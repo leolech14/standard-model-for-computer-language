@@ -25,12 +25,25 @@ python3 cli.py analyze /path/to/repo --mode minimal --llm
 
 The output will be saved in `output/` by default.
 
-## 🩺 System Health Check
 
-Verify that all pipelines (Regex, God Class Detector, Graph Logic, LLM connectivity) are working correctly.
+## 🩺 System Health & Auditing
+
+### Health Check
+Verify that all pipelines (Regex, God Class Detector, Graph Logic, LLM connectivity) are operational.
 
 ```bash
 python3 cli.py health
+```
+
+### Full Audit
+Run a comprehensive validation that combines the health check with a live analysis of a target repo (or the current directory). This proves the toolchain works end-to-end.
+
+```bash
+# Audit the current directory
+python3 cli.py audit .
+
+# Audit a specific repo
+python3 cli.py audit /path/to/repo --mode minimal
 ```
 
 ## 🧠 Architecture: The Hybrid Pipeline
