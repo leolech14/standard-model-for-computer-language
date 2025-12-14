@@ -83,6 +83,32 @@ def main():
         description="Validates integrity of static analysis, graph generation, and LLM connectivity."
     )
     
+    # ==========================================
+    # AUDIT Command
+    # ==========================================
+    audit_parser = subparsers.add_parser(
+        "audit",
+        help="Run a combined health check and minimal analysis to validate the toolchain",
+        description="Performs a full audit: Newman suite + minimal repo scan to prove the pipeline works."
+    )
+    audit_parser.add_argument(
+        "path",
+        nargs="?",
+        default=".",
+        help="Target repository (defaults to current directory)"
+    )
+    audit_parser.add_argument(
+        "--mode",
+        choices=["minimal", "auto"],
+        default="minimal",
+        help="Analysis mode for the audit scan"
+    )
+    audit_parser.add_argument(
+        "--output",
+        default="output/audit",
+        help="Output directory for audit artifacts"
+    )
+
     # Parse
     args = parser.parse_args()
     
@@ -90,6 +116,11 @@ def main():
         from core.newman_runner import run_health_check
         sys.exit(run_health_check(exit_on_fail=True))
     
+
+    elif args.command == "audit":
+        from core.audit_runner import run_full_audit
+        sys.exit(run_full_audit(target_path=args.path, mode=args.mode, output_dir=args.output))
+
     elif args.command == "analyze":
         if not args.path:
             # Fallback to demo mode if no path provided, similar to learning_engine defaults

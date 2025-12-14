@@ -8,6 +8,7 @@ Lightweight version without external dependencies for immediate testing
 import json
 import re
 import math
+import os
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from collections import defaultdict
@@ -171,13 +172,14 @@ class GodClassDetectorLite:
         source_extensions = ['.py', '.java', '.ts', '.js', '.go', '.rs', '.kt', '.cs']
         source_files = []
 
-        for root, dirs, files in Path(repo_path).walk():
+        for root, dirs, files in os.walk(Path(repo_path)):
+            root_path = Path(root)
             # Skip common directories
             dirs[:] = [d for d in dirs if d not in ['.git', '__pycache__', 'node_modules', 'target', 'build', 'dist']]
 
             for file in files:
                 if any(file.endswith(ext) for ext in source_extensions):
-                    source_files.append(str(root / file))
+                    source_files.append(str(root_path / file))
 
         return source_files
 

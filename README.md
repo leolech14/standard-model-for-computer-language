@@ -1,4 +1,4 @@
-# Spectrometer v12 (Minimal + Hybrid)
+# Standard Model for Computer Language (Spectrometer v12)
 
 Spectrometer is an architecture-aware codebase analyzer that extracts "particles" (components) and builds dependency graphs. It features a **Hybrid Static+LLM Pipeline** that combines deterministic static analysis with semantic role inference using LLMs.
 
