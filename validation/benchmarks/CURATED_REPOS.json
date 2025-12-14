@@ -1,0 +1,268 @@
+{
+    "version": 1,
+    "description": "Curated repos with EXPLICIT architecture documentation - truth comes from devs",
+    "generated_at": "2025-12-14",
+    "note": "Only repos where developers documented their architecture. We extract truth from THEIR docs, not ours.",
+    "repos": [
+        {
+            "id": 1,
+            "repo": "koei-kaji/ddd-clean-architecture-python",
+            "clone_url": "https://github.com/koei-kaji/ddd-clean-architecture-python.git",
+            "description": "DDD + Clean Architecture TODO app with sequence diagrams and domain models",
+            "architecture_source": "README.md with Directory Structure, Sequence Diagrams, Domain Models sections",
+            "declared_patterns": [
+                "DDD",
+                "Clean Architecture",
+                "CQRS",
+                "IoC Container"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 16
+        },
+        {
+            "id": 2,
+            "repo": "cosmicpython/code",
+            "clone_url": "https://github.com/cosmicpython/code.git",
+            "description": "Architecture Patterns with Python book - official code",
+            "architecture_source": "Book: 'Architecture Patterns with Python' - extensive documentation",
+            "declared_patterns": [
+                "DDD",
+                "Event-Driven",
+                "Repository Pattern",
+                "Unit of Work"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "medium",
+            "stars": 2800
+        },
+        {
+            "id": 3,
+            "repo": "iktakahiro/dddpy",
+            "clone_url": "https://github.com/iktakahiro/dddpy.git",
+            "description": "Python DDD example with FastAPI, onion architecture",
+            "architecture_source": "README.md with layer diagrams, type hints declare Entity/UseCase/Repository",
+            "declared_patterns": [
+                "DDD",
+                "Onion Architecture",
+                "Repository Pattern"
+            ],
+            "has_architecture_docs": true,
+            "vendored_path": "validation/dddpy_real",
+            "language": "python",
+            "size": "small",
+            "stars": 500
+        },
+        {
+            "id": 4,
+            "repo": "pgorecki/python-ddd",
+            "clone_url": "https://github.com/pgorecki/python-ddd.git",
+            "description": "DDD building blocks in Python",
+            "architecture_source": "README.md documents Entity, ValueObject, AggregateRoot, Repository",
+            "declared_patterns": [
+                "DDD",
+                "Building Blocks"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 300
+        },
+        {
+            "id": 5,
+            "repo": "Enforcer/clean-architecture-python",
+            "clone_url": "https://github.com/Enforcer/clean-architecture-python.git",
+            "description": "Clean Architecture implementation in Python",
+            "architecture_source": "README.md with layer documentation",
+            "declared_patterns": [
+                "Clean Architecture",
+                "Use Cases",
+                "Presenters"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 450
+        },
+        {
+            "id": 6,
+            "repo": "ledmonster/ddd-python-inject",
+            "clone_url": "https://github.com/ledmonster/ddd-python-inject.git",
+            "description": "DDD with dependency injection",
+            "architecture_source": "README.md with DI container documentation",
+            "declared_patterns": [
+                "DDD",
+                "Dependency Injection"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 50
+        },
+        {
+            "id": 7,
+            "repo": "stemmlerjs/ddd-forum",
+            "clone_url": "https://github.com/stemmlerjs/ddd-forum.git",
+            "description": "Hackernews-style forum with DDD/Clean Architecture",
+            "architecture_source": "docs/ARCHITECTURE.md - extensive design docs",
+            "declared_patterns": [
+                "DDD",
+                "Clean Architecture",
+                "CQRS",
+                "Event Sourcing"
+            ],
+            "has_architecture_docs": true,
+            "language": "typescript",
+            "size": "large",
+            "stars": 2000
+        },
+        {
+            "id": 8,
+            "repo": "joamag/colony",
+            "clone_url": "https://github.com/joamag/colony.git",
+            "description": "Colony Framework - plugin-based architecture",
+            "architecture_source": "ARCHITECTURE.md file",
+            "declared_patterns": [
+                "Plugin Architecture",
+                "Modular"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "large",
+            "stars": 100
+        },
+        {
+            "id": 9,
+            "repo": "dry-python/returns",
+            "clone_url": "https://github.com/dry-python/returns.git",
+            "description": "Make your functions return something meaningful",
+            "architecture_source": "docs/ with functional programming patterns",
+            "declared_patterns": [
+                "Functional",
+                "Railway-Oriented Programming"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "medium",
+            "stars": 3200
+        },
+        {
+            "id": 10,
+            "repo": "dry-python/classes",
+            "clone_url": "https://github.com/dry-python/classes.git",
+            "description": "Smart, pythonic, ad-hoc, typed polymorphism",
+            "architecture_source": "docs/ with type class patterns",
+            "declared_patterns": [
+                "Type Classes",
+                "Polymorphism"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 700
+        },
+        {
+            "id": 11,
+            "repo": "Arjan-Ploeger/todo-clean-architecture",
+            "clone_url": "https://github.com/Arjan-Ploeger/todo-clean-architecture.git",
+            "description": "TODO app with clean architecture layers",
+            "architecture_source": "README.md with layer diagram",
+            "declared_patterns": [
+                "Clean Architecture"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 30
+        },
+        {
+            "id": 12,
+            "repo": "mateuszsojka/fastapi-ddd-example",
+            "clone_url": "https://github.com/mateuszsojka/fastapi-ddd-example.git",
+            "description": "FastAPI + DDD example",
+            "architecture_source": "README.md with domain model docs",
+            "declared_patterns": [
+                "DDD",
+                "FastAPI"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 100
+        },
+        {
+            "id": 13,
+            "repo": "python-injector/injector",
+            "clone_url": "https://github.com/python-injector/injector.git",
+            "description": "DI framework - architecture self-documents via decorators",
+            "architecture_source": "Decorators: @inject, @singleton define DI patterns",
+            "declared_patterns": [
+                "Dependency Injection"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "small",
+            "stars": 1100
+        },
+        {
+            "id": 14,
+            "repo": "tiangolo/sqlmodel",
+            "clone_url": "https://github.com/tiangolo/sqlmodel.git",
+            "description": "SQL databases with Pydantic - type hints declare models",
+            "architecture_source": "Type hints: class User(SQLModel) declares entities",
+            "declared_patterns": [
+                "ORM",
+                "Typed Models"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "medium",
+            "stars": 12000
+        },
+        {
+            "id": 15,
+            "repo": "pydantic/pydantic",
+            "clone_url": "https://github.com/pydantic/pydantic.git",
+            "description": "Data validation - BaseModel inheritance declares DTOs",
+            "architecture_source": "Inheritance: class Foo(BaseModel) declares DTO pattern",
+            "declared_patterns": [
+                "Validation",
+                "DTO Pattern"
+            ],
+            "has_architecture_docs": true,
+            "language": "python",
+            "size": "large",
+            "stars": 18000
+        }
+    ],
+    "truth_extraction_rules": {
+        "file_patterns": [
+            "ARCHITECTURE.md",
+            "DESIGN.md",
+            "docs/architecture.md",
+            "docs/ARCHITECTURE.md",
+            "README.md with architecture section"
+        ],
+        "type_hint_patterns": [
+            "class X(Entity)",
+            "class X(ValueObject)",
+            "class X(AggregateRoot)",
+            "class X(Repository)",
+            "class X(UseCase)"
+        ],
+        "inheritance_patterns": [
+            "BaseModel → DTO",
+            "ABC → Interface",
+            "Exception → DomainError",
+            "Enum → ValueObject"
+        ],
+        "directory_patterns": [
+            "domain/ → Domain Layer",
+            "usecase/ → Application Layer",
+            "infrastructure/ → Infrastructure Layer",
+            "presentation/ → Presentation Layer"
+        ]
+    }
+}

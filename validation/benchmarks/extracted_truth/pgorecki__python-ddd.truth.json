@@ -1,0 +1,544 @@
+{
+  "repo": "pgorecki__python-ddd",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/pgorecki__python-ddd",
+  "confidence": 0.6,
+  "truth_sources": [
+    "dir:src/api",
+    "inheritance:ValueObject",
+    "type:Repository",
+    "inheritance:BaseModel",
+    "type:Query",
+    "inheritance:Enum",
+    "inheritance:AggregateRoot",
+    "inheritance:Entity",
+    "dir:src/cli",
+    "doc:README.md",
+    "type:AggregateRoot",
+    "type:Command",
+    "type:Entity",
+    "type:Event",
+    "inheritance:ABC",
+    "type:Service",
+    "type:ValueObject",
+    "inheritance:Exception"
+  ],
+  "layers": [
+    "presentation",
+    "presentation"
+  ],
+  "expected_components": [
+    {
+      "name": "PostgresJsonListingRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "EndingListingService",
+      "type": "Service",
+      "source": "type_hint"
+    },
+    {
+      "name": "BidWasPlaced",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "HighestBidderWasOutbid",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "BidWasRetracted",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingWasCancelled",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "Bidder",
+      "type": "ValueObject",
+      "source": "type_hint"
+    },
+    {
+      "name": "Seller",
+      "type": "ValueObject",
+      "source": "type_hint"
+    },
+    {
+      "name": "Bid",
+      "type": "ValueObject",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "Listing",
+      "type": "AggregateRoot",
+      "source": "type_hint"
+    },
+    {
+      "name": "PlaceBidCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "RetractBidCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "GetBiddingDetails",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "GetPastdueListings",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "UserRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "PostgresJsonUserRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "User",
+      "type": "AggregateRoot",
+      "source": "type_hint"
+    },
+    {
+      "name": "PostgresJsonListingRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingDraftCreatedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingDraftUpdatedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingDraftDeletedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingPublishedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "ListingRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "Listing",
+      "type": "AggregateRoot",
+      "source": "type_hint"
+    },
+    {
+      "name": "Seller",
+      "type": "AggregateRoot",
+      "source": "type_hint"
+    },
+    {
+      "name": "DeleteListingDraftCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "UpdateListingDraftCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "PublishListingDraftCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "CreateListingDraftCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "GetListingDetails",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "GetListingsOfSeller",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "GetAllListings",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "Query",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "Command",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "DataMapper",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "InMemoryRepository",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "SqlAlchemyGenericRepository",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "InMemoryRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "SqlAlchemyGenericRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "DomainEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "CompositeDomainEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "Money",
+      "type": "ValueObject",
+      "source": "type_hint"
+    },
+    {
+      "name": "Aggregate",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "GenericRepository",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "Entity",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "AggregateRoot",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "CompleteOrderCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "OrderCompletedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "PaymentProcessedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "OrderShippedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "CompleteOrderCommand",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "OrderCompletedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "PaymentProcessedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "OrderShippedEvent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "SendPing",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "PingSent",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "CompleteOrder",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "OrderCompleted",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "NotifyBuyerOfOrderCompletion",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "PrepareOrderForShipping",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "Person",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "Person",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "PersonSqlAlchemyRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "PersonEntity",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "PersonEntity",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "PersonAggregate",
+      "type": "AggregateRoot",
+      "source": "type_hint"
+    },
+    {
+      "name": "Bidder",
+      "type": "ValueObject",
+      "source": "inheritance"
+    },
+    {
+      "name": "Seller",
+      "type": "ValueObject",
+      "source": "inheritance"
+    },
+    {
+      "name": "Bid",
+      "type": "ValueObject",
+      "source": "inheritance"
+    },
+    {
+      "name": "Money",
+      "type": "ValueObject",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingRepository",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingRepository",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "DataMapper",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingDAO",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "UserResponse",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "LoginResponse",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "CurrentUser",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingWriteModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingPublishModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingReadModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingIndexModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "BidReadModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "BiddingResponse",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "PlaceBidRequest",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "IntegrationEvent",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "BusinessRule",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "CustomPydanticModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "User",
+      "type": "AggregateRoot",
+      "source": "inheritance"
+    },
+    {
+      "name": "Listing",
+      "type": "AggregateRoot",
+      "source": "inheritance"
+    },
+    {
+      "name": "Seller",
+      "type": "AggregateRoot",
+      "source": "inheritance"
+    },
+    {
+      "name": "PersonAggregate",
+      "type": "AggregateRoot",
+      "source": "inheritance"
+    },
+    {
+      "name": "ListingStatus",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "ApplicationException",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "InfrastructureException",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "DomainException",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "EntityNotFoundException",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "Aggregate",
+      "type": "Entity",
+      "source": "inheritance"
+    },
+    {
+      "name": "Person",
+      "type": "Entity",
+      "source": "inheritance"
+    },
+    {
+      "name": "Person",
+      "type": "Entity",
+      "source": "inheritance"
+    },
+    {
+      "name": "PersonEntity",
+      "type": "Entity",
+      "source": "inheritance"
+    },
+    {
+      "name": "PersonEntity",
+      "type": "Entity",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

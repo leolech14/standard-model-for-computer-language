@@ -1,0 +1,108 @@
+{
+  "spec": {
+    "name": "dddpy_real_onion_v1",
+    "repo_path": "spectrometer_v12_minimal/validation/dddpy_real",
+    "scored_types": [
+      "Entity",
+      "ValueObject",
+      "Repository",
+      "RepositoryImpl",
+      "UseCase",
+      "Controller",
+      "DTO"
+    ]
+  },
+  "report": {
+    "summary": {
+      "expected_total": 30,
+      "predicted_total": 30,
+      "correct_total": 30,
+      "missed_total": 0,
+      "wrong_total": 0,
+      "extra_total": 0,
+      "accuracy_on_expected": 1.0
+    },
+    "metrics_by_type": {
+      "Controller": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "DTO": {
+        "expected": 8,
+        "predicted": 8,
+        "correct": 8,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "Entity": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "Repository": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "RepositoryImpl": {
+        "expected": 1,
+        "predicted": 1,
+        "correct": 1,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "UseCase": {
+        "expected": 14,
+        "predicted": 14,
+        "correct": 14,
+        "recall": 1.0,
+        "precision": 1.0
+      },
+      "ValueObject": {
+        "expected": 4,
+        "predicted": 4,
+        "correct": 4,
+        "recall": 1.0,
+        "precision": 1.0
+      }
+    },
+    "expected_by_type": {
+      "DTO": 8,
+      "Controller": 1,
+      "ValueObject": 4,
+      "Repository": 1,
+      "Entity": 1,
+      "UseCase": 14,
+      "RepositoryImpl": 1
+    },
+    "predicted_by_type": {
+      "RepositoryImpl": 1,
+      "DTO": 8,
+      "UseCase": 14,
+      "ValueObject": 4,
+      "Repository": 1,
+      "Entity": 1,
+      "Controller": 1
+    },
+    "correct_by_type": {
+      "DTO": 8,
+      "Controller": 1,
+      "ValueObject": 4,
+      "Repository": 1,
+      "Entity": 1,
+      "UseCase": 14,
+      "RepositoryImpl": 1
+    },
+    "wrong_by_expected_type": {},
+    "missed": [],
+    "wrong": [],
+    "extras": []
+  }
+}

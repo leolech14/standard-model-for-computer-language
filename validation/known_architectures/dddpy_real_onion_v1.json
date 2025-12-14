@@ -1,0 +1,25 @@
+{
+  "name": "dddpy_real_onion_v1",
+  "description": "Python DDD + Onion Architecture (domain/usecase/infrastructure/presentation) - used as ground-truth benchmark.",
+  "language": "python",
+  "repo_path": "spectrometer_v12_minimal/validation/dddpy_real",
+  "scored_types": ["Entity", "ValueObject", "Repository", "RepositoryImpl", "UseCase", "Controller", "DTO"],
+  "ignore_path_globs": ["**/tests/**", "**/__init__.py", "**/.venv/**", "**/.git/**"],
+  "rules": [
+    { "type": "Entity", "path_glob": "dddpy/domain/**/entities/*.py" },
+    { "type": "Entity", "path_glob": "dddpy/domain/**/entities/**/*.py" },
+    { "type": "ValueObject", "path_glob": "dddpy/domain/**/value_objects/*.py" },
+    { "type": "ValueObject", "path_glob": "dddpy/domain/**/value_objects/**/*.py" },
+    { "type": "Repository", "path_glob": "dddpy/domain/**/repositories/*.py" },
+    { "type": "Repository", "path_glob": "dddpy/domain/**/repositories/**/*.py" },
+    { "type": "UseCase", "path_glob": "dddpy/usecase/**/*.py" },
+    { "type": "Controller", "path_glob": "dddpy/presentation/**/handlers/*.py" },
+    { "type": "Controller", "path_glob": "dddpy/presentation/**/handlers/**/*.py" },
+    { "type": "DTO", "path_glob": "dddpy/presentation/**/schemas/*.py" },
+    { "type": "DTO", "path_glob": "dddpy/presentation/**/schemas/**/*.py" },
+    { "type": "DTO", "path_glob": "dddpy/presentation/**/error_messages/*.py" },
+    { "type": "DTO", "path_glob": "dddpy/presentation/**/error_messages/**/*.py" },
+    { "type": "RepositoryImpl", "path_glob": "dddpy/infrastructure/**/*.py", "name_regex": ".*RepositoryImpl$" },
+    { "type": "DTO", "path_glob": "dddpy/infrastructure/**/*.py", "name_regex": ".*DTO$" }
+  ]
+}

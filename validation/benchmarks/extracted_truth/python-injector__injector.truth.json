@@ -1,0 +1,42 @@
+{
+  "repo": "python-injector__injector",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/python-injector__injector",
+  "confidence": 0.6,
+  "truth_sources": [
+    "doc:README.md",
+    "inheritance:ABC",
+    "inheritance:Exception",
+    "type:Command"
+  ],
+  "layers": [],
+  "expected_components": [
+    {
+      "name": "PyTest",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "Plugin",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "Shape",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "Error",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "_BindingNotYetAvailable",
+      "type": "Error",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

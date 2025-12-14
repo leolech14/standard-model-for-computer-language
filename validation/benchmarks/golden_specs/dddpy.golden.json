@@ -1,0 +1,202 @@
+{
+    "spec_version": 1,
+    "repo": "iktakahiro/dddpy",
+    "description": "Python DDD Example with FastAPI - Complete Golden Spec",
+    "created_at": "2025-12-14",
+    "expected_structure": {
+        "layers": [
+            "domain",
+            "usecase",
+            "infrastructure",
+            "presentation"
+        ],
+        "total_files_min": 60,
+        "total_files_max": 80
+    },
+    "expected_components": [
+        {
+            "name": "Todo",
+            "type": "Entity",
+            "file_pattern": "**/domain/**/todo.py",
+            "required": true,
+            "properties": {
+                "has_id": true,
+                "mutable": true
+            }
+        },
+        {
+            "name": "TodoId",
+            "type": "ValueObject",
+            "file_pattern": "**/domain/**/todo_id.py",
+            "required": true
+        },
+        {
+            "name": "TodoTitle",
+            "type": "ValueObject",
+            "file_pattern": "**/domain/**/todo_title.py",
+            "required": true
+        },
+        {
+            "name": "TodoDescription",
+            "type": "ValueObject",
+            "file_pattern": "**/domain/**/todo_description.py",
+            "required": true
+        },
+        {
+            "name": "TodoStatus",
+            "type": "ValueObject",
+            "file_pattern": "**/domain/**/todo_status.py",
+            "required": true
+        },
+        {
+            "name": "TodoRepository",
+            "type": "Repository",
+            "file_pattern": "**/domain/**/todo_repository.py",
+            "required": true,
+            "properties": {
+                "is_abstract": true
+            }
+        },
+        {
+            "name": "TodoRepositoryImpl",
+            "type": "Repository",
+            "file_pattern": "**/infrastructure/**/todo_repository.py",
+            "required": true,
+            "properties": {
+                "implements": "TodoRepository"
+            }
+        },
+        {
+            "name": "CreateTodoUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/create_todo*.py",
+            "required": true
+        },
+        {
+            "name": "FindTodoByIdUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/find_todo*.py",
+            "required": true
+        },
+        {
+            "name": "FindTodosUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/find_todos*.py",
+            "required": true
+        },
+        {
+            "name": "StartTodoUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/start_todo*.py",
+            "required": true
+        },
+        {
+            "name": "CompleteTodoUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/complete_todo*.py",
+            "required": true
+        },
+        {
+            "name": "UpdateTodoUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/update_todo*.py",
+            "required": true
+        },
+        {
+            "name": "DeleteTodoUseCase",
+            "type": "UseCase",
+            "file_pattern": "**/usecase/**/delete_todo*.py",
+            "required": true
+        },
+        {
+            "name": "TodoSchema",
+            "type": "DTO",
+            "file_pattern": "**/presentation/**/schemas/*.py",
+            "required": true
+        },
+        {
+            "name": "TodoCreateSchema",
+            "type": "DTO",
+            "file_pattern": "**/presentation/**/schemas/*.py",
+            "required": true
+        },
+        {
+            "name": "TodoUpdateSchema",
+            "type": "DTO",
+            "file_pattern": "**/presentation/**/schemas/*.py",
+            "required": true
+        },
+        {
+            "name": "TodoNotFoundError",
+            "type": "DomainError",
+            "file_pattern": "**/domain/**/errors/*.py",
+            "required": true
+        },
+        {
+            "name": "TodoDTO",
+            "type": "DTO",
+            "file_pattern": "**/infrastructure/**/*.py",
+            "required": true
+        },
+        {
+            "name": "Base",
+            "type": "Entity",
+            "file_pattern": "**/infrastructure/**/base.py",
+            "required": true,
+            "properties": {
+                "is_sqlalchemy_base": true
+            }
+        }
+    ],
+    "expected_relationships": [
+        {
+            "from": "TodoRepositoryImpl",
+            "to": "TodoRepository",
+            "type": "implements"
+        },
+        {
+            "from": "CreateTodoUseCaseImpl",
+            "to": "CreateTodoUseCase",
+            "type": "implements"
+        },
+        {
+            "from": "CreateTodoUseCaseImpl",
+            "to": "TodoRepository",
+            "type": "depends_on"
+        },
+        {
+            "from": "Todo",
+            "to": "TodoId",
+            "type": "contains"
+        },
+        {
+            "from": "Todo",
+            "to": "TodoTitle",
+            "type": "contains"
+        },
+        {
+            "from": "Todo",
+            "to": "TodoStatus",
+            "type": "contains"
+        },
+        {
+            "from": "TodoSchema",
+            "to": "BaseModel",
+            "type": "extends"
+        }
+    ],
+    "expected_patterns": {
+        "ddd_layers": true,
+        "clean_architecture": true,
+        "repository_pattern": true,
+        "use_case_pattern": true,
+        "value_objects": true,
+        "domain_errors": true
+    },
+    "scoring_weights": {
+        "components_found": 0.4,
+        "relationships_found": 0.3,
+        "patterns_detected": 0.2,
+        "structure_match": 0.1
+    }
+}

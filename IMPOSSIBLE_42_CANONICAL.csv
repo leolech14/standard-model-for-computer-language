@@ -1,0 +1,43 @@
+id,name,base_hadron,law_id,reason,status
+1,CommandHandler::FindById,CommandHandler,L1,Command cannot return data (CQRS),confirmed
+2,QueryHandler::Save,QueryHandler,L2,Query cannot mutate state (CQRS),confirmed
+3,Entity::Stateless,Entity,L4,Entity requires identity/state,confirmed
+4,ValueObject::HasIdentity,ValueObject,L5,Value Object cannot have identity,confirmed
+5,RepositoryImpl::PureFunction,RepositoryImpl,L6,Repository performs I/O; cannot be pure,confirmed
+6,PureFunction::ExternalIO,PureFunction,L3,Pure function cannot perform external I/O,confirmed
+7,EventHandler::ReturnsValue,EventHandler,L7,Event handler is fire-and-forget,confirmed
+8,TestFunction::ModifiesProductionData,TestFunction,L10,Tests cannot touch production data,confirmed
+9,APIHandler::InternalOnly,APIHandler,L8,API must cross external boundary,confirmed
+10,Service::GlobalState,Service,L9,Service must be stateless (DDD/Clean),confirmed
+11,AggregateRoot::NoInvariants,AggregateRoot,pending,Aggregate root must enforce invariants (law alignment pending),confirmed
+12,Validator::AcceptsInvalid,Validator,L11,Validator cannot accept invalid input,confirmed
+13,Middleware::SkipsNext,Middleware,pending,Middleware must call/chain next,confirmed
+14,HealthCheck::Returns500WhenHealthy,HealthCheck,pending,Health check cannot return 500 when healthy,confirmed
+15,GracefulShutdown::HardKill,GracefulShutdown,pending,Hard kill is not graceful,confirmed
+16,ChaosMonkey::ImprovesStability,ChaosMonkey,pending,Chaos monkey improving stability is paradox,confirmed
+17,TBD_17,,pending,Not yet extracted from source thread/canvas,placeholder
+18,TBD_18,,pending,Not yet extracted from source thread/canvas,placeholder
+19,TBD_19,,pending,Not yet extracted from source thread/canvas,placeholder
+20,TBD_20,,pending,Not yet extracted from source thread/canvas,placeholder
+21,TBD_21,,pending,Not yet extracted from source thread/canvas,placeholder
+22,TBD_22,,pending,Not yet extracted from source thread/canvas,placeholder
+23,TBD_23,,pending,Not yet extracted from source thread/canvas,placeholder
+24,TBD_24,,pending,Not yet extracted from source thread/canvas,placeholder
+25,TBD_25,,pending,Not yet extracted from source thread/canvas,placeholder
+26,TBD_26,,pending,Not yet extracted from source thread/canvas,placeholder
+27,TBD_27,,pending,Not yet extracted from source thread/canvas,placeholder
+28,TBD_28,,pending,Not yet extracted from source thread/canvas,placeholder
+29,TBD_29,,pending,Not yet extracted from source thread/canvas,placeholder
+30,TBD_30,,pending,Not yet extracted from source thread/canvas,placeholder
+31,TBD_31,,pending,Not yet extracted from source thread/canvas,placeholder
+32,TBD_32,,pending,Not yet extracted from source thread/canvas,placeholder
+33,TBD_33,,pending,Not yet extracted from source thread/canvas,placeholder
+34,TBD_34,,pending,Not yet extracted from source thread/canvas,placeholder
+35,TBD_35,,pending,Not yet extracted from source thread/canvas,placeholder
+36,TBD_36,,pending,Not yet extracted from source thread/canvas,placeholder
+37,TBD_37,,pending,Not yet extracted from source thread/canvas,placeholder
+38,TBD_38,,pending,Not yet extracted from source thread/canvas,placeholder
+39,TBD_39,,pending,Not yet extracted from source thread/canvas,placeholder
+40,TBD_40,,pending,Not yet extracted from source thread/canvas,placeholder
+41,TBD_41,,pending,Not yet extracted from source thread/canvas,placeholder
+42,TBD_42,,pending,Not yet extracted from source thread/canvas,placeholder

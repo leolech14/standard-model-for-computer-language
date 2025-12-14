@@ -1,0 +1,592 @@
+[
+  {
+    "name": "dddpy_real_onion_v1",
+    "run_dir": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/runs/2025-12-14_071547/dddpy_real_onion_v1",
+    "summary": {
+      "expected_total": 30,
+      "predicted_total": 30,
+      "correct_total": 30,
+      "missed_total": 0,
+      "wrong_total": 0,
+      "extra_total": 0,
+      "accuracy_on_expected": 1.0
+    },
+    "unknown_count": 82,
+    "unknown_samples": [
+      {
+        "symbol_kind": "function",
+        "name": "lifespan",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/main.py",
+        "line": 19,
+        "evidence": "async def lifespan(app: FastAPI):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_session",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 29,
+        "evidence": "def get_session() -> Iterator[Session]:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_todo_repository",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 49,
+        "evidence": "def get_todo_repository(session: Session = Depends(get_session)) -> TodoRepository:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_create_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 61,
+        "evidence": "def get_create_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_start_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 75,
+        "evidence": "def get_start_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_complete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 89,
+        "evidence": "def get_complete_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_update_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 103,
+        "evidence": "def get_update_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_delete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 117,
+        "evidence": "def get_delete_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_find_todo_by_id_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 131,
+        "evidence": "def get_find_todo_by_id_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_find_todos_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 145,
+        "evidence": "def get_find_todos_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_todo_repository",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "line": 86,
+        "evidence": "def new_todo_repository(session: Session) -> TodoRepository:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_find_todo_by_id_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "line": 55,
+        "evidence": "def new_find_todo_by_id_usecase(todo_repository: TodoRepository) -> FindTodoByIdUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_start_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/start_todo_usecase.py",
+        "line": 71,
+        "evidence": "def new_start_todo_usecase(todo_repository: TodoRepository) -> StartTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_complete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/complete_todo_usecase.py",
+        "line": 71,
+        "evidence": "def new_complete_todo_usecase(todo_repository: TodoRepository) -> CompleteTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_find_todos_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todos_usecase.py",
+        "line": 38,
+        "evidence": "def new_find_todos_usecase(todo_repository: TodoRepository) -> FindTodosUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_create_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/create_todo_usecase.py",
+        "line": 57,
+        "evidence": "def new_create_todo_usecase(todo_repository: TodoRepository) -> CreateTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_delete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/delete_todo_usecase.py",
+        "line": 50,
+        "evidence": "def new_delete_todo_usecase(todo_repository: TodoRepository) -> DeleteTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_update_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/update_todo_usecase.py",
+        "line": 78,
+        "evidence": "def new_update_todo_usecase(todo_repository: TodoRepository) -> UpdateTodoUseCase:"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoNotFoundError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_not_found_error.py",
+        "line": 4,
+        "evidence": "class TodoNotFoundError(Exception):"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoNotStartedError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_not_started_error.py",
+        "line": 4,
+        "evidence": "class TodoNotStartedError(Exception):"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoAlreadyStartedError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_already_started_error.py",
+        "line": 4,
+        "evidence": "class TodoAlreadyStartedError(Exception):"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoAlreadyCompletedError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_already_completed_error.py",
+        "line": 4,
+        "evidence": "class TodoAlreadyCompletedError(Exception):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+        "line": 14,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "find_todos_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+        "line": 20,
+        "evidence": "def find_todos_usecase(todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_find_todos_empty_list",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+        "line": 25,
+        "evidence": "def test_find_todos_empty_list(find_todos_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_find_todos_with_items",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+        "line": 38,
+        "evidence": "def test_find_todos_with_items(find_todos_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "line": 14,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "find_todo_by_id_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "line": 20,
+        "evidence": "def find_todo_by_id_usecase(todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "line": 26,
+        "evidence": "def todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_find_todo_by_id_success",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "line": 35,
+        "evidence": "def test_find_todo_by_id_success(find_todo_by_id_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_find_todo_by_id_not_found",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "line": 48,
+        "evidence": "def test_find_todo_by_id_not_found(find_todo_by_id_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+        "line": 15,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "complete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+        "line": 21,
+        "evidence": "def complete_todo_usecase(todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+        "line": 27,
+        "evidence": "def todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_complete_todo_success",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+        "line": 38,
+        "evidence": "def test_complete_todo_success(complete_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_complete_todo_not_found",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+        "line": 53,
+        "evidence": "def test_complete_todo_not_found(complete_todo_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_complete_already_completed_todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+        "line": 65,
+        "evidence": "def test_complete_already_completed_todo("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+        "line": 14,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "start_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+        "line": 20,
+        "evidence": "def start_todo_usecase(todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+        "line": 26,
+        "evidence": "def todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_start_todo_success",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+        "line": 35,
+        "evidence": "def test_start_todo_success(start_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_start_todo_not_found",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+        "line": 49,
+        "evidence": "def test_start_todo_not_found(start_todo_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_start_completed_todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+        "line": 61,
+        "evidence": "def test_start_completed_todo(start_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 14,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "update_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 20,
+        "evidence": "def update_todo_usecase(todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 26,
+        "evidence": "def todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_update_todo_title_only",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 35,
+        "evidence": "def test_update_todo_title_only(update_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_update_todo_description_only",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 51,
+        "evidence": "def test_update_todo_description_only(update_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_update_todo_both_fields",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 67,
+        "evidence": "def test_update_todo_both_fields(update_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_update_todo_not_found",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+        "line": 86,
+        "evidence": "def test_update_todo_not_found(update_todo_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+        "line": 14,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_todo_with_title_only",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+        "line": 25,
+        "evidence": "def test_create_todo_with_title_only(create_todo_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_todo_with_title_and_description",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+        "line": 37,
+        "evidence": "def test_create_todo_with_title_and_description("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_todo_repository_error",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+        "line": 52,
+        "evidence": "def test_create_todo_repository_error(create_todo_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo_repository_mock",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+        "line": 14,
+        "evidence": "def todo_repository_mock():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "delete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+        "line": 20,
+        "evidence": "def delete_todo_usecase(todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+        "line": 26,
+        "evidence": "def todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_delete_todo_success",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+        "line": 34,
+        "evidence": "def test_delete_todo_success(delete_todo_usecase, todo_repository_mock, todo):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_delete_todo_not_found",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+        "line": 47,
+        "evidence": "def test_delete_todo_not_found(delete_todo_usecase, todo_repository_mock):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_todo_status_values",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_status.py",
+        "line": 6,
+        "evidence": "def test_todo_status_values():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_todo_status_enum_members",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_status.py",
+        "line": 13,
+        "evidence": "def test_todo_status_enum_members():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_str_representation",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_status.py",
+        "line": 21,
+        "evidence": "def test_str_representation():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_valid_title",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+        "line": 8,
+        "evidence": "def test_create_valid_title():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_empty_title_raises_error",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+        "line": 14,
+        "evidence": "def test_empty_title_raises_error():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_title_too_long_raises_error",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+        "line": 20,
+        "evidence": "def test_title_too_long_raises_error():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_str_representation",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+        "line": 27,
+        "evidence": "def test_str_representation():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_generate_creates_valid_uuid",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_id.py",
+        "line": 10,
+        "evidence": "def test_generate_creates_valid_uuid():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_generate_creates_unique_ids",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_id.py",
+        "line": 17,
+        "evidence": "def test_generate_creates_unique_ids():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_str_representation",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_id.py",
+        "line": 24,
+        "evidence": "def test_str_representation():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_valid_description",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_description.py",
+        "line": 8,
+        "evidence": "def test_create_valid_description():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_description_exceeding_length_limit",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_description.py",
+        "line": 14,
+        "evidence": "def test_create_description_exceeding_length_limit():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_str_representation",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_description.py",
+        "line": 21,
+        "evidence": "def test_str_representation():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_create_todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 16,
+        "evidence": "def test_create_todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_todo_properties",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 31,
+        "evidence": "def test_todo_properties():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_update_title",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 57,
+        "evidence": "def test_update_title():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_update_description",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 68,
+        "evidence": "def test_update_description():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_clear_description",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 79,
+        "evidence": "def test_clear_description():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_start_todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 89,
+        "evidence": "def test_start_todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_complete_todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 99,
+        "evidence": "def test_complete_todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_complete_already_completed_todo",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 111,
+        "evidence": "def test_complete_already_completed_todo():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_is_overdue",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 120,
+        "evidence": "def test_is_overdue():"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "test_todo_equality",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+        "line": 155,
+        "evidence": "def test_todo_equality():"
+      }
+    ]
+  }
+]

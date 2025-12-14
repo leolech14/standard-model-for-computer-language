@@ -1,0 +1,7 @@
+# Core Dependencies
+matplotlib
+numpy
+
+# Optional Dependencies (for Full Mode)
+tree-sitter>=0.20.0
+tree-sitter-python>=0.20.0

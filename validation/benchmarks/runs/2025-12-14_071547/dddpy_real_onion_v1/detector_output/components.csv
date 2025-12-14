@@ -1,0 +1,115 @@
+component_id,type,symbol_kind,name,rel_file,line,confidence,evidence,purpose,internal_deps,external_deps,stdlib_deps
+7c513619327d,Unknown,function,lifespan,main.py,19,30.0,async def lifespan(app: FastAPI):,Unknown particle type,2,1,3
+272fe1e417d2,Unknown,function,get_session,dddpy/infrastructure/di/injection.py,29,30.0,def get_session() -> Iterator[Session]:,Unknown particle type,4,2,1
+95f50231ef4c,Unknown,function,get_todo_repository,dddpy/infrastructure/di/injection.py,49,30.0,def get_todo_repository(session: Session = Depends(get_session)) -> TodoRepository:,Unknown particle type,4,2,1
+e51f930fdd15,Unknown,function,get_create_todo_usecase,dddpy/infrastructure/di/injection.py,61,30.0,def get_create_todo_usecase(,Unknown particle type,4,2,1
+29883555e94b,Unknown,function,get_start_todo_usecase,dddpy/infrastructure/di/injection.py,75,30.0,def get_start_todo_usecase(,Unknown particle type,4,2,1
+ec4bb16eb1da,Unknown,function,get_complete_todo_usecase,dddpy/infrastructure/di/injection.py,89,30.0,def get_complete_todo_usecase(,Unknown particle type,4,2,1
+878ba48d2150,Unknown,function,get_update_todo_usecase,dddpy/infrastructure/di/injection.py,103,30.0,def get_update_todo_usecase(,Unknown particle type,4,2,1
+c7a40347db19,Unknown,function,get_delete_todo_usecase,dddpy/infrastructure/di/injection.py,117,30.0,def get_delete_todo_usecase(,Unknown particle type,4,2,1
+b1294ae02f3a,Unknown,function,get_find_todo_by_id_usecase,dddpy/infrastructure/di/injection.py,131,30.0,def get_find_todo_by_id_usecase(,Unknown particle type,4,2,1
+f7cbc8320778,Unknown,function,get_find_todos_usecase,dddpy/infrastructure/di/injection.py,145,30.0,def get_find_todos_usecase(,Unknown particle type,4,2,1
+c2b2fae9231f,Factory,function,create_tables,dddpy/infrastructure/sqlite/database.py,25,50.0,def create_tables():,Encapsulates complex object creation logic,0,3,0
+6419d676c9df,RepositoryImpl,class,TodoRepositoryImpl,dddpy/infrastructure/sqlite/todo/todo_repository.py,15,75.0,class TodoRepositoryImpl(TodoRepository):,Concrete repository implementation (I/O boundary),4,3,1
+66d7886f14d0,Unknown,function,new_todo_repository,dddpy/infrastructure/sqlite/todo/todo_repository.py,86,30.0,def new_todo_repository(session: Session) -> TodoRepository:,Unknown particle type,4,3,1
+517ed4f964e9,DTO,class,TodoDTO,dddpy/infrastructure/sqlite/todo/todo_dto.py,19,50.0,class TodoDTO(Base):,Data transfer object / schema (no business behavior),3,2,2
+067d7f17f7eb,UseCase,class,FindTodoByIdUseCase,dddpy/usecase/todo/find_todo_by_id_usecase.py,11,50.0,class FindTodoByIdUseCase(ABC):,Application-specific business operation with single purpose,4,0,1
+0273fd7bfa23,UseCase,class,FindTodoByIdUseCaseImpl,dddpy/usecase/todo/find_todo_by_id_usecase.py,26,50.0,class FindTodoByIdUseCaseImpl(FindTodoByIdUseCase):,Application-specific business operation with single purpose,4,0,1
+a97c5e07a0c1,Unknown,function,new_find_todo_by_id_usecase,dddpy/usecase/todo/find_todo_by_id_usecase.py,55,30.0,def new_find_todo_by_id_usecase(todo_repository: TodoRepository) -> FindTodoByIdUseCase:,Unknown particle type,4,0,1
+ddd2b9dc8f73,UseCase,class,StartTodoUseCase,dddpy/usecase/todo/start_todo_usecase.py,15,50.0,class StartTodoUseCase(ABC):,Application-specific business operation with single purpose,4,0,1
+87cb2541d87d,UseCase,class,StartTodoUseCaseImpl,dddpy/usecase/todo/start_todo_usecase.py,30,50.0,class StartTodoUseCaseImpl(StartTodoUseCase):,Application-specific business operation with single purpose,4,0,1
+4f3089c29c0f,Unknown,function,new_start_todo_usecase,dddpy/usecase/todo/start_todo_usecase.py,71,30.0,def new_start_todo_usecase(todo_repository: TodoRepository) -> StartTodoUseCase:,Unknown particle type,4,0,1
+deda9cbd7435,UseCase,class,CompleteTodoUseCase,dddpy/usecase/todo/complete_todo_usecase.py,15,50.0,class CompleteTodoUseCase(ABC):,Application-specific business operation with single purpose,4,0,1
+ed1bb89f16a2,UseCase,class,CompleteTodoUseCaseImpl,dddpy/usecase/todo/complete_todo_usecase.py,30,50.0,class CompleteTodoUseCaseImpl(CompleteTodoUseCase):,Application-specific business operation with single purpose,4,0,1
+1cf87759c42f,Unknown,function,new_complete_todo_usecase,dddpy/usecase/todo/complete_todo_usecase.py,71,30.0,def new_complete_todo_usecase(todo_repository: TodoRepository) -> CompleteTodoUseCase:,Unknown particle type,4,0,1
+b2ea53e29472,UseCase,class,FindTodosUseCase,dddpy/usecase/todo/find_todos_usecase.py,10,50.0,class FindTodosUseCase(ABC):,Application-specific business operation with single purpose,2,0,2
+4c63f252c576,UseCase,class,FindTodosUseCaseImpl,dddpy/usecase/todo/find_todos_usecase.py,22,50.0,class FindTodosUseCaseImpl(FindTodosUseCase):,Application-specific business operation with single purpose,2,0,2
+9cca77471ce5,Unknown,function,new_find_todos_usecase,dddpy/usecase/todo/find_todos_usecase.py,38,30.0,def new_find_todos_usecase(todo_repository: TodoRepository) -> FindTodosUseCase:,Unknown particle type,2,0,2
+6d406ca5a0af,UseCase,class,CreateTodoUseCase,dddpy/usecase/todo/create_todo_usecase.py,11,50.0,class CreateTodoUseCase(ABC):,Application-specific business operation with single purpose,3,0,2
+076cdcb496cd,UseCase,class,CreateTodoUseCaseImpl,dddpy/usecase/todo/create_todo_usecase.py,29,50.0,class CreateTodoUseCaseImpl(CreateTodoUseCase):,Application-specific business operation with single purpose,3,0,2
+7865a9278e20,Unknown,function,new_create_todo_usecase,dddpy/usecase/todo/create_todo_usecase.py,57,30.0,def new_create_todo_usecase(todo_repository: TodoRepository) -> CreateTodoUseCase:,Unknown particle type,3,0,2
+6a9f1fcc3a48,UseCase,class,DeleteTodoUseCase,dddpy/usecase/todo/delete_todo_usecase.py,10,50.0,class DeleteTodoUseCase(ABC):,Application-specific business operation with single purpose,3,0,1
+45e101c2812e,UseCase,class,DeleteTodoUseCaseImpl,dddpy/usecase/todo/delete_todo_usecase.py,22,50.0,class DeleteTodoUseCaseImpl(DeleteTodoUseCase):,Application-specific business operation with single purpose,3,0,1
+f45359516119,Unknown,function,new_delete_todo_usecase,dddpy/usecase/todo/delete_todo_usecase.py,50,30.0,def new_delete_todo_usecase(todo_repository: TodoRepository) -> DeleteTodoUseCase:,Unknown particle type,3,0,1
+c5ec4c359dc4,UseCase,class,UpdateTodoUseCase,dddpy/usecase/todo/update_todo_usecase.py,12,50.0,class UpdateTodoUseCase(ABC):,Application-specific business operation with single purpose,4,0,2
+3343ef6357a5,UseCase,class,UpdateTodoUseCaseImpl,dddpy/usecase/todo/update_todo_usecase.py,34,50.0,class UpdateTodoUseCaseImpl(UpdateTodoUseCase):,Application-specific business operation with single purpose,4,0,2
+45dc59a51f16,Unknown,function,new_update_todo_usecase,dddpy/usecase/todo/update_todo_usecase.py,78,30.0,def new_update_todo_usecase(todo_repository: TodoRepository) -> UpdateTodoUseCase:,Unknown particle type,4,0,2
+b2a9b8fcc150,ValueObject,class,TodoDescription,dddpy/domain/todo/value_objects/todo_description.py,7,50.0,class TodoDescription:,"Immutable object defined by its attributes, not identity",0,0,1
+70ea4f5cdca5,ValueObject,class,TodoStatus,dddpy/domain/todo/value_objects/todo_status.py,6,50.0,class TodoStatus(Enum):,"Immutable object defined by its attributes, not identity",0,0,1
+b1126f7996e0,ValueObject,class,TodoTitle,dddpy/domain/todo/value_objects/todo_title.py,7,50.0,class TodoTitle:,"Immutable object defined by its attributes, not identity",0,0,1
+260ce170729b,ValueObject,class,TodoId,dddpy/domain/todo/value_objects/todo_id.py,8,50.0,class TodoId:,"Immutable object defined by its attributes, not identity",0,0,2
+a1cdf5e1b71b,Repository,class,TodoRepository,dddpy/domain/todo/repositories/todo_repository.py,10,75.0,class TodoRepository(ABC):,Data access layer for aggregate persistence,2,0,2
+5d80623af857,Unknown,class,TodoNotFoundError,dddpy/domain/todo/exceptions/todo_not_found_error.py,4,30.0,class TodoNotFoundError(Exception):,Unknown particle type,0,0,0
+0e3912d18290,Unknown,class,TodoNotStartedError,dddpy/domain/todo/exceptions/todo_not_started_error.py,4,30.0,class TodoNotStartedError(Exception):,Unknown particle type,0,0,0
+17127381944f,Unknown,class,TodoAlreadyStartedError,dddpy/domain/todo/exceptions/todo_already_started_error.py,4,30.0,class TodoAlreadyStartedError(Exception):,Unknown particle type,0,0,0
+783585582e10,Unknown,class,TodoAlreadyCompletedError,dddpy/domain/todo/exceptions/todo_already_completed_error.py,4,30.0,class TodoAlreadyCompletedError(Exception):,Unknown particle type,0,0,0
+03c6da2d335e,Entity,class,Todo,dddpy/domain/todo/entities/todo.py,14,50.0,class Todo:,Core domain object with identity and lifecycle management,1,0,2
+69d18c958f99,DTO,class,TodoUpdateSchema,dddpy/presentation/api/todo/schemas/todo_update_schema.py,6,50.0,class TodoUpdateSchema(BaseModel):,Data transfer object / schema (no business behavior),0,1,0
+fbcab477fc11,DTO,class,TodoCreateSchema,dddpy/presentation/api/todo/schemas/todo_create_schema.py,6,50.0,class TodoCreateSchema(BaseModel):,Data transfer object / schema (no business behavior),0,1,0
+2ef13563f0e9,DTO,class,TodoSchema,dddpy/presentation/api/todo/schemas/todo_schema.py,8,50.0,class TodoSchema(BaseModel):,Data transfer object / schema (no business behavior),1,1,0
+eb518ab6f69d,DTO,class,ErrorMessageTodoAlreadyCompleted,dddpy/presentation/api/todo/error_messages/todo_already_completed_error_message.py,8,50.0,class ErrorMessageTodoAlreadyCompleted(BaseModel):,Data transfer object / schema (no business behavior),1,1,0
+adc03e82d8c3,DTO,class,ErrorMessageTodoNotFound,dddpy/presentation/api/todo/error_messages/todo_not_found_error_message.py,8,50.0,class ErrorMessageTodoNotFound(BaseModel):,Data transfer object / schema (no business behavior),1,1,0
+b6b4dc912417,DTO,class,ErrorMessageTodoNotStarted,dddpy/presentation/api/todo/error_messages/todo_not_started_error_message.py,8,50.0,class ErrorMessageTodoNotStarted(BaseModel):,Data transfer object / schema (no business behavior),1,1,0
+96bdc813db31,DTO,class,ErrorMessageTodoAlreadyStarted,dddpy/presentation/api/todo/error_messages/todo_already_started_error_message.py,8,50.0,class ErrorMessageTodoAlreadyStarted(BaseModel):,Data transfer object / schema (no business behavior),1,1,0
+be047188510d,Controller,class,TodoApiRouteHandler,dddpy/presentation/api/todo/handlers/todo_api_route_handler.py,38,50.0,class TodoApiRouteHandler:,Handles user input and coordinates application flow,6,1,2
+ca667b0f9abc,Unknown,function,todo_repository_mock,tests/usecase/todo/test_find_todos_usecase.py,14,30.0,def todo_repository_mock():,Unknown particle type,4,1,1
+96552b37714c,Unknown,function,find_todos_usecase,tests/usecase/todo/test_find_todos_usecase.py,20,30.0,def find_todos_usecase(todo_repository_mock):,Unknown particle type,4,1,1
+9e5b9c710076,Unknown,function,test_find_todos_empty_list,tests/usecase/todo/test_find_todos_usecase.py,25,30.0,"def test_find_todos_empty_list(find_todos_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+95bb29cf44da,Unknown,function,test_find_todos_with_items,tests/usecase/todo/test_find_todos_usecase.py,38,30.0,"def test_find_todos_with_items(find_todos_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+3066758531ca,Unknown,function,todo_repository_mock,tests/usecase/todo/test_find_todo_by_id_usecase.py,14,30.0,def todo_repository_mock():,Unknown particle type,4,1,1
+7d2698d6dea2,Unknown,function,find_todo_by_id_usecase,tests/usecase/todo/test_find_todo_by_id_usecase.py,20,30.0,def find_todo_by_id_usecase(todo_repository_mock):,Unknown particle type,4,1,1
+755332e86912,Unknown,function,todo,tests/usecase/todo/test_find_todo_by_id_usecase.py,26,30.0,def todo():,Unknown particle type,4,1,1
+a03b82d00ec6,Unknown,function,test_find_todo_by_id_success,tests/usecase/todo/test_find_todo_by_id_usecase.py,35,30.0,"def test_find_todo_by_id_success(find_todo_by_id_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+c1f4cd3e1566,Unknown,function,test_find_todo_by_id_not_found,tests/usecase/todo/test_find_todo_by_id_usecase.py,48,30.0,"def test_find_todo_by_id_not_found(find_todo_by_id_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+412fee0c1413,Unknown,function,todo_repository_mock,tests/usecase/todo/test_complete_todo_usecase.py,15,30.0,def todo_repository_mock():,Unknown particle type,4,1,2
+f1b858ccfb14,Unknown,function,complete_todo_usecase,tests/usecase/todo/test_complete_todo_usecase.py,21,30.0,def complete_todo_usecase(todo_repository_mock):,Unknown particle type,4,1,2
+d1562dea2e90,Unknown,function,todo,tests/usecase/todo/test_complete_todo_usecase.py,27,30.0,def todo():,Unknown particle type,4,1,2
+394acc045984,Unknown,function,test_complete_todo_success,tests/usecase/todo/test_complete_todo_usecase.py,38,30.0,"def test_complete_todo_success(complete_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,2
+5af8dc97517e,Unknown,function,test_complete_todo_not_found,tests/usecase/todo/test_complete_todo_usecase.py,53,30.0,"def test_complete_todo_not_found(complete_todo_usecase, todo_repository_mock):",Unknown particle type,4,1,2
+307bd47b23ee,Unknown,function,test_complete_already_completed_todo,tests/usecase/todo/test_complete_todo_usecase.py,65,30.0,def test_complete_already_completed_todo(,Unknown particle type,4,1,2
+07be5b0bbe60,Unknown,function,todo_repository_mock,tests/usecase/todo/test_start_todo_usecase.py,14,30.0,def todo_repository_mock():,Unknown particle type,4,1,1
+11191b33bc6f,Unknown,function,start_todo_usecase,tests/usecase/todo/test_start_todo_usecase.py,20,30.0,def start_todo_usecase(todo_repository_mock):,Unknown particle type,4,1,1
+755acc414119,Unknown,function,todo,tests/usecase/todo/test_start_todo_usecase.py,26,30.0,def todo():,Unknown particle type,4,1,1
+6b507a83e39f,Unknown,function,test_start_todo_success,tests/usecase/todo/test_start_todo_usecase.py,35,30.0,"def test_start_todo_success(start_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+ab3d0b85dc9f,Unknown,function,test_start_todo_not_found,tests/usecase/todo/test_start_todo_usecase.py,49,30.0,"def test_start_todo_not_found(start_todo_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+73094447b60d,Unknown,function,test_start_completed_todo,tests/usecase/todo/test_start_todo_usecase.py,61,30.0,"def test_start_completed_todo(start_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+823de700edfb,Unknown,function,todo_repository_mock,tests/usecase/todo/test_update_todo_usecase.py,14,30.0,def todo_repository_mock():,Unknown particle type,4,1,1
+3baf510c5bf7,Unknown,function,update_todo_usecase,tests/usecase/todo/test_update_todo_usecase.py,20,30.0,def update_todo_usecase(todo_repository_mock):,Unknown particle type,4,1,1
+50f3a937f055,Unknown,function,todo,tests/usecase/todo/test_update_todo_usecase.py,26,30.0,def todo():,Unknown particle type,4,1,1
+89fc163bcf3c,Unknown,function,test_update_todo_title_only,tests/usecase/todo/test_update_todo_usecase.py,35,30.0,"def test_update_todo_title_only(update_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+c0faea1bf134,Unknown,function,test_update_todo_description_only,tests/usecase/todo/test_update_todo_usecase.py,51,30.0,"def test_update_todo_description_only(update_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+45c8d044242e,Unknown,function,test_update_todo_both_fields,tests/usecase/todo/test_update_todo_usecase.py,67,30.0,"def test_update_todo_both_fields(update_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+9a8899ab72c9,Unknown,function,test_update_todo_not_found,tests/usecase/todo/test_update_todo_usecase.py,86,30.0,"def test_update_todo_not_found(update_todo_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+8ebb70fa5e8d,Unknown,function,todo_repository_mock,tests/usecase/todo/test_create_todo_usecase.py,14,30.0,def todo_repository_mock():,Unknown particle type,4,1,1
+1bfe9f47d7e8,Factory,function,create_todo_usecase,tests/usecase/todo/test_create_todo_usecase.py,20,50.0,def create_todo_usecase(todo_repository_mock):,Encapsulates complex object creation logic,4,1,1
+304161005a81,Unknown,function,test_create_todo_with_title_only,tests/usecase/todo/test_create_todo_usecase.py,25,30.0,"def test_create_todo_with_title_only(create_todo_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+a71d5ec5788b,Unknown,function,test_create_todo_with_title_and_description,tests/usecase/todo/test_create_todo_usecase.py,37,30.0,def test_create_todo_with_title_and_description(,Unknown particle type,4,1,1
+8ddcef06f40c,Unknown,function,test_create_todo_repository_error,tests/usecase/todo/test_create_todo_usecase.py,52,30.0,"def test_create_todo_repository_error(create_todo_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+b906537ee50b,Unknown,function,todo_repository_mock,tests/usecase/todo/test_delete_todo_usecase.py,14,30.0,def todo_repository_mock():,Unknown particle type,4,1,1
+2b0066417f23,Unknown,function,delete_todo_usecase,tests/usecase/todo/test_delete_todo_usecase.py,20,30.0,def delete_todo_usecase(todo_repository_mock):,Unknown particle type,4,1,1
+a6881410d34f,Unknown,function,todo,tests/usecase/todo/test_delete_todo_usecase.py,26,30.0,def todo():,Unknown particle type,4,1,1
+610080e18489,Unknown,function,test_delete_todo_success,tests/usecase/todo/test_delete_todo_usecase.py,34,30.0,"def test_delete_todo_success(delete_todo_usecase, todo_repository_mock, todo):",Unknown particle type,4,1,1
+76fab774154e,Unknown,function,test_delete_todo_not_found,tests/usecase/todo/test_delete_todo_usecase.py,47,30.0,"def test_delete_todo_not_found(delete_todo_usecase, todo_repository_mock):",Unknown particle type,4,1,1
+ded027d87258,Unknown,function,test_todo_status_values,tests/domain/todo/value_objects/test_todo_status.py,6,30.0,def test_todo_status_values():,Unknown particle type,1,0,0
+8d9c105872b3,Unknown,function,test_todo_status_enum_members,tests/domain/todo/value_objects/test_todo_status.py,13,30.0,def test_todo_status_enum_members():,Unknown particle type,1,0,0
+1f9b031ed6fc,Unknown,function,test_str_representation,tests/domain/todo/value_objects/test_todo_status.py,21,30.0,def test_str_representation():,Unknown particle type,1,0,0
+1c0b82858666,Unknown,function,test_create_valid_title,tests/domain/todo/value_objects/test_todo_title.py,8,30.0,def test_create_valid_title():,Unknown particle type,1,1,0
+1dbbb5477ed8,Unknown,function,test_empty_title_raises_error,tests/domain/todo/value_objects/test_todo_title.py,14,30.0,def test_empty_title_raises_error():,Unknown particle type,1,1,0
+9be2fbb9878d,Unknown,function,test_title_too_long_raises_error,tests/domain/todo/value_objects/test_todo_title.py,20,30.0,def test_title_too_long_raises_error():,Unknown particle type,1,1,0
+420b46c6b312,Unknown,function,test_str_representation,tests/domain/todo/value_objects/test_todo_title.py,27,30.0,def test_str_representation():,Unknown particle type,1,1,0
+221af638f24a,Unknown,function,test_generate_creates_valid_uuid,tests/domain/todo/value_objects/test_todo_id.py,10,30.0,def test_generate_creates_valid_uuid():,Unknown particle type,1,1,1
+86ce31032015,Unknown,function,test_generate_creates_unique_ids,tests/domain/todo/value_objects/test_todo_id.py,17,30.0,def test_generate_creates_unique_ids():,Unknown particle type,1,1,1
+04b9090468a4,Unknown,function,test_str_representation,tests/domain/todo/value_objects/test_todo_id.py,24,30.0,def test_str_representation():,Unknown particle type,1,1,1
+b0a03ba04cc0,Unknown,function,test_create_valid_description,tests/domain/todo/value_objects/test_todo_description.py,8,30.0,def test_create_valid_description():,Unknown particle type,1,1,0
+4d3ffa6a1064,Unknown,function,test_create_description_exceeding_length_limit,tests/domain/todo/value_objects/test_todo_description.py,14,30.0,def test_create_description_exceeding_length_limit():,Unknown particle type,1,1,0
+1551a8b898a4,Unknown,function,test_str_representation,tests/domain/todo/value_objects/test_todo_description.py,21,30.0,def test_str_representation():,Unknown particle type,1,1,0
+16cc27ec697b,Unknown,function,test_create_todo,tests/domain/todo/entities/test_todo.py,16,30.0,def test_create_todo():,Unknown particle type,2,1,1
+aa19c1d5a858,Unknown,function,test_todo_properties,tests/domain/todo/entities/test_todo.py,31,30.0,def test_todo_properties():,Unknown particle type,2,1,1
+c4ae5467cd86,Unknown,function,test_update_title,tests/domain/todo/entities/test_todo.py,57,30.0,def test_update_title():,Unknown particle type,2,1,1
+74862f6b4314,Unknown,function,test_update_description,tests/domain/todo/entities/test_todo.py,68,30.0,def test_update_description():,Unknown particle type,2,1,1
+5ed37fad7f7b,Unknown,function,test_clear_description,tests/domain/todo/entities/test_todo.py,79,30.0,def test_clear_description():,Unknown particle type,2,1,1
+0e35dee03e13,Unknown,function,test_start_todo,tests/domain/todo/entities/test_todo.py,89,30.0,def test_start_todo():,Unknown particle type,2,1,1
+3acdc718baab,Unknown,function,test_complete_todo,tests/domain/todo/entities/test_todo.py,99,30.0,def test_complete_todo():,Unknown particle type,2,1,1
+0632dc759c79,Unknown,function,test_complete_already_completed_todo,tests/domain/todo/entities/test_todo.py,111,30.0,def test_complete_already_completed_todo():,Unknown particle type,2,1,1
+60a8c0cd077d,Unknown,function,test_is_overdue,tests/domain/todo/entities/test_todo.py,120,30.0,def test_is_overdue():,Unknown particle type,2,1,1
+581e7024621e,Unknown,function,test_todo_equality,tests/domain/todo/entities/test_todo.py,155,30.0,def test_todo_equality():,Unknown particle type,2,1,1

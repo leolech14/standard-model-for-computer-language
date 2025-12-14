@@ -1,0 +1,172 @@
+[
+  {
+    "name": "dddpy_real_onion_v1",
+    "run_dir": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/runs/2025-12-14_071653/dddpy_real_onion_v1",
+    "summary": {
+      "expected_total": 30,
+      "predicted_total": 30,
+      "correct_total": 30,
+      "missed_total": 0,
+      "wrong_total": 0,
+      "extra_total": 0,
+      "accuracy_on_expected": 1.0
+    },
+    "unknown_count": 82,
+    "unknown_samples": [
+      {
+        "symbol_kind": "function",
+        "name": "lifespan",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/main.py",
+        "line": 19,
+        "evidence": "async def lifespan(app: FastAPI):"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_session",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 29,
+        "evidence": "def get_session() -> Iterator[Session]:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_todo_repository",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 49,
+        "evidence": "def get_todo_repository(session: Session = Depends(get_session)) -> TodoRepository:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_create_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 61,
+        "evidence": "def get_create_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_start_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 75,
+        "evidence": "def get_start_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_complete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 89,
+        "evidence": "def get_complete_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_update_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 103,
+        "evidence": "def get_update_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_delete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 117,
+        "evidence": "def get_delete_todo_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_find_todo_by_id_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 131,
+        "evidence": "def get_find_todo_by_id_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "get_find_todos_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+        "line": 145,
+        "evidence": "def get_find_todos_usecase("
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_todo_repository",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "line": 86,
+        "evidence": "def new_todo_repository(session: Session) -> TodoRepository:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_find_todo_by_id_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "line": 55,
+        "evidence": "def new_find_todo_by_id_usecase(todo_repository: TodoRepository) -> FindTodoByIdUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_start_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/start_todo_usecase.py",
+        "line": 71,
+        "evidence": "def new_start_todo_usecase(todo_repository: TodoRepository) -> StartTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_complete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/complete_todo_usecase.py",
+        "line": 71,
+        "evidence": "def new_complete_todo_usecase(todo_repository: TodoRepository) -> CompleteTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_find_todos_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todos_usecase.py",
+        "line": 38,
+        "evidence": "def new_find_todos_usecase(todo_repository: TodoRepository) -> FindTodosUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_create_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/create_todo_usecase.py",
+        "line": 57,
+        "evidence": "def new_create_todo_usecase(todo_repository: TodoRepository) -> CreateTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_delete_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/delete_todo_usecase.py",
+        "line": 50,
+        "evidence": "def new_delete_todo_usecase(todo_repository: TodoRepository) -> DeleteTodoUseCase:"
+      },
+      {
+        "symbol_kind": "function",
+        "name": "new_update_todo_usecase",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/update_todo_usecase.py",
+        "line": 78,
+        "evidence": "def new_update_todo_usecase(todo_repository: TodoRepository) -> UpdateTodoUseCase:"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoNotFoundError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_not_found_error.py",
+        "line": 4,
+        "evidence": "class TodoNotFoundError(Exception):"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoNotStartedError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_not_started_error.py",
+        "line": 4,
+        "evidence": "class TodoNotStartedError(Exception):"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoAlreadyStartedError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_already_started_error.py",
+        "line": 4,
+        "evidence": "class TodoAlreadyStartedError(Exception):"
+      },
+      {
+        "symbol_kind": "class",
+        "name": "TodoAlreadyCompletedError",
+        "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_already_completed_error.py",
+        "line": 4,
+        "evidence": "class TodoAlreadyCompletedError(Exception):"
+      }
+    ]
+  }
+]

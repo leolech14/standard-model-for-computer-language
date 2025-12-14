@@ -1,0 +1,170 @@
+{
+  "version": "V12.1",
+  "description": "Universal patterns with touchpoints for cross-language detection",
+  "universal_patterns": [
+    {
+      "id": "entity",
+      "name": "Entity",
+      "touchpoints": ["identity", "state", "business_rules"],
+      "tree_sitter_query": "(class_definition name: \"*Entity*\")",
+      "cross_language": true,
+      "description": "Core domain object with unique identity and lifecycle"
+    },
+    {
+      "id": "repository",
+      "name": "Repository",
+      "touchpoints": ["data_access", "abstraction", "collection_interface"],
+      "tree_sitter_query": "(class_definition name: \"*Repository*\")",
+      "cross_language": true,
+      "description": "Data access abstraction for aggregate persistence"
+    },
+    {
+      "id": "service",
+      "name": "Service",
+      "touchpoints": ["business_logic", "coordination", "transaction_boundary"],
+      "tree_sitter_query": "(class_definition name: \"*Service*\")",
+      "cross_language": true,
+      "description": "Business logic coordination across aggregates"
+    },
+    {
+      "id": "usecase",
+      "name": "UseCase",
+      "touchpoints": ["execution", "business_operation", "single_purpose"],
+      "tree_sitter_query": "(class_definition name: \"*UseCase*\")",
+      "cross_language": true,
+      "description": "Application-specific business operation"
+    },
+    {
+      "id": "value_object",
+      "name": "ValueObject",
+      "touchpoints": ["immutability", "value_semantics", "validation"],
+      "tree_sitter_query": "(class_definition name: \"*Value*\" (decorator name: \"@dataclass\"))",
+      "cross_language": true,
+      "description": "Immutable object defined by attributes, not identity"
+    },
+    {
+      "id": "controller",
+      "name": "Controller",
+      "touchpoints": ["request_handling", "coordination", "response_formatting"],
+      "tree_sitter_query": "(class_definition name: \"*Controller*\")",
+      "cross_language": true,
+      "description": "Handles user input and coordinates application flow"
+    },
+    {
+      "id": "factory",
+      "name": "Factory",
+      "touchpoints": ["object_creation", "construction_logic", "encapsulation"],
+      "tree_sitter_query": "(class_definition name: \"*Factory*\")",
+      "cross_language": true,
+      "description": "Encapsulates complex object creation logic"
+    }
+  ],
+  "universal_touchpoints": {
+    "identity": {
+      "description": "Unique identifier that distinguishes objects",
+      "indicators": ["id", "uuid", "identifier", "key", "primary_key"]
+    },
+    "state": {
+      "description": "Mutable attributes that define object's condition",
+      "indicators": ["properties", "attributes", "fields", "member_variables"]
+    },
+    "business_rules": {
+      "description": "Domain logic and invariants",
+      "indicators": ["validate", "ensure", "check", "business", "domain"]
+    },
+    "data_access": {
+      "description": "Database or storage operations",
+      "indicators": ["save", "find", "delete", "query", "persist", "retrieve"]
+    },
+    "abstraction": {
+      "description": "Interface or abstract base class",
+      "indicators": ["interface", "abstract", "protocol", "ABC", "virtual"]
+    },
+    "collection_interface": {
+      "description": "Methods for working with collections",
+      "indicators": ["find_by", "get_all", "list", "filter", "search"]
+    },
+    "business_logic": {
+      "description": "Core business operations",
+      "indicators": ["process", "execute", "handle", "perform", "calculate"]
+    },
+    "coordination": {
+      "description": "Orchestrating multiple components",
+      "indicators": ["coordinate", "manage", "orchestrate", "mediate"]
+    },
+    "transaction_boundary": {
+      "description": "Transaction management boundaries",
+      "indicators": ["transaction", "commit", "rollback", "begin", "unit_of_work"]
+    },
+    "execution": {
+      "description": "Main execution method",
+      "indicators": ["execute", "run", "perform", "apply", "handle"]
+    },
+    "business_operation": {
+      "description": "Specific business operation",
+      "indicators": ["create", "update", "delete", "send", "complete"]
+    },
+    "single_purpose": {
+      "description": "One responsibility per use case",
+      "indicators": ["single", "specific", "dedicated", "focused"]
+    },
+    "immutability": {
+      "description": "Immutable state after creation",
+      "indicators": ["frozen", "immutable", "readonly", "final", "const"]
+    },
+    "value_semantics": {
+      "description": "Equality based on values, not identity",
+      "indicators": ["equals", "hash", "compare", "value", "equality"]
+    },
+    "validation": {
+      "description": "Input validation and constraints",
+      "indicators": ["validate", "check", "verify", "ensure", "require"]
+    },
+    "request_handling": {
+      "description": "HTTP request or user input handling",
+      "indicators": ["request", "http", "get", "post", "put", "delete"]
+    },
+    "response_formatting": {
+      "description": "Response preparation and formatting",
+      "indicators": ["response", "format", "serialize", "render", "return"]
+    },
+    "object_creation": {
+      "description": "Complex object construction logic",
+      "indicators": ["create", "build", "make", "construct", "instantiate"]
+    },
+    "construction_logic": {
+      "description": "Encapsulated construction details",
+      "indicators": ["build", "assemble", "compose", "configure"]
+    },
+    "encapsulation": {
+      "description": "Hiding implementation details",
+      "indicators": ["private", "protected", "internal", "hidden"]
+    }
+  },
+  "language_mappings": {
+    "python": {
+      "class_definition": "class_definition",
+      "method_definition": "function_definition",
+      "decorator": "decorator",
+      "assignment": "assignment"
+    },
+    "java": {
+      "class_definition": "class_declaration",
+      "method_definition": "method_declaration",
+      "decorator": "annotation",
+      "assignment": "local_variable_declaration"
+    },
+    "typescript": {
+      "class_definition": "class_declaration",
+      "method_definition": "method_definition",
+      "decorator": "decorator",
+      "assignment": "variable_declaration"
+    },
+    "go": {
+      "class_definition": "type_declaration",
+      "method_definition": "method_declaration",
+      "decorator": "none",
+      "assignment": "assignment_statement"
+    }
+  }
+}

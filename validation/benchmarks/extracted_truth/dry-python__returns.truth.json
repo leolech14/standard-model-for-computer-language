@@ -1,0 +1,55 @@
+{
+  "repo": "dry-python__returns",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/dry-python__returns",
+  "confidence": 0.4,
+  "truth_sources": [
+    "dir:returns/interfaces",
+    "inheritance:Enum",
+    "doc:README.md",
+    "inheritance:ABC",
+    "inheritance:Exception"
+  ],
+  "layers": [
+    "interfaces"
+  ],
+  "expected_components": [
+    {
+      "name": "IOResult",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "Maybe",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "Result",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "BaseContainer",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "UnwrapFailedError",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "_CustomError",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "_KindErrors",
+      "type": "Enum",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

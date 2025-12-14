@@ -1,0 +1,169 @@
+{
+  "repo": "dddpy_real",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real",
+  "confidence": 0.7,
+  "truth_sources": [
+    "dir:dddpy/presentation",
+    "type:Repository",
+    "inheritance:Enum",
+    "dir:dddpy/domain",
+    "type:UseCase",
+    "doc:README.md",
+    "inheritance:ABC",
+    "dir:dddpy/usecase",
+    "dir:dddpy/infrastructure",
+    "inheritance:BaseModel",
+    "inheritance:Exception"
+  ],
+  "layers": [
+    "domain",
+    "application",
+    "infrastructure",
+    "presentation"
+  ],
+  "expected_components": [
+    {
+      "name": "FindTodoByIdUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "StartTodoUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "CompleteTodoUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "FindTodosUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "CreateTodoUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "DeleteTodoUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "UpdateTodoUseCaseImpl",
+      "type": "UseCase",
+      "source": "type_hint"
+    },
+    {
+      "name": "TodoRepositoryImpl",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "TodoUpdateSchema",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoCreateSchema",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoSchema",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ErrorMessageTodoAlreadyCompleted",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ErrorMessageTodoNotFound",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ErrorMessageTodoNotStarted",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "ErrorMessageTodoAlreadyStarted",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoStatus",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoRepository",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "FindTodoByIdUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "StartTodoUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "CompleteTodoUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "FindTodosUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "CreateTodoUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "DeleteTodoUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "UpdateTodoUseCase",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoNotFoundError",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoNotStartedError",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoAlreadyStartedError",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "TodoAlreadyCompletedError",
+      "type": "Error",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

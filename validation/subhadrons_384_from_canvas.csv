@@ -1,0 +1,385 @@
+canvas_node_id,sub_index,badge,subhadron_name,base_type,is_antimatter,reason,rarity,visual,x,y,color
+sub_1,1,🏆,Entity_WithInvariants,Entity,False,,98.7%,sphere_glowing_core_gold_crown,4923,4140,4
+sub_2,2,🏆,Entity_Immutable,Entity,False,,12.4%,sphere_crystalline_locked,4923,4360,4
+sub_3,3,⚫,Entity_Stateless,Entity,True,Entity must have state,,,10360,1820,1
+sub_4,4,🏆,Entity_WithIdentity,Entity,False,,99.9%,sphere_glowing_core,5194,4140,4
+sub_5,5,🏆,ValueObject_Immutable,ValueObject,False,,99.1%,cube_crystalline,5194,4360,4
+sub_6,6,⚫,ValueObject_WithIdentity,ValueObject,True,ValueObject cannot have identity,,,10360,2040,1
+sub_7,7,⚫,ValueObject_Mutable,ValueObject,True,ValueObject must be immutable,,,10360,2260,1
+sub_8,8,🏆,AggregateRoot_WithInvariants,AggregateRoot,False,,89.3%,sphere_golden_crown_pulsing,5466,4140,4
+sub_9,9,🏆,CommandHandler_Create,CommandHandler,False,,96.2%,octahedron_gold_ring,10360,2480,1
+sub_10,10,⚫,CommandHandler_FindById,CommandHandler,True,CommandHandler cannot return data,,,10360,2700,1
+sub_11,11,🏆,CommandHandler_Save,CommandHandler,False,,91.1%,octahedron_gold_ring_thick,10360,2920,1
+sub_12,12,⚫,QueryHandler_Save,QueryHandler,True,QueryHandler cannot mutate state,,,10360,3140,1
+sub_13,13,🏆,QueryHandler_FindById,QueryHandler,False,,98.7%,octahedron_blue_ring,10360,3360,1
+sub_14,14,⚫,EventHandler_ReturnsValue,EventHandler,True,EventHandler is fire-and-forget,,,10360,3580,1
+sub_15,15,⚫,Repository_PureFunction,RepositoryImpl,True,Repository has I/O,,,10360,3800,1
+sub_16,16,⚫,Service_GlobalState,Service,True,Service must be stateless,,,10360,4020,1
+sub_17,17,⚫,APIHandler_InternalOnly,APIHandler,True,API crosses boundary,,,10360,4240,1
+sub_18,18,⚫,Validator_AcceptsInvalid,Validator,True,Validator must reject,,,10660,1820,1
+sub_19,19,⚫,TestFunction_TouchesProduction,TestFunction,True,Test isolation violation,,,10660,2040,1
+sub_20,20,⚫,ChaosMonkey_ImprovesStability,ChaosMonkey,True,Paradox,,,10660,2260,1
+sub_21,21,⚫,HealthCheck_Returns500WhenHealthy,HealthCheck,True,Health check must be honest,,,10660,2480,1
+sub_22,22,⚫,GracefulShutdown_HardKill,GracefulShutdown,True,Not graceful,,,10660,2700,1
+sub_23,23,🏆,CreateUserCommandHandler_WithCompensation,CommandHandler,False,,8.9%,octahedron_gold_ring_red_chain,10660,2920,1
+sub_24,24,🏆,UserAggregate_WithBusinessInvariants,AggregateRoot,False,,87.2%,sphere_golden_crown_strong_glow,5466,4360,4
+sub_25,25,🏆,UserRegisteredEvent_ProjectedToReadModel,EventHandler,False,,34.1%,octahedron_purple_pulse,10660,3140,1
+sub_26,26,🏆,IdempotentCommandHandler_WithOutbox,CommandHandler,False,,12.7%,octahedron_gold_ring_blue_lock,10660,3360,1
+sub_27,27,🏆,ReadModel_Denormalized,ReadModel,False,,67.8%,sphere_transparent_blue,5738,4140,4
+sub_28,28,🏆,DomainService_Orchestration,Service,False,,41.3%,gear_with_orbiting_spheres,5738,4360,4
+sub_29,29,🏆,Specification_Composable,Specification,False,,29.5%,diamond_composite_glow,10660,3580,1
+sub_30,30,🏆,Factory_WithDependencyInjection,Factory,False,,38.2%,spark_with_syringe,6010,4140,4
+sub_31,31,⚫,DTO_WithBehavior,DTO,True,DTO must be anemic,,,10660,3800,1
+sub_32,32,⚫,Policy_WithSideEffects,Policy,True,Policy must be pure,,,10660,4020,1
+sub_33,33,⚫,Projection_WithWriteBack,Projection,True,Projection cannot write back,,,10660,4240,1
+sub_34,34,⚫,Saga_WithNoCompensation,SagaStep,True,Saga must have compensation,,,10960,1820,1
+sub_35,35,⚫,Adapter_WithBusinessLogic,InfrastructureAdapter,True,Adapter must not contain business,,,10960,2040,1
+sub_36,36,⚫,Port_WithImplementation,DomainPort,True,Port must be interface only,,,10960,2260,1
+sub_37,37,⚫,Controller_WithDomainLogic,APIHandler,True,Controller must not contain domain,,,10960,2480,1
+sub_38,38,⚫,EventSourcedAggregate_WithoutEvents,AggregateRoot,True,Must emit events,,,10960,2700,1
+sub_39,39,⚫,CircuitBreaker_ThatNeverTrips,CircuitBreakerInit,True,Defeats purpose,,,10960,2920,1
+sub_40,40,⚫,RateLimiter_Unlimited,RateLimiter,True,Not limiting,,,10960,3140,1
+sub_41,41,⚫,FeatureFlag_AlwaysOn,FeatureFlagCheck,True,Not a flag,,,10960,3360,1
+sub_42,42,⚫,CanaryDeploy_100Percent,CanaryDeployTrigger,True,Not a canary,,,10960,3580,1
+sub_43,43,⚫,ReadModel_WithBusinessLogic,ReadModel,True,ReadModel must be read-only,,,10960,3800,1
+sub_44,44,🏆,ReadModel_WithIdentity,ReadModel,False,,61.2%,transparent_sphere_glowing_id,6010,4360,4
+sub_45,45,⚫,Projection_WithCommandHandling,Projection,True,Projection cannot handle commands,,,10960,4020,1
+sub_46,46,⚫,DomainEvent_WithSideEffects,DomainEvent,True,Domain Events must be pure facts,,,10960,4240,1
+sub_47,47,🏆,DomainEvent_Immutable,DomainEvent,False,,94.8%,envelope_crystalline,11260,1820,1
+sub_48,48,⚫,SagaStep_WithoutCompensation,SagaStep,True,Saga must have compensation,,,11260,2040,1
+sub_49,49,🏆,SagaStep_WithCompensation,SagaStep,False,,18.9%,chain_with_red_reverse_arrow,11260,2260,1
+sub_50,50,🏆,OutboxPattern_WithManualCommit,Outbox,False,,45.1%,box_with_hand,5920,-1505,3
+sub_51,51,⚫,OutboxPattern_WithoutTransaction,Outbox,True,Must be transactional,,,11260,2480,1
+sub_52,52,⚫,DeadLetterHandler_WithRetryForever,EventHandler,True,Must eventually give up,,,11260,2700,1
+sub_53,53,🏆,DeadLetterHandler_WithAlerting,EventHandler,False,,11.3%,skull_with_siren,11260,2920,1
+sub_54,54,⚫,IntegrationService_WithDomainLogic,Service,True,Integration must not contain domain,,,11260,3140,1
+sub_55,55,🏆,IntegrationService_WithOrchestration,Service,False,,32.7%,gear_with_orbit,6282,4140,4
+sub_56,56,⚫,AntiCorruptionLayer_WithLeakyAbstraction,Adapter,True,Must protect domain,,,11260,3360,1
+sub_57,57,🏆,AntiCorruptionLayer_FullIsolation,Adapter,False,,28.4%,shield_solid_glow,6282,4360,4
+sub_58,58,🏆,BoundedContext_WithSharedKernel,BoundedContext,False,,19.6%,dodecahedron_with_bridge,6554,4140,4
+sub_59,59,🏆,BoundedContext_Isolated,BoundedContext,False,,67.2%,dodecahedron_separate,6554,4360,4
+sub_60,60,🏆,ContextMap_WithUpstreamDownstream,ContextMap,False,,41.8%,map_with_arrows,6826,4140,4
+sub_61,61,⚫,SharedKernel_WithDomainLeak,SharedKernel,True,Shared kernel must be pure,,,11260,3580,1
+sub_62,62,⚫,CustomerSupplier_WithTightCoupling,ContextMap,True,Should be loose,,,11260,3800,1
+sub_63,63,🏆,OpenHostService_WithVersioning,APIHandler,False,,38.9%,globe_with_v_tags,5920,-1285,3
+sub_64,64,⚫,PublishedLanguage_WithBreakingChanges,APIHandler,True,Published language must be stable,,,11260,4020,1
+sub_65,65,🏆,SeparateWays_NoIntegration,BoundedContext,False,,14.1%,dodecahedron_isolated,6826,4360,4
+sub_66,66,⚫,Conformist_WithBidirectionalDependency,ContextMap,True,Conformist is one-way,,,11260,4240,1
+sub_67,67,⚫,AnticorruptionLayer_WithDirectCalls,Adapter,True,Must translate,,,11560,1820,1
+sub_68,68,⚫,DomainEvent_WithMutableState,DomainEvent,True,Domain Events must be immutable,,,11560,2040,1
+sub_69,69,⚫,DomainEvent_WithBehavior,DomainEvent,True,Events are facts,,,11560,2260,1
+sub_70,70,⚫,Command_WithSideEffectsBeforeValidation,CommandHandler,True,Must validate first,,,11560,2480,1
+sub_71,71,⚫,Command_WithNoValidation,CommandHandler,True,Commands must be validated,,,11560,2700,1
+sub_72,72,⚫,Query_WithStateMutation,QueryHandler,True,Query cannot mutate,,,11560,2920,1
+sub_73,73,⚫,EventHandler_WithStatefulProcessing,EventHandler,True,Event handlers must be stateless,,,11560,3140,1
+sub_74,74,⚫,Repository_WithBusinessLogic,RepositoryImpl,True,Repository must not contain business,,,11560,3360,1
+sub_75,75,⚫,Service_WithPersistence,Service,True,Service must not touch storage,,,11560,3580,1
+sub_76,76,⚫,Entity_WithDirectPersistence,Entity,True,Entity must go through repository,,,11560,3800,1
+sub_77,77,⚫,ValueObject_WithRepository,ValueObject,True,Value Objects are not persisted directly,,,11560,4020,1
+sub_78,78,⚫,DTO_WithValidation,DTO,True,DTO must be anemic,,,11560,4240,1
+sub_79,79,⚫,Controller_WithBusinessLogic,APIHandler,True,Controller must not contain domain,,,11860,1820,1
+sub_80,80,⚫,UseCase_WithDirectDatabaseAccess,UseCase,True,Use case must go through repository,,,11860,2040,1
+sub_81,81,⚫,Factory_WithBusinessRules,Factory,True,Factory must be simple creation,,,11860,2260,1
+sub_82,82,⚫,Specification_WithSideEffects,Specification,True,Specification must be pure,,,11860,2480,1
+sub_83,83,⚫,Policy_WithExternalDependencies,Policy,True,Policy must be pure,,,11860,2700,1
+sub_84,84,⚫,Adapter_WithOrchestration,InfrastructureAdapter,True,Adapter must not orchestrate,,,11860,2920,1
+sub_85,85,⚫,Port_WithBusinessLogic,DomainPort,True,Port must be interface only,,,11860,3140,1
+sub_86,86,⚫,ApplicationService_WithPersistence,Service,True,Service must not touch storage,,,11860,3360,1
+sub_87,87,⚫,DomainService_WithInfrastructure,Service,True,Domain service must be pure,,,11860,3580,1
+sub_88,88,⚫,InfrastructureAdapter_WithDomainLogic,InfrastructureAdapter,True,Adapter must not contain domain,,,11860,3800,1
+sub_89,89,🏆,APIHandler_WithValidation,APIHandler,False,,88.3%,globe_with_shield,5920,-1065,3
+sub_90,90,⚫,APIHandler_WithBusinessLogic,APIHandler,True,Controller must not contain domain,,,11860,4020,1
+sub_91,91,⚫,HealthCheck_WithSideEffects,HealthCheck,True,Health check must be pure,,,11860,4240,1
+sub_92,92,⚫,MetricsExporter_WithBlocking,MetricsExporter,True,Must be non-blocking,,,12160,1820,1
+sub_93,93,⚫,TracerProvider_WithBusinessLogic,TracerProvider,True,Tracing must be orthogonal,,,12160,2040,1
+sub_94,94,⚫,DependencyInjection_WithCircular,DependencyInjectionContainer,True,Circular dependencies forbidden,,,12160,2260,1
+sub_95,95,⚫,RateLimiter_WithNoLimit,RateLimiter,True,Defeats purpose,,,12160,2480,1
+sub_96,96,⚫,FeatureFlag_WithHardcode,FeatureFlagCheck,True,Not a flag,,,12160,2700,1
+sub_97,97,⚫,BackgroundThread_WithSharedState,BackgroundThread,True,Threads must not share mutable state,,,12160,2920,1
+sub_98,98,⚫,Actor_WithBlockingCalls,Actor,True,Actor model forbids blocking,,,12160,3140,1
+sub_99,99,⚫,MessageConsumer_WithSyncProcessing,MessageConsumer,True,Must be async,,,12160,3360,1
+sub_100,100,⚫,QueueWorker_WithNoBackpressure,QueueWorker,True,Must handle backpressure,,,12160,3580,1
+sub_101,101,⚫,CommandHandler_WithDirectDB,CommandHandler,True,Must go through repository,,,12160,3800,1
+sub_102,102,⚫,QueryHandler_WithWrite,QueryHandler,True,Query cannot mutate,,,12160,4020,1
+sub_103,103,⚫,EventHandler_WithBlocking,EventHandler,True,Event handlers must not block,,,12160,4240,1
+sub_104,104,⚫,Repository_WithValidation,RepositoryImpl,True,Validation belongs in domain,,,12460,1820,1
+sub_105,105,🏆,Service_WithDirectEventPublish,Service,False,,72.1%,gear_with_envelope,7097,4140,4
+sub_106,106,⚫,Entity_WithLazyLoading,Entity,True,Entity must not know about persistence,,,12460,2040,1
+sub_107,107,⚫,ValueObject_WithLazyProperties,ValueObject,True,Value objects must be fully initialized,,,12460,2260,1
+sub_108,108,⚫,AggregateRoot_WithPublicSetters,AggregateRoot,True,Aggregate must control state,,,12460,2480,1
+sub_109,109,⚫,DomainEvent_WithCommandBehavior,DomainEvent,True,Events are not commands,,,12460,2700,1
+sub_110,110,⚫,Command_WithNoIntent,CommandHandler,True,Command must express intent,,,12460,2920,1
+sub_111,111,⚫,Query_WithSideEffects,QueryHandler,True,Query must be pure,,,12460,3140,1
+sub_112,112,⚫,Specification_WithState,Specification,True,Specification must be stateless,,,12460,3360,1
+sub_113,113,⚫,Factory_WithValidation,Factory,True,Factory must not validate,,,12460,3580,1
+sub_114,114,⚫,Policy_WithExternalCall,Policy,True,Policy must be pure,,,12460,3800,1
+sub_115,115,⚫,Adapter_WithState,InfrastructureAdapter,True,Adapter must be stateless,,,12460,4020,1
+sub_116,116,⚫,Port_WithDefaultImplementation,DomainPort,True,Port must not provide impl,,,12460,4240,1
+sub_117,117,⚫,Controller_WithPersistence,APIHandler,True,Controller must not touch DB,,,12760,1820,1
+sub_118,118,⚫,UseCase_WithInfrastructure,UseCase,True,Use case must be pure,,,12760,2040,1
+sub_119,119,⚫,DomainService_WithIO,Service,True,Domain service must be pure,,,12760,2260,1
+sub_120,120,⚫,InfrastructureService_WithDomain,Service,True,Infrastructure must not contain domain,,,12760,2480,1
+sub_121,121,⚫,Entity_WithServiceLocator,Entity,True,Entity must not resolve dependencies,,,12760,2700,1
+sub_122,122,⚫,ValueObject_WithServiceLookup,ValueObject,True,Value object must be pure,,,12760,2920,1
+sub_123,123,⚫,AggregateRoot_WithStaticAccess,AggregateRoot,True,Aggregate must be instance-based,,,12760,3140,1
+sub_124,124,⚫,CommandHandler_WithStaticState,CommandHandler,True,Command handler must be stateless,,,12760,3360,1
+sub_125,125,🏆,QueryHandler_WithCaching,QueryHandler,False,,44.7%,blue_ring_with_cache,12760,3580,1
+sub_126,126,🏆,EventHandler_WithOrderingGuarantee,EventHandler,False,,29.1%,pulse_with_sequence,12760,3800,1
+sub_127,127,🏆,Repository_WithCaching,RepositoryImpl,False,,52.8%,plug_with_cache_glow,7097,4360,4
+sub_128,128,⚫,Repository_WithBusinessRules,RepositoryImpl,True,Repository must not contain business,,,12760,4020,1
+sub_129,129,⚫,Service_WithDirectRepository,Service,True,Service must use ports,,,12760,4240,1
+sub_130,130,🏆,Service_WithDomainEvents,Service,False,,78.4%,gear_with_envelope,7369,4140,4
+sub_131,131,⚫,Entity_WithPublicFields,Entity,True,Entity must encapsulate state,,,13060,1820,1
+sub_132,132,⚫,Entity_WithGetterSetterHell,Entity,True,Anemic domain model,,,13060,2040,1
+sub_133,133,⚫,ValueObject_WithBehavior,ValueObject,True,Value objects must be anemic,,,13060,2260,1
+sub_134,134,🏆,ValueObject_WithValidationInConstructor,ValueObject,False,,96.1%,cube_with_shield_at_birth,7369,4360,4
+sub_135,135,⚫,AggregateRoot_WithNoTransactionBoundary,AggregateRoot,True,Aggregate must be transactional unit,,,13060,2480,1
+sub_136,136,⚫,CommandHandler_WithMultipleResponsibilities,CommandHandler,True,Violates SRP,,,13060,2700,1
+sub_137,137,🏆,QueryHandler_WithComplexJoins,QueryHandler,False,,61.3%,blue_ring_with_chains,13060,2920,1
+sub_138,138,⚫,EventHandler_WithBusinessLogic,EventHandler,True,Event handler must only react,,,13060,3140,1
+sub_139,139,⚫,DomainEvent_WithValidation,DomainEvent,True,"Events are facts, not commands",,,13060,3360,1
+sub_140,140,🏆,DomainEvent_WithTimestampInPayload,DomainEvent,False,,89.7%,envelope_with_clock,13060,3580,1
+sub_141,141,⚫,Saga_WithNoTimeout,SagaStep,True,Saga must have timeout,,,13060,3800,1
+sub_142,142,🏆,Saga_WithCompensation,SagaStep,False,,22.6%,chain_with_reverse_arrow,13060,4020,1
+sub_143,143,🏆,Outbox_WithPolling,Outbox,False,,67.2%,box_with_eye,6220,-1505,3
+sub_144,144,⚫,DeadLetter_WithManualRetry,EventHandler,True,Must be automated,,,13060,4240,1
+sub_145,145,⚫,Integration_WithTightCoupling,InfrastructureAdapter,True,Must be loose,,,13360,1820,1
+sub_146,146,⚫,AntiCorruption_WithBidirectional,Adapter,True,ACL must be one-way,,,13360,2040,1
+sub_147,147,⚫,BoundedContext_WithLeakyAbstraction,BoundedContext,True,Must protect language,,,13360,2260,1
+sub_148,148,🏆,ContextMap_WithNoRelationship,ContextMap,False,,34.1%,map_empty,7641,4140,4
+sub_149,149,⚫,SharedKernel_WithDifferentUbiquitousLanguage,SharedKernel,True,Must share language,,,13360,2480,1
+sub_150,150,⚫,OpenHost_WithNoVersioning,APIHandler,True,Must support evolution,,,13360,2700,1
+sub_151,151,⚫,PublishedLanguage_WithBreakingChange,APIHandler,True,Must be stable,,,13360,2920,1
+sub_152,152,⚫,SeparateWays_WithAccidentalIntegration,BoundedContext,True,Defeats purpose,,,13360,3140,1
+sub_153,153,⚫,Conformist_WithCustomTranslation,ContextMap,True,Conformist must accept upstream,,,13360,3360,1
+sub_154,154,⚫,CustomerSupplier_WithNoContract,ContextMap,True,Must have contract,,,13360,3580,1
+sub_155,155,⚫,Partnership_WithNoJointPlanning,ContextMap,True,Must collaborate,,,13360,3800,1
+sub_156,156,⚫,LayeredArchitecture_WithSkippedLayers,Module,True,Must respect layers,,,13360,4020,1
+sub_157,157,⚫,Hexagonal_WithDomainInAdapter,Module,True,Domain must be center,,,13360,4240,1
+sub_158,158,⚫,CleanArchitecture_WithInfrastructureInDomain,Module,True,Domain must be pure,,,13660,1820,1
+sub_159,159,⚫,Microservice_WithSharedDatabase,BoundedContext,True,Violates autonomy,,,13660,2040,1
+sub_160,160,⚫,EventSourcing_WithSnapshotWithoutEvents,AggregateRoot,True,Must have events,,,13660,2260,1
+sub_161,161,⚫,CQRS_WithSharedModels,Module,True,Must separate read/write models,,,13660,2480,1
+sub_162,162,⚫,DDD_WithAnemicDomainModel,Module,True,Violates DDD principles,,,13660,2700,1
+sub_163,163,⚫,ModularMonolith_WithCrossModuleCalls,Module,True,Should use interfaces,,,13660,2920,1
+sub_164,164,⚫,Serverless_WithLongRunningFunction,LambdaEntry,True,Must be short-lived,,,13660,3140,1
+sub_165,165,⚫,Container_WithPrivilegedMode,ContainerEntry,True,Security risk,,,13660,3360,1
+sub_166,166,⚫,Kubernetes_WithHostNetwork,KubernetesJob,True,Breaks isolation,,,13660,3580,1
+sub_167,167,⚫,CronJob_WithNoDeadlines,CronJob,True,Risk of resource leak,,,13660,3800,1
+sub_168,168,⚫,BackgroundJob_WithNoIdempotency,QueueWorker,True,At-least-once delivery risk,,,13660,4020,1
+sub_169,169,⚫,Actor_WithSharedMutableState,Actor,True,Actor model forbids shared state,,,13660,4240,1
+sub_170,170,⚫,Actor_WithBlockingReceive,Actor,True,Must be non-blocking,,,13960,1820,1
+sub_171,171,🏆,Actor_WithGuaranteedDelivery,Actor,False,,38.9%,envelope_with_shield,6220,-1285,3
+sub_172,172,⚫,WebWorker_WithDOMAccess,WebWorker,True,Web workers cannot access DOM,,,13960,2040,1
+sub_173,173,🏆,ServiceWorker_WithLongCache,ServiceWorker,False,,72.1%,shield_with_clock,6220,-1065,3
+sub_174,174,⚫,Serverless_WithStatefulLogic,LambdaEntry,True,Serverless must be stateless,,,13960,2260,1
+sub_175,175,⚫,Serverless_WithHeavyInit,LambdaEntry,True,Defeats cold start advantage,,,13960,2480,1
+sub_176,176,⚫,CircuitBreaker_WithNoFallback,CircuitBreakerInit,True,Must have fallback,,,13960,2700,1
+sub_177,177,⚫,CircuitBreaker_WithAlwaysClosed,CircuitBreakerInit,True,Defeats purpose,,,13960,2920,1
+sub_178,178,⚫,Bulkhead_WithSharedPool,Bulkhead,True,Must isolate pools,,,13960,3140,1
+sub_179,179,⚫,Retry_WithNoBackoff,Retry,True,Exponential backoff required,,,13960,3360,1
+sub_180,180,⚫,Timeout_WithInfinite,Timeout,True,Must have limit,,,13960,3580,1
+sub_181,181,⚫,Cache_WithNoEviction,Cache,True,Will OOM,,,13960,3800,1
+sub_182,182,⚫,Cache_WithWriteThroughWithoutRead,Cache,True,Pointless,,,13960,4020,1
+sub_183,183,🏆,FeatureFlag_WithRuntimeChange,FeatureFlagCheck,False,,41.2%,toggle_live_switch,6520,-1505,3
+sub_184,184,⚫,FeatureFlag_WithNoKillSwitch,FeatureFlagCheck,True,Must have emergency off,,,13960,4240,1
+sub_185,185,⚫,ABTest_WithNoStatisticalSignificance,ABTestRouter,True,Must validate stats,,,14260,1820,1
+sub_186,186,⚫,Canary_WithNoMonitoring,CanaryDeployTrigger,True,Blind canary,,,14260,2040,1
+sub_187,187,⚫,ChaosMonkey_WithNoSafety,ChaosMonkey,True,Must have guardrails,,,14260,2260,1
+sub_188,188,⚫,SelfHealing_WithNoLivenessProbe,SelfHealingProbe,True,Cannot heal if dead,,,14260,2480,1
+sub_189,189,⚫,ConfigLoader_WithHardcodedValues,ConfigLoader,True,Defeats config purpose,,,14260,2700,1
+sub_190,190,⚫,ConfigLoader_WithNoReload,ConfigLoader,True,Must support hot reload,,,14260,2920,1
+sub_191,191,⚫,Logger_WithSyncWrites,LoggerInit,True,Must be async,,,14260,3140,1
+sub_192,192,⚫,Logger_WithPII,LoggerInit,True,Security violation,,,14260,3360,1
+sub_193,193,🏆,Tracer_WithNoSampling,TracerProvider,False,,67.8%,wave_full_coverage,6520,-1285,3
+sub_194,194,⚫,Tracer_WithBlockingCalls,TracerProvider,True,Must not block,,,14260,3580,1
+sub_195,195,⚫,Metrics_WithNoLabels,MetricsExporter,True,Useless granularity,,,14260,3800,1
+sub_196,196,⚫,HealthCheck_WithBusinessLogic,HealthCheck,True,Health must be infrastructural,,,14260,4020,1
+sub_197,197,⚫,GracefulShutdown_WithNoTimeout,GracefulShutdown,True,Risk of hang,,,14260,4240,1
+sub_198,198,⚫,PanicRecover_WithLogAndContinue,PanicRecover,True,Must propagate or terminate,,,14560,1820,1
+sub_199,199,🏆,RateLimiter_WithNoBurst,RateLimiter,False,,61.4%,hourglass_with_small_top,6520,-1065,3
+sub_200,200,⚫,RateLimiter_WithGlobalScope,RateLimiter,True,Should be per-user/resource,,,14560,2040,1
+sub_201,201,⚫,CacheWarmer_WithInfiniteLoop,CacheWarmer,True,Risk of DoS,,,14560,2260,1
+sub_202,202,⚫,PluginLoader_WithNoIsolation,PluginLoader,True,Security risk,,,14560,2480,1
+sub_203,203,⚫,MigrationRunner_WithNoRollback,MigrationRunner,True,Must be reversible,,,14560,2700,1
+sub_204,204,⚫,SeedData_WithProductionData,SeedData,True,Security/GDPR violation,,,14560,2920,1
+sub_205,205,⚫,MainEntry_WithBusinessLogic,MainEntry,True,Main must only bootstrap,,,14560,3140,1
+sub_206,206,🏆,MainEntry_WithGracefulStartup,MainEntry,False,,88.1%,crown_with_smooth_glow,6820,-1505,3
+sub_207,207,🏆,CLIEntry_WithComplexParsing,CLIEntry,False,,42.7%,terminal_with_gear,6820,-1285,3
+sub_208,208,⚫,LambdaEntry_WithLargePayload,LambdaEntry,True,Violates size limits,,,14560,3360,1
+sub_209,209,⚫,WorkerEntry_WithNoSupervision,WorkerEntry,True,Risk of silent failure,,,14560,3580,1
+sub_210,210,⚫,GraphQLResolver_WithNPlusOne,GraphQLResolver,True,Performance anti-pattern,,,14560,3800,1
+sub_211,211,⚫,GraphQLResolver_WithAuthenticationInside,GraphQLResolver,True,Auth must be middleware,,,14560,4020,1
+sub_212,212,⚫,WebSocket_WithStatefulConnections,WebSocketHandler,True,Should be stateless or supervised,,,14560,4240,1
+sub_213,213,⚫,WebSocket_WithBroadcastWithoutAck,WebSocketHandler,True,Risk of lost messages,,,14860,1820,1
+sub_214,214,⚫,ContainerEntry_WithHostMounts,ContainerEntry,True,Breaks isolation,,,14860,2040,1
+sub_215,215,⚫,Kubernetes_WithLatestTag,KubernetesJob,True,Not reproducible,,,14860,2260,1
+sub_216,216,⚫,CronJob_WithOverlappingRuns,CronJob,True,Risk of race conditions,,,14860,2480,1
+sub_217,217,⚫,MessageConsumer_WithNoPoisonHandling,MessageConsumer,True,Can crash entire queue,,,14860,2700,1
+sub_218,218,⚫,QueueWorker_WithFixedThreadPool,QueueWorker,True,No backpressure,,,14860,2920,1
+sub_219,219,⚫,BackgroundThread_WithUncaughtExceptions,BackgroundThread,True,Silent failures,,,14860,3140,1
+sub_220,220,⚫,Actor_WithSynchronousAsk,Actor,True,Breaks actor model,,,14860,3360,1
+sub_221,221,⚫,WebWorker_WithSharedArrayBuffer,WebWorker,True,Security risk (Spectre),,,14860,3580,1
+sub_222,222,⚫,ServiceWorker_WithUnlimitedCache,ServiceWorker,True,Will fill disk,,,14860,3800,1
+sub_223,223,🏆,Serverless_WithColdStartMitigation,LambdaEntry,False,,67.3%,cloud_with_fire,6820,-1065,3
+sub_224,224,🏆,Serverless_WithProvisionedConcurrency,LambdaEntry,False,,51.9%,cloud_with_reserved_seat,7120,-1505,3
+sub_225,225,🏆,HealthCheck_WithDatabasePing,HealthCheck,False,,88.1%,heart_with_database,7120,-1285,3
+sub_226,226,⚫,HealthCheck_WithExternalCall,HealthCheck,True,Health must be internal,,,14860,4020,1
+sub_227,227,🏆,GracefulShutdown_WithForceAfterTimeout,GracefulShutdown,False,,72.4%,fade_with_guillotine,7120,-1065,3
+sub_228,228,⚫,PanicRecover_WithSwallowAll,PanicRecover,True,Hides critical errors,,,14860,4240,1
+sub_229,229,⚫,CircuitBreaker_WithManualReset,CircuitBreakerInit,True,Should be automatic,,,15160,1820,1
+sub_230,230,🏆,RateLimiter_WithTokenBucket,RateLimiter,False,,79.6%,hourglass_with_tokens,7420,-1505,3
+sub_231,231,⚫,Cache_WithWriteBehindWithoutAck,Cache,True,Risk of data loss,,,15160,2040,1
+sub_232,232,⚫,FeatureFlag_WithDatabaseBackend,FeatureFlagCheck,True,Should be fast path,,,15160,2260,1
+sub_233,233,🏆,ABTest_WithUnevenTrafficSplit,ABTestRouter,False,,68.2%,split_arrow_90_10,7420,-1285,3
+sub_234,234,⚫,Canary_WithNoRollbackPlan,CanaryDeployTrigger,True,High risk,,,15160,2480,1
+sub_235,235,⚫,ChaosMonkey_WithNoBlastRadius,ChaosMonkey,True,Can destroy everything,,,15160,2700,1
+sub_236,236,⚫,SelfHealing_WithRestartLoop,SelfHealingProbe,True,Death spiral,,,15160,2920,1
+sub_237,237,⚫,ConfigLoader_WithNoSchemaValidation,ConfigLoader,True,Risk of invalid config,,,15160,3140,1
+sub_238,238,🏆,Logger_WithStructuredOutput,LoggerInit,False,,94.3%,log_with_json,7420,-1065,3
+sub_239,239,⚫,Tracer_WithFullSamplingInProd,TracerProvider,True,Performance killer,,,15160,3360,1
+sub_240,240,⚫,Metrics_WithHighCardinality,MetricsExporter,True,Can crash Prometheus,,,15160,3580,1
+sub_241,241,⚫,PluginLoader_WithDynamicCodeEval,PluginLoader,True,Security nightmare,,,15160,3800,1
+sub_242,242,⚫,MigrationRunner_WithNoIdempotency,MigrationRunner,True,Risk on retry,,,15160,4020,1
+sub_243,243,⚫,SeedData_WithRealCustomerData,SeedData,True,GDPR violation,,,15160,4240,1
+sub_244,244,⚫,MainEntry_WithDependencyHell,MainEntry,True,Should be minimal,,,15460,1820,1
+sub_245,245,⚫,CLIEntry_WithBusinessLogic,CLIEntry,True,CLI must be thin,,,15460,2040,1
+sub_246,246,⚫,LambdaEntry_WithBlockingIO,LambdaEntry,True,Freezes function,,,15460,2260,1
+sub_247,247,⚫,WorkerEntry_WithNoDeadLetter,WorkerEntry,True,Lost failures,,,15460,2480,1
+sub_248,248,⚫,GraphQLResolver_WithDirectDB,GraphQLResolver,True,Must go through service,,,15460,2700,1
+sub_249,249,⚫,WebSocket_WithNoPingPong,WebSocketHandler,True,Connection drops undetected,,,15460,2920,1
+sub_250,250,⚫,Container_WithLatestImage,ContainerEntry,True,Not reproducible,,,15460,3140,1
+sub_251,251,⚫,Kubernetes_WithNoResourceLimits,KubernetesJob,True,Risk of DoS,,,15460,3360,1
+sub_252,252,⚫,CronJob_WithNoConcurrencyPolicy,CronJob,True,Risk of overlaps,,,15460,3580,1
+sub_253,253,⚫,MessageConsumer_WithNoAck,MessageConsumer,True,Risk of message loss,,,15460,3800,1
+sub_254,254,⚫,MessageConsumer_WithAutoAck,MessageConsumer,True,Risk of duplicate processing,,,15460,4020,1
+sub_255,255,⚫,QueueWorker_WithNoPoisonQueue,QueueWorker,True,Can crash worker,,,15460,4240,1
+sub_256,256,⚫,BackgroundThread_WithDaemonTrue,BackgroundThread,True,Can kill process silently,,,15760,1820,1
+sub_257,257,⚫,Actor_WithNoSupervisionTree,Actor,True,Silent failures,,,15760,2040,1
+sub_258,258,⚫,WebWorker_WithPostMessageBlocking,WebWorker,True,Breaks async model,,,15760,2260,1
+sub_259,259,⚫,ServiceWorker_WithNoUpdateStrategy,ServiceWorker,True,Stale content forever,,,15760,2480,1
+sub_260,260,⚫,Serverless_WithSharedState,LambdaEntry,True,Impossible in serverless,,,15760,2700,1
+sub_261,261,🏆,Serverless_WithStaticInit,LambdaEntry,False,,71.2%,cloud_with_persistent_core,7720,-1505,3
+sub_262,262,⚫,CircuitBreaker_WithNoHysteresis,CircuitBreakerInit,True,Flapping,,,15760,2920,1
+sub_263,263,⚫,Bulkhead_WithNoQueue,Bulkhead,True,No backpressure,,,15760,3140,1
+sub_264,264,⚫,Retry_WithFixedDelay,Retry,True,Poor for burst traffic,,,15760,3360,1
+sub_265,265,⚫,Timeout_WithNoCancellation,Timeout,True,Resource leak,,,15760,3580,1
+sub_266,266,⚫,Cache_WithStaleReadsForever,Cache,True,Inconsistent data,,,15760,3800,1
+sub_267,267,🏆,FeatureFlag_WithGradualRollout,FeatureFlagCheck,False,,82.7%,toggle_with_percentage,7720,-1285,3
+sub_268,268,⚫,ABTest_WithNoDuration,ABTestRouter,True,No statistical power,,,15760,4020,1
+sub_269,269,⚫,Canary_WithNoHealthCheck,CanaryDeployTrigger,True,Zombie instances,,,15760,4240,1
+sub_270,270,⚫,ChaosMonkey_WithAllEnabled,ChaosMonkey,True,Production suicide,,,16060,1820,1
+sub_271,271,⚫,SelfHealing_WithNoRecoveryLimit,SelfHealingProbe,True,Death spiral,,,16060,2040,1
+sub_272,272,⚫,ConfigLoader_WithEnvVarsOnly,ConfigLoader,True,No external config,,,16060,2260,1
+sub_273,273,⚫,Logger_WithNoCorrelationId,LoggerInit,True,Tracing impossible,,,16060,2480,1
+sub_274,274,⚫,Tracer_WithNoContextPropagation,TracerProvider,True,Broken traces,,,16060,2700,1
+sub_275,275,⚫,Metrics_WithNoHistogram,MetricsExporter,True,No latency insight,,,16060,2920,1
+sub_276,276,🏆,HealthCheck_WithDependencyCheck,HealthCheck,False,,91.3%,heart_with_external_pulse,7720,-1065,3
+sub_277,277,⚫,GracefulShutdown_WithNoSignalHandling,GracefulShutdown,True,Hard kill on SIGTERM,,,16060,3140,1
+sub_278,278,🏆,PanicRecover_WithReraise,PanicRecover,False,,68.9%,parachute_with_rethrow,8020,-1505,3
+sub_279,279,🏆,RateLimiter_WithLeakyBucket,RateLimiter,False,,77.1%,hourglass_with_leak,8020,-1285,3
+sub_280,280,⚫,CacheWarmer_WithNoWarmup,CacheWarmer,True,Cold starts,,,16060,3360,1
+sub_281,281,⚫,PluginLoader_WithNoVersionCheck,PluginLoader,True,Compatibility hell,,,16060,3580,1
+sub_282,282,⚫,MigrationRunner_WithNoSchemaLock,MigrationRunner,True,Concurrent migration risk,,,16060,3800,1
+sub_283,283,⚫,SeedData_WithNoIdempotency,SeedData,True,Duplicate data on rerun,,,16060,4020,1
+sub_284,284,⚫,MainEntry_WithComplexLogic,MainEntry,True,Main must be bootstrap only,,,16060,4240,1
+sub_285,285,⚫,CLIEntry_WithNoHelp,CLIEntry,True,Poor UX,,,16360,1820,1
+sub_286,286,⚫,LambdaEntry_WithNoTimeout,LambdaEntry,True,Can run forever,,,16360,2040,1
+sub_287,287,⚫,WorkerEntry_WithNoBackoff,WorkerEntry,True,Thundering herd,,,16360,2260,1
+sub_288,288,⚫,GraphQLResolver_WithNoBatching,GraphQLResolver,True,N+1 problem,,,16360,2480,1
+sub_289,289,⚫,WebSocket_WithNoReconnect,WebSocketHandler,True,Permanent disconnect,,,16360,2700,1
+sub_290,290,⚫,Container_WithNoHealthcheck,ContainerEntry,True,Zombie containers,,,16360,2920,1
+sub_291,291,⚫,Kubernetes_WithNoLivenessProbe,KubernetesJob,True,Cannot restart dead pods,,,16360,3140,1
+sub_292,292,⚫,CronJob_WithNoHistoryLimit,CronJob,True,Disk fill risk,,,16360,3360,1
+sub_293,293,⚫,MessageConsumer_WithNoConsumerGroup,MessageConsumer,True,No scaling,,,16360,3580,1
+sub_294,294,⚫,QueueWorker_WithNoVisibilityTimeout,QueueWorker,True,Invisible processing,,,16360,3800,1
+sub_295,295,⚫,Actor_WithNoMailboxBound,Actor,True,Risk of OOM,,,16360,4020,1
+sub_296,296,🏆,Actor_WithPriorityInbox,Actor,False,,42.1%,envelope_with_vip_tag,8020,-1065,3
+sub_297,297,🏆,WebWorker_WithSharedWorker,WebWorker,False,,31.8%,tab_shared_glow,8320,-1505,3
+sub_298,298,⚫,ServiceWorker_WithNoSkipWaiting,ServiceWorker,True,Stale service forever,,,16360,4240,1
+sub_299,299,⚫,Serverless_WithLocalState,LambdaEntry,True,Lost on next invocation,,,16660,1820,1
+sub_300,300,🏆,Serverless_WithWarmContainers,LambdaEntry,False,,69.4%,cloud_with_heat,8320,-1285,3
+sub_301,301,⚫,CircuitBreaker_WithNoMetrics,CircuitBreakerInit,True,Blind resilience,,,16660,2040,1
+sub_302,302,🏆,CircuitBreaker_WithSuccessThreshold,CircuitBreakerInit,False,,58.7%,broken_chain_healing,8320,-1065,3
+sub_303,303,🏆,Bulkhead_WithDynamicPool,Bulkhead,False,,44.2%,wall_with_slider,8620,-1505,3
+sub_304,304,🏆,Retry_WithJitter,Retry,False,,91.3%,arrow_with_random,8620,-1285,3
+sub_305,305,🏆,Timeout_WithContextPropagation,Timeout,False,,76.9%,hourglass_with_thread,8620,-1065,3
+sub_306,306,🏆,Cache_WithCaffeineConfig,Cache,False,,83.1%,memory_with_coffee,8920,-1505,3
+sub_307,307,🏆,FeatureFlag_WithSegmentTargeting,FeatureFlagCheck,False,,78.5%,toggle_with_target,8920,-1285,3
+sub_308,308,🏆,ABTest_WithRampUp,ABTestRouter,False,,66.2%,split_arrow_with_gradient,8920,-1065,3
+sub_309,309,🏆,Canary_WithGradualTraffic,CanaryDeployTrigger,False,,71.4%,bird_with_percentage,9220,-1505,3
+sub_310,310,🏆,ChaosMonkey_WithSchedule,ChaosMonkey,False,,29.8%,monkey_with_clock,9220,-1285,3
+sub_311,311,🏆,SelfHealing_WithExponentialBackoff,SelfHealingProbe,False,,81.7%,glow_with_delay,9220,-1065,3
+sub_312,312,🏆,ConfigLoader_WithVaultBackend,ConfigLoader,False,,73.2%,gear_with_safe,9520,-1505,3
+sub_313,313,🏆,Logger_WithAsyncAppender,LoggerInit,False,,88.9%,log_with_no_block,9520,-1285,3
+sub_314,314,🏆,Tracer_WithHeadSampling,TracerProvider,False,,79.1%,wave_with_filter,9520,-1065,3
+sub_315,315,🏆,Metrics_WithExemplars,MetricsExporter,False,,64.3%,graph_with_examples,9820,-1505,3
+sub_316,316,🏆,HealthCheck_WithReadinessProbe,HealthCheck,False,,92.6%,heart_with_ready_light,9820,-1285,3
+sub_317,317,🏆,GracefulShutdown_WithPreStopHook,GracefulShutdown,False,,79.8%,fade_with_hook,9820,-1065,3
+sub_318,318,🏆,PanicRecover_WithStructuredLogging,PanicRecover,False,,85.4%,parachute_with_json,10120,-1505,3
+sub_319,319,🏆,RateLimiter_WithRedisBackend,RateLimiter,False,,71.9%,hourglass_with_redis,10120,-1285,3
+sub_320,320,🏆,CacheWarmer_WithPredictiveLoad,CacheWarmer,False,,38.7%,fire_with_crystal_ball,10120,-1065,3
+sub_321,321,🏆,PluginLoader_WithSandbox,PluginLoader,False,,52.3%,plug_with_shield,10420,-1505,3
+sub_322,322,🏆,MigrationRunner_WithDryRun,MigrationRunner,False,,89.1%,arrow_up_with_preview,10420,-1285,3
+sub_323,323,🏆,SeedData_WithFakerLibrary,SeedData,False,,93.7%,seed_with_fake_face,10420,-1065,3
+sub_324,324,🏆,MainEntry_WithBanner,MainEntry,False,,67.2%,crown_with_sign,10720,-1505,3
+sub_325,325,🏆,CLIEntry_WithAutocomplete,CLIEntry,False,,61.8%,terminal_with_suggestions,10720,-1285,3
+sub_326,326,🏆,LambdaEntry_WithLayers,LambdaEntry,False,,74.5%,cloud_with_strata,10720,-1065,3
+sub_327,327,🏆,WorkerEntry_WithCircuitBreaker,WorkerEntry,False,,68.9%,gear_with_shield,11020,-1505,3
+sub_328,328,🏆,GraphQLResolver_WithDataLoader,GraphQLResolver,False,,88.3%,graph_with_batch,11020,-1285,3
+sub_329,329,🏆,WebSocket_WithCompression,WebSocketHandler,False,,76.1%,wave_compressed,11020,-1065,3
+sub_330,330,🏆,Container_WithReadOnlyRoot,ContainerEntry,False,,82.7%,docker_with_lock,11320,-1505,3
+sub_331,331,🏆,Kubernetes_WithPodDisruptionBudget,KubernetesJob,False,,79.4%,helm_with_safety_net,11320,-1285,3
+sub_332,332,🏆,CronJob_WithSuccessfulJobsHistory,CronJob,False,,85.2%,clock_with_archive,11320,-1065,3
+sub_333,333,🏆,MessageConsumer_WithConsumerPrefetch,MessageConsumer,False,,72.8%,rabbit_with_buffer,11620,-1505,3
+sub_334,334,🏆,QueueWorker_WithDeadLetterExchange,QueueWorker,False,,89.6%,gear_with_skull_box,11620,-1285,3
+sub_335,335,🏆,BackgroundThread_WithVirtualThreads,BackgroundThread,False,,67.3%,spiral_lightweight,11620,-1065,3
+sub_336,336,🏆,Actor_WithPersistentMailbox,Actor,False,,54.9%,envelope_with_disk,11920,-1505,3
+sub_337,337,🏆,WebWorker_WithOffscreenCanvas,WebWorker,False,,61.2%,tab_with_canvas,11920,-1285,3
+sub_338,338,🏆,ServiceWorker_WithBackgroundSync,ServiceWorker,False,,73.8%,shield_with_sync,11920,-1065,3
+sub_339,339,🏆,Serverless_WithEventSourcing,LambdaEntry,False,,42.7%,cloud_with_event_stream,12220,-1505,3
+sub_340,340,🏆,Serverless_WithGraphQL,LambdaEntry,False,,68.4%,cloud_with_graph,12220,-1285,3
+sub_341,341,🏆,CircuitBreaker_WithAdaptiveThreshold,CircuitBreakerInit,False,,55.1%,broken_chain_with_ai,12220,-1065,3
+sub_342,342,🏆,Bulkhead_WithSemaphore,Bulkhead,False,,79.3%,wall_with_counter,12520,-1505,3
+sub_343,343,🏆,Retry_WithCircuitBreaker,Retry,False,,84.1%,arrow_with_shield,12520,-1285,3
+sub_344,344,🏆,Timeout_WithAdaptive,Timeout,False,,62.9%,hourglass_with_ai,12520,-1065,3
+sub_345,345,🏆,Cache_WithRedisCluster,Cache,False,,71.5%,memory_with_cluster,12820,-1505,3
+sub_346,346,🏆,FeatureFlag_WithMultivariate,FeatureFlagCheck,False,,76.8%,toggle_with_multiple,12820,-1285,3
+sub_347,347,🏆,ABTest_WithBayesianAnalysis,ABTestRouter,False,,41.3%,split_arrow_with_brain,12820,-1065,3
+sub_348,348,🏆,Canary_WithShadowTraffic,CanaryDeployTrigger,False,,58.7%,bird_with_mirror,13120,-1505,3
+sub_349,349,🏆,ChaosMonkey_WithGameDays,ChaosMonkey,False,,33.9%,monkey_with_calendar,13120,-1285,3
+sub_350,350,🏆,SelfHealing_WithPredictive,SelfHealingProbe,False,,47.2%,glow_with_crystal_ball,13120,-1065,3
+sub_351,351,🏆,ConfigLoader_WithConsul,ConfigLoader,False,,69.1%,gear_with_consul,13420,-1505,3
+sub_352,352,🏆,Logger_WithOpenTelemetry,LoggerInit,False,,88.6%,log_with_trace,13420,-1285,3
+sub_353,353,🏆,Tracer_WithTailSampling,TracerProvider,False,,75.4%,wave_with_tail,13420,-1065,3
+sub_354,354,🏆,Metrics_WithOpenTelemetry,MetricsExporter,False,,82.3%,graph_with_otel,13720,-1505,3
+sub_355,355,🏆,HealthCheck_WithStartupProbe,HealthCheck,False,,91.8%,heart_with_boot,13720,-1285,3
+sub_356,356,🏆,GracefulShutdown_WithZeroDowntime,GracefulShutdown,False,,79.9%,fade_perfect,13720,-1065,3
+sub_357,357,🏆,PanicRecover_WithDeadLetter,PanicRecover,False,,66.7%,parachute_with_skull_box,14020,-1505,3
+sub_358,358,🏆,RateLimiter_WithDistributed,RateLimiter,False,,84.2%,hourglass_with_network,14020,-1285,3
+sub_359,359,🏆,CacheWarmer_WithMLPrediction,CacheWarmer,False,,39.8%,fire_with_brain,14020,-1065,3
+sub_360,360,🏆,PluginLoader_WithWebAssembly,PluginLoader,False,,52.6%,plug_with_wasm,14320,-1505,3
+sub_361,361,🏆,MigrationRunner_WithBlueGreen,MigrationRunner,False,,73.1%,arrow_up_with_two_lanes,14320,-1285,3
+sub_362,362,🏆,SeedData_WithAnonymizedReal,SeedData,False,,89.4%,seed_with_mask,14320,-1065,3
+sub_363,363,🏆,MainEntry_WithHealthEndpoint,MainEntry,False,,94.7%,crown_with_heart,14620,-1505,3
+sub_364,364,🏆,CLIEntry_WithStructuredOutput,CLIEntry,False,,81.3%,terminal_with_json,14620,-1285,3
+sub_365,365,🏆,LambdaEntry_WithTracing,LambdaEntry,False,,88.9%,cloud_with_wave,14620,-1065,3
+sub_366,366,🏆,WorkerEntry_WithPriorityQueue,WorkerEntry,False,,67.2%,gear_with_vip,14920,-1505,3
+sub_367,367,🏆,GraphQLResolver_WithPersistedQueries,GraphQLResolver,False,,76.5%,graph_with_lock,14920,-1285,3
+sub_368,368,🏆,WebSocket_WithMultiplexing,WebSocketHandler,False,,64.8%,wave_with_multiple,14920,-1065,3
+sub_369,369,🏆,Container_WithInitContainers,ContainerEntry,False,,79.1%,docker_with_setup,15220,-1505,3
+sub_370,370,🏆,Kubernetes_WithHorizontalPodAutoscaler,KubernetesJob,False,,85.3%,helm_with_scale,15220,-1285,3
+sub_371,371,🏆,CronJob_WithStartingDeadline,CronJob,False,,82.7%,clock_with_limit,15220,-1065,3
+sub_372,372,🏆,MessageConsumer_WithExactlyOnce,MessageConsumer,False,,71.9%,rabbit_with_lock,15520,-1505,3
+sub_373,373,🏆,QueueWorker_WithCircuitBreaker,QueueWorker,False,,78.4%,gear_with_shield,15520,-1285,3
+sub_374,374,🏆,BackgroundThread_WithStructuredConcurrency,BackgroundThread,False,,69.7%,spiral_with_tree,15520,-1065,3
+sub_375,375,🏆,Actor_WithVirtualThreads,Actor,False,,58.3%,envelope_lightweight,15820,-1505,3
+sub_376,376,🏆,WebWorker_WithComlink,WebWorker,False,,66.1%,tab_with_proxy,15820,-1285,3
+sub_377,377,🏆,ServiceWorker_WithWorkbox,ServiceWorker,False,,79.8%,shield_with_toolbox,15820,-1065,3
+sub_378,378,🏆,Serverless_WithStepFunctions,LambdaEntry,False,,72.4%,cloud_with_orchestrator,16120,-1505,3
+sub_379,379,🏆,Serverless_WithEventBridge,LambdaEntry,False,,75.9%,cloud_with_bus,16120,-1285,3
+sub_380,380,🏆,CircuitBreaker_WithShedLoad,CircuitBreakerInit,False,,68.2%,broken_chain_with_reject,16120,-1065,3
+sub_381,381,🏆,Bulkhead_WithAdaptive,Bulkhead,False,,59.6%,wall_with_ai,16420,-1505,3
+sub_382,382,🏆,Retry_WithAdaptive,Retry,False,,73.1%,arrow_with_brain,16420,-1285,3
+sub_383,383,🏆,Timeout_WithCircuitBreaker,Timeout,False,,77.8%,hourglass_with_shield,16420,-1065,3
+sub_384,384,🏆,Cache_WithDistributedLock,Cache,False,,81.4%,memory_with_mutex,16720,-1505,3

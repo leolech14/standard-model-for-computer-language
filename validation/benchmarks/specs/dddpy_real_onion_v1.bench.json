@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "name": "dddpy_real_onion_v1",
+  "repo_dir": "dddpy_real",
+  "scored_types": [
+    "Entity",
+    "ValueObject",
+    "Repository",
+    "RepositoryImpl",
+    "UseCase",
+    "Controller",
+    "DTO"
+  ],
+  "ignore_path_globs": [
+    "**/tests/**",
+    "**/__init__.py",
+    "**/.venv/**",
+    "**/.git/**"
+  ],
+  "expected_components": [
+    {
+      "rel_file": "dddpy/presentation/api/todo/schemas/todo_update_schema.py",
+      "symbol": "TodoUpdateSchema",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/schemas/todo_create_schema.py",
+      "symbol": "TodoCreateSchema",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/schemas/todo_schema.py",
+      "symbol": "TodoSchema",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/error_messages/todo_already_completed_error_message.py",
+      "symbol": "ErrorMessageTodoAlreadyCompleted",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/error_messages/todo_not_found_error_message.py",
+      "symbol": "ErrorMessageTodoNotFound",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/error_messages/todo_not_started_error_message.py",
+      "symbol": "ErrorMessageTodoNotStarted",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/error_messages/todo_already_started_error_message.py",
+      "symbol": "ErrorMessageTodoAlreadyStarted",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+      "symbol": "TodoApiRouteHandler",
+      "symbol_kind": "class",
+      "type": "Controller"
+    },
+    {
+      "rel_file": "dddpy/domain/todo/value_objects/todo_description.py",
+      "symbol": "TodoDescription",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "dddpy/domain/todo/value_objects/todo_status.py",
+      "symbol": "TodoStatus",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "dddpy/domain/todo/value_objects/todo_title.py",
+      "symbol": "TodoTitle",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "dddpy/domain/todo/value_objects/todo_id.py",
+      "symbol": "TodoId",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "dddpy/domain/todo/repositories/todo_repository.py",
+      "symbol": "TodoRepository",
+      "symbol_kind": "class",
+      "type": "Repository"
+    },
+    {
+      "rel_file": "dddpy/domain/todo/entities/todo.py",
+      "symbol": "Todo",
+      "symbol_kind": "class",
+      "type": "Entity"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+      "symbol": "FindTodoByIdUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+      "symbol": "FindTodoByIdUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/start_todo_usecase.py",
+      "symbol": "StartTodoUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/start_todo_usecase.py",
+      "symbol": "StartTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/complete_todo_usecase.py",
+      "symbol": "CompleteTodoUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/complete_todo_usecase.py",
+      "symbol": "CompleteTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/find_todos_usecase.py",
+      "symbol": "FindTodosUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/find_todos_usecase.py",
+      "symbol": "FindTodosUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/create_todo_usecase.py",
+      "symbol": "CreateTodoUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/create_todo_usecase.py",
+      "symbol": "CreateTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/delete_todo_usecase.py",
+      "symbol": "DeleteTodoUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/delete_todo_usecase.py",
+      "symbol": "DeleteTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/update_todo_usecase.py",
+      "symbol": "UpdateTodoUseCase",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/usecase/todo/update_todo_usecase.py",
+      "symbol": "UpdateTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "type": "UseCase"
+    },
+    {
+      "rel_file": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+      "symbol": "TodoRepositoryImpl",
+      "symbol_kind": "class",
+      "type": "RepositoryImpl"
+    },
+    {
+      "rel_file": "dddpy/infrastructure/sqlite/todo/todo_dto.py",
+      "symbol": "TodoDTO",
+      "symbol_kind": "class",
+      "type": "DTO"
+    }
+  ],
+  "notes": "Generated from known_architectures/dddpy_real_onion_v1.json rules (path-based truth; not fully independent)."
+}

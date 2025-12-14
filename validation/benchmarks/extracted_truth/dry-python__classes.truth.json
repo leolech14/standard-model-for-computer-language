@@ -1,0 +1,25 @@
+{
+  "repo": "dry-python__classes",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/dry-python__classes",
+  "confidence": 0.5,
+  "truth_sources": [
+    "doc:README.md",
+    "type:Query"
+  ],
+  "layers": [],
+  "expected_components": [
+    {
+      "name": "_HasNoConcreteTypes",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "_HasUnboundTypes",
+      "type": "Query",
+      "source": "type_hint"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

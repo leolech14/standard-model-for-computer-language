@@ -1,0 +1,262 @@
+{
+  "source": "1440_csv.csv",
+  "rows": 3888,
+  "axes": {
+    "responsibility": {
+      "count": 12,
+      "values": [
+        "Compensate",
+        "Create",
+        "Delete",
+        "Execute",
+        "List",
+        "Project",
+        "Query",
+        "Read",
+        "Search",
+        "Update",
+        "Validate",
+        "Write"
+      ]
+    },
+    "purity": {
+      "count": 4,
+      "values": [
+        "ExternalIO",
+        "Idempotent",
+        "Impure",
+        "Pure"
+      ]
+    },
+    "boundary": {
+      "count": 6,
+      "values": [
+        "Adapter",
+        "Application",
+        "Domain",
+        "Infrastructure",
+        "Interface",
+        "Test"
+      ]
+    },
+    "lifecycle": {
+      "count": 5,
+      "values": [
+        "Ephemeral",
+        "Immutable",
+        "Scoped",
+        "Singleton",
+        "Transient"
+      ]
+    }
+  },
+  "rpbl_grid_size": 1440,
+  "rpbl_unique_in_rows": 1440,
+  "continents": {
+    "unique_count": 5,
+    "unique": [
+      "Data Foundations",
+      "Execution",
+      "Foundations",
+      "Logic & Flow",
+      "Organization"
+    ],
+    "counts": {
+      "Execution": 1826,
+      "Logic & Flow": 832,
+      "Data Foundations": 720,
+      "Organization": 419,
+      "Foundations": 91
+    }
+  },
+  "fundamentals": {
+    "unique_count": 12,
+    "unique": [
+      "Aggregates",
+      "Bits",
+      "Bytes",
+      "Control Structures",
+      "Executables",
+      "Expressions",
+      "Files",
+      "Functions",
+      "Modules",
+      "Primitives",
+      "Statements",
+      "Variables"
+    ],
+    "counts": {
+      "Executables": 1826,
+      "Functions": 488,
+      "Bits": 324,
+      "Bytes": 306,
+      "Aggregates": 254,
+      "Control Structures": 235,
+      "Variables": 91,
+      "Modules": 91,
+      "Primitives": 90,
+      "Files": 74,
+      "Expressions": 55,
+      "Statements": 54
+    }
+  },
+  "hadrons": {
+    "unique_count": 96,
+    "top10_by_rows": [
+      [
+        "ParityBit",
+        144
+      ],
+      [
+        "SignBit",
+        144
+      ],
+      [
+        "MagicBytes",
+        144
+      ],
+      [
+        "PaddingBytes",
+        144
+      ],
+      [
+        "GuardClause",
+        144
+      ],
+      [
+        "SagaStep",
+        144
+      ],
+      [
+        "Reducer",
+        144
+      ],
+      [
+        "Projection",
+        144
+      ],
+      [
+        "Fiber",
+        144
+      ],
+      [
+        "WebWorker",
+        144
+      ]
+    ],
+    "rows_per_hadron": {
+      "min": 18,
+      "max": 144,
+      "histogram": {
+        "18": 61,
+        "19": 18,
+        "144": 17
+      }
+    }
+  },
+  "base_hadrons": {
+    "unique_count": 96,
+    "mismatch_count": 0,
+    "top10_by_rows": [
+      [
+        "ParityBit",
+        144
+      ],
+      [
+        "SignBit",
+        144
+      ],
+      [
+        "MagicBytes",
+        144
+      ],
+      [
+        "PaddingBytes",
+        144
+      ],
+      [
+        "GuardClause",
+        144
+      ],
+      [
+        "SagaStep",
+        144
+      ],
+      [
+        "Reducer",
+        144
+      ],
+      [
+        "Projection",
+        144
+      ],
+      [
+        "Fiber",
+        144
+      ],
+      [
+        "WebWorker",
+        144
+      ]
+    ]
+  },
+  "impossible": {
+    "row_count": 81,
+    "hadron_unique_count": 56,
+    "reasons": {
+      "Immutable cannot have mutating operations": 72,
+      "Entity has state, cannot be pure": 4,
+      "ValueObject is immutable": 3,
+      "Immutable cannot handle commands": 2
+    },
+    "continents": {
+      "Execution": 25,
+      "Organization": 24,
+      "Logic & Flow": 22,
+      "Data Foundations": 8,
+      "Foundations": 2
+    },
+    "top10_hadrons": [
+      [
+        "Entity",
+        5
+      ],
+      [
+        "CommandHandler",
+        4
+      ],
+      [
+        "ValueObject",
+        3
+      ],
+      [
+        "QueryHandler",
+        2
+      ],
+      [
+        "DTO",
+        2
+      ],
+      [
+        "FeatureModule",
+        2
+      ],
+      [
+        "BitMask",
+        2
+      ],
+      [
+        "IfBranch",
+        2
+      ],
+      [
+        "QueueWorker",
+        2
+      ],
+      [
+        "Assignment",
+        2
+      ]
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "repo": "koei-kaji__ddd-clean-architecture-python",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/koei-kaji__ddd-clean-architecture-python",
+  "confidence": 0.6,
+  "truth_sources": [
+    "type:Repository",
+    "inheritance:Enum",
+    "type:Query",
+    "inheritance:BaseModel",
+    "doc:README.md",
+    "type:Entity",
+    "inheritance:ABC",
+    "type:Service",
+    "type:ValueObject",
+    "inheritance:Exception"
+  ],
+  "layers": [],
+  "expected_components": [
+    {
+      "name": "ToDoApplicationServicer",
+      "type": "Service",
+      "source": "type_hint"
+    },
+    {
+      "name": "TaskName",
+      "type": "ValueObject",
+      "source": "type_hint"
+    },
+    {
+      "name": "Task",
+      "type": "Entity",
+      "source": "type_hint"
+    },
+    {
+      "name": "TaskId",
+      "type": "ValueObject",
+      "source": "type_hint"
+    },
+    {
+      "name": "InMemoryTaskQueryService",
+      "type": "Service",
+      "source": "type_hint"
+    },
+    {
+      "name": "InMemoryTaskQueryService",
+      "type": "Query",
+      "source": "type_hint"
+    },
+    {
+      "name": "InMemoryTaskRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "ABCBaseFrozenModel",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "Interface",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "Path",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "TaskStatus",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "TaskAdapter",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "TaskStatus",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "TaskStatus",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "TaskData",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "EntityModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "InjectionException",
+      "type": "Error",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

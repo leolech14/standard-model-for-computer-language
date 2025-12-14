@@ -1,0 +1,84 @@
+{
+  "repo": "cosmicpython__code",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/cosmicpython__code",
+  "confidence": 0.6,
+  "truth_sources": [
+    "type:Repository",
+    "type:Command",
+    "doc:README.md",
+    "type:Event",
+    "inheritance:ABC",
+    "inheritance:Exception"
+  ],
+  "layers": [],
+  "expected_components": [
+    {
+      "name": "SqlAlchemyRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "Allocated",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "Deallocated",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "OutOfStock",
+      "type": "Event",
+      "source": "type_hint"
+    },
+    {
+      "name": "Allocate",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "CreateBatch",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "ChangeBatchQuantity",
+      "type": "Command",
+      "source": "type_hint"
+    },
+    {
+      "name": "FakeRepository",
+      "type": "Repository",
+      "source": "type_hint"
+    },
+    {
+      "name": "AbstractNotifications",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "AbstractRepository",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "AbstractUnitOfWork",
+      "type": "Abstract",
+      "source": "inheritance"
+    },
+    {
+      "name": "InvalidSku",
+      "type": "Error",
+      "source": "inheritance"
+    },
+    {
+      "name": "MyException",
+      "type": "Error",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

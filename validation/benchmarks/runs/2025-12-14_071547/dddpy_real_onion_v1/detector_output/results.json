@@ -1,0 +1,2595 @@
+{
+  "metadata": {
+    "generated_at": "2025-12-14T07:15:47.513399",
+    "spectrometer_version": "V12.1",
+    "mode": "comprehensive_analysis"
+  },
+  "summary": {
+    "total_particles_found": 114,
+    "files_analyzed": 65,
+    "files_with_particles": 42,
+    "coverage_percentage": 64.61538461538461,
+    "unique_particle_types": 9,
+    "top_particle_types": [
+      [
+        "Unknown",
+        82
+      ],
+      [
+        "UseCase",
+        14
+      ],
+      [
+        "DTO",
+        8
+      ],
+      [
+        "ValueObject",
+        4
+      ],
+      [
+        "Factory",
+        2
+      ]
+    ],
+    "unknown_particles": 82,
+    "recognized_particles": 32,
+    "recognized_percentage": 28.07017543859649,
+    "average_confidence": 36.05263157894737,
+    "average_rpbl_score": 5.206140350877193,
+    "high_confidence_particles": 0,
+    "medium_confidence_particles": 2
+  },
+  "detailed_stats": {
+    "file_analysis": {
+      "total_files_processed": 65,
+      "files_with_particles": 42,
+      "files_without_particles": 23,
+      "file_coverage_percentage": 64.61538461538461,
+      "average_file_size": 1186.1846153846154,
+      "total_lines_analyzed": 2637,
+      "total_characters_analyzed": 77102
+    },
+    "particle_analysis": {
+      "total_particles_detected": 114,
+      "unique_particle_types": 9,
+      "particle_type_distribution": {
+        "Unknown": {
+          "count": 82,
+          "total_confidence": 2460.0,
+          "total_rpbl": 410.0,
+          "responsibility_sum": 410,
+          "purity_sum": 410,
+          "boundary_sum": 410,
+          "lifecycle_sum": 410,
+          "average_confidence": 30.0,
+          "average_rpbl": 5.0,
+          "average_responsibility": 5.0,
+          "average_purity": 5.0,
+          "average_boundary": 5.0,
+          "average_lifecycle": 5.0
+        },
+        "Factory": {
+          "count": 2,
+          "total_confidence": 100.0,
+          "total_rpbl": 9.0,
+          "responsibility_sum": 10,
+          "purity_sum": 12,
+          "boundary_sum": 8,
+          "lifecycle_sum": 6,
+          "average_confidence": 50.0,
+          "average_rpbl": 4.5,
+          "average_responsibility": 5.0,
+          "average_purity": 6.0,
+          "average_boundary": 4.0,
+          "average_lifecycle": 3.0
+        },
+        "RepositoryImpl": {
+          "count": 1,
+          "total_confidence": 75.0,
+          "total_rpbl": 6.0,
+          "responsibility_sum": 8,
+          "purity_sum": 3,
+          "boundary_sum": 6,
+          "lifecycle_sum": 7,
+          "average_confidence": 75.0,
+          "average_rpbl": 6.0,
+          "average_responsibility": 8.0,
+          "average_purity": 3.0,
+          "average_boundary": 6.0,
+          "average_lifecycle": 7.0
+        },
+        "DTO": {
+          "count": 8,
+          "total_confidence": 400.0,
+          "total_rpbl": 46.0,
+          "responsibility_sum": 32,
+          "purity_sum": 64,
+          "boundary_sum": 64,
+          "lifecycle_sum": 24,
+          "average_confidence": 50.0,
+          "average_rpbl": 5.75,
+          "average_responsibility": 4.0,
+          "average_purity": 8.0,
+          "average_boundary": 8.0,
+          "average_lifecycle": 3.0
+        },
+        "UseCase": {
+          "count": 14,
+          "total_confidence": 700.0,
+          "total_rpbl": 77.0,
+          "responsibility_sum": 84,
+          "purity_sum": 70,
+          "boundary_sum": 98,
+          "lifecycle_sum": 56,
+          "average_confidence": 50.0,
+          "average_rpbl": 5.5,
+          "average_responsibility": 6.0,
+          "average_purity": 5.0,
+          "average_boundary": 7.0,
+          "average_lifecycle": 4.0
+        },
+        "ValueObject": {
+          "count": 4,
+          "total_confidence": 200.0,
+          "total_rpbl": 26.0,
+          "responsibility_sum": 16,
+          "purity_sum": 36,
+          "boundary_sum": 20,
+          "lifecycle_sum": 32,
+          "average_confidence": 50.0,
+          "average_rpbl": 6.5,
+          "average_responsibility": 4.0,
+          "average_purity": 9.0,
+          "average_boundary": 5.0,
+          "average_lifecycle": 8.0
+        },
+        "Repository": {
+          "count": 1,
+          "total_confidence": 75.0,
+          "total_rpbl": 7.0,
+          "responsibility_sum": 8,
+          "purity_sum": 6,
+          "boundary_sum": 7,
+          "lifecycle_sum": 7,
+          "average_confidence": 75.0,
+          "average_rpbl": 7.0,
+          "average_responsibility": 8.0,
+          "average_purity": 6.0,
+          "average_boundary": 7.0,
+          "average_lifecycle": 7.0
+        },
+        "Entity": {
+          "count": 1,
+          "total_confidence": 50.0,
+          "total_rpbl": 7.25,
+          "responsibility_sum": 9,
+          "purity_sum": 3,
+          "boundary_sum": 8,
+          "lifecycle_sum": 9,
+          "average_confidence": 50.0,
+          "average_rpbl": 7.25,
+          "average_responsibility": 9.0,
+          "average_purity": 3.0,
+          "average_boundary": 8.0,
+          "average_lifecycle": 9.0
+        },
+        "Controller": {
+          "count": 1,
+          "total_confidence": 50.0,
+          "total_rpbl": 5.25,
+          "responsibility_sum": 6,
+          "purity_sum": 2,
+          "boundary_sum": 9,
+          "lifecycle_sum": 4,
+          "average_confidence": 50.0,
+          "average_rpbl": 5.25,
+          "average_responsibility": 6.0,
+          "average_purity": 2.0,
+          "average_boundary": 9.0,
+          "average_lifecycle": 4.0
+        }
+      },
+      "particles_per_file": 1.7538461538461538,
+      "max_particles_in_file": 10
+    },
+    "touchpoint_analysis": {
+      "total_touchpoints_detected": 213,
+      "unique_touchpoint_types": 6,
+      "touchpoint_distribution": {
+        "identity": 122,
+        "data_access": 52,
+        "state": 30,
+        "validation": 5,
+        "immutability": 3,
+        "coordination": 1
+      }
+    },
+    "language_analysis": {
+      "languages_detected": [
+        "python"
+      ],
+      "number_of_languages": 1
+    },
+    "processing_time_seconds": 2.9802322387695312e-05
+  },
+  "particles": [
+    {
+      "type": "Unknown",
+      "name": "lifespan",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/main.py",
+      "line": 19,
+      "confidence": 30.0,
+      "evidence": "async def lifespan(app: FastAPI):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_session",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 29,
+      "confidence": 30.0,
+      "evidence": "def get_session() -> Iterator[Session]:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_todo_repository",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 49,
+      "confidence": 30.0,
+      "evidence": "def get_todo_repository(session: Session = Depends(get_session)) -> TodoRepository:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_create_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 61,
+      "confidence": 30.0,
+      "evidence": "def get_create_todo_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_start_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 75,
+      "confidence": 30.0,
+      "evidence": "def get_start_todo_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_complete_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 89,
+      "confidence": 30.0,
+      "evidence": "def get_complete_todo_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_update_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 103,
+      "confidence": 30.0,
+      "evidence": "def get_update_todo_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_delete_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 117,
+      "confidence": 30.0,
+      "evidence": "def get_delete_todo_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_find_todo_by_id_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 131,
+      "confidence": 30.0,
+      "evidence": "def get_find_todo_by_id_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "get_find_todos_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/di/injection.py",
+      "line": 145,
+      "confidence": 30.0,
+      "evidence": "def get_find_todos_usecase(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Factory",
+      "name": "create_tables",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/sqlite/database.py",
+      "line": 25,
+      "confidence": 50.0,
+      "evidence": "def create_tables():",
+      "responsibility": 5,
+      "purity": 6,
+      "boundary": 4,
+      "lifecycle": 3,
+      "rpbl_score": 4.5,
+      "description": "Encapsulates complex object creation logic"
+    },
+    {
+      "type": "RepositoryImpl",
+      "name": "TodoRepositoryImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/sqlite/todo/todo_repository.py",
+      "line": 15,
+      "confidence": 75.0,
+      "evidence": "class TodoRepositoryImpl(TodoRepository):",
+      "responsibility": 8,
+      "purity": 3,
+      "boundary": 6,
+      "lifecycle": 7,
+      "rpbl_score": 6.0,
+      "description": "Concrete repository implementation (I/O boundary)"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_todo_repository",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/sqlite/todo/todo_repository.py",
+      "line": 86,
+      "confidence": 30.0,
+      "evidence": "def new_todo_repository(session: Session) -> TodoRepository:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "DTO",
+      "name": "TodoDTO",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/infrastructure/sqlite/todo/todo_dto.py",
+      "line": 19,
+      "confidence": 50.0,
+      "evidence": "class TodoDTO(Base):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "UseCase",
+      "name": "FindTodoByIdUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todo_by_id_usecase.py",
+      "line": 11,
+      "confidence": 50.0,
+      "evidence": "class FindTodoByIdUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "FindTodoByIdUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todo_by_id_usecase.py",
+      "line": 26,
+      "confidence": 50.0,
+      "evidence": "class FindTodoByIdUseCaseImpl(FindTodoByIdUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_find_todo_by_id_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todo_by_id_usecase.py",
+      "line": 55,
+      "confidence": 30.0,
+      "evidence": "def new_find_todo_by_id_usecase(todo_repository: TodoRepository) -> FindTodoByIdUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "UseCase",
+      "name": "StartTodoUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/start_todo_usecase.py",
+      "line": 15,
+      "confidence": 50.0,
+      "evidence": "class StartTodoUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "StartTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/start_todo_usecase.py",
+      "line": 30,
+      "confidence": 50.0,
+      "evidence": "class StartTodoUseCaseImpl(StartTodoUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_start_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/start_todo_usecase.py",
+      "line": 71,
+      "confidence": 30.0,
+      "evidence": "def new_start_todo_usecase(todo_repository: TodoRepository) -> StartTodoUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "UseCase",
+      "name": "CompleteTodoUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/complete_todo_usecase.py",
+      "line": 15,
+      "confidence": 50.0,
+      "evidence": "class CompleteTodoUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "CompleteTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/complete_todo_usecase.py",
+      "line": 30,
+      "confidence": 50.0,
+      "evidence": "class CompleteTodoUseCaseImpl(CompleteTodoUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_complete_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/complete_todo_usecase.py",
+      "line": 71,
+      "confidence": 30.0,
+      "evidence": "def new_complete_todo_usecase(todo_repository: TodoRepository) -> CompleteTodoUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "UseCase",
+      "name": "FindTodosUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todos_usecase.py",
+      "line": 10,
+      "confidence": 50.0,
+      "evidence": "class FindTodosUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "FindTodosUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todos_usecase.py",
+      "line": 22,
+      "confidence": 50.0,
+      "evidence": "class FindTodosUseCaseImpl(FindTodosUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_find_todos_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/find_todos_usecase.py",
+      "line": 38,
+      "confidence": 30.0,
+      "evidence": "def new_find_todos_usecase(todo_repository: TodoRepository) -> FindTodosUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "UseCase",
+      "name": "CreateTodoUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/create_todo_usecase.py",
+      "line": 11,
+      "confidence": 50.0,
+      "evidence": "class CreateTodoUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "CreateTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/create_todo_usecase.py",
+      "line": 29,
+      "confidence": 50.0,
+      "evidence": "class CreateTodoUseCaseImpl(CreateTodoUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_create_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/create_todo_usecase.py",
+      "line": 57,
+      "confidence": 30.0,
+      "evidence": "def new_create_todo_usecase(todo_repository: TodoRepository) -> CreateTodoUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "UseCase",
+      "name": "DeleteTodoUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/delete_todo_usecase.py",
+      "line": 10,
+      "confidence": 50.0,
+      "evidence": "class DeleteTodoUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "DeleteTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/delete_todo_usecase.py",
+      "line": 22,
+      "confidence": 50.0,
+      "evidence": "class DeleteTodoUseCaseImpl(DeleteTodoUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_delete_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/delete_todo_usecase.py",
+      "line": 50,
+      "confidence": 30.0,
+      "evidence": "def new_delete_todo_usecase(todo_repository: TodoRepository) -> DeleteTodoUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "UseCase",
+      "name": "UpdateTodoUseCase",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/update_todo_usecase.py",
+      "line": 12,
+      "confidence": 50.0,
+      "evidence": "class UpdateTodoUseCase(ABC):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "UseCase",
+      "name": "UpdateTodoUseCaseImpl",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/update_todo_usecase.py",
+      "line": 34,
+      "confidence": 50.0,
+      "evidence": "class UpdateTodoUseCaseImpl(UpdateTodoUseCase):",
+      "responsibility": 6,
+      "purity": 5,
+      "boundary": 7,
+      "lifecycle": 4,
+      "rpbl_score": 5.5,
+      "description": "Application-specific business operation with single purpose"
+    },
+    {
+      "type": "Unknown",
+      "name": "new_update_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/usecase/todo/update_todo_usecase.py",
+      "line": 78,
+      "confidence": 30.0,
+      "evidence": "def new_update_todo_usecase(todo_repository: TodoRepository) -> UpdateTodoUseCase:",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "ValueObject",
+      "name": "TodoDescription",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/value_objects/todo_description.py",
+      "line": 7,
+      "confidence": 50.0,
+      "evidence": "class TodoDescription:",
+      "responsibility": 4,
+      "purity": 9,
+      "boundary": 5,
+      "lifecycle": 8,
+      "rpbl_score": 6.5,
+      "description": "Immutable object defined by its attributes, not identity"
+    },
+    {
+      "type": "ValueObject",
+      "name": "TodoStatus",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/value_objects/todo_status.py",
+      "line": 6,
+      "confidence": 50.0,
+      "evidence": "class TodoStatus(Enum):",
+      "responsibility": 4,
+      "purity": 9,
+      "boundary": 5,
+      "lifecycle": 8,
+      "rpbl_score": 6.5,
+      "description": "Immutable object defined by its attributes, not identity"
+    },
+    {
+      "type": "ValueObject",
+      "name": "TodoTitle",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/value_objects/todo_title.py",
+      "line": 7,
+      "confidence": 50.0,
+      "evidence": "class TodoTitle:",
+      "responsibility": 4,
+      "purity": 9,
+      "boundary": 5,
+      "lifecycle": 8,
+      "rpbl_score": 6.5,
+      "description": "Immutable object defined by its attributes, not identity"
+    },
+    {
+      "type": "ValueObject",
+      "name": "TodoId",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/value_objects/todo_id.py",
+      "line": 8,
+      "confidence": 50.0,
+      "evidence": "class TodoId:",
+      "responsibility": 4,
+      "purity": 9,
+      "boundary": 5,
+      "lifecycle": 8,
+      "rpbl_score": 6.5,
+      "description": "Immutable object defined by its attributes, not identity"
+    },
+    {
+      "type": "Repository",
+      "name": "TodoRepository",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/repositories/todo_repository.py",
+      "line": 10,
+      "confidence": 75.0,
+      "evidence": "class TodoRepository(ABC):",
+      "responsibility": 8,
+      "purity": 6,
+      "boundary": 7,
+      "lifecycle": 7,
+      "rpbl_score": 7.0,
+      "description": "Data access layer for aggregate persistence"
+    },
+    {
+      "type": "Unknown",
+      "name": "TodoNotFoundError",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_not_found_error.py",
+      "line": 4,
+      "confidence": 30.0,
+      "evidence": "class TodoNotFoundError(Exception):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "TodoNotStartedError",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_not_started_error.py",
+      "line": 4,
+      "confidence": 30.0,
+      "evidence": "class TodoNotStartedError(Exception):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "TodoAlreadyStartedError",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_already_started_error.py",
+      "line": 4,
+      "confidence": 30.0,
+      "evidence": "class TodoAlreadyStartedError(Exception):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "TodoAlreadyCompletedError",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/exceptions/todo_already_completed_error.py",
+      "line": 4,
+      "confidence": 30.0,
+      "evidence": "class TodoAlreadyCompletedError(Exception):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Entity",
+      "name": "Todo",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/domain/todo/entities/todo.py",
+      "line": 14,
+      "confidence": 50.0,
+      "evidence": "class Todo:",
+      "responsibility": 9,
+      "purity": 3,
+      "boundary": 8,
+      "lifecycle": 9,
+      "rpbl_score": 7.25,
+      "description": "Core domain object with identity and lifecycle management"
+    },
+    {
+      "type": "DTO",
+      "name": "TodoUpdateSchema",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/schemas/todo_update_schema.py",
+      "line": 6,
+      "confidence": 50.0,
+      "evidence": "class TodoUpdateSchema(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "DTO",
+      "name": "TodoCreateSchema",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/schemas/todo_create_schema.py",
+      "line": 6,
+      "confidence": 50.0,
+      "evidence": "class TodoCreateSchema(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "DTO",
+      "name": "TodoSchema",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/schemas/todo_schema.py",
+      "line": 8,
+      "confidence": 50.0,
+      "evidence": "class TodoSchema(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "DTO",
+      "name": "ErrorMessageTodoAlreadyCompleted",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/error_messages/todo_already_completed_error_message.py",
+      "line": 8,
+      "confidence": 50.0,
+      "evidence": "class ErrorMessageTodoAlreadyCompleted(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "DTO",
+      "name": "ErrorMessageTodoNotFound",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/error_messages/todo_not_found_error_message.py",
+      "line": 8,
+      "confidence": 50.0,
+      "evidence": "class ErrorMessageTodoNotFound(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "DTO",
+      "name": "ErrorMessageTodoNotStarted",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/error_messages/todo_not_started_error_message.py",
+      "line": 8,
+      "confidence": 50.0,
+      "evidence": "class ErrorMessageTodoNotStarted(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "DTO",
+      "name": "ErrorMessageTodoAlreadyStarted",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/error_messages/todo_already_started_error_message.py",
+      "line": 8,
+      "confidence": 50.0,
+      "evidence": "class ErrorMessageTodoAlreadyStarted(BaseModel):",
+      "responsibility": 4,
+      "purity": 8,
+      "boundary": 8,
+      "lifecycle": 3,
+      "rpbl_score": 5.75,
+      "description": "Data transfer object / schema (no business behavior)"
+    },
+    {
+      "type": "Controller",
+      "name": "TodoApiRouteHandler",
+      "symbol_kind": "class",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+      "line": 38,
+      "confidence": 50.0,
+      "evidence": "class TodoApiRouteHandler:",
+      "responsibility": 6,
+      "purity": 2,
+      "boundary": 9,
+      "lifecycle": 4,
+      "rpbl_score": 5.25,
+      "description": "Handles user input and coordinates application flow"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "find_todos_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+      "line": 20,
+      "confidence": 30.0,
+      "evidence": "def find_todos_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_find_todos_empty_list",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+      "line": 25,
+      "confidence": 30.0,
+      "evidence": "def test_find_todos_empty_list(find_todos_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_find_todos_with_items",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todos_usecase.py",
+      "line": 38,
+      "confidence": 30.0,
+      "evidence": "def test_find_todos_with_items(find_todos_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "find_todo_by_id_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+      "line": 20,
+      "confidence": 30.0,
+      "evidence": "def find_todo_by_id_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+      "line": 26,
+      "confidence": 30.0,
+      "evidence": "def todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_find_todo_by_id_success",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+      "line": 35,
+      "confidence": 30.0,
+      "evidence": "def test_find_todo_by_id_success(find_todo_by_id_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_find_todo_by_id_not_found",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_find_todo_by_id_usecase.py",
+      "line": 48,
+      "confidence": 30.0,
+      "evidence": "def test_find_todo_by_id_not_found(find_todo_by_id_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+      "line": 15,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "complete_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+      "line": 21,
+      "confidence": 30.0,
+      "evidence": "def complete_todo_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+      "line": 27,
+      "confidence": 30.0,
+      "evidence": "def todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_complete_todo_success",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+      "line": 38,
+      "confidence": 30.0,
+      "evidence": "def test_complete_todo_success(complete_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_complete_todo_not_found",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+      "line": 53,
+      "confidence": 30.0,
+      "evidence": "def test_complete_todo_not_found(complete_todo_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_complete_already_completed_todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_complete_todo_usecase.py",
+      "line": 65,
+      "confidence": 30.0,
+      "evidence": "def test_complete_already_completed_todo(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "start_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+      "line": 20,
+      "confidence": 30.0,
+      "evidence": "def start_todo_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+      "line": 26,
+      "confidence": 30.0,
+      "evidence": "def todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_start_todo_success",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+      "line": 35,
+      "confidence": 30.0,
+      "evidence": "def test_start_todo_success(start_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_start_todo_not_found",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+      "line": 49,
+      "confidence": 30.0,
+      "evidence": "def test_start_todo_not_found(start_todo_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_start_completed_todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_start_todo_usecase.py",
+      "line": 61,
+      "confidence": 30.0,
+      "evidence": "def test_start_completed_todo(start_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "update_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 20,
+      "confidence": 30.0,
+      "evidence": "def update_todo_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 26,
+      "confidence": 30.0,
+      "evidence": "def todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_update_todo_title_only",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 35,
+      "confidence": 30.0,
+      "evidence": "def test_update_todo_title_only(update_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_update_todo_description_only",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 51,
+      "confidence": 30.0,
+      "evidence": "def test_update_todo_description_only(update_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_update_todo_both_fields",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 67,
+      "confidence": 30.0,
+      "evidence": "def test_update_todo_both_fields(update_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_update_todo_not_found",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_update_todo_usecase.py",
+      "line": 86,
+      "confidence": 30.0,
+      "evidence": "def test_update_todo_not_found(update_todo_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Factory",
+      "name": "create_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+      "line": 20,
+      "confidence": 50.0,
+      "evidence": "def create_todo_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 6,
+      "boundary": 4,
+      "lifecycle": 3,
+      "rpbl_score": 4.5,
+      "description": "Encapsulates complex object creation logic"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_todo_with_title_only",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+      "line": 25,
+      "confidence": 30.0,
+      "evidence": "def test_create_todo_with_title_only(create_todo_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_todo_with_title_and_description",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+      "line": 37,
+      "confidence": 30.0,
+      "evidence": "def test_create_todo_with_title_and_description(",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_todo_repository_error",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_create_todo_usecase.py",
+      "line": 52,
+      "confidence": 30.0,
+      "evidence": "def test_create_todo_repository_error(create_todo_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo_repository_mock",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def todo_repository_mock():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "delete_todo_usecase",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+      "line": 20,
+      "confidence": 30.0,
+      "evidence": "def delete_todo_usecase(todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+      "line": 26,
+      "confidence": 30.0,
+      "evidence": "def todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_delete_todo_success",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+      "line": 34,
+      "confidence": 30.0,
+      "evidence": "def test_delete_todo_success(delete_todo_usecase, todo_repository_mock, todo):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_delete_todo_not_found",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/usecase/todo/test_delete_todo_usecase.py",
+      "line": 47,
+      "confidence": 30.0,
+      "evidence": "def test_delete_todo_not_found(delete_todo_usecase, todo_repository_mock):",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_todo_status_values",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_status.py",
+      "line": 6,
+      "confidence": 30.0,
+      "evidence": "def test_todo_status_values():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_todo_status_enum_members",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_status.py",
+      "line": 13,
+      "confidence": 30.0,
+      "evidence": "def test_todo_status_enum_members():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_str_representation",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_status.py",
+      "line": 21,
+      "confidence": 30.0,
+      "evidence": "def test_str_representation():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_valid_title",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+      "line": 8,
+      "confidence": 30.0,
+      "evidence": "def test_create_valid_title():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_empty_title_raises_error",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def test_empty_title_raises_error():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_title_too_long_raises_error",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+      "line": 20,
+      "confidence": 30.0,
+      "evidence": "def test_title_too_long_raises_error():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_str_representation",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_title.py",
+      "line": 27,
+      "confidence": 30.0,
+      "evidence": "def test_str_representation():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_generate_creates_valid_uuid",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_id.py",
+      "line": 10,
+      "confidence": 30.0,
+      "evidence": "def test_generate_creates_valid_uuid():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_generate_creates_unique_ids",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_id.py",
+      "line": 17,
+      "confidence": 30.0,
+      "evidence": "def test_generate_creates_unique_ids():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_str_representation",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_id.py",
+      "line": 24,
+      "confidence": 30.0,
+      "evidence": "def test_str_representation():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_valid_description",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_description.py",
+      "line": 8,
+      "confidence": 30.0,
+      "evidence": "def test_create_valid_description():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_description_exceeding_length_limit",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_description.py",
+      "line": 14,
+      "confidence": 30.0,
+      "evidence": "def test_create_description_exceeding_length_limit():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_str_representation",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/value_objects/test_todo_description.py",
+      "line": 21,
+      "confidence": 30.0,
+      "evidence": "def test_str_representation():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_create_todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 16,
+      "confidence": 30.0,
+      "evidence": "def test_create_todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_todo_properties",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 31,
+      "confidence": 30.0,
+      "evidence": "def test_todo_properties():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_update_title",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 57,
+      "confidence": 30.0,
+      "evidence": "def test_update_title():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_update_description",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 68,
+      "confidence": 30.0,
+      "evidence": "def test_update_description():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_clear_description",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 79,
+      "confidence": 30.0,
+      "evidence": "def test_clear_description():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_start_todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 89,
+      "confidence": 30.0,
+      "evidence": "def test_start_todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_complete_todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 99,
+      "confidence": 30.0,
+      "evidence": "def test_complete_todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_complete_already_completed_todo",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 111,
+      "confidence": 30.0,
+      "evidence": "def test_complete_already_completed_todo():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_is_overdue",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 120,
+      "confidence": 30.0,
+      "evidence": "def test_is_overdue():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    },
+    {
+      "type": "Unknown",
+      "name": "test_todo_equality",
+      "symbol_kind": "function",
+      "file_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/dddpy_real/tests/domain/todo/entities/test_todo.py",
+      "line": 155,
+      "confidence": 30.0,
+      "evidence": "def test_todo_equality():",
+      "responsibility": 5,
+      "purity": 5,
+      "boundary": 5,
+      "lifecycle": 5,
+      "rpbl_score": 5.0,
+      "description": "Unknown particle type"
+    }
+  ],
+  "performance": {
+    "files_per_second": 2181038.08,
+    "lines_per_second": 88483037.184,
+    "characters_per_second": 2587113816.064,
+    "avg_time_per_file": 4.584972675030048e-07,
+    "success_rate": 100.0
+  },
+  "dependencies": {
+    "external_packages": [
+      {
+        "package": "pytest",
+        "count": 11
+      },
+      {
+        "package": "sqlalchemy",
+        "count": 9
+      },
+      {
+        "package": "pydantic",
+        "count": 7
+      },
+      {
+        "package": "fastapi",
+        "count": 3
+      }
+    ],
+    "stdlib_packages": [
+      {
+        "package": "__future__",
+        "count": 15
+      },
+      {
+        "package": "typing",
+        "count": 8
+      },
+      {
+        "package": "abc",
+        "count": 8
+      },
+      {
+        "package": "unittest",
+        "count": 7
+      },
+      {
+        "package": "datetime",
+        "count": 4
+      },
+      {
+        "package": "uuid",
+        "count": 4
+      },
+      {
+        "package": "dataclasses",
+        "count": 3
+      },
+      {
+        "package": "logging",
+        "count": 2
+      },
+      {
+        "package": "contextlib",
+        "count": 1
+      },
+      {
+        "package": "enum",
+        "count": 1
+      }
+    ],
+    "internal_edges": [
+      {
+        "from": "main.py",
+        "to": "dddpy/infrastructure/sqlite/database.py",
+        "count": 1
+      },
+      {
+        "from": "main.py",
+        "to": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/__init__.py",
+        "to": "dddpy/infrastructure/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/di/injection.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/di/injection.py",
+        "to": "dddpy/infrastructure/sqlite/database.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/di/injection.py",
+        "to": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/di/injection.py",
+        "to": "dddpy/usecase/todo/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/__init__.py",
+        "to": "dddpy/infrastructure/sqlite/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "to": "dddpy/infrastructure/sqlite/todo/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_dto.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_dto.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/todo_dto.py",
+        "to": "dddpy/infrastructure/sqlite/database.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/__init__.py",
+        "to": "dddpy/infrastructure/sqlite/todo/todo_dto.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/infrastructure/sqlite/todo/__init__.py",
+        "to": "dddpy/infrastructure/sqlite/todo/todo_repository.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/__init__.py",
+        "to": "dddpy/usecase/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/start_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/start_todo_usecase.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/start_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/start_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/create_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/start_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/complete_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/update_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/delete_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/__init__.py",
+        "to": "dddpy/usecase/todo/find_todos_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/find_todos_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/find_todos_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/create_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/create_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/create_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/delete_todo_usecase.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/delete_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/delete_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/update_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/update_todo_usecase.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/update_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/usecase/todo/update_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/__init__.py",
+        "to": "dddpy/domain/todo/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/value_objects/__init__.py",
+        "to": "dddpy/domain/todo/value_objects/todo_description.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/value_objects/__init__.py",
+        "to": "dddpy/domain/todo/value_objects/todo_id.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/value_objects/__init__.py",
+        "to": "dddpy/domain/todo/value_objects/todo_status.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/value_objects/__init__.py",
+        "to": "dddpy/domain/todo/value_objects/todo_title.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/repositories/todo_repository.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/repositories/todo_repository.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/repositories/__init__.py",
+        "to": "dddpy/domain/todo/repositories/todo_repository.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/exceptions/__init__.py",
+        "to": "dddpy/domain/todo/exceptions/todo_already_completed_error.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/exceptions/__init__.py",
+        "to": "dddpy/domain/todo/exceptions/todo_already_started_error.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/exceptions/__init__.py",
+        "to": "dddpy/domain/todo/exceptions/todo_not_found_error.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/exceptions/__init__.py",
+        "to": "dddpy/domain/todo/exceptions/todo_not_started_error.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/entities/__init__.py",
+        "to": "dddpy/domain/todo/entities/todo.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/domain/todo/entities/todo.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/__init__.py",
+        "to": "dddpy/presentation/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/__init__.py",
+        "to": "dddpy/presentation/api/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/__init__.py",
+        "to": "dddpy/presentation/api/todo/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/schemas/todo_schema.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/schemas/__init__.py",
+        "to": "dddpy/presentation/api/todo/schemas/todo_create_schema.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/schemas/__init__.py",
+        "to": "dddpy/presentation/api/todo/schemas/todo_schema.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/schemas/__init__.py",
+        "to": "dddpy/presentation/api/todo/schemas/todo_update_schema.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/todo_already_completed_error_message.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/__init__.py",
+        "to": "dddpy/presentation/api/todo/error_messages/todo_already_completed_error_message.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/__init__.py",
+        "to": "dddpy/presentation/api/todo/error_messages/todo_already_started_error_message.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/__init__.py",
+        "to": "dddpy/presentation/api/todo/error_messages/todo_not_found_error_message.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/__init__.py",
+        "to": "dddpy/presentation/api/todo/error_messages/todo_not_started_error_message.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/todo_not_found_error_message.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/todo_not_started_error_message.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/error_messages/todo_already_started_error_message.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/__init__.py",
+        "to": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "to": "dddpy/domain/todo/exceptions/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "to": "dddpy/infrastructure/di/injection.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "to": "dddpy/presentation/api/todo/error_messages/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "to": "dddpy/presentation/api/todo/schemas/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "dddpy/presentation/api/todo/handlers/todo_api_route_handler.py",
+        "to": "dddpy/usecase/todo/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todos_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todos_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todos_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todos_usecase.py",
+        "to": "dddpy/usecase/todo/find_todos_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_find_todo_by_id_usecase.py",
+        "to": "dddpy/usecase/todo/find_todo_by_id_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_complete_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_complete_todo_usecase.py",
+        "to": "dddpy/usecase/todo/complete_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_start_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_start_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_start_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_start_todo_usecase.py",
+        "to": "dddpy/usecase/todo/start_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_update_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_update_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_update_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_update_todo_usecase.py",
+        "to": "dddpy/usecase/todo/update_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_create_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_create_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_create_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_create_todo_usecase.py",
+        "to": "dddpy/usecase/todo/create_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_delete_todo_usecase.py",
+        "to": "dddpy/domain/todo/entities/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_delete_todo_usecase.py",
+        "to": "dddpy/domain/todo/repositories/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_delete_todo_usecase.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      },
+      {
+        "from": "tests/usecase/todo/test_delete_todo_usecase.py",
+        "to": "dddpy/usecase/todo/delete_todo_usecase.py",
+        "count": 1
+      },
+      {
+        "from": "tests/domain/todo/value_objects/test_todo_status.py",
+        "to": "dddpy/domain/todo/value_objects/todo_status.py",
+        "count": 1
+      },
+      {
+        "from": "tests/domain/todo/value_objects/test_todo_title.py",
+        "to": "dddpy/domain/todo/value_objects/todo_title.py",
+        "count": 1
+      },
+      {
+        "from": "tests/domain/todo/value_objects/test_todo_id.py",
+        "to": "dddpy/domain/todo/value_objects/todo_id.py",
+        "count": 1
+      },
+      {
+        "from": "tests/domain/todo/value_objects/test_todo_description.py",
+        "to": "dddpy/domain/todo/value_objects/todo_description.py",
+        "count": 1
+      },
+      {
+        "from": "tests/domain/todo/entities/test_todo.py",
+        "to": "dddpy/domain/todo/entities/todo.py",
+        "count": 1
+      },
+      {
+        "from": "tests/domain/todo/entities/test_todo.py",
+        "to": "dddpy/domain/todo/value_objects/__init__.py",
+        "count": 1
+      }
+    ],
+    "unknown_dependency_count": 0
+  }
+}

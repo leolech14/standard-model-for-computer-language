@@ -1,0 +1,1089 @@
+{
+    "version": 2,
+    "generated_at": "2025-12-14T07:35:00",
+    "description": "100+ Real-World Python Repositories for Comprehensive Testing",
+    "suites": {
+        "ddd_clean_arch": "Domain-Driven Design & Clean Architecture projects",
+        "web_frameworks": "Web frameworks and APIs",
+        "cli_tools": "Command-line tools",
+        "data_science": "Data science and ML projects",
+        "devops": "DevOps and infrastructure tools",
+        "libraries": "Popular Python libraries",
+        "microservices": "Microservice architectures",
+        "enterprise": "Enterprise patterns"
+    },
+    "repos": [
+        {
+            "id": 1,
+            "repo": "iktakahiro/dddpy",
+            "suite": "ddd_clean_arch",
+            "description": "Python DDD example with FastAPI",
+            "stars": 500,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/iktakahiro/dddpy.git",
+            "local_path": "validation/dddpy_real",
+            "has_golden_spec": true
+        },
+        {
+            "id": 2,
+            "repo": "pgorecki/python-ddd",
+            "suite": "ddd_clean_arch",
+            "description": "DDD building blocks in Python",
+            "stars": 300,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/pgorecki/python-ddd.git"
+        },
+        {
+            "id": 3,
+            "repo": "cosmicpython/code",
+            "suite": "ddd_clean_arch",
+            "description": "Architecture Patterns with Python (book code)",
+            "stars": 2800,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/cosmicpython/code.git"
+        },
+        {
+            "id": 4,
+            "repo": "tiangolo/fastapi",
+            "suite": "web_frameworks",
+            "description": "FastAPI framework",
+            "stars": 70000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/tiangolo/fastapi.git",
+            "local_path": "/tmp/fastapi_test/fastapi"
+        },
+        {
+            "id": 5,
+            "repo": "pallets/flask",
+            "suite": "web_frameworks",
+            "description": "Flask web framework",
+            "stars": 65000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/pallets/flask.git"
+        },
+        {
+            "id": 6,
+            "repo": "django/django",
+            "suite": "web_frameworks",
+            "description": "Django web framework",
+            "stars": 75000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/django/django.git"
+        },
+        {
+            "id": 7,
+            "repo": "encode/starlette",
+            "suite": "web_frameworks",
+            "description": "ASGI framework",
+            "stars": 9000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/encode/starlette.git"
+        },
+        {
+            "id": 8,
+            "repo": "litestar-org/litestar",
+            "suite": "web_frameworks",
+            "description": "Modern ASGI framework",
+            "stars": 4000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/litestar-org/litestar.git"
+        },
+        {
+            "id": 9,
+            "repo": "httpie/cli",
+            "suite": "cli_tools",
+            "description": "HTTPie CLI",
+            "stars": 30000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/httpie/cli.git"
+        },
+        {
+            "id": 10,
+            "repo": "pallets/click",
+            "suite": "cli_tools",
+            "description": "Click CLI framework",
+            "stars": 15000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/pallets/click.git"
+        },
+        {
+            "id": 11,
+            "repo": "python-poetry/poetry",
+            "suite": "cli_tools",
+            "description": "Python dependency management",
+            "stars": 28000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/python-poetry/poetry.git"
+        },
+        {
+            "id": 12,
+            "repo": "pypa/pipenv",
+            "suite": "cli_tools",
+            "description": "Python dev workflow",
+            "stars": 24000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/pypa/pipenv.git"
+        },
+        {
+            "id": 13,
+            "repo": "psf/black",
+            "suite": "cli_tools",
+            "description": "Python code formatter",
+            "stars": 35000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/psf/black.git"
+        },
+        {
+            "id": 14,
+            "repo": "astral-sh/ruff",
+            "suite": "cli_tools",
+            "description": "Fast Python linter",
+            "stars": 25000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/astral-sh/ruff.git"
+        },
+        {
+            "id": 15,
+            "repo": "pandas-dev/pandas",
+            "suite": "data_science",
+            "description": "Pandas data analysis",
+            "stars": 40000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/pandas-dev/pandas.git"
+        },
+        {
+            "id": 16,
+            "repo": "scikit-learn/scikit-learn",
+            "suite": "data_science",
+            "description": "ML library",
+            "stars": 55000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/scikit-learn/scikit-learn.git"
+        },
+        {
+            "id": 17,
+            "repo": "numpy/numpy",
+            "suite": "data_science",
+            "description": "NumPy",
+            "stars": 25000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/numpy/numpy.git"
+        },
+        {
+            "id": 18,
+            "repo": "pydantic/pydantic",
+            "suite": "libraries",
+            "description": "Data validation",
+            "stars": 18000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/pydantic/pydantic.git"
+        },
+        {
+            "id": 19,
+            "repo": "sqlalchemy/sqlalchemy",
+            "suite": "libraries",
+            "description": "SQL toolkit",
+            "stars": 8000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/sqlalchemy/sqlalchemy.git"
+        },
+        {
+            "id": 20,
+            "repo": "encode/httpx",
+            "suite": "libraries",
+            "description": "HTTP client",
+            "stars": 12000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/encode/httpx.git"
+        },
+        {
+            "id": 21,
+            "repo": "psf/requests",
+            "suite": "libraries",
+            "description": "HTTP for humans",
+            "stars": 50000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/psf/requests.git"
+        },
+        {
+            "id": 22,
+            "repo": "aio-libs/aiohttp",
+            "suite": "libraries",
+            "description": "Async HTTP",
+            "stars": 14000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/aio-libs/aiohttp.git"
+        },
+        {
+            "id": 23,
+            "repo": "celery/celery",
+            "suite": "libraries",
+            "description": "Distributed task queue",
+            "stars": 23000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/celery/celery.git"
+        },
+        {
+            "id": 24,
+            "repo": "pytest-dev/pytest",
+            "suite": "libraries",
+            "description": "Testing framework",
+            "stars": 11000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/pytest-dev/pytest.git"
+        },
+        {
+            "id": 25,
+            "repo": "ansible/ansible",
+            "suite": "devops",
+            "description": "Automation platform",
+            "stars": 60000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/ansible/ansible.git"
+        },
+        {
+            "id": 26,
+            "repo": "saltstack/salt",
+            "suite": "devops",
+            "description": "Infrastructure automation",
+            "stars": 13000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/saltstack/salt.git"
+        },
+        {
+            "id": 27,
+            "repo": "aws/aws-cli",
+            "suite": "devops",
+            "description": "AWS CLI",
+            "stars": 14000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/aws/aws-cli.git"
+        },
+        {
+            "id": 28,
+            "repo": "localstack/localstack",
+            "suite": "devops",
+            "description": "Local AWS cloud",
+            "stars": 50000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/localstack/localstack.git"
+        },
+        {
+            "id": 29,
+            "repo": "docker/compose",
+            "suite": "devops",
+            "description": "Docker Compose",
+            "stars": 32000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/docker/compose.git"
+        },
+        {
+            "id": 30,
+            "repo": "sanic-org/sanic",
+            "suite": "web_frameworks",
+            "description": "Async web framework",
+            "stars": 17000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/sanic-org/sanic.git"
+        },
+        {
+            "id": 31,
+            "repo": "bottlepy/bottle",
+            "suite": "web_frameworks",
+            "description": "Micro web framework",
+            "stars": 8000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/bottlepy/bottle.git"
+        },
+        {
+            "id": 32,
+            "repo": "marshmallow-code/marshmallow",
+            "suite": "libraries",
+            "description": "Serialization library",
+            "stars": 6800,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/marshmallow-code/marshmallow.git"
+        },
+        {
+            "id": 33,
+            "repo": "pallets/werkzeug",
+            "suite": "libraries",
+            "description": "WSGI library",
+            "stars": 6500,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/pallets/werkzeug.git"
+        },
+        {
+            "id": 34,
+            "repo": "pallets/jinja",
+            "suite": "libraries",
+            "description": "Template engine",
+            "stars": 9800,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/pallets/jinja.git"
+        },
+        {
+            "id": 35,
+            "repo": "pyca/cryptography",
+            "suite": "libraries",
+            "description": "Cryptography library",
+            "stars": 6000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/pyca/cryptography.git"
+        },
+        {
+            "id": 36,
+            "repo": "encode/django-rest-framework",
+            "suite": "web_frameworks",
+            "description": "Django REST framework",
+            "stars": 27000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/encode/django-rest-framework.git"
+        },
+        {
+            "id": 37,
+            "repo": "graphql-python/graphene",
+            "suite": "web_frameworks",
+            "description": "GraphQL in Python",
+            "stars": 7800,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/graphql-python/graphene.git"
+        },
+        {
+            "id": 38,
+            "repo": "strawberry-graphql/strawberry",
+            "suite": "web_frameworks",
+            "description": "Modern GraphQL",
+            "stars": 3700,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/strawberry-graphql/strawberry.git"
+        },
+        {
+            "id": 39,
+            "repo": "tiangolo/typer",
+            "suite": "cli_tools",
+            "description": "CLI with type hints",
+            "stars": 13000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/tiangolo/typer.git"
+        },
+        {
+            "id": 40,
+            "repo": "tqdm/tqdm",
+            "suite": "cli_tools",
+            "description": "Progress bars",
+            "stars": 27000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/tqdm/tqdm.git"
+        },
+        {
+            "id": 41,
+            "repo": "Textualize/rich",
+            "suite": "cli_tools",
+            "description": "Rich terminal formatting",
+            "stars": 47000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/Textualize/rich.git"
+        },
+        {
+            "id": 42,
+            "repo": "Textualize/textual",
+            "suite": "cli_tools",
+            "description": "TUI framework",
+            "stars": 23000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/Textualize/textual.git"
+        },
+        {
+            "id": 43,
+            "repo": "huggingface/transformers",
+            "suite": "data_science",
+            "description": "NLP transformers",
+            "stars": 120000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/huggingface/transformers.git"
+        },
+        {
+            "id": 44,
+            "repo": "langchain-ai/langchain",
+            "suite": "data_science",
+            "description": "LLM framework",
+            "stars": 80000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/langchain-ai/langchain.git"
+        },
+        {
+            "id": 45,
+            "repo": "openai/openai-python",
+            "suite": "libraries",
+            "description": "OpenAI SDK",
+            "stars": 18000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/openai/openai-python.git"
+        },
+        {
+            "id": 46,
+            "repo": "Significant-Gravitas/AutoGPT",
+            "suite": "data_science",
+            "description": "AutoGPT agent",
+            "stars": 160000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/Significant-Gravitas/AutoGPT.git"
+        },
+        {
+            "id": 47,
+            "repo": "streamlit/streamlit",
+            "suite": "data_science",
+            "description": "Data apps",
+            "stars": 30000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/streamlit/streamlit.git"
+        },
+        {
+            "id": 48,
+            "repo": "gradio-app/gradio",
+            "suite": "data_science",
+            "description": "ML web UIs",
+            "stars": 28000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/gradio-app/gradio.git"
+        },
+        {
+            "id": 49,
+            "repo": "boto/boto3",
+            "suite": "libraries",
+            "description": "AWS SDK",
+            "stars": 8500,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/boto/boto3.git"
+        },
+        {
+            "id": 50,
+            "repo": "googleapis/google-cloud-python",
+            "suite": "libraries",
+            "description": "GCP SDK",
+            "stars": 4500,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/googleapis/google-cloud-python.git"
+        },
+        {
+            "id": 51,
+            "repo": "python-telegram-bot/python-telegram-bot",
+            "suite": "libraries",
+            "description": "Telegram bot API",
+            "stars": 24000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/python-telegram-bot/python-telegram-bot.git"
+        },
+        {
+            "id": 52,
+            "repo": "Rapptz/discord.py",
+            "suite": "libraries",
+            "description": "Discord API",
+            "stars": 14000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/Rapptz/discord.py.git"
+        },
+        {
+            "id": 53,
+            "repo": "PyGithub/PyGithub",
+            "suite": "libraries",
+            "description": "GitHub API",
+            "stars": 6500,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/PyGithub/PyGithub.git"
+        },
+        {
+            "id": 54,
+            "repo": "scrapy/scrapy",
+            "suite": "libraries",
+            "description": "Web scraping",
+            "stars": 50000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/scrapy/scrapy.git"
+        },
+        {
+            "id": 55,
+            "repo": "python-pillow/Pillow",
+            "suite": "libraries",
+            "description": "Image processing",
+            "stars": 11500,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/python-pillow/Pillow.git"
+        },
+        {
+            "id": 56,
+            "repo": "fabric/fabric",
+            "suite": "devops",
+            "description": "SSH automation",
+            "stars": 14500,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/fabric/fabric.git"
+        },
+        {
+            "id": 57,
+            "repo": "paramiko/paramiko",
+            "suite": "libraries",
+            "description": "SSH library",
+            "stars": 8700,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/paramiko/paramiko.git"
+        },
+        {
+            "id": 58,
+            "repo": "pre-commit/pre-commit",
+            "suite": "devops",
+            "description": "Git hooks",
+            "stars": 12000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/pre-commit/pre-commit.git"
+        },
+        {
+            "id": 59,
+            "repo": "ray-project/ray",
+            "suite": "data_science",
+            "description": "Distributed computing",
+            "stars": 30000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/ray-project/ray.git"
+        },
+        {
+            "id": 60,
+            "repo": "dask/dask",
+            "suite": "data_science",
+            "description": "Parallel computing",
+            "stars": 12000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/dask/dask.git"
+        },
+        {
+            "id": 61,
+            "repo": "great-expectations/great_expectations",
+            "suite": "data_science",
+            "description": "Data validation",
+            "stars": 9500,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/great-expectations/great_expectations.git"
+        },
+        {
+            "id": 62,
+            "repo": "apache/airflow",
+            "suite": "devops",
+            "description": "Workflow orchestration",
+            "stars": 34000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/apache/airflow.git"
+        },
+        {
+            "id": 63,
+            "repo": "prefecthq/prefect",
+            "suite": "devops",
+            "description": "Modern orchestration",
+            "stars": 14000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/prefecthq/prefect.git"
+        },
+        {
+            "id": 64,
+            "repo": "dagster-io/dagster",
+            "suite": "devops",
+            "description": "Data orchestrator",
+            "stars": 10000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/dagster-io/dagster.git"
+        },
+        {
+            "id": 65,
+            "repo": "mage-ai/mage-ai",
+            "suite": "data_science",
+            "description": "Data pipeline tool",
+            "stars": 7000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/mage-ai/mage-ai.git"
+        },
+        {
+            "id": 66,
+            "repo": "PostHog/posthog",
+            "suite": "enterprise",
+            "description": "Product analytics",
+            "stars": 17000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/PostHog/posthog.git"
+        },
+        {
+            "id": 67,
+            "repo": "getsentry/sentry",
+            "suite": "enterprise",
+            "description": "Error tracking",
+            "stars": 37000,
+            "language": "python",
+            "size_category": "huge",
+            "clone_url": "https://github.com/getsentry/sentry.git"
+        },
+        {
+            "id": 68,
+            "repo": "mitmproxy/mitmproxy",
+            "suite": "devops",
+            "description": "HTTPS proxy",
+            "stars": 35000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/mitmproxy/mitmproxy.git"
+        },
+        {
+            "id": 69,
+            "repo": "spotify/luigi",
+            "suite": "devops",
+            "description": "Pipeline framework",
+            "stars": 17000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/spotify/luigi.git"
+        },
+        {
+            "id": 70,
+            "repo": "mlflow/mlflow",
+            "suite": "data_science",
+            "description": "ML lifecycle",
+            "stars": 17000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/mlflow/mlflow.git"
+        },
+        {
+            "id": 71,
+            "repo": "wandb/wandb",
+            "suite": "data_science",
+            "description": "ML experiment tracking",
+            "stars": 8000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/wandb/wandb.git"
+        },
+        {
+            "id": 72,
+            "repo": "optuna/optuna",
+            "suite": "data_science",
+            "description": "Hyperparameter optimization",
+            "stars": 9500,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/optuna/optuna.git"
+        },
+        {
+            "id": 73,
+            "repo": "joke2k/faker",
+            "suite": "libraries",
+            "description": "Fake data generator",
+            "stars": 17000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/joke2k/faker.git"
+        },
+        {
+            "id": 74,
+            "repo": "miyakogi/pyppeteer",
+            "suite": "libraries",
+            "description": "Puppeteer for Python",
+            "stars": 3600,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/miyakogi/pyppeteer.git"
+        },
+        {
+            "id": 75,
+            "repo": "microsoft/playwright-python",
+            "suite": "libraries",
+            "description": "Browser automation",
+            "stars": 10000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/microsoft/playwright-python.git"
+        },
+        {
+            "id": 76,
+            "repo": "locustio/locust",
+            "suite": "devops",
+            "description": "Load testing",
+            "stars": 23000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/locustio/locust.git"
+        },
+        {
+            "id": 77,
+            "repo": "python-attrs/attrs",
+            "suite": "libraries",
+            "description": "Classes without boilerplate",
+            "stars": 5000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/python-attrs/attrs.git"
+        },
+        {
+            "id": 78,
+            "repo": "more-itertools/more-itertools",
+            "suite": "libraries",
+            "description": "Iterator utilities",
+            "stars": 3300,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/more-itertools/more-itertools.git"
+        },
+        {
+            "id": 79,
+            "repo": "python/mypy",
+            "suite": "cli_tools",
+            "description": "Static type checker",
+            "stars": 17000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/python/mypy.git"
+        },
+        {
+            "id": 80,
+            "repo": "PyCQA/pylint",
+            "suite": "cli_tools",
+            "description": "Python linter",
+            "stars": 5000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/PyCQA/pylint.git"
+        },
+        {
+            "id": 81,
+            "repo": "PyCQA/flake8",
+            "suite": "cli_tools",
+            "description": "Style checker",
+            "stars": 3200,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/PyCQA/flake8.git"
+        },
+        {
+            "id": 82,
+            "repo": "PyCQA/isort",
+            "suite": "cli_tools",
+            "description": "Import sorter",
+            "stars": 6200,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/PyCQA/isort.git"
+        },
+        {
+            "id": 83,
+            "repo": "encode/databases",
+            "suite": "libraries",
+            "description": "Async database support",
+            "stars": 3600,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/encode/databases.git"
+        },
+        {
+            "id": 84,
+            "repo": "tortoise/tortoise-orm",
+            "suite": "libraries",
+            "description": "Async ORM",
+            "stars": 4200,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/tortoise/tortoise-orm.git"
+        },
+        {
+            "id": 85,
+            "repo": "piccolo-orm/piccolo",
+            "suite": "libraries",
+            "description": "Fast async ORM",
+            "stars": 1300,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/piccolo-orm/piccolo.git"
+        },
+        {
+            "id": 86,
+            "repo": "alembic/alembic",
+            "suite": "libraries",
+            "description": "Database migrations",
+            "stars": 2400,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/alembic/alembic.git"
+        },
+        {
+            "id": 87,
+            "repo": "redis/redis-py",
+            "suite": "libraries",
+            "description": "Redis client",
+            "stars": 12000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/redis/redis-py.git"
+        },
+        {
+            "id": 88,
+            "repo": "aio-libs/aioredis-py",
+            "suite": "libraries",
+            "description": "Async Redis",
+            "stars": 2500,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/aio-libs/aioredis-py.git"
+        },
+        {
+            "id": 89,
+            "repo": "mongodb/mongo-python-driver",
+            "suite": "libraries",
+            "description": "MongoDB driver",
+            "stars": 4000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/mongodb/mongo-python-driver.git"
+        },
+        {
+            "id": 90,
+            "repo": "elastic/elasticsearch-py",
+            "suite": "libraries",
+            "description": "Elasticsearch client",
+            "stars": 4100,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/elastic/elasticsearch-py.git"
+        },
+        {
+            "id": 91,
+            "repo": "bentoml/BentoML",
+            "suite": "data_science",
+            "description": "ML model serving",
+            "stars": 6500,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/bentoml/BentoML.git"
+        },
+        {
+            "id": 92,
+            "repo": "SeldonIO/seldon-core",
+            "suite": "microservices",
+            "description": "ML deployment",
+            "stars": 4200,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/SeldonIO/seldon-core.git"
+        },
+        {
+            "id": 93,
+            "repo": "agronholm/anyio",
+            "suite": "libraries",
+            "description": "Async compatibility",
+            "stars": 1600,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/agronholm/anyio.git"
+        },
+        {
+            "id": 94,
+            "repo": "MagicStack/uvloop",
+            "suite": "libraries",
+            "description": "Fast event loop",
+            "stars": 9800,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/MagicStack/uvloop.git"
+        },
+        {
+            "id": 95,
+            "repo": "tiangolo/sqlmodel",
+            "suite": "libraries",
+            "description": "SQL databases with Pydantic",
+            "stars": 12000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/tiangolo/sqlmodel.git"
+        },
+        {
+            "id": 96,
+            "repo": "coleifer/peewee",
+            "suite": "libraries",
+            "description": "Simple ORM",
+            "stars": 10500,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/coleifer/peewee.git"
+        },
+        {
+            "id": 97,
+            "repo": "samuelcolvin/arq",
+            "suite": "libraries",
+            "description": "Async job queue",
+            "stars": 1900,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/samuelcolvin/arq.git"
+        },
+        {
+            "id": 98,
+            "repo": "Delgan/loguru",
+            "suite": "libraries",
+            "description": "Better logging",
+            "stars": 18000,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/Delgan/loguru.git"
+        },
+        {
+            "id": 99,
+            "repo": "BerriAI/litellm",
+            "suite": "data_science",
+            "description": "LLM gateway",
+            "stars": 8000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/BerriAI/litellm.git"
+        },
+        {
+            "id": 100,
+            "repo": "vllm-project/vllm",
+            "suite": "data_science",
+            "description": "LLM inference",
+            "stars": 20000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/vllm-project/vllm.git"
+        },
+        {
+            "id": 101,
+            "repo": "lm-sys/FastChat",
+            "suite": "data_science",
+            "description": "LLM chat platform",
+            "stars": 35000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/lm-sys/FastChat.git"
+        },
+        {
+            "id": 102,
+            "repo": "reflex-dev/reflex",
+            "suite": "web_frameworks",
+            "description": "Full-stack Python",
+            "stars": 16000,
+            "language": "python",
+            "size_category": "large",
+            "clone_url": "https://github.com/reflex-dev/reflex.git"
+        },
+        {
+            "id": 103,
+            "repo": "zauberzeug/nicegui",
+            "suite": "web_frameworks",
+            "description": "Python web UI",
+            "stars": 8000,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/zauberzeug/nicegui.git"
+        },
+        {
+            "id": 104,
+            "repo": "python-injector/injector",
+            "suite": "ddd_clean_arch",
+            "description": "Dependency injection",
+            "stars": 1100,
+            "language": "python",
+            "size_category": "small",
+            "clone_url": "https://github.com/python-injector/injector.git"
+        },
+        {
+            "id": 105,
+            "repo": "dry-python/returns",
+            "suite": "ddd_clean_arch",
+            "description": "Functional Python",
+            "stars": 3200,
+            "language": "python",
+            "size_category": "medium",
+            "clone_url": "https://github.com/dry-python/returns.git"
+        }
+    ],
+    "stats": {
+        "total_repos": 105,
+        "by_suite": {
+            "ddd_clean_arch": 5,
+            "web_frameworks": 14,
+            "cli_tools": 14,
+            "data_science": 19,
+            "devops": 14,
+            "libraries": 32,
+            "microservices": 1,
+            "enterprise": 2
+        },
+        "by_size": {
+            "small": 25,
+            "medium": 35,
+            "large": 30,
+            "huge": 15
+        }
+    }
+}

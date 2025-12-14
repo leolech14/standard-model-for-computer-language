@@ -1,0 +1,46 @@
+[
+  {
+    "repo": "dddpy_real",
+    "root": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/dddpy_real",
+    "languages_top": [
+      [
+        ".py",
+        65
+      ],
+      [
+        ".md",
+        3
+      ],
+      [
+        ".json",
+        3
+      ],
+      [
+        ".toml",
+        2
+      ],
+      [
+        ".lock",
+        1
+      ],
+      [
+        ".conf",
+        1
+      ],
+      [
+        ".png",
+        1
+      ],
+      [
+        ".yaml",
+        1
+      ]
+    ],
+    "architecture_docs": [
+      "README.md"
+    ],
+    "architecture_as_code": [],
+    "diagrams": [],
+    "boundary_configs": []
+  }
+]

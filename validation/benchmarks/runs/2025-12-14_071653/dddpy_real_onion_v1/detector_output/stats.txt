@@ -1,0 +1,28 @@
+====================================================================================================
+🚀 SPECTROMETER V12 - COMPREHENSIVE ANALYSIS RESULTS
+====================================================================================================
+
+📊 SUMMARY STATISTICS
+--------------------------------------------------
+Total Particles Found: 114
+Files Analyzed: 65
+Files with Particles: 42
+Coverage: 64.6%
+Unique Particle Types: 9
+Average Confidence: 36.1%
+Average RPBL Score: 5.2
+
+🏆 TOP PARTICLE TYPES
+--------------------------------------------------
+1. Unknown: 82 (71.9%)
+2. UseCase: 14 (12.3%)
+3. DTO: 8 (7.0%)
+4. ValueObject: 4 (3.5%)
+5. Factory: 2 (1.8%)
+
+⚡ PERFORMANCE METRICS
+--------------------------------------------------
+Files/Second: 2216502
+Lines/Second: 89921786
+Characters/Second: 2629180707
+Success Rate: 100.0%

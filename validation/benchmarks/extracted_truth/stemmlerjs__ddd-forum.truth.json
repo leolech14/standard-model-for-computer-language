@@ -1,0 +1,13 @@
+{
+  "repo": "stemmlerjs__ddd-forum",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/stemmlerjs__ddd-forum",
+  "confidence": 0.3,
+  "truth_sources": [
+    "doc:README.md"
+  ],
+  "layers": [],
+  "expected_components": [],
+  "architecture_docs": [
+    "README.md"
+  ]
+}

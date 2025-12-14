@@ -1,0 +1,79 @@
+[
+  {
+    "id": "L1",
+    "name": "CQRS – Commands",
+    "statement": "A CommandHandler never returns domain data.",
+    "scope": ["CommandHandler"],
+    "violation_example": "CommandHandler::FindById"
+  },
+  {
+    "id": "L2",
+    "name": "CQRS – Queries",
+    "statement": "A QueryHandler never mutates domain state.",
+    "scope": ["QueryHandler"],
+    "violation_example": "QueryHandler::Save"
+  },
+  {
+    "id": "L3",
+    "name": "Referential Purity",
+    "statement": "A PureFunction has no side effects (I/O, mutation, time).",
+    "scope": ["PureFunction"],
+    "violation_example": "PureFunction::ExternalIO"
+  },
+  {
+    "id": "L4",
+    "name": "Entity Identity",
+    "statement": "An Entity always carries a persistent identifier.",
+    "scope": ["Entity"],
+    "violation_example": "Entity::Stateless"
+  },
+  {
+    "id": "L5",
+    "name": "Value Object Immutability",
+    "statement": "A ValueObject never has identity; equality is by value.",
+    "scope": ["ValueObject"],
+    "violation_example": "ValueObject::HasIdentity"
+  },
+  {
+    "id": "L6",
+    "name": "Repository Impurity",
+    "statement": "A RepositoryImpl is never pure (it performs I/O).",
+    "scope": ["RepositoryImpl"],
+    "violation_example": "RepositoryImpl::PureFunction"
+  },
+  {
+    "id": "L7",
+    "name": "Fire-and-Forget Events",
+    "statement": "An EventHandler never returns a value.",
+    "scope": ["EventHandler"],
+    "violation_example": "EventHandler::ReturnsValue"
+  },
+  {
+    "id": "L8",
+    "name": "External APIs",
+    "statement": "An APIHandler always crosses an external boundary.",
+    "scope": ["APIHandler"],
+    "violation_example": "APIHandler::InternalOnly"
+  },
+  {
+    "id": "L9",
+    "name": "Stateless Services",
+    "statement": "An Application Service does not keep state between calls.",
+    "scope": ["Service"],
+    "violation_example": "Service::GlobalState"
+  },
+  {
+    "id": "L10",
+    "name": "Test Isolation",
+    "statement": "A TestFunction never touches production data.",
+    "scope": ["TestFunction"],
+    "violation_example": "TestFunction::ModifiesProductionData"
+  },
+  {
+    "id": "L11",
+    "name": "Validator Rejection",
+    "statement": "A Validator never accepts invalid input/state.",
+    "scope": ["Validator"],
+    "violation_example": "Validator::AcceptsInvalid"
+  }
+]

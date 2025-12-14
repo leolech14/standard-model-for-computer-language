@@ -1,0 +1,51 @@
+{
+  "repo": "tiangolo__sqlmodel",
+  "repo_path": "/Users/lech/PROJECTS_all/PROJECT_elements/spectrometer_v12_minimal/validation/benchmarks/repos/tiangolo__sqlmodel",
+  "confidence": 0.4,
+  "truth_sources": [
+    "doc:README.md",
+    "inheritance:BaseModel",
+    "inheritance:Enum"
+  ],
+  "layers": [],
+  "expected_components": [
+    {
+      "name": "MyEnum1",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "MyEnum2",
+      "type": "Enum",
+      "source": "inheritance"
+    },
+    {
+      "name": "InheritModel",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "CustomType",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "Arg",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "LinkData",
+      "type": "DTO",
+      "source": "inheritance"
+    },
+    {
+      "name": "SQLModel",
+      "type": "DTO",
+      "source": "inheritance"
+    }
+  ],
+  "architecture_docs": [
+    "README.md"
+  ]
+}
