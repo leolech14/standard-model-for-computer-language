@@ -308,4 +308,250 @@ L4 (Ecosystem): AuthService
 
 ---
 
+## Part 15: The 7 Semantic Layers (GPT Model)
+
+Entities exist across 7 orthogonal semantic layers:
+
+| Layer | Where It Exists | Example Kinds |
+|-------|-----------------|---------------|
+| **Physical** | Filesystem | repo, folder, file, span |
+| **Code** | Language symbols | package, module, class, function, type |
+| **Runtime** | Execution | process, thread, container, invocation |
+| **Deploy** | Infrastructure | image, workload, pod, service, ingress |
+| **Contract** | APIs | endpoint, event topic, message schema |
+| **Data** | Storage | datastore, schema, table, column, index |
+| **Concept** | Domain | bounded context, aggregate, entity, value object |
+
+### Critical Rule
+
+> **CONTAINS is layer-local and forms a tree. Everything else is a different relation.**
+
+This single constraint prevents 80% of "what lives inside what" confusion.
+
+---
+
+## Part 16: Entity Coordinates
+
+Every entity is uniquely identified by three coordinates:
+
+```
+Entity = (Layer, Kind, Locator) + Metadata
+```
+
+| Coordinate | What It Is | Examples |
+|------------|------------|----------|
+| **Layer** | Where it exists | code, data, deploy, concept |
+| **Kind** | What it is | code.symbol.class, data.table, contract.http_route |
+| **Locator** | How to find it | fully qualified name, path + line, resourceName |
+
+### Example Locators by Layer
+
+| Layer | Locator Format |
+|-------|----------------|
+| Physical | `path + byte/line span` |
+| Code | `language + FQN + signature` |
+| Data | `connection-id + schema.table.column` |
+| Contract | `METHOD + path` or `topic name` |
+| Deploy | `cluster/ns + resourceName` |
+| Runtime | `workloadRef + pid` |
+
+---
+
+## Part 17: Cross-Layer Correspondence (Edges)
+
+When the "same concept" exists across layers, use correspondence edges (not CONTAINS):
+
+| Edge Type | Meaning | Example |
+|-----------|---------|---------|
+| **REALIZES** | Implementation realizes concept | code.symbol REALIZES concept.use_case |
+| **REPRESENTS** | Schema represents concept | contract.schema REPRESENTS concept.entity |
+| **PERSISTS_AS** | Concept stored as data | concept.entity PERSISTS_AS data.table |
+| **EXPOSED_AS** | Capability exposed via contract | concept.use_case EXPOSED_AS contract.http_route |
+| **HANDLED_BY** | Contract handled by runtime | contract.route HANDLED_BY runtime.service |
+| **OWNS** | Component owns concept/data | runtime.service OWNS concept.aggregate |
+
+### Example: "User" Across Layers
+
+```
+concept.domain_entity: User
+  │
+  ├── PERSISTS_AS → data.table: users
+  ├── REPRESENTS ← contract.schema: UserDTO
+  └── EXPOSED_AS → contract.route: GET /users/{id}
+                      │
+                      └── HANDLED_BY → runtime.service: identity-api
+```
+
+---
+
+## Part 18: Facet-Based Component Model
+
+A **Component** is a container that collects evidence across multiple layers via facets:
+
+| Facet | What It Captures |
+|-------|------------------|
+| **Code** | Entrypoints, modules, symbols |
+| **Deploy** | Image, workload, env vars, replicas |
+| **Runtime** | Process type, concurrency model |
+| **Contract** | Routes, topics, schemas |
+| **Data** | Tables, caches, queues |
+| **Ops** | CI jobs, alerts, dashboards |
+
+### Example Component
+
+```json
+{
+  "id": "identity-api",
+  "facets": {
+    "code": ["src/server.ts", "src/routes/*"],
+    "deploy": "k8s/identity-api.yaml",
+    "runtime": { "type": "nodejs_http_server", "replicas": 3 },
+    "contract": ["GET /users/{id}", "POST /auth/login"],
+    "data": ["users", "sessions"],
+    "ops": ["ci/identity.yml", "alerts/auth-failure.yaml"]
+  }
+}
+```
+
+---
+
+## Part 19: The 10 Universal Subsystems
+
+Most repositories cluster into ~10 meta-components (subsystems):
+
+| # | Subsystem | What It Contains | Purpose |
+|---|-----------|------------------|---------|
+| 1 | **Ingress** | Routers, controllers, middleware, auth entrypoints | Receive requests |
+| 2 | **Egress** | External clients, outbound webhooks, payment calls | Call external systems |
+| 3 | **Domain Core** | Entities, rules, workflows/use-cases | Business logic |
+| 4 | **Persistence** | ORM/repositories, migrations, DB adapters | Store data |
+| 5 | **Async Processing** | Queues, workers, schedulers, event handlers | Background work |
+| 6 | **Presentation** | UI components, view models, templates | Display data |
+| 7 | **Security** | AuthN/AuthZ, policies, secret access | Protect system |
+| 8 | **Observability** | Logging, metrics, tracing, alerts | Monitor health |
+| 9 | **Configuration** | Config loading, env vars, runtime wiring | Configure behavior |
+| 10 | **Delivery** | Build/test pipelines, packaging, IaC | Ship code |
+
+---
+
+## Part 20: The Core Atomic Blocks (GPT Analysis)
+
+~8-10 atoms cover 95%+ of everyday code:
+
+| # | Atom | Purpose | Prevalence |
+|---|------|---------|------------|
+| 1 | Values/Types | Represent information | 98%+ |
+| 2 | Bindings (Names) | Give values stable names | 98%+ |
+| 3 | Expressions | Transform data | 95%+ |
+| 4 | Statements/Effects | Change state | 95%+ |
+| 5 | Sequencing | Define order of actions | 95%+ |
+| 6 | Selection (Branching) | Choose behavior | 95%+ |
+| 7 | Repetition (Iteration) | Process collections | 95%+ |
+| 8 | Abstraction (Functions) | Package behavior | 90%+ |
+| 9 | Composition (Calling) | Assemble from parts | 90%+ |
+| 10 | Modularity (Modules) | Control scope | 85%+ |
+| 11 | Error Handling | Make failure explicit | 80%+ |
+| 12 | Concurrency | Handle parallelism | 45%+ |
+
+---
+
+## Part 21: The Capability Model (Purpose)
+
+The most universal cross-language primitive is **Capability**:
+
+```
+Capability = (Verb, Object, Boundary, Contract)
+```
+
+| Component | What It Is | Examples |
+|-----------|------------|----------|
+| **Verb** | Action performed | ingest, transform, persist, retrieve, emit, coordinate |
+| **Object** | Domain noun | Order, User, File, Event, Session |
+| **Boundary** | Where it runs | process, container, function, browser |
+| **Contract** | Inputs/outputs | request schema, latency constraints |
+
+### Example
+
+A "controller," "route handler," and "lambda handler" all become:
+
+```
+Capability: Ingest(HTTP Request) → Transform(Order) → Emit(Event)
+```
+
+Different mechanisms, **same purpose**.
+
+---
+
+## Part 22: The Critical Design Rule
+
+> **CONTAINS is layer-local and forms a tree. Everything else is a different relation.**
+
+### Layer-Local Containment Trees
+
+```
+Physical:  repo → dir → file → span
+Code:      package → module → class → method
+Deploy:    cluster → namespace → workload → pod
+Contract:  api → route → request_schema
+Data:      datastore → schema → table → column
+Concept:   bounded_context → aggregate → entity → value_object
+```
+
+### Never Mix Layers in CONTAINS
+
+❌ `concept.User CONTAINS code.UserClass` — WRONG
+✅ `code.UserClass REALIZES concept.User` — CORRECT
+
+---
+
+## Part 23: Two-Graph Architecture
+
+Maintain two separate graphs:
+
+| Graph | Purpose | Answers |
+|-------|---------|---------|
+| **Containment Graph** | Layer-pure nesting | "Where is it defined?" "What's inside what?" |
+| **Architecture Graph** | Cross-layer connections | "Who owns it?" "What implements it?" |
+
+---
+
+## Part 24: Output Format (Canonical IR)
+
+The output is an Intermediate Representation with two layers:
+
+### Layer 1: Facts (High Fidelity)
+
+```json
+{
+  "facts": {
+    "entrypoints": [...],
+    "routes": [...],
+    "datastores": [...],
+    "events": [...],
+    "config_keys": [...]
+  }
+}
+```
+
+### Layer 2: Interpretation (Purpose + Components)
+
+```json
+{
+  "components": [
+    {
+      "id": "c_ingress_http",
+      "kind": "interface.http_api",
+      "purpose": [{ "capability": "Ingest(HTTP)", "confidence": 0.98 }],
+      "evidence": ["route:r1", "entrypoint:ep1"]
+    }
+  ],
+  "subsystems": [
+    { "id": "ss_ingress", "kind": "Ingress", "members": [...] }
+  ]
+}
+```
+
+---
+
 *This document is the canonical reference for the Standard Model for Computer Language v14.*
+
