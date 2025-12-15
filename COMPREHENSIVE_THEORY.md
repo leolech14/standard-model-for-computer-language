@@ -553,5 +553,74 @@ The output is an Intermediate Representation with two layers:
 
 ---
 
+## Part 25: Roadmap — Next Evolution
+
+### Phase 1: Immediate (Days)
+
+| Priority | Task | Effort | Impact |
+|----------|------|--------|--------|
+| P0 | Layer-Local CONTAINS validation | 2h | Fixes 80% confusion |
+| P0 | Two-Layer IR (Facts + Interpretation) | 4h | Trustworthy output |
+| P1 | Scale Dimension (9th D) | 4h | Hierarchical navigation |
+| P1 | Cross-Layer Edges (REALIZES, PERSISTS_AS) | 4h | Complete architecture graph |
+
+### Phase 2: Strategic (Weeks)
+
+| Priority | Task | Effort | Impact |
+|----------|------|--------|--------|
+| P2 | **Leiden Clustering** for auto-subsystem discovery | 1 day | 🔥 Game changer |
+| P2 | LanceDB integration for vector retrieval | 1 day | Fast code search |
+| P2 | Facet-Based Components | 2 days | Clean multi-layer view |
+| P2 | Community Summaries (LLM-generated) | 1 day | Readable architecture |
+
+### Phase 3: Vision (Months)
+
+| Priority | Task | Effort | Impact |
+|----------|------|--------|--------|
+| P3 | **Full GraphRAG integration** | 3 days | Global + Local queries |
+| P3 | 7 Semantic Layers (replace 5-layer model) | 1 week | Theoretical completeness |
+| P3 | Interactive Graph Visualization | 1 week | Human navigation |
+| P3 | coAST Universal AST | 2 weeks | True polyglot support |
+
+---
+
+## Part 26: Key Research Citations
+
+### Hierarchies & Graph Databases
+
+- [Modeling Categories in a Graph Database](https://neo4j.com) - Neo4j
+- [GraphRAG: Hierarchical Approach to RAG](https://lancedb.com/blog/graphrag-hierarchical-approach-to-retrieval-augmented-generation/) - LanceDB
+- [Understanding Graph Databases: A Comprehensive Tutorial](https://arxiv.org) - arXiv
+- [Entity understanding with hierarchical graph learning](https://sciencedirect.com) - ScienceDirect
+
+### Managing Model Complexity
+
+- [The Architecture of Complexity](https://medium.com) - Medium
+- [What is Software Complexity?](https://vfunction.com) - vFunction
+- [Code Complexity: An In-Depth Explanation and Metrics](https://blog.codacy.com) - Codacy
+- [Identifying Code Complexity's Effect on Dev Productivity](https://faros.ai) - Faros AI
+- [Complexity Theory in Practice](https://agility-at-scale.com) - Agility at Scale
+
+### Hierarchical Code Analysis
+
+- [Hierarchical Graph-Based Code Summarization](https://arxiv.org) - arXiv
+- [Hierarchical Reasoning in Graph-Based RAG](https://openreview.net) - OpenReview
+- [Building a Graph-Based Code Analysis Engine](https://rustic-ai.github.io) - Rustic AI
+
+### Graph Visualization
+
+- [Best Graph Database Visualization Tools](https://puppygraph.com) - PuppyGraph
+- [15 Best Graph Visualization Tools](https://neo4j.com) - Neo4j
+- [Data Analysis and Visualization](https://tomsawyer.com) - Tom Sawyer Software
+
+### LLM + Code Analysis
+
+- [CodexGraph](https://reddit.com) - Reddit (discussion)
+- [A Graph-Integrated Large Language Model](https://openreview.net) - OpenReview
+- [coala/coAST: Universal AST](https://github.com) - GitHub
+- [Large Language Models for Code Analysis](https://arxiv.org) - arXiv
+
+---
+
 *This document is the canonical reference for the Standard Model for Computer Language v14.*
 
