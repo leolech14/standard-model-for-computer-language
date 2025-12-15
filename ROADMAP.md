@@ -58,6 +58,7 @@
 | What is Software Complexity? | https://vfunction.com |
 | Code Complexity Metrics | https://blog.codacy.com |
 | Code Complexity's Effect on Dev Productivity | https://faros.ai |
+| Identifying Engineering Bottlenecks | https://www.faros.ai/blog/most-effective-ways-to-identify-engineering-bottlenecks |
 
 ### Hierarchical Code Analysis
 
