@@ -32,8 +32,26 @@
 |----------|------|--------|--------|
 | **P3** | Full GraphRAG integration | 3 days | Global + Local queries |
 | **P3** | 7 Semantic Layers (replace 5-layer) | 1 week | Theoretical completeness |
-| **P3** | Interactive Graph Visualization | 1 week | Human navigation |
+| **P3** | 🔥 **yFiles for HTML** visualization | 1 week | Enterprise graph UI |
 | **P3** | coAST Universal AST | 2 weeks | True polyglot support |
+
+### yFiles Integration Notes
+
+**Why yFiles?**
+- Enterprise-grade graph visualization (handles 1000+ nodes)
+- Built-in LLM integration patterns (JSON → Graph → User interaction → LLM)
+- Hierarchical, Organic, Tree, Radial layouts
+- Interactive editing (drag, zoom, click events)
+- WebGL/Canvas/SVG rendering
+- TypeScript support
+
+**Key Integration Pattern:**
+```
+LLM Output (JSON) → yFiles Graph → User Interaction → Back to LLM
+```
+
+**Commercial:** Requires license (trial available)
+
 
 ---
 
@@ -75,6 +93,9 @@
 | Neo4j Graph Visualization Tools | https://neo4j.com/blog/graph-visualization/neo4j-graph-visualization-tools/ |
 | Best Graph Database Visualization Tools | https://puppygraph.com |
 | Tom Sawyer Data Visualization | https://tomsawyer.com |
+| **yFiles for HTML** (LLM Integration) | https://www.yworks.com/products/yfiles-for-html |
+| yFiles Developer Guide | https://docs.yworks.com/yfileshtml/ |
+| Diagramming with ChatGPT (yWorks) | https://www.yworks.com/blog/diagramming-with-chatgpt |
 
 ### LLM + Code Analysis
 
@@ -101,6 +122,7 @@
 | 8 | Scale Dimension (9th D) | ⚠️ Proposed | Phase 1 |
 | 9 | Leiden Clustering | ❌ Not implemented | **Phase 2 🔥** |
 | 10 | GraphRAG | ❌ Not implemented | Phase 3 |
+| 11 | **yFiles Visualization** | ❌ Not implemented | **Phase 3 🔥** |
 
 ---
 
