@@ -418,6 +418,7 @@ class SemanticIDGenerator:
         ptype = particle.get("type", "Unknown")
         name = particle.get("name", "")
         file_path = particle.get("file_path", "")
+        symbol_kind = particle.get("symbol_kind", "")
         
         # Default classification
         continent = Continent.ORG
@@ -437,9 +438,17 @@ class SemanticIDGenerator:
             continent = Continent.ORG
             fundamental = Fundamental.AGG
             level = Level.MOLECULE
-        elif particle.get("symbol_kind") == "function":
+        elif symbol_kind in {"function", "method"}:
             continent = Continent.LOGIC
             fundamental = Fundamental.FUNC
+            level = Level.MOLECULE
+        elif symbol_kind in {"variable", "const"}:
+            continent = Continent.DATA
+            fundamental = Fundamental.VAR
+            level = Level.MOLECULE
+        elif symbol_kind in {"type", "interface", "enum"}:
+            continent = Continent.ORG
+            fundamental = Fundamental.TYPE
             level = Level.MOLECULE
             
         module_path = file_path.replace("/", ".").replace(".py", "")
@@ -455,7 +464,13 @@ class SemanticIDGenerator:
             "type": ptype,
             "line": particle.get("line", 0),
             "confidence": particle.get("confidence", 0),
+            "file_path": file_path,
+            "symbol_kind": symbol_kind,
         }
+
+        parent = particle.get("parent")
+        if isinstance(parent, str) and parent:
+            properties["parent"] = parent
         
         return SemanticID(
             continent=continent,

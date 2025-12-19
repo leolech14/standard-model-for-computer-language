@@ -20,6 +20,7 @@ import json
 
 class EdgeType(Enum):
     """Types of edges between components."""
+    CONTAINS = "contains"  # Structural containment (repo→dir→file→symbol, class→method, etc.)
     IMPORT = "import"       # File-level import
     CALL = "call"           # Function/method invocation
     INHERIT = "inherit"     # Class inheritance

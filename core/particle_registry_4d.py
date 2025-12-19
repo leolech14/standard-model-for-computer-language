@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# ⚠️ DEPRECATED: This 4D registry groups dimensions for convenience.
+# The canonical model is 8D (particle_registry_8d.py).
+# See STANDARD_MODEL_PAPER.md Section 2.3 for authoritative spec.
 """
 4D Particle Registry — Canonical Storage for Multi-Dimensional Code Physics
 

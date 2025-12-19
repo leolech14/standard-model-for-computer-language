@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# ⚠️ DEPRECATED: This 6D registry is an experimental grouping.
+# The canonical model is 8D (particle_registry_8d.py).
+# See STANDARD_MODEL_PAPER.md Section 2.3 for authoritative spec.
 """
 🔬 6D GROUPED PARTICLE REGISTRY
 Dimensions grouped hierarchically (collapsed overlaps).

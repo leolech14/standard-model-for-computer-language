@@ -284,7 +284,7 @@ class LearningEngine:
     def _analyze_repo_minimal(self, repo_path: str) -> RepoAnalysis:
         """Minimal analysis using regex-based Universal Detector."""
         print(f"  ⚡ Running Minimal Pipeline (Universal Detector)...")
-        results = self.universal_detector.analyze_repository(repo_path)
+        results = self.universal_detector.analyze_repository(repo_path, output_dir=self.output_dir)
         
         comp_results = results.get("comprehensive_results", {})
         particles = comp_results.get("particles", [])
@@ -889,29 +889,190 @@ class LearningEngine:
         try:
             from core.ir import Graph, Component, Edge, EdgeType
             
-            graph = Graph(repo_name=report.repos[0].name if report.repos else "analysis", repo_path=str(out))
+            repo_name = report.repos[0].name if report.repos else "analysis"
+            repo_root = Path(report.repos[0].path).resolve() if report.repos and report.repos[0].path else Path(".").resolve()
+            graph = Graph(repo_name=repo_name, repo_path=str(repo_root))
+
+            contains_seen: set[tuple[str, str]] = set()
+            import_seen: set[tuple[str, str]] = set()
+
+            repo_node_id = f"{repo_name}/"
+            graph.add_component(
+                Component(
+                    id=repo_node_id,
+                    name=repo_name,
+                    kind="repo",
+                    file="",
+                    role="Repo",
+                    role_confidence=1.0,
+                )
+            )
+
+            def _posix(p: Path) -> str:
+                return p.as_posix()
+
+            def _rel_file(file_path: str) -> str:
+                if not file_path:
+                    return ""
+                p = Path(file_path)
+                if p.is_absolute():
+                    candidate = p
+                else:
+                    rooted = (repo_root / p)
+                    candidate = rooted if rooted.exists() else p
+                try:
+                    resolved = candidate.resolve()
+                except Exception:
+                    resolved = candidate
+                try:
+                    rel = resolved.relative_to(repo_root)
+                    return _posix(rel)
+                except Exception:
+                    return str(file_path).replace("\\", "/").lstrip("./")
+
+            def _dir_id(dir_path: str) -> str:
+                d = dir_path.strip().strip("/")
+                return f"{d}/" if d else ""
+
+            def _add_contains(source: str, target: str) -> None:
+                if not source or not target:
+                    return
+                key = (source, target)
+                if key in contains_seen:
+                    return
+                contains_seen.add(key)
+                graph.add_edge(
+                    Edge(
+                        source=source,
+                        target=target,
+                        edge_type=EdgeType.CONTAINS,
+                        category="structural",
+                        confidence=1.0,
+                    )
+                )
+
+            def _add_import(source: str, target: str) -> None:
+                if not source or not target:
+                    return
+                key = (source, target)
+                if key in import_seen:
+                    return
+                import_seen.add(key)
+                graph.add_edge(
+                    Edge(
+                        source=source,
+                        target=target,
+                        edge_type=EdgeType.IMPORT,
+                        category="internal",
+                        confidence=1.0,
+                    )
+                )
+
+            def _ensure_directory(dir_path: str) -> str:
+                did = _dir_id(dir_path)
+                if not did:
+                    return repo_node_id
+                if did in graph.components:
+                    return did
+
+                name = Path(dir_path).name if dir_path else repo_name
+                graph.add_component(
+                    Component(
+                        id=did,
+                        name=name,
+                        kind="directory",
+                        file=did,
+                        role="Directory",
+                        role_confidence=1.0,
+                    )
+                )
+
+                parent = str(Path(dir_path).parent).replace("\\", "/")
+                if parent in (".", "/"):
+                    parent_id = repo_node_id
+                else:
+                    parent_id = _ensure_directory(parent)
+
+                _add_contains(parent_id, did)
+                return did
+
+            def _ensure_file(file_rel: str) -> str:
+                rel = str(file_rel).replace("\\", "/").lstrip("./")
+                if not rel:
+                    return ""
+                if rel in graph.components:
+                    return rel
+
+                suffix = Path(rel).suffix.lower()
+                kind = "file"
+                if suffix in {".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp"}:
+                    kind = "asset"
+
+                graph.add_component(
+                    Component(
+                        id=rel,
+                        name=Path(rel).name,
+                        kind=kind,
+                        file=rel,
+                        role="File",
+                        role_confidence=1.0,
+                    )
+                )
+
+                parent_dir = Path(rel).parent.as_posix()
+                parent_id = repo_node_id if parent_dir in (".", "") else _ensure_directory(parent_dir)
+                _add_contains(parent_id, rel)
+                return rel
             
+            symbol_index: dict[tuple[str, str], str] = {}
+            pending_symbol_contains: list[tuple[str, str, str]] = []  # (file_rel, parent_name, child_id)
+
             # Add components from semantic IDs
             for sid in self.semantic_matrix.ids:
                 role = sid.properties.get("type") if hasattr(sid, 'properties') else None
-                graph.add_component(Component(
-                    id=sid.to_string() if hasattr(sid, 'to_string') else str(sid),
-                    name=sid.name if hasattr(sid, 'name') else "",
-                    kind=str(sid.fundamental.value) if hasattr(sid, 'fundamental') else "unknown",
-                    file=sid.module_path if hasattr(sid, 'module_path') else "",
-                    role=role,
-                    role_confidence=sid.properties.get("confidence", 0) / 100.0 if hasattr(sid, 'properties') and sid.properties.get("confidence") else 0.0,
-                ))
+                sid_id = sid.to_string() if hasattr(sid, "to_string") else str(sid)
+                file_path = ""
+                if hasattr(sid, "properties") and isinstance(getattr(sid, "properties", None), dict):
+                    file_path = str(sid.properties.get("file_path") or "")
+                file_rel = _rel_file(file_path)
+
+                graph.add_component(
+                    Component(
+                        id=sid_id,
+                        name=sid.name if hasattr(sid, "name") else "",
+                        kind=str(sid.fundamental.value) if hasattr(sid, "fundamental") else "unknown",
+                        file=file_rel or (sid.module_path if hasattr(sid, "module_path") else ""),
+                        role=role,
+                        role_confidence=(
+                            sid.properties.get("confidence", 0) / 100.0
+                            if hasattr(sid, "properties") and sid.properties.get("confidence")
+                            else 0.0
+                        ),
+                    )
+                )
+
+                if file_rel:
+                    file_node = _ensure_file(file_rel)
+                    _add_contains(file_node, sid_id)
+                    symbol_index[(file_rel, sid.name)] = sid_id
+
+                    parent_name = str(sid.properties.get("parent") or "") if hasattr(sid, "properties") else ""
+                    if parent_name:
+                        pending_symbol_contains.append((file_rel, parent_name, sid_id))
+
+            for file_rel, parent_name, child_id in pending_symbol_contains:
+                parent_id = symbol_index.get((file_rel, parent_name))
+                if parent_id:
+                    _add_contains(parent_id, child_id)
             
             # Add edges from all repos
             for repo in report.repos:
                 for src, tgt in repo.edges:
-                    graph.add_edge(Edge(
-                        source=src,
-                        target=tgt,
-                        edge_type=EdgeType.IMPORT,
-                        category="internal",
-                    ))
+                    src_rel = str(src).replace("\\", "/").lstrip("./")
+                    tgt_rel = str(tgt).replace("\\", "/").lstrip("./")
+                    _ensure_file(src_rel)
+                    _ensure_file(tgt_rel)
+                    _add_import(src_rel, tgt_rel)
             
             # Export
             (out / "graph.json").write_text(graph.to_json())
@@ -1012,6 +1173,7 @@ def run_analysis(args):
     repos_dir = args.repos_dir if hasattr(args, 'repos_dir') else None
     language = args.language if hasattr(args, 'language') else None
     output_dir = args.output if hasattr(args, 'output') else "output/learning"
+    engine.output_dir = output_dir
     workers = args.workers if hasattr(args, 'workers') else 4
     
     if single_repo:

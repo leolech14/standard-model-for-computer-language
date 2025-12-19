@@ -15,7 +15,7 @@ from learning_engine import run_analysis
 def main():
     parser = argparse.ArgumentParser(
         prog="spectrometer",
-        description="🔭 Spectrometer v12 - Advanced Code Analysis & Learning System"
+        description="🔬 Standard Code Spectrometer - Analyze any codebase structure"
     )
     subparsers = parser.add_subparsers(dest="command", help="Command to execute")
 

@@ -87,6 +87,12 @@ class GodClassDetectorLite:
                 'import_pattern': r'^\s*import\s+',
                 'comment_pattern': r'//.*$|/\*.*?\*/'
             },
+            'javascript': {
+                'class_pattern': r'^\s*(export\s+)?(default\s+)?class\s+(\w+)',
+                'method_pattern': r'^\s*(async\s+)?(\w+)\s*\(',
+                'import_pattern': r'^\s*(import\s+.*from\s+|const\s+.*=\s+require\()',
+                'comment_pattern': r'//.*$|/\*.*?\*/'
+            },
             'typescript': {
                 'class_pattern': r'^\s*(export\s+)?(abstract\s+)?class\s+(\w+)',
                 'method_pattern': r'^\s*(public\s+)?(private\s+)?(protected\s+)?(async\s+)?(\w+)\s*\(',
@@ -175,7 +181,23 @@ class GodClassDetectorLite:
         for root, dirs, files in os.walk(Path(repo_path)):
             root_path = Path(root)
             # Skip common directories
-            dirs[:] = [d for d in dirs if d not in ['.git', '__pycache__', 'node_modules', 'target', 'build', 'dist']]
+            dirs[:] = [
+                d
+                for d in dirs
+                if d
+                not in [
+                    '.git',
+                    '__pycache__',
+                    'node_modules',
+                    'target',
+                    'build',
+                    'dist',
+                    'venv',
+                    '.venv',
+                    'coverage',
+                    '.next',
+                ]
+            ]
 
             for file in files:
                 if any(file.endswith(ext) for ext in source_extensions):

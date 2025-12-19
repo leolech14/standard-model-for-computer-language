@@ -1,0 +1,1465 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "Standard Model for Computer Language - 167 Atom Ontology",
+  "total_atoms": 167,
+  "phases": {
+    "DATA": {
+      "description": "Data foundations - the matter of software",
+      "families": {
+        "Bits": {
+          "atoms": [
+            {
+              "id": "DAT.BIT.A",
+              "name": "BitFlag",
+              "description": "Single boolean flag"
+            },
+            {
+              "id": "DAT.BIT.A",
+              "name": "BitMask",
+              "description": "Binary mask for operations"
+            },
+            {
+              "id": "DAT.BIT.A",
+              "name": "ParityBit",
+              "description": "Error detection bit"
+            },
+            {
+              "id": "DAT.BIT.A",
+              "name": "SignBit",
+              "description": "Numeric sign indicator"
+            }
+          ]
+        },
+        "Bytes": {
+          "atoms": [
+            {
+              "id": "DAT.BYT.A",
+              "name": "ByteArray",
+              "description": "Raw byte sequence"
+            },
+            {
+              "id": "DAT.BYT.A",
+              "name": "MagicBytes",
+              "description": "File format identifier"
+            },
+            {
+              "id": "DAT.BYT.A",
+              "name": "PaddingBytes",
+              "description": "Alignment padding"
+            },
+            {
+              "id": "DAT.BYT.A",
+              "name": "Buffer",
+              "description": "In-memory byte buffer"
+            }
+          ]
+        },
+        "Primitives": {
+          "atoms": [
+            {
+              "id": "DAT.PRM.A",
+              "name": "Boolean",
+              "description": "True/false value"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Integer",
+              "description": "Whole number"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Float",
+              "description": "Decimal number"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "String",
+              "description": "Text value"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Null",
+              "description": "Absence of value"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Undefined",
+              "description": "Uninitialized value"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Symbol",
+              "description": "Unique identifier"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "BigInt",
+              "description": "Arbitrary precision integer"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Enum",
+              "description": "Enumeration value"
+            },
+            {
+              "id": "DAT.PRM.A",
+              "name": "Char",
+              "description": "Single character"
+            }
+          ]
+        },
+        "Variables": {
+          "atoms": [
+            {
+              "id": "DAT.VAR.A",
+              "name": "LocalVar",
+              "description": "Function-scoped variable"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "GlobalVar",
+              "description": "Module/global scope variable"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "Parameter",
+              "description": "Function parameter"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "InstanceField",
+              "description": "Object instance property"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "StaticField",
+              "description": "Class-level property"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "Constant",
+              "description": "Immutable binding"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "EnvironmentVar",
+              "description": "Environment variable reference"
+            },
+            {
+              "id": "DAT.VAR.A",
+              "name": "ConfigValue",
+              "description": "Configuration parameter"
+            }
+          ]
+        }
+      }
+    },
+    "LOGIC": {
+      "description": "Logic & flow - the forces of software",
+      "families": {
+        "Expressions": {
+          "atoms": [
+            {
+              "id": "LOG.EXP.A",
+              "name": "LiteralExpr",
+              "description": "Literal value expression"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "IdentifierExpr",
+              "description": "Variable reference"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "BinaryExpr",
+              "description": "Two-operand operation"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "UnaryExpr",
+              "description": "Single-operand operation"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "TernaryExpr",
+              "description": "Conditional expression"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "CallExpr",
+              "description": "Function invocation"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "MemberExpr",
+              "description": "Property access"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "IndexExpr",
+              "description": "Array/map access"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "ArrowExpr",
+              "description": "Arrow function expression"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "AwaitExpr",
+              "description": "Promise await"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "YieldExpr",
+              "description": "Generator yield"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "SpreadExpr",
+              "description": "Spread operator"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "TemplateExpr",
+              "description": "Template literal"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "NewExpr",
+              "description": "Constructor call"
+            },
+            {
+              "id": "LOG.EXP.A",
+              "name": "TypeofExpr",
+              "description": "Type introspection"
+            }
+          ]
+        },
+        "Statements": {
+          "atoms": [
+            {
+              "id": "LOG.STM.A",
+              "name": "Assignment",
+              "description": "Variable assignment"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "Declaration",
+              "description": "Variable declaration"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "ReturnStmt",
+              "description": "Function return"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "ThrowStmt",
+              "description": "Exception throw"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "BreakStmt",
+              "description": "Loop/switch break"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "ContinueStmt",
+              "description": "Loop continue"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "ExpressionStmt",
+              "description": "Expression as statement"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "EmptyStmt",
+              "description": "No-op statement"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "DebuggerStmt",
+              "description": "Debugger breakpoint"
+            },
+            {
+              "id": "LOG.STM.A",
+              "name": "LabeledStmt",
+              "description": "Labeled statement"
+            }
+          ]
+        },
+        "Control": {
+          "atoms": [
+            {
+              "id": "LOG.CTL.A",
+              "name": "IfBranch",
+              "description": "Conditional branch"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "ElseBranch",
+              "description": "Alternative branch"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "SwitchCase",
+              "description": "Switch case clause"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "DefaultCase",
+              "description": "Switch default"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "ForLoop",
+              "description": "For iteration"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "ForInLoop",
+              "description": "For-in iteration"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "ForOfLoop",
+              "description": "For-of iteration"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "WhileLoop",
+              "description": "While iteration"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "DoWhileLoop",
+              "description": "Do-while iteration"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "TryBlock",
+              "description": "Exception handling try"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "CatchClause",
+              "description": "Exception handler"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "FinallyClause",
+              "description": "Cleanup block"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "GuardClause",
+              "description": "Early return guard"
+            },
+            {
+              "id": "LOG.CTL.A",
+              "name": "WithBlock",
+              "description": "With statement (deprecated)"
+            }
+          ]
+        },
+        "Functions": {
+          "atoms": [
+            {
+              "id": "LOG.FNC.M",
+              "name": "PureFunction",
+              "description": "No side effects, deterministic"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "ImpureFunction",
+              "description": "Has side effects"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "AsyncFunction",
+              "description": "Returns promise"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Generator",
+              "description": "Yields values"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "AsyncGenerator",
+              "description": "Async iteration"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Constructor",
+              "description": "Object initializer"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Method",
+              "description": "Class method"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Getter",
+              "description": "Property getter"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Setter",
+              "description": "Property setter"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Lambda",
+              "description": "Anonymous function"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Closure",
+              "description": "Captures outer scope"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Callback",
+              "description": "Passed as argument"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Middleware",
+              "description": "Request/response interceptor"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Decorator",
+              "description": "Function wrapper"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Hook",
+              "description": "Lifecycle hook"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Validator",
+              "description": "Input validation"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Mapper",
+              "description": "Data transformation"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Reducer",
+              "description": "Aggregation function"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Predicate",
+              "description": "Boolean test function"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Comparator",
+              "description": "Ordering function"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Factory",
+              "description": "Object creation"
+            },
+            {
+              "id": "LOG.FNC.M",
+              "name": "Builder",
+              "description": "Fluent construction"
+            }
+          ]
+        }
+      }
+    },
+    "ORGANIZATION": {
+      "description": "Organization - the structure of software",
+      "families": {
+        "Aggregates": {
+          "atoms": [
+            {
+              "id": "ORG.AGG.M",
+              "name": "Entity",
+              "description": "Identity-based domain object"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "ValueObject",
+              "description": "Immutable value container"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "AggregateRoot",
+              "description": "Consistency boundary"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "DTO",
+              "description": "Data transfer object"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "ViewModel",
+              "description": "UI-specific model"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "ReadModel",
+              "description": "Query-optimized projection"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Command",
+              "description": "Intent to change state"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Query",
+              "description": "Request for data"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Event",
+              "description": "Something that happened"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Projection",
+              "description": "Event-sourced view"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Specification",
+              "description": "Business rule"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Policy",
+              "description": "Decision logic"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Enum",
+              "description": "Finite value set"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Record",
+              "description": "Immutable data record"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Tuple",
+              "description": "Fixed-size collection"
+            },
+            {
+              "id": "ORG.AGG.M",
+              "name": "Union",
+              "description": "Type union/variant"
+            }
+          ]
+        },
+        "Services": {
+          "atoms": [
+            {
+              "id": "ORG.SVC.M",
+              "name": "DomainService",
+              "description": "Domain logic without state"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "ApplicationService",
+              "description": "Use case orchestration"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "InfrastructureService",
+              "description": "External system adapter"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Repository",
+              "description": "Aggregate persistence"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Gateway",
+              "description": "External API client"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Adapter",
+              "description": "Port implementation"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Facade",
+              "description": "Simplified interface"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Proxy",
+              "description": "Access control wrapper"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Mediator",
+              "description": "Component coordination"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Observer",
+              "description": "Event subscription"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "Strategy",
+              "description": "Interchangeable algorithm"
+            },
+            {
+              "id": "ORG.SVC.M",
+              "name": "State",
+              "description": "State machine behavior"
+            }
+          ]
+        },
+        "Modules": {
+          "atoms": [
+            {
+              "id": "ORG.MOD.O",
+              "name": "FeatureModule",
+              "description": "Self-contained feature"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "SharedModule",
+              "description": "Cross-cutting utilities"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "CoreModule",
+              "description": "Essential abstractions"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "InfraModule",
+              "description": "External integrations"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "TestModule",
+              "description": "Test utilities"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "ConfigModule",
+              "description": "Configuration"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "Package",
+              "description": "Published package"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "Namespace",
+              "description": "Logical grouping"
+            },
+            {
+              "id": "ORG.MOD.O",
+              "name": "Layer",
+              "description": "Architectural layer"
+            }
+          ]
+        },
+        "Files": {
+          "atoms": [
+            {
+              "id": "ORG.FIL.O",
+              "name": "SourceFile",
+              "description": "Code file"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "TestFile",
+              "description": "Test suite file"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "ConfigFile",
+              "description": "Configuration file"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "SchemaFile",
+              "description": "Data schema definition"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "MigrationFile",
+              "description": "Database migration"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "Script",
+              "description": "Standalone script"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "EntryPoint",
+              "description": "Application entry"
+            },
+            {
+              "id": "ORG.FIL.O",
+              "name": "TypeDef",
+              "description": "Type definitions"
+            }
+          ]
+        }
+      }
+    },
+    "EXECUTION": {
+      "description": "Execution - the dynamics of software",
+      "families": {
+        "Handlers": {
+          "atoms": [
+            {
+              "id": "EXE.HDL.O",
+              "name": "APIHandler",
+              "description": "HTTP endpoint handler"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "WebSocketHandler",
+              "description": "WebSocket connection"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "GraphQLResolver",
+              "description": "GraphQL field resolver"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "EventHandler",
+              "description": "Event subscriber"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "CommandHandler",
+              "description": "CQRS command handler"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "QueryHandler",
+              "description": "CQRS query handler"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "MessageConsumer",
+              "description": "Queue message handler"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "WebhookHandler",
+              "description": "Webhook receiver"
+            },
+            {
+              "id": "EXE.HDL.O",
+              "name": "ErrorHandler",
+              "description": "Error boundary"
+            }
+          ]
+        },
+        "Workers": {
+          "atoms": [
+            {
+              "id": "EXE.WRK.O",
+              "name": "CronJob",
+              "description": "Scheduled task"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "QueueWorker",
+              "description": "Background job processor"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "BatchProcessor",
+              "description": "Bulk data processing"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "StreamProcessor",
+              "description": "Real-time data pipeline"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "MigrationRunner",
+              "description": "Database migration executor"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "SeedRunner",
+              "description": "Data seeding"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "CacheWarmer",
+              "description": "Cache initialization"
+            },
+            {
+              "id": "EXE.WRK.O",
+              "name": "Indexer",
+              "description": "Search indexing"
+            }
+          ]
+        },
+        "Initializers": {
+          "atoms": [
+            {
+              "id": "EXE.INI.O",
+              "name": "MainEntry",
+              "description": "Application main()"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "ServerBootstrap",
+              "description": "Server startup"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "DIContainer",
+              "description": "Dependency injection setup"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "ConfigLoader",
+              "description": "Config initialization"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "LoggerInit",
+              "description": "Logging setup"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "DatabaseInit",
+              "description": "DB connection setup"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "CacheInit",
+              "description": "Cache connection"
+            },
+            {
+              "id": "EXE.INI.O",
+              "name": "PluginLoader",
+              "description": "Plugin initialization"
+            }
+          ]
+        },
+        "Probes": {
+          "atoms": [
+            {
+              "id": "EXE.PRB.O",
+              "name": "HealthCheck",
+              "description": "Liveness/readiness probe"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "MetricsExporter",
+              "description": "Prometheus/metrics"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "TracerProvider",
+              "description": "Distributed tracing"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "CircuitBreaker",
+              "description": "Fault tolerance"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "RateLimiter",
+              "description": "Request throttling"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "FeatureFlag",
+              "description": "Feature toggle check"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "AuditLogger",
+              "description": "Audit trail"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "GracefulShutdown",
+              "description": "Clean termination"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "TestDouble",
+              "description": "Mock/stub for testing"
+            },
+            {
+              "id": "EXE.PRB.O",
+              "name": "Fixture",
+              "description": "Test data setup"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "tree_sitter_mappings": {
+    "description": "Maps Tree-Sitter AST node types to atom IDs",
+    "javascript": {
+      "function_declaration": "LOG.FNC.M",
+      "function_expression": "LOG.FNC.M",
+      "arrow_function": "LOG.FNC.M",
+      "method_definition": "LOG.FNC.M",
+      "generator_function": "LOG.FNC.M",
+      "generator_function_declaration": "LOG.FNC.M",
+      "async_function": "LOG.FNC.M",
+      "async_arrow_function": "LOG.FNC.M",
+      "class_declaration": "ORG.AGG.M",
+      "class_expression": "ORG.AGG.M",
+      "class_body": "ORG.AGG.M",
+      "field_definition": "DAT.VAR.A",
+      "static_block": "EXE.INI.O",
+      "if_statement": "LOG.CTL.A",
+      "else_clause": "LOG.CTL.A",
+      "switch_statement": "LOG.CTL.A",
+      "switch_case": "LOG.CTL.A",
+      "switch_default": "LOG.CTL.A",
+      "for_statement": "LOG.CTL.A",
+      "for_in_statement": "LOG.CTL.A",
+      "for_of_statement": "LOG.CTL.A",
+      "while_statement": "LOG.CTL.A",
+      "do_statement": "LOG.CTL.A",
+      "try_statement": "LOG.CTL.A",
+      "catch_clause": "LOG.CTL.A",
+      "finally_clause": "LOG.CTL.A",
+      "variable_declaration": "LOG.STM.A",
+      "lexical_declaration": "LOG.STM.A",
+      "expression_statement": "LOG.STM.A",
+      "return_statement": "LOG.STM.A",
+      "throw_statement": "LOG.STM.A",
+      "break_statement": "LOG.STM.A",
+      "continue_statement": "LOG.STM.A",
+      "empty_statement": "LOG.STM.A",
+      "debugger_statement": "LOG.STM.A",
+      "labeled_statement": "LOG.STM.A",
+      "with_statement": "LOG.CTL.A",
+      "call_expression": "LOG.EXP.A",
+      "new_expression": "LOG.EXP.A",
+      "member_expression": "LOG.EXP.A",
+      "subscript_expression": "LOG.EXP.A",
+      "binary_expression": "LOG.EXP.A",
+      "unary_expression": "LOG.EXP.A",
+      "update_expression": "LOG.EXP.A",
+      "ternary_expression": "LOG.EXP.A",
+      "assignment_expression": "LOG.EXP.A",
+      "augmented_assignment_expression": "LOG.EXP.A",
+      "sequence_expression": "LOG.EXP.A",
+      "await_expression": "LOG.EXP.A",
+      "yield_expression": "LOG.EXP.A",
+      "spread_element": "LOG.EXP.A",
+      "template_string": "DAT.PRM.A",
+      "template_substitution": "LOG.EXP.A",
+      "tagged_template_expression": "LOG.EXP.A",
+      "object_pattern": "LOG.EXP.A",
+      "array_pattern": "LOG.EXP.A",
+      "rest_pattern": "LOG.EXP.A",
+      "string": "DAT.PRM.A",
+      "number": "DAT.PRM.A",
+      "true": "DAT.PRM.A",
+      "false": "DAT.PRM.A",
+      "null": "DAT.PRM.A",
+      "undefined": "DAT.PRM.A",
+      "regex": "DAT.PRM.A",
+      "object": "ORG.AGG.M",
+      "array": "ORG.AGG.M",
+      "import_statement": "ORG.MOD.O",
+      "import_declaration": "ORG.MOD.O",
+      "export_statement": "ORG.MOD.O",
+      "export_declaration": "ORG.MOD.O",
+      "export_default_declaration": "ORG.MOD.O",
+      "named_imports": "ORG.MOD.O",
+      "import_specifier": "ORG.MOD.O",
+      "export_specifier": "ORG.MOD.O",
+      "jsx_element": "LOG.EXP.A",
+      "jsx_self_closing_element": "LOG.EXP.A",
+      "jsx_opening_element": "LOG.EXP.A",
+      "jsx_closing_element": "LOG.EXP.A",
+      "jsx_expression": "LOG.EXP.A",
+      "jsx_attribute": "DAT.VAR.A",
+      "jsx_text": "DAT.PRM.A",
+      "identifier": "DAT.VAR.A",
+      "shorthand_property_identifier": "DAT.VAR.A",
+      "property_identifier": "DAT.VAR.A",
+      "private_property_identifier": "DAT.VAR.A",
+      "formal_parameters": "DAT.VAR.A",
+      "required_parameter": "DAT.VAR.A",
+      "optional_parameter": "DAT.VAR.A",
+      "rest_parameter": "DAT.VAR.A",
+      "comment": "DAT.BYT.A",
+      "hash_bang_line": "DAT.BYT.A"
+    },
+    "typescript": {
+      "function_declaration": "LOG.FNC.M",
+      "function_expression": "LOG.FNC.M",
+      "arrow_function": "LOG.FNC.M",
+      "method_definition": "LOG.FNC.M",
+      "generator_function": "LOG.FNC.M",
+      "generator_function_declaration": "LOG.FNC.M",
+      "async_function": "LOG.FNC.M",
+      "async_arrow_function": "LOG.FNC.M",
+      "class_declaration": "ORG.AGG.M",
+      "class_expression": "ORG.AGG.M",
+      "class_body": "ORG.AGG.M",
+      "field_definition": "DAT.VAR.A",
+      "static_block": "EXE.INI.O",
+      "if_statement": "LOG.CTL.A",
+      "else_clause": "LOG.CTL.A",
+      "switch_statement": "LOG.CTL.A",
+      "switch_case": "LOG.CTL.A",
+      "switch_default": "LOG.CTL.A",
+      "for_statement": "LOG.CTL.A",
+      "for_in_statement": "LOG.CTL.A",
+      "for_of_statement": "LOG.CTL.A",
+      "while_statement": "LOG.CTL.A",
+      "do_statement": "LOG.CTL.A",
+      "try_statement": "LOG.CTL.A",
+      "catch_clause": "LOG.CTL.A",
+      "finally_clause": "LOG.CTL.A",
+      "variable_declaration": "LOG.STM.A",
+      "lexical_declaration": "LOG.STM.A",
+      "expression_statement": "LOG.STM.A",
+      "return_statement": "LOG.STM.A",
+      "throw_statement": "LOG.STM.A",
+      "break_statement": "LOG.STM.A",
+      "continue_statement": "LOG.STM.A",
+      "empty_statement": "LOG.STM.A",
+      "debugger_statement": "LOG.STM.A",
+      "labeled_statement": "LOG.STM.A",
+      "with_statement": "LOG.CTL.A",
+      "call_expression": "LOG.EXP.A",
+      "new_expression": "LOG.EXP.A",
+      "member_expression": "LOG.EXP.A",
+      "subscript_expression": "LOG.EXP.A",
+      "binary_expression": "LOG.EXP.A",
+      "unary_expression": "LOG.EXP.A",
+      "update_expression": "LOG.EXP.A",
+      "ternary_expression": "LOG.EXP.A",
+      "assignment_expression": "LOG.EXP.A",
+      "augmented_assignment_expression": "LOG.EXP.A",
+      "sequence_expression": "LOG.EXP.A",
+      "await_expression": "LOG.EXP.A",
+      "yield_expression": "LOG.EXP.A",
+      "spread_element": "LOG.EXP.A",
+      "template_string": "DAT.PRM.A",
+      "template_substitution": "LOG.EXP.A",
+      "tagged_template_expression": "LOG.EXP.A",
+      "object_pattern": "LOG.EXP.A",
+      "array_pattern": "LOG.EXP.A",
+      "rest_pattern": "LOG.EXP.A",
+      "string": "DAT.PRM.A",
+      "number": "DAT.PRM.A",
+      "true": "DAT.PRM.A",
+      "false": "DAT.PRM.A",
+      "null": "DAT.PRM.A",
+      "undefined": "DAT.PRM.A",
+      "regex": "DAT.PRM.A",
+      "object": "ORG.AGG.M",
+      "array": "ORG.AGG.M",
+      "import_statement": "ORG.MOD.O",
+      "import_declaration": "ORG.MOD.O",
+      "export_statement": "ORG.MOD.O",
+      "export_declaration": "ORG.MOD.O",
+      "export_default_declaration": "ORG.MOD.O",
+      "named_imports": "ORG.MOD.O",
+      "import_specifier": "ORG.MOD.O",
+      "export_specifier": "ORG.MOD.O",
+      "jsx_element": "LOG.EXP.A",
+      "jsx_self_closing_element": "LOG.EXP.A",
+      "jsx_opening_element": "LOG.EXP.A",
+      "jsx_closing_element": "LOG.EXP.A",
+      "jsx_expression": "LOG.EXP.A",
+      "jsx_attribute": "DAT.VAR.A",
+      "jsx_text": "DAT.PRM.A",
+      "identifier": "DAT.VAR.A",
+      "shorthand_property_identifier": "DAT.VAR.A",
+      "property_identifier": "DAT.VAR.A",
+      "private_property_identifier": "DAT.VAR.A",
+      "formal_parameters": "DAT.VAR.A",
+      "required_parameter": "DAT.VAR.A",
+      "optional_parameter": "DAT.VAR.A",
+      "rest_parameter": "DAT.VAR.A",
+      "comment": "DAT.BYT.A",
+      "hash_bang_line": "DAT.BYT.A",
+      "interface_declaration": "ORG.AGG.M",
+      "type_alias_declaration": "ORG.AGG.M",
+      "enum_declaration": "ORG.AGG.M",
+      "type_annotation": "ORG.AGG.M",
+      "type_parameters": "ORG.AGG.M",
+      "type_parameter": "ORG.AGG.M",
+      "abstract_class_declaration": "ORG.AGG.M",
+      "readonly_type": "DAT.VAR.A",
+      "as_expression": "LOG.EXP.A",
+      "type_assertion": "LOG.EXP.A",
+      "non_null_expression": "LOG.EXP.A",
+      "satisfies_expression": "LOG.EXP.A",
+      "module_declaration": "ORG.MOD.O",
+      "namespace_declaration": "ORG.MOD.O",
+      "ambient_declaration": "ORG.MOD.O",
+      "declare_statement": "ORG.MOD.O"
+    },
+    "python": {
+      "function_definition": "LOG.FNC.M",
+      "async_function_definition": "LOG.FNC.M",
+      "lambda": "LOG.FNC.M",
+      "class_definition": "ORG.AGG.M",
+      "decorated_definition": "LOG.FNC.M",
+      "decorator": "LOG.FNC.M",
+      "if_statement": "LOG.CTL.A",
+      "elif_clause": "LOG.CTL.A",
+      "else_clause": "LOG.CTL.A",
+      "for_statement": "LOG.CTL.A",
+      "while_statement": "LOG.CTL.A",
+      "try_statement": "LOG.CTL.A",
+      "except_clause": "LOG.CTL.A",
+      "finally_clause": "LOG.CTL.A",
+      "with_statement": "LOG.CTL.A",
+      "match_statement": "LOG.CTL.A",
+      "case_clause": "LOG.CTL.A",
+      "expression_statement": "LOG.STM.A",
+      "return_statement": "LOG.STM.A",
+      "raise_statement": "LOG.STM.A",
+      "pass_statement": "LOG.STM.A",
+      "break_statement": "LOG.STM.A",
+      "continue_statement": "LOG.STM.A",
+      "assert_statement": "LOG.STM.A",
+      "global_statement": "LOG.STM.A",
+      "nonlocal_statement": "LOG.STM.A",
+      "assignment": "LOG.STM.A",
+      "augmented_assignment": "LOG.STM.A",
+      "call": "LOG.EXP.A",
+      "attribute": "LOG.EXP.A",
+      "subscript": "LOG.EXP.A",
+      "binary_operator": "LOG.EXP.A",
+      "unary_operator": "LOG.EXP.A",
+      "comparison_operator": "LOG.EXP.A",
+      "boolean_operator": "LOG.EXP.A",
+      "conditional_expression": "LOG.EXP.A",
+      "await": "LOG.EXP.A",
+      "yield": "LOG.EXP.A",
+      "list_comprehension": "LOG.EXP.A",
+      "dictionary_comprehension": "LOG.EXP.A",
+      "set_comprehension": "LOG.EXP.A",
+      "generator_expression": "LOG.EXP.A",
+      "import_statement": "ORG.MOD.O",
+      "import_from_statement": "ORG.MOD.O",
+      "string": "DAT.PRM.A",
+      "integer": "DAT.PRM.A",
+      "float": "DAT.PRM.A",
+      "true": "DAT.PRM.A",
+      "false": "DAT.PRM.A",
+      "none": "DAT.PRM.A",
+      "list": "ORG.AGG.M",
+      "dictionary": "ORG.AGG.M",
+      "set": "ORG.AGG.M",
+      "tuple": "ORG.AGG.M",
+      "identifier": "DAT.VAR.A",
+      "parameters": "DAT.VAR.A",
+      "default_parameter": "DAT.VAR.A",
+      "typed_parameter": "DAT.VAR.A",
+      "keyword_argument": "DAT.VAR.A",
+      "list_splat_pattern": "DAT.VAR.A",
+      "dictionary_splat_pattern": "DAT.VAR.A",
+      "comment": "DAT.BYT.A"
+    },
+    "tsx": {
+      "function_declaration": "LOG.FNC.M",
+      "function_expression": "LOG.FNC.M",
+      "arrow_function": "LOG.FNC.M",
+      "method_definition": "LOG.FNC.M",
+      "generator_function": "LOG.FNC.M",
+      "generator_function_declaration": "LOG.FNC.M",
+      "async_function": "LOG.FNC.M",
+      "async_arrow_function": "LOG.FNC.M",
+      "class_declaration": "ORG.AGG.M",
+      "class_expression": "ORG.AGG.M",
+      "class_body": "ORG.AGG.M",
+      "field_definition": "DAT.VAR.A",
+      "static_block": "EXE.INI.O",
+      "if_statement": "LOG.CTL.A",
+      "else_clause": "LOG.CTL.A",
+      "switch_statement": "LOG.CTL.A",
+      "switch_case": "LOG.CTL.A",
+      "switch_default": "LOG.CTL.A",
+      "for_statement": "LOG.CTL.A",
+      "for_in_statement": "LOG.CTL.A",
+      "for_of_statement": "LOG.CTL.A",
+      "while_statement": "LOG.CTL.A",
+      "do_statement": "LOG.CTL.A",
+      "try_statement": "LOG.CTL.A",
+      "catch_clause": "LOG.CTL.A",
+      "finally_clause": "LOG.CTL.A",
+      "variable_declaration": "LOG.STM.A",
+      "lexical_declaration": "LOG.STM.A",
+      "expression_statement": "LOG.STM.A",
+      "return_statement": "LOG.STM.A",
+      "throw_statement": "LOG.STM.A",
+      "break_statement": "LOG.STM.A",
+      "continue_statement": "LOG.STM.A",
+      "empty_statement": "LOG.STM.A",
+      "debugger_statement": "LOG.STM.A",
+      "labeled_statement": "LOG.STM.A",
+      "with_statement": "LOG.CTL.A",
+      "call_expression": "LOG.EXP.A",
+      "new_expression": "LOG.EXP.A",
+      "member_expression": "LOG.EXP.A",
+      "subscript_expression": "LOG.EXP.A",
+      "binary_expression": "LOG.EXP.A",
+      "unary_expression": "LOG.EXP.A",
+      "update_expression": "LOG.EXP.A",
+      "ternary_expression": "LOG.EXP.A",
+      "assignment_expression": "LOG.EXP.A",
+      "augmented_assignment_expression": "LOG.EXP.A",
+      "sequence_expression": "LOG.EXP.A",
+      "await_expression": "LOG.EXP.A",
+      "yield_expression": "LOG.EXP.A",
+      "spread_element": "LOG.EXP.A",
+      "template_string": "DAT.PRM.A",
+      "template_substitution": "LOG.EXP.A",
+      "tagged_template_expression": "LOG.EXP.A",
+      "object_pattern": "LOG.EXP.A",
+      "array_pattern": "LOG.EXP.A",
+      "rest_pattern": "LOG.EXP.A",
+      "string": "DAT.PRM.A",
+      "number": "DAT.PRM.A",
+      "true": "DAT.PRM.A",
+      "false": "DAT.PRM.A",
+      "null": "DAT.PRM.A",
+      "undefined": "DAT.PRM.A",
+      "regex": "DAT.PRM.A",
+      "object": "ORG.AGG.M",
+      "array": "ORG.AGG.M",
+      "import_statement": "ORG.MOD.O",
+      "import_declaration": "ORG.MOD.O",
+      "export_statement": "ORG.MOD.O",
+      "export_declaration": "ORG.MOD.O",
+      "export_default_declaration": "ORG.MOD.O",
+      "named_imports": "ORG.MOD.O",
+      "import_specifier": "ORG.MOD.O",
+      "export_specifier": "ORG.MOD.O",
+      "jsx_element": "LOG.EXP.A",
+      "jsx_self_closing_element": "LOG.EXP.A",
+      "jsx_opening_element": "LOG.EXP.A",
+      "jsx_closing_element": "LOG.EXP.A",
+      "jsx_expression": "LOG.EXP.A",
+      "jsx_attribute": "DAT.VAR.A",
+      "jsx_text": "DAT.PRM.A",
+      "identifier": "DAT.VAR.A",
+      "shorthand_property_identifier": "DAT.VAR.A",
+      "property_identifier": "DAT.VAR.A",
+      "private_property_identifier": "DAT.VAR.A",
+      "formal_parameters": "DAT.VAR.A",
+      "required_parameter": "DAT.VAR.A",
+      "optional_parameter": "DAT.VAR.A",
+      "rest_parameter": "DAT.VAR.A",
+      "comment": "DAT.BYT.A",
+      "hash_bang_line": "DAT.BYT.A",
+      "interface_declaration": "ORG.AGG.M",
+      "type_alias_declaration": "ORG.AGG.M",
+      "enum_declaration": "ORG.AGG.M",
+      "type_annotation": "ORG.AGG.M",
+      "type_parameters": "ORG.AGG.M",
+      "type_parameter": "ORG.AGG.M",
+      "abstract_class_declaration": "ORG.AGG.M",
+      "readonly_type": "DAT.VAR.A",
+      "as_expression": "LOG.EXP.A",
+      "type_assertion": "LOG.EXP.A",
+      "non_null_expression": "LOG.EXP.A",
+      "satisfies_expression": "LOG.EXP.A",
+      "module_declaration": "ORG.MOD.O",
+      "namespace_declaration": "ORG.MOD.O",
+      "ambient_declaration": "ORG.MOD.O",
+      "declare_statement": "ORG.MOD.O"
+    }
+  },
+  "semantic_patterns": {
+    "description": "Name patterns to infer specific atom subtypes",
+    "patterns": [
+      {
+        "pattern": ".*Handler$",
+        "atom": "EXE.HDL.O",
+        "subtype": "APIHandler"
+      },
+      {
+        "pattern": ".*Controller$",
+        "atom": "EXE.HDL.O",
+        "subtype": "APIHandler"
+      },
+      {
+        "pattern": ".*Service$",
+        "atom": "ORG.SVC.M",
+        "subtype": "ApplicationService"
+      },
+      {
+        "pattern": ".*Repository$",
+        "atom": "ORG.SVC.M",
+        "subtype": "Repository"
+      },
+      {
+        "pattern": ".*Factory$",
+        "atom": "LOG.FNC.M",
+        "subtype": "Factory"
+      },
+      {
+        "pattern": ".*Builder$",
+        "atom": "LOG.FNC.M",
+        "subtype": "Builder"
+      },
+      {
+        "pattern": ".*Validator$",
+        "atom": "LOG.FNC.M",
+        "subtype": "Validator"
+      },
+      {
+        "pattern": ".*Mapper$",
+        "atom": "LOG.FNC.M",
+        "subtype": "Mapper"
+      },
+      {
+        "pattern": ".*DTO$",
+        "atom": "ORG.AGG.M",
+        "subtype": "DTO"
+      },
+      {
+        "pattern": ".*Entity$",
+        "atom": "ORG.AGG.M",
+        "subtype": "Entity"
+      },
+      {
+        "pattern": ".*Event$",
+        "atom": "ORG.AGG.M",
+        "subtype": "Event"
+      },
+      {
+        "pattern": ".*Command$",
+        "atom": "ORG.AGG.M",
+        "subtype": "Command"
+      },
+      {
+        "pattern": ".*Query$",
+        "atom": "ORG.AGG.M",
+        "subtype": "Query"
+      },
+      {
+        "pattern": "^handle.*",
+        "atom": "EXE.HDL.O",
+        "subtype": "EventHandler"
+      },
+      {
+        "pattern": "^on[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Hook"
+      },
+      {
+        "pattern": "^use[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Hook"
+      },
+      {
+        "pattern": "^get[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Getter"
+      },
+      {
+        "pattern": "^set[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Setter"
+      },
+      {
+        "pattern": "^is[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Predicate"
+      },
+      {
+        "pattern": "^has[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Predicate"
+      },
+      {
+        "pattern": "^can[A-Z].*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Predicate"
+      },
+      {
+        "pattern": "^validate.*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Validator"
+      },
+      {
+        "pattern": "^transform.*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Mapper"
+      },
+      {
+        "pattern": "^convert.*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Mapper"
+      },
+      {
+        "pattern": "^build.*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Builder"
+      },
+      {
+        "pattern": "^create.*",
+        "atom": "LOG.FNC.M",
+        "subtype": "Factory"
+      },
+      {
+        "pattern": "^init.*",
+        "atom": "EXE.INI.O",
+        "subtype": "ConfigLoader"
+      },
+      {
+        "pattern": "^setup.*",
+        "atom": "EXE.INI.O",
+        "subtype": "ConfigLoader"
+      },
+      {
+        "pattern": "^sync.*",
+        "atom": "ORG.SVC.M",
+        "subtype": "InfrastructureService"
+      },
+      {
+        "pattern": "^fetch.*",
+        "atom": "ORG.SVC.M",
+        "subtype": "Gateway"
+      },
+      {
+        "pattern": "^load.*",
+        "atom": "ORG.SVC.M",
+        "subtype": "Repository"
+      }
+    ]
+  }
+}

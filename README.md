@@ -1,10 +1,23 @@
-# 🌌 Standard Model for Computer Language (Spectrometer v12)
+# 🔬 Standard Code Spectrometer
 
-> **"We are code particle physicists. We map the fundamental sub-atomic pieces of modern software."**
+> **A Particle Accelerator for your Codebase** — Maps the fundamental structure of any software system using the Standard Model of Code.
 
-Spectrometer is not just a linter. It is a **Particle Accelerator for your Codebase**. It smashes your repository against a wall of static analysis and LLM inference to reveal the hidden structure of your software—the "Standard Model" of your system.
+## ⚡ Quick Start (30 seconds)
 
----
+```bash
+# 1. Clone and install
+git clone https://github.com/leolech14/standard-code-spectrometer.git
+cd standard-code-spectrometer
+pip install -r requirements.txt
+
+# 2. Analyze ANY repo
+python cli.py analyze /path/to/any/repo
+
+# 3. View results
+cat output/learning/COMPREHENSIVE_REPORT.md
+```
+
+That's it. Works on Python, JavaScript, TypeScript out of the box.
 
 ## 🗺️ What We Have Mapped So Far
 

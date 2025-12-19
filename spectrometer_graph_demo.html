@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectrometer - Code Particle Graph</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 300px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+        .stats {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-row:last-child { border: none; }
+        .stat-value { color: #00d4ff; font-weight: 600; }
+        .legend { margin-top: 20px; }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        #graph {
+            flex: 1;
+            background: transparent;
+        }
+        .node-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,212,255,0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(0,212,255,0.3);
+            display: none;
+        }
+        .node-info.active { display: block; }
+        .node-info h3 { color: #00d4ff; margin-bottom: 10px; }
+        .dimension { 
+            font-size: 0.8rem; 
+            color: #888;
+            margin: 4px 0;
+        }
+        .dimension span { color: #e0e0e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>🔬 Spectrometer</h1>
+            <p class="subtitle">Code Particle Visualization</p>
+            
+            <div class="stats">
+                <div class="stat-row">
+                    <span>Particles</span>
+                    <span class="stat-value" id="particle-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Connections</span>
+                    <span class="stat-value" id="edge-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Subsystems</span>
+                    <span class="stat-value" id="subsystem-count">0</span>
+                </div>
+            </div>
+
+            <div class="legend">
+                <h3 style="margin-bottom: 10px; font-size: 0.9rem;">Particle Types</h3>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #00d4ff;"></div>
+                    <span>Interface Layer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #7b2cbf;"></div>
+                    <span>Core Layer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #00ff88;"></div>
+                    <span>Infra Layer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #ff6b6b;"></div>
+                    <span>Data Layer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #ffd93d;"></div>
+                    <span>Tests Layer</span>
+                </div>
+            </div>
+
+            <div class="node-info" id="node-info">
+                <h3 id="node-name">Node Name</h3>
+                <div class="dimension">Layer: <span id="node-layer">-</span></div>
+                <div class="dimension">Role: <span id="node-role">-</span></div>
+                <div class="dimension">Effect: <span id="node-effect">-</span></div>
+                <div class="dimension">Boundary: <span id="node-boundary">-</span></div>
+            </div>
+        </div>
+        <div id="graph"></div>
+    </div>
+
+    <script>
+        // Sample data representing code particles
+        const particles = [
+            // Interface Layer (Cyan)
+            { id: 1, label: 'RouteHandler', group: 'interface', layer: 'Interface', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Input' },
+            { id: 2, label: 'Presenter', group: 'interface', layer: 'Interface', role: 'Data', effect: 'Read', boundary: 'Output' },
+            { id: 3, label: 'InputValidator', group: 'interface', layer: 'Interface', role: 'Worker', effect: 'Pure', boundary: 'Input' },
+            
+            // Core Layer (Purple)
+            { id: 4, label: 'UserService', group: 'core', layer: 'Core', role: 'Worker', effect: 'ReadModify', boundary: 'Internal' },
+            { id: 5, label: 'BusinessEntity', group: 'core', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Internal' },
+            { id: 6, label: 'DomainEvent', group: 'core', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Output' },
+            { id: 7, label: 'BusinessRule', group: 'core', layer: 'Core', role: 'Worker', effect: 'Pure', boundary: 'Internal' },
+            
+            // Infra Layer (Green)
+            { id: 8, label: 'Repository', group: 'infra', layer: 'Infra', role: 'Data', effect: 'ReadModify', boundary: 'I/O' },
+            { id: 9, label: 'APIClient', group: 'infra', layer: 'Infra', role: 'Worker', effect: 'ReadModify', boundary: 'I/O' },
+            { id: 10, label: 'MessageProducer', group: 'infra', layer: 'Infra', role: 'Worker', effect: 'Write', boundary: 'Output' },
+            { id: 11, label: 'ConfigLoader', group: 'infra', layer: 'Infra', role: 'Data', effect: 'Read', boundary: 'Input' },
+            
+            // Data Layer (Red)
+            { id: 12, label: 'UserDTO', group: 'data', layer: 'Data', role: 'Data', effect: 'Pure', boundary: 'Internal' },
+            { id: 13, label: 'Schema', group: 'data', layer: 'Data', role: 'Data', effect: 'Pure', boundary: 'Internal' },
+            
+            // Tests Layer (Yellow)
+            { id: 14, label: 'TestCase', group: 'tests', layer: 'Tests', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Internal' },
+            { id: 15, label: 'Fixture', group: 'tests', layer: 'Tests', role: 'Data', effect: 'Pure', boundary: 'Internal' },
+        ];
+
+        // Edges representing relationships
+        const connections = [
+            { from: 1, to: 3, label: 'CALLS' },
+            { from: 1, to: 4, label: 'CALLS' },
+            { from: 3, to: 12, label: 'USES' },
+            { from: 4, to: 5, label: 'USES' },
+            { from: 4, to: 7, label: 'CALLS' },
+            { from: 4, to: 8, label: 'CALLS' },
+            { from: 4, to: 6, label: 'PRODUCES' },
+            { from: 6, to: 10, label: 'TRIGGERS' },
+            { from: 8, to: 13, label: 'USES' },
+            { from: 9, to: 11, label: 'READS' },
+            { from: 2, to: 12, label: 'FORMATS' },
+            { from: 14, to: 4, label: 'TESTS' },
+            { from: 14, to: 15, label: 'USES' },
+            { from: 15, to: 5, label: 'MOCKS' },
+        ];
+
+        // Color schemes for groups
+        const groupColors = {
+            interface: { background: '#00d4ff', border: '#00a8cc', font: '#000' },
+            core: { background: '#7b2cbf', border: '#5a189a', font: '#fff' },
+            infra: { background: '#00ff88', border: '#00cc6a', font: '#000' },
+            data: { background: '#ff6b6b', border: '#ee5253', font: '#fff' },
+            tests: { background: '#ffd93d', border: '#f9ca24', font: '#000' },
+        };
+
+        // Create nodes with styling
+        const nodes = new vis.DataSet(particles.map(p => ({
+            id: p.id,
+            label: p.label,
+            group: p.group,
+            color: {
+                background: groupColors[p.group].background,
+                border: groupColors[p.group].border,
+                highlight: { background: '#fff', border: groupColors[p.group].border }
+            },
+            font: { color: groupColors[p.group].font, size: 14, face: 'Segoe UI' },
+            shape: 'box',
+            borderWidth: 2,
+            shadow: true,
+            margin: 10,
+            // Store metadata
+            layer: p.layer,
+            role: p.role,
+            effect: p.effect,
+            boundary: p.boundary
+        })));
+
+        // Create edges with styling
+        const edges = new vis.DataSet(connections.map(c => ({
+            from: c.from,
+            to: c.to,
+            label: c.label,
+            arrows: 'to',
+            color: { color: 'rgba(255,255,255,0.3)', highlight: '#00d4ff' },
+            font: { color: '#888', size: 10, strokeWidth: 0 },
+            smooth: { type: 'curvedCW', roundness: 0.2 }
+        })));
+
+        // Network options
+        const options = {
+            nodes: {
+                borderWidthSelected: 3,
+            },
+            edges: {
+                width: 1.5,
+                selectionWidth: 3,
+            },
+            physics: {
+                solver: 'forceAtlas2Based',
+                forceAtlas2Based: {
+                    gravitationalConstant: -50,
+                    centralGravity: 0.01,
+                    springLength: 150,
+                    springConstant: 0.08,
+                    damping: 0.4
+                },
+                stabilization: { iterations: 200 }
+            },
+            interaction: {
+                hover: true,
+                tooltipDelay: 200,
+                zoomView: true,
+                dragView: true
+            },
+            layout: {
+                improvedLayout: true
+            }
+        };
+
+        // Create network
+        const container = document.getElementById('graph');
+        const data = { nodes, edges };
+        const network = new vis.Network(container, data, options);
+
+        // Update stats
+        document.getElementById('particle-count').textContent = particles.length;
+        document.getElementById('edge-count').textContent = connections.length;
+        document.getElementById('subsystem-count').textContent = Object.keys(groupColors).length;
+
+        // Handle node click
+        network.on('click', function(params) {
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const node = nodes.get(nodeId);
+                
+                document.getElementById('node-info').classList.add('active');
+                document.getElementById('node-name').textContent = node.label;
+                document.getElementById('node-layer').textContent = node.layer;
+                document.getElementById('node-role').textContent = node.role;
+                document.getElementById('node-effect').textContent = node.effect;
+                document.getElementById('node-boundary').textContent = node.boundary;
+            } else {
+                document.getElementById('node-info').classList.remove('active');
+            }
+        });
+
+        // Fit view after stabilization
+        network.once('stabilizationIterationsDone', function() {
+            network.fit({ animation: { duration: 500 } });
+        });
+    </script>
+</body>
+</html>

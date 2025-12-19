@@ -9,6 +9,7 @@ import os
 import ast
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
@@ -20,7 +21,11 @@ class TreeSitterUniversalEngine:
             '.py': 'python',
             '.java': 'java',
             '.ts': 'typescript',
+            '.tsx': 'typescript',
             '.js': 'javascript',
+            '.jsx': 'javascript',
+            '.mjs': 'javascript',
+            '.cjs': 'javascript',
             '.go': 'go',
             '.rs': 'rust',
             '.kt': 'kotlin',
@@ -33,6 +38,8 @@ class TreeSitterUniversalEngine:
         patterns_file = Path(__file__).parent.parent / 'patterns' / 'universal_patterns.json'
         with open(patterns_file) as f:
             self.patterns = json.load(f)
+
+        self._ts_symbol_extractor = (Path(__file__).parent.parent / "tools" / "ts_symbol_extractor.cjs").resolve()
 
     def _tokenize_identifier(self, name: str) -> List[str]:
         """Tokenize identifier into lowercase tokens (snake_case + CamelCase)."""
@@ -71,7 +78,7 @@ class TreeSitterUniversalEngine:
         except Exception:
             return {'particles': [], 'touchpoints': [], 'language': 'unknown'}
 
-        # Parse with Tree-sitter (simplified for minimal version)
+        # Parse (simplified for minimal version)
         particles = self._extract_particles(content, language, file_path)
         touchpoints = self._extract_touchpoints(content, particles)
         raw_imports = self._extract_raw_imports(content, language)
@@ -88,21 +95,38 @@ class TreeSitterUniversalEngine:
 
     def _extract_particles(self, content: str, language: str, file_path: str) -> List[Dict]:
         """Extract particles using universal pattern matching"""
+        if language == 'python':
+            return self._extract_python_particles_ast(content, file_path)
+
         particles = []
         lines = content.split('\n')
 
         for i, line in enumerate(lines, 1):
-            # Python: restrict to top-level definitions to avoid counting nested helpers (e.g., Pydantic Config)
-            if language == 'python':
-                if re.match(r'^class\s+\w+', line):
+            # JS/TS: keep to top-level declarations (no indentation) to avoid nested helpers and class methods.
+            if language in {'javascript', 'typescript'}:
+                if line != line.lstrip():
+                    continue
+
+                if re.match(r'^\s*(export\s+)?(default\s+)?(abstract\s+)?class\s+\w+', line):
                     particle = self._classify_class_pattern(line, i, file_path)
                     if particle:
                         particles.append(particle)
-                elif re.match(r'^(async\s+def|def)\s+\w+', line):
-                    particle = self._classify_function_pattern(line, i, file_path)
+                    continue
+
+                if re.match(r'^\s*interface\s+\w+', line) or re.match(r'^\s*type\s+\w+\s*=', line):
+                    particle = self._classify_class_pattern(line, i, file_path)
                     if particle:
                         particles.append(particle)
-                continue
+                    continue
+
+                if re.match(r'^\s*(export\s+)?(default\s+)?(async\s+)?function\s+\w+', line) or re.match(
+                    r'^\s*(export\s+)?(const|let|var)\s+\w+\s*=\s*(async\s*)?\(?[^=]*=>',
+                    line,
+                ):
+                    particle = self._classify_function_pattern(line, i, file_path, language)
+                    if particle:
+                        particles.append(particle)
+                    continue
 
             # Other languages: keep permissive matching (indentation is less meaningful)
             if re.match(r'^\s*(class|public class|private class|interface|type)\s+\w+', line):
@@ -111,9 +135,9 @@ class TreeSitterUniversalEngine:
                     particles.append(particle)
                 continue
 
-            if re.match(r'^\s*(def|public|private|protected|func)\s+\w+', line):
-                particle = self._classify_function_pattern(line, i, file_path)
-                if particle and particle.get('type') != 'Unknown':
+            if re.match(r'^\s*(async\s+def|def|public|private|protected|static|func|fn)\s+\w+', line):
+                particle = self._classify_function_pattern(line, i, file_path, language)
+                if particle:
                     particles.append(particle)
 
         return particles
@@ -174,16 +198,14 @@ class TreeSitterUniversalEngine:
             'evidence': line_stripped[:100]
         }
 
-    def _classify_function_pattern(self, line: str, line_num: int, file_path: str) -> Optional[Dict]:
+    def _classify_function_pattern(self, line: str, line_num: int, file_path: str, language: str) -> Optional[Dict]:
         """Classify function-like patterns"""
         line_stripped = line.strip()
 
         # Extract name
-        name_match = re.search(r'(?:async\s+def|def|func)\s+(\w+)', line_stripped)
-        if not name_match:
+        func_name = self._extract_function_name(line_stripped, language)
+        if not func_name:
             return None
-
-        func_name = name_match.group(1)
 
         # Determine particle type
         particle_type = self._get_function_type_by_name(func_name)
@@ -200,6 +222,199 @@ class TreeSitterUniversalEngine:
             'confidence': confidence,
             'evidence': line_stripped[:100]
         }
+
+    def _classify_extracted_symbol(
+        self,
+        *,
+        name: str,
+        symbol_kind: str,
+        file_path: str,
+        line_num: int,
+        evidence: str = "",
+        parent: str = "",
+    ) -> Dict[str, Any]:
+        evidence_line = (evidence or "").strip()
+
+        normalized_path = file_path.replace("\\", "/").lower()
+        particle_type: Optional[str] = None
+
+        if symbol_kind in {"class", "interface", "type", "enum"}:
+            # Strong location signals (DDD/Clean folders, or UI layers).
+            if "/domain/" in normalized_path and "/entities/" in normalized_path:
+                particle_type = "Entity"
+            elif "/domain/" in normalized_path and ("/value_objects/" in normalized_path or "/valueobjects/" in normalized_path):
+                particle_type = "ValueObject"
+            elif "/domain/" in normalized_path and ("/services/" in normalized_path or "/domain_services/" in normalized_path):
+                particle_type = "DomainService"
+            elif "/domain/" in normalized_path and "/repositories/" in normalized_path:
+                particle_type = "Repository"
+            elif "/infrastructure/" in normalized_path and "repository" in name.lower():
+                particle_type = "RepositoryImpl"
+            elif (
+                "/presentation/" in normalized_path
+                or "/controllers/" in normalized_path
+                or "/api/" in normalized_path
+                or "/ro-finance/src/components/" in normalized_path
+                or "/ro-finance/src/pages/" in normalized_path
+            ):
+                particle_type = "Controller"
+            elif "BaseModel" in evidence_line or "/schemas/" in normalized_path or "/error_messages/" in normalized_path:
+                particle_type = "DTO"
+            elif "/tests/" in normalized_path or "/test/" in normalized_path:
+                particle_type = "Test"
+            elif "/config/" in normalized_path or "settings" in normalized_path:
+                particle_type = "Configuration"
+            elif "exception" in normalized_path or "error" in normalized_path:
+                particle_type = "Exception"
+
+            # Naming conventions fallback.
+            if particle_type is None:
+                particle_type = self._get_particle_type_by_name(name)
+
+        elif symbol_kind in {"function", "method"}:
+            # If we get "Class.method", classify primarily by the last segment.
+            short_name = name.split(".")[-1] if "." in name else name
+            particle_type = self._get_function_type_by_name(short_name)
+
+            # UI components: exported PascalCase functions/components
+            if particle_type is None and (
+                "/ro-finance/src/components/" in normalized_path or "/ro-finance/src/pages/" in normalized_path
+            ):
+                if short_name[:1].isupper():
+                    particle_type = "Controller"
+
+        resolved_type = particle_type or "Unknown"
+        confidence = self._calculate_confidence(name, evidence_line) if particle_type else 30.0
+
+        particle: Dict[str, Any] = {
+            "type": resolved_type,
+            "name": name,
+            "symbol_kind": symbol_kind if symbol_kind else "unknown",
+            "file_path": file_path,
+            "line": line_num,
+            "confidence": confidence,
+            "evidence": evidence_line[:200],
+        }
+
+        if parent:
+            particle["parent"] = parent
+
+        return particle
+
+    def _extract_python_particles_ast(self, content: str, file_path: str) -> List[Dict]:
+        """Extract Python particles using `ast` for accurate nested/class method detection."""
+        try:
+            tree = ast.parse(content)
+        except Exception:
+            return []
+
+        lines = content.splitlines()
+        particles: List[Dict[str, Any]] = []
+
+        class_stack: List[str] = []
+        func_stack: List[str] = []
+
+        def evidence_for_line(line_no: int) -> str:
+            idx = max(0, int(line_no or 1) - 1)
+            if idx >= len(lines):
+                return ""
+            return (lines[idx] or "").strip()
+
+        class Visitor(ast.NodeVisitor):
+            def visit_ClassDef(self, node: ast.ClassDef):
+                class_name = getattr(node, "name", "") or ""
+                line_no = getattr(node, "lineno", 0) or 0
+                parent = class_stack[-1] if class_stack else (func_stack[-1] if func_stack else "")
+                particles.append(
+                    self_outer._classify_extracted_symbol(
+                        name=class_name,
+                        symbol_kind="class",
+                        file_path=file_path,
+                        line_num=line_no,
+                        evidence=evidence_for_line(line_no),
+                        parent=parent,
+                    )
+                )
+
+                class_stack.append(class_name)
+                self.generic_visit(node)
+                class_stack.pop()
+
+            def visit_FunctionDef(self, node: ast.FunctionDef):
+                func_name = getattr(node, "name", "") or ""
+                line_no = getattr(node, "lineno", 0) or 0
+                if class_stack:
+                    full_name = f"{class_stack[-1]}.{func_name}"
+                    parent = class_stack[-1]
+                    kind = "method"
+                elif func_stack:
+                    full_name = f"{func_stack[-1]}.{func_name}"
+                    parent = func_stack[-1]
+                    kind = "function"
+                else:
+                    full_name = func_name
+                    parent = ""
+                    kind = "function"
+
+                particles.append(
+                    self_outer._classify_extracted_symbol(
+                        name=full_name,
+                        symbol_kind=kind,
+                        file_path=file_path,
+                        line_num=line_no,
+                        evidence=evidence_for_line(line_no),
+                        parent=parent,
+                    )
+                )
+
+                func_stack.append(func_name)
+                self.generic_visit(node)
+                func_stack.pop()
+
+            def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+                # Reuse FunctionDef logic
+                self.visit_FunctionDef(node)  # type: ignore[arg-type]
+
+        self_outer = self
+        Visitor().visit(tree)
+
+        return particles
+
+    def _extract_function_name(self, line: str, language: str) -> Optional[str]:
+        """Extract a function name from a declaration line (best-effort, regex-based)."""
+        if language == 'python':
+            m = re.search(r'^(?:async\s+def|def)\s+(\w+)', line)
+            return m.group(1) if m else None
+
+        if language == 'go':
+            # func Name( or func (r Receiver) Name(
+            m = re.search(r'^func\s+(?:\([^)]*\)\s*)?(\w+)\s*\(', line)
+            return m.group(1) if m else None
+
+        if language == 'rust':
+            # fn name( or pub fn name(
+            m = re.search(r'^(?:pub\s+)?fn\s+(\w+)\s*\(', line)
+            return m.group(1) if m else None
+
+        if language in {'javascript', 'typescript'}:
+            # export default async function name(
+            m = re.search(r'^(?:export\s+)?(?:default\s+)?(?:async\s+)?function\s+(\w+)\s*\(', line)
+            if m:
+                return m.group(1)
+
+            # export const name = (...) => / const name = async (...) =>
+            m = re.search(
+                r'^(?:export\s+)?(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s*)?\(?[^=]*=>',
+                line,
+            )
+            if m:
+                return m.group(1)
+
+            return None
+
+        # Java/C#/Kotlin/TS methods (best-effort): last identifier before "("
+        m = re.search(r'(\w+)\s*\(', line)
+        return m.group(1) if m else None
 
     def _get_particle_type_by_name(self, name: str) -> Optional[str]:
         """Determine particle type by naming conventions"""
@@ -247,31 +462,39 @@ class TreeSitterUniversalEngine:
     def _get_function_type_by_name(self, name: str) -> Optional[str]:
         """Determine function particle type by naming"""
         name_lower = name.lower()
+        tokens = set(self._tokenize_identifier(name))
 
-        if name.startswith('handle_') or name.endswith('_handler'):
+        if tokens & {'handle', 'handler'} or name_lower.endswith('_handler'):
             return 'EventHandler'
-        elif name.startswith('on_') or name.startswith('when_'):
+        if tokens & {'on', 'when', 'observe', 'observer', 'listener', 'subscribe', 'subscriber'}:
             return 'Observer'
-        elif name.startswith('create_') or name.startswith('make_'):
+
+        if tokens & {'create', 'make', 'build'}:
             return 'Factory'
-        elif 'validate' in name_lower or 'check' in name_lower:
+
+        if tokens & {'validate', 'check', 'verify', 'ensure', 'require'}:
             return 'Specification'
-        elif name.startswith('execute_') or name.startswith('run_'):
-            return 'UseCase'
-        elif 'apply' in name_lower:
-            return 'Policy'
-        elif name.startswith('process_'):
-            return 'DomainService'
-        elif name.startswith('get_') or name.startswith('fetch_') or name.startswith('find_'):
+
+        if tokens & {'get', 'fetch', 'find', 'list', 'read', 'load'}:
             return 'Query'
-        elif name.startswith('to_') or name.startswith('from_') or name.startswith('as_'):
-            return 'Converter'
-        elif name.startswith('is_') or name.startswith('has_') or name.startswith('can_'):
-            return 'Predicate'
-        elif name.startswith('test_'):
-            return 'Test'
-        elif 'configure' in name_lower or 'setup' in name_lower:
-            return 'Configuration'
+
+        if tokens & {'save', 'commit', 'upsert', 'delete', 'write', 'sync', 'import', 'export', 'connect', 'disconnect', 'purge'}:
+            return 'Command'
+
+        if tokens & {'execute', 'run', 'start', 'stop', 'restart'}:
+            return 'UseCase'
+
+        if 'apply' in tokens:
+            return 'Policy'
+
+        if tokens & {'process', 'orchestrate'}:
+            return 'DomainService'
+
+        if tokens & {'is', 'has', 'can', 'should'}:
+            return 'Specification'
+
+        if tokens & {'setup', 'configure', 'config', 'init', 'bootstrap'}:
+            return 'Service'
 
         return None
 
@@ -570,16 +793,106 @@ class TreeSitterUniversalEngine:
 
     def analyze_directory(self, directory_path: str) -> List[Dict[str, Any]]:
         """Analyze all supported files in directory"""
-        results = []
+        results: List[Dict[str, Any]] = []
+
+        # Prefer TypeScript AST extraction for JS/TS when available (richer symbol mapping).
+        ts_results = self._extract_js_ts_directory_with_typescript(directory_path)
+        ts_files_abs = {Path(r.get("file_path", "")).resolve() for r in ts_results if r.get("file_path")}
+        results.extend(ts_results)
 
         for root, dirs, files in os.walk(directory_path):
             # Skip common ignore directories
-            dirs[:] = [d for d in dirs if d not in ['.git', '__pycache__', 'node_modules', 'venv']]
+            dirs[:] = [
+                d
+                for d in dirs
+                if d
+                not in [
+                    '.git',
+                    '__pycache__',
+                    'node_modules',
+                    'venv',
+                    '.venv',
+                    'dist',
+                    'build',
+                    'coverage',
+                    '.next',
+                    '.turbo',
+                    '.cache',
+                ]
+            ]
 
             for file in files:
                 if Path(file).suffix in self.supported_languages:
                     file_path = os.path.join(root, file)
+                    # Skip JS/TS files already handled by TypeScript extractor.
+                    if Path(file_path).resolve() in ts_files_abs:
+                        continue
                     result = self.analyze_file(file_path)
                     results.append(result)
 
         return results
+
+    def _extract_js_ts_directory_with_typescript(self, directory_path: str) -> List[Dict[str, Any]]:
+        """Extract JS/TS symbols using the TypeScript compiler API (via Node), when available."""
+        if not self._ts_symbol_extractor.exists():
+            return []
+
+        try:
+            proc = subprocess.run(
+                ["node", str(self._ts_symbol_extractor), directory_path],
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+        except Exception:
+            return []
+
+        if proc.returncode != 0 or not proc.stdout:
+            return []
+
+        try:
+            payload = json.loads(proc.stdout)
+        except Exception:
+            return []
+
+        if not payload.get("ok"):
+            return []
+
+        out: List[Dict[str, Any]] = []
+        for f in payload.get("files", []) or []:
+            file_path = str(f.get("file_path") or "")
+            language = str(f.get("language") or "unknown")
+            if language not in {"javascript", "typescript"} or not file_path:
+                continue
+
+            particles: List[Dict[str, Any]] = []
+            for sym in f.get("particles", []) or []:
+                name = str(sym.get("name") or "")
+                symbol_kind = str(sym.get("symbol_kind") or "unknown")
+                line_num = int(sym.get("line") or 0)
+                evidence = str(sym.get("evidence") or "")
+                parent = str(sym.get("parent") or "")
+                particles.append(
+                    self._classify_extracted_symbol(
+                        name=name,
+                        symbol_kind=symbol_kind,
+                        file_path=file_path,
+                        line_num=line_num,
+                        evidence=evidence,
+                        parent=parent,
+                    )
+                )
+
+            out.append(
+                {
+                    "file_path": file_path,
+                    "language": language,
+                    "particles": particles,
+                    "touchpoints": f.get("touchpoints") or [],
+                    "raw_imports": f.get("raw_imports") or [],
+                    "lines_analyzed": int(f.get("lines_analyzed") or 0),
+                    "chars_analyzed": int(f.get("chars_analyzed") or 0),
+                }
+            )
+
+        return out

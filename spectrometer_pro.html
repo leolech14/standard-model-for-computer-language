@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔬 Spectrometer Pro - Code Architecture Visualizer</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #8b8b9e;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-yellow: #eab308;
+            --accent-orange: #f97316;
+            --accent-pink: #ec4899;
+            --glow-cyan: 0 0 30px rgba(0, 212, 255, 0.3);
+            --glow-purple: 0 0 30px rgba(168, 85, 247, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        /* Main Layout */
+        .app {
+            display: grid;
+            grid-template-columns: 320px 1fr 320px;
+            grid-template-rows: 60px 1fr;
+            height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+        }
+
+        .btn.active {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+        }
+
+        /* Left Sidebar */
+        .sidebar-left {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* Search */
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Layer Filters */
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .filter-item.active {
+            border-color: var(--accent-cyan);
+        }
+
+        .filter-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .filter-label {
+            flex: 1;
+            font-size: 0.875rem;
+        }
+
+        .filter-count {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--bg-primary);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Graph Container */
+        .graph-container {
+            position: relative;
+            background: var(--bg-primary);
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+        }
+
+        #graph {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Layout Controls */
+        .layout-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .layout-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .layout-btn:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+
+        .layout-btn.active {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        /* Right Sidebar - Node Details */
+        .sidebar-right {
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .node-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .node-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .node-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .node-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Dimension Cards */
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dimension-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .dimension-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .dimension-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Connections List */
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .connection-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .connection-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-cyan);
+        }
+
+        .connection-arrow {
+            color: var(--accent-cyan);
+        }
+
+        .connection-type {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🔬</div>
+                <span class="logo-text">Spectrometer Pro</span>
+            </div>
+            <div class="header-controls">
+                <button class="btn" onclick="fitGraph()">⊡ Fit</button>
+                <button class="btn" onclick="togglePhysics()">⚡ Physics</button>
+                <button class="btn" onclick="exportJSON()">💾 Export</button>
+            </div>
+        </header>
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search particles..." oninput="searchNodes(this.value)">
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-nodes">0</div>
+                    <div class="stat-label">Particles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-edges">0</div>
+                    <div class="stat-label">Edges</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-layers">0</div>
+                    <div class="stat-label">Layers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-density">0%</div>
+                    <div class="stat-label">Density</div>
+                </div>
+            </div>
+
+            <div class="section-title">Filter by Layer</div>
+            <div class="filter-list" id="layer-filters"></div>
+
+            <div class="section-title">Filter by Role</div>
+            <div class="filter-list" id="role-filters"></div>
+        </aside>
+
+        <!-- Main Graph -->
+        <main class="graph-container">
+            <div id="graph"></div>
+            <div class="layout-controls">
+                <button class="layout-btn active" onclick="setLayout('force')">🌐 Force</button>
+                <button class="layout-btn" onclick="setLayout('hierarchical')">📊 Hierarchical</button>
+                <button class="layout-btn" onclick="setLayout('radial')">🎯 Radial</button>
+                <button class="layout-btn" onclick="setLayout('grid')">⊞ Grid</button>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <div id="node-details">
+                <div class="empty-state">
+                    <div class="empty-icon">👆</div>
+                    <p>Click a node to see details</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // ==========================================
+        // SPECTROMETER DATA MODEL
+        // ==========================================
+
+        const layerColors = {
+            'Interface': { bg: '#00d4ff', border: '#00a8cc', icon: '🌐' },
+            'App': { bg: '#a855f7', border: '#7c3aed', icon: '📱' },
+            'Core': { bg: '#ec4899', border: '#db2777', icon: '💎' },
+            'Infra': { bg: '#22c55e', border: '#16a34a', icon: '🔧' },
+            'Data': { bg: '#ef4444', border: '#dc2626', icon: '💾' },
+            'Tests': { bg: '#eab308', border: '#ca8a04', icon: '🧪' },
+        };
+
+        const roleIcons = {
+            'Orchestrator': '🎼',
+            'Worker': '⚙️',
+            'Data': '📦',
+        };
+
+        // Sample particles - representing a real codebase
+        const particles = [
+            // Interface Layer
+            { id: 1, label: 'RouteHandler', layer: 'Interface', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Input', state: 'Stateless', activation: 'Event', lifetime: 'Transient' },
+            { id: 2, label: 'Presenter', layer: 'Interface', role: 'Data', effect: 'Read', boundary: 'Output', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 3, label: 'InputValidator', layer: 'Interface', role: 'Worker', effect: 'Pure', boundary: 'Input', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 4, label: 'AuthMiddleware', layer: 'Interface', role: 'Worker', effect: 'Read', boundary: 'Input', state: 'Stateless', activation: 'Event', lifetime: 'Transient' },
+
+            // App Layer
+            { id: 5, label: 'UserUseCase', layer: 'App', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 6, label: 'OrderUseCase', layer: 'App', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 7, label: 'PaymentUseCase', layer: 'App', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 8, label: 'NotificationService', layer: 'App', role: 'Worker', effect: 'Write', boundary: 'Output', state: 'Stateless', activation: 'Event', lifetime: 'Transient' },
+
+            // Core Layer
+            { id: 9, label: 'User', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateful', activation: 'Direct', lifetime: 'Session' },
+            { id: 10, label: 'Order', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateful', activation: 'Direct', lifetime: 'Session' },
+            { id: 11, label: 'Product', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateful', activation: 'Direct', lifetime: 'Global' },
+            { id: 12, label: 'PricingRule', layer: 'Core', role: 'Worker', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 13, label: 'DiscountPolicy', layer: 'Core', role: 'Worker', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 14, label: 'OrderCreated', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Output', state: 'Stateless', activation: 'Event', lifetime: 'Transient' },
+            { id: 15, label: 'PaymentReceived', layer: 'Core', role: 'Data', effect: 'Pure', boundary: 'Output', state: 'Stateless', activation: 'Event', lifetime: 'Transient' },
+
+            // Infra Layer
+            { id: 16, label: 'UserRepository', layer: 'Infra', role: 'Data', effect: 'ReadModify', boundary: 'I/O', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 17, label: 'OrderRepository', layer: 'Infra', role: 'Data', effect: 'ReadModify', boundary: 'I/O', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 18, label: 'PaymentGateway', layer: 'Infra', role: 'Worker', effect: 'ReadModify', boundary: 'I/O', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 19, label: 'EmailClient', layer: 'Infra', role: 'Worker', effect: 'Write', boundary: 'I/O', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 20, label: 'CacheService', layer: 'Infra', role: 'Data', effect: 'ReadModify', boundary: 'I/O', state: 'Stateful', activation: 'Direct', lifetime: 'Global' },
+            { id: 21, label: 'MessageQueue', layer: 'Infra', role: 'Worker', effect: 'ReadModify', boundary: 'I/O', state: 'Stateless', activation: 'Event', lifetime: 'Global' },
+            { id: 22, label: 'ConfigLoader', layer: 'Infra', role: 'Data', effect: 'Read', boundary: 'Input', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+
+            // Data Layer
+            { id: 23, label: 'UserDTO', layer: 'Data', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 24, label: 'OrderDTO', layer: 'Data', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 25, label: 'UserSchema', layer: 'Data', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+            { id: 26, label: 'OrderSchema', layer: 'Data', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Global' },
+
+            // Tests Layer
+            { id: 27, label: 'UserUseCaseTest', layer: 'Tests', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 28, label: 'OrderUseCaseTest', layer: 'Tests', role: 'Orchestrator', effect: 'ReadModify', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 29, label: 'UserFixture', layer: 'Tests', role: 'Data', effect: 'Pure', boundary: 'Internal', state: 'Stateless', activation: 'Direct', lifetime: 'Transient' },
+            { id: 30, label: 'MockRepository', layer: 'Tests', role: 'Data', effect: 'ReadModify', boundary: 'Internal', state: 'Stateful', activation: 'Direct', lifetime: 'Transient' },
+        ];
+
+        // Connections
+        const connections = [
+            // Interface -> App
+            { from: 1, to: 5, type: 'CALLS' },
+            { from: 1, to: 6, type: 'CALLS' },
+            { from: 1, to: 3, type: 'CALLS' },
+            { from: 4, to: 5, type: 'GUARDS' },
+
+            // App -> Core
+            { from: 5, to: 9, type: 'USES' },
+            { from: 6, to: 10, type: 'USES' },
+            { from: 6, to: 11, type: 'USES' },
+            { from: 6, to: 12, type: 'CALLS' },
+            { from: 6, to: 13, type: 'CALLS' },
+            { from: 7, to: 10, type: 'USES' },
+            { from: 6, to: 14, type: 'EMITS' },
+            { from: 7, to: 15, type: 'EMITS' },
+
+            // App -> Infra
+            { from: 5, to: 16, type: 'CALLS' },
+            { from: 6, to: 17, type: 'CALLS' },
+            { from: 7, to: 18, type: 'CALLS' },
+            { from: 8, to: 19, type: 'CALLS' },
+            { from: 8, to: 21, type: 'CALLS' },
+
+            // Core Events -> Services
+            { from: 14, to: 8, type: 'TRIGGERS' },
+            { from: 15, to: 8, type: 'TRIGGERS' },
+
+            // Infra -> Data
+            { from: 16, to: 25, type: 'USES' },
+            { from: 17, to: 26, type: 'USES' },
+            { from: 20, to: 16, type: 'CACHES' },
+            { from: 20, to: 17, type: 'CACHES' },
+
+            // Interface -> Data (DTOs)
+            { from: 2, to: 23, type: 'FORMATS' },
+            { from: 2, to: 24, type: 'FORMATS' },
+            { from: 3, to: 23, type: 'VALIDATES' },
+
+            // Tests
+            { from: 27, to: 5, type: 'TESTS' },
+            { from: 28, to: 6, type: 'TESTS' },
+            { from: 27, to: 29, type: 'USES' },
+            { from: 28, to: 29, type: 'USES' },
+            { from: 27, to: 30, type: 'USES' },
+            { from: 28, to: 30, type: 'USES' },
+            { from: 30, to: 16, type: 'MOCKS' },
+            { from: 30, to: 17, type: 'MOCKS' },
+        ];
+
+        // ==========================================
+        // VISUALIZATION ENGINE
+        // ==========================================
+
+        let network;
+        let nodes;
+        let edges;
+        let activeFilters = { layers: new Set(), roles: new Set() };
+        let currentLayout = 'force';
+        let physicsEnabled = true;
+
+        function initGraph() {
+            // Create nodes
+            nodes = new vis.DataSet(particles.map(p => ({
+                id: p.id,
+                label: p.label,
+                group: p.layer,
+                color: {
+                    background: layerColors[p.layer].bg,
+                    border: layerColors[p.layer].border,
+                    highlight: { background: '#fff', border: layerColors[p.layer].border },
+                    hover: { background: '#fff', border: layerColors[p.layer].border }
+                },
+                font: {
+                    color: '#000',
+                    size: 12,
+                    face: 'Inter',
+                    bold: { color: '#000' }
+                },
+                shape: p.role === 'Orchestrator' ? 'diamond' : (p.role === 'Data' ? 'box' : 'ellipse'),
+                size: p.role === 'Orchestrator' ? 25 : 20,
+                borderWidth: 2,
+                shadow: { enabled: true, size: 10, color: 'rgba(0,0,0,0.3)' },
+                ...p
+            })));
+
+            // Create edges
+            edges = new vis.DataSet(connections.map((c, i) => ({
+                id: i,
+                from: c.from,
+                to: c.to,
+                label: c.type,
+                arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+                color: {
+                    color: 'rgba(255,255,255,0.2)',
+                    highlight: '#00d4ff',
+                    hover: '#00d4ff'
+                },
+                font: { color: '#666', size: 9, strokeWidth: 0, align: 'middle' },
+                smooth: { type: 'curvedCW', roundness: 0.15 },
+                width: 1.5,
+                hoverWidth: 2.5
+            })));
+
+            // Options
+            const options = getLayoutOptions(currentLayout);
+
+            // Create network
+            const container = document.getElementById('graph');
+            network = new vis.Network(container, { nodes, edges }, options);
+
+            // Event handlers
+            network.on('click', handleNodeClick);
+            network.on('stabilizationIterationsDone', () => network.fit({ animation: true }));
+
+            updateStats();
+            buildFilters();
+        }
+
+        function getLayoutOptions(layout) {
+            const base = {
+                nodes: { borderWidthSelected: 3 },
+                edges: { selectionWidth: 3 },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 100,
+                    zoomView: true,
+                    dragView: true,
+                    multiselect: true
+                },
+            };
+
+            switch (layout) {
+                case 'hierarchical':
+                    return {
+                        ...base,
+                        layout: {
+                            hierarchical: {
+                                direction: 'UD',
+                                sortMethod: 'hubsize',
+                                levelSeparation: 100,
+                                nodeSpacing: 120,
+                                treeSpacing: 200
+                            }
+                        },
+                        physics: false
+                    };
+                case 'radial':
+                    return {
+                        ...base,
+                        layout: { improvedLayout: true },
+                        physics: {
+                            solver: 'repulsion',
+                            repulsion: { nodeDistance: 200, centralGravity: 0.3 },
+                            stabilization: { iterations: 150 }
+                        }
+                    };
+                case 'grid':
+                    return {
+                        ...base,
+                        layout: { improvedLayout: false },
+                        physics: false
+                    };
+                default: // force
+                    return {
+                        ...base,
+                        layout: { improvedLayout: true },
+                        physics: {
+                            enabled: physicsEnabled,
+                            solver: 'forceAtlas2Based',
+                            forceAtlas2Based: {
+                                gravitationalConstant: -80,
+                                centralGravity: 0.01,
+                                springLength: 120,
+                                springConstant: 0.05,
+                                damping: 0.4
+                            },
+                            stabilization: { iterations: 200 }
+                        }
+                    };
+            }
+        }
+
+        function setLayout(layout) {
+            currentLayout = layout;
+            document.querySelectorAll('.layout-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (layout === 'grid') {
+                // Manual grid layout
+                const layerOrder = ['Interface', 'App', 'Core', 'Infra', 'Data', 'Tests'];
+                const nodesByLayer = {};
+                particles.forEach(p => {
+                    if (!nodesByLayer[p.layer]) nodesByLayer[p.layer] = [];
+                    nodesByLayer[p.layer].push(p);
+                });
+
+                let y = 0;
+                layerOrder.forEach(layer => {
+                    const layerNodes = nodesByLayer[layer] || [];
+                    layerNodes.forEach((p, i) => {
+                        nodes.update({ id: p.id, x: i * 150, y: y });
+                    });
+                    y += 150;
+                });
+                network.setOptions({ physics: false });
+                network.fit({ animation: true });
+            } else {
+                network.setOptions(getLayoutOptions(layout));
+                if (layout !== 'grid') {
+                    network.stabilize();
+                }
+            }
+        }
+
+        function handleNodeClick(params) {
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const node = nodes.get(nodeId);
+                showNodeDetails(node);
+            }
+        }
+
+        function showNodeDetails(node) {
+            const connectedEdges = network.getConnectedEdges(node.id);
+            const outgoing = [];
+            const incoming = [];
+
+            connectedEdges.forEach(edgeId => {
+                const edge = edges.get(edgeId);
+                if (edge.from === node.id) {
+                    const target = nodes.get(edge.to);
+                    outgoing.push({ node: target, type: edge.label });
+                } else {
+                    const source = nodes.get(edge.from);
+                    incoming.push({ node: source, type: edge.label });
+                }
+            });
+
+            const layerInfo = layerColors[node.layer];
+
+            document.getElementById('node-details').innerHTML = `
+                <div class="node-detail-header">
+                    <div class="node-icon" style="background: ${layerInfo.bg}">
+                        ${layerInfo.icon}
+                    </div>
+                    <div>
+                        <div class="node-title">${node.label}</div>
+                        <div class="node-subtitle">${node.layer} Layer • ${node.role}</div>
+                    </div>
+                </div>
+                
+                <div class="section-title">8D Coordinates</div>
+                <div class="dimension-grid">
+                    <div class="dimension-card">
+                        <div class="dimension-label">Layer</div>
+                        <div class="dimension-value">${node.layer}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">Role</div>
+                        <div class="dimension-value">${node.role}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">Effect</div>
+                        <div class="dimension-value">${node.effect}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">Boundary</div>
+                        <div class="dimension-value">${node.boundary}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">State</div>
+                        <div class="dimension-value">${node.state}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">Activation</div>
+                        <div class="dimension-value">${node.activation}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">Lifetime</div>
+                        <div class="dimension-value">${node.lifetime}</div>
+                    </div>
+                    <div class="dimension-card">
+                        <div class="dimension-label">Connections</div>
+                        <div class="dimension-value">${incoming.length + outgoing.length}</div>
+                    </div>
+                </div>
+                
+                ${outgoing.length > 0 ? `
+                    <div class="section-title">Outgoing (${outgoing.length})</div>
+                    <div class="connection-list">
+                        ${outgoing.map(c => `
+                            <div class="connection-item" onclick="focusNode(${c.node.id})">
+                                <span class="connection-arrow">→</span>
+                                <span>${c.node.label}</span>
+                                <span class="connection-type">${c.type}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+                
+                ${incoming.length > 0 ? `
+                    <div class="section-title">Incoming (${incoming.length})</div>
+                    <div class="connection-list">
+                        ${incoming.map(c => `
+                            <div class="connection-item" onclick="focusNode(${c.node.id})">
+                                <span class="connection-arrow">←</span>
+                                <span>${c.node.label}</span>
+                                <span class="connection-type">${c.type}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function focusNode(nodeId) {
+            network.selectNodes([nodeId]);
+            network.focus(nodeId, { scale: 1.5, animation: true });
+            showNodeDetails(nodes.get(nodeId));
+        }
+
+        function updateStats() {
+            document.getElementById('stat-nodes').textContent = particles.length;
+            document.getElementById('stat-edges').textContent = connections.length;
+            document.getElementById('stat-layers').textContent = Object.keys(layerColors).length;
+            const maxEdges = particles.length * (particles.length - 1);
+            const density = ((connections.length / maxEdges) * 100).toFixed(1);
+            document.getElementById('stat-density').textContent = density + '%';
+        }
+
+        function buildFilters() {
+            // Layer filters
+            const layerCounts = {};
+            particles.forEach(p => {
+                layerCounts[p.layer] = (layerCounts[p.layer] || 0) + 1;
+            });
+
+            const layerFiltersHtml = Object.entries(layerColors).map(([layer, info]) => `
+                <div class="filter-item active" data-layer="${layer}" onclick="toggleFilter('layer', '${layer}', this)">
+                    <div class="filter-dot" style="background: ${info.bg}"></div>
+                    <span class="filter-label">${layer}</span>
+                    <span class="filter-count">${layerCounts[layer] || 0}</span>
+                </div>
+            `).join('');
+            document.getElementById('layer-filters').innerHTML = layerFiltersHtml;
+
+            // Role filters
+            const roleCounts = {};
+            particles.forEach(p => {
+                roleCounts[p.role] = (roleCounts[p.role] || 0) + 1;
+            });
+
+            const roleFiltersHtml = Object.entries(roleIcons).map(([role, icon]) => `
+                <div class="filter-item active" data-role="${role}" onclick="toggleFilter('role', '${role}', this)">
+                    <span>${icon}</span>
+                    <span class="filter-label">${role}</span>
+                    <span class="filter-count">${roleCounts[role] || 0}</span>
+                </div>
+            `).join('');
+            document.getElementById('role-filters').innerHTML = roleFiltersHtml;
+        }
+
+        function toggleFilter(type, value, element) {
+            element.classList.toggle('active');
+            const set = type === 'layer' ? activeFilters.layers : activeFilters.roles;
+            if (set.has(value)) {
+                set.delete(value);
+            } else {
+                set.add(value);
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const activeLayerFilters = document.querySelectorAll('[data-layer].active');
+            const activeRoleFilters = document.querySelectorAll('[data-role].active');
+
+            const activeLayers = new Set(Array.from(activeLayerFilters).map(el => el.dataset.layer));
+            const activeRoles = new Set(Array.from(activeRoleFilters).map(el => el.dataset.role));
+
+            nodes.forEach(node => {
+                const visible = activeLayers.has(node.layer) && activeRoles.has(node.role);
+                nodes.update({ id: node.id, hidden: !visible });
+            });
+        }
+
+        function searchNodes(query) {
+            const q = query.toLowerCase();
+            nodes.forEach(node => {
+                const match = !q || node.label.toLowerCase().includes(q);
+                nodes.update({
+                    id: node.id,
+                    opacity: match ? 1 : 0.2,
+                    font: { ...node.font, color: match ? '#000' : '#999' }
+                });
+            });
+
+            if (q) {
+                const matches = particles.filter(p => p.label.toLowerCase().includes(q));
+                if (matches.length === 1) {
+                    focusNode(matches[0].id);
+                }
+            }
+        }
+
+        function fitGraph() {
+            network.fit({ animation: { duration: 500 } });
+        }
+
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            network.setOptions({ physics: { enabled: physicsEnabled } });
+            event.target.classList.toggle('active');
+        }
+
+        function exportJSON() {
+            const data = {
+                particles: particles,
+                connections: connections,
+                exported_at: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'spectrometer_graph.json';
+            a.click();
+        }
+
+        // Initialize
+        initGraph();
+    </script>
+</body>
+
+</html>

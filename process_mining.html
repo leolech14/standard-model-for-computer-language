@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛏️ Process Mining - Code Flow Analyzer</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --bg-hover: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+            --accent-yellow: #d29922;
+            --accent-purple: #a371f7;
+            --accent-cyan: #39c5cf;
+            --accent-orange: #db6d28;
+            --accent-pink: #db61a2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .logo h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .header-stat {
+            text-align: center;
+        }
+
+        .header-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .header-stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent-blue);
+        }
+
+        .btn.primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        /* Left Panel - Traces */
+        .panel-left {
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trace-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .trace-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .trace-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .trace-item.active {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+        }
+
+        .trace-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .trace-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .trace-count {
+            background: var(--bg-dark);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .trace-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .trace-step {
+            background: var(--bg-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .trace-arrow {
+            color: var(--text-muted);
+        }
+
+        /* Main Canvas */
+        .canvas-container {
+            position: relative;
+            background: var(--bg-dark);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(57, 197, 207, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(163, 113, 247, 0.03) 0%, transparent 40%);
+            min-height: 400px;
+            overflow: hidden;
+        }
+
+        #process-graph {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* Flow Controls */
+        .flow-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .flow-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.15s;
+        }
+
+        .flow-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .flow-btn.active {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        /* Legend */
+        .legend {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+        }
+
+        .legend-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0;
+            font-size: 0.8rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        /* Right Panel - Activity Details */
+        .panel-right {
+            background: var(--bg-card);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .activity-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .activity-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .activity-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .metric-card {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .metric-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .metric-bar {
+            height: 4px;
+            background: var(--bg-hover);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .metric-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        /* Transitions Section */
+        .transitions-section {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .transition-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .transition-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .transition-arrow {
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+        }
+
+        .transition-target {
+            flex: 1;
+        }
+
+        .transition-target-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .transition-target-type {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .transition-freq {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+        }
+
+        /* Timeline */
+        .timeline {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .timeline-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-track {
+            flex: 1;
+            height: 32px;
+            background: var(--bg-dark);
+            border-radius: 6px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .timeline-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #fff;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .timeline-segment:hover {
+            filter: brightness(1.2);
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Animations */
+        @keyframes flowPulse {
+
+            0%,
+            100% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 20;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">⛏️</span>
+                <div>
+                    <h1>Process Mining</h1>
+                    <span>Code Flow Analyzer</span>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <div class="header-stat-value" style="color: var(--accent-cyan)" id="total-traces">0</div>
+                    <div class="header-stat-label">Traces</div>
+                </div>
+                <div class="header-stat">
+                    <div class="header-stat-value" style="color: var(--accent-purple)" id="total-activities">0</div>
+                    <div class="header-stat-label">Activities</div>
+                </div>
+                <div class="header-stat">
+                    <div class="header-stat-value" style="color: var(--accent-green)" id="total-transitions">0</div>
+                    <div class="header-stat-label">Transitions</div>
+                </div>
+                <div class="header-stat">
+                    <div class="header-stat-value" style="color: var(--accent-yellow)" id="avg-duration">0ms</div>
+                    <div class="header-stat-label">Avg Duration</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn" onclick="resetView()">🔄 Reset</button>
+                <button class="btn" onclick="toggleAnimation()">▶️ Animate</button>
+                <button class="btn primary" onclick="exportProcess()">💾 Export</button>
+            </div>
+        </header>
+
+        <!-- Left Panel - Traces -->
+        <aside class="panel-left">
+            <div class="panel-header">
+                <span>Execution Traces</span>
+                <span id="trace-count">0</span>
+            </div>
+            <div class="trace-list" id="trace-list"></div>
+        </aside>
+
+        <!-- Main Canvas -->
+        <main class="canvas-container">
+            <div id="process-graph"></div>
+
+            <div class="legend">
+                <div class="legend-title">Activity Types</div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-cyan)"></div>
+                    <span>Entry Point</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-purple)"></div>
+                    <span>Processing</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-green)"></div>
+                    <span>Data Access</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-orange)"></div>
+                    <span>External Call</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--accent-pink)"></div>
+                    <span>Exit Point</span>
+                </div>
+            </div>
+
+            <div class="flow-controls">
+                <button class="flow-btn active" onclick="setLayout('hierarchical')" title="Hierarchical">📊</button>
+                <button class="flow-btn" onclick="setLayout('force')" title="Force">🌐</button>
+                <button class="flow-btn" onclick="setLayout('lr')" title="Left-Right">➡️</button>
+                <button class="flow-btn" onclick="fitView()" title="Fit View">⊡</button>
+            </div>
+        </main>
+
+        <!-- Right Panel - Details -->
+        <aside class="panel-right">
+            <div id="activity-details">
+                <div class="empty-state">
+                    <div class="empty-icon">📊</div>
+                    <p>Select an activity to view details</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Timeline -->
+        <footer class="timeline">
+            <span class="timeline-label">Process Flow</span>
+            <div class="timeline-track" id="timeline"></div>
+        </footer>
+    </div>
+
+    <script>
+        // ==========================================
+        // PROCESS MINING DATA MODEL
+        // ==========================================
+
+        const activityTypes = {
+            'entry': { color: '#39c5cf', icon: '🚪', label: 'Entry Point' },
+            'process': { color: '#a371f7', icon: '⚙️', label: 'Processing' },
+            'data': { color: '#3fb950', icon: '💾', label: 'Data Access' },
+            'external': { color: '#db6d28', icon: '🌐', label: 'External Call' },
+            'exit': { color: '#db61a2', icon: '✅', label: 'Exit Point' },
+        };
+
+        // Activities (nodes in the process)
+        const activities = [
+            { id: 'start', label: 'Start', type: 'entry', layer: 'Interface' },
+            { id: 'auth', label: 'Authenticate', type: 'process', layer: 'Interface' },
+            { id: 'validate', label: 'Validate Input', type: 'process', layer: 'Interface' },
+            { id: 'route', label: 'Route Request', type: 'process', layer: 'App' },
+            { id: 'usecase', label: 'Execute UseCase', type: 'process', layer: 'App' },
+            { id: 'domain', label: 'Apply Domain Rules', type: 'process', layer: 'Core' },
+            { id: 'validate_biz', label: 'Business Validation', type: 'process', layer: 'Core' },
+            { id: 'cache_check', label: 'Check Cache', type: 'data', layer: 'Infra' },
+            { id: 'db_read', label: 'Read Database', type: 'data', layer: 'Infra' },
+            { id: 'db_write', label: 'Write Database', type: 'data', layer: 'Infra' },
+            { id: 'api_call', label: 'External API', type: 'external', layer: 'Infra' },
+            { id: 'queue', label: 'Queue Message', type: 'external', layer: 'Infra' },
+            { id: 'format', label: 'Format Response', type: 'process', layer: 'Interface' },
+            { id: 'log', label: 'Log Event', type: 'data', layer: 'Infra' },
+            { id: 'end', label: 'End', type: 'exit', layer: 'Interface' },
+        ];
+
+        // Transitions (edges with frequencies)
+        const transitions = [
+            { from: 'start', to: 'auth', freq: 1000, avgDuration: 5 },
+            { from: 'auth', to: 'validate', freq: 950, avgDuration: 12 },
+            { from: 'auth', to: 'end', freq: 50, avgDuration: 2, label: 'Auth Failed' },
+            { from: 'validate', to: 'route', freq: 920, avgDuration: 3 },
+            { from: 'validate', to: 'end', freq: 30, avgDuration: 1, label: 'Invalid Input' },
+            { from: 'route', to: 'usecase', freq: 920, avgDuration: 8 },
+            { from: 'usecase', to: 'domain', freq: 900, avgDuration: 15 },
+            { from: 'usecase', to: 'cache_check', freq: 800, avgDuration: 2 },
+            { from: 'cache_check', to: 'db_read', freq: 200, avgDuration: 45, label: 'Cache Miss' },
+            { from: 'cache_check', to: 'domain', freq: 600, avgDuration: 1, label: 'Cache Hit' },
+            { from: 'db_read', to: 'domain', freq: 200, avgDuration: 5 },
+            { from: 'domain', to: 'validate_biz', freq: 900, avgDuration: 20 },
+            { from: 'validate_biz', to: 'db_write', freq: 850, avgDuration: 35 },
+            { from: 'validate_biz', to: 'end', freq: 50, avgDuration: 3, label: 'Validation Failed' },
+            { from: 'db_write', to: 'queue', freq: 800, avgDuration: 8 },
+            { from: 'db_write', to: 'api_call', freq: 400, avgDuration: 120 },
+            { from: 'queue', to: 'log', freq: 800, avgDuration: 2 },
+            { from: 'api_call', to: 'log', freq: 380, avgDuration: 3 },
+            { from: 'api_call', to: 'end', freq: 20, avgDuration: 5, label: 'API Error' },
+            { from: 'log', to: 'format', freq: 1100, avgDuration: 5 },
+            { from: 'format', to: 'end', freq: 900, avgDuration: 3 },
+        ];
+
+        // Execution traces (sample paths through the process)
+        const traces = [
+            {
+                id: 1,
+                name: 'Happy Path - Create Order',
+                count: 450,
+                steps: ['start', 'auth', 'validate', 'route', 'usecase', 'cache_check', 'domain', 'validate_biz', 'db_write', 'queue', 'log', 'format', 'end'],
+                duration: 156
+            },
+            {
+                id: 2,
+                name: 'Cache Miss Flow',
+                count: 200,
+                steps: ['start', 'auth', 'validate', 'route', 'usecase', 'cache_check', 'db_read', 'domain', 'validate_biz', 'db_write', 'queue', 'log', 'format', 'end'],
+                duration: 198
+            },
+            {
+                id: 3,
+                name: 'External API Flow',
+                count: 150,
+                steps: ['start', 'auth', 'validate', 'route', 'usecase', 'domain', 'validate_biz', 'db_write', 'api_call', 'log', 'format', 'end'],
+                duration: 245
+            },
+            {
+                id: 4,
+                name: 'Auth Failure',
+                count: 50,
+                steps: ['start', 'auth', 'end'],
+                duration: 7
+            },
+            {
+                id: 5,
+                name: 'Validation Failure',
+                count: 30,
+                steps: ['start', 'auth', 'validate', 'end'],
+                duration: 20
+            },
+            {
+                id: 6,
+                name: 'Business Rule Rejection',
+                count: 50,
+                steps: ['start', 'auth', 'validate', 'route', 'usecase', 'domain', 'validate_biz', 'end'],
+                duration: 68
+            },
+            {
+                id: 7,
+                name: 'API Error Recovery',
+                count: 20,
+                steps: ['start', 'auth', 'validate', 'route', 'usecase', 'domain', 'validate_biz', 'db_write', 'api_call', 'end'],
+                duration: 210
+            },
+        ];
+
+        // ==========================================
+        // VISUALIZATION ENGINE
+        // ==========================================
+
+        let network;
+        let nodes;
+        let edges;
+        let currentLayout = 'force';
+        let animating = false;
+        let selectedTrace = null;
+
+        function initGraph() {
+            // Calculate node sizes based on frequency
+            const nodeFrequencies = {};
+            transitions.forEach(t => {
+                nodeFrequencies[t.from] = (nodeFrequencies[t.from] || 0) + t.freq;
+                nodeFrequencies[t.to] = (nodeFrequencies[t.to] || 0) + t.freq;
+            });
+            const maxFreq = Math.max(...Object.values(nodeFrequencies));
+
+            // Create nodes
+            nodes = new vis.DataSet(activities.map(a => {
+                const freq = nodeFrequencies[a.id] || 1;
+                const size = 20 + (freq / maxFreq) * 30;
+                const typeInfo = activityTypes[a.type];
+
+                return {
+                    id: a.id,
+                    label: a.label,
+                    shape: a.type === 'entry' || a.type === 'exit' ? 'circle' : 'box',
+                    size: size,
+                    color: {
+                        background: typeInfo.color,
+                        border: typeInfo.color,
+                        highlight: { background: '#fff', border: typeInfo.color },
+                        hover: { background: '#fff', border: typeInfo.color }
+                    },
+                    font: {
+                        color: '#fff',
+                        size: 12,
+                        face: 'Inter',
+                        bold: { color: '#fff' }
+                    },
+                    borderWidth: 2,
+                    shadow: { enabled: true, size: 15, color: typeInfo.color + '40' },
+                    ...a,
+                    frequency: freq
+                };
+            }));
+
+            // Calculate edge widths based on frequency
+            const maxEdgeFreq = Math.max(...transitions.map(t => t.freq));
+
+            // Create edges
+            edges = new vis.DataSet(transitions.map((t, i) => {
+                const width = 1 + (t.freq / maxEdgeFreq) * 8;
+                const opacity = 0.3 + (t.freq / maxEdgeFreq) * 0.7;
+
+                return {
+                    id: i,
+                    from: t.from,
+                    to: t.to,
+                    label: t.label || '',
+                    width: width,
+                    arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+                    color: {
+                        color: `rgba(88, 166, 255, ${opacity})`,
+                        highlight: '#58a6ff',
+                        hover: '#58a6ff'
+                    },
+                    font: { color: '#8b949e', size: 10, strokeWidth: 0, align: 'middle' },
+                    smooth: { type: 'curvedCW', roundness: 0.2 },
+                    ...t
+                };
+            }));
+
+            const options = getLayoutOptions(currentLayout);
+
+            const container = document.getElementById('process-graph');
+            if (typeof vis === 'undefined') {
+                console.error('vis.js not loaded!');
+                if (container) container.innerHTML = '<div style="color: red; padding: 50px;">Error: vis.js not loaded</div>';
+                return;
+            }
+
+            network = new vis.Network(container, { nodes, edges }, options);
+
+            network.on('click', handleClick);
+            network.on('stabilizationIterationsDone', () => network.fit({ animation: true }));
+
+            // Force fit
+            network.fit();
+
+            updateStats();
+            renderTraces();
+            renderTimeline();
+        }
+
+        function getLayoutOptions(layout) {
+            const base = {
+                nodes: { borderWidthSelected: 3 },
+                edges: { selectionWidth: 2 },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 100,
+                    zoomView: true,
+                    dragView: true
+                },
+            };
+
+            switch (layout) {
+                case 'lr':
+                    return {
+                        ...base,
+                        layout: {
+                            hierarchical: {
+                                direction: 'LR',
+                                sortMethod: 'directed',
+                                levelSeparation: 150,
+                                nodeSpacing: 100
+                            }
+                        },
+                        physics: false
+                    };
+                case 'force':
+                    return {
+                        ...base,
+                        layout: { improvedLayout: true },
+                        physics: {
+                            solver: 'forceAtlas2Based',
+                            forceAtlas2Based: {
+                                gravitationalConstant: -100,
+                                centralGravity: 0.02,
+                                springLength: 150,
+                                springConstant: 0.05
+                            },
+                            stabilization: { iterations: 200 }
+                        }
+                    };
+                default: // hierarchical
+                    return {
+                        ...base,
+                        layout: {
+                            hierarchical: {
+                                direction: 'UD',
+                                sortMethod: 'directed',
+                                levelSeparation: 100,
+                                nodeSpacing: 120
+                            }
+                        },
+                        physics: false
+                    };
+            }
+        }
+
+        function setLayout(layout) {
+            currentLayout = layout;
+            document.querySelectorAll('.flow-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            network.setOptions(getLayoutOptions(layout));
+        }
+
+        function handleClick(params) {
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const node = nodes.get(nodeId);
+                showActivityDetails(node);
+            }
+        }
+
+        function showActivityDetails(activity) {
+            const typeInfo = activityTypes[activity.type];
+
+            // Find connected transitions
+            const outgoing = transitions.filter(t => t.from === activity.id);
+            const incoming = transitions.filter(t => t.to === activity.id);
+
+            const totalIn = incoming.reduce((sum, t) => sum + t.freq, 0);
+            const totalOut = outgoing.reduce((sum, t) => sum + t.freq, 0);
+            const avgDuration = [...outgoing, ...incoming].reduce((sum, t) => sum + t.avgDuration, 0) /
+                (outgoing.length + incoming.length || 1);
+
+            document.getElementById('activity-details').innerHTML = `
+                <div class="activity-header">
+                    <div class="activity-icon" style="background: ${typeInfo.color}">${typeInfo.icon}</div>
+                    <div>
+                        <div class="activity-title">${activity.label}</div>
+                        <div class="activity-type">${typeInfo.label} • ${activity.layer} Layer</div>
+                    </div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" style="color: var(--accent-cyan)">${activity.frequency.toLocaleString()}</div>
+                        <div class="metric-label">Total Frequency</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" style="width: ${(activity.frequency / 2000) * 100}%; background: var(--accent-cyan)"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" style="color: var(--accent-yellow)">${avgDuration.toFixed(1)}ms</div>
+                        <div class="metric-label">Avg Duration</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" style="width: ${Math.min((avgDuration / 100) * 100, 100)}%; background: var(--accent-yellow)"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" style="color: var(--accent-green)">${totalIn.toLocaleString()}</div>
+                        <div class="metric-label">Incoming</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" style="color: var(--accent-purple)">${totalOut.toLocaleString()}</div>
+                        <div class="metric-label">Outgoing</div>
+                    </div>
+                </div>
+                
+                <div class="transitions-section">
+                    ${outgoing.length > 0 ? `
+                        <div class="section-title">Outgoing Transitions (${outgoing.length})</div>
+                        ${outgoing.map(t => {
+                const target = activities.find(a => a.id === t.to);
+                const targetType = activityTypes[target.type];
+                return `
+                                <div class="transition-item" onclick="focusNode('${t.to}')">
+                                    <span class="transition-arrow">→</span>
+                                    <div class="transition-target">
+                                        <div class="transition-target-name">${target.label}</div>
+                                        <div class="transition-target-type">${t.label || targetType.label} • ${t.avgDuration}ms</div>
+                                    </div>
+                                    <span class="transition-freq">${t.freq}</span>
+                                </div>
+                            `;
+            }).join('')}
+                    ` : ''}
+                    
+                    ${incoming.length > 0 ? `
+                        <div class="section-title" style="margin-top: 16px">Incoming Transitions (${incoming.length})</div>
+                        ${incoming.map(t => {
+                const source = activities.find(a => a.id === t.from);
+                const sourceType = activityTypes[source.type];
+                return `
+                                <div class="transition-item" onclick="focusNode('${t.from}')">
+                                    <span class="transition-arrow">←</span>
+                                    <div class="transition-target">
+                                        <div class="transition-target-name">${source.label}</div>
+                                        <div class="transition-target-type">${t.label || sourceType.label} • ${t.avgDuration}ms</div>
+                                    </div>
+                                    <span class="transition-freq">${t.freq}</span>
+                                </div>
+                            `;
+            }).join('')}
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function focusNode(nodeId) {
+            network.selectNodes([nodeId]);
+            network.focus(nodeId, { scale: 1.2, animation: true });
+            showActivityDetails(nodes.get(nodeId));
+        }
+
+        function renderTraces() {
+            const html = traces.map(trace => `
+                <div class="trace-item ${selectedTrace === trace.id ? 'active' : ''}" 
+                     onclick="selectTrace(${trace.id})">
+                    <div class="trace-header">
+                        <span class="trace-name">${trace.name}</span>
+                        <span class="trace-count">${trace.count}x</span>
+                    </div>
+                    <div class="trace-flow">
+                        ${trace.steps.slice(0, 5).map((step, i) => {
+                const activity = activities.find(a => a.id === step);
+                return `
+                                <span class="trace-step">${activity.label}</span>
+                                ${i < Math.min(trace.steps.length - 1, 4) ? '<span class="trace-arrow">→</span>' : ''}
+                            `;
+            }).join('')}
+                        ${trace.steps.length > 5 ? `<span class="trace-step">+${trace.steps.length - 5}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('trace-list').innerHTML = html;
+            document.getElementById('trace-count').textContent = traces.length;
+        }
+
+        function selectTrace(traceId) {
+            selectedTrace = traceId;
+            const trace = traces.find(t => t.id === traceId);
+
+            // Highlight trace path
+            nodes.forEach(node => {
+                const inTrace = trace.steps.includes(node.id);
+                nodes.update({
+                    id: node.id,
+                    opacity: inTrace ? 1 : 0.2,
+                    shadow: { enabled: inTrace }
+                });
+            });
+
+            edges.forEach(edge => {
+                const fromIdx = trace.steps.indexOf(edge.from);
+                const toIdx = trace.steps.indexOf(edge.to);
+                const inTrace = fromIdx !== -1 && toIdx !== -1 && toIdx === fromIdx + 1;
+                edges.update({
+                    id: edge.id,
+                    color: {
+                        color: inTrace ? '#58a6ff' : 'rgba(88, 166, 255, 0.1)',
+                        highlight: '#58a6ff'
+                    },
+                    width: inTrace ? edge.width * 1.5 : 1
+                });
+            });
+
+            renderTraces();
+        }
+
+        function renderTimeline() {
+            const totalCount = traces.reduce((sum, t) => sum + t.count, 0);
+
+            const html = traces.map(trace => {
+                const width = (trace.count / totalCount) * 100;
+                const typeInfo = activityTypes[activities.find(a => a.id === trace.steps[trace.steps.length - 2] || trace.steps[0]).type];
+
+                return `
+                    <div class="timeline-segment" 
+                         style="width: ${width}%; background: ${trace.steps.includes('end') && trace.steps.length < 5 ? 'var(--accent-red)' : 'var(--accent-purple)'}"
+                         onclick="selectTrace(${trace.id})"
+                         title="${trace.name}: ${trace.count} executions">
+                        ${width > 8 ? trace.count : ''}
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('timeline').innerHTML = html;
+        }
+
+        function updateStats() {
+            document.getElementById('total-traces').textContent = traces.reduce((sum, t) => sum + t.count, 0).toLocaleString();
+            document.getElementById('total-activities').textContent = activities.length;
+            document.getElementById('total-transitions').textContent = transitions.length;
+
+            const avgDuration = traces.reduce((sum, t) => sum + t.duration * t.count, 0) /
+                traces.reduce((sum, t) => sum + t.count, 0);
+            document.getElementById('avg-duration').textContent = avgDuration.toFixed(0) + 'ms';
+        }
+
+        function resetView() {
+            selectedTrace = null;
+            nodes.forEach(node => {
+                nodes.update({ id: node.id, opacity: 1, shadow: { enabled: true } });
+            });
+            edges.forEach(edge => {
+                const t = transitions[edge.id];
+                const maxFreq = Math.max(...transitions.map(t => t.freq));
+                const opacity = 0.3 + (t.freq / maxFreq) * 0.7;
+                edges.update({
+                    id: edge.id,
+                    color: { color: `rgba(88, 166, 255, ${opacity})` },
+                    width: 1 + (t.freq / maxFreq) * 8
+                });
+            });
+            renderTraces();
+            network.fit({ animation: true });
+        }
+
+        function fitView() {
+            network.fit({ animation: { duration: 500 } });
+        }
+
+        function toggleAnimation() {
+            animating = !animating;
+            // Animation implementation would go here
+            event.target.textContent = animating ? '⏸️ Pause' : '▶️ Animate';
+        }
+
+        function exportProcess() {
+            const data = {
+                activities,
+                transitions,
+                traces,
+                exported_at: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'process_mining_export.json';
+            a.click();
+        }
+
+        // Initialize
+        initGraph();
+    </script>
+</body>
+
+</html>
