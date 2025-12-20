@@ -13,6 +13,56 @@ import subprocess
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
+try:
+    from type_registry import normalize_type
+except ImportError:
+    try:
+        from core.type_registry import normalize_type
+    except ImportError:
+        def normalize_type(t): return t
+
+# =============================================================================
+# INHERITANCE-BASED DDD TYPE MAPPINGS (99% confidence)
+# =============================================================================
+DDD_BASE_CLASS_MAPPINGS = {
+    # Entities & Aggregates
+    "Entity": "Entity",
+    "BaseEntity": "Entity",
+    "DomainEntity": "Entity",
+    "EntityModel": "Entity",
+    "AggregateRoot": "AggregateRoot",
+    "Aggregate": "AggregateRoot",
+    
+    # Value Objects
+    "ValueObject": "ValueObject",
+    "ValueObjectModel": "ValueObject",
+    "BaseFrozenModel": "ValueObject",
+    
+    # Repositories
+    "GenericRepository": "Repository",
+    "AbstractRepository": "Repository",
+    "BaseRepository": "Repository",
+    
+    # Events
+    "DomainEvent": "DomainEvent",
+    "Event": "DomainEvent",
+    "IntegrationEvent": "DomainEvent",
+    
+    # Commands/Queries (CQRS)
+    "Command": "Command",
+    "BaseCommand": "Command",
+    "Query": "Query",
+    "BaseQuery": "Query",
+    
+    # Services
+    "DomainService": "DomainService",
+    "ApplicationService": "Service",
+    
+    # Configuration
+    "BaseSettings": "Configuration",
+}
+
+
 class TreeSitterUniversalEngine:
     """Universal Tree-sitter engine for cross-language pattern detection"""
 
@@ -232,24 +282,94 @@ class TreeSitterUniversalEngine:
         line_num: int,
         evidence: str = "",
         parent: str = "",
+        base_classes: List[str] = None,
+        decorators: List[str] = None,
     ) -> Dict[str, Any]:
         evidence_line = (evidence or "").strip()
+        base_classes = base_classes or []
+        decorators = decorators or []
 
         normalized_path = file_path.replace("\\", "/").lower()
         particle_type: Optional[str] = None
+        confidence = 30.0  # Default low confidence
+        
+        # =============================================================================
+        # TIER 0: FRAMEWORK-SPECIFIC OVERRIDES (99% confidence)
+        # =============================================================================
+        # Pytest / Conftest
+        if "conftest.py" in normalized_path:
+            if any(d for d in decorators if "fixture" in d) or name == "conftest":
+                particle_type = "Configuration"
+                confidence = 99.0
+            else:
+                particle_type = "Test" # Default for things in conftest
+                confidence = 80.0
+                
+        if particle_type is None:
+            for d in decorators:
+                if "fixture" in d: # pytest.fixture
+                    particle_type = "Configuration"
+                    confidence = 90.0
+                    break
+                if "validator" in d.lower(): # pydantic validators, marshmallow
+                    particle_type = "Validator"
+                    confidence = 90.0
+                    break
+                if "command" in d.lower(): # click/typer commands
+                    particle_type = "Command"
+                    confidence = 90.0
+                    break
+                if d.endswith(".task") or d == "task": # celery.task
+                    particle_type = "Job"
+                    confidence = 90.0
+                    break
+                if "router" in d: # fastapi router
+                    particle_type = "Controller"
+                    confidence = 90.0
+                    break
 
-        if symbol_kind in {"class", "interface", "type", "enum"}:
+        # =============================================================================
+        # TIER 1: INHERITANCE-BASED DETECTION (99% confidence)
+        # =============================================================================
+        if symbol_kind in {"class", "interface", "type", "enum"} and base_classes:
+            for base in base_classes:
+                if base in DDD_BASE_CLASS_MAPPINGS:
+                    particle_type = DDD_BASE_CLASS_MAPPINGS[base]
+                    confidence = 99.0  # Inheritance = highest confidence
+                    break
+
+        # =============================================================================
+        # TIER 2: PATH-BASED DETECTION (90% confidence)
+        # =============================================================================
+        if particle_type is None and symbol_kind in {"class", "interface", "type", "enum"}:
             # Strong location signals (DDD/Clean folders, or UI layers).
             if "/domain/" in normalized_path and "/entities/" in normalized_path:
                 particle_type = "Entity"
+                confidence = 90.0
+            elif "/domain/" in normalized_path and ("/aggregates/" in normalized_path or "/aggregate/" in normalized_path):
+                particle_type = "AggregateRoot"
+                confidence = 90.0
+            elif "/domain/" in normalized_path and ("/events/" in normalized_path or "/event/" in normalized_path):
+                particle_type = "DomainEvent"
+                confidence = 90.0
             elif "/domain/" in normalized_path and ("/value_objects/" in normalized_path or "/valueobjects/" in normalized_path):
                 particle_type = "ValueObject"
+                confidence = 90.0
             elif "/domain/" in normalized_path and ("/services/" in normalized_path or "/domain_services/" in normalized_path):
                 particle_type = "DomainService"
+                confidence = 90.0
             elif "/domain/" in normalized_path and "/repositories/" in normalized_path:
                 particle_type = "Repository"
+                confidence = 90.0
+            elif "/domain/" in normalized_path and ("/commands/" in normalized_path or "/command/" in normalized_path):
+                particle_type = "Command"
+                confidence = 90.0
+            elif "/domain/" in normalized_path and ("/queries/" in normalized_path or "/query/" in normalized_path):
+                particle_type = "Query"
+                confidence = 90.0
             elif "/infrastructure/" in normalized_path and "repository" in name.lower():
                 particle_type = "RepositoryImpl"
+                confidence = 90.0
             elif (
                 "/presentation/" in normalized_path
                 or "/controllers/" in normalized_path
@@ -258,23 +378,51 @@ class TreeSitterUniversalEngine:
                 or "/ro-finance/src/pages/" in normalized_path
             ):
                 particle_type = "Controller"
+                confidence = 85.0
             elif "BaseModel" in evidence_line or "/schemas/" in normalized_path or "/error_messages/" in normalized_path:
                 particle_type = "DTO"
+                confidence = 85.0
             elif "/tests/" in normalized_path or "/test/" in normalized_path:
                 particle_type = "Test"
+                confidence = 80.0
             elif "/config/" in normalized_path or "settings" in normalized_path:
                 particle_type = "Configuration"
+                confidence = 80.0
             elif "exception" in normalized_path or "error" in normalized_path:
                 particle_type = "Exception"
+                confidence = 80.0
+            elif "/utils/" in normalized_path or "/helpers/" in normalized_path or "/common/" in normalized_path:
+                particle_type = "Utility"
+                confidence = 75.0
+            elif "/models/" in normalized_path and "/domain/" not in normalized_path:
+                particle_type = "DTO"
+                confidence = 75.0
+            elif "/adapters/" in normalized_path:
+                particle_type = "Adapter"
+                confidence = 75.0
+            elif "/clients/" in normalized_path or "/external/" in normalized_path:
+                particle_type = "Client"
+                confidence = 75.0
+            elif "/gateways/" in normalized_path:
+                particle_type = "Gateway"
+                confidence = 75.0
 
-            # Naming conventions fallback.
-            if particle_type is None:
-                particle_type = self._get_particle_type_by_name(name)
+        # =============================================================================
+        # TIER 3: NAMING CONVENTIONS (70-80% confidence)
+        # =============================================================================
+        if particle_type is None and symbol_kind in {"class", "interface", "type", "enum"}:
+            particle_type = self._get_particle_type_by_name(name)
+            if particle_type:
+                confidence = 75.0
 
-        elif symbol_kind in {"function", "method"}:
+        if symbol_kind in {"function", "method"}:
             # If we get "Class.method", classify primarily by the last segment.
             short_name = name.split(".")[-1] if "." in name else name
-            particle_type = self._get_function_type_by_name(short_name)
+            
+            if particle_type is None:
+                particle_type = self._get_function_type_by_name(short_name)
+                if particle_type:
+                    confidence = 70.0
 
             # UI components: exported PascalCase functions/components
             if particle_type is None and (
@@ -282,9 +430,9 @@ class TreeSitterUniversalEngine:
             ):
                 if short_name[:1].isupper():
                     particle_type = "Controller"
+                    confidence = 70.0
 
-        resolved_type = particle_type or "Unknown"
-        confidence = self._calculate_confidence(name, evidence_line) if particle_type else 30.0
+        resolved_type = normalize_type(particle_type or "Unknown")
 
         particle: Dict[str, Any] = {
             "type": resolved_type,
@@ -298,8 +446,60 @@ class TreeSitterUniversalEngine:
 
         if parent:
             particle["parent"] = parent
+        if base_classes:
+            particle["base_classes"] = base_classes
 
         return particle
+
+    def _get_base_class_names(self, node: ast.ClassDef) -> List[str]:
+        """Extract base class names from a Python class definition."""
+        bases = []
+        for base in node.bases:
+            if isinstance(base, ast.Name):
+                bases.append(base.id)
+            elif isinstance(base, ast.Attribute):
+                bases.append(base.attr)
+            elif isinstance(base, ast.Subscript):
+                # Generic types like Generic[T]
+                if isinstance(base.value, ast.Name):
+                    bases.append(base.value.id)
+                elif isinstance(base.value, ast.Attribute):
+                    bases.append(base.value.attr)
+        return bases
+
+    def _get_decorators(self, node: Any) -> List[str]:
+        """Extract decorator names from a node."""
+        decorators = []
+        for decorator in getattr(node, "decorator_list", []):
+            try:
+                if isinstance(decorator, ast.Name):
+                    decorators.append(decorator.id)
+                elif isinstance(decorator, ast.Attribute):
+                    # Handle @pytest.fixture where fixture is attribute
+                    parts = []
+                    while isinstance(decorator, ast.Attribute):
+                        parts.append(decorator.attr)
+                        decorator = decorator.value
+                    if isinstance(decorator, ast.Name):
+                        parts.append(decorator.id)
+                    decorators.append(".".join(reversed(parts)))
+                elif isinstance(decorator, ast.Call):
+                    # Handle @decorator(args)
+                    if isinstance(decorator.func, ast.Name):
+                        decorators.append(decorator.func.id)
+                    elif isinstance(decorator.func, ast.Attribute):
+                        # Handle @pytest.fixture(scope="module")
+                        parts = []
+                        curr = decorator.func
+                        while isinstance(curr, ast.Attribute):
+                            parts.append(curr.attr)
+                            curr = curr.value
+                        if isinstance(curr, ast.Name):
+                            parts.append(curr.id)
+                        decorators.append(".".join(reversed(parts)))
+            except Exception:
+                pass
+        return decorators
 
     def _extract_python_particles_ast(self, content: str, file_path: str) -> List[Dict]:
         """Extract Python particles using `ast` for accurate nested/class method detection."""
@@ -325,6 +525,11 @@ class TreeSitterUniversalEngine:
                 class_name = getattr(node, "name", "") or ""
                 line_no = getattr(node, "lineno", 0) or 0
                 parent = class_stack[-1] if class_stack else (func_stack[-1] if func_stack else "")
+                
+                # Extract base class names and decorators
+                base_classes = self_outer._get_base_class_names(node)
+                decorators = self_outer._get_decorators(node)
+                
                 particles.append(
                     self_outer._classify_extracted_symbol(
                         name=class_name,
@@ -333,6 +538,8 @@ class TreeSitterUniversalEngine:
                         line_num=line_no,
                         evidence=evidence_for_line(line_no),
                         parent=parent,
+                        base_classes=base_classes,
+                        decorators=decorators,
                     )
                 )
 
@@ -356,6 +563,8 @@ class TreeSitterUniversalEngine:
                     parent = ""
                     kind = "function"
 
+                decorators = self_outer._get_decorators(node)
+
                 particles.append(
                     self_outer._classify_extracted_symbol(
                         name=full_name,
@@ -364,6 +573,7 @@ class TreeSitterUniversalEngine:
                         line_num=line_no,
                         evidence=evidence_for_line(line_no),
                         parent=parent,
+                        decorators=decorators,
                     )
                 )
 
@@ -419,8 +629,23 @@ class TreeSitterUniversalEngine:
     def _get_particle_type_by_name(self, name: str) -> Optional[str]:
         """Determine particle type by naming conventions"""
         tokens = set(self._tokenize_identifier(name))
+        name_lower = name.lower()
 
-        if tokens & {'entity', 'model', 'aggregate'}:
+        # AggregateRoot has highest priority in naming
+        if 'aggregate' in tokens and 'root' in tokens:
+            return 'AggregateRoot'
+        if name_lower.endswith('aggregate'):
+            return 'AggregateRoot'
+        
+        # Events - check for Event suffix or common event patterns
+        if name_lower.endswith('event'):
+            return 'Event'
+        if tokens & {'event', 'occurred', 'happened', 'created', 'updated', 'deleted', 'changed'}:
+            # Only if it looks like an event name (past tense verbs)
+            if any(name_lower.endswith(suffix) for suffix in ['created', 'updated', 'deleted', 'changed', 'placed', 'cancelled', 'completed', 'started', 'finished']):
+                return 'Event'
+        
+        if tokens & {'entity', 'model'}:
             return 'Entity'
         elif tokens & {'repository', 'repo'}:
             return 'Repository'
@@ -436,9 +661,9 @@ class TreeSitterUniversalEngine:
             return 'Specification'
         elif 'command' in tokens:
             return 'Command'
-        elif 'query' in tokens or 'get' in tokens:
+        elif 'query' in tokens:
             return 'Query'
-        elif 'usecase' in tokens or ('use' in tokens and 'case' in tokens) or 'use_case' in name.lower():
+        elif 'usecase' in tokens or ('use' in tokens and 'case' in tokens) or 'use_case' in name_lower:
             return 'UseCase'
         elif tokens & {'dto', 'request', 'response', 'schema'}:
             return 'DTO'
@@ -456,6 +681,26 @@ class TreeSitterUniversalEngine:
             return 'Builder'
         elif 'adapter' in tokens:
             return 'Adapter'
+        
+        # NEW PATTERNS for improved coverage
+        elif tokens & {'parser', 'parse', 'deserialize', 'serialize'}:
+            return 'Utility'
+        elif tokens & {'mapper', 'mapping', 'converter', 'convert', 'transform', 'translator'}:
+            return 'Mapper'
+        elif tokens & {'client', 'consumer', 'caller'}:
+            return 'Client'
+        elif tokens & {'gateway', 'facade', 'proxy'}:
+            return 'Gateway'
+        elif tokens & {'middleware', 'interceptor', 'filter'}:
+            return 'Adapter'
+        elif tokens & {'listener', 'watcher', 'monitor'}:
+            return 'Observer'
+        elif tokens & {'strategy', 'policy', 'rule'}:
+            return 'Policy'
+        elif tokens & {'state', 'status', 'context'}:
+            return 'Entity'
+        elif tokens & {'result', 'outcome', 'output'}:
+            return 'DTO'
 
         return None
 

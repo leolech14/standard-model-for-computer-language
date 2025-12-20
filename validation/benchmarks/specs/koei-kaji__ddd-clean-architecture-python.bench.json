@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "name": "koei-kaji__ddd-clean-architecture-python",
+  "repo_dir": "koei-kaji__ddd-clean-architecture-python",
+  "scored_types": [
+    "Entity",
+    "ValueObject"
+  ],
+  "ignore_path_globs": [
+    "**/tests/**",
+    "**/test/**",
+    "**/__init__.py",
+    "**/.venv/**",
+    "**/.git/**"
+  ],
+  "expected_components": [
+    {
+      "rel_file": "src/rest_api/models/base_response.py",
+      "symbol": "BaseResponse",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/rest_api/models/base_request.py",
+      "symbol": "BaseRequest",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/todo/domain/models/base_model.py",
+      "symbol": "ValueObjectModel",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/todo/domain/models/tasks/task_name.py",
+      "symbol": "TaskName",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/todo/domain/models/tasks/task.py",
+      "symbol": "Task",
+      "symbol_kind": "class",
+      "type": "Entity"
+    },
+    {
+      "rel_file": "src/todo/domain/models/tasks/task_id.py",
+      "symbol": "TaskId",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/todo/application/tasks/commons/task_data.py",
+      "symbol": "TaskData",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    }
+  ],
+  "extraction_metadata": {
+    "method": "inheritance_analysis",
+    "confidence_threshold": 0.95,
+    "files_scanned": 86,
+    "base_classes_found": {}
+  },
+  "notes": "Auto-generated via inheritance analysis. 7 components with \u226595% confidence."
+}

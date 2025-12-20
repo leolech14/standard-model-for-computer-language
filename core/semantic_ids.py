@@ -276,21 +276,57 @@ class SemanticIDGenerator:
         """Generate semantic IDs for the entire codebase."""
         from dataclasses import asdict
         ids = []
+
+        # 🚀 UNIFICATION: Pre-scan with TreeSitterUniversalEngine for high-fidelity rules
+        # This bridges the gap between the Benchmark Engine and the CLI
+        particle_map = {}
+        try:
+            # Try core import first, then local
+            try:
+                from core.tree_sitter_engine import TreeSitterUniversalEngine
+            except ImportError:
+                from tree_sitter_engine import TreeSitterUniversalEngine
+                
+            engine = TreeSitterUniversalEngine()
+            print("  ⚡ Enhancing analysis with TreeSitterUniversalEngine rules...")
+            
+            for file_path, code in codebase.files.items():
+                if file_path.endswith(".py"):
+                    try:
+                        particles = engine._extract_python_particles_ast(code, file_path)
+                        for p in particles:
+                            # Key by (file, qualified_name)
+                            key = (file_path, p['name'])
+                            particle_map[key] = p['type']
+                    except Exception:
+                        pass
+        except ImportError:
+            pass
         
         # Functions
         for func in codebase.functions.values():
             # Convert dataclass to dict for compatibility
             data = asdict(func)
-            ids.append(self.from_function(data, func.file))
+            
+            # Determine qualified name for matching
+            qname = func.name
+            if ":" in func.id:
+                suffix = func.id.split(":")[-1]
+                if "." in suffix:
+                    qname = suffix
+            
+            refined_type = particle_map.get((func.file, qname))
+            ids.append(self.from_function(data, func.file, refined_type))
             
         # Classes
         for cls in codebase.classes.values():
             data = asdict(cls)
-            ids.append(self.from_class(data, cls.file))
+            refined_type = particle_map.get((cls.file, cls.name))
+            ids.append(self.from_class(data, cls.file, refined_type))
             
         return ids
     
-    def from_function(self, func_data: Dict, file_path: str) -> SemanticID:
+    def from_function(self, func_data: Dict, file_path: str, refined_type: Optional[str] = None) -> SemanticID:
         """Generate semantic ID for a function."""
         
         # Determine classification based on function properties
@@ -303,7 +339,17 @@ class SemanticIDGenerator:
         is_handler = any(x in name.lower() for x in ["handle", "execute", "run", "process"])
         is_validator = name.lower().startswith("validate")
         
-        if is_handler or is_validator:
+        # Override with refined type
+        if refined_type and refined_type != "Unknown":
+            if refined_type == "Validator": is_validator = True
+            if refined_type == "Command": is_handler = True
+            # For other refined types, we trust the mapping below
+            
+        if refined_type == "Configuration":
+             level = Level.MOLECULE
+             fundamental = Fundamental.AGG # Configs are usually classes, but function configs exist
+             continent = Continent.ORG
+        elif is_handler or is_validator:
             level = Level.ORGANELLE
             fundamental = Fundamental.HANDLER
             continent = Continent.EXEC
@@ -336,7 +382,7 @@ class SemanticIDGenerator:
             properties=properties,
         )
     
-    def from_class(self, class_data: Dict, file_path: str) -> SemanticID:
+    def from_class(self, class_data: Dict, file_path: str, refined_type: Optional[str] = None) -> SemanticID:
         """Generate semantic ID for a class."""
         
         name = class_data.get("name", "")
@@ -350,7 +396,23 @@ class SemanticIDGenerator:
         is_usecase = "UseCase" in name or "execute" in methods
         is_value_object = not is_entity and len(instance_vars) > 0
         
-        if is_repository:
+        # Override with refined type
+        if refined_type and refined_type != "Unknown":
+             is_repository = refined_type in ["Repository", "RepositoryImpl"]
+             is_usecase = refined_type == "UseCase"
+             is_entity = refined_type == "Entity"
+             is_value_object = refined_type == "ValueObject"
+             
+        if refined_type == "Configuration" or refined_type == "BaseSettings":
+             level = Level.MOLECULE
+             fundamental = Fundamental.AGG
+             continent = Continent.ORG
+             properties = {"config": True}
+        elif refined_type == "DomainEvent":
+             level = Level.MOLECULE
+             fundamental = Fundamental.AGG
+             continent = Continent.LOGIC # Events are data+logic
+        elif is_repository:
             level = Level.ORGANELLE
             fundamental = Fundamental.HANDLER
             continent = Continent.EXEC

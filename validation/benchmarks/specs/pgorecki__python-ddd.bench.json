@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "name": "pgorecki__python-ddd",
+  "repo_dir": "pgorecki__python-ddd",
+  "scored_types": [
+    "AggregateRoot",
+    "Command",
+    "DTO",
+    "DomainEvent",
+    "Entity",
+    "Query",
+    "Repository",
+    "RepositoryImpl",
+    "ValueObject"
+  ],
+  "ignore_path_globs": [
+    "**/tests/**",
+    "**/test/**",
+    "**/__init__.py",
+    "**/.venv/**",
+    "**/.git/**"
+  ],
+  "expected_components": [
+    {
+      "rel_file": "src/modules/bidding/domain/events.py",
+      "symbol": "BidWasPlaced",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/events.py",
+      "symbol": "HighestBidderWasOutbid",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/events.py",
+      "symbol": "BidWasRetracted",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/events.py",
+      "symbol": "ListingWasCancelled",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/value_objects.py",
+      "symbol": "Bidder",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/value_objects.py",
+      "symbol": "Seller",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/value_objects.py",
+      "symbol": "Bid",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/repositories.py",
+      "symbol": "ListingRepository",
+      "symbol_kind": "class",
+      "type": "Repository"
+    },
+    {
+      "rel_file": "src/modules/bidding/domain/entities.py",
+      "symbol": "Listing",
+      "symbol_kind": "class",
+      "type": "AggregateRoot"
+    },
+    {
+      "rel_file": "src/modules/bidding/application/command/place_bid.py",
+      "symbol": "PlaceBidCommand",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/modules/bidding/application/command/retract_bid.py",
+      "symbol": "RetractBidCommand",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/modules/bidding/application/query/get_bidding_details.py",
+      "symbol": "GetBiddingDetails",
+      "symbol_kind": "class",
+      "type": "Query"
+    },
+    {
+      "rel_file": "src/modules/bidding/application/query/get_pastdue_listings.py",
+      "symbol": "GetPastdueListings",
+      "symbol_kind": "class",
+      "type": "Query"
+    },
+    {
+      "rel_file": "src/modules/iam/application/repository.py",
+      "symbol": "UserRepository",
+      "symbol_kind": "class",
+      "type": "Repository"
+    },
+    {
+      "rel_file": "src/modules/iam/domain/entities.py",
+      "symbol": "User",
+      "symbol_kind": "class",
+      "type": "AggregateRoot"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/events.py",
+      "symbol": "ListingDraftCreatedEvent",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/events.py",
+      "symbol": "ListingDraftUpdatedEvent",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/events.py",
+      "symbol": "ListingDraftDeletedEvent",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/events.py",
+      "symbol": "ListingPublishedEvent",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/repositories.py",
+      "symbol": "ListingRepository",
+      "symbol_kind": "class",
+      "type": "Repository"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/entities.py",
+      "symbol": "Listing",
+      "symbol_kind": "class",
+      "type": "AggregateRoot"
+    },
+    {
+      "rel_file": "src/modules/catalog/domain/entities.py",
+      "symbol": "Seller",
+      "symbol_kind": "class",
+      "type": "AggregateRoot"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/command/delete_listing_draft.py",
+      "symbol": "DeleteListingDraftCommand",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/command/update_listing_draft.py",
+      "symbol": "UpdateListingDraftCommand",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/command/publish_listing_draft.py",
+      "symbol": "PublishListingDraftCommand",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/command/create_listing_draft.py",
+      "symbol": "CreateListingDraftCommand",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/query/get_listing_details.py",
+      "symbol": "GetListingDetails",
+      "symbol_kind": "class",
+      "type": "Query"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/query/get_listings_of_seller.py",
+      "symbol": "GetListingsOfSeller",
+      "symbol_kind": "class",
+      "type": "Query"
+    },
+    {
+      "rel_file": "src/modules/catalog/application/query/get_all_listings.py",
+      "symbol": "GetAllListings",
+      "symbol_kind": "class",
+      "type": "Query"
+    },
+    {
+      "rel_file": "src/api/routers/iam.py",
+      "symbol": "UserResponse",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/routers/iam.py",
+      "symbol": "LoginResponse",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/catalog.py",
+      "symbol": "CurrentUser",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/catalog.py",
+      "symbol": "ListingWriteModel",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/catalog.py",
+      "symbol": "ListingPublishModel",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/catalog.py",
+      "symbol": "ListingReadModel",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/catalog.py",
+      "symbol": "ListingIndexModel",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/bidding.py",
+      "symbol": "BidReadModel",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/bidding.py",
+      "symbol": "BiddingResponse",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/api/models/bidding.py",
+      "symbol": "PlaceBidRequest",
+      "symbol_kind": "class",
+      "type": "DTO"
+    },
+    {
+      "rel_file": "src/seedwork/application/queries.py",
+      "symbol": "Query",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/seedwork/infrastructure/repository.py",
+      "symbol": "InMemoryRepository",
+      "symbol_kind": "class",
+      "type": "RepositoryImpl"
+    },
+    {
+      "rel_file": "src/seedwork/infrastructure/repository.py",
+      "symbol": "SqlAlchemyGenericRepository",
+      "symbol_kind": "class",
+      "type": "RepositoryImpl"
+    },
+    {
+      "rel_file": "src/seedwork/domain/events.py",
+      "symbol": "DomainEvent",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/seedwork/domain/events.py",
+      "symbol": "CompositeDomainEvent",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/seedwork/domain/value_objects.py",
+      "symbol": "Money",
+      "symbol_kind": "class",
+      "type": "ValueObject"
+    },
+    {
+      "rel_file": "src/seedwork/domain/aggregates.py",
+      "symbol": "Aggregate",
+      "symbol_kind": "class",
+      "type": "Entity"
+    },
+    {
+      "rel_file": "src/seedwork/domain/entities.py",
+      "symbol": "AggregateRoot",
+      "symbol_kind": "class",
+      "type": "Entity"
+    }
+  ],
+  "extraction_metadata": {
+    "method": "inheritance_analysis",
+    "confidence_threshold": 0.95,
+    "files_scanned": 108,
+    "base_classes_found": {
+      "ValueObject": "src/seedwork/domain/value_objects.py",
+      "GenericRepository": "src/seedwork/domain/repositories.py",
+      "Entity": "src/seedwork/domain/entities.py"
+    }
+  },
+  "notes": "Auto-generated via inheritance analysis. 47 components with \u226595% confidence."
+}

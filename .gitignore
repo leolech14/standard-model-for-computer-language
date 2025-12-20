@@ -38,3 +38,9 @@ ENV/
 output/
 # We keep extras/ in the repo as it contains legacy scripts, unless user wants them excluded
 # extras/
+
+# Validation Artifacts
+validation/100_repo_results/
+validation/benchmarks/repos/
+validation/benchmarks/runs/
+validation/__pycache__/

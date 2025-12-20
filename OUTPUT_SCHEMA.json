@@ -1,0 +1,197 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Spectrometer Analysis Output",
+    "description": "Complete manifest of all outputs from repository analysis",
+    "version": "1.0.0",
+    "output_directory": "{output}/{repo_name}_{timestamp}/",
+    "files": {
+        "graph.json": {
+            "description": "Complete code graph with nodes and edges",
+            "required": true,
+            "schema": {
+                "repo_name": "string - Repository identifier",
+                "repo_path": "string - Absolute path to repo",
+                "components": {
+                    "type": "object",
+                    "description": "Map of node_id → node details",
+                    "item_schema": {
+                        "name": "string - Component name",
+                        "type": "string - Canonical type (Entity, Repository, etc.)",
+                        "file_path": "string - Relative file path",
+                        "line": "integer - Line number",
+                        "symbol_kind": "string - class|function|method",
+                        "confidence": "float - Detection confidence 0-100",
+                        "evidence": "string - Code snippet used for classification",
+                        "base_classes": "array[string] - Inherited classes (if any)",
+                        "parent": "string - Parent class/function name"
+                    }
+                },
+                "edges": {
+                    "type": "array",
+                    "description": "Relationships between nodes",
+                    "item_schema": {
+                        "source": "string - Source node ID",
+                        "target": "string - Target node ID",
+                        "edge_type": "string - calls|imports|inherits|uses",
+                        "file": "string - File where edge was found",
+                        "line": "integer - Line number"
+                    }
+                },
+                "stats": {
+                    "total_files": "integer",
+                    "total_particles": "integer",
+                    "by_type": "object - Count per type",
+                    "by_language": "object - Count per language"
+                }
+            }
+        },
+        "semantic_ids.json": {
+            "description": "Semantic identifiers for all code entities",
+            "required": true,
+            "schema": {
+                "stats": {
+                    "total": "integer - Total semantic IDs",
+                    "by_continent": "object - DATA|LOGIC|ORG|EXEC counts",
+                    "by_level": "object - ATOM|MOLECULE|ORGANELLE counts"
+                },
+                "ids": {
+                    "type": "array",
+                    "description": "All semantic IDs in the codebase",
+                    "item_schema": {
+                        "id": "string - Full semantic ID (CONT.FUND.LEVEL|path|name|hash)",
+                        "continent": "string - DATA|LOGIC|ORGANIZATION|EXECUTION",
+                        "fundamental": "string - Family within continent",
+                        "level": "string - ATOM|MOLECULE|ORGANELLE",
+                        "module_path": "string - File path",
+                        "name": "string - Entity name",
+                        "properties": {
+                            "type": "string - Canonical architectural type",
+                            "line": "integer - Line number",
+                            "confidence": "float - Detection confidence",
+                            "file_path": "string - Absolute file path"
+                        }
+                    }
+                }
+            }
+        },
+        "learning_report.json": {
+            "description": "Analysis run metadata and statistics",
+            "required": true,
+            "schema": {
+                "run_id": "string - Unique run identifier (YYYYMMDD_HHMMSS)",
+                "timestamp": "string - ISO8601 timestamp",
+                "repos_analyzed": "integer",
+                "total_files": "integer",
+                "total_lines": "integer",
+                "total_nodes": "integer",
+                "total_known": "integer - Classified components",
+                "total_unknown": "integer - Unclassified components",
+                "avg_coverage": "float - Knowledge coverage 0-1",
+                "repos": {
+                    "type": "array",
+                    "item_schema": {
+                        "name": "string - Repo name",
+                        "path": "string - Repo path",
+                        "files": "integer",
+                        "nodes": "integer"
+                    }
+                },
+                "all_discoveries": {
+                    "type": "array",
+                    "description": "New patterns discovered during analysis"
+                }
+            }
+        },
+        "GRAPH_ANALYSIS.md": {
+            "description": "Human-readable graph analysis report",
+            "required": false,
+            "content": {
+                "bottleneck_functions": "Top nodes by betweenness centrality",
+                "pagerank_ranking": "Most important nodes by PageRank",
+                "community_summary": "Natural clusters detected",
+                "bridge_edges": "Critical coupling points"
+            }
+        },
+        "NETWORK_DIAGRAM.mermaid": {
+            "description": "Visual dependency graph in Mermaid format",
+            "required": false
+        },
+        "llm_context.md": {
+            "description": "Summary optimized for LLM consumption",
+            "required": false,
+            "content": {
+                "architecture_overview": "High-level structure",
+                "key_components": "Important nodes with roles",
+                "dependencies": "Critical relationships"
+            }
+        },
+        "discoveries.md": {
+            "description": "New patterns discovered during analysis",
+            "required": false
+        },
+        "REDUNDANCY_REPORT.md": {
+            "description": "Duplicate/similar code detection",
+            "required": false
+        }
+    },
+    "analysis_dimensions": {
+        "WHAT": {
+            "description": "What code elements exist",
+            "outputs": [
+                "components in graph.json",
+                "semantic_ids.json"
+            ],
+            "metrics": [
+                "particle count by type",
+                "coverage percentage"
+            ]
+        },
+        "WHERE": {
+            "description": "Architectural layer placement",
+            "outputs": [
+                "type classification in components"
+            ],
+            "metrics": [
+                "layer distribution (domain/app/infra/presentation)"
+            ]
+        },
+        "HOW": {
+            "description": "Relationships and dependencies",
+            "outputs": [
+                "edges in graph.json",
+                "GRAPH_ANALYSIS.md"
+            ],
+            "metrics": [
+                "edge count",
+                "centrality scores",
+                "community count"
+            ]
+        },
+        "WHY": {
+            "description": "Architectural intent and patterns",
+            "outputs": [
+                "llm_context.md"
+            ],
+            "metrics": [
+                "pattern recognition confidence"
+            ]
+        }
+    },
+    "canonical_types": {
+        "source": "patterns/canonical_types.json",
+        "count": 30,
+        "layers": [
+            "domain",
+            "application",
+            "infrastructure",
+            "presentation",
+            "cross_cutting"
+        ]
+    },
+    "atoms": {
+        "source": "patterns/unified_taxonomy.json",
+        "count": 165,
+        "mapped_to_types": 85,
+        "syntax_only": 80
+    }
+}

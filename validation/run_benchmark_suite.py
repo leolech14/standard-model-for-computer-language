@@ -153,9 +153,18 @@ def _score_expected_vs_predicted(
 
 
 def _run_detector(repo_root: Path, target_repo_root: Path, *, output_dir: Path) -> dict[str, Any]:
-    core_dir = repo_root / "spectrometer_v12_minimal" / "core"
-    if not core_dir.exists():
-        raise FileNotFoundError(f"Missing core dir: {core_dir}")
+    # Try multiple possible locations for core directory
+    core_candidates = [
+        repo_root / "core",
+        repo_root / "spectrometer_v12_minimal" / "core",
+    ]
+    core_dir = None
+    for candidate in core_candidates:
+        if candidate.exists():
+            core_dir = candidate
+            break
+    if core_dir is None:
+        raise FileNotFoundError(f"Missing core dir. Tried: {[str(c) for c in core_candidates]}")
 
     core_dir_str = str(core_dir)
     if core_dir_str not in sys.path:

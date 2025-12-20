@@ -1,0 +1,390 @@
+{
+    "version": "1.0",
+    "description": "Canonical architectural component types organized by layer",
+    "layers": {
+        "domain": {
+            "description": "Core business logic and domain model",
+            "types": [
+                {
+                    "id": "Entity",
+                    "description": "Core domain object with identity and lifecycle",
+                    "rpbl": {
+                        "responsibility": 9,
+                        "purity": 3,
+                        "boundary": 8,
+                        "lifecycle": 9
+                    }
+                },
+                {
+                    "id": "ValueObject",
+                    "description": "Immutable object defined by attributes, not identity",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 9,
+                        "boundary": 5,
+                        "lifecycle": 8
+                    }
+                },
+                {
+                    "id": "AggregateRoot",
+                    "description": "Root entity enforcing business invariants across a cluster",
+                    "rpbl": {
+                        "responsibility": 10,
+                        "purity": 5,
+                        "boundary": 9,
+                        "lifecycle": 10
+                    }
+                },
+                {
+                    "id": "DomainEvent",
+                    "description": "Record of something significant that happened in the domain",
+                    "aliases": [
+                        "Event"
+                    ],
+                    "rpbl": {
+                        "responsibility": 3,
+                        "purity": 9,
+                        "boundary": 4,
+                        "lifecycle": 2
+                    }
+                },
+                {
+                    "id": "DomainService",
+                    "description": "Domain logic that doesn't belong to entities or value objects",
+                    "rpbl": {
+                        "responsibility": 8,
+                        "purity": 7,
+                        "boundary": 5,
+                        "lifecycle": 6
+                    }
+                },
+                {
+                    "id": "Specification",
+                    "description": "Encapsulated business rule that can be combined",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 8,
+                        "boundary": 3,
+                        "lifecycle": 7
+                    }
+                }
+            ]
+        },
+        "application": {
+            "description": "Use cases, commands, queries - application orchestration",
+            "types": [
+                {
+                    "id": "UseCase",
+                    "description": "Application-specific business operation with single purpose",
+                    "rpbl": {
+                        "responsibility": 6,
+                        "purity": 5,
+                        "boundary": 7,
+                        "lifecycle": 4
+                    }
+                },
+                {
+                    "id": "Command",
+                    "description": "Immutable intent to change system state (CQRS write)",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 9,
+                        "boundary": 3,
+                        "lifecycle": 2
+                    }
+                },
+                {
+                    "id": "Query",
+                    "description": "Immutable request for system information (CQRS read)",
+                    "rpbl": {
+                        "responsibility": 3,
+                        "purity": 9,
+                        "boundary": 3,
+                        "lifecycle": 2
+                    }
+                },
+                {
+                    "id": "EventHandler",
+                    "description": "Handles domain events and executes side effects",
+                    "rpbl": {
+                        "responsibility": 6,
+                        "purity": 4,
+                        "boundary": 6,
+                        "lifecycle": 5
+                    }
+                },
+                {
+                    "id": "Policy",
+                    "description": "Encapsulated business rule or algorithm",
+                    "rpbl": {
+                        "responsibility": 5,
+                        "purity": 8,
+                        "boundary": 4,
+                        "lifecycle": 8
+                    }
+                },
+                {
+                    "id": "ApplicationService",
+                    "description": "Application-level orchestration and coordination",
+                    "aliases": [
+                        "Service"
+                    ],
+                    "rpbl": {
+                        "responsibility": 7,
+                        "purity": 3,
+                        "boundary": 8,
+                        "lifecycle": 5
+                    }
+                }
+            ]
+        },
+        "infrastructure": {
+            "description": "Persistence, external services, I/O boundaries",
+            "types": [
+                {
+                    "id": "Repository",
+                    "description": "Abstract data access contract for aggregate persistence",
+                    "rpbl": {
+                        "responsibility": 8,
+                        "purity": 6,
+                        "boundary": 7,
+                        "lifecycle": 7
+                    }
+                },
+                {
+                    "id": "RepositoryImpl",
+                    "description": "Concrete repository implementation (I/O boundary)",
+                    "rpbl": {
+                        "responsibility": 8,
+                        "purity": 3,
+                        "boundary": 6,
+                        "lifecycle": 7
+                    }
+                },
+                {
+                    "id": "Gateway",
+                    "description": "Facade for external service integration",
+                    "rpbl": {
+                        "responsibility": 6,
+                        "purity": 2,
+                        "boundary": 9,
+                        "lifecycle": 5
+                    }
+                },
+                {
+                    "id": "Client",
+                    "description": "HTTP/API client for external services",
+                    "rpbl": {
+                        "responsibility": 5,
+                        "purity": 2,
+                        "boundary": 8,
+                        "lifecycle": 4
+                    }
+                },
+                {
+                    "id": "Adapter",
+                    "description": "Converts between domain and external formats",
+                    "rpbl": {
+                        "responsibility": 5,
+                        "purity": 6,
+                        "boundary": 7,
+                        "lifecycle": 4
+                    }
+                },
+                {
+                    "id": "Provider",
+                    "description": "Supplies external resources or configuration",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 4,
+                        "boundary": 6,
+                        "lifecycle": 5
+                    }
+                }
+            ]
+        },
+        "presentation": {
+            "description": "Controllers, endpoints, views - user interface layer",
+            "types": [
+                {
+                    "id": "Controller",
+                    "description": "Handles user input and coordinates application flow",
+                    "rpbl": {
+                        "responsibility": 6,
+                        "purity": 2,
+                        "boundary": 9,
+                        "lifecycle": 4
+                    }
+                },
+                {
+                    "id": "Endpoint",
+                    "description": "API endpoint handling HTTP requests",
+                    "aliases": [
+                        "Handler"
+                    ],
+                    "rpbl": {
+                        "responsibility": 5,
+                        "purity": 2,
+                        "boundary": 9,
+                        "lifecycle": 3
+                    }
+                },
+                {
+                    "id": "DTO",
+                    "description": "Data transfer object / schema (no business behavior)",
+                    "aliases": [
+                        "Schema",
+                        "Request",
+                        "Response"
+                    ],
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 8,
+                        "boundary": 8,
+                        "lifecycle": 3
+                    }
+                },
+                {
+                    "id": "View",
+                    "description": "Template or UI component rendering",
+                    "aliases": [
+                        "Component"
+                    ],
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 3,
+                        "boundary": 8,
+                        "lifecycle": 3
+                    }
+                },
+                {
+                    "id": "Presenter",
+                    "description": "Formats data for view presentation",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 6,
+                        "boundary": 7,
+                        "lifecycle": 3
+                    }
+                }
+            ]
+        },
+        "cross_cutting": {
+            "description": "Patterns that span multiple layers",
+            "types": [
+                {
+                    "id": "Factory",
+                    "description": "Encapsulates complex object creation logic",
+                    "rpbl": {
+                        "responsibility": 5,
+                        "purity": 6,
+                        "boundary": 4,
+                        "lifecycle": 3
+                    }
+                },
+                {
+                    "id": "Builder",
+                    "description": "Step-by-step object construction",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 7,
+                        "boundary": 3,
+                        "lifecycle": 3
+                    }
+                },
+                {
+                    "id": "Mapper",
+                    "description": "Converts between different object representations",
+                    "aliases": [
+                        "Converter"
+                    ],
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 8,
+                        "boundary": 4,
+                        "lifecycle": 2
+                    }
+                },
+                {
+                    "id": "Validator",
+                    "description": "Input validation and business rule checks",
+                    "rpbl": {
+                        "responsibility": 4,
+                        "purity": 8,
+                        "boundary": 5,
+                        "lifecycle": 2
+                    }
+                },
+                {
+                    "id": "Configuration",
+                    "description": "Application configuration and settings",
+                    "aliases": [
+                        "Config",
+                        "Settings"
+                    ],
+                    "rpbl": {
+                        "responsibility": 3,
+                        "purity": 7,
+                        "boundary": 5,
+                        "lifecycle": 8
+                    }
+                },
+                {
+                    "id": "Exception",
+                    "description": "Custom error types and error handling",
+                    "aliases": [
+                        "Error"
+                    ],
+                    "rpbl": {
+                        "responsibility": 2,
+                        "purity": 9,
+                        "boundary": 3,
+                        "lifecycle": 1
+                    }
+                },
+                {
+                    "id": "Utility",
+                    "description": "Helper functions and shared utilities",
+                    "aliases": [
+                        "Helper",
+                        "Utils"
+                    ],
+                    "rpbl": {
+                        "responsibility": 3,
+                        "purity": 8,
+                        "boundary": 2,
+                        "lifecycle": 2
+                    }
+                },
+                {
+                    "id": "Test",
+                    "description": "Test cases and test utilities",
+                    "aliases": [
+                        "Spec"
+                    ],
+                    "rpbl": {
+                        "responsibility": 3,
+                        "purity": 5,
+                        "boundary": 2,
+                        "lifecycle": 1
+                    }
+                }
+            ]
+        }
+    },
+    "scoring": {
+        "per_layer": true,
+        "flat_aggregate": true,
+        "layer_weights": {
+            "domain": 1.5,
+            "application": 1.2,
+            "infrastructure": 1.0,
+            "presentation": 1.0,
+            "cross_cutting": 0.8
+        }
+    },
+    "fallback": {
+        "id": "Unknown",
+        "description": "Component that could not be classified with sufficient confidence"
+    }
+}

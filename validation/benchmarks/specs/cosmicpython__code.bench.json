@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "name": "cosmicpython__code",
+  "repo_dir": "cosmicpython__code",
+  "scored_types": [
+    "Command",
+    "DomainEvent",
+    "RepositoryImpl"
+  ],
+  "ignore_path_globs": [
+    "**/tests/**",
+    "**/test/**",
+    "**/__init__.py",
+    "**/.venv/**",
+    "**/.git/**"
+  ],
+  "expected_components": [
+    {
+      "rel_file": "src/allocation/adapters/repository.py",
+      "symbol": "SqlAlchemyRepository",
+      "symbol_kind": "class",
+      "type": "RepositoryImpl"
+    },
+    {
+      "rel_file": "src/allocation/domain/events.py",
+      "symbol": "Allocated",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/allocation/domain/events.py",
+      "symbol": "Deallocated",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/allocation/domain/events.py",
+      "symbol": "OutOfStock",
+      "symbol_kind": "class",
+      "type": "DomainEvent"
+    },
+    {
+      "rel_file": "src/allocation/domain/commands.py",
+      "symbol": "Allocate",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/allocation/domain/commands.py",
+      "symbol": "CreateBatch",
+      "symbol_kind": "class",
+      "type": "Command"
+    },
+    {
+      "rel_file": "src/allocation/domain/commands.py",
+      "symbol": "ChangeBatchQuantity",
+      "symbol_kind": "class",
+      "type": "Command"
+    }
+  ],
+  "extraction_metadata": {
+    "method": "inheritance_analysis",
+    "confidence_threshold": 0.95,
+    "files_scanned": 21,
+    "base_classes_found": {
+      "AbstractRepository": "src/allocation/adapters/repository.py",
+      "Event": "src/allocation/domain/events.py",
+      "Command": "src/allocation/domain/commands.py"
+    }
+  },
+  "notes": "Auto-generated via inheritance analysis. 7 components with \u226595% confidence."
+}
