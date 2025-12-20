@@ -133,13 +133,17 @@ By mapping the graph, you can target optimization efforts:
 *   **High Complexity + High Churn**: Refactoring targets ("Hotspots").
 *   **God Classes**: Nodes with excessive `smell:god_class` scores (>70) should be split to reduce cognitive load.
 
-### Example Node Map
+### Example: Spectrometer Self-Audit
+mapped from `output/audit/graph.json`:
+
 ```mermaid
 graph TD
-    A["Controller: EXEC.HDL"] -->|Calls| B["Service: EXEC.HDL"]
-    B -->|Uses| C["Repository: EXEC.HDL"]
-    C -->|Persists| D["Entity: ORG.AGG"]
-    style B stroke:#f00,stroke-width:2px,stroke-dasharray: 5 5
+    CLI["cli.py: LOG.FNC"] -->|Invokes| LE["LearningEngine: EXE.HDL"]
+    LE -->|Configures| AC["AnalyzerConfig: ORG.AGG"]
+    LE -->|Uses| TS["TreeSitterUniversalEngine: EXE.HDL"]
+    LE -->|Uses| GC["GodClassDetectorLite: ORG.AGG"]
+    GC -.->|Produces| GM["GodClassMetrics: ORG.AGG"]
+    style GC stroke:#f00,stroke-width:2px,stroke-dasharray: 5 5
 ```
 
 ---
