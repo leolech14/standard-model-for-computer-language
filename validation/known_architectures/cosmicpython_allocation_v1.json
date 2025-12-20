@@ -1,0 +1,52 @@
+{
+    "name": "cosmicpython_allocation_v1",
+    "description": "Cosmic Python book example - Clean Architecture with DDD (domain/service_layer/adapters/entrypoints). Ground truth for accuracy testing.",
+    "language": "python",
+    "repo_path": "validation/benchmarks/repos/cosmicpython__code",
+    "scored_types": [
+        "Entity",
+        "ValueObject",
+        "Repository",
+        "RepositoryImpl",
+        "DomainEvent",
+        "Command"
+    ],
+    "ignore_path_globs": [
+        "**/tests/**",
+        "**/__init__.py",
+        "**/.venv/**",
+        "**/.git/**"
+    ],
+    "rules": [
+        {
+            "type": "Entity",
+            "path_glob": "src/allocation/domain/model.py",
+            "name_regex": "^(Product|Batch)$"
+        },
+        {
+            "type": "ValueObject",
+            "path_glob": "src/allocation/domain/model.py",
+            "name_regex": "^OrderLine$"
+        },
+        {
+            "type": "DomainEvent",
+            "path_glob": "src/allocation/domain/events.py",
+            "name_regex": "^(Allocated|Deallocated|OutOfStock)$"
+        },
+        {
+            "type": "Command",
+            "path_glob": "src/allocation/domain/commands.py",
+            "name_regex": "^(Allocate|CreateBatch|ChangeBatchQuantity)$"
+        },
+        {
+            "type": "Repository",
+            "path_glob": "src/allocation/adapters/repository.py",
+            "name_regex": "^AbstractRepository$"
+        },
+        {
+            "type": "RepositoryImpl",
+            "path_glob": "src/allocation/adapters/repository.py",
+            "name_regex": "^SqlAlchemyRepository$"
+        }
+    ]
+}
