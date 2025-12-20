@@ -1,0 +1,64 @@
+{
+    "name": "poetry_cli_v1",
+    "description": "Python Poetry - CLI package manager. Ground truth for CLI architecture pattern testing.",
+    "language": "python",
+    "repo_path": "validation/benchmarks/repos/python-poetry__poetry",
+    "scored_types": [
+        "Configuration",
+        "Command",
+        "Service",
+        "Factory",
+        "Exception"
+    ],
+    "ignore_path_globs": [
+        "**/tests/**",
+        "**/__init__.py",
+        "**/.venv/**",
+        "**/.git/**"
+    ],
+    "rules": [
+        {
+            "type": "Configuration",
+            "path_glob": "src/poetry/config/config.py",
+            "name_regex": "^(Config|PackageFilterPolicy)$"
+        },
+        {
+            "type": "Configuration",
+            "path_glob": "src/poetry/config/*.py",
+            "name_regex": ".*ConfigSource$"
+        },
+        {
+            "type": "Command",
+            "path_glob": "src/poetry/console/commands/*.py",
+            "name_regex": ".*Command$"
+        },
+        {
+            "type": "Command",
+            "path_glob": "src/poetry/console/commands/**/*.py",
+            "name_regex": ".*Command$"
+        },
+        {
+            "type": "Service",
+            "path_glob": "src/poetry/publishing/publisher.py",
+            "name_regex": "^Publisher$"
+        },
+        {
+            "type": "Service",
+            "path_glob": "src/poetry/puzzle/solver.py",
+            "name_regex": "^Solver$"
+        },
+        {
+            "type": "Service",
+            "path_glob": "src/poetry/puzzle/provider.py",
+            "name_regex": "^Provider$"
+        },
+        {
+            "type": "Factory",
+            "path_glob": "src/poetry/factory.py"
+        },
+        {
+            "type": "Exception",
+            "path_glob": "src/poetry/**/*exceptions*.py"
+        }
+    ]
+}
