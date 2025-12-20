@@ -108,6 +108,42 @@ The taxonomy organizes all code into 4 "Continents":
 
 ---
 
+## 💡 Use Cases
+
+### 1. Architectural Audits
+Instantly visualize the structural integrity of a codebase. Identify "Antimatter" (God Classes), circular dependencies, and layer violations (e.g., Domain Logic importing Infrastructure).
+
+### 2. Legacy Migration
+When moving a monolith to microservices, use Spectrometer to identify **Seams**—natural boundaries where modules are decoupled. The `SemanticID` graph makes these seams explicit.
+
+### 3. LLM Context Optimization
+Raw code is expensive to tokenize. Semantic IDs provide a **lossy compression** of the entire codebase structure (reducing token count by ~95%) while preserving the architectural relationships needed for reasoning.
+
+---
+
+## 🕸️ Visualizing the Graph (Mapping & Optimization)
+
+The engine produces a `graph.json` that maps the codebase as a directed graph:
+- **Nodes**: Semantic IDs (Classes, Functions, Modules).
+- **Edges**: Dependencies (Imports, Inheritance, Calls).
+
+### Optimization Strategy
+By mapping the graph, you can target optimization efforts:
+*   **High Fan-In Nodes**: Critical infrastructure; optimize for stability.
+*   **High Complexity + High Churn**: Refactoring targets ("Hotspots").
+*   **God Classes**: Nodes with excessive `smell:god_class` scores (>70) should be split to reduce cognitive load.
+
+### Example Node Map
+```mermaid
+graph TD
+    A[Controller | EXEC.HDL] -->|Calls| B[Service | EXEC.HDL]
+    B -->|Uses| C[Repository | EXEC.HDL]
+    C -->|Persists| D[Entity | ORG.AGG]
+    style B stroke:#f00,stroke-width:2px,stroke-dasharray: 5 5 (God Class Risk)
+```
+
+---
+
 ## Contributing
 
 This is an open scientific instrument. We welcome contributions to refine the taxonomy (`patterns/canonical_types.json`) or improve language support in the `TreeSitterUniversalEngine`.
