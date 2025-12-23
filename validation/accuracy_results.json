@@ -1,0 +1,259 @@
+{
+  "total": 500,
+  "correct": 332,
+  "incorrect": 128,
+  "uncertain": 40,
+  "by_role": {
+    "Utility": {
+      "correct": 53,
+      "incorrect": 11,
+      "uncertain": 0
+    },
+    "Configuration": {
+      "correct": 3,
+      "incorrect": 3,
+      "uncertain": 0
+    },
+    "Specification": {
+      "correct": 8,
+      "incorrect": 9,
+      "uncertain": 0
+    },
+    "Job": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 2
+    },
+    "Command": {
+      "correct": 5,
+      "incorrect": 5,
+      "uncertain": 0
+    },
+    "Lifecycle": {
+      "correct": 0,
+      "incorrect": 1,
+      "uncertain": 0
+    },
+    "Query": {
+      "correct": 36,
+      "incorrect": 5,
+      "uncertain": 0
+    },
+    "Test": {
+      "correct": 157,
+      "incorrect": 67,
+      "uncertain": 0
+    },
+    "Service": {
+      "correct": 9,
+      "incorrect": 0,
+      "uncertain": 0
+    },
+    "ValueObject": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 1
+    },
+    "Provider": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 5
+    },
+    "Controller": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 6
+    },
+    "Mapper": {
+      "correct": 4,
+      "incorrect": 3,
+      "uncertain": 0
+    },
+    "DTO": {
+      "correct": 16,
+      "incorrect": 0,
+      "uncertain": 0
+    },
+    "Iterator": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 1
+    },
+    "Exception": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 2
+    },
+    "Factory": {
+      "correct": 14,
+      "incorrect": 3,
+      "uncertain": 0
+    },
+    "EventHandler": {
+      "correct": 4,
+      "incorrect": 2,
+      "uncertain": 0
+    },
+    "Internal": {
+      "correct": 5,
+      "incorrect": 14,
+      "uncertain": 0
+    },
+    "ApplicationService": {
+      "correct": 17,
+      "incorrect": 5,
+      "uncertain": 0
+    },
+    "Observer": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 9
+    },
+    "DomainService": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 5
+    },
+    "Validator": {
+      "correct": 1,
+      "incorrect": 0,
+      "uncertain": 0
+    },
+    "UseCase": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 5
+    },
+    "Fixture": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 2
+    },
+    "Policy": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 1
+    },
+    "Entity": {
+      "correct": 0,
+      "incorrect": 0,
+      "uncertain": 1
+    }
+  },
+  "errors": [
+    {
+      "name": "test_cold_import_time",
+      "assigned": "Configuration",
+      "should_be": "Test",
+      "conf": 90.0
+    },
+    {
+      "name": "DomainReflectionTest.testtable_schema",
+      "assigned": "Configuration",
+      "should_be": "Test",
+      "conf": 90.0
+    },
+    {
+      "name": "SelfReferentialTest.node_fixture",
+      "assigned": "Configuration",
+      "should_be": "Test",
+      "conf": 90.0
+    },
+    {
+      "name": "TestResult.report_stats",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 75.0
+    },
+    {
+      "name": "NonPKCascadeTest.setup_classes",
+      "assigned": "ApplicationService",
+      "should_be": "Test",
+      "conf": 70.0
+    },
+    {
+      "name": "CustomUserPasswordResetTest.setUp",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "TextTest.go",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "SelfRefInheritanceAliasedTest.setup_classes",
+      "assigned": "ApplicationService",
+      "should_be": "Test",
+      "conf": 70.0
+    },
+    {
+      "name": "ComputedReturningTest.define_tables",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "LoginRequiredTestCase.async_view",
+      "assigned": "ApplicationService",
+      "should_be": "Test",
+      "conf": 70.0
+    },
+    {
+      "name": "test_file_response.numbers_for_cleanup",
+      "assigned": "ApplicationService",
+      "should_be": "Test",
+      "conf": 70.0
+    },
+    {
+      "name": "TestEnUS.setUp",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "IdentityTest.fn",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "AttributesTest.somecallable",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "AttributesTest.func1",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "TestUtilsMisc.j3",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "VersioningMappedSelectTest.setup_classes",
+      "assigned": "ApplicationService",
+      "should_be": "Test",
+      "conf": 70.0
+    },
+    {
+      "name": "test_trial_relative_params.objective",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    },
+    {
+      "name": "IdentityReflectionTest.define_tables",
+      "assigned": "Utility",
+      "should_be": "Test",
+      "conf": 60.0
+    }
+  ]
+}
