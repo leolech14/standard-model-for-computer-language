@@ -26,6 +26,7 @@ from antimatter_evaluator import AntimatterEvaluator
 from insights_engine import generate_insights
 from purpose_field import detect_purpose_field, Layer
 from execution_flow import detect_execution_flow
+from performance_predictor import predict_performance
 
 
 def run_proof(target_path: str) -> dict:
@@ -287,10 +288,41 @@ def run_proof(target_path: str) -> dict:
     print()
     
     # ═══════════════════════════════════════════════════════════════════════
-    # STAGE 8: SUMMARY
+    # STAGE 8: PERFORMANCE PREDICTION
     # ═══════════════════════════════════════════════════════════════════════
     print("┌─────────────────────────────────────────────────────────────────┐")
-    print("│ STAGE 8: SUMMARY                                               │")
+    print("│ STAGE 8: PERFORMANCE PREDICTION                                │")
+    print("└─────────────────────────────────────────────────────────────────┘")
+    
+    try:
+        perf_profile = predict_performance(nodes, exec_flow)
+        perf_summary = perf_profile.summary()
+        
+        print(f"  Time types:")
+        for ttype, cost in sorted(perf_summary['time_by_type'].items(), key=lambda x: -x[1]):
+            pct = cost / perf_summary['total_estimated_cost'] * 100 if perf_summary['total_estimated_cost'] else 0
+            print(f"    {ttype:15} {cost:10.0f} ({pct:5.1f}%)")
+        
+        print(f"\n  Critical path: {perf_summary['critical_path_length']} nodes, cost={perf_summary['critical_path_cost']:.0f}")
+        print(f"  Hotspots: {perf_summary['hotspot_count']}")
+        
+        if perf_profile.hotspots:
+            print(f"\n  Top hotspots:")
+            for hs in perf_profile.hotspots[:3]:
+                if hs in perf_profile.nodes:
+                    hn = perf_profile.nodes[hs]
+                    print(f"    - {hn.name} ({hn.time_type.value}, score={hn.hotspot_score:.0f})")
+    except Exception as e:
+        perf_profile = None
+        perf_summary = {}
+        print(f"  ⚠ Performance prediction skipped: {e}")
+    print()
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # STAGE 9: SUMMARY
+    # ═══════════════════════════════════════════════════════════════════════
+    print("┌─────────────────────────────────────────────────────────────────┐")
+    print("│ STAGE 9: SUMMARY                                               │")
     print("└─────────────────────────────────────────────────────────────────┘")
     
     # Build insights summary for JSON
@@ -309,10 +341,10 @@ def run_proof(target_path: str) -> dict:
         "metadata": {
             "target": str(target),
             "timestamp": datetime.now().isoformat(),
-            "version": "2.2.0",
+            "version": "2.3.0",
             "model": "Standard Model of Code",
             "tool": "Collider",
-            "pipeline_stages": 8
+            "pipeline_stages": 9
         },
         "classification": {
             "total_nodes": len(nodes),
@@ -344,6 +376,14 @@ def run_proof(target_path: str) -> dict:
             "dead_code_percent": flow_summary.get('dead_code_percent', 0) if flow_summary else 0,
             "chains_count": flow_summary.get('chains_count', 0) if flow_summary else 0,
             "orphans": exec_flow.orphans[:10] if exec_flow and exec_flow.orphans else []
+        },
+        "performance": {
+            "total_estimated_cost": perf_summary.get('total_estimated_cost', 0) if perf_summary else 0,
+            "critical_path_cost": perf_summary.get('critical_path_cost', 0) if perf_summary else 0,
+            "critical_path_length": perf_summary.get('critical_path_length', 0) if perf_summary else 0,
+            "hotspot_count": perf_summary.get('hotspot_count', 0) if perf_summary else 0,
+            "time_by_type": perf_summary.get('time_by_type', {}) if perf_summary else {},
+            "hotspots": perf_profile.hotspots[:5] if perf_profile and perf_profile.hotspots else []
         },
         "metrics": {
             "entities": entities,
