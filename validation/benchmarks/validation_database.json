@@ -6,7 +6,36 @@
     "total_repos": 999,
     "tested_repos": 0,
     "avg_coverage": null,
-    "avg_confidence": null
+    "avg_confidence": null,
+    "tiers": {
+      "platinum": [
+        1,
+        100
+      ],
+      "gold": [
+        101,
+        300
+      ],
+      "silver": [
+        301,
+        600
+      ],
+      "bronze": [
+        601,
+        999
+      ]
+    },
+    "tier_counts": {
+      "platinum": 100,
+      "gold": 200,
+      "silver": 300,
+      "bronze": 399
+    },
+    "dod": {
+      "min_coverage": 100.0,
+      "min_avg_confidence": 85.0,
+      "min_repo_confidence": 70.0
+    }
   },
   "repos": [
     {
@@ -23,7 +52,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 2,
@@ -39,7 +69,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 3,
@@ -55,7 +86,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 4,
@@ -71,7 +103,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 5,
@@ -87,7 +120,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 6,
@@ -103,7 +137,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 7,
@@ -119,7 +154,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 8,
@@ -135,7 +171,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 9,
@@ -151,7 +188,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 10,
@@ -167,7 +205,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 11,
@@ -183,7 +222,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 12,
@@ -199,7 +239,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 13,
@@ -215,7 +256,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 14,
@@ -231,7 +273,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 15,
@@ -247,7 +290,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 16,
@@ -263,7 +307,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 17,
@@ -279,7 +324,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 18,
@@ -295,7 +341,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 19,
@@ -311,7 +358,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 20,
@@ -327,7 +375,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 21,
@@ -343,7 +392,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 22,
@@ -359,7 +409,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 23,
@@ -375,7 +426,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 24,
@@ -391,7 +443,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 25,
@@ -407,7 +460,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 26,
@@ -423,7 +477,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 27,
@@ -439,7 +494,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 28,
@@ -455,7 +511,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 29,
@@ -471,7 +528,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 30,
@@ -487,7 +545,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 31,
@@ -503,7 +562,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 32,
@@ -519,7 +579,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 33,
@@ -535,7 +596,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 34,
@@ -551,7 +613,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 35,
@@ -567,7 +630,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 36,
@@ -583,7 +647,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 37,
@@ -599,7 +664,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 38,
@@ -615,7 +681,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 39,
@@ -631,7 +698,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 40,
@@ -647,7 +715,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 41,
@@ -663,7 +732,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 42,
@@ -679,7 +749,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 43,
@@ -695,7 +766,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 44,
@@ -711,7 +783,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 45,
@@ -727,7 +800,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 46,
@@ -743,7 +817,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 47,
@@ -759,7 +834,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 48,
@@ -775,7 +851,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 49,
@@ -791,7 +868,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 50,
@@ -807,7 +885,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 51,
@@ -823,7 +902,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 52,
@@ -839,7 +919,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 53,
@@ -855,7 +936,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 54,
@@ -871,7 +953,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 55,
@@ -887,7 +970,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 56,
@@ -903,7 +987,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 57,
@@ -919,7 +1004,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 58,
@@ -935,7 +1021,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 59,
@@ -951,7 +1038,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 60,
@@ -967,7 +1055,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 61,
@@ -983,7 +1072,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 62,
@@ -999,7 +1089,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 63,
@@ -1015,7 +1106,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 64,
@@ -1031,7 +1123,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 65,
@@ -1047,7 +1140,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 66,
@@ -1063,7 +1157,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 67,
@@ -1079,7 +1174,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 68,
@@ -1095,7 +1191,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 69,
@@ -1111,7 +1208,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 70,
@@ -1127,7 +1225,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 71,
@@ -1143,7 +1242,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 72,
@@ -1159,7 +1259,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 73,
@@ -1175,7 +1276,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 74,
@@ -1191,7 +1293,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 75,
@@ -1207,7 +1310,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 76,
@@ -1223,7 +1327,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 77,
@@ -1239,7 +1344,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 78,
@@ -1255,7 +1361,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 79,
@@ -1271,7 +1378,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 80,
@@ -1287,7 +1395,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 81,
@@ -1303,7 +1412,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 82,
@@ -1319,7 +1429,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 83,
@@ -1335,7 +1446,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 84,
@@ -1351,7 +1463,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 85,
@@ -1367,7 +1480,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 86,
@@ -1383,7 +1497,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 87,
@@ -1399,7 +1514,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 88,
@@ -1415,7 +1531,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 89,
@@ -1431,7 +1548,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 90,
@@ -1447,7 +1565,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 91,
@@ -1463,7 +1582,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 92,
@@ -1479,7 +1599,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 93,
@@ -1495,7 +1616,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 94,
@@ -1511,7 +1633,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 95,
@@ -1527,7 +1650,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 96,
@@ -1543,7 +1667,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 97,
@@ -1559,7 +1684,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 98,
@@ -1575,7 +1701,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 99,
@@ -1591,7 +1718,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 100,
@@ -1607,7 +1735,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "platinum"
     },
     {
       "rank": 101,
@@ -1623,7 +1752,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 102,
@@ -1639,7 +1769,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 103,
@@ -1655,7 +1786,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 104,
@@ -1671,7 +1803,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 105,
@@ -1687,7 +1820,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 106,
@@ -1703,7 +1837,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 107,
@@ -1719,7 +1854,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 108,
@@ -1735,7 +1871,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 109,
@@ -1751,7 +1888,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 110,
@@ -1767,7 +1905,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 111,
@@ -1783,7 +1922,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 112,
@@ -1799,7 +1939,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 113,
@@ -1815,7 +1956,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 114,
@@ -1831,7 +1973,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 115,
@@ -1847,7 +1990,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 116,
@@ -1863,7 +2007,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 117,
@@ -1879,7 +2024,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 118,
@@ -1895,7 +2041,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 119,
@@ -1911,7 +2058,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 120,
@@ -1927,7 +2075,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 121,
@@ -1943,7 +2092,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 122,
@@ -1959,7 +2109,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 123,
@@ -1975,7 +2126,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 124,
@@ -1991,7 +2143,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 125,
@@ -2007,7 +2160,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 126,
@@ -2023,7 +2177,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 127,
@@ -2039,7 +2194,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 128,
@@ -2055,7 +2211,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 129,
@@ -2071,7 +2228,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 130,
@@ -2087,7 +2245,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 131,
@@ -2103,7 +2262,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 132,
@@ -2119,7 +2279,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 133,
@@ -2135,7 +2296,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 134,
@@ -2151,7 +2313,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 135,
@@ -2167,7 +2330,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 136,
@@ -2183,7 +2347,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 137,
@@ -2199,7 +2364,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 138,
@@ -2215,7 +2381,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 139,
@@ -2231,7 +2398,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 140,
@@ -2247,7 +2415,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 141,
@@ -2263,7 +2432,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 142,
@@ -2279,7 +2449,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 143,
@@ -2295,7 +2466,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 144,
@@ -2311,7 +2483,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 145,
@@ -2327,7 +2500,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 146,
@@ -2343,7 +2517,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 147,
@@ -2359,7 +2534,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 148,
@@ -2375,7 +2551,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 149,
@@ -2391,7 +2568,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 150,
@@ -2407,7 +2585,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 151,
@@ -2423,7 +2602,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 152,
@@ -2439,7 +2619,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 153,
@@ -2455,7 +2636,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 154,
@@ -2471,7 +2653,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 155,
@@ -2487,7 +2670,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 156,
@@ -2503,7 +2687,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 157,
@@ -2519,7 +2704,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 158,
@@ -2535,7 +2721,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 159,
@@ -2551,7 +2738,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 160,
@@ -2567,7 +2755,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 161,
@@ -2583,7 +2772,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 162,
@@ -2599,7 +2789,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 163,
@@ -2615,7 +2806,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 164,
@@ -2631,7 +2823,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 165,
@@ -2647,7 +2840,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 166,
@@ -2663,7 +2857,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 167,
@@ -2679,7 +2874,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 168,
@@ -2695,7 +2891,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 169,
@@ -2711,7 +2908,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 170,
@@ -2727,7 +2925,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 171,
@@ -2743,7 +2942,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 172,
@@ -2759,7 +2959,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 173,
@@ -2775,7 +2976,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 174,
@@ -2791,7 +2993,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 175,
@@ -2807,7 +3010,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 176,
@@ -2823,7 +3027,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 177,
@@ -2839,7 +3044,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 178,
@@ -2855,7 +3061,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 179,
@@ -2871,7 +3078,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 180,
@@ -2887,7 +3095,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 181,
@@ -2903,7 +3112,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 182,
@@ -2919,7 +3129,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 183,
@@ -2935,7 +3146,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 184,
@@ -2951,7 +3163,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 185,
@@ -2967,7 +3180,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 186,
@@ -2983,7 +3197,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 187,
@@ -2999,7 +3214,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 188,
@@ -3015,7 +3231,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 189,
@@ -3031,7 +3248,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 190,
@@ -3047,7 +3265,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 191,
@@ -3063,7 +3282,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 192,
@@ -3079,7 +3299,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 193,
@@ -3095,7 +3316,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 194,
@@ -3111,7 +3333,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 195,
@@ -3127,7 +3350,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 196,
@@ -3143,7 +3367,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 197,
@@ -3159,7 +3384,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 198,
@@ -3175,7 +3401,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 199,
@@ -3191,7 +3418,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 200,
@@ -3207,7 +3435,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 201,
@@ -3223,7 +3452,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 202,
@@ -3239,7 +3469,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 203,
@@ -3255,7 +3486,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 204,
@@ -3271,7 +3503,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 205,
@@ -3287,7 +3520,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 206,
@@ -3303,7 +3537,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 207,
@@ -3319,7 +3554,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 208,
@@ -3335,7 +3571,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 209,
@@ -3351,7 +3588,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 210,
@@ -3367,7 +3605,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 211,
@@ -3383,7 +3622,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 212,
@@ -3399,7 +3639,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 213,
@@ -3415,7 +3656,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 214,
@@ -3431,7 +3673,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 215,
@@ -3447,7 +3690,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 216,
@@ -3463,7 +3707,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 217,
@@ -3479,7 +3724,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 218,
@@ -3495,7 +3741,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 219,
@@ -3511,7 +3758,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 220,
@@ -3527,7 +3775,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 221,
@@ -3543,7 +3792,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 222,
@@ -3559,7 +3809,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 223,
@@ -3575,7 +3826,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 224,
@@ -3591,7 +3843,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 225,
@@ -3607,7 +3860,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 226,
@@ -3623,7 +3877,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 227,
@@ -3639,7 +3894,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 228,
@@ -3655,7 +3911,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 229,
@@ -3671,7 +3928,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 230,
@@ -3687,7 +3945,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 231,
@@ -3703,7 +3962,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 232,
@@ -3719,7 +3979,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 233,
@@ -3735,7 +3996,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 234,
@@ -3751,7 +4013,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 235,
@@ -3767,7 +4030,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 236,
@@ -3783,7 +4047,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 237,
@@ -3799,7 +4064,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 238,
@@ -3815,7 +4081,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 239,
@@ -3831,7 +4098,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 240,
@@ -3847,7 +4115,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 241,
@@ -3863,7 +4132,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 242,
@@ -3879,7 +4149,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 243,
@@ -3895,7 +4166,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 244,
@@ -3911,7 +4183,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 245,
@@ -3927,7 +4200,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 246,
@@ -3943,7 +4217,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 247,
@@ -3959,7 +4234,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 248,
@@ -3975,7 +4251,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 249,
@@ -3991,7 +4268,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 250,
@@ -4007,7 +4285,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 251,
@@ -4023,7 +4302,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 252,
@@ -4039,7 +4319,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 253,
@@ -4055,7 +4336,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 254,
@@ -4071,7 +4353,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 255,
@@ -4087,7 +4370,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 256,
@@ -4103,7 +4387,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 257,
@@ -4119,7 +4404,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 258,
@@ -4135,7 +4421,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 259,
@@ -4151,7 +4438,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 260,
@@ -4167,7 +4455,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 261,
@@ -4183,7 +4472,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 262,
@@ -4199,7 +4489,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 263,
@@ -4215,7 +4506,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 264,
@@ -4231,7 +4523,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 265,
@@ -4247,7 +4540,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 266,
@@ -4263,7 +4557,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 267,
@@ -4279,7 +4574,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 268,
@@ -4295,7 +4591,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 269,
@@ -4311,7 +4608,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 270,
@@ -4327,7 +4625,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 271,
@@ -4343,7 +4642,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 272,
@@ -4359,7 +4659,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 273,
@@ -4375,7 +4676,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 274,
@@ -4391,7 +4693,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 275,
@@ -4407,7 +4710,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 276,
@@ -4423,7 +4727,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 277,
@@ -4439,7 +4744,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 278,
@@ -4455,7 +4761,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 279,
@@ -4471,7 +4778,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 280,
@@ -4487,7 +4795,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 281,
@@ -4503,7 +4812,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 282,
@@ -4519,7 +4829,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 283,
@@ -4535,7 +4846,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 284,
@@ -4551,7 +4863,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 285,
@@ -4567,7 +4880,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 286,
@@ -4583,7 +4897,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 287,
@@ -4599,7 +4914,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 288,
@@ -4615,7 +4931,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 289,
@@ -4631,7 +4948,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 290,
@@ -4647,7 +4965,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 291,
@@ -4663,7 +4982,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 292,
@@ -4679,7 +4999,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 293,
@@ -4695,7 +5016,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 294,
@@ -4711,7 +5033,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 295,
@@ -4727,7 +5050,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 296,
@@ -4743,7 +5067,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 297,
@@ -4759,7 +5084,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 298,
@@ -4775,7 +5101,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 299,
@@ -4791,7 +5118,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 300,
@@ -4807,7 +5135,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "gold"
     },
     {
       "rank": 301,
@@ -4823,7 +5152,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 302,
@@ -4839,7 +5169,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 303,
@@ -4855,7 +5186,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 304,
@@ -4871,7 +5203,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 305,
@@ -4887,7 +5220,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 306,
@@ -4903,7 +5237,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 307,
@@ -4919,7 +5254,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 308,
@@ -4935,7 +5271,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 309,
@@ -4951,7 +5288,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 310,
@@ -4967,7 +5305,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 311,
@@ -4983,7 +5322,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 312,
@@ -4999,7 +5339,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 313,
@@ -5015,7 +5356,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 314,
@@ -5031,7 +5373,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 315,
@@ -5047,7 +5390,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 316,
@@ -5063,7 +5407,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 317,
@@ -5079,7 +5424,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 318,
@@ -5095,7 +5441,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 319,
@@ -5111,7 +5458,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 320,
@@ -5127,7 +5475,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 321,
@@ -5143,7 +5492,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 322,
@@ -5159,7 +5509,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 323,
@@ -5175,7 +5526,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 324,
@@ -5191,7 +5543,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 325,
@@ -5207,7 +5560,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 326,
@@ -5223,7 +5577,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 327,
@@ -5239,7 +5594,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 328,
@@ -5255,7 +5611,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 329,
@@ -5271,7 +5628,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 330,
@@ -5287,7 +5645,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 331,
@@ -5303,7 +5662,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 332,
@@ -5319,7 +5679,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 333,
@@ -5335,7 +5696,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 334,
@@ -5351,7 +5713,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 335,
@@ -5367,7 +5730,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 336,
@@ -5383,7 +5747,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 337,
@@ -5399,7 +5764,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 338,
@@ -5415,7 +5781,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 339,
@@ -5431,7 +5798,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 340,
@@ -5447,7 +5815,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 341,
@@ -5463,7 +5832,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 342,
@@ -5479,7 +5849,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 343,
@@ -5495,7 +5866,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 344,
@@ -5511,7 +5883,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 345,
@@ -5527,7 +5900,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 346,
@@ -5543,7 +5917,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 347,
@@ -5559,7 +5934,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 348,
@@ -5575,7 +5951,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 349,
@@ -5591,7 +5968,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 350,
@@ -5607,7 +5985,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 351,
@@ -5623,7 +6002,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 352,
@@ -5639,7 +6019,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 353,
@@ -5655,7 +6036,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 354,
@@ -5671,7 +6053,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 355,
@@ -5687,7 +6070,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 356,
@@ -5703,7 +6087,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 357,
@@ -5719,7 +6104,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 358,
@@ -5735,7 +6121,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 359,
@@ -5751,7 +6138,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 360,
@@ -5767,7 +6155,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 361,
@@ -5783,7 +6172,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 362,
@@ -5799,7 +6189,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 363,
@@ -5815,7 +6206,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 364,
@@ -5831,7 +6223,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 365,
@@ -5847,7 +6240,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 366,
@@ -5863,7 +6257,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 367,
@@ -5879,7 +6274,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 368,
@@ -5895,7 +6291,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 369,
@@ -5911,7 +6308,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 370,
@@ -5927,7 +6325,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 371,
@@ -5943,7 +6342,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 372,
@@ -5959,7 +6359,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 373,
@@ -5975,7 +6376,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 374,
@@ -5991,7 +6393,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 375,
@@ -6007,7 +6410,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 376,
@@ -6023,7 +6427,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 377,
@@ -6039,7 +6444,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 378,
@@ -6055,7 +6461,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 379,
@@ -6071,7 +6478,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 380,
@@ -6087,7 +6495,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 381,
@@ -6103,7 +6512,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 382,
@@ -6119,7 +6529,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 383,
@@ -6135,7 +6546,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 384,
@@ -6151,7 +6563,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 385,
@@ -6167,7 +6580,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 386,
@@ -6183,7 +6597,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 387,
@@ -6199,7 +6614,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 388,
@@ -6215,7 +6631,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 389,
@@ -6231,7 +6648,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 390,
@@ -6247,7 +6665,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 391,
@@ -6263,7 +6682,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 392,
@@ -6279,7 +6699,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 393,
@@ -6295,7 +6716,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 394,
@@ -6311,7 +6733,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 395,
@@ -6327,7 +6750,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 396,
@@ -6343,7 +6767,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 397,
@@ -6359,7 +6784,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 398,
@@ -6375,7 +6801,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 399,
@@ -6391,7 +6818,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 400,
@@ -6407,7 +6835,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 401,
@@ -6423,7 +6852,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 402,
@@ -6439,7 +6869,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 403,
@@ -6455,7 +6886,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 404,
@@ -6471,7 +6903,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 405,
@@ -6487,7 +6920,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 406,
@@ -6503,7 +6937,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 407,
@@ -6519,7 +6954,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 408,
@@ -6535,7 +6971,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 409,
@@ -6551,7 +6988,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 410,
@@ -6567,7 +7005,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 411,
@@ -6583,7 +7022,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 412,
@@ -6599,7 +7039,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 413,
@@ -6615,7 +7056,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 414,
@@ -6631,7 +7073,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 415,
@@ -6647,7 +7090,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 416,
@@ -6663,7 +7107,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 417,
@@ -6679,7 +7124,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 418,
@@ -6695,7 +7141,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 419,
@@ -6711,7 +7158,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 420,
@@ -6727,7 +7175,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 421,
@@ -6743,7 +7192,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 422,
@@ -6759,7 +7209,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 423,
@@ -6775,7 +7226,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 424,
@@ -6791,7 +7243,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 425,
@@ -6807,7 +7260,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 426,
@@ -6823,7 +7277,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 427,
@@ -6839,7 +7294,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 428,
@@ -6855,7 +7311,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 429,
@@ -6871,7 +7328,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 430,
@@ -6887,7 +7345,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 431,
@@ -6903,7 +7362,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 432,
@@ -6919,7 +7379,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 433,
@@ -6935,7 +7396,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 434,
@@ -6951,7 +7413,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 435,
@@ -6967,7 +7430,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 436,
@@ -6983,7 +7447,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 437,
@@ -6999,7 +7464,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 438,
@@ -7015,7 +7481,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 439,
@@ -7031,7 +7498,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 440,
@@ -7047,7 +7515,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 441,
@@ -7063,7 +7532,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 442,
@@ -7079,7 +7549,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 443,
@@ -7095,7 +7566,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 444,
@@ -7111,7 +7583,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 445,
@@ -7127,7 +7600,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 446,
@@ -7143,7 +7617,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 447,
@@ -7159,7 +7634,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 448,
@@ -7175,7 +7651,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 449,
@@ -7191,7 +7668,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 450,
@@ -7207,7 +7685,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 451,
@@ -7223,7 +7702,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 452,
@@ -7239,7 +7719,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 453,
@@ -7255,7 +7736,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 454,
@@ -7271,7 +7753,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 455,
@@ -7287,7 +7770,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 456,
@@ -7303,7 +7787,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 457,
@@ -7319,7 +7804,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 458,
@@ -7335,7 +7821,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 459,
@@ -7351,7 +7838,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 460,
@@ -7367,7 +7855,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 461,
@@ -7383,7 +7872,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 462,
@@ -7399,7 +7889,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 463,
@@ -7415,7 +7906,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 464,
@@ -7431,7 +7923,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 465,
@@ -7447,7 +7940,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 466,
@@ -7463,7 +7957,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 467,
@@ -7479,7 +7974,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 468,
@@ -7495,7 +7991,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 469,
@@ -7511,7 +8008,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 470,
@@ -7527,7 +8025,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 471,
@@ -7543,7 +8042,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 472,
@@ -7559,7 +8059,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 473,
@@ -7575,7 +8076,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 474,
@@ -7591,7 +8093,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 475,
@@ -7607,7 +8110,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 476,
@@ -7623,7 +8127,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 477,
@@ -7639,7 +8144,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 478,
@@ -7655,7 +8161,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 479,
@@ -7671,7 +8178,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 480,
@@ -7687,7 +8195,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 481,
@@ -7703,7 +8212,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 482,
@@ -7719,7 +8229,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 483,
@@ -7735,7 +8246,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 484,
@@ -7751,7 +8263,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 485,
@@ -7767,7 +8280,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 486,
@@ -7783,7 +8297,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 487,
@@ -7799,7 +8314,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 488,
@@ -7815,7 +8331,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 489,
@@ -7831,7 +8348,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 490,
@@ -7847,7 +8365,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 491,
@@ -7863,7 +8382,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 492,
@@ -7879,7 +8399,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 493,
@@ -7895,7 +8416,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 494,
@@ -7911,7 +8433,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 495,
@@ -7927,7 +8450,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 496,
@@ -7943,7 +8467,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 497,
@@ -7959,7 +8484,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 498,
@@ -7975,7 +8501,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 499,
@@ -7991,7 +8518,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 500,
@@ -8007,7 +8535,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 501,
@@ -8023,7 +8552,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 502,
@@ -8039,7 +8569,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 503,
@@ -8055,7 +8586,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 504,
@@ -8071,7 +8603,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 505,
@@ -8087,7 +8620,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 506,
@@ -8103,7 +8637,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 507,
@@ -8119,7 +8654,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 508,
@@ -8135,7 +8671,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 509,
@@ -8151,7 +8688,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 510,
@@ -8167,7 +8705,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 511,
@@ -8183,7 +8722,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 512,
@@ -8199,7 +8739,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 513,
@@ -8215,7 +8756,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 514,
@@ -8231,7 +8773,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 515,
@@ -8247,7 +8790,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 516,
@@ -8263,7 +8807,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 517,
@@ -8279,7 +8824,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 518,
@@ -8295,7 +8841,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 519,
@@ -8311,7 +8858,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 520,
@@ -8327,7 +8875,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 521,
@@ -8343,7 +8892,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 522,
@@ -8359,7 +8909,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 523,
@@ -8375,7 +8926,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 524,
@@ -8391,7 +8943,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 525,
@@ -8407,7 +8960,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 526,
@@ -8423,7 +8977,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 527,
@@ -8439,7 +8994,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 528,
@@ -8455,7 +9011,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 529,
@@ -8471,7 +9028,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 530,
@@ -8487,7 +9045,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 531,
@@ -8503,7 +9062,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 532,
@@ -8519,7 +9079,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 533,
@@ -8535,7 +9096,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 534,
@@ -8551,7 +9113,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 535,
@@ -8567,7 +9130,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 536,
@@ -8583,7 +9147,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 537,
@@ -8599,7 +9164,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 538,
@@ -8615,7 +9181,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 539,
@@ -8631,7 +9198,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 540,
@@ -8647,7 +9215,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 541,
@@ -8663,7 +9232,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 542,
@@ -8679,7 +9249,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 543,
@@ -8695,7 +9266,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 544,
@@ -8711,7 +9283,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 545,
@@ -8727,7 +9300,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 546,
@@ -8743,7 +9317,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 547,
@@ -8759,7 +9334,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 548,
@@ -8775,7 +9351,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 549,
@@ -8791,7 +9368,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 550,
@@ -8807,7 +9385,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 551,
@@ -8823,7 +9402,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 552,
@@ -8839,7 +9419,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 553,
@@ -8855,7 +9436,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 554,
@@ -8871,7 +9453,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 555,
@@ -8887,7 +9470,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 556,
@@ -8903,7 +9487,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 557,
@@ -8919,7 +9504,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 558,
@@ -8935,7 +9521,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 559,
@@ -8951,7 +9538,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 560,
@@ -8967,7 +9555,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 561,
@@ -8983,7 +9572,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 562,
@@ -8999,7 +9589,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 563,
@@ -9015,7 +9606,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 564,
@@ -9031,7 +9623,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 565,
@@ -9047,7 +9640,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 566,
@@ -9063,7 +9657,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 567,
@@ -9079,7 +9674,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 568,
@@ -9095,7 +9691,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 569,
@@ -9111,7 +9708,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 570,
@@ -9127,7 +9725,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 571,
@@ -9143,7 +9742,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 572,
@@ -9159,7 +9759,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 573,
@@ -9175,7 +9776,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 574,
@@ -9191,7 +9793,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 575,
@@ -9207,7 +9810,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 576,
@@ -9223,7 +9827,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 577,
@@ -9239,7 +9844,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 578,
@@ -9255,7 +9861,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 579,
@@ -9271,7 +9878,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 580,
@@ -9287,7 +9895,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 581,
@@ -9303,7 +9912,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 582,
@@ -9319,7 +9929,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 583,
@@ -9335,7 +9946,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 584,
@@ -9351,7 +9963,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 585,
@@ -9367,7 +9980,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 586,
@@ -9383,7 +9997,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 587,
@@ -9399,7 +10014,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 588,
@@ -9415,7 +10031,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 589,
@@ -9431,7 +10048,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 590,
@@ -9447,7 +10065,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 591,
@@ -9463,7 +10082,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 592,
@@ -9479,7 +10099,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 593,
@@ -9495,7 +10116,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 594,
@@ -9511,7 +10133,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 595,
@@ -9527,7 +10150,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 596,
@@ -9543,7 +10167,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 597,
@@ -9559,7 +10184,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 598,
@@ -9575,7 +10201,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 599,
@@ -9591,7 +10218,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 600,
@@ -9607,7 +10235,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "silver"
     },
     {
       "rank": 601,
@@ -9623,7 +10252,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 602,
@@ -9639,7 +10269,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 603,
@@ -9655,7 +10286,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 604,
@@ -9671,7 +10303,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 605,
@@ -9687,7 +10320,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 606,
@@ -9703,7 +10337,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 607,
@@ -9719,7 +10354,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 608,
@@ -9735,7 +10371,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 609,
@@ -9751,7 +10388,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 610,
@@ -9767,7 +10405,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 611,
@@ -9783,7 +10422,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 612,
@@ -9799,7 +10439,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 613,
@@ -9815,7 +10456,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 614,
@@ -9831,7 +10473,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 615,
@@ -9847,7 +10490,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 616,
@@ -9863,7 +10507,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 617,
@@ -9879,7 +10524,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 618,
@@ -9895,7 +10541,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 619,
@@ -9911,7 +10558,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 620,
@@ -9927,7 +10575,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 621,
@@ -9943,7 +10592,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 622,
@@ -9959,7 +10609,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 623,
@@ -9975,7 +10626,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 624,
@@ -9991,7 +10643,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 625,
@@ -10007,7 +10660,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 626,
@@ -10023,7 +10677,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 627,
@@ -10039,7 +10694,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 628,
@@ -10055,7 +10711,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 629,
@@ -10071,7 +10728,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 630,
@@ -10087,7 +10745,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 631,
@@ -10103,7 +10762,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 632,
@@ -10119,7 +10779,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 633,
@@ -10135,7 +10796,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 634,
@@ -10151,7 +10813,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 635,
@@ -10167,7 +10830,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 636,
@@ -10183,7 +10847,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 637,
@@ -10199,7 +10864,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 638,
@@ -10215,7 +10881,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 639,
@@ -10231,7 +10898,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 640,
@@ -10247,7 +10915,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 641,
@@ -10263,7 +10932,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 642,
@@ -10279,7 +10949,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 643,
@@ -10295,7 +10966,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 644,
@@ -10311,7 +10983,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 645,
@@ -10327,7 +11000,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 646,
@@ -10343,7 +11017,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 647,
@@ -10359,7 +11034,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 648,
@@ -10375,7 +11051,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 649,
@@ -10391,7 +11068,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 650,
@@ -10407,7 +11085,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 651,
@@ -10423,7 +11102,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 652,
@@ -10439,7 +11119,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 653,
@@ -10455,7 +11136,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 654,
@@ -10471,7 +11153,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 655,
@@ -10487,7 +11170,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 656,
@@ -10503,7 +11187,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 657,
@@ -10519,7 +11204,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 658,
@@ -10535,7 +11221,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 659,
@@ -10551,7 +11238,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 660,
@@ -10567,7 +11255,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 661,
@@ -10583,7 +11272,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 662,
@@ -10599,7 +11289,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 663,
@@ -10615,7 +11306,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 664,
@@ -10631,7 +11323,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 665,
@@ -10647,7 +11340,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 666,
@@ -10663,7 +11357,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 667,
@@ -10679,7 +11374,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 668,
@@ -10695,7 +11391,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 669,
@@ -10711,7 +11408,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 670,
@@ -10727,7 +11425,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 671,
@@ -10743,7 +11442,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 672,
@@ -10759,7 +11459,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 673,
@@ -10775,7 +11476,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 674,
@@ -10791,7 +11493,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 675,
@@ -10807,7 +11510,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 676,
@@ -10823,7 +11527,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 677,
@@ -10839,7 +11544,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 678,
@@ -10855,7 +11561,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 679,
@@ -10871,7 +11578,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 680,
@@ -10887,7 +11595,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 681,
@@ -10903,7 +11612,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 682,
@@ -10919,7 +11629,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 683,
@@ -10935,7 +11646,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 684,
@@ -10951,7 +11663,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 685,
@@ -10967,7 +11680,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 686,
@@ -10983,7 +11697,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 687,
@@ -10999,7 +11714,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 688,
@@ -11015,7 +11731,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 689,
@@ -11031,7 +11748,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 690,
@@ -11047,7 +11765,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 691,
@@ -11063,7 +11782,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 692,
@@ -11079,7 +11799,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 693,
@@ -11095,7 +11816,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 694,
@@ -11111,7 +11833,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 695,
@@ -11127,7 +11850,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 696,
@@ -11143,7 +11867,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 697,
@@ -11159,7 +11884,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 698,
@@ -11175,7 +11901,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 699,
@@ -11191,7 +11918,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 700,
@@ -11207,7 +11935,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 701,
@@ -11223,7 +11952,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 702,
@@ -11239,7 +11969,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 703,
@@ -11255,7 +11986,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 704,
@@ -11271,7 +12003,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 705,
@@ -11287,7 +12020,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 706,
@@ -11303,7 +12037,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 707,
@@ -11319,7 +12054,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 708,
@@ -11335,7 +12071,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 709,
@@ -11351,7 +12088,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 710,
@@ -11367,7 +12105,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 711,
@@ -11383,7 +12122,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 712,
@@ -11399,7 +12139,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 713,
@@ -11415,7 +12156,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 714,
@@ -11431,7 +12173,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 715,
@@ -11447,7 +12190,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 716,
@@ -11463,7 +12207,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 717,
@@ -11479,7 +12224,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 718,
@@ -11495,7 +12241,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 719,
@@ -11511,7 +12258,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 720,
@@ -11527,7 +12275,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 721,
@@ -11543,7 +12292,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 722,
@@ -11559,7 +12309,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 723,
@@ -11575,7 +12326,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 724,
@@ -11591,7 +12343,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 725,
@@ -11607,7 +12360,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 726,
@@ -11623,7 +12377,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 727,
@@ -11639,7 +12394,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 728,
@@ -11655,7 +12411,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 729,
@@ -11671,7 +12428,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 730,
@@ -11687,7 +12445,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 731,
@@ -11703,7 +12462,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 732,
@@ -11719,7 +12479,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 733,
@@ -11735,7 +12496,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 734,
@@ -11751,7 +12513,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 735,
@@ -11767,7 +12530,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 736,
@@ -11783,7 +12547,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 737,
@@ -11799,7 +12564,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 738,
@@ -11815,7 +12581,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 739,
@@ -11831,7 +12598,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 740,
@@ -11847,7 +12615,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 741,
@@ -11863,7 +12632,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 742,
@@ -11879,7 +12649,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 743,
@@ -11895,7 +12666,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 744,
@@ -11911,7 +12683,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 745,
@@ -11927,7 +12700,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 746,
@@ -11943,7 +12717,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 747,
@@ -11959,7 +12734,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 748,
@@ -11975,7 +12751,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 749,
@@ -11991,7 +12768,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 750,
@@ -12007,7 +12785,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 751,
@@ -12023,7 +12802,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 752,
@@ -12039,7 +12819,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 753,
@@ -12055,7 +12836,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 754,
@@ -12071,7 +12853,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 755,
@@ -12087,7 +12870,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 756,
@@ -12103,7 +12887,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 757,
@@ -12119,7 +12904,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 758,
@@ -12135,7 +12921,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 759,
@@ -12151,7 +12938,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 760,
@@ -12167,7 +12955,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 761,
@@ -12183,7 +12972,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 762,
@@ -12199,7 +12989,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 763,
@@ -12215,7 +13006,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 764,
@@ -12231,7 +13023,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 765,
@@ -12247,7 +13040,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 766,
@@ -12263,7 +13057,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 767,
@@ -12279,7 +13074,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 768,
@@ -12295,7 +13091,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 769,
@@ -12311,7 +13108,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 770,
@@ -12327,7 +13125,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 771,
@@ -12343,7 +13142,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 772,
@@ -12359,7 +13159,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 773,
@@ -12375,7 +13176,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 774,
@@ -12391,7 +13193,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 775,
@@ -12407,7 +13210,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 776,
@@ -12423,7 +13227,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 777,
@@ -12439,7 +13244,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 778,
@@ -12455,7 +13261,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 779,
@@ -12471,7 +13278,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 780,
@@ -12487,7 +13295,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 781,
@@ -12503,7 +13312,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 782,
@@ -12519,7 +13329,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 783,
@@ -12535,7 +13346,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 784,
@@ -12551,7 +13363,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 785,
@@ -12567,7 +13380,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 786,
@@ -12583,7 +13397,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 787,
@@ -12599,7 +13414,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 788,
@@ -12615,7 +13431,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 789,
@@ -12631,7 +13448,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 790,
@@ -12647,7 +13465,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 791,
@@ -12663,7 +13482,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 792,
@@ -12679,7 +13499,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 793,
@@ -12695,7 +13516,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 794,
@@ -12711,7 +13533,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 795,
@@ -12727,7 +13550,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 796,
@@ -12743,7 +13567,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 797,
@@ -12759,7 +13584,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 798,
@@ -12775,7 +13601,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 799,
@@ -12791,7 +13618,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 800,
@@ -12807,7 +13635,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 801,
@@ -12823,7 +13652,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 802,
@@ -12839,7 +13669,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 803,
@@ -12855,7 +13686,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 804,
@@ -12871,7 +13703,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 805,
@@ -12887,7 +13720,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 806,
@@ -12903,7 +13737,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 807,
@@ -12919,7 +13754,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 808,
@@ -12935,7 +13771,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 809,
@@ -12951,7 +13788,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 810,
@@ -12967,7 +13805,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 811,
@@ -12983,7 +13822,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 812,
@@ -12999,7 +13839,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 813,
@@ -13015,7 +13856,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 814,
@@ -13031,7 +13873,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 815,
@@ -13047,7 +13890,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 816,
@@ -13063,7 +13907,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 817,
@@ -13079,7 +13924,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 818,
@@ -13095,7 +13941,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 819,
@@ -13111,7 +13958,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 820,
@@ -13127,7 +13975,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 821,
@@ -13143,7 +13992,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 822,
@@ -13159,7 +14009,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 823,
@@ -13175,7 +14026,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 824,
@@ -13191,7 +14043,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 825,
@@ -13207,7 +14060,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 826,
@@ -13223,7 +14077,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 827,
@@ -13239,7 +14094,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 828,
@@ -13255,7 +14111,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 829,
@@ -13271,7 +14128,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 830,
@@ -13287,7 +14145,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 831,
@@ -13303,7 +14162,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 832,
@@ -13319,7 +14179,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 833,
@@ -13335,7 +14196,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 834,
@@ -13351,7 +14213,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 835,
@@ -13367,7 +14230,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 836,
@@ -13383,7 +14247,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 837,
@@ -13399,7 +14264,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 838,
@@ -13415,7 +14281,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 839,
@@ -13431,7 +14298,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 840,
@@ -13447,7 +14315,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 841,
@@ -13463,7 +14332,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 842,
@@ -13479,7 +14349,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 843,
@@ -13495,7 +14366,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 844,
@@ -13511,7 +14383,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 845,
@@ -13527,7 +14400,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 846,
@@ -13543,7 +14417,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 847,
@@ -13559,7 +14434,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 848,
@@ -13575,7 +14451,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 849,
@@ -13591,7 +14468,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 850,
@@ -13607,7 +14485,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 851,
@@ -13623,7 +14502,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 852,
@@ -13639,7 +14519,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 853,
@@ -13655,7 +14536,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 854,
@@ -13671,7 +14553,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 855,
@@ -13687,7 +14570,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 856,
@@ -13703,7 +14587,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 857,
@@ -13719,7 +14604,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 858,
@@ -13735,7 +14621,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 859,
@@ -13751,7 +14638,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 860,
@@ -13767,7 +14655,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 861,
@@ -13783,7 +14672,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 862,
@@ -13799,7 +14689,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 863,
@@ -13815,7 +14706,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 864,
@@ -13831,7 +14723,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 865,
@@ -13847,7 +14740,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 866,
@@ -13863,7 +14757,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 867,
@@ -13879,7 +14774,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 868,
@@ -13895,7 +14791,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 869,
@@ -13911,7 +14808,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 870,
@@ -13927,7 +14825,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 871,
@@ -13943,7 +14842,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 872,
@@ -13959,7 +14859,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 873,
@@ -13975,7 +14876,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 874,
@@ -13991,7 +14893,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 875,
@@ -14007,7 +14910,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 876,
@@ -14023,7 +14927,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 877,
@@ -14039,7 +14944,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 878,
@@ -14055,7 +14961,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 879,
@@ -14071,7 +14978,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 880,
@@ -14087,7 +14995,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 881,
@@ -14103,7 +15012,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 882,
@@ -14119,7 +15029,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 883,
@@ -14135,7 +15046,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 884,
@@ -14151,7 +15063,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 885,
@@ -14167,7 +15080,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 886,
@@ -14183,7 +15097,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 887,
@@ -14199,7 +15114,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 888,
@@ -14215,7 +15131,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 889,
@@ -14231,7 +15148,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 890,
@@ -14247,7 +15165,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 891,
@@ -14263,7 +15182,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 892,
@@ -14279,7 +15199,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 893,
@@ -14295,7 +15216,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 894,
@@ -14311,7 +15233,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 895,
@@ -14327,7 +15250,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 896,
@@ -14343,7 +15267,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 897,
@@ -14359,7 +15284,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 898,
@@ -14375,7 +15301,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 899,
@@ -14391,7 +15318,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 900,
@@ -14407,7 +15335,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 901,
@@ -14423,7 +15352,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 902,
@@ -14439,7 +15369,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 903,
@@ -14455,7 +15386,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 904,
@@ -14471,7 +15403,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 905,
@@ -14487,7 +15420,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 906,
@@ -14503,7 +15437,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 907,
@@ -14519,7 +15454,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 908,
@@ -14535,7 +15471,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 909,
@@ -14551,7 +15488,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 910,
@@ -14567,7 +15505,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 911,
@@ -14583,7 +15522,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 912,
@@ -14599,7 +15539,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 913,
@@ -14615,7 +15556,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 914,
@@ -14631,7 +15573,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 915,
@@ -14647,7 +15590,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 916,
@@ -14663,7 +15607,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 917,
@@ -14679,7 +15624,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 918,
@@ -14695,7 +15641,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 919,
@@ -14711,7 +15658,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 920,
@@ -14727,7 +15675,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 921,
@@ -14743,7 +15692,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 922,
@@ -14759,7 +15709,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 923,
@@ -14775,7 +15726,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 924,
@@ -14791,7 +15743,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 925,
@@ -14807,7 +15760,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 926,
@@ -14823,7 +15777,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 927,
@@ -14839,7 +15794,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 928,
@@ -14855,7 +15811,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 929,
@@ -14871,7 +15828,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 930,
@@ -14887,7 +15845,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 931,
@@ -14903,7 +15862,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 932,
@@ -14919,7 +15879,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 933,
@@ -14935,7 +15896,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 934,
@@ -14951,7 +15913,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 935,
@@ -14967,7 +15930,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 936,
@@ -14983,7 +15947,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 937,
@@ -14999,7 +15964,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 938,
@@ -15015,7 +15981,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 939,
@@ -15031,7 +15998,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 940,
@@ -15047,7 +16015,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 941,
@@ -15063,7 +16032,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 942,
@@ -15079,7 +16049,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 943,
@@ -15095,7 +16066,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 944,
@@ -15111,7 +16083,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 945,
@@ -15127,7 +16100,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 946,
@@ -15143,7 +16117,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 947,
@@ -15159,7 +16134,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 948,
@@ -15175,7 +16151,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 949,
@@ -15191,7 +16168,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 950,
@@ -15207,7 +16185,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 951,
@@ -15223,7 +16202,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 952,
@@ -15239,7 +16219,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 953,
@@ -15255,7 +16236,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 954,
@@ -15271,7 +16253,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 955,
@@ -15287,7 +16270,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 956,
@@ -15303,7 +16287,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 957,
@@ -15319,7 +16304,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 958,
@@ -15335,7 +16321,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 959,
@@ -15351,7 +16338,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 960,
@@ -15367,7 +16355,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 961,
@@ -15383,7 +16372,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 962,
@@ -15399,7 +16389,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 963,
@@ -15415,7 +16406,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 964,
@@ -15431,7 +16423,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 965,
@@ -15447,7 +16440,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 966,
@@ -15463,7 +16457,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 967,
@@ -15479,7 +16474,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 968,
@@ -15495,7 +16491,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 969,
@@ -15511,7 +16508,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 970,
@@ -15527,7 +16525,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 971,
@@ -15543,7 +16542,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 972,
@@ -15559,7 +16559,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 973,
@@ -15575,7 +16576,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 974,
@@ -15591,7 +16593,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 975,
@@ -15607,7 +16610,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 976,
@@ -15623,7 +16627,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 977,
@@ -15639,7 +16644,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 978,
@@ -15655,7 +16661,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 979,
@@ -15671,7 +16678,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 980,
@@ -15687,7 +16695,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 981,
@@ -15703,7 +16712,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 982,
@@ -15719,7 +16729,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 983,
@@ -15735,7 +16746,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 984,
@@ -15751,7 +16763,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 985,
@@ -15767,7 +16780,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 986,
@@ -15783,7 +16797,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 987,
@@ -15799,7 +16814,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 988,
@@ -15815,7 +16831,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 989,
@@ -15831,7 +16848,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 990,
@@ -15847,7 +16865,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 991,
@@ -15863,7 +16882,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 992,
@@ -15879,7 +16899,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 993,
@@ -15895,7 +16916,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 994,
@@ -15911,7 +16933,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 995,
@@ -15927,7 +16950,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 996,
@@ -15943,7 +16967,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 997,
@@ -15959,7 +16984,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 998,
@@ -15975,7 +17001,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     },
     {
       "rank": 999,
@@ -15991,7 +17018,8 @@
       "edges": null,
       "violations": null,
       "time_ms": null,
-      "notes": null
+      "notes": null,
+      "tier": "bronze"
     }
   ]
 }
