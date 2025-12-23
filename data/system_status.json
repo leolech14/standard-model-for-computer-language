@@ -1,0 +1,16 @@
+{
+  "canonical": {
+    "atoms": 167,
+    "roles": 27
+  },
+  "learnable": {
+    "prefix_patterns": 58,
+    "suffix_patterns": 43,
+    "path_patterns": 11,
+    "role_map": 38,
+    "aliases": 6,
+    "total": 156
+  },
+  "accuracy": 93.0,
+  "last_updated": "2025-12-23"
+}
