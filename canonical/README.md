@@ -35,8 +35,39 @@ These files grow with learning. This is the ONLY place to add new patterns.
 2. Add entry to `canonical/learned/ledger.md`
 3. Run tests to verify
 
-## Loading
+## 🔄 Update Checklists
 
-Code loads from these files:
-- `core/registry/pattern_repository.py` → `learned/patterns.json`
-- `core/atom_classifier.py` → `fixed/atoms.json`
+### When Adding a NEW PATTERN
+
+1. Edit `learned/patterns.json`
+   - Add to `prefix_patterns`, `suffix_patterns`, or `path_patterns`
+   - Set `role` and `confidence`
+2. Log in `learned/ledger.md`
+   - Date, pattern, type, role, confidence
+3. Verify: Run `python3 -c "from core.registry.pattern_repository import get_pattern_repository; r=get_pattern_repository(); print(len(r.get_prefix_patterns()))"`
+
+### When Adding a NEW ROLE
+
+1. Edit `fixed/roles.json`
+   - Add role name and purpose
+2. Update `docs/DIMENSIONS.md` if needed
+
+### When Adding a NEW ATOM
+
+> ⚠️ This is rare - only if AST coverage is incomplete
+
+1. Edit `fixed/atoms.json`
+2. Update `docs/ATOMS_REFERENCE.md`
+
+---
+
+## 📁 File Map
+
+| File | Edit When... |
+|------|-------------|
+| `learned/patterns.json` | Learning new patterns |
+| `learned/ledger.md` | Logging pattern changes |
+| `fixed/atoms.json` | Never (167 is complete) |
+| `fixed/dimensions.json` | Never (8D is stable) |
+| `fixed/roles.json` | Rarely (27 roles) |
+
