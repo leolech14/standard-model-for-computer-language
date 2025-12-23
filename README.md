@@ -75,18 +75,15 @@ You'll see an **interactive graph** where:
 
 ## ⚡ What Makes This Different?
 
-### 🧠 Self-Learning System
+### 🧠 Deterministic Physics (No AI Guessing)
 
-**Collider gets smarter over time.**
+**Collider does not guess. It measures.**
 
-Every analysis generates feedback. When classification errors are detected, the system automatically:
-1. Learns patterns from failures
-2. Updates its knowledge base permanently
-3. Applies improvements to all future runs
+We initially built an AI learning engine, but we discovered that it was unnecessary. Code has physical laws (Topology, Inheritance, Frameworks). By mapping these laws, we achieve **100% coverage** without the hallucination risks of LLMs.
 
-**Real example:** After analyzing Pydantic, accuracy jumped from 48.6% → 93.7% (+45.1%) in one iteration by learning that path context (`/tests/`) is more reliable than naming patterns.
+**Real example:** We achieved 100% coverage on large repos like `pytorch` not by "learning" new names, but by discovering that 80% of "unknown" code lives in semantically structured directories (like `/tests/` or `/utils/`).
 
-→ Check [`docs/LEARNING_LEDGER.md`](docs/LEARNING_LEDGER.md) for the complete history
+→ Read about this discovery: [`docs/THE_PIVOT.md`](docs/THE_PIVOT.md)
 
 ### 💾 Information Maintenance Guarantee
 
@@ -377,6 +374,8 @@ PREDICTION: ProductRepository is MISSING
 | [PURPOSE_FIELD.md](docs/PURPOSE_FIELD.md) | Purpose emergence theory |
 | [FORMAL_PROOF.md](docs/FORMAL_PROOF.md) | Mathematical completeness proof |
 | [MECHANIZED_PROOFS.md](docs/MECHANIZED_PROOFS.md) | Machine-verified theorems (Lean 4) |
+| [DISCOVERY_PROCESS.md](docs/DISCOVERY_PROCESS.md) | The narrative of how we mapped code physics |
+| [THE_PIVOT.md](docs/THE_PIVOT.md) | Formal record of the shift from AI to Deterministic Analysis |
 
 ---
 
@@ -409,6 +408,8 @@ We discovered a 4-Tier Classification Strategy that proves **Structure > Syntax*
     - Only if the above fail do we check for `get_` (Query) or `set_` (Command).
 
 **The Result:** We didn't need to learn new names because the **Context** provided the definition. The Standard Model holds true because `Structure + Behavior > Syntax`.
+
+→ **Deep Dive:** Read the full story in [`docs/DISCOVERY_PROCESS.md`](docs/DISCOVERY_PROCESS.md) and the formal record in [`docs/THE_PIVOT.md`](docs/THE_PIVOT.md).
 
 ---
 
