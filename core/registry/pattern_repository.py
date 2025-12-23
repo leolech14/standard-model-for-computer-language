@@ -82,6 +82,7 @@ class PatternRepository:
             'remove_': ('Command', 85),
             'add_': ('Command', 85),
             'save_': ('Command', 85),
+            'login': ('Command', 85),  # LEARNED: Tier 1 adjudication
             'insert_': ('Command', 85),
             'create_': ('Factory', 95),  # LEARNED: Boosted from 85
             'do_': ('Command', 80),

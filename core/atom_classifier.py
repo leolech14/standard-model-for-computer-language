@@ -63,7 +63,8 @@ class AtomClassifier:
         self.atoms_by_subtype['configuration'] = self.atoms_by_subtype.get('configvalue', 'ORG.CFG.O')
         self.atoms_by_subtype['adapter'] = self.atoms_by_subtype.get('adapter', 'ORG.SVC.M')
         self.atoms_by_subtype['observer'] = self.atoms_by_subtype.get('eventhandler', 'EXE.HDL.O')
-        self.atoms_by_subtype['specification'] = self.atoms_by_subtype.get('policy', 'LOG.FNC.M')
+        self.atoms_by_subtype['specification']
+        self.atoms_by_subtype['query'] = self.atoms_by_subtype.get('query', 'LOG.FNC.M')  # LEARNED = self.atoms_by_subtype.get('policy', 'LOG.FNC.M')
         
         # Compile semantic patterns
         self.semantic_patterns = []
@@ -127,7 +128,25 @@ class AtomClassifier:
                 confidence = max(confidence, 0.75)
                 break
         
-        # 2.5. Try suffix patterns from pattern repository
+        # 2.5. Try PREFIX patterns from pattern repository (CRITICAL FIX)
+        if self.repo:
+            prefix_patterns = self.repo.get_prefix_patterns()
+            for pattern, (role, conf) in prefix_patterns.items():
+                if name.startswith(pattern) or name.lower().startswith(pattern.lower()):
+                    role_key = role.lower()
+                    if role_key == 'test':
+                        role_key = 'testdouble'
+                    atom_id = self.atoms_by_subtype.get(role_key)
+                    if atom_id:
+                        return AtomClassification(
+                            phase=self.atoms_by_id[atom_id][0],
+                            family=self.atoms_by_id[atom_id][1],
+                            atom_id=atom_id,
+                            subtype=role,
+                            confidence=conf / 100.0
+                        )
+        
+        # 2.6. Try SUFFIX patterns from pattern repository
         if self.repo:
             suffix_patterns = self.repo.get_suffix_patterns()
             for pattern, (role, conf) in suffix_patterns.items():
