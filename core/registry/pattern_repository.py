@@ -32,6 +32,20 @@ class PatternRepository:
     def __init__(self):
         self._prefix_patterns: Dict[str, Tuple[str, float]] = {}
         self._suffix_patterns: Dict[str, Tuple[str, float]] = {}
+        # New: Path patterns for context-aware classification
+        self._path_patterns: Dict[str, Tuple[str, float]] = {
+            '/test': ('Test', 95),
+            '/tests': ('Test', 95),
+            '/spec': ('Test', 90),
+            '/scenarios': ('Test', 90),
+            '/repository': ('Repository', 90),
+            '/service': ('Service', 90),
+            '/controller': ('Controller', 90),
+            '/model': ('Entity', 85),
+            '/entity': ('Entity', 85),
+            '/util': ('Utility', 80),
+            '/helper': ('Utility', 80),
+        }
         self._dunder_patterns: Dict[str, Tuple[str, float]] = {}
         self._decorator_patterns: Dict[str, str] = {}
         self._inheritance_patterns: Dict[str, str] = {}
@@ -72,8 +86,9 @@ class PatternRepository:
             'create_': ('Factory', 85),
             'do_': ('Command', 80),
             'run_': ('Command', 80),
-            'execute_': ('UseCase', 85),
-            'process_': ('Service', 80),
+            'execute_': ('Service', 60),  # Reduced from 85 (was UseCase/Service)
+            'process_': ('Service', 60),  # Reduced from 80
+
             
             # Factory patterns
             'build_': ('Factory', 85),
@@ -280,6 +295,10 @@ class PatternRepository:
     # =========================================================================
     # Query Methods
     # =========================================================================
+    
+    def get_path_patterns(self) -> Dict[str, Tuple[str, float]]:
+        """Get all path patterns."""
+        return self._path_patterns.copy()
     
     def get_prefix_patterns(self) -> Dict[str, Tuple[str, float]]:
         """Get all prefix patterns."""

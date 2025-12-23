@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 from typing import Optional, Tuple
 from dataclasses import dataclass
+from .registry.pattern_repository import get_pattern_repository
 
 
 @dataclass
@@ -32,8 +33,12 @@ class AtomClassifier:
         with open(atoms_path, "r", encoding="utf-8") as f:
             self.taxonomy = json.load(f)
         
+        
         # Build lookup structures
         self._build_lookups()
+        
+        # Load pattern repository (Learned Patterns)
+        self.repo = get_pattern_repository()
     
     def _build_lookups(self):
         """Build fast lookup structures from taxonomy."""
@@ -66,7 +71,7 @@ class AtomClassifier:
         # Tree-sitter mappings
         self.ts_mappings = self.taxonomy.get("tree_sitter_mappings", {})
     
-    def classify_by_name(self, name: str, ast_node_type: str = None, language: str = None) -> AtomClassification:
+    def classify_by_name(self, name: str, ast_node_type: str = None, language: str = None, file_path: str = None) -> AtomClassification:
         """
         Classify a code entity by its name and optionally AST info.
         
@@ -74,12 +79,28 @@ class AtomClassifier:
             name: Function/class/variable name
             ast_node_type: Tree-sitter AST node type (e.g., "function_declaration")
             language: Language (e.g., "javascript", "python")
-        
-        Returns:
-            AtomClassification with phase, family, atom_id, subtype, confidence
+            file_path: Optional file path for context-aware classification
         """
         confidence = 0.5  # Default confidence
         
+        # 0. Context Awareness (Path Patterns) - HIGHEST PRIORITY
+        # Learned from feedback loop: File path is strongest signal for tests/services
+        if language and language == "python" and self.repo and file_path:
+             path_patterns = self.repo.get_path_patterns()
+             for pattern, (role, confidence) in path_patterns.items():
+                 # Check if path contains the pattern (e.g. "tests/")
+                 if pattern in file_path:
+                     # Map role to Atom ID
+                     atom_id = self.atoms_by_subtype.get(role.lower())
+                     if atom_id:
+                         return AtomClassification(
+                             phase=self.atoms_by_id[atom_id][0],
+                             family=self.atoms_by_id[atom_id][1],
+                             atom_id=atom_id, 
+                             subtype=role,
+                             confidence=confidence / 100.0
+                         )
+
         # 1. Try Tree-sitter mapping first (highest confidence for structure)
         atom_id = None
         if language and ast_node_type:
