@@ -1,0 +1,220 @@
+{
+  "generated_at": "2025-12-23T18:27:42.062746",
+  "total_errors": 23,
+  "errors_by_tier": {
+    "platinum": 23
+  },
+  "errors_by_type": {
+    "other": 21,
+    "clone_timeout": 2
+  },
+  "error_details": [
+    {
+      "repo": "codecrafters-io/build-your-own-x",
+      "tier": "platinum",
+      "rank": 1,
+      "language": "Markdown",
+      "stars": 451426,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "sindresorhus/awesome",
+      "tier": "platinum",
+      "rank": 3,
+      "language": null,
+      "stars": 424404,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "jwasham/coding-interview-university",
+      "tier": "platinum",
+      "rank": 7,
+      "language": null,
+      "stars": 335173,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "awesome-selfhosted/awesome-selfhosted",
+      "tier": "platinum",
+      "rank": 11,
+      "language": null,
+      "stars": 264275,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "practical-tutorials/project-based-learning",
+      "tier": "platinum",
+      "rank": 12,
+      "language": null,
+      "stars": 253269,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "trimstray/the-book-of-secret-knowledge",
+      "tier": "platinum",
+      "rank": 17,
+      "language": null,
+      "stars": 199523,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "ossu/computer-science",
+      "tier": "platinum",
+      "rank": 18,
+      "language": "HTML",
+      "stars": 199361,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "getify/You-Dont-Know-JS",
+      "tier": "platinum",
+      "rank": 21,
+      "language": null,
+      "stars": 184145,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "github/gitignore",
+      "tier": "platinum",
+      "rank": 29,
+      "language": null,
+      "stars": 171425,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "massgravel/Microsoft-Activation-Scripts",
+      "tier": "platinum",
+      "rank": 32,
+      "language": "Batchfile",
+      "stars": 160249,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "jlevy/the-art-of-command-line",
+      "tier": "platinum",
+      "rank": 33,
+      "language": null,
+      "stars": 159239,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "labuladong/fucking-algorithm",
+      "tier": "platinum",
+      "rank": 49,
+      "language": "Markdown",
+      "stars": 131336,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "ripienaar/free-for-dev",
+      "tier": "platinum",
+      "rank": 59,
+      "language": "HTML",
+      "stars": 116459,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "justjavac/free-programming-books-zh_CN",
+      "tier": "platinum",
+      "rank": 60,
+      "language": null,
+      "stars": 116015,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "goldbergyoni/nodebestpractices",
+      "tier": "platinum",
+      "rank": 70,
+      "language": "Dockerfile",
+      "stars": 104834,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "microsoft/generative-ai-for-beginners",
+      "tier": "platinum",
+      "rank": 74,
+      "language": "Jupyter Notebook",
+      "stars": 104146,
+      "error": "Clone timeout - repo too large",
+      "error_type": "clone_timeout"
+    },
+    {
+      "repo": "Hack-with-Github/Awesome-Hacking",
+      "tier": "platinum",
+      "rank": 77,
+      "language": null,
+      "stars": 103076,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "tier": "platinum",
+      "rank": 79,
+      "language": null,
+      "stars": 101684,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "papers-we-love/papers-we-love",
+      "tier": "platinum",
+      "rank": 80,
+      "language": "Shell",
+      "stars": 101313,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "mtdvio/every-programmer-should-know",
+      "tier": "platinum",
+      "rank": 88,
+      "language": null,
+      "stars": 97005,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "jaywcjlove/awesome-mac",
+      "tier": "platinum",
+      "rank": 89,
+      "language": "JavaScript",
+      "stars": 96688,
+      "error": "Unknown error",
+      "error_type": "other"
+    },
+    {
+      "repo": "microsoft/Web-Dev-For-Beginners",
+      "tier": "platinum",
+      "rank": 95,
+      "language": "JavaScript",
+      "stars": 94718,
+      "error": "Clone timeout",
+      "error_type": "clone_timeout"
+    },
+    {
+      "repo": "ryanmcdermott/clean-code-javascript",
+      "tier": "platinum",
+      "rank": 96,
+      "language": "JavaScript",
+      "stars": 94159,
+      "error": "Unknown error",
+      "error_type": "other"
+    }
+  ]
+}
