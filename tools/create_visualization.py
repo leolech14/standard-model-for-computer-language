@@ -87,8 +87,17 @@ def build_particles(proof: dict, unified: dict) -> list:
     orphans = set(exec_flow.get("orphans", []))
     entry_count = exec_flow.get("entry_points", 0)
     
+    # Track seen IDs to avoid duplicates
+    seen_ids = set()
+    
     # Process nodes from unified analysis
     for node in unified.get("nodes", []):
+        node_id = node.get("id") or node.get("name", "")
+        
+        # Skip duplicates
+        if node_id in seen_ids:
+            continue
+        seen_ids.add(node_id)
         node_id = node.get("id") or node.get("name", "")
         name = node.get("name", node_id)
         role = node.get("role", "Unknown")
