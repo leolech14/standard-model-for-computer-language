@@ -109,42 +109,46 @@ Every node preserves:
 
 Collider's Information Maintenance Guarantee enables powerful future capabilities:
 
+### 1. Bidirectional Code Analysis
+
 ```mermaid
-graph TB
-    subgraph "Current: Analysis & Preservation"
-        CODE1[["Source Code<br/>(Repository)"]] -->|"collider analyze"| ANALYZE["🔬 Collider<br/>Parser + Classifier"]
-        ANALYZE -->|"Extract + Classify"| GRAPH1[("🗺️ Architectural Graph<br/>Nodes + Edges + Metadata")]
-    end
+graph LR
+    CODE1[["📁 Source Code"]] -->|"collider analyze"| COLLIDER["🔬 Collider"]
+    COLLIDER --> GRAPH[("🗺️ Graph<br/>Nodes + Edges")]
+    GRAPH -.->|"collider generate<br/>(Future)"| GEN["🔨 Generator"]
+    GEN -.-> CODE2[["📁 Code"]]
     
-    subgraph "Future: Reconstruction"
-        GRAPH1 -.->|"collider generate<br/>(Theoretical)"| GENERATE["🔨 Code Generator<br/>Template Engine"]
-        GENERATE -.-> CODE2[["Reconstructed Code<br/>(Semantically Equivalent)"]]
-    end
+    classDef implemented fill:#4ade80,stroke:#16a34a,stroke-width:3px
+    classDef future fill:#fbbf24,stroke:#d97706,stroke-width:2px,stroke-dasharray:5 5
     
-    subgraph "Extended: Prompt-to-Code"
-        PROMPT[["💬 Natural Language<br/>Architecture Spec"]] -.->|"collider create<br/>(Future)"| LLM["🤖 LLM + Graph Builder"]
-        LLM -.-> GRAPH2[("🗺️ Architectural Graph<br/>Generated from Spec")]
-        GRAPH2 -.-> GENERATE2["🔨 Code Generator"]
-        GENERATE2 -.-> CODE3[["Generated Code<br/>(Full Implementation)"]]
-    end
-    
-    classDef current fill:#4ade80,stroke:#16a34a,stroke-width:3px,color:#000
-    classDef future fill:#fbbf24,stroke:#d97706,stroke-width:2px,stroke-dasharray: 5 5,color:#000
-    classDef graphNode fill:#60a5fa,stroke:#2563eb,stroke-width:3px,color:#000
-    
-    class CODE1,ANALYZE current
-    class GRAPH1,GRAPH2 graphNode
-    class CODE2,CODE3,GENERATE,GENERATE2,LLM,PROMPT future
+    class CODE1,COLLIDER,GRAPH implemented
+    class GEN,CODE2 future
 ```
 
-**Legend:**
-- **Green (Solid)** = ✅ Implemented (82.4% mean accuracy)
-- **Yellow (Dashed)** = ⏳ Future (possible due to lossless schema)
+**Status:** ✅ Analysis implemented (82.4% accuracy) | ⏳ Generation future
+
+### 2. LLM-Driven Architecture Generation
+
+```mermaid
+graph LR
+    PROMPT[["💬 Prompt<br/>'Build a DDD app'"]] -.->|"collider create<br/>(Future)"| LLM["🤖 LLM"]
+    LLM -.-> GRAPH[("🗺️ Graph<br/>Auto-Generated")]
+    GRAPH -.-> GEN["🔨 Generator"]
+    GEN -.-> CODE[["📁 Full Codebase"]]
+    
+    classDef future fill:#fbbf24,stroke:#d97706,stroke-width:2px,stroke-dasharray:5 5
+    
+    class PROMPT,LLM,GRAPH,GEN,CODE future
+```
+
+**Status:** ⏳ Future feature (enabled by lossless schema)
 
 **Why this matters:** Because every node preserves complete source code and metadata, the graph can serve as:
 - Input to LLMs for semantic refactoring
 - Foundation for architecture-first development
 - Bidirectional bridge between design and implementation
+
+---
 
 ---
 
