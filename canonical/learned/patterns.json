@@ -227,6 +227,42 @@
     "process_": {
       "role": "Service",
       "confidence": 60
+    },
+    "random_": {
+      "role": "Utility",
+      "confidence": 85
+    },
+    "Fake": {
+      "role": "Fixture",
+      "confidence": 90
+    },
+    "Abstract": {
+      "role": "Interface",
+      "confidence": 90
+    },
+    "Sql": {
+      "role": "Repository",
+      "confidence": 85
+    },
+    "post_to_": {
+      "role": "Fixture",
+      "confidence": 85
+    },
+    "subscribe_": {
+      "role": "Observer",
+      "confidence": 90
+    },
+    "unsubscribe_": {
+      "role": "Observer",
+      "confidence": 90
+    },
+    "try_to_": {
+      "role": "Utility",
+      "confidence": 80
+    },
+    "wait_for_": {
+      "role": "Utility",
+      "confidence": 80
     }
   },
   "suffix_patterns": {
@@ -401,6 +437,34 @@
     "Processor": {
       "role": "Service",
       "confidence": 75
+    },
+    "_commit": {
+      "role": "Command",
+      "confidence": 90
+    },
+    "_rollback": {
+      "role": "Command",
+      "confidence": 90
+    },
+    "UnitOfWork": {
+      "role": "Repository",
+      "confidence": 95
+    },
+    "Message": {
+      "role": "DomainEvent",
+      "confidence": 85
+    },
+    "MessageBus": {
+      "role": "EventHandler",
+      "confidence": 95
+    },
+    "_port": {
+      "role": "Interface",
+      "confidence": 85
+    },
+    "_model": {
+      "role": "Entity",
+      "confidence": 85
     }
   },
   "path_patterns": {
