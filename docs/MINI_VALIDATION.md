@@ -26,26 +26,42 @@ python scripts/sample_for_mini_validation.py
 
 ---
 
-### Step 2: Manual Annotation (16 hours total, ~2 hours/day for a week)
+---
 
-**Open `data/mini_validation_samples.csv` in Excel/Google Sheets**
+### Step 2: Annotation
 
-**For each row:**
-1. Read the `name`, `signature`, `docstring`
-2. Decide: What **role** does this element have?
-   - Repository? Query? Command? Entity? Service? etc.
-3. Fill in `annotated_role` column with your answer
-4. (Optional) Add `notes` if unclear
+**Choose ONE option:**
 
-**Tips:**
-- Don't overthink it (5-10 seconds per element max)
-- Use the Collider prediction as a hint (but judge for yourself)
-- If truly ambiguous, write "ambiguous" in notes
-- You can skip `annotated_atom` (role is more important)
+#### Option A: LLM Annotation ⭐ FASTER (30 minutes)
 
-**Progress tracking:**
-- ~70 samples/day = done in 7 days
-- ~2 hours/day = very manageable
+**Use AI to annotate automatically:**
+
+```bash
+# Using GPT-4 (best quality, costs ~$2)
+export OPENAI_API_KEY="sk-..."
+python scripts/annotate_with_llm.py --method openai
+
+# Or using local Ollama (free, needs model loaded)
+# First: ollama pull llama3.2
+python scripts/annotate_with_llm.py --method ollama
+```
+
+**Pros:** Fast, reproducible, consistent  
+**Cons:** Costs money (GPT-4) or needs setup (Ollama)
+
+---
+
+#### Option B: Manual Annotation (16 hours)
+
+**Open `data/mini_validation_samples.csv` in Excel**
+
+For each row:
+1. Read name, signature, docstring
+2. Classify role (Query, Command, Entity, etc.)
+3. Fill `annotated_role` column
+
+**Pros:** Free, "true" ground truth  
+**Cons:** Slow, tedious
 
 ---
 
