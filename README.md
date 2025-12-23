@@ -130,10 +130,10 @@ graph TB
     
     classDef current fill:#4ade80,stroke:#16a34a,stroke-width:3px,color:#000
     classDef future fill:#fbbf24,stroke:#d97706,stroke-width:2px,stroke-dasharray: 5 5,color:#000
-    classDef graph fill:#60a5fa,stroke:#2563eb,stroke-width:3px,color:#000
+    classDef graphNode fill:#60a5fa,stroke:#2563eb,stroke-width:3px,color:#000
     
     class CODE1,ANALYZE current
-    class GRAPH1,GRAPH2 graph
+    class GRAPH1,GRAPH2 graphNode
     class CODE2,CODE3,GENERATE,GENERATE2,LLM,PROMPT future
 ```
 
