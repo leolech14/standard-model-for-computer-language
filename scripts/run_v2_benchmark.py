@@ -15,7 +15,7 @@ root_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "tools"))
 
-from learning_engine import LearningEngine
+from tools.analysis_engine import AnalysisEngine
 
 def run_benchmark(limit=5):
     print("🚀 RUNNING STANDAD MODEL ON NEW REPOS (v2)")
@@ -37,8 +37,9 @@ def run_benchmark(limit=5):
         print(f"  - {r.name}")
     print("\n" + "-"*60 + "\n")
 
-    # Initialize Engine
-    engine = LearningEngine(auto_learn=True, llm_model=None) # No LLM for speed in sample run
+    auto_learn = True
+    print(f"🚀 Initializing Unified Analysis Engine (auto_learn={auto_learn})...")
+    engine = AnalysisEngine(auto_learn=auto_learn, llm_model=None) # No LLM for speed in sample run
     
     # Run Analysis
     results = []

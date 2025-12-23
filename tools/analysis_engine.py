@@ -107,7 +107,7 @@ class LearningReport:
 
 from core.config import AnalyzerConfig
 
-class LearningEngine:
+class AnalysisEngine:
     """
     Comprehensive code learning engine.
     

@@ -11,8 +11,11 @@ from collections import Counter, defaultdict
 import re
 
 
-class AutoPatternDiscovery:
-    """Automatic pattern discovery for unknown particles."""
+class HeuristicClassifier:
+    """
+    Deterministic naming pattern classifier (Tier 3).
+    Acts as a fallback when topological and inheritance extraction fail.
+    """
     
     # Prefix patterns to detect
     PREFIX_ROLES = {
@@ -519,78 +522,14 @@ class AutoPatternDiscovery:
                        (sum(self.discovered_patterns.values()) + len(self.unknown_names)) * 100
                        if (sum(self.discovered_patterns.values()) + len(self.unknown_names)) > 0 else 0
         }
-    
-    def learn_patterns_from_data(self, samples: List[Dict[str, str]]) -> Dict[str, Tuple[str, float]]:
-        """
-        Learn new patterns from annotated data (Ground Truth).
-        
-        Args:
-            samples: List of dicts with 'name', 'file', 'annotated_role'
-            
-        Returns:
-            Dict of suggested patterns: { 'pattern': ('Role', confidence) }
-        """
-        print(f"🧠 Auto-Learning from {len(samples)} samples...")
-        
-        # 1. Collect tokens for each Actual Role
-        role_tokens = defaultdict(list)
-        role_prefixes = defaultdict(list)
-        role_suffixes = defaultdict(list)
-        
-        for s in samples:
-            role = s.get('annotated_role')
-            if not role or role == 'Unknown': continue
-            
-            name = s.get('name', '').lower()
-            if not name: continue
-            
-            # Extract tokens
-            tokens = re.findall(r'[a-z]+', name)
-            
-            # Prefixes (e.g. "transform_" in "transform_data")
-            if '_' in name:
-                parts = name.split('_')
-                if parts[0]: role_prefixes[role].append(parts[0] + '_')
-                
-            # Suffixes (e.g. "Transformer" in "DataTransformer")
-            # We assume CamelCase for suffixes usually
-            raw_name = s.get('name', '')
-            if raw_name[0].isupper():
-                # Naive suffix extraction: last UpperCase token
-                # This is heuristic but works for standard naming
-                pass # TODO: Implement robust suffix logic
-                
-            role_tokens[role].extend(tokens)
-
-        # 2. Analyze correlations
-        # We look for tokens that appear significantly more often in Role X than others
-        
-        suggested_patterns = {}
-        
-        # Analyzer: Prefixes
-        for role, prefixes in role_prefixes.items():
-            counts = Counter(prefixes)
-            total = len(prefixes)
-            
-            for prefix, count in counts.items():
-                # Threshold: Must appear at least 3 times and be > 50% of occurrences
-                if count >= 3:
-                     # Confidence = consistency
-                     confidence = min(95.0, (count / total) * 100 + 40) 
-                     
-                     # Check disjointness (e.g. ensure 'get_' isn't also popular in 'Command')
-                     # For now, simple suggestion
-                     suggested_patterns[prefix] = (role, confidence)
-                     
-        return suggested_patterns
 
 
-def apply_auto_discovery(particles: List[Dict]) -> List[Dict]:
+def apply_heuristics(particles: List[Dict]) -> List[Dict]:
     """
-    Apply auto pattern discovery to particles during pipeline.
+    Apply heuristic classification to particles during pipeline.
     Modifies particles in place to update Unknown types.
     """
-    discovery = AutoPatternDiscovery()
+    discovery = HeuristicClassifier()
     updated = 0
     
     for particle in particles:
@@ -601,7 +540,7 @@ def apply_auto_discovery(particles: List[Dict]) -> List[Dict]:
             if new_type != 'Unknown':
                 particle['type'] = new_type
                 particle['confidence'] = confidence
-                particle['discovery_method'] = 'auto_pattern'
+                particle['discovery_method'] = 'heuristic_pattern'
                 updated += 1
     
     # Generate report
@@ -623,7 +562,7 @@ if __name__ == '__main__':
         'some_random_function',
     ]
     
-    discovery = AutoPatternDiscovery()
+    discovery = HeuristicClassifier()
     for name in test_names:
         role, conf = discovery.classify_by_pattern(name)
         print(f'{name} -> {role} ({conf}%)')
