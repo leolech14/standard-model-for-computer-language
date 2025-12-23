@@ -19,7 +19,7 @@ These files define the theory's coordinate system. Changing them breaks existing
 |------|----------|-------|
 | `atoms.json` | 167 atom taxonomy | Fixed |
 | `dimensions.json` | 8 semantic dimensions | Fixed |
-| `roles.json` | 27 canonical roles | Fixed |
+| `roles.json` | 33 canonical roles | Fixed |
 
 ### learned/ - EDIT HERE
 These files grow with learning. This is the ONLY place to add new patterns.
@@ -69,5 +69,5 @@ These files grow with learning. This is the ONLY place to add new patterns.
 | `learned/ledger.md` | Logging pattern changes |
 | `fixed/atoms.json` | Never (167 is complete) |
 | `fixed/dimensions.json` | Never (8D is stable) |
-| `fixed/roles.json` | Rarely (27 roles) |
+| `fixed/roles.json` | Rarely (33 roles) |
 

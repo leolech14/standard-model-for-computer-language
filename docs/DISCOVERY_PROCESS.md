@@ -63,6 +63,19 @@ During the early research phase, we mapped **152 Tree-Sitter AST node types** ac
 
 > **Note:** This number (152) is **historical context only**. The current implementation dynamically extracts whatever AST nodes Tree-Sitter provides, rather than mapping to a fixed list. The 152 was useful for initial taxonomy design but is not enforced in the running system.
 
+### Current Detection Patterns (Updated December 2025)
+
+The deterministic classifier uses patterns from `canonical/learned/patterns.json`:
+
+| Pattern Type | Count |
+|--------------|-------|
+| Prefix patterns | 66 |
+| Suffix patterns | 50 |
+| Path patterns | 11 |
+| **Total** | **127** |
+
+> These patterns map to **33 canonical roles** defined in `STANDARD_MODEL_SCHEMA.json`.
+
 ---
 
 ## 7. Conclusion
