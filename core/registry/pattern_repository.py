@@ -105,6 +105,8 @@ class PatternRepository:
             # Event patterns
             'handle_': ('EventHandler', 85),
             'on_': ('EventHandler', 85),
+            'watch_': ('Observer', 80),  # INFERRED (Tier 2)
+            '_should_': ('Specification', 85),  # INFERRED (Tier 3)
             
             # Mapper patterns
             'convert_': ('Transformer', 90), # LEARNED (was Mapper)
@@ -148,6 +150,20 @@ class PatternRepository:
             'Provider': ('Provider', 85),
             
             # Data patterns
+            'Mixin': ('Adapter', 85),  # INFERRED (Tier 2)
+            'Config': ('Configuration', 90),  # INFERRED (Tier 2)
+            'Configuration': ('Configuration', 90),
+            
+            # Testing patterns (Tier 2)
+            'Mock': ('TestDouble', 95),  # INFERRED
+            'Mocker': ('TestDouble', 95),  # INFERRED
+            'Stub': ('TestDouble', 90),  # INFERRED
+            'Fake': ('TestDouble', 90),
+            
+            # DDD patterns (Tier 2)
+            'Specifier': ('Specification', 80),  # INFERRED
+            
+            # Data patterns cont'd
             'Mapper': ('Mapper', 85),
             'Converter': ('Mapper', 80),
             'Transformer': ('Mapper', 80),

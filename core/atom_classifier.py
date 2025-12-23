@@ -121,6 +121,23 @@ class AtomClassifier:
                 confidence = max(confidence, 0.75)
                 break
         
+        # 2.5. Try suffix patterns from pattern repository
+        if self.repo:
+            suffix_patterns = self.repo.get_suffix_patterns()
+            for pattern, (role, conf) in suffix_patterns.items():
+                if name.endswith(pattern):
+                    role_key = role.lower()
+                    atom_id = self.atoms_by_subtype.get(role_key)
+                    if atom_id:
+                        return AtomClassification(
+                            phase=self.atoms_by_id[atom_id][0],
+                            family=self.atoms_by_id[atom_id][1],
+                            atom_id=atom_id,
+                            subtype=role,
+                            confidence=conf / 100.0
+                        )
+
+        
         # 3. Fall back to generic classification
         if atom_id is None:
             # Infer from name patterns
