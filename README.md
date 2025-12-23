@@ -1,26 +1,54 @@
 # Collider: The Standard Model of Code
- 
+
 > **Analyze any codebase. Get a complete semantic map. Detect violations. Predict missing components.**
- 
-Collider turns source code into **structured knowledge** by mapping every element to a universal schema. Think of it as "running a physics experiment" on your codebase.
+
+Collider turns source code into **structured knowledge** by mapping every element to a standardized schema. It uses a "Standard Model" analogy to treat software architecture as a rigorous, verifiable system.
 
 ---
 
 ## 💡 The Core Idea
 
-**Software has physics.**
+**Standardized consistency at scale.**
 
-Just like matter is made of atoms, code is made of **167 fundamental building blocks** (Atoms), which map to **33 Canonical Roles** (like Repository, Entity, Service), which organize into **Layers** (Domain, Infrastructure, Application).
+Using the physics analogy: just as matter can be modeled as atoms, **Collider employs an empirically validated schema** to map code into **atomic base components**. These map to a set of **Canonical Roles** (like Repository, Entity, Service), which organize into **Layers** (Domain, Infrastructure, Application).
 
 When you run Collider, it:
 1. **Parses** your code into atoms
 2. **Classifies** them into roles
 3. **Maps** architectural layers
-4. **Detects** violations of design laws
+4. **Detects** violations of architectural rules
 5. **Predicts** missing components
 6. **Generates** an interactive visualization
 
-**The result?** A complete, navigable map of what your code *is*, what it *does*, and where it *violates* best practices.
+**The result?** A complete, navigable map of what your code *is*, what it *does*, and where it *deviates* from best practices.
+
+### The "User Repository" Story: A Concrete Example
+
+To understand how Collider works, let's look at a common scenario:
+
+1.  **Input**: You have a file `user_repo.py` containing a class `UserRepository`.
+2.  **Analysis**: Collider decomposes it into atomic units (methods, types).
+3.  **Classification**: Based on its inheritance and location, it is identified as a **Repository** (Role) belonging to the **Infrastructure** (Layer).
+4.  **Detection**: If this class imports a `Domain` entity directly but violates dependency inversion, Collider flags it as a **"Cross-Layer Violation"**. This isn't just a linter error; it's an architectural insight based on the system's topology.
+
+---
+
+## 🔬 Evidence for a Standard Model
+
+Before asking you to believe in the theory, here is the evidence that code follows structural principles:
+
+| Metric | Value |
+|--------|-------|
+| Repositories tested | **91** (from `repos_v2` benchmark) |
+| Nodes classified | **270,000+** |
+| Coverage | **100%** (0 unknowns) |
+| Accuracy (overall) | 99.2% |
+| Accuracy (high-confidence) | 99.9% |
+| Speed | 1,860 nodes/sec |
+| Scale Tested | Up to 100k+ nodes (`pytorch`, `diffusers`) |
+
+**The Hypothesis:** Most "unknown" code in large projects actually follows strict topological and structural patterns.
+**The Result:** By mapping these patterns (Context + Inheritance), we achieved 100% classification coverage across 91 diverse repositories without relying on AI guessing.
 
 ---
 
@@ -29,7 +57,7 @@ When you run Collider, it:
 ### For Code Audits
 - **100% coverage**: Every file, class, and function is classified
 - **Instant architecture diagram**: See the system from 30,000 feet
-- **Violation detection**: Find "impossible states" (e.g., Domain depending on Infrastructure)
+- **Violation detection**: Find "invalid states" (e.g., Domain depending on Infrastructure)
 
 ### For Understanding Legacy Code
 - **Semantic search**: Find all "Repositories" or "Controllers" instantly
@@ -75,18 +103,14 @@ You'll see an **interactive graph** where:
 
 ## ⚡ What Makes This Different?
 
-### 🧠 Deterministic Physics (No AI Guessing)
-
-**Collider does not guess. It measures.**
-
-We initially built an AI learning engine, but we discovered that it was unnecessary. Code has physical laws (Topology, Inheritance, Frameworks). By mapping these laws, we achieve **100% coverage** without the hallucination risks of LLMs.
+### 🧠 Deterministic Analysis
+We initially built an AI learning engine but discovered that it was unnecessary for structural analysis. Code structures tend to follow predictable patterns (Topology, Inheritance, Frameworks). By mapping these patterns, we achieve **100% coverage** in our benchmarks without the hallucination risks of LLMs.
 
 **Real example:** We achieved 100% coverage on large repos like `pytorch` not by "learning" new names, but by discovering that 80% of "unknown" code lives in semantically structured directories (like `/tests/` or `/utils/`).
 
 → Read about this discovery: [`docs/THE_PIVOT.md`](docs/THE_PIVOT.md)
 
 ### 💾 Information Maintenance Guarantee
-
 **No data is lost during transformation.**
 
 Every node preserves:
@@ -112,7 +136,7 @@ Collider's Information Maintenance Guarantee enables powerful future capabilitie
 graph LR
     CODE1[["📁 Source Code"]] -->|"collider analyze"| COLLIDER["🔬 Collider"]
     COLLIDER --> GRAPH[("🗺️ Graph<br/>Nodes + Edges")]
-    GRAPH -.->|"collider generate<br/>(Future)"| GEN["🔨 Generator"]
+    GRAPH -.->|"collider generate<br/>(Proposed)"| GEN["🔨 Generator"]
     GEN -.-> CODE2[["📁 Code"]]
     
     classDef implemented fill:#047857,stroke:#065f46,stroke-width:3px,color:#fff
@@ -128,7 +152,7 @@ graph LR
 
 ```mermaid
 graph LR
-    PROMPT[["💬 Prompt<br/>'Build a DDD app'"]] -.->|"collider create<br/>(Future)"| LLM["🤖 LLM"]
+    PROMPT[["💬 Prompt<br/>'Build a DDD app'"]] -.->|"collider create<br/>(Proposed)"| LLM["🤖 LLM"]
     LLM -.-> GRAPH[("🗺️ Graph<br/>Auto-Generated")]
     GRAPH -.-> GEN["🔨 Generator"]
     GEN -.-> CODE[["📁 Full Codebase"]]
@@ -219,85 +243,32 @@ Stage 10: Visualization    → Generate interactive HTML
 
 ---
 
-## 📊 Interpreting the Output
+## 📊 Solving Developer Problems
 
-### 1. The JSON Report (`proof_output.json`)
+Instead of just listing features, here is how Collider answers critical development questions:
 
-**Key sections:**
+### "How do I quickly understand this class?"
+**Answer: Role Classification.**
+Collider assigns one of our **standardized roles** (e.g., `Repository`, `Controller`) to every class, giving you instant context on its purpose.
 
-#### `classification`
-```json
-{
-  "total_nodes": 245,
-  "role_distribution": {
-    "Repository": 8,
-    "Entity": 12,
-    "Service": 5,
-    "Controller": 3
-  },
-  "coverage_percent": 98.5,
-  "average_confidence": 87.3
-}
-```
-→ **Read:** "245 code elements classified with 98.5% coverage, avg confidence 87%"
+### "Is my architecture leaking?"
+**Answer: Structural Consistency Checks.**
+Collider identifies **Dependency Violations**, such as a Domain Entity importing an Infrastructure component, flagging them as potential design flaws.
 
-#### `antimatter.violations`
-```json
-[
-  {
-    "law": "NO_CROSS_LAYER_IMPORT",
-    "particle": "User",
-    "message": "Domain Entity imports Infrastructure"
-  }
-]
-```
-→ **Read:** "Found a violation: User (Domain) depends on Infrastructure layer"
+### "What is missing from my system?"
+**Answer: Symmetry Predictions.**
+If you have 12 Entities but only 2 Repositories, Collider detects the asymmetry and **predicts** the missing components, guiding your refactoring.
 
-#### `predictions`
-```json
-[
-  "Missing ~6 Repositories for 12 Entities",
-  "Missing ~8 Tests for 5 Services"
-]
-```
-→ **Read:** "You should have 6 more Repositories and 8 more Tests based on symmetry"
-
-#### `insights`
-```json
-{
-  "count": 4,
-  "items": [
-    {
-      "priority": "high",
-      "title": "God Class Detected",
-      "recommendation": "Apply Single Responsibility Principle"
-    }
-  ]
-}
-```
-→ **Read:** "4 actionable insights, starting with 'God Class' (high priority)"
-
----
-
-### 2. The Visualization (`collider_report.html`)
-
-**Features:**
-- **Force-directed graph**: Nodes repel, edges attract (organic layout)
-- **Color coding**: Layers have distinct colors (Domain=green, Infrastructure=blue)
-- **Interactive**: Click nodes for details, drag to reposition, zoom/pan
-- **Filters**: Show/hide by role, layer, or complexity
-
-**Example:**
-- Large red nodes = High complexity
-- Orange border = Hotspot (performance-critical)
-- Isolated nodes = Orphans (dead code)
+### "Where are the hidden risks?"
+**Answer: Insight Generation.**
+From "God Classes" to "Orphaned Code," Collider scans for patterns that indicate maintenance headaches before they become bugs.
 
 ---
 
 ## 🧬 What Collider Detects
 
-### 1. The 167 Atoms
-Every code element maps to one of 167 structural types, organized in 4 phases:
+### 1. The Atomic Schema
+Our schema maps every code element to one of **167 structural types**, a number arrived at through empirical saturation testing:
 
 - **DATA** (26): `Entity`, `ValueObject`, `DTO`, `Enum`
 - **LOGIC** (61): `Query`, `Command`, `Validator`, `Mapper`
@@ -308,7 +279,7 @@ Every code element maps to one of 167 structural types, organized in 4 phases:
 
 ---
 
-### 2. The 27 Canonical Roles
+### 2. The Canonical Role Definitions
 Atoms group into semantic roles that describe *what it does*:
 
 | Role | Purpose | Example |
@@ -320,7 +291,7 @@ Atoms group into semantic roles that describe *what it does*:
 | `Query` | Read-only data retrieval | `GetUserById` |
 | `Command` | State-changing operation | `CreateUser` |
 
-**See all 27:** [PURPOSE_FIELD.md](docs/PURPOSE_FIELD.md)
+**See all 33:** [PURPOSE_FIELD.md](docs/PURPOSE_FIELD.md)
 
 ---
 
@@ -336,34 +307,6 @@ Roles belong to architectural layers:
 
 ---
 
-### 4. Antimatter Violations
-The "Laws of Code Physics" define **impossible states**:
-
-```
-❌ Domain Entity imports Infrastructure (layer violation)
-❌ Query has side effects (role violation)
-❌ Repository has no interface (abstraction violation)
-❌ Service has no tests (coverage violation)
-```
-
-When detected, Collider flags them with severity (CRITICAL, HIGH, MEDIUM, LOW).
-
----
-
-### 5. Predictions (Symmetry)
-If the system has patterns, Collider predicts missing components:
-
-**Example:**
-```
-Found: User, Order, Product (3 Entities)
-Found: UserRepository, OrderRepository (2 Repositories)
-
-PREDICTION: ProductRepository is MISSING
-→ Recommendation: Create ProductRepository to maintain symmetry
-```
-
----
-
 ## 📚 Advanced Documentation
 
 | Document | Description |
@@ -372,9 +315,9 @@ PREDICTION: ProductRepository is MISSING
 | [CANONICAL_SCHEMA.md](docs/CANONICAL_SCHEMA.md) | Complete field reference |
 | [ATOMS_REFERENCE.md](docs/ATOMS_REFERENCE.md) | All 167 atoms |
 | [PURPOSE_FIELD.md](docs/PURPOSE_FIELD.md) | Purpose emergence theory |
-| [FORMAL_PROOF.md](docs/FORMAL_PROOF.md) | Mathematical completeness proof |
+| [FORMAL_PROOF.md](docs/FORMAL_PROOF.md) | Formal structure definition |
 | [MECHANIZED_PROOFS.md](docs/MECHANIZED_PROOFS.md) | Machine-verified theorems (Lean 4) |
-| [DISCOVERY_PROCESS.md](docs/DISCOVERY_PROCESS.md) | The narrative of how we mapped code physics |
+| [DISCOVERY_PROCESS.md](docs/DISCOVERY_PROCESS.md) | The narrative of how we mapped code structure |
 | [THE_PIVOT.md](docs/THE_PIVOT.md) | Formal record of the shift from AI to Deterministic Analysis |
 
 ---
@@ -413,80 +356,17 @@ We discovered a 4-Tier Classification Strategy that proves **Structure > Syntax*
 
 ---
 
-## 🔬 Empirical Validation
+## 🎓 The Guiding Principle
 
-| Metric | Value |
-|--------|-------|
-| Repositories tested | **91** (from `repos_v2` benchmark) |
-| Nodes classified | **270,000+** |
-| Coverage | **100%** (0 unknowns) |
-| Accuracy (overall) | 99.2% |
-| Accuracy (high-confidence) | 99.9% |
-| Speed | 1,860 nodes/sec |
-| Scale Tested | Up to 100k+ nodes (`pytorch`, `diffusers`) |
+> **Treat software engineering as a rigorous discipline.**
 
-**The claim:** Any code element can be mapped to semantic coordinates without LLMs.
-**The proof:** 270k+ elements across 91 repos with 100% coverage.
+While creativity and ingenuity are irreplaceable, we believe that a foundation of verifiable principles elevates the practice of software engineering.
 
----
+- **Symmetry**: Balanced architectures tend to be more robust.
+- **Separation**: Clear boundaries between layers prevent entanglement.
+- **Purity**: Predictable components are easier to test and maintain.
 
-## 🛠️ CLI Reference
-
-### `collider analyze`
-Run full analysis pipeline (10 stages)
-```bash
-collider analyze /path/to/code
-```
-
-### `collider audit`
-Health check (verifies system integrity)
-```bash
-collider audit
-```
-
-### `collider viz`
-Regenerate visualization from existing JSON
-```bash
-collider viz proof_output.json
-```
-
----
-
-## 🎓 The Philosophical Claim
-
-> **Software has LAWS, like physics.**
-
-- **Conservation of Symmetry**: If you have Entities, you need Repositories
-- **Layer Separation**: Domain cannot depend on Infrastructure
-- **Role Purity**: A Query cannot have side effects
-
-Violations are not "code smells"—they are **IMPOSSIBLE STATES**.
-
-Purpose flows through architecture like energy through a system.
-
-**This makes software engineering a SCIENCE, not an ART.**
-
----
-
-## 📖 Example Workflow
-
-```bash
-# 1. Analyze a codebase
-cd my-project
-collider analyze .
-
-# 2. Review the output
-cat proof_output.json | jq '.insights'
-
-# 3. Open visualization
-open collider_report.html
-
-# 4. Filter to "Repositories"
-# (in browser: use the UI filter dropdown)
-
-# 5. Find violations
-cat proof_output.json | jq '.antimatter.violations'
-```
+By making these principles measurable, we transform subjective "code smells" into objective, actionable data.
 
 ---
 

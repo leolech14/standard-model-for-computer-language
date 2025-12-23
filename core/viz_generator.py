@@ -135,9 +135,12 @@ class VisualizationGenerator:
     def _inject_data(self, html: str, particles: List[Dict], connections: List[Dict]) -> str:
         """Inject JSON data into the HTML template using strict markers."""
         
-        # Prepare JSON
-        particles_json = json.dumps(particles)
-        connections_json = json.dumps(connections)
+        # Prepare JSON with HTML safety
+        def safe_json_dumps(obj):
+            return json.dumps(obj).replace('<', '\\u003c').replace('>', '\\u003e').replace('/', '\\u002f')
+            
+        particles_json = safe_json_dumps(particles)
+        connections_json = safe_json_dumps(connections)
         
         # Injection Block
         injection_block = f"""

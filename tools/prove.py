@@ -472,11 +472,15 @@ def run_proof(target_path: str, **kwargs) -> dict:
             with open(template_path, 'r', encoding='utf-8') as f:
                 html_content = f.read()
             
+            # Safe JSON serialization for HTML embedding
+            def safe_json_dumps(obj):
+                return json.dumps(obj).replace('<', '\\u003c').replace('>', '\\u003e').replace('/', '\\u002f')
+
             # Construct injection block
             injection_block = f"""
-    const particles = {json.dumps(viz_data['particles'])};
-    const connections = {json.dumps(viz_data['connections'])};
-    const vizMetadata = {json.dumps(viz_data['metadata'])};
+    const particles = {safe_json_dumps(viz_data['particles'])};
+    const connections = {safe_json_dumps(viz_data['connections'])};
+    const vizMetadata = {safe_json_dumps(viz_data['metadata'])};
             """
             
             # Replace marker
@@ -489,7 +493,11 @@ def run_proof(target_path: str, **kwargs) -> dict:
                 parts_after = html_content.split(end_marker)[1]
                 new_content = parts_before + start_marker + injection_block + end_marker + parts_after
                 
-                report_path = Path("collider_report.html")
+                output_dir = kwargs.get('output_dir', '.')
+                out_path = Path(output_dir)
+                out_path.mkdir(parents=True, exist_ok=True)
+                
+                report_path = out_path / "collider_report.html"
                 with open(report_path, 'w', encoding='utf-8') as f:
                     f.write(new_content)
                     
@@ -503,7 +511,10 @@ def run_proof(target_path: str, **kwargs) -> dict:
         traceback.print_exc()
 
     print()
-    output_file = Path("proof_output.json")
+    output_dir = kwargs.get('output_dir', '.')
+    out_path = Path(output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+    output_file = out_path / "proof_output.json"
     with open(output_file, 'w') as f:
         json.dump(proof_document, f, indent=2, default=str)
     print(f"  ✓ Proof saved to: {output_file}")

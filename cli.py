@@ -202,7 +202,8 @@ def main():
                 llm=args.llm, 
                 llm_model=args.llm_model,
                 language=args.language,
-                no_learn=args.no_learn
+                no_learn=args.no_learn,
+                output_dir=args.output
             )
             # The run_proof function generates the spectrometer_report.html
             print("\n✅ Analysis complete. Visualization report generated.")

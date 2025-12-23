@@ -8,7 +8,7 @@ Every particle of code exists in **8 orthogonal semantic dimensions** (see §2.4
 |---|-----------|--------|--------|
 | 1 | **WHAT** | Atom types | 167 types across 16 families |
 | 2 | **Layer** | Architectural position | Interface, Application, Core, Infrastructure, Test |
-| 3 | **Role** | Functional purpose | 27 canonical roles (Repository, Factory, etc.) |
+| 3 | **Role** | Functional purpose | 33 canonical roles (Repository, Factory, etc.) |
 | 4 | **Boundary** | Connection type | Internal, Input, I/O, Output |
 | 5 | **State** | Memory behavior | Stateful, Stateless |
 | 6 | **Effect** | Side effects | Pure, Read, Write, ReadModify |
@@ -122,7 +122,7 @@ Particle(
 |-----------|--------|------------------|
 | WHAT | ✅ Complete | AST node mapping |
 | Layer | ✅ Complete | Path + import heuristics |
-| Role | ✅ Complete | Pattern matching (27 roles) |
+| Role | ✅ Complete | Pattern matching (33 roles) |
 | Boundary | ✅ Complete | Call + parameter analysis |
 | State | ✅ Complete | Field analysis |
 | Effect | ⚠️ Partial | Call graph (needs improvement) |
@@ -173,7 +173,7 @@ These evolve as the system learns from new codebases:
 FIXED LAYER (Theory)
 ├── 8 Dimensions (semantic axes)
 ├── 167 Atoms (what it is)
-└── 27 Roles (why it exists)
+└── 33 Roles (why it exists)
          ↓
     DETECTED BY
          ↓

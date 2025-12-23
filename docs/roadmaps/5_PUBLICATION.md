@@ -19,7 +19,7 @@
 1. **Abstract** (200 words)
 2. **Introduction** (2 pages) — Motivation, claims, contributions
 3. **Background** (1 page) — Standard Model overview
-4. **Approach** (2 pages) — 167 atoms, 27 roles, RPBL, pipeline
+4. **Approach** (2 pages) — 167 atoms, 33 roles, RPBL, pipeline
 5. **Evaluation** (4 pages) — RQs, dataset, metrics, results
 6. **Threats to Validity** (1 page) — Internal, external, construct
 7. **Related Work** (2 pages) — Code analysis tools, LLM approaches
