@@ -40,27 +40,41 @@ def extract_elements(analysis: Dict) -> List[Dict]:
     return elements
 
 def sample_elements(output_dir: Path, n_samples: int = 500, seed: int = 42) -> None:
-    """Sample n elements from all analyses."""
+    """Sample n elements from graph.json."""
     random.seed(seed)
     
-    # Find all unified_analysis.json files
-    analysis_files = list(output_dir.glob('*/unified_analysis.json'))
+    # Find graph.json
+    graph_file = output_dir / 'graph.json'
     
-    if not analysis_files:
-        print(f"No analysis files found in {output_dir}")
+    if not graph_file.exists():
+        print(f"❌ No graph.json found in {output_dir}")
+        print(f"   Run 'python cli.py audit .' first")
         return
     
-    print(f"Found {len(analysis_files)} analysis files")
+    print(f"Loading {graph_file}...")
     
-    # Collect all elements
+    # Load graph (large file)
+    with open(graph_file) as f:
+        graph = json.load(f)
+    
+    # Extract elements (components is a dict)
     all_elements = []
-    for analysis_file in analysis_files:
-        try:
-            analysis = load_analysis(analysis_file)
-            elements = extract_elements(analysis)
-            all_elements.extend(elements)
-        except Exception as e:
-            print(f"Error processing {analysis_file}: {e}")
+    for component_id, node in graph.get('components', {}).items():
+        # Only sample code elements (FNC=function, AGG=class/aggregate, HDL=handler)
+        if node.get('kind') in ['FNC', 'AGG', 'HDL']:
+            element = {
+                'id': node.get('id', component_id),
+                'name': node.get('name', ''),
+                'kind': node.get('kind', ''),
+                'file': node.get('file', ''),
+                'line': node.get('start_line', 0),
+                'signature': node.get('signature', '')[:200],  # Limit length
+                'docstring': node.get('docstring', '')[:200],
+                'predicted_atom': '',  # Not in this format
+                'predicted_role': node.get('role', ''),
+                'confidence': node.get('role_confidence', 0.0)
+            }
+            all_elements.append(element)
     
     print(f"Total elements available: {len(all_elements)}")
     
