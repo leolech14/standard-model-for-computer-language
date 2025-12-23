@@ -11,55 +11,54 @@ Each atom and role has a PURPOSE - the reason it exists.
 # =============================================================================
 
 ROLE_PURPOSE = {
-    # Data Access
+    # Data Access (3 roles)
     "Query": "Retrieve data without modification",
     "Command": "Execute an action that changes state",
     "Repository": "Abstract data persistence operations",
     
-    # Creation
+    # Domain Modeling (2 roles)
+    "Entity": "Represent a domain object with identity",
+    "Service": "Coordinate business operations across entities",
+    
+    # Creation (2 roles)
     "Factory": "Create and configure new instances",
     "Builder": "Construct complex objects step by step",
     
-    # Business Logic
-    "Service": "Coordinate business operations across entities",
-    "DomainService": "Encapsulate domain logic that doesn't belong to entities",
-    "ApplicationService": "Orchestrate use cases across domain services",
-    "UseCase": "Execute a single user intention",
-    "Policy": "Express business rules as first-class objects",
-    
-    # Data Representation
-    "Entity": "Represent a domain object with identity",
-    "ValueObject": "Represent an immutable domain concept",
-    "DTO": "Transfer data between layers without behavior",
-    "Mapper": "Transform data from one representation to another",
-    
-    # Validation & Specification
+    # Validation & Transformation (2 roles)
     "Validator": "Verify data meets constraints",
-    "Specification": "Define a business rule as a boolean condition",
+    "Transformer": "Convert data from one representation to another",
     
-    # Events & Reactions
-    "EventHandler": "React to domain events",
-    "Observer": "Watch for changes and respond",
-    "Subscriber": "Receive and process published messages",
-    
-    # Infrastructure
-    "Controller": "Handle external requests and delegate to application",
-    "Gateway": "Adapt external systems to internal interface",
+    # Structural Patterns (3 roles)
     "Adapter": "Convert between incompatible interfaces",
-    "Provider": "Supply dependencies to consumers",
+    "Decorator": "Add behavior dynamically to objects",
+    "Strategy": "Encapsulate interchangeable algorithms",
+    
+    # Interface & Presentation (3 roles)
+    "Controller": "Handle external requests and delegate to application",
+    "Presenter": "Format data for display",
+    "View": "Render user interface components",
+    
+    # Configuration & Constants (2 roles)
     "Configuration": "Define system parameters and settings",
+    "Constant": "Store immutable values used across codebase",
     
-    # Lifecycle
-    "Lifecycle": "Manage creation, initialization, and cleanup",
-    "Job": "Execute scheduled or background work",
-    
-    # Testing
+    # Testing (3 roles)
     "Test": "Verify behavior meets expectations",
+    "Mock": "Simulate dependencies for testing",
     "Fixture": "Provide test data and setup",
     
-    # Utility
+    # Lifecycle & Events (3 roles)
+    "EventHandler": "React to domain events",
+    "Observer": "Watch for changes and respond",
+    "Migration": "Manage schema and data evolution",
+    
+    # Infrastructure (2 roles)
+    "Singleton": "Ensure single instance exists globally",
+    "Guard": "Control access and enforce authorization",
+    
+    # Cross-cutting (2 roles)
     "Utility": "Provide stateless helper operations",
-    "Internal": "Support implementation details privately",
+    "Middleware": "Intercept and process requests/responses",
 }
 
 # =============================================================================
