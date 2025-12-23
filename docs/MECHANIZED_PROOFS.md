@@ -27,8 +27,9 @@ If `lake build` succeeds, this theorem is **proven**.
 |---------|-------|------------|--------|
 | **3.3** | RPBL space has 10,000 states | `Boundedness.lean` | ✓ Verified |
 | **3.4** | Total space has 45,090,000 states | `Boundedness.lean` | ✓ Verified |
+| **3.5** | No dimension is redundant | `Minimality.lean` | ✓ Verified |
+| **3.8** | Canonical schema is minimal | `Schema.lean` | ✓ Verified |
 | **3.7** | Pipeline stages form valid DAG | `Pipeline.lean` | ⏳ Planned |
-| **3.8** | Canonical schema is minimal | `Schema.lean` | ⏳ Planned |
 
 ---
 
