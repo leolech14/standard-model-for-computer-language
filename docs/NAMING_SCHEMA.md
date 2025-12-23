@@ -307,4 +307,106 @@ output/particles.csv
 
 ---
 
+## 16. Frequently-Used Concepts
+
+### 16.1 Validation & Testing
+| Concept | Official Name | Definition |
+|---------|---------------|------------|
+| **Manual annotation** | `ground_truth` | Human-labeled data for validation |
+| **Accuracy measurement** | `validation` | Comparing predictions vs ground truth |
+| **Test dataset** | `benchmark` | Collection of codebases for testing |
+| **Sample for annotation** | `validation_sample` | Subset selected for manual review |
+| **Annotation task** | `labeling` | Process of manually classifying particles |
+
+### 16.2 Research & Academic
+| Concept | Official Name | Definition |
+|---------|---------------|------------|
+| **Formal proof** | `mathematical_proof` | Logical derivation of theorems |
+| **Mechanized proof** | `lean_proof` | Machine-verified proof in Lean 4 |
+| **Axiom** | `axiom` | Unproven assumption (validated empirically) |
+| **Theorem** | `theorem` | Proven mathematical statement |
+| **Empirical validation** | `empirical_study` | Data-driven validation |
+| **Research question** | `RQ` | Hypothesis to test (e.g., RQ1: Completeness) |
+
+### 16.3 Workflow & Process
+| Concept | Official Name | Definition |
+|---------|---------------|------------|
+| **Quick validation** | `mini_validation` | 500-sample quick test |
+| **Full validation** | `benchmark_study` | 100+ repo comprehensive test |
+| **Pipeline stage** | `stage` | One of 10 processing steps |
+| **Analysis run** | `collision` | One execution of Collider |
+| **Batch analysis** | `batch_collision` | Analyzing multiple codebases |
+
+### 16.4 Quality Metrics
+| Concept | Official Name | Range/Unit | Definition |
+|---------|---------------|------------|------------|
+| **Classification accuracy** | `accuracy` | 0-100% | % of correct role predictions |
+| **Coverage** | `coverage` | 0-100% | % of particles successfully classified |
+| **Confidence** | `confidence` | 0-100% | Classifier certainty score |
+| **Inter-rater agreement** | `kappa` (κ) | -1 to 1 | Agreement between annotators |
+| **Mutual information** | `MI` | bits | Statistical independence measure |
+
+### 16.5 Data & Files
+| Concept | Official Name | Format | Contains |
+|---------|---------------|--------|----------|
+| **Main output** | `collider_output.json` | JSON | Full collision result |
+| **Flat export** | `particles.csv` | CSV | Particle list (spreadsheet) |
+| **Visualization** | `collider_report.html` | HTML | Interactive report |
+| **Annotation file** | `validation_samples.csv` | CSV | Samples for manual review |
+| **Results file** | `validation_report.md` | Markdown | Accuracy metrics |
+
+### 16.6 Development & Tools
+| Concept | Official Name | Type | Purpose |
+|---------|---------------|------|---------|
+| **Command-line tool** | `collider` CLI | Binary | Run analysis from terminal |
+| **Python API** | `collider` package | Library | Programmatic access |
+| **Sampling script** | `sample_for_mini_validation.py` | Script | Generate validation samples |
+| **Validation script** | `validate_annotations.py` | Script | Compute accuracy |
+| **Proof verifier** | `lean` | Tool | Verify mechanized proofs |
+
+### 16.7 Documentation Types
+| Type | Official Name | Audience | Purpose |
+|------|---------------|----------|---------|
+| **User guide** | `README.md` | Users | Getting started |
+| **Theory doc** | `THEORY_MAP.md` | Researchers | Theoretical foundations |
+| **API reference** | `NAMING_SCHEMA.md` | Developers | Terminology reference |
+| **Proof doc** | `FORMAL_PROOF.md` | Academics | Mathematical rigor |
+| **Roadmap** | `roadmaps/*.md` | Contributors | Implementation plans |
+| **Validation plan** | `VALIDATION_PLAN.md` | Researchers | Empirical methodology |
+
+### 16.8 Common Abbreviations
+| Abbreviation | Full Name | Usage |
+|--------------|-----------|-------|
+| **RPBL** | Responsibility-Purity-Boundary-Lifecycle | Behavioral dimensions |
+| **MI** | Mutual Information | Orthogonality metric |
+| **RQ** | Research Question | Hypothesis (e.g., RQ1, RQ2) |
+| **CI** | Confidence Interval | Statistical range (95% CI) |
+| **DAG** | Directed Acyclic Graph | Pipeline structure |
+| **AST** | Abstract Syntax Tree | Code structure |
+| **LOC** | Lines of Code | Size metric |
+| **κ** (kappa) | Cohen's Kappa | Inter-rater reliability |
+
+### 16.9 Particle States
+| State | Official Name | Definition |
+|-------|---------------|------------|
+| **Classified** | `classified` | Has atom + role assigned |
+| **Unclassified** | `unclassified` | Missing atom or role |
+| **High-confidence** | `confident` | Confidence >75% |
+| **Low-confidence** | `uncertain` | Confidence <50% |
+| **Violated** | `antimatter` | Architectural violation detected |
+| **Predicted** | `predicted` | Inferred (not directly observed) |
+
+### 16.10 Common Phrases
+| Phrase | Official Term | Example |
+|--------|---------------|---------|
+| "Run the analysis" | `Execute collision` | "Let's execute a collision on this repo" |
+| "Check for issues" | `Scan for antimatter` | "Scanning for antimatter..." |
+| "God Class detected" | `Massive particle found` | "Found 3 massive particles" |
+| "Classify the code" | `Assign atoms and roles` | "Assigning roles to particles..." |
+| "Dependency graph" | `Interaction network` | "Visualizing interaction network" |
+| "Code smell" | `Antimatter signature` | "Detected antimatter signature" |
+
+---
+
 **This is the canonical reference. All code, docs, and communication should use these terms.**
+
