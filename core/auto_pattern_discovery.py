@@ -211,9 +211,14 @@ class AutoPatternDiscovery:
                 if next_char.isupper() or next_char == '_':
                     self.discovered_patterns[f'java_ts:{prefix}'] += 1
                     return (role, 80.0)        
-        # 3. Check suffix patterns
+        # 3. Check suffix patterns (both lowercase and original case)
         for suffix, role in self.SUFFIX_ROLES.items():
-            if short_lower.endswith(suffix):
+            # Check lowercase suffix
+            if short_lower.endswith(suffix.lower()):
+                self.discovered_patterns[f'suffix:{suffix}'] += 1
+                return (role, 85.0)
+            # Check original case suffix (e.g., UserService)
+            if short.endswith(suffix):
                 self.discovered_patterns[f'suffix:{suffix}'] += 1
                 return (role, 85.0)
         
@@ -228,9 +233,14 @@ class AutoPatternDiscovery:
             return ('Controller', 75.0)
         
         # 6. Fixture/Example patterns (common in framework docs/tests)
+        # IMPORTANT: Only match if NOT also matching a suffix pattern (e.g., UserService)
         fixture_tokens = {'fake', 'mock', 'stub', 'dummy', 'sample', 'example', 'demo', 
-                         'fixture', 'hero', 'item', 'user', 'todo', 'post', 'comment'}
-        if any(token in short_lower for token in fixture_tokens):
+                         'fixture', 'hero', 'item', 'todo', 'post', 'comment'}
+        # Remove 'user' from here - too common in real class names
+        is_fixture = any(token in short_lower for token in fixture_tokens)
+        # Check if it's actually a domain class pattern
+        has_domain_suffix = any(short.endswith(s) for s in ['Service', 'Repository', 'Controller', 'Handler', 'Factory', 'Builder', 'Mapper', 'Validator'])
+        if is_fixture and not has_domain_suffix:
             self.discovered_patterns['fixture/example'] += 1
             return ('Fixture', 70.0)
         
