@@ -51,3 +51,8 @@ proof_output.json
 *.csv
 **/spectrometer_output/
 archive/
+
+# Generated Reports (root level)
+collider_report.html
+collider_viz.html
+spectrometer_report.html

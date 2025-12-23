@@ -3,7 +3,6 @@
 🔍 AUDIT RUNNER
 Performs a combined health check and minimal analysis to prove the pipeline works end-to-end.
 """
-from types import SimpleNamespace
 from pathlib import Path
 from datetime import datetime
 import sys
@@ -15,12 +14,12 @@ if str(ROOT_DIR) not in sys.path:
 
 from core.newman_suite import NewmanSuite
 try:
-    from tools.analysis_engine import run_analysis
+    from tools.prove import run_proof
 except ImportError:
     # Fallback if tools package not yet installed
     import sys
     sys.path.append(str(ROOT_DIR / "tools"))
-    from analysis_engine import run_analysis
+    from prove import run_proof
 
 
 def _print_health(results):
@@ -71,21 +70,10 @@ def run_full_audit(target_path: str = ".", output_dir: str = "output/audit") -> 
     health_ok = _print_health(health_results)
 
     print("\n🧠 RUNNING ANALYSIS")
-    audit_args = SimpleNamespace(
-        path=str(repo_path),
-        output=output_dir,
-        language=None,
-        workers=2,
-        no_learn=True,
-        llm=False,
-        llm_model="qwen2.5:7b-instruct",
-        single_repo=str(repo_path),
-        repos_dir=None,
-    )
 
     analysis_ok = True
     try:
-        run_analysis(audit_args)
+        run_proof(str(repo_path), output_dir=output_dir)
     except SystemExit as e:
         analysis_ok = (e.code == 0)
     except Exception as exc:  # noqa: BLE001
