@@ -118,8 +118,8 @@ graph LR
     GRAPH -.->|"collider generate<br/>(Future)"| GEN["🔨 Generator"]
     GEN -.-> CODE2[["📁 Code"]]
     
-    classDef implemented fill:#4ade80,stroke:#16a34a,stroke-width:3px
-    classDef future fill:#fbbf24,stroke:#d97706,stroke-width:2px,stroke-dasharray:5 5
+    classDef implemented fill:#047857,stroke:#065f46,stroke-width:3px,color:#fff
+    classDef future fill:#d97706,stroke:#b45309,stroke-width:2px,stroke-dasharray:5 5,color:#fff
     
     class CODE1,COLLIDER,GRAPH implemented
     class GEN,CODE2 future
@@ -136,7 +136,7 @@ graph LR
     GRAPH -.-> GEN["🔨 Generator"]
     GEN -.-> CODE[["📁 Full Codebase"]]
     
-    classDef future fill:#fbbf24,stroke:#d97706,stroke-width:2px,stroke-dasharray:5 5
+    classDef future fill:#d97706,stroke:#b45309,stroke-width:2px,stroke-dasharray:5 5,color:#fff
     
     class PROMPT,LLM,GRAPH,GEN,CODE future
 ```
