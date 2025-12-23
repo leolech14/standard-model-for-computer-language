@@ -91,6 +91,17 @@ class TreeSitterUniversalEngine:
         with open(patterns_file) as f:
             self.patterns = json.load(f)
 
+        # Load pattern repository for dynamic pattern matching
+        try:
+            from core.registry.pattern_repository import get_pattern_repository
+            self.pattern_repo = get_pattern_repository()
+        except ImportError:
+            try:
+                from registry.pattern_repository import get_pattern_repository
+                self.pattern_repo = get_pattern_repository()
+            except ImportError:
+                self.pattern_repo = None
+
         self._ts_symbol_extractor = (Path(__file__).parent.parent / "tools" / "ts_symbol_extractor.cjs").resolve()
         self.python_depth_margin = 50
         self.python_recursion_hard_cap = 10000
@@ -423,6 +434,29 @@ class TreeSitterUniversalEngine:
             elif "/gateways/" in normalized_path:
                 particle_type = "Gateway"
                 confidence = 75.0
+
+        # =============================================================================
+        # TIER 2.5: LEARNED PATTERNS FROM patterns.json (80-95% confidence)
+        # =============================================================================
+        if particle_type is None and self.pattern_repo is not None:
+            short_name = name.split(".")[-1] if "." in name else name
+            
+            # Try prefix patterns first
+            prefix_result = self.pattern_repo.classify_by_prefix(short_name)
+            if prefix_result and prefix_result[0] != "Unknown":
+                particle_type = prefix_result[0]
+                confidence = float(prefix_result[1])
+            
+            # Try suffix patterns (may override or confirm)
+            suffix_result = self.pattern_repo.classify_by_suffix(short_name)
+            if suffix_result and suffix_result[0] != "Unknown":
+                if particle_type is None:
+                    particle_type = suffix_result[0]
+                    confidence = float(suffix_result[1])
+                elif suffix_result[1] > confidence:
+                    # Suffix has higher confidence, use it
+                    particle_type = suffix_result[0]
+                    confidence = float(suffix_result[1])
 
         # =============================================================================
         # TIER 3: NAMING CONVENTIONS (70-80% confidence)
