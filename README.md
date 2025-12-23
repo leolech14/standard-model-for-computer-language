@@ -297,6 +297,7 @@ PREDICTION: ProductRepository is MISSING
 | [ATOMS_REFERENCE.md](docs/ATOMS_REFERENCE.md) | All 167 atoms |
 | [PURPOSE_FIELD.md](docs/PURPOSE_FIELD.md) | Purpose emergence theory |
 | [FORMAL_PROOF.md](docs/FORMAL_PROOF.md) | Mathematical completeness proof |
+| [MECHANIZED_PROOFS.md](docs/MECHANIZED_PROOFS.md) | Machine-verified theorems (Lean 4) |
 
 ---
 
