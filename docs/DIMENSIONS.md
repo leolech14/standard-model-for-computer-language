@@ -12,7 +12,7 @@ For practical visualization and simplified reasoning, these project into a **4D 
 | **WHY** | Role |
 
 The 4D model is a lossy compression: it combines correlated dimensions for usability.
-The 12 Families (Periodic Table) correspond to the **WHAT** dimension.
+The 16 Families (Periodic Table) correspond to the **WHAT** dimension.
 
 ---
 

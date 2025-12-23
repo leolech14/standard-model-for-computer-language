@@ -48,7 +48,7 @@ This document defines the **official terminology** for all concepts in the Stand
 | Concept | Official Name | Aliases (Deprecated) | Example |
 |---------|---------------|---------------------|---------|
 | **167 taxonomy** | `atoms` | syntactic_types | DAT.BIT.A, LOG.FNC.M |
-| **Atom group** | `family` | category | 12 families (e.g., Logic, Data) |
+| **Atom group** | `family` | category | 16 families (e.g., Logic, Data) |
 | **Atom phase** | `phase` | dimension | 4 phases (Data, Logic, Org, Exec) |
 
 ### 3.2 Semantic (WHY)

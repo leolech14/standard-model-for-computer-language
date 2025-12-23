@@ -263,4 +263,4 @@
 | 167 | **Fixture** | `EXE.PRB.O` | Test data setup |
 
 ---
-**Total: 167 atoms across 4 phases and 12 families**
+**Total: 167 atoms across 4 phases and 16 families**

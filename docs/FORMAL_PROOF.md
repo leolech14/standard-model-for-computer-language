@@ -118,7 +118,7 @@ Developer intent is partially encoded in naming conventions, following natural l
    - Scripting (JavaScript, Ruby, PHP)
    - Systems (Rust, Go)
 
-4. Each AST node type maps to exactly one of 12 families:
+4. Each AST node type maps to exactly one of 16 families:
    
    | Family | AST Node Types | Atom Coverage |
    |--------|---------------|---------------|

@@ -10,7 +10,7 @@ December 2025
 
 ## Abstract
 
-We present the **Standard Model of Code**, a comprehensive framework for representing, classifying, and analyzing software systems as multi-dimensional graph structures. Drawing inspiration from particle physics taxonomy, we propose a hierarchical ontology comprising **167 atomic code constructs** organized into **12 families** across **4 phases**, measured along **8 orthogonal semantic dimensions**. We map these atoms to **152 Tree-Sitter AST node types** across JavaScript, TypeScript, and Python.
+We present the **Standard Model of Code**, a comprehensive framework for representing, classifying, and analyzing software systems as multi-dimensional graph structures. Drawing inspiration from particle physics taxonomy, we propose a hierarchical ontology comprising **167 atomic code constructs** organized into **16 families** across **4 phases**, measured along **8 orthogonal semantic dimensions**. We map these atoms to **152 Tree-Sitter AST node types** across JavaScript, TypeScript, and Python.
 
 We implement this model in the **Collider** tool and validate it against **35,263 code entities** across 3 production codebases, achieving **100% classification coverage** with zero unmapped constructs. The framework identifies architectural violations, God Functions, semantic duplicates, and refactoring opportunities. Initial manual inspection suggests high face validity; a formal precision study is planned future work.
 
@@ -87,9 +87,9 @@ Particles exist at four levels of granularity:
 | L3 | **Organism** | Composed of molecules | Class, Module, Service |
 | L4 | **Ecosystem** | The whole system | Package, Repository |
 
-### 2.3 The 12 Families (167 Atoms)
+### 2.3 The 16 Families (167 Atoms)
 
-Atoms group into 12 families across 4 phases:
+Atoms group into 16 families across 4 phases:
 
 ![Taxonomy Chart](paper_charts/fig1_taxonomy.png)
 
@@ -101,7 +101,7 @@ Atoms group into 12 families across 4 phases:
 | **LOGIC** | Expressions, Statements, Control, Functions | 61 | The forces of software |
 | **ORGANIZATION** | Aggregates, Services, Modules, Files | 45 | The structure of software |
 | **EXECUTION** | Handlers, Workers, Initializers, Probes | 35 | The dynamics of software |
-| **TOTAL** | 12 families | **167** | |
+| **TOTAL** | 16 families | **167** | |
 
 #### Definition 1 (Atom)
 
