@@ -30,6 +30,8 @@ If `lake build` succeeds, this theorem is **proven**.
 | **3.5** | No dimension is redundant | `Minimality.lean` | ✓ Verified |
 | **3.7** | Pipeline stages form valid DAG | `Pipeline.lean` | ✓ Verified |
 | **3.8** | Canonical schema is minimal | `Schema.lean` | ✓ Verified |
+| **4.2** | Classification is deterministic | `Determinism.lean` | ✓ Verified |
+| **4.3** | State management maintains integrity | `StateManagement.lean` | ✓ Verified |
 
 ---
 

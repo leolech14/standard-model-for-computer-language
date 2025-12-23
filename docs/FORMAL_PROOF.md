@@ -566,6 +566,11 @@ Selected theorems have been **machine-verified** using Lean 4, a proof assistant
 |---------|-----------|--------|
 | **3.3** RPBL Boundedness | `proofs/lean/StandardModel/Boundedness.lean` | ✓ Verified |
 | **3.4** Total Space Boundedness | `proofs/lean/StandardModel/Boundedness.lean` | ✓ Verified |
+| **3.5** Minimality | `proofs/lean/StandardModel/Minimality.lean` | ✓ Verified |
+| **3.7** Pipeline DAG | `proofs/lean/StandardModel/Pipeline.lean` | ✓ Verified |
+| **3.8** Schema Minimality | `proofs/lean/StandardModel/Schema.lean` | ✓ Verified |
+| **4.2** Determinism | `proofs/lean/StandardModel/Determinism.lean` | ✓ Verified |
+| **4.3** State Management | `proofs/lean/StandardModel/StateManagement.lean` | ✓ Verified |
 
 ### How to Verify
 
