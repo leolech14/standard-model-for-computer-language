@@ -464,7 +464,7 @@ def run_proof(target_path: str) -> dict:
         # 3. INJECT INTO TEMPLATE
         # Locate template (try local dir, then root)
         repo_root = Path(__file__).resolve().parent.parent
-        template_path = repo_root / "spectrometer_viz.html"
+        template_path = repo_root / "collider_viz.html"
         
         if not template_path.exists():
             print(f"  ⚠ Template not found at {template_path}")
@@ -489,7 +489,7 @@ def run_proof(target_path: str) -> dict:
                 parts_after = html_content.split(end_marker)[1]
                 new_content = parts_before + start_marker + injection_block + end_marker + parts_after
                 
-                report_path = Path("spectrometer_report.html")
+                report_path = Path("collider_report.html")
                 with open(report_path, 'w', encoding='utf-8') as f:
                     f.write(new_content)
                     

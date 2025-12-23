@@ -11,11 +11,11 @@ class VisualizationGenerator:
     Generates interactive HTML visualizations for Spectrometer graphs.
     """
 
-    def __init__(self, template_path: str = "demos/spectrometer_sigma.html"):
+    def __init__(self, template_path: str = "demos/collider_viz.html"):
         self.template_path = Path(template_path)
         if not self.template_path.exists():
             # Fallback to looking in source root if not found
-            self.template_path = Path(__file__).parent.parent / "demos" / "spectrometer_pro.html"
+            self.template_path = Path(__file__).parent.parent / "collider_viz.html"
 
     def generate(self, graph_path: str | Path, output_path: str | Path):
         """

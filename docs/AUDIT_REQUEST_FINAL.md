@@ -23,9 +23,9 @@ The major milestone achieved is the transition from ad-hoc data handling to a **
 - **Integrity**: `state.validate()` enforces referential consistency (no processing orphans).
 - **Export**: `state.export()` provides the canonical JSON schema.
 
-### 2. The Interactive Spectrometer
+### 2. The Interactive Collider
 **Previously:** Broken or static HTML templates.
-**Now:** A fully offline-capable, interactive Visualization Engine (`spectrometer_viz.html`).
+**Now:** A fully offline-capable, interactive Visualization Engine (`collider_viz.html`).
 - **Features**: Force-directed layout, infinite canvas, and rich metadata inspection.
 - **Pipeline**: Directly consumes the `CodebaseState` export.
 - **Command**: `collider viz <graph.json>`
@@ -55,12 +55,12 @@ Analyze the codebase itself to generate the "Purpose Field":
 ```bash
 collider analyze .
 ```
-*Expected Result: `proof_output.json` and `spectrometer_report.html` generated.*
+*Expected Result: `proof_output.json` and `collider_report.html` generated.*
 
 ### 3. Visual Inspection
 Open the generated report to explore the 3D structure of the code:
 ```bash
-open spectrometer_report.html
+open collider_report.html
 ```
 
 ---

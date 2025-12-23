@@ -78,13 +78,13 @@ collider viz graph.json  # Regenerate visualization from JSON
 
 ## Visualization
 
-The **Spectrometer** provides an interactive 3D/2D visualization of your codebase's Purpose Field.
+The **Collider Visualization** provides an interactive 3D/2D visualization of your codebase's Purpose Field.
 
 1. Generate analysis:
    ```bash
-   python tools/prove.py /path/to/code
+   collider analyze /path/to/code
    ```
-2. Open `spectrometer_viz.html` in your browser.
+2. Open `collider_report.html` (or `collider_viz.html`) in your browser.
    - Works fully offline (bundled assets).
    - Visualize relationships, layers, and hotpots.
 

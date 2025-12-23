@@ -221,7 +221,7 @@ def main():
         from core.viz_generator import VisualizationGenerator
         
         graph_path = Path(args.graph_path)
-        output_path = Path(args.output) if args.output else graph_path.parent / "spectrometer_viz.html"
+        output_path = Path(args.output) if args.output else graph_path.parent / "collider_viz.html"
         
         generator = VisualizationGenerator()
         try:
