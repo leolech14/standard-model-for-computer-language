@@ -1,0 +1,402 @@
+{
+  "repo": "standard-model-of-code",
+  "version": "1.0.0",
+  "timestamp": "2024-12-24",
+  "confidence": 100,
+  "symbols": {
+    "TreeSitterUniversalEngine": {
+      "role": "Factory",
+      "category": "core"
+    },
+    "TreeSitterEngine": {
+      "role": "Factory",
+      "category": "core"
+    },
+    "PatternRepository": {
+      "role": "Repository",
+      "category": "core"
+    },
+    "ParticleClassifier": {
+      "role": "Analyzer",
+      "category": "core"
+    },
+    "PurityDetector": {
+      "role": "Analyzer",
+      "category": "detector"
+    },
+    "BoundaryDetector": {
+      "role": "Analyzer",
+      "category": "detector"
+    },
+    "PurposeFieldDetector": {
+      "role": "Analyzer",
+      "category": "detector"
+    },
+    "AutoPatternDiscovery": {
+      "role": "Analyzer",
+      "category": "detector"
+    },
+    "InsightsEngine": {
+      "role": "Analyzer",
+      "category": "detector"
+    },
+    "GraphTypeInference": {
+      "role": "Analyzer",
+      "category": "graph"
+    },
+    "AntimatterEvaluator": {
+      "role": "Validator",
+      "category": "graph"
+    },
+    "FixGenerator": {
+      "role": "Factory",
+      "category": "generator"
+    },
+    "analyze_file": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "analyze_directory": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "extract_symbols": {
+      "role": "Transformer",
+      "category": "method"
+    },
+    "classify_by_prefix": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "classify_by_suffix": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "classify_by_path": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "classify_by_param_type": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "classify_by_import": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "_enrich_with_how": {
+      "role": "Transformer",
+      "category": "method"
+    },
+    "_enrich_with_where": {
+      "role": "Transformer",
+      "category": "method"
+    },
+    "_enrich_with_why": {
+      "role": "Transformer",
+      "category": "method"
+    },
+    "detect_purpose": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "detect_patterns": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "detect_purity": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "detect_boundaries": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "infer_type": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "apply_graph_inference": {
+      "role": "Command",
+      "category": "method"
+    },
+    "measure_complexity": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "measure_depth": {
+      "role": "Analyzer",
+      "category": "method"
+    },
+    "run_benchmark": {
+      "role": "Command",
+      "category": "script"
+    },
+    "run_tests": {
+      "role": "Command",
+      "category": "script"
+    },
+    "update_docs": {
+      "role": "Command",
+      "category": "script"
+    }
+  },
+  "files": {
+    "core/enrichment_helpers.py": {
+      "hash": "724fac50dec73901",
+      "size": 3081,
+      "lines": 87
+    },
+    "core/tree_sitter_engine.py": {
+      "hash": "301e72031e5897b6",
+      "size": 65063,
+      "lines": 1608
+    },
+    "core/graph_extractor.py": {
+      "hash": "26c5feffbb9330b0",
+      "size": 20811,
+      "lines": 518
+    },
+    "core/config.py": {
+      "hash": "91ba2420ead9c266",
+      "size": 2026,
+      "lines": 54
+    },
+    "core/ollama_client.py": {
+      "hash": "323befe6a9606b55",
+      "size": 8245,
+      "lines": 245
+    },
+    "core/god_class_detector_lite.py": {
+      "hash": "afd6576bf47722ca",
+      "size": 18261,
+      "lines": 464
+    },
+    "core/unified_analysis.py": {
+      "hash": "9f62ebb489c11a38",
+      "size": 20942,
+      "lines": 573
+    },
+    "core/atom_extractor.py": {
+      "hash": "ec3274ddf1ea4981",
+      "size": 28245,
+      "lines": 626
+    },
+    "core/stats_generator.py": {
+      "hash": "640b22f3f6ae55df",
+      "size": 12697,
+      "lines": 279
+    },
+    "core/purpose_field.py": {
+      "hash": "3fbcd1d38c3dbbad",
+      "size": 14485,
+      "lines": 368
+    },
+    "core/redundancy_detector.py": {
+      "hash": "8e7a83c6c3ad32bc",
+      "size": 13738,
+      "lines": 396
+    },
+    "core/atom_registry.py": {
+      "hash": "254ab823479b99c6",
+      "size": 21175,
+      "lines": 386
+    },
+    "core/purpose_registry.py": {
+      "hash": "df5c1cfdb14c48c4",
+      "size": 13360,
+      "lines": 357
+    },
+    "core/dependency_analyzer.py": {
+      "hash": "4b93d9ee6e92304a",
+      "size": 10614,
+      "lines": 342
+    },
+    "core/universal_detector.py": {
+      "hash": "3cdda3b4a5c91046",
+      "size": 5249,
+      "lines": 115
+    },
+    "core/atom_classifier.py": {
+      "hash": "765c84042e5c01a6",
+      "size": 13948,
+      "lines": 360
+    },
+    "core/__init__.py": {
+      "hash": "c43e46735061e936",
+      "size": 80,
+      "lines": 1
+    },
+    "core/performance_predictor.py": {
+      "hash": "447be6ff6f2283b5",
+      "size": 12554,
+      "lines": 374
+    },
+    "core/test_totality.py": {
+      "hash": "43aa450416c55c27",
+      "size": 12969,
+      "lines": 358
+    },
+    "core/ir.py": {
+      "hash": "cf70a33e0c502a94",
+      "size": 2274,
+      "lines": 83
+    },
+    "core/antimatter_evaluator.py": {
+      "hash": "0ee19f2f38192cb5",
+      "size": 13251,
+      "lines": 356
+    },
+    "core/type_registry.py": {
+      "hash": "5e0fa2e88c0fa639",
+      "size": 6006,
+      "lines": 183
+    },
+    "core/semantic_ids.py": {
+      "hash": "043e940ea468bdc1",
+      "size": 28209,
+      "lines": 767
+    },
+    "core/llm_test.py": {
+      "hash": "3b8df8cf09986126",
+      "size": 6014,
+      "lines": 183
+    },
+    "core/heuristic_classifier.py": {
+      "hash": "be6f774f4e7ebd6d",
+      "size": 23997,
+      "lines": 571
+    },
+    "core/language_loader.py": {
+      "hash": "204e51aab60d0560",
+      "size": 3474,
+      "lines": 88
+    },
+    "core/report_generator.py": {
+      "hash": "47f10e033c0538ba",
+      "size": 9238,
+      "lines": 253
+    },
+    "core/graph_type_inference.py": {
+      "hash": "b5e2faa1a3cd0e0f",
+      "size": 17186,
+      "lines": 444
+    },
+    "core/fix_generator.py": {
+      "hash": "88e1aa1ed81377c2",
+      "size": 15243,
+      "lines": 553
+    },
+    "core/newman_suite.py": {
+      "hash": "e358a3069a728436",
+      "size": 5575,
+      "lines": 131
+    },
+    "core/execution_flow.py": {
+      "hash": "dcad6b0a2fff78b0",
+      "size": 16343,
+      "lines": 460
+    },
+    "core/smart_extractor.py": {
+      "hash": "100f39a04cc837d7",
+      "size": 12955,
+      "lines": 359
+    },
+    "core/intent_detector.py": {
+      "hash": "f3d86a90f717feae",
+      "size": 9319,
+      "lines": 276
+    },
+    "core/newman_runner.py": {
+      "hash": "b2ce6a502a3960e4",
+      "size": 1496,
+      "lines": 54
+    },
+    "core/data_management.py": {
+      "hash": "d38d6a38476a7631",
+      "size": 4304,
+      "lines": 133
+    },
+    "core/graph_analyzer.py": {
+      "hash": "062447e89984a0d5",
+      "size": 14691,
+      "lines": 473
+    },
+    "core/insights_engine.py": {
+      "hash": "1e0e99b278d3e0c7",
+      "size": 22652,
+      "lines": 538
+    },
+    "core/system_health.py": {
+      "hash": "f1285e6fcca24902",
+      "size": 3607,
+      "lines": 105
+    },
+    "core/complete_extractor.py": {
+      "hash": "e68f983204a10060",
+      "size": 22782,
+      "lines": 598
+    },
+    "core/purity_detector.py": {
+      "hash": "e39754c0676c3866",
+      "size": 8214,
+      "lines": 245
+    },
+    "core/particle_classifier.py": {
+      "hash": "73d97511f24d2ddd",
+      "size": 3232,
+      "lines": 90
+    },
+    "core/audit_runner.py": {
+      "hash": "613d1d27fc2c76bb",
+      "size": 2784,
+      "lines": 96
+    },
+    "core/viz_generator.py": {
+      "hash": "94bad5898843c924",
+      "size": 12776,
+      "lines": 327
+    },
+    "core/boundary_detector.py": {
+      "hash": "aea0e2e6050e79c0",
+      "size": 5569,
+      "lines": 173
+    },
+    "core/parser/symbol_classifier.py": {
+      "hash": "cbe632da3b8ee225",
+      "size": 11011,
+      "lines": 347
+    },
+    "core/parser/__init__.py": {
+      "hash": "7d795657419264ab",
+      "size": 1392,
+      "lines": 65
+    },
+    "core/parser/python_parser.py": {
+      "hash": "c8b5adaa1f0a5a20",
+      "size": 11131,
+      "lines": 311
+    },
+    "core/parser/import_extractor.py": {
+      "hash": "6dc79996db76c65b",
+      "size": 8914,
+      "lines": 272
+    },
+    "core/registry/__init__.py": {
+      "hash": "ec0d60246390402a",
+      "size": 737,
+      "lines": 36
+    },
+    "core/registry/pattern_repository.py": {
+      "hash": "54df6bcdcf0cd769",
+      "size": 23071,
+      "lines": 606
+    },
+    "core/registry/schema_repository.py": {
+      "hash": "1998d0be95fbb0bf",
+      "size": 17326,
+      "lines": 455
+    }
+  },
+  "file_count": 51
+}

@@ -1959,5 +1959,67 @@
       "confidence": 0.95,
       "source": "mockito"
     }
+  },
+  "exact_patterns": {
+    "TreeSitterUniversalEngine": {
+      "role": "Factory",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "TreeSitterEngine": {
+      "role": "Factory",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "PatternRepository": {
+      "role": "Repository",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "ParticleClassifier": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "PurityDetector": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "BoundaryDetector": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "PurposeFieldDetector": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "AutoPatternDiscovery": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "InsightsEngine": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "GraphTypeInference": {
+      "role": "Analyzer",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "AntimatterEvaluator": {
+      "role": "Validator",
+      "confidence": 99,
+      "source": "ground_truth"
+    },
+    "FixGenerator": {
+      "role": "Factory",
+      "confidence": 99,
+      "source": "ground_truth"
+    }
   }
 }
