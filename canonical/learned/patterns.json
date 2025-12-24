@@ -561,6 +561,111 @@
       "role": "Factory",
       "confidence": 80,
       "source": "go-idiom"
+    },
+    "analyze": {
+      "role": "Analyzer",
+      "confidence": 88,
+      "source": "smc-internal"
+    },
+    "extract": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "detect": {
+      "role": "Analyzer",
+      "confidence": 88,
+      "source": "smc-internal"
+    },
+    "classify": {
+      "role": "Analyzer",
+      "confidence": 90,
+      "source": "smc-internal"
+    },
+    "parse": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "infer": {
+      "role": "Analyzer",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "apply": {
+      "role": "Command",
+      "confidence": 78,
+      "source": "general"
+    },
+    "process": {
+      "role": "Transformer",
+      "confidence": 80,
+      "source": "general"
+    },
+    "save": {
+      "role": "Command",
+      "confidence": 82,
+      "source": "general"
+    },
+    "dump": {
+      "role": "Command",
+      "confidence": 78,
+      "source": "general"
+    },
+    "enrich": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "normalize": {
+      "role": "Transformer",
+      "confidence": 82,
+      "source": "general"
+    },
+    "validate": {
+      "role": "Validator",
+      "confidence": 88,
+      "source": "general"
+    },
+    "compute": {
+      "role": "Transformer",
+      "confidence": 82,
+      "source": "general"
+    },
+    "measure": {
+      "role": "Analyzer",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "Build": {
+      "role": "Builder",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Create": {
+      "role": "Factory",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Make": {
+      "role": "Factory",
+      "confidence": 82,
+      "source": "general"
+    },
+    "Generate": {
+      "role": "Factory",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Convert": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Transform": {
+      "role": "Transformer",
+      "confidence": 88,
+      "source": "general"
     }
   },
   "suffix_patterns": {
@@ -1158,6 +1263,111 @@
       "role": "Transformer",
       "confidence": 88,
       "source": "general"
+    },
+    "Detector": {
+      "role": "Analyzer",
+      "confidence": 92,
+      "source": "smc-internal"
+    },
+    "Classifier": {
+      "role": "Analyzer",
+      "confidence": 92,
+      "source": "smc-internal"
+    },
+    "Extractor": {
+      "role": "Transformer",
+      "confidence": 90,
+      "source": "smc-internal"
+    },
+    "Analyzer": {
+      "role": "Analyzer",
+      "confidence": 95,
+      "source": "smc-internal"
+    },
+    "Inference": {
+      "role": "Analyzer",
+      "confidence": 88,
+      "source": "smc-internal"
+    },
+    "Discovery": {
+      "role": "Analyzer",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "Generator": {
+      "role": "Factory",
+      "confidence": 88,
+      "source": "smc-internal"
+    },
+    "Evaluator": {
+      "role": "Analyzer",
+      "confidence": 90,
+      "source": "smc-internal"
+    },
+    "Schema": {
+      "role": "Entity",
+      "confidence": 88,
+      "source": "smc-internal"
+    },
+    "Model": {
+      "role": "Entity",
+      "confidence": 82,
+      "source": "general"
+    },
+    "Data": {
+      "role": "Entity",
+      "confidence": 75,
+      "source": "general"
+    },
+    "Result": {
+      "role": "DTO",
+      "confidence": 78,
+      "source": "general"
+    },
+    "Output": {
+      "role": "DTO",
+      "confidence": 75,
+      "source": "general"
+    },
+    "Request": {
+      "role": "DTO",
+      "confidence": 82,
+      "source": "general"
+    },
+    "Response": {
+      "role": "DTO",
+      "confidence": 82,
+      "source": "general"
+    },
+    "Worker": {
+      "role": "Job",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Runner": {
+      "role": "Command",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Executor": {
+      "role": "Command",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Loader": {
+      "role": "Query",
+      "confidence": 80,
+      "source": "general"
+    },
+    "Dumper": {
+      "role": "Command",
+      "confidence": 80,
+      "source": "general"
+    },
+    "Saver": {
+      "role": "Command",
+      "confidence": 80,
+      "source": "general"
     }
   },
   "path_patterns": {
@@ -1448,6 +1658,26 @@
       "role": "Transformer",
       "confidence": 88,
       "source": "js-framework"
+    },
+    "core/": {
+      "role": "Internal",
+      "confidence": 78,
+      "source": "smc-internal"
+    },
+    "scripts/": {
+      "role": "Command",
+      "confidence": 85,
+      "source": "smc-internal"
+    },
+    "tools/": {
+      "role": "Utility",
+      "confidence": 82,
+      "source": "smc-internal"
+    },
+    "validation/": {
+      "role": "Test",
+      "confidence": 85,
+      "source": "smc-internal"
     }
   },
   "parameter_type_patterns": {
