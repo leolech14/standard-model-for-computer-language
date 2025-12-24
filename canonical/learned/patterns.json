@@ -1043,6 +1043,121 @@
       "role": "Transformer",
       "confidence": 82,
       "source": "rxjava"
+    },
+    "Scheduler": {
+      "role": "Orchestrator",
+      "confidence": 88,
+      "source": "rxjava"
+    },
+    "Subscription": {
+      "role": "Resource",
+      "confidence": 82,
+      "source": "rxjava"
+    },
+    "Emitter": {
+      "role": "Producer",
+      "confidence": 85,
+      "source": "rxjava"
+    },
+    "Advice": {
+      "role": "Interceptor",
+      "confidence": 88,
+      "source": "spring"
+    },
+    "Aspect": {
+      "role": "Interceptor",
+      "confidence": 90,
+      "source": "spring"
+    },
+    "Interceptor": {
+      "role": "Interceptor",
+      "confidence": 92,
+      "source": "spring"
+    },
+    "Filter": {
+      "role": "Interceptor",
+      "confidence": 85,
+      "source": "spring"
+    },
+    "Bean": {
+      "role": "Service",
+      "confidence": 80,
+      "source": "spring"
+    },
+    "Properties": {
+      "role": "Configuration",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Function": {
+      "role": "Transformer",
+      "confidence": 78,
+      "source": "guava"
+    },
+    "Predicate": {
+      "role": "Specification",
+      "confidence": 85,
+      "source": "guava"
+    },
+    "Supplier": {
+      "role": "Factory",
+      "confidence": 82,
+      "source": "guava"
+    },
+    "Buffer": {
+      "role": "Container",
+      "confidence": 78,
+      "source": "general"
+    },
+    "Stream": {
+      "role": "Stream",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Pool": {
+      "role": "Cache",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Queue": {
+      "role": "Container",
+      "confidence": 82,
+      "source": "general"
+    },
+    "Stack": {
+      "role": "Container",
+      "confidence": 82,
+      "source": "general"
+    },
+    "Channel": {
+      "role": "Stream",
+      "confidence": 85,
+      "source": "go-idiom"
+    },
+    "Goroutine": {
+      "role": "Job",
+      "confidence": 80,
+      "source": "go-idiom"
+    },
+    "Codec": {
+      "role": "Adapter",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Encoder": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Decoder": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "general"
+    },
+    "Deserializer": {
+      "role": "Transformer",
+      "confidence": 88,
+      "source": "general"
     }
   },
   "path_patterns": {
@@ -1273,6 +1388,66 @@
       "role": "Interface",
       "confidence": 88.0,
       "source": "path-convention"
+    },
+    "binding/": {
+      "role": "Adapter",
+      "confidence": 85,
+      "source": "go-framework"
+    },
+    "render/": {
+      "role": "Adapter",
+      "confidence": 85,
+      "source": "go-framework"
+    },
+    "codec/": {
+      "role": "Adapter",
+      "confidence": 82,
+      "source": "go-framework"
+    },
+    "encoding/": {
+      "role": "Transformer",
+      "confidence": 80,
+      "source": "go-framework"
+    },
+    "decoding/": {
+      "role": "Transformer",
+      "confidence": 80,
+      "source": "go-framework"
+    },
+    "src/core/": {
+      "role": "Internal",
+      "confidence": 78,
+      "source": "js-framework"
+    },
+    "dist/": {
+      "role": "Build",
+      "confidence": 90,
+      "source": "js-framework"
+    },
+    "parser/": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "js-framework"
+    },
+    "printer/": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "js-framework"
+    },
+    "lexer/": {
+      "role": "Transformer",
+      "confidence": 85,
+      "source": "js-framework"
+    },
+    "ast/": {
+      "role": "Entity",
+      "confidence": 82,
+      "source": "js-framework"
+    },
+    "compiler/": {
+      "role": "Transformer",
+      "confidence": 88,
+      "source": "js-framework"
     }
   },
   "parameter_type_patterns": {
