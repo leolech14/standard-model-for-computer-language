@@ -6,139 +6,173 @@
   "symbols": {
     "TreeSitterUniversalEngine": {
       "role": "Factory",
-      "category": "core"
+      "category": "core",
+      "purpose": "Parses code into AST"
     },
     "TreeSitterEngine": {
       "role": "Factory",
-      "category": "core"
+      "category": "core",
+      "purpose": "Legacy AST parser"
     },
     "PatternRepository": {
       "role": "Repository",
-      "category": "core"
+      "category": "core",
+      "purpose": "Stores naming patterns"
     },
     "ParticleClassifier": {
       "role": "Analyzer",
-      "category": "core"
+      "category": "core",
+      "purpose": "Assigns roles to symbols"
     },
     "PurityDetector": {
       "role": "Analyzer",
-      "category": "detector"
+      "category": "detector",
+      "purpose": "Finds pure functions"
     },
     "BoundaryDetector": {
       "role": "Analyzer",
-      "category": "detector"
+      "category": "detector",
+      "purpose": "Finds layer violations"
     },
     "PurposeFieldDetector": {
       "role": "Analyzer",
-      "category": "detector"
+      "category": "detector",
+      "purpose": "Infers code intent"
     },
     "AutoPatternDiscovery": {
       "role": "Analyzer",
-      "category": "detector"
+      "category": "detector",
+      "purpose": "Learns new patterns"
     },
     "InsightsEngine": {
       "role": "Analyzer",
-      "category": "detector"
+      "category": "detector",
+      "purpose": "Generates improvement suggestions"
     },
     "GraphTypeInference": {
       "role": "Analyzer",
-      "category": "graph"
+      "category": "graph",
+      "purpose": "Propagates types via edges"
     },
     "AntimatterEvaluator": {
       "role": "Validator",
-      "category": "graph"
+      "category": "graph",
+      "purpose": "Validates constraint rules"
     },
     "FixGenerator": {
       "role": "Factory",
-      "category": "generator"
+      "category": "generator",
+      "purpose": "Creates code fixes"
     },
     "analyze_file": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Extracts symbols from file"
     },
     "analyze_directory": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Scans entire codebase"
     },
     "extract_symbols": {
       "role": "Transformer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Pulls AST nodes"
     },
     "classify_by_prefix": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Matches name prefixes"
     },
     "classify_by_suffix": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Matches name suffixes"
     },
     "classify_by_path": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Infers from file path"
     },
     "classify_by_param_type": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Uses parameter types"
     },
     "classify_by_import": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Uses import statements"
     },
     "_enrich_with_how": {
       "role": "Transformer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Adds purity dimension"
     },
     "_enrich_with_where": {
       "role": "Transformer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Adds layer dimension"
     },
     "_enrich_with_why": {
       "role": "Transformer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Adds intent dimension"
     },
     "detect_purpose": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Finds function intent"
     },
     "detect_patterns": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Finds naming matches"
     },
     "detect_purity": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Checks side effects"
     },
     "detect_boundaries": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Checks layer rules"
     },
     "infer_type": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Derives type from context"
     },
     "apply_graph_inference": {
       "role": "Command",
-      "category": "method"
+      "category": "method",
+      "purpose": "Runs graph propagation"
     },
     "measure_complexity": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Counts code complexity"
     },
     "measure_depth": {
       "role": "Analyzer",
-      "category": "method"
+      "category": "method",
+      "purpose": "Measures AST depth"
     },
     "run_benchmark": {
       "role": "Command",
-      "category": "script"
+      "category": "script",
+      "purpose": "Tests against GitHub repos"
     },
     "run_tests": {
       "role": "Command",
-      "category": "script"
+      "category": "script",
+      "purpose": "Executes test suite"
     },
     "update_docs": {
       "role": "Command",
-      "category": "script"
+      "category": "script",
+      "purpose": "Syncs documentation"
     }
   },
   "files": {
