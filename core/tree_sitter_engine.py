@@ -357,6 +357,27 @@ class TreeSitterUniversalEngine:
                     break
 
         # =============================================================================
+        # TIER 0.5: STRUCTURAL ANCHORS (95% confidence) - "Pseudo-Decorators"
+        # These are definitive signals in Go/JS/Java that act like decorators
+        # =============================================================================
+        if particle_type is None and self.pattern_repo is not None:
+            # Extract parameter types from params
+            if params:
+                param_types = [p.get("type", "") for p in params if p.get("type")]
+                if param_types:
+                    result = self.pattern_repo.classify_by_param_type(param_types)
+                    if result and result[0] != "Unknown" and result[1] > 0:
+                        particle_type = result[0]
+                        confidence = float(result[1])
+            
+            # Check file path patterns
+            if particle_type is None:
+                result = self.pattern_repo.classify_by_path(file_path)
+                if result and result[0] != "Unknown" and result[1] > 80:
+                    particle_type = result[0]
+                    confidence = float(result[1])
+
+        # =============================================================================
         # TIER 1: INHERITANCE-BASED DETECTION (99% confidence)
         # =============================================================================
         if symbol_kind in {"class", "interface", "type", "enum"} and base_classes:
