@@ -889,6 +889,470 @@
     "/helper": {
       "role": "Utility",
       "confidence": 80
+    },
+    "controllers/": {
+      "role": "Controller",
+      "confidence": 90.0
+    },
+    "handlers/": {
+      "role": "EventHandler",
+      "confidence": 88.0
+    },
+    "routes/": {
+      "role": "Router",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "api/": {
+      "role": "Controller",
+      "confidence": 80.0,
+      "source": "path-convention"
+    },
+    "endpoints/": {
+      "role": "Controller",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "models/": {
+      "role": "Entity",
+      "confidence": 88.0
+    },
+    "entities/": {
+      "role": "Entity",
+      "confidence": 92.0
+    },
+    "schemas/": {
+      "role": "Entity",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "domain/": {
+      "role": "Entity",
+      "confidence": 80.0,
+      "source": "path-convention"
+    },
+    "repositories/": {
+      "role": "Repository",
+      "confidence": 95.0
+    },
+    "repos/": {
+      "role": "Repository",
+      "confidence": 90.0,
+      "source": "path-convention"
+    },
+    "dal/": {
+      "role": "Repository",
+      "confidence": 88.0,
+      "source": "path-convention"
+    },
+    "db/": {
+      "role": "Repository",
+      "confidence": 75.0,
+      "source": "path-convention"
+    },
+    "services/": {
+      "role": "Service",
+      "confidence": 92.0
+    },
+    "usecases/": {
+      "role": "Service",
+      "confidence": 90.0,
+      "source": "path-convention"
+    },
+    "use_cases/": {
+      "role": "Service",
+      "confidence": 90.0,
+      "source": "path-convention"
+    },
+    "components/": {
+      "role": "UIComponent",
+      "confidence": 92.0
+    },
+    "views/": {
+      "role": "UIComponent",
+      "confidence": 88.0,
+      "source": "path-convention"
+    },
+    "pages/": {
+      "role": "Entry",
+      "confidence": 90.0
+    },
+    "layouts/": {
+      "role": "Template",
+      "confidence": 88.0,
+      "source": "path-convention"
+    },
+    "widgets/": {
+      "role": "UIComponent",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "tests/": {
+      "role": "Test",
+      "confidence": 95.0
+    },
+    "test/": {
+      "role": "Test",
+      "confidence": 95.0,
+      "source": "path-convention"
+    },
+    "__tests__/": {
+      "role": "Test",
+      "confidence": 98.0
+    },
+    "spec/": {
+      "role": "Test",
+      "confidence": 92.0,
+      "source": "path-convention"
+    },
+    "fixtures/": {
+      "role": "Fixture",
+      "confidence": 90.0,
+      "source": "path-convention"
+    },
+    "middleware/": {
+      "role": "Interceptor",
+      "confidence": 92.0
+    },
+    "middlewares/": {
+      "role": "Interceptor",
+      "confidence": 92.0,
+      "source": "path-convention"
+    },
+    "config/": {
+      "role": "Configuration",
+      "confidence": 92.0
+    },
+    "configs/": {
+      "role": "Configuration",
+      "confidence": 90.0,
+      "source": "path-convention"
+    },
+    "migrations/": {
+      "role": "SystemUtility",
+      "confidence": 99.0
+    },
+    "utils/": {
+      "role": "Utility",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "helpers/": {
+      "role": "Utility",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "lib/": {
+      "role": "Utility",
+      "confidence": 75.0,
+      "source": "path-convention"
+    },
+    "pkg/": {
+      "role": "Service",
+      "confidence": 70.0
+    },
+    "internal/": {
+      "role": "Internal",
+      "confidence": 80.0
+    },
+    "cmd/": {
+      "role": "Entry",
+      "confidence": 90.0
+    },
+    "types/": {
+      "role": "ValueObject",
+      "confidence": 85.0,
+      "source": "path-convention"
+    },
+    "dtos/": {
+      "role": "DTO",
+      "confidence": 92.0,
+      "source": "path-convention"
+    },
+    "interfaces/": {
+      "role": "Interface",
+      "confidence": 88.0,
+      "source": "path-convention"
+    }
+  },
+  "parameter_type_patterns": {
+    "gin.Context": {
+      "role": "Controller",
+      "confidence": 95.0
+    },
+    "*gin.Context": {
+      "role": "Controller",
+      "confidence": 95.0,
+      "source": "go-gin"
+    },
+    "c *gin.Context": {
+      "role": "Controller",
+      "confidence": 95.0,
+      "source": "go-gin"
+    },
+    "http.ResponseWriter": {
+      "role": "Controller",
+      "confidence": 90.0
+    },
+    "*http.Request": {
+      "role": "Controller",
+      "confidence": 90.0,
+      "source": "go-stdlib"
+    },
+    "w http.ResponseWriter": {
+      "role": "Controller",
+      "confidence": 90.0,
+      "source": "go-stdlib"
+    },
+    "*gorm.DB": {
+      "role": "Repository",
+      "confidence": 88.0
+    },
+    "*sql.DB": {
+      "role": "Repository",
+      "confidence": 85.0
+    },
+    "*sqlx.DB": {
+      "role": "Repository",
+      "confidence": 88.0,
+      "source": "go-sqlx"
+    },
+    "echo.Context": {
+      "role": "Controller",
+      "confidence": 95.0
+    },
+    "c echo.Context": {
+      "role": "Controller",
+      "confidence": 95.0,
+      "source": "go-echo"
+    },
+    "*fiber.Ctx": {
+      "role": "Controller",
+      "confidence": 95.0
+    },
+    "chi.Router": {
+      "role": "Router",
+      "confidence": 90.0,
+      "source": "go-chi"
+    },
+    "context.Context": {
+      "role": "Service",
+      "confidence": 70.0
+    }
+  },
+  "import_patterns": {
+    "react": {
+      "role": "UIComponent",
+      "confidence": 95.0
+    },
+    "react-dom": {
+      "role": "UIComponent",
+      "confidence": 95.0,
+      "source": "react"
+    },
+    "@tanstack/react-query": {
+      "role": "DataLoader",
+      "confidence": 88.0,
+      "source": "react-query"
+    },
+    "react-router": {
+      "role": "Router",
+      "confidence": 85.0,
+      "source": "react-router"
+    },
+    "react-redux": {
+      "role": "StateManager",
+      "confidence": 88.0,
+      "source": "redux"
+    },
+    "zustand": {
+      "role": "StateManager",
+      "confidence": 90.0
+    },
+    "@reduxjs/toolkit": {
+      "role": "StateManager",
+      "confidence": 90.0,
+      "source": "redux"
+    },
+    "express": {
+      "role": "Controller",
+      "confidence": 85.0
+    },
+    "koa": {
+      "role": "Controller",
+      "confidence": 85.0,
+      "source": "koa"
+    },
+    "fastify": {
+      "role": "Controller",
+      "confidence": 85.0,
+      "source": "fastify"
+    },
+    "hono": {
+      "role": "Controller",
+      "confidence": 85.0,
+      "source": "hono"
+    },
+    "mongoose": {
+      "role": "Repository",
+      "confidence": 90.0
+    },
+    "prisma": {
+      "role": "Repository",
+      "confidence": 92.0,
+      "source": "prisma"
+    },
+    "@prisma/client": {
+      "role": "Repository",
+      "confidence": 92.0
+    },
+    "sequelize": {
+      "role": "Repository",
+      "confidence": 88.0,
+      "source": "sequelize"
+    },
+    "typeorm": {
+      "role": "Repository",
+      "confidence": 90.0
+    },
+    "drizzle-orm": {
+      "role": "Repository",
+      "confidence": 90.0,
+      "source": "drizzle"
+    },
+    "jest": {
+      "role": "Test",
+      "confidence": 95.0
+    },
+    "vitest": {
+      "role": "Test",
+      "confidence": 95.0
+    },
+    "@testing-library/react": {
+      "role": "Test",
+      "confidence": 95.0,
+      "source": "testing-library"
+    },
+    "mocha": {
+      "role": "Test",
+      "confidence": 95.0,
+      "source": "mocha"
+    },
+    "chai": {
+      "role": "Test",
+      "confidence": 90.0,
+      "source": "chai"
+    },
+    "vue": {
+      "role": "UIComponent",
+      "confidence": 95.0
+    },
+    "pinia": {
+      "role": "StateManager",
+      "confidence": 90.0,
+      "source": "pinia"
+    },
+    "@angular/core": {
+      "role": "UIComponent",
+      "confidence": 95.0,
+      "source": "angular"
+    },
+    "@angular/http": {
+      "role": "Service",
+      "confidence": 85.0,
+      "source": "angular"
+    }
+  },
+  "inheritance_patterns": {
+    "JpaRepository": {
+      "role": "Repository",
+      "confidence": 0.99,
+      "source": "spring-data"
+    },
+    "CrudRepository": {
+      "role": "Repository",
+      "confidence": 0.99,
+      "source": "spring-data"
+    },
+    "MongoRepository": {
+      "role": "Repository",
+      "confidence": 0.99,
+      "source": "spring-data"
+    },
+    "PagingAndSortingRepository": {
+      "role": "Repository",
+      "confidence": 0.99,
+      "source": "spring-data"
+    },
+    "@Entity": {
+      "role": "Entity",
+      "confidence": 0.99,
+      "source": "jpa"
+    },
+    "@Table": {
+      "role": "Entity",
+      "confidence": 0.95,
+      "source": "jpa"
+    },
+    "@Column": {
+      "role": "Entity",
+      "confidence": 0.85,
+      "source": "jpa"
+    },
+    "@Service": {
+      "role": "Service",
+      "confidence": 0.99,
+      "source": "spring"
+    },
+    "@Repository": {
+      "role": "Repository",
+      "confidence": 0.99,
+      "source": "spring"
+    },
+    "@Controller": {
+      "role": "Controller",
+      "confidence": 0.99,
+      "source": "spring"
+    },
+    "@RestController": {
+      "role": "Controller",
+      "confidence": 0.99,
+      "source": "spring"
+    },
+    "@Component": {
+      "role": "Service",
+      "confidence": 0.9,
+      "source": "spring"
+    },
+    "@Configuration": {
+      "role": "Configuration",
+      "confidence": 0.95,
+      "source": "spring"
+    },
+    "@Autowired": {
+      "role": "Service",
+      "confidence": 0.8,
+      "source": "spring"
+    },
+    "@Test": {
+      "role": "Test",
+      "confidence": 0.99,
+      "source": "junit"
+    },
+    "@BeforeEach": {
+      "role": "Fixture",
+      "confidence": 0.95,
+      "source": "junit"
+    },
+    "@AfterEach": {
+      "role": "Fixture",
+      "confidence": 0.95,
+      "source": "junit"
+    },
+    "@Mock": {
+      "role": "TestDouble",
+      "confidence": 0.95,
+      "source": "mockito"
     }
   }
 }

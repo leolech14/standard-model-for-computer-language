@@ -70,6 +70,20 @@ class PatternRepository:
             confidence = info.get("confidence", 75)
             self._path_patterns[pattern] = (role, confidence)
         
+        # Load parameter type patterns (STRUCTURAL ANCHORS - Go framework types)
+        self._param_type_patterns: Dict[str, Tuple[str, float]] = {}
+        for pattern, info in data.get("parameter_type_patterns", {}).items():
+            role = info.get("role", "Unknown")
+            confidence = info.get("confidence", 90)
+            self._param_type_patterns[pattern] = (role, confidence)
+        
+        # Load import patterns (STRUCTURAL ANCHORS - JS/TS imports)
+        self._import_patterns: Dict[str, Tuple[str, float]] = {}
+        for pattern, info in data.get("import_patterns", {}).items():
+            role = info.get("role", "Unknown")
+            confidence = info.get("confidence", 85)
+            self._import_patterns[pattern] = (role, confidence)
+        
         # Still need to load dunder/decorator/inheritance from defaults
         self._load_dunder_patterns()
         self._load_decorator_patterns()
@@ -492,6 +506,79 @@ class PatternRepository:
             return self._dunder_patterns[short_name]
         
         return ('Unknown', 0)
+    
+    # =========================================================================
+    # STRUCTURAL ANCHOR METHODS (High Confidence)
+    # These are "pseudo-decorators" - structural signals that strongly indicate role
+    # =========================================================================
+    
+    def classify_by_param_type(self, param_types: List[str]) -> Tuple[str, float]:
+        """Classify by function parameter types (Go framework anchors).
+        
+        Example: gin.Context → Controller (95% confidence)
+        """
+        if not hasattr(self, '_param_type_patterns'):
+            return ('Unknown', 0)
+        
+        for param_type in param_types:
+            # Normalize: remove leading * for pointers
+            normalized = param_type.lstrip('*').strip()
+            
+            # Try exact match first
+            if normalized in self._param_type_patterns:
+                return self._param_type_patterns[normalized]
+            
+            # Try partial match (e.g., "c *gin.Context" contains "gin.Context")
+            for pattern, (role, conf) in self._param_type_patterns.items():
+                if pattern in param_type:
+                    return (role, conf)
+        
+        return ('Unknown', 0)
+    
+    def classify_by_import(self, imports: List[str]) -> Tuple[str, float]:
+        """Classify by imports (JS/TS library anchors).
+        
+        Example: 'react' import → UIComponent (95% confidence)
+        """
+        if not hasattr(self, '_import_patterns'):
+            return ('Unknown', 0)
+        
+        best_match = ('Unknown', 0)
+        
+        for imp in imports:
+            # Extract package name from import path
+            package = imp.split('/')[-1] if '/' in imp else imp
+            package = package.split('/')[0]  # Handle scoped packages like @prisma/client
+            
+            # Check full import
+            if imp in self._import_patterns:
+                role, conf = self._import_patterns[imp]
+                if conf > best_match[1]:
+                    best_match = (role, conf)
+            
+            # Check package name
+            elif package in self._import_patterns:
+                role, conf = self._import_patterns[package]
+                if conf > best_match[1]:
+                    best_match = (role, conf)
+        
+        return best_match
+    
+    def classify_by_path(self, file_path: str) -> Tuple[str, float]:
+        """Classify by file path patterns (universal directory anchors).
+        
+        Example: 'src/controllers/user.go' → Controller (90% confidence)
+        """
+        normalized = file_path.replace('\\', '/').lower()
+        
+        best_match = ('Unknown', 0)
+        
+        for pattern, (role, conf) in self._path_patterns.items():
+            if pattern.lower() in normalized:
+                if conf > best_match[1]:
+                    best_match = (role, conf)
+        
+        return best_match
 
 
 # Singleton instance

@@ -157,3 +157,13 @@ When adding new patterns, ALWAYS report:
 - New Go patterns: Handle*, Serve*, With*, *Middleware, *Option, *Cmd
 - New JS patterns: use* (hooks), *Page, *Layout, *Provider, *Context, on*, handle*
 - Expected improvement: ~76,000 nodes gain 8%+ confidence
+
+## 2025-12-23 - Structural Anchors Strategy
+- Implemented "Pseudo-Decorators" approach based on external insight
+- Added NEW pattern types: parameter_type_patterns, import_patterns
+- Added 14 Go framework param patterns (gin.Context, http.ResponseWriter)
+- Added 26 JS/TS import patterns (react, express, prisma)
+- Added 18 Java Spring/JPA annotation patterns
+- Added 40 directory path patterns (controllers/, models/, services/)
+- Expected impact: 66% → 75% average confidence
+- Key insight: Treat structural signals with TIER 1 (95%) confidence like decorators
