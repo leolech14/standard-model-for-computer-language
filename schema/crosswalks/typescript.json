@@ -1,13 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "version": "1.0.0",
-    "description": "AST-to-Atom crosswalk for TypeScript (validated December 2025)",
+    "version": "2.0.0",
+    "description": "AST-to-Atom crosswalk for TypeScript (200-atom hypothesis testing)",
     "language": "typescript",
     "coverage": {
-        "ast_nodes_total": 80,
-        "mapped": 78,
-        "coverage_percent": 98,
-        "notes": "2% gap: decorators (covered by existing Decorator atom)"
+        "ast_nodes_total": 115,
+        "mapped": 110,
+        "skipped": 5,
+        "coverage_percent": 96,
+        "notes": "Skipped: internal compiler nodes"
     },
     "mappings": [
         {
@@ -20,8 +21,7 @@
             "ast_node": "ImportDeclaration",
             "atom_id": "ORG.MOD.O",
             "atom_name": "ImportStmt",
-            "type": "Direct",
-            "note": "NEW ATOM #172"
+            "type": "Direct"
         },
         {
             "ast_node": "ExportDeclaration",
@@ -56,8 +56,9 @@
         {
             "ast_node": "TypeAliasDeclaration",
             "atom_id": "ORG.AGG.M",
-            "atom_name": "TypeDef",
-            "type": "Direct"
+            "atom_name": "TypeAlias",
+            "type": "Direct",
+            "note": "#197"
         },
         {
             "ast_node": "FunctionDeclaration",
@@ -306,6 +307,12 @@
             "type": "Direct"
         },
         {
+            "ast_node": "BigIntLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "BigInt",
+            "type": "Direct"
+        },
+        {
             "ast_node": "TrueKeyword",
             "atom_id": "DAT.PRM.A",
             "atom_name": "Boolean",
@@ -339,6 +346,378 @@
             "ast_node": "Decorator",
             "atom_id": "LOG.FNC.M",
             "atom_name": "Decorator",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ClassBody",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "Block",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ModuleBlock",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "Block",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ClassExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ClassExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FunctionExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "FunctionExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AsExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeCast",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeAssertionExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeCast",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NonNullExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "NullAssert",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SatisfiesExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeCheck",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ParenthesizedExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ParenExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "DeleteExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "DeleteExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeOfExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeofExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "VoidExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "VoidExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TaggedTemplateExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TemplateExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "OmittedExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "EmptyExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MetaProperty",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MetaExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "PropertyDeclaration",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "InstanceField",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IndexSignature",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "IndexerDecl",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "HeritageClause",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "InheritClause",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ExportAssignment",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ExportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NamespaceExportDeclaration",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ExportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ImportClause",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ImportSpecifier",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ExportSpecifier",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ExportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NamespaceImport",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NamespaceExport",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ExportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NamedImports",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NamedExports",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ExportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "Parameter",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "Parameter",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeParameter",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "GenericParam",
+            "type": "Direct",
+            "note": "#193"
+        },
+        {
+            "ast_node": "ComputedPropertyName",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ComputedKey",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "PrivateIdentifier",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IdentifierExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ThisKeyword",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ThisExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SuperKeyword",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "SuperExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "DebuggerStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "DebuggerStmt",
+            "type": "Direct",
+            "note": "#198"
+        },
+        {
+            "ast_node": "EmptyStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "EmptyStmt",
+            "type": "Direct",
+            "note": "#200"
+        },
+        {
+            "ast_node": "LabeledStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "LabeledBlock",
+            "type": "Direct",
+            "note": "#199"
+        },
+        {
+            "ast_node": "WithStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WithBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "RegularExpressionLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "RegexLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "NoSubstitutionTemplateLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "String",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "TemplateHead",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TemplateExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "TemplateMiddle",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TemplateExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "TemplateTail",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TemplateExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "TemplateSpan",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TemplateExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "TypeReference",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeRef",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FunctionType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "FunctionType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ConstructorType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ConstructorType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeQuery",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeQuery",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeLiteral",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ArrayType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TupleType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TupleType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "OptionalType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "OptionalType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "RestType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "RestType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "UnionType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "UnionType",
+            "type": "Direct",
+            "note": "#194"
+        },
+        {
+            "ast_node": "IntersectionType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "IntersectionType",
+            "type": "Direct",
+            "note": "#195"
+        },
+        {
+            "ast_node": "ConditionalType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ConditionalType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "InferType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "InferType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ParenthesizedType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ParenType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MappedType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "MappedType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IndexedAccessType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "IndexedType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "LiteralType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "LiteralType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TemplateLiteralType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TemplateType",
             "type": "Direct"
         }
     ]

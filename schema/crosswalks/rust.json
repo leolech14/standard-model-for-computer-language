@@ -1,13 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "version": "1.0.0",
-    "description": "AST-to-Atom crosswalk for Rust (validated December 2025)",
+    "version": "2.0.0",
+    "description": "AST-to-Atom crosswalk for Rust (200-atom hypothesis testing)",
     "language": "rust",
     "coverage": {
-        "ast_nodes_total": 100,
-        "mapped": 97,
-        "coverage_percent": 97,
-        "notes": "3% gap: macro definitions/invocations and attributes - covered by new atoms"
+        "ast_nodes_total": 84,
+        "mapped": 80,
+        "skipped": 4,
+        "coverage_percent": 95,
+        "notes": "Skipped: internal pattern nodes"
     },
     "mappings": [
         {
@@ -35,6 +36,12 @@
             "type": "Merged"
         },
         {
+            "ast_node": "foreign_mod_item",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ForeignModule",
+            "type": "Direct"
+        },
+        {
             "ast_node": "struct_item",
             "atom_id": "ORG.AGG.M",
             "atom_name": "Struct",
@@ -44,6 +51,12 @@
             "ast_node": "enum_item",
             "atom_id": "ORG.AGG.M",
             "atom_name": "Enum",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "union_item",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Union",
             "type": "Direct"
         },
         {
@@ -57,12 +70,19 @@
             "atom_id": "ORG.AGG.M",
             "atom_name": "ImplBlock",
             "type": "Direct",
-            "note": "NEW ATOM #170"
+            "note": "#170"
         },
         {
             "ast_node": "type_item",
             "atom_id": "ORG.AGG.M",
-            "atom_name": "TypeDef",
+            "atom_name": "TypeAlias",
+            "type": "Direct",
+            "note": "#197"
+        },
+        {
+            "ast_node": "associated_type",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "AssocType",
             "type": "Direct"
         },
         {
@@ -108,6 +128,12 @@
             "type": "Direct"
         },
         {
+            "ast_node": "if_let_expression",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "IfBranch",
+            "type": "Merged"
+        },
+        {
             "ast_node": "match_expression",
             "atom_id": "LOG.CTL.A",
             "atom_name": "SwitchCase",
@@ -116,7 +142,14 @@
         {
             "ast_node": "match_arm",
             "atom_id": "LOG.CTL.A",
-            "atom_name": "SwitchCase",
+            "atom_name": "MatchPattern",
+            "type": "Direct",
+            "note": "#173"
+        },
+        {
+            "ast_node": "match_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "MatchPattern",
             "type": "Merged"
         },
         {
@@ -129,7 +162,13 @@
             "ast_node": "while_expression",
             "atom_id": "LOG.CTL.A",
             "atom_name": "WhileLoop",
-            "type": "Direct"
+            "type": "Merged"
+        },
+        {
+            "ast_node": "while_let_expression",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WhileLoop",
+            "type": "Merged"
         },
         {
             "ast_node": "for_expression",
@@ -162,6 +201,18 @@
             "type": "Direct"
         },
         {
+            "ast_node": "yield_expression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "YieldExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "try_expression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TryExpr",
+            "type": "Direct"
+        },
+        {
             "ast_node": "async_block",
             "atom_id": "EXE.WRK.O",
             "atom_name": "AsyncBlock",
@@ -174,18 +225,42 @@
             "type": "Direct"
         },
         {
+            "ast_node": "method_call_expression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "CallExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "generic_function",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "GenericFunc",
+            "type": "Direct"
+        },
+        {
             "ast_node": "macro_invocation",
             "atom_id": "LOG.EXP.A",
             "atom_name": "MacroCall",
             "type": "Direct",
-            "note": "NEW ATOM #169"
+            "note": "#169"
         },
         {
             "ast_node": "macro_definition",
             "atom_id": "LOG.FNC.M",
             "atom_name": "MacroDef",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "macro_rule",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "MacroRule",
             "type": "Direct",
-            "note": "NEW ATOM"
+            "note": "#191"
+        },
+        {
+            "ast_node": "token_tree",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MacroTokens",
+            "type": "Direct"
         },
         {
             "ast_node": "binary_expression",
@@ -215,7 +290,8 @@
             "ast_node": "range_expression",
             "atom_id": "LOG.EXP.A",
             "atom_name": "RangeExpr",
-            "type": "Direct"
+            "type": "Direct",
+            "note": "#183"
         },
         {
             "ast_node": "type_cast_expression",
@@ -226,13 +302,31 @@
         {
             "ast_node": "reference_expression",
             "atom_id": "LOG.EXP.A",
-            "atom_name": "UnaryExpr",
+            "atom_name": "RefExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "dereference_expression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "DerefExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "assignment_expression",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "compound_assignment_expr",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
             "type": "Merged"
         },
         {
             "ast_node": "struct_expression",
             "atom_id": "DAT.PRM.A",
-            "atom_name": "CompositeLiteral",
+            "atom_name": "StructLiteral",
             "type": "Direct"
         },
         {
@@ -245,6 +339,18 @@
             "ast_node": "array_expression",
             "atom_id": "DAT.PRM.A",
             "atom_name": "ArrayLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "unit_expression",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "UnitLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "parenthesized_expression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ParenExpr",
             "type": "Direct"
         },
         {
@@ -266,6 +372,18 @@
             "type": "Direct"
         },
         {
+            "ast_node": "raw_string_literal",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "String",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "char_literal",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Char",
+            "type": "Direct"
+        },
+        {
             "ast_node": "boolean_literal",
             "atom_id": "DAT.PRM.A",
             "atom_name": "Boolean",
@@ -278,10 +396,123 @@
             "type": "Direct"
         },
         {
-            "ast_node": "attribute_item",
-            "atom_id": "ORG.SVC.M",
-            "atom_name": "Decorator",
+            "ast_node": "field_identifier",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IdentifierExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "type_identifier",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeRef",
             "type": "Direct"
+        },
+        {
+            "ast_node": "lifetime",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Lifetime",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "attribute_item",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Annotation",
+            "type": "Direct",
+            "note": "#189"
+        },
+        {
+            "ast_node": "inner_attribute_item",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Annotation",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "visibility_modifier",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "AccessMod",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "expression_statement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ExpressionStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "empty_statement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "EmptyStmt",
+            "type": "Direct",
+            "note": "#200"
+        },
+        {
+            "ast_node": "tuple_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "DestructPattern",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "slice_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "DestructPattern",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "struct_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "DestructPattern",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ref_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "RefPattern",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "reference_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "RefPattern",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "mut_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "MutPattern",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "or_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "OrPattern",
+            "type": "Direct",
+            "note": "#176"
+        },
+        {
+            "ast_node": "range_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "RangePattern",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "identifier_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "BindPattern",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "_",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WildcardPattern",
+            "type": "Direct",
+            "note": "#175"
+        },
+        {
+            "ast_node": "rest_pattern",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "RestPattern",
+            "type": "Direct",
+            "note": "#178"
         }
     ]
 }
