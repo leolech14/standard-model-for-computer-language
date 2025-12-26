@@ -1,13 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "version": "1.0.0",
-    "description": "AST-to-Atom crosswalk for Java (validated December 2025)",
+    "version": "2.0.0",
+    "description": "AST-to-Atom crosswalk for Java (200-atom hypothesis testing)",
     "language": "java",
     "coverage": {
-        "ast_nodes_total": 50,
-        "mapped": 49,
-        "coverage_percent": 99,
-        "notes": "1% gap: annotations (covered by existing Decorator atom)"
+        "ast_nodes_total": 95,
+        "mapped": 90,
+        "skipped": 5,
+        "coverage_percent": 95,
+        "notes": "Skipped: Javadoc, comment nodes"
     },
     "mappings": [
         {
@@ -26,8 +27,13 @@
             "ast_node": "ImportDeclaration",
             "atom_id": "ORG.MOD.O",
             "atom_name": "ImportStmt",
-            "type": "Direct",
-            "note": "NEW ATOM #172"
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeDecl",
+            "type": "Direct"
         },
         {
             "ast_node": "ClassDeclaration",
@@ -50,8 +56,14 @@
         {
             "ast_node": "AnnotationTypeDeclaration",
             "atom_id": "ORG.SVC.M",
-            "atom_name": "Interface",
-            "type": "Merged"
+            "atom_name": "AnnotationType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "RecordDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Record",
+            "type": "Direct"
         },
         {
             "ast_node": "FieldDeclaration",
@@ -72,6 +84,24 @@
             "type": "Direct"
         },
         {
+            "ast_node": "Initializer",
+            "atom_id": "EXE.INI.O",
+            "atom_name": "InitializerBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "EnumConstantDeclaration",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "EnumConstant",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AnnotationTypeMemberDeclaration",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Method",
+            "type": "Merged"
+        },
+        {
             "ast_node": "LambdaExpression",
             "atom_id": "LOG.FNC.M",
             "atom_name": "Lambda",
@@ -84,16 +114,46 @@
             "type": "Direct"
         },
         {
+            "ast_node": "CreationReference",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MethodRef",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ExpressionMethodReference",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MethodRef",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "SuperMethodReference",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MethodRef",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "TypeMethodReference",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MethodRef",
+            "type": "Merged"
+        },
+        {
             "ast_node": "LocalVariableDeclaration",
             "atom_id": "DAT.VAR.A",
             "atom_name": "LocalVar",
             "type": "Direct"
         },
         {
-            "ast_node": "Initializer",
-            "atom_id": "EXE.INI.O",
-            "atom_name": "InitializerBlock",
+            "ast_node": "SingleVariableDeclaration",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "Parameter",
             "type": "Direct"
+        },
+        {
+            "ast_node": "VariableDeclarationFragment",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "LocalVar",
+            "type": "Merged"
         },
         {
             "ast_node": "Block",
@@ -117,11 +177,10 @@
             "ast_node": "SwitchExpression",
             "atom_id": "LOG.CTL.A",
             "atom_name": "SwitchCase",
-            "type": "Merged",
-            "note": "Java 14+"
+            "type": "Merged"
         },
         {
-            "ast_node": "CaseStatement",
+            "ast_node": "SwitchCase",
             "atom_id": "LOG.CTL.A",
             "atom_name": "SwitchCase",
             "type": "Merged"
@@ -181,6 +240,12 @@
             "type": "Direct"
         },
         {
+            "ast_node": "YieldStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "YieldStmt",
+            "type": "Direct"
+        },
+        {
             "ast_node": "TryStatement",
             "atom_id": "LOG.CTL.A",
             "atom_name": "TryBlock",
@@ -193,15 +258,53 @@
             "type": "Direct"
         },
         {
-            "ast_node": "FinallyClause",
-            "atom_id": "LOG.CTL.A",
-            "atom_name": "FinallyClause",
-            "type": "Direct"
-        },
-        {
             "ast_node": "SynchronizedStatement",
             "atom_id": "EXE.WRK.O",
             "atom_name": "SyncBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "LabeledStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "LabeledBlock",
+            "type": "Direct",
+            "note": "#199"
+        },
+        {
+            "ast_node": "EmptyStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "EmptyStmt",
+            "type": "Direct",
+            "note": "#200"
+        },
+        {
+            "ast_node": "ExpressionStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ExpressionStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "VariableDeclarationStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Declaration",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeDeclarationStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Declaration",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ConstructorInvocation",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ThisCall",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SuperConstructorInvocation",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "SuperCall",
             "type": "Direct"
         },
         {
@@ -211,9 +314,27 @@
             "type": "Direct"
         },
         {
+            "ast_node": "SuperMethodInvocation",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "CallExpr",
+            "type": "Merged"
+        },
+        {
             "ast_node": "ClassInstanceCreation",
             "atom_id": "LOG.EXP.A",
             "atom_name": "NewExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayCreation",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "NewArrayExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayInitializer",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "ArrayLiteral",
             "type": "Direct"
         },
         {
@@ -241,18 +362,6 @@
             "type": "Direct"
         },
         {
-            "ast_node": "FieldAccess",
-            "atom_id": "LOG.EXP.A",
-            "atom_name": "MemberExpr",
-            "type": "Direct"
-        },
-        {
-            "ast_node": "ArrayAccess",
-            "atom_id": "LOG.EXP.A",
-            "atom_name": "IndexExpr",
-            "type": "Direct"
-        },
-        {
             "ast_node": "CastExpression",
             "atom_id": "LOG.EXP.A",
             "atom_name": "TypeCast",
@@ -265,33 +374,39 @@
             "type": "Direct"
         },
         {
+            "ast_node": "ParenthesizedExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ParenExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FieldAccess",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MemberExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SuperFieldAccess",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MemberExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ArrayAccess",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IndexExpr",
+            "type": "Direct"
+        },
+        {
             "ast_node": "Assignment",
             "atom_id": "LOG.STM.A",
             "atom_name": "Assignment",
             "type": "Direct"
         },
         {
-            "ast_node": "StringLiteral",
-            "atom_id": "DAT.PRM.A",
-            "atom_name": "String",
-            "type": "Direct"
-        },
-        {
-            "ast_node": "NumberLiteral",
-            "atom_id": "DAT.PRM.A",
-            "atom_name": "Integer",
-            "type": "Direct"
-        },
-        {
-            "ast_node": "BooleanLiteral",
-            "atom_id": "DAT.PRM.A",
-            "atom_name": "Boolean",
-            "type": "Direct"
-        },
-        {
-            "ast_node": "NullLiteral",
-            "atom_id": "DAT.PRM.A",
-            "atom_name": "Null",
+            "ast_node": "ThisExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ThisExpr",
             "type": "Direct"
         },
         {
@@ -301,10 +416,176 @@
             "type": "Direct"
         },
         {
+            "ast_node": "QualifiedName",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "QualifiedExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "NumberLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Integer",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CharacterLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Char",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "StringLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "String",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TextBlock",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "String",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NullLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Null",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BooleanLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Boolean",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "ClassLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Modifier",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "AccessMod",
+            "type": "Direct"
+        },
+        {
             "ast_node": "Annotation",
             "atom_id": "LOG.FNC.M",
-            "atom_name": "Decorator",
+            "atom_name": "Annotation",
+            "type": "Direct",
+            "note": "#189"
+        },
+        {
+            "ast_node": "MarkerAnnotation",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Annotation",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NormalAnnotation",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Annotation",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "SingleMemberAnnotation",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Annotation",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "MemberValuePair",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "KeyValuePair",
             "type": "Direct"
+        },
+        {
+            "ast_node": "TypeParameter",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "GenericParam",
+            "type": "Direct",
+            "note": "#193"
+        },
+        {
+            "ast_node": "Dimension",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ArrayDim",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SimpleType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeRef",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ArrayType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ParameterizedType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "GenericType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "WildcardType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "WildcardType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "UnionType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "UnionType",
+            "type": "Direct",
+            "note": "#194"
+        },
+        {
+            "ast_node": "IntersectionType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "IntersectionType",
+            "type": "Direct",
+            "note": "#195"
+        },
+        {
+            "ast_node": "NameQualifiedType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeRef",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "PrimitiveType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "PrimitiveType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "QualifiedType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeRef",
+            "type": "Merged"
+        }
+    ],
+    "skipped": [
+        {
+            "node": "LineComment",
+            "reason": "Comment, not semantic"
+        },
+        {
+            "node": "BlockComment",
+            "reason": "Comment, not semantic"
+        },
+        {
+            "node": "Javadoc",
+            "reason": "Documentation, not semantic"
+        },
+        {
+            "node": "TagElement",
+            "reason": "Javadoc internal"
         }
     ]
 }
