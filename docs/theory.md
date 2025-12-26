@@ -29,6 +29,8 @@ required_sections:
   - "PART IX: THE LINEAGE"
   - "PART X: THE CONCEPT ATLAS"
   - "PART XI: THE VALIDATION"
+  - "PART XII: THE OCTAHEDRAL ATOM"
+  - "PART XIII: THE 200-ATOM VALIDATION"
 
 # POSTULATES - The verifier checks these are stated (not proven truths, but working hypotheses)
 postulates:
@@ -220,7 +222,7 @@ Every **Particle** (classified Node) has a position on **8 independent axes**.
 
 | # | DIM | QUESTION | VALUES | DETECTION |
 |---|-----|----------|--------|-----------|
-| D1 | **WHAT** | What is this made of? | 167 atom types | AST node mapping |
+| D1 | **WHAT** | What is this made of? | 200 atom types | AST node mapping |
 | D2 | **LAYER** | Where in architecture? | Interface, Application, Core, Infrastructure, Test | Path + imports |
 | D3 | **ROLE** | What's its purpose? | 33 working roles | Name patterns |
 | D4 | **BOUNDARY** | Does it cross boundaries? | Internal, Input, I/O, Output | Call targets |
@@ -245,7 +247,7 @@ Particle(
 
 ---
 
-### 1.5 THE 167 ATOMS (Material Composition)
+### 1.5 THE 200 ATOMS (Material Composition)
 
 Atoms are organized in **4 PHASES × 4 FAMILIES = 16 FAMILIES**.
 
@@ -255,13 +257,13 @@ Atoms are organized in **4 PHASES × 4 FAMILIES = 16 FAMILIES**.
 | **LOGIC** | Expressions, Statements, Control, Functions | 61 | The forces of software |
 | **ORGANIZATION** | Aggregates, Services, Modules, Files | 45 | The structure of software |
 | **EXECUTION** | Handlers, Workers, Initializers, Probes | 35 | The dynamics of software |
-| **TOTAL** | **16 families** | **167** | Complete AST coverage |
+| **TOTAL** | **16 families** | **200** | Complete AST coverage |
 
 **PHASE → FAMILY → ATOM hierarchy:**
 ```
 PHASE (4)
   └── FAMILY (4 per phase = 16)
-        └── ATOM (10-15 per family = 167)
+        └── ATOM (~12 per family = 200)
 ```
 
 ---
@@ -556,10 +558,10 @@ How we determine what something IS:
 ┃   │    PARTICLE     │    │    8 DIMENSIONS         │    │    RELATIONSHIPS      │      ┃
 ┃   │ (Node + Atom +  │    │  (8D Classification)    │    │                       │      ┃
 ┃   │   Confidence)   │    │                         │    │  calls ───────▶       │      ┃
-┃   │                 │    │  D1: WHAT (167 atoms)   │    │  imports ═════▶       │      ┃
+┃   │                 │    │  D1: WHAT (200 atoms)   │    │  imports ═════▶       │      ┃
 ┃   │   ┌─────────┐   │    │  D2: LAYER              │    │  inherits ◁───        │      ┃
 ┃   │   │  ATOM   │   │    │  D3: ROLE (33 roles)    │    │  implements ◁··       │      ┃
-┃   │   │(1 of 167)│   │    │  D4: BOUNDARY           │    │  uses ·····▶          │      ┃
+┃   │   │(1 of 200)│   │    │  D4: BOUNDARY           │    │  uses ·····▶          │      ┃
 ┃   │   └─────────┘   │    │  D5: STATE              │    │  contains ◇──▶        │      ┃
 ┃   │        │        │    │  D6: EFFECT             │    │  is_a ────◇           │      ┃
 ┃   │   has_role      │    │  D7: ACTIVATION         │    │  has_role ──◆         │      ┃
@@ -601,7 +603,7 @@ How each major concept relates to every other:
 | **LEVEL** | exists in all | **contains/contained_by** | applies to | measured at | categorized in | assigned at L3-L7 | connects across |
 | **LENS** | reveals each | applies to all | **parallel views** | orthogonal | reveals what | reveals purpose | analyzes |
 | **DIMENSION** | orthogonal | measured at | orthogonal | **8D space** | WHAT=which atom | ROLE=which role | properties of |
-| **ATOM** | material basis | L3 nodes have | what it IS | D1 position | **167 types** | determines | typed by |
+| **ATOM** | material basis | L3 nodes have | what it IS | D1 position | **200 types** | determines | typed by |
 | **ROLE** | semantic purpose | L3-L7 scope | why it EXISTS | D3 position | semantic of | **33 types** | labeled by |
 | **EDGE** | crosses planes | crosses levels | analyzed by | has properties | connects atoms | connects roles | **6 types** |
 
@@ -619,7 +621,7 @@ How each major concept relates to every other:
 | **Dimensions** | 8 | Canonical | `schema/fixed/dimensions.json` | Universal |
 | **Phases** | 4 | Canonical | Theory | Universal |
 | **Families** | 16 | Canonical | Theory | Universal |
-| **Atoms** | 167 | Canonical | `schema/fixed/atoms.json` | Python, TypeScript, Java |
+| **Atoms** | 200 | Canonical | `schema/fixed/atoms.json` | Python, TypeScript, Java, Go, Rust |
 | **Roles** | 33 | Canonical | `schema/fixed/roles.json` | Universal |
 | **Edges** | 6 | Canonical | Theory | Universal |
 | **Patterns** | 100+ | Frontier | `schema/learned/patterns.json` | Evolving |
@@ -642,7 +644,7 @@ How each major concept relates to every other:
 ║   ├── 8 Lenses (R1-R8)                                     ── PARALLEL       ║
 ║   ├── 8 Dimensions (D1-D8)                                 ── ORTHOGONAL     ║
 ║   ├── 4 Phases × 4 Families = 16 Families                  ── HIERARCHICAL   ║
-║   ├── 167 Atoms                                            ── CATEGORICAL    ║
+║   ├── 200 Atoms                                            ── CATEGORICAL    ║
 ║   └── 33 Roles                                             ── CATEGORICAL    ║
 ║                                                                               ║
 ║   RELATIONSHIPS (How Things Connect)                                          ║
@@ -679,7 +681,7 @@ How each major concept relates to every other:
 | 3 | **Level Transitivity** | `contains` is transitive | Non-transitive containment found | Graph analysis |
 | 4 | **Lens Adequacy** | 8 lenses cover observed question-space | Recurring questions not expressible | Question-lens mapping study |
 | 5 | **Dimension Orthogonality** | 8 dimensions are independent axes | Dimensions found to correlate | Mutual information analysis |
-| 6 | **Atom Coverage** | 167 atoms cover AST types (scoped languages) | Unmapped AST nodes in new languages | Coverage crosswalk per language |
+| 6 | **Atom Coverage** | 200 atoms cover AST types (scoped languages) | Unmapped AST nodes in new languages | Coverage crosswalk per language |
 | 7 | **Node Fundamentality** | L3 NODE is the atom of semantic analysis | Finer granularity needed | Use-case validation |
 | 8 | **Fractal Self-Similarity** | M→I→P→O repeats at every scale | Counter-examples at some scale | Multi-scale pattern analysis |
 | 9 | **Classification Confidence** | Every classification has measurable certainty | Confidence scores miscalibrated | Calibration study (ECE) |
@@ -918,7 +920,7 @@ graph TD
 16. **[Part XIV: The Analyst's Playbook](#part-xiv-the-analysts-playbook)** (Mental Models)
 
 ---
-The Standard Model of Code V2 (SMC) represents a proposed "Grand Unification" of software engineering theory. Historically, software has been analyzed through disjointed lenses: either as physical text (Halstead), linguistic expression (Halliday), mathematical structures (Category Theory), or architectural forms (Alexander). The SMC proposes that these are not competing theories, but orthogonal dimensions of a single underlying reality. By defining a working ontology of **167 Atoms** (Structure) and **33 Roles** (Purpose) across **8 Dimensions**, the SMC provides a "Rosetta Stone" that connects these disparate fields. This document provides a comparative analysis of the SMC against the major theoretical frameworks of the last 50 years.
+The Standard Model of Code V2 (SMC) represents a proposed "Grand Unification" of software engineering theory. Historically, software has been analyzed through disjointed lenses: either as physical text (Halstead), linguistic expression (Halliday), mathematical structures (Category Theory), or architectural forms (Alexander). The SMC proposes that these are not competing theories, but orthogonal dimensions of a single underlying reality. By defining a working ontology of **200 Atoms** (Structure) and **33 Roles** (Purpose) across **8 Dimensions**, the SMC provides a "Rosetta Stone" that connects these disparate fields. This document provides a comparative analysis of the SMC against the major theoretical frameworks of the last 50 years.
 
 ---
 
@@ -974,7 +976,7 @@ The SMC uses the **13 Semantic Levels of Scale** to measure entropy at specific 
 *   **L5 Entropy:** The unpredictability of Nodes within a File (Cohesion).
 *   **L9 Entropy:** The unpredictability of Services within a System (Coupling).
 
-Because the SMC identifies *types* of atoms (167 variants), it can calculate a much more distinct "Spectral Entropy" than simple text-based compression could.
+Because the SMC identifies *types* of atoms (200 variants), it can calculate a much more distinct "Spectral Entropy" than simple text-based compression could.
 
 ---
 
@@ -1015,7 +1017,7 @@ Graphs ($G = (V, E)$) model connectivity. Key concepts:
 
 ### The SMC Correlation
 The SMC is fundamentally Graph-Native. `unified_analysis.json` *is* a graph.
-*   **Nodes ($V$):** The 167 Atoms.
+*   **Nodes ($V$):** The 200 Atoms.
 *   **Edges ($E$):** `Calls`, `Imports`, `Inherits`.
 
 **Spectral Analysis of the Graph:**
@@ -1875,7 +1877,7 @@ DIMENSIONS ← Faceted Classification (Ranganathan, 1933)
 | D7 ACTIVATION | Event-Driven Arch |
 | D8 LIFETIME | Garbage Collection |
 
-### 1.6 THE 167 ATOMS
+### 1.6 THE 200 ATOMS
 
 ```
 ATOMS ← AST Node Kinds (Compiler Theory)
@@ -2050,7 +2052,7 @@ PHASE 5: STANDARD CODE (After all above)
 | Abstraction | Hiding complexity behind simpler interface |
 | Aggregate | Consistency boundary around related entities |
 | AST | Tree representation of source code syntax |
-| Atom | One of 167 structural classification types |
+| Atom | One of 200 structural classification types |
 | Boundary | Where a system meets the outside |
 | Call Graph | Graph of which functions invoke which |
 | Dimension | One of 8 orthogonal classification axes |
@@ -2169,7 +2171,7 @@ New language features map to existing atoms:
 - Java 8 lambdas → existing Function atom
 - TypeScript optional chaining → existing Property atom
 
-The 167 atoms form a **language-agnostic core**.
+The 200 atoms form a **language-agnostic core**.
 
 ### 6.3 EVOLUTION PROTOCOL VALIDATED
 
@@ -2216,7 +2218,7 @@ When new constructs appear:
 
 ## 8. CONCLUSION
 
-> **The 167 atoms achieve ~98% coverage across 5 mainstream languages.**
+> **The 200 atoms achieve ~98% coverage across 5 mainstream languages.**
 > 
 > With 5 proposed additions (comprehensions, macros, impl blocks, defer, imports),
 > the model reaches **effective 100% coverage** for Python, TypeScript, Java, Go, and Rust.
@@ -2230,3 +2232,510 @@ When new constructs appear:
 *Research methodology: Tree-sitter AST node enumeration + manual crosswalk to working atoms.*
 *Sources: 31 references, 102 searches, December 2025.*
 
+
+---
+
+# PART XII: THE OCTAHEDRAL ATOM
+
+> *Each of the 200 atoms is an octahedron. Its 8 faces are its 8 dimensions.*
+
+---
+
+## The Relationship
+
+| Concept | Count | Meaning |
+|---------|-------|---------|
+| **Atom Types** | 200 | Possible values for the WHAT dimension |
+| **Roles** | 33 | Possible values for the ROLE dimension |
+| **Levels** | 16 | Abstraction Levels (L-3 to L12) |
+| **Dimensions** | 8 | The 8 faces of each atom |
+
+---
+
+## The Complete Model
+
+```
+                    16 ABSTRACTION LEVELS (L-3 to L12)
+                           ↑
+                           │
+    L12 (Universe) ────────┼──────── ◆ (octahedron at this level)
+    L11 (Ecosystem)        │
+    L10 (System)           │         Each level contains
+    L9 (Application)       │         octahedral atoms with
+    ...                    │         8 faces of metadata
+    L3 (Node) ─────────────┼──────── ◆ ← most common analysis level
+    ...                    │
+    L-3 (Bit)              │
+                           ↓
+```
+
+**The 8 Faces (Horizontal):**
+
+```
+200 ATOM TYPES   → Face 1 (WHAT)
+5 LAYERS         → Face 2 (LAYER: Interface/App/Core/Infra/Test)
+33 ROLES         → Face 3 (ROLE)
+4 BOUNDARIES     → Face 4 (BOUNDARY: Internal/Input/I-O/Output)
+2 STATES         → Face 5 (STATE: Stateful/Stateless)
+4 EFFECTS        → Face 6 (EFFECT: Pure/Read/Write/ReadModify)
+3 LIFECYCLES     → Face 7 (LIFECYCLE: Create/Use/Destroy)
+0-100%           → Face 8 (TRUST)
+```
+
+**The 16 Abstraction Levels:**
+
+| Level | Name | Example |
+|-------|------|---------|
+| L12 | Universe | All code everywhere |
+| L11 | Ecosystem | npm, PyPI |
+| L10 | System | Distributed system |
+| L9 | Application | Single app |
+| L8 | Subsystem | Bounded context |
+| L7 | Package | Module/library |
+| L6 | File | Source file |
+| L5 | Section | Class/region |
+| L4 | Block | Function body |
+| **L3** | **Node** | **Statement/expression** ← atom level |
+| L2 | Phrase | Expression fragment |
+| L1 | Word | Keyword/operator |
+| **L0** | **Token** | **Identifier/literal** |
+| L-1 | Character | Single char/symbol |
+| L-2 | Byte | 8 bits |
+| **L-3** | **Bit / Qubit** | **Foundational unit** |
+
+Every instance of a code construct is an **octahedron at a specific level** carrying 8 pieces of metadata.
+
+> **⚠️ QUANTUM FRONTIER (L-3):**
+> Bit and Qubit are the same abstraction level - different implementations of the foundational information unit.
+> An integrated theory bridging classical and quantum computing is the **immediate next step**.
+
+---
+
+## The Shape of Each Atom
+
+```
+           ◢ STATE ◣
+          /    |    \
+         /     |     \
+      WHAT ────┼──── ROLE
+         \     |     /
+          \    |    /
+           ◤ EFFECT ◥
+
+     (+ LAYER, BOUNDARY, LIFECYCLE, TRUST on remaining faces)
+```
+
+---
+
+## Geometry
+
+| Property | Count | Meaning |
+|----------|-------|---------|
+| **Faces** | 8 | The 8 dimensions of analysis |
+| **Vertices** | 6 | Maximum intersection points |
+| **Edges** | 12 | Relationships between dimensions |
+
+---
+
+## The 8 Faces (Dimensions)
+
+Each face of the octahedron carries one dimension of metadata:
+
+| Face | Dimension | Question | Data Type |
+|------|-----------|----------|-----------|
+| **1** | WHAT | What is this? | Atom type (1 of 200) |
+| **2** | LAYER | Where in architecture? | Interface/App/Core/Infra/Test |
+| **3** | ROLE | What's its purpose? | Role name (1 of 33) |
+| **4** | BOUNDARY | Does it cross boundaries? | Internal/Input/I-O/Output |
+| **5** | STATE | Does it maintain state? | Stateful/Stateless |
+| **6** | EFFECT | Does it have side effects? | Pure/Read/Write/ReadModify |
+| **7** | LIFECYCLE | In what phase? | Create/Use/Destroy |
+| **8** | TRUST | What's the confidence? | 0-100% |
+
+---
+
+## The 6 Vertices (Intersection Points)
+
+The vertices represent maximum dimensional overlap:
+
+| Vertex | Position | Intersecting Dimensions |
+|--------|----------|-------------------------|
+| **V1** | Top | STATE + LAYER + WHAT + ROLE |
+| **V2** | Bottom | EFFECT + BOUNDARY + LIFECYCLE + TRUST |
+| **V3** | Front | WHAT + STATE + EFFECT + BOUNDARY |
+| **V4** | Back | ROLE + STATE + EFFECT + TRUST |
+| **V5** | Left | LAYER + STATE + EFFECT + LIFECYCLE |
+| **V6** | Right | BOUNDARY + STATE + EFFECT + TRUST |
+
+---
+
+## The 12 Edges (Dimensional Relationships)
+
+Each edge represents a valid question combining two dimensions:
+
+1. STATE ↔ WHAT: "What state does this type hold?"
+2. STATE ↔ ROLE: "How does state relate to purpose?"
+3. STATE ↔ EFFECT: "What effects does state cause?"
+4. EFFECT ↔ WHAT: "What effects does this type produce?"
+5. EFFECT ↔ ROLE: "How do effects serve purpose?"
+6. WHAT ↔ ROLE: "What types fulfill this role?"
+7. LAYER ↔ BOUNDARY: "Which layers cross which boundaries?"
+8. LAYER ↔ LIFECYCLE: "How does layer affect lifecycle?"
+9. BOUNDARY ↔ TRUST: "What trust for boundary-crossing code?"
+10. LIFECYCLE ↔ TRUST: "How does lifecycle affect confidence?"
+11. ROLE ↔ LAYER: "What roles exist at each layer?"
+12. WHAT ↔ LAYER: "What atom types at each layer?"
+
+---
+
+## Opposed Faces (Dual Dimensions)
+
+Opposite faces represent complementary perspectives:
+
+| Face 1 | Face 2 | Duality |
+|--------|--------|---------|
+| STATE | EFFECT | Internal ↔ External |
+| WHAT | ROLE | Structure ↔ Purpose |
+| LAYER | BOUNDARY | Position ↔ Transition |
+| LIFECYCLE | TRUST | Time ↔ Confidence |
+
+---
+
+## Visual Representation
+
+### Flat Projection (Net)
+
+```
+         ┌─────────┐
+         │ LIFECYCLE│
+┌────────┼─────────┼────────┐
+│ LAYER  │  STATE  │ BOUNDARY│
+├────────┼─────────┼────────┤
+│  WHAT  │ (center)│  ROLE   │
+├────────┼─────────┼────────┤
+│        │ EFFECT  │        │
+└────────┼─────────┼────────┘
+         │  TRUST  │
+         └─────────┘
+```
+
+### Side View (Diamond)
+
+```
+       STATE
+         ◆
+        /|\
+       / | \
+      /  |  \
+     ◇───┼───◇
+      \  |  /
+       \ | /
+        \|/
+         ◆
+       EFFECT
+```
+
+---
+
+## Why Octahedron?
+
+1. **Exactly 8 faces** - Perfect for 8 dimensions
+2. **Dual of cube** - Mathematical elegance (cube has 8 vertices, 6 faces)
+3. **Symmetric** - All faces are equilateral triangles
+4. **No privileged face** - All dimensions are equally accessible
+5. **Natural for visualization** - Easy to render, rotate, inspect
+
+---
+
+## Atom Data Structure
+
+```json
+{
+  "id": "example_function",
+  "type": "Function",
+  "octahedron": {
+    "WHAT": "LOG.FNC.M",
+    "LAYER": "Application",
+    "ROLE": "Controller",
+    "BOUNDARY": "Input",
+    "STATE": "Stateless",
+    "EFFECT": "ReadModify",
+    "LIFECYCLE": "Use",
+    "TRUST": 0.87
+  }
+}
+```
+
+---
+
+## Implications
+
+### 1. Every Atom is Complete
+Every atom carries all 8 dimensions. No dimension is optional.
+
+### 2. Analysis is Rotation
+Analyzing code through different dimensions is like rotating the octahedron to see different faces.
+
+### 3. Unknown is Valid
+A face value of "Unknown" means that dimension hasn't been analyzed yet, not that it doesn't exist.
+
+### 4. Edges are Questions
+The 12 edges generate 12 cross-dimensional questions we can ask about any atom.
+
+---
+
+> *"The octahedron is not the territory. It is the shape of our understanding."*
+
+**Version:** 2.1.0  
+**Formalized:** 2025-12-26
+
+---
+
+# THE 200 ATOM HYPOTHESIS
+
+---
+
+## Abstract
+
+The original Standard Model claimed **200 atoms** as the complete set of code structures. Empirical validation across Python, TypeScript, Java, Go, and Rust revealed:
+
+- **172 atoms** are needed today (167 + 5 validated additions)
+- **~28 more concepts** remain unmapped
+- **~200 atoms** may be the true coverage threshold
+
+This document develops the hypothesis and sets up testing protocols.
+
+---
+
+## 1. THE EVOLUTION
+
+```
+v1.0: 200 atoms (theoretical design)
+         ↓
+v2.0: 172 atoms (+ Comprehension, MacroCall, ImplBlock, Defer, ImportStmt)
+         ↓
+v3.0: ~200 atoms (hypothesis - to be tested)
+```
+
+---
+
+## 2. THE EVIDENCE
+
+### 2.1 Scanner Results (December 2025)
+
+| Language | Total AST Nodes | Mapped | Missing | Coverage |
+|----------|-----------------|--------|---------|----------|
+| Python | 108 | 51 | 47 | 47% |
+| TypeScript | 115 | 55 | 63 | 48% |
+| Go | 52 | 36 | 16 | 69% |
+| Rust | 84 | 45 | 39 | 54% |
+| Java | 95 | 49 | 49 | 52% |
+| **Total** | **454** | **236** | **214** | **52%** |
+
+### 2.2 Missing Category Breakdown
+
+| Category | Count | Status |
+|----------|-------|--------|
+| Operator tokens (not real nodes) | ~80 | **SKIP** |
+| Compile-time type nodes | ~60 | **DEFER** |
+| True semantic gaps | ~75 | **ACTION** |
+
+Of the 75 actionable gaps:
+- ~50 map to **existing atoms** (crosswalk gap only)
+- ~25 need **new atoms** (truly new concepts)
+
+---
+
+## 3. THE 28 CANDIDATE ATOMS
+
+These concepts have no current atom mapping:
+
+### 3.1 Pattern Matching Family (+4)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #173 | `MatchPattern` | Python, Rust | Pattern in match arm |
+| #174 | `PatternGuard` | Rust | Guard clause in pattern |
+| #175 | `WildcardPattern` | Python, Rust | `_` catch-all |
+| #176 | `OrPattern` | Python, Rust | `x | y` alternatives |
+
+### 3.2 Destructuring Family (+3)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #177 | `SpreadElement` | TS/JS | `...rest` expansion |
+| #178 | `RestPattern` | All | Collect remaining |
+| #179 | `DestructuringAssign` | All | `const {a, b} = obj` |
+
+### 3.3 Expression Variants (+5)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #180 | `WalrusExpr` | Python | `:=` named expression |
+| #181 | `NullishCoalesce` | TS/JS | `??` operator |
+| #182 | `OptionalChain` | TS/JS | `?.` safe navigation |
+| #183 | `RangeExpr` | Rust, Go | `start..end` ranges |
+| #184 | `PipelineExpr` | Future | `x |> f` pipe operator |
+
+### 3.4 Concurrency Extended (+4)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #185 | `ChannelClose` | Go | Distinct from send |
+| #186 | `AsyncIterator` | TS, Python | `async for` |
+| #187 | `ParallelFor` | Many | Parallel iteration |
+| #188 | `AtomicOp` | Rust, Go | Atomic operations |
+
+### 3.5 Metaprogramming (+4)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #189 | `Annotation` | Java, TS | `@Decorator` metadata |
+| #190 | `Pragma` | Many | Compiler directives |
+| #191 | `MacroRule` | Rust | Macro definition body |
+| #192 | `Quote` | Lisp, Elixir | Code-as-data |
+
+### 3.6 Type System (Optional) (+5)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #193 | `GenericParam` | All typed | `<T>` type parameters |
+| #194 | `UnionType` | TS, Python | `X | Y` type union |
+| #195 | `IntersectionType` | TS | `X & Y` type merge |
+| #196 | `TypeConstraint` | All typed | `where T: Clone` |
+| #197 | `TypeAlias` | All typed | `type X = Y` |
+
+### 3.7 Edge Cases (+3)
+
+| ID | Name | Languages | Reason |
+|----|------|-----------|--------|
+| #198 | `DebuggerStmt` | TS/JS | `debugger;` breakpoint |
+| #199 | `LabeledBlock` | Go, Java | Named break target |
+| #200 | `EmptyStmt` | All | `;` no-op |
+
+---
+
+## 4. THE TESTING PROTOCOL
+
+### 4.1 Phase 1: Crosswalk Completion
+
+**Goal:** Map all 75 actionable gaps to existing or new atoms.
+
+**Method:**
+```bash
+# Run the scanner
+python3 src/tools/coverage_scanner.py
+
+# For each missing node, decide:
+# 1. Map to existing atom (update crosswalk)
+# 2. Create new atom (update schema + crosswalk)
+```
+
+**Success Criteria:**
+- Coverage > 90% for each language
+- No "UNKNOWN" mappings remaining
+
+### 4.2 Phase 2: Real Code Validation
+
+**Goal:** Parse real codebases, count unmapped nodes.
+
+**Method:**
+```bash
+# Parse a real project
+python3 src/tools/parse_project.py /path/to/project
+
+# Count:
+# - Total nodes parsed
+# - Nodes mapped to atoms
+# - Nodes with "Unknown" atom
+```
+
+**Success Criteria:**
+- < 5% "Unknown" atoms in real code
+- All unknowns are obscure edge cases
+
+### 4.3 Phase 3: Atom Count Convergence
+
+**Goal:** Find the minimum atom set for 95% coverage.
+
+**Method:**
+1. Start with 172 atoms
+2. Add atoms one-by-one for each new concept
+3. Re-run validation after each addition
+4. Stop when coverage plateaus
+
+**Hypothesis:**
+- Around **~200 atoms**, coverage will reach 95%+
+- Diminishing returns after 200
+
+---
+
+## 5. THE DECISION MATRIX
+
+For each "missing" AST node, use this decision tree:
+
+```
+Is it a real AST node (not operator token)?
+├─ NO → SKIP (not a node)
+└─ YES → Does it have runtime semantics?
+          ├─ NO → DEFER (compile-time only, maybe future atom)
+          └─ YES → Does an existing atom cover it?
+                    ├─ YES → UPDATE CROSSWALK ONLY
+                    └─ NO → CREATE NEW ATOM
+```
+
+---
+
+## 6. THE VERSIONING PLAN
+
+| Version | Atom Count | Status |
+|---------|------------|--------|
+| v2.0 | 172 | Current |
+| v2.1 | ~185 | After crosswalk completion |
+| v3.0 | ~200 | After real-code validation |
+| LTS | 200 | Long-term stable |
+
+---
+
+## 7. ACTION ITEMS
+
+### Immediate (This Week)
+
+- [ ] Complete crosswalks for all 5 languages
+- [ ] Add Pattern Matching atoms (#173-176)
+- [ ] Add Destructuring atoms (#177-179)
+- [ ] Re-run scanner to verify improvement
+
+### Short-term (This Month)
+
+- [ ] Parse real projects (Django, Express, Spring)
+- [ ] Measure actual coverage on production code
+- [ ] Finalize v2.1 with refined atom count
+
+### Long-term (Q1 2026)
+
+- [ ] Reach 200-atom stable version
+- [ ] Document rationale for each atom
+- [ ] Publish as canonical reference
+
+---
+
+## 8. APPENDIX: RUNNING THE TESTS
+
+```bash
+# 1. Check current coverage
+python3 src/tools/coverage_scanner.py
+
+# 2. View missing by language
+python3 src/tools/coverage_scanner.py --lang python
+
+# 3. Generate full report
+python3 src/tools/coverage_scanner.py > docs/coverage_report.md
+
+# 4. After updating crosswalks, verify improvement
+python3 src/tools/coverage_scanner.py | grep "Total"
+```
+
+---
+
+> *"The map grows to match the territory. 167 was the sketch. 200 is the survey."*
