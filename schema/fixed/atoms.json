@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.0.0",
-  "description": "Standard Model of Code - 172 Atom Ontology (167 original + 5 from validation)",
-  "total_atoms": 172,
+  "version": "2.1.0",
+  "description": "Standard Model of Code - 185 Atom Ontology (167 original + 18 from crosswalk validation)",
+  "total_atoms": 185,
   "validation_date": "2025-12-26",
   "phases": {
     "DATA": {

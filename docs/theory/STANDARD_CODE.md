@@ -12,7 +12,7 @@ reference_counts:
   levels: 16           # 13 Semantic (L0-L12) + 3 Physical (L-1 to L-3)
   lenses: 8
   dimensions: 8
-  atoms: 167
+  atoms: 200  # Complete working set (see schema/fixed/200_ATOMS.md)
   roles: 33
   edge_families: 6
 
