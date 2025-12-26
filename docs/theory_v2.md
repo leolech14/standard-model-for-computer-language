@@ -2522,6 +2522,395 @@ graph TD
 
 
 <!-- @END_SECTION: part_8_atlas -->
+
+---
+
+<!-- @SECTION: part_4_structure -->
+<!-- @ORDER: 4.0 -->
+<!-- @DEPENDS_ON: part_3_taxonomy -->
+<!-- @PROVIDES: er_diagram, matrix_representation -->
+
+# PART IV: THE COMPLETE STRUCTURE
+
+---
+
+## 8. ENTITY-RELATIONSHIP DIAGRAM
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                              STANDARD MODEL OF CODE                                    ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                                                                        ┃
+┃   ┌────────────────────────────────────────────────────────────────────────────────┐   ┃
+┃   │                          3 PLANES (Parallel Existence)                         │   ┃
+┃   │   ╔═══════════╗        ╔═══════════╗        ╔═══════════╗                      │   ┃
+┃   │   ║ PHYSICAL  ║◀─────▶ ║  VIRTUAL  ║◀─────▶ ║ SEMANTIC  ║                      │   ┃
+┃   │   ║  (Matter) ║encodes ║(Structure)║interprets║ (Meaning)║                     │   ┃
+┃   │   ╚═════╦═════╝        ╚═════╦═════╝        ╚═════╦═════╝                      │   ┃
+┃   │         │     exists_in      │     exists_in      │                            │   ┃
+┃   │         └────────────────────┼────────────────────┘                            │   ┃
+┃   └─────────────────────────────┬┴─────────────────────────────────────────────────┘   ┃
+┃                                 │                                                      ┃
+┃                           every_entity                                                 ┃
+┃                                 ▼                                                      ┃
+┃   ┌────────────────────────────────────────────────────────────────────────────────┐   ┃
+┃   │                          16 LEVELS (Nested Hierarchy)                          │   ┃
+┃   │                                                                                │   ┃
+┃   │   L12 ──contains──▶ L11 ──contains──▶ L10 ──▶ L9 ──▶ L8                        │   ┃
+┃   │                                                    │                           │   ┃
+┃   │                                            ════════╪════════ MACRO             │   ┃
+┃   │                                                    │                           │   ┃
+┃   │   L7 ──contains──▶ L6 ──contains──▶ L5 ──▶ L4 ──▶ L3 ★                         │   ┃
+┃   │                                                    │                           │   ┃
+┃   │                                            ════════╪════════ SEMANTIC          │   ┃
+┃   │                                                    │                           │   ┃
+┃   │   L3 ──contains──▶ L2 ──contains──▶ L1 ──contains──▶ L0                        │   ┃
+┃   │                                                                                │   ┃
+┃   └─────────────────────────────┬──────────────────────────────────────────────────┘   ┃
+┃                                 │                                                      ┃
+┃                           has_level                                                    ┃
+┃                                 ▼                                                      ┃
+┃   ┌────────────────────────────────────────────────────────────────────────────────┐   ┃
+┃   │                             ENTITY (Any Code Unit)                             │   ┃
+┃   │                                                                                │   ┃
+┃   │   ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐            │   ┃
+┃   │   │     SYSTEM      │───▶│     PACKAGE     │───▶│      FILE       │            │   ┃
+┃   │   │      (L7)       │    │      (L6)       │    │      (L5)       │            │   ┃
+┃   │   └─────────────────┘    └─────────────────┘    └────────┬────────┘            │   ┃
+┃   │                                                          │                     │   ┃
+┃   │                          ┌───────────────────────────────┼──────────────┐      │   ┃
+┃   │                          │                               │              │      │   ┃
+┃   │                          ▼                               ▼              ▼      │   ┃
+┃   │   ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐            │   ┃
+┃   │   │   CONTAINER     │───▶│      NODE ★     │◀───│   PROPERTY      │            │   ┃
+┃   │   │     (L4)        │    │      (L3)       │    │                 │            │   ┃
+┃   │   └─────────────────┘    └────────┬────────┘    └─────────────────┘            │   ┃
+┃   │                                   │                                            │   ┃
+┃   └───────────────────────────────────┼────────────────────────────────────────────┘   ┃
+┃                                       │                                                ┃
+┃            ┌──────────────────────────┼──────────────────────────┐                     ┃
+┃            │                          │                          │                     ┃
+┃      is_classified_as            has_position              has_edges                   ┃
+┃            ▼                          ▼                          ▼                     ┃
+┃   ┌─────────────────┐    ┌─────────────────────────┐    ┌───────────────────────┐      ┃
+┃   │    PARTICLE     │    │    8 DIMENSIONS         │    │    RELATIONSHIPS      │      ┃
+┃   │ (Node + Atom +  │    │  (8D Classification)    │    │                       │      ┃
+┃   │   Confidence)   │    │                         │    │  calls ───────▶       │      ┃
+┃   │                 │    │  D1: WHAT (200 atoms)   │    │  imports ═════▶       │      ┃
+┃   │   ┌─────────┐   │    │  D2: LAYER              │    │  inherits ◁───        │      ┃
+┃   │   │  ATOM   │   │    │  D3: ROLE (33 roles)    │    │  implements ◁··       │      ┃
+┃   │   │(1 of 200)│  │    │  D4: BOUNDARY           │    │  uses ·····▶          │      ┃
+┃   │   └─────────┘   │    │  D5: STATE              │    │  contains ◇──▶        │      ┃
+┃   │        │        │    │  D6: EFFECT             │    │  is_a ────◇           │      ┃
+┃   │   has_role      │    │  D7: ACTIVATION         │    │  has_role ──◆         │      ┃
+┃   │        ▼        │    │  D8: LIFETIME           │    │  triggers ──▷         │      ┃
+┃   │   ┌─────────┐   │    │                         │    │                       │      ┃
+┃   │   │  ROLE   │   │    └─────────────────────────┘    └───────────────────────┘      ┃
+┃   │   │(1 of 33)│   │                                                                  ┃
+┃   │   └─────────┘   │                                                                  ┃
+┃   └─────────────────┘                                                                  ┃
+┃            │                                                                           ┃
+┃      viewed_through                                                                    ┃
+┃            ▼                                                                           ┃
+┃   ┌────────────────────────────────────────────────────────────────────────────────┐   ┃
+┃   │                          8 LENSES (Parallel Views)                             │   ┃
+┃   │                                                                                │   ┃
+┃   │   ╔══════════╗ ╔══════════╗ ╔══════════╗ ╔══════════╗                          │   ┃
+┃   │   ║ IDENTITY ║ ║ ONTOLOGY ║ ║ CLASSIF. ║ ║ COMPOSIT.║                          │   ┃
+┃   │   ║   (R1)   ║ ║   (R2)   ║ ║   (R3)   ║ ║   (R4)   ║                          │   ┃
+┃   │   ╚══════════╝ ╚══════════╝ ╚══════════╝ ╚══════════╝                          │   ┃
+┃   │   ╔══════════╗ ╔══════════╗ ╔══════════╗ ╔══════════╗                          │   ┃
+┃   │   ║ RELATION ║ ║ TRANSFOR ║ ║ SEMANTIC ║ ║ EPISTEMO ║                          │   ┃
+┃   │   ║   (R5)   ║ ║   (R6)   ║ ║   (R7)   ║ ║   (R8)   ║                          │   ┃
+┃   │   ╚══════════╝ ╚══════════╝ ╚══════════╝ ╚══════════╝                          │   ┃
+┃   │                                                                                │   ┃
+┃   └────────────────────────────────────────────────────────────────────────────────┘   ┃
+┃                                                                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+---
+
+## 9. RELATIONSHIP MATRIX
+
+How each major concept relates to every other:
+
+|  | PLANE | LEVEL | LENS | DIMENSION | ATOM | ROLE | EDGE |
+|--|-------|-------|------|-----------|------|------|------|
+| **PLANE** | — | crosses all | applies to | orthogonal | exists in all | exists in all | exists in all |
+| **LEVEL** | exists in all | **contains/contained_by** | applies to | measured at | categorized in | assigned at L3-L7 | connects across |
+| **LENS** | reveals each | applies to all | **parallel views** | orthogonal | reveals what | reveals purpose | analyzes |
+| **DIMENSION** | orthogonal | measured at | orthogonal | **8D space** | WHAT=which atom | ROLE=which role | properties of |
+| **ATOM** | material basis | L3 nodes have | what it IS | D1 position | **200 types** | determines | typed by |
+| **ROLE** | semantic purpose | L3-L7 scope | why it EXISTS | D3 position | semantic of | **33 types** | labeled by |
+| **EDGE** | crosses planes | crosses levels | analyzed by | has properties | connects atoms | connects roles | **6 types** |
+
+---
+
+## 10. CANONICAL (v2.0) vs FRONTIER
+
+> **Note:** "Canonical" means "current working set"—not "all there is." Extension is expected and governed.
+
+| CATEGORY | COUNT | STATUS | LOCATION | SCOPE |
+|----------|-------|--------|----------|-------|
+| **Planes** | 3 | Canonical | Theory | Universal |
+| **Levels** | 16 | Canonical | Theory | Universal |
+| **Lenses** | 8 | Canonical | Theory | Universal |
+| **Dimensions** | 8 | Canonical | `schema/fixed/dimensions.json` | Universal |
+| **Phases** | 4 | Canonical | Theory | Universal |
+| **Families** | 16 | Canonical | Theory | Universal |
+| **Atoms** | 200 | Canonical | `schema/fixed/atoms.json` | Python, TypeScript, Java, Go, Rust |
+| **Roles** | 33 | Canonical | `schema/fixed/roles.json` | Universal |
+| **Edges** | 6 | Canonical | Theory | Universal |
+| **Patterns** | 100+ | Frontier | `schema/learned/patterns.json` | Evolving |
+| **Confidence Weights** | N | Frontier | Runtime | Learnable |
+| **Unknown Atoms** | ? | Frontier | Tracked | Languages not yet mapped |
+| **Ambiguous Roles** | ? | Frontier | Tracked | Cases requiring human review |
+
+---
+
+## 11. COMPLETE INVENTORY
+
+```
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                         STANDARD MODEL INVENTORY                              ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   ONTOLOGY (What Exists)                                                      ║
+║   ├── 3 Planes (Physical, Virtual, Semantic)               ── PARALLEL        ║
+║   ├── 16 Levels (L-3 to L12)                               ── NESTED          ║
+║   ├── 8 Lenses (R1-R8)                                     ── PARALLEL        ║
+║   ├── 8 Dimensions (D1-D8)                                 ── ORTHOGONAL      ║
+║   ├── 4 Phases × 4 Families = 16 Families                  ── HIERARCHICAL    ║
+║   ├── 200 Atoms                                            ── CATEGORICAL     ║
+║   └── 33 Roles                                             ── CATEGORICAL     ║
+║                                                                               ║
+║   RELATIONSHIPS (How Things Connect)                                          ║
+║   ├── Structural: contains, is_part_of                                        ║
+║   ├── Dependency: calls, imports, uses                                        ║
+║   ├── Inheritance: inherits, implements, mixes_in                             ║
+║   ├── Semantic: is_a, has_role, serves, delegates_to                          ║
+║   └── Temporal: initializes, triggers, disposes, precedes                     ║
+║                                                                               ║
+║   BOUNDARIES                                                                  ║
+║   ├── MACRO: L8-L12 (beyond scope)                                            ║
+║   ├── OPERATIONAL: L3-L7 (we classify)                                        ║
+║   └── SYNTACTIC: L0-L2 (inside node)                                          ║
+║                                                                               ║
+║   FUNDAMENTAL UNIT                                                            ║
+║   └── ★ L3 NODE (Function/Method)                                             ║
+║                                                                               ║
+║   FRACTAL PATTERN (at every scale)                                            ║
+║   └── MEMORY → INPUT → PROCESSING → OUTPUT → (cycles back)                    ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+## 12. KEY POSTULATES (Current Hypotheses)
+
+> **These are working assumptions, not proven facts.** Each has validation obligations.
+
+| # | Postulate | Current Claim | How It Could Be Wrong | Validation Method |
+|---|-----------|---------------|----------------------|-------------------|
+| 1 | **Plane Simultaneity** | Every entity exists in all 3 planes at once | New planes discovered (e.g., temporal) | Theoretical analysis |
+| 2 | **Level Exclusivity** | Every entity IS exactly one level | Entities spanning levels found | Empirical classification |
+| 3 | **Level Transitivity** | `contains` is transitive | Non-transitive containment found | Graph analysis |
+| 4 | **Lens Adequacy** | 8 lenses cover observed question-space | Recurring questions not expressible | Question-lens mapping study |
+| 5 | **Dimension Orthogonality** | 8 dimensions are independent axes | Dimensions found to correlate | Mutual information analysis |
+| 6 | **Atom Coverage** | 200 atoms cover AST types (scoped languages) | Unmapped AST nodes in new languages | Coverage crosswalk per language |
+| 7 | **Node Fundamentality** | L3 NODE is the atom of semantic analysis | Finer granularity needed | Use-case validation |
+| 8 | **Fractal Self-Similarity** | M→I→P→O repeats at every scale | Counter-examples at some scale | Multi-scale pattern analysis |
+| 9 | **Classification Confidence** | Every classification has measurable certainty | Confidence scores miscalibrated | Calibration study (ECE) |
+| 10 | **Edge Symmetry** | Every relationship has an inverse | Asymmetric edges found | Edge taxonomy review |
+
+---
+
+> **This is the current working model (v2.0). The model is OPEN: extension is expected and governed.**
+
+<!-- @END_SECTION: part_4_structure -->
+
+---
+
+<!-- @SECTION: sixteen_levels -->
+<!-- @ORDER: 1.1.2 -->
+<!-- @DEPENDS_ON: three_planes -->
+<!-- @PROVIDES: L-3_to_L12 -->
+
+### 1.2 THE 16 LEVELS (The Zero-Point Scale)
+
+The scale is centered on **L0 (Token)**—the point where text becomes logic.
+It consists of **13 Semantic Levels** (L0-L12) and **3 Physical Levels** (L-1 to L-3).
+
+*   **Positive Levels (L1 to L12):** The Realm of **Meaning** (Software).
+*   **Zero Point (L0):** The Event Horizon (The Atom of Syntax).
+*   **Negative Levels (L-1 to L-3):** The Realm of **Data** (Physics).
+
+```
+╔═══════════════════════════════════════════════════════════════════════════════════════╗
+║  #   LEVEL           SYMBOL   DEFINITION                    CONTAINS                  ║
+╠═══════════════════════════════════════════════════════════════════════════════════════╣
+║      ════════════════════════ COSMOLOGICAL SCALES ════════════════════════            ║
+║ L12  UNIVERSE         🌐      All code everywhere           → Domains                 ║
+║ L11  DOMAIN           🏛️       Industry vertical             → Organizations          ║
+║ L10  ORGANIZATION     🏢      Company codebase              → Platforms               ║
+║ L9   PLATFORM         ☁️       Infrastructure                → Ecosystems              ║
+║ L8   ECOSYSTEM        🔗      Connected systems             → Systems                 ║
+╠═══════════════════════════════════════════════════════════════════════════════════════╣
+║      ════════════════════════ SYSTEMIC SCALES ════════════════════════                ║
+║ L7   SYSTEM (Holon)   ◇       Deployable codebase           → Packages                ║
+║ L6   PACKAGE          📁      Module/folder                 → Files                   ║
+║ L5   FILE             📄      Source file                   → Containers              ║
+║ L4   CONTAINER        □       Class/struct                  → Nodes                   ║
+╠═══════════════════════════════════════════════════════════════════════════════════════╣
+║      ════════════════════════ SEMANTIC SCALES ════════════════════════                ║
+║ L3   NODE (Atom)      ●       Function/method               → Blocks                  ║
+║ L2   BLOCK            ▬       Control structure             → Statements              ║
+║ L1   STATEMENT        ─       Instruction                   → Tokens                  ║
+╠═══════════════════════════════════════════════════════════════════════════════════════╣
+║      ════════════════════════ THE EVENT HORIZON ════════════════════════              ║
+║ L0   TOKEN            ·       Lexical Unit (Word)           → Characters              ║
+╠═══════════════════════════════════════════════════════════════════════════════════════╣
+║      ════════════════════════ PHYSICAL SCALES ════════════════════════                ║
+║ L-1  CHARACTER        a       Alphanumeric symbol           → Bytes                   ║
+║ L-2  BYTE             01      8-bit unit                    → Bits                    ║
+║ L-3  BIT/QUBIT        ⚡       Classical or Quantum bit       → Energy                  ║
+╚═══════════════════════════════════════════════════════════════════════════════════════╝
+```
+
+**Correction:** The "Atom" (L3) remains the fundamental unit of *Semantic Analysis*, but the "Bit" (L-3) is the fundamental unit of *Existence*.
+
+> **TERMINOLOGY NOTE:** The word "Atom" has two related meanings in Standard Code:
+> 1. **L3 Node (Semantic Atom):** The function/method—the smallest unit with meaning and behavior.
+> 2. **200 Atom Types (Classification Atoms):** The categories in D1 (WHAT dimension)—used to classify what kind of structure something IS.
+> 
+> Think of it like chemistry: a "hydrogen atom" is both (1) an indivisible unit and (2) a type classification (element #1). Here, a function is both a Node (the unit) and has an Atom Type (e.g., "Function", "Method", "Lambda").
+>
+> **OCTAHEDRAL SHAPE:** Each atom is geometrically represented as an **octahedron** with 8 triangular faces—one for each dimension. See [OCTAHEDRAL_ATOM.md](./OCTAHEDRAL_ATOM.md).
+
+---
+
+### 1.3 THE 8 LENSES (Perspectives for Understanding)
+
+Every entity can be viewed through **all 8 lenses simultaneously**.
+
+| # | LENS | QUESTION | REVEALS | EXAMPLE |
+|---|------|----------|---------|---------|
+| R1 | **IDENTITY** | What is it called? | Name, path, signature | `getUserById` at `core/user.py:42` |
+| R2 | **ONTOLOGY** | What exists? | Entity type, properties | "A function with 3 params" |
+| R3 | **CLASSIFICATION** | What kind is it? | Role, category, atom | "This is a Query" |
+| R4 | **COMPOSITION** | How is it structured? | Parts, container, nesting | "6 methods inside 1 class" |
+| R5 | **RELATIONSHIPS** | How is it connected? | Calls, imports, inherits | "Called by 5, calls 2" |
+| R6 | **TRANSFORMATION** | What does it do? | Input → Process → Output | "Takes ID, returns User" |
+| R7 | **SEMANTICS** | What does it mean? | Purpose, intent, responsibility | "Retrieves user from DB" |
+| R8 | **EPISTEMOLOGY** | How certain are we? | Confidence, evidence, source | "92% from name pattern" |
+
+**COMPLETENESS HYPOTHESIS:** Every question about code *should be* answerable by one lens. This is a design goal, not a proven theorem. Classifications require empirical validation (see R8: Epistemology).
+
+---
+
+### 1.4 THE 8 DIMENSIONS (Orthogonal Classification Axes)
+
+Every **Particle** (classified Node) has a position on **8 independent axes**.
+
+| # | DIM | QUESTION | VALUES | DETECTION |
+|---|-----|----------|--------|-----------|
+| D1 | **WHAT** | What is this made of? | 200 atom types | AST node mapping |
+| D2 | **LAYER** | Where in architecture? | Interface, Application, Core, Infrastructure, Test | Path + imports |
+| D3 | **ROLE** | What's its purpose? | 33 working roles | Name patterns |
+| D4 | **BOUNDARY** | Does it cross boundaries? | Internal, Input, I/O, Output | Call targets |
+| D5 | **STATE** | Does it maintain state? | Stateful, Stateless | Field analysis |
+| D6 | **EFFECT** | Side effects? | Pure, Read, Write, ReadModify | Call graph |
+| D7 | **ACTIVATION** | How is it triggered? | Direct, Event, Time | Decorators |
+| D8 | **LIFETIME** | How long does it exist? | Transient, Session, Global | Scope analysis |
+
+**8D COORDINATE EXAMPLE:**
+```python
+Particle(
+    what="Function",        # D1: Atom type
+    layer="Core",           # D2: Architectural layer
+    role="Repository",      # D3: Functional purpose
+    boundary="I/O",         # D4: External connection
+    state="Stateless",      # D5: No internal state
+    effect="ReadModify",    # D6: Side effects
+    activation="Direct",    # D7: Direct invocation
+    lifetime="Transient"    # D8: Per-request
+)
+```
+
+---
+
+### 1.5 THE 200 ATOMS (Material Composition)
+
+Atoms are organized in **4 PHASES × 4 FAMILIES = 16 FAMILIES**.
+
+| PHASE | FAMILIES | ATOMS | DESCRIPTION |
+|-------|----------|-------|-------------|
+| **DATA** | Bits, Bytes, Primitives, Variables | 26 | The matter of software |
+| **LOGIC** | Expressions, Statements, Control, Functions | 61 | The forces of software |
+| **ORGANIZATION** | Aggregates, Services, Modules, Files | 45 | The structure of software |
+| **EXECUTION** | Handlers, Workers, Initializers, Probes | 35 | The dynamics of software |
+| **TOTAL** | **16 families** | **200** | Complete AST coverage |
+
+**PHASE → FAMILY → ATOM hierarchy:**
+```
+PHASE (4)
+  └── FAMILY (4 per phase = 16)
+        └── ATOM (~12 per family = 200)
+```
+
+---
+
+### 1.6 THE 33 ROLES (Semantic Purposes)
+
+Roles are the **semantic classification** assigned to Nodes.
+
+| CATEGORY | ROLES |
+|----------|-------|
+| **Query** (Read) | Query, Finder, Loader, Getter |
+| **Command** (Write) | Command, Creator, Mutator, Destroyer |
+| **Factory** (Create) | Factory, Builder |
+| **Storage** (Persist) | Repository, Store, Cache |
+| **Orchestration** (Coordinate) | Service, Controller, Manager, Orchestrator |
+| **Validation** (Check) | Validator, Guard, Asserter |
+| **Transform** (Convert) | Transformer, Mapper, Serializer, Parser |
+| **Event** (React) | Handler, Listener, Subscriber, Emitter |
+| **Utility** (Help) | Utility, Formatter, Helper |
+| **Internal** (Implement) | Internal, Lifecycle |
+| **Unknown** | Unknown (unclassified) |
+
+---
+
+## 2. THE FRACTAL PATTERN (Universal Structure)
+
+The **M→I→P→O** pattern repeats at every scale.
+
+```
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                │
+│   ╔════════╗     ╔═════════╗     ╔════════════╗     ╔════════╗                 │
+│   ║ MEMORY ║ ──▶ ║  INPUT  ║ ──▶ ║ PROCESSING ║ ──▶ ║ OUTPUT ║                 │
+│   ╚════════╝     ╚═════════╝     ╚════════════╝     ╚════════╝                 │
+│        ▲                                                  │                    │
+│        └──────────────────────────────────────────────────┘                    │
+│                         (cycles back to memory)                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+SCALE           MEMORY           INPUT            PROCESSING       OUTPUT
+───────────────────────────────────────────────────────────────────────────────
+L12 UNIVERSE    Prior State      Request          Transform        Response
+L7  SYSTEM      Database         API Call         Controller       Result
+L4  CONTAINER   State Store      Parameters       Methods          Return
+L3  NODE        Closure          Arguments        Body             Value
+L2  BLOCK       Condition        Operands         Operators        Result
+L0  TOKEN       Position         Characters       Lexer            Symbol
+
+"The same M→I→P→O pattern repeats at every level of granularity."
+```
+
+---
+
 ---
 
 > *"The map grows to match the territory. We are always running behind."*
