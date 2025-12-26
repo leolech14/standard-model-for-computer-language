@@ -26,6 +26,8 @@ required_sections:
   - "PART VI: THE NATURAL LAW"
   - "PART VII: THE FUTURE"
   - "PART VIII: THE ATLAS"
+  - "PART IX: THE LINEAGE"
+  - "PART X: THE CONCEPT ATLAS"
 
 # POSTULATES - The verifier checks these are stated (not proven truths, but working hypotheses)
 postulates:
@@ -1717,3 +1719,295 @@ graph TD
 
 ---
 
+
+# PART IX: THE LINEAGE (Intellectual Inheritance)
+
+---
+
+> *"Just like code has inheritance chains, we must track where each concept comes from."*
+
+## The Epistemic Contract
+
+We rely on understanding concepts that we did not develop. We borrow knowledge from those who came before. This section traces the **intellectual provenance** of every Standard Code concept.
+
+---
+
+## 1. FOUNDATIONAL LINEAGES
+
+### 1.1 THE 3 PLANES
+
+```
+PLANES ← Semiotics: Syntactics/Semantics/Pragmatics (Morris, 1938)
+       ← Three Worlds Theory (Karl Popper, 1972)
+           └── World 1: Physical → P1 PHYSICAL
+           └── World 2: Mental 
+           └── World 3: Abstract Objects → P3 SEMANTIC
+       ← Levels of Abstraction (Floridi, 2008)
+```
+
+**Synthesis:** We renamed Popper's "Worlds" to "Planes" and aligned with software substrates.
+
+### 1.2 THE 16 LEVELS
+
+```
+LEVELS ← Abstraction Layers (Dijkstra, "THE", 1968)
+       ← Holarchy (Koestler, "Ghost in the Machine", 1967)
+           └── Holons: Simultaneously whole and part
+       ← Scalar Hierarchy (Allen & Starr, 1982)
+       ← Levels of Abstraction (Floridi, 2008)
+```
+
+**Synthesis:** Combined Dijkstra's layers, Koestler's holons, ecological scaling.
+
+### 1.3 THE FRACTAL PATTERN (M→I→P→O)
+
+```
+FRACTAL ← Self-Similarity (Mandelbrot, 1975)
+        ← Input-Process-Output (Shannon, 1948)
+        ← Cybernetic Loop (Wiener, 1948)
+        ← OODA Loop (John Boyd, 1970s)
+```
+
+**Synthesis:** IPO + Memory (state) + feedback = M→I→P→O at every scale.
+
+### 1.4 THE 8 LENSES
+
+```
+LENSES ← Aristotle's Four Causes (350 BC)
+       ← Zachman Framework (1987): What, How, Where, Who, When, Why
+       ← 4+1 Architectural Views (Kruchten, 1995)
+```
+
+| Lens | Primary Ancestor |
+|------|------------------|
+| R1 Identity | Universal naming |
+| R2 Ontology | Aristotle |
+| R3 Classification | Linnaeus taxonomy |
+| R4 Composition | Mereology |
+| R5 Relationships | Euler (Graph Theory) |
+| R6 Transformation | Shannon |
+| R7 Semantics | Morris (Semiotics) |
+| R8 Epistemology | **Novel** |
+
+### 1.5 THE 8 DIMENSIONS
+
+```
+DIMENSIONS ← Faceted Classification (Ranganathan, 1933)
+           ← DDD Concepts (Evans, 2003)
+           ← Clean Architecture (Martin, 2012)
+```
+
+| Dimension | Primary Ancestor |
+|-----------|------------------|
+| D1 WHAT | Compiler Theory (AST) |
+| D2 LAYER | Clean Architecture |
+| D3 ROLE | DDD Patterns |
+| D4 BOUNDARY | Hexagonal (Cockburn) |
+| D5 STATE | Mealy/Moore |
+| D6 EFFECT | Lambda Calculus |
+| D7 ACTIVATION | Event-Driven Arch |
+| D8 LIFETIME | Garbage Collection |
+
+### 1.6 THE 167 ATOMS
+
+```
+ATOMS ← AST Node Kinds (Compiler Theory)
+      ← Periodic Table Metaphor (Mendeleev, 1869)
+      ← Design Patterns (GoF, 1994)
+      ← DDD Building Blocks (Evans, 2003)
+```
+
+### 1.7 THE 33 ROLES
+
+```
+ROLES ← DDD Tactical Patterns (Evans, 2003)
+      ← CQRS (Greg Young, 2010)
+      ← Hexagonal Architecture (Cockburn, 2005)
+      ← Clean Architecture (Martin, 2012)
+```
+
+---
+
+## 2. THEORETICAL FRAMEWORKS
+
+### 2.1 THE COSMOLOGY
+
+```
+COSMOLOGY ← Manifold Theory (Riemann, 1854)
+          ← Holarchy (Koestler, 1967)
+          ← Computational Universe (Wolfram, 2002)
+```
+
+### 2.2 THE CONSTRUCTAL LAW
+
+```
+CONSTRUCTAL ← Adrian Bejan (1996)
+             └── "Flow systems evolve to provide easier access"
+           ← Thermodynamics (2nd Law)
+```
+
+### 2.3 THE EPISTEMIC STANCE
+
+```
+EPISTEMIC ← Critical Rationalism (Popper, 1934)
+          ← Map vs Territory (Korzybski, 1931)
+          ← Open World Assumption (Description Logics)
+```
+
+---
+
+## 3. NOVEL CONTRIBUTIONS
+
+| Concept | Novel Contribution |
+|---------|-------------------|
+| **8D Classification Manifold** | 8 orthogonal dimensions as semantic space |
+| **Particle = Node + Atom + Confidence** | The triple with uncertainty |
+| **L3 as Semantic Event Horizon** | Function as fundamental unit |
+| **R8 Epistemology Lens** | Confidence tracking as first-class |
+| **Frontier Register** | Unknown as first-class |
+| **Postulates with Validation Obligations** | Every claim falsifiable |
+
+---
+
+## 4. BIBLIOGRAPHY (Key Sources)
+
+| Author | Work | Year | Concepts |
+|--------|------|------|----------|
+| Aristotle | Categories | -350 | Ontology |
+| Dijkstra | Structure of THE | 1968 | Layers |
+| Shannon | Information Theory | 1948 | IPO |
+| Koestler | Ghost in the Machine | 1967 | Holons |
+| Popper | Objective Knowledge | 1972 | 3 Worlds |
+| Bejan | Constructal Theory | 1996 | Flow |
+| Evans | Domain-Driven Design | 2003 | DDD |
+| Martin | Clean Architecture | 2012 | Layers |
+
+---
+
+# PART X: THE CONCEPT ATLAS (Prerequisites)
+
+---
+
+> *"To understand the duality, you must first understand what a particle is and what a wave is."*
+
+## The Library of Prerequisites
+
+Standard Code is a synthesis. This section maps the **47 concepts** needed to understand it.
+
+---
+
+## 1. CONCEPT INVENTORY
+
+### Count: 47 Core Concepts
+
+| Category | Count | Examples |
+|----------|-------|----------|
+| **Foundational** | 10 | Abstraction, Hierarchy, Graph, Recursion, Fractal |
+| **Philosophical** | 6 | Ontology, Epistemology, Semiotics |
+| **Scientific** | 7 | Entropy, Information, State, Transformation |
+| **Software Engineering** | 9 | AST, Call Graph, Function, Class, Module |
+| **DDD/Architecture** | 8 | Entity, Aggregate, Repository, Boundary |
+| **Standard Code** | 7 | Plane, Level, Lens, Dimension, Atom, Role, Particle |
+
+---
+
+## 2. SPATIAL RELATIONSHIPS
+
+### 2.1 PARALLEL (∥) - Side by Side
+
+```
+┌─────────────────────────────────────────────────────────┐
+│   ╔════════════╗  ╔════════════╗  ╔════════════╗       │
+│   ║  PHYSICAL  ║∥ ║  VIRTUAL   ║∥ ║  SEMANTIC  ║       │
+│   ╚════════════╝  ╚════════════╝  ╚════════════╝       │
+│                                                         │
+│   ╔════╗ ╔════╗ ╔════╗ ╔════╗ ╔════╗ ╔════╗ ╔════╗ ╔════╗│
+│   ║ D1 ║∥║ D2 ║∥║ D3 ║∥║ D4 ║∥║ D5 ║∥║ D6 ║∥║ D7 ║∥║ D8 ║│
+│   ╚════╝ ╚════╝ ╚════╝ ╚════╝ ╚════╝ ╚════╝ ╚════╝ ╚════╝│
+└─────────────────────────────────────────────────────────┘
+```
+
+### 2.2 CONTAINS (⊂) - Nested
+
+```
+L12 UNIVERSE
+ └── L7 SYSTEM
+      └── L6 PACKAGE
+           └── L5 FILE
+                └── L4 CONTAINER
+                     └── L3 NODE ★
+                          └── L2 BLOCK
+                               └── L1 STMT
+                                    └── L0 TOKEN
+```
+
+### 2.3 ABOVE/BELOW (↑↓) - Abstraction Scales
+
+```
+META-LEVEL      ← Epistemics, Lineage, Validation
+     ↑
+THEORY-LEVEL    ← Planes, Levels, Lenses, Dimensions
+     ↑  
+DOMAIN-LEVEL    ← DDD, GoF, Clean Architecture
+     ↑
+FOUNDATIONAL    ← Abstraction, Hierarchy, Graph
+```
+
+---
+
+## 3. LEARNING PATH
+
+```
+PHASE 1: FOUNDATIONS (No prerequisites)
+  └── Abstraction, Hierarchy, Graph, Recursion
+
+PHASE 2: STRUCTURES (After Phase 1)
+  └── Tree, Taxonomy, AST, Fractal
+
+PHASE 3: PHILOSOPHY (Any time)
+  └── Semiotics, Ontology, Epistemology
+
+PHASE 4: SOFTWARE DOMAIN (After 1-2)
+  └── DDD, Clean Architecture, GoF
+
+PHASE 5: STANDARD CODE (After all above)
+  └── Planes, Levels, Lenses, Dimensions, Atoms, Roles, Particle
+```
+
+---
+
+## 4. ESSENTIAL GLOSSARY (47 Concepts)
+
+| Concept | One-Line Definition |
+|---------|---------------------|
+| Abstraction | Hiding complexity behind simpler interface |
+| Aggregate | Consistency boundary around related entities |
+| AST | Tree representation of source code syntax |
+| Atom | One of 167 structural classification types |
+| Boundary | Where a system meets the outside |
+| Call Graph | Graph of which functions invoke which |
+| Dimension | One of 8 orthogonal classification axes |
+| Edge | Connection between nodes in a graph |
+| Entity | Object with identity that persists over time |
+| Epistemology | Study of knowledge and belief |
+| Fractal | Pattern that repeats at every scale |
+| Graph | Nodes connected by edges |
+| Hierarchy | Levels of containment or abstraction |
+| Lens | One of 8 perspectives for viewing code |
+| Level | One of 16 scales in the hierarchy |
+| Map vs Territory | Representation ≠ reality |
+| Node | Point in a graph |
+| Ontology | Study of what exists |
+| Particle | Node + Atom + Confidence |
+| Plane | One of 3 modes of existence |
+| Recursion | Self-reference, part contains whole |
+| Repository | Pattern for data persistence |
+| Role | One of 33 semantic purposes |
+| Semiotics | Study of signs and symbols |
+| State | Current configuration of a system |
+| Taxonomy | Classification hierarchy |
+| Transformation | Change from one state to another |
+
+---
+
+> *"We stand on the shoulders of giants. This is our acknowledgment and our map of what we've inherited."*
