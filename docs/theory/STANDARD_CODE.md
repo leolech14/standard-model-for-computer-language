@@ -6,8 +6,8 @@ schema_version: "2.0.0"
 document_name: "Standard Code"
 last_verified: "2025-12-26"
 
-# CANONICAL COUNTS - The verifier checks these against occurrences in the document
-canonical_counts:
+# REFERENCE COUNTS - The verifier checks these against occurrences in the document
+reference_counts:
   planes: 3
   levels: 16           # 13 Semantic (L0-L12) + 3 Physical (L-1 to L-3)
   lenses: 8
@@ -78,9 +78,9 @@ We are not "borrowing" metaphors—we are recognizing that **all domains share t
 
 | Principle | Meaning |
 |-----------|----------|
-| **Open World** | All inventories are canonical *working sets*—versioned, testable, and revisable. They are not claims of totality. |
+| **Open World** | All inventories are *working sets*—versioned, testable, and revisable. They are abstractions, not reality. |
 | **Unknown is First-Class** | Any construct that does not fit cleanly becomes evidence that the map must evolve. |
-| **Provisional Certainty** | We crystallize knowledge because usefulness requires it, but we never claim exhaustiveness. |
+| **Provisional Certainty** | We crystallize knowledge because usefulness requires it, but we never claim to capture all of reality. |
 | **Humble Science** | Every "postulate" is a hypothesis with validation obligations, not a proven theorem. |
 | **Universal Analogy** | Every domain is a lens into every other domain. Cross-pollination is the method. |
 
@@ -91,12 +91,12 @@ We are not "borrowing" metaphors—we are recognizing that **all domains share t
 
 **What this IS:**
 - A comprehensive map of software engineering territory
-- A versioned canonical reference (v2.0.0)
+- A versioned working model (v2.0.0)
 - An open framework designed to evolve with evidence
 
 **Version:** 2.0.0  
 **Last Verified:** 2025-12-26  
-**Status:** CANONICAL REFERENCE (Open, Versioned)
+**Status:** WORKING MODEL (Open, Versioned, Useful)
 
 ---
 
@@ -220,7 +220,7 @@ Every **Particle** (classified Node) has a position on **8 independent axes**.
 |---|-----|----------|--------|-----------|
 | D1 | **WHAT** | What is this made of? | 167 atom types | AST node mapping |
 | D2 | **LAYER** | Where in architecture? | Interface, Application, Core, Infrastructure, Test | Path + imports |
-| D3 | **ROLE** | What's its purpose? | 33 canonical roles | Name patterns |
+| D3 | **ROLE** | What's its purpose? | 33 working roles | Name patterns |
 | D4 | **BOUNDARY** | Does it cross boundaries? | Internal, Input, I/O, Output | Call targets |
 | D5 | **STATE** | Does it maintain state? | Stateful, Stateless | Field analysis |
 | D6 | **EFFECT** | Side effects? | Pure, Read, Write, ReadModify | Call graph |
@@ -422,7 +422,7 @@ How we determine what something IS:
 
 | SOURCE | CONFIDENCE | MECHANISM | EXAMPLE |
 |--------|------------|-----------|---------|
-| **Ground Truth** | 100% | Manual verification | Human-labeled |
+| **Human Verified** | 100% | Manual verification | Human-labeled |
 | **Decorator** | 85-95% | AST decorator analysis | `@app.route` → Controller |
 | **Inheritance** | 80-95% | Type hierarchy | `extends Repository` → Repository |
 | **Name Pattern** | 60-90% | Regex matching | `get*` → Query |
@@ -436,7 +436,7 @@ How we determine what something IS:
 
 | RANGE | LEVEL | MEANING | ACTION |
 |-------|-------|---------|--------|
-| 95-100% | **CERTAIN** | Ground truth / overwhelming evidence | Trust |
+| 95-100% | **CERTAIN** | Human verified / overwhelming evidence | Trust |
 | 80-94% | **HIGH** | Strong pattern match | Accept |
 | 60-79% | **MEDIUM** | Pattern with ambiguity | Review if critical |
 | 40-59% | **LOW** | Weak evidence | Verify |
@@ -668,7 +668,7 @@ How each major concept relates to every other:
 
 ## 12. KEY POSTULATES (Current Hypotheses)
 
-> **These are working assumptions, not proven truths.** Each has validation obligations.
+> **These are working assumptions, not proven facts.** Each has validation obligations.
 
 | # | Postulate | Current Claim | How It Could Be Wrong | Validation Method |
 |---|-----------|---------------|----------------------|-------------------|
@@ -685,7 +685,7 @@ How each major concept relates to every other:
 
 ---
 
-> **This is the current canonical reference set (v2.0). The model is OPEN: extension is expected and governed.**
+> **This is the current working model (v2.0). The model is OPEN: extension is expected and governed.**
 
 # PART V: THE COSMOLOGY (Global Topology)
 
@@ -877,7 +877,7 @@ graph TD
 16. **[Part XIV: The Analyst's Playbook](#part-xiv-the-analysts-playbook)** (Mental Models)
 
 ---
-The Standard Model of Code V2 (SMC) represents a proposed "Grand Unification" of software engineering theory. Historically, software has been analyzed through disjointed lenses: either as physical text (Halstead), linguistic expression (Halliday), mathematical structures (Category Theory), or architectural forms (Alexander). The SMC proposes that these are not competing theories, but orthogonal dimensions of a single underlying reality. By defining a rigorous ontology of **167 Atoms** (Structure) and **33 Roles** (Purpose) across **8 Dimensions**, the SMC provides the "Rosetta Stone" that connects these disparate fields. This document provides an exhaustive comparative analysis of the SMC against the major theoretical frameworks of the last 50 years.
+The Standard Model of Code V2 (SMC) represents a proposed "Grand Unification" of software engineering theory. Historically, software has been analyzed through disjointed lenses: either as physical text (Halstead), linguistic expression (Halliday), mathematical structures (Category Theory), or architectural forms (Alexander). The SMC proposes that these are not competing theories, but orthogonal dimensions of a single underlying reality. By defining a working ontology of **167 Atoms** (Structure) and **33 Roles** (Purpose) across **8 Dimensions**, the SMC provides a "Rosetta Stone" that connects these disparate fields. This document provides a comparative analysis of the SMC against the major theoretical frameworks of the last 50 years.
 
 ---
 
@@ -1061,7 +1061,7 @@ The Standard Model of Code V2 is not a replacement for these theories, but a **S
 *   It validates **Alexander**: Code is living structure (Centers).
 *   It validates **Category Theory**: Code is mathematical relation (Morphisms).
 
-By organizing these truths into **8 Orthogonal Dimensions**, the Standard Model provides the first truly universal framework for the analysis, understanding, and improvement of software systems.
+By organizing these insights into **8 Orthogonal Dimensions**, the Standard Model provides a comprehensive framework for the analysis, understanding, and improvement of software systems. It is a useful lens, not a claim of ultimate reality.
 
 
 ---
@@ -2095,7 +2095,7 @@ These atoms exist for languages not in this study (C, C++, Assembly):
 | **Friend** | ORG | C++ friend declarations |
 | **Inline Assembly** | EXE | None of 5 languages support inline ASM |
 
-**Status:** These remain in the canonical set for C/C++ coverage.
+**Status:** These remain in the working set for C/C++ coverage.
 
 ---
 
@@ -2109,7 +2109,7 @@ These atoms exist for languages not in this study (C, C++, Assembly):
 | **#171** | Defer | EXE.HND | Go defer statement (cleanup at exit) |
 | **#172** | ImportStatement | ORG.MOD | AST node for import/use declarations |
 
-**Status:** Under review. If adopted, canonical count becomes **172**.
+**Status:** Under review. If adopted, working count becomes **172**.
 
 ---
 
@@ -2182,9 +2182,10 @@ When new constructs appear:
 > 
 > The 7 unused atoms remain valid for C/C++ coverage.
 > 
-> **This validates the completeness hypothesis as a strong working set.**
+> **This validates the model as a useful working set. It is not complete—it is useful.**
 
 ---
 
-*Research methodology: Tree-sitter AST node enumeration + manual crosswalk to canonical atoms.*
+*Research methodology: Tree-sitter AST node enumeration + manual crosswalk to working atoms.*
 *Sources: 31 references, 102 searches, December 2025.*
+
