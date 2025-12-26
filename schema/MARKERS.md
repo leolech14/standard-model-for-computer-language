@@ -35,6 +35,7 @@ All markers are HTML comments with a specific format:
 | `@PROVIDES` | Concepts introduced | Comma-separated concept names |
 | `@VERSION` | Content version | Semantic version like `1.0.0` |
 | `@STATUS` | Content status | `draft`, `review`, `stable` |
+| `@SOURCES` | Scientific validation | Comma-separated citations (e.g., `Popper1959`, `Kuhn1962`) |
 
 ---
 
