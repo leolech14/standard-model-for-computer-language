@@ -227,10 +227,17 @@ class ExecutionFlowDetector:
                 layer = pn.layer.value if hasattr(pn.layer, 'value') else str(pn.layer)
             
             # Determine if public (no underscore prefix)
-            is_public = not name.startswith('_') or name.startswith('__')
+            # Handle fully qualified names (Class.method)
+            short_name = name.split('.')[-1]
+            # Public if doesn't start with _, BUT dunder methods (e.g. __init__)
+            # are considered "internal/implicit" so we don't flag them as public orphans.
+            is_public = not short_name.startswith('_')
+            # Note: We treat __init__ etc as NOT public for orphan checks because 
+            # they are invoked implicitly usually. OR we could check startswith('__') -> False.
             
             # Check if entry point
-            is_entry = self._is_entry_point(name, decorators)
+            # TRUST THE ROLE if it was already classified as EntryPoint
+            is_entry = self._is_entry_point(name, decorators) or role == 'EntryPoint'
             
             self.nodes[node_id] = FlowNode(
                 id=node_id,

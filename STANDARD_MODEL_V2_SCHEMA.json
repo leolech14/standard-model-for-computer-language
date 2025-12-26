@@ -1,0 +1,131 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://spectrometer.dev/standard-model-of-code/v2.0.0",
+    "title": "Standard Model of Code V2",
+    "description": "Unified 8-Dimensional Ontology for Code Analysis",
+    "version": "2.0.0",
+    "definitions": {
+        "Dimension1_WHAT": {
+            "description": "D1: What is this made of? (167 Atoms)",
+            "type": "string",
+            "$comment": "Validation against canonical/fixed/atoms.json IDs (e.g., LOG.FNC.M)"
+        },
+        "Dimension2_LAYER": {
+            "description": "D2: Where does this live?",
+            "type": "string",
+            "enum": [
+                "DOMAIN",
+                "APPLICATION",
+                "INFRASTRUCTURE",
+                "PRESENTATION",
+                "CROSS_CUTTING",
+                "TEST"
+            ]
+        },
+        "Dimension3_ROLE": {
+            "description": "D3: What is its purpose? (33 Roles)",
+            "type": "string",
+            "$comment": "Validation against canonical/fixed/roles.json keys (e.g., Query, Repository)"
+        },
+        "Dimension4_BOUNDARY": {
+            "description": "D4: Does it cross boundaries?",
+            "type": "string",
+            "enum": [
+                "Internal",
+                "Input",
+                "Output",
+                "IO"
+            ]
+        },
+        "Dimension5_STATE": {
+            "description": "D5: Does it maintain state?",
+            "type": "string",
+            "enum": [
+                "Stateful",
+                "Stateless"
+            ]
+        },
+        "Dimension6_EFFECT": {
+            "description": "D6: What are its side effects?",
+            "type": "string",
+            "enum": [
+                "Pure",
+                "Read",
+                "Write",
+                "ReadModify"
+            ]
+        },
+        "Dimension7_ACTIVATION": {
+            "description": "D7: How is it triggered?",
+            "type": "string",
+            "enum": [
+                "Direct",
+                "Event",
+                "Time"
+            ]
+        },
+        "Dimension8_LIFETIME": {
+            "description": "D8: How long does it exist?",
+            "type": "string",
+            "enum": [
+                "Transient",
+                "Session",
+                "Global"
+            ]
+        },
+        "Particle": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "what": {
+                            "$ref": "#/definitions/Dimension1_WHAT"
+                        },
+                        "layer": {
+                            "$ref": "#/definitions/Dimension2_LAYER"
+                        },
+                        "role": {
+                            "$ref": "#/definitions/Dimension3_ROLE"
+                        },
+                        "boundary": {
+                            "$ref": "#/definitions/Dimension4_BOUNDARY"
+                        },
+                        "state": {
+                            "$ref": "#/definitions/Dimension5_STATE"
+                        },
+                        "effect": {
+                            "$ref": "#/definitions/Dimension6_EFFECT"
+                        },
+                        "activation": {
+                            "$ref": "#/definitions/Dimension7_ACTIVATION"
+                        },
+                        "lifetime": {
+                            "$ref": "#/definitions/Dimension8_LIFETIME"
+                        }
+                    },
+                    "required": [
+                        "what",
+                        "layer",
+                        "role"
+                    ]
+                },
+                "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                }
+            },
+            "required": [
+                "id",
+                "dimensions"
+            ]
+        }
+    }
+}

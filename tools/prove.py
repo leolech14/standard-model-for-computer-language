@@ -170,7 +170,8 @@ def run_proof(target_path: str, **kwargs) -> dict:
     print("└─────────────────────────────────────────────────────────────────┘")
     
     # Count structural pairs
-    entities = role_counts.get('Entity', 0) + role_counts.get('DTO', 0)
+    # Exclude DTOs from entity count (data structures != persisted entities)
+    entities = role_counts.get('Entity', 0) + role_counts.get('AggregateRoot', 0)
     repositories = role_counts.get('Repository', 0)
     services = role_counts.get('Service', 0) + role_counts.get('ApplicationService', 0)
     controllers = role_counts.get('Controller', 0)

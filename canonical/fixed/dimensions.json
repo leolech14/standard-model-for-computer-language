@@ -25,7 +25,7 @@
             "id": 3,
             "name": "Role",
             "question": "What is its purpose?",
-            "domain": "27 canonical roles",
+            "domain": "33 canonical roles",
             "source": "roles.json"
         },
         {

@@ -56,3 +56,14 @@ archive/
 collider_report.html
 collider_viz.html
 spectrometer_report.html
+
+# Audio - exclude large files and segments, keep only complete versions
+audio/**/
+audio/*-44k.mp3
+audio/*.py
+audio/*.sh
+!audio/WHAT_IS_A_FUNCTION_COMPLETE.mp3
+
+# Large generated files
+*.mp3
+!audio/WHAT_IS_A_FUNCTION_COMPLETE.mp3

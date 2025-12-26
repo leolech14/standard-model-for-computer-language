@@ -1,22 +1,31 @@
 {
-  "schema_version": "1.0.0",
-  "description": "The 27 canonical roles (WHY dimension)",
-  "count": 27,
+  "schema_version": "2.0.0",
+  "description": "The 33 canonical roles (WHY dimension) from Standard Model V2 theory",
+  "count": 33,
   "roles": {
     "Query": {
       "purpose": "Retrieve data without modification"
     },
+    "Finder": {
+      "purpose": "Search for data based on criteria"
+    },
+    "Loader": {
+      "purpose": "Load data from storage/source"
+    },
+    "Getter": {
+      "purpose": "Access property/attribute"
+    },
     "Command": {
       "purpose": "Execute an action that changes state"
     },
-    "Repository": {
-      "purpose": "Abstract data persistence operations"
+    "Creator": {
+      "purpose": "Create new entity/record"
     },
-    "Entity": {
-      "purpose": "Represent a domain object with identity"
+    "Mutator": {
+      "purpose": "Modify existing entity/state"
     },
-    "Service": {
-      "purpose": "Coordinate business operations across entities"
+    "Destroyer": {
+      "purpose": "Delete/remove entity"
     },
     "Factory": {
       "purpose": "Create and configure new instances"
@@ -24,65 +33,74 @@
     "Builder": {
       "purpose": "Construct complex objects step by step"
     },
+    "Repository": {
+      "purpose": "Abstract data persistence operations"
+    },
+    "Store": {
+      "purpose": "Manage application state"
+    },
+    "Cache": {
+      "purpose": "Temporarily store data for performance"
+    },
+    "Service": {
+      "purpose": "Coordinate business operations"
+    },
+    "Controller": {
+      "purpose": "Handle external requests"
+    },
+    "Manager": {
+      "purpose": "Manage resources or components"
+    },
+    "Orchestrator": {
+      "purpose": "Coordinate complex workflows"
+    },
     "Validator": {
       "purpose": "Verify data meets constraints"
     },
-    "Transformer": {
-      "purpose": "Convert data from one representation to another"
-    },
-    "Adapter": {
-      "purpose": "Convert between incompatible interfaces"
-    },
-    "Decorator": {
-      "purpose": "Add behavior dynamically to objects"
-    },
-    "Strategy": {
-      "purpose": "Encapsulate interchangeable algorithms"
-    },
-    "Controller": {
-      "purpose": "Handle external requests and delegate to application"
-    },
-    "Presenter": {
-      "purpose": "Format data for display"
-    },
-    "View": {
-      "purpose": "Render user interface components"
-    },
-    "Configuration": {
-      "purpose": "Define system parameters and settings"
-    },
-    "Constant": {
-      "purpose": "Store immutable values used across codebase"
-    },
-    "Test": {
-      "purpose": "Verify behavior meets expectations"
-    },
-    "Mock": {
-      "purpose": "Simulate dependencies for testing"
-    },
-    "Fixture": {
-      "purpose": "Provide test data and setup"
-    },
-    "EventHandler": {
-      "purpose": "React to domain events"
-    },
-    "Observer": {
-      "purpose": "Watch for changes and respond"
-    },
-    "Migration": {
-      "purpose": "Manage schema and data evolution"
-    },
-    "Singleton": {
-      "purpose": "Ensure single instance exists globally"
-    },
     "Guard": {
-      "purpose": "Control access and enforce authorization"
+      "purpose": "Protect access or enforce conditions"
+    },
+    "Asserter": {
+      "purpose": "Assert truth of conditions"
+    },
+    "Transformer": {
+      "purpose": "Convert data format"
+    },
+    "Mapper": {
+      "purpose": "Map between types"
+    },
+    "Serializer": {
+      "purpose": "Serialize properties to output format"
+    },
+    "Parser": {
+      "purpose": "Parse input format to data"
+    },
+    "Handler": {
+      "purpose": "React to events"
+    },
+    "Listener": {
+      "purpose": "Passive event observation"
+    },
+    "Subscriber": {
+      "purpose": "Subscribe to event stream"
+    },
+    "Emitter": {
+      "purpose": "Emit/publish events"
     },
     "Utility": {
-      "purpose": "Provide stateless helper operations"
+      "purpose": "General constant/stateless helper"
     },
-    "Middleware": {
-      "purpose": "Intercept and process requests/responses"
+    "Formatter": {
+      "purpose": "Format output for display"
+    },
+    "Helper": {
+      "purpose": "Specific assistive logic"
+    },
+    "Internal": {
+      "purpose": "Private implementation detail"
+    },
+    "Lifecycle": {
+      "purpose": "Manage object/process lifecycle"
     }
   }
 }

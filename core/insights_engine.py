@@ -275,7 +275,8 @@ class InsightsEngine:
     
     def _check_missing_repositories(self, role_counts: Counter):
         """Detect missing repository pattern"""
-        entities = role_counts.get('Entity', 0) + role_counts.get('DTO', 0)
+        # Exclude DTOs - they are data structures, not persisted domain entities
+        entities = role_counts.get('Entity', 0) + role_counts.get('AggregateRoot', 0)
         repos = role_counts.get('Repository', 0)
         
         if entities > 5 and repos < entities * 0.3:

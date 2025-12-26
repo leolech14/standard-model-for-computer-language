@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "target": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core",
+    "timestamp": "2025-12-24T17:31:11.072797",
+    "version": "2.3.0",
+    "model": "Standard Model of Code",
+    "tool": "Collider",
+    "pipeline_stages": 9
+  },
+  "classification": {
+    "total_nodes": 556,
+    "total_edges": 1687,
+    "role_distribution": {
+      "Internal": 161,
+      "DTO": 117,
+      "Analyzer": 30,
+      "Utility": 14,
+      "Service": 9,
+      "ApplicationService": 1,
+      "Command": 17,
+      "Query": 62,
+      "Transformer": 51,
+      "Factory": 48,
+      "Validator": 10,
+      "Specification": 10,
+      "Repository": 3,
+      "Test": 15,
+      "View": 2,
+      "Mapper": 2,
+      "UIComponent": 1,
+      "Exception": 1,
+      "Stream": 1,
+      "Entity": 1
+    },
+    "coverage_percent": 100.0,
+    "average_confidence": 76.94,
+    "classification_time_seconds": 0.4
+  },
+  "antimatter": {
+    "violations_count": 0,
+    "violations": []
+  },
+  "predictions": [
+    "Missing ~115 Repositories for 118 Entities"
+  ],
+  "insights": {
+    "count": 3,
+    "items": [
+      {
+        "type": "refactoring",
+        "priority": "high",
+        "title": "God Class Detected",
+        "description": "Found 1 classes with 20+ methods.",
+        "recommendation": "Decompose into smaller, focused classes",
+        "schema": "GOD_CLASS_DECOMPOSITION"
+      },
+      {
+        "type": "architecture",
+        "priority": "medium",
+        "title": "Missing Repository Pattern",
+        "description": "Found 118 data entities but only 3 repositories.",
+        "recommendation": "Apply Repository Pattern to abstract data access",
+        "schema": "REPOSITORY_PATTERN"
+      },
+      {
+        "type": "performance",
+        "priority": "low",
+        "title": "Pure Function Optimization",
+        "description": "Found 76 potentially pure functions (Queries + Utilities).",
+        "recommendation": "Verify purity and add caching where beneficial",
+        "schema": "PURE_FUNCTION_EXTRACTION"
+      }
+    ]
+  },
+  "purpose_field": {
+    "layers": {
+      "infrastructure": 191,
+      "domain": 129,
+      "unknown": 135,
+      "application": 80,
+      "testing": 14,
+      "presentation": 2
+    },
+    "layer_purposes": {
+      "presentation": "Display data and handle user interaction",
+      "application": "Orchestrate use cases and coordinate domain",
+      "domain": "Express and enforce business rules",
+      "infrastructure": "Handle technical concerns and external systems",
+      "testing": "Verify behavior and validate expectations",
+      "unknown": "Purpose not yet determined"
+    },
+    "violations_count": 0,
+    "violations": []
+  },
+  "execution_flow": {
+    "entry_points": 175,
+    "reachable_nodes": 175,
+    "orphan_count": 357,
+    "dead_code_percent": 64.79,
+    "chains_count": 50,
+    "orphans": [
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine.__init__",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._tokenize_identifier",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine.analyze_file",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._extract_particles",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._classify_class_pattern",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._classify_function_pattern",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._classify_extracted_symbol",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._get_base_class_names",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._get_decorators",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine._get_function_body"
+    ]
+  },
+  "performance": {
+    "total_estimated_cost": 138124,
+    "critical_path_cost": 750,
+    "critical_path_length": 1,
+    "hotspot_count": 10,
+    "time_by_type": {
+      "\u03c4_compute": 8050.0,
+      "\u03c4_instant": 1824.0,
+      "\u03c4_io_local": 79750.0,
+      "\u03c4_io_network": 48500.0
+    },
+    "hotspots": [
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/enrichment_helpers.py:_enrich_with_how",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/enrichment_helpers.py:_enrich_with_where",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/enrichment_helpers.py:_enrich_with_why",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:normalize_type",
+      "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/core/tree_sitter_engine.py:TreeSitterUniversalEngine"
+    ]
+  },
+  "metrics": {
+    "entities": 118,
+    "repositories": 3,
+    "services": 10,
+    "controllers": 0,
+    "tests": 15
+  }
+}

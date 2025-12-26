@@ -53,6 +53,9 @@ class UnifiedNode:
     out_degree: int = 0
     layer: Optional[str] = None
     
+    # V2: 8 Dimensions
+    dimensions: Dict[str, str] = field(default_factory=dict)
+    
     # Metadata
     metadata: Dict[str, Any] = field(default_factory=dict)
 
@@ -82,8 +85,8 @@ class UnifiedAnalysisOutput:
     """
     
     # === METADATA ===
-    schema_version: str = "1.0.0"
-    spectrometer_version: str = "V12.2"
+    schema_version: str = "2.0.0"
+    spectrometer_version: str = "V2.0.0"
     generated_at: str = ""
     analysis_time_ms: int = 0
     
@@ -224,6 +227,9 @@ def create_unified_output(
             "in_degree": node.get("in_degree", 0),
             "out_degree": node.get("out_degree", 0),
             "layer": node.get("layer"),
+            "out_degree": node.get("out_degree", 0),
+            "layer": node.get("layer"),
+            "dimensions": node.get("dimensions", {}),
             "metadata": node.get("metadata", {}),
         }
         output.nodes.append(unified_node)
