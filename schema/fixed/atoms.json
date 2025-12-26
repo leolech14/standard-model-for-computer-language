@@ -1,8 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.0.0",
-  "description": "Standard Model of Code - 167 Atom Ontology",
-  "total_atoms": 167,
+  "version": "2.0.0",
+  "description": "Standard Model of Code - 172 Atom Ontology (167 original + 5 from validation)",
+  "total_atoms": 172,
+  "validation_date": "2025-12-26",
   "phases": {
     "DATA": {
       "description": "Data foundations - the matter of software",

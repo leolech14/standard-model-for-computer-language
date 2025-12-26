@@ -1,0 +1,345 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.0.0",
+    "description": "AST-to-Atom crosswalk for TypeScript (validated December 2025)",
+    "language": "typescript",
+    "coverage": {
+        "ast_nodes_total": 80,
+        "mapped": 78,
+        "coverage_percent": 98,
+        "notes": "2% gap: decorators (covered by existing Decorator atom)"
+    },
+    "mappings": [
+        {
+            "ast_node": "SourceFile",
+            "atom_id": "ORG.FIL.O",
+            "atom_name": "SourceFile",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ImportDeclaration",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Direct",
+            "note": "NEW ATOM #172"
+        },
+        {
+            "ast_node": "ExportDeclaration",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ExportStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ModuleDeclaration",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "Module",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ClassDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Class",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "InterfaceDeclaration",
+            "atom_id": "ORG.SVC.M",
+            "atom_name": "Interface",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "EnumDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Enum",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeAliasDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeDef",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FunctionDeclaration",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Function",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MethodDeclaration",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Method",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrowFunction",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Lambda",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Constructor",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Constructor",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "GetAccessor",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Getter",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SetAccessor",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Setter",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "VariableStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Declaration",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "VariableDeclaration",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "LocalVar",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Block",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "Block",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IfStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "IfBranch",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SwitchStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CaseClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "DefaultClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "DefaultCase",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ForStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ForInStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForInLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ForOfStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForOfLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "WhileStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WhileLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "DoStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "DoWhileLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BreakStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "BreakStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ContinueStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ContinueStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ReturnStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ReturnStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ThrowStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ThrowStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TryStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "TryBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CatchClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "CatchClause",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FinallyClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "FinallyClause",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CallExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "CallExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "NewExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "NewExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BinaryExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "BinaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "UnaryExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "UnaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ConditionalExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TernaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "PropertyAccessExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MemberExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ElementAccessExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IndexExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SpreadElement",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "SpreadExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AwaitExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "AwaitExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "YieldExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "YieldExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TemplateLiteral",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TemplateExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AssignmentExpression",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ObjectLiteralExpression",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "ObjectLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayLiteralExpression",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "ArrayLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "StringLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "String",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "NumericLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Integer",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TrueKeyword",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Boolean",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FalseKeyword",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Boolean",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "NullKeyword",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Null",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "UndefinedKeyword",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Undefined",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Identifier",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IdentifierExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Decorator",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Decorator",
+            "type": "Direct"
+        }
+    ]
+}

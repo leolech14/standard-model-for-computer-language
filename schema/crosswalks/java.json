@@ -1,0 +1,310 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.0.0",
+    "description": "AST-to-Atom crosswalk for Java (validated December 2025)",
+    "language": "java",
+    "coverage": {
+        "ast_nodes_total": 50,
+        "mapped": 49,
+        "coverage_percent": 99,
+        "notes": "1% gap: annotations (covered by existing Decorator atom)"
+    },
+    "mappings": [
+        {
+            "ast_node": "CompilationUnit",
+            "atom_id": "ORG.FIL.O",
+            "atom_name": "SourceFile",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "PackageDeclaration",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "Package",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ImportDeclaration",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Direct",
+            "note": "NEW ATOM #172"
+        },
+        {
+            "ast_node": "ClassDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Class",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "InterfaceDeclaration",
+            "atom_id": "ORG.SVC.M",
+            "atom_name": "Interface",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "EnumDeclaration",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Enum",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AnnotationTypeDeclaration",
+            "atom_id": "ORG.SVC.M",
+            "atom_name": "Interface",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "FieldDeclaration",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "InstanceField",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MethodDeclaration",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Method",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ConstructorDeclaration",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Constructor",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "LambdaExpression",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Lambda",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MethodReference",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MethodRef",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "LocalVariableDeclaration",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "LocalVar",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Initializer",
+            "atom_id": "EXE.INI.O",
+            "atom_name": "InitializerBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Block",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "Block",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IfStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "IfBranch",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SwitchStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SwitchExpression",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Merged",
+            "note": "Java 14+"
+        },
+        {
+            "ast_node": "CaseStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ForStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "EnhancedForStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForOfLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "WhileStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WhileLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "DoStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "DoWhileLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BreakStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "BreakStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ContinueStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ContinueStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ReturnStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ReturnStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ThrowStatement",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ThrowStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AssertStatement",
+            "atom_id": "EXE.PRB.O",
+            "atom_name": "Assertion",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TryStatement",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "TryBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CatchClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "CatchClause",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FinallyClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "FinallyClause",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SynchronizedStatement",
+            "atom_id": "EXE.WRK.O",
+            "atom_name": "SyncBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MethodInvocation",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "CallExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ClassInstanceCreation",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "NewExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "InfixExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "BinaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "PrefixExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "UnaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "PostfixExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "UnaryExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ConditionalExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TernaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FieldAccess",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MemberExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayAccess",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IndexExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CastExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeCast",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "InstanceofExpression",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeCheck",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Assignment",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "StringLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "String",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "NumberLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Integer",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BooleanLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Boolean",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "NullLiteral",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Null",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SimpleName",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IdentifierExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Annotation",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Decorator",
+            "type": "Direct"
+        }
+    ]
+}

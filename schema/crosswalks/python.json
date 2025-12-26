@@ -1,0 +1,324 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.0.0",
+    "description": "AST-to-Atom crosswalk for Python (validated December 2025)",
+    "language": "python",
+    "coverage": {
+        "ast_nodes_total": 60,
+        "mapped": 60,
+        "coverage_percent": 100
+    },
+    "mappings": [
+        {
+            "ast_node": "Module",
+            "atom_id": "ORG.FIL.O",
+            "atom_name": "SourceFile",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FunctionDef",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Function",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AsyncFunctionDef",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "AsyncFunction",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ClassDef",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Class",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Return",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ReturnStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Delete",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "DeleteStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Assign",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AugAssign",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "AnnAssign",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "For",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AsyncFor",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForLoop",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "While",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WhileLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "If",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "IfBranch",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "With",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WithBlock",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AsyncWith",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "WithBlock",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "Raise",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ThrowStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Try",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "TryBlock",
+            "type": "Split"
+        },
+        {
+            "ast_node": "ExceptHandler",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "CatchClause",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Assert",
+            "atom_id": "EXE.PRB.O",
+            "atom_name": "Assertion",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Import",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ImportFrom",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "Global",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "GlobalVar",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Nonlocal",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "LocalVar",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "Pass",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "EmptyStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Break",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "BreakStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Continue",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ContinueStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BoolOp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "BinaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BinOp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "BinaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "UnaryOp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "UnaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Lambda",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Lambda",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IfExp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TernaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Dict",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "DictLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Set",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "SetLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ListComp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "Comprehension",
+            "type": "Direct",
+            "note": "NEW ATOM #168"
+        },
+        {
+            "ast_node": "SetComp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "Comprehension",
+            "type": "Merged",
+            "note": "NEW ATOM #168"
+        },
+        {
+            "ast_node": "DictComp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "Comprehension",
+            "type": "Merged",
+            "note": "NEW ATOM #168"
+        },
+        {
+            "ast_node": "GeneratorExp",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "Comprehension",
+            "type": "Merged",
+            "note": "NEW ATOM #168"
+        },
+        {
+            "ast_node": "Await",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "AwaitExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Yield",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "YieldExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "YieldFrom",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "YieldExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "Compare",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "BinaryExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "Call",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "CallExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Constant",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Literal",
+            "type": "Split"
+        },
+        {
+            "ast_node": "Attribute",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MemberExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Subscript",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IndexExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Starred",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "SpreadExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Name",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IdentifierExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "List",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "ListLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Tuple",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "TupleLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Match",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Direct",
+            "note": "Python 3.10+"
+        },
+        {
+            "ast_node": "match_case",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Merged"
+        }
+    ]
+}

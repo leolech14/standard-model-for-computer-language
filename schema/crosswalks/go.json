@@ -1,0 +1,230 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.0.0",
+    "description": "AST-to-Atom crosswalk for Go (validated December 2025)",
+    "language": "go",
+    "coverage": {
+        "ast_nodes_total": 40,
+        "mapped": 40,
+        "coverage_percent": 100
+    },
+    "mappings": [
+        {
+            "ast_node": "File",
+            "atom_id": "ORG.FIL.O",
+            "atom_name": "SourceFile",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Package",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "Package",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ImportSpec",
+            "atom_id": "ORG.MOD.O",
+            "atom_name": "ImportStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FuncDecl",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Function",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FuncLit",
+            "atom_id": "LOG.FNC.M",
+            "atom_name": "Lambda",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeSpec",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "TypeDef",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "StructType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Struct",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "InterfaceType",
+            "atom_id": "ORG.SVC.M",
+            "atom_name": "Interface",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ValueSpec",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "VarDecl",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BlockStmt",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "Block",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IfStmt",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "IfBranch",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SwitchStmt",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeSwitchStmt",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "CaseClause",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "SwitchCase",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ForStmt",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "RangeStmt",
+            "atom_id": "LOG.CTL.A",
+            "atom_name": "ForOfLoop",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ReturnStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ReturnStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BranchStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ControlFlow",
+            "type": "Split"
+        },
+        {
+            "ast_node": "GoStmt",
+            "atom_id": "EXE.WRK.O",
+            "atom_name": "GoroutineSpawn",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "DeferStmt",
+            "atom_id": "EXE.HDL.O",
+            "atom_name": "Defer",
+            "type": "Direct",
+            "note": "NEW ATOM #171"
+        },
+        {
+            "ast_node": "SelectStmt",
+            "atom_id": "EXE.WRK.O",
+            "atom_name": "ChannelSelect",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CommClause",
+            "atom_id": "EXE.WRK.O",
+            "atom_name": "ChannelCase",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SendStmt",
+            "atom_id": "EXE.WRK.O",
+            "atom_name": "ChannelSend",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CallExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "CallExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BinaryExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "BinaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "UnaryExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "UnaryExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SelectorExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "MemberExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IndexExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IndexExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "SliceExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "SliceExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "TypeAssertExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "TypeCast",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "CompositeLit",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "CompositeLiteral",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "BasicLit",
+            "atom_id": "DAT.PRM.A",
+            "atom_name": "Literal",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Ident",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IdentifierExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "AssignStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IncDecStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Assignment",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "ExprStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "ExpressionStmt",
+            "type": "Direct"
+        }
+    ]
+}
