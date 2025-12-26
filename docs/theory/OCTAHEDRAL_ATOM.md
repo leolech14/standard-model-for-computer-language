@@ -61,17 +61,14 @@
 | **L3** | **Node** | **Statement/expression** ← atom level |
 | L2 | Token | Identifier/literal |
 | L1 | Character | Single char |
-| L0 | Bit-sequence | Binary |
-| L-1 | Bit | Single bit |
-| L-2 | Electron | Logical gate |
-| L-3 | Qubit | Quantum state |
+| L0 | Bit-sequence | Binary word |
+| **L-3** | **Bit / Qubit** | **Classical or quantum bit** ← foundational |
 
 Every instance of a code construct is an **octahedron at a specific level** carrying 8 pieces of metadata.
 
 > **⚠️ QUANTUM FRONTIER (L-3):**
-> Levels L-1 to L-3 (Bit, Electron, Qubit) represent the physical/quantum foundations.
-> An integrated theory of quantum computing is the **immediate next step** but is not yet formalized.
-> When ready, L-3 will bridge classical bits and quantum qubits.
+> Bit and Qubit are the same abstraction level - different implementations of the foundational information unit.
+> An integrated theory bridging classical and quantum computing is the **immediate next step**.
 
 ---
 
