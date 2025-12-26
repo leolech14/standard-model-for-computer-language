@@ -77,14 +77,15 @@ def check_canonical_counts(frontmatter: dict, body: str) -> list[str]:
     
     return errors
 
-def check_theorems(frontmatter: dict, body: str) -> list[str]:
-    """Check all theorems are stated."""
+def check_postulates(frontmatter: dict, body: str) -> list[str]:
+    """Check all postulates are stated."""
     errors = []
-    theorems = frontmatter.get('theorems', [])
+    # Support both old 'theorems' and new 'postulates' key
+    postulates = frontmatter.get('postulates', frontmatter.get('theorems', []))
     
-    for theorem in theorems:
-        if theorem not in body:
-            errors.append(f"Missing theorem: '{theorem}'")
+    for postulate in postulates:
+        if postulate not in body:
+            errors.append(f"Missing postulate: '{postulate}'")
     
     return errors
 
@@ -122,31 +123,36 @@ def check_json_cross_reference(frontmatter: dict) -> list[str]:
     """Cross-check canonical counts against JSON files."""
     errors = []
     
-    try:
-        roles_path = Path("canonical/fixed/roles.json")
+    # Try both old and new paths
+    roles_paths = [Path("schema/fixed/roles.json"), Path("canonical/fixed/roles.json")]
+    for roles_path in roles_paths:
         if roles_path.exists():
-            roles_data = json.load(open(roles_path))
-            json_role_count = roles_data.get("count", len(roles_data.get("roles", {})))
-            expected = frontmatter.get("canonical_counts", {}).get("roles")
-            if expected and json_role_count != expected:
-                errors.append(f"roles.json has {json_role_count} roles but schema expects {expected}")
-            else:
-                print(f"  ✓ roles.json count matches ({json_role_count})")
-    except Exception as e:
-        errors.append(f"Failed to check roles.json: {e}")
+            try:
+                roles_data = json.load(open(roles_path))
+                json_role_count = roles_data.get("count", len(roles_data.get("roles", {})))
+                expected = frontmatter.get("canonical_counts", {}).get("roles")
+                if expected and json_role_count != expected:
+                    errors.append(f"roles.json has {json_role_count} roles but schema expects {expected}")
+                else:
+                    print(f"  ✓ roles.json count matches ({json_role_count})")
+                break
+            except Exception as e:
+                errors.append(f"Failed to check {roles_path}: {e}")
     
-    try:
-        dims_path = Path("canonical/fixed/dimensions.json")
+    dims_paths = [Path("schema/fixed/dimensions.json"), Path("canonical/fixed/dimensions.json")]
+    for dims_path in dims_paths:
         if dims_path.exists():
-            dims_data = json.load(open(dims_path))
-            json_dim_count = len(dims_data.get("dimensions", []))
-            expected = frontmatter.get("canonical_counts", {}).get("dimensions")
-            if expected and json_dim_count != expected:
-                errors.append(f"dimensions.json has {json_dim_count} dimensions but schema expects {expected}")
-            else:
-                print(f"  ✓ dimensions.json count matches ({json_dim_count})")
-    except Exception as e:
-        errors.append(f"Failed to check dimensions.json: {e}")
+            try:
+                dims_data = json.load(open(dims_path))
+                json_dim_count = len(dims_data.get("dimensions", []))
+                expected = frontmatter.get("canonical_counts", {}).get("dimensions")
+                if expected and json_dim_count != expected:
+                    errors.append(f"dimensions.json has {json_dim_count} dimensions but schema expects {expected}")
+                else:
+                    print(f"  ✓ dimensions.json count matches ({json_dim_count})")
+                break
+            except Exception as e:
+                errors.append(f"Failed to check {dims_path}: {e}")
     
     return errors
 
@@ -191,15 +197,16 @@ def main():
     else:
         print(f"  ✓ Canonical counts consistent")
     
-    # Check theorems
-    print("\nChecking theorems...")
-    errors = check_theorems(frontmatter, body)
+    # Check postulates
+    print("\nChecking postulates...")
+    errors = check_postulates(frontmatter, body)
     if errors:
         all_errors.extend(errors)
         for e in errors:
             print(f"  ✗ {e}")
     else:
-        print(f"  ✓ All {len(frontmatter.get('theorems', []))} theorems present")
+        postulate_count = len(frontmatter.get('postulates', frontmatter.get('theorems', [])))
+        print(f"  ✓ All {postulate_count} postulates present")
     
     # Check for duplicates
     print("\nChecking for duplicate headers...")

@@ -27,23 +27,48 @@ required_sections:
   - "PART VII: THE FUTURE"
   - "PART VIII: THE ATLAS"
 
-# THEOREMS - The verifier checks these are stated
-theorems:
+# POSTULATES - The verifier checks these are stated (not proven truths, but working hypotheses)
+postulates:
   - "Plane Simultaneity"
   - "Level Exclusivity"
   - "Dimension Orthogonality"
-  - "Atom Completeness"
+  - "Atom Coverage"
   - "Fractal Self-Similarity"
 ---
 
 # STANDARD CODE
-## The Complete Theory of Software
+## A Living Map of Software Engineering
 
-> *All volumes, theories, and maps in a single verifiable document.*
+> *"The territory exists. This document is a living legend. Canon is a tool, not a claim of totality."*
 
-**Version:** 2.0.0
+---
+
+## EPISTEMIC STANCE (First Principle)
+
+> **We know that we don't know.**
+
+This work is a **map** of software engineering, **not the territory**. Its purpose is to create a usable legend that improves navigation, prediction, and reasoning.
+
+| Principle | Meaning |
+|-----------|----------|
+| **Open World** | All inventories are canonical *working sets*—versioned, testable, and revisable. They are not claims of totality. |
+| **Unknown is First-Class** | Any construct that does not fit cleanly becomes evidence that the map must evolve. |
+| **Provisional Certainty** | We crystallize knowledge because usefulness requires it, but we never claim exhaustiveness. |
+| **Humble Science** | Every "postulate" is a hypothesis with validation obligations, not a proven theorem. |
+
+**What this is NOT:**
+- NOT a "theory of everything" for code
+- NOT a closed model
+- NOT proof that these categories are all that exist
+
+**What this IS:**
+- A comprehensive map of software engineering territory
+- A versioned canonical reference (v2.0.0)
+- An open framework designed to evolve with evidence
+
+**Version:** 2.0.0  
 **Last Verified:** 2025-12-26  
-**Status:** CANONICAL (Single Source of Truth)
+**Status:** CANONICAL REFERENCE (Open, Versioned)
 
 ---
 
@@ -552,21 +577,25 @@ How each major concept relates to every other:
 
 ---
 
-## 10. FIXED vs LEARNABLE
+## 10. CANONICAL (v2.0) vs FRONTIER
 
-| CATEGORY | COUNT | STATUS | LOCATION |
-|----------|-------|--------|----------|
-| **Planes** | 3 | FIXED | Theory |
-| **Levels** | 16 | FIXED | Theory (13 Semantic + 3 Physical) |
-| **Lenses** | 8 | FIXED | Theory |
-| **Dimensions** | 8 | FIXED | `canonical/fixed/dimensions.json` |
-| **Phases** | 4 | FIXED | Theory |
-| **Families** | 16 | FIXED | Theory |
-| **Atoms** | 167 | FIXED | `canonical/fixed/atoms.json` |
-| **Roles** | 33 | FIXED | `canonical/fixed/roles.json` |
-| **Edges** | 6 | FIXED | Theory |
-| **Patterns** | 100+ | LEARNABLE | `canonical/learned/patterns.json` |
-| **Confidence Weights** | N | LEARNABLE | Runtime |
+> **Note:** "Canonical" means "current working set"—not "all there is." Extension is expected and governed.
+
+| CATEGORY | COUNT | STATUS | LOCATION | SCOPE |
+|----------|-------|--------|----------|-------|
+| **Planes** | 3 | Canonical | Theory | Universal |
+| **Levels** | 16 | Canonical | Theory | Universal |
+| **Lenses** | 8 | Canonical | Theory | Universal |
+| **Dimensions** | 8 | Canonical | `schema/fixed/dimensions.json` | Universal |
+| **Phases** | 4 | Canonical | Theory | Universal |
+| **Families** | 16 | Canonical | Theory | Universal |
+| **Atoms** | 167 | Canonical | `schema/fixed/atoms.json` | Python, TypeScript, Java |
+| **Roles** | 33 | Canonical | `schema/fixed/roles.json` | Universal |
+| **Edges** | 6 | Canonical | Theory | Universal |
+| **Patterns** | 100+ | Frontier | `schema/learned/patterns.json` | Evolving |
+| **Confidence Weights** | N | Frontier | Runtime | Learnable |
+| **Unknown Atoms** | ? | Frontier | Tracked | Languages not yet mapped |
+| **Ambiguous Roles** | ? | Frontier | Tracked | Cases requiring human review |
 
 ---
 
@@ -609,22 +638,26 @@ How each major concept relates to every other:
 
 ---
 
-## 12. KEY THEOREMS
+## 12. KEY POSTULATES (Current Hypotheses)
 
-1. **Plane Simultaneity**: Every entity exists in all 3 planes at once
-2. **Level Exclusivity**: Every entity IS exactly one level
-3. **Level Transitivity**: `contains` is transitive (L7 contains L5 contains L3)
-4. **Lens Completeness**: The 8 lenses answer every possible question about code
-5. **Dimension Orthogonality**: The 8 dimensions are independent axes
-6. **Atom Completeness**: 167 atoms cover all AST node types
-7. **Node Fundamentality**: L3 NODE is the atom of semantic analysis
-8. **Fractal Self-Similarity**: M→I→P→O repeats at every scale
-9. **Classification Confidence**: Every classification has measurable certainty
-10. **Edge Symmetry**: Every relationship has an inverse
+> **These are working assumptions, not proven truths.** Each has validation obligations.
+
+| # | Postulate | Current Claim | How It Could Be Wrong | Validation Method |
+|---|-----------|---------------|----------------------|-------------------|
+| 1 | **Plane Simultaneity** | Every entity exists in all 3 planes at once | New planes discovered (e.g., temporal) | Theoretical analysis |
+| 2 | **Level Exclusivity** | Every entity IS exactly one level | Entities spanning levels found | Empirical classification |
+| 3 | **Level Transitivity** | `contains` is transitive | Non-transitive containment found | Graph analysis |
+| 4 | **Lens Adequacy** | 8 lenses cover observed question-space | Recurring questions not expressible | Question-lens mapping study |
+| 5 | **Dimension Orthogonality** | 8 dimensions are independent axes | Dimensions found to correlate | Mutual information analysis |
+| 6 | **Atom Coverage** | 167 atoms cover AST types (scoped languages) | Unmapped AST nodes in new languages | Coverage crosswalk per language |
+| 7 | **Node Fundamentality** | L3 NODE is the atom of semantic analysis | Finer granularity needed | Use-case validation |
+| 8 | **Fractal Self-Similarity** | M→I→P→O repeats at every scale | Counter-examples at some scale | Multi-scale pattern analysis |
+| 9 | **Classification Confidence** | Every classification has measurable certainty | Confidence scores miscalibrated | Calibration study (ECE) |
+| 10 | **Edge Symmetry** | Every relationship has an inverse | Asymmetric edges found | Edge taxonomy review |
 
 ---
 
-> **This is the complete Standard Model of Code. All concepts defined. All relationships typed. All edges have properties. The model is closed.**
+> **This is the current canonical reference set (v2.0). The model is OPEN: extension is expected and governed.**
 
 # PART V: THE COSMOLOGY (Global Topology)
 
