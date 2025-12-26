@@ -1616,8 +1616,8 @@ graph TD
 
 > *"A comparative, metaphysical, and scientific analysis of the nature of software."*
 
-**Status:** Canonical Reference
-**Scope:** Universal Theory of Software Nature
+**Status:** Working Model (v2.0)
+**Scope:** Comparative Theory of Software Nature
 
 ---
 
