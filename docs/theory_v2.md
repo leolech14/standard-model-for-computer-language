@@ -126,13 +126,25 @@ These are not competing theories. They are **different lenses on the same phenom
 
 ---
 
+<!-- @SECTION: the_question -->
+<!-- @ORDER: 2.1 -->
+<!-- @DEPENDS_ON: problem_of_software -->
+<!-- @PROVIDES: central_question -->
+
 ## 2.1 The Question We're Trying to Answer
 
 > *"What IS a piece of code, really?"*
 
 Not philosophically. Practically. What categories describe it? What relationships define it? What patterns repeat across all software?
 
+<!-- @END_SECTION: the_question -->
+
 ---
+
+<!-- @SECTION: why_no_one_before -->
+<!-- @ORDER: 2.2 -->
+<!-- @DEPENDS_ON: the_question -->
+<!-- @PROVIDES: three_planes_intro -->
 
 ## 2.2 Why No One Has Done This Before
 
@@ -143,7 +155,16 @@ Because software is simultaneously:
 
 Most approaches focus on one plane. We attempt to map all three.
 
+<!-- @END_SECTION: why_no_one_before -->
+<!-- @END_SECTION: problem_of_software -->
+
 ---
+
+<!-- @SECTION: power_of_analogies -->
+<!-- @TOPIC: methodology -->
+<!-- @ORDER: 3.0 -->
+<!-- @DEPENDS_ON: why_no_one_before -->
+<!-- @PROVIDES: universal_analogy, tudo_e_uma_analogia -->
 
 # PART III: THE POWER OF ANALOGIES
 
@@ -153,6 +174,11 @@ Most approaches focus on one plane. We attempt to map all three.
 This is the methodological foundation. Cross-domain mapping works because **all domains share structural patterns**.
 
 ---
+
+<!-- @SECTION: analogies_we_use -->
+<!-- @ORDER: 3.1 -->
+<!-- @DEPENDS_ON: power_of_analogies -->
+<!-- @PROVIDES: analogy_table -->
 
 ## 3.1 The Analogies We Use
 
@@ -167,17 +193,37 @@ This is the methodological foundation. Cross-domain mapping works because **all 
 
 ---
 
+<!-- @SECTION: why_analogies_work -->
+<!-- @ORDER: 3.2 -->
+<!-- @DEPENDS_ON: analogies_we_use -->
+<!-- @PROVIDES: isomorphism, computation_universal -->
+
 ## 3.2 Why Analogies Work
 
 The universe computes. All computation is isomorphic. Therefore, patterns discovered in one domain illuminate patterns in others. We are not "borrowing" metaphors—we are recognizing structural similarities.
 
+<!-- @END_SECTION: why_analogies_work -->
+<!-- @END_SECTION: analogies_we_use -->
+<!-- @END_SECTION: power_of_analogies -->
+
 ---
+
+<!-- @SECTION: layers_of_abstraction -->
+<!-- @TOPIC: hierarchy -->
+<!-- @ORDER: 4.0 -->
+<!-- @DEPENDS_ON: why_analogies_work -->
+<!-- @PROVIDES: layer_concept, abstraction_ladder -->
 
 # PART IV: THE LAYERS OF ABSTRACTION
 
 Understanding software requires understanding **layers**. Concepts build on concepts. Nothing exists in isolation.
 
 ---
+
+<!-- @SECTION: inheritance_chain -->
+<!-- @ORDER: 4.1 -->
+<!-- @DEPENDS_ON: layers_of_abstraction -->
+<!-- @PROVIDES: intellectual_lineage -->
 
 ## 4.1 The Inheritance Chain of Ideas
 
@@ -195,7 +241,14 @@ Epistemology (Popper, Kuhn)
 
 We stand on shoulders. Every concept has ancestors.
 
+<!-- @END_SECTION: inheritance_chain -->
+
 ---
+
+<!-- @SECTION: sixteen_levels -->
+<!-- @ORDER: 4.2 -->
+<!-- @DEPENDS_ON: inheritance_chain -->
+<!-- @PROVIDES: L-3_to_L12, abstraction_scale, token_as_zero -->
 
 ## 4.2 The 16 Levels of Abstraction
 
@@ -236,13 +289,27 @@ The scale runs from L-3 (Bit/Qubit) to L12 (Universe):
 **L3 (Node)** is our fundamental unit of semantic analysis.
 **L-3 (Bit/Qubit)** is the physical foundation.
 
+<!-- @END_SECTION: sixteen_levels -->
+<!-- @END_SECTION: layers_of_abstraction -->
+
 ---
+
+<!-- @SECTION: three_bodies -->
+<!-- @TOPIC: planes_of_existence -->
+<!-- @ORDER: 5.0 -->
+<!-- @DEPENDS_ON: sixteen_levels -->
+<!-- @PROVIDES: three_planes, physical_virtual_semantic -->
 
 # PART V: THE THREE BODIES, ONE ENTITY
 
 Every piece of code exists simultaneously in **three planes**.
 
 ---
+
+<!-- @SECTION: three_planes -->
+<!-- @ORDER: 5.1 -->
+<!-- @DEPENDS_ON: three_bodies -->
+<!-- @PROVIDES: plane_definitions -->
 
 ## 5.1 The Three Planes
 
@@ -252,7 +319,14 @@ Every piece of code exists simultaneously in **three planes**.
 | **VIRTUAL** | Symbols, Structure | What is its form? | AST node |
 | **SEMANTIC** | Meaning, Intent | What does it mean? | Purpose, role |
 
+<!-- @END_SECTION: three_planes -->
+
 ---
+
+<!-- @SECTION: flow_between_planes -->
+<!-- @ORDER: 5.2 -->
+<!-- @DEPENDS_ON: three_planes -->
+<!-- @PROVIDES: encoding, interpretation -->
 
 ## 5.2 The Flow Between Planes
 
@@ -263,7 +337,14 @@ P1 PHYSICAL  ──encoding──▶  P2 VIRTUAL  ──interpretation──▶ 
 
 We READ from P2 (Virtual) and PRODUCE P3 (Semantic).
 
+<!-- @END_SECTION: flow_between_planes -->
+
 ---
+
+<!-- @SECTION: converging_to_entity -->
+<!-- @ORDER: 5.3 -->
+<!-- @DEPENDS_ON: flow_between_planes -->
+<!-- @PROVIDES: node_as_fundamental, node_L3 -->
 
 ## 5.3 Converging to a Single Entity
 
@@ -274,13 +355,27 @@ A Node (L3) is:
 - The smallest unit with meaning and behavior
 - The "atom" of semantic analysis
 
+<!-- @END_SECTION: converging_to_entity -->
+<!-- @END_SECTION: three_bodies -->
+
 ---
+
+<!-- @SECTION: periodic_table -->
+<!-- @TOPIC: atom_organization -->
+<!-- @ORDER: 6.0 -->
+<!-- @DEPENDS_ON: converging_to_entity -->
+<!-- @PROVIDES: 200_atoms, 4_phases, 22_families -->
 
 # PART VI: THE PERIODIC TABLE OF CODE
 
 Just as chemistry has 118 elements organized in a periodic table, code has **200+ atoms** organized in **4 phases and 22 families**.
 
 ---
+
+<!-- @SECTION: the_200_atoms -->
+<!-- @ORDER: 6.1 -->
+<!-- @DEPENDS_ON: periodic_table -->
+<!-- @PROVIDES: atom_inventory, phases_families -->
 
 ## 6.1 The 200 Atoms
 
@@ -294,7 +389,14 @@ These are the building blocks of all code:
 | **EXECUTION** | 6 | 62 | The runtime of software |
 | **TOTAL** | 22 | 200 | Current working set |
 
+<!-- @END_SECTION: the_200_atoms -->
+
 ---
+
+<!-- @SECTION: why_organization_works -->
+<!-- @ORDER: 6.2 -->
+<!-- @DEPENDS_ON: the_200_atoms -->
+<!-- @PROVIDES: coverage_validation -->
 
 ## 6.2 Why This Organization Works
 
@@ -304,7 +406,14 @@ Like the periodic table:
 - Position predicts behavior
 - Coverage is empirically validated (~98% across 5 languages)
 
+<!-- @END_SECTION: why_organization_works -->
+
 ---
+
+<!-- @SECTION: the_33_roles -->
+<!-- @ORDER: 6.3 -->
+<!-- @DEPENDS_ON: why_organization_works -->
+<!-- @PROVIDES: role_taxonomy, 33_roles -->
 
 ## 6.3 The 33 Roles
 
@@ -324,13 +433,27 @@ Atoms have **type** (what they ARE). Roles describe **purpose** (what they DO).
 | Internal | Internal, Lifecycle |
 | Unknown | Unknown (unclassified) |
 
+<!-- @END_SECTION: the_33_roles -->
+<!-- @END_SECTION: periodic_table -->
+
 ---
+
+<!-- @SECTION: octahedral_atom -->
+<!-- @TOPIC: geometric_model -->
+<!-- @ORDER: 7.0 -->
+<!-- @DEPENDS_ON: the_33_roles -->
+<!-- @PROVIDES: octahedron_shape, 8_faces -->
 
 # PART VII: THE OCTAHEDRAL ATOM
 
 Each atom is geometrically represented as an **octahedron** with 8 triangular faces—one for each dimension.
 
 ---
+
+<!-- @SECTION: why_octahedron -->
+<!-- @ORDER: 7.1 -->
+<!-- @DEPENDS_ON: octahedral_atom -->
+<!-- @PROVIDES: geometry_justification -->
 
 ## 7.1 Why Octahedron?
 
@@ -339,7 +462,14 @@ Each atom is geometrically represented as an **octahedron** with 8 triangular fa
 - Symmetric (all faces are equilateral triangles)
 - No privileged face (all dimensions equally accessible)
 
+<!-- @END_SECTION: why_octahedron -->
+
 ---
+
+<!-- @SECTION: eight_dimensions -->
+<!-- @ORDER: 7.2 -->
+<!-- @DEPENDS_ON: why_octahedron -->
+<!-- @PROVIDES: D1_to_D8, dimension_definitions -->
 
 ## 7.2 The 8 Dimensions (Faces)
 
@@ -354,7 +484,14 @@ Each atom is geometrically represented as an **octahedron** with 8 triangular fa
 | 7 | **LIFECYCLE** | In what phase? | Create/Use/Destroy |
 | 8 | **TRUST** | Confidence level? | 0-100% |
 
+<!-- @END_SECTION: eight_dimensions -->
+
 ---
+
+<!-- @SECTION: dual_dimensions -->
+<!-- @ORDER: 7.3 -->
+<!-- @DEPENDS_ON: eight_dimensions -->
+<!-- @PROVIDES: dualities, opposite_faces -->
 
 ## 7.3 Dual Dimensions (Opposite Faces)
 
@@ -365,7 +502,14 @@ Each atom is geometrically represented as an **octahedron** with 8 triangular fa
 | LAYER | BOUNDARY | Position ↔ Transition |
 | LIFECYCLE | TRUST | Time ↔ Confidence |
 
+<!-- @END_SECTION: dual_dimensions -->
+
 ---
+
+<!-- @SECTION: dual_nature -->
+<!-- @ORDER: 7.4 -->
+<!-- @DEPENDS_ON: dual_dimensions -->
+<!-- @PROVIDES: epistemic_ontological, lens_dimension_duality -->
 
 ## 7.4 The Dual Nature of Atoms
 
@@ -390,6 +534,11 @@ Every atom has **two natures**, like wave-particle duality in physics:
          └─────────────────────────────────────┘
 ```
 
+<!-- @SECTION: eight_lenses -->
+<!-- @ORDER: 7.4.1 -->
+<!-- @DEPENDS_ON: dual_nature -->
+<!-- @PROVIDES: R1_to_R8, lens_definitions -->
+
 **The 8 Lenses (Epistemic Nature):**
 
 | # | Lens | Question | Reveals | Example Answer |
@@ -402,6 +551,8 @@ Every atom has **two natures**, like wave-particle duality in physics:
 | R6 | **TRANSFORMATION** | What does it do? | Input → Output | "Takes ID, returns User" |
 | R7 | **SEMANTICS** | What does it mean? | Purpose, intent | "Retrieves user from DB" |
 | R8 | **EPISTEMOLOGY** | How certain are we? | Confidence, evidence | "92% from name pattern" |
+
+<!-- @END_SECTION: eight_lenses -->
 
 **The 8 Dimensions (Ontological Nature):**
 
@@ -418,6 +569,11 @@ Every atom has **two natures**, like wave-particle duality in physics:
 
 > *Like quantum mechanics: the observer (lenses) and the observed (dimensions) are inseparable. You cannot know an atom without asking through lenses; you cannot ask without the atom having dimensional properties.*
 
+<!-- @SECTION: lens_dimension_question -->
+<!-- @ORDER: 7.4.2 -->
+<!-- @DEPENDS_ON: eight_lenses, eight_dimensions -->
+<!-- @PROVIDES: open_question_lenses_dimensions -->
+
 **⚠️ OPEN QUESTION:** How exactly do Lenses and Dimensions relate?
 
 | Hypothesis | Description | Implies |
@@ -429,13 +585,28 @@ Every atom has **two natures**, like wave-particle duality in physics:
 
 *We do not currently know which hypothesis is correct. This is documented as an open frontier.*
 
+<!-- @END_SECTION: lens_dimension_question -->
+<!-- @END_SECTION: dual_nature -->
+<!-- @END_SECTION: octahedral_atom -->
+
 ---
+
+<!-- @SECTION: relationships -->
+<!-- @TOPIC: edge_types -->
+<!-- @ORDER: 8.0 -->
+<!-- @DEPENDS_ON: octahedral_atom -->
+<!-- @PROVIDES: edge_taxonomy, code_as_graph -->
 
 # PART VIII: THE RELATIONSHIPS
 
 Atoms don't exist in isolation. They connect via **edges**.
 
 ---
+
+<!-- @SECTION: edge_types -->
+<!-- @ORDER: 8.1 -->
+<!-- @DEPENDS_ON: relationships -->
+<!-- @PROVIDES: 5_edge_categories -->
 
 ## 8.1 Edge Types
 
@@ -447,7 +618,14 @@ Atoms don't exist in isolation. They connect via **edges**.
 | **Semantic** | is_a, has_role, serves, delegates_to |
 | **Temporal** | initializes, triggers, disposes, precedes |
 
+<!-- @END_SECTION: edge_types -->
+
 ---
+
+<!-- @SECTION: graph_of_code -->
+<!-- @ORDER: 8.2 -->
+<!-- @DEPENDS_ON: edge_types -->
+<!-- @PROVIDES: graph_model -->
 
 ## 8.2 The Graph of Code
 
@@ -456,13 +634,27 @@ Code is a **graph**:
 - Edges = relationships
 - Positions = 8-dimensional coordinates
 
+<!-- @END_SECTION: graph_of_code -->
+<!-- @END_SECTION: relationships -->
+
 ---
+
+<!-- @SECTION: validation -->
+<!-- @TOPIC: empirical_testing -->
+<!-- @ORDER: 9.0 -->
+<!-- @DEPENDS_ON: graph_of_code -->
+<!-- @PROVIDES: validation_approach, empirical_evidence -->
 
 # PART IX: THE VALIDATION
 
 This map must be tested against reality.
 
 ---
+
+<!-- @SECTION: empirical_coverage -->
+<!-- @ORDER: 9.1 -->
+<!-- @DEPENDS_ON: validation -->
+<!-- @PROVIDES: language_coverage_stats -->
 
 ## 9.1 Empirical Coverage
 
@@ -474,7 +666,14 @@ This map must be tested against reality.
 | Go | 52 | 52 | **100%** |
 | Rust | 80 | 84 | 95% |
 
+<!-- @END_SECTION: empirical_coverage -->
+
 ---
+
+<!-- @SECTION: what_validated -->
+<!-- @ORDER: 9.2 -->
+<!-- @DEPENDS_ON: empirical_coverage -->
+<!-- @PROVIDES: confirmed_hypotheses -->
 
 ## 9.2 What We Validated
 
@@ -482,7 +681,14 @@ This map must be tested against reality.
 - Cross-language mapping is possible
 - The periodic table organization works
 
+<!-- @END_SECTION: what_validated -->
+
 ---
+
+<!-- @SECTION: what_not_validated -->
+<!-- @ORDER: 9.3 -->
+<!-- @DEPENDS_ON: what_validated -->
+<!-- @PROVIDES: limitations, open_questions -->
 
 ## 9.3 What We Did NOT Validate
 
@@ -490,7 +696,16 @@ This map must be tested against reality.
 - Optimality (other organizations may work better)
 - Universality (new languages may require new atoms)
 
+<!-- @END_SECTION: what_not_validated -->
+<!-- @END_SECTION: validation -->
+
 ---
+
+<!-- @SECTION: open_frontier -->
+<!-- @TOPIC: unknown -->
+<!-- @ORDER: 10.0 -->
+<!-- @DEPENDS_ON: what_not_validated -->
+<!-- @PROVIDES: frontier_acknowledgment, epistemic_closure -->
 
 # PART X: THE OPEN FRONTIER
 
@@ -500,6 +715,11 @@ This is where we end as we began.
 
 ---
 
+<!-- @SECTION: what_not_mapped -->
+<!-- @ORDER: 10.1 -->
+<!-- @DEPENDS_ON: open_frontier -->
+<!-- @PROVIDES: gap_inventory -->
+
 ## 10.1 What We Haven't Mapped
 
 - Quantum computing integration (L-3 Qubit)
@@ -507,7 +727,14 @@ This is where we end as we began.
 - New paradigms (AI-generated code, biological computing)
 - The territory beyond our current map
 
+<!-- @END_SECTION: what_not_mapped -->
+
 ---
+
+<!-- @SECTION: the_98_percent_problem -->
+<!-- @ORDER: 10.2 -->
+<!-- @DEPENDS_ON: what_not_mapped -->
+<!-- @PROVIDES: junk_code_hypothesis -->
 
 ## 10.2 The ~98% Problem
 
@@ -520,7 +747,14 @@ Like "junk DNA" that turned out to have regulatory functions:
 
 **Warning:** This numerical similarity may be pure coincidence. We do not claim causation.
 
+<!-- @END_SECTION: the_98_percent_problem -->
+
 ---
+
+<!-- @SECTION: the_invitation -->
+<!-- @ORDER: 10.3 -->
+<!-- @DEPENDS_ON: the_98_percent_problem -->
+<!-- @PROVIDES: open_contribution -->
 
 ## 10.3 The Invitation
 
@@ -529,6 +763,9 @@ This map is open. If you find territory we haven't mapped:
 2. Propose an update
 3. Test empirically
 4. Contribute
+
+<!-- @END_SECTION: the_invitation -->
+<!-- @END_SECTION: open_frontier -->
 
 ---
 
