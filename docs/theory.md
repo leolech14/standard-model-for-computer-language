@@ -51,6 +51,10 @@ postulates:
 
 ---
 
+<!-- @SECTION: epistemic_stance -->
+<!-- @ORDER: 0.1 -->
+<!-- @PROVIDES: map_not_territory, humble_science -->
+
 ## EPISTEMIC STANCE (First Principle)
 
 > **We know that we don't know.**
@@ -58,6 +62,11 @@ postulates:
 This work is a **map** of software engineering, **not the territory**. Its purpose is to create a usable legend that improves navigation, prediction, and reasoning.
 
 ---
+
+<!-- @SECTION: meta_principle -->
+<!-- @ORDER: 0.2 -->
+<!-- @DEPENDS_ON: epistemic_stance -->
+<!-- @PROVIDES: universal_analogy -->
 
 ### The Meta-Principle: Universal Analogy
 
@@ -74,7 +83,14 @@ This is why cross-domain mapping works. Atoms and software particles. Fractals a
 
 We are not "borrowing" metaphors—we are recognizing that **all domains share the same underlying patterns**. This is why concepts from physics, biology, linguistics, and philosophy all illuminate software. The universe computes, and all computation is isomorphic.
 
+<!-- @END_SECTION: meta_principle -->
+
 ---
+
+<!-- @SECTION: operating_principles -->
+<!-- @ORDER: 0.3 -->
+<!-- @DEPENDS_ON: meta_principle -->
+<!-- @PROVIDES: open_world, unknown_first_class -->
 
 ### Operating Principles
 
@@ -100,6 +116,9 @@ We are not "borrowing" metaphors—we are recognizing that **all domains share t
 **Last Verified:** 2025-12-26  
 **Status:** WORKING MODEL (Open, Versioned, Useful)
 
+<!-- @END_SECTION: operating_principles -->
+<!-- @END_SECTION: epistemic_stance -->
+
 ---
 
 <!-- ASSERT: planes.count = 3 -->
@@ -108,6 +127,9 @@ We are not "borrowing" metaphors—we are recognizing that **all domains share t
 <!-- ASSERT: dimensions.count = 8 -->
 <!-- ASSERT: atoms.count = 200 -->
 <!-- ASSERT: roles.count = 33 -->
+
+<!-- @SECTION: volume_1_specification -->
+<!-- @ORDER: 1.0 -->
 
 # VOLUME I: THE SPECIFICATION
 
@@ -118,11 +140,20 @@ We are not "borrowing" metaphors—we are recognizing that **all domains share t
 
 ---
 
+<!-- @SECTION: ontology -->
+<!-- @TOPIC: what_exists -->
+<!-- @ORDER: 1.1 -->
+<!-- @DEPENDS_ON: operating_principles -->
+
 # PART I: THE ONTOLOGY (What Exists)
 
 ---
 
 ## 1. ENTITIES (Nodes of Knowledge)
+
+<!-- @SECTION: three_planes -->
+<!-- @ORDER: 1.1.1 -->
+<!-- @PROVIDES: physical_virtual_semantic -->
 
 ### 1.1 THE 3 PLANES (Modes of Existence)
 
@@ -142,7 +173,14 @@ P1 PHYSICAL  ──encoding──▶  P2 VIRTUAL  ──interpretation──▶ 
 
 **OUR POSITION:** We READ from P2 (Virtual) and PRODUCE P3 (Semantic).
 
+<!-- @END_SECTION: three_planes -->
+
 ---
+
+<!-- @SECTION: sixteen_levels -->
+<!-- @ORDER: 1.1.2 -->
+<!-- @DEPENDS_ON: three_planes -->
+<!-- @PROVIDES: L-3_to_L12 -->
 
 ### 1.2 THE 16 LEVELS (The Zero-Point Scale)
 
