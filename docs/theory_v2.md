@@ -769,6 +769,266 @@ This map is open. If you find territory we haven't mapped:
 
 ---
 
+<!-- @SECTION: taxonomy -->
+<!-- @TOPIC: classification_patterns -->
+<!-- @ORDER: 11.0 -->
+<!-- @DEPENDS_ON: open_frontier -->
+<!-- @PROVIDES: classification_system, pattern_recognition -->
+
+# PART XI: THE TAXONOMY (Classification System)
+
+How we determine what something IS through pattern recognition.
+
+---
+
+<!-- @SECTION: classification_sources -->
+<!-- @ORDER: 11.1 -->
+<!-- @DEPENDS_ON: taxonomy -->
+<!-- @PROVIDES: confidence_by_source -->
+
+## 11.1 Classification Sources
+
+| SOURCE | CONFIDENCE | MECHANISM | EXAMPLE |
+|--------|------------|-----------|---------|
+| **Human Verified** | 100% | Manual verification | Human-labeled |
+| **Decorator** | 85-95% | AST decorator analysis | `@app.route` → Controller |
+| **Inheritance** | 80-95% | Type hierarchy | `extends Repository` → Repository |
+| **Name Pattern** | 60-90% | Regex matching | `get*` → Query |
+| **Graph Inference** | 50-70% | Call graph analysis | Called by Controller → likely Service |
+| **LLM Fallback** | 40-60% | AI classification | Embedding similarity |
+| **Unknown** | 0-30% | No evidence | Needs review |
+
+<!-- @END_SECTION: classification_sources -->
+
+---
+
+<!-- @SECTION: confidence_levels -->
+<!-- @ORDER: 11.2 -->
+<!-- @DEPENDS_ON: classification_sources -->
+<!-- @PROVIDES: confidence_thresholds -->
+
+## 11.2 Confidence Levels
+
+| RANGE | LEVEL | MEANING | ACTION |
+|-------|-------|---------|--------|
+| 95-100% | **CERTAIN** | Human verified / overwhelming evidence | Trust |
+| 80-94% | **HIGH** | Strong pattern match | Accept |
+| 60-79% | **MEDIUM** | Pattern with ambiguity | Review if critical |
+| 40-59% | **LOW** | Weak evidence | Verify |
+| 0-39% | **UNCERTAIN** | Insufficient evidence | Human review required |
+
+<!-- @END_SECTION: confidence_levels -->
+
+---
+
+<!-- @SECTION: pattern_types -->
+<!-- @ORDER: 11.3 -->
+<!-- @DEPENDS_ON: confidence_levels -->
+<!-- @PROVIDES: prefix_suffix_path_patterns -->
+
+## 11.3 Pattern Types
+
+### 11.3.1 PREFIX PATTERNS (Name Starts With)
+
+| PREFIX | ROLE | CONFIDENCE | EXAMPLE |
+|--------|------|------------|---------|
+| `get`, `fetch`, `find` | Query | 85% | `getUserById` |
+| `create`, `make`, `build` | Creator | 85% | `createUser` |
+| `update`, `set`, `modify` | Mutator | 80% | `updateEmail` |
+| `delete`, `remove`, `destroy` | Destroyer | 85% | `deleteUser` |
+| `is`, `has`, `can`, `should` | Predicate | 90% | `isValid` |
+| `validate`, `check`, `verify` | Validator | 85% | `validateEmail` |
+| `to`, `from`, `parse`, `format` | Transformer | 80% | `toJSON` |
+| `on`, `handle` | Handler | 80% | `onUserCreated` |
+| `_`, `__` (not dunder) | Internal | 90% | `_buildQuery` |
+| `test_`, `spec_` | Test | 95% | `test_user_creation` |
+
+### 11.3.2 SUFFIX PATTERNS (Name Ends With)
+
+| SUFFIX | ROLE | CONFIDENCE | EXAMPLE |
+|--------|------|------------|---------|
+| `Repository`, `Repo` | Repository | 95% | `UserRepository` |
+| `Service` | Service | 90% | `UserService` |
+| `Controller` | Controller | 95% | `UserController` |
+| `Factory` | Factory | 95% | `UserFactory` |
+| `Handler` | Handler | 85% | `EventHandler` |
+| `Manager` | Manager | 85% | `CacheManager` |
+| `Validator` | Validator | 90% | `EmailValidator` |
+| `Builder` | Builder | 90% | `QueryBuilder` |
+| `Mapper` | Mapper | 85% | `UserMapper` |
+| `Adapter` | Adapter | 85% | `DatabaseAdapter` |
+
+### 11.3.3 PATH PATTERNS (File Location)
+
+| PATH CONTAINS | LAYER | CONFIDENCE | EXAMPLE |
+|---------------|-------|------------|---------|
+| `test/`, `tests/`, `spec/` | Test | 95% | `tests/user_test.py` |
+| `api/`, `controllers/`, `routes/` | Interface | 85% | `api/users.py` |
+| `services/`, `application/` | Application | 80% | `services/user_service.py` |
+| `domain/`, `models/`, `entities/` | Core | 80% | `domain/user.py` |
+| `infrastructure/`, `adapters/` | Infrastructure | 85% | `infrastructure/db.py` |
+
+<!-- @END_SECTION: pattern_types -->
+<!-- @END_SECTION: taxonomy -->
+
+---
+
+<!-- @SECTION: lineage -->
+<!-- @TOPIC: intellectual_inheritance -->
+<!-- @ORDER: 12.0 -->
+<!-- @DEPENDS_ON: taxonomy -->
+<!-- @PROVIDES: epistemic_contract, concept_provenance -->
+<!-- @SOURCES: Aristotle350BC, Dijkstra1968, Shannon1948, Koestler1967, Popper1972, Evans2003, Martin2012 -->
+
+# PART XII: THE LINEAGE (Intellectual Inheritance)
+
+> *"Just like code has inheritance chains, we must track where each concept comes from."*
+
+We rely on understanding concepts that we did not develop. We borrow knowledge from those who came before. This section traces the **intellectual provenance** of every Standard Code concept.
+
+---
+
+<!-- @SECTION: foundational_lineages -->
+<!-- @ORDER: 12.1 -->
+<!-- @DEPENDS_ON: lineage -->
+<!-- @PROVIDES: concept_ancestry -->
+
+## 12.1 Foundational Lineages
+
+### 12.1.1 THE 3 PLANES
+
+```
+PLANES ← Semiotics: Syntactics/Semantics/Pragmatics (Morris, 1938)
+       ← Three Worlds Theory (Karl Popper, 1972)
+           └── World 1: Physical → P1 PHYSICAL
+           └── World 2: Mental 
+           └── World 3: Abstract Objects → P3 SEMANTIC
+       ← Levels of Abstraction (Floridi, 2008)
+```
+
+**Synthesis:** We renamed Popper's "Worlds" to "Planes" and aligned with software substrates.
+
+### 12.1.2 THE 16 LEVELS
+
+```
+LEVELS ← Abstraction Layers (Dijkstra, "THE", 1968)
+       ← Holarchy (Koestler, "Ghost in the Machine", 1967)
+           └── Holons: Simultaneously whole and part
+       ← Scalar Hierarchy (Allen & Starr, 1982)
+       ← Levels of Abstraction (Floridi, 2008)
+```
+
+**Synthesis:** Combined Dijkstra's layers, Koestler's holons, ecological scaling.
+
+### 12.1.3 THE 8 LENSES
+
+```
+LENSES ← Aristotle's Four Causes (350 BC)
+       ← Zachman Framework (1987): What, How, Where, Who, When, Why
+       ← 4+1 Architectural Views (Kruchten, 1995)
+```
+
+| Lens | Primary Ancestor |
+|------|------------------|
+| R1 Identity | Universal naming |
+| R2 Ontology | Aristotle |
+| R3 Classification | Linnaeus taxonomy |
+| R4 Composition | Mereology |
+| R5 Relationships | Euler (Graph Theory) |
+| R6 Transformation | Shannon |
+| R7 Semantics | Morris (Semiotics) |
+| R8 Epistemology | **Novel** |
+
+### 12.1.4 THE 8 DIMENSIONS
+
+```
+DIMENSIONS ← Faceted Classification (Ranganathan, 1933)
+           ← DDD Concepts (Evans, 2003)
+           ← Clean Architecture (Martin, 2012)
+```
+
+| Dimension | Primary Ancestor |
+|-----------|------------------|
+| D1 WHAT | Compiler Theory (AST) |
+| D2 LAYER | Clean Architecture |
+| D3 ROLE | DDD Patterns |
+| D4 BOUNDARY | Hexagonal (Cockburn) |
+| D5 STATE | Mealy/Moore |
+| D6 EFFECT | Lambda Calculus |
+| D7 LIFECYCLE | Event-Driven Arch |
+| D8 TRUST | Garbage Collection |
+
+### 12.1.5 THE 200 ATOMS
+
+```
+ATOMS ← AST Node Kinds (Compiler Theory)
+      ← Periodic Table Metaphor (Mendeleev, 1869)
+      ← Design Patterns (GoF, 1994)
+      ← DDD Building Blocks (Evans, 2003)
+```
+
+### 12.1.6 THE 33 ROLES
+
+```
+ROLES ← DDD Tactical Patterns (Evans, 2003)
+      ← CQRS (Greg Young, 2010)
+      ← Hexagonal Architecture (Cockburn, 2005)
+      ← Clean Architecture (Martin, 2012)
+```
+
+<!-- @END_SECTION: foundational_lineages -->
+
+---
+
+<!-- @SECTION: novel_contributions -->
+<!-- @ORDER: 12.2 -->
+<!-- @DEPENDS_ON: foundational_lineages -->
+<!-- @PROVIDES: original_synthesis -->
+
+## 12.2 Novel Contributions
+
+What is **new** in this work, not borrowed:
+
+| Concept | Novel Contribution |
+|---------|-------------------|
+| **8D Classification Manifold** | 8 orthogonal dimensions as semantic space |
+| **Particle = Node + Atom + Confidence** | The triple with uncertainty |
+| **L3 as Semantic Event Horizon** | Function as fundamental unit |
+| **R8 Epistemology Lens** | Confidence tracking as first-class |
+| **Frontier Register** | Unknown as first-class |
+| **Postulates with Validation Obligations** | Every claim falsifiable |
+| **Dual Nature (Lenses/Dimensions)** | Epistemic/Ontological duality |
+| **Marker System** | Programmatic concept traceability |
+
+<!-- @END_SECTION: novel_contributions -->
+
+---
+
+<!-- @SECTION: bibliography -->
+<!-- @ORDER: 12.3 -->
+<!-- @DEPENDS_ON: novel_contributions -->
+<!-- @PROVIDES: primary_sources -->
+
+## 12.3 Bibliography (Key Sources)
+
+| Author | Work | Year | Concepts |
+|--------|------|------|----------|
+| Aristotle | Categories | -350 | Ontology |
+| Dijkstra | Structure of THE | 1968 | Layers |
+| Shannon | Information Theory | 1948 | IPO |
+| Koestler | Ghost in the Machine | 1967 | Holons |
+| Popper | Objective Knowledge | 1972 | 3 Worlds |
+| Bejan | Constructal Theory | 1996 | Flow |
+| Evans | Domain-Driven Design | 2003 | DDD |
+| Martin | Clean Architecture | 2012 | Layers |
+| Ranganathan | Colon Classification | 1933 | Facets |
+| Korzybski | Science and Sanity | 1931 | Map/Territory |
+
+<!-- @END_SECTION: bibliography -->
+<!-- @END_SECTION: lineage -->
+
+---
+
 > *"The map grows to match the territory. We are always running behind."*
 > 
 > *"Somos cartógrafos humildes. O mapa cresce com o território. Sempre haverá mais território."*
