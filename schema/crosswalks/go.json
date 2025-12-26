@@ -1,11 +1,12 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "version": "1.0.0",
-    "description": "AST-to-Atom crosswalk for Go (validated December 2025)",
+    "version": "2.0.0",
+    "description": "AST-to-Atom crosswalk for Go (200-atom hypothesis testing)",
     "language": "go",
     "coverage": {
-        "ast_nodes_total": 40,
-        "mapped": 40,
+        "ast_nodes_total": 52,
+        "mapped": 52,
+        "skipped": 0,
         "coverage_percent": 100
     },
     "mappings": [
@@ -224,6 +225,104 @@
             "ast_node": "ExprStmt",
             "atom_id": "LOG.STM.A",
             "atom_name": "ExpressionStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "GenDecl",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "Declaration",
+            "type": "Split"
+        },
+        {
+            "ast_node": "DeclStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "Declaration",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "EmptyStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "EmptyStmt",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "LabeledStmt",
+            "atom_id": "LOG.STM.A",
+            "atom_name": "LabeledBlock",
+            "type": "Direct",
+            "note": "NEW ATOM #199"
+        },
+        {
+            "ast_node": "BadExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ErrorExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ParenExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "ParenExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "StarExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "UnaryExpr",
+            "type": "Merged"
+        },
+        {
+            "ast_node": "KeyValueExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "KeyValuePair",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "IndexListExpr",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "IndexExpr",
+            "type": "Merged",
+            "note": "Go 1.18+ generics"
+        },
+        {
+            "ast_node": "Ellipsis",
+            "atom_id": "LOG.EXP.A",
+            "atom_name": "SpreadExpr",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "Field",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "FieldDecl",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FieldList",
+            "atom_id": "DAT.VAR.A",
+            "atom_name": "ParameterList",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ArrayType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ArrayType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "MapType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "MapType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "ChanType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "ChannelType",
+            "type": "Direct"
+        },
+        {
+            "ast_node": "FuncType",
+            "atom_id": "ORG.AGG.M",
+            "atom_name": "FunctionType",
             "type": "Direct"
         }
     ]

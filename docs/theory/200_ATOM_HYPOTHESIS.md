@@ -1,7 +1,5 @@
 # THE 200 ATOM HYPOTHESIS
 
-> *"167 was a map. 200 is the territory."*
-
 ---
 
 ## Abstract
