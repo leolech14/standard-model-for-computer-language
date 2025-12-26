@@ -41,6 +41,9 @@ postulates:
 # STANDARD CODE
 ## A Living Map of Software Engineering
 
+> **"Tudo é uma analogia pra tudo."**
+> *(Everything is an analogy for everything.)*
+
 > *"The territory exists. This document is a living legend. Canon is a tool, not a claim of totality."*
 
 ---
