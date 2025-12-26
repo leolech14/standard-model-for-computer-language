@@ -104,7 +104,7 @@ We are not "borrowing" metaphors—we are recognizing that **all domains share t
 <!-- ASSERT: levels.count = 16 -->
 <!-- ASSERT: lenses.count = 8 -->
 <!-- ASSERT: dimensions.count = 8 -->
-<!-- ASSERT: atoms.count = 167 -->
+<!-- ASSERT: atoms.count = 200 -->
 <!-- ASSERT: roles.count = 33 -->
 
 # VOLUME I: THE SPECIFICATION
@@ -179,7 +179,7 @@ It consists of **13 Semantic Levels** (L0-L12) and **3 Physical Levels** (L-1 to
 ║      ════════════════════════ PHYSICAL SCALES ════════════════════════                ║
 ║ L-1  CHARACTER        a       Alphanumeric symbol           → Bytes                   ║
 ║ L-2  BYTE             01      8-bit unit                    → Bits                    ║
-║ L-3  BIT              ⚡       Binary state (0/1)            → Energy                  ║
+║ L-3  BIT/QUBIT        ⚡       Classical or Quantum bit       → Energy                  ║
 ╚═══════════════════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -187,9 +187,11 @@ It consists of **13 Semantic Levels** (L0-L12) and **3 Physical Levels** (L-1 to
 
 > **TERMINOLOGY NOTE:** The word "Atom" has two related meanings in Standard Code:
 > 1. **L3 Node (Semantic Atom):** The function/method—the smallest unit with meaning and behavior.
-> 2. **167 Atom Types (Classification Atoms):** The categories in D1 (WHAT dimension)—used to classify what kind of structure something IS.
+> 2. **200 Atom Types (Classification Atoms):** The categories in D1 (WHAT dimension)—used to classify what kind of structure something IS.
 > 
 > Think of it like chemistry: a "hydrogen atom" is both (1) an indivisible unit and (2) a type classification (element #1). Here, a function is both a Node (the unit) and has an Atom Type (e.g., "Function", "Method", "Lambda").
+>
+> **OCTAHEDRAL SHAPE:** Each atom is geometrically represented as an **octahedron** with 8 triangular faces—one for each dimension. See [OCTAHEDRAL_ATOM.md](./OCTAHEDRAL_ATOM.md).
 
 ---
 
@@ -783,6 +785,45 @@ In the future, we do not "write" code. We express **Impulses**.
 Why do we need the Standard Model if AI does it all?
 Because **Natural Language is Vague**.
 The Standard Model acts as the **Universal Protocol** that constrains AI generation into **Precise, Safe, Executable Structures**. It is the roadmap for the "Code-as-Intent" engine.
+
+---
+
+## 16.3 THE JUNK CODE HYPOTHESIS (SPECULATIVE)
+
+> **⚠️ WARNING: This section contains speculation based on numerical coincidence. It may be pure spurious correlation. We do not know.**
+
+### The Observation
+
+The configuration space of octahedral atoms shows an interesting numerical coincidence with genetics:
+
+| Domain | "Functional" | "Junk" |
+|--------|--------------|--------|
+| **DNA** (ENCODE 2012) | ~2% protein-coding genes | ~98% "non-coding" |
+| **Code Atoms** (calculated) | ~1.5% valid configurations | ~98.5% "impossible" |
+
+### The Honest Assessment
+
+**This is probably spurious correlation.** The numbers are similar because:
+1. Both systems have exponential configuration spaces
+2. Useful configurations are always rare in combinatorial explosions
+3. There is no known causal mechanism linking the two
+
+### What We Do NOT Know
+
+- We do NOT know if "impossible" code configurations have hidden functions
+- We do NOT know if this parallel has any predictive power
+- We do NOT know if ENCODE-like discoveries await for code
+
+### Why We Include It
+
+> **"Tudo é uma analogia pra tudo."**
+
+If the meta-principle is true, then every domain may reveal patterns in every other domain. The DNA parallel is logged as:
+- An **observation** (numerical similarity exists)
+- A **hypothesis** (unused configuration space may have hidden utility)
+- A **research direction** (mine real codebases for "impossible" but existing patterns)
+
+**This is NOT a claim. It is a question.**
 
 ---
 
