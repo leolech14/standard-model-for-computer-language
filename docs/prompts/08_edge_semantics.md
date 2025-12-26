@@ -1,3 +1,7 @@
+> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (167 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
+
+---
+
 # MEGAPROMPT 08: EDGE SEMANTICS & GRAPH SCHEMA
 
 ## Context

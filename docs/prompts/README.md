@@ -1,6 +1,24 @@
 # Standard Code Validation Megaprompts
 
-This directory contains 14 comprehensive prompts for validating the Standard Code theory.
+> **Epistemic Stance**: These prompts validate a MAP of software engineering, not the territory. All findings should assume the map will evolve.
+
+---
+
+## The Paradigm (Share With Every Prompt)
+
+> **"We know that we don't know."**
+
+When executing any validation prompt:
+
+1. **Canonical ≠ Complete**: Numbers like 167 atoms, 33 roles, 8 dimensions are *working sets*, not claims of totality. Finding gaps is expected and valuable.
+
+2. **Unknown is First-Class**: Entities that don't fit cleanly are *evidence to evolve the map*, not failures.
+
+3. **Postulates, Not Theorems**: Every claim has "How It Could Be Wrong" and "Validation Method" columns. We test hypotheses, not prove truths.
+
+4. **Open World Assumption**: The model is designed to extend. Your findings may add atoms, roles, lenses—this is success.
+
+---
 
 ## Prompts Index
 
@@ -34,7 +52,12 @@ This directory contains 14 comprehensive prompts for validating the Standard Cod
 
 ## Usage
 
-1. Copy the megaprompt text
-2. Append the relevant context (e.g., `STANDARD_CODE.md` content)
-3. Send to an LLM (Claude, GPT-4, etc.)
-4. Review output and iterate
+1. **Read the Paradigm first** (above)
+2. Copy the megaprompt text
+3. Append the relevant context (e.g., `STANDARD_CODE.md` content)
+4. Send to an LLM (Claude, GPT-4, etc.)
+5. Treat all findings as **evolution opportunities**, not failures
+
+---
+
+> *"The territory exists. This document is a living legend. Canon is a tool, not a claim of totality."*
