@@ -51,12 +51,34 @@ postulates:
 
 This work is a **map** of software engineering, **not the territory**. Its purpose is to create a usable legend that improves navigation, prediction, and reasoning.
 
+---
+
+### The Meta-Principle: Universal Analogy
+
+> **"Tudo é uma analogia pra tudo."**
+> *(Everything is an analogy for everything.)*
+
+This is why cross-domain mapping works. Atoms and software particles. Fractals and code hierarchies. Linguistics and syntax. Physics and computation. Every domain shares structural patterns with every other domain.
+
+**Implications:**
+- The Standard Model of **Particle Physics** is an analogy for the Standard Model of **Code**
+- **Biological taxonomy** is an analogy for **software classification**
+- **Map/Territory** from geography is an analogy for **abstraction/implementation**
+- **Holons** from systems theory are an analogy for **software modules**
+
+We are not "borrowing" metaphors—we are recognizing that **all domains share the same underlying patterns**. This is why concepts from physics, biology, linguistics, and philosophy all illuminate software. The universe computes, and all computation is isomorphic.
+
+---
+
+### Operating Principles
+
 | Principle | Meaning |
 |-----------|----------|
 | **Open World** | All inventories are canonical *working sets*—versioned, testable, and revisable. They are not claims of totality. |
 | **Unknown is First-Class** | Any construct that does not fit cleanly becomes evidence that the map must evolve. |
 | **Provisional Certainty** | We crystallize knowledge because usefulness requires it, but we never claim exhaustiveness. |
 | **Humble Science** | Every "postulate" is a hypothesis with validation obligations, not a proven theorem. |
+| **Universal Analogy** | Every domain is a lens into every other domain. Cross-pollination is the method. |
 
 **What this is NOT:**
 - NOT a "theory of everything" for code
