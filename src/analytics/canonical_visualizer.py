@@ -599,22 +599,23 @@ class CanonicalVisualizer:
         connections = []
 
         # Build comprehensive name -> ID lookup for fuzzy matching
-        name_to_id = {}
+        # Use lists to handle duplicate short names
+        name_to_ids = defaultdict(list)  # name -> list of matching IDs
         module_to_ids = defaultdict(list)  # module name -> list of atom IDs in that module
 
         for vid in valid_ids:
-            # Store full ID
-            name_to_id[vid] = vid
+            # Store full ID (always unique)
+            name_to_ids[vid].append(vid)
 
             # Extract short name from full ID (e.g., "function_name" from "/path/file.py:function_name")
             if ":" in vid:
                 short = vid.split(":")[-1]
-                name_to_id[short] = vid
+                name_to_ids[short].append(vid)
 
             # Store filename:name format
             if "/" in vid and ":" in vid:
                 parts = vid.rsplit("/", 1)[-1]  # file.py:Name
-                name_to_id[parts] = vid
+                name_to_ids[parts].append(vid)
 
             # Map module name (file basename without extension) to all its atoms
             if "/" in vid:
@@ -624,8 +625,7 @@ class CanonicalVisualizer:
                 else:
                     module_name = file_part.rsplit(".", 1)[0]  # "file" from "file.py"
                 module_to_ids[module_name].append(vid)
-                # Also map underscore variants (e.g., "enrichment_helpers")
-                name_to_id[module_name] = vid
+                name_to_ids[module_name].append(vid)
 
         for e in self.edges:
             src = e.get("source") or e.get("from")
@@ -635,8 +635,8 @@ class CanonicalVisualizer:
                 continue
 
             # Try to resolve to valid IDs with multiple strategies
-            resolved_src = self._resolve_edge_id(src, name_to_id, module_to_ids)
-            resolved_tgt = self._resolve_edge_id(tgt, name_to_id, module_to_ids)
+            resolved_src = self._resolve_edge_id(src, name_to_ids, module_to_ids)
+            resolved_tgt = self._resolve_edge_id(tgt, name_to_ids, module_to_ids)
 
             if not resolved_src or not resolved_tgt:
                 continue
@@ -655,19 +655,14 @@ class CanonicalVisualizer:
 
         return connections
 
-    def _resolve_edge_id(self, ref: str, name_to_id: Dict, module_to_ids: Dict) -> Optional[str]:
+    def _resolve_edge_id(self, ref: str, name_to_ids: Dict, module_to_ids: Dict) -> Optional[str]:
         """Resolve an edge reference to a valid node ID."""
-        # Direct match
-        if ref in name_to_id:
-            return name_to_id[ref]
+        # Direct match (full ID)
+        if ref in name_to_ids and name_to_ids[ref]:
+            return name_to_ids[ref][0]
 
-        # Try last part after dot (e.g., "core.intent_detector._enrich_with_why" -> "_enrich_with_why")
-        if "." in ref:
-            last_part = ref.split(".")[-1]
-            if last_part in name_to_id:
-                return name_to_id[last_part]
-
-        # Try module.function format (e.g., "intent_detector._enrich_with_why")
+        # Try module.function format first (most specific)
+        # e.g., "core.intent_detector._enrich_with_why" -> intent_detector module, _enrich_with_why func
         if "." in ref:
             parts = ref.split(".")
             if len(parts) >= 2:
@@ -678,6 +673,27 @@ class CanonicalVisualizer:
                 for cid in candidates:
                     if cid.endswith(f":{func}"):
                         return cid
+
+        # Try last part after dot (less specific, may have duplicates)
+        if "." in ref:
+            last_part = ref.split(".")[-1]
+            if last_part in name_to_ids and name_to_ids[last_part]:
+                # If only one match, use it; otherwise need module context
+                matches = name_to_ids[last_part]
+                if len(matches) == 1:
+                    return matches[0]
+                # Multiple matches - try to use module hint from ref
+                if len(ref.split(".")) >= 2:
+                    module_hint = ref.split(".")[-2]
+                    for m in matches:
+                        if module_hint in m:
+                            return m
+                # Fall back to first match
+                return matches[0]
+
+        # Try short name directly
+        if ref in name_to_ids and name_to_ids[ref]:
+            return name_to_ids[ref][0]
 
         # Try as module name only (for external refs like "os", "json", etc.)
         if ref in module_to_ids and module_to_ids[ref]:
