@@ -9,9 +9,10 @@ from pathlib import Path
 # Add root to path to ensure modules are found
 root_dir = Path(__file__).resolve().parent
 sys.path.append(str(root_dir))
+sys.path.append(str(root_dir / "src"))
 
 # Import the robust prove engine
-from tools.prove import run_proof
+from src.tools.prove import run_proof
 
 def main():
     parser = argparse.ArgumentParser(
@@ -153,6 +154,53 @@ def main():
     )
 
     # ==========================================
+    # DASHBOARD Command
+    # ==========================================
+    dash_parser = subparsers.add_parser(
+        "dashboard",
+        help="Generate interactive HTML dashboard from analysis",
+        description="Creates a visual dashboard with 8D coverage, atom distribution, and Math Engine metrics."
+    )
+    dash_parser.add_argument(
+        "analysis_path",
+        help="Path to unified_analysis.json file"
+    )
+    dash_parser.add_argument(
+        "--output", "-o",
+        default=None,
+        help="Output path for the HTML dashboard"
+    )
+    dash_parser.add_argument(
+        "--title", "-t",
+        default="Collider Analysis Dashboard",
+        help="Dashboard title"
+    )
+
+    # ==========================================
+    # ISSUES Command
+    # ==========================================
+    issues_parser = subparsers.add_parser(
+        "issues",
+        help="Generate GitHub Issues from analysis insights",
+        description="Creates actionable tickets for code quality improvements, violations, and tech debt."
+    )
+    issues_parser.add_argument(
+        "analysis_path",
+        help="Path to unified_analysis.json file"
+    )
+    issues_parser.add_argument(
+        "--output", "-o",
+        default=None,
+        help="Output path for issues file"
+    )
+    issues_parser.add_argument(
+        "--format", "-f",
+        choices=["markdown", "json"],
+        default="markdown",
+        help="Output format (default: markdown)"
+    )
+
+    # ==========================================
     # FIX Command (Consolidated from FixGenerator)
     # ==========================================
     fix_parser = subparsers.add_parser(
@@ -175,6 +223,41 @@ def main():
         "--output", "-o",
         default=None,
         help="Output file path (prints to stdout if not specified)"
+    )
+
+    # ==========================================
+    # ENRICH Command (LLM Classification)
+    # ==========================================
+    enrich_parser = subparsers.add_parser(
+        "enrich",
+        help="Enrich unknown atoms using LLM classification",
+        description="Uses LLM (Claude or Ollama) to classify unknown code entities."
+    )
+    enrich_parser.add_argument(
+        "analysis_path",
+        help="Path to unified_analysis.json file"
+    )
+    enrich_parser.add_argument(
+        "--output", "-o",
+        default=None,
+        help="Output path for enriched results"
+    )
+    enrich_parser.add_argument(
+        "--limit", "-n",
+        type=int,
+        default=100,
+        help="Maximum entities to classify (default: 100)"
+    )
+    enrich_parser.add_argument(
+        "--backend", "-b",
+        choices=["auto", "ollama", "claude", "heuristic"],
+        default="auto",
+        help="LLM backend to use (default: auto)"
+    )
+    enrich_parser.add_argument(
+        "--model", "-m",
+        default="qwen2.5:7b-instruct",
+        help="Model name (default: qwen2.5:7b-instruct for Ollama)"
     )
 
     # Parse
@@ -263,9 +346,47 @@ def main():
             print(f"❌ Error generating visualization: {e}")
             sys.exit(1)
 
+    elif args.command == "dashboard":
+        from core.dashboard_generator import generate_dashboard
+
+        analysis_path = Path(args.analysis_path)
+        if not analysis_path.exists():
+            print(f"❌ Error: Analysis file not found: {args.analysis_path}")
+            sys.exit(1)
+
+        try:
+            output_path = generate_dashboard(
+                str(analysis_path),
+                args.output,
+                args.title
+            )
+            print(f"✅ Dashboard generated: {output_path}")
+        except Exception as e:
+            print(f"❌ Error generating dashboard: {e}")
+            sys.exit(1)
+
+    elif args.command == "issues":
+        from core.github_issues_generator import generate_issues
+
+        analysis_path = Path(args.analysis_path)
+        if not analysis_path.exists():
+            print(f"❌ Error: Analysis file not found: {args.analysis_path}")
+            sys.exit(1)
+
+        try:
+            output_path = generate_issues(
+                str(analysis_path),
+                args.output,
+                args.format
+            )
+            print(f"✅ GitHub Issues generated: {output_path}")
+        except Exception as e:
+            print(f"❌ Error generating issues: {e}")
+            sys.exit(1)
+
     elif args.command == "fix":
         from core.fix_generator import FixGenerator
-        
+
         generator = FixGenerator("python") # Default to python for now
         
         # Context building
@@ -292,7 +413,73 @@ def main():
         else:
             print(f"❌ Could not generate fix for schema: {args.schema}")
             sys.exit(1)
-    
+
+    elif args.command == "enrich":
+        from core.llm_classifier import LLMClassifier
+        import json
+
+        analysis_path = Path(args.analysis_path)
+        if not analysis_path.exists():
+            print(f"Error: Analysis file not found: {args.analysis_path}")
+            sys.exit(1)
+
+        print(f"Loading analysis from {args.analysis_path}...")
+
+        with open(analysis_path) as f:
+            data = json.load(f)
+
+        # Extract unknowns
+        unknowns = [
+            node for node in data.get('nodes', [])
+            if node.get('role') == 'Unknown' or node.get('dimensions', {}).get('D3_ROLE') == 'Unknown'
+        ]
+
+        print(f"Found {len(unknowns)} unknown entities")
+        print(f"Using backend: {args.backend}, model: {args.model}")
+
+        classifier = LLMClassifier(model_name=args.model, backend=args.backend)
+
+        # Classify unknowns
+        results = []
+        for i, node in enumerate(unknowns[:args.limit]):
+            context = f"Name: {node.get('name')}\nKind: {node.get('kind')}\nFile: {node.get('file_path')}"
+            if node.get('body_source'):
+                context += f"\nBody: {node['body_source'][:300]}"
+
+            role, confidence = classifier.classify_with_llm(context)
+            results.append({
+                "name": node.get('name'),
+                "role": role,
+                "confidence": confidence,
+                "file": node.get('file_path')
+            })
+
+            if (i + 1) % 10 == 0:
+                print(f"  Classified {i + 1}/{min(len(unknowns), args.limit)}...")
+
+        # Summary
+        role_counts = {}
+        for r in results:
+            role = r['role']
+            role_counts[role] = role_counts.get(role, 0) + 1
+
+        print(f"\nResults by role:")
+        for role, count in sorted(role_counts.items(), key=lambda x: -x[1]):
+            print(f"  {role}: {count}")
+
+        # Save results
+        output_path = args.output or str(analysis_path.parent / "llm_enriched.json")
+        with open(output_path, 'w') as f:
+            json.dump({
+                "total_classified": len(results),
+                "by_role": role_counts,
+                "backend": classifier.get_stats()['backend'],
+                "results": results
+            }, f, indent=2)
+
+        print(f"\nSaved to {output_path}")
+        print(f"Stats: {classifier.get_stats()}")
+
     else:
         parser.print_help()
         sys.exit(1)
