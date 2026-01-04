@@ -12,6 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field, asdict
+from edge_extractor import file_node_id
 
 
 @dataclass
@@ -405,6 +406,11 @@ def analyze(target_path: str, output_dir: str = None, **options) -> UnifiedAnaly
             print(f"   ⚠️  LLM Enrichment failed: {e}")
             
     # =========================================================================
+    # FILE NODES: Emit module/file nodes for all scanned files
+    particles, file_node_count = _emit_file_nodes(particles, results)
+    if file_node_count:
+        print(f"   -> {file_node_count} file nodes emitted")
+
     # STAGE 4: EDGE EXTRACTION → Call Graph
     # =========================================================================
     print("\n🔗 Stage 4: Edge Extraction...")
@@ -487,6 +493,67 @@ def analyze(target_path: str, output_dir: str = None, **options) -> UnifiedAnaly
     return output
 
 
+
+
+def _emit_file_nodes(particles: List[Dict], results: List[Dict]) -> tuple:
+    """Ensure file-level nodes exist for all scanned Python files."""
+    existing_ids = set()
+    for p in particles:
+        node_id = p.get("id")
+        if not node_id:
+            file_path = p.get("file_path", "")
+            name = p.get("name", "")
+            if file_path and name:
+                try:
+                    file_path = str(Path(file_path).resolve())
+                except Exception:
+                    pass
+                node_id = f"{file_path}:{name}"
+        if node_id:
+            existing_ids.add(node_id)
+
+    file_nodes = []
+    seen_files = set()
+
+    for result in results:
+        file_path = result.get("file_path", "")
+        if not file_path:
+            continue
+        if Path(file_path).suffix != ".py":
+            continue
+
+        try:
+            normalized_path = str(Path(file_path).resolve())
+        except Exception:
+            normalized_path = file_path
+
+        if normalized_path in seen_files:
+            continue
+        seen_files.add(normalized_path)
+
+        node_id = file_node_id(normalized_path, existing_ids)
+        if node_id in existing_ids:
+            continue
+
+        node_name = node_id.rsplit(":", 1)[-1]
+        file_nodes.append({
+            "id": node_id,
+            "name": node_name,
+            "kind": "module",
+            "file_path": normalized_path,
+            "start_line": 1,
+            "end_line": result.get("lines_analyzed", 0),
+            "type": "Module",
+            "confidence": 100.0,
+            "discovery_method": "filesystem",
+            "metadata": {"file_node": True},
+        })
+        existing_ids.add(node_id)
+
+    if file_nodes:
+        particles = particles + file_nodes
+
+    return particles, len(file_nodes)
 def extract_call_edges(particles: List[Dict], results: List[Dict]) -> List[Dict]:
     """
     Extract call relationships from particles and raw imports.
