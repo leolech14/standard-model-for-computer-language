@@ -33,6 +33,14 @@ jobs:
       - name: Run Health Check
         run: |
           python - <<'PY'
+          import os
+
+          # NewmanSuite checks local dev environment (Ollama, etc.)
+          # Skip in CI - Self-Analysis below is the real CI validation
+          if os.environ.get("CI"):
+              print("⏭️  Skipping NewmanSuite in CI (checks local dev environment)")
+              raise SystemExit(0)
+
           from core.newman_suite import NewmanSuite
 
           results = NewmanSuite().run_all()
