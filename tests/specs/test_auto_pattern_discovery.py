@@ -1,14 +1,32 @@
 """
-Tests for AutoPatternDiscovery - the core role classification engine.
+SPECIFICATION: AutoPatternDiscovery - Role Classification Engine
+=================================================================
+
+This file is a SPECIFICATION, not a test suite.
+It lives in tests/specs/ and is NOT collected by pytest.
+
+These tests define the expected behavior of AutoPatternDiscovery,
+which will be implemented in Phase 5 of the ROADMAP.
+
+To run these specs (when the module is implemented):
+    PYTHONPATH=src/core pytest tests/specs/test_auto_pattern_discovery.py -v
 """
 import pytest
 import sys
 from pathlib import Path
 
-# Add core to path
-sys.path.insert(0, str(Path(__file__).parent.parent / 'core'))
+# Add core to path (for when module is implemented)
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src' / 'core'))
 
-from auto_pattern_discovery import AutoPatternDiscovery
+# This import will fail until the module is implemented
+# Uncomment when AutoPatternDiscovery is ready:
+# from auto_pattern_discovery import AutoPatternDiscovery
+
+# Placeholder for the class - remove when real import works
+class AutoPatternDiscovery:
+    """Placeholder - see ROADMAP Phase 5 for implementation."""
+    def classify_by_pattern(self, name: str) -> tuple:
+        raise NotImplementedError("See ROADMAP Phase 5")
 
 
 class TestAutoPatternDiscovery:

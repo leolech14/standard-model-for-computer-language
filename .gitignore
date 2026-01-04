@@ -44,8 +44,13 @@ output/
 # Validation Artifacts
 validation/100_repo_results/
 validation/benchmarks/repos/
+validation/benchmarks/repos_v2/
+validation/benchmarks/repos_tier1/
 validation/benchmarks/runs/
+validation/pilot_repos/
+validation/dddpy_real/
 validation/__pycache__/
+github_analysis/
 spectrometer_output/
 proof_output.json
 *.csv
