@@ -59,11 +59,6 @@ class TestPurposeFieldDetector:
     # COMPOSITE PURPOSE
     # =========================================================================
     
-    @pytest.mark.xfail(
-        reason="TODO(SMOC-002): EMERGENCE_RULES lookup fails for frozenset({'Query', 'Command'}). "
-               "Returns 'Service' instead of 'Repository'. Bug in purpose_classifier.py.",
-        strict=True
-    )
     def test_class_with_query_and_command_is_repository(self, detector):
         """Class with Query + Command children should be Repository."""
         nodes = [

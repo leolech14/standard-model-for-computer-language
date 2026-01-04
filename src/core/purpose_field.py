@@ -81,7 +81,6 @@ class PurposeFieldDetector:
         
         # If children are mixed business logic → Service
         frozenset(["Command", "Query", "Validator"]): "Service",
-        frozenset(["Command", "Query"]): "Service",
         frozenset(["UseCase"]): "ApplicationService",
         
         # If all children are Tests → TestSuite
