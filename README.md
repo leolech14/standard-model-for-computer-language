@@ -2,7 +2,31 @@
 
 > **Analyze any codebase. Get a complete semantic map. Detect violations. Predict missing components.**
 
-Collider turns source code into **structured knowledge** by mapping every element to a standardized schema. It uses a "Standard Model" analogy to treat software architecture as a rigorous, verifiable system.
+---
+
+## 🏛️ Two Pillars
+
+This project has two sides. Pick your path:
+
+| Pillar | Purpose | Start Here |
+|--------|---------|------------|
+| **📚 THEORY** | Understand the model | [`docs/THEORY_MAP.md`](docs/THEORY_MAP.md) |
+| **🔧 TOOL** | Use or develop Collider | [`CLAUDE.md`](CLAUDE.md) |
+
+### Theory (The "Why")
+The **Standard Model of Code** is a theoretical framework that treats code like physics:
+- **Atoms**: 167 structural types (Entity, Repository, Service...)
+- **Dimensions**: 8-dimensional classification (RPBL + 4 more)
+- **Layers**: Architectural strata (Domain, Infrastructure, Application...)
+
+→ Go to [`docs/`](docs/) to explore the theory.
+
+### Tool (The "How")
+**Collider** is the implementation that applies the theory:
+```bash
+./collider full /path/to/repo --output /tmp/analysis
+```
+→ Go to [`src/core/`](src/core/) to develop the tool.
 
 ---
 

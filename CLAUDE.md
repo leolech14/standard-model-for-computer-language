@@ -2,6 +2,17 @@
 
 > Quick reference for AI agents working on this codebase.
 
+---
+
+## 🏛️ Two Pillars
+
+| Pillar | Location | Purpose |
+|--------|----------|---------|
+| **📚 THEORY** | `docs/`, `schema/` | The model (atoms, dimensions, layers) |
+| **🔧 TOOL** | `src/core/`, `cli.py` | The implementation (Collider) |
+
+---
+
 ## What Is This?
 
 **Collider** is a code analysis tool that generates `output.md` - a structured report optimized for LLM consumption.
