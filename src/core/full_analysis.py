@@ -202,6 +202,18 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     from roadmap_evaluator import RoadmapEvaluator
     from topology_reasoning import TopologyClassifier
     from semantic_cortex import ConceptExtractor
+    # NOTE: standard_output_generator removed - consolidated into HTML viz
+    
+    # Import Visualization Engine (Dynamic Import to handle relative paths)
+    import importlib.util
+    try:
+        viz_path = Path(__file__).parent.parent.parent / "tools" / "visualize_graph.py"
+        spec = importlib.util.spec_from_file_location("visualize_graph", viz_path)
+        visualize_graph = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(visualize_graph)
+    except Exception as e:
+        print(f"⚠️ Visualization module load warning: {e}")
+        visualize_graph = None
     
     # Stage 1: Base analysis
     print("\n🔬 Stage 1: Base Analysis...")
@@ -225,6 +237,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     # Stage 4: Execution Flow
     print("\n⚡ Stage 4: Execution Flow...")
     exec_flow = detect_execution_flow(nodes, edges, purpose_field)
+    
     print(f"   → {len(exec_flow.entry_points)} entry points")
     print(f"   → {len(exec_flow.orphans)} orphans ({exec_flow.dead_code_percent}% dead code)")
     
@@ -262,8 +275,8 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     # Type distribution
     types = Counter(n.get('type', 'Unknown') for n in nodes)
     
-    # Layer distribution
-    layers = Counter(n.get('layer', 'unknown') for n in nodes)
+    # Ring distribution (Clean Architecture)
+    rings = Counter(n.get('ring', 'unknown') for n in nodes)
     
     # RPBL averages
     rpbl_sums = {'responsibility': 0, 'purity': 0, 'boundary': 0, 'lifecycle': 0}
@@ -275,11 +288,13 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     
     # Build complete output
     full_output = {
+        'nodes': list(nodes),  # Required for report generator
+        'edges': list(edges),  # Required for report generator
         'meta': {
             'target': str(target),
             'timestamp': time.strftime('%Y-%m-%dT%H:%M:%S'),
             'analysis_time_ms': int(total_time * 1000),
-            'version': '2.0.0',
+            'version': '4.0.0',
             'deterministic': True
         },
         'counts': {
@@ -292,18 +307,21 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         },
         'coverage': {
             'type_coverage': 100.0,
-            'layer_coverage': (len(nodes) - layers.get('unknown', 0)) / len(nodes) * 100 if nodes else 0,
+            'ring_coverage': (len(nodes) - rings.get('unknown', 0)) / len(nodes) * 100 if nodes else 0,
             'rpbl_coverage': rpbl_count / len(nodes) * 100 if nodes else 0,
             'dead_code_percent': exec_flow.dead_code_percent
         },
         'distributions': {
             'types': dict(types.most_common(15)),
-            'layers': dict(layers),
+            'rings': dict(rings),
             'atoms': dict(Counter(n.get('atom', '') for n in nodes))
         },
         'rpbl_profile': rpbl_avgs,
         'purpose_field': purpose_field.summary(),
-        'execution_flow': exec_flow.summary(),
+        'execution_flow': dict(exec_flow.summary(), **{
+            'entry_points': exec_flow.entry_points,
+            'orphans': exec_flow.orphans
+        }),
         'markov': markov,
         'knots': knots,
         'data_flow': data_flow,
@@ -327,11 +345,9 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         out_path = target / "collider_output" if target.is_dir() else target.parent / "collider_output"
     
     out_path.mkdir(parents=True, exist_ok=True)
-    output_file = out_path / "full_analysis.json"
-    
-    with open(output_file, 'w') as f:
-        json.dump(full_output, f, indent=2, default=str)
-    
+
+    # NOTE: Removed full_analysis.json write - unified_analysis.json is the single source of truth
+
     # Stage 9: Roadmap Evaluation
     print("\n🛣️  Stage 9: Roadmap Evaluation...")
     roadmap_name = options.get('roadmap')
@@ -376,18 +392,41 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     except Exception as e:
         print(f"   ⚠️ Semantic analysis failed: {e}")
 
-    # Generate Brain Download (LLM Summary)
+    # ==========================================================================
+    # OUTPUT CONSOLIDATION: 2 files only
+    # 1. unified_analysis.json - Structured data (single source of truth)
+    # 2. collider_report.html  - Visual report (embeds Brain Download)
+    # ==========================================================================
+
+    # Generate Brain Download content (for embedding in HTML)
     from brain_download import generate_brain_download
     brain_content = generate_brain_download(full_output)
-    brain_file = out_path / "output.md"
-    with open(brain_file, 'w') as f:
-        f.write(brain_content)
-    
+    full_output['brain_download'] = brain_content  # Embed in JSON for HTML access
+
+    # Stage 12: Write consolidated outputs
+    print("\n📦 Stage 12: Generating Consolidated Outputs...")
+
+    # Output 1: unified_analysis.json (SINGLE DATA SOURCE)
+    unified_json = out_path / "unified_analysis.json"
+    with open(unified_json, 'w') as f:
+        json.dump(full_output, f, indent=2, default=str)
+    print(f"   → Data: {unified_json}")
+
+    # Output 2: collider_report.html (SINGLE VISUAL REPORT)
+    viz_file = out_path / "collider_report.html"
+    try:
+        if visualize_graph:
+            visualize_graph.generate_html(str(unified_json), str(viz_file))
+            print(f"   → Visual: {viz_file}")
+    except Exception as e:
+        print(f"   ⚠️ Visualization generation failed: {e}")
+
     print("\n" + "=" * 60)
     print("✅ FULL ANALYSIS COMPLETE")
     print(f"   Time: {total_time:.1f}s")
-    print(f"   Output: {output_file}")
-    print(f"   Brain:  {brain_file}")
+    print(f"   Data:   {unified_json}")
+    if visualize_graph:
+        print(f"   Visual: {viz_file}")
     print("=" * 60)
     
     return full_output
