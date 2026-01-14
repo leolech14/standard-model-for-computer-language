@@ -394,7 +394,115 @@ class PatternRepository:
             'BaseSettings': 'Configuration',
             'Settings': 'Configuration',
         }
-    
+        # Contains patterns (Legacy Heuristic capability)
+        self._contains_patterns = {
+            # Database/DB
+            'database': ('Repository', 75),
+            'db': ('Repository', 75),
+            'sql': ('Repository', 75),
+            'query': ('Repository', 75),
+            'cursor': ('Repository', 75),
+            'connection': ('Repository', 75),
+            'pool': ('Repository', 75),
+            
+            # Auth
+            'auth': ('Policy', 75),
+            'permission': ('Policy', 75),
+            'access': ('Policy', 75),
+            
+            # Rendering/UI
+            'render': ('Utility', 75),
+            'template': ('Factory', 75),
+            'view': ('Controller', 75),
+            'page': ('Controller', 75),
+            'widget': ('Controller', 75),
+            'ui': ('Controller', 75),
+            
+            # Lifecycle
+            'session': ('Service', 70),
+            'context': ('Service', 70),
+            'state': ('Service', 70),
+            
+            # Operations
+            'compute': ('Service', 70),
+            'calculate': ('Service', 70),
+            'process': ('Service', 70),
+            'handle': ('EventHandler', 75),
+            'callback': ('EventHandler', 75),
+            
+            # Utilities
+            'parse': ('Utility', 75),
+            'format': ('Utility', 75),
+            'util': ('Utility', 75),
+            'helper': ('Utility', 75),
+            'log': ('Utility', 75),
+            'trace': ('Utility', 75),
+            'debug': ('Utility', 75),
+            
+            # Network
+            'api': ('Controller', 75),
+            'url': ('Query', 70),
+            'http': ('Adapter', 75),
+            'client': ('Client', 75),
+            'request': ('DTO', 70),
+            'response': ('DTO', 70),
+            
+            # Concurrency
+            'mutex': ('Service', 75),
+            'lock': ('Service', 75),
+            'async': ('Service', 70),
+            'worker': ('Job', 75),
+            'task': ('Job', 75),
+            'job': ('Job', 75),
+            'queue': ('Service', 75),
+            
+            # Data Mapping
+            'json': ('Mapper', 75),
+            'xml': ('Mapper', 75),
+            'csv': ('Mapper', 75),
+            'map': ('Mapper', 70),
+            'transform': ('Mapper', 75),
+            'convert': ('Mapper', 75),
+            'serialize': ('Mapper', 75),
+            
+            # Error Handling
+            'error': ('Exception', 75),
+            'fail': ('Exception', 75),
+            'exception': ('Exception', 75),
+            
+            # File I/O
+            'file': ('Adapter', 70),
+            'io': ('Adapter', 70),
+            'stream': ('Iterator', 75),
+
+            # Go-specific patterns
+            'goroutine': ('Service', 80),
+            'channel': ('Service', 80),
+            'chan': ('Service', 75),
+            'defer': ('Lifecycle', 75),
+            'context': ('Service', 80),
+            'waitgroup': ('Service', 80),
+            'wg': ('Service', 70),
+            'grpc': ('Controller', 85),
+            'proto': ('DTO', 80),
+            'gin': ('Controller', 85),
+            'echo': ('Controller', 85),
+            'fiber': ('Controller', 85),
+            'chi': ('Controller', 85),
+            'mux': ('Controller', 80),
+            'handler': ('EventHandler', 85),
+            'middleware': ('Service', 85),
+        }
+        
+        # Load contains patterns from JSON if available
+        if CANONICAL_PATTERNS_PATH.exists():
+            with open(CANONICAL_PATTERNS_PATH) as f:
+                data = json.load(f)
+                for pattern, info in data.get("contains_patterns", {}).items():
+                    role = info.get("role", "Unknown")
+                    confidence = info.get("confidence", 75)
+                    self._contains_patterns[pattern] = (role, confidence)
+
     # =========================================================================
     # Query Methods
     # =========================================================================
@@ -410,6 +518,10 @@ class PatternRepository:
     def get_suffix_patterns(self) -> Dict[str, Tuple[str, float]]:
         """Get all suffix patterns."""
         return self._suffix_patterns.copy()
+        
+    def get_contains_patterns(self) -> Dict[str, Tuple[str, float]]:
+        """Get all contains patterns."""
+        return self._contains_patterns.copy()
     
     def get_dunder_patterns(self) -> Dict[str, Tuple[str, float]]:
         """Get all dunder method patterns."""
@@ -429,6 +541,8 @@ class PatternRepository:
         for _, (role, _) in self._prefix_patterns.items():
             roles.add(role)
         for _, (role, _) in self._suffix_patterns.items():
+            roles.add(role)
+        for _, (role, _) in self._contains_patterns.items():
             roles.add(role)
         for _, (role, _) in self._dunder_patterns.items():
             roles.add(role)
@@ -497,6 +611,20 @@ class PatternRepository:
                 return (role, conf)
         
         return ('Unknown', 0)
+    
+    def classify_by_contains(self, name: str) -> Tuple[str, float]:
+        """Classify by substring patterns (Legacy Heuristic)."""
+        short_name = name.split('.')[-1] if '.' in name else name
+        short_lower = short_name.lower()
+        
+        best_match = ('Unknown', 0)
+        
+        for pattern, (role, conf) in self._contains_patterns.items():
+            if pattern in short_lower:
+                if conf > best_match[1]:
+                    best_match = (role, conf)
+        
+        return best_match
     
     def classify_by_dunder(self, name: str) -> Tuple[str, float]:
         """Classify a dunder method."""
@@ -599,6 +727,7 @@ if __name__ == "__main__":
     print("=" * 50)
     print(f"Prefix patterns: {len(repo.get_prefix_patterns())}")
     print(f"Suffix patterns: {len(repo.get_suffix_patterns())}")
+    print(f"Contains patterns: {len(repo.get_contains_patterns())}")
     print(f"Dunder patterns: {len(repo.get_dunder_patterns())}")
     print(f"Decorator patterns: {len(repo.get_decorator_patterns())}")
     print(f"Inheritance patterns: {len(repo.get_inheritance_patterns())}")
