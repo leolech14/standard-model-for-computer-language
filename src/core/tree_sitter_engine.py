@@ -122,7 +122,16 @@ class TreeSitterUniversalEngine:
 
         # Parse (simplified for minimal version)
         depth_metrics: Dict[str, Any] = {}
-        if language == 'python':
+        if language in {'javascript', 'javascript_react', 'typescript'}:  # JS/TS/JSX/TSX
+             try:
+                 print(f"DEBUG: Attempting tree-sitter for {file_path}")
+                 particles = self._extract_particles_tree_sitter(content, language, file_path)
+                 print(f"DEBUG: Tree-sitter success. {len(particles)} particles.")
+             except Exception as e:
+                 print(f"DEBUG: Tree-sitter failed: {e}")
+                 # Fallback to regex
+                 particles = self._extract_particles(content, 'javascript', file_path)
+        elif language == 'python':
             # DELEGATE to PythonASTExtractor
             particles, depth_metrics = self.python_extractor.extract_particles_ast(
                 content, file_path, include_depth_metrics=True
@@ -131,7 +140,7 @@ class TreeSitterUniversalEngine:
             particles = self._extract_particles(content, language, file_path)
             
         touchpoints = self._extract_touchpoints(content, particles)
-        raw_imports = self._extract_raw_imports(content, language)
+        raw_imports = self._extract_raw_imports(content, language, file_path)
 
         result = {
             'file_path': file_path,
@@ -145,6 +154,110 @@ class TreeSitterUniversalEngine:
         if depth_metrics:
             result['depth_metrics'] = depth_metrics
         return result
+
+    def _extract_particles_tree_sitter(self, content: str, language: str, file_path: str) -> List[Dict]:
+        """Extract particles using Tree-sitter."""
+        try:
+             import tree_sitter
+             import tree_sitter_javascript
+             
+             JS_LANG = tree_sitter.Language(tree_sitter_javascript.language())
+             parser = tree_sitter.Parser()
+             parser.language = JS_LANG
+             
+             tree = parser.parse(bytes(content, "utf8"))
+             root_node = tree.root_node
+             
+             particles = []
+             
+             # Query for functions, classes, variables (arrow funcs)
+             query_scm = """
+             (function_declaration) @func
+             (class_declaration) @class
+             (variable_declarator 
+                 value: (arrow_function)
+             ) @arrow
+             (call_expression
+                 function: (identifier) @hook
+                 (#match? @hook "^use[A-Z]")
+             ) @hook_call
+             """
+             
+             query = tree_sitter.Query(JS_LANG, query_scm)
+             cursor = tree_sitter.QueryCursor(query)
+             captures = cursor.captures(root_node)
+             
+             # captures is dict { name: [nodes] }
+             for tag, nodes in captures.items():
+                 for node in nodes:
+                     start_line = node.start_point[0] + 1
+                 
+                 p_type = None
+                 p_name = "unknown"
+                 
+                 if tag == 'func':
+                     p_type = 'Function'
+                     # Function name node
+                     name_node = node.child_by_field_name('name')
+                     if name_node:
+                         p_name = content[name_node.start_byte:name_node.end_byte]
+                         
+                 elif tag == 'class':
+                     p_type = 'Class'
+                     name_node = node.child_by_field_name('name')
+                     if name_node:
+                         p_name = content[name_node.start_byte:name_node.end_byte]
+                         
+                 elif tag == 'arrow':
+                     p_type = 'Function'
+                     # Parent of variable_declarator is variable_declaration?
+                     # variable_declarator has name field
+                     name_node = node.child_by_field_name('name')
+                     if name_node:
+                         p_name = content[name_node.start_byte:name_node.end_byte]
+                         
+                 elif tag == 'hook_call':
+                     # Hook usage is not a particle definition, but maybe we want to track it?
+                     # Actually, standard model atoms use hook *usage* as evidence of T2?
+                     # For now, let's skip hook usage as "particle" unless we define a "Hook" type?
+                     # Let's map it to 'Function' or 'Feature'
+                     p_type = 'Feature' # Or specific hook type
+                     p_name = content[node.start_byte:node.end_byte] # Full call? No, just name
+                     # The node is the call_expression. The capture 'hook' is identifier.
+                     # We caputured call_expression as @hook_call
+                     # Let's verify structure.
+                     pass 
+                     
+                 if p_type and p_name:
+                      # Capture full node source for T2 pattern matching
+                      node_source = content[node.start_byte:node.end_byte]
+                      end_line = node.end_point[0] + 1
+
+                      # Get the signature (first line of the function/class)
+                      first_line = node_source.split('\n')[0] if node_source else ""
+
+                      # Map to symbol_kind
+                      symbol_kind = 'function' if p_type == 'Function' else 'class'
+
+                      # Use classifier to get proper dimensions (including T2 detection)
+                      particle = self.classifier.classify_extracted_symbol(
+                          name=p_name,
+                          symbol_kind=symbol_kind,
+                          file_path=file_path,
+                          line_num=start_line,
+                          end_line=end_line,
+                          evidence=first_line,
+                          body_source=node_source,
+                      )
+                      particle['tags'] = ['tree-sitter', language]
+                      particles.append(particle)
+                      
+             return particles
+             
+        except ImportError:
+            raise Exception("Tree-sitter not installed")
+        except Exception as e:
+            raise e
         
     def analyze_directory(self, dir_path: str, extensions: List[str] = None) -> List[Dict[str, Any]]:
         """Analyze all supported files in a directory."""
@@ -206,14 +319,16 @@ class TreeSitterUniversalEngine:
                     continue
 
             # Other languages: keep permissive matching (indentation is less meaningful)
-            if re.match(r'^\s*(class|public class|private class|interface|type)\s+\w+', line):
+            # Classes/Structs: Rust uses 'struct', Go uses 'type X struct'
+            if re.match(r'^\s*(class|public class|private class|interface|type|pub\s+struct|struct|impl)\s+\w+', line):
                 # DELEGATE to Classifier
                 particle = self.classifier.classify_class_pattern(line, i, file_path)
                 if particle:
                     particles.append(particle)
                 continue
 
-            if re.match(r'^\s*(async\s+def|def|public|private|protected|static|func|fn)\s+\w+', line):
+            # Functions: Added 'pub fn', 'pub async fn' for Rust
+            if re.match(r'^\s*(async\s+def|def|public|private|protected|static|func|fn|pub\s+fn|pub\s+async\s+fn)\s+\w+', line):
                 # DELEGATE to Classifier
                 particle = self.classifier.classify_function_pattern(line, i, file_path, language)
                 if particle:
@@ -251,8 +366,12 @@ class TreeSitterUniversalEngine:
                 })
         return touchpoints
 
-    def _extract_raw_imports(self, content: str, language: str) -> List[Any]:
+    def _extract_raw_imports(self, content: str, language: str, file_path: str = "") -> List[Any]:
         """Extract raw import statements using multi-language extractor."""
+        # Skip import extraction for data files that might contain embedded code strings
+        if file_path and Path(file_path).name == 'data.js':
+            return []
+
         # Try to import factory (lazy import to avoid circular dep issues)
         try:
             from core.parser.import_extractor import extract_imports
