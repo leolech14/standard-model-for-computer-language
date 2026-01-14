@@ -90,13 +90,16 @@ class UniversalClassifier:
             # Try to detect by content patterns
             particle_type = self._detect_by_keywords(line_stripped)
 
-        resolved_type = particle_type or 'Unknown'
+        resolved_type = particle_type  # Keep None if unknown, let kind be used as fallback
         confidence = self._calculate_confidence(class_name, line_stripped) if particle_type else 30.0
 
+        particle_id = f"{file_path}:{class_name}" if file_path else class_name
         return {
+            'id': particle_id,
             'type': resolved_type,
             'name': class_name,
             'symbol_kind': 'class',
+            'kind': 'class',  # Ensure kind is set for fallback
             'file_path': file_path,
             'line': line_num,
             'confidence': confidence,
@@ -115,13 +118,16 @@ class UniversalClassifier:
         # Determine particle type
         particle_type = self._get_function_type_by_name(func_name)
 
-        resolved_type = particle_type or 'Unknown'
+        resolved_type = particle_type  # Keep None if unknown, let kind be used as fallback
         confidence = self._calculate_confidence(func_name, line_stripped) if particle_type else 30.0
 
+        particle_id = f"{file_path}:{func_name}" if file_path else func_name
         return {
+            'id': particle_id,
             'type': resolved_type,
             'name': func_name,
             'symbol_kind': 'function',
+            'kind': 'function',  # Ensure kind is set for fallback
             'file_path': file_path,
             'line': line_num,
             'confidence': confidence,
@@ -192,6 +198,18 @@ class UniversalClassifier:
                     confidence = 90.0
                     break
 
+        # Framework Instantiation Detection (Tier 0.1)
+        if particle_type is None and evidence:
+            if "FastAPI(" in evidence or "Flask(" in evidence:
+                particle_type = "EntryPoint"
+                confidence = 95.0
+            elif "typer.Typer(" in evidence:
+                particle_type = "EntryPoint"
+                confidence = 95.0
+            elif "click.group(" in evidence:
+                particle_type = "Command"
+                confidence = 95.0
+
         # =============================================================================
         # TIER 0.5: STRUCTURAL ANCHORS (95% confidence) - "Pseudo-Decorators"
         # =============================================================================
@@ -211,6 +229,21 @@ class UniversalClassifier:
                 if result and result[0] != "Unknown" and result[1] > 80:
                     particle_type = result[0]
                     confidence = float(result[1])
+
+        # =============================================================================
+        # TIER 1.5: NAME-BASED HEURISITICS (Low confidence fallback)
+        # =============================================================================
+        if particle_type is None:
+            if symbol_kind in {"class", "interface", "struct"}:
+                heuristic_type = self._get_particle_type_by_name(name)
+                if heuristic_type:
+                    particle_type = heuristic_type
+                    confidence = 75.0
+            elif symbol_kind in {"function", "method"}:
+                heuristic_type = self._get_function_type_by_name(name)
+                if heuristic_type:
+                    particle_type = heuristic_type
+                    confidence = 70.0
 
         # =============================================================================
         # TIER 1: INHERITANCE-BASED DETECTION (99% confidence)
@@ -370,11 +403,10 @@ class UniversalClassifier:
             "body_source": body_source,
             "docstring": docstring,
             "return_type": return_type,
-            "docstring": docstring,
-            "return_type": return_type,
+            "params": params if params else [],  # R6: Include params for I/O signature derivation
         }
 
-        # V2: Derive 8 Dimensions
+        # V2: Derive 8 Dimensions (now includes R6_TRANSFORMATION)
         particle["dimensions"] = self._derive_dimensions(particle)
 
         if parent:
@@ -383,8 +415,6 @@ class UniversalClassifier:
             particle["base_classes"] = base_classes
         if decorators:
             particle["decorators"] = decorators
-        if params:
-            particle["params"] = params
 
         return particle
 
@@ -420,6 +450,12 @@ class UniversalClassifier:
         if name.startswith('to_') or name.startswith('from_') or name.startswith('convert_'): return 'Transformer'
         if name.startswith('is_') or name.startswith('has_') or name.startswith('can_'): return 'Specification'
         if name.startswith('test_'): return 'Test'
+        # Go factory convention: NewUserRepository, NewService
+        if name.startswith('New') and len(name) > 3 and name[3].isupper(): return 'Factory'
+        # Rust constructor convention: fn new()
+        if name == 'new': return 'Factory'
+        # Go/C main entry point
+        if name == 'main': return 'EntryPoint'
         return None
 
     def _calculate_confidence(self, name: str, evidence: str) -> float:
@@ -443,78 +479,203 @@ class UniversalClassifier:
     # =============================================================================
     # V2: 8-DIMENSIONAL CLASSIFICATION
     # =============================================================================
-    def _derive_dimensions(self, particle: Dict[str, Any]) -> Dict[str, str]:
-        """Derive the 8 orthogonal dimensions for a particle."""
+    def _derive_dimensions(self, particle: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Derive the 8 orthogonal dimensions for a particle.
+
+        Schema-aligned keys (particle.schema.json):
+        - D1_WHAT: Atom type identifier
+        - D2_LAYER: Clean Architecture layer (Interface/Application/Core/Infrastructure/Test/Unknown)
+        - D3_ROLE: DDD tactical role
+        - D4_BOUNDARY: Information flow (Internal/Input/Output/I-O)
+        - D5_STATE: State management (Stateful/Stateless)
+        - D6_EFFECT: Side effects (Pure/Read/Write/ReadWrite)
+        - D7_LIFECYCLE: Object phase (Create/Use/Destroy)
+        - D8_TRUST: Classification confidence (0-100)
+        """
         dims = {}
-        
-        # D1: WHAT (Atom Type)
-        # Using simplified mapping based on symbol_kind + role
+
         kind = particle.get("symbol_kind", "unknown")
         role = particle.get("type", "Unknown")
-        
-        if role == "Test":
-            dims["what"] = "QUALITY.TST.A" # Approximate ID
-        elif role == "DTO" or role == "ValueObject":
-            dims["what"] = "ORG.AGG.M"
-        else:
-            dims["what"] = self.atom_map.get(kind, "UNKNOWN")
-
-        # D2: LAYER
+        name = particle.get("name", "").lower()
         path = particle.get("file_path", "").lower()
-        if "/domain/" in path: dims["layer"] = "DOMAIN"
-        elif "/application/" in path or "/services/" in path: dims["layer"] = "APPLICATION"
-        elif "/infrastructure/" in path or "/adapters/" in path: dims["layer"] = "INFRASTRUCTURE"
-        elif "/presentation/" in path or "/api/" in path: dims["layer"] = "PRESENTATION"
-        elif "/test" in path: dims["layer"] = "TEST"
-        elif "/core/" in path: dims["layer"] = "DOMAIN" # Default core to domain if ambiguous
-        else: dims["layer"] = "CROSS_CUTTING" # Default for utils/config
+        confidence = particle.get("confidence", 70.0)
+        body = particle.get("body_source", "") or ""
 
-        # D3: ROLE
-        dims["role"] = role
-
-        # D4: BOUNDARY
-        if dims["layer"] in ["PRESENTATION", "INFRASTRUCTURE"]:
-            if role in ["Controller", "Handler"]: dims["boundary"] = "Input"
-            elif role in ["Client", "Gateway", "Repository"]: dims["boundary"] = "Output"
-            else: dims["boundary"] = "Internal"
+        # =====================================================================
+        # D1_WHAT: Atom Type
+        # =====================================================================
+        if role == "Test":
+            dims["D1_WHAT"] = "QUALITY.TST.A"
+        elif role in ["DTO", "ValueObject"]:
+            dims["D1_WHAT"] = "ORG.AGG.M"
         else:
-            dims["boundary"] = "Internal"
-            
-        # D5: STATE
-        # Heuristic: Classes are stateful, functions are stateless (mostly)
+            dims["D1_WHAT"] = self.atom_map.get(kind, "Unknown")
+
+        # =====================================================================
+        # D2_LAYER: Clean Architecture Layer
+        # =====================================================================
+        if "/domain/" in path or "/entities/" in path or "/models/" in path:
+            dims["D2_LAYER"] = "Core"
+        elif "/application/" in path or "/services/" in path or "/usecases/" in path:
+            dims["D2_LAYER"] = "Application"
+        elif "/infrastructure/" in path or "/adapters/" in path or "/repositories/" in path:
+            dims["D2_LAYER"] = "Infrastructure"
+        elif "/presentation/" in path or "/api/" in path or "/controllers/" in path or "/routes/" in path:
+            dims["D2_LAYER"] = "Interface"
+        elif "/test" in path or "_test" in path or "test_" in name:
+            dims["D2_LAYER"] = "Test"
+        elif "/core/" in path:
+            dims["D2_LAYER"] = "Core"
+        else:
+            dims["D2_LAYER"] = "Unknown"
+
+        # =====================================================================
+        # D3_ROLE: DDD Tactical Role
+        # =====================================================================
+        dims["D3_ROLE"] = role
+
+        # =====================================================================
+        # D4_BOUNDARY: Information Flow Boundary
+        # =====================================================================
+        # Input: receives external data (controllers, handlers, listeners)
+        # Output: sends data externally (clients, gateways, publishers)
+        # I-O: both directions (repositories with external DB, API clients)
+        # Internal: no external boundary crossing
+
+        if role in ["Controller", "Handler", "Listener", "Subscriber", "Consumer"]:
+            dims["D4_BOUNDARY"] = "Input"
+        elif role in ["Publisher", "Producer", "Notifier"]:
+            dims["D4_BOUNDARY"] = "Output"
+        elif role in ["Repository", "Gateway", "Client", "Adapter"]:
+            dims["D4_BOUNDARY"] = "I-O"
+        elif dims["D2_LAYER"] == "Interface":
+            dims["D4_BOUNDARY"] = "Input"
+        elif dims["D2_LAYER"] == "Infrastructure":
+            dims["D4_BOUNDARY"] = "I-O"
+        else:
+            dims["D4_BOUNDARY"] = "Internal"
+
+        # =====================================================================
+        # D5_STATE: State Management
+        # =====================================================================
+        # Analyze body for state indicators
+        has_self_assignment = "self." in body and "=" in body
+        has_instance_vars = "__init__" in name or has_self_assignment
+
         if kind == "class":
-            dims["state"] = "Stateful"
-        else:
-            dims["state"] = "Stateless"
-            
-        # D6: EFFECT
-        # Heuristic: Queries are Read, Commands are Write
-        if role in ["Query", "Finder", "Loader", "Getter"]:
-            dims["effect"] = "Read"
-        elif role in ["Command", "Creator", "Mutator", "Destroyer"]:
-            dims["effect"] = "Write"
-        elif role in ["Validator", "Transformer", "Utility"]:
-            dims["effect"] = "Pure"
-        else:
-            dims["effect"] = "ReadModify" # Default mixed
-
-        # D7: ACTIVATION
-        if role in ["EventHandler", "Listener", "Subscriber"]:
-            dims["activation"] = "Event"
-        elif role in ["CronJob", "Task"]:
-            dims["activation"] = "Time"
-        else:
-            dims["activation"] = "Direct"
-
-        # D8: LIFETIME
-        if kind == "class":
-            if role in ["Service", "Repository", "Factory"]:
-                dims["lifetime"] = "Global" # Singletons usually
-            elif role in ["Controller", "Handler"]:
-                dims["lifetime"] = "Session" # Often per-request
+            # Classes with __init__ or self.x = assignments are stateful
+            if has_instance_vars or role in ["Entity", "Aggregate", "Repository"]:
+                dims["D5_STATE"] = "Stateful"
+            elif role in ["Service", "Utility", "Factory"]:
+                dims["D5_STATE"] = "Stateless"
             else:
-                dims["lifetime"] = "Transient"
+                dims["D5_STATE"] = "Stateful"  # Default for classes
         else:
-            dims["lifetime"] = "Transient"
+            # Functions/methods: check for state modification
+            if has_self_assignment:
+                dims["D5_STATE"] = "Stateful"
+            else:
+                dims["D5_STATE"] = "Stateless"
+
+        # =====================================================================
+        # D6_EFFECT: Side Effect Classification
+        # =====================================================================
+        # Pure: no side effects, deterministic
+        # Read: reads external state but doesn't modify
+        # Write: modifies external state
+        # ReadWrite: both reads and writes external state
+
+        # Name-based heuristics
+        is_getter = name.startswith(("get_", "find_", "fetch_", "load_", "read_", "list_", "search_"))
+        is_setter = name.startswith(("set_", "update_", "save_", "create_", "delete_", "remove_", "write_"))
+        is_checker = name.startswith(("is_", "has_", "can_", "should_", "check_", "validate_"))
+
+        # Body-based heuristics
+        has_return = "return " in body
+        has_db_write = any(kw in body.lower() for kw in ["insert", "update", "delete", "commit", "save"])
+        has_io_write = any(kw in body.lower() for kw in ["write", "send", "post", "put", "publish"])
+        has_db_read = any(kw in body.lower() for kw in ["select", "query", "find", "fetch", "get"])
+
+        if role in ["Query", "Finder", "Loader", "Getter", "Specification"]:
+            dims["D6_EFFECT"] = "Read"
+        elif role in ["Command", "Creator", "Mutator", "Destroyer"]:
+            dims["D6_EFFECT"] = "Write"
+        elif role in ["Validator", "Transformer", "Utility", "ValueObject"]:
+            dims["D6_EFFECT"] = "Pure"
+        elif is_checker or (is_getter and not has_db_write and not has_io_write):
+            dims["D6_EFFECT"] = "Pure" if is_checker else "Read"
+        elif is_setter or has_db_write or has_io_write:
+            if has_db_read or is_getter:
+                dims["D6_EFFECT"] = "ReadWrite"
+            else:
+                dims["D6_EFFECT"] = "Write"
+        elif role == "Repository":
+            dims["D6_EFFECT"] = "ReadWrite"
+        elif has_return and not has_db_write and not has_io_write:
+            dims["D6_EFFECT"] = "Read"
+        else:
+            dims["D6_EFFECT"] = "ReadWrite"  # Default: assume mixed
+
+        # =====================================================================
+        # D7_LIFECYCLE: Object Lifecycle Phase
+        # =====================================================================
+        # Create: constructors, factories, builders
+        # Use: normal operations
+        # Destroy: destructors, cleanup, disposal
+
+        if name in ["__init__", "new", "create", "build", "construct"] or name.startswith(("create_", "new_", "build_")):
+            dims["D7_LIFECYCLE"] = "Create"
+        elif name in ["__del__", "destroy", "dispose", "cleanup", "close"] or name.startswith(("delete_", "remove_", "destroy_", "cleanup_")):
+            dims["D7_LIFECYCLE"] = "Destroy"
+        elif role in ["Factory", "Builder", "Creator"]:
+            dims["D7_LIFECYCLE"] = "Create"
+        elif role in ["Destroyer", "Disposer"]:
+            dims["D7_LIFECYCLE"] = "Destroy"
+        else:
+            dims["D7_LIFECYCLE"] = "Use"
+
+        # =====================================================================
+        # D8_TRUST: Classification Confidence (0-100)
+        # =====================================================================
+        dims["D8_TRUST"] = confidence
+
+        # =====================================================================
+        # R6_TRANSFORMATION: I/O Signature Lens (for functions/methods)
+        # =====================================================================
+        # Maps code as transformations: Inputs (params) → Outputs (returns)
+        # Enables purity analysis, data flow tracking, and transformation views
+        if kind in ["function", "method"]:
+            params_list = particle.get("params", [])
+            return_type_str = particle.get("return_type", "") or "Any"
+
+            # Format inputs as standardized signature
+            input_sig = []
+            for p in params_list:
+                if isinstance(p, dict):
+                    input_sig.append({
+                        "name": p.get("name", ""),
+                        "type": p.get("type", "Any") or "Any",
+                        "has_default": bool(p.get("default"))
+                    })
+
+            # Infer purity from signature (heuristic)
+            # Pure if: has return type (not None/void), no I/O types in params
+            io_types = {"IO", "File", "Path", "Socket", "Connection", "Session", "Request", "Response"}
+            param_types = {p.get("type", "") for p in input_sig if p.get("type")}
+            has_io_params = bool(io_types & param_types)
+            has_return = return_type_str not in ("None", "", "Any")
+
+            # Check effect from D6 for additional purity signal
+            d6_effect = dims.get("D6_EFFECT", "ReadWrite")
+            is_pure = d6_effect == "Pure" or (has_return and not has_io_params and d6_effect in ["Pure", "Read"])
+
+            dims["R6_TRANSFORMATION"] = {
+                "inputs": input_sig,
+                "output": return_type_str,
+                "arity": len(input_sig),
+                "is_pure": is_pure,
+                "signature": f"({', '.join(p['type'] for p in input_sig)}) -> {return_type_str}"
+            }
 
         return dims
