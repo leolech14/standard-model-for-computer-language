@@ -523,7 +523,7 @@ class UniversalClassifier:
             dims["D2_LAYER"] = "Infrastructure"
         elif "/presentation/" in path or "/api/" in path or "/controllers/" in path or "/routes/" in path:
             dims["D2_LAYER"] = "Interface"
-        elif "/test" in path or "_test" in path or "test_" in name:
+        elif "/tests/" in path or "/test/" in path or "_test.py" in path or "test_" in name:
             dims["D2_LAYER"] = "Test"
         elif "/core/" in path:
             dims["D2_LAYER"] = "Core"
