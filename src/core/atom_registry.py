@@ -355,24 +355,30 @@ class AtomRegistry:
         self.ecosystem_patterns = {
             "react": {
                 "imports": ["react", "react-dom", "react-native"],
-                "file_patterns": [".jsx", ".tsx"],
+                "file_patterns": [".js", ".jsx", ".ts", ".tsx"],
                 "code_patterns": {
-                    "EXT.REACT.002": ["function", "return", "<"],  # FunctionalComponent
-                    "EXT.REACT.003": ["extends", "Component", "React.Component"],  # ClassComponent
-                    "EXT.REACT.005": ["useState"],  # useState hook
-                    "EXT.REACT.006": ["useEffect"],  # useEffect hook
-                    "EXT.REACT.007": ["useContext"],  # useContext hook
-                    "EXT.REACT.008": ["useMemo"],  # useMemo hook
-                    "EXT.REACT.009": ["useCallback"],  # useCallback hook
-                    "EXT.REACT.010": ["useRef"],  # useRef hook
-                    "EXT.REACT.011": ["useReducer"],  # useReducer hook
-                    "EXT.REACT.012": ["<", "/>", "jsx"],  # JSXElement
-                    "EXT.REACT.015": ["createContext", "Context.Provider"],  # Context
-                    "EXT.REACT.016": ["createPortal"],  # Portal
-                    "EXT.REACT.017": ["Suspense"],  # Suspense
-                    "EXT.REACT.018": ["componentDidCatch", "getDerivedStateFromError"],  # ErrorBoundary
-                    "EXT.REACT.019": ["Fragment", "<>"],  # Fragment
-                    "EXT.REACT.020": ["useRef", "createRef", "forwardRef"],  # Ref
+                    # Functional Component - any function returning JSX
+                    "EXT.REACT.001": ["function", "return", "<", "/>"],  
+                    # Class Component
+                    "EXT.REACT.002": ["class", "extends", "React.Component"],  
+                    # Hooks - require parentheses to avoid substring false positives
+                    "EXT.REACT.005": ["useState("],
+                    "EXT.REACT.006": ["useEffect("],
+                    "EXT.REACT.007": ["useContext("],
+                    "EXT.REACT.008": ["useMemo("],
+                    "EXT.REACT.009": ["useCallback("],
+                    "EXT.REACT.010": ["useRef("],
+                    "EXT.REACT.011": ["useReducer("],
+                    # Context
+                    "EXT.REACT.015": ["createContext", "Context.Provider"],
+                    # Portal
+                    "EXT.REACT.016": ["createPortal"],
+                    # Suspense
+                    "EXT.REACT.017": ["Suspense"],
+                    # Error Boundary
+                    "EXT.REACT.018": ["componentDidCatch", "getDerivedStateFromError"],
+                    # Fragment
+                    "EXT.REACT.019": ["Fragment", "<>"],
                 }
             },
             "ml": {
@@ -490,6 +496,7 @@ class AtomRegistry:
         content_lower = content.lower()
 
         for ecosystem, patterns in self.ecosystem_patterns.items():
+            # print(f"DEBUG: Checking {ecosystem} against {file_path}")
             # Check file extension (React: .jsx, .tsx)
             file_exts = patterns.get("file_patterns", [])
             if any(file_path_lower.endswith(ext) for ext in file_exts):
@@ -505,7 +512,12 @@ class AtomRegistry:
             for imp in patterns.get("imports", []):
                 imp_lower = imp.lower()
                 if f"import {imp_lower}" in content_lower or f"from {imp_lower}" in content_lower:
+                    # print(f"DEBUG: Detected ecosystem {ecosystem} for {file_path}")
                     return ecosystem
+            
+            # Special check for React without imports (JSX presence)
+            if ecosystem == "react" and ("<div" in content_lower or "/>" in content_lower):
+                 return ecosystem
 
         return None
 
@@ -522,10 +534,12 @@ class AtomRegistry:
         combined = f"{name} {body_source}"  # Check both name and body
 
         for atom_id, keywords in patterns.items():
-            # Match if ANY keyword is found (more flexible)
-            if any(kw.lower() in combined.lower() for kw in keywords):
+            # Match if ALL keywords are found (precise)
+            if all(kw.lower() in combined.lower() for kw in keywords):
+                # print(f"DEBUG: Detected T2 atom {atom_id} for ecosystem {ecosystem}.")
                 return atom_id
 
+        # print(f"DEBUG: No T2 atom detected for ecosystem {ecosystem} with provided source.")
         return None
 
     def get_t2_atom(self, atom_id: str) -> Optional[Dict]:

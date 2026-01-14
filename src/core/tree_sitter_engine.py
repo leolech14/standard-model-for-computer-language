@@ -124,9 +124,9 @@ class TreeSitterUniversalEngine:
         depth_metrics: Dict[str, Any] = {}
         if language in {'javascript', 'javascript_react', 'typescript'}:  # JS/TS/JSX/TSX
              try:
-                 print(f"DEBUG: Attempting tree-sitter for {file_path}")
+                 # print(f"DEBUG: Attempting tree-sitter for {file_path}")
                  particles = self._extract_particles_tree_sitter(content, language, file_path)
-                 print(f"DEBUG: Tree-sitter success. {len(particles)} particles.")
+                 # print(f"DEBUG: Tree-sitter success. {len(particles)} particles.")
              except Exception as e:
                  print(f"DEBUG: Tree-sitter failed: {e}")
                  # Fallback to regex

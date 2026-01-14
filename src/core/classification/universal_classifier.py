@@ -538,6 +538,7 @@ class UniversalClassifier:
                 file_content = body  # Fallback to body if can't read file
 
             ecosystem = self.atom_registry.detect_ecosystem(file_path_orig, content=file_content)
+            # print(f"DEBUG: T2 check for {particle.get('name')} in {file_path_orig}: ecosystem={ecosystem}")
             if ecosystem:
                 # Build detection context: body + signature/evidence + base classes (for class detection)
                 detection_context = body

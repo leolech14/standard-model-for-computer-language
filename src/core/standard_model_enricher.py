@@ -9,18 +9,21 @@ Applies the full Standard Model theory to particles:
 import json
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+from classification.universal_classifier import UniversalClassifier
 
 
 class StandardModelEnricher:
     """Enriches particles with full Standard Model theory."""
     
     def __init__(self):
-        self.canonical_types = {}       # type_id -> {description, rpbl, layer, aliases}
+        self.canonical_types = {}       # type_id -> {description, rpbl, ring, aliases}
         self.type_aliases = {}          # alias -> canonical_type
         self.rpbl_scores = {}           # type_id -> {R, P, B, L}
-        self.type_to_layer = {}         # type_id -> layer
+        self.type_to_ring = {}         # type_id -> ring
         self.atoms = {}                 # atom_id -> {name, layer, description}
         self.atom_mappings = {}         # language -> {symbol_kind -> atom_id}
+        
+        self.classifier = UniversalClassifier()
         
         self._load_canonical_types()
         self._load_atoms()
@@ -37,16 +40,16 @@ class StandardModelEnricher:
         with open(types_file) as f:
             data = json.load(f)
         
-        # Parse layers and types
-        for layer_name, layer_data in data.get('layers', {}).items():
-            for type_def in layer_data.get('types', []):
+        # Parse rings and types
+        for ring_name, ring_data in data.get('rings', {}).items():
+            for type_def in ring_data.get('types', []):
                 type_id = type_def.get('id')
                 if not type_id:
                     continue
                 
                 self.canonical_types[type_id] = {
                     'description': type_def.get('description', ''),
-                    'layer': layer_name,
+                    'ring': ring_name,
                     'aliases': type_def.get('aliases', []),
                     'rpbl': type_def.get('rpbl', {})
                 }
@@ -54,8 +57,8 @@ class StandardModelEnricher:
                 # Store RPBL scores
                 self.rpbl_scores[type_id] = type_def.get('rpbl', {})
                 
-                # Store layer mapping
-                self.type_to_layer[type_id] = layer_name
+                # Store ring mapping
+                self.type_to_ring[type_id] = ring_name
                 
                 # Register aliases
                 for alias in type_def.get('aliases', []):
@@ -135,21 +138,77 @@ class StandardModelEnricher:
             'lifecycle': 5
         })
     
-    def get_layer(self, type_name: str) -> Optional[str]:
-        """Get the architectural layer for a type."""
+    def get_ring(self, type_name: str) -> Optional[str]:
+        """Get the architectural ring for a type."""
         canonical = self.resolve_canonical_type(type_name)
-        return self.type_to_layer.get(canonical)
+        return self.type_to_ring.get(canonical)
     
-    def get_atom(self, symbol_kind: str, language: str = 'python') -> str:
-        """Get the Atom ID for a symbol kind."""
+    def get_atom(self, symbol_kind: str, role: str = None, language: str = 'python') -> str:
+        """Get the Atom ID for a symbol kind and optional semantic role."""
         lang_map = self.atom_mappings.get(language, self.atom_mappings.get('python', {}))
         
-        # Direct mapping
+        # 1. Direct mapping from language specific kinds
         atom_id = lang_map.get(symbol_kind)
         if atom_id:
             return atom_id
+            
+        # 2. Semantic Role Mapping (The "Smart" Layer)
+        # Maps discovered roles (e.g. "Repository") to specific Atom IDs
+        role_map = {
+            # Organization - Services
+            'Repository': 'ORG.SVC.M',
+            'Service': 'ORG.SVC.M',
+            'Gateway': 'ORG.SVC.M',
+            'Cache': 'ORG.SVC.M',
+            'EventBus': 'ORG.SVC.M',
+            'MessageBroker': 'ORG.SVC.M',
+            'InfrastructureService': 'ORG.SVC.M',
+            
+            # Organization - Aggregates
+            'Entity': 'ORG.AGG.M',
+            'ValueObject': 'ORG.AGG.M',
+            'DTO': 'ORG.AGG.M',
+            'Command': 'ORG.AGG.M',
+            'Query': 'ORG.AGG.M',
+            'Event': 'ORG.AGG.M',
+            'Union': 'ORG.AGG.M',
+            'GraphNode': 'ORG.AGG.M',
+            'Tree': 'ORG.AGG.M',
+            
+            # Logic - Functions
+            'Factory': 'LOG.FNC.M',
+            'Builder': 'LOG.FNC.M',
+            'Validator': 'LOG.FNC.M',
+            'Mapper': 'LOG.FNC.M',
+            'Hook': 'LOG.FNC.M',
+            'Predicate': 'LOG.FNC.M',
+            'RetryFunction': 'LOG.FNC.M',
+            'CachedFunction': 'LOG.FNC.M',
+            'Saga': 'LOG.FNC.M',
+            'Pipeline': 'LOG.FNC.M',
+            'Constructor': 'LOG.FNC.M',
+            
+            # Execution - Handlers
+            'APIHandler': 'EXE.HDL.O',
+            'EventHandler': 'EXE.HDL.O',
+            'CommandHandler': 'EXE.HDL.O',
+            'QueryHandler': 'EXE.HDL.O',
+            'MessageConsumer': 'EXE.HDL.O',
+            'SSEHandler': 'EXE.HDL.O',
+            'gRPCHandler': 'EXE.HDL.O',
+            
+            # Execution - Probes/Workers
+            'ChaosProbe': 'EXE.PRB.O',
+            'CanaryCheck': 'EXE.PRB.O',
+            'HealthCheck': 'EXE.PRB.O',
+            'Sidecar': 'EXE.WRK.O',
+            'ReplicaSet': 'EXE.WRK.O',
+        }
         
-        # Fallback mappings
+        if role and role in role_map:
+            return role_map[role]
+        
+        # 3. Fallback mappings based on symbol kind
         fallbacks = {
             'class': 'ORG.AGG.M',
             'function': 'LOG.FNC.M',
@@ -176,6 +235,11 @@ class StandardModelEnricher:
         # Add RPBL scores
         rpbl = self.get_rpbl_scores(canonical_type)
         particle['rpbl'] = rpbl
+        # 2. Dimensions (T2 Atoms)
+        # The classifier usually does this during extraction, but if not...
+        if 'dimensions' not in particle:
+             # print(f"DEBUG: Deriving dimensions for {particle.get('name')}")
+             particle['dimensions'] = self.classifier._derive_dimensions(particle)
         
         # Add to dimensions if dimensions dict exists
         if 'dimensions' in particle:
@@ -184,14 +248,26 @@ class StandardModelEnricher:
             particle['dimensions']['boundary'] = rpbl.get('boundary', 5)
             particle['dimensions']['lifecycle'] = rpbl.get('lifecycle', 5)
         
-        # Add layer from type definition
-        layer = self.get_layer(canonical_type)
-        if layer and not particle.get('layer'):
-            particle['layer'] = layer
+        # Add ring from type definition
+        ring = self.get_ring(canonical_type)
+        if ring and not particle.get('ring'):
+            particle['ring'] = ring
         
         # Add Atom mapping
         symbol_kind = particle.get('symbol_kind') or particle.get('kind') or 'unknown'
-        particle['atom'] = self.get_atom(symbol_kind)
+        
+        # Check for T2 atom from UniversalClassifier (stored in dimensions)
+        t2_atom = None
+        if 'dimensions' in particle and 'D1_WHAT' in particle['dimensions']:
+            d1 = particle['dimensions']['D1_WHAT']
+            if d1 and d1.startswith('EXT.'):
+                t2_atom = d1
+        
+        if t2_atom:
+            particle['atom'] = t2_atom
+        else:
+            # Pass the resolved canonical role to get_atom to enable semantic detection
+            particle['atom'] = self.get_atom(symbol_kind, role=canonical_type)
         
         return particle
     
