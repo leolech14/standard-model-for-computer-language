@@ -17,7 +17,11 @@ from typing import Dict, Any
 
 
 def calculate_theory_coverage(analysis_path: str) -> Dict[str, Any]:
-    """Calculate theory coverage metrics from unified_analysis.json."""
+    """Calculate theory coverage metrics from unified_analysis.json.
+    
+    Uses ROLE classification as primary coverage metric (legacy high-coverage approach),
+    plus ecosystem-specific T2 atoms as secondary metrics.
+    """
     
     with open(analysis_path, 'r') as f:
         data = json.load(f)
@@ -28,10 +32,26 @@ def calculate_theory_coverage(analysis_path: str) -> Dict[str, Any]:
     if total == 0:
         return {'error': 'No nodes found', 'overall_score': 0}
     
-    # D1_WHAT coverage (particles with assigned atom, not Unknown)
+    # PRIMARY: Role coverage (legacy 100% coverage system)
+    role_classified = sum(
+        1 for n in nodes
+        if n.get('role') and n['role'] != 'Unknown'
+    )
+    
+    # Type coverage (DDD types like DTO, Controller, etc.)
+    type_classified = sum(
+        1 for n in nodes
+        if n.get('type') and n['type'] != 'Unknown'
+    )
+    
+    # Average confidence
+    confidences = [n.get('confidence', 0) for n in nodes if n.get('confidence')]
+    avg_confidence = sum(confidences) / len(confidences) if confidences else 0
+    
+    # SECONDARY: D1_WHAT (ecosystem-specific T2 atoms)
     d1_what_assigned = sum(
         1 for n in nodes
-        if n.get('dimensions', {}).get('D1_WHAT') 
+        if n.get('dimensions', {}).get('D1_WHAT')
         and n['dimensions']['D1_WHAT'] != 'Unknown'
     )
     
@@ -62,16 +82,32 @@ def calculate_theory_coverage(analysis_path: str) -> Dict[str, Any]:
     )
     
     # Calculate percentages
+    role_pct = (role_classified / total) * 100
+    type_pct = (type_classified / total) * 100
     d1_what_pct = (d1_what_assigned / total) * 100
     d1_ecosystem_pct = (d1_ecosystem_assigned / total) * 100
     hooks_pct = (hooks_enriched / len(react_components) * 100) if react_components else 100.0
     k8s_pct = (k8s_kind_assigned / len(k8s_resources) * 100) if k8s_resources else 100.0
     
-    # Overall score: weighted average
-    overall = (d1_what_pct * 0.4 + d1_ecosystem_pct * 0.3 + hooks_pct * 0.15 + k8s_pct * 0.15)
+    # Overall score: weighted average (prioritize role coverage)
+    overall = (role_pct * 0.5 + type_pct * 0.3 + avg_confidence * 0.2)
     
     return {
         'total_nodes': total,
+        'role_coverage': {
+            'classified': role_classified,
+            'total': total,
+            'percentage': round(role_pct, 1)
+        },
+        'type_coverage': {
+            'classified': type_classified,
+            'total': total,
+            'percentage': round(type_pct, 1)
+        },
+        'confidence': {
+            'average': round(avg_confidence, 1),
+            'samples': len(confidences)
+        },
         'd1_what': {
             'assigned': d1_what_assigned,
             'total': total,
@@ -130,10 +166,34 @@ def main():
     print(f"\n   Total Nodes: {metrics['total_nodes']}")
     print()
     
+    # PRIMARY METRICS
+    print("   ═══ PRIMARY COVERAGE (Legacy System) ═══")
+    
+    # Role Coverage
+    role = metrics['role_coverage']
+    bar = "█" * int(role['percentage'] / 5)
+    print(f"\n   Role Classification")
+    print(f"     {role['classified']}/{role['total']} = {role['percentage']}% {bar}")
+    
+    # Type Coverage
+    typ = metrics['type_coverage']
+    bar = "█" * int(typ['percentage'] / 5)
+    print(f"\n   Type Classification")
+    print(f"     {typ['classified']}/{typ['total']} = {typ['percentage']}% {bar}")
+    
+    # Confidence
+    conf = metrics['confidence']
+    bar = "█" * int(conf['average'] / 5)
+    print(f"\n   Average Confidence")
+    print(f"     {conf['average']}% ({conf['samples']} samples) {bar}")
+    
+    # SECONDARY METRICS
+    print("\n   ═══ SECONDARY (Ecosystem-Specific) ═══")
+    
     # D1_WHAT
     d1 = metrics['d1_what']
     bar = "█" * int(d1['percentage'] / 5)
-    print(f"   D1_WHAT (Atom Assignment)")
+    print(f"\n   D1_WHAT (T2 Atoms)")
     print(f"     {d1['assigned']}/{d1['total']} = {d1['percentage']}% {bar}")
     
     # D1_ECOSYSTEM
