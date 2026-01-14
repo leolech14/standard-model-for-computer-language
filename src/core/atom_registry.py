@@ -456,14 +456,29 @@ class AtomRegistry:
                 }
             },
             "rust": {
-                "imports": [],  # Rust doesn't have imports like Python
+                "imports": ["std", "tokio", "serde", "actix", "async-std"],  # Common crates
                 "file_patterns": [".rs"],
                 "code_patterns": {
-                    "EXT.RUST.001": ["Result<", "Ok(", "Err("],  # Result
-                    "EXT.RUST.002": ["Option<", "Some(", "None"],  # Option
-                    "EXT.RUST.003": ["impl", "trait"],  # Trait
-                    "EXT.RUST.004": ["async fn", ".await"],  # AsyncFn
-                    "EXT.RUST.005": ["unsafe"],  # UnsafeBlock
+                    # Struct - data aggregate (detected by symbol_kind or code)
+                    "EXT.RUST.001": ["struct"],
+                    # Trait - interface definition
+                    "EXT.RUST.002": ["trait"],
+                    # Impl - implementation block
+                    "EXT.RUST.003": ["impl"],
+                    # Async - async functions/blocks
+                    "EXT.RUST.004": ["async fn", ".await"],
+                    # Result handling - error handling pattern
+                    "EXT.RUST.005": ["Result<", "Ok(", "Err("],
+                    # Option handling - optional values
+                    "EXT.RUST.006": ["Option<", "Some(", "None"],
+                    # Unsafe block
+                    "EXT.RUST.007": ["unsafe"],
+                    # Lifetime annotations
+                    "EXT.RUST.008": ["'a", "'static", "lifetime"],
+                    # Ownership - smart pointers
+                    "EXT.RUST.009": ["Box<", "Rc<", "Arc<", "RefCell<"],
+                    # Enum - algebraic data type
+                    "EXT.RUST.010": ["enum"],
                 }
             }
         }

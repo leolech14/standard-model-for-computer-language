@@ -122,7 +122,7 @@ class TreeSitterUniversalEngine:
 
         # Parse (simplified for minimal version)
         depth_metrics: Dict[str, Any] = {}
-        if language in {'javascript', 'javascript_react', 'typescript'}:  # JS/TS/JSX/TSX
+        if language in {'javascript', 'javascript_react', 'typescript', 'rust'}:  # JS/TS/JSX/TSX/Rust
              try:
                  # print(f"DEBUG: Attempting tree-sitter for {file_path}")
                  particles = self._extract_particles_tree_sitter(content, language, file_path)
@@ -130,7 +130,7 @@ class TreeSitterUniversalEngine:
              except Exception as e:
                  print(f"DEBUG: Tree-sitter failed: {e}")
                  # Fallback to regex
-                 particles = self._extract_particles(content, 'javascript', file_path)
+                 particles = self._extract_particles(content, language, file_path)
         elif language == 'python':
             # DELEGATE to PythonASTExtractor
             particles, depth_metrics = self.python_extractor.extract_particles_ast(
@@ -161,6 +161,7 @@ class TreeSitterUniversalEngine:
         import tree_sitter_javascript
         import tree_sitter_typescript
         import tree_sitter_python
+        import tree_sitter_rust
 
         # Map extensions to (language_object, parser_name)
         ts_supported_languages = {
@@ -169,6 +170,7 @@ class TreeSitterUniversalEngine:
             ".jsx": (tree_sitter_javascript.language(), "javascript"),
             ".ts": (tree_sitter_typescript.language_typescript(), "typescript"),
             ".tsx": (tree_sitter_typescript.language_tsx(), "tsx"),
+            ".rs": (tree_sitter_rust.language(), "rust"),
         }
 
         ext = Path(file_path).suffix
@@ -186,43 +188,59 @@ class TreeSitterUniversalEngine:
 
         particles = []
 
-        # Query for functions and classes - works for JS/TS/JSX/TSX
-        # Updated to capture React T2 patterns (Function/Class Components + Hooks)
-        query_scm = """
-        (function_declaration name: (identifier) @func.name) @func
-        (#match? @func.name "^[A-Z]")
-        
-        (variable_declarator
-          name: (identifier) @func.name
-          value: (arrow_function) @func
-        )
-        (#match? @func.name "^[A-Z]")
-        
-        (variable_declarator
-          name: (identifier) @func.name
-          value: (function_expression) @func
-        )
-        (#match? @func.name "^[A-Z]")
-        
-        (class_declaration name: (identifier) @class.name) @class
-        (#match? @class.name "^[A-Z]")
-        
-        ; Hook calls
-        (call_expression
-          function: (identifier) @hook.name
-          (#match? @hook.name "^use[A-Z]")
-        ) @hook_call
-        """
+        # Language-specific queries
+        if parser_name == "rust":
+            # Rust-specific query for structs, traits, impls, functions
+            query_scm = """
+            (function_item name: (identifier) @func.name) @func
+            (struct_item name: (type_identifier) @struct.name) @struct
+            (trait_item name: (type_identifier) @trait.name) @trait
+            (impl_item) @impl
+            (enum_item name: (type_identifier) @enum.name) @enum
+            """
+        else:
+            # JS/TS/JSX/TSX query for React components + hooks
+            query_scm = """
+            (function_declaration name: (identifier) @func.name) @func
+            (#match? @func.name "^[A-Z]")
+            
+            (variable_declarator
+              name: (identifier) @func.name
+              value: (arrow_function) @func
+            )
+            (#match? @func.name "^[A-Z]")
+            
+            (variable_declarator
+              name: (identifier) @func.name
+              value: (function_expression) @func
+            )
+            (#match? @func.name "^[A-Z]")
+            
+            (class_declaration name: (identifier) @class.name) @class
+            (#match? @class.name "^[A-Z]")
+            
+            ; Hook calls
+            (call_expression
+              function: (identifier) @hook.name
+              (#match? @hook.name "^use[A-Z]")
+            ) @hook_call
+            """
         
         try:
             query = tree_sitter.Query(tree_sitter.Language(lang_obj), query_scm)
         except Exception as e:
             # Fallback for languages that might error on the complex query
             print(f"DEBUG: Complex query failed ({e}), using simple query")
-            query_scm = """
-            (function_declaration) @func
-            (class_declaration) @class
-            """
+            if parser_name == "rust":
+                query_scm = """
+                (function_item) @func
+                (struct_item) @struct
+                """
+            else:
+                query_scm = """
+                (function_declaration) @func
+                (class_declaration) @class
+                """
             query = tree_sitter.Query(tree_sitter.Language(lang_obj), query_scm)
 
         cursor = tree_sitter.QueryCursor(query)
@@ -242,14 +260,48 @@ class TreeSitterUniversalEngine:
                 p_name = 'Unknown'
                 symbol_kind = 'function'
 
-                if tag == 'class':
+                # Handle Rust-specific node types
+                if tag == 'struct':
+                    p_type = 'Struct'
+                    symbol_kind = 'struct'
+                    name_node = node.child_by_field_name('name')
+                    if name_node:
+                        p_name = name_node.text.decode('utf8')
+                elif tag == 'trait':
+                    p_type = 'Trait'
+                    symbol_kind = 'trait'
+                    name_node = node.child_by_field_name('name')
+                    if name_node:
+                        p_name = name_node.text.decode('utf8')
+                elif tag == 'impl':
+                    p_type = 'Impl'
+                    symbol_kind = 'impl'
+                    # Impl blocks: extract type name from type field
+                    type_node = node.child_by_field_name('type')
+                    if type_node:
+                        p_name = type_node.text.decode('utf8')
+                    else:
+                        # Try to extract from first type identifier child
+                        for child in node.children:
+                            if child.type == 'type_identifier':
+                                p_name = child.text.decode('utf8')
+                                break
+                elif tag == 'enum':
+                    p_type = 'Enum'
+                    symbol_kind = 'enum'
+                    name_node = node.child_by_field_name('name')
+                    if name_node:
+                        p_name = name_node.text.decode('utf8')
+                # Handle JS/TS node types
+                elif tag == 'class':
                     p_type = 'Class'
                     symbol_kind = 'class'
                     name_node = node.child_by_field_name('name')
                     if name_node:
                         p_name = name_node.text.decode('utf8')
                 elif tag == 'func':
-                    if node.type == 'function_declaration':
+                    # Rust function_item or JS function_declaration
+                    if node.type in ('function_item', 'function_declaration'):
                         name_node = node.child_by_field_name('name')
                         if name_node:
                             p_name = name_node.text.decode('utf8')
