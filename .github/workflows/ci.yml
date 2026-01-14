@@ -96,3 +96,48 @@ jobs:
             ci_output/
             proof_output.json
           retention-days: 7
+
+  docstring-lint:
+    name: Docstring Coverage
+    runs-on: ubuntu-latest
+    continue-on-error: true  # Non-blocking initially
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pydocstyle
+        run: pip install pydocstyle
+
+      - name: Run docstring check
+        run: |
+          pydocstyle src/core/ --convention=google --add-ignore=D100,D104,D105,D107 || true
+          echo "Docstring check complete (non-blocking)"
+
+  theory-coverage:
+    name: Theory Completeness
+    runs-on: ubuntu-latest
+    needs: audit
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download analysis artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: collider-analysis
+          path: ci_output/
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run theory coverage
+        run: python scripts/theory_coverage.py ci_output/unified_analysis.json

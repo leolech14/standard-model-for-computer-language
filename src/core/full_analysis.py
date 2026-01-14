@@ -18,6 +18,69 @@ from collections import Counter, defaultdict
 from typing import Dict, List, Any
 
 
+def _calculate_theory_completeness(nodes: List[Dict]) -> Dict[str, Any]:
+    """
+    Calculate theory completeness metrics for the analysis output.
+    
+    Measures what percentage of applicable Standard Model elements
+    are captured in the analysis.
+    """
+    if not nodes:
+        return {'overall_score': 0, 'error': 'No nodes'}
+    
+    total = len(nodes)
+    
+    # D1_WHAT (atom assignment)
+    d1_what_assigned = sum(
+        1 for n in nodes
+        if n.get('dimensions', {}).get('D1_WHAT')
+        and n['dimensions']['D1_WHAT'] != 'Unknown'
+    )
+    
+    # D1_ECOSYSTEM
+    d1_ecosystem_assigned = sum(
+        1 for n in nodes
+        if n.get('dimensions', {}).get('D1_ECOSYSTEM')
+    )
+    
+    # React hook metadata
+    react_components = [
+        n for n in nodes
+        if n.get('dimensions', {}).get('D1_WHAT', '').startswith('EXT.REACT.')
+    ]
+    hooks_enriched = sum(
+        1 for n in react_components
+        if n.get('metadata', {}).get('hooks_used') is not None
+    )
+    
+    # K8s metadata
+    k8s_resources = [
+        n for n in nodes
+        if n.get('dimensions', {}).get('D1_ECOSYSTEM') == 'kubernetes'
+    ]
+    k8s_kind_assigned = sum(
+        1 for n in k8s_resources
+        if n.get('metadata', {}).get('k8s_kind')
+    )
+    
+    # Calculate percentages
+    d1_what_pct = (d1_what_assigned / total) * 100
+    d1_ecosystem_pct = (d1_ecosystem_assigned / total) * 100
+    hooks_pct = (hooks_enriched / len(react_components) * 100) if react_components else 100.0
+    k8s_pct = (k8s_kind_assigned / len(k8s_resources) * 100) if k8s_resources else 100.0
+    
+    # Overall score
+    overall = (d1_what_pct * 0.4 + d1_ecosystem_pct * 0.3 + hooks_pct * 0.15 + k8s_pct * 0.15)
+    
+    return {
+        'd1_what_percentage': round(d1_what_pct, 1),
+        'd1_ecosystem_percentage': round(d1_ecosystem_pct, 1),
+        'hooks_metadata_percentage': round(hooks_pct, 1),
+        'k8s_metadata_percentage': round(k8s_pct, 1),
+        'overall_score': round(overall, 1)
+    }
+
+
 def compute_markov_matrix(nodes: List[Dict], edges: List[Dict]) -> Dict:
     """
     Compute Markov transition matrix from call graph.
@@ -311,6 +374,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             'rpbl_coverage': rpbl_count / len(nodes) * 100 if nodes else 0,
             'dead_code_percent': exec_flow.dead_code_percent
         },
+        'theory_completeness': _calculate_theory_completeness(nodes),
         'distributions': {
             'types': dict(types.most_common(15)),
             'rings': dict(rings),
