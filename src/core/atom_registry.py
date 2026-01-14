@@ -379,11 +379,51 @@ class AtomRegistry:
                 "imports": ["tensorflow", "torch", "pytorch", "keras", "sklearn", "numpy", "pandas"],
                 "file_patterns": [".py"],
                 "code_patterns": {
-                    "EXT.ML.001": ["torch.nn.Module", "tf.keras.Model", "nn.Module"],  # Model
-                    "EXT.ML.002": ["torch.nn.Linear", "Dense", "nn.Linear"],  # Layer
-                    "EXT.ML.003": ["backward", "loss.backward"],  # Gradient
-                    "EXT.ML.004": ["Dataset", "DataLoader"],  # Dataset
-                    "EXT.ML.005": ["train_test_split", "fit", ".train()"],  # TrainingLoop
+                    # EXT.ML.001: Model/Forward Pass - neural network model definition
+                    "EXT.ML.001": [
+                        "torch.nn.Module", "tf.keras.Model", "nn.Module",  # Model class
+                        "def forward(", "(Module)",  # Forward pass method (with paren to avoid false matches)
+                        "F.relu(", "F.softmax(", "F.log_softmax(",  # Functional activations
+                        "F.max_pool2d(", "F.avg_pool2d(", "F.dropout(",  # Functional layers (with paren)
+                    ],
+                    # EXT.ML.002: Layer Definition - neural network layers
+                    "EXT.ML.002": [
+                        "nn.Linear", "nn.Conv2d", "nn.Conv1d", "nn.LSTM", "nn.GRU",
+                        "nn.Dropout", "nn.BatchNorm", "nn.LayerNorm",
+                        "Dense", "torch.nn.Linear",  # Keras/verbose
+                    ],
+                    # EXT.ML.003: Backpropagation - gradient computation
+                    "EXT.ML.003": [
+                        "backward", "loss.backward", ".backward()",
+                        "zero_grad", "optimizer.step",
+                    ],
+                    # EXT.ML.004: Data Pipeline - dataset and loading
+                    "EXT.ML.004": [
+                        "Dataset", "DataLoader", "torch.utils.data",
+                        ".dataset", "train_loader", "test_loader",
+                    ],
+                    # EXT.ML.005: Training/Eval Loop - training workflow
+                    "EXT.ML.005": [
+                        "model.train()", ".train()", "model.eval()", ".eval()",
+                        "train_test_split", "fit", "epochs",
+                    ],
+                    # EXT.ML.006: Optimizer - optimization algorithms
+                    "EXT.ML.006": [
+                        "optim.SGD", "optim.Adam", "optim.AdamW", "optim.Adadelta",
+                        "optimizer", "learning_rate", "lr=",
+                    ],
+                    # EXT.ML.007: Loss Function - loss computation
+                    "EXT.ML.007": [
+                        "nn.CrossEntropy", "nn.MSELoss", "nn.BCELoss",
+                        "F.nll_loss", "F.cross_entropy", "F.mse_loss",
+                        "loss =", "criterion",
+                    ],
+                    # EXT.ML.008: Tensor Operations - tensor manipulation
+                    "EXT.ML.008": [
+                        "torch.tensor", "torch.zeros", "torch.ones", "torch.randn",
+                        "torch.flatten", "torch.cat", "torch.stack",
+                        ".to(device)", ".cuda()", ".cpu()",
+                    ],
                 }
             },
             "kubernetes": {

@@ -416,15 +416,17 @@ class UniversalClassifier:
             "params": params if params else [],  # R6: Include params for I/O signature derivation
         }
 
-        # V2: Derive 8 Dimensions (now includes R6_TRANSFORMATION)
-        particle["dimensions"] = self._derive_dimensions(particle)
-
+        # Add optional fields BEFORE dimension derivation (so they're available for T2 detection)
         if parent:
             particle["parent"] = parent
         if base_classes:
             particle["base_classes"] = base_classes
         if decorators:
             particle["decorators"] = decorators
+
+        # V2: Derive 8 Dimensions (now includes R6_TRANSFORMATION and T2 ecosystem detection)
+        # Must be called AFTER base_classes/decorators are set for accurate class detection
+        particle["dimensions"] = self._derive_dimensions(particle)
 
         return particle
 
@@ -537,8 +539,18 @@ class UniversalClassifier:
 
             ecosystem = self.atom_registry.detect_ecosystem(file_path_orig, content=file_content)
             if ecosystem:
-                # Detect specific T2 atom from function name and body
-                t2_atom = self.atom_registry.detect_t2_atom(ecosystem, body, particle.get("name", ""))
+                # Build detection context: body + signature/evidence + base classes (for class detection)
+                detection_context = body
+                # Use signature or evidence field (evidence contains the definition line, e.g., "class Net(nn.Module):")
+                sig = particle.get("signature", "") or particle.get("evidence", "")
+                if sig:
+                    detection_context = f"{sig}\n{detection_context}"
+                bases = particle.get("base_classes", [])
+                if bases:
+                    detection_context = f"{' '.join(bases)}\n{detection_context}"
+
+                # Detect specific T2 atom from name, signature, bases, and body
+                t2_atom = self.atom_registry.detect_t2_atom(ecosystem, detection_context, particle.get("name", ""))
                 if t2_atom:
                     dims["D1_WHAT"] = t2_atom
                     dims["D1_ECOSYSTEM"] = ecosystem  # Track ecosystem for analysis
