@@ -283,9 +283,81 @@ class TreeSitterUniversalEngine:
                     body_source=node_source,
                 )
                 particle['tags'] = ['tree-sitter', parser_name]
+                # Store byte ranges for hook enrichment
+                particle['_node_start_byte'] = node.start_byte
+                particle['_node_end_byte'] = node.end_byte
                 particles.append(particle)
 
+        # === HOOK COUNTING ENRICHMENT ===
+        # Run separate query for hook calls (use* pattern)
+        hook_calls = self._extract_hook_calls(ts_lang, root_node, content)
+
+        # Enrich React components with hook usage metadata
+        for particle in particles:
+            dims = particle.get('dimensions', {})
+            d1_what = dims.get('D1_WHAT', '')
+
+            # Only enrich React components (EXT.REACT.001-006 are component atoms)
+            if not d1_what.startswith('EXT.REACT.'):
+                continue
+
+            comp_start = particle.get('_node_start_byte')
+            comp_end = particle.get('_node_end_byte')
+            if comp_start is None or comp_end is None:
+                continue
+
+            # Find hooks used inside this component
+            hooks_inside = [
+                h for h in hook_calls
+                if comp_start <= h['start_byte'] and h['end_byte'] <= comp_end
+            ]
+
+            if hooks_inside:
+                particle.setdefault('metadata', {})['hooks_used'] = len(hooks_inside)
+                particle['metadata']['hooks'] = [h['name'] for h in hooks_inside]
+
+        # Clean up internal byte range fields (not needed in output)
+        for particle in particles:
+            particle.pop('_node_start_byte', None)
+            particle.pop('_node_end_byte', None)
+
         return particles
+
+    def _extract_hook_calls(self, ts_lang, root_node, content: str) -> List[Dict]:
+        """Extract React hook calls (use* pattern) from AST."""
+        import tree_sitter
+
+        hook_query_scm = """
+        (call_expression
+          function: (identifier) @hook_name)
+        """
+
+        try:
+            hook_query = tree_sitter.Query(ts_lang, hook_query_scm)
+            cursor = tree_sitter.QueryCursor(hook_query)
+            captures = cursor.captures(root_node)
+
+            hook_calls = []
+            for tag, nodes in captures.items():
+                if tag != 'hook_name':
+                    continue
+                for node in nodes:
+                    name = node.text.decode('utf8') if node.text else ''
+                    # Filter to use* pattern (React hooks)
+                    if name.startswith('use') and len(name) > 3 and name[3].isupper():
+                        # Get parent call_expression for full byte range
+                        call_node = node.parent
+                        if call_node and call_node.type == 'call_expression':
+                            hook_calls.append({
+                                'name': name,
+                                'start_byte': call_node.start_byte,
+                                'end_byte': call_node.end_byte,
+                                'line': call_node.start_point[0] + 1
+                            })
+            return hook_calls
+        except Exception as e:
+            # If hook query fails, return empty list (non-blocking)
+            return []
         
     def analyze_directory(self, dir_path: str, extensions: List[str] = None) -> List[Dict[str, Any]]:
         """Analyze all supported files in a directory."""

@@ -255,3 +255,79 @@ class TestTreeSitterFallback:
 
         names = [p["name"] for p in particles]
         assert "App" in names, "Fallback must still find App"
+
+
+@requires_tree_sitter
+class TestHookMetadataEnrichment:
+    """Hook usage metadata must be correctly added to React components."""
+
+    def test_custom_hook_has_hook_metadata(self):
+        """Custom hooks should have hooks_used metadata."""
+        engine = TreeSitterUniversalEngine()
+        result = engine.analyze_file(str(FIXTURES_DIR / "hooks_component.tsx"))
+
+        particles = result.get("particles", [])
+        use_counter = next((p for p in particles if p["name"] == "useCounter"), None)
+
+        assert use_counter is not None, "useCounter not found"
+        meta = use_counter.get("metadata", {})
+
+        assert meta.get("hooks_used", 0) >= 2, \
+            f"useCounter should have at least 2 hooks, got {meta.get('hooks_used')}"
+        assert "useState" in meta.get("hooks", []), \
+            f"useCounter should use useState, got {meta.get('hooks')}"
+
+    def test_component_with_hooks_has_metadata(self):
+        """Components using hooks should have hooks_used metadata."""
+        engine = TreeSitterUniversalEngine()
+        result = engine.analyze_file(str(FIXTURES_DIR / "hooks_component.tsx"))
+
+        particles = result.get("particles", [])
+        counter = next((p for p in particles if p["name"] == "Counter"), None)
+
+        assert counter is not None, "Counter not found"
+        meta = counter.get("metadata", {})
+
+        assert meta.get("hooks_used", 0) >= 3, \
+            f"Counter should have at least 3 hooks, got {meta.get('hooks_used')}"
+        # Should include useEffect, useMemo, useContext, useRef, useCounter
+        hooks = meta.get("hooks", [])
+        assert len(hooks) >= 3, f"Expected at least 3 hook names, got {hooks}"
+
+    def test_component_without_hooks_no_metadata(self):
+        """Components without hooks should not have hooks_used metadata."""
+        engine = TreeSitterUniversalEngine()
+        result = engine.analyze_file(str(FIXTURES_DIR / "hooks_component.tsx"))
+
+        particles = result.get("particles", [])
+        app = next((p for p in particles if p["name"] == "App"), None)
+
+        assert app is not None, "App not found"
+        meta = app.get("metadata", {})
+
+        assert meta.get("hooks_used", 0) == 0, \
+            f"App should have 0 hooks, got {meta.get('hooks_used')}"
+
+    def test_non_react_functions_no_hook_metadata(self):
+        """Non-React functions should not have hook metadata."""
+        engine = TreeSitterUniversalEngine()
+
+        import tempfile
+        with tempfile.NamedTemporaryFile(suffix=".js", mode="w", delete=False) as f:
+            f.write("""
+function add(a, b) {
+  return a + b;
+}
+""")
+            temp_path = f.name
+
+        try:
+            result = engine.analyze_file(temp_path)
+            particles = result.get("particles", [])
+
+            for p in particles:
+                meta = p.get("metadata", {})
+                assert "hooks_used" not in meta, \
+                    f"Plain function {p['name']} should not have hooks_used"
+        finally:
+            Path(temp_path).unlink()
