@@ -377,6 +377,7 @@ def main():
     elif args.command == "doctor":
         from src.core.full_analysis import run_full_analysis
         from src.core.normalize_output import normalize_output, validate_contract
+        from collections import Counter
 
         output_dir = args.output or tempfile.mkdtemp(prefix="collider_doctor_")
         print(f"🩺 Doctor running on: {args.path}")
@@ -403,6 +404,19 @@ def main():
             sys.exit(1)
 
         print("✅ Doctor PASS: output contract verified.")
+        nodes = normalized.get("nodes", []) if isinstance(normalized, dict) else []
+        atom_family_counts = Counter()
+        tier_counts = Counter()
+        for node in nodes:
+            if not isinstance(node, dict):
+                continue
+            atom_family = node.get("atom_family") or "unknown"
+            tier = node.get("tier") or "unknown"
+            atom_family_counts[str(atom_family)] += 1
+            tier_counts[str(tier)] += 1
+        if nodes:
+            print("   atom_family counts:", dict(atom_family_counts))
+            print("   tier counts:", dict(tier_counts))
     
     elif args.command == "graph":
         from src.core.graph_analyzer import analyze_full, generate_report, load_graph, shortest_path

@@ -10,10 +10,41 @@ from __future__ import annotations
 
 from datetime import datetime
 from pathlib import PurePath
-from typing import Any, Dict, Iterable, List, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
 CONFIDENCE_SUFFIXES = ("_confidence", "_prob", "_probability")
+ATOM_FAMILIES = {"LOG", "DAT", "ORG", "EXE", "EXT"}
+TIER_VALUES = {"T0", "T1", "T2", "unknown"}
+SCHEMA_CATEGORY_TO_FAMILY = {
+    "LOGIC": "LOG",
+    "DATA": "DAT",
+    "ORGANIZATION": "ORG",
+    "EXECUTION": "EXE",
+    "ECOSYSTEM": "EXT",
+}
+
+_SCHEMA = None
+
+
+def _get_schema():
+    """Lazy-load unified atom schema if available."""
+    global _SCHEMA
+    if _SCHEMA is not None:
+        return _SCHEMA
+    try:
+        from src.core.unified_atom_schema import get_unified_schema
+    except ImportError:
+        try:
+            from unified_atom_schema import get_unified_schema
+        except ImportError:
+            _SCHEMA = None
+            return _SCHEMA
+    try:
+        _SCHEMA = get_unified_schema()
+    except Exception:
+        _SCHEMA = None
+    return _SCHEMA
 
 
 def normalize_meta(data: Dict[str, Any]) -> Dict[str, Any]:
@@ -64,6 +95,64 @@ def normalize_confidence_fields(obj: Dict[str, Any]) -> None:
             raw_key = f"{key}_raw"
             obj.setdefault(raw_key, value)
             obj[key] = numeric / 100.0
+
+
+def _derive_atom_family(atom_id: str) -> Optional[str]:
+    if not atom_id:
+        return None
+    prefix = atom_id.split(".", 1)[0].upper()
+    if prefix in ATOM_FAMILIES:
+        return prefix
+    schema = _get_schema()
+    if schema:
+        atom_def = schema.get(atom_id)
+        if atom_def:
+            category = str(atom_def.category).upper()
+            return SCHEMA_CATEGORY_TO_FAMILY.get(category)
+    return None
+
+
+def _derive_tier(atom_id: str) -> str:
+    if not atom_id:
+        return "unknown"
+    schema = _get_schema()
+    if schema:
+        atom_def = schema.get(atom_id)
+        if atom_def and atom_def.tier:
+            return atom_def.tier
+    prefix = atom_id.split(".", 1)[0].upper()
+    if prefix == "CORE":
+        return "T0"
+    if prefix == "ARCH":
+        return "T1"
+    if prefix == "EXT":
+        return "T2"
+    return "unknown"
+
+
+def _normalize_taxonomy(node: Dict[str, Any]) -> None:
+    atom_id = node.get("atom")
+    derived_family = _derive_atom_family(atom_id) if atom_id else None
+    if atom_id:
+        if derived_family:
+            node["atom_family"] = derived_family
+        else:
+            node.setdefault("atom_family", None)
+
+    tier_value = node.get("tier")
+    if isinstance(tier_value, str):
+        tier_value = tier_value.upper()
+        if tier_value in ("T0", "T1", "T2"):
+            node["tier"] = tier_value
+        elif tier_value.lower() == "unknown":
+            node["tier"] = "unknown"
+        else:
+            tier_value = None
+    if not tier_value or node.get("tier") not in TIER_VALUES:
+        node["tier"] = _derive_tier(atom_id) if atom_id else "unknown"
+
+    if "ring" not in node:
+        node["ring"] = None
 
 
 def _iter_nodes(data: Dict[str, Any]) -> Iterable[Dict[str, Any]]:
@@ -178,6 +267,7 @@ def normalize_output(data: Dict[str, Any]) -> Dict[str, Any]:
     for node in nodes:
         if isinstance(node, dict):
             normalize_confidence_fields(node)
+            _normalize_taxonomy(node)
     for edge in edges:
         if isinstance(edge, dict):
             normalize_confidence_fields(edge)
@@ -220,6 +310,18 @@ def validate_contract(data: Dict[str, Any]) -> Tuple[List[str], List[str]]:
             errors.append(f"node[{idx}] missing id")
         elif "::" not in node_id:
             warnings.append(f"node[{idx}] legacy id format: {node_id}")
+
+        atom_id = node.get("atom")
+        atom_family = node.get("atom_family")
+        if atom_id:
+            if not atom_family:
+                errors.append(f"node[{idx}] atom_family missing for atom {atom_id}")
+            elif str(atom_family).upper() not in ATOM_FAMILIES:
+                errors.append(f"node[{idx}] atom_family invalid: {atom_family}")
+
+        tier = node.get("tier")
+        if tier not in TIER_VALUES:
+            errors.append(f"node[{idx}] tier invalid: {tier}")
 
         check_confidence_fields(node, f"node[{idx}]")
 

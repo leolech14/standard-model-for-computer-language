@@ -59,6 +59,7 @@ def test_normalize_output_contract():
     assert normalized["nodes"][0]["confidence_raw"] == 80
     assert normalized["nodes"][0]["role_confidence"] == 0.8
     assert normalized["nodes"][0]["role_confidence_raw"] == 80
+    assert normalized["nodes"][0]["atom_family"] == "LOG"
 
     edge_conf = normalized["edges"][0]["confidence"]
     assert 0.0 <= edge_conf <= 1.0
@@ -72,3 +73,11 @@ def test_normalize_output_contract():
     errors, warnings = validate_contract(normalized)
     assert errors == []
     assert warnings == []
+
+
+def test_normalize_output_idempotent():
+    target_path = "/tmp/project"
+    data = _sample_output(target_path)
+    once = normalize_output(data)
+    twice = normalize_output(once)
+    assert once == twice
