@@ -271,11 +271,28 @@ def generate_webgl_html(json_source, output_path):
     # First, apply appearance tokens to all nodes (adds color, size)
     nodes_with_appearance = appearance.apply_to_nodes(nodes, file_boundaries, color_mode="tier")
 
+    node_id_counts = {}
+    canonical_id_map = {}
+
+    def normalize_node_id(node, index):
+        raw_id = node.get('id') or node.get('atom_id')
+        if not raw_id:
+            file_path = node.get('file_path') or node.get('file') or 'unknown'
+            name = node.get('name') or node.get('symbol') or node.get('kind') or 'node'
+            start_line = node.get('start_line') or node.get('line') or index
+            raw_id = f"{file_path}::{name}:{start_line}"
+
+        base_id = str(raw_id).strip() or f"node:{index}"
+        count = node_id_counts.get(base_id, 0) + 1
+        node_id_counts[base_id] = count
+        if count == 1:
+            canonical_id_map[base_id] = base_id
+            return base_id
+        return f"{base_id}#{count}"
+
     node_set = set()
-    for n in nodes_with_appearance:
-        nid = n.get('id')
-        if not nid:
-            continue
+    for idx, n in enumerate(nodes_with_appearance):
+        nid = normalize_node_id(n, idx)
         atom = n.get('atom') or n.get('atom_id') or 'UNK'
         name = n.get('name', nid)
         file_path = n.get('file_path', '')
@@ -309,6 +326,16 @@ def generate_webgl_html(json_source, output_path):
     # ==========================================================================
     # EDGE PROCESSING: Apply appearance engine tokens
     # ==========================================================================
+    def normalize_edge_endpoint(value):
+        if isinstance(value, dict):
+            value = value.get('id')
+        if value is None:
+            return None
+        key = str(value).strip()
+        if not key:
+            return None
+        return canonical_id_map.get(key, key)
+
     edges_with_appearance = appearance.apply_to_edges(edges)
     default_edge_opacity = resolver.appearance(
         "color.edge-modes.opacity",
@@ -316,11 +343,17 @@ def generate_webgl_html(json_source, output_path):
     )
 
     for e in edges_with_appearance:
-        src = e.get('source')
-        tgt = e.get('target')
+        src = normalize_edge_endpoint(e.get('source'))
+        tgt = normalize_edge_endpoint(e.get('target'))
 
         # Filter broken edges
         if src in node_set and tgt in node_set:
+            raw_markov = e.get('markov_weight', 0.0)
+            try:
+                markov_weight = float(raw_markov) if raw_markov is not None else 0.0
+            except (TypeError, ValueError):
+                markov_weight = 0.0
+
             graph_data['links'].append({
                 "source": src,
                 "target": tgt,
@@ -328,7 +361,7 @@ def generate_webgl_html(json_source, output_path):
                 "opacity": e.get('opacity', default_edge_opacity),
                 "edge_type": e.get('edge_type', e.get('type', 'default')),
                 "weight": e.get('weight', 1.0),
-                "markov_weight": e.get('markov_weight', 0.0),  # For flow visualization
+                "markov_weight": markov_weight,  # For flow visualization
                 "confidence": e.get('confidence', 1.0),
                 "resolution": e.get('resolution', 'unknown')
             })
@@ -1359,6 +1392,119 @@ def generate_webgl_html(json_source, output_path):
         }};
 
         // =====================================================================
+        // DATA MANAGER: Minimal runtime checks for deterministic self-test/parity
+        // =====================================================================
+        class DataManager {{
+            constructor() {{
+                this.raw = {{ nodes: [], links: [] }};
+                this.index = {{ nodeById: new Map() }};
+            }}
+
+            init(data) {{
+                this.raw.nodes = Array.isArray(data?.nodes) ? data.nodes : [];
+                this.raw.links = Array.isArray(data?.links) ? data.links : [];
+                this._buildNodeIndex();
+                return this;
+            }}
+
+            _buildNodeIndex() {{
+                this.index.nodeById.clear();
+                for (const node of this.raw.nodes) {{
+                    if (!node || !node.id) continue;
+                    if (!this.index.nodeById.has(node.id)) {{
+                        this.index.nodeById.set(node.id, node);
+                    }}
+                }}
+            }}
+
+            _endpointId(link, side) {{
+                if (!link) return '';
+                let value = link[side];
+                if (value && typeof value === 'object') {{
+                    value = value.id;
+                }}
+                if (value === undefined || value === null) return '';
+                return String(value).trim();
+            }}
+
+            selfTest() {{
+                const errors = [];
+                const warnings = [];
+                const seenIds = new Set();
+
+                for (const node of this.raw.nodes) {{
+                    if (!node || !node.id) {{
+                        errors.push('Node missing id');
+                        continue;
+                    }}
+                    if (seenIds.has(node.id)) {{
+                        errors.push(`Duplicate node id: ${{node.id}}`);
+                        continue;
+                    }}
+                    seenIds.add(node.id);
+                }}
+
+                for (const link of this.raw.links) {{
+                    const srcId = this._endpointId(link, 'source');
+                    const tgtId = this._endpointId(link, 'target');
+                    if (srcId && !this.index.nodeById.has(srcId)) {{
+                        warnings.push(`Edge source not in graph: ${{srcId}}`);
+                    }}
+                    if (tgtId && !this.index.nodeById.has(tgtId)) {{
+                        warnings.push(`Edge target not in graph: ${{tgtId}}`);
+                    }}
+                }}
+
+                const status = errors.length === 0 ? '✅ PASS' : '❌ FAIL';
+                console.log(`%c[DataManager] Self-Test: ${{status}}`,
+                    errors.length === 0 ? 'color: #4ade80; font-weight: bold' : 'color: #f87171; font-weight: bold');
+                console.log(`  Nodes: ${{this.raw.nodes.length}}, Edges: ${{this.raw.links.length}}`);
+                console.log(`  Indexed: nodeById=${{this.index.nodeById.size}}`);
+
+                if (errors.length > 0) {{
+                    console.error('[DataManager] Errors:', errors);
+                }}
+                if (warnings.length > 0) {{
+                    console.warn('[DataManager] Warnings:', warnings.slice(0, 5));
+                    if (warnings.length > 5) {{
+                        console.warn(`  ... and ${{warnings.length - 5}} more warnings`);
+                    }}
+                }}
+
+                return {{ errors, warnings, pass: errors.length === 0 }};
+            }}
+        }}
+
+        function runDmParity(dm, data) {{
+            if (!dm) return;
+            const checks = [];
+            const rawNodes = Array.isArray(data?.nodes) ? data.nodes.length : 0;
+            const rawEdges = Array.isArray(data?.links) ? data.links.length : 0;
+            const dmNodes = dm.raw.nodes.length;
+            const dmEdges = dm.raw.links.length;
+
+            checks.push({{ name: 'Node count', dm: dmNodes, old: rawNodes, pass: dmNodes === rawNodes }});
+            checks.push({{ name: 'Edge count', dm: dmEdges, old: rawEdges, pass: dmEdges === rawEdges }});
+            checks.push({{ name: 'Node index size', dm: dm.index.nodeById.size, old: rawNodes, pass: dm.index.nodeById.size === rawNodes }});
+
+            const rawMarkovEdges = (Array.isArray(data?.links) ? data.links : [])
+                .filter(l => (l?.markov_weight || 0) > 0).length;
+            const dmMarkovEdges = (Array.isArray(dm.raw.links) ? dm.raw.links : [])
+                .filter(l => (l?.markov_weight || 0) > 0).length;
+            checks.push({{ name: 'Markov edges', dm: dmMarkovEdges, old: rawMarkovEdges, pass: dmMarkovEdges === rawMarkovEdges }});
+
+            const allPass = checks.every(c => c.pass);
+            const style = allPass ? 'color: #4ade80; font-weight: bold' : 'color: #f87171; font-weight: bold';
+            console.log(`%c[DM Parity] ${{allPass ? '✅ ALL PASS' : '❌ MISMATCH'}}`, style);
+            checks.forEach(c => {{
+                const icon = c.pass ? '✓' : '✗';
+                console.log(`  ${{icon}} ${{c.name}}: DM=${{c.dm}}, Raw=${{c.old}}`);
+            }});
+        }}
+
+        let DM = null;
+
+        // =====================================================================
         // HUD LAYOUT MANAGER: Smart Text Placement with Collision Avoidance
         // =====================================================================
         const HudLayoutManager = {{
@@ -1727,6 +1873,15 @@ def generate_webgl_html(json_source, output_path):
         worker.postMessage(COMPRESSED_PAYLOAD);
 
         function initGraph(data) {{
+            // =================================================================
+            // DATA MANAGER: Self-test + parity checks
+            // =================================================================
+            DM = new DataManager();
+            DM.init(data);
+            window.DM = DM;
+            DM.selfTest();
+            runDmParity(DM, data);
+
             // =================================================================
             // TOKEN-DRIVEN CONFIG: Extract from payload
             // =================================================================
