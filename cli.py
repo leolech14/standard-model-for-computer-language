@@ -41,7 +41,7 @@ def main():
     analyze_parser.add_argument(
         "--output",
         default=None,
-        help="Output directory for results (defaults to <repo>/collider_output)",
+        help="Output directory for results (defaults to <repo>/.collider)",
     )
     analyze_parser.add_argument(
         "--language", 
@@ -133,7 +133,7 @@ def main():
     full_parser.add_argument(
         "--output",
         default=None,
-        help="Output directory for results"
+        help="Output directory for results (defaults to <repo>/.collider)"
     )
     full_parser.add_argument(
         "--roadmap",

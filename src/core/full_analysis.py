@@ -22,6 +22,15 @@ from typing import Dict, List, Any, Optional
 # FILE-CENTRIC VIEW: Bridges atom-centric analysis with file-based navigation
 # =============================================================================
 
+def _resolve_output_dir(target: Path, output_dir: Optional[str]) -> Path:
+    """Resolve the canonical output directory."""
+    if output_dir:
+        return Path(output_dir)
+    if target.is_dir():
+        return target / ".collider"
+    return target.parent / ".collider"
+
+
 def build_file_index(nodes: List[Dict], edges: List[Dict], target_path: str = "") -> Dict[str, Any]:
     """
     Build a file-centric index of atoms for hybrid navigation.
@@ -399,6 +408,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     
     start_time = time.time()
     target = Path(target_path).resolve()
+    resolved_output_dir = _resolve_output_dir(target, output_dir)
     
     print("=" * 60)
     print("COLLIDER FULL ANALYSIS")
@@ -422,7 +432,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     print("\n🔬 Stage 1: Base Analysis...")
     analysis_options = dict(options)
     analysis_options.pop("roadmap", None)
-    result = analyze(str(target), output_dir=output_dir, write_output=False, **analysis_options)
+    result = analyze(str(target), output_dir=str(resolved_output_dir), write_output=False, **analysis_options)
     nodes = result.nodes if hasattr(result, 'nodes') else result.get('nodes', [])
     edges = result.edges if hasattr(result, 'edges') else result.get('edges', [])
     unified_stats = getattr(result, 'stats', {}) if hasattr(result, 'stats') else result.get('stats', {})
@@ -622,10 +632,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     print(f"   → {sum(f['atom_count'] for f in file_boundaries)} atoms mapped to files")
 
     # Save output
-    if output_dir:
-        out_path = Path(output_dir)
-    else:
-        out_path = target / "collider_output" if target.is_dir() else target.parent / "collider_output"
+    out_path = resolved_output_dir
     
     out_path.mkdir(parents=True, exist_ok=True)
 
