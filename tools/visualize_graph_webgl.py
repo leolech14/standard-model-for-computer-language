@@ -39,8 +39,8 @@ def generate_webgl_html(json_source, output_path):
     # META FALLBACK: Prefer meta.* but fall back to root-level fields
     # This ensures backward compatibility with older output formats
     # ==========================================================================
-    version = meta.get('version') or data.get('version', 'V3-Tokens')
-    target_path = meta.get('target') or data.get('target', 'Unknown')
+    version = meta.get('version') or data.get('collider_version') or data.get('version', 'V3-Tokens')
+    target_path = meta.get('target') or data.get('target_path') or data.get('target', 'Unknown')
     target_folder = Path(target_path).name if target_path and target_path != 'Unknown' else 'Unknown'
     timestamp = meta.get('timestamp') or data.get('timestamp', datetime.now().isoformat())
 
@@ -196,13 +196,55 @@ def generate_webgl_html(json_source, output_path):
     flow_mode_config = appearance.get_flow_mode_config()
     controls_config = controls.to_js_config()
 
+    # ==========================================================================
+    # KPI CALCULATION: Build KPIs from stats/architecture if not present
+    # ==========================================================================
+    kpis = data.get("kpis", {})
+    if not kpis:
+        stats = data.get("stats", {})
+        arch = data.get("architecture", {})
+        graph_inf = arch.get("graph_inference", {})
+
+        # Calculate edge resolution from import_resolution stats
+        import_res = stats.get("import_resolution", {})
+        resolved = import_res.get("resolved", 0)
+        unresolved = import_res.get("unresolved", 0)
+        total_imports = resolved + unresolved
+        edge_res_pct = (resolved / total_imports * 100) if total_imports > 0 else None
+
+        # Calculate call ratio from edges
+        call_edges = sum(1 for e in edges if e.get("type") == "calls")
+        call_ratio_pct = (call_edges / len(edges) * 100) if edges else None
+
+        # Get topology from graph inference
+        topology = graph_inf.get("topology_class", "UNKNOWN")
+
+        # Calculate orphan and hub counts from nodes
+        orphan_count = sum(1 for n in nodes if n.get("in_degree", 0) == 0 and n.get("out_degree", 0) == 0)
+        hub_threshold = 10
+        top_hub_count = sum(1 for n in nodes if (n.get("in_degree", 0) + n.get("out_degree", 0)) > hub_threshold)
+
+        # Get dead code percentage
+        dead_code_pct = stats.get("unknown_percentage")
+
+        kpis = {
+            "edge_resolution_percent": edge_res_pct,
+            "call_ratio_percent": call_ratio_pct,
+            "reachability_percent": stats.get("coverage_percentage"),
+            "dead_code_percent": dead_code_pct,
+            "knot_score": graph_inf.get("knot_score"),
+            "topology_shape": topology,
+            "orphan_count": orphan_count,
+            "top_hub_count": top_hub_count
+        }
+
     # OPTIMIZATION: Minify payload for embedding
     graph_data = {
         "nodes": [],
         "links": [],
         "file_boundaries": file_boundaries,
         "brain_download": data.get("brain_download", ""),
-        "kpis": data.get("kpis", {}),
+        "kpis": kpis,
         "meta": meta,
         # Token-driven configs for JS (THE REMOTE CONTROL)
         "physics": physics_config,
@@ -286,6 +328,7 @@ def generate_webgl_html(json_source, output_path):
                 "opacity": e.get('opacity', default_edge_opacity),
                 "edge_type": e.get('edge_type', e.get('type', 'default')),
                 "weight": e.get('weight', 1.0),
+                "markov_weight": e.get('markov_weight', 0.0),  # For flow visualization
                 "confidence": e.get('confidence', 1.0),
                 "resolution": e.get('resolution', 'unknown')
             })
@@ -348,8 +391,8 @@ def generate_webgl_html(json_source, output_path):
         /* HUD: Mission Control (Top Left) */
         .hud-panel {{
             position: absolute;
-            background: rgba(8, 10, 14, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
             padding: 15px;
             border-radius: 4px;
@@ -466,7 +509,7 @@ def generate_webgl_html(json_source, output_path):
         .side-lock {{
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.9);
             border-radius: 8px;
             padding: 4px 6px;
             font-size: 10px;
@@ -484,8 +527,8 @@ def generate_webgl_html(json_source, output_path):
         }}
         .side-content {{
             display: none;
-            background: rgba(8, 10, 14, 0.28);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             padding: 10px;
             backdrop-filter: blur(12px);
@@ -499,7 +542,7 @@ def generate_webgl_html(json_source, output_path):
         }}
         .side-title {{
             font-size: 9px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.9);
             letter-spacing: 1px;
             margin-bottom: 6px;
         }}
@@ -508,7 +551,7 @@ def generate_webgl_html(json_source, output_path):
         }}
         .side-group-title {{
             font-size: 9px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.85);
             margin-bottom: 4px;
         }}
         .filter-list {{
@@ -541,7 +584,7 @@ def generate_webgl_html(json_source, output_path):
         }}
         .filter-slider label {{
             font-size: 9px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.9);
         }}
         .filter-slider input[type="range"] {{
             width: 100%;
@@ -576,6 +619,11 @@ def generate_webgl_html(json_source, output_path):
             border-color: rgba(255,255,255,0.3);
             color: #ffffff;
             box-shadow: none;
+        }}
+        .dock-btn.disabled {{
+            opacity: 0.35;
+            cursor: not-allowed;
+            pointer-events: none;
         }}
 
         /* Datamap Toggles */
@@ -667,14 +715,14 @@ def generate_webgl_html(json_source, output_path):
             justify-content: space-between;
             font-size: 11px;
             margin-bottom: 4px;
-            color: #aaa;
+            color: #ffffff;
         }}
         .hover-panel-row .label {{
-            color: #888;
+            color: rgba(255, 255, 255, 0.85);
             min-width: 70px;
         }}
         .hover-panel-row .value {{
-            color: #fff;
+            color: #ffffff;
             text-align: right;
             white-space: nowrap;
             overflow: hidden;
@@ -686,11 +734,138 @@ def generate_webgl_html(json_source, output_path):
         }}
         .hover-panel-file {{
             font-size: 10px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             margin-top: 8px;
             padding-top: 6px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.15);
             word-break: break-all;
+        }}
+
+        /* SELECTION PANEL - Persistent selection summary */
+        .selection-panel {{
+            position: fixed;
+            top: 140px;
+            right: 20px;
+            width: 320px;
+            max-height: 360px;
+            overflow: auto;
+            display: none;
+            z-index: 25;
+            transition: left 150ms ease-out, top 150ms ease-out;
+            will-change: left, top;
+        }}
+        .selection-panel.visible {{ display: block; }}
+        .selection-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }}
+        .selection-title {{
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.4px;
+        }}
+        .selection-clear {{
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.95);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            cursor: pointer;
+        }}
+        .selection-list {{
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }}
+        .selection-item {{
+            padding: 6px 8px;
+            background: rgba(0, 0, 0, 0.50);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+        }}
+        .selection-name {{
+            font-size: 12px;
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }}
+        .selection-row {{
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: rgba(255,255,255,0.95);
+        }}
+        .selection-row .label {{
+            color: rgba(255,255,255,0.85);
+        }}
+        .selection-summary {{
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.95);
+        }}
+        .selection-pill {{
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 3px 8px;
+            font-size: 9px;
+            color: rgba(255,255,255,0.8);
+        }}
+
+        /* MODE TOAST - Brief hints when changing modes */
+        .mode-toast {{
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-out;
+            white-space: nowrap;
+            backdrop-filter: blur(8px);
+        }}
+        .mode-toast.visible {{
+            opacity: 1;
+        }}
+
+        /* FLOW LEGEND - Mini explanation for flow mode */
+        .flow-legend {{
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 140, 0, 0.4);
+            border-radius: 6px;
+            padding: 6px 10px;
+            color: rgba(255, 200, 100, 0.9);
+            font-size: 10px;
+            font-family: 'Inter', sans-serif;
+            z-index: 50;
+            display: none;
+            backdrop-filter: blur(6px);
+        }}
+        .flow-legend.visible {{
+            display: block;
         }}
 
         /* FILE HOVER PANEL - Smart Text Placement */
@@ -779,6 +954,59 @@ def generate_webgl_html(json_source, output_path):
             color: #ffffff;
         }}
 
+        /* GROUPS LIST */
+        .group-list {{
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }}
+        .group-item {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            cursor: pointer;
+        }}
+        .group-item.active {{
+            border-color: rgba(140, 200, 255, 0.5);
+            background: rgba(80, 140, 220, 0.18);
+        }}
+        .group-color {{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,0.4);
+        }}
+        .group-name {{
+            flex-grow: 1;
+            font-size: 10px;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }}
+        .group-count {{
+            font-size: 9px;
+            color: rgba(255,255,255,0.85);
+        }}
+        .group-toggle {{
+            accent-color: #6fe8ff;
+        }}
+
+        /* SELECTION BOX (marquee) */
+        #selection-box {{
+            position: fixed;
+            border: 1px solid rgba(100, 180, 255, 0.8);
+            background: rgba(100, 180, 255, 0.12);
+            display: none;
+            pointer-events: none;
+            z-index: 30;
+        }}
+
         /* Loading Screen */
         #loader {{
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -820,7 +1048,7 @@ def generate_webgl_html(json_source, output_path):
             <div style="font-size: 11px; opacity: 0.7; margin-bottom: 4px;">{target_folder}</div>
             <div style="font-size: 10px; opacity: 0.5;">{ts_display}</div>
             <hr style="border-color: rgba(255,255,255,0.1); margin: 10px 0;">
-            <div style="font-size: 9px; opacity: 0.4;">L-Click Rotate · R-Click Pan · Scroll Zoom</div>
+            <div style="font-size: 9px; opacity: 0.5;">L-Drag Select · R-Drag Rotate · Space+Drag Pan · Scroll Zoom</div>
         </div>
 
         <!-- Central stats (moved from top-left for visual balance) -->
@@ -874,6 +1102,15 @@ def generate_webgl_html(json_source, output_path):
                 <span class="value" id="hover-role">--</span>
             </div>
             <div class="hover-panel-file" id="hover-file">file_path</div>
+        </div>
+
+        <!-- SELECTION PANEL: Persistent selection summary -->
+        <div class="hud-panel selection-panel" id="selection-panel">
+            <div class="selection-header">
+                <span class="selection-title" id="selection-title">SELECTION</span>
+                <button class="selection-clear" id="selection-clear">CLEAR</button>
+            </div>
+            <div class="selection-list" id="selection-body"></div>
         </div>
 
         <!-- FILE INFO PANEL: Shows on node hover -->
@@ -933,11 +1170,16 @@ def generate_webgl_html(json_source, output_path):
                         <div class="filter-list" id="filter-metadata"></div>
                     </div>
                 </div>
+                <div class="side-section" id="side-groups">
+                    <div class="side-title">GROUPS</div>
+                    <div class="group-list" id="group-list"></div>
+                </div>
             </div>
         </div>
 
         <div class="hud-panel bottom-dock">
             <div class="datamap-controls" id="datamap-controls"></div>
+            <button class="dock-btn disabled" id="btn-create-group" title="Create a group from selection">CREATE GROUP</button>
             <button class="dock-btn" id="btn-files">FILES</button>
             <!-- File visualization mode sub-controls -->
             <div class="file-mode-controls" id="file-mode-controls">
@@ -954,10 +1196,15 @@ def generate_webgl_html(json_source, output_path):
             <button class="dock-btn" id="btn-edge-mode" title="Edge colors: type, resolution, weight, confidence">EDGE: TYPE</button>
             <button class="dock-btn" id="btn-report">REPORT</button>
             <button class="dock-btn active" id="btn-stars" title="Toggle background starfield">STARS</button>
+            <button class="dock-btn" id="btn-reset-layout" title="Re-run physics simulation">RESET</button>
+            <button class="dock-btn active" id="btn-hints" title="Show/hide mode hints">HINTS</button>
             <button class="dock-btn" id="btn-dimensions">2D</button>
         </div>
+        <div class="flow-legend" id="flow-legend">FLOW: edge width = transition probability</div>
         <div class="hud-toast" id="hud-toast"></div>
     </div>
+
+    <div id="selection-box"></div>
 
     <script>
         // UMD globals: THREE, ForceGraph3D, pako already loaded
@@ -1013,6 +1260,18 @@ def generate_webgl_html(json_source, output_path):
         let DATAMAP_CONFIGS = [];
         let DATAMAP_INDEX = {{}};
         let DATAMAP_UI = new Map();
+        let HOVERED_NODE = null;
+        let SELECTED_NODE_IDS = new Set();
+        let DATASET_KEY = 'default';
+        let GROUPS_STORAGE_KEY = 'collider_groups_default';
+        let GROUPS = [];
+        let ACTIVE_GROUP_ID = null;
+        let MARQUEE_ACTIVE = false;
+        let MARQUEE_START = null;
+        let SELECTION_BOX = null;
+        let LAST_MARQUEE_END_TS = 0;
+        const SELECTION_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
+        const GROUP_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
         let IS_3D = true;
         let DIMENSION_TRANSITION = false;
         let STARFIELD = null;
@@ -1055,6 +1314,12 @@ def generate_webgl_html(json_source, output_path):
         let NODE_COLOR_CONFIG = {{ tier: {{}}, ring: {{}}, unknown: '#666666' }};
         let FLOW_CONFIG = {{}};  // Flow mode settings from THE REMOTE CONTROL
         let GRAPH_MODE = 'atoms'; // atoms | files | hybrid
+
+        // Layout stability: cache node positions to prevent re-randomization on toggles
+        let NODE_POSITION_CACHE = new Map();
+        let LAYOUT_FROZEN = false;  // When true, don't reheat simulation
+        let HINTS_ENABLED = true;   // Show mode toasts
+
         let FILE_GRAPH = null;
         let FILE_NODE_IDS = new Map();
         let FILE_NODE_POSITIONS = new Map();
@@ -1233,6 +1498,26 @@ def generate_webgl_html(json_source, output_path):
                 return candidates;
             }},
 
+            // Generate candidate positions for selection panel (prefer right side)
+            getSelectionPanelCandidates(panelWidth, panelHeight) {{
+                const vp = this.getViewport();
+                const margin = 20;
+                const sidebarOpen = this.isSidebarOpen();
+                const sidebarWidth = sidebarOpen ? 300 : 0;
+
+                return sidebarOpen ? [
+                    {{ left: vp.right - panelWidth - margin, top: vp.bottom - panelHeight - margin }}, // Bottom-right
+                    {{ left: vp.right - panelWidth - margin, top: vp.top + margin }},                  // Top-right
+                    {{ left: sidebarWidth + margin, top: vp.bottom - panelHeight - margin }},         // Bottom-left
+                    {{ left: sidebarWidth + margin, top: vp.top + margin }}                           // Top-left
+                ] : [
+                    {{ left: vp.right - panelWidth - margin, top: vp.bottom - panelHeight - margin }},
+                    {{ left: vp.right - panelWidth - margin, top: vp.top + margin }},
+                    {{ left: vp.left + margin, top: vp.bottom - panelHeight - margin }},
+                    {{ left: vp.left + margin, top: vp.top + margin }}
+                ];
+            }},
+
             // Generate candidate positions for hover panel (4 quadrants around mouse cursor)
             getHoverPanelCandidates(mouseX, mouseY, panelWidth, panelHeight) {{
                 const vp = this.getViewport();
@@ -1358,6 +1643,29 @@ def generate_webgl_html(json_source, output_path):
                     filePanelOccupied.push(hoverPanelRect);
                 }}
 
+                // Place selection panel (secondary priority)
+                const selectionPanel = document.getElementById('selection-panel');
+                let selectionPanelRect = null;
+                if (selectionPanel && selectionPanel.classList.contains('visible')) {{
+                    const candidates = this.getSelectionPanelCandidates(
+                        selectionPanel.offsetWidth || 320,
+                        selectionPanel.offsetHeight || 280
+                    );
+                    const pos = this.placePanel(selectionPanel, candidates, filePanelOccupied);
+                    if (pos) {{
+                        selectionPanel.style.left = pos.left + 'px';
+                        selectionPanel.style.top = pos.top + 'px';
+                        selectionPanel.style.right = 'auto';
+                        selectionPanelRect = {{
+                            left: pos.left,
+                            top: pos.top,
+                            right: pos.left + (selectionPanel.offsetWidth || 320),
+                            bottom: pos.top + (selectionPanel.offsetHeight || 280)
+                        }};
+                        filePanelOccupied.push(selectionPanelRect);
+                    }}
+                }}
+
                 // Place file panel (lower priority, avoids hover panel too)
                 const filePanel = document.getElementById('file-panel');
                 if (filePanel && filePanel.classList.contains('visible')) {{
@@ -1478,18 +1786,38 @@ def generate_webgl_html(json_source, output_path):
                 .nodeVal(node => (node.val || 1) * APPEARANCE_STATE.nodeScale)
                 .linkColor(link => toColorNumber(getEdgeColor(link), 0x222222))
                 .linkOpacity(link => (link.opacity ?? EDGE_DEFAULT_OPACITY))
+                .nodeThreeObjectExtend(true)
+                .nodeThreeObject(node => ensureNodeOverlays(node))
                 .nodeResolution(nodeRes)
                 .showNavInfo(false)
                 .warmupTicks(simulation.warmupTicks || 30)
                 .cooldownTicks(simulation.cooldownTicks || 0)
                 .onNodeHover(node => handleNodeHover(node, data))
-                .onNodeClick(node => handleNodeClick(node))
+                .onNodeClick((node, event) => handleNodeClick(node, event))
+                .onBackgroundClick(() => maybeClearSelection())
                 .onEngineStop(() => {{
                     document.getElementById('loader').style.display = 'none';
                     drawFileBoundaries(data);
+                    // LAYOUT STABILITY: Freeze layout after initial simulation completes
+                    if (!LAYOUT_FROZEN) {{
+                        saveNodePositions();
+                        freezeLayout();
+                    }}
                 }});
 
             window.Graph = Graph;
+            initSelectionState(data);
+            setupSelectionInteractions();
+            updateSelectionVisuals();
+
+            // =================================================================
+            // CONTROLS: keep default camera behavior, enable damping
+            // =================================================================
+            const controls = Graph.controls();
+            if (controls) {{
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.1;
+            }}
 
             // =================================================================
             // TOKEN-DRIVEN: Force Configuration
@@ -1778,6 +2106,21 @@ def generate_webgl_html(json_source, output_path):
                 return getFileColor(fileIdx, totalFiles, fileLabel);
             }}
 
+            // Atom family color palette (LOG=blue, DAT=green, ORG=purple, EXE=red, EXT=orange)
+            const ATOM_FAMILY_COLORS = {{
+                'LOG': '#4a9eff',   // Blue - logic/functions
+                'DAT': '#4ade80',   // Green - data/DTOs
+                'ORG': '#a78bfa',   // Purple - organizational
+                'EXE': '#f87171',   // Red - execution/entry
+                'EXT': '#fb923c',   // Orange - external/extensions
+                'UNKNOWN': '#666666'
+            }};
+
+            if (NODE_COLOR_MODE === 'family') {{
+                const atomFamily = getNodeAtomFamily(node);
+                return ATOM_FAMILY_COLORS[atomFamily] || ATOM_FAMILY_COLORS.UNKNOWN;
+            }}
+
             if (NODE_COLOR_MODE === 'ring') {{
                 const ring = getNodeRing(node);
                 const ringColor = NODE_COLOR_CONFIG.ring?.[ring];
@@ -1787,15 +2130,6 @@ def generate_webgl_html(json_source, output_path):
                 // Fallback: if ring is UNKNOWN or unmapped, use atom_family palette
                 if (ring === 'UNKNOWN' || !NODE_COLOR_CONFIG.ring?.[ring]) {{
                     const atomFamily = getNodeAtomFamily(node);
-                    // Atom family color palette (LOG=blue, DAT=green, ORG=purple, EXE=red, EXT=orange)
-                    const ATOM_FAMILY_COLORS = {{
-                        'LOG': '#4a9eff',   // Blue - logic/functions
-                        'DAT': '#4ade80',   // Green - data/DTOs
-                        'ORG': '#a78bfa',   // Purple - organizational
-                        'EXE': '#f87171',   // Red - execution/entry
-                        'EXT': '#fb923c',   // Orange - external/extensions
-                        'UNKNOWN': '#666666'
-                    }};
                     return ATOM_FAMILY_COLORS[atomFamily] || ATOM_FAMILY_COLORS.UNKNOWN;
                 }}
                 const hue = hashToUnit(ring) * 360;
@@ -1875,6 +2209,104 @@ def generate_webgl_html(json_source, output_path):
             }}
 
             return {{ nodes: visibleNodes, links: visibleLinks }};
+        }}
+
+        // ====================================================================
+        // LAYOUT STABILITY: Preserve node positions across graph updates
+        // ====================================================================
+        function saveNodePositions() {{
+            if (!Graph) return;
+            const nodes = Graph.graphData().nodes || [];
+            nodes.forEach(node => {{
+                if (node.x !== undefined && node.y !== undefined) {{
+                    NODE_POSITION_CACHE.set(node.id, {{
+                        x: node.x, y: node.y, z: node.z || 0,
+                        vx: node.vx || 0, vy: node.vy || 0, vz: node.vz || 0,
+                        fx: node.fx, fy: node.fy, fz: node.fz
+                    }});
+                }}
+            }});
+        }}
+
+        function restoreNodePositions(nodes) {{
+            nodes.forEach(node => {{
+                const cached = NODE_POSITION_CACHE.get(node.id);
+                if (cached) {{
+                    node.x = cached.x;
+                    node.y = cached.y;
+                    node.z = cached.z;
+                    node.vx = cached.vx;
+                    node.vy = cached.vy;
+                    node.vz = cached.vz;
+                    // Pin nodes in place when layout is frozen
+                    if (LAYOUT_FROZEN) {{
+                        node.fx = cached.x;
+                        node.fy = cached.y;
+                        node.fz = cached.z;
+                    }}
+                }}
+            }});
+        }}
+
+        function freezeLayout() {{
+            LAYOUT_FROZEN = true;
+            if (!Graph) return;
+            const nodes = Graph.graphData().nodes || [];
+            nodes.forEach(node => {{
+                if (node.x !== undefined) {{
+                    node.fx = node.x;
+                    node.fy = node.y;
+                    node.fz = node.z;
+                }}
+            }});
+            Graph.cooldownTicks(0);  // Stop simulation immediately
+        }}
+
+        function unfreezeLayout() {{
+            LAYOUT_FROZEN = false;
+            if (!Graph) return;
+            const nodes = Graph.graphData().nodes || [];
+            nodes.forEach(node => {{
+                node.fx = undefined;
+                node.fy = undefined;
+                node.fz = undefined;
+            }});
+        }}
+
+        function resetLayout() {{
+            // Clear position cache and reheat simulation
+            NODE_POSITION_CACHE.clear();
+            unfreezeLayout();
+            if (Graph) {{
+                Graph.cooldownTicks(200);  // Allow simulation to run
+                Graph.d3ReheatSimulation();
+            }}
+            showModeToast('Layout reset - physics running');
+        }}
+
+        // ====================================================================
+        // MODE TOASTS: Brief hints when changing modes
+        // ====================================================================
+        let _toastTimeout = null;
+
+        function showModeToast(message) {{
+            if (!HINTS_ENABLED) return;
+
+            let toast = document.getElementById('mode-toast');
+            if (!toast) {{
+                toast = document.createElement('div');
+                toast.id = 'mode-toast';
+                toast.className = 'mode-toast';
+                document.body.appendChild(toast);
+            }}
+
+            toast.textContent = message;
+            toast.classList.add('visible');
+
+            if (_toastTimeout) clearTimeout(_toastTimeout);
+            _toastTimeout = setTimeout(() => {{
+                toast.classList.remove('visible');
+            }}, 1200);
         }}
 
         function getLinkEndpointId(link, side) {{
@@ -2101,27 +2533,37 @@ def generate_webgl_html(json_source, output_path):
 
         function refreshGraph() {{
             if (!FULL_GRAPH || !Graph) return;
+
+            // LAYOUT STABILITY: Save current positions before any graph update
+            saveNodePositions();
+
             if (GRAPH_MODE === 'files') {{
                 if (!FILE_GRAPH) {{
                     FILE_GRAPH = buildFileGraph(FULL_GRAPH);
                 }}
+                restoreNodePositions(FILE_GRAPH.nodes);
                 Graph.graphData(FILE_GRAPH);
                 applyFileColors(FILE_GRAPH.nodes);
                 Graph.nodeVal(node => (node.val || 1) * APPEARANCE_STATE.nodeScale);
                 Graph.nodeLabel('name');
                 applyEdgeMode();
                 updateDatamapControls();
+                syncSelectionAfterGraphUpdate();
+                if (LAYOUT_FROZEN) freezeLayout();
                 return;
             }}
 
             if (GRAPH_MODE === 'hybrid') {{
                 const hybrid = buildHybridGraph(FULL_GRAPH);
+                restoreNodePositions(hybrid.nodes);
                 Graph.graphData(hybrid);
                 applyFileColors(hybrid.nodes);
                 Graph.nodeVal(node => (node.val || 1) * APPEARANCE_STATE.nodeScale);
                 Graph.nodeLabel(VIS_FILTERS.metadata.showLabels ? 'name' : '');
                 applyEdgeMode();
                 updateDatamapControls();
+                syncSelectionAfterGraphUpdate();
+                if (LAYOUT_FROZEN) freezeLayout();
                 return;
             }}
 
@@ -2130,6 +2572,7 @@ def generate_webgl_html(json_source, output_path):
                 showToast('No nodes for that datamap selection.');
                 ACTIVE_DATAMAPS.clear();
                 const fallback = filterGraph(FULL_GRAPH, CURRENT_DENSITY, new Set(), VIS_FILTERS);
+                restoreNodePositions(fallback.nodes);
                 Graph.graphData(fallback);
                 applyNodeColors(fallback.nodes);
                 Graph.nodeVal(node => (node.val || 1) * APPEARANCE_STATE.nodeScale);
@@ -2139,9 +2582,12 @@ def generate_webgl_html(json_source, output_path):
                     applyFileVizMode();
                 }}
                 updateDatamapControls();
+                syncSelectionAfterGraphUpdate();
+                if (LAYOUT_FROZEN) freezeLayout();
                 return;
             }}
             applyNodeColors(subset.nodes);
+            restoreNodePositions(subset.nodes);
             Graph.graphData(subset);
             Graph.nodeVal(node => (node.val || 1) * APPEARANCE_STATE.nodeScale);
             Graph.nodeLabel(VIS_FILTERS.metadata.showLabels ? 'name' : '');
@@ -2150,6 +2596,8 @@ def generate_webgl_html(json_source, output_path):
                 applyFileVizMode();
             }}
             updateDatamapControls();
+            syncSelectionAfterGraphUpdate();
+            if (LAYOUT_FROZEN) freezeLayout();
         }}
 
         function collectCounts(items, keyFn) {{
@@ -2823,6 +3271,7 @@ def generate_webgl_html(json_source, output_path):
             buildExclusiveOptions('filter-node-color', [
                 {{ label: 'TIER', value: 'tier' }},
                 {{ label: 'RING', value: 'ring' }},
+                {{ label: 'FAMILY', value: 'family' }},
                 {{ label: 'FILE', value: 'file' }}
             ], NODE_COLOR_MODE, setNodeColorMode);
             buildExclusiveOptions('filter-edge-mode', [
@@ -3117,6 +3566,13 @@ def generate_webgl_html(json_source, output_path):
             weight: 'EDGE: WEIGHT',
             confidence: 'EDGE: CONF',
             mono: 'EDGE: MONO'
+        }};
+        const EDGE_MODE_HINTS = {{
+            type: 'Edge color by type (calls, imports, etc.)',
+            resolution: 'Edge color by resolution (0-1, resolved vs unresolved)',
+            weight: 'Edge width by weight (call frequency)',
+            confidence: 'Edge opacity by confidence (0-1)',
+            mono: 'Monochrome edges (no color encoding)'
         }};
 
         function clamp01(value) {{
@@ -3418,6 +3874,8 @@ def generate_webgl_html(json_source, output_path):
                 button.textContent = EDGE_MODE_LABELS[EDGE_MODE] || 'EDGE';
             }}
             applyEdgeMode();
+            // Show mode toast hint
+            showModeToast(EDGE_MODE_HINTS[mode] || `Edge mode: ${{mode}}`);
         }}
 
         // Datamap toggles are wired in buildDatamapControls().
@@ -3461,6 +3919,21 @@ def generate_webgl_html(json_source, output_path):
             setStarsVisible(!isActive);
         }};
 
+        // Reset Layout button - explicitly re-run physics
+        document.getElementById('btn-reset-layout').onclick = () => {{
+            resetLayout();
+        }};
+
+        // Hints toggle - enable/disable mode toasts
+        document.getElementById('btn-hints').onclick = () => {{
+            const btn = document.getElementById('btn-hints');
+            HINTS_ENABLED = !HINTS_ENABLED;
+            btn.classList.toggle('active', HINTS_ENABLED);
+            if (HINTS_ENABLED) {{
+                showModeToast('Hints enabled');
+            }}
+        }};
+
         document.getElementById('btn-edge-mode').onclick = () => cycleEdgeMode();
 
         // ====================================================================
@@ -3476,10 +3949,16 @@ def generate_webgl_html(json_source, output_path):
             const btn = document.getElementById('btn-flow');
             btn.classList.toggle('active', flowMode);
 
+            // Show/hide flow legend
+            const legend = document.getElementById('flow-legend');
+            if (legend) legend.classList.toggle('visible', flowMode);
+
             if (flowMode) {{
                 applyFlowVisualization();
+                showModeToast('FLOW: edge width = transition probability, particles = direction');
             }} else {{
                 clearFlowVisualization();
+                showModeToast('Flow mode off');
             }}
         }};
 
@@ -3491,14 +3970,37 @@ def generate_webgl_html(json_source, output_path):
             const flowCfg = FLOW_CONFIG || {{}};
             const highlightColor = flowCfg.highlightColor || '#ff8c00';
             const sizeMult = flowCfg.sizeMultiplier || 1.8;
-            const edgeScale = flowCfg.edgeWidthScale || 2.0;
+            const edgeScale = flowCfg.edgeWidthScale || 3.0;  // Increased for visibility
             const particles = flowCfg.particles || {{}};
+            const topK = flowCfg.topKEdges || 3;  // Show only top K outgoing edges per node
+            const minWeight = flowCfg.minWeight || 0.1;  // Minimum weight threshold
 
             // Build set of high entropy node names
             highEntropyNodes.clear();
             highEntropy.forEach(n => highEntropyNodes.add(n.node));
 
             const graphNodes = Graph.graphData().nodes;
+            const graphLinks = Graph.graphData().links;
+
+            // THRESHOLDING: Build a map of top-K outgoing edges per source node
+            const edgesBySource = new Map();
+            graphLinks.forEach(link => {{
+                const srcId = typeof link.source === 'object' ? link.source.id : link.source;
+                if (!edgesBySource.has(srcId)) {{
+                    edgesBySource.set(srcId, []);
+                }}
+                edgesBySource.get(srcId).push(link);
+            }});
+
+            // For each source, keep only top-K by markov_weight (transition probability)
+            const visibleEdges = new Set();
+            edgesBySource.forEach((edges, srcId) => {{
+                const sorted = edges
+                    .filter(e => (e.markov_weight || 0) >= minWeight)
+                    .sort((a, b) => (b.markov_weight || 0) - (a.markov_weight || 0))
+                    .slice(0, topK);
+                sorted.forEach(e => visibleEdges.add(e));
+            }});
 
             // Store original colors and apply flow coloring
             graphNodes.forEach(node => {{
@@ -3512,23 +4014,36 @@ def generate_webgl_html(json_source, output_path):
                 }}
             }});
 
-            // Update link widths based on edge weight
+            // Update link widths based on markov_weight (with thresholding)
             Graph.linkWidth(link => {{
-                const weight = link.weight || 1;
-                return Math.max(0.5, weight * edgeScale);
+                if (!visibleEdges.has(link)) return 0.1;  // Dim non-top edges
+                const mw = link.markov_weight || 0;
+                return Math.max(0.5, mw * edgeScale);
             }});
 
-            // Add directional particles if enabled
-            if (particles.enabled !== false) {{
-                Graph.linkDirectionalParticles(particles.count || 2);
-                Graph.linkDirectionalParticleWidth(particles.width || 2);
-                Graph.linkDirectionalParticleSpeed(particles.speed || 0.005);
-            }}
+            // Update link opacity to emphasize important edges
+            Graph.linkOpacity(link => {{
+                if (!visibleEdges.has(link)) return 0.05;  // Nearly invisible
+                return 0.6 + (link.markov_weight || 0) * 0.4;  // 0.6 - 1.0 range
+            }});
+
+            // Add directional particles only on visible edges
+            Graph.linkDirectionalParticles(link => {{
+                if (!visibleEdges.has(link)) return 0;
+                return particles.count || 3;
+            }});
+            Graph.linkDirectionalParticleWidth(particles.width || 2.5);
+            Graph.linkDirectionalParticleSpeed(particles.speed || 0.008);
+            Graph.linkDirectionalParticleColor(() => '#ffaa00');
 
             // Update node coloring
             Graph.nodeColor(n => toColorNumber(n.color, '#888888'));
 
-            console.log(`Flow mode: ${{highEntropyNodes.size}} high entropy nodes highlighted`);
+            updateSelectionVisuals();
+
+            // Debug: count edges with markov weights
+            const edgesWithMarkov = graphLinks.filter(l => l.markov_weight > 0).length;
+            console.log(`Flow mode: ${{highEntropyNodes.size}} high entropy nodes, ${{visibleEdges.size}} visible edges (top-${{topK}} per node), ${{edgesWithMarkov}}/${{graphLinks.length}} edges with markov weights`);
         }}
 
         function clearFlowVisualization() {{
@@ -3557,6 +4072,7 @@ def generate_webgl_html(json_source, output_path):
 
             highEntropyNodes.clear();
             applyEdgeMode();
+            updateSelectionVisuals();
         }}
 
         function setDatamap(prefix) {{
@@ -3687,8 +4203,513 @@ def generate_webgl_html(json_source, output_path):
             HudLayoutManager.reflow();
         }}
 
+        function buildDatasetKey(data) {{
+            const meta = (data && data.meta) ? data.meta : {{}};
+            const target = meta.target || meta.project || 'dataset';
+            const version = meta.version || '';
+            const nodeCount = Array.isArray(data?.nodes) ? data.nodes.length : 0;
+            const edgeCount = Array.isArray(data?.links)
+                ? data.links.length
+                : (Array.isArray(data?.edges) ? data.edges.length : 0);
+            const raw = `${{target}}|${{nodeCount}}|${{edgeCount}}|${{version}}`;
+            return raw.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 180);
+        }}
+
+        function loadGroups() {{
+            GROUPS = [];
+            try {{
+                const stored = localStorage.getItem(GROUPS_STORAGE_KEY);
+                if (stored) {{
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed)) {{
+                        GROUPS = parsed;
+                    }}
+                }}
+            }} catch (e) {{
+                // localStorage unavailable
+            }}
+            GROUPS = GROUPS.filter(group => group && group.id && Array.isArray(group.node_ids));
+            GROUPS.forEach(group => {{
+                if (group.visible === undefined) group.visible = true;
+            }});
+        }}
+
+        function saveGroups() {{
+            try {{
+                localStorage.setItem(GROUPS_STORAGE_KEY, JSON.stringify(GROUPS));
+            }} catch (e) {{
+                // localStorage unavailable
+            }}
+        }}
+
+        function getNextGroupColor() {{
+            const hue = (GROUPS.length * 137.5) % 360;
+            return hslColor(hue, 65, 55);
+        }}
+
+        function getGroupById(groupId) {{
+            return GROUPS.find(group => group.id === groupId) || null;
+        }}
+
+        function getPrimaryGroupForNode(nodeId) {{
+            const visibleGroups = GROUPS.filter(group =>
+                group.visible !== false && Array.isArray(group.node_ids) && group.node_ids.includes(nodeId)
+            );
+            if (!visibleGroups.length) return null;
+            if (ACTIVE_GROUP_ID) {{
+                const active = visibleGroups.find(group => group.id === ACTIVE_GROUP_ID);
+                if (active) return active;
+            }}
+            return visibleGroups[0];
+        }}
+
+        function renderGroupList() {{
+            const container = document.getElementById('group-list');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!GROUPS.length) {{
+                const empty = document.createElement('div');
+                empty.style.fontSize = '9px';
+                empty.style.color = 'rgba(255,255,255,0.4)';
+                empty.textContent = 'No groups yet';
+                container.appendChild(empty);
+                return;
+            }}
+
+            GROUPS.forEach(group => {{
+                const row = document.createElement('div');
+                row.className = 'group-item';
+                row.classList.toggle('active', group.id === ACTIVE_GROUP_ID);
+
+                const dot = document.createElement('span');
+                dot.className = 'group-color';
+                dot.style.background = group.color || '#6fe8ff';
+
+                const name = document.createElement('span');
+                name.className = 'group-name';
+                name.textContent = group.name || 'Group';
+
+                const count = document.createElement('span');
+                count.className = 'group-count';
+                count.textContent = String((group.node_ids || []).length);
+
+                const toggle = document.createElement('input');
+                toggle.type = 'checkbox';
+                toggle.className = 'group-toggle';
+                toggle.checked = group.visible !== false;
+                toggle.onchange = (e) => {{
+                    e.stopPropagation();
+                    group.visible = toggle.checked;
+                    saveGroups();
+                    updateSelectionVisuals();
+                    renderGroupList();
+                }};
+
+                row.onclick = (e) => {{
+                    if (e.target === toggle) return;
+                    ACTIVE_GROUP_ID = group.id;
+                    renderGroupList();
+                    setSelection(group.node_ids || []);
+                    updateSelectionVisuals();
+                }};
+
+                row.appendChild(dot);
+                row.appendChild(name);
+                row.appendChild(count);
+                row.appendChild(toggle);
+                container.appendChild(row);
+            }});
+        }}
+
+        function updateGroupButtonState() {{
+            const btn = document.getElementById('btn-create-group');
+            if (!btn) return;
+            const hasSelection = SELECTED_NODE_IDS.size > 0;
+            btn.classList.toggle('disabled', !hasSelection);
+            btn.disabled = !hasSelection;
+        }}
+
+        function createGroupFromSelection() {{
+            if (SELECTED_NODE_IDS.size === 0) return;
+            const nodeIds = Array.from(SELECTED_NODE_IDS);
+            const groupId = `group_${{Date.now().toString(36)}}`;
+            const groupName = `Group ${{GROUPS.length + 1}}`;
+            const groupColor = getNextGroupColor();
+            GROUPS.push({{
+                id: groupId,
+                name: groupName,
+                color: groupColor,
+                node_ids: nodeIds,
+                visible: true
+            }});
+            ACTIVE_GROUP_ID = groupId;
+            saveGroups();
+            renderGroupList();
+            updateSelectionVisuals();
+            showToast(`Created ${{groupName}} (${{nodeIds.length}})`);
+        }}
+
+        function getSelectedNodes() {{
+            if (!Graph || !Graph.graphData) return [];
+            const nodes = Graph.graphData().nodes || [];
+            return nodes.filter(node => node && node.id && SELECTED_NODE_IDS.has(node.id));
+        }}
+
+        function setSelection(ids, additive = false) {{
+            if (!additive) {{
+                SELECTED_NODE_IDS.clear();
+            }}
+            (ids || []).forEach(id => {{
+                if (id) SELECTED_NODE_IDS.add(id);
+            }});
+            updateSelectionPanel();
+            updateSelectionVisuals();
+            updateGroupButtonState();
+        }}
+
+        function toggleSelection(node) {{
+            if (!node || !node.id) return;
+            if (SELECTED_NODE_IDS.has(node.id)) {{
+                SELECTED_NODE_IDS.delete(node.id);
+            }} else {{
+                SELECTED_NODE_IDS.add(node.id);
+            }}
+            updateSelectionPanel();
+            updateSelectionVisuals();
+            updateGroupButtonState();
+        }}
+
+        function clearSelection() {{
+            SELECTED_NODE_IDS.clear();
+            updateSelectionPanel();
+            updateSelectionVisuals();
+            updateGroupButtonState();
+        }}
+
+        function maybeClearSelection() {{
+            const now = Date.now();
+            if (now - LAST_MARQUEE_END_TS < 250) return;
+            clearSelection();
+        }}
+
+        function formatCountList(items, limit = 4) {{
+            return items.slice(0, limit).map(([key, count]) => `${{key}} ${{count}}`).join(' · ') || '--';
+        }}
+
+        function appendSelectionRow(container, label, value) {{
+            const row = document.createElement('div');
+            row.className = 'selection-row';
+            const labelEl = document.createElement('span');
+            labelEl.className = 'label';
+            labelEl.textContent = label;
+            const valueEl = document.createElement('span');
+            valueEl.textContent = value || '--';
+            row.appendChild(labelEl);
+            row.appendChild(valueEl);
+            container.appendChild(row);
+        }}
+
+        function updateSelectionPanel() {{
+            const panel = document.getElementById('selection-panel');
+            const body = document.getElementById('selection-body');
+            const title = document.getElementById('selection-title');
+            if (!panel || !body) return;
+
+            const nodes = getSelectedNodes();
+            if (!nodes.length) {{
+                panel.classList.remove('visible');
+                body.innerHTML = '';
+                return;
+            }}
+
+            panel.classList.add('visible');
+            if (title) title.textContent = `SELECTION (${{nodes.length}})`;
+            body.innerHTML = '';
+
+            if (nodes.length <= 3) {{
+                nodes.forEach(node => {{
+                    const item = document.createElement('div');
+                    item.className = 'selection-item';
+                    const name = document.createElement('div');
+                    name.className = 'selection-name';
+                    name.textContent = node.name || node.id || 'Unknown';
+                    item.appendChild(name);
+                    appendSelectionRow(item, 'Family', getNodeAtomFamily(node));
+                    appendSelectionRow(item, 'Ring', getNodeRing(node));
+                    appendSelectionRow(item, 'Tier', getNodeTier(node));
+                    appendSelectionRow(item, 'Role', node.role || '--');
+                    const filePath = node.file_path || node.file || '';
+                    if (filePath) {{
+                        const shortPath = filePath.length > 48 ? '...' + filePath.slice(-45) : filePath;
+                        appendSelectionRow(item, 'File', shortPath);
+                    }}
+                    body.appendChild(item);
+                }});
+            }} else {{
+                const summary = document.createElement('div');
+                summary.className = 'selection-summary';
+
+                const families = collectCounts(nodes, n => getNodeAtomFamily(n));
+                const rings = collectCounts(nodes, n => getNodeRing(n));
+                const tiers = collectCounts(nodes, n => getNodeTier(n));
+
+                const total = document.createElement('div');
+                total.textContent = `Total: ${{nodes.length}} nodes`;
+                summary.appendChild(total);
+
+                const familyRow = document.createElement('div');
+                familyRow.textContent = `Family: ${{formatCountList(families)}}`;
+                summary.appendChild(familyRow);
+
+                const ringRow = document.createElement('div');
+                ringRow.textContent = `Ring: ${{formatCountList(rings)}}`;
+                summary.appendChild(ringRow);
+
+                const tierRow = document.createElement('div');
+                tierRow.textContent = `Tier: ${{formatCountList(tiers)}}`;
+                summary.appendChild(tierRow);
+
+                const numericKeys = [
+                    ['tokens', 'TOKENS'],
+                    ['bytes', 'BYTES'],
+                    ['loc', 'LOC'],
+                    ['lines', 'LINES'],
+                    ['lines_of_code', 'LOC'],
+                    ['size', 'SIZE']
+                ];
+                const totals = {{}};
+                nodes.forEach(node => {{
+                    numericKeys.forEach(([key]) => {{
+                        const value = Number(node[key]);
+                        if (Number.isFinite(value)) {{
+                            totals[key] = (totals[key] || 0) + value;
+                        }}
+                    }});
+                }});
+                numericKeys.forEach(([key, label]) => {{
+                    if (totals[key]) {{
+                        const row = document.createElement('div');
+                        row.textContent = `${{label}}: ${{Math.round(totals[key])}}`;
+                        summary.appendChild(row);
+                    }}
+                }});
+
+                body.appendChild(summary);
+            }}
+
+            HudLayoutManager.reflow();
+        }}
+
+        function updateOverlayScale(node) {{
+            const base = Math.max(0.6, (node.val || 1) * (APPEARANCE_STATE.nodeScale || 1));
+            const selectionScale = base * 1.9;
+            const groupScale = base * 1.5;
+            if (node.__selectionHalo) {{
+                node.__selectionHalo.scale.set(selectionScale, selectionScale, selectionScale);
+            }}
+            if (node.__groupHalo) {{
+                node.__groupHalo.scale.set(groupScale, groupScale, groupScale);
+            }}
+        }}
+
+        function ensureNodeOverlays(node) {{
+            if (!node) return null;
+            if (node.__overlayGroup) return node.__overlayGroup;
+
+            const group = new THREE.Group();
+
+            const selectionMaterial = new THREE.MeshBasicMaterial({{
+                color: 0x88d0ff,
+                transparent: true,
+                opacity: 0.35,
+                depthWrite: false
+            }});
+            const selectionHalo = new THREE.Mesh(SELECTION_HALO_GEOMETRY, selectionMaterial);
+            selectionHalo.visible = false;
+            selectionHalo.renderOrder = 3;
+
+            const groupMaterial = new THREE.MeshBasicMaterial({{
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.18,
+                depthWrite: false
+            }});
+            const groupHalo = new THREE.Mesh(GROUP_HALO_GEOMETRY, groupMaterial);
+            groupHalo.visible = false;
+            groupHalo.renderOrder = 2;
+
+            group.add(selectionHalo);
+            group.add(groupHalo);
+
+            node.__selectionHalo = selectionHalo;
+            node.__groupHalo = groupHalo;
+            node.__overlayGroup = group;
+            return group;
+        }}
+
+        function updateSelectionVisuals() {{
+            if (!Graph || !Graph.graphData) return;
+            const nodes = Graph.graphData().nodes || [];
+            nodes.forEach(node => {{
+                ensureNodeOverlays(node);
+                updateOverlayScale(node);
+                if (node.__selectionHalo) {{
+                    node.__selectionHalo.visible = SELECTED_NODE_IDS.has(node.id);
+                }}
+                if (node.__groupHalo) {{
+                    const group = getPrimaryGroupForNode(node.id);
+                    if (group) {{
+                        node.__groupHalo.visible = group.visible !== false;
+                        node.__groupHalo.material.color.set(group.color || '#88d0ff');
+                        node.__groupHalo.material.opacity =
+                            (group.id === ACTIVE_GROUP_ID) ? 0.45 : 0.18;
+                    }} else {{
+                        node.__groupHalo.visible = false;
+                    }}
+                }}
+            }});
+        }}
+
+        function syncSelectionAfterGraphUpdate() {{
+            if (!Graph || !Graph.graphData) return;
+            const visibleIds = new Set((Graph.graphData().nodes || []).map(n => n.id));
+            let changed = false;
+            Array.from(SELECTED_NODE_IDS).forEach(id => {{
+                if (!visibleIds.has(id)) {{
+                    SELECTED_NODE_IDS.delete(id);
+                    changed = true;
+                }}
+            }});
+            if (changed) {{
+                updateSelectionPanel();
+            }}
+            updateSelectionVisuals();
+            updateGroupButtonState();
+        }}
+
+        function updateSelectionBox(rect) {{
+            if (!SELECTION_BOX) return;
+            SELECTION_BOX.style.display = 'block';
+            SELECTION_BOX.style.left = `${{rect.left}}px`;
+            SELECTION_BOX.style.top = `${{rect.top}}px`;
+            SELECTION_BOX.style.width = `${{rect.width}}px`;
+            SELECTION_BOX.style.height = `${{rect.height}}px`;
+        }}
+
+        function getBoxRect(start, end) {{
+            const left = Math.min(start.x, end.x);
+            const top = Math.min(start.y, end.y);
+            const width = Math.abs(start.x - end.x);
+            const height = Math.abs(start.y - end.y);
+            return {{
+                left,
+                top,
+                width,
+                height,
+                right: left + width,
+                bottom: top + height
+            }};
+        }}
+
+        function getNodeScreenPosition(node) {{
+            if (!Graph || !Graph.camera || !node) return null;
+            if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) return null;
+            const camera = Graph.camera();
+            const vector = new THREE.Vector3(node.x, node.y, node.z || 0);
+            vector.project(camera);
+            const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+            const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+            return {{ x, y }};
+        }}
+
+        function selectNodesInBox(rect, additive = true) {{
+            if (!Graph || !Graph.graphData) return;
+            const nodes = Graph.graphData().nodes || [];
+            const selected = [];
+            nodes.forEach(node => {{
+                const pos = getNodeScreenPosition(node);
+                if (!pos) return;
+                if (pos.x >= rect.left && pos.x <= rect.right &&
+                    pos.y >= rect.top && pos.y <= rect.bottom) {{
+                    if (node.id) selected.push(node.id);
+                }}
+            }});
+            if (selected.length) {{
+                setSelection(selected, additive);
+            }}
+        }}
+
+        function setupSelectionInteractions() {{
+            const clearBtn = document.getElementById('selection-clear');
+            if (clearBtn) {{
+                clearBtn.onclick = () => clearSelection();
+            }}
+
+            const groupBtn = document.getElementById('btn-create-group');
+            if (groupBtn) {{
+                groupBtn.onclick = () => createGroupFromSelection();
+            }}
+
+            SELECTION_BOX = document.getElementById('selection-box');
+            if (!Graph || !Graph.renderer || !SELECTION_BOX) return;
+
+            const canvas = Graph.renderer().domElement;
+            if (!canvas) return;
+
+            const onPointerDown = (e) => {{
+                // Shift + left-drag = marquee selection
+                if (e.button !== 0) return;
+                if (!e.shiftKey) return;
+                if (e.target !== canvas) return;
+                if (HOVERED_NODE) return;
+                MARQUEE_ACTIVE = true;
+                MARQUEE_START = {{ x: e.clientX, y: e.clientY }};
+                updateSelectionBox(getBoxRect(MARQUEE_START, MARQUEE_START));
+                if (Graph.controls()) {{
+                    Graph.controls().enabled = false;
+                }}
+                e.preventDefault();
+            }};
+
+            const onPointerMove = (e) => {{
+                if (!MARQUEE_ACTIVE || !MARQUEE_START) return;
+                updateSelectionBox(getBoxRect(MARQUEE_START, {{ x: e.clientX, y: e.clientY }}));
+            }};
+
+            const finishSelection = (e) => {{
+                if (!MARQUEE_ACTIVE || !MARQUEE_START) return;
+                const rect = getBoxRect(MARQUEE_START, {{ x: e.clientX, y: e.clientY }});
+                SELECTION_BOX.style.display = 'none';
+                MARQUEE_ACTIVE = false;
+                MARQUEE_START = null;
+                LAST_MARQUEE_END_TS = Date.now();
+                if (Graph.controls()) {{
+                    Graph.controls().enabled = true;
+                }}
+                if (rect.width > 4 && rect.height > 4) {{
+                    selectNodesInBox(rect, true);
+                }}
+            }};
+
+            canvas.addEventListener('pointerdown', onPointerDown, {{ passive: false }});
+            canvas.addEventListener('pointermove', onPointerMove, {{ passive: true }});
+            canvas.addEventListener('pointerup', finishSelection, {{ passive: true }});
+            canvas.addEventListener('pointerleave', finishSelection, {{ passive: true }});
+        }}
+
+        function initSelectionState(data) {{
+            DATASET_KEY = buildDatasetKey(data);
+            GROUPS_STORAGE_KEY = `collider_groups_${{DATASET_KEY}}`;
+            loadGroups();
+            renderGroupList();
+            updateSelectionPanel();
+            updateGroupButtonState();
+        }}
+
         function handleNodeHover(node, data) {{
             const filePanel = document.getElementById('file-panel');
+            HOVERED_NODE = node || null;
 
             // Always update hover panel (separate from file panel)
             updateHoverPanel(node);
@@ -3738,11 +4759,19 @@ def generate_webgl_html(json_source, output_path):
             HudLayoutManager.reflow();
         }}
 
-        function handleNodeClick(node) {{
+        function handleNodeClick(node, event) {{
             if (!node) return;
-            if (GRAPH_MODE !== 'files' && GRAPH_MODE !== 'hybrid') return;
-            if (!node.isFileNode) return;
-            toggleFileExpand(node.fileIdx);
+            const additive = event && event.shiftKey;
+            if (additive) {{
+                toggleSelection(node);
+                return;
+            }}
+            if (node.id) {{
+                setSelection([node.id]);
+            }}
+            if ((GRAPH_MODE === 'files' || GRAPH_MODE === 'hybrid') && node.isFileNode) {{
+                toggleFileExpand(node.fileIdx);
+            }}
         }}
 
         function toggleFileExpand(fileIdx) {{
