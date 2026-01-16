@@ -11,6 +11,8 @@ Outputs:
     - output_human-readable_<project>_<timestamp>.html (human report + graph)
 """
 import json
+import os
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -29,6 +31,33 @@ def _resolve_output_dir(target: Path, output_dir: Optional[str]) -> Path:
     if target.is_dir():
         return target / ".collider"
     return target.parent / ".collider"
+
+
+def _find_latest_html(output_dir: Path) -> Optional[Path]:
+    """Return newest output_human-readable_*.html in output_dir, if any."""
+    try:
+        candidates = sorted(
+            output_dir.glob("output_human-readable_*.html"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+    except FileNotFoundError:
+        return None
+    return candidates[0] if candidates else None
+
+
+def _open_file(path: Path) -> bool:
+    """Open a file path with the OS default handler."""
+    try:
+        if sys.platform == "darwin":
+            subprocess.run(["open", str(path)], check=False)
+        elif os.name == "nt":
+            os.startfile(str(path))  # type: ignore[attr-defined]
+        else:
+            subprocess.run(["xdg-open", str(path)], check=False)
+    except Exception:
+        return False
+    return True
 
 
 def build_file_index(nodes: List[Dict], edges: List[Dict], target_path: str = "") -> Dict[str, Any]:
@@ -405,6 +434,11 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     
     if options is None:
         options = {}
+    open_latest = options.get("open_latest")
+    if open_latest is None:
+        open_latest = False
+    if options.get("no_open", False):
+        open_latest = False
     
     start_time = time.time()
     target = Path(target_path).resolve()
@@ -716,6 +750,14 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         print(f"   Data:   {unified_json}")
     if viz_file:
         print(f"   Visual: {viz_file}")
+    if open_latest:
+        latest_html = _find_latest_html(out_path)
+        if latest_html:
+            print(f"   Open:   {latest_html}")
+            if not _open_file(latest_html):
+                print("   ⚠️  Open failed (see system logs for details).")
+        else:
+            print("   ⚠️  No HTML outputs found to open.")
     print("=" * 60)
     
     return full_output

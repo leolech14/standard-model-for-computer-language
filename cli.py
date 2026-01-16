@@ -43,6 +43,20 @@ def main():
         default=None,
         help="Output directory for results (defaults to <repo>/.collider)",
     )
+    analyze_open = analyze_parser.add_mutually_exclusive_group()
+    analyze_open.add_argument(
+        "--open",
+        dest="open_latest",
+        action="store_true",
+        help="Open newest HTML output after analysis",
+    )
+    analyze_open.add_argument(
+        "--no-open",
+        dest="open_latest",
+        action="store_false",
+        help="Do not open HTML output after analysis",
+    )
+    analyze_parser.set_defaults(open_latest=None)
     analyze_parser.add_argument(
         "--language", 
         default=None, 
@@ -135,6 +149,20 @@ def main():
         default=None,
         help="Output directory for results (defaults to <repo>/.collider)"
     )
+    full_open = full_parser.add_mutually_exclusive_group()
+    full_open.add_argument(
+        "--open",
+        dest="open_latest",
+        action="store_true",
+        help="Open newest HTML output after analysis",
+    )
+    full_open.add_argument(
+        "--no-open",
+        dest="open_latest",
+        action="store_false",
+        help="Do not open HTML output after analysis",
+    )
+    full_parser.set_defaults(open_latest=None)
     full_parser.add_argument(
         "--roadmap",
         default=None,
@@ -337,6 +365,8 @@ def main():
         from src.core.full_analysis import run_full_analysis
         try:
             options = {"roadmap": args.roadmap} if args.roadmap else {}
+            if args.open_latest is not None:
+                options["open_latest"] = args.open_latest
             run_full_analysis(args.path, args.output, options=options)
         except Exception as e:
             print(f"❌ Full analysis failed: {e}")
@@ -355,6 +385,8 @@ def main():
             from src.core.full_analysis import run_full_analysis
 
             options = {}
+            if args.open_latest is not None:
+                options["open_latest"] = args.open_latest
             if args.llm:
                 options["llm"] = True
                 options["llm_model"] = args.llm_model
