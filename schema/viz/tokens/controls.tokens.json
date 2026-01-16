@@ -1,0 +1,291 @@
+{
+  "$schema": "controls-tokens",
+  "$purpose": "UI control bindings - USER EDITABLE",
+
+  "panels": {
+    "metrics": {
+      "visible":  {"$value": true},
+      "position": {"$value": "top-right"},
+      "fields": ["edge-resolution", "call-ratio", "reachability", "dead-code", "knot-score", "topology"]
+    },
+
+    "file-info": {
+      "visible":  {"$value": false},
+      "position": {"$value": "bottom-left"},
+      "show-on":  {"$value": "hover", "$options": ["hover", "click", "always"]},
+      "fields": ["file-name", "cohesion", "purpose", "atom-count", "classes", "functions", "code-preview"]
+    },
+
+    "report": {
+      "visible":  {"$value": false},
+      "position": {"$value": "top-right"},
+      "width":    {"$value": 420}
+    }
+  },
+
+  "buttons": {
+    "datamaps": {
+      "ALL":      {"$value": true,  "$filter": null},
+      "LOG":      {"$value": true,  "$filter": "LOG"},
+      "DAT":      {"$value": true,  "$filter": "DAT"},
+      "ORG":      {"$value": true,  "$filter": "ORG"},
+      "EXE":      {"$value": true,  "$filter": "EXE"},
+      "EXTERNAL": {"$value": true,  "$filter": "EXT"},
+      "CORE":     {"$value": true,  "$filter": "T0"},
+      "ARCH":     {"$value": true,  "$filter": "T1"},
+      "EXT":      {"$value": true,  "$filter": "T2"}
+    },
+
+    "modes": {
+      "FILES":  {"$value": true, "$description": "Toggle file visualization"},
+      "REPORT": {"$value": true, "$description": "Toggle report panel"}
+    },
+
+    "file-sub-modes": {
+      "COLOR":   {"$value": true,  "$mode": "color"},
+      "HULLS":   {"$value": true,  "$mode": "hulls"},
+      "CLUSTER": {"$value": true,  "$mode": "cluster"},
+      "MAP":     {"$value": true,  "$mode": "map"}
+    }
+  },
+
+  "datamaps": {
+    "$value": [
+      {
+        "id": "LOG",
+        "label": "LOG",
+        "match": { "atom_families": ["LOG"] }
+      },
+      {
+        "id": "DAT",
+        "label": "DAT",
+        "match": { "atom_families": ["DAT"] }
+      },
+      {
+        "id": "ORG",
+        "label": "ORG",
+        "match": { "atom_families": ["ORG"] }
+      },
+      {
+        "id": "EXE",
+        "label": "EXE",
+        "match": { "atom_families": ["EXE"] }
+      },
+      {
+        "id": "EXTERNAL",
+        "label": "EXTERNAL",
+        "match": { "atom_families": ["EXT"] }
+      },
+      {
+        "id": "T0",
+        "label": "T0",
+        "match": { "tiers": ["T0"] }
+      },
+      {
+        "id": "T1",
+        "label": "T1",
+        "match": { "tiers": ["T1"] }
+      },
+      {
+        "id": "T2",
+        "label": "T2",
+        "match": { "tiers": ["T2"] }
+      },
+      {
+        "id": "UNKNOWN",
+        "label": "UNKNOWN",
+        "match": { "tiers": ["UNKNOWN"] }
+      },
+      {
+        "id": "CORE",
+        "label": "CORE",
+        "match": { "tiers": ["T0"] }
+      },
+      {
+        "id": "ARCH",
+        "label": "ARCH",
+        "match": { "tiers": ["T1"] }
+      },
+      {
+        "id": "EXT",
+        "label": "EXT",
+        "match": { "tiers": ["T2"] }
+      },
+      {
+        "id": "DOMAIN",
+        "label": "DOMAIN",
+        "match": { "rings": ["DOMAIN"] }
+      },
+      {
+        "id": "APPLICATION",
+        "label": "APPLICATION",
+        "match": { "rings": ["APPLICATION"] }
+      },
+      {
+        "id": "PRESENTATION",
+        "label": "PRESENTATION",
+        "match": { "rings": ["PRESENTATION"] }
+      },
+      {
+        "id": "INTERFACE",
+        "label": "INTERFACE",
+        "match": { "rings": ["INTERFACE"] }
+      },
+      {
+        "id": "INFRASTRUCTURE",
+        "label": "INFRASTRUCTURE",
+        "match": { "rings": ["INFRASTRUCTURE"] }
+      },
+      {
+        "id": "CROSS_CUTTING",
+        "label": "CROSS_CUTTING",
+        "match": { "rings": ["CROSS_CUTTING"] }
+      },
+      {
+        "id": "TEST",
+        "label": "TEST",
+        "match": { "rings": ["TEST"] }
+      },
+      {
+        "id": "RING_UNKNOWN",
+        "label": "RING_UNKNOWN",
+        "match": { "rings": ["UNKNOWN"] }
+      }
+    ]
+  },
+
+  "sliders": {
+    "density": {
+      "label":   {"$value": "MATTER DENSITY"},
+      "min":     {"$value": 1},
+      "max":     {"$value": 10},
+      "step":    {"$value": 0.5},
+      "default": {"$value": 2}
+    },
+
+    "cluster-strength": {
+      "label":   {"$value": "CLUSTER FORCE"},
+      "min":     {"$value": 0},
+      "max":     {"$value": 1},
+      "step":    {"$value": 0.1},
+      "default": {"$value": 0.45}
+    },
+
+    "boundary-opacity": {
+      "label":   {"$value": "HULL OPACITY"},
+      "min":     {"$value": 0},
+      "max":     {"$value": 0.5},
+      "step":    {"$value": 0.02},
+      "default": {"$value": 0.1}
+    },
+
+    "edge-opacity": {
+      "label":   {"$value": "EDGE OPACITY"},
+      "min":     {"$value": 0},
+      "max":     {"$value": 1},
+      "step":    {"$value": 0.05},
+      "default": {"$value": 0.2}
+    },
+
+    "node-scale": {
+      "label":   {"$value": "NODE SCALE"},
+      "min":     {"$value": 0.5},
+      "max":     {"$value": 3},
+      "step":    {"$value": 0.1},
+      "default": {"$value": 1}
+    },
+
+    "background-brightness": {
+      "label":   {"$value": "BACKGROUND"},
+      "min":     {"$value": 0},
+      "max":     {"$value": 1},
+      "step":    {"$value": 0.05},
+      "default": {"$value": 1}
+    },
+
+    "file-lightness": {
+      "label":   {"$value": "FILE LIGHT"},
+      "min":     {"$value": 20},
+      "max":     {"$value": 80},
+      "step":    {"$value": 1},
+      "default": {"$value": 50}
+    },
+
+    "hull-wire-opacity": {
+      "label":   {"$value": "HULL WIRE"},
+      "min":     {"$value": 0.05},
+      "max":     {"$value": 0.6},
+      "step":    {"$value": 0.02},
+      "default": {"$value": 0.35}
+    },
+
+    "hue-shift": {
+      "label":   {"$value": "HUE SHIFT"},
+      "min":     {"$value": -180},
+      "max":     {"$value": 180},
+      "step":    {"$value": 1},
+      "default": {"$value": 0}
+    },
+
+    "chroma-scale": {
+      "label":   {"$value": "CHROMA SCALE"},
+      "min":     {"$value": 0},
+      "max":     {"$value": 2},
+      "step":    {"$value": 0.05},
+      "default": {"$value": 1}
+    },
+
+    "lightness-shift": {
+      "label":   {"$value": "LIGHT SHIFT"},
+      "min":     {"$value": -20},
+      "max":     {"$value": 20},
+      "step":    {"$value": 1},
+      "default": {"$value": 0}
+    }
+  },
+
+  "interactions": {
+    "hover": {
+      "show-label":   {"$value": true},
+      "show-panel":   {"$value": true},
+      "highlight":    {"$value": true},
+      "delay-hide-ms": {"$value": 300}
+    },
+
+    "click": {
+      "select":       {"$value": true},
+      "zoom-to":      {"$value": false},
+      "show-details": {"$value": true}
+    },
+
+    "navigation": {
+      "rotate":  {"$value": "left-click"},
+      "pan":     {"$value": "right-click"},
+      "zoom":    {"$value": "scroll"}
+    }
+  },
+
+  "sidebar": {
+    "visible": {"$value": true},
+    "collapsed": {"$value": true},
+    "width": {"$value": 240}
+  },
+
+  "filters": {
+    "tiers": {
+      "$value": ["CORE", "ARCH", "EXT", "DISCOVERED", "UNKNOWN"]
+    },
+    "rings": {
+      "$value": ["LOG", "DAT", "ORG", "EXE", "EXT"]
+    },
+    "edges": {
+      "$value": ["calls", "contains", "uses", "imports", "inherits", "default"]
+    },
+    "metadata": {
+      "show-labels": {"$value": true},
+      "show-file-panel": {"$value": true},
+      "show-report-panel": {"$value": true},
+      "show-edges": {"$value": true}
+    }
+  }
+}

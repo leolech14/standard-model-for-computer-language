@@ -1,0 +1,360 @@
+{
+  "$schema": "design-tokens",
+  "$purpose": "Visual appearance variables - THE REMOTE CONTROL",
+
+  "render": {
+    "$description": "Core rendering parameters",
+    "dimensions": {
+      "$value": 3,
+      "$options": [2, 3],
+      "$description": "Default 2D or 3D mode"
+    },
+    "node-resolution": {
+      "$value": 8,
+      "$description": "Sphere polygon count (4=low, 16=high)"
+    },
+    "anti-alias": {
+      "$value": true
+    }
+  },
+
+  "color": {
+    "atom": {
+      "t0-core": {
+        "$value": "oklch(70.25% 0.1364 236.02)",
+        "$description": "Universal atoms - Blue"
+      },
+      "t1-arch": {
+        "$value": "oklch(77.72% 0.1521 87.78)",
+        "$description": "Architectural patterns - Yellow"
+      },
+      "t2-eco": {
+        "$value": "oklch(54.72% 0.2500 310.47)",
+        "$description": "Ecosystem-specific - Purple"
+      },
+      "t3-discovered": {
+        "$value": "oklch(55.93% 0.1426 38.53)",
+        "$description": "Auto-discovered - Orange"
+      },
+      "unknown": {
+        "$value": "oklch(51.03% 0.0000 89.88)",
+        "$description": "Unclassified - Gray"
+      }
+    },
+    "atom-family": {
+      "LOG": {
+        "$value": "oklch(87.71% 0.1492 201.19)",
+        "$description": "Logic/Control - Cyan"
+      },
+      "DAT": {
+        "$value": "oklch(87.99% 0.2100 156.86)",
+        "$description": "Data - Green"
+      },
+      "ORG": {
+        "$value": "oklch(82.72% 0.1711 80.53)",
+        "$description": "Organization - Gold"
+      },
+      "EXE": {
+        "$value": "oklch(63.54% 0.2541 15.46)",
+        "$description": "Execution - Red"
+      },
+      "EXT": {
+        "$value": "oklch(53.38% 0.2503 301.37)",
+        "$description": "External - Purple"
+      },
+      "UNKNOWN": {
+        "$value": "oklch(51.03% 0.0000 89.88)",
+        "$description": "Unclassified - Gray"
+      }
+    },
+    "ring": {
+      "DOMAIN": {
+        "$value": "oklch(82.72% 0.1711 80.53)",
+        "$description": "Domain - Gold"
+      },
+      "APPLICATION": {
+        "$value": "oklch(87.71% 0.1492 201.19)",
+        "$description": "Application - Cyan"
+      },
+      "PRESENTATION": {
+        "$value": "oklch(87.99% 0.2100 156.86)",
+        "$description": "Presentation - Green"
+      },
+      "INTERFACE": {
+        "$value": "oklch(70.25% 0.1364 236.02)",
+        "$description": "Interface - Blue"
+      },
+      "INFRASTRUCTURE": {
+        "$value": "oklch(63.54% 0.2541 15.46)",
+        "$description": "Infrastructure - Red"
+      },
+      "CROSS_CUTTING": {
+        "$value": "oklch(53.38% 0.2503 301.37)",
+        "$description": "Cross Cutting - Purple"
+      },
+      "TEST": {
+        "$value": "oklch(65.00% 0.1450 330.00)",
+        "$description": "Test - Magenta"
+      },
+      "UNKNOWN": {
+        "$value": "oklch(51.03% 0.0000 89.88)",
+        "$description": "Unclassified - Gray"
+      }
+    },
+    "edge": {
+      "default": {
+        "$value": "oklch(25% 0.01 242)",
+        "$description": "Fallback edge color - very dim"
+      },
+      "calls": {
+        "$value": "oklch(45% 0.08 209)",
+        "$description": "Call edges - dimmed cyan"
+      },
+      "contains": {
+        "$value": "oklch(40% 0.07 162)",
+        "$description": "Containment edges - dimmed green"
+      },
+      "uses": {
+        "$value": "oklch(45% 0.09 85)",
+        "$description": "Usage edges - dimmed gold"
+      },
+      "imports": {
+        "$value": "oklch(35% 0.00 90)",
+        "$description": "Import edges - gray"
+      },
+      "inherits": {
+        "$value": "oklch(45% 0.10 57)",
+        "$description": "Inheritance edges - dimmed orange"
+      }
+    },
+    "edge-modes": {
+      "resolution": {
+        "internal": {
+          "$value": "oklch(60% 0.10 223)",
+          "$description": "Resolved internal - blue"
+        },
+        "external": {
+          "$value": "oklch(55% 0.14 23)",
+          "$description": "Resolved external - red"
+        },
+        "unresolved": {
+          "$value": "oklch(50% 0.01 248)",
+          "$description": "Unresolved - gray"
+        },
+        "unknown": {
+          "$value": "oklch(40% 0.00 90)",
+          "$description": "Unknown - dark gray"
+        }
+      },
+      "weight": {
+        "hue-min": { "$value": 210 },
+        "hue-max": { "$value": 50 },
+        "chroma": { "$value": 0.10 },
+        "saturation": { "$value": 40 },
+        "lightness": { "$value": 38 }
+      },
+      "confidence": {
+        "hue-min": { "$value": 20 },
+        "hue-max": { "$value": 120 },
+        "chroma": { "$value": 0.10 },
+        "saturation": { "$value": 40 },
+        "lightness": { "$value": 40 }
+      },
+      "width": {
+        "base": { "$value": 0.6 },
+        "weight-scale": { "$value": 2.0 },
+        "confidence-scale": { "$value": 1.5 }
+      },
+      "dim": {
+        "interfile-factor": {
+          "$value": 0.25,
+          "$description": "Opacity multiplier for cross-file edges"
+        }
+      },
+      "opacity": {
+        "$value": 0.08,
+        "$description": "Master edge opacity"
+      }
+    },
+    "highlight": {
+      "$description": "Selection and hover colors",
+      "selected": {
+        "$value": "oklch(90% 0.20 60)",
+        "$description": "Selected node - bright yellow"
+      },
+      "hover": {
+        "$value": "oklch(85% 0.15 200)",
+        "$description": "Hovered node - bright cyan"
+      },
+      "connected": {
+        "$value": "oklch(70% 0.12 150)",
+        "$description": "Connected edges on hover"
+      }
+    },
+    "background": {
+      "$value": "oklch(0% 0 0)",
+      "$description": "Scene background - pure black"
+    },
+    "panel": {
+      "$value": "oklch(16.56% 0.0132 248.65 / 0.85)",
+      "$description": "UI panel background"
+    },
+    "accent": {
+      "$value": "oklch(87.71% 0.1492 201.19)",
+      "$description": "UI accent color"
+    }
+  },
+
+  "size": {
+    "atom": {
+      "base": {
+        "$value": 1.0,
+        "$description": "Base node size"
+      },
+      "min": {
+        "$value": 0.5,
+        "$description": "Minimum node size"
+      },
+      "max": {
+        "$value": 8.0,
+        "$description": "Maximum node size"
+      },
+      "scale": {
+        "$value": 0.15,
+        "$description": "Size increase per fanout connection"
+      }
+    },
+    "edge": {
+      "width": {
+        "$value": 0.8,
+        "$description": "Base edge width"
+      }
+    },
+    "boundary": {
+      "padding": {
+        "$value": 1.2,
+        "$description": "Hull padding factor"
+      },
+      "min-extent": {
+        "$value": 6,
+        "$description": "Minimum hull axis length"
+      },
+      "quantile": {
+        "$value": 0.9,
+        "$description": "Trim percentile for hulls"
+      }
+    }
+  },
+
+  "opacity": {
+    "edge": {
+      "$value": 0.08,
+      "$description": "Master edge opacity - LOWER = more subtle"
+    },
+    "boundary-fill": {
+      "$value": 0.1,
+      "$description": "Hull fill opacity"
+    },
+    "boundary-wire": {
+      "$value": 0.35,
+      "$description": "Hull wireframe opacity"
+    },
+    "stars": {
+      "$value": 0.6,
+      "$description": "Starfield opacity"
+    }
+  },
+
+  "stars": {
+    "$description": "Cosmic background starfield",
+    "enabled": {
+      "$value": true
+    },
+    "count": {
+      "$value": 1500,
+      "$description": "Number of stars"
+    },
+    "spread": {
+      "$value": 4000,
+      "$description": "Distribution radius"
+    },
+    "size": {
+      "$value": 1.5,
+      "$description": "Star point size"
+    }
+  },
+
+  "file-color": {
+    "$description": "File-based node coloring (golden angle distribution)",
+    "strategy": {
+      "$value": "golden-angle",
+      "$options": ["golden-angle", "sequential", "hash"]
+    },
+    "angle": {
+      "$value": 137.5,
+      "$description": "Golden angle for hue distribution"
+    },
+    "chroma": {
+      "$value": 0.12,
+      "$description": "OKLCH chroma for file colors"
+    },
+    "saturation": {
+      "$value": 60,
+      "$description": "HSL saturation fallback"
+    },
+    "lightness": {
+      "$value": 45,
+      "$description": "Base lightness for file colors"
+    }
+  },
+
+  "flow-mode": {
+    "$description": "Markov chain flow visualization",
+    "highlight-color": {
+      "$value": "oklch(75% 0.18 55)",
+      "$description": "High entropy node color - orange"
+    },
+    "size-multiplier": {
+      "$value": 1.8,
+      "$description": "Size boost for high entropy nodes"
+    },
+    "edge-width-scale": {
+      "$value": 2.0,
+      "$description": "Edge width multiplier by weight"
+    },
+    "particles": {
+      "enabled": {
+        "$value": true
+      },
+      "count": {
+        "$value": 2,
+        "$description": "Directional particles per edge"
+      },
+      "speed": {
+        "$value": 0.005,
+        "$description": "Particle animation speed"
+      },
+      "width": {
+        "$value": 2,
+        "$description": "Particle size"
+      }
+    }
+  },
+
+  "bloom": {
+    "$description": "Post-processing glow effect",
+    "enabled": {
+      "$value": false,
+      "$description": "Disabled - not available in UMD builds"
+    },
+    "strength": {
+      "$value": 1.2
+    },
+    "radius": {
+      "$value": 0.4
+    },
+    "threshold": {
+      "$value": 0.2
+    }
+  }
+}
