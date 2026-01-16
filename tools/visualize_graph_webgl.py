@@ -411,18 +411,19 @@ def generate_webgl_html(json_source, output_path):
         .side-dock {{
             --side-width: 260px;
             position: absolute;
-            top: 50%;
+            top: 120px;
             left: 16px;
-            transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 30px;
-            max-height: 70vh;
+            max-height: calc(100vh - 200px);
             opacity: 0.45;
             pointer-events: auto;
             transition: opacity 0.4s ease, width 0.4s ease;
             z-index: 12;
+            overflow-y: auto;
+            overflow-x: hidden;
         }}
         /* Hover to open (unless locked) */
         .side-dock:hover:not(.locked) {{
