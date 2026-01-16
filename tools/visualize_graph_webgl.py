@@ -1301,10 +1301,12 @@ def generate_webgl_html(json_source, output_path):
         let ACTIVE_GROUP_ID = null;
         let MARQUEE_ACTIVE = false;
         let MARQUEE_START = null;
+        let MARQUEE_ADDITIVE = false;
         let SELECTION_BOX = null;
         let LAST_MARQUEE_END_TS = 0;
         const SELECTION_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
         const GROUP_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
+        let SPACE_PRESSED = false;
         let IS_3D = true;
         let DIMENSION_TRANSITION = false;
         let STARFIELD = null;
@@ -1972,6 +1974,42 @@ def generate_webgl_html(json_source, output_path):
             if (controls) {{
                 controls.enableDamping = true;
                 controls.dampingFactor = 0.1;
+                controls.enableRotate = true;
+                controls.enablePan = false;
+
+                const baseButtons = {{
+                    LEFT: THREE.MOUSE.PAN,
+                    MIDDLE: THREE.MOUSE.DOLLY,
+                    RIGHT: THREE.MOUSE.ROTATE
+                }};
+
+                const applyPanMode = (enabled) => {{
+                    controls.enablePan = enabled;
+                    controls.mouseButtons = baseButtons;
+                }};
+
+                applyPanMode(false);
+
+                window.addEventListener('keydown', (e) => {{
+                    if (e.code !== 'Space') return;
+                    if (SPACE_PRESSED) return;
+                    SPACE_PRESSED = true;
+                    applyPanMode(true);
+                    e.preventDefault();
+                }});
+
+                window.addEventListener('keyup', (e) => {{
+                    if (e.code !== 'Space') return;
+                    if (!SPACE_PRESSED) return;
+                    SPACE_PRESSED = false;
+                    applyPanMode(false);
+                }});
+
+                window.addEventListener('blur', () => {{
+                    if (!SPACE_PRESSED) return;
+                    SPACE_PRESSED = false;
+                    applyPanMode(false);
+                }});
             }}
 
             // =================================================================
@@ -4544,6 +4582,7 @@ def generate_webgl_html(json_source, output_path):
 
         function maybeClearSelection() {{
             const now = Date.now();
+            if (MARQUEE_ACTIVE) return;
             if (now - LAST_MARQUEE_END_TS < 250) return;
             clearSelection();
         }}
@@ -4813,12 +4852,13 @@ def generate_webgl_html(json_source, output_path):
             if (!canvas) return;
 
             const onPointerDown = (e) => {{
-                // Shift + left-drag = marquee selection
+                // Left-drag = marquee selection (space+drag reserved for pan)
                 if (e.button !== 0) return;
-                if (!e.shiftKey) return;
+                if (SPACE_PRESSED) return;
                 if (e.target !== canvas) return;
                 if (HOVERED_NODE) return;
                 MARQUEE_ACTIVE = true;
+                MARQUEE_ADDITIVE = !!e.shiftKey;
                 MARQUEE_START = {{ x: e.clientX, y: e.clientY }};
                 updateSelectionBox(getBoxRect(MARQUEE_START, MARQUEE_START));
                 if (Graph.controls()) {{
@@ -4836,14 +4876,17 @@ def generate_webgl_html(json_source, output_path):
                 if (!MARQUEE_ACTIVE || !MARQUEE_START) return;
                 const rect = getBoxRect(MARQUEE_START, {{ x: e.clientX, y: e.clientY }});
                 SELECTION_BOX.style.display = 'none';
+                const additive = MARQUEE_ADDITIVE;
                 MARQUEE_ACTIVE = false;
                 MARQUEE_START = null;
-                LAST_MARQUEE_END_TS = Date.now();
+                MARQUEE_ADDITIVE = false;
                 if (Graph.controls()) {{
                     Graph.controls().enabled = true;
                 }}
-                if (rect.width > 4 && rect.height > 4) {{
-                    selectNodesInBox(rect, true);
+                const didDrag = rect.width > 4 && rect.height > 4;
+                if (didDrag) {{
+                    LAST_MARQUEE_END_TS = Date.now();
+                    selectNodesInBox(rect, additive);
                 }}
             }};
 
