@@ -62,6 +62,10 @@ collider_report.html
 collider_viz.html
 spectrometer_report.html
 
+# Generated experiment and Blender outputs
+blender/output/
+experiments/outputs/
+
 # Audio - exclude large files and segments, keep only complete versions
 audio/**/
 audio/*-44k.mp3
@@ -81,6 +85,9 @@ audio/*.sh
 # Keep schema and docs tracked
 !schema/
 !docs/
+
+# Internal orientation files (auto-synced)
+.agent/orientation/
 
 # Generated output directory
 output.md/

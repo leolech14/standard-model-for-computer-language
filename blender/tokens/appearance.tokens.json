@@ -1,0 +1,294 @@
+{
+  "$schema": "design-tokens",
+  "$purpose": "Blender 3D visualization parameters for Standard Model of Code column",
+  "smc": {
+    "$description": "Standard Model of Code domain configuration",
+    "domain": {
+      "num_levels": {
+        "$value": 16,
+        "$description": "Total levels in the SMC column (L-3 to L12)"
+      },
+      "level_offset": {
+        "$value": -3,
+        "$description": "Offset to convert index to level name (idx + offset = level)"
+      },
+      "planes": {
+        "$description": "The three parallel layers of reality",
+        "physical": {
+          "start": { "$value": 0, "$description": "L-3 (Bit)" },
+          "end": { "$value": 2, "$description": "L-1 (Byte)" }
+        },
+        "virtual": {
+          "start": { "$value": 3, "$description": "L0 (Value)" },
+          "end": { "$value": 7, "$description": "L4 (Module)" }
+        },
+        "semantic": {
+          "start": { "$value": 8, "$description": "L5 (Component)" },
+          "end": { "$value": 15, "$description": "L12 (Universe)" }
+        }
+      }
+    },
+    "geometry": {
+      "$description": "Funnel/vase shape parameters",
+      "funnel_height": {
+        "$value": 1.8,
+        "$description": "Height of each funnel segment"
+      },
+      "funnel_gap": {
+        "$value": 0.2,
+        "$description": "Vertical spacing between funnels"
+      },
+      "radii": {
+        "base_bottom": {
+          "$value": 1.8,
+          "$description": "Bottom radius of lowest funnel"
+        },
+        "base_top": {
+          "$value": 0.6,
+          "$description": "Top radius of lowest funnel"
+        },
+        "top_bottom": {
+          "$value": 0.9,
+          "$description": "Bottom radius of highest funnel"
+        },
+        "top_top": {
+          "$value": 0.35,
+          "$description": "Top radius of highest funnel"
+        }
+      },
+      "mesh": {
+        "segments": {
+          "$value": 64,
+          "$description": "Circumference polygon count"
+        },
+        "profile_resolution": {
+          "$value": 16,
+          "$description": "Vertical subdivisions for curve"
+        }
+      }
+    },
+    "curve": {
+      "$description": "Vase profile curve control points",
+      "pinch_position": {
+        "$value": 0.5,
+        "$description": "Vertical position of narrowest point (0-1)"
+      },
+      "pinch_factor": {
+        "$value": 0.85,
+        "$description": "How much to narrow at pinch (1.0 = no pinch)"
+      },
+      "top_flare_power": {
+        "$value": 0.7,
+        "$description": "Exponent for top half curve (< 1 = more flare)"
+      }
+    }
+  },
+  "color": {
+    "$description": "OKLCH color gradient for level coloring",
+    "gradient": {
+      "$description": "7-stop gradient from cyan (L-3) to magenta (L12)",
+      "stops": [
+        {
+          "position": { "$value": 0.0 },
+          "oklch": { "$value": "oklch(70% 0.15 220)", "$description": "Cyan - Physical plane start" }
+        },
+        {
+          "position": { "$value": 0.2 },
+          "oklch": { "$value": "oklch(75% 0.16 180)", "$description": "Teal - Physical/Virtual boundary" }
+        },
+        {
+          "position": { "$value": 0.35 },
+          "oklch": { "$value": "oklch(80% 0.17 85)", "$description": "Amber - Virtual plane core" }
+        },
+        {
+          "position": { "$value": 0.5 },
+          "oklch": { "$value": "oklch(82% 0.17 80)", "$description": "Gold - Virtual/Semantic boundary" }
+        },
+        {
+          "position": { "$value": 0.65 },
+          "oklch": { "$value": "oklch(75% 0.18 60)", "$description": "Orange - Semantic plane start" }
+        },
+        {
+          "position": { "$value": 0.8 },
+          "oklch": { "$value": "oklch(60% 0.22 310)", "$description": "Violet - Semantic plane core" }
+        },
+        {
+          "position": { "$value": 1.0 },
+          "oklch": { "$value": "oklch(55% 0.25 330)", "$description": "Magenta - Cosmological" }
+        }
+      ]
+    },
+    "fallback_srgb": {
+      "$description": "Pre-computed sRGB approximations for Blender",
+      "cyan": { "$value": [0.10, 0.60, 0.85, 1.0] },
+      "teal": { "$value": [0.15, 0.75, 0.65, 1.0] },
+      "amber": { "$value": [0.95, 0.70, 0.20, 1.0] },
+      "violet": { "$value": [0.55, 0.30, 0.90, 1.0] },
+      "magenta": { "$value": [0.80, 0.25, 0.75, 1.0] }
+    }
+  },
+  "material": {
+    "$description": "Shader parameters for glowing glass effect",
+    "glass": {
+      "ior": {
+        "$value": 1.2,
+        "$description": "Index of refraction (1.0 = no refraction)"
+      },
+      "roughness": {
+        "$value": 0.05,
+        "$description": "Surface roughness (0 = mirror smooth)"
+      },
+      "transmission": {
+        "$value": 0.3,
+        "$description": "Mix factor for glass vs emission (0 = all emission)"
+      }
+    },
+    "emission": {
+      "base_strength": {
+        "$value": 2.5,
+        "$description": "Default emission intensity"
+      },
+      "physical_strength": {
+        "$value": 2.0,
+        "$description": "Emission for physical plane (L-3 to L-1)"
+      },
+      "virtual_strength": {
+        "$value": 3.0,
+        "$description": "Emission for virtual plane (L0 to L4)"
+      },
+      "semantic_strength": {
+        "$value": 4.0,
+        "$description": "Emission for semantic core (L5 to L8)"
+      },
+      "cosmological_strength": {
+        "$value": 3.5,
+        "$description": "Emission for cosmological (L9 to L12)"
+      }
+    },
+    "volume": {
+      "enabled": {
+        "$value": true
+      },
+      "density": {
+        "$value": 0.3,
+        "$description": "Volumetric emission strength"
+      }
+    }
+  },
+  "scene": {
+    "$description": "Blender scene setup parameters",
+    "world": {
+      "background_color": {
+        "$value": [0.012, 0.012, 0.018, 1.0],
+        "$description": "Very dark blue-gray background"
+      },
+      "background_strength": {
+        "$value": 1.0
+      }
+    },
+    "lighting": {
+      "$description": "Three-point lighting rig",
+      "key": {
+        "type": { "$value": "AREA" },
+        "energy": { "$value": 1000 },
+        "size": { "$value": 10 },
+        "color": { "$value": [1.0, 0.95, 0.9] },
+        "location": { "$value": [6, -6, 20] },
+        "rotation_deg": { "$value": [45, 0, 45] }
+      },
+      "fill": {
+        "type": { "$value": "AREA" },
+        "energy": { "$value": 500 },
+        "size": { "$value": 8 },
+        "color": { "$value": [0.9, 0.95, 1.0] },
+        "location": { "$value": [-5, 5, 15] },
+        "rotation_deg": { "$value": [60, 0, -135] }
+      },
+      "rim": {
+        "type": { "$value": "AREA" },
+        "energy": { "$value": 400 },
+        "size": { "$value": 6 },
+        "color": { "$value": [0.85, 0.75, 1.0], "$description": "Violet tint" },
+        "location": { "$value": [0, 8, 12] },
+        "rotation_deg": { "$value": [30, 0, 180] }
+      }
+    },
+    "camera": {
+      "lens": {
+        "$value": 50,
+        "$description": "Focal length in mm"
+      },
+      "distance": {
+        "$value": 14.14,
+        "$description": "Distance from column center"
+      },
+      "height_offset": {
+        "$value": 3,
+        "$description": "Camera height above column center"
+      },
+      "angle_deg": {
+        "$value": 45,
+        "$description": "Horizontal angle around column"
+      },
+      "tilt_deg": {
+        "$value": 65,
+        "$description": "Vertical tilt angle"
+      }
+    }
+  },
+  "render": {
+    "$description": "Render engine and output settings",
+    "engine": {
+      "$value": "BLENDER_EEVEE_NEXT",
+      "$options": ["BLENDER_EEVEE_NEXT", "CYCLES"],
+      "$description": "Render engine (Eevee for speed, Cycles for quality)"
+    },
+    "resolution": {
+      "x": { "$value": 1920 },
+      "y": { "$value": 1080 }
+    },
+    "output": {
+      "format": {
+        "$value": "PNG",
+        "$options": ["PNG", "JPEG", "EXR"]
+      },
+      "color_depth": {
+        "$value": 16,
+        "$options": [8, 16]
+      }
+    },
+    "bloom": {
+      "$description": "Compositor glare/bloom effect",
+      "enabled": { "$value": true },
+      "type": {
+        "$value": "FOG_GLOW",
+        "$options": ["FOG_GLOW", "SIMPLE_STAR", "STREAKS", "GHOSTS"]
+      },
+      "quality": {
+        "$value": "HIGH",
+        "$options": ["LOW", "MEDIUM", "HIGH"]
+      },
+      "threshold": {
+        "$value": 0.2,
+        "$description": "Brightness threshold for bloom (0-1)"
+      },
+      "size": {
+        "$value": 9,
+        "$description": "Bloom spread size (1-9)"
+      }
+    }
+  },
+  "animation": {
+    "$description": "Animation parameters for turntable and effects",
+    "turntable": {
+      "enabled": { "$value": false },
+      "duration_frames": { "$value": 120 },
+      "rotation_deg": { "$value": 360 }
+    },
+    "level_pulse": {
+      "enabled": { "$value": false },
+      "frequency": { "$value": 0.5, "$description": "Pulses per second" },
+      "amplitude": { "$value": 0.2, "$description": "Emission variation" }
+    }
+  }
+}

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKLCH 3D Color Selector - Standalone</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0f;
+            color: #fff;
+            font-family: 'SF Mono', Monaco, 'Fira Code', monospace;
+            overflow: hidden;
+        }
+        #container { width: 100vw; height: 100vh; }
+
+        #controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(10, 10, 20, 0.9);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 320px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        h1 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #0ff, #f0f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slider-group {
+            margin: 15px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .slider-value {
+            color: #0ff;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #222;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0ff;
+            cursor: pointer;
+            box-shadow: 0 0 10px #0ff;
+        }
+
+        #colorPreview {
+            width: 100%;
+            height: 80px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            text-shadow: 0 0 10px #000;
+        }
+
+        #colorCode {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: inherit;
+            color: #0ff;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #colorCode:hover {
+            background: #1a1a1a;
+            border-color: #0ff;
+        }
+
+        .info {
+            margin-top: 15px;
+            font-size: 0.75em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        #selectedMarker {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 10, 20, 0.9);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 15px 20px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .axis-label {
+            position: fixed;
+            font-size: 0.8em;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <div id="controls">
+        <h1>OKLCH 3D Selector</h1>
+
+        <div class="slider-group">
+            <div class="slider-label">
+                <span>Lightness (L)</span>
+                <span class="slider-value" id="valL">0.65</span>
+            </div>
+            <input type="range" id="sliderL" min="0" max="1" step="0.01" value="0.65">
+        </div>
+
+        <div class="slider-group">
+            <div class="slider-label">
+                <span>Chroma (C)</span>
+                <span class="slider-value" id="valC">0.15</span>
+            </div>
+            <input type="range" id="sliderC" min="0" max="0.37" step="0.01" value="0.15">
+        </div>
+
+        <div class="slider-group">
+            <div class="slider-label">
+                <span>Hue (H)</span>
+                <span class="slider-value" id="valH">240°</span>
+            </div>
+            <input type="range" id="sliderH" min="0" max="360" step="1" value="240">
+        </div>
+
+        <div id="colorPreview">Loading...</div>
+
+        <input type="text" id="colorCode" value="oklch(0.65 0.15 240)" readonly onclick="this.select(); document.execCommand('copy');">
+
+        <div class="info">
+            Drag to rotate | Scroll to zoom | Click to copy<br>
+            3D model shows sRGB gamut boundary in OKLCH space
+        </div>
+    </div>
+
+    <div id="selectedMarker">
+        <span style="color:#0ff">Click</span> on model to pick color
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ============ OKLCH <-> RGB Conversion (Björn Ottosson) ============
+        function oklch_to_oklab(L, C, H) {
+            const h_rad = H * Math.PI / 180;
+            return { L, a: C * Math.cos(h_rad), b: C * Math.sin(h_rad) };
+        }
+
+        function oklab_to_linear_srgb(L, a, b) {
+            const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
+            const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
+            const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
+
+            const l = l_ * l_ * l_;
+            const m = m_ * m_ * m_;
+            const s = s_ * s_ * s_;
+
+            return {
+                r:  4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+                g: -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+                b: -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+            };
+        }
+
+        function linear_to_srgb(x) {
+            if (x <= 0.0031308) return 12.92 * x;
+            return 1.055 * Math.pow(x, 1/2.4) - 0.055;
+        }
+
+        function oklch_to_rgb(L, C, H) {
+            const lab = oklch_to_oklab(L, C, H);
+            const lin = oklab_to_linear_srgb(lab.L, lab.a, lab.b);
+            return {
+                r: Math.max(0, Math.min(1, linear_to_srgb(lin.r))),
+                g: Math.max(0, Math.min(1, linear_to_srgb(lin.g))),
+                b: Math.max(0, Math.min(1, linear_to_srgb(lin.b)))
+            };
+        }
+
+        function rgb_to_hex(r, g, b) {
+            const toHex = v => Math.round(v * 255).toString(16).padStart(2, '0');
+            return '#' + toHex(r) + toHex(g) + toHex(b);
+        }
+
+        function isInGamut(r, g, b) {
+            return r >= 0 && r <= 1 && g >= 0 && g <= 1 && b >= 0 && b <= 1;
+        }
+
+        // ============ Three.js Setup ============
+        const container = document.getElementById('container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a0a0f);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(1.5, 1.2, 1.5);
+        camera.lookAt(0, 0.5, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // ============ Generate OKLCH Gamut Surface ============
+        function generateGamutSurface() {
+            const positions = [];
+            const colors = [];
+
+            const L_STEPS = 30;
+            const H_STEPS = 72;
+            const C_MAX = 0.37;
+
+            // Find gamut boundary for each L and H
+            for (let li = 0; li <= L_STEPS; li++) {
+                const L = li / L_STEPS;
+                for (let hi = 0; hi < H_STEPS; hi++) {
+                    const H = (hi / H_STEPS) * 360;
+
+                    // Binary search for max chroma at this L,H
+                    let minC = 0, maxC = C_MAX;
+                    for (let i = 0; i < 20; i++) {
+                        const midC = (minC + maxC) / 2;
+                        const rgb = oklch_to_rgb(L, midC, H);
+                        const lin = oklab_to_linear_srgb(
+                            oklch_to_oklab(L, midC, H).L,
+                            oklch_to_oklab(L, midC, H).a,
+                            oklch_to_oklab(L, midC, H).b
+                        );
+                        if (lin.r >= -0.001 && lin.r <= 1.001 &&
+                            lin.g >= -0.001 && lin.g <= 1.001 &&
+                            lin.b >= -0.001 && lin.b <= 1.001) {
+                            minC = midC;
+                        } else {
+                            maxC = midC;
+                        }
+                    }
+
+                    const C = minC;
+                    const h_rad = H * Math.PI / 180;
+
+                    // Cylindrical coords: x = C*cos(H), z = C*sin(H), y = L
+                    positions.push(C * Math.cos(h_rad), L, C * Math.sin(h_rad));
+
+                    const rgb = oklch_to_rgb(L, C, H);
+                    colors.push(rgb.r, rgb.g, rgb.b);
+                }
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.012,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.9
+            });
+
+            return new THREE.Points(geometry, material);
+        }
+
+        // ============ Generate Wireframe Axes ============
+        function generateAxes() {
+            const group = new THREE.Group();
+            const axisMat = new THREE.LineBasicMaterial({ color: 0x333333 });
+
+            // L axis (vertical)
+            const lGeo = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(0, 0, 0),
+                new THREE.Vector3(0, 1, 0)
+            ]);
+            group.add(new THREE.Line(lGeo, axisMat));
+
+            // Hue circle at L=0.5
+            const huePoints = [];
+            for (let i = 0; i <= 64; i++) {
+                const angle = (i / 64) * Math.PI * 2;
+                huePoints.push(new THREE.Vector3(0.37 * Math.cos(angle), 0.5, 0.37 * Math.sin(angle)));
+            }
+            const hueGeo = new THREE.BufferGeometry().setFromPoints(huePoints);
+            group.add(new THREE.Line(hueGeo, new THREE.LineBasicMaterial({ color: 0x222244 })));
+
+            return group;
+        }
+
+        // ============ Selected Color Marker ============
+        const markerGeo = new THREE.SphereGeometry(0.02, 16, 16);
+        const markerMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const marker = new THREE.Mesh(markerGeo, markerMat);
+        scene.add(marker);
+
+        // ============ Add to Scene ============
+        const gamutSurface = generateGamutSurface();
+        scene.add(gamutSurface);
+        scene.add(generateAxes());
+
+        // ============ Orbit Controls (manual) ============
+        let isDragging = false;
+        let prevX = 0, prevY = 0;
+        let rotY = 0.5, rotX = 0.3;
+        let zoom = 2.5;
+
+        container.addEventListener('mousedown', e => { isDragging = true; prevX = e.clientX; prevY = e.clientY; });
+        container.addEventListener('mouseup', () => isDragging = false);
+        container.addEventListener('mouseleave', () => isDragging = false);
+        container.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            rotY += (e.clientX - prevX) * 0.01;
+            rotX += (e.clientY - prevY) * 0.01;
+            rotX = Math.max(-1.5, Math.min(1.5, rotX));
+            prevX = e.clientX;
+            prevY = e.clientY;
+        });
+        container.addEventListener('wheel', e => {
+            zoom += e.deltaY * 0.002;
+            zoom = Math.max(1, Math.min(5, zoom));
+        });
+
+        // ============ UI Controls ============
+        const sliderL = document.getElementById('sliderL');
+        const sliderC = document.getElementById('sliderC');
+        const sliderH = document.getElementById('sliderH');
+        const valL = document.getElementById('valL');
+        const valC = document.getElementById('valC');
+        const valH = document.getElementById('valH');
+        const colorPreview = document.getElementById('colorPreview');
+        const colorCode = document.getElementById('colorCode');
+
+        function updateColor() {
+            const L = parseFloat(sliderL.value);
+            const C = parseFloat(sliderC.value);
+            const H = parseFloat(sliderH.value);
+
+            valL.textContent = L.toFixed(2);
+            valC.textContent = C.toFixed(2);
+            valH.textContent = H + '°';
+
+            const rgb = oklch_to_rgb(L, C, H);
+            const hex = rgb_to_hex(rgb.r, rgb.g, rgb.b);
+            const oklchStr = `oklch(${L.toFixed(2)} ${C.toFixed(2)} ${H})`;
+
+            colorPreview.style.background = hex;
+            colorPreview.textContent = hex;
+            colorPreview.style.color = L > 0.6 ? '#000' : '#fff';
+            colorCode.value = oklchStr;
+
+            // Update marker position
+            const h_rad = H * Math.PI / 180;
+            marker.position.set(C * Math.cos(h_rad), L, C * Math.sin(h_rad));
+            markerMat.color.setRGB(rgb.r, rgb.g, rgb.b);
+        }
+
+        sliderL.addEventListener('input', updateColor);
+        sliderC.addEventListener('input', updateColor);
+        sliderH.addEventListener('input', updateColor);
+        updateColor();
+
+        // ============ Animation Loop ============
+        function animate() {
+            requestAnimationFrame(animate);
+
+            camera.position.x = Math.sin(rotY) * Math.cos(rotX) * zoom;
+            camera.position.y = Math.sin(rotX) * zoom + 0.5;
+            camera.position.z = Math.cos(rotY) * Math.cos(rotX) * zoom;
+            camera.lookAt(0, 0.5, 0);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // ============ Resize ============
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        console.log('OKLCH 3D Selector loaded successfully!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMC 3D Cosmology - Three.js Integration</title>
+  <style>
+    body { margin: 0; background: #000; }
+    canvas { display: block; }
+    #info { position: absolute; top: 10px; left: 10px; color: #fff; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div id="info">SMC 3D: Chaos to Cosmology (Rotate/Zoom) - Click to Dissolve Holon</div>
+  <script type="module">
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+    import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+    const info = document.getElementById("info");
+    const ANIMATION_DURATION = 3000;
+
+    function isWebGLAvailable() {
+      try {
+        const canvas = document.createElement("canvas");
+        return !!(window.WebGLRenderingContext &&
+          (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")));
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function startFallback2D(message) {
+      info.textContent = message;
+
+      const canvas = document.createElement("canvas");
+      canvas.id = "fallback-canvas";
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext("2d");
+
+      const starCount = 1200;
+      const stars = [];
+      const particles = [];
+      const edges = [
+        [0, 2], [0, 3], [0, 4], [0, 5],
+        [1, 2], [1, 3], [1, 4], [1, 5],
+        [2, 4], [2, 5], [3, 4], [3, 5]
+      ];
+      const verts = [
+        { x: 1, y: 0, z: 0 },
+        { x: -1, y: 0, z: 0 },
+        { x: 0, y: 1, z: 0 },
+        { x: 0, y: -1, z: 0 },
+        { x: 0, y: 0, z: 1 },
+        { x: 0, y: 0, z: -1 }
+      ];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function project(v, rotY, rotX, scale) {
+        const cy = Math.cos(rotY);
+        const sy = Math.sin(rotY);
+        const cx = Math.cos(rotX);
+        const sx = Math.sin(rotX);
+
+        let x = v.x * scale;
+        let y = v.y * scale;
+        let z = v.z * scale;
+
+        const xz = x * cy - z * sy;
+        const zz = x * sy + z * cy;
+        const yz = y * cx - zz * sx;
+        const zz2 = y * sx + zz * cx;
+
+        const depth = zz2 + 4;
+        const fov = canvas.height * 0.6;
+        const s = fov / depth;
+
+        return {
+          x: canvas.width / 2 + xz * s,
+          y: canvas.height / 2 - yz * s
+        };
+      }
+
+      function seed() {
+        stars.length = 0;
+        particles.length = 0;
+        for (let i = 0; i < starCount; i++) {
+          stars.push({
+            x: (Math.random() - 0.5) * 200,
+            y: (Math.random() - 0.5) * 200,
+            z: (Math.random() - 0.5) * 200
+          });
+        }
+        for (let i = 0; i < 900; i++) {
+          particles.push({
+            x: (Math.random() - 0.5) * 2.4,
+            y: (Math.random() - 0.5) * 2.4,
+            z: (Math.random() - 0.5) * 2.4
+          });
+        }
+      }
+
+      let animationStart = null;
+      let dissolveTarget = 0;
+      let dissolve = 0;
+
+      function ease(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function draw(time) {
+        requestAnimationFrame(draw);
+        if (!animationStart) animationStart = time;
+        const t = Math.min((time - animationStart) / ANIMATION_DURATION, 1);
+        const easeT = ease(t);
+
+        dissolve += (dissolveTarget - dissolve) * 0.08;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#000022";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#ffffff";
+        stars.forEach(star => {
+          const p = project(star, time * 0.0002, time * 0.0001, 1);
+          ctx.fillRect(p.x, p.y, 1, 1);
+        });
+
+        const rotY = easeT * Math.PI / 6 + Math.sin(time * 0.001) * 0.2;
+        const rotX = easeT * Math.PI / 10;
+        const scale = 1 + easeT * 1.2;
+        const alpha = 1 - dissolve;
+
+        ctx.strokeStyle = `rgba(0, 191, 255, ${0.8 * alpha})`;
+        ctx.lineWidth = 1;
+        edges.forEach(([a, b]) => {
+          const p1 = project(verts[a], rotY, rotX, scale);
+          const p2 = project(verts[b], rotY, rotX, scale);
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        });
+
+        const particleAlpha = Math.min(0.8, easeT * 0.8 + dissolve * 0.8);
+        ctx.fillStyle = `rgba(255, 215, 0, ${particleAlpha})`;
+        particles.forEach(pt => {
+          const p = project(pt, rotY + time * 0.0004, rotX, scale * 1.2);
+          ctx.fillRect(p.x, p.y, 2, 2);
+        });
+      }
+
+      resize();
+      seed();
+      requestAnimationFrame(draw);
+
+      window.addEventListener("resize", () => {
+        resize();
+      });
+
+      window.addEventListener("click", () => {
+        dissolveTarget = dissolveTarget > 0.5 ? 0 : 1;
+      });
+    }
+
+    function startThree() {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+      } catch (err) {
+        startFallback2D("WebGL disabled. Using 2D fallback.");
+        return;
+      }
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      camera.position.set(0, 0, 5);
+
+      // Nebula background (chaos to cosmology gradient)
+      scene.background = new THREE.Color(0x000022);
+      const stars = new THREE.BufferGeometry();
+      const starVerts = [];
+      for (let i = 0; i < 5000; i++) {
+        starVerts.push(
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200
+        );
+      }
+      stars.setAttribute("position", new THREE.Float32BufferAttribute(starVerts, 3));
+      const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.05 });
+      const starField = new THREE.Points(stars, starMat);
+      scene.add(starField);
+
+      // Octahedral holon
+      const holonGeo = new THREE.OctahedronGeometry(1, 0);
+      const holonMat = new THREE.MeshPhongMaterial({
+        color: 0x00bfff,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.8
+      });
+      const holon = new THREE.Mesh(holonGeo, holonMat);
+      scene.add(holon);
+
+      // Dissolution particles
+      const particlesGeo = new THREE.BufferGeometry();
+      const particlesPos = [];
+      for (let i = 0; i < 1000; i++) {
+        particlesPos.push(
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2
+        );
+      }
+      particlesGeo.setAttribute("position", new THREE.Float32BufferAttribute(particlesPos, 3));
+      const particlesMat = new THREE.PointsMaterial({
+        color: 0xffd700,
+        size: 0.05,
+        transparent: true,
+        opacity: 0
+      });
+      const particles = new THREE.Points(particlesGeo, particlesMat);
+      scene.add(particles);
+
+      // Light for depth
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(5, 5, 5);
+      scene.add(light);
+
+      let animationStart = null;
+      let dissolveTarget = 0;
+      let dissolve = 0;
+
+      function ease(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function animate(time) {
+        requestAnimationFrame(animate);
+
+        if (!animationStart) animationStart = time;
+        const t = Math.min((time - animationStart) / ANIMATION_DURATION, 1);
+        const easeT = ease(t);
+
+        dissolve += (dissolveTarget - dissolve) * 0.08;
+
+        // Incline and expand (chaos to cosmology)
+        holon.rotation.x = easeT * Math.PI / 6;
+        holon.scale.set(1 + easeT, 1 + easeT, 1 + easeT * 2);
+
+        // Side-to-side oscillation
+        holon.position.x = Math.sin(t * 2 * Math.PI) * 0.2;
+
+        // Dissolution particles
+        holon.material.opacity = 0.8 * (1 - dissolve);
+        particles.material.opacity = easeT * 0.8 + dissolve * 0.8;
+        particles.rotation.y += 0.001;
+
+        starField.rotation.y += 0.0005;
+
+        controls.update();
+        renderer.render(scene, camera);
+      }
+
+      requestAnimationFrame(animate);
+
+      // Click for dissolution
+      window.addEventListener("click", () => {
+        dissolveTarget = dissolveTarget > 0.5 ? 0 : 1;
+      });
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    if (!isWebGLAvailable()) {
+      startFallback2D("WebGL disabled. Using 2D fallback.");
+    } else {
+      startThree();
+    }
+  </script>
+</body>
+</html>

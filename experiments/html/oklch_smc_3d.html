@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKLCH 3D Extrusion Animation - Integrado ao SMC</title>
+  <style>
+    body { background: #000; color: #fff; font-family: monospace; }
+    canvas { border: 1px solid #333; display: block; margin: 20px auto; }
+    button { display: block; margin: 10px auto; padding: 10px; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <button onclick="start3DExtrusionAnimation()">Extrude to 3D (SMC Cosmology Transition)</button>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Configuracoes (alinhadas ao SMC: amplitude para 'flow resistance', rotacao para unificacao)
+    const GRID_U = 60; // Resolucao U (phases do SMC)
+    const GRID_V = 40; // Resolucao V (layers)
+    const AMPLITUDE = 0.2; // Altura maxima (representa hierarquia semantic alta)
+    const TARGET_ROTATION_Y = 30; // Graus de inclinacao (caos to cosmologia)
+    const ANIMATION_DURATION = 3000; // 3 segundos (transicao intent-impulse-dissolution)
+
+    // Easing (suave como leis Constructal)
+    function ease(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    // Altura inspirada em SMC (onda para fluxos ramificados)
+    function heightFunction(u, v) {
+      return AMPLITUDE * Math.sin(2 * Math.PI * u) * Math.cos(2 * Math.PI * v);
+    }
+
+    // Grid de vertices (atomos como pontos)
+    function createSurfaceGrid() {
+      const vertices = [];
+      for (let i = 0; i <= GRID_U; i++) {
+        for (let j = 0; j <= GRID_V; j++) {
+          const u = i / GRID_U;
+          const v = j / GRID_V;
+          const x = (u - 0.5) * 2;
+          const y = (v - 0.5) * 2;
+          const z = 0; // Inicial flat (physical chaos)
+          const color = getOKLCHColor(u, v); // Cor semantica (H=phase, C=trust)
+          vertices.push({x, y, z, color, u, v});
+        }
+      }
+      return vertices;
+    }
+
+    // Cor OKLCH simulada (SMC: H=phase, C=trust simulada, L=layer)
+    function getOKLCHColor(u, v) {
+      const h = u * 360; // Hue para phase (0-360)
+      const c = v * 0.37; // Chroma para trust (0=baixo, 0.37=alto)
+      const l = 0.5; // Lightness constante para uniformidade
+      // Simula OKLCH to RGB (use culori.js para real)
+      return {
+        r: Math.sin(h * Math.PI / 180) * c + l,
+        g: Math.cos(h * Math.PI / 180) * c + l,
+        b: (u + v) / 2 + l
+      };
+    }
+
+    // Atualiza vertices (expansao Z como cosmologia)
+    function updateVertices(vertices, t) {
+      vertices.forEach(v => {
+        v.z = ease(t) * heightFunction(v.u, v.v); // Expansao Constructal
+      });
+    }
+
+    // Projecao 3D para 2D (perspectiva cosmica)
+    function projectVertex(vertex, rotationY, camera) {
+      const cos = Math.cos(rotationY * Math.PI / 180);
+      const sin = Math.sin(rotationY * Math.PI / 180);
+      const rx = vertex.x * cos - vertex.z * sin;
+      const rz = vertex.x * sin + vertex.z * cos;
+      const projZ = rz + camera.z;
+      const scale = (canvas.height / 2) / Math.tan(60 * Math.PI / 360) / projZ;
+      const px = canvas.width / 2 + rx * scale * (canvas.width / canvas.height);
+      const py = canvas.height / 2 - vertex.y * scale;
+      return {x: px, y: py, z: projZ};
+    }
+
+    // Desenhar (triangulacao para rede)
+    function drawSurface(vertices, rotationY, camera) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const projected = vertices.map(v => projectVertex(v, rotationY, camera));
+      const faces = [];
+      for (let i = 0; i < GRID_U; i++) {
+        for (let j = 0; j < GRID_V; j++) {
+          const idx = i * (GRID_V + 1) + j;
+          const p1 = projected[idx];
+          const p2 = projected[idx + 1];
+          const p3 = projected[idx + GRID_V + 1];
+          const p4 = projected[idx + GRID_V + 2];
+          faces.push({
+            points: [p1, p2, p3],
+            avgZ: (p1.z + p2.z + p3.z) / 3,
+            color: averageColor(vertices[idx], vertices[idx + 1], vertices[idx + GRID_V + 1])
+          });
+          faces.push({
+            points: [p2, p3, p4],
+            avgZ: (p2.z + p3.z + p4.z) / 3,
+            color: averageColor(vertices[idx + 1], vertices[idx + GRID_V + 1], vertices[idx + GRID_V + 2])
+          });
+        }
+      }
+      faces.sort((a, b) => a.avgZ - b.avgZ);
+      faces.forEach(f => {
+        ctx.beginPath();
+        ctx.moveTo(f.points[0].x, f.points[0].y);
+        ctx.lineTo(f.points[1].x, f.points[1].y);
+        ctx.lineTo(f.points[2].x, f.points[2].y);
+        ctx.closePath();
+        ctx.fillStyle = `rgb(${(f.color.r*255)|0}, ${(f.color.g*255)|0}, ${(f.color.b*255)|0})`;
+        ctx.fill();
+      });
+    }
+
+    // Media de cor (para faces)
+    function averageColor(...verts) {
+      const avg = verts.reduce((acc, v) => ({
+        r: acc.r + v.color.r,
+        g: acc.g + v.color.g,
+        b: acc.b + v.color.b
+      }), {r: 0, g: 0, b: 0});
+      return {
+        r: avg.r / verts.length,
+        g: avg.g / verts.length,
+        b: avg.b / verts.length
+      };
+    }
+
+    // Animacao principal
+    let vertices = createSurfaceGrid();
+    let animationStart = null;
+
+    function animate(time) {
+      if (!animationStart) animationStart = time;
+      const elapsed = time - animationStart;
+      const t = Math.min(elapsed / ANIMATION_DURATION, 1);
+
+      updateVertices(vertices, t);
+      const rotationY = TARGET_ROTATION_Y * ease(t);
+      const camera = {z: 3}; // Camera simples
+
+      drawSurface(vertices, rotationY, camera);
+
+      if (t < 1) requestAnimationFrame(animate);
+    }
+
+    // Iniciar
+    function start3DExtrusionAnimation() {
+      animationStart = null;
+      requestAnimationFrame(animate);
+    }
+  </script>
+</body>
+</html>
