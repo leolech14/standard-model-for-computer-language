@@ -3287,6 +3287,10 @@ function setupControls(data) {
 
     // Render color-coded legends with counts
     renderAllLegends();
+
+    // Flow mode button (attached here for proper DOM timing)
+    const btnFlow = document.getElementById('btn-flow');
+    if (btnFlow) btnFlow.onclick = () => toggleFlowMode();
 }
 
 /**
@@ -7403,9 +7407,14 @@ function toggleFlowMode() {
     }
 }
 
-document.getElementById('btn-flow').onclick = () => toggleFlowMode();
+// NOTE: btn-flow onclick moved to setupControls() for proper DOM timing
 
 function applyFlowVisualization() {
+    // Guard: Ensure Graph is ready
+    if (!Graph || !DM) {
+        console.warn('[Flow] Graph or DM not ready');
+        return;
+    }
     // Force black background for contrast if needed, or dim params
     // Node Color dimming
     const markov = DM ? DM.getMarkov() : {};  // ALL DATA FROM DM
@@ -7503,6 +7512,9 @@ function applyFlowVisualization() {
 }
 
 function clearFlowVisualization() {
+    // Guard: Ensure Graph is ready
+    if (!Graph) return;
+
     const graphNodes = Graph.graphData().nodes;
     const sizeMult = (FLOW_CONFIG || {}).sizeMultiplier || 1.8;
 
@@ -9250,7 +9262,10 @@ function drawContainmentSpheres(data) {
         FILE_CONTAINMENT.spheres.push({
             mesh, wireframe,
             fileIdx: parseInt(fileIdx),
-            velocity: new THREE.Vector3(0, 0, 0)
+            velocity: new THREE.Vector3(0, 0, 0),
+            // FIX: Add activity and nodes for animation (was missing, caused crashes)
+            activity: FILE_CONTAINMENT.particleActivity[fileIdx] || 0,
+            nodes: nodes.map(n => n.id)
         });
     });
 }
@@ -9611,7 +9626,7 @@ function applyFileVizMode() {
     else if (fileVizMode === 'cluster') {
         // Apply clustering force
         applyFileColors(graphNodes);
-        applyClusterForce(data);
+        applyClusterForce(DM.raw);  // FIX: was undefined `data`, now uses DM.raw
     }
     else if (fileVizMode === 'map') {
         // File map uses file nodes + optional expansion
@@ -9624,11 +9639,12 @@ function applyFileVizMode() {
         applyFileColors(graphNodes);
 
         // Build directory tree and compute activity levels
-        buildDirectoryTree(data);
-        computeFileActivity(data, graphNodes);
+        // FIX: was undefined `data`, now uses DM.raw
+        buildDirectoryTree(DM.raw);
+        computeFileActivity(DM.raw, graphNodes);
 
         // Draw containment spheres
-        drawContainmentSpheres(data, graphNodes);
+        drawContainmentSpheres(DM.raw, graphNodes);
 
         // Start the slow-motion animation with collisions
         startContainmentAnimation();
