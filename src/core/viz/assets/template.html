@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Collider Universe v{{VERSION}}</title>
     <style>
         /* INJECTED STYLES */
-        {{STYLES}}
+            {
+                {
+                STYLES
+            }
+        }
     </style>
 
     <!-- ENGINE: UMD builds - works with file:// protocol (no CORS issues) -->
@@ -16,11 +21,13 @@
     <!-- CDN scripts: synchronous to ensure THREE is available before app.js -->
     <!-- NOTE: defer doesn't work with inline scripts - they execute before deferred scripts -->
     <!-- THREE.js loaded first so 3d-force-graph detects and reuses it (avoids duplicate) -->
+    <!-- THREE.js loaded first so 3d-force-graph detects and reuses it (avoids duplicate) -->
     <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
     <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
     <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js"></script>
     <script src="https://unpkg.com/three@0.149.0/examples/js/geometries/ConvexGeometry.js"></script>
 </head>
+
 <body data-layout="stack">
     <div id="loader">
         <div>INITIALIZING UNIVERSE...</div>
@@ -31,11 +38,13 @@
 
     <div id="hud">
         <div class="hud-panel top-left" id="header-panel">
-            <h1 style="font-size: 16px; margin: 0 0 8px 0;">COLLIDER <span style="opacity: 0.5; font-size: 11px;">v{{VERSION}}</span></h1>
+            <h1 style="font-size: 16px; margin: 0 0 8px 0;">COLLIDER <span
+                    style="opacity: 0.5; font-size: 11px;">v{{VERSION}}</span></h1>
             <div style="font-size: 11px; opacity: 0.7; margin-bottom: 4px;" id="target-name">target</div>
             <div style="font-size: 10px; opacity: 0.5;" id="timestamp">timestamp</div>
             <hr style="border-color: rgba(255,255,255,0.1); margin: 10px 0;">
-            <div style="font-size: 9px; opacity: 0.5;">L-Drag Select · R-Drag Rotate · Space+Drag Pan · Scroll Zoom</div>
+            <div style="font-size: 9px; opacity: 0.5;">L-Drag Select · R-Drag Rotate · Space+Drag Pan · Scroll Zoom
+            </div>
         </div>
 
         <!-- Central stats -->
@@ -47,14 +56,26 @@
 
         <div class="hud-panel metrics-panel" id="metrics-panel">
             <h1>System Metrics</h1>
-            <div class="metric"><span class="metric-health neutral" id="health-edge-resolution"></span><span class="metric-label">EDGE RES</span><span class="metric-val" id="metric-edge-resolution">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-call-ratio"></span><span class="metric-label">CALL RATIO</span><span class="metric-val" id="metric-call-ratio">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-reachability"></span><span class="metric-label">REACHABILITY</span><span class="metric-val" id="metric-reachability">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-dead-code"></span><span class="metric-label">DEAD CODE</span><span class="metric-val" id="metric-dead-code">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-knot-score"></span><span class="metric-label">KNOT SCORE</span><span class="metric-val" id="metric-knot-score">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-topology"></span><span class="metric-label">TOPOLOGY</span><span class="metric-val" id="metric-topology">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-orphans"></span><span class="metric-label">ORPHANS</span><span class="metric-val" id="metric-orphans">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-top-hubs"></span><span class="metric-label">TOP HUBS</span><span class="metric-val" id="metric-top-hubs">--</span></div>
+            <div class="metric"><span class="metric-health neutral" id="health-edge-resolution"></span><span
+                    class="metric-label">EDGE RES</span><span class="metric-val" id="metric-edge-resolution">--</span>
+            </div>
+            <div class="metric"><span class="metric-health neutral" id="health-call-ratio"></span><span
+                    class="metric-label">CALL RATIO</span><span class="metric-val" id="metric-call-ratio">--</span>
+            </div>
+            <div class="metric"><span class="metric-health neutral" id="health-reachability"></span><span
+                    class="metric-label">REACHABILITY</span><span class="metric-val" id="metric-reachability">--</span>
+            </div>
+            <div class="metric"><span class="metric-health neutral" id="health-dead-code"></span><span
+                    class="metric-label">DEAD CODE</span><span class="metric-val" id="metric-dead-code">--</span></div>
+            <div class="metric"><span class="metric-health neutral" id="health-knot-score"></span><span
+                    class="metric-label">KNOT SCORE</span><span class="metric-val" id="metric-knot-score">--</span>
+            </div>
+            <div class="metric"><span class="metric-health neutral" id="health-topology"></span><span
+                    class="metric-label">TOPOLOGY</span><span class="metric-val" id="metric-topology">--</span></div>
+            <div class="metric"><span class="metric-health neutral" id="health-orphans"></span><span
+                    class="metric-label">ORPHANS</span><span class="metric-val" id="metric-orphans">--</span></div>
+            <div class="metric"><span class="metric-health neutral" id="health-top-hubs"></span><span
+                    class="metric-label">TOP HUBS</span><span class="metric-val" id="metric-top-hubs">--</span></div>
         </div>
 
         <div class="hud-panel report-panel" id="report-panel">
@@ -119,11 +140,11 @@
         <div class="side-dock always-open" id="side-dock">
             <div class="side-content" id="side-content">
                 <!-- TOPOLOGY: 3D Minimap filter visualization -->
-                <div class="side-section" id="side-topology">
+                <div class="side-section" id="dock-topo">
                     <div class="side-title">TOPOLOGY</div>
                     <div class="topo-map-container">
                         <!-- 3D Minimap Canvas: Hyperboloid showing 3 layers -->
-                        <div class="topo-map" id="topo-minimap" onclick="toggleMinimapExpand(event)">
+                        <div class="topo-map" id="dock-minimap" onclick="toggleMinimapExpand(event)">
                             <canvas id="topo-canvas"></canvas>
                             <span class="topo-expand-hint">Click to expand</span>
                         </div>
@@ -179,7 +200,7 @@
                 </div>
 
                 <!-- PRESETS: Quick visualization modes -->
-                <div class="side-section" id="side-presets">
+                <div class="side-section" id="dock-presets">
                     <div class="side-title">PRESETS</div>
                     <div class="preset-grid" id="preset-grid">
                         <div class="preset-btn active" data-preset="tier" title="Core → Architecture → External">
@@ -210,7 +231,7 @@
 
                     <!-- OKLCH COLOR SCHEMES -->
                     <div class="side-title color-schemes-title">OKLCH SCHEMES</div>
-                    <div class="color-scheme-grid" id="color-scheme-grid">
+                    <div class="color-scheme-grid" id="dock-schemes">
                         <div class="color-scheme-btn thermal" data-preset="thermal">
                             <span class="scheme-name">THERMAL</span>
                             <span class="scheme-tooltip">Heat signature - activity glows hot</span>
@@ -247,7 +268,7 @@
                 </div>
 
                 <!-- LAYOUT: Graph layout presets -->
-                <div class="side-section" id="side-layout">
+                <div class="side-section" id="dock-layouts">
                     <div class="side-title collapsible" data-target="layout-content">
                         <span class="collapse-icon">▼</span> LAYOUT
                     </div>
@@ -320,7 +341,7 @@
                 </div>
 
                 <!-- GROUPS: Selection groups -->
-                <div class="side-section" id="side-groups">
+                <div class="side-section" id="dock-info">
                     <div class="side-title collapsible" data-target="groups-content">
                         <span class="collapse-icon">▼</span> GROUPS
                     </div>
@@ -330,7 +351,7 @@
                 </div>
 
                 <!-- DATA: Metadata toggles -->
-                <div class="side-section" id="side-data">
+                <div class="side-section" id="dock-datamaps">
                     <div class="side-title collapsible collapsed" data-target="data-content">
                         <span class="collapse-icon">▶</span> DATA
                     </div>
@@ -341,9 +362,10 @@
             </div>
         </div>
 
-        <div class="hud-panel bottom-dock">
+        <div class="hud-panel bottom-dock" id="bottom-dock">
             <div class="datamap-controls" id="datamap-controls"></div>
-            <button class="dock-btn disabled" id="btn-create-group" title="Create a group from selection">CREATE GROUP</button>
+            <button class="dock-btn disabled" id="btn-create-group" title="Create a group from selection">CREATE
+                GROUP</button>
             <button class="dock-btn" id="btn-files">FILES</button>
             <!-- File visualization mode sub-controls -->
             <div class="file-mode-controls" id="file-mode-controls">
@@ -352,14 +374,16 @@
                 <button class="file-mode-btn" id="btn-file-cluster" title="Force cluster by file">CLUSTER</button>
                 <button class="file-mode-btn" id="btn-file-map" title="Show file nodes">MAP</button>
                 <button class="file-mode-btn" id="btn-file-spheres" title="Show containment spheres">SPHERES</button>
-                <button class="file-mode-btn pop-btn" id="btn-file-pop" title="Pop boundaries - release particles into chaos!">POP!</button>
+                <button class="file-mode-btn pop-btn" id="btn-file-pop"
+                    title="Pop boundaries - release particles into chaos!">POP!</button>
             </div>
             <div class="file-expand-controls" id="file-expand-controls">
                 <button class="file-expand-btn active" id="btn-expand-inline" title="Expand in place">INLINE</button>
                 <button class="file-expand-btn" id="btn-expand-detach" title="Expand and detach">DETACH</button>
             </div>
             <button class="dock-btn" id="btn-flow" title="Markov chain - edge thickness by probability">FLOW</button>
-            <button class="dock-btn" id="btn-edge-mode" title="Edge colors: type, resolution, weight, confidence">EDGE: TYPE</button>
+            <button class="dock-btn" id="btn-edge-mode" title="Edge colors: type, resolution, weight, confidence">EDGE:
+                TYPE</button>
             <button class="dock-btn" id="btn-report">REPORT</button>
             <button class="dock-btn active" id="btn-stars" title="Toggle background starfield">STARS</button>
             <button class="dock-btn" id="btn-reset-layout" title="Re-run physics simulation">RESET</button>
@@ -379,39 +403,62 @@
             <!-- View controls -->
             <button class="cmd-btn" id="cmd-view">
                 <span class="tooltip">View</span>
-                <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>
             </button>
             <button class="cmd-btn" id="cmd-filter">
                 <span class="tooltip">Filters</span>
-                <svg viewBox="0 0 24 24"><polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46" />
+                </svg>
             </button>
             <button class="cmd-btn" id="cmd-style">
                 <span class="tooltip">Style</span>
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20 4 4 0 0 0 0-8 2 2 0 0 1 0-4 10 10 0 0 0 0-8z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a10 10 0 0 0 0 20 4 4 0 0 0 0-8 2 2 0 0 1 0-4 10 10 0 0 0 0-8z" />
+                </svg>
             </button>
             <button class="cmd-btn" id="cmd-oklch" onclick="toggleOklchPicker()">
                 <span class="tooltip tooltip-left">OKLCH</span>
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                </svg>
             </button>
             <div class="cmd-divider"></div>
             <!-- Mode toggles -->
-            <button class="cmd-btn" id="cmd-files2">
+            <button class="cmd-btn" id="cmd-files" onclick="handleCmdFiles()">
                 <span class="tooltip">File Mode</span>
-                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14,2 14,8 20,8" />
+                </svg>
             </button>
-            <button class="cmd-btn" id="cmd-flow2">
+            <button class="cmd-btn" id="cmd-flow" onclick="handleCmdFlow()">
                 <span class="tooltip">Flow Mode</span>
-                <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+                </svg>
             </button>
             <button class="cmd-btn active" id="cmd-3d">
                 <span class="tooltip">3D / 2D</span>
-                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
             </button>
             <div class="cmd-divider"></div>
             <!-- Settings -->
             <button class="cmd-btn" id="cmd-settings">
                 <span class="tooltip">Settings</span>
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
             </button>
         </div>
 
@@ -519,7 +566,8 @@
                         <span class="slider-label">Node Size</span>
                         <span class="slider-value" id="node-size-value">1.0x</span>
                     </div>
-                    <input type="range" class="slider-input" id="node-size-slider" min="0.2" max="3" step="0.1" value="1">
+                    <input type="range" class="slider-input" id="node-size-slider" min="0.2" max="3" step="0.1"
+                        value="1">
                 </div>
                 <div class="slider-row">
                     <div class="slider-header">
@@ -603,14 +651,16 @@
     <div class="oklch-picker" id="oklch-picker">
         <div class="oklch-picker-header">
             <span class="oklch-picker-title">OKLCH</span>
-            <a href="https://oklch.com" target="_blank" class="oklch-external-link" title="Full picker at oklch.com">↗</a>
+            <a href="https://oklch.com" target="_blank" class="oklch-external-link"
+                title="Full picker at oklch.com">↗</a>
             <button class="oklch-picker-close" onclick="toggleOklchPicker()">&times;</button>
         </div>
         <div class="oklch-content">
             <div class="oklch-preview-bar">
                 <div class="oklch-swatch" id="oklch-swatch"></div>
                 <div class="oklch-values">
-                    <input type="text" id="oklch-css" readonly onclick="this.select();document.execCommand('copy');showToast('Copied!')">
+                    <input type="text" id="oklch-css" readonly
+                        onclick="this.select();document.execCommand('copy');showToast('Copied!')">
                 </div>
             </div>
             <div class="oklch-sliders">
@@ -620,7 +670,8 @@
                 </div>
                 <div class="oklch-slider-group">
                     <label>C <span id="oklch-c-val">0.15</span></label>
-                    <input type="range" id="oklch-c" min="0" max="0.4" step="0.001" value="0.15" class="oklch-range oklch-range-c">
+                    <input type="range" id="oklch-c" min="0" max="0.4" step="0.001" value="0.15"
+                        class="oklch-range oklch-range-c">
                 </div>
                 <div class="oklch-slider-group">
                     <label>H <span id="oklch-h-val">220°</span></label>
@@ -651,7 +702,8 @@
     </div>
 
     <script>
-        {{APP_JS}}
+        { { APP_JS } }
     </script>
 </body>
+
 </html>
