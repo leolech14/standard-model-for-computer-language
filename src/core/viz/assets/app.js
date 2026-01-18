@@ -6256,7 +6256,7 @@ function applyMetadataVisibility() {
 // ═══════════════════════════════════════════════════════════════
 // OKLCH COLOR SCHEME BUTTONS - L, C, H move together coherently
 // ═══════════════════════════════════════════════════════════════
-const colorSchemeGrid = document.getElementById('color-scheme-grid');
+const colorSchemeGrid = document.getElementById('dock-schemes');
 if (colorSchemeGrid) {
     colorSchemeGrid.querySelectorAll('.color-scheme-btn').forEach(btn => {
         btn.addEventListener('click', () => {
