@@ -20,13 +20,24 @@ Collider is valuable and complete without any AI integration. The Standard Model
 │   LAYER 1: DETERMINISTIC CORE (The Intelligence)                    │
 │   ════════════════════════════════════════════════                  │
 │                                                                     │
-│   Graph Analysis          Metrics & Scoring       Classification    │
-│   ─────────────           ─────────────────       ──────────────    │
-│   • Shortest paths        • RPBL scores           • Atom types      │
-│   • Cycle detection       • Complexity metrics    • Topology shape  │
-│   • Component analysis    • Coupling coefficients • Role inference  │
-│   • Hub identification    • Cohesion measures     • Tier assignment │
-│   • Dead code detection   • Markov chains         • Ring placement  │
+│   THE THEORETICAL FOUNDATION (The Standard Model):                  │
+│   ────────────────────────────────────────────────                  │
+│   • Atomic Theory: OPEN SCHEMA with 200+ atoms across 3 tiers       │
+│     (T0 Core, T1 Stdlib, T2 Ecosystem), 16 families, 4 phases       │
+│     (DATA → LOGIC → ORGANIZATION → EXECUTION)                       │
+│     Expandable to 600+ atoms for all major ecosystems               │
+│   • Role Theory: Canonical roles (Repository, Entity, Service...)   │
+│   • Layer Theory: Architectural placement (Domain, Infra, App, UI)  │
+│   • Antimatter Laws: Cross-layer violation detection                │
+│   • Purpose Field: System intent emergence                          │
+│   • Execution Flow: Reachability and orphan detection               │
+│                                                                     │
+│   DERIVED ANALYSIS (built on the theory):                           │
+│   ────────────────────────────────────────                          │
+│   • RPBL Scoring       • Topology Classification                    │
+│   • Coupling Analysis  • Dead Code Detection                        │
+│   • Shortest Paths     • Markov Chain Analysis                      │
+│   • Knot Detection     • Component Analysis                         │
 │                                                                     │
 │   STATUS: ✅ FULLY IMPLEMENTED                                      │
 │                                                                     │

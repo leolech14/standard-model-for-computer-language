@@ -14,7 +14,7 @@ This document proves the **dependency order** of the Standard Model theories and
 
 ```mermaid
 graph TD
-    A[Atomic Theory<br/>167 Atoms] --> B[Role Theory<br/>Canonical Roles]
+    A[Atomic Theory<br/>200+ Atoms<br/>Open Schema] --> B[Role Theory<br/>Canonical Roles]
     B --> C[Layer Theory<br/>Architecture]
     B --> D[Antimatter Laws<br/>Constraints]
     C --> E[Purpose Field<br/>Global Intent]
@@ -41,7 +41,7 @@ graph TD
 
 | Theory | Atomic Theory |
 |--------|---------------|
-| **Axiom** | Every code element is composed of **167 known Atoms** (e.g., `LOG.FNC.M` = Function) |
+| **Axiom** | Every code element is composed of **known Atoms** from an **open schema** (200+ atoms, expandable to 600+) |
 | **Input** | Raw source code (text) |
 | **Output** | `List[Node]` where each Node has `atom_id`, `name`, `file_path`, `lines` |
 | **Pipeline** | `STAGE 1: Classification` |
@@ -256,7 +256,7 @@ Atoms group into 16 families across 4 phases:
 | Services | Execution | Background services |
 | Workers | Execution | Async/background workers |
 
-**Total Atoms:** 167 across 16 families in 4 phases
+**Total Atoms:** 200+ across 16 families in 4 phases (open schema, expandable to 600+ for all ecosystems)
 
 ---
 

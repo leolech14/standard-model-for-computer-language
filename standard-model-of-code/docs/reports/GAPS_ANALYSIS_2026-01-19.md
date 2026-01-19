@@ -38,12 +38,27 @@ The full vision requires **bidirectional** transformation, enabling manipulation
 │  │              LAYER 1: DETERMINISTIC CORE                      │  │
 │  │                    (THE INTELLIGENCE)                         │  │
 │  │                                                               │  │
-│  │  • God Class Detection (fan-out, responsibility)              │  │
-│  │  • Coupling Analysis (edge density, cohesion)                 │  │
-│  │  • Shortest Path Algorithms (graph traversal)                 │  │
-│  │  • Dead Code Detection (unreachable nodes)                    │  │
-│  │  • Topology Classification (star, mesh, hierarchical)         │  │
+│  │  THE THEORETICAL FOUNDATION:                                  │  │
+│  │  ─────────────────────────────                                │  │
+│  │  • Atomic Theory: OPEN SCHEMA with 200+ atoms across 3 tiers  │  │
+│  │    (T0 Core, T1 Stdlib, T2 Ecosystem), 16 families, 4 phases  │  │
+│  │    (DATA → LOGIC → ORGANIZATION → EXECUTION)                  │  │
+│  │    Expandable to 600+ atoms for all major ecosystems          │  │
+│  │  • Role Theory: Pattern matching to canonical roles           │  │
+│  │    (Repository, Entity, Service, Controller, etc.)            │  │
+│  │  • Layer Theory: Architectural placement                      │  │
+│  │    (Domain, Infrastructure, Application, UI)                  │  │
+│  │  • Antimatter Laws: Cross-layer violation detection           │  │
+│  │  • Purpose Field: System intent emergence                     │  │
+│  │  • Execution Flow: Reachability and orphan detection          │  │
+│  │                                                               │  │
+│  │  DERIVED ANALYSIS (built on the theory):                      │  │
+│  │  ───────────────────────────────────────                      │  │
 │  │  • RPBL Scoring (Responsibility, Purity, Boundary, Lifecycle) │  │
+│  │  • Topology Classification (star, mesh, hierarchical)         │  │
+│  │  • Coupling Analysis (edge density, cohesion)                 │  │
+│  │  • Dead Code Detection (unreachable nodes)                    │  │
+│  │  • Shortest Path Algorithms (graph traversal)                 │  │
 │  │  • Markov Chain Analysis (transition probabilities)           │  │
 │  │  • Knot Detection (circular dependencies)                     │  │
 │  │                                                               │  │
