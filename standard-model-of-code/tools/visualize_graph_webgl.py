@@ -233,7 +233,7 @@ def generate_webgl_html(json_source: Any, output_path: str):
     node_color_config = appearance.get_node_color_config()
     highlight_config = appearance.get_highlight_config()
     flow_mode_config = appearance.get_flow_mode_config()
-    flow_mode_config = appearance.get_flow_mode_config()
+    flow_presets_config = appearance.get_flow_presets_config()
     animation_config = appearance.get_animation_config()
     controls_config = controls.to_js_config(
         available_rings=available_rings,
@@ -309,8 +309,8 @@ def generate_webgl_html(json_source: Any, output_path: str):
             "file_color": file_color_config,
             "node_color": node_color_config,
             "highlight": highlight_config,
-            "highlight": highlight_config,
             "flow_mode": flow_mode_config,
+            "flow-presets": flow_presets_config,
             "animation": animation_config
         },
         "controls": controls_config,

@@ -280,6 +280,41 @@ class AppearanceEngine:
             }
         }
 
+    def get_flow_presets_config(self) -> Dict[str, Any]:
+        """Get flow presets configuration for Markov chain visualization.
+
+        Returns all 6 named presets (ember, ocean, plasma, matrix, pulse, aurora)
+        with their color and parameter settings.
+        """
+        presets = ["ember", "ocean", "plasma", "matrix", "pulse", "aurora"]
+        config = {}
+
+        for preset in presets:
+            prefix = f"flow-presets.{preset}"
+            config[preset] = {
+                "highlightColor": self._normalize_color(
+                    self.resolver.appearance(f"{prefix}.highlightColor", "#ff8c00")
+                ),
+                "particleColor": self._normalize_color(
+                    self.resolver.appearance(f"{prefix}.particleColor", "#ffaa00")
+                ),
+                "dimColor": self._normalize_color(
+                    self.resolver.appearance(f"{prefix}.dimColor", "#331100")
+                ),
+                "edgeColor": self._normalize_color(
+                    self.resolver.appearance(f"{prefix}.edgeColor", "#ff6600")
+                ),
+                "particleCount": self.resolver.appearance(f"{prefix}.particleCount", 3),
+                "particleWidth": self.resolver.appearance(f"{prefix}.particleWidth", 2.5),
+                "particleSpeed": self.resolver.appearance(f"{prefix}.particleSpeed", 0.008),
+                "edgeWidthScale": self.resolver.appearance(f"{prefix}.edgeWidthScale", 3.0),
+                "sizeMultiplier": self.resolver.appearance(f"{prefix}.sizeMultiplier", 1.8),
+                "edgeOpacityMin": self.resolver.appearance(f"{prefix}.edgeOpacityMin", 0.3),
+                "dimOpacity": self.resolver.appearance(f"{prefix}.dimOpacity", 0.05)
+            }
+
+        return config
+
     def get_boundary_config(self) -> Dict[str, Any]:
         """Get file boundary appearance configuration."""
         return {
