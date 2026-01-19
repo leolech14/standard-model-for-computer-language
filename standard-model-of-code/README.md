@@ -464,7 +464,7 @@ By making these principles measurable, we transform subjective "code smells" int
 
 ## 🤝 Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) (coming soon)
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ---
 
