@@ -21,3 +21,7 @@ mypy>=1.0.0
 
 # Optional: Template rendering
 jinja2>=3.1.0
+
+# Robustness
+chardet>=5.0.0
+jsonschema>=4.0.0
