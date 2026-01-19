@@ -77,29 +77,37 @@ let STARFIELD_OPACITY = 0;
 let BLOOM_PASS = null;
 let BLOOM_STRENGTH = 0;
 let EDGE_MODE = 'gradient-file';  // DEFAULT: Show file regions with gradients!
-let EDGE_DEFAULT_OPACITY = 0.2;
+let EDGE_DEFAULT_OPACITY = null;  // Initialized from appearance.tokens at runtime (token value: 0.08)
 let DEFAULT_LINK_DISTANCE = null;
+
+// =================================================================
+// THEME CONFIGURATION: Loaded from payload at runtime
+// =================================================================
+let THEME_CONFIG = {
+    available: ['dark'],
+    default: 'dark',
+    current: 'dark',
+    colors: {
+        edge: {},
+        viz: {},
+        console: {},
+        schemes: {}
+    }
+};
+
+// Default color configs - will be overridden by payload tokens
+// Edge mode configuration - populated from appearance.tokens at runtime
+// Fallback values are defined in appearance.tokens.json:131-204
 let EDGE_MODE_CONFIG = {
-    resolution: {
-        internal: '#4dd4ff',
-        external: '#ff6b6b',
-        unresolved: '#9aa0a6',
-        unknown: '#666666'
-    },
-    weight: { hue_min: 210, hue_max: 50, chroma: null, saturation: 45, lightness: 42 },
-    confidence: { hue_min: 20, hue_max: 120, chroma: null, saturation: 45, lightness: 44 },
-    width: { base: 1.2, weight_scale: 2.5, confidence_scale: 1.5 },
-    dim: { interfile_factor: 0.25 },
-    opacity: 0.12
+    resolution: {},
+    weight: {},
+    confidence: {},
+    width: {},
+    dim: {},
+    opacity: null
 };
-let EDGE_COLOR_CONFIG = {
-    default: '#333333',
-    calls: '#4dd4ff',
-    contains: '#00ff9d',
-    uses: '#ffb800',
-    imports: '#9aa0a6',
-    inherits: '#ff6b6b'
-};
+// Edge type colors - populated from theme.tokens.json:501-512 at runtime
+let EDGE_COLOR_CONFIG = {};
 let FILE_COLOR_CONFIG = {
     strategy: 'golden-angle',
     angle: 137.5,
@@ -110,6 +118,22 @@ let FILE_COLOR_CONFIG = {
 let EDGE_RANGES = { weight: { min: 1, max: 1 }, confidence: { min: 1, max: 1 } };
 let NODE_FILE_INDEX = new Map();
 let NODE_COLOR_CONFIG = { tier: {}, ring: {}, unknown: '#666666' };
+
+// Console logging colors - populated from theme config
+let CONSOLE_COLORS = {
+    success: '#4ade80',
+    error: '#f87171',
+    warning: '#ffaa00',
+    info: '#4dd4ff'
+};
+
+// Viz colors for canvas and fallbacks - populated from theme config
+let VIZ_COLORS = {
+    canvasBg: '#03040a',
+    nodeFallback: '#888888',
+    edgeFallback: '#333333',
+    groupHalo: '#88d0ff'
+};
 let FLOW_CONFIG = {};  // Flow mode settings from THE REMOTE CONTROL
 let GRAPH_MODE = 'atoms'; // atoms | files | hybrid
 
@@ -2159,7 +2183,7 @@ function initFallback2D(container, graphData, fullData) {
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
-    canvas.style.background = '#03040a';
+    canvas.style.background = VIZ_COLORS.canvasBg;
     container.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
@@ -2221,11 +2245,11 @@ function initFallback2D(container, graphData, fullData) {
         if (typeof c === 'number') {
             return '#' + c.toString(16).padStart(6, '0');
         }
-        return c || '#888888';
+        return c || VIZ_COLORS.nodeFallback;
     }
 
     function render() {
-        ctx.fillStyle = '#03040a';
+        ctx.fillStyle = VIZ_COLORS.canvasBg;
         ctx.fillRect(0, 0, width, height);
 
         // Draw edges
@@ -2312,6 +2336,42 @@ function initGraph(data) {
     // =================================================================
     const physicsConfig = data.physics || {};
     const appearanceConfig = data.appearance || {};
+
+    // =================================================================
+    // THEME CONFIG: Load theme configuration for runtime switching
+    // =================================================================
+    if (data.theme_config) {
+        THEME_CONFIG = {
+            ...THEME_CONFIG,
+            available: data.theme_config.available || ['dark'],
+            default: data.theme_config.default || 'dark',
+            current: data.theme_config.default || 'dark',
+            colors: data.theme_config.colors || THEME_CONFIG.colors
+        };
+
+        // Apply edge colors from theme config
+        if (THEME_CONFIG.colors.edge) {
+            EDGE_COLOR_CONFIG = { ...EDGE_COLOR_CONFIG, ...THEME_CONFIG.colors.edge };
+        }
+
+        // Apply viz colors from theme config
+        if (THEME_CONFIG.colors.viz) {
+            const viz = THEME_CONFIG.colors.viz;
+            VIZ_COLORS = {
+                canvasBg: viz['canvas-bg'] || VIZ_COLORS.canvasBg,
+                nodeFallback: viz['node-fallback'] || VIZ_COLORS.nodeFallback,
+                edgeFallback: viz['edge-fallback'] || VIZ_COLORS.edgeFallback,
+                groupHalo: viz['group-halo'] || VIZ_COLORS.groupHalo
+            };
+        }
+
+        // Apply console colors from theme config
+        if (THEME_CONFIG.colors.console) {
+            CONSOLE_COLORS = { ...CONSOLE_COLORS, ...THEME_CONFIG.colors.console };
+        }
+
+        console.log(`%c[Theme] Loaded: ${THEME_CONFIG.available.join(', ')}`, `color: ${CONSOLE_COLORS.info}; font-weight: bold`);
+    }
     const simulation = physicsConfig.simulation || {};
     const background = appearanceConfig.background || {};
     const stars = background.stars || {};
@@ -2322,16 +2382,18 @@ function initGraph(data) {
     FLOW_CONFIG = appearanceConfig.flow_mode || {};
     const edgeModes = appearanceConfig.edge_modes || {};
     EDGE_MODE_CONFIG = {
-        resolution: edgeModes.resolution || EDGE_MODE_CONFIG.resolution,
-        weight: edgeModes.weight || EDGE_MODE_CONFIG.weight,
-        confidence: edgeModes.confidence || EDGE_MODE_CONFIG.confidence,
-        width: edgeModes.width || EDGE_MODE_CONFIG.width,
-        dim: edgeModes.dim || EDGE_MODE_CONFIG.dim,
-        opacity: (typeof edgeModes.opacity === 'number') ? edgeModes.opacity : EDGE_MODE_CONFIG.opacity
+        resolution: edgeModes.resolution || { internal: '#4dd4ff', external: '#ff6b6b', unresolved: '#9aa0a6', unknown: '#666666' },
+        weight: edgeModes.weight || { hue_min: 210, hue_max: 50, saturation: 45, lightness: 42 },
+        confidence: edgeModes.confidence || { hue_min: 20, hue_max: 120, saturation: 45, lightness: 44 },
+        width: edgeModes.width || { base: 0.6, weight_scale: 2.0, confidence_scale: 1.5 },
+        dim: edgeModes.dim || { interfile_factor: 0.25 },
+        opacity: (typeof edgeModes.opacity === 'number') ? edgeModes.opacity : 0.08
     };
+
     FILE_COLOR_CONFIG = Object.assign({}, FILE_COLOR_CONFIG, appearanceConfig.file_color || {});
+    // Token value 0.08 from appearance.tokens.json:202, fallback only if token system fails
     EDGE_DEFAULT_OPACITY =
-        (typeof EDGE_MODE_CONFIG.opacity === 'number') ? EDGE_MODE_CONFIG.opacity : EDGE_DEFAULT_OPACITY;
+        (typeof EDGE_MODE_CONFIG.opacity === 'number') ? EDGE_MODE_CONFIG.opacity : 0.08;
     const boundaryConfig = appearanceConfig.boundary || {};
     APPEARANCE_STATE.edgeOpacity = EDGE_DEFAULT_OPACITY;
     APPEARANCE_STATE.boundaryFill = boundaryConfig.fill_opacity ?? APPEARANCE_STATE.boundaryFill;
@@ -2345,7 +2407,14 @@ function initGraph(data) {
         unknown: nodeColor.unknown || '#666666'
     };
     const edgeColor = appearanceConfig.edge_color || {};
-    EDGE_COLOR_CONFIG = Object.assign({}, EDGE_COLOR_CONFIG, edgeColor);
+    EDGE_COLOR_CONFIG = {
+        default: edgeColor.default || '#333333',
+        calls: edgeColor.calls || '#4dd4ff',
+        contains: edgeColor.contains || '#00ff9d',
+        uses: edgeColor.uses || '#ffb800',
+        imports: edgeColor.imports || '#9aa0a6',
+        inherits: edgeColor.inherits || '#ff6b6b'
+    };
 
     // Initial Filter: show full graph
     const filtered = filterGraph(data, CURRENT_DENSITY, ACTIVE_DATAMAPS, VIS_FILTERS);
@@ -10749,3 +10818,116 @@ if (document.readyState === 'loading') {
 
 // Expose for debugging
 window.PanelManager = PanelManager;
+
+// =================================================================
+// THEME SWITCHING: Runtime theme management
+// =================================================================
+
+/**
+ * Set the active theme by name.
+ * Updates document data-theme attribute and stores preference.
+ * @param {string} themeName - Theme name: 'dark', 'light', or 'high-contrast'
+ */
+function setTheme(themeName) {
+    if (!THEME_CONFIG.available.includes(themeName)) {
+        console.warn(`[Theme] Unknown theme: ${themeName}. Available: ${THEME_CONFIG.available.join(', ')}`);
+        return;
+    }
+
+    // Update document attribute for CSS variable switching
+    document.documentElement.setAttribute('data-theme', themeName);
+
+    // Update global state
+    THEME_CONFIG.current = themeName;
+
+    // Store preference in localStorage
+    try {
+        localStorage.setItem('collider-theme', themeName);
+    } catch (e) {
+        console.warn('[Theme] Could not save preference:', e);
+    }
+
+    // Update canvas background if WebGL renderer is active
+    if (Graph && Graph.scene && Graph.scene()) {
+        const scene = Graph.scene();
+        if (scene.background) {
+            const bgColor = getComputedStyle(document.documentElement)
+                .getPropertyValue('--color-viz-canvas-bg')?.trim() || VIZ_COLORS.canvasBg;
+            scene.background = new THREE.Color(bgColor);
+        }
+    }
+
+    // Update theme toggle buttons
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === themeName);
+    });
+
+    console.log(`%c[Theme] Switched to: ${themeName}`, `color: ${CONSOLE_COLORS.success}; font-weight: bold`);
+    showToast(`Theme: ${themeName}`);
+}
+
+/**
+ * Get the current theme name.
+ * @returns {string} Current theme name
+ */
+function getTheme() {
+    return THEME_CONFIG.current;
+}
+
+/**
+ * Get list of available themes.
+ * @returns {string[]} Array of theme names
+ */
+function getAvailableThemes() {
+    return THEME_CONFIG.available;
+}
+
+/**
+ * Cycle to the next theme in the list.
+ */
+function cycleTheme() {
+    const current = THEME_CONFIG.current;
+    const themes = THEME_CONFIG.available;
+    const currentIndex = themes.indexOf(current);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
+}
+
+/**
+ * Initialize theme from saved preference or system preference.
+ */
+function initTheme() {
+    // Check for saved preference
+    let savedTheme = null;
+    try {
+        savedTheme = localStorage.getItem('collider-theme');
+    } catch (e) {
+        // Ignore storage errors
+    }
+
+    // Use saved preference if valid
+    if (savedTheme && THEME_CONFIG.available.includes(savedTheme)) {
+        setTheme(savedTheme);
+        return;
+    }
+
+    // Fall back to default theme
+    setTheme(THEME_CONFIG.default);
+}
+
+// Initialize theme on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Small delay to ensure CSS vars are loaded
+        setTimeout(initTheme, 50);
+    });
+} else {
+    setTimeout(initTheme, 50);
+}
+
+// Expose theme functions globally
+window.setTheme = setTheme;
+window.getTheme = getTheme;
+window.getAvailableThemes = getAvailableThemes;
+window.cycleTheme = cycleTheme;
+window.THEME_CONFIG = THEME_CONFIG;

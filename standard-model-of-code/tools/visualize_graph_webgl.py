@@ -369,7 +369,10 @@ def generate_webgl_html(json_source: Any, output_path: str):
         "brain_download": data.get("brain_download", ""),
 
         # AI Insights (Gemini-powered analysis)
-        "ai_insights": data.get("ai_insights", None)
+        "ai_insights": data.get("ai_insights", None),
+
+        # Theme configuration for runtime switching
+        "theme_config": resolver.get_js_theme_config()
     }
 
     # NODE PROCESSING
@@ -486,11 +489,14 @@ def generate_webgl_html(json_source: Any, output_path: str):
         print("Please ensure src/core/viz/assets contains template.html, styles.css, and app.js")
         return
 
-    # INJECT CSS VARIABLES FROM TOKENS
+    # INJECT CSS VARIABLES FROM TOKENS (with multi-theme support)
     # resolver is already available from the top-level import
-    css_variables = resolver.generate_css_variables(include=["theme", "layout"])
+    css_variables = resolver.generate_all_themes_css(include=["theme", "layout"])
     if css_variables:
         styles = f"/* === DESIGN TOKENS (auto-generated) === */\n{css_variables}\n\n/* === COMPONENT STYLES === */\n{styles}"
+
+    # Get theme config for JS injection
+    theme_config = resolver.get_js_theme_config()
 
     # INJECTION
     print("Generating HTML...")

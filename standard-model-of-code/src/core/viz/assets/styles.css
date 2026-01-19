@@ -2731,6 +2731,42 @@ body {
             font-weight: 600;
         }
 
+        /* ============================================
+           THEME SWITCHER
+           ============================================ */
+        .theme-switcher {
+            display: flex;
+            gap: var(--spacing-2);
+            flex-wrap: wrap;
+        }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-4);
+            background: var(--color-bg-active);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            color: var(--color-text-secondary);
+            font-size: var(--typography-size-xs);
+            font-weight: var(--typography-weight-medium);
+            cursor: pointer;
+            transition: var(--transition-default);
+        }
+        .theme-btn:hover {
+            background: var(--color-bg-hover);
+            border-color: var(--color-border-strong);
+            color: var(--color-text-primary);
+        }
+        .theme-btn.active {
+            background: var(--color-accent-primary-bg);
+            border-color: var(--color-accent-primary);
+            color: var(--color-accent-primary);
+        }
+        .theme-btn svg {
+            flex-shrink: 0;
+        }
+
         /* Chip buttons for filters */
         .chip-group {
             display: flex;

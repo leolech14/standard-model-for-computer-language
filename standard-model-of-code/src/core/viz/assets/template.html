@@ -560,6 +560,23 @@
                 <button class="panel-close" onclick="closePanel('settings')">&times;</button>
             </div>
             <div class="panel-section">
+                <div class="panel-section-title">Theme</div>
+                <div class="theme-switcher" id="theme-switcher">
+                    <button class="theme-btn active" data-theme="dark" onclick="setTheme('dark')" title="Dark theme (default)">
+                        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        <span>Dark</span>
+                    </button>
+                    <button class="theme-btn" data-theme="light" onclick="setTheme('light')" title="Light theme">
+                        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="4" fill="currentColor"/><path fill="currentColor" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                        <span>Light</span>
+                    </button>
+                    <button class="theme-btn" data-theme="high-contrast" onclick="setTheme('high-contrast')" title="High contrast (accessibility)">
+                        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M12 2a10 10 0 0 1 0 20V2Z"/></svg>
+                        <span>High Contrast</span>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-section">
                 <div class="panel-section-title">Layout</div>
                 <div class="slider-row">
                     <div class="slider-header">

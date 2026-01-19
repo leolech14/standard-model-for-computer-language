@@ -10,6 +10,12 @@ Token Files:
     - controls.tokens.json: UI controls (panels, buttons, layouts)
     - theme.tokens.json: UI chrome (backgrounds, text, typography, shadows)
     - layout.tokens.json: Spacing, z-index, transitions, radius
+
+Theme Support:
+    - theme.tokens.json can contain a "themes" object with theme variants
+    - Default theme is "dark" (the root tokens)
+    - Variants (light, high-contrast) are stored in themes.{name}
+    - CSS is generated with [data-theme="X"] attribute selectors
 """
 
 import json
@@ -41,6 +47,10 @@ class TokenResolver:
         self._controls_tokens = self._load_tokens("controls.tokens.json")
         self._theme_tokens = self._load_tokens("theme.tokens.json")
         self._layout_tokens = self._load_tokens("layout.tokens.json")
+
+        # Extract theme variants
+        self._theme_variants = self._theme_tokens.get("themes", {})
+        self._default_theme = self._theme_tokens.get("$default-theme", "dark")
 
     def _load_tokens(self, filename: str) -> dict:
         """Load tokens from a JSON file."""
@@ -228,6 +238,195 @@ class TokenResolver:
         """
         css_name = path.replace(".", "-").replace("_", "-").lower()
         return f"var(--{css_name})"
+
+    def get_theme_names(self) -> List[str]:
+        """
+        Get list of available theme names.
+
+        Returns:
+            List of theme names including the default theme.
+        """
+        themes = [self._default_theme]  # Default theme first
+        for name in self._theme_variants.keys():
+            if not name.startswith("$") and name != self._default_theme:
+                themes.append(name)
+        return themes
+
+    def get_default_theme(self) -> str:
+        """
+        Get the default theme name.
+
+        Returns:
+            The default theme name (usually "dark").
+        """
+        return self._default_theme
+
+    def _flatten_theme_tokens(self, tokens: dict, prefix: str = "") -> List[Tuple[str, str]]:
+        """
+        Flatten nested theme token dict to list of (css-var-name, value) tuples.
+        Only extracts color-related tokens that vary between themes.
+
+        Args:
+            tokens: Theme variant token dictionary
+            prefix: Current path prefix
+
+        Returns:
+            List of (name, value) tuples
+        """
+        result = []
+        for key, value in tokens.items():
+            # Skip metadata keys
+            if key.startswith("$"):
+                continue
+
+            var_name = f"{prefix}-{key}" if prefix else key
+
+            if isinstance(value, dict):
+                if "$value" in value:
+                    # Terminal value node
+                    result.append((var_name, str(value["$value"])))
+                else:
+                    # Nested object, recurse
+                    result.extend(self._flatten_theme_tokens(value, var_name))
+            else:
+                # Direct value (shouldn't happen in well-formed tokens)
+                result.append((var_name, str(value)))
+
+        return result
+
+    def generate_theme_css(self, theme_name: str) -> str:
+        """
+        Generate CSS custom properties for a specific theme.
+
+        Args:
+            theme_name: Name of the theme ("dark", "light", "high-contrast")
+
+        Returns:
+            CSS string with theme-specific custom properties.
+        """
+        if theme_name == self._default_theme:
+            # Default theme uses root tokens (already generated)
+            return ""
+
+        if theme_name not in self._theme_variants:
+            return ""
+
+        theme_tokens = self._theme_variants[theme_name]
+        if not isinstance(theme_tokens, dict):
+            return ""
+
+        variables = self._flatten_theme_tokens(theme_tokens)
+        if not variables:
+            return ""
+
+        # Build CSS with attribute selector
+        lines = [f'[data-theme="{theme_name}"] {{']
+        for name, value in sorted(variables):
+            css_name = name.replace(".", "-").replace("_", "-").lower()
+            lines.append(f"  --{css_name}: {value};")
+        lines.append("}")
+
+        return "\n".join(lines)
+
+    def generate_all_themes_css(self, include: Optional[List[str]] = None) -> str:
+        """
+        Generate CSS for all themes including base variables and theme variants.
+
+        This generates:
+        1. :root block with default (dark) theme variables
+        2. [data-theme="light"] block with light theme overrides
+        3. [data-theme="high-contrast"] block with high-contrast overrides
+
+        Args:
+            include: List of token sets to include. Options: "theme", "layout", "appearance".
+                     Defaults to ["theme", "layout"] (UI-focused tokens).
+
+        Returns:
+            Complete CSS string with all theme variables.
+        """
+        css_parts = []
+
+        # Generate base variables (default/dark theme)
+        base_css = self.generate_css_variables(include=include)
+        if base_css:
+            css_parts.append(base_css)
+
+        # Generate theme variant CSS
+        for theme_name in self.get_theme_names():
+            if theme_name != self._default_theme:
+                theme_css = self.generate_theme_css(theme_name)
+                if theme_css:
+                    css_parts.append(f"\n/* Theme: {theme_name} */\n{theme_css}")
+
+        return "\n".join(css_parts)
+
+    def get_js_theme_config(self) -> Dict[str, Any]:
+        """
+        Get theme configuration for injection into JavaScript.
+
+        Returns a dict containing:
+        - available: List of theme names
+        - default: Default theme name
+        - colors: Commonly needed colors for JS (edge colors, canvas bg, etc.)
+
+        Returns:
+            Dict with theme configuration for JS.
+        """
+        # Extract commonly needed colors from theme tokens
+        colors = {}
+
+        # Edge colors
+        edge_colors = self._resolve_path(self._theme_tokens, "color.edge")
+        if isinstance(edge_colors, dict):
+            colors["edge"] = {}
+            for key, val in edge_colors.items():
+                if not key.startswith("$"):
+                    if isinstance(val, dict) and "$value" in val:
+                        colors["edge"][key] = val["$value"]
+                    elif isinstance(val, str):
+                        colors["edge"][key] = val
+
+        # Viz colors
+        viz_colors = self._resolve_path(self._theme_tokens, "color.viz")
+        if isinstance(viz_colors, dict):
+            colors["viz"] = {}
+            for key, val in viz_colors.items():
+                if not key.startswith("$"):
+                    if isinstance(val, dict) and "$value" in val:
+                        colors["viz"][key] = val["$value"]
+                    elif isinstance(val, str):
+                        colors["viz"][key] = val
+
+        # Console colors
+        console_colors = self._resolve_path(self._theme_tokens, "color.console")
+        if isinstance(console_colors, dict):
+            colors["console"] = {}
+            for key, val in console_colors.items():
+                if not key.startswith("$"):
+                    if isinstance(val, dict) and "$value" in val:
+                        colors["console"][key] = val["$value"]
+                    elif isinstance(val, str):
+                        colors["console"][key] = val
+
+        # Color schemes
+        schemes = self._resolve_path(self._theme_tokens, "color.schemes")
+        if isinstance(schemes, dict):
+            colors["schemes"] = {}
+            for scheme_name, scheme_val in schemes.items():
+                if not scheme_name.startswith("$") and isinstance(scheme_val, dict):
+                    colors["schemes"][scheme_name] = {}
+                    for key, val in scheme_val.items():
+                        if not key.startswith("$"):
+                            if isinstance(val, dict) and "$value" in val:
+                                colors["schemes"][scheme_name][key] = val["$value"]
+                            elif isinstance(val, str):
+                                colors["schemes"][scheme_name][key] = val
+
+        return {
+            "available": self.get_theme_names(),
+            "default": self._default_theme,
+            "colors": colors
+        }
 
 
 def get_resolver() -> TokenResolver:
