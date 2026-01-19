@@ -83,6 +83,14 @@
             <div class="report-content" id="report-content"></div>
         </div>
 
+        <!-- AI INSIGHTS PANEL: Gemini-powered pattern analysis -->
+        <div class="hud-panel insights-panel" id="insights-panel">
+            <h1>AI Insights <span class="insights-badge">✨ Gemini</span></h1>
+            <div class="insights-content" id="insights-content">
+                <div class="insights-placeholder">No AI insights available. Generate with:<br><code>python tools/ai/insights_generator.py &lt;unified_analysis.json&gt;</code></div>
+            </div>
+        </div>
+
         <!-- NODE HOVER PANEL: Quick info when hovering a node -->
         <div class="hud-panel hover-panel" id="hover-panel">
             <div class="hover-panel-header">
@@ -344,6 +352,7 @@
             <button class="dock-btn" id="btn-edge-mode" title="Edge colors: type, resolution, weight, confidence">EDGE:
                 TYPE</button>
             <button class="dock-btn" id="btn-report">REPORT</button>
+            <button class="dock-btn" id="btn-insights" title="AI-powered pattern analysis">AI</button>
             <button class="dock-btn active" id="btn-stars" title="Toggle background starfield">STARS</button>
             <button class="dock-btn" id="btn-reset-layout" title="Re-run physics simulation">RESET</button>
             <button class="dock-btn active" id="btn-hints" title="Show/hide mode hints">HINTS</button>

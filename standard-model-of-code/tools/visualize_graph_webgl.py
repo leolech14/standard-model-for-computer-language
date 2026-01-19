@@ -366,7 +366,10 @@ def generate_webgl_html(json_source: Any, output_path: str):
         "llm_enrichment": data.get("llm_enrichment", {}),
 
         # Brain download (the full report)
-        "brain_download": data.get("brain_download", "")
+        "brain_download": data.get("brain_download", ""),
+
+        # AI Insights (Gemini-powered analysis)
+        "ai_insights": data.get("ai_insights", None)
     }
 
     # NODE PROCESSING

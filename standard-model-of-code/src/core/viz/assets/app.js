@@ -2283,6 +2283,7 @@ function initFallback2D(container, graphData, fullData) {
     // Setup UI controls (they work independently of 3D graph)
     setupControls(fullData);
     setupReport(fullData);
+    setupAIInsights(fullData);
     setupMetrics(fullData);
     setupHudFade();
     setupDimensionToggle();
@@ -2634,6 +2635,7 @@ function initGraph(data) {
     Promise.resolve().then(() => {
         setupControls(data);
         setupReport(data);
+        setupAIInsights(data);
         setupMetrics(data);
         setupHudFade();
         setupDimensionToggle();
@@ -6631,6 +6633,124 @@ function setupReport(data) {
     content.textContent = report || 'No report available.';
 }
 
+function setupAIInsights(data) {
+    const panel = document.getElementById('insights-panel');
+    const content = document.getElementById('insights-content');
+    const btn = document.getElementById('btn-insights');
+
+    const insights = (data && data.ai_insights) ? data.ai_insights : null;
+
+    if (!insights) {
+        // Hide the button if no insights available
+        if (btn) btn.style.display = 'none';
+        return;
+    }
+
+    // Show the button
+    if (btn) btn.style.display = 'inline-flex';
+
+    // Render insights
+    let html = '';
+
+    // Executive Summary
+    if (insights.executive_summary) {
+        html += `<div class="insights-section">
+            <div class="insights-section-title">Executive Summary</div>
+            <div class="insights-summary">${escapeHtml(insights.executive_summary)}</div>
+        </div>`;
+    }
+
+    // Patterns Detected
+    if (insights.patterns_detected && insights.patterns_detected.length > 0) {
+        html += `<div class="insights-section">
+            <div class="insights-section-title">Patterns Detected</div>`;
+        for (const pattern of insights.patterns_detected) {
+            const confidencePercent = Math.round((pattern.confidence || 0) * 100);
+            html += `<div class="insights-pattern">
+                <div class="insights-pattern-header">
+                    <span class="insights-pattern-name">${escapeHtml(pattern.pattern_name || 'Unknown')}</span>
+                    <span class="insights-pattern-type ${pattern.pattern_type || ''}">${escapeHtml(pattern.pattern_type || '')}</span>
+                </div>
+                <div class="insights-confidence">
+                    <div class="insights-confidence-bar">
+                        <div class="insights-confidence-fill" style="width: ${confidencePercent}%"></div>
+                    </div>
+                    <span>${confidencePercent}%</span>
+                </div>
+                ${pattern.evidence ? `<div class="insights-pattern-evidence">${escapeHtml(pattern.evidence)}</div>` : ''}
+                ${pattern.recommendation ? `<div class="insights-pattern-evidence" style="color: var(--color-accent-secondary);">💡 ${escapeHtml(pattern.recommendation)}</div>` : ''}
+            </div>`;
+        }
+        html += '</div>';
+    }
+
+    // Refactoring Opportunities
+    if (insights.refactoring_opportunities && insights.refactoring_opportunities.length > 0) {
+        html += `<div class="insights-section">
+            <div class="insights-section-title">Refactoring Opportunities</div>`;
+        for (const refactor of insights.refactoring_opportunities) {
+            html += `<div class="insights-refactor">
+                <div class="insights-refactor-title">
+                    ${escapeHtml(refactor.title || 'Untitled')}
+                    <span class="insights-refactor-priority ${refactor.priority || 'LOW'}">${refactor.priority || 'LOW'}</span>
+                </div>
+                ${refactor.description ? `<div class="insights-refactor-desc">${escapeHtml(refactor.description)}</div>` : ''}
+                ${refactor.affected_files && refactor.affected_files.length > 0 ?
+                    `<div class="insights-refactor-desc" style="margin-top: 4px; color: var(--color-text-muted);">Files: ${refactor.affected_files.slice(0, 3).map(f => escapeHtml(f)).join(', ')}${refactor.affected_files.length > 3 ? '...' : ''}</div>` : ''}
+            </div>`;
+        }
+        html += '</div>';
+    }
+
+    // Topology Analysis
+    if (insights.topology_analysis) {
+        const topo = insights.topology_analysis;
+        html += `<div class="insights-section">
+            <div class="insights-section-title">Topology Analysis</div>
+            ${topo.shape_interpretation ? `<div class="insights-summary">${escapeHtml(topo.shape_interpretation)}</div>` : ''}
+            ${topo.health_assessment ? `<div class="insights-pattern-evidence">🏥 Health: ${escapeHtml(topo.health_assessment)}</div>` : ''}
+            ${topo.coupling_analysis ? `<div class="insights-pattern-evidence">🔗 Coupling: ${escapeHtml(topo.coupling_analysis)}</div>` : ''}
+        </div>`;
+    }
+
+    // Risk Areas
+    if (insights.risk_areas && insights.risk_areas.length > 0) {
+        html += `<div class="insights-section">
+            <div class="insights-section-title">Risk Areas</div>`;
+        for (const risk of insights.risk_areas) {
+            html += `<div class="insights-risk">
+                <span class="insights-risk-level ${risk.risk_level || 'LOW'}">${risk.risk_level || 'LOW'}</span>
+                <div class="insights-risk-content">
+                    <div class="insights-risk-area">${escapeHtml(risk.area || 'Unknown')}</div>
+                    ${risk.description ? `<div class="insights-risk-desc">${escapeHtml(risk.description)}</div>` : ''}
+                    ${risk.mitigation ? `<div class="insights-risk-desc" style="color: var(--color-accent-secondary); margin-top: 4px;">💡 ${escapeHtml(risk.mitigation)}</div>` : ''}
+                </div>
+            </div>`;
+        }
+        html += '</div>';
+    }
+
+    // Meta information
+    if (insights.meta) {
+        const meta = insights.meta;
+        html += `<div class="insights-meta">
+            Generated: ${meta.generated_at ? new Date(meta.generated_at).toLocaleString() : 'Unknown'}
+            | Model: ${escapeHtml(meta.model || 'Unknown')}
+            ${meta.confidence ? ` | Confidence: ${Math.round(meta.confidence * 100)}%` : ''}
+        </div>`;
+    }
+
+    content.innerHTML = html || '<div class="insights-placeholder">No insights data available.</div>';
+}
+
+// Helper function for HTML escaping (if not already defined)
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function setupMetrics(data) {
     const kpis = (data && data.kpis) ? data.kpis : {};
     const setText = (id, value) => {
@@ -7525,6 +7645,19 @@ document.getElementById('btn-report').onclick = () => {
     panel.style.display = isOpen ? 'none' : 'block';
     btn.classList.toggle('active', !isOpen);
 };
+
+// AI INSIGHTS PANEL TOGGLE
+const btnInsights = document.getElementById('btn-insights');
+if (btnInsights) {
+    btnInsights.onclick = () => {
+        const panel = document.getElementById('insights-panel');
+        const btn = document.getElementById('btn-insights');
+        if (!panel) return;
+        const isOpen = panel.style.display === 'block';
+        panel.style.display = isOpen ? 'none' : 'block';
+        btn.classList.toggle('active', !isOpen);
+    };
+}
 
 // ====================================================================
 // STARFIELD TOGGLE: Show/hide background stars (with localStorage)
