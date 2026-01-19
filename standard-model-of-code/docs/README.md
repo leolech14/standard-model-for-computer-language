@@ -26,9 +26,9 @@
 
 | Document | Description |
 |----------|-------------|
-| [ATOMS_REFERENCE](./ATOMS_REFERENCE.md) | Atom ontology (4 phases, 16 families) |
+| [ATOMS_REFERENCE](./ATOMS_REFERENCE.md) | Atom ontology (`schema/atom.schema.json`) - 4 phases, 16 families |
 | [CANONICAL_SCHEMA](./CANONICAL_SCHEMA.md) | Complete field reference |
-| [PURPOSE_FIELD](./PURPOSE_FIELD.md) | Purpose emergence theory |
+| [PURPOSE_FIELD](./PURPOSE_FIELD.md) | Purpose emergence theory (`src/core/purpose_field.py`) |
 
 ## Process & History
 

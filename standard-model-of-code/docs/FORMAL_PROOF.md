@@ -22,6 +22,25 @@ This work unifies syntactic parsing, semantic analysis, and architectural reason
 
 ---
 
+## Scope
+
+**FORMAL_PROOF** is the canonical source for **mathematical proofs and formal definitions**:
+- Formal definitions (Definition 1.1-1.9)
+- Core axioms (Axiom A1-A4)
+- Complete theorem statements and proofs (Theorems 3.1-3.8)
+- Classification algorithms (Algorithm 4.1-4.2)
+- Empirical validation methodology
+
+**Related documents:**
+- `THEORY_MAP.md` - Conceptual hierarchy and pipeline dependencies (non-mathematical overview)
+- `MECHANIZED_PROOFS.md` - Lean 4 machine verification of theorems
+
+**This document does NOT contain:**
+- Implementation details (see `src/core/`)
+- Lean 4 proof code (see MECHANIZED_PROOFS.md)
+
+---
+
 ## 1. Definitions
 
 ### Definition 1.1 (Code Element)

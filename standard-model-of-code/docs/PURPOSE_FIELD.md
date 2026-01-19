@@ -4,13 +4,11 @@
 
 # Purpose Field Theory
 
-## The Hierarchical Emergence of Purpose in Code
+## Hierarchical Organization of Purpose
 
 ### Overview
 
-Code is not just syntax. It has **PURPOSE** - the reason it exists.
-
-Purpose exists at multiple levels, each **EMERGING** from the level below:
+Code has **PURPOSE** - the reason it exists. Purpose is organized at multiple levels:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -22,9 +20,9 @@ Purpose exists at multiple levels, each **EMERGING** from the level below:
 │  ─────────────────────────────────────────────────────                  │
 │  Shared purpose of components in the same architectural layer          │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  LEVEL 2: COMPOSITE PURPOSE (Emergence)                                 │
+│  LEVEL 2: COMPOSITE PURPOSE (Components)                                │
 │  ─────────────────────────────────────────────────────                  │
-│  Emergent purpose from grouped components                               │
+│  Aggregated purpose from grouped components                             │
 ├─────────────────────────────────────────────────────────────────────────┤
 │  LEVEL 1: ATOMIC PURPOSE (Role)                                         │
 │  ─────────────────────────────────────────────────────                  │
@@ -56,7 +54,7 @@ Every code element has an **intrinsic purpose** - the reason it was written.
 
 ## Level 2: Composite Purpose
 
-When components are **grouped together** (by class, module, or relationship), a new purpose **EMERGES** that is more than the sum of parts.
+When components are **grouped together** (by class, module, or relationship), a new purpose arises from the combination of their individual purposes.
 
 ### Example: UserRepository
 
@@ -74,8 +72,8 @@ class UserRepository:
 
 The composite purpose:
 - Is NOT just "Query + Command + Command + Query"
-- EMERGES from the combination
-- Has its own semantic meaning
+- Reflects the unified role of the containing class
+- Has distinct semantic meaning from its parts
 
 **Detection**: Aggregate roles within containing class → infer composite role
 
@@ -265,10 +263,3 @@ Violations are **purpose flow errors**:
 - Purpose leaking (query with side effects)
 - Purpose gaps (entity without repository)
 
----
-
-## The Remarkable Claim
-
-> **Software has a Purpose Field - a semantic gradient of meaning that flows through the architecture. The Standard Model detects this field, enables navigation by purpose, and identifies violations as purpose flow errors.**
-
-This makes software engineering a **study of purpose**, not just syntax.

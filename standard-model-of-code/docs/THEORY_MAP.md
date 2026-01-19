@@ -15,7 +15,24 @@
 
 ---
 
-This document proves the **dependency order** of the Standard Model theories and shows why reordering breaks the analysis.
+## Scope
+
+**THEORY_MAP** covers the **conceptual hierarchy and pipeline dependencies** of the Standard Model:
+- Why theories must be applied in a specific order (the Mounting Law)
+- The 4-tier microscopic-to-macroscopic stack
+- The data flow between pipeline stages
+
+**Related documents:**
+- `FORMAL_PROOF.md` - Mathematical proofs and formal definitions (Theorems 3.1-3.8)
+- `MECHANIZED_PROOFS.md` - Lean 4 machine verification
+
+**This document does NOT contain:**
+- Formal mathematical proofs (see FORMAL_PROOF.md)
+- Lean 4 code (see MECHANIZED_PROOFS.md)
+
+---
+
+This document explains the **dependency order** of the Standard Model theories and shows why reordering breaks the analysis.
 
 ---
 

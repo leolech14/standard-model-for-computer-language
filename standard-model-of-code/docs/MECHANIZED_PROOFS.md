@@ -8,7 +8,24 @@ This directory contains **machine-verified proofs** of key theorems from the Sta
 
 ---
 
-## ✅ Verified Theorems
+## Scope
+
+**MECHANIZED_PROOFS** contains the **Lean 4 machine-verified versions** of key theorems:
+- Verified theorem summaries (Theorems 3.3, 3.4, 3.5, 3.7, 3.8, 4.1, 4.2, 4.3)
+- Theorems with axioms (Theorems 3.1, 3.2, 3.6 - empirically validated)
+- Lean 4 proof structure and verification instructions
+
+**Related documents:**
+- `FORMAL_PROOF.md` - Complete mathematical proofs (canonical source for theorem content)
+- `THEORY_MAP.md` - Conceptual hierarchy and pipeline dependencies
+
+**This document does NOT contain:**
+- Full theorem proofs in mathematical notation (see FORMAL_PROOF.md)
+- Complete Lean 4 proof code (see `proofs/lean/` directory)
+
+---
+
+## Verified Theorems
 
 ### Pure Mathematics (No Axioms)
 | Theorem | File | Status |

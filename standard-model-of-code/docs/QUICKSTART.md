@@ -25,8 +25,8 @@ This generates:
 
 | About Your Codebase | Collider Tells You |
 |---------------------|-------------------|
-| Structure | Topology shape (Star, Mesh, Hierarchical) |
-| Health | RPBL scores, dead code %, violations |
+| Structure | Topology shape (`src/core/topology_reasoning.py`) - Star, Mesh, Hierarchical |
+| Health | RPBL scores (`src/core/full_analysis.py`), dead code %, violations |
 | Architecture | Layer distribution, type breakdown |
 | Hotspots | God classes, circular dependencies |
 
