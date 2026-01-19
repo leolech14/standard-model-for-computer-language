@@ -6,11 +6,20 @@
 
 > **"How do we mount things on one another so that it makes sense?"**
 
+---
+
+## FOR AI: When to Read This
+- Read when: understanding theory dependencies, pipeline order matters
+- Key sections: Dependency DAG, 4-Tier Stack
+- File references: `docs/FORMAL_PROOF.md`, `docs/MECHANIZED_PROOFS.md`
+
+---
+
 This document proves the **dependency order** of the Standard Model theories and shows why reordering breaks the analysis.
 
 ---
 
-## 📐 The Theoretical Hierarchy (Dependency DAG)
+## The Theoretical Hierarchy (Dependency DAG)
 
 ```mermaid
 graph TD

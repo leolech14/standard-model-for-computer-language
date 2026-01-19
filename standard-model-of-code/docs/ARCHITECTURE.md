@@ -4,6 +4,13 @@
 
 ---
 
+## FOR AI: When to Read This
+- Read when: implementing new pipeline stages, understanding layer separation
+- Key sections: Two-Layer Architecture, Bidirectionality Vision
+- File references: `src/core/full_analysis.py`, `cli.py`
+
+---
+
 ## Core Principle
 
 **The deterministic layer IS the intelligence. The LLM layer is optional enrichment.**

@@ -2,11 +2,18 @@
 
 ---
 
-# 🔬 Standard Code Model
+# Standard Code Model
 ## Atom Reference (Open Schema)
 
 > **Note:** This is a reference of the atom ontology organized by 4 phases and 16 families.
 > The schema is OPEN and continuously evolving. See `schema/fixed/atoms.json` for definitions.
+
+---
+
+## FOR AI: When to Read This
+- Read when: classifying code elements, understanding atom families
+- Key sections: 4 Phases, 16 Families, Atom Examples
+- File references: `schema/atom.schema.json`, `src/core/graph_builder.py`
 
 ---
 

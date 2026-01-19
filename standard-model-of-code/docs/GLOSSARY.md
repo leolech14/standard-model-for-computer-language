@@ -4,63 +4,71 @@
 
 # Glossary
 
-Key terms used throughout the Standard Model documentation.
+Project-specific terms mapped to code locations and schema paths.
 
 ---
 
 ## Core Concepts
 
-| Term | Definition |
-|------|------------|
-| **Atom** | The fundamental unit of code structure. Every code element (function, class, variable) is classified as an atom. |
-| **Codespace** | The hyperdimensional semantic space where all software artifacts exist and relate. |
-| **Collider** | The implementation tool that applies Standard Model theory to real codebases. |
-| **Standard Model of Code** | The theoretical framework — a periodic table for software. |
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| Atom | `$.particles[*].atom` | `string` (Phase.Family.Name) | `src/core/atom_classifier.py` |
+| Codespace | `$.particles[*]` | Array of classified entities | `src/core/unified_analysis.py` |
+| Collider | (Tool output) | `unified_analysis.json`, `output.md`, HTML | `src/core/full_analysis.py` |
 
-## The 4 Phases
+## Phases & Families
 
-| Phase | Contains | Purpose |
-|-------|----------|---------|
-| **DATA** | Bits, Bytes, Primitives, Variables | The matter of software |
-| **LOGIC** | Expressions, Statements, Control, Functions | The forces of software |
-| **ORGANIZATION** | Aggregates, Services, Modules, Files | The structure of software |
-| **EXECUTION** | Handlers, Workers, Initializers, Probes | The dynamics of software |
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| DATA Phase | `$.particles[*].atom` starts with `DAT` | Primitives, Variables, Constants | `schema/particle.schema.json` |
+| LOGIC Phase | `$.particles[*].atom` starts with `LOG` | Functions, Expressions, Statements | `schema/particle.schema.json` |
+| ORGANIZATION Phase | `$.particles[*].atom` starts with `ORG` | Classes, Modules, Services | `schema/particle.schema.json` |
+| EXECUTION Phase | `$.particles[*].atom` starts with `EXE` | Handlers, Initializers, Workers | `schema/particle.schema.json` |
+
+## Graph Structure
+
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| Node | `$.particles[*]` | object with id, atom, location | `src/core/unified_analysis.py` |
+| Edge | `$.particles[*].edges_out[*]` | object with source, target, type | `src/core/edge_extractor.py` |
+| In-Degree | `$.particles[*].metrics.in_degree` | integer >= 0 | `src/core/graph_analyzer.py` |
+| Out-Degree | `$.particles[*].metrics.out_degree` | integer >= 0 | `src/core/graph_analyzer.py` |
 
 ## Analysis Concepts
 
-| Term | Definition |
-|------|------------|
-| **Antimatter** | Violations of architectural laws (e.g., Domain→Infrastructure dependency). |
-| **Dead Code** | Nodes unreachable from any entry point. |
-| **Edge** | A dependency relationship between two nodes. |
-| **God Class** | A node with excessive dependencies (high hub score). |
-| **Knot** | A circular dependency pattern. |
-| **Layer** | Architectural placement: Domain, Infrastructure, Application, UI. |
-| **Node** | A code element in the graph (function, class, module). |
-| **Orphan** | A node with no incoming or outgoing edges. |
-| **Role** | Canonical behavior pattern (Repository, Entity, Controller, etc.). |
-| **Topology** | The shape of the dependency graph (Star, Mesh, Hierarchical, Islands). |
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| Antimatter | `$.particles[*].violations[*]` | violation_type, severity | `src/core/antimatter_evaluator.py` |
+| Dead Code | `$.execution_flow.orphans[*]` | array of node IDs | `src/core/execution_flow.py` |
+| Knot | `$.knots.cycles[*]` | array of node IDs | `src/core/topology_reasoning.py` |
+| Layer | `$.particles[*].ddd.layer` | Domain, Application, Infrastructure, UI | `src/core/purpose_field.py` |
+| Role | `$.particles[*].metadata.role` | Repository, Entity, Controller, Service | `src/core/heuristic_classifier.py` |
+| Topology | `$.statistics.topology` | Star, Mesh, Hierarchical, Islands | `src/core/topology_reasoning.py` |
 
 ## RPBL Scoring
 
-| Dimension | Measures |
-|-----------|----------|
-| **R** - Responsibility | How focused is this code? (Single vs. multiple concerns) |
-| **P** - Purity | How side-effect-free? (Pure functions vs. I/O heavy) |
-| **B** - Boundary | How well-encapsulated? (Clean interfaces vs. leaky abstractions) |
-| **L** - Lifecycle | How stable? (Long-lived vs. frequently changing) |
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| Responsibility | `$.rpbl_profile.responsibility` | float 0-10 | `src/core/unified_analysis.py` |
+| Purity | `$.rpbl_profile.purity` | float 0-10 | `src/core/unified_analysis.py` |
+| Boundary | `$.rpbl_profile.boundary` | float 0-10 | `src/core/unified_analysis.py` |
+| Lifecycle | `$.rpbl_profile.lifecycle` | float 0-10 | `src/core/unified_analysis.py` |
 
-## Architecture Terms
+## Execution & Flow
 
-| Term | Definition |
-|------|------------|
-| **Analysis** | Code → Graph transformation (implemented). |
-| **Bidirectionality** | The ability to transform in both directions (code ↔ graph). |
-| **Deterministic Core** | The algorithmic analysis layer — reproducible, no AI. |
-| **Grip Layer** | The AI-facing communication interface. |
-| **LLM Enrichment** | Optional AI layer for natural language summaries. |
-| **Synthesis** | Graph → Code transformation (not yet implemented). |
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| Entry Point | `$.execution_flow.entry_points[*]` | node IDs | `src/core/execution_flow.py` |
+| Dead Code % | `$.coverage.dead_code_percent` | float 0-100 | `src/core/execution_flow.py` |
+
+## Output Files
+
+| Term | JSON Path | Valid Values | Where Computed |
+|------|-----------|--------------|----------------|
+| Unified Analysis | `unified_analysis.json` | Complete graph | `src/core/unified_analysis.py` |
+| Brain Download | `output.md` | LLM-optimized report | `src/core/brain_download.py` |
+| Collider Report | `collider_report.html` | 3D visualization | `src/core/viz/` |
 
 ---
 
-See also: [THEORY_MAP](./THEORY_MAP.md) for how these concepts relate.
+See also: [THEORY_MAP](./THEORY_MAP.md) for conceptual relationships.
