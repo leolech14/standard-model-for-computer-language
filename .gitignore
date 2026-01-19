@@ -86,3 +86,7 @@ build/
 # OBSIDIAN (optional - remove if you use Obsidian here)
 # =============================================================================
 .obsidian/
+
+# Large output files (backed up to GCS: gs://elements-archive-2026/large_outputs/)
+archive/large_outputs/**/*.json
+archive/large_outputs/**/*.html
