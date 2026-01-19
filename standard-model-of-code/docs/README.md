@@ -63,6 +63,7 @@
 | Report | Description |
 |--------|-------------|
 | [GAPS_ANALYSIS](./reports/GAPS_ANALYSIS_2026-01-19.md) | Current gaps and implementation roadmap |
+| [DOCS_IMPROVEMENT](./reports/DOCS_IMPROVEMENT_TASK_REGISTRY.md) | AI-optimized docs tasks with confidence scores |
 | [TOKEN_SYSTEM_AUDIT](./reports/DESIGN_TOKEN_SYSTEM_AUDIT.md) | Design token system analysis |
 | [TOKEN_VERIFICATION](./reports/TOKEN_SYSTEM_VERIFICATION_PROTOCOL.md) | Token verification protocol |
 | [TOKEN_REGISTRY](./reports/TOKEN_SYSTEM_TASK_REGISTRY.md) | Token system task tracking |

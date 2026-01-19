@@ -12,6 +12,12 @@ Analysis reports, audits, and tracking documents.
 |--------|--------|-------------|
 | [GAPS_ANALYSIS_2026-01-19](./GAPS_ANALYSIS_2026-01-19.md) | ACTIVE | Bidirectionality gap analysis and roadmap |
 
+## Documentation Improvement
+
+| Report | Status | Description |
+|--------|--------|-------------|
+| [DOCS_IMPROVEMENT_TASK_REGISTRY](./DOCS_IMPROVEMENT_TASK_REGISTRY.md) | ACTIVE | AI-optimized docs improvement tasks with confidence scores |
+
 ## Token System
 
 | Report | Status | Description |
