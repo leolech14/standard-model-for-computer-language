@@ -1,0 +1,14 @@
+# Default owners for everything
+* @leonardo-lech
+
+# Core analysis engine
+/src/core/ @leonardo-lech
+
+# Schema definitions (critical)
+/schema/ @leonardo-lech
+
+# CI/CD configuration
+/.github/ @leonardo-lech
+
+# Documentation
+/docs/ @leonardo-lech
