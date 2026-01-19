@@ -136,6 +136,10 @@ let VIS_FILTERS = {
     roles: new Set(),
     edges: new Set(),
     families: new Set(),  // Atom families: LOG, DAT, ORG, EXE, EXT
+    files: new Set(),     // File-based filtering
+    layers: new Set(),    // D2_LAYER: Interface, Application, Core, Infrastructure, Test
+    effects: new Set(),   // D6_EFFECT: Pure, Read, Write, ReadWrite
+    edgeFamilies: new Set(), // Edge families: Structural, Dependency, Inheritance, Semantic, Temporal
     metadata: {
         showLabels: true,
         showFilePanel: true,
@@ -611,23 +615,31 @@ class LegendManager {
             layer: {
                 name: 'LAYERS',
                 icon: '☰',
-                extract: (node) => (node.layer || 'VIRTUAL').toUpperCase()
+                extract: (node) => (node.layer || node.dimensions?.D2_LAYER || 'Unknown').toUpperCase()
+            },
+            effect: {
+                name: 'EFFECTS',
+                icon: '⚡',
+                extract: (node) => (node.effect || node.dimensions?.D6_EFFECT || 'Unknown')
             },
             edgeType: {
-                name: 'EDGES',
+                name: 'EDGE TYPES',
                 icon: '→',
                 extract: (link) => (link.edge_type || link.type || 'unknown').toLowerCase()
+            },
+            edgeFamily: {
+                name: 'EDGE FAMILIES',
+                icon: '⇢',
+                extract: (link) => (link.family || 'Dependency')
             }
         };
 
         this.counts = {};      // Computed counts per dimension
-        this.visible = {};     // Visibility state for filtering
         this._subscribers = [];
     }
 
     init(nodes, links) {
         this._computeCounts(nodes, links);
-        this._initVisibility();
         return this;
     }
 
@@ -658,18 +670,9 @@ class LegendManager {
         console.log('[Legend] Counts:', this.counts);
     }
 
-    _initVisibility() {
-        this.visible = {};
-        Object.keys(this.dimensions).forEach(dim => {
-            // Initialize with all categories from ColorOrchestrator
-            this.visible[dim] = new Set(Color.getCategories(dim));
-        });
-    }
-
     // Get legend data - COLORS FROM ColorOrchestrator
     getLegendData(dimension) {
         const counts = this.counts[dimension] || {};
-        const visible = this.visible[dimension] || new Set();
 
         return Object.keys(counts)
             .filter(cat => counts[cat] > 0)
@@ -679,7 +682,6 @@ class LegendManager {
                 label: Color.getLabel(dimension, cat),  // FROM ColorOrchestrator
                 color: Color.get(dimension, cat),       // FROM ColorOrchestrator (with transforms!)
                 count: counts[cat] || 0,
-                visible: visible.has(cat),
                 dimension: dimension
             }));
     }
@@ -687,16 +689,6 @@ class LegendManager {
     // Get color - DELEGATES to ColorOrchestrator
     getColor(dimension, category) {
         return Color.get(dimension, category);
-    }
-
-    toggleCategory(dimension, category) {
-        if (!this.visible[dimension]) return;
-        if (this.visible[dimension].has(category)) {
-            this.visible[dimension].delete(category);
-        } else {
-            this.visible[dimension].add(category);
-        }
-        this._notifySubscribers('visibility-change', { dimension, category });
     }
 
     subscribe(callback) {
@@ -797,6 +789,8 @@ class DataManager {
             nodesByTier: new Map(),        // tier → [nodes]
             nodesByFamily: new Map(),      // family → [nodes]
             nodesByRing: new Map(),        // ring → [nodes]
+            nodesByLayer: new Map(),       // layer (D2_LAYER) → [nodes]
+            nodesByEffect: new Map(),      // effect (D6_EFFECT) → [nodes]
             nodesByFile: new Map(),        // fileIdx → [nodes]
             edgesBySource: new Map(),      // nodeId → [edges from]
             edgesByTarget: new Map(),      // nodeId → [edges to]
@@ -882,6 +876,8 @@ class DataManager {
         this.index.nodesByTier.clear();
         this.index.nodesByFamily.clear();
         this.index.nodesByRing.clear();
+        this.index.nodesByLayer.clear();
+        this.index.nodesByEffect.clear();
         this.index.nodesByFile.clear();
 
         for (const node of this.raw.nodes) {
@@ -907,6 +903,20 @@ class DataManager {
                 this.index.nodesByRing.set(ring, []);
             }
             this.index.nodesByRing.get(ring).push(node);
+
+            // Layer index (D2_LAYER)
+            const layer = this._getNodeLayer(node);
+            if (!this.index.nodesByLayer.has(layer)) {
+                this.index.nodesByLayer.set(layer, []);
+            }
+            this.index.nodesByLayer.get(layer).push(node);
+
+            // Effect index (D6_EFFECT)
+            const effect = this._getNodeEffect(node);
+            if (!this.index.nodesByEffect.has(effect)) {
+                this.index.nodesByEffect.set(effect, []);
+            }
+            this.index.nodesByEffect.get(effect).push(node);
 
             // File index
             const fileIdx = node.fileIdx ?? -1;
@@ -1011,6 +1021,16 @@ class DataManager {
         if (!node) return 'UNKNOWN';
         const ring = (node.ring || node.layer || 'UNKNOWN').toUpperCase();
         return ring;
+    }
+
+    _getNodeLayer(node) {
+        if (!node) return 'Unknown';
+        return node.layer || node.dimensions?.D2_LAYER || 'Unknown';
+    }
+
+    _getNodeEffect(node) {
+        if (!node) return 'Unknown';
+        return node.effect || node.dimensions?.D6_EFFECT || 'Unknown';
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -1155,6 +1175,37 @@ class DataManager {
             }
         }
         return this.cache.edgeTypeCounts;
+    }
+
+    getLayerCounts() {
+        if (!this.cache.layerCounts) {
+            this.cache.layerCounts = new Map();
+            for (const [layer, nodes] of this.index.nodesByLayer) {
+                this.cache.layerCounts.set(layer, nodes.length);
+            }
+        }
+        return this.cache.layerCounts;
+    }
+
+    getEffectCounts() {
+        if (!this.cache.effectCounts) {
+            this.cache.effectCounts = new Map();
+            for (const [effect, nodes] of this.index.nodesByEffect) {
+                this.cache.effectCounts.set(effect, nodes.length);
+            }
+        }
+        return this.cache.effectCounts;
+    }
+
+    getEdgeFamilyCounts() {
+        if (!this.cache.edgeFamilyCounts) {
+            this.cache.edgeFamilyCounts = new Map();
+            for (const link of this.raw.links) {
+                const family = link.family || 'Dependency';
+                this.cache.edgeFamilyCounts.set(family, (this.cache.edgeFamilyCounts.get(family) || 0) + 1);
+            }
+        }
+        return this.cache.edgeFamilyCounts;
     }
 
     getEdgeRanges() {
@@ -1636,7 +1687,6 @@ function renderLegendSection(containerId, dimension, stateSet, onUpdate) {
                     stateSet.add(item.id);
                     el.classList.remove('filtered');
                 }
-                if (Legend) Legend.toggleCategory(dimension, item.id);
                 if (onUpdate) onUpdate();
             });
         }
@@ -1658,9 +1708,12 @@ function renderAllLegends() {
     renderLegendSection('topo-tiers', 'tier', VIS_FILTERS.tiers, refreshGraph);
     renderLegendSection('topo-families', 'family', VIS_FILTERS.families, refreshGraph);
     renderLegendSection('topo-rings', 'ring', VIS_FILTERS.rings, refreshGraph);
+    renderLegendSection('topo-layers', 'layer', VIS_FILTERS.layers, refreshGraph);
+    renderLegendSection('topo-effects', 'effect', VIS_FILTERS.effects, refreshGraph);
 
-    // Render edge legend
+    // Render edge legends
     renderLegendSection('topo-edges', 'edgeType', VIS_FILTERS.edges, refreshGraph);
+    renderLegendSection('topo-edge-families', 'edgeFamily', VIS_FILTERS.edgeFamilies, refreshGraph);
 
     console.log('[Legend] All sections rendered');
 }
@@ -2835,6 +2888,16 @@ function getNodeRing(node) {
     return normalizeRingValue(ring) || 'UNKNOWN';
 }
 
+function getNodeLayer(node) {
+    if (!node) return 'Unknown';
+    return node.layer || node.dimensions?.D2_LAYER || 'Unknown';
+}
+
+function getNodeEffect(node) {
+    if (!node) return 'Unknown';
+    return node.effect || node.dimensions?.D6_EFFECT || 'Unknown';
+}
+
 function getNodeColorByMode(node) {
     // ═══════════════════════════════════════════════════════════════════
     // ALL COLORS NOW COME FROM ColorOrchestrator (aliased as Color)
@@ -2899,12 +2962,14 @@ function filterGraph(data, minVal, datamapSet, filters) {
     const allNodes = DM ? DM.getNodes() : (data?.nodes || []);
     const allLinks = DM ? DM.getLinks() : (data?.links || []);
 
-
     const tierFilter = filters?.tiers || new Set();
     const ringFilter = filters?.rings || new Set();
     const roleFilter = filters?.roles || new Set();
     const edgeFilter = filters?.edges || new Set();
     const familyFilter = filters?.families || new Set();
+    const layerFilter = filters?.layers || new Set();
+    const effectFilter = filters?.effects || new Set();
+    const edgeFamilyFilter = filters?.edgeFamilies || new Set();
     const showEdges = filters?.metadata?.showEdges !== false;
 
     const availableRings = Array.from(new Set(allNodes.map(n => getNodeRing(n)))).sort();
@@ -2940,13 +3005,17 @@ function filterGraph(data, minVal, datamapSet, filters) {
     const ringFilterActive = ringFilter.size > 0;
     const roleFilterActive = roleFilter.size > 0;
     const familyFilterActive = familyFilter.size > 0;
+    const layerFilterActive = layerFilter.size > 0;
+    const effectFilterActive = effectFilter.size > 0;
 
     const filterSummary = {
         active: {
             tier: tierFilter.size,
             ring: ringFilter.size,
             role: roleFilter.size,
-            family: familyFilter.size
+            family: familyFilter.size,
+            layer: layerFilter.size,
+            effect: effectFilter.size
         },
         ringValues: ringFilterValues.slice().sort(),
         availableRings,
@@ -2963,14 +3032,23 @@ function filterGraph(data, minVal, datamapSet, filters) {
         if (ringFilterActive && !ringFilter.has(getNodeRing(n))) return false;
         if (roleFilterActive && !roleFilter.has(String(n.role || 'Unknown'))) return false;
         if (familyFilterActive && !familyFilter.has(getNodeAtomFamily(n))) return false;
+        if (layerFilterActive && !layerFilter.has(getNodeLayer(n))) return false;
+        if (effectFilterActive && !effectFilter.has(getNodeEffect(n))) return false;
         return true;
     });
 
 
 
-    if (visibleNodes.length === 0 && (tierFilterActive || ringFilterActive || roleFilterActive || familyFilterActive)) {
-        const availableFamilies = Array.from(new Set(allNodes.map(n => getNodeAtomFamily(n)))).sort();
-
+    // Zero-node protection: warn when dimension filters result in empty graph
+    if (visibleNodes.length === 0 && (tierFilterActive || ringFilterActive || roleFilterActive || familyFilterActive || layerFilterActive || effectFilterActive)) {
+        const activeFilters = [];
+        if (tierFilterActive) activeFilters.push(`tiers: [${Array.from(tierFilter).join(', ')}]`);
+        if (ringFilterActive) activeFilters.push(`rings: [${Array.from(ringFilter).join(', ')}]`);
+        if (roleFilterActive) activeFilters.push(`roles: [${Array.from(roleFilter).join(', ')}]`);
+        if (familyFilterActive) activeFilters.push(`families: [${Array.from(familyFilter).join(', ')}]`);
+        if (layerFilterActive) activeFilters.push(`layers: [${Array.from(layerFilter).join(', ')}]`);
+        if (effectFilterActive) activeFilters.push(`effects: [${Array.from(effectFilter).join(', ')}]`);
+        console.warn('[filterGraph] Zero nodes match filters:', activeFilters.join(', '));
     }
 
     const visibleIds = new Set(visibleNodes.map(n => n.id));
@@ -2983,6 +3061,10 @@ function filterGraph(data, minVal, datamapSet, filters) {
 
     if (edgeFilter.size > 0) {
         visibleLinks = visibleLinks.filter(l => edgeFilter.has(String(l.edge_type || l.type || 'default')));
+    }
+
+    if (edgeFamilyFilter.size > 0) {
+        visibleLinks = visibleLinks.filter(l => edgeFamilyFilter.has(l.family || 'Dependency'));
     }
 
     if (!showEdges) {
@@ -3632,6 +3714,26 @@ function refreshGraph() {
         if (LAYOUT_FROZEN) freezeLayout();
         return;
     }
+
+    // Zero-node protection for VIS_FILTERS (tier/ring/family/role)
+    const hasActiveFilters = VIS_FILTERS.tiers.size > 0 || VIS_FILTERS.rings.size > 0 ||
+                             VIS_FILTERS.families.size > 0 || VIS_FILTERS.roles.size > 0;
+    if (subset.nodes.length === 0 && hasActiveFilters) {
+        showToast('No nodes match current filters. Clearing filters.');
+        clearAllFilters();
+        const fallback = filterGraph(null, CURRENT_DENSITY, ACTIVE_DATAMAPS, VIS_FILTERS);
+        restoreNodePositions(fallback.nodes);
+        Graph.graphData(fallback);
+        applyNodeColors(fallback.nodes);
+        Graph.nodeVal(node => (node.val || 1) * APPEARANCE_STATE.nodeScale);
+        Graph.nodeLabel(VIS_FILTERS.metadata.showLabels ? 'name' : '');
+        applyEdgeMode();
+        updateDatamapControls();
+        syncSelectionAfterGraphUpdate();
+        if (LAYOUT_FROZEN) freezeLayout();
+        return;
+    }
+
     applyNodeColors(subset.nodes);
     restoreNodePositions(subset.nodes);
     Graph.graphData(subset);
@@ -5169,6 +5271,38 @@ function toggleEdgeFilter(edgeType, element) {
     refreshGraph();
 }
 
+/**
+ * Clear all dimension filters (tier, ring, family, role, file, edge)
+ * Used for zero-node recovery and manual reset
+ */
+function clearAllFilters() {
+    VIS_FILTERS.tiers.clear();
+    VIS_FILTERS.rings.clear();
+    VIS_FILTERS.families.clear();
+    VIS_FILTERS.roles.clear();
+    VIS_FILTERS.files.clear();
+    VIS_FILTERS.edges.clear();
+    VIS_FILTERS.layers.clear();
+    VIS_FILTERS.effects.clear();
+    VIS_FILTERS.edgeFamilies.clear();
+
+    // Update legend UI
+    document.querySelectorAll('.topo-legend-item.filtered').forEach(el => el.classList.remove('filtered'));
+
+    // Update chip UI
+    document.querySelectorAll('.filter-chip.active').forEach(el => el.classList.remove('active'));
+
+    // Update minimap if present
+    if (typeof updateTopoMinimapFilters === 'function') {
+        updateTopoMinimapFilters();
+    }
+
+    console.log('[Filters] All filters cleared');
+}
+
+// Expose for UI buttons
+window.clearAllFilters = clearAllFilters;
+
 // ═══════════════════════════════════════════════════════════════════════
 // DISSOLUTION PARTICLE SYSTEM - Particles disperse when layers toggle
 // ═══════════════════════════════════════════════════════════════════════
@@ -6254,9 +6388,59 @@ function applyMetadataVisibility() {
 
 
 // ═══════════════════════════════════════════════════════════════
-// OKLCH COLOR SCHEME BUTTONS - L, C, H move together coherently
+// PRESET BUTTONS - Quick visualization mode selection (Tier, Family, etc.)
 // ═══════════════════════════════════════════════════════════════
 const presetGrid = document.getElementById('dock-presets');
+const presetBtnGrid = document.getElementById('preset-grid');
+if (presetBtnGrid) {
+    presetBtnGrid.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const presetKey = btn.dataset.preset;
+            const preset = VIS_PRESETS[presetKey];
+            if (!preset) return;
+
+            // Update active states
+            presetBtnGrid.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            const colorSchemeGridEl = document.getElementById('dock-schemes');
+            if (colorSchemeGridEl) colorSchemeGridEl.querySelectorAll('.color-scheme-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            APPEARANCE_STATE.currentPreset = presetKey;
+            APPEARANCE_STATE.colorMode = preset.colorBy;
+
+            // Apply node color mode
+            setNodeColorMode(preset.colorBy);
+
+            // Apply edge mode
+            const edgeModes = { 'type': 'gradient-tier', 'weight': 'weight', 'resolution': 'gradient-file' };
+            EDGE_MODE = edgeModes[preset.edgeBy] || preset.edgeBy || 'gradient-tier';
+            applyEdgeMode();
+
+            // Handle flow mode for 'flow' preset
+            if (presetKey === 'flow') {
+                if (!flowMode && typeof toggleFlowMode === 'function') toggleFlowMode();
+            } else if (flowMode && typeof disableFlowMode === 'function') {
+                disableFlowMode();
+            }
+
+            // Refresh gradient edges to pick up new node colors
+            if (typeof window.refreshGradientEdgeColors === 'function') {
+                window.refreshGradientEdgeColors();
+            }
+
+            // Re-render legends
+            if (typeof renderAllLegends === 'function') {
+                renderAllLegends();
+            }
+
+            console.log('[Preset] Applied:', preset.name, '| colorBy:', preset.colorBy, '| edgeBy:', preset.edgeBy);
+        });
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// OKLCH COLOR SCHEME BUTTONS - L, C, H move together coherently
+// ═══════════════════════════════════════════════════════════════
 const colorSchemeGrid = document.getElementById('dock-schemes');
 if (colorSchemeGrid) {
     colorSchemeGrid.querySelectorAll('.color-scheme-btn').forEach(btn => {
@@ -6272,6 +6456,22 @@ if (colorSchemeGrid) {
 
             APPEARANCE_STATE.currentPreset = presetKey;
             APPEARANCE_STATE.colorMode = preset.colorBy;
+
+            // Clear dimension filters to ensure consistent node count across schemes
+            // This prevents stale tier/ring/family filters from affecting the new view
+            VIS_FILTERS.tiers.clear();
+            VIS_FILTERS.rings.clear();
+            VIS_FILTERS.families.clear();
+            VIS_FILTERS.roles.clear();
+            VIS_FILTERS.files.clear();
+            VIS_FILTERS.edges.clear();
+            VIS_FILTERS.layers.clear();
+            VIS_FILTERS.effects.clear();
+            VIS_FILTERS.edgeFamilies.clear();
+            // Update UI to reflect cleared filters
+            document.querySelectorAll('.topo-legend-item.filtered').forEach(el => el.classList.remove('filtered'));
+            document.querySelectorAll('.filter-chip.active').forEach(el => el.classList.remove('active'));
+            console.log('[Preset] Cleared dimension filters for clean preset switch');
 
             // Apply node color mode
             setNodeColorMode(preset.colorBy === 'layer' ? 'tier' : preset.colorBy);
@@ -6322,6 +6522,11 @@ if (colorSchemeGrid) {
 
             applyEdgeMode();
 
+            // Refresh gradient edges to pick up new node colors
+            if (typeof window.refreshGradientEdgeColors === 'function') {
+                window.refreshGradientEdgeColors();
+            }
+
             // Re-render legends with updated colors from ColorOrchestrator
             if (typeof renderAllLegends === 'function') {
                 renderAllLegends();
@@ -6330,8 +6535,8 @@ if (colorSchemeGrid) {
             // Handle flow mode
             if (preset.edgeBy === 'weight' || preset.edgeBy === 'gradient-flow') {
                 if (!flowMode && typeof toggleFlowMode === 'function') toggleFlowMode();
-            } else if (flowMode && typeof clearFlowVisualization === 'function') {
-                clearFlowVisualization();
+            } else if (flowMode && typeof disableFlowMode === 'function') {
+                disableFlowMode();
             }
 
             console.log('[OKLCH] Applied:', preset.name, '| Color.transform:', Color.transform);
@@ -7378,9 +7583,109 @@ let originalLinkWidths = new Map();
 let highEntropyNodes = new Set();
 // FLOW_CONFIG is set in initGraph() from THE REMOTE CONTROL tokens
 
+// Flow Mode Presets - cycle through by clicking FLOW button repeatedly
+const FLOW_PRESETS = [
+    {
+        name: 'EMBER',
+        highlightColor: '#ff8c00',
+        particleColor: '#ffaa00',
+        dimColor: '#331100',
+        edgeColor: '#ff6600',
+        particleCount: 3,
+        particleWidth: 2.5,
+        particleSpeed: 0.008,
+        edgeWidthScale: 3.0,
+        sizeMultiplier: 1.8,
+        edgeOpacityMin: 0.3,
+        dimOpacity: 0.05
+    },
+    {
+        name: 'OCEAN',
+        highlightColor: '#00d4ff',
+        particleColor: '#4df0ff',
+        dimColor: '#001122',
+        edgeColor: '#0088cc',
+        particleCount: 4,
+        particleWidth: 2.0,
+        particleSpeed: 0.006,
+        edgeWidthScale: 2.5,
+        sizeMultiplier: 1.6,
+        edgeOpacityMin: 0.25,
+        dimOpacity: 0.03
+    },
+    {
+        name: 'PLASMA',
+        highlightColor: '#ff00ff',
+        particleColor: '#ff66ff',
+        dimColor: '#110011',
+        edgeColor: '#cc00cc',
+        particleCount: 5,
+        particleWidth: 3.0,
+        particleSpeed: 0.012,
+        edgeWidthScale: 4.0,
+        sizeMultiplier: 2.0,
+        edgeOpacityMin: 0.35,
+        dimOpacity: 0.04
+    },
+    {
+        name: 'MATRIX',
+        highlightColor: '#00ff00',
+        particleColor: '#88ff88',
+        dimColor: '#001100',
+        edgeColor: '#00cc00',
+        particleCount: 6,
+        particleWidth: 1.5,
+        particleSpeed: 0.015,
+        edgeWidthScale: 2.0,
+        sizeMultiplier: 1.4,
+        edgeOpacityMin: 0.2,
+        dimOpacity: 0.02
+    },
+    {
+        name: 'PULSE',
+        highlightColor: '#ff4444',
+        particleColor: '#ff8888',
+        dimColor: '#110000',
+        edgeColor: '#cc2222',
+        particleCount: 2,
+        particleWidth: 4.0,
+        particleSpeed: 0.004,
+        edgeWidthScale: 5.0,
+        sizeMultiplier: 2.2,
+        edgeOpacityMin: 0.4,
+        dimOpacity: 0.06
+    },
+    {
+        name: 'AURORA',
+        highlightColor: '#33ccbb',
+        particleColor: '#66ffee',
+        dimColor: '#002222',
+        edgeColor: '#22aa99',
+        particleCount: 4,
+        particleWidth: 2.2,
+        particleSpeed: 0.007,
+        edgeWidthScale: 3.5,
+        sizeMultiplier: 1.7,
+        edgeOpacityMin: 0.28,
+        dimOpacity: 0.04
+    }
+];
+let currentFlowPreset = 0;
+
 // Callable function for direct invocation (no proxy click needed)
 function toggleFlowMode() {
-    flowMode = !flowMode;
+    // If already in flow mode, cycle to next preset
+    if (flowMode) {
+        currentFlowPreset = (currentFlowPreset + 1) % FLOW_PRESETS.length;
+        const preset = FLOW_PRESETS[currentFlowPreset];
+        console.log(`[Flow] Cycling to preset: ${preset.name}`);
+        applyFlowVisualization();
+        showModeToast(`FLOW: ${preset.name}`);
+        return;
+    }
+
+    flowMode = true;
+    currentFlowPreset = 0;
     console.log('[Flow] Toggled to:', flowMode);
 
     // Sync BOTH potential buttons (Dock vs CommandBar)
@@ -7394,18 +7699,33 @@ function toggleFlowMode() {
     const legend = document.getElementById('flow-legend');
     if (legend) legend.classList.toggle('visible', flowMode);
 
-    if (flowMode) {
-        // EXCLUSIVE MODE: Clear other visual noise
-        clearAllFileModes();
-        // Ensure standard file/hull buttons are off
-        document.querySelectorAll('.file-mode-btn').forEach(b => b.classList.remove('active'));
+    // EXCLUSIVE MODE: Clear other visual noise
+    clearAllFileModes();
+    // Ensure standard file/hull buttons are off
+    document.querySelectorAll('.file-mode-btn').forEach(b => b.classList.remove('active'));
 
-        applyFlowVisualization();
-        showModeToast('FLOW: edge width = transition probability, particles = direction');
-    } else {
-        clearFlowVisualization();
-        showModeToast('Flow mode off');
-    }
+    applyFlowVisualization();
+    const preset = FLOW_PRESETS[currentFlowPreset];
+    showModeToast(`FLOW: ${preset.name}`);
+}
+
+// Turn off flow mode completely
+function disableFlowMode() {
+    if (!flowMode) return;
+    flowMode = false;
+    currentFlowPreset = 0;
+
+    const btnDock = document.getElementById('btn-flow');
+    if (btnDock) btnDock.classList.remove('active');
+
+    const btnCmd = document.getElementById('cmd-flow2');
+    if (btnCmd) btnCmd.classList.remove('active');
+
+    const legend = document.getElementById('flow-legend');
+    if (legend) legend.classList.remove('visible');
+
+    clearFlowVisualization();
+    showModeToast('Flow mode off');
 }
 
 // NOTE: btn-flow onclick moved to setupControls() for proper DOM timing
@@ -7416,19 +7736,25 @@ function applyFlowVisualization() {
         console.warn('[Flow] Graph or DM not ready');
         return;
     }
-    // Force black background for contrast if needed, or dim params
-    // Node Color dimming
+
+    // Get current preset settings
+    const preset = FLOW_PRESETS[currentFlowPreset];
     const markov = DM ? DM.getMarkov() : {};  // ALL DATA FROM DM
     const highEntropy = markov.high_entropy_nodes || [];
 
-    // Get flow config from tokens (THE REMOTE CONTROL)
+    // Use preset values (fallback to FLOW_CONFIG for topK/minWeight if not in preset)
     const flowCfg = FLOW_CONFIG || {};
-    const highlightColor = flowCfg.highlightColor || '#ff8c00';
-    const sizeMult = flowCfg.sizeMultiplier || 1.8;
-    const edgeScale = flowCfg.edgeWidthScale || 3.0;  // Increased for visibility
-    const particles = flowCfg.particles || {};
+    const highlightColor = preset.highlightColor;
+    const particleColor = preset.particleColor;
+    const sizeMult = preset.sizeMultiplier;
+    const edgeScale = preset.edgeWidthScale;
+    const particleCount = preset.particleCount;
+    const particleWidth = preset.particleWidth;
+    const particleSpeed = preset.particleSpeed;
+    const edgeOpacityMin = preset.edgeOpacityMin;
+    const dimOpacity = preset.dimOpacity;
     const topK = flowCfg.topKEdges || 3;  // Show only top K outgoing edges per node
-    const minWeight = flowCfg.minWeight || 0.01;  // LOWERED THRESHOLD from 0.1 to 0.01 to ensure visibility
+    const minWeight = flowCfg.minWeight || 0.01;
 
     // Build set of high entropy node names
     highEntropyNodes.clear();
@@ -7457,50 +7783,52 @@ function applyFlowVisualization() {
         sorted.forEach(e => visibleEdges.add(e));
     });
 
-    // Store original colors and apply flow coloring
+    // Store original colors and sizes, then apply flow coloring
     graphNodes.forEach(node => {
         if (!originalNodeColors.has(node.id)) {
             originalNodeColors.set(node.id, node.color);
         }
+        // Restore original size first (in case switching presets)
+        if (node._originalVal) {
+            node.val = node._originalVal;
+        } else {
+            node._originalVal = node.val || 1;
+        }
         // High entropy nodes highlighted (decision points)
         if (highEntropyNodes.has(node.name)) {
             node.color = highlightColor;
-            node.val = (node.val || 1) * sizeMult;
+            node.val = node._originalVal * sizeMult;
         }
     });
 
     // Update link widths based on markov_weight (with amplification)
-    // Find max markov weight for normalization
     const maxMarkov = Math.max(0.001, ...graphLinks.map(l => l.markov_weight || 0));
 
     Graph.linkWidth(link => {
         if (!visibleEdges.has(link)) return 0.1;  // Dim non-top edges
         const mw = link.markov_weight || 0;
-        // Normalize to [0,1], then amplify, then scale
         const normalized = mw / maxMarkov;
         const amplified = amplify(normalized);
-        // Map to visible width range: 0.5 (min) to edgeScale*2 (max)
         return 0.5 + amplified * edgeScale * 2;
     });
 
-    // Update link opacity to emphasize important edges (with amplification)
+    // Update link opacity to emphasize important edges
     Graph.linkOpacity(link => {
-        if (!visibleEdges.has(link)) return 0.05;  // Nearly invisible
+        if (!visibleEdges.has(link)) return dimOpacity;
         const mw = link.markov_weight || 0;
         const normalized = mw / maxMarkov;
         const amplified = amplify(normalized);
-        // Map to opacity range: 0.3 (min visible) to 1.0 (full)
-        return 0.3 + amplified * 0.7;
+        return edgeOpacityMin + amplified * (1.0 - edgeOpacityMin);
     });
 
     // Add directional particles only on visible edges
     Graph.linkDirectionalParticles(link => {
         if (!visibleEdges.has(link)) return 0;
-        return particles.count || 3;
+        return particleCount;
     });
-    Graph.linkDirectionalParticleWidth(particles.width || 2.5);
-    Graph.linkDirectionalParticleSpeed(particles.speed || 0.008);
-    Graph.linkDirectionalParticleColor(() => '#ffaa00');
+    Graph.linkDirectionalParticleWidth(particleWidth);
+    Graph.linkDirectionalParticleSpeed(particleSpeed);
+    Graph.linkDirectionalParticleColor(() => particleColor);
 
     // Update node coloring
     Graph.nodeColor(n => toColorNumber(n.color, '#888888'));
@@ -7509,7 +7837,7 @@ function applyFlowVisualization() {
 
     // Debug: count edges with markov weights
     const edgesWithMarkov = graphLinks.filter(l => l.markov_weight > 0).length;
-    console.log(`Flow mode: ${highEntropyNodes.size} high entropy nodes, ${visibleEdges.size} visible edges (top-${topK} per node), ${edgesWithMarkov}/${graphLinks.length} edges with markov weights`);
+    console.log(`[Flow] Preset: ${preset.name} | ${highEntropyNodes.size} high entropy nodes, ${visibleEdges.size} visible edges (top-${topK}), ${edgesWithMarkov}/${graphLinks.length} edges with markov`);
 }
 
 function clearFlowVisualization() {
@@ -7517,21 +7845,24 @@ function clearFlowVisualization() {
     if (!Graph) return;
 
     const graphNodes = Graph.graphData().nodes;
-    const sizeMult = (FLOW_CONFIG || {}).sizeMultiplier || 1.8;
 
     // Restore original node colors and sizes
     graphNodes.forEach(node => {
         if (originalNodeColors.has(node.id)) {
             node.color = originalNodeColors.get(node.id);
         }
-        // Reset size if it was a high entropy node
-        if (highEntropyNodes.has(node.name)) {
-            node.val = (node.val || sizeMult) / sizeMult;
+        // Restore original size from saved value
+        if (node._originalVal) {
+            node.val = node._originalVal;
+            delete node._originalVal;
         }
     });
 
     // Reset link widths
     Graph.linkWidth(1);
+
+    // Reset link opacity
+    Graph.linkOpacity(0.6);
 
     // Remove directional particles
     Graph.linkDirectionalParticles(0);
@@ -9719,12 +10050,16 @@ function clearAllFileModes() {
     }
 
     // Fix: Clear lingering filters that may have been auto-populated by defaults during File Mode
-    if (VIS_FILTERS.rings.size > 0 || VIS_FILTERS.tiers.size > 0 || VIS_FILTERS.families.size > 0) {
+    if (VIS_FILTERS.rings.size > 0 || VIS_FILTERS.tiers.size > 0 || VIS_FILTERS.families.size > 0 || VIS_FILTERS.files.size > 0) {
         VIS_FILTERS.rings.clear();
         VIS_FILTERS.tiers.clear();
         VIS_FILTERS.families.clear();
         VIS_FILTERS.roles.clear();
+        VIS_FILTERS.files.clear();
         VIS_FILTERS.edges.clear();
+        VIS_FILTERS.layers.clear();
+        VIS_FILTERS.effects.clear();
+        VIS_FILTERS.edgeFamilies.clear();
         // Update UI chips
         document.querySelectorAll('.filter-chip.active').forEach(c => c.classList.remove('active'));
     }
@@ -10043,3 +10378,241 @@ function handleCmdFiles() {
 }
 function handleCmdFlow() { toggleFlowMode(); }
 function handleCmd3d() { toggleDimensions(); }
+
+// ════════════════════════════════════════════════════════════════════════
+// PANEL DRAG & RESIZE - Make panels movable and resizable
+// ════════════════════════════════════════════════════════════════════════
+
+const PanelManager = {
+    panels: new Map(),
+    activePanel: null,
+    dragState: null,
+    resizeState: null,
+    storageKey: 'collider-panel-positions',
+
+    init() {
+        // Initialize draggable/resizable panels (use actual element IDs)
+        this.initPanel('side-dock', { draggable: true, resizable: true, minWidth: 150, maxWidth: 400 });
+        this.initPanel('header-panel', { draggable: true, resizable: false });
+        this.initPanel('stats-panel', { draggable: true, resizable: false });
+        this.initPanel('metrics-panel', { draggable: true, resizable: true, minWidth: 180, maxWidth: 350 });
+
+        // Restore saved positions
+        this.restorePositions();
+
+        // Global mouse handlers
+        document.addEventListener('mousemove', (e) => this.onMouseMove(e));
+        document.addEventListener('mouseup', (e) => this.onMouseUp(e));
+    },
+
+    initPanel(id, options = {}) {
+        const panel = document.getElementById(id) || document.querySelector('.' + id);
+        if (!panel) return;
+
+        const config = {
+            el: panel,
+            id: id,
+            draggable: options.draggable !== false,
+            resizable: options.resizable === true,
+            minWidth: options.minWidth || 100,
+            maxWidth: options.maxWidth || 600,
+            minHeight: options.minHeight || 50,
+            maxHeight: options.maxHeight || window.innerHeight - 100
+        };
+
+        this.panels.set(id, config);
+
+        // Make panel positioned if not already
+        const style = window.getComputedStyle(panel);
+        if (style.position === 'static') {
+            panel.style.position = 'absolute';
+        }
+
+        // Add drag handle (the panel header or title)
+        if (config.draggable) {
+            const header = panel.querySelector('.side-title, .hud-title, .panel-header') || panel;
+            header.style.cursor = 'move';
+            header.addEventListener('mousedown', (e) => this.startDrag(e, id));
+        }
+
+        // Add resize handle
+        if (config.resizable) {
+            const handle = document.createElement('div');
+            handle.className = 'panel-resize-handle';
+            handle.addEventListener('mousedown', (e) => this.startResize(e, id));
+            panel.appendChild(handle);
+            panel.style.position = 'absolute'; // Required for resize
+        }
+    },
+
+    startDrag(e, panelId) {
+        // Don't drag if clicking on interactive elements
+        if (e.target.closest('input, button, select, .collapsible-content, .preset-btn, .layout-btn, .color-scheme-btn')) {
+            return;
+        }
+
+        const config = this.panels.get(panelId);
+        if (!config) return;
+
+        e.preventDefault();
+        const rect = config.el.getBoundingClientRect();
+
+        this.dragState = {
+            panelId,
+            startX: e.clientX,
+            startY: e.clientY,
+            startLeft: rect.left,
+            startTop: rect.top
+        };
+
+        config.el.classList.add('panel-dragging');
+    },
+
+    startResize(e, panelId) {
+        const config = this.panels.get(panelId);
+        if (!config) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const rect = config.el.getBoundingClientRect();
+
+        this.resizeState = {
+            panelId,
+            startX: e.clientX,
+            startY: e.clientY,
+            startWidth: rect.width,
+            startHeight: rect.height
+        };
+
+        config.el.classList.add('panel-resizing');
+    },
+
+    onMouseMove(e) {
+        if (this.dragState) {
+            const config = this.panels.get(this.dragState.panelId);
+            if (!config) return;
+
+            const dx = e.clientX - this.dragState.startX;
+            const dy = e.clientY - this.dragState.startY;
+
+            let newLeft = this.dragState.startLeft + dx;
+            let newTop = this.dragState.startTop + dy;
+
+            // Keep within viewport
+            newLeft = Math.max(0, Math.min(window.innerWidth - 50, newLeft));
+            newTop = Math.max(0, Math.min(window.innerHeight - 50, newTop));
+
+            config.el.style.left = newLeft + 'px';
+            config.el.style.top = newTop + 'px';
+            config.el.style.right = 'auto';
+            config.el.style.bottom = 'auto';
+        }
+
+        if (this.resizeState) {
+            const config = this.panels.get(this.resizeState.panelId);
+            if (!config) return;
+
+            const dx = e.clientX - this.resizeState.startX;
+            const dy = e.clientY - this.resizeState.startY;
+
+            let newWidth = this.resizeState.startWidth + dx;
+            let newHeight = this.resizeState.startHeight + dy;
+
+            // Apply constraints
+            newWidth = Math.max(config.minWidth, Math.min(config.maxWidth, newWidth));
+            newHeight = Math.max(config.minHeight, Math.min(config.maxHeight, newHeight));
+
+            config.el.style.width = newWidth + 'px';
+            // Only resize height for certain panels
+            if (config.el.classList.contains('side-dock') || config.el.classList.contains('side-content')) {
+                // Don't change height for sidebar - it's auto
+            } else {
+                config.el.style.height = newHeight + 'px';
+            }
+        }
+    },
+
+    onMouseUp(e) {
+        if (this.dragState) {
+            const config = this.panels.get(this.dragState.panelId);
+            if (config) {
+                config.el.classList.remove('panel-dragging');
+                this.savePositions();
+            }
+            this.dragState = null;
+        }
+
+        if (this.resizeState) {
+            const config = this.panels.get(this.resizeState.panelId);
+            if (config) {
+                config.el.classList.remove('panel-resizing');
+                this.savePositions();
+            }
+            this.resizeState = null;
+        }
+    },
+
+    savePositions() {
+        const positions = {};
+        this.panels.forEach((config, id) => {
+            const rect = config.el.getBoundingClientRect();
+            const style = config.el.style;
+            positions[id] = {
+                left: style.left || rect.left + 'px',
+                top: style.top || rect.top + 'px',
+                width: style.width || null,
+                height: style.height || null
+            };
+        });
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(positions));
+        } catch (e) {
+            console.warn('[PanelManager] Could not save positions:', e);
+        }
+    },
+
+    restorePositions() {
+        try {
+            const saved = localStorage.getItem(this.storageKey);
+            if (!saved) return;
+
+            const positions = JSON.parse(saved);
+            Object.entries(positions).forEach(([id, pos]) => {
+                const config = this.panels.get(id);
+                if (!config) return;
+
+                if (pos.left) config.el.style.left = pos.left;
+                if (pos.top) config.el.style.top = pos.top;
+                if (pos.width) config.el.style.width = pos.width;
+                if (pos.height) config.el.style.height = pos.height;
+
+                // Clear right/bottom if we're setting left/top
+                if (pos.left) config.el.style.right = 'auto';
+                if (pos.top) config.el.style.bottom = 'auto';
+            });
+        } catch (e) {
+            console.warn('[PanelManager] Could not restore positions:', e);
+        }
+    },
+
+    resetPositions() {
+        try {
+            localStorage.removeItem(this.storageKey);
+            location.reload();
+        } catch (e) {
+            console.warn('[PanelManager] Could not reset positions:', e);
+        }
+    }
+};
+
+// Initialize after DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => PanelManager.init());
+} else {
+    // Small delay to ensure all panels are rendered
+    setTimeout(() => PanelManager.init(), 100);
+}
+
+// Expose for debugging
+window.PanelManager = PanelManager;

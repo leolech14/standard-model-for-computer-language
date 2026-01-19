@@ -101,6 +101,32 @@
       "sm": { "$value": "14px" },
       "md": { "$value": "16px" },
       "lg": { "$value": "20px" }
+    },
+    "row-height": {
+      "$description": "Standard row heights for list items",
+      "sm": { "$value": "24px" },
+      "md": { "$value": "28px" },
+      "lg": { "$value": "32px" }
+    },
+    "scrollbar": {
+      "$description": "Scrollbar dimensions",
+      "width": { "$value": "4px" }
     }
+  },
+
+  "blur": {
+    "$description": "Backdrop blur values",
+    "none": { "$value": "0" },
+    "sm": { "$value": "8px" },
+    "md": { "$value": "12px" },
+    "lg": { "$value": "20px" },
+    "xl": { "$value": "24px" }
+  },
+
+  "offset": {
+    "$description": "Fixed position offsets",
+    "sidebar-top": { "$value": "130px", "$description": "Below header panel" },
+    "sidebar-left": { "$value": "12px" },
+    "panel-margin": { "$value": "20px" }
   }
 }

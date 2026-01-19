@@ -141,7 +141,10 @@
             <div class="side-content" id="side-content">
                 <!-- TOPOLOGY: 3D Minimap filter visualization -->
                 <div class="side-section" id="dock-topo">
-                    <div class="side-title">TOPOLOGY</div>
+                    <div class="side-title collapsible" data-target="topo-content">
+                        <span class="collapse-icon">▶</span> TOPOLOGY
+                    </div>
+                    <div class="collapsible-content collapsed" id="topo-content">
                     <div class="topo-map-container">
                         <!-- 3D Minimap Canvas: Hyperboloid showing 3 layers -->
                         <div class="topo-map" id="dock-minimap" onclick="toggleMinimapExpand(event)">
@@ -170,6 +173,12 @@
                         <div class="topo-legend" id="topo-rings"></div>
                         <div class="topo-section-title">EDGES</div>
                         <div class="topo-edge-filters" id="topo-edges"></div>
+                        <div class="topo-section-title">LAYERS (D2)</div>
+                        <div class="topo-legend" id="topo-layers"></div>
+                        <div class="topo-section-title">EFFECTS (D6)</div>
+                        <div class="topo-legend" id="topo-effects"></div>
+                        <div class="topo-section-title">EDGE FAMILIES</div>
+                        <div class="topo-legend" id="topo-edge-families"></div>
                         <!-- Mathematical Model - HIDDEN (adds visual clutter) -->
                         <div class="topo-section-title collapsible" data-target="topo-math" style="display:none;">
                             <span class="collapse-icon">▶</span> GEOMETRY
@@ -197,36 +206,19 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
 
                 <!-- PRESETS: Quick visualization modes -->
                 <div class="side-section" id="dock-presets">
                     <div class="side-title">PRESETS</div>
                     <div class="preset-grid" id="preset-grid">
-                        <div class="preset-btn active" data-preset="tier" title="Core → Architecture → External">
-                            <span class="preset-icon">◐</span>
-                            <span class="preset-name">Tier</span>
-                        </div>
-                        <div class="preset-btn" data-preset="family" title="LOG, DAT, ORG, EXE, EXT">
-                            <span class="preset-icon">⬡</span>
-                            <span class="preset-name">Family</span>
-                        </div>
-                        <div class="preset-btn" data-preset="layer" title="Physical → Virtual → Semantic">
-                            <span class="preset-icon">☰</span>
-                            <span class="preset-name">Layer</span>
-                        </div>
-                        <div class="preset-btn" data-preset="ring" title="Domain architecture layers">
-                            <span class="preset-icon">◎</span>
-                            <span class="preset-name">Ring</span>
-                        </div>
-                        <div class="preset-btn" data-preset="file" title="Each file gets unique hue">
-                            <span class="preset-icon">📄</span>
-                            <span class="preset-name">File</span>
-                        </div>
-                        <div class="preset-btn" data-preset="flow" title="Markov chain flow visualization">
-                            <span class="preset-icon">↝</span>
-                            <span class="preset-name">Flow</span>
-                        </div>
+                        <div class="preset-btn active" data-preset="tier" title="Core → Architecture → External">Tier</div>
+                        <div class="preset-btn" data-preset="family" title="LOG, DAT, ORG, EXE, EXT">Family</div>
+                        <div class="preset-btn" data-preset="layer" title="Physical → Virtual → Semantic">Layer</div>
+                        <div class="preset-btn" data-preset="ring" title="Domain architecture layers">Ring</div>
+                        <div class="preset-btn" data-preset="file" title="Each file gets unique hue">File</div>
+                        <div class="preset-btn" data-preset="flow" title="Markov chain flow visualization">Flow</div>
                     </div>
 
                     <!-- OKLCH COLOR SCHEMES -->
@@ -274,50 +266,17 @@
                     </div>
                     <div class="collapsible-content" id="layout-content">
                         <div class="layout-grid" id="layout-grid">
-                            <div class="layout-btn active" data-layout="force" title="Physics-based clustering">
-                                <span class="layout-icon">🌀</span>
-                                <span class="layout-name">Force</span>
-                            </div>
-                            <div class="layout-btn" data-layout="orbital" title="Planetary orbit bands">
-                                <span class="layout-icon">🪐</span>
-                                <span class="layout-name">Orbital</span>
-                            </div>
-                            <div class="layout-btn" data-layout="radial" title="Concentric tier rings">
-                                <span class="layout-icon">🎯</span>
-                                <span class="layout-name">Radial</span>
-                            </div>
-                            <div class="layout-btn" data-layout="spiral" title="DNA helix spiral">
-                                <span class="layout-icon">🧬</span>
-                                <span class="layout-name">Spiral</span>
-                            </div>
-                            <div class="layout-btn" data-layout="sphere" title="Spherical shell distribution">
-                                <span class="layout-icon">🌍</span>
-                                <span class="layout-name">Sphere</span>
-                            </div>
-                            <div class="layout-btn" data-layout="torus" title="Donut ring arrangement">
-                                <span class="layout-icon">🍩</span>
-                                <span class="layout-name">Torus</span>
-                            </div>
-                            <div class="layout-btn" data-layout="grid" title="Structured 3D grid">
-                                <span class="layout-icon">📐</span>
-                                <span class="layout-name">Grid</span>
-                            </div>
-                            <div class="layout-btn" data-layout="cylinder" title="Cylindrical layers">
-                                <span class="layout-icon">🗼</span>
-                                <span class="layout-name">Cylinder</span>
-                            </div>
-                            <div class="layout-btn" data-layout="tree" title="Hierarchical tree structure">
-                                <span class="layout-icon">🌳</span>
-                                <span class="layout-name">Tree</span>
-                            </div>
-                            <div class="layout-btn" data-layout="flock" title="Organic flocking behavior">
-                                <span class="layout-icon">🐦</span>
-                                <span class="layout-name">Flock</span>
-                            </div>
-                            <div class="layout-btn" data-layout="galaxy" title="Spiral galaxy with arms">
-                                <span class="layout-icon">🌌</span>
-                                <span class="layout-name">Galaxy</span>
-                            </div>
+                            <div class="layout-btn active" data-layout="force" title="Physics-based clustering">Force</div>
+                            <div class="layout-btn" data-layout="orbital" title="Planetary orbit bands">Orbital</div>
+                            <div class="layout-btn" data-layout="radial" title="Concentric tier rings">Radial</div>
+                            <div class="layout-btn" data-layout="spiral" title="DNA helix spiral">Spiral</div>
+                            <div class="layout-btn" data-layout="sphere" title="Spherical shell distribution">Sphere</div>
+                            <div class="layout-btn" data-layout="torus" title="Donut ring arrangement">Torus</div>
+                            <div class="layout-btn" data-layout="grid" title="Structured 3D grid">Grid</div>
+                            <div class="layout-btn" data-layout="cylinder" title="Cylindrical layers">Cylinder</div>
+                            <div class="layout-btn" data-layout="tree" title="Hierarchical tree structure">Tree</div>
+                            <div class="layout-btn" data-layout="flock" title="Organic flocking behavior">Flock</div>
+                            <div class="layout-btn" data-layout="galaxy" title="Spiral galaxy with arms">Galaxy</div>
                         </div>
                     </div>
                 </div>
