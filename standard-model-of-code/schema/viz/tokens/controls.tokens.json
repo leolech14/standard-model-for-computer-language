@@ -881,7 +881,7 @@
         "$value": 0.2
       },
       "max": {
-        "$value": 3
+        "$value": 8
       },
       "step": {
         "$value": 0.1
