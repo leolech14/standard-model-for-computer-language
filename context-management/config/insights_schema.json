@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Collider AI Insights",
+  "description": "Structured output from AI analysis of Collider results",
+  "type": "object",
+  "required": ["meta", "executive_summary"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["generated_at", "model"],
+      "properties": {
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp"
+        },
+        "model": {
+          "type": "string",
+          "description": "Gemini model used"
+        },
+        "target": {
+          "type": "string",
+          "description": "Codebase analyzed"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Overall confidence score"
+        },
+        "processing_time_ms": {
+          "type": "integer",
+          "description": "Time taken for analysis"
+        }
+      }
+    },
+    "executive_summary": {
+      "type": "string",
+      "description": "2-3 sentence high-level summary",
+      "maxLength": 500
+    },
+    "patterns_detected": {
+      "type": "array",
+      "description": "Design patterns and anti-patterns found",
+      "items": {
+        "type": "object",
+        "required": ["pattern_name", "pattern_type", "confidence"],
+        "properties": {
+          "pattern_name": {
+            "type": "string",
+            "description": "Name of the pattern (e.g., Factory, God Object)"
+          },
+          "pattern_type": {
+            "type": "string",
+            "enum": ["design_pattern", "anti_pattern", "architectural", "behavioral"],
+            "description": "Category of pattern"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "affected_nodes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Node IDs or names affected"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Explanation of why this pattern was detected"
+          },
+          "recommendation": {
+            "type": "string",
+            "description": "What to do about it"
+          }
+        }
+      }
+    },
+    "refactoring_opportunities": {
+      "type": "array",
+      "description": "Specific actionable improvements",
+      "items": {
+        "type": "object",
+        "required": ["title", "priority"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Short name for the refactoring"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
+          },
+          "category": {
+            "type": "string",
+            "description": "Type of refactoring (e.g., Separation of Concerns)"
+          },
+          "description": {
+            "type": "string",
+            "description": "What to do and why"
+          },
+          "affected_files": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "estimated_effort": {
+            "type": "string",
+            "description": "Rough effort estimate"
+          },
+          "estimated_impact": {
+            "type": "string",
+            "description": "Expected benefit"
+          }
+        }
+      }
+    },
+    "topology_analysis": {
+      "type": "object",
+      "description": "Interpretation of the codebase topology",
+      "properties": {
+        "shape_interpretation": {
+          "type": "string",
+          "description": "What the topology shape means"
+        },
+        "health_assessment": {
+          "type": "string",
+          "description": "Overall architectural health"
+        },
+        "comparison": {
+          "type": "string",
+          "description": "Comparison to known architectures"
+        },
+        "coupling_analysis": {
+          "type": "string",
+          "description": "Assessment of coupling/cohesion"
+        }
+      }
+    },
+    "rpbl_interpretation": {
+      "type": "object",
+      "description": "Interpretation of RPBL scores",
+      "properties": {
+        "responsibility": {
+          "type": "string",
+          "description": "What the R score means"
+        },
+        "purity": {
+          "type": "string",
+          "description": "What the P score means"
+        },
+        "boundary": {
+          "type": "string",
+          "description": "What the B score means"
+        },
+        "lifecycle": {
+          "type": "string",
+          "description": "What the L score means"
+        },
+        "overall": {
+          "type": "string",
+          "description": "Combined interpretation"
+        }
+      }
+    },
+    "domain_insights": {
+      "type": "object",
+      "description": "Business domain analysis",
+      "properties": {
+        "inferred_domain": {
+          "type": "string"
+        },
+        "domain_concepts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ubiquitous_language": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key domain terms found"
+        }
+      }
+    },
+    "risk_areas": {
+      "type": "array",
+      "description": "Potential problem areas",
+      "items": {
+        "type": "object",
+        "properties": {
+          "area": { "type": "string" },
+          "risk_level": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] },
+          "description": { "type": "string" },
+          "mitigation": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -129,9 +129,75 @@ def retry_with_backoff(func, max_retries=5, base_delay=1.0):
 
 
 # --- System Prompts & Modes ---
+INSIGHTS_PROMPT = """
+You are a SOFTWARE ARCHITECTURE ANALYST specializing in pattern recognition and code quality assessment.
+
+Your task is to analyze Collider output (a semantic graph of a codebase) and provide structured insights.
+
+ANALYSIS CONTEXT (from Collider):
+{context}
+
+TASK:
+1. Identify design patterns present (Factory, Repository, Observer, Facade, etc.)
+2. Detect anti-patterns (God Object, Spaghetti Code, Anemic Domain Model, Feature Envy, etc.)
+3. Suggest 3-5 specific refactoring opportunities with priority (CRITICAL/HIGH/MEDIUM/LOW)
+4. Interpret the topology shape in architectural terms
+5. Assess RPBL scores if present (Responsibility, Purity, Boundary, Lifecycle)
+6. Identify risk areas and technical debt
+7. Provide a 2-3 sentence executive summary
+
+OUTPUT FORMAT:
+Return ONLY valid JSON matching this structure (no markdown, no code blocks):
+{{
+  "meta": {{
+    "generated_at": "<ISO timestamp>",
+    "model": "<model name>",
+    "target": "<codebase name>",
+    "confidence": <0.0-1.0>
+  }},
+  "executive_summary": "<2-3 sentences>",
+  "patterns_detected": [
+    {{
+      "pattern_name": "<name>",
+      "pattern_type": "design_pattern|anti_pattern|architectural",
+      "confidence": <0.0-1.0>,
+      "affected_nodes": ["<node1>", "<node2>"],
+      "evidence": "<why detected>",
+      "recommendation": "<what to do>"
+    }}
+  ],
+  "refactoring_opportunities": [
+    {{
+      "title": "<short name>",
+      "priority": "CRITICAL|HIGH|MEDIUM|LOW",
+      "category": "<type>",
+      "description": "<what and why>",
+      "affected_files": ["<file1>"],
+      "estimated_impact": "<benefit>"
+    }}
+  ],
+  "topology_analysis": {{
+    "shape_interpretation": "<what the shape means>",
+    "health_assessment": "<overall health>",
+    "coupling_analysis": "<coupling assessment>"
+  }},
+  "risk_areas": [
+    {{
+      "area": "<name>",
+      "risk_level": "HIGH|MEDIUM|LOW",
+      "description": "<issue>",
+      "mitigation": "<fix>"
+    }}
+  ]
+}}
+
+Be specific. Cite actual node names from the input. Do not hallucinate nodes that don't exist.
+"""
+
 MODES = {
     "standard": {
-        "prompt": "You are a senior software engineer. Analyze the provided codebase context and answer the user's request."
+        "prompt": "You are a senior software engineer. Analyze the provided codebase context and answer the user's request.",
+        "output_format": "text"
     },
     "forensic": {
         "prompt": """
@@ -141,7 +207,8 @@ RULES:
 2. Format citations as: `[path/to/file.py:L10-L15]`
 3. Do not generalize. If you cannot find the specific implementation, state "Evidence not found in provided context."
 4. Quote the exact code snippet when relevant.
-"""
+""",
+        "output_format": "text"
     },
     "architect": {
         "prompt": """
@@ -151,18 +218,118 @@ RULES:
 1. Use the terminology defined in `metadata/COLLIDER_ARCHITECTURE.md` (e.g., "The UnifiedNode layer...", "The RPBL classification...").
 2. Connect implementation details to the architectural vision.
 3. Identify topological structures (knots, cycles, layers).
-"""
+""",
+        "output_format": "text"
+    },
+    "insights": {
+        "prompt": INSIGHTS_PROMPT,
+        "output_format": "json"
     }
 }
 
+def extract_collider_context(json_path):
+    """Extract key metrics from Collider unified_analysis.json for insights prompt."""
+    with open(json_path) as f:
+        data = json.load(f)
+
+    # Extract key sections
+    context_parts = []
+
+    # Target name (multiple possible locations)
+    target = data.get('target_name') or data.get('meta', {}).get('target') or 'Unknown'
+    context_parts.append(f"Target: {target}")
+
+    # Counts (handle both structures)
+    nodes = data.get('nodes', [])
+    edges = data.get('edges', [])
+    counts = data.get('counts', {})
+
+    node_count = counts.get('total_nodes') or len(nodes)
+    edge_count = counts.get('total_edges') or len(edges)
+    file_count = counts.get('files') or len(set(n.get('file_path', '') for n in nodes))
+
+    context_parts.append(f"Nodes: {node_count}")
+    context_parts.append(f"Edges: {edge_count}")
+    context_parts.append(f"Files: {file_count}")
+
+    # Architecture
+    arch = data.get('architecture', {})
+    if arch:
+        # Handle nested graph_inference structure
+        graph_inf = arch.get('graph_inference', {})
+        topology = graph_inf.get('topology_shape') or arch.get('topology_shape', 'Unknown')
+        context_parts.append(f"Topology Shape: {topology}")
+
+        density = graph_inf.get('density') or arch.get('density')
+        if density:
+            context_parts.append(f"Graph Density: {density}")
+
+        # Detected patterns
+        patterns = arch.get('detected_patterns', [])
+        if patterns:
+            context_parts.append(f"Detected Patterns: {', '.join(patterns[:5])}")
+
+        # Layer violations
+        violations = arch.get('layer_violations', [])
+        if violations:
+            context_parts.append(f"Layer Violations: {len(violations)}")
+
+    # RPBL (check multiple locations)
+    rpbl = data.get('rpbl_profile', {}) or data.get('rpbl', {})
+    if rpbl and any(rpbl.get(k) for k in ['R', 'P', 'B', 'L']):
+        context_parts.append(f"RPBL Profile: R={rpbl.get('R', 0):.2f}, P={rpbl.get('P', 0):.2f}, B={rpbl.get('B', 0):.2f}, L={rpbl.get('L', 0):.2f}")
+
+    # Top hubs (check multiple locations)
+    hubs = data.get('top_hubs', []) or data.get('stats', {}).get('top_hubs', [])
+    if hubs:
+        hub_names = [h.get('name', h.get('id', 'Unknown')) for h in hubs[:10]]
+        context_parts.append(f"Top Hubs: {', '.join(hub_names)}")
+
+    # Orphans (dead code)
+    orphans = data.get('orphans_list', []) or data.get('orphans', [])
+    if orphans:
+        context_parts.append(f"Dead Code (Orphans): {len(orphans)} nodes")
+
+    # Dependencies / antimatter
+    antimatter = data.get('antimatter', {})
+    if antimatter:
+        violations = antimatter.get('violations', [])
+        if violations:
+            context_parts.append(f"Antimatter Violations: {len(violations)}")
+
+    # Classification stats
+    classification = data.get('classification', {})
+    if classification:
+        role_dist = classification.get('role_distribution', {})
+        if role_dist:
+            top_roles = sorted(role_dist.items(), key=lambda x: x[1], reverse=True)[:5]
+            role_summary = ', '.join([f"{r}: {c}" for r, c in top_roles])
+            context_parts.append(f"Role Distribution: {role_summary}")
+
+    # Sample nodes (for context)
+    sample_nodes = nodes[:30] if nodes else []
+    if sample_nodes:
+        node_summary = []
+        for n in sample_nodes:
+            name = n.get('name', n.get('id', 'Unknown'))
+            role = n.get('role', 'Unknown')
+            kind = n.get('kind', '')
+            node_summary.append(f"{name} ({role}/{kind})")
+        context_parts.append(f"Sample Nodes: {', '.join(node_summary)}")
+
+    return '\n'.join(context_parts)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Analyze codebase with Vertex AI")
-    parser.add_argument("prompt", help="The question or instruction for the AI")
+    parser.add_argument("prompt", nargs='?', default="Analyze this codebase", help="The question or instruction for the AI")
     parser.add_argument("--dir", help="Filter by directory (e.g., 'tools/archive')")
     parser.add_argument("--file", help="Specific file(s) to include (comma separated)")
     parser.add_argument("--set", help="Analysis Set (brain, body, theory, legacy)")
     parser.add_argument("--model", default=DEFAULT_MODEL, help="Model to use")
-    parser.add_argument("--mode", default="standard", choices=MODES.keys(), help="Analysis mode: standard, forensic (line-level), or architect (theory-aware)")
+    parser.add_argument("--mode", default="standard", choices=MODES.keys(), help="Analysis mode: standard, forensic, architect, or insights")
+    parser.add_argument("--collider-json", help="Path to Collider unified_analysis.json (for insights mode)")
+    parser.add_argument("--output", "-o", help="Output file path (for insights mode, saves JSON)")
     parser.add_argument("--yes", "-y", action="store_true", help="Skip cost confirmation")
     args = parser.parse_args()
 
@@ -246,9 +413,29 @@ def main():
     )
 
     contents = [Part.from_uri(file_uri=f, mime_type="text/plain") for f in selected_files]
-    
-    # Inject Mode-Specific System Prompt
-    full_prompt = f"{MODES[args.mode]['prompt']}\n\nUSER QUERY: {args.prompt}"
+
+    # Handle insights mode specially
+    if args.mode == "insights":
+        if not args.collider_json:
+            print("Error: --collider-json is required for insights mode")
+            print("Usage: python analyze.py --mode insights --collider-json /path/to/unified_analysis.json")
+            sys.exit(1)
+
+        # Extract context from Collider output
+        print(f"\nExtracting context from: {args.collider_json}")
+        try:
+            collider_context = extract_collider_context(args.collider_json)
+            print(f"Context extracted ({len(collider_context)} chars)")
+        except Exception as e:
+            print(f"Error reading Collider JSON: {e}")
+            sys.exit(1)
+
+        # Build prompt with context injected
+        full_prompt = MODES['insights']['prompt'].format(context=collider_context)
+    else:
+        # Standard prompt building
+        full_prompt = f"{MODES[args.mode]['prompt']}\n\nUSER QUERY: {args.prompt}"
+
     contents.append(Part.from_text(text=full_prompt))
 
     print("\n--- Analyzing ---")
@@ -261,7 +448,42 @@ def main():
             )
 
         response = retry_with_backoff(make_request)
-        print(response.text)
+
+        # Handle output based on mode
+        output_format = MODES[args.mode].get('output_format', 'text')
+
+        if output_format == 'json':
+            # Parse and validate JSON for insights mode
+            raw_text = response.text.strip()
+            # Remove markdown code blocks if present
+            if raw_text.startswith('```'):
+                lines = raw_text.split('\n')
+                raw_text = '\n'.join(lines[1:-1] if lines[-1] == '```' else lines[1:])
+
+            try:
+                insights_data = json.loads(raw_text)
+                print(json.dumps(insights_data, indent=2))
+
+                # Save to file if --output specified
+                if args.output:
+                    with open(args.output, 'w') as f:
+                        json.dump(insights_data, f, indent=2)
+                    print(f"\n✅ Insights saved to: {args.output}")
+                else:
+                    # Default output path
+                    default_output = Path(args.collider_json).parent / "ai_insights.json"
+                    with open(default_output, 'w') as f:
+                        json.dump(insights_data, f, indent=2)
+                    print(f"\n✅ Insights saved to: {default_output}")
+
+            except json.JSONDecodeError as e:
+                print(f"⚠️ Warning: Response is not valid JSON: {e}")
+                print("Raw response:")
+                print(raw_text)
+        else:
+            # Text output
+            print(response.text)
+
         print("\n-----------------")
         if response.usage_metadata:
             print(f"Tokens Used: {response.usage_metadata.prompt_token_count} Input, {response.usage_metadata.candidates_token_count} Output")
