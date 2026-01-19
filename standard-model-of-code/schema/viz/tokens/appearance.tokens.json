@@ -366,6 +366,87 @@
       }
     }
   },
+  "flow-presets": {
+    "$description": "Named flow visualization presets for Markov chain display",
+    "ember": {
+      "highlightColor": { "$value": "#ff8c00" },
+      "particleColor": { "$value": "#ffaa00" },
+      "dimColor": { "$value": "#331100" },
+      "edgeColor": { "$value": "#ff6600" },
+      "particleCount": { "$value": 3 },
+      "particleWidth": { "$value": 2.5 },
+      "particleSpeed": { "$value": 0.008 },
+      "edgeWidthScale": { "$value": 3.0 },
+      "sizeMultiplier": { "$value": 1.8 },
+      "edgeOpacityMin": { "$value": 0.3 },
+      "dimOpacity": { "$value": 0.05 }
+    },
+    "ocean": {
+      "highlightColor": { "$value": "#00d4ff" },
+      "particleColor": { "$value": "#4df0ff" },
+      "dimColor": { "$value": "#001122" },
+      "edgeColor": { "$value": "#0088cc" },
+      "particleCount": { "$value": 4 },
+      "particleWidth": { "$value": 2.0 },
+      "particleSpeed": { "$value": 0.006 },
+      "edgeWidthScale": { "$value": 2.5 },
+      "sizeMultiplier": { "$value": 1.6 },
+      "edgeOpacityMin": { "$value": 0.25 },
+      "dimOpacity": { "$value": 0.03 }
+    },
+    "plasma": {
+      "highlightColor": { "$value": "#ff00ff" },
+      "particleColor": { "$value": "#ff66ff" },
+      "dimColor": { "$value": "#110011" },
+      "edgeColor": { "$value": "#cc00cc" },
+      "particleCount": { "$value": 5 },
+      "particleWidth": { "$value": 3.0 },
+      "particleSpeed": { "$value": 0.012 },
+      "edgeWidthScale": { "$value": 4.0 },
+      "sizeMultiplier": { "$value": 2.0 },
+      "edgeOpacityMin": { "$value": 0.35 },
+      "dimOpacity": { "$value": 0.04 }
+    },
+    "matrix": {
+      "highlightColor": { "$value": "#00ff00" },
+      "particleColor": { "$value": "#88ff88" },
+      "dimColor": { "$value": "#001100" },
+      "edgeColor": { "$value": "#00cc00" },
+      "particleCount": { "$value": 6 },
+      "particleWidth": { "$value": 1.5 },
+      "particleSpeed": { "$value": 0.015 },
+      "edgeWidthScale": { "$value": 2.0 },
+      "sizeMultiplier": { "$value": 1.4 },
+      "edgeOpacityMin": { "$value": 0.2 },
+      "dimOpacity": { "$value": 0.02 }
+    },
+    "pulse": {
+      "highlightColor": { "$value": "#ff4444" },
+      "particleColor": { "$value": "#ff8888" },
+      "dimColor": { "$value": "#110000" },
+      "edgeColor": { "$value": "#cc2222" },
+      "particleCount": { "$value": 2 },
+      "particleWidth": { "$value": 4.0 },
+      "particleSpeed": { "$value": 0.004 },
+      "edgeWidthScale": { "$value": 5.0 },
+      "sizeMultiplier": { "$value": 2.2 },
+      "edgeOpacityMin": { "$value": 0.4 },
+      "dimOpacity": { "$value": 0.06 }
+    },
+    "aurora": {
+      "highlightColor": { "$value": "#33ccbb" },
+      "particleColor": { "$value": "#66ffee" },
+      "dimColor": { "$value": "#002222" },
+      "edgeColor": { "$value": "#22aa99" },
+      "particleCount": { "$value": 4 },
+      "particleWidth": { "$value": 2.2 },
+      "particleSpeed": { "$value": 0.007 },
+      "edgeWidthScale": { "$value": 3.5 },
+      "sizeMultiplier": { "$value": 1.7 },
+      "edgeOpacityMin": { "$value": 0.28 },
+      "dimOpacity": { "$value": 0.04 }
+    }
+  },
   "physics": {
     "forces": {
       "charge": {

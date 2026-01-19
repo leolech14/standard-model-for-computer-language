@@ -7813,91 +7813,101 @@ function getFlowPresetColor(presetName, property, fallback) {
     return scheme[property] || fallback;
 }
 
+// Get flow preset value from appearance tokens (T008)
+// Retrieves any flow preset parameter from APPEARANCE_CONFIG.flow-presets
+function getFlowPresetValue(presetName, property, fallback) {
+    const presets = (APPEARANCE_CONFIG && APPEARANCE_CONFIG['flow-presets']) || {};
+    const preset = presets[presetName.toLowerCase()] || {};
+    const value = preset[property];
+    return (value !== undefined && value !== null) ? value : fallback;
+}
+
 // Flow Mode Presets - cycle through by clicking FLOW button repeatedly
+// T008: All values now sourced from appearance.tokens.json flow-presets section
 const FLOW_PRESETS = [
     {
         name: 'EMBER',
-        highlightColor: getFlowPresetColor('EMBER', 'highlightColor', '#ff8c00'),
-        particleColor: getFlowPresetColor('EMBER', 'particleColor', '#ffaa00'),
-        dimColor: getFlowPresetColor('EMBER', 'dimColor', '#331100'),
-        edgeColor: getFlowPresetColor('EMBER', 'edgeColor', '#ff6600'),
-        particleCount: 3,
-        particleWidth: 2.5,
-        particleSpeed: 0.008,
-        edgeWidthScale: 3.0,
-        sizeMultiplier: 1.8,
-        edgeOpacityMin: 0.3,
-        dimOpacity: 0.05
+        highlightColor: getFlowPresetColor('EMBER', 'highlightColor', getFlowPresetValue('ember', 'highlightColor', '#ff8c00')),
+        particleColor: getFlowPresetColor('EMBER', 'particleColor', getFlowPresetValue('ember', 'particleColor', '#ffaa00')),
+        dimColor: getFlowPresetColor('EMBER', 'dimColor', getFlowPresetValue('ember', 'dimColor', '#331100')),
+        edgeColor: getFlowPresetColor('EMBER', 'edgeColor', getFlowPresetValue('ember', 'edgeColor', '#ff6600')),
+        particleCount: getFlowPresetValue('ember', 'particleCount', 3),
+        particleWidth: getFlowPresetValue('ember', 'particleWidth', 2.5),
+        particleSpeed: getFlowPresetValue('ember', 'particleSpeed', 0.008),
+        edgeWidthScale: getFlowPresetValue('ember', 'edgeWidthScale', 3.0),
+        sizeMultiplier: getFlowPresetValue('ember', 'sizeMultiplier', 1.8),
+        edgeOpacityMin: getFlowPresetValue('ember', 'edgeOpacityMin', 0.3),
+        dimOpacity: getFlowPresetValue('ember', 'dimOpacity', 0.05)
     },
     {
         name: 'OCEAN',
-        highlightColor: getFlowPresetColor('OCEAN', 'highlightColor', '#00d4ff'),
-        particleColor: getFlowPresetColor('OCEAN', 'particleColor', '#4df0ff'),
-        dimColor: getFlowPresetColor('OCEAN', 'dimColor', '#001122'),
-        edgeColor: getFlowPresetColor('OCEAN', 'edgeColor', '#0088cc'),
-        particleCount: 4,
-        particleWidth: 2.0,
-        particleSpeed: 0.006,
-        edgeWidthScale: 2.5,
-        sizeMultiplier: 1.6,
-        edgeOpacityMin: 0.25,
-        dimOpacity: 0.03
+        highlightColor: getFlowPresetColor('OCEAN', 'highlightColor', getFlowPresetValue('ocean', 'highlightColor', '#00d4ff')),
+        particleColor: getFlowPresetColor('OCEAN', 'particleColor', getFlowPresetValue('ocean', 'particleColor', '#4df0ff')),
+        dimColor: getFlowPresetColor('OCEAN', 'dimColor', getFlowPresetValue('ocean', 'dimColor', '#001122')),
+        edgeColor: getFlowPresetColor('OCEAN', 'edgeColor', getFlowPresetValue('ocean', 'edgeColor', '#0088cc')),
+        particleCount: getFlowPresetValue('ocean', 'particleCount', 4),
+        particleWidth: getFlowPresetValue('ocean', 'particleWidth', 2.0),
+        particleSpeed: getFlowPresetValue('ocean', 'particleSpeed', 0.006),
+        edgeWidthScale: getFlowPresetValue('ocean', 'edgeWidthScale', 2.5),
+        sizeMultiplier: getFlowPresetValue('ocean', 'sizeMultiplier', 1.6),
+        edgeOpacityMin: getFlowPresetValue('ocean', 'edgeOpacityMin', 0.25),
+        dimOpacity: getFlowPresetValue('ocean', 'dimOpacity', 0.03)
     },
     {
         name: 'PLASMA',
-        highlightColor: getFlowPresetColor('PLASMA', 'highlightColor', '#ff00ff'),
-        particleColor: getFlowPresetColor('PLASMA', 'particleColor', '#ff66ff'),
-        dimColor: getFlowPresetColor('PLASMA', 'dimColor', '#110011'),
-        edgeColor: getFlowPresetColor('PLASMA', 'edgeColor', '#cc00cc'),
-        particleCount: 5,
-        particleWidth: 3.0,
-        particleSpeed: 0.012,
-        edgeWidthScale: 4.0,
-        sizeMultiplier: 2.0,
-        edgeOpacityMin: 0.35,
-        dimOpacity: 0.04
+        highlightColor: getFlowPresetColor('PLASMA', 'highlightColor', getFlowPresetValue('plasma', 'highlightColor', '#ff00ff')),
+        particleColor: getFlowPresetColor('PLASMA', 'particleColor', getFlowPresetValue('plasma', 'particleColor', '#ff66ff')),
+        dimColor: getFlowPresetColor('PLASMA', 'dimColor', getFlowPresetValue('plasma', 'dimColor', '#110011')),
+        edgeColor: getFlowPresetColor('PLASMA', 'edgeColor', getFlowPresetValue('plasma', 'edgeColor', '#cc00cc')),
+        particleCount: getFlowPresetValue('plasma', 'particleCount', 5),
+        particleWidth: getFlowPresetValue('plasma', 'particleWidth', 3.0),
+        particleSpeed: getFlowPresetValue('plasma', 'particleSpeed', 0.012),
+        edgeWidthScale: getFlowPresetValue('plasma', 'edgeWidthScale', 4.0),
+        sizeMultiplier: getFlowPresetValue('plasma', 'sizeMultiplier', 2.0),
+        edgeOpacityMin: getFlowPresetValue('plasma', 'edgeOpacityMin', 0.35),
+        dimOpacity: getFlowPresetValue('plasma', 'dimOpacity', 0.04)
     },
     {
         name: 'MATRIX',
-        highlightColor: getFlowPresetColor('MATRIX', 'highlightColor', '#00ff00'),
-        particleColor: getFlowPresetColor('MATRIX', 'particleColor', '#88ff88'),
-        dimColor: getFlowPresetColor('MATRIX', 'dimColor', '#001100'),
-        edgeColor: getFlowPresetColor('MATRIX', 'edgeColor', '#00cc00'),
-        particleCount: 6,
-        particleWidth: 1.5,
-        particleSpeed: 0.015,
-        edgeWidthScale: 2.0,
-        sizeMultiplier: 1.4,
-        edgeOpacityMin: 0.2,
-        dimOpacity: 0.02
+        highlightColor: getFlowPresetColor('MATRIX', 'highlightColor', getFlowPresetValue('matrix', 'highlightColor', '#00ff00')),
+        particleColor: getFlowPresetColor('MATRIX', 'particleColor', getFlowPresetValue('matrix', 'particleColor', '#88ff88')),
+        dimColor: getFlowPresetColor('MATRIX', 'dimColor', getFlowPresetValue('matrix', 'dimColor', '#001100')),
+        edgeColor: getFlowPresetColor('MATRIX', 'edgeColor', getFlowPresetValue('matrix', 'edgeColor', '#00cc00')),
+        particleCount: getFlowPresetValue('matrix', 'particleCount', 6),
+        particleWidth: getFlowPresetValue('matrix', 'particleWidth', 1.5),
+        particleSpeed: getFlowPresetValue('matrix', 'particleSpeed', 0.015),
+        edgeWidthScale: getFlowPresetValue('matrix', 'edgeWidthScale', 2.0),
+        sizeMultiplier: getFlowPresetValue('matrix', 'sizeMultiplier', 1.4),
+        edgeOpacityMin: getFlowPresetValue('matrix', 'edgeOpacityMin', 0.2),
+        dimOpacity: getFlowPresetValue('matrix', 'dimOpacity', 0.02)
     },
     {
         name: 'PULSE',
-        highlightColor: getFlowPresetColor('PULSE', 'highlightColor', '#ff4444'),
-        particleColor: getFlowPresetColor('PULSE', 'particleColor', '#ff8888'),
-        dimColor: getFlowPresetColor('PULSE', 'dimColor', '#110000'),
-        edgeColor: getFlowPresetColor('PULSE', 'edgeColor', '#cc2222'),
-        particleCount: 2,
-        particleWidth: 4.0,
-        particleSpeed: 0.004,
-        edgeWidthScale: 5.0,
-        sizeMultiplier: 2.2,
-        edgeOpacityMin: 0.4,
-        dimOpacity: 0.06
+        highlightColor: getFlowPresetColor('PULSE', 'highlightColor', getFlowPresetValue('pulse', 'highlightColor', '#ff4444')),
+        particleColor: getFlowPresetColor('PULSE', 'particleColor', getFlowPresetValue('pulse', 'particleColor', '#ff8888')),
+        dimColor: getFlowPresetColor('PULSE', 'dimColor', getFlowPresetValue('pulse', 'dimColor', '#110000')),
+        edgeColor: getFlowPresetColor('PULSE', 'edgeColor', getFlowPresetValue('pulse', 'edgeColor', '#cc2222')),
+        particleCount: getFlowPresetValue('pulse', 'particleCount', 2),
+        particleWidth: getFlowPresetValue('pulse', 'particleWidth', 4.0),
+        particleSpeed: getFlowPresetValue('pulse', 'particleSpeed', 0.004),
+        edgeWidthScale: getFlowPresetValue('pulse', 'edgeWidthScale', 5.0),
+        sizeMultiplier: getFlowPresetValue('pulse', 'sizeMultiplier', 2.2),
+        edgeOpacityMin: getFlowPresetValue('pulse', 'edgeOpacityMin', 0.4),
+        dimOpacity: getFlowPresetValue('pulse', 'dimOpacity', 0.06)
     },
     {
         name: 'AURORA',
-        highlightColor: getFlowPresetColor('AURORA', 'highlightColor', '#33ccbb'),
-        particleColor: getFlowPresetColor('AURORA', 'particleColor', '#66ffee'),
-        dimColor: getFlowPresetColor('AURORA', 'dimColor', '#002222'),
-        edgeColor: getFlowPresetColor('AURORA', 'edgeColor', '#22aa99'),
-        particleCount: 4,
-        particleWidth: 2.2,
-        particleSpeed: 0.007,
-        edgeWidthScale: 3.5,
-        sizeMultiplier: 1.7,
-        edgeOpacityMin: 0.28,
-        dimOpacity: 0.04
+        highlightColor: getFlowPresetColor('AURORA', 'highlightColor', getFlowPresetValue('aurora', 'highlightColor', '#33ccbb')),
+        particleColor: getFlowPresetColor('AURORA', 'particleColor', getFlowPresetValue('aurora', 'particleColor', '#66ffee')),
+        dimColor: getFlowPresetColor('AURORA', 'dimColor', getFlowPresetValue('aurora', 'dimColor', '#002222')),
+        edgeColor: getFlowPresetColor('AURORA', 'edgeColor', getFlowPresetValue('aurora', 'edgeColor', '#22aa99')),
+        particleCount: getFlowPresetValue('aurora', 'particleCount', 4),
+        particleWidth: getFlowPresetValue('aurora', 'particleWidth', 2.2),
+        particleSpeed: getFlowPresetValue('aurora', 'particleSpeed', 0.007),
+        edgeWidthScale: getFlowPresetValue('aurora', 'edgeWidthScale', 3.5),
+        sizeMultiplier: getFlowPresetValue('aurora', 'sizeMultiplier', 1.7),
+        edgeOpacityMin: getFlowPresetValue('aurora', 'edgeOpacityMin', 0.28),
+        dimOpacity: getFlowPresetValue('aurora', 'dimOpacity', 0.04)
     }
 ];
 let currentFlowPreset = 0;

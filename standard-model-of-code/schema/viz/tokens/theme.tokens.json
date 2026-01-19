@@ -69,6 +69,22 @@
           "near-black": { "$value": "#1a1a1a" },
           "gray-dark": { "$value": "#666666" },
           "white": { "$value": "#ffffff" }
+        },
+        "status": {
+          "success": { "$value": "#16a34a" },
+          "success-bg": { "$value": "#dcfce7" },
+          "warning": { "$value": "#ca8a04" },
+          "warning-bg": { "$value": "#fef9c3" },
+          "error": { "$value": "#dc2626" },
+          "error-bg": { "$value": "#fee2e2" },
+          "info": { "$value": "#0284c7" },
+          "info-bg": { "$value": "#e0f2fe" }
+        },
+        "data": {
+          "blue": { "$value": "#2563eb" },
+          "green": { "$value": "#16a34a" },
+          "yellow": { "$value": "#ca8a04" },
+          "red": { "$value": "#dc2626" }
         }
       },
       "shadow": {
