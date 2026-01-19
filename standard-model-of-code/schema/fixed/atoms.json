@@ -1,10 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "version": "2.2.0",
-  "description": "Standard Model of Code - Core Atom Ontology. OPEN SCHEMA: This file contains base atoms (185 in this snapshot). The full schema includes T0 Core (43), T1 Stdlib (24), T2 Ecosystem (17+), and extension packs. Total coverage: 200+ atoms, expandable to 600+ for all major ecosystems.",
+  "description": "Standard Model of Code - Core Atom Ontology. OPEN SCHEMA organized into 4 phases and 16 families.",
   "schema_type": "open",
-  "snapshot_atoms": 185,
-  "historical_note": "The '167 original atoms' was an early milestone. The schema has since grown through crosswalk validation (+18) and tier extensions.",
   "validation_date": "2026-01-19",
   "phases": {
     "DATA": {

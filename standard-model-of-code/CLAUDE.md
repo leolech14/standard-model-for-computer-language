@@ -50,10 +50,8 @@ This is the most distinctive aspect: **theory and application live together, inf
 │  ───────────────────────────────────────────────            │
 │                                                             │
 │  THE THEORETICAL FOUNDATION (The Standard Model):          │
-│  • Atomic Theory: OPEN SCHEMA with 200+ atoms across       │
-│    3 tiers (T0 Core, T1 Stdlib, T2 Ecosystem), 16 families,│
-│    4 phases (DATA → LOGIC → ORGANIZATION → EXECUTION)      │
-│    Expandable to 600+ atoms for all major ecosystems       │
+│  • Atomic Theory: OPEN SCHEMA organized into 4 phases,     │
+│    16 families (DATA → LOGIC → ORGANIZATION → EXECUTION)   │
 │  • Role Theory: Canonical roles (Repository, Entity, etc.) │
 │  • Layer Theory: Architectural placement (Domain, Infra)   │
 │  • Antimatter Laws: Cross-layer violation detection        │

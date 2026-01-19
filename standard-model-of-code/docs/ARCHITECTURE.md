@@ -22,10 +22,8 @@ Collider is valuable and complete without any AI integration. The Standard Model
 │                                                                     │
 │   THE THEORETICAL FOUNDATION (The Standard Model):                  │
 │   ────────────────────────────────────────────────                  │
-│   • Atomic Theory: OPEN SCHEMA with 200+ atoms across 3 tiers       │
-│     (T0 Core, T1 Stdlib, T2 Ecosystem), 16 families, 4 phases       │
-│     (DATA → LOGIC → ORGANIZATION → EXECUTION)                       │
-│     Expandable to 600+ atoms for all major ecosystems               │
+│   • Atomic Theory: OPEN SCHEMA organized into 4 phases,             │
+│     16 families (DATA → LOGIC → ORGANIZATION → EXECUTION)           │
 │   • Role Theory: Canonical roles (Repository, Entity, Service...)   │
 │   • Layer Theory: Architectural placement (Domain, Infra, App, UI)  │
 │   • Antimatter Laws: Cross-layer violation detection                │

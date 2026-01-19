@@ -5,10 +5,8 @@
 # 🔬 Standard Code Model
 ## Atom Reference (Open Schema)
 
-> **Note:** This is a snapshot of the base atom ontology. The schema is OPEN and continuously growing.
-> Current coverage: 200+ atoms across 3 tiers (T0 Core, T1 Stdlib, T2 Ecosystem).
-> Expandable to 600+ atoms for all major ecosystems.
-> See `schema/fixed/atoms.json` for the full base schema and `src/patterns/ATOMS_*.yaml` for tier definitions.
+> **Note:** This is a reference of the atom ontology organized by 4 phases and 16 families.
+> The schema is OPEN and continuously evolving. See `schema/fixed/atoms.json` for definitions.
 
 ---
 
