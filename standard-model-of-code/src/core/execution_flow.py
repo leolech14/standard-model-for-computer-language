@@ -18,6 +18,15 @@ from dataclasses import dataclass, field
 from collections import defaultdict
 from enum import Enum
 
+# Import graph analyzer for reachability path analysis
+try:
+    from graph_analyzer import shortest_path, load_graph
+    GRAPH_ANALYZER_AVAILABLE = True
+except ImportError:
+    GRAPH_ANALYZER_AVAILABLE = False
+    shortest_path = None
+    load_graph = None
+
 
 class FlowType(Enum):
     """Types of execution flow"""
@@ -84,6 +93,9 @@ class ExecutionFlow:
     total_nodes: int = 0
     reachable_nodes: int = 0
     dead_code_percent: float = 0.0
+    
+    # Reachability data (orphan_id -> path from nearest entry)
+    reachability_paths: Dict[str, List[str]] = field(default_factory=dict)
     
     def summary(self) -> dict:
         """Summarize execution flow"""
@@ -190,6 +202,9 @@ class ExecutionFlowDetector:
         total = len(self.nodes)
         dead_code_pct = len(orphans) / total * 100 if total else 0
         
+        # Compute reachability paths for orphans (how to reach them)
+        reachability_paths = self._compute_reachability_paths(orphans, entry_points, edges)
+        
         return ExecutionFlow(
             nodes=self.nodes,
             chains=chains,
@@ -198,7 +213,8 @@ class ExecutionFlowDetector:
             integration_errors=errors,
             total_nodes=total,
             reachable_nodes=len(reachable),
-            dead_code_percent=round(dead_code_pct, 2)
+            dead_code_percent=round(dead_code_pct, 2),
+            reachability_paths=reachability_paths
         )
     
     def _build_nodes(self, analysis_nodes: list, purpose_nodes: dict = None):
@@ -344,6 +360,39 @@ class ExecutionFlowDetector:
                 orphans.append(node_id)
         
         return orphans
+    
+    def _compute_reachability_paths(self, orphans: List[str], entry_points: List[str], 
+                                     edges: list) -> Dict[str, List[str]]:
+        """
+        Compute shortest path from entry points to each orphan.
+        Uses graph_analyzer.shortest_path if available.
+        Returns: {orphan_id: [path_from_nearest_entry]}
+        """
+        if not GRAPH_ANALYZER_AVAILABLE or not shortest_path:
+            return {}
+        
+        paths = {}
+        
+        try:
+            # Build networkx graph from edges
+            G = load_graph(list(self.nodes.values()), edges)
+            if G is None:
+                return {}
+            
+            for orphan_id in orphans[:20]:  # Limit for performance
+                # Find shortest path from any entry point to this orphan
+                best_path = None
+                for entry in entry_points[:10]:  # Limit entries checked
+                    path = shortest_path(G, entry, orphan_id)
+                    if path and (best_path is None or len(path) < len(best_path)):
+                        best_path = path
+                
+                if best_path:
+                    paths[orphan_id] = best_path
+        except Exception:
+            pass  # Graceful degradation if graph analysis fails
+        
+        return paths
     
     def _build_chains(self, entry_points: List[str], max_depth: int = 20) -> List[CausalityChain]:
         """Build causality chains from entry points"""
