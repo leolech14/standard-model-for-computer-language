@@ -59,7 +59,13 @@ const SELECT = (function() {
             if (id) _ids.add(id);
         });
         _updatePanel();
-        _updateVisuals();
+        // Use app.js's updateSelectionVisuals if available (has group halo logic)
+        // Otherwise fall back to internal _updateVisuals
+        if (typeof window.updateSelectionVisuals === 'function') {
+            window.updateSelectionVisuals();
+        } else {
+            _updateVisuals();
+        }
         _updateGroupButtonState();
     }
 
@@ -74,7 +80,11 @@ const SELECT = (function() {
             _ids.add(node.id);
         }
         _updatePanel();
-        _updateVisuals();
+        if (typeof window.updateSelectionVisuals === 'function') {
+            window.updateSelectionVisuals();
+        } else {
+            _updateVisuals();
+        }
         _updateGroupButtonState();
     }
 
@@ -84,7 +94,11 @@ const SELECT = (function() {
     function clear() {
         _ids.clear();
         _updatePanel();
-        _updateVisuals();
+        if (typeof window.updateSelectionVisuals === 'function') {
+            window.updateSelectionVisuals();
+        } else {
+            _updateVisuals();
+        }
         _updateGroupButtonState();
     }
 
@@ -106,7 +120,11 @@ const SELECT = (function() {
             if (id) _ids.add(id);
         });
         _updatePanel();
-        _updateVisuals();
+        if (typeof window.updateSelectionVisuals === 'function') {
+            window.updateSelectionVisuals();
+        } else {
+            _updateVisuals();
+        }
         _updateGroupButtonState();
     }
 
@@ -118,7 +136,11 @@ const SELECT = (function() {
             _ids.delete(id);
         });
         _updatePanel();
-        _updateVisuals();
+        if (typeof window.updateSelectionVisuals === 'function') {
+            window.updateSelectionVisuals();
+        } else {
+            _updateVisuals();
+        }
         _updateGroupButtonState();
     }
 
@@ -471,7 +493,8 @@ const SELECT = (function() {
 
 // Backward compatibility aliases - Using getters to ensure live updates
 // Note: All variables use Object.defineProperty to avoid duplicate declarations with app.js
-// SELECTED_NODE_IDS - app.js owns this, not duplicated here
+// SELECTED_NODE_IDS - selection.js is now the SINGLE SOURCE OF TRUTH (unified in modularization)
+Object.defineProperty(window, 'SELECTED_NODE_IDS', { get: () => SELECT.ids, configurable: true });
 Object.defineProperty(window, 'MARQUEE_ACTIVE', { get: () => SELECT.marqueeActive, configurable: true });
 Object.defineProperty(window, 'MARQUEE_START', { get: () => SELECT.marqueeStart, configurable: true });
 Object.defineProperty(window, 'MARQUEE_ADDITIVE', { get: () => SELECT.marqueeAdditive, configurable: true });

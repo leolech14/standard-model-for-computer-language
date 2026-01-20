@@ -59,7 +59,7 @@ let DATAMAP_CONFIGS = [];
 let DATAMAP_INDEX = {};
 let DATAMAP_UI = new Map();
 let HOVERED_NODE = null;
-let SELECTED_NODE_IDS = new Set();
+// SELECTED_NODE_IDS - provided by selection.js module (getter to SELECT.ids)
 let DATASET_KEY = 'default';
 let GROUPS_STORAGE_KEY = 'collider_groups_default';
 let GROUPS = [];
@@ -1946,79 +1946,8 @@ function filterGraph(data, minVal, datamapSet, filters) {
 // getLinkEndpointId, getFileTarget - MOVED TO modules/layout-helpers.js
 // stableOffset - MOVED TO modules/utils.js
 
-function buildFileGraph(data) {
-    // ALL DATA FROM DM (data param kept for backward compatibility)
-    const boundaries = DM ? DM.getFileBoundaries() : (data?.file_boundaries || []);
-    const nodes = DM ? DM.getNodes() : (data?.nodes || []);
-    const links = DM ? DM.getLinks() : (data?.links || []);
-
-    const totalFiles = boundaries.length;
-    const fileNodes = [];
-    const fileNodeIds = new Map();
-    const nodeFileIdx = new Map();
-
-    nodes.forEach(n => {
-        if (n && n.id) {
-            nodeFileIdx.set(n.id, n.fileIdx ?? -1);
-        }
-    });
-
-    boundaries.forEach((boundary, idx) => {
-        const label = boundary.file_name || boundary.file || `file-${idx}`;
-        const atomCount = boundary.atom_count || 1;
-        const nodeId = `file:${idx}`;
-        fileNodeIds.set(idx, nodeId);
-        fileNodes.push({
-            id: nodeId,
-            name: label,
-            fileIdx: idx,
-            isFileNode: true,
-            val: Math.max(2, Math.sqrt(atomCount)),
-            color: getFileColor(idx, totalFiles, label),
-            file_path: boundary.file || '',
-            atom_count: atomCount
-        });
-    });
-
-    const edgeMap = new Map();
-    links.forEach(link => {
-        const srcId = getLinkEndpointId(link, 'source');
-        const tgtId = getLinkEndpointId(link, 'target');
-        const srcIdx = nodeFileIdx.get(srcId) ?? -1;
-        const tgtIdx = nodeFileIdx.get(tgtId) ?? -1;
-        if (srcIdx < 0 || tgtIdx < 0 || srcIdx === tgtIdx) return;
-        const key = `${srcIdx}->${tgtIdx}`;
-        const existing = edgeMap.get(key) || {
-            source: fileNodeIds.get(srcIdx),
-            target: fileNodeIds.get(tgtIdx),
-            weight: 0,
-            edge_type: 'file',
-            resolution: 'file'
-        };
-        existing.weight += 1;
-        edgeMap.set(key, existing);
-    });
-
-    FILE_NODE_IDS = fileNodeIds;
-    return {
-        nodes: fileNodes,
-        links: Array.from(edgeMap.values())
-    };
-}
-
-function captureFileNodePositions() {
-    FILE_NODE_POSITIONS = new Map();
-    const nodes = (Graph && Graph.graphData().nodes) ? Graph.graphData().nodes : [];
-    nodes.forEach(node => {
-        if (node && node.isFileNode && Number.isFinite(node.x) && Number.isFinite(node.y)) {
-            FILE_NODE_POSITIONS.set(node.fileIdx, {
-                x: node.x,
-                y: node.y,
-                z: Number.isFinite(node.z) ? node.z : 0
-            });
-        }
-    });
-}
+// buildFileGraph - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.buildFileGraph)
+// captureFileNodePositions - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.captureFileNodePositions)
 
 function buildHybridGraph(data) {
     // ALL DATA FROM DM - the reaction chamber for data chemistry
@@ -3743,26 +3672,9 @@ let highEntropyNodes = new Set();
 // loadGroups, saveGroups, getNextGroupColor, getGroupById, getPrimaryGroupForNode - MOVED TO modules/groups.js
 // renderGroupList, updateGroupButtonState, createGroupFromSelection - MOVED TO modules/groups.js
 
-function getSelectedNodes() {
-    if (!Graph || !Graph.graphData) return [];
-    const nodes = Graph.graphData().nodes || [];
-    return nodes.filter(node => node && node.id && SELECTED_NODE_IDS.has(node.id));
-}
-
-function setSelection(ids, additive = false) {
-    if (!additive) {
-        SELECTED_NODE_IDS.clear();
-    }
-    (ids || []).forEach(id => {
-        if (id) SELECTED_NODE_IDS.add(id);
-    });
-    updateSelectionPanel();
-    updateSelectionVisuals();
-    updateGroupButtonState();
-}
-
-// toggleSelection, clearSelection, maybeClearSelection - MOVED TO modules/selection.js
-// Use SELECT.toggle(), SELECT.clear(), SELECT.maybeClear()
+// getSelectedNodes, setSelection, toggleSelection, clearSelection, maybeClearSelection - MOVED TO modules/selection.js
+// Use SELECT.getSelectedNodes(), SELECT.set(), SELECT.toggle(), SELECT.clear(), SELECT.maybeClear()
+// Shims in selection.js provide global function names for backward compatibility
 
 function formatCountList(items, limit = 4) {
     return items.slice(0, limit).map(([key, count]) => `${key} ${count}`).join(' · ') || '--';
@@ -4109,120 +4021,9 @@ if (typeof graph !== 'undefined' && graph.appearance && graph.appearance.animati
 // NOTE: originalColorsForDim declared at top of file
 
 // oklchToHex - MOVED TO modules/color-engine.js (use COLOR.get() instead)
-
-function updatePendulums(dt) {
-    const p1 = PENDULUM.hue;
-    const p2 = PENDULUM.chroma;
-
-    // Pendulum 1: Modulates the SPEED of hue rotation (organic variation)
-    const accel1 = -(p1.gravity / p1.length) * Math.sin(p1.angle);
-    p1.velocity += accel1 * dt;
-    p1.velocity *= p1.damping;
-    p1.angle += p1.velocity * dt;
-
-    // Hue rotates CONTINUOUSLY through full rainbow!
-    // Pendulum modulates the speed for organic feel
-    const speedMod = 1 + Math.sin(p1.angle) * 0.5;  // 0.5x to 1.5x speed
-    PENDULUM.currentHue = (PENDULUM.currentHue + p1.rotationSpeed * speedMod * (dt / 16)) % 360;
-
-    // Pendulum 2: Controls chroma with coupling to hue pendulum
-    const coupling = 0.00015 * Math.sin(p1.angle);
-    const accel2 = -(p2.gravity / p2.length) * Math.sin(p2.angle) + coupling;
-    p2.velocity += accel2 * dt;
-    p2.velocity *= p2.damping;
-    p2.angle += p2.velocity * dt;
-
-    // Update lightness phase (pulsing brightness)
-    PENDULUM.lightness.phase += PENDULUM.lightness.speed * dt;
-}
-
-// Get selection color with optional spatial phase offset
-// Brightness reduced 17% from original (center 62 instead of 75)
-// Get selection color with optional spatial phase offset
-// Dynamic brightness/chroma based on PENDULUM config
-function getSelectionColor(phaseOffset = 0) {
-    const p2 = PENDULUM.chroma;
-    const p3 = PENDULUM.lightness;
-
-    // Full rainbow hue (continuous rotation) + Ripple offset (45 degrees spread)
-    const H = (PENDULUM.currentHue + phaseOffset * 45) % 360;
-
-    // Chroma with gentle spatial variation (Ripple)
-    const C = Math.max(0.18, p2.center + Math.sin(p2.angle + phaseOffset * Math.PI * 2) * p2.amplitude);
-
-    // Bright lightness with Ripple pulse
-    const L = p3.center + Math.sin(p3.phase + phaseOffset * Math.PI * 4) * p3.amplitude;
-
-    return oklchToHex(L, C, H);
-}
-
-// Calculate spatial phase for RIPPLE EFFECT based on distance from center
-function getNodeSpatialPhase(node) {
-    const x = node.x || 0;
-    const y = node.y || 0;
-    const z = node.z || 0;
-
-    // Calculate distance from origin (radial ripple)
-    const distance = Math.sqrt(x * x + y * y + z * z);
-
-    // Normalize distance to create concentric ripples
-    // Ripples expand outward from center
-    const scale = PENDULUM.ripple ? (PENDULUM.ripple.scale || 200) : 200;
-    const ripplePhase = (distance / scale) % 1;
-
-    // Add subtle angular variation for more organic feel
-    const angle = Math.atan2(y, x);
-    const angularOffset = Math.sin(angle * 3) * 0.1;  // Subtle angular modulation
-
-    return (ripplePhase + angularOffset + 1) % 1;
-}
-
+// updatePendulums, getSelectionColor, getNodeSpatialPhase, animateSelectionColors - MOVED TO modules/selection.js
+// startSelectionAnimation, stopSelectionAnimation - MOVED TO modules/selection.js (shims provide global names)
 // dimColor - MOVED TO modules/color-helpers.js
-
-function animateSelectionColors(timestamp) {
-    if (!PENDULUM.running) return;
-
-    const dt = PENDULUM.lastTime ? Math.min(timestamp - PENDULUM.lastTime, 50) : 16;
-    PENDULUM.lastTime = timestamp;
-
-    // Update physics
-    updatePendulums(dt);
-
-    // Apply color to selected nodes with SPATIAL VARIATION
-    // Each node gets a different phase based on its position
-    if (SELECTED_NODE_IDS.size > 0 && Graph && Graph.graphData) {
-        const nodes = Graph.graphData().nodes || [];
-
-        nodes.forEach(node => {
-            if (SELECTED_NODE_IDS.has(node.id)) {
-                // SELECTED: Rainbow color with spatial phase offset
-                // Different regions of the selection pulse at different phases
-                const spatialPhase = getNodeSpatialPhase(node);
-                node.color = getSelectionColor(spatialPhase);
-            }
-            // Non-selected nodes stay dimmed (set in updateSelectionVisuals)
-        });
-
-        Graph.nodeColor(n => toColorNumber(n.color, 0x888888));
-    }
-
-    requestAnimationFrame(animateSelectionColors);
-}
-
-function startSelectionAnimation() {
-    if (!PENDULUM.running) {
-        PENDULUM.running = true;
-        // Give pendulums initial push
-        PENDULUM.hue.velocity = 0.02 + Math.random() * 0.01;
-        PENDULUM.chroma.velocity = 0.015 + Math.random() * 0.01;
-        PENDULUM.lastTime = 0;
-        requestAnimationFrame(animateSelectionColors);
-    }
-}
-
-function stopSelectionAnimation() {
-    PENDULUM.running = false;
-}
 
 function updateSelectionVisuals() {
     if (!Graph || !Graph.graphData) return;
@@ -4314,17 +4115,20 @@ function updateSelectionVisuals() {
 function syncSelectionAfterGraphUpdate() {
     if (!Graph || !Graph.graphData) return;
     const visibleIds = new Set((Graph.graphData().nodes || []).map(n => n.id));
-    let changed = false;
+    const idsToRemove = [];
     Array.from(SELECTED_NODE_IDS).forEach(id => {
         if (!visibleIds.has(id)) {
-            SELECTED_NODE_IDS.delete(id);
-            changed = true;
+            idsToRemove.push(id);
         }
     });
-    if (changed) {
-        updateSelectionPanel();
+    if (idsToRemove.length > 0) {
+        // Use SELECT.remove() for proper module integration
+        // This triggers updateSelectionVisuals via the hook
+        SELECT.remove(idsToRemove);
+    } else {
+        // No changes to selection, but still need to update visuals
+        updateSelectionVisuals();
     }
-    updateSelectionVisuals();
     updateGroupButtonState();
 }
 
@@ -5190,37 +4994,7 @@ window.FILE_CONTAINMENT = FILE_CONTAINMENT;
 // FILE MODE HANDLERS
 // ====================================================================
 
-// FILES button - toggle file mode on/off
-function setFileModeState(enabled) {
-    fileMode = enabled;
-    const cmdBtn = document.getElementById('cmd-files');
-    if (cmdBtn) cmdBtn.classList.toggle('active', fileMode);
-    const dockBtn = document.getElementById('btn-files');
-    if (dockBtn) dockBtn.classList.toggle('active', fileMode);
-
-    const filePanel = document.getElementById('file-panel');
-    const modeControls = document.getElementById('file-mode-controls');
-    const expandControls = document.getElementById('file-expand-controls');
-
-    if (fileMode) {
-        filePanel.classList.add('visible');
-        modeControls.classList.add('visible');
-        expandControls.classList.toggle('visible', fileVizMode === 'map');
-        applyFileVizMode();
-        applyEdgeMode();
-        HudLayoutManager.reflow();
-    } else {
-        filePanel.classList.remove('visible');
-        modeControls.classList.remove('visible');
-        expandControls.classList.remove('visible');
-        EXPANDED_FILES.clear();
-        window.GRAPH_MODE = 'atoms';
-        HudLayoutManager.reflow();
-        clearAllFileModes();
-        applyEdgeMode();
-        refreshGraph();
-    }
-}
+// setFileModeState - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.setEnabled)
 
 document.getElementById('btn-files').onclick = () => {
     setFileModeState(!fileMode);
@@ -5292,179 +5066,20 @@ function updateExpandButtons() {
     if (detachBtn) detachBtn.classList.toggle('active', FILE_EXPAND_MODE === 'detach');
 }
 
-function setFileVizMode(mode) {
-    fileVizMode = mode;
-    // Update button states
-    document.querySelectorAll('.file-mode-btn').forEach(btn => btn.classList.remove('active'));
-    const modeBtn = document.getElementById('btn-file-' + mode);
-    if (modeBtn) modeBtn.classList.add('active');
-    const expandControls = document.getElementById('file-expand-controls');
-    if (expandControls) expandControls.classList.toggle('visible', fileVizMode === 'map');
-    if (fileVizMode === 'map') {
-        updateExpandButtons();
-    }
-    if (fileVizMode === 'map') {
-        window.GRAPH_MODE = (EXPANDED_FILES.size > 0) ? 'hybrid' : 'files';
-    } else {
-        EXPANDED_FILES.clear();
-        window.GRAPH_MODE = 'atoms';
-    }
-    if (!fileMode) {
-        setFileModeState(true);
-    } else if (fileVizMode === 'map') {
-        applyFileVizMode();
-    } else {
-        refreshGraph();
-    }
-}
+// setFileVizMode - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.setMode)
 
-function applyFileVizMode() {
-    if (!fileMode) return;
+// applyFileVizMode - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.apply)
 
-    // Clear previous state
-    clearFileBoundaries();
-    if (fileVizMode !== 'hulls') {
-        hullRedrawAttempts = 0;
-    }
+// scheduleHullRedraw - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.scheduleHullRedraw)
 
-    // ALL DATA FROM DM
-    const graphNodes = DM ? DM.getVisibleNodes() : (Graph?.graphData()?.nodes || []);
+// applyFileColors - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.applyColors)
 
-    // FILE COHESION: Auto-activate for color/hulls/cluster modes (precise file separation)
-    if (fileVizMode === 'color' || fileVizMode === 'hulls' || fileVizMode === 'cluster') {
-        const physicsPayload = { physics: DM.raw.physics, config: DM.raw.config };
-        applyFileCohesion(physicsPayload);  // Uses DM internally + Token Config
-    }
-
-    if (fileVizMode === 'color') {
-        // Color mode is already applied via node colors
-        // Just ensure nodes have file colors
-        applyFileColors(graphNodes);
-    }
-    else if (fileVizMode === 'hulls') {
-        // Draw boundary hulls (cohesion force already applied above)
-        applyFileColors(graphNodes);
-        scheduleHullRedraw(1500);  // Delay to let cohesion settle
-    }
-    else if (fileVizMode === 'cluster') {
-        // Apply clustering force
-        applyFileColors(graphNodes);
-        applyClusterForce(DM.raw);  // FIX: was undefined `data`, now uses DM.raw
-    }
-    else if (fileVizMode === 'map') {
-        // File map uses file nodes + optional expansion
-        window.GRAPH_MODE = (EXPANDED_FILES.size > 0) ? 'hybrid' : 'files';
-        refreshGraph();
-        showToast('File map active. Click a file node to expand.');
-    }
-    else if (fileVizMode === 'spheres') {
-        // Containment spheres mode - particles held by transparent force fields
-        applyFileColors(graphNodes);
-
-        // Build directory tree and compute activity levels
-        // FIX: was undefined `data`, now uses DM.raw
-        buildDirectoryTree(DM.raw);
-        computeFileActivity(DM.raw, graphNodes);
-
-        // Draw containment spheres
-        drawContainmentSpheres(DM.raw, graphNodes);
-
-        // Start the slow-motion animation with collisions
-        startContainmentAnimation();
-
-        showToast('Containment spheres active. Files as force fields. Click POP! to release.');
-    }
-}
-
-function scheduleHullRedraw(delayMs = 1200) {
-    if (hullRedrawTimer) {
-        clearTimeout(hullRedrawTimer);
-    }
-    hullRedrawTimer = setTimeout(() => {
-        if (!(fileMode && fileVizMode === 'hulls')) {
-            hullRedrawAttempts = 0;
-            return;
-        }
-        const drawn = drawFileBoundaries(null);  // Uses DM internally
-        if (drawn === 0 && hullRedrawAttempts < 3) {
-            hullRedrawAttempts += 1;
-            scheduleHullRedraw(1200 + (hullRedrawAttempts * 700));
-        } else {
-            hullRedrawAttempts = 0;
-        }
-    }, delayMs);
-}
-
-function applyFileColors(graphNodes) {
-    // Generate file colors and apply to nodes - ALL DATA FROM DM
-    const boundaries = DM ? DM.getFileBoundaries() : [];
-    const totalFiles = boundaries.length;
-    graphNodes.forEach(node => {
-        if (node.fileIdx >= 0) {
-            const fileInfo = boundaries[node.fileIdx] || {};
-            const fileLabel = fileInfo.file || fileInfo.file_name || node.fileIdx;
-            node.color = getFileColor(node.fileIdx, totalFiles, fileLabel);
-        }
-    });
-    Graph.nodeColor(n => toColorNumber(n.color, 0x888888));
-}
-
-function clearFileBoundaries() {
-    const scene = Graph.scene();
-    fileBoundaryMeshes.forEach(mesh => scene.remove(mesh));
-    fileBoundaryMeshes = [];
-}
+// clearFileBoundaries - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.clearBoundaries)
 
 // Moved here to avoid temporal dead zone issue
 let fileCohesionActive = false;
 
-function clearAllFileModes() {
-    clearFileBoundaries();
-    // Reset file cohesion force if active
-    clearFileCohesion();
-    // Reset cluster force if active
-    if (clusterForceActive) {
-        Graph.d3Force('cluster', null);
-        clusterForceActive = false;
-        if (DEFAULT_LINK_DISTANCE !== null) {
-            Graph.d3Force('link').distance(DEFAULT_LINK_DISTANCE);
-        }
-        Graph.d3ReheatSimulation();
-    }
-    // Stop containment animation if active
-    stopContainmentAnimation();
-    // Clear containment spheres
-    if (FILE_CONTAINMENT && FILE_CONTAINMENT.spheres) {
-        const scene = Graph.scene();
-        FILE_CONTAINMENT.spheres.forEach(s => {
-            if (s.mesh) scene.remove(s.mesh);
-        });
-        FILE_CONTAINMENT.spheres = [];
-        FILE_CONTAINMENT.boundariesPopped = false;
-    }
-
-    // Fix: Clear lingering filters that may have been auto-populated by defaults during File Mode
-    if (VIS_FILTERS.rings.size > 0 || VIS_FILTERS.tiers.size > 0 || VIS_FILTERS.families.size > 0 || VIS_FILTERS.files.size > 0) {
-        VIS_FILTERS.rings.clear();
-        VIS_FILTERS.tiers.clear();
-        VIS_FILTERS.families.clear();
-        VIS_FILTERS.roles.clear();
-        VIS_FILTERS.files.clear();
-        VIS_FILTERS.edges.clear();
-        VIS_FILTERS.layers.clear();
-        VIS_FILTERS.effects.clear();
-        VIS_FILTERS.edgeFamilies.clear();
-        // Update UI chips
-        document.querySelectorAll('.filter-chip.active').forEach(c => c.classList.remove('active'));
-    }
-
-    // Reset POP button state
-    const popBtn = document.getElementById('btn-file-pop');
-    if (popBtn) {
-        popBtn.classList.remove('active');
-        popBtn.textContent = 'POP!';
-    }
-}
+// clearAllFileModes - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.clearAllModes)
 
 // applyClusterForce, applyFileCohesion, clearFileCohesion - MOVED TO modules/file-viz.js
 

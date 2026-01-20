@@ -13,6 +13,8 @@
  *
  * Depends on: DATA (for file boundaries), COLOR (for transforms)
  *
+ * Pattern: IIFE with State Unification (see docs/specs/VISUALIZATION_UI_SPEC.md)
+ *
  * Usage:
  *   FILE_VIZ.setMode('map')          // Switch to file-nodes view
  *   FILE_VIZ.toggle()                // Toggle file mode on/off

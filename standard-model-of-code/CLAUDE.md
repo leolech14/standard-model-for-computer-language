@@ -49,6 +49,7 @@
 | Control Bar | `src/core/viz/assets/modules/control-bar.js` |
 | File Viz | `src/core/viz/assets/modules/file-viz.js` |
 | File Enricher | `src/core/file_enricher.py` |
+| Module pattern | `docs/specs/VISUALIZATION_UI_SPEC.md#state-unification-pattern` |
 
 ## Output Files
 
