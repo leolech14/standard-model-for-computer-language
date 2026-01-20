@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     from src.core.viz import AppearanceEngine, ControlsEngine, PhysicsEngine, get_resolver
+    # FileEnricher is used in full_analysis.py, not here (already enriched in JSON)
 except ImportError:
     # Fallback if running from a different context or if imports fail
     print("WARNING: Could not import core engines. Ensure you are running from the project root.")
@@ -161,6 +162,9 @@ def generate_webgl_html(json_source: Any, output_path: str):
             })
         file_boundaries = synthesized_boundaries
         files_index = synthesized_index
+
+    # NOTE: File boundaries are already enriched in full_analysis.py
+    # The JSON source contains: size_bytes, token_estimate, age_days, format_category, etc.
 
     # Create mappings (support absolute + relative file paths)
     node_to_file = {}
@@ -371,6 +375,12 @@ def generate_webgl_html(json_source: Any, output_path: str):
         # AI Insights (Gemini-powered analysis)
         "ai_insights": data.get("ai_insights", None),
 
+        # Graph Analytics (PageRank, Betweenness, Communities)
+        "graph_analytics": data.get("graph_analytics", {}),
+
+        # Statistical Metrics (Entropy, Cyclomatic, Halstead)
+        "statistical_metrics": data.get("statistical_metrics", {}),
+
         # Theme configuration for runtime switching
         "theme_config": resolver.get_js_theme_config()
     }
@@ -423,7 +433,11 @@ def generate_webgl_html(json_source: Any, output_path: str):
             "role": n.get('role') or (n.get('dimensions') or {}).get('D3_ROLE', 'Unknown'),
             "file": file_path,
             "fileIdx": file_idx,
-            "body": n.get('body_source', '')[:500]
+            "body": n.get('body_source', '')[:500],
+            # New octahedral dimensions
+            "boundary": n.get('boundary', 'internal'),
+            "state": n.get('state', 'stateless'),
+            "lifecycle": n.get('lifecycle', 'use')
         })
         node_set.add(nid)
 
@@ -476,14 +490,51 @@ def generate_webgl_html(json_source: Any, output_path: str):
     # ASSET LOADING
     viz_assets = Path(__file__).parent.parent / "src/core/viz/assets"
 
+    # MODULE ORDER: Load modules before app.js in dependency order
+    # Foundation modules first (no dependencies), then dependent modules
+    MODULE_ORDER = [
+        "performance.js",                   # Performance subsystem (existing)
+        "modules/core.js",                  # Constants & utilities
+        "modules/node-accessors.js",        # Node property functions
+        "modules/color-engine.js",          # OKLCH color system
+        "modules/refresh-throttle.js",      # Throttled graph updates
+        "modules/legend-manager.js",        # Legend system (depends: COLOR, NODE)
+        "modules/data-manager.js",          # Data access layer (depends: NODE, COLOR, LEGEND)
+        "modules/animation.js",             # Layout & animation controller
+        "modules/selection.js",             # Selection system (depends: CORE, NODE)
+        "modules/panels.js",                # Panel management
+        "modules/sidebar.js",               # Sidebar controls
+        "modules/edge-system.js",           # Edge coloring & modes
+        "modules/file-viz.js",              # File visualization modes
+        "modules/control-bar.js",           # Visual mapping command bar
+        "modules/main.js",                  # Entry point + wiring
+    ]
+
     print(f"Loading assets from {viz_assets}...")
     try:
         with open(viz_assets / "template.html", "r", encoding='utf-8') as f:
             template = f.read()
         with open(viz_assets / "styles.css", "r", encoding='utf-8') as f:
             styles = f.read()
+
+        # Load modules in order and concatenate
+        js_parts = []
+        for module_path in MODULE_ORDER:
+            module_file = viz_assets / module_path
+            if module_file.exists():
+                with open(module_file, "r", encoding='utf-8') as f:
+                    js_parts.append(f"// ═══ MODULE: {module_path} ═══\n{f.read()}")
+                print(f"  Loaded module: {module_path}")
+            else:
+                print(f"  Skipped module (not found): {module_path}")
+
+        # Load app.js (the main application, will shrink as we migrate)
         with open(viz_assets / "app.js", "r", encoding='utf-8') as f:
-            app_js = f.read()
+            js_parts.append(f"// ═══ MAIN APPLICATION ═══\n{f.read()}")
+
+        app_js = "\n\n".join(js_parts)
+        print(f"  Total JS modules loaded: {len(js_parts)}")
+
     except FileNotFoundError as e:
         print(f"CRITICAL ERROR: Could not find asset file: {e}")
         print("Please ensure src/core/viz/assets contains template.html, styles.css, and app.js")

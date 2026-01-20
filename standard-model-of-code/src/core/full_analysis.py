@@ -854,6 +854,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         'markov': markov,
         'knots': knots,
         'graph_analytics': graph_analytics if 'graph_analytics' in dir() else {},
+        'statistical_metrics': statistical_metrics if 'statistical_metrics' in dir() else {},
         'data_flow': data_flow,
         'performance': perf_summary,
         'top_hubs': [],
