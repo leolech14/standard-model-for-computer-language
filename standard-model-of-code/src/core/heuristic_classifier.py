@@ -10,6 +10,14 @@ from typing import Dict, List, Tuple, Counter
 from collections import Counter, defaultdict
 import re
 
+try:
+    from core.registry.role_registry import get_role_registry
+except ImportError:
+    try:
+        from registry.role_registry import get_role_registry
+    except ImportError:
+        def get_role_registry(): return None
+
 
 class HeuristicClassifier:
     """
@@ -63,8 +71,8 @@ class HeuristicClassifier:
         'should_': 'Asserter',
         'validate_': 'Validator',
         'check_': 'Validator',
-        'parse_': 'Utility',
-        'format_': 'Utility',
+        'parse_': 'Parser',
+        'format_': 'Formatter',
         'convert_': 'Mapper',
         'transform_': 'Mapper',
         'to_': 'Mapper', 
@@ -74,7 +82,7 @@ class HeuristicClassifier:
         'on_': 'Handler',
         'do_': 'Command',
         'run_': 'Command',
-        'execute_': 'UseCase',
+        'execute_': 'Service',
         'process_': 'Service',
         'render_': 'Utility',
         'init_': 'Service',
@@ -188,12 +196,24 @@ class HeuristicClassifier:
     def __init__(self):
         self.discovered_patterns: Dict[str, int] = Counter()
         self.unknown_names: List[str] = []
-    
+        self.role_registry = get_role_registry()
+
+    def _canonicalize(self, role: str) -> str:
+        """Ensure role is canonical."""
+        if self.role_registry:
+            return self.role_registry.get_canonical(role)
+        return role
+
     def classify_by_pattern(self, name: str) -> Tuple[str, float]:
         """
         Deterministically classify a function/method name by pattern.
         Returns (type, confidence).
         """
+        role, conf = self._classify_by_pattern_internal(name)
+        return (self._canonicalize(role), conf)
+
+    def _classify_by_pattern_internal(self, name: str) -> Tuple[str, float]:
+        """Internal classification logic."""
         if not name:
             return ('Unknown', 0.0)
         
@@ -560,14 +580,18 @@ def apply_heuristics(particles: List[Dict]) -> List[Dict]:
     Modifies particles in place to update Unknown types.
     """
     discovery = HeuristicClassifier()
+    registry = get_role_registry()
     updated = 0
-    
+
     for particle in particles:
         if particle.get('type') == 'Unknown':
             name = particle.get('name', '')
             new_type, confidence = discovery.classify_by_pattern(name)
-            
+
             if new_type != 'Unknown':
+                # Normalize to canonical role
+                if registry:
+                    new_type = registry.normalize(new_type)
                 particle['type'] = new_type
                 particle['confidence'] = confidence
                 particle['discovery_method'] = 'heuristic_pattern'

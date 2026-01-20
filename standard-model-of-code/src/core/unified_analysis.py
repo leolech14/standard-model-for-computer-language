@@ -14,6 +14,16 @@ from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field, asdict
 from edge_extractor import file_node_id, resolve_edges, extract_call_edges
 
+try:
+    from core.registry.role_registry import get_role_registry
+    _role_registry = get_role_registry()
+except ImportError:
+    try:
+        from registry.role_registry import get_role_registry
+        _role_registry = get_role_registry()
+    except ImportError:
+        _role_registry = None
+
 
 @dataclass
 class UnifiedNode:
@@ -208,6 +218,9 @@ def create_unified_output(
 
         # Normalize role/type - these are used interchangeably
         role_value = node.get("type") or node.get("role") or "Unknown"
+        # Enforce canonical roles via RoleRegistry
+        if _role_registry and role_value:
+            role_value = _role_registry.normalize(role_value)
         kind_value = node.get("symbol_kind") or node.get("kind") or "unknown"
         layer_value = node.get("layer") or node.get("purpose_layer") or node.get("dimensions", {}).get("D2_LAYER")
         effect_value = node.get("dimensions", {}).get("D6_EFFECT", "Unknown")
@@ -630,6 +643,8 @@ def _emit_file_nodes(particles: List[Dict], results: List[Dict]) -> tuple:
             continue
 
         node_name = node_id.rsplit(":", 1)[-1]
+        # Normalize 'Module' via RoleRegistry (Module -> Utility)
+        file_type = _role_registry.normalize("Module") if _role_registry else "Module"
         file_nodes.append({
             "id": node_id,
             "name": node_name,
@@ -637,7 +652,7 @@ def _emit_file_nodes(particles: List[Dict], results: List[Dict]) -> tuple:
             "file_path": normalized_path,
             "start_line": 1,
             "end_line": result.get("lines_analyzed", 0),
-            "type": "Module",
+            "type": file_type,
             "confidence": 100.0,
             "discovery_method": "filesystem",
             "metadata": {"file_node": True},

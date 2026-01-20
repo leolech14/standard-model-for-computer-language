@@ -44,10 +44,10 @@ class InferenceRule:
 # These are deterministic logic rules based on graph structure
 
 INFERENCE_RULES = [
-    # If only Tests call you → you're the Subject Under Test
+    # If only Tests call you → you're the Subject Under Test (canonical: Internal)
     InferenceRule(
         name="called_only_by_tests",
-        inferred_type="SubjectUnderTest",
+        inferred_type="Internal",  # Was SubjectUnderTest
         confidence=85.0,
         caller_types={"Test"},
     ),
@@ -60,18 +60,18 @@ INFERENCE_RULES = [
         callee_types={"Repository", "RepositoryImpl"},
     ),
     
-    # If you call external Client/Gateway → you're an Integration Service
+    # If you call external Client/Gateway → you're an Integration Service (canonical: Service)
     InferenceRule(
         name="calls_external",
-        inferred_type="IntegrationService",
+        inferred_type="Service",  # Was IntegrationService
         confidence=85.0,
         callee_types={"Client", "Gateway", "Adapter"},
     ),
-    
-    # If Controller calls you → you're a UseCase or Service
+
+    # If Controller calls you → you're a UseCase or Service (canonical: Service)
     InferenceRule(
         name="called_by_controller",
-        inferred_type="UseCase",
+        inferred_type="Service",  # Was UseCase
         confidence=80.0,
         caller_types={"Controller"},
     ),
@@ -109,10 +109,10 @@ INFERENCE_RULES = [
         callee_types={"Validator", "Specification"},
     ),
     
-    # If EventHandler calls you → you're likely handling an event response
+    # If EventHandler calls you → you're likely handling an event response (canonical: Handler)
     InferenceRule(
         name="called_by_event_handler",
-        inferred_type="EventProcessor",
+        inferred_type="Handler",  # Was EventProcessor
         confidence=75.0,
         caller_types={"EventHandler", "Observer"},
     ),

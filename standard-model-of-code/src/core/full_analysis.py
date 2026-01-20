@@ -604,6 +604,20 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         timer.set_output(nodes=len(nodes), rpbl_enriched=rpbl_count)
     print(f"   → {rpbl_count} nodes with RPBL scores")
 
+    # Pipeline Assertion: Validate canonical roles
+    try:
+        from registry.role_registry import get_role_registry
+        _registry = get_role_registry()
+        _invalid = {n.get('role') for n in nodes if n.get('role') and not _registry.validate(n['role'])}
+        if _invalid:
+            import os
+            if os.environ.get('COLLIDER_STRICT_ROLES', '').lower() == 'true':
+                raise ValueError(f"Non-canonical roles detected: {_invalid}")
+            else:
+                print(f"   ⚠️ WARNING: Non-canonical roles: {_invalid}")
+    except ImportError:
+        pass  # Registry not available, skip validation
+
     # Stage 2.5: Ecosystem discovery (hybrid T2 approach)
     print("\n🧭 Stage 2.5: Ecosystem Discovery...")
     with StageTimer(perf_manager, "Stage 2.5: Ecosystem Discovery") as timer:
@@ -681,11 +695,9 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     # Stage 6.5: Graph Analytics (Nerd Layer)
     print("\n🧮 Stage 6.5: Graph Analytics...")
     with StageTimer(perf_manager, "Stage 6.5: Graph Analytics") as timer:
+        # Degree computation (always runs - needed for Control Bar mappings)
         try:
-            from graph_analyzer import find_bottlenecks, find_pagerank, find_communities
             import networkx as nx
-            
-            # Build NetworkX graph from edges
             G = nx.DiGraph()
             for node in nodes:
                 G.add_node(node.get('id', ''), **{k: v for k, v in node.items() if k != 'body_source'})
@@ -694,26 +706,70 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                 tgt = edge.get('target', edge.get('to', ''))
                 if src and tgt:
                     G.add_edge(src, tgt)
-            
-            # Run analytics
-            bottlenecks = find_bottlenecks(G, top_n=20) if len(G) > 0 else []
-            pagerank_top = find_pagerank(G, top_n=20) if len(G) > 0 else []
-            communities = find_communities(G) if len(G) > 5 else {}
-            
-            graph_analytics = {
-                'bottlenecks': bottlenecks,
-                'pagerank_top': pagerank_top,
-                'communities_count': len(communities),
-                'communities': {str(k): len(v) for k, v in list(communities.items())[:10]} if communities else {},
-            }
-            timer.set_output(bottlenecks=len(bottlenecks), pagerank=len(pagerank_top), communities=len(communities))
-            print(f"   → {len(bottlenecks)} bottlenecks identified")
-            print(f"   → {len(pagerank_top)} PageRank leaders")
-            print(f"   → {len(communities)} communities detected")
+
+            # Compute in_degree and out_degree for each node
+            in_degree_map = dict(G.in_degree())
+            out_degree_map = dict(G.out_degree())
+            degree_enriched = 0
+            for node in nodes:
+                node_id = node.get('id', '')
+                node['in_degree'] = in_degree_map.get(node_id, 0)
+                node['out_degree'] = out_degree_map.get(node_id, 0)
+                if node['in_degree'] > 0 or node['out_degree'] > 0:
+                    degree_enriched += 1
+            print(f"   → {degree_enriched} nodes enriched with degree metrics")
+        except ImportError:
+            # Fallback: compute degrees without networkx
+            from collections import defaultdict
+            in_counts = defaultdict(int)
+            out_counts = defaultdict(int)
+            for edge in edges:
+                src = edge.get('source', edge.get('from', ''))
+                tgt = edge.get('target', edge.get('to', ''))
+                if src:
+                    out_counts[src] += 1
+                if tgt:
+                    in_counts[tgt] += 1
+            degree_enriched = 0
+            for node in nodes:
+                node_id = node.get('id', '')
+                node['in_degree'] = in_counts.get(node_id, 0)
+                node['out_degree'] = out_counts.get(node_id, 0)
+                if node['in_degree'] > 0 or node['out_degree'] > 0:
+                    degree_enriched += 1
+            print(f"   → {degree_enriched} nodes enriched with degree metrics (fallback)")
+            G = None  # No graph for analytics
+
+        # Advanced analytics (optional - requires graph_analyzer)
+        try:
+            from graph_analyzer import find_bottlenecks, find_pagerank, find_communities
+            if G is not None:
+                # Run analytics
+                bottlenecks_raw = find_bottlenecks(G, top_n=20) if len(G) > 0 else []
+                pagerank_raw = find_pagerank(G, top_n=20) if len(G) > 0 else []
+                communities = find_communities(G) if len(G) > 5 else {}
+
+                # Convert dataclass objects to dicts for JSON serialization
+                from dataclasses import asdict
+                bottlenecks = [asdict(b) if hasattr(b, '__dataclass_fields__') else b for b in bottlenecks_raw]
+                pagerank_top = [asdict(p) if hasattr(p, '__dataclass_fields__') else p for p in pagerank_raw]
+
+                graph_analytics = {
+                    'bottlenecks': bottlenecks,
+                    'pagerank_top': pagerank_top,
+                    'communities_count': len(communities),
+                    'communities': {str(k): len(v) for k, v in list(communities.items())[:10]} if communities else {},
+                }
+                timer.set_output(bottlenecks=len(bottlenecks), pagerank=len(pagerank_top), communities=len(communities))
+                print(f"   → {len(bottlenecks)} bottlenecks identified")
+                print(f"   → {len(pagerank_top)} PageRank leaders")
+                print(f"   → {len(communities)} communities detected")
+            else:
+                graph_analytics = {}
         except Exception as e:
             graph_analytics = {}
             timer.set_status("WARN", str(e))
-            print(f"   ⚠️ Graph analytics skipped: {e}")
+            print(f"   ⚠️ Advanced graph analytics skipped: {e}")
 
     # Stage 6.6: Statistical Metrics (Entropy, Complexity, Halstead)
     print("\n📊 Stage 6.6: Statistical Metrics...")
@@ -824,6 +880,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             'rings': dict(rings),
             'atoms': dict(Counter(n.get('atom', '') for n in nodes))
         },
+        'analytics': statistical_metrics,
         'edge_types': dict(edge_types),
         'rpbl_profile': rpbl_avgs,
         'kpis': {

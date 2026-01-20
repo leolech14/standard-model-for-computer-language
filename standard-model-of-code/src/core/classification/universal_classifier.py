@@ -1,6 +1,7 @@
 """
 Universal Classification Engine
 Extracted from TreeSitterUniversalEngine to separate concerns.
+Uses RoleRegistry for canonical classification.
 """
 import re
 from typing import Dict, Any, Optional, List
@@ -22,11 +23,15 @@ except ImportError:
 
 try:
     from core.registry.pattern_repository import get_pattern_repository
+    # New: Role Registry for validation
+    from core.registry.role_registry import get_role_registry
 except ImportError:
     try:
         from registry.pattern_repository import get_pattern_repository
+        from registry.role_registry import get_role_registry
     except ImportError:
         def get_pattern_repository(): return None
+        def get_role_registry(): return None
 
 try:
     from core.atom_registry import AtomRegistry
@@ -42,6 +47,7 @@ class UniversalClassifier:
 
     def __init__(self):
         self.pattern_repo = get_pattern_repository()
+        self.role_registry = get_role_registry()
         # V3: Initialize AtomRegistry for T2 ecosystem detection
         self.atom_registry = AtomRegistry() if AtomRegistry else None
         # V2: Initialize simplified Atom map (hardcoded for speed, could load from atoms.json)
@@ -103,6 +109,10 @@ class UniversalClassifier:
         resolved_type = particle_type  # Keep None if unknown, let kind be used as fallback
         confidence = self._calculate_confidence(class_name, line_stripped) if particle_type else 30.0
 
+        # Validate against RoleRegistry - normalize to canonical
+        if self.role_registry and resolved_type:
+            resolved_type = self.role_registry.get_canonical(resolved_type)
+
         particle_id = f"{file_path}:{class_name}" if file_path else class_name
         return {
             'id': particle_id,
@@ -132,6 +142,11 @@ class UniversalClassifier:
         confidence = self._calculate_confidence(func_name, line_stripped) if particle_type else 30.0
 
         particle_id = f"{file_path}:{func_name}" if file_path else func_name
+        
+        # Validate against Registry
+        if self.role_registry and resolved_type:
+             resolved_type = self.role_registry.get_canonical(resolved_type)
+
         return {
             'id': particle_id,
             'type': resolved_type,
@@ -397,6 +412,10 @@ class UniversalClassifier:
                 if particle_type is None or pattern_conf > confidence:
                     particle_type = suffix_result[0]
                     confidence = pattern_conf
+
+        # Validate and Canonicalize Role
+        if self.role_registry and particle_type:
+            particle_type = self.role_registry.get_canonical(particle_type)
 
         resolved_type = normalize_type(particle_type or "Unknown")
 
