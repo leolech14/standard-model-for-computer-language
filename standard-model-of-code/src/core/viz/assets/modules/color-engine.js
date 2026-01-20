@@ -1249,6 +1249,11 @@ return {
 };
 }) ();
 
+// Export to window for global access
+window.COLOR = COLOR;
+
 // Backward compatibility aliases - Using Object.defineProperty to avoid duplicate declarations
 Object.defineProperty(window, 'ColorOrchestrator', { get: () => COLOR, configurable: true });
 Object.defineProperty(window, 'Color', { get: () => COLOR, configurable: true });
+
+console.log('[Module] COLOR loaded - OKLCH color engine with', Object.keys(COLOR.schemePaths || {}).length, 'schemes');

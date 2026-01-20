@@ -51,11 +51,11 @@ window.VIS_STATE = (function() {
     // ═══════════════════════════════════════════════════════════════════════
 
     const state = {
-        colorBy: 'tier',           // Current color mode (from PRESET_CONFIG)
+        colorBy: 'fan_in',         // Default to interval mode to show OKLCH schemes
         sizeBy: 'fanout',          // 'uniform', 'degree', 'fanout', 'complexity'
         edgeBy: 'type',            // 'type', 'resolution', 'weight', 'gradient-tier', etc.
-        palette: 'viridis',        // Active scheme name (from SCHEME_CONFIG)
-        paletteType: 'categorical' // Derived: 'categorical' or 'interval'
+        palette: 'helix',          // OKLCH helix path - visually striking default
+        paletteType: 'interval'    // Derived: 'categorical' or 'interval'
     };
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -259,9 +259,9 @@ window.VIS_STATE = (function() {
             window.applyNodeColors(nodes);
         }
 
-        // Trigger WebGL re-render
+        // Trigger WebGL re-render with new function reference to force update
         if (Graph) {
-            Graph.nodeColor(Graph.nodeColor());
+            Graph.nodeColor(n => n.color);
         }
 
         // Refresh edge gradients
@@ -411,6 +411,10 @@ window.VIS_STATE = (function() {
 
             state.paletteType = isIntervalMode(state.colorBy) ? 'interval' : 'categorical';
         } catch (e) { /* ignore localStorage errors */ }
+
+        // Apply initial state to globals (critical for NODE_COLOR_MODE)
+        _applyColorMode(state.colorBy);
+        _applyPalette();
 
         console.log('[VIS_STATE] Initialized:', state);
     }

@@ -438,7 +438,27 @@ def generate_webgl_html(json_source: Any, output_path: str):
             # New octahedral dimensions
             "boundary": n.get('boundary', 'internal'),
             "state": n.get('state', 'stateless'),
-            "lifecycle": n.get('lifecycle', 'use')
+            "lifecycle": n.get('lifecycle', 'use'),
+            # ═══ METRIC FIELDS (required for interval color modes) ═══
+            "in_degree": n.get('in_degree', 0),
+            "out_degree": n.get('out_degree', 0),
+            "fan_in": n.get('in_degree', 0),   # Alias for in_degree
+            "fan_out": n.get('fan_out') or n.get('out_degree', 0),
+            "complexity": n.get('complexity') or n.get('cyclomatic_complexity', 0),
+            "loc": n.get('loc') or n.get('lines_of_code') or n.get('end_line', 0) - n.get('start_line', 0),
+            "trust": n.get('trust') or n.get('confidence', 1.0),
+            # RPBL DNA scores
+            "responsibility": n.get('responsibility', 5),
+            "purity": n.get('purity', 5),
+            "lifecycle_score": n.get('lifecycle_score', 5),
+            "boundary_score": n.get('boundary_score', 5),
+            # Topology metrics
+            "centrality": n.get('centrality', 0),
+            "rank": n.get('rank') or n.get('pagerank', 0),
+            "depth": n.get('depth') or n.get('call_depth', 0),
+            # Evolution metrics
+            "churn": n.get('churn', 0),
+            "age": n.get('age', 0)
         })
         node_set.add(nid)
 
