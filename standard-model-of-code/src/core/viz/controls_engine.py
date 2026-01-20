@@ -71,6 +71,39 @@ class ControlsEngine:
                     "filter": "EXT"
                 }
             },
+            # New dimension-based color modes
+            "dimensionModes": {
+                "BOUNDARY": {
+                    "enabled": True,
+                    "colorBy": "boundary",
+                    "colors": {
+                        "internal": "#4dabf7",  # Blue - safe internal
+                        "input": "#51cf66",     # Green - inputs
+                        "output": "#ff6b6b",    # Red - outputs
+                        "io": "#be4bdb"         # Purple - I/O (risky)
+                    },
+                    "label": "Color by I/O"
+                },
+                "STATE": {
+                    "enabled": True,
+                    "colorBy": "state",
+                    "colors": {
+                        "stateless": "#51cf66",  # Green - pure/safe
+                        "stateful": "#ffa94d"    # Orange - mutable
+                    },
+                    "label": "Color by State"
+                },
+                "LIFECYCLE": {
+                    "enabled": True,
+                    "colorBy": "lifecycle",
+                    "colors": {
+                        "create": "#51cf66",     # Green - constructors
+                        "use": "#4dabf7",        # Blue - operations
+                        "destroy": "#ff6b6b"     # Red - cleanup
+                    },
+                    "label": "Color by Phase"
+                }
+            },
             "modes": {
                 "FILES": {
                     "enabled": self.resolver.controls("buttons.modes.FILES.$value", True),
@@ -244,6 +277,27 @@ class ControlsEngine:
             "rings": self.resolver.controls("filters.rings", []),
             "families": self.resolver.controls("filters.families", []),
             "edges": self.resolver.controls("filters.edges", []),
+            # New octahedral dimension filters
+            "dimensions": {
+                "boundary": {
+                    "enabled": True,
+                    "values": ["internal", "input", "output", "io"],
+                    "default": ["internal", "input", "output", "io"],
+                    "label": "Boundary (I/O)"
+                },
+                "state": {
+                    "enabled": True,
+                    "values": ["stateless", "stateful"],
+                    "default": ["stateless", "stateful"],
+                    "label": "State"
+                },
+                "lifecycle": {
+                    "enabled": True,
+                    "values": ["create", "use", "destroy"],
+                    "default": ["create", "use", "destroy"],
+                    "label": "Lifecycle Phase"
+                }
+            },
             "metadata": {
                 "showLabels": self.resolver.controls("filters.metadata.show-labels", True),
                 "showFilePanel": self.resolver.controls("filters.metadata.show-file-panel", True),
