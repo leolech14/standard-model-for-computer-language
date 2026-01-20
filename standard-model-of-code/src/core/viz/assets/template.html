@@ -5,25 +5,32 @@
     <title>Collider v{{VERSION}}</title>
     <style>
         /* ═══════════════════════════════════════════════════════════════════
-           MINIMAL COLLIDER UI - Clean, Simple, Functional
+           COLLIDER UI - Dual Sidebar Layout
            ═══════════════════════════════════════════════════════════════════ */
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #0a0a0f;
-            --surface: rgba(20, 20, 30, 0.95);
-            --surface-hover: rgba(30, 30, 45, 0.95);
+            --surface: rgba(15, 15, 22, 0.95);
+            --surface-hover: rgba(25, 25, 35, 0.95);
             --border: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(74, 158, 255, 0.3);
             --text: rgba(255, 255, 255, 0.9);
             --text-dim: rgba(255, 255, 255, 0.5);
+            --text-muted: rgba(255, 255, 255, 0.3);
             --accent: #4a9eff;
-            --accent-dim: rgba(74, 158, 255, 0.3);
+            --accent-dim: rgba(74, 158, 255, 0.2);
+            --accent-glow: rgba(74, 158, 255, 0.4);
             --green: #22c55e;
             --yellow: #eab308;
             --red: #ef4444;
-            --sidebar-width: 240px;
-            --radius: 6px;
+            --cyan: #00d4ff;
+            --sidebar-width: 280px;
+            --right-panel-width: 260px;
+            --header-height: 48px;
+            --radius: 8px;
+            --radius-sm: 4px;
         }
 
         body {
@@ -34,7 +41,9 @@
             font-size: 12px;
         }
 
-        /* Loader */
+        /* ═══════════════════════════════════════════════════════════════════
+           LOADER
+           ═══════════════════════════════════════════════════════════════════ */
         #loader {
             position: fixed;
             inset: 0;
@@ -50,114 +59,151 @@
         }
         #loader-status { font-size: 11px; opacity: 0.5; }
 
-        /* Graph container */
-        #3d-graph { width: 100vw; height: 100vh; }
-
         /* ═══════════════════════════════════════════════════════════════════
-           HEADER - Minimal top bar
+           HEADER - Top bar spanning full width
            ═══════════════════════════════════════════════════════════════════ */
         #header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 44px;
+            height: var(--header-height);
             background: var(--surface);
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             padding: 0 16px;
             gap: 24px;
-            z-index: 100;
+            z-index: 200;
         }
 
         .logo {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             letter-spacing: 1px;
+            color: var(--accent);
         }
-        .logo span { opacity: 0.4; font-size: 10px; margin-left: 6px; }
+        .logo span { opacity: 0.5; font-size: 10px; margin-left: 6px; color: var(--text); }
 
-        .stats {
+        .header-stats {
             display: flex;
             gap: 20px;
             font-size: 11px;
         }
-        .stat { display: flex; gap: 6px; }
-        .stat-label { opacity: 0.5; }
-        .stat-value { font-weight: 500; font-variant-numeric: tabular-nums; }
+        .stat { display: flex; gap: 6px; align-items: center; }
+        .stat-label { opacity: 0.4; text-transform: uppercase; font-size: 9px; letter-spacing: 0.5px; }
+        .stat-value { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--cyan); }
 
         .target-name {
             margin-left: auto;
             font-size: 11px;
-            opacity: 0.6;
-            max-width: 300px;
+            opacity: 0.5;
+            max-width: 400px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
         /* ═══════════════════════════════════════════════════════════════════
-           SIDEBAR - Clean minimal design
+           MAIN LAYOUT - Graph container
            ═══════════════════════════════════════════════════════════════════ */
-        #sidebar {
+        #3d-graph {
             position: fixed;
-            top: 44px;
-            right: 0;
+            top: var(--header-height);
+            left: var(--sidebar-width);
+            right: var(--right-panel-width);
+            bottom: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           LEFT SIDEBAR - Controls & Filters
+           ═══════════════════════════════════════════════════════════════════ */
+        #left-sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
             bottom: 0;
             width: var(--sidebar-width);
             background: var(--surface);
-            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
             overflow-y: auto;
             overflow-x: hidden;
             z-index: 100;
         }
 
-        #sidebar::-webkit-scrollbar { width: 4px; }
-        #sidebar::-webkit-scrollbar-track { background: transparent; }
-        #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        #left-sidebar::-webkit-scrollbar { width: 4px; }
+        #left-sidebar::-webkit-scrollbar-track { background: transparent; }
+        #left-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+        /* ═══════════════════════════════════════════════════════════════════
+           RIGHT SIDEBAR - Info Panels
+           ═══════════════════════════════════════════════════════════════════ */
+        #right-sidebar {
+            position: fixed;
+            top: var(--header-height);
+            right: 0;
+            bottom: 0;
+            width: var(--right-panel-width);
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #right-sidebar::-webkit-scrollbar { width: 4px; }
+        #right-sidebar::-webkit-scrollbar-track { background: transparent; }
+        #right-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           SECTION - Collapsible sections
+           ═══════════════════════════════════════════════════════════════════ */
         .section {
             border-bottom: 1px solid var(--border);
         }
 
         .section-header {
-            padding: 10px 12px;
+            padding: 12px 14px;
             font-size: 10px;
             font-weight: 600;
             letter-spacing: 1px;
-            opacity: 0.6;
+            text-transform: uppercase;
+            opacity: 0.5;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
             user-select: none;
+            transition: all 0.15s;
         }
         .section-header:hover { opacity: 0.9; background: var(--surface-hover); }
-        .section-header .arrow { transition: transform 0.2s; }
+        .section-header .arrow { transition: transform 0.2s; font-size: 8px; }
         .section-header.collapsed .arrow { transform: rotate(-90deg); }
 
         .section-content {
-            padding: 8px 12px 12px;
-            display: grid;
-            gap: 8px;
+            padding: 8px 14px 14px;
         }
         .section-content.collapsed { display: none; }
 
-        /* Button grid */
+        /* ═══════════════════════════════════════════════════════════════════
+           BUTTON GRID - For presets and actions
+           ═══════════════════════════════════════════════════════════════════ */
         .btn-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
+            gap: 6px;
         }
         .btn-grid-2 { grid-template-columns: repeat(2, 1fr); }
         .btn-grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .btn-grid-6 { grid-template-columns: repeat(6, 1fr); }
 
         .btn {
-            padding: 6px 8px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border-radius: var(--radius-sm);
             color: var(--text-dim);
             font-size: 9px;
             font-weight: 500;
@@ -165,87 +211,131 @@
             cursor: pointer;
             transition: all 0.15s;
             text-align: center;
+            text-transform: uppercase;
         }
         .btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: var(--text);
+            border-color: var(--border-accent);
         }
         .btn.active {
             background: var(--accent-dim);
             border-color: var(--accent);
             color: var(--accent);
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
-        /* Sliders */
+        /* Icon buttons */
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           SLIDERS
+           ═══════════════════════════════════════════════════════════════════ */
         .slider-row {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
+            margin-bottom: 10px;
         }
+        .slider-row:last-child { margin-bottom: 0; }
+
         .slider-header {
             display: flex;
             justify-content: space-between;
             font-size: 10px;
         }
-        .slider-label { opacity: 0.7; }
-        .slider-value { font-variant-numeric: tabular-nums; opacity: 0.9; }
+        .slider-label { opacity: 0.6; }
+        .slider-value { font-variant-numeric: tabular-nums; color: var(--cyan); }
 
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
             height: 4px;
-            background: var(--border);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
             cursor: pointer;
         }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background: var(--accent);
             border-radius: 50%;
             cursor: grab;
+            box-shadow: 0 0 8px var(--accent-glow);
         }
         input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; }
 
-        /* Filter chips */
+        /* ═══════════════════════════════════════════════════════════════════
+           FILTER CHIPS
+           ═══════════════════════════════════════════════════════════════════ */
+        .filter-group {
+            margin-bottom: 12px;
+        }
+        .filter-group:last-child { margin-bottom: 0; }
+
+        .filter-label {
+            font-size: 9px;
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
         .chips {
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
         }
         .chip {
-            padding: 4px 8px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 9px;
             cursor: pointer;
             transition: all 0.15s;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
         }
-        .chip:hover { background: rgba(255, 255, 255, 0.1); }
-        .chip.active { background: var(--accent-dim); border-color: var(--accent); }
+        .chip:hover { background: rgba(255, 255, 255, 0.08); }
+        .chip.active {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
         .chip .dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
         }
 
-        /* Toggle switches */
+        /* ═══════════════════════════════════════════════════════════════════
+           TOGGLE SWITCHES
+           ═══════════════════════════════════════════════════════════════════ */
         .toggle-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 10px;
+            padding: 6px 0;
         }
+        .toggle-row .toggle-label { opacity: 0.7; }
+
         .toggle {
-            width: 32px;
-            height: 18px;
-            background: var(--border);
-            border-radius: 9px;
+            width: 36px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             cursor: pointer;
             position: relative;
             transition: background 0.2s;
@@ -255,118 +345,186 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             background: var(--text);
             border-radius: 50%;
             transition: transform 0.2s;
         }
         .toggle.active { background: var(--accent); }
-        .toggle.active::after { transform: translateX(14px); }
+        .toggle.active::after { transform: translateX(16px); }
 
         /* ═══════════════════════════════════════════════════════════════════
-           HOVER PANEL - Node info on hover
+           INFO PANEL - Right sidebar node info
            ═══════════════════════════════════════════════════════════════════ */
-        #hover-panel {
-            position: fixed;
-            bottom: 16px;
-            left: 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 12px;
-            min-width: 200px;
-            max-width: 300px;
-            display: none;
-            z-index: 100;
+        .info-panel {
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
         }
-        #hover-panel.visible { display: block; }
 
-        .hover-name {
+        .info-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .info-panel-title {
+            font-size: 10px;
             font-weight: 600;
-            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        .node-info {
+            display: none;
+        }
+        .node-info.visible { display: block; }
+
+        .node-name {
+            font-weight: 600;
+            font-size: 13px;
             margin-bottom: 4px;
             word-break: break-all;
+            color: var(--cyan);
         }
-        .hover-kind {
+        .node-kind {
             font-size: 10px;
-            opacity: 0.6;
-            margin-bottom: 8px;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .hover-row {
+
+        .info-row {
             display: flex;
             justify-content: space-between;
             font-size: 10px;
-            padding: 2px 0;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
-        .hover-row .label { opacity: 0.5; }
-        .hover-file {
+        .info-row:last-child { border-bottom: none; }
+        .info-row .label { opacity: 0.4; }
+        .info-row .value { text-align: right; }
+
+        .node-file {
             font-size: 9px;
-            opacity: 0.4;
-            margin-top: 8px;
+            opacity: 0.3;
+            margin-top: 10px;
             word-break: break-all;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        .placeholder-text {
+            font-size: 10px;
+            opacity: 0.3;
+            text-align: center;
+            padding: 20px;
         }
 
         /* ═══════════════════════════════════════════════════════════════════
            SELECTION PANEL
            ═══════════════════════════════════════════════════════════════════ */
-        #selection-panel {
-            position: fixed;
-            bottom: 16px;
-            left: 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 12px;
-            min-width: 200px;
-            max-width: 300px;
-            max-height: 300px;
+        .selection-panel {
+            flex: 1;
+            padding: 14px;
             overflow-y: auto;
-            display: none;
-            z-index: 101;
         }
-        #selection-panel.visible { display: block; }
 
         .selection-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-        .selection-title { font-weight: 600; font-size: 11px; }
+        .selection-title {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+        .selection-count {
+            font-size: 9px;
+            padding: 2px 8px;
+            background: var(--accent-dim);
+            border-radius: 10px;
+            color: var(--accent);
+        }
+
         .selection-clear {
             font-size: 9px;
-            padding: 2px 6px;
+            padding: 4px 8px;
             background: none;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             color: var(--text-dim);
             cursor: pointer;
         }
         .selection-clear:hover { color: var(--text); border-color: var(--text-dim); }
 
+        .selection-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
         .selection-item {
             font-size: 10px;
-            padding: 4px 0;
-            border-bottom: 1px solid var(--border);
+            padding: 6px 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
+            margin-bottom: 2px;
+            background: rgba(255,255,255,0.02);
         }
-        .selection-item:hover { color: var(--accent); }
-        .selection-item:last-child { border-bottom: none; }
+        .selection-item:hover { background: rgba(255,255,255,0.05); color: var(--accent); }
 
         /* ═══════════════════════════════════════════════════════════════════
-           PERFORMANCE HUD
+           STATS PANEL (bottom of right sidebar)
+           ═══════════════════════════════════════════════════════════════════ */
+        .stats-panel {
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .stats-item {
+            text-align: center;
+            padding: 8px;
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-sm);
+        }
+        .stats-item .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--cyan);
+            font-variant-numeric: tabular-nums;
+        }
+        .stats-item .label {
+            font-size: 8px;
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           PERFORMANCE HUD (optional overlay)
            ═══════════════════════════════════════════════════════════════════ */
         #perf-hud {
             position: fixed;
-            top: 52px;
-            left: 8px;
-            background: rgba(0, 0, 0, 0.7);
+            top: calc(var(--header-height) + 8px);
+            left: calc(var(--sidebar-width) + 8px);
+            background: rgba(0, 0, 0, 0.8);
             padding: 6px 10px;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             font-size: 10px;
             font-family: 'SF Mono', Monaco, monospace;
-            z-index: 100;
+            z-index: 150;
             display: none;
         }
         #perf-hud.visible { display: block; }
@@ -386,8 +544,8 @@
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 10px 20px;
+            border: 1px solid var(--border-accent);
+            padding: 12px 24px;
             border-radius: var(--radius);
             font-size: 12px;
             z-index: 1000;
@@ -408,6 +566,35 @@
             z-index: 50;
             display: none;
         }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           SECTION-SPECIFIC STYLING
+           ═══════════════════════════════════════════════════════════════════ */
+
+        /* Color mode buttons with color indicators */
+        .color-btn {
+            position: relative;
+        }
+        .color-btn::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+        }
+        .color-btn[data-preset="tier"]::before { background: #ff6b6b; }
+        .color-btn[data-preset="family"]::before { background: #4ecdc4; }
+        .color-btn[data-preset="layer"]::before { background: #95e1d3; }
+        .color-btn[data-preset="ring"]::before { background: #f9ed69; }
+        .color-btn[data-preset="file"]::before { background: #a8e6cf; }
+        .color-btn[data-preset="flow"]::before { background: #dcd6f7; }
+
+        /* Layout buttons with mini icons */
+        .layout-btn {
+            height: 32px;
+        }
     </style>
 
     <script>
@@ -426,45 +613,42 @@
         <div id="loader-status">Loading data...</div>
     </div>
 
-    <!-- Graph -->
-    <div id="3d-graph"></div>
-
     <!-- Header -->
     <div id="header">
         <div class="logo">COLLIDER <span>v{{VERSION}}</span></div>
-        <div class="stats">
+        <div class="header-stats">
             <div class="stat">
-                <span class="stat-label">NODES</span>
+                <span class="stat-label">Nodes</span>
                 <span class="stat-value" id="stat-nodes">0</span>
             </div>
             <div class="stat">
-                <span class="stat-label">EDGES</span>
+                <span class="stat-label">Edges</span>
                 <span class="stat-value" id="stat-edges">0</span>
             </div>
             <div class="stat">
-                <span class="stat-label">ENTROPY</span>
+                <span class="stat-label">Entropy</span>
                 <span class="stat-value" id="stat-entropy">--</span>
             </div>
         </div>
         <div class="target-name" id="target-name"></div>
     </div>
 
-    <!-- Sidebar -->
-    <div id="sidebar">
+    <!-- Left Sidebar -->
+    <div id="left-sidebar">
         <!-- COLOR MODE -->
         <div class="section">
             <div class="section-header" data-section="color">
-                <span>COLOR BY</span>
+                <span>Color Mode</span>
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content" id="section-color">
                 <div class="btn-grid">
-                    <button class="btn active" data-preset="tier">TIER</button>
-                    <button class="btn" data-preset="family">FAMILY</button>
-                    <button class="btn" data-preset="layer">LAYER</button>
-                    <button class="btn" data-preset="ring">RING</button>
-                    <button class="btn" data-preset="file">FILE</button>
-                    <button class="btn" data-preset="flow">FLOW</button>
+                    <button class="btn color-btn active" data-preset="tier">Tier</button>
+                    <button class="btn color-btn" data-preset="family">Family</button>
+                    <button class="btn color-btn" data-preset="layer">Layer</button>
+                    <button class="btn color-btn" data-preset="ring">Ring</button>
+                    <button class="btn color-btn" data-preset="file">File</button>
+                    <button class="btn color-btn" data-preset="flow">Flow</button>
                 </div>
             </div>
         </div>
@@ -472,17 +656,17 @@
         <!-- LAYOUT -->
         <div class="section">
             <div class="section-header" data-section="layout">
-                <span>LAYOUT</span>
+                <span>Layout</span>
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content" id="section-layout">
                 <div class="btn-grid">
-                    <button class="btn active" data-layout="force">FORCE</button>
-                    <button class="btn" data-layout="radial">RADIAL</button>
-                    <button class="btn" data-layout="orbital">ORBITAL</button>
-                    <button class="btn" data-layout="sphere">SPHERE</button>
-                    <button class="btn" data-layout="grid">GRID</button>
-                    <button class="btn" data-layout="spiral">SPIRAL</button>
+                    <button class="btn layout-btn active" data-layout="force">Force</button>
+                    <button class="btn layout-btn" data-layout="radial">Radial</button>
+                    <button class="btn layout-btn" data-layout="orbital">Orbital</button>
+                    <button class="btn layout-btn" data-layout="sphere">Sphere</button>
+                    <button class="btn layout-btn" data-layout="grid">Grid</button>
+                    <button class="btn layout-btn" data-layout="spiral">Spiral</button>
                 </div>
             </div>
         </div>
@@ -490,7 +674,7 @@
         <!-- PHYSICS -->
         <div class="section">
             <div class="section-header" data-section="physics">
-                <span>PHYSICS</span>
+                <span>Physics</span>
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content" id="section-physics">
@@ -515,18 +699,11 @@
                     </div>
                     <input type="range" id="physics-center" min="0" max="0.5" step="0.01" value="0.05">
                 </div>
-                <div class="slider-row">
-                    <div class="slider-header">
-                        <span class="slider-label">Damping</span>
-                        <span class="slider-value" id="physics-damping-val">0.4</span>
-                    </div>
-                    <input type="range" id="physics-damping" min="0" max="1" step="0.05" value="0.4">
-                </div>
-                <div class="btn-grid btn-grid-4" style="margin-top: 4px;">
-                    <button class="btn" data-physics="default">DEF</button>
-                    <button class="btn" data-physics="tight">TIGHT</button>
-                    <button class="btn" data-physics="loose">LOOSE</button>
-                    <button class="btn" data-physics="explosive">BOOM</button>
+                <div class="btn-grid btn-grid-4" style="margin-top: 8px;">
+                    <button class="btn" data-physics="default">Def</button>
+                    <button class="btn" data-physics="tight">Tight</button>
+                    <button class="btn" data-physics="loose">Loose</button>
+                    <button class="btn" data-physics="explosive">Boom</button>
                 </div>
             </div>
         </div>
@@ -534,7 +711,7 @@
         <!-- APPEARANCE -->
         <div class="section">
             <div class="section-header" data-section="appearance">
-                <span>APPEARANCE</span>
+                <span>Appearance</span>
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content" id="section-appearance">
@@ -552,76 +729,114 @@
                     </div>
                     <input type="range" id="edge-opacity" min="0" max="1" step="0.05" value="0.4">
                 </div>
-                <div class="slider-row">
-                    <div class="slider-header">
-                        <span class="slider-label">Label Size</span>
-                        <span class="slider-value" id="label-size-val">1.0</span>
-                    </div>
-                    <input type="range" id="label-size" min="0" max="2" step="0.1" value="1">
-                </div>
-                <div class="toggle-row" style="margin-top: 4px;">
-                    <span>Show Labels</span>
+                <div class="toggle-row">
+                    <span class="toggle-label">Show Labels</span>
                     <div class="toggle active" id="toggle-labels"></div>
                 </div>
                 <div class="toggle-row">
-                    <span>Starfield</span>
-                    <div class="toggle active" id="toggle-stars"></div>
+                    <span class="toggle-label">Starfield</span>
+                    <div class="toggle" id="toggle-stars"></div>
                 </div>
             </div>
         </div>
 
         <!-- FILTERS -->
         <div class="section">
-            <div class="section-header collapsed" data-section="filters">
-                <span>FILTERS</span>
+            <div class="section-header" data-section="filters">
+                <span>Filters</span>
                 <span class="arrow">▼</span>
             </div>
-            <div class="section-content collapsed" id="section-filters">
-                <div style="font-size: 9px; opacity: 0.5; margin-bottom: 4px;">TIERS</div>
-                <div class="chips" id="filter-tiers"></div>
-                <div style="font-size: 9px; opacity: 0.5; margin: 8px 0 4px;">RINGS</div>
-                <div class="chips" id="filter-rings"></div>
-                <div style="font-size: 9px; opacity: 0.5; margin: 8px 0 4px;">EDGES</div>
-                <div class="chips" id="filter-edges"></div>
+            <div class="section-content" id="section-filters">
+                <div class="filter-group">
+                    <div class="filter-label">Tiers</div>
+                    <div class="chips" id="filter-tiers"></div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">Rings</div>
+                    <div class="chips" id="filter-rings"></div>
+                </div>
+                <div class="filter-group">
+                    <div class="filter-label">Edge Types</div>
+                    <div class="chips" id="filter-edges"></div>
+                </div>
             </div>
         </div>
 
         <!-- ACTIONS -->
         <div class="section">
             <div class="section-header collapsed" data-section="actions">
-                <span>ACTIONS</span>
+                <span>Actions</span>
                 <span class="arrow">▼</span>
             </div>
             <div class="section-content collapsed" id="section-actions">
                 <div class="btn-grid btn-grid-2">
-                    <button class="btn" id="btn-reset">RESET VIEW</button>
-                    <button class="btn" id="btn-screenshot">SCREENSHOT</button>
-                    <button class="btn" id="btn-2d">TOGGLE 2D</button>
-                    <button class="btn" id="btn-freeze">FREEZE</button>
+                    <button class="btn" id="btn-reset">Reset View</button>
+                    <button class="btn" id="btn-screenshot">Screenshot</button>
+                    <button class="btn" id="btn-2d">Toggle 2D</button>
+                    <button class="btn" id="btn-freeze">Freeze</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Hover Panel -->
-    <div id="hover-panel">
-        <div class="hover-name" id="hover-name">Node Name</div>
-        <div class="hover-kind" id="hover-kind">function</div>
-        <div class="hover-row"><span class="label">Atom</span><span id="hover-atom">--</span></div>
-        <div class="hover-row"><span class="label">Family</span><span id="hover-family">--</span></div>
-        <div class="hover-row"><span class="label">Ring</span><span id="hover-ring">--</span></div>
-        <div class="hover-row"><span class="label">Tier</span><span id="hover-tier">--</span></div>
-        <div class="hover-row"><span class="label">Role</span><span id="hover-role">--</span></div>
-        <div class="hover-file" id="hover-file"></div>
-    </div>
+    <!-- Graph Container -->
+    <div id="3d-graph"></div>
 
-    <!-- Selection Panel -->
-    <div id="selection-panel">
-        <div class="selection-header">
-            <span class="selection-title" id="selection-title">SELECTED (0)</span>
-            <button class="selection-clear" id="selection-clear">CLEAR</button>
+    <!-- Right Sidebar -->
+    <div id="right-sidebar">
+        <!-- Hover Info Panel -->
+        <div class="info-panel">
+            <div class="info-panel-header">
+                <span class="info-panel-title">Node Info</span>
+            </div>
+            <div class="node-info" id="hover-panel">
+                <div class="node-name" id="hover-name">Node Name</div>
+                <div class="node-kind" id="hover-kind">function</div>
+                <div class="info-row"><span class="label">Atom</span><span class="value" id="hover-atom">--</span></div>
+                <div class="info-row"><span class="label">Family</span><span class="value" id="hover-family">--</span></div>
+                <div class="info-row"><span class="label">Ring</span><span class="value" id="hover-ring">--</span></div>
+                <div class="info-row"><span class="label">Tier</span><span class="value" id="hover-tier">--</span></div>
+                <div class="info-row"><span class="label">Role</span><span class="value" id="hover-role">--</span></div>
+                <div class="node-file" id="hover-file"></div>
+            </div>
+            <div class="placeholder-text" id="hover-placeholder">Hover over a node to see details</div>
         </div>
-        <div id="selection-list"></div>
+
+        <!-- Selection Panel -->
+        <div class="selection-panel">
+            <div class="selection-header">
+                <span class="selection-title">Selection</span>
+                <span class="selection-count" id="selection-count">0</span>
+            </div>
+            <div id="selection-actions" style="display: none; margin-bottom: 10px;">
+                <button class="selection-clear" id="selection-clear">Clear</button>
+            </div>
+            <div class="selection-list" id="selection-list">
+                <div class="placeholder-text">Click nodes to select</div>
+            </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stats-grid">
+                <div class="stats-item">
+                    <div class="value" id="stats-nodes">0</div>
+                    <div class="label">Visible</div>
+                </div>
+                <div class="stats-item">
+                    <div class="value" id="stats-edges">0</div>
+                    <div class="label">Edges</div>
+                </div>
+                <div class="stats-item">
+                    <div class="value" id="stats-files">0</div>
+                    <div class="label">Files</div>
+                </div>
+                <div class="stats-item">
+                    <div class="value" id="stats-density">--</div>
+                    <div class="label">Density</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Performance HUD -->

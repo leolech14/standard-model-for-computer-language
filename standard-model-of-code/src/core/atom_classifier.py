@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
 🔬 ATOM CLASSIFIER
-Uses the 167-atom taxonomy to classify code entities with more granularity.
+Uses the unified atom taxonomy (94+ atoms from all tiers) to classify code entities.
+
+Sources:
+- atoms.json: 14 base atoms + AST mappings
+- ATOMS_TIER0_CORE.yaml: 42 T0 atoms
+- ATOMS_TIER1_STDLIB.yaml: 21 T1 atoms
+- ATOMS_TIER2_ECOSYSTEM.yaml: 17 T2 atoms
 """
 
 import json
@@ -10,6 +16,7 @@ from pathlib import Path
 from typing import Optional, Tuple
 from dataclasses import dataclass
 from .registry.pattern_repository import get_pattern_repository
+from .atom_loader import get_unified_taxonomy
 
 
 @dataclass
@@ -20,18 +27,16 @@ class AtomClassification:
     atom_id: str        # e.g., LOG.FNC.M
     subtype: str        # e.g., Validator, Factory
     confidence: float   # 0.0 - 1.0
+    tier: str = "base"  # T0, T1, T2, or base
 
 
 class AtomClassifier:
-    """Classifies code entities using the 167-atom taxonomy."""
-    
+    """Classifies code entities using the unified 94+ atom taxonomy."""
+
     def __init__(self, atoms_path: str = None):
-        """Load atom definitions from JSON."""
-        if atoms_path is None:
-            atoms_path = Path(__file__).parent.parent / "patterns" / "atoms.json"
-        
-        with open(atoms_path, "r", encoding="utf-8") as f:
-            self.taxonomy = json.load(f)
+        """Load atom definitions from unified taxonomy."""
+        # Use unified taxonomy that loads all sources
+        self.taxonomy = get_unified_taxonomy()
         
         
         # Build lookup structures
@@ -59,13 +64,14 @@ class AtomClassifier:
                     
                     self.atoms_by_subtype[subtype.lower()] = atom_id
         
-        # Add common aliases
-        self.atoms_by_subtype['configuration'] = self.atoms_by_subtype.get('configvalue', 'ORG.CFG.O')
+        # Add common aliases (safe with .get to avoid KeyError)
+        self.atoms_by_subtype['configuration'] = self.atoms_by_subtype.get('configvalue', 'SYS.CFG.O')
         self.atoms_by_subtype['adapter'] = self.atoms_by_subtype.get('adapter', 'ORG.SVC.M')
         self.atoms_by_subtype['observer'] = self.atoms_by_subtype.get('eventhandler', 'EXE.HDL.O')
-        self.atoms_by_subtype['specification']
-        self.atoms_by_subtype['query']
-        self.atoms_by_subtype['entity'] = 'ORG.AGG.M'  # LEARNED: Entity data classes = self.atoms_by_subtype.get('query', 'LOG.FNC.M')  # LEARNED = self.atoms_by_subtype.get('policy', 'LOG.FNC.M')
+        self.atoms_by_subtype['specification'] = self.atoms_by_subtype.get('specification', 'LOG.FNC.M')
+        self.atoms_by_subtype['query'] = self.atoms_by_subtype.get('query', 'LOG.FNC.M')
+        self.atoms_by_subtype['entity'] = self.atoms_by_subtype.get('entity', 'ORG.AGG.M')
+        self.atoms_by_subtype['policy'] = self.atoms_by_subtype.get('policy', 'LOG.FNC.M')
         
         # Compile semantic patterns
         self.semantic_patterns = []
@@ -265,7 +271,7 @@ class AtomClassifier:
         return None
     
     def list_all_atoms(self) -> list:
-        """List all 167 atoms with their info."""
+        """List all atoms with their info (94+ from unified taxonomy)."""
         atoms = []
         for phase_name, phase in self.taxonomy.get("phases", {}).items():
             for family_name, family in phase.get("families", {}).items():
@@ -327,7 +333,7 @@ if __name__ == "__main__":
         # Demo mode
         classifier = AtomClassifier()
         
-        print("=== 167 ATOM TAXONOMY ===")
+        print("=== UNIFIED ATOM TAXONOMY (94+ atoms) ===")
         print(f"Total atoms: {len(classifier.list_all_atoms())}")
         print()
         

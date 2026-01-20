@@ -305,7 +305,61 @@ def generate_brain_download(full_analysis: Dict) -> str:
         lines.append("")
 
     # =========================================================================
-    # SECTION 10: QUICK REFERENCE
+    # SECTION 10: PERFORMANCE PROFILE (if timing data available)
+    # =========================================================================
+    if 'pipeline_performance' in full_analysis:
+        perf = full_analysis['pipeline_performance']
+        summary = perf.get('summary', {})
+        stages = perf.get('stages', [])
+
+        lines.append("## PERFORMANCE PROFILE")
+        lines.append("")
+        lines.append(f"**Total Pipeline Time**: {summary.get('total_latency_ms', 0) / 1000:.2f}s")
+        lines.append(f"**Stages**: {summary.get('ok_count', 0)}/{summary.get('total_stages', 0)} OK")
+        if summary.get('peak_memory_kb', 0) > 0:
+            peak_mb = summary['peak_memory_kb'] / 1024
+            lines.append(f"**Peak Memory**: {peak_mb:.0f} MB")
+        lines.append("")
+
+        # Find bottleneck
+        slowest = summary.get('slowest_stage')
+        if slowest:
+            lines.append("### Bottleneck Analysis")
+            lines.append(f"- **Slowest Stage**: `{slowest['name']}` ({slowest['latency_ms']:.0f}ms)")
+
+            # Calculate percentage of total time
+            total_ms = summary.get('total_latency_ms', 1)
+            bottleneck_pct = (slowest['latency_ms'] / total_ms) * 100
+            if bottleneck_pct > 50:
+                lines.append(f"- ⚠️ This stage accounts for {bottleneck_pct:.0f}% of total time")
+            lines.append("")
+
+        # Stage breakdown table (top 5 slowest)
+        if stages:
+            sorted_stages = sorted(stages, key=lambda s: s.get('latency_ms', 0), reverse=True)[:5]
+            lines.append("### Stage Timing (Top 5)")
+            lines.append("")
+            lines.append("| Stage | Status | Time | Memory |")
+            lines.append("|-------|--------|------|--------|")
+            for s in sorted_stages:
+                status_icon = {"OK": "✅", "FAIL": "❌", "WARN": "⚠️", "SKIP": "⏭️"}.get(s.get('status', ''), "❓")
+                latency = s.get('latency_ms', 0)
+                if latency >= 1000:
+                    time_str = f"{latency / 1000:.2f}s"
+                else:
+                    time_str = f"{latency:.0f}ms"
+                mem_delta = s.get('memory_delta_kb', 0)
+                if mem_delta >= 1024:
+                    mem_str = f"+{mem_delta / 1024:.0f}MB"
+                elif mem_delta > 0:
+                    mem_str = f"+{mem_delta}KB"
+                else:
+                    mem_str = "~0"
+                lines.append(f"| {s.get('stage_name', 'Unknown')} | {status_icon} | {time_str} | {mem_str} |")
+            lines.append("")
+
+    # =========================================================================
+    # SECTION 11: QUICK REFERENCE
     # =========================================================================
     lines.append("## QUICK REFERENCE")
     lines.append("")
@@ -319,7 +373,7 @@ def generate_brain_download(full_analysis: Dict) -> str:
     lines.append(f"RPBL:       R={rpbl['responsibility']} P={rpbl['purity']} B={rpbl['boundary']} L={rpbl['lifecycle']}")
     lines.append("```")
     lines.append("")
-    
+
     return "\n".join(lines)
 
 

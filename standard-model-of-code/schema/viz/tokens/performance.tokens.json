@@ -1,0 +1,94 @@
+{
+  "$schema": "../../../schema/token-schema.json",
+  "name": "Performance Tokens",
+  "version": "1.0.0",
+  "description": "Animation and rendering performance configuration. All thresholds in one place.",
+
+  "frameBudget": {
+    "targetFps": 60,
+    "targetFrameMs": 16.67,
+    "warningThreshold": 0.8,
+    "criticalThreshold": 1.5,
+    "description": "Frame timing targets. Warning at 80% budget (13.3ms), critical at 150% (25ms)"
+  },
+
+  "nodeThresholds": {
+    "small": 100,
+    "medium": 500,
+    "large": 1000,
+    "massive": 5000,
+    "description": "Node count tiers for adaptive quality"
+  },
+
+  "adaptiveQuality": {
+    "tiers": {
+      "ultra": {
+        "maxNodes": 100,
+        "refreshStrategy": "perFrame",
+        "flockEnabled": true,
+        "labelDensity": 1.0,
+        "edgeOpacity": 1.0,
+        "animationDuration": 1500
+      },
+      "high": {
+        "maxNodes": 500,
+        "refreshStrategy": "perFrame",
+        "flockEnabled": false,
+        "labelDensity": 0.8,
+        "edgeOpacity": 0.9,
+        "animationDuration": 1200
+      },
+      "medium": {
+        "maxNodes": 1000,
+        "refreshStrategy": "throttled",
+        "refreshEveryNFrames": 2,
+        "flockEnabled": false,
+        "labelDensity": 0.5,
+        "edgeOpacity": 0.7,
+        "animationDuration": 800
+      },
+      "low": {
+        "maxNodes": 5000,
+        "refreshStrategy": "throttled",
+        "refreshEveryNFrames": 3,
+        "flockEnabled": false,
+        "labelDensity": 0.2,
+        "edgeOpacity": 0.5,
+        "animationDuration": 500
+      },
+      "minimal": {
+        "maxNodes": null,
+        "refreshStrategy": "onDemand",
+        "flockEnabled": false,
+        "labelDensity": 0.1,
+        "edgeOpacity": 0.3,
+        "animationDuration": 200
+      }
+    }
+  },
+
+  "animation": {
+    "defaultDuration": 1500,
+    "minDuration": 100,
+    "maxDuration": 3000,
+    "easingFunction": "smoothstep",
+    "interruptBehavior": "cancelAndSnap",
+    "description": "interruptBehavior: 'cancelAndSnap' means new layout cancels old and snaps to current interpolated position"
+  },
+
+  "monitoring": {
+    "sampleWindowMs": 1000,
+    "sampleCount": 60,
+    "degradeAfterConsecutiveDrops": 10,
+    "upgradeAfterConsecutiveGood": 30,
+    "hudEnabled": true,
+    "hudPosition": "bottom-left",
+    "description": "Performance monitoring and auto-adaptation settings"
+  },
+
+  "invariants": {
+    "positionOwnership": "single",
+    "ownerPriority": ["transition", "motion", "flock", "force"],
+    "description": "At any moment, exactly ONE system owns node positions. Priority order for conflicts."
+  }
+}

@@ -519,6 +519,7 @@ def generate_webgl_html(json_source: Any, output_path: str):
     html_content = template.replace(mangled_styles, styles)
     html_content = html_content.replace("{{STYLES}}", styles)
     html_content = html_content.replace("{ { APP_JS } }", app_js_unescaped)
+    html_content = html_content.replace("{{APP_JS}}", app_js_unescaped)
     html_content = html_content.replace("{{VERSION}}", str(version))
     # Note: {{PAYLOAD}} in template is already replaced via app_js_unescaped
 

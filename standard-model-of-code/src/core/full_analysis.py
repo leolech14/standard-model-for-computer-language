@@ -20,6 +20,7 @@ from collections import Counter, defaultdict
 from typing import Dict, List, Any, Optional
 
 
+
 # =============================================================================
 # FILE-CENTRIC VIEW: Bridges atom-centric analysis with file-based navigation
 # =============================================================================
@@ -533,7 +534,7 @@ def _generate_ai_insights(full_output: Dict, output_dir: Path, options: Dict) ->
 
 def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[str, Any] = None) -> Dict:
     """Run complete analysis with all theoretical frameworks."""
-    
+
     if options is None:
         options = {}
     open_latest = options.get("open_latest")
@@ -541,18 +542,27 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         open_latest = False
     if options.get("no_open", False):
         open_latest = False
-    
+
     start_time = time.time()
     target = Path(target_path).resolve()
     resolved_output_dir = _resolve_output_dir(target, output_dir)
-    
+
+    # Import analysis functions (must come before observability import)
+    sys.path.insert(0, str(Path(__file__).parent))
+
+    # Initialize observability
+    timing_enabled = options.get("timing", False)
+    verbose_timing = options.get("verbose_timing", False)
+    from observability import PerformanceManager, StageTimer
+    perf_manager = PerformanceManager(verbose=verbose_timing)
+    perf_manager.start_pipeline()
+
     print("=" * 60)
     print("COLLIDER FULL ANALYSIS")
     print(f"Target: {target}")
+    if timing_enabled or verbose_timing:
+        print("Performance Tracking: ENABLED")
     print("=" * 60)
-    
-    # Import analysis functions
-    sys.path.insert(0, str(Path(__file__).parent))
     
     from unified_analysis import analyze
     from standard_model_enricher import enrich_with_standard_model
@@ -566,78 +576,96 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     
     # Stage 1: Base analysis
     print("\n🔬 Stage 1: Base Analysis...")
-    analysis_options = dict(options)
-    analysis_options.pop("roadmap", None)
-    result = analyze(str(target), output_dir=str(resolved_output_dir), write_output=False, **analysis_options)
-    nodes = result.nodes if hasattr(result, 'nodes') else result.get('nodes', [])
-    edges = result.edges if hasattr(result, 'edges') else result.get('edges', [])
-    unified_stats = getattr(result, 'stats', {}) if hasattr(result, 'stats') else result.get('stats', {})
-    unified_classification = getattr(result, 'classification', {}) if hasattr(result, 'classification') else result.get('classification', {})
-    unified_auto_discovery = getattr(result, 'auto_discovery', {}) if hasattr(result, 'auto_discovery') else result.get('auto_discovery', {})
-    unified_dependencies = getattr(result, 'dependencies', {}) if hasattr(result, 'dependencies') else result.get('dependencies', {})
-    unified_architecture = getattr(result, 'architecture', {}) if hasattr(result, 'architecture') else result.get('architecture', {})
-    unified_llm_enrichment = getattr(result, 'llm_enrichment', {}) if hasattr(result, 'llm_enrichment') else result.get('llm_enrichment', {})
-    unified_warnings = getattr(result, 'warnings', []) if hasattr(result, 'warnings') else result.get('warnings', [])
-    unified_recommendations = getattr(result, 'recommendations', []) if hasattr(result, 'recommendations') else result.get('recommendations', [])
+    with StageTimer(perf_manager, "Stage 1: Base Analysis") as timer:
+        analysis_options = dict(options)
+        analysis_options.pop("roadmap", None)
+        result = analyze(str(target), output_dir=str(resolved_output_dir), write_output=False, **analysis_options)
+        nodes = result.nodes if hasattr(result, 'nodes') else result.get('nodes', [])
+        edges = result.edges if hasattr(result, 'edges') else result.get('edges', [])
+        unified_stats = getattr(result, 'stats', {}) if hasattr(result, 'stats') else result.get('stats', {})
+        unified_classification = getattr(result, 'classification', {}) if hasattr(result, 'classification') else result.get('classification', {})
+        unified_auto_discovery = getattr(result, 'auto_discovery', {}) if hasattr(result, 'auto_discovery') else result.get('auto_discovery', {})
+        unified_dependencies = getattr(result, 'dependencies', {}) if hasattr(result, 'dependencies') else result.get('dependencies', {})
+        unified_architecture = getattr(result, 'architecture', {}) if hasattr(result, 'architecture') else result.get('architecture', {})
+        unified_llm_enrichment = getattr(result, 'llm_enrichment', {}) if hasattr(result, 'llm_enrichment') else result.get('llm_enrichment', {})
+        unified_warnings = getattr(result, 'warnings', []) if hasattr(result, 'warnings') else result.get('warnings', [])
+        unified_recommendations = getattr(result, 'recommendations', []) if hasattr(result, 'recommendations') else result.get('recommendations', [])
+        timer.set_output(nodes=len(nodes), edges=len(edges))
     print(f"   → {len(nodes)} nodes, {len(edges)} edges")
     
     # Stage 2: Standard Model enrichment
     print("\n🧬 Stage 2: Standard Model Enrichment...")
-    nodes = enrich_with_standard_model(nodes)
-    rpbl_count = sum(1 for n in nodes if n.get('rpbl'))
+    with StageTimer(perf_manager, "Stage 2: Standard Model Enrichment") as timer:
+        nodes = enrich_with_standard_model(nodes)
+        rpbl_count = sum(1 for n in nodes if n.get('rpbl'))
+        timer.set_output(nodes=len(nodes), rpbl_enriched=rpbl_count)
     print(f"   → {rpbl_count} nodes with RPBL scores")
 
     # Stage 2.5: Ecosystem discovery (hybrid T2 approach)
     print("\n🧭 Stage 2.5: Ecosystem Discovery...")
-    try:
-        from discovery_engine import discover_ecosystem_unknowns
-        ecosystem_discovery = discover_ecosystem_unknowns(nodes)
-        print(f"   → {ecosystem_discovery.get('total_unknowns', 0)} unknown ecosystem patterns")
-    except Exception as e:
-        ecosystem_discovery = {}
-        print(f"   ⚠️ Ecosystem discovery skipped: {e}")
-    
+    with StageTimer(perf_manager, "Stage 2.5: Ecosystem Discovery") as timer:
+        try:
+            from discovery_engine import discover_ecosystem_unknowns
+            ecosystem_discovery = discover_ecosystem_unknowns(nodes)
+            timer.set_output(unknowns=ecosystem_discovery.get('total_unknowns', 0))
+            print(f"   → {ecosystem_discovery.get('total_unknowns', 0)} unknown ecosystem patterns")
+        except Exception as e:
+            ecosystem_discovery = {}
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Ecosystem discovery skipped: {e}")
+
     # Stage 3: Purpose Field
     print("\n🎯 Stage 3: Purpose Field...")
-    purpose_field = detect_purpose_field(nodes, edges)
+    with StageTimer(perf_manager, "Stage 3: Purpose Field") as timer:
+        purpose_field = detect_purpose_field(nodes, edges)
+        timer.set_output(nodes=len(purpose_field.nodes), violations=len(purpose_field.violations))
     print(f"   → {len(purpose_field.nodes)} purpose nodes")
     print(f"   → {len(purpose_field.violations)} violations")
-    
+
     # Stage 4: Execution Flow
     print("\n⚡ Stage 4: Execution Flow...")
-    exec_flow = detect_execution_flow(nodes, edges, purpose_field)
-    
+    with StageTimer(perf_manager, "Stage 4: Execution Flow") as timer:
+        exec_flow = detect_execution_flow(nodes, edges, purpose_field)
+        timer.set_output(entry_points=len(exec_flow.entry_points), orphans=len(exec_flow.orphans))
     print(f"   → {len(exec_flow.entry_points)} entry points")
     print(f"   → {len(exec_flow.orphans)} orphans ({exec_flow.dead_code_percent}% dead code)")
-    
+
     # Stage 5: Markov Matrix
     print("\n📊 Stage 5: Markov Transition Matrix...")
-    markov = compute_markov_matrix(nodes, edges)
+    with StageTimer(perf_manager, "Stage 5: Markov Transition Matrix") as timer:
+        markov = compute_markov_matrix(nodes, edges)
+        timer.set_output(transitions=markov['total_transitions'], edges_weighted=markov['edges_with_weight'])
     print(f"   → {markov['total_transitions']} nodes with transitions")
     print(f"   → {markov['edges_with_weight']} edges with markov_weight")
     print(f"   → {markov['avg_fanout']:.1f} avg fanout")
-    
+
     # Stage 6: Knot Detection
     print("\n🔗 Stage 6: Knot/Cycle Detection...")
-    knots = detect_knots(nodes, edges)
+    with StageTimer(perf_manager, "Stage 6: Knot/Cycle Detection") as timer:
+        knots = detect_knots(nodes, edges)
+        timer.set_output(cycles=knots['cycles_detected'], bidirectional=knots['bidirectional_edges'])
     print(f"   → {knots['cycles_detected']} cycles detected")
     print(f"   → {knots['bidirectional_edges']} bidirectional edges")
     print(f"   → Knot score: {knots['knot_score']}/10")
-    
+
     # Stage 7: Data Flow
     print("\n🌊 Stage 7: Data Flow Analysis...")
-    data_flow = compute_data_flow(nodes, edges)
+    with StageTimer(perf_manager, "Stage 7: Data Flow Analysis") as timer:
+        data_flow = compute_data_flow(nodes, edges)
+        timer.set_output(sources=len(data_flow['data_sources']), sinks=len(data_flow['data_sinks']))
     print(f"   → {len(data_flow['data_sources'])} data sources")
     print(f"   → {len(data_flow['data_sinks'])} data sinks")
-    
+
     # Stage 8: Performance Prediction
     print("\n⏱️  Stage 8: Performance Prediction...")
-    try:
-        perf = predict_performance(nodes, edges)
-        perf_summary = perf.summary() if hasattr(perf, 'summary') else {}
-    except Exception as e:
-        print(f"   ⚠️  Performance prediction skipped: {e}")
-        perf_summary = {}
+    with StageTimer(perf_manager, "Stage 8: Performance Prediction") as timer:
+        try:
+            perf = predict_performance(nodes, edges)
+            perf_summary = perf.summary() if hasattr(perf, 'summary') else {}
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️  Performance prediction skipped: {e}")
+            perf_summary = {}
     
     # Compute aggregate metrics
     total_time = time.time() - start_time
@@ -758,73 +786,89 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     # FILE-CENTRIC VIEW: Hybrid atom/file navigation
     # ==========================================================================
     print("\n📁 Building file index...")
-    files_index = build_file_index(nodes, edges, str(target))
-    file_boundaries = build_file_boundaries(files_index)
-
-    full_output['files'] = files_index
-    full_output['file_boundaries'] = file_boundaries
-    full_output['counts']['files_with_atoms'] = len(files_index)
+    with StageTimer(perf_manager, "File Index Building") as timer:
+        files_index = build_file_index(nodes, edges, str(target))
+        file_boundaries = build_file_boundaries(files_index)
+        full_output['files'] = files_index
+        full_output['file_boundaries'] = file_boundaries
+        full_output['counts']['files_with_atoms'] = len(files_index)
+        timer.set_output(files=len(files_index), atoms_mapped=sum(f['atom_count'] for f in file_boundaries))
 
     print(f"   → {len(files_index)} files indexed")
     print(f"   → {sum(f['atom_count'] for f in file_boundaries)} atoms mapped to files")
 
     # Save output
     out_path = resolved_output_dir
-    
+
     out_path.mkdir(parents=True, exist_ok=True)
 
     # NOTE: The LLM-oriented output JSON is the single source of truth for analysis results.
 
     # Stage 9: Roadmap Evaluation
     print("\n🛣️  Stage 9: Roadmap Evaluation...")
-    roadmap_name = options.get('roadmap')
-    if roadmap_name:
-        try:
-            roadmap_path = Path(__file__).parent / "roadmaps" / f"{roadmap_name}.json"
-            if roadmap_path.exists():
-                evaluator = RoadmapEvaluator(str(roadmap_path))
-                # Collect all file paths
-                all_files = [str(f) for f in Path(target_path).rglob('*') if f.is_file()]
-                roadmap_result = evaluator.evaluate(all_files)
-                full_output['roadmap'] = roadmap_result
-                print(f"   → Roadmap '{roadmap_name}' analyzed: {roadmap_result['readiness_score']:.0f}% ready")
-            else:
-                print(f"   ⚠️ Roadmap '{roadmap_name}' not found in roadmaps directory")
-        except Exception as e:
-            print(f"   ⚠️ Roadmap analysis failed: {e}")
-            import traceback
-            traceback.print_exc()
-    else:
-        print("   → Skipped (no --roadmap specified)")
+    with StageTimer(perf_manager, "Stage 9: Roadmap Evaluation") as timer:
+        roadmap_name = options.get('roadmap')
+        if roadmap_name:
+            try:
+                roadmap_path = Path(__file__).parent / "roadmaps" / f"{roadmap_name}.json"
+                if roadmap_path.exists():
+                    evaluator = RoadmapEvaluator(str(roadmap_path))
+                    # Collect all file paths
+                    all_files = [str(f) for f in Path(target_path).rglob('*') if f.is_file()]
+                    roadmap_result = evaluator.evaluate(all_files)
+                    full_output['roadmap'] = roadmap_result
+                    timer.set_output(readiness=roadmap_result.get('readiness_score', 0))
+                    print(f"   → Roadmap '{roadmap_name}' analyzed: {roadmap_result['readiness_score']:.0f}% ready")
+                else:
+                    timer.set_status("WARN", f"Roadmap '{roadmap_name}' not found")
+                    print(f"   ⚠️ Roadmap '{roadmap_name}' not found in roadmaps directory")
+            except Exception as e:
+                timer.set_status("WARN", str(e))
+                print(f"   ⚠️ Roadmap analysis failed: {e}")
+                import traceback
+                traceback.print_exc()
+        else:
+            timer.set_status("SKIP")
+            print("   → Skipped (no --roadmap specified)")
 
     # Stage 10: Visual Topology Analysis
     print("\n🧠 Stage 10: Visual Reasoning...")
-    try:
-        topo = TopologyClassifier()
-        topology_result = topo.classify(nodes, edges)
-        full_output['topology'] = topology_result
-        full_output['kpis']['topology_shape'] = topology_result.get('shape', 'UNKNOWN')
-        print(f"   → Visual Shape: {topology_result['shape']}")
-        print(f"   → Description: {topology_result['description']}")
-    except Exception as e:
-        print(f"   ⚠️ Topology analysis failed: {e}")
+    with StageTimer(perf_manager, "Stage 10: Visual Reasoning") as timer:
+        try:
+            topo = TopologyClassifier()
+            topology_result = topo.classify(nodes, edges)
+            full_output['topology'] = topology_result
+            full_output['kpis']['topology_shape'] = topology_result.get('shape', 'UNKNOWN')
+            timer.set_output(shape=topology_result.get('shape', 'UNKNOWN'))
+            print(f"   → Visual Shape: {topology_result['shape']}")
+            print(f"   → Description: {topology_result['description']}")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Topology analysis failed: {e}")
 
     # Stage 11: Semantic Cortex (Concept Extraction)
     print("\n🧠 Stage 11: Semantic Cortex...")
-    try:
-        cortex = ConceptExtractor()
-        semantics = cortex.extract_concepts(nodes)
-        full_output['semantics'] = semantics
-        print(f"   → Domain Inference: {semantics['domain_inference']}")
-        print(f"   → Top Concepts: {', '.join([t['term'] for t in semantics['top_concepts'][:5]])}")
-    except Exception as e:
-        print(f"   ⚠️ Semantic analysis failed: {e}")
+    with StageTimer(perf_manager, "Stage 11: Semantic Cortex") as timer:
+        try:
+            cortex = ConceptExtractor()
+            semantics = cortex.extract_concepts(nodes)
+            full_output['semantics'] = semantics
+            timer.set_output(concepts=len(semantics.get('top_concepts', [])))
+            print(f"   → Domain Inference: {semantics['domain_inference']}")
+            print(f"   → Top Concepts: {', '.join([t['term'] for t in semantics['top_concepts'][:5]])}")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Semantic analysis failed: {e}")
 
     # ==========================================================================
     # OUTPUT CONSOLIDATION: 2 files only
     # 1. output_llm-oriented_<project>_<timestamp>.json - Structured knowledge bundle
     # 2. output_human-readable_<project>_<timestamp>.html - Visual report (embeds Brain Download)
     # ==========================================================================
+
+    # Add performance data BEFORE generating brain_download (so it's included in markdown)
+    if timing_enabled or verbose_timing:
+        full_output['pipeline_performance'] = perf_manager.to_dict()
 
     # Generate Brain Download content (for embedding in HTML)
     from brain_download import generate_brain_download
@@ -834,30 +878,44 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     # Stage 11b: AI Insights (optional - requires Vertex AI)
     if options.get('ai_insights'):
         print("\n✨ Stage 11b: AI Insights Generation (Vertex AI)...")
-        try:
-            ai_insights = _generate_ai_insights(full_output, out_path, options)
-            if ai_insights:
-                full_output['ai_insights'] = ai_insights
-                print("   → AI insights generated successfully")
-            else:
-                print("   ⚠️ AI insights generation returned no results")
-        except Exception as e:
-            print(f"   ⚠️ AI insights generation failed: {e}")
+        with StageTimer(perf_manager, "Stage 11b: AI Insights") as timer:
+            try:
+                ai_insights = _generate_ai_insights(full_output, out_path, options)
+                if ai_insights:
+                    full_output['ai_insights'] = ai_insights
+                    timer.set_output(insights=len(ai_insights) if isinstance(ai_insights, list) else 1)
+                    print("   → AI insights generated successfully")
+                else:
+                    timer.set_status("WARN", "No results returned")
+                    print("   ⚠️ AI insights generation returned no results")
+            except Exception as e:
+                timer.set_status("FAIL", str(e))
+                print(f"   ⚠️ AI insights generation failed: {e}")
 
     # Stage 12: Write consolidated outputs
     print("\n📦 Stage 12: Generating Consolidated Outputs...")
 
     unified_json = None
     viz_file = None
-    try:
-        from src.core.output_generator import generate_outputs
-        outputs = generate_outputs(full_output, out_path, target_name=target.name)
-        unified_json = outputs["llm"]
-        viz_file = outputs["html"]
-        print(f"   → Data: {unified_json}")
-        print(f"   → Visual: {viz_file}")
-    except Exception as e:
-        print(f"   ⚠️ Output generation failed: {e}")
+    with StageTimer(perf_manager, "Stage 12: Output Generation") as timer:
+        try:
+            # Add performance data INSIDE timer but BEFORE write (includes stages 1-11)
+            if timing_enabled or verbose_timing:
+                full_output['pipeline_performance'] = perf_manager.to_dict()
+
+            from src.core.output_generator import generate_outputs
+            outputs = generate_outputs(full_output, out_path, target_name=target.name)
+            unified_json = outputs["llm"]
+            viz_file = outputs["html"]
+            timer.set_output(json=1, html=1)
+            print(f"   → Data: {unified_json}")
+            print(f"   → Visual: {viz_file}")
+        except Exception as e:
+            timer.set_status("FAIL", str(e))
+            print(f"   ⚠️ Output generation failed: {e}")
+
+    # Final timing summary
+    total_time = time.time() - start_time
 
     print("\n" + "=" * 60)
     print("✅ FULL ANALYSIS COMPLETE")
@@ -866,6 +924,11 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         print(f"   Data:   {unified_json}")
     if viz_file:
         print(f"   Visual: {viz_file}")
+
+    # Print timing summary if enabled
+    if timing_enabled and not verbose_timing:
+        perf_manager.print_summary()
+
     if open_latest:
         latest_html = _find_latest_html(out_path)
         if latest_html:
@@ -876,7 +939,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         else:
             print("   ⚠️  No HTML outputs found to open.")
     print("=" * 60)
-    
+
     return full_output
 
 

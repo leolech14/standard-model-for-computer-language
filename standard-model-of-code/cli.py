@@ -178,6 +178,16 @@ def main():
         default="gemini-2.0-flash-001",
         help="Gemini model for insights generation (default: gemini-2.0-flash-001)"
     )
+    full_parser.add_argument(
+        "--timing",
+        action="store_true",
+        help="Enable pipeline timing metrics (summary at end)"
+    )
+    full_parser.add_argument(
+        "--verbose-timing",
+        action="store_true",
+        help="Print per-stage timing during execution (implies --timing)"
+    )
 
     # ==========================================
     # GRAPH Command
@@ -380,6 +390,12 @@ def main():
             if getattr(args, 'ai_insights', False):
                 options["ai_insights"] = True
                 options["ai_insights_model"] = getattr(args, 'ai_insights_model', 'gemini-2.0-flash-001')
+            # Timing options
+            if getattr(args, 'verbose_timing', False):
+                options["verbose_timing"] = True
+                options["timing"] = True  # verbose implies timing
+            elif getattr(args, 'timing', False):
+                options["timing"] = True
             run_full_analysis(args.path, args.output, options=options)
         except Exception as e:
             print(f"❌ Full analysis failed: {e}")
