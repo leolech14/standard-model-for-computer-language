@@ -66,6 +66,33 @@
 3. Know which hemisphere you're in
 4. Large outputs → offload to GCS
 
+## Commit Convention: AI-Native
+
+For significant commits, structure messages as **knowledge transfer artifacts** for future AI agents:
+
+```
+<type>: <summary>
+
+## CHANGES
+| File | Description |
+|------|-------------|
+
+## API (if changed)
+// Usage: MODULE.function()
+
+## FINDING CODE
+grep -r "PATTERN" path/
+
+## TESTING
+./collider full . --output .collider_report
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+Types: `feat`, `fix`, `refactor`, `docs`, `chore`
+
+This is a **pattern**, not automation. Apply it when commits are significant.
+
 ## Hemisphere Handoff
 
 For Body (Collider) work:

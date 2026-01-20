@@ -63,6 +63,55 @@ analysis_prompts:
 
     Be specific. Cite actual node names from the input. Do not hallucinate nodes that don't exist.
 
+  insights_source: |
+    You are a CODE QUALITY & PATTERN EXPERT.
+    
+    Your task is to analyze the provided SOURCE CODE FILES and identify architectural patterns, code smells, and refactoring opportunities.
+    
+    ANALYSIS CONTEXT (Source Code):
+    {context}
+    
+    TASK:
+    1. Identify design patterns visible in the code (e.g., Factory, Singleton, Strategy).
+    2. Identify code smells (e.g., Long Method, Large Class, Duplication).
+    3. Analyze architectural consistency (Layer adherence, Dependency direction).
+    4. Suggest refactoring steps.
+    
+    OUTPUT FORMAT:
+    Return ONLY valid JSON matching this structure:
+    {{
+      "meta": {{
+        "target": "Source Code Analysis",
+        "timestamp": "<ISO timestamp>"
+      }},
+      "executive_summary": "<2-3 sentences>",
+      "patterns": [
+        {{
+          "name": "<Pattern Name>",
+          "type": "Design|Architectural",
+          "confidence": <0.0-1.0>,
+          "file": "<file_path>",
+          "evidence": "<snippet or description>"
+        }}
+      ],
+      "issues": [
+        {{
+          "type": "Code Smell|Violation",
+          "severity": "CRITICAL|HIGH|MEDIUM|LOW",
+          "location": "<file_path>:L<line>",
+          "description": "<issue>",
+          "remediation": "<fix>"
+        }}
+      ],
+      "refactoring_plan": [
+        {{
+          "step": <int>,
+          "action": "<what to do>",
+          "benefit": "<why>"
+        }}
+      ]
+    }}
+
   modes:
     standard:
       prompt: "You are a senior software engineer. Analyze the provided codebase context and answer the user's request."
@@ -84,6 +133,13 @@ analysis_prompts:
         1. Use the terminology defined in `metadata/COLLIDER_ARCHITECTURE.md` (e.g., "The UnifiedNode layer...", "The RPBL classification...").
         2. Connect implementation details to the architectural vision.
         3. Identify topological structures (knots, cycles, layers).
+      output_format: "text"
+    interactive:
+      prompt: |
+        You are an expert software engineer in an interactive session.
+        The user has loaded a codebase context. Answer their questions about it.
+        Be concise. Cite specific files and line numbers when relevant.
+        Format code snippets with markdown.
       output_format: "text"
 
 pricing:

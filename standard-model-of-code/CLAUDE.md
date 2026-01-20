@@ -17,7 +17,8 @@
 | Document | Path | Contents |
 |----------|------|----------|
 | Model | `docs/MODEL.md` | Theory, atoms, roles, proofs, history |
-| Collider | `docs/COLLIDER.md` | Commands, pipeline, lookup, troubleshooting |
+| Collider | `docs/COLLIDER.md` | Commands, pipeline, visualization controls |
+| Viz UI Spec | `docs/specs/VISUALIZATION_UI_SPEC.md` | Technical spec for interactive UI |
 
 ## Commands
 
@@ -44,7 +45,10 @@
 | Role definitions | `schema/fixed/roles.json` |
 | HTML template | `src/core/viz/assets/template.html` |
 | HTML styles | `src/core/viz/assets/styles.css` |
-| HTML JS | `src/core/viz/assets/app.js` |
+| HTML JS (legacy) | `src/core/viz/assets/app.js` |
+| Control Bar | `src/core/viz/assets/modules/control-bar.js` |
+| File Viz | `src/core/viz/assets/modules/file-viz.js` |
+| File Enricher | `src/core/file_enricher.py` |
 
 ## Output Files
 
@@ -87,6 +91,14 @@
 | VISUAL REASONING | Topology shape (Star, Mesh, Islands) |
 | DOMAIN CONTEXT | Inferred business domain |
 | AI INSIGHTS | Pattern detection (if `--ai-insights`) |
+
+## Visualization Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `M` or `` ` `` | Toggle Control Bar (visual mapping) |
+| `I` | Show info for selected nodes |
+| `Escape` | Close panels |
 
 ## Rules
 
