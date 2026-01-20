@@ -1781,11 +1781,11 @@ function runSelfTest(data) {
         updateHoverPanel(null);
     }
 
-    // Test 2: Stats panel populated (stats-* elements)
-    const statsNodes = document.getElementById('stats-nodes');
-    const statsEdges = document.getElementById('stats-edges');
-    test('stats-panel-nodes-populated', statsNodes && statsNodes.textContent !== '0');
-    test('stats-panel-edges-populated', statsEdges && statsEdges.textContent !== '0');
+    // Test 2: Header stats populated (stat-* elements - these are set early)
+    const headerNodes = document.getElementById('stat-nodes');
+    const headerEdges = document.getElementById('stat-edges');
+    test('header-nodes-populated', headerNodes && headerNodes.textContent !== '0');
+    test('header-edges-populated', headerEdges && headerEdges.textContent !== '0');
 
     // Test 3: Data integrity
     test('nodes-count-positive', data.nodes && data.nodes.length > 0);
