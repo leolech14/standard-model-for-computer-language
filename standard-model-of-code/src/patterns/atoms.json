@@ -84,6 +84,54 @@
             "name": "Dependency",
             "layer": "System",
             "description": "External library, imported package, sidecar"
+        },
+        "DAT.BIT.A": {
+            "id": "DAT.BIT.A",
+            "name": "Bit",
+            "layer": "Data",
+            "description": "Bit-level data operations. Examples: BitFlag, BitMask, ParityBit."
+        },
+        "DAT.COL.A": {
+            "id": "DAT.COL.A",
+            "name": "Collection",
+            "layer": "Data",
+            "description": "Collection literals. Examples: ArrayLiteral, ObjectLiteral, TupleLiteral."
+        },
+        "EXE.IO.O": {
+            "id": "EXE.IO.O",
+            "name": "IO Operation",
+            "layer": "Execution",
+            "description": "I/O operations. Examples: FileRead, FileWrite, NetworkRead, HttpRequest."
+        },
+        "EXE.MEM.O": {
+            "id": "EXE.MEM.O",
+            "name": "Memory Operation",
+            "layer": "Execution",
+            "description": "Memory management operations. Examples: Allocation, Deallocation, Reference, Clone."
+        },
+        "EXE.MET.O": {
+            "id": "EXE.MET.O",
+            "name": "Metaprogramming",
+            "layer": "Execution",
+            "description": "Metaprogramming operations. Examples: MacroDef, Reflection, CodeGen, FFI."
+        },
+        "EXE.WRK.O": {
+            "id": "EXE.WRK.O",
+            "name": "Worker",
+            "layer": "Execution",
+            "description": "Concurrency primitives. Examples: Thread, Process, Goroutine, Task, Future."
+        },
+        "ORG.FIL.O": {
+            "id": "ORG.FIL.O",
+            "name": "File",
+            "layer": "Organization",
+            "description": "Code organization at the file level. Examples: SourceFile, Header, ConfigFile."
+        },
+        "ORG.TYP.O": {
+            "id": "ORG.TYP.O",
+            "name": "Type",
+            "layer": "Organization",
+            "description": "Type system constructs. Examples: TypeRef, ArrayType, FunctionType."
         }
     },
     "mappings": {

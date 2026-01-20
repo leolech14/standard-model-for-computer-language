@@ -16,10 +16,34 @@ class HeuristicClassifier:
     Deterministic naming pattern classifier (Tier 3).
     Acts as a fallback when topological and inheritance extraction fail.
     """
-    
+
+    # Mappings for the 20 missing canonical roles from TAXONOMY_GAP_REPORT.md
+    MISSING_CANONICAL_ROLES = {
+        'Asserter': ['assert', 'ensure', 'must'],
+        'Cache': ['cache', 'memoize'],
+        'Creator': ['create', 'new_entity', 'make_record'],
+        'Destroyer': ['destroy', 'delete_entity', 'remove_record'],
+        'Emitter': ['emit', 'publish', 'broadcast'],
+        'Finder': ['find', 'search'],
+        'Formatter': ['format', 'pretty_print', 'display_as'],
+        'Getter': ['get_property', 'accessor'],
+        'Guard': ['guard', 'can_activate', 'protect', 'check_access'],
+        'Helper': ['helper', 'assist'],
+        'Listener': ['listen', 'observe'],
+        'Loader': ['load_data', 'fetch_from_source'],
+        'Manager': ['manage', 'resource_manager'],
+        'Mutator': ['mutate', 'modify', 'update_state'],
+        'Orchestrator': ['orchestrate', 'coordinate', 'workflow'],
+        'Parser': ['parse', 'lex', 'tokenize'],
+        'Serializer': ['serialize', 'dump_to_format'],
+        'Store': ['store', 'state_store', 'app_state'],
+        'Subscriber': ['subscribe', 'on_message'],
+        'Transformer': ['transform', 'convert_data']
+    }
+
     # Prefix patterns to detect
     PREFIX_ROLES = {
-        'test_': 'Test',
+        'test_': 'Asserter',
         'get_': 'Query',
         'set_': 'Command',
         'add_': 'Command',
@@ -33,10 +57,10 @@ class HeuristicClassifier:
         'fetch_': 'Query',
         'load_': 'Query',
         'save_': 'Command',
-        'is_': 'Specification',
-        'has_': 'Specification',
-        'can_': 'Specification',
-        'should_': 'Specification',
+        'is_': 'Asserter',
+        'has_': 'Asserter',
+        'can_': 'Asserter',
+        'should_': 'Asserter',
         'validate_': 'Validator',
         'check_': 'Validator',
         'parse_': 'Utility',
@@ -46,8 +70,8 @@ class HeuristicClassifier:
         'to_': 'Mapper', 
         'from_': 'Factory',
         'as_': 'Mapper',
-        'handle_': 'EventHandler',
-        'on_': 'EventHandler',
+        'handle_': 'Handler',
+        'on_': 'Handler',
         'do_': 'Command',
         'run_': 'Command',
         'execute_': 'UseCase',
@@ -61,9 +85,9 @@ class HeuristicClassifier:
     
     # Suffix patterns
     SUFFIX_ROLES = {
-        '_handler': 'EventHandler',
-        '_callback': 'EventHandler',
-        '_hook': 'EventHandler',
+        '_handler': 'Handler',
+        '_callback': 'Handler',
+        '_hook': 'Handler',
         '_validator': 'Validator',
         '_factory': 'Factory',
         '_builder': 'Builder',
@@ -77,49 +101,49 @@ class HeuristicClassifier:
         '_serializer': 'Mapper',
         '_deserializer': 'Mapper',
         '_converter': 'Mapper',
-        '_adapter': 'Adapter',
+        '_adapter': 'Mapper',
         '_decorator': 'Utility',
         '_wrapper': 'Utility',
         '_mixin': 'Utility',
-        '_test': 'Test',
-        '_spec': 'Specification',
+        '_test': 'Asserter',
+        '_spec': 'Asserter',
         # Java conventions (camelCase)
         'Service': 'Service',
         'Repository': 'Repository',
         'Controller': 'Controller',
-        'Handler': 'EventHandler',
+        'Handler': 'Handler',
         'Factory': 'Factory',
         'Builder': 'Builder',
         'Mapper': 'Mapper',
         'Validator': 'Validator',
-        'Provider': 'Provider',
-        'Client': 'Client',
-        'Impl': 'RepositoryImpl',
+        'Factory': 'Factory',
+        'Service': 'Service',
+        'Impl': 'Internal',
         # Go conventions
-        'Handler': 'EventHandler',
-        'Middleware': 'Service',
+        'Handler': 'Handler',
+        'Guard': 'Service',
     }
     
     # Java/TypeScript prefix patterns (for polyglot support)
     JAVA_TS_PREFIX_ROLES = {
         # Java test patterns
-        'test': 'Test',       # testUserLogin
-        'should': 'Test',     # shouldReturnUser
-        'given': 'Test',      # givenValidInput
-        'when': 'Test',       # whenUserLogsIn
-        'then': 'Test',       # thenReturnSuccess
+        'test': 'Asserter',       # testUserLogin
+        'should': 'Asserter',     # shouldReturnUser
+        'given': 'Asserter',      # givenValidInput
+        'when': 'Asserter',       # whenUserLogsIn
+        'then': 'Asserter',       # thenReturnSuccess
         # TypeScript/Jest patterns  
-        'describe': 'Test',   # describe('UserService')
-        'it': 'Test',         # it('should work')
+        'describe': 'Asserter',   # describe('UserService')
+        'it': 'Asserter',         # it('should work')
         'expect': 'Validator',
-        'beforeEach': 'Fixture',
-        'afterEach': 'Fixture',
-        'beforeAll': 'Fixture',
-        'afterAll': 'Fixture',
+        'beforeEach': 'Asserter',
+        'afterEach': 'Asserter',
+        'beforeAll': 'Asserter',
+        'afterAll': 'Asserter',
         # Go patterns
-        'Test': 'Test',       # TestUserLogin
-        'Benchmark': 'Test',  # BenchmarkSort
-        'Example': 'Test',    # ExampleSort
+        'Asserter': 'Asserter',       # TestUserLogin
+        'Benchmark': 'Asserter',  # BenchmarkSort
+        'Example': 'Asserter',    # ExampleSort
         # Angular/NestJS
         'ng': 'Service',      # ngOnInit
         '@Injectable': 'Service',
@@ -129,7 +153,7 @@ class HeuristicClassifier:
         '@Service': 'Service',
         '@Repository': 'Repository',
         '@Controller': 'Controller',
-        '@Test': 'Test',
+        '@Test': 'Asserter',
     }
     
     # Dunder methods
@@ -139,21 +163,21 @@ class HeuristicClassifier:
         '__del__': 'Lifecycle',
         '__str__': 'Utility',
         '__repr__': 'Utility',
-        '__eq__': 'Specification',
-        '__ne__': 'Specification',
-        '__lt__': 'Specification',
-        '__le__': 'Specification',
-        '__gt__': 'Specification',
-        '__ge__': 'Specification',
+        '__eq__': 'Asserter',
+        '__ne__': 'Asserter',
+        '__lt__': 'Asserter',
+        '__le__': 'Asserter',
+        '__gt__': 'Asserter',
+        '__ge__': 'Asserter',
         '__hash__': 'Utility',
-        '__bool__': 'Specification',
+        '__bool__': 'Asserter',
         '__len__': 'Query',
-        '__iter__': 'Iterator',
-        '__next__': 'Iterator',
+        '__iter__': 'Query',
+        '__next__': 'Query',
         '__getitem__': 'Query',
         '__setitem__': 'Command',
         '__delitem__': 'Command',
-        '__contains__': 'Specification',
+        '__contains__': 'Asserter',
         '__call__': 'Command',
         '__enter__': 'Lifecycle',
         '__exit__': 'Lifecycle',
@@ -186,7 +210,7 @@ class HeuristicClassifier:
         # - File path would contain "test" (handled separately)
         if any(pattern in full_name_lower for pattern in ['test.', '.test', 'test_', '_test', 'tests.', '.tests']):
             self.discovered_patterns['test_context'] += 1
-            return ('Test', 90.0)
+            return ('Asserter', 90.0)
         
         # 1. Check dunder methods (highest confidence)
         if short_lower.startswith('__') and short_lower.endswith('__'):
@@ -195,7 +219,13 @@ class HeuristicClassifier:
                     return (role, 95.0)
             # Unknown dunder
             return ('Utility', 70.0)
-        
+
+        # 1.5 Check for missing canonical role keywords (High Priority)
+        for role, keywords in self.MISSING_CANONICAL_ROLES.items():
+            if any(keyword in short_lower for keyword in keywords):
+                self.discovered_patterns[f'canonical_keyword:{role}'] += 1
+                return (role, 90.0)
+
         # 2. Check prefix patterns
         for prefix, role in self.PREFIX_ROLES.items():
             if short_lower.startswith(prefix):
@@ -245,7 +275,7 @@ class HeuristicClassifier:
         has_domain_suffix = any(short.endswith(s) for s in ['Service', 'Repository', 'Controller', 'Handler', 'Factory', 'Builder', 'Mapper', 'Validator'])
         if is_fixture and not has_domain_suffix:
             self.discovered_patterns['fixture/example'] += 1
-            return ('Fixture', 70.0)
+            return ('Asserter', 70.0)
         
         # 7. Common framework patterns
         if any(x in short_lower for x in ['endpoint', 'route', 'view', 'page']):
@@ -338,7 +368,7 @@ class HeuristicClassifier:
         # 24. Error/Exception/Not Found patterns
         if any(x in short_lower for x in ['error', 'exception', 'not_found', 'missing', 'invalid', 'fail']):
             self.discovered_patterns['error'] += 1
-            return ('Exception', 75.0)
+            return ('Handler', 75.0)
         
         # 25. Mixin patterns
         if 'mixin' in short_lower:
@@ -348,12 +378,12 @@ class HeuristicClassifier:
         # 26. Callback/Hook/Event patterns
         if any(x in short_lower for x in ['callback', 'hook', 'event', 'signal', 'listener', 'trigger']):
             self.discovered_patterns['callback'] += 1
-            return ('EventHandler', 75.0)
+            return ('Handler', 75.0)
         
         # 27. Patch/Mock/Stub (test doubles)
         if any(x in short_lower for x in ['patch', 'mock', 'stub', 'spy', 'double']):
             self.discovered_patterns['test_double'] += 1
-            return ('Test', 75.0)
+            return ('Asserter', 75.0)
         
         # 28. Filter/Sort/Order patterns
         if any(x in short_lower for x in ['filter', 'sort', 'order', 'group', 'partition', 'bucket']):
@@ -363,7 +393,7 @@ class HeuristicClassifier:
         # 29. Config/Setting/Option patterns
         if any(x in short_lower for x in ['config', 'setting', 'option', 'preference', 'env', 'environ']):
             self.discovered_patterns['config'] += 1
-            return ('Configuration', 75.0)
+            return ('Store', 75.0)
         
         # 30. Pool/Cache/Buffer patterns
         if any(x in short_lower for x in ['pool', 'cache', 'buffer', 'queue', 'stack']):
@@ -373,7 +403,7 @@ class HeuristicClassifier:
         # 31. Auth/Permission/Access patterns
         if any(x in short_lower for x in ['auth', 'permission', 'access', 'grant', 'deny', 'role', 'acl']):
             self.discovered_patterns['auth'] += 1
-            return ('Policy', 75.0)
+            return ('Guard', 75.0)
         
         # 32. Log/Trace/Debug patterns
         if any(x in short_lower for x in ['log', 'trace', 'debug', 'audit', 'metric', 'stat']):
@@ -393,7 +423,7 @@ class HeuristicClassifier:
         # 35. Iterator/Generator patterns
         if any(x in short_lower for x in ['iter', 'generator', 'yield', 'stream', 'cursor', 'scroll']):
             self.discovered_patterns['iterator'] += 1
-            return ('Iterator', 75.0)
+            return ('Query', 75.0)
         
         # 36. Clone/Copy/Duplicate patterns
         if any(x in short_lower for x in ['clone', 'copy', 'duplicate', 'replicate', 'mirror']):
@@ -423,7 +453,7 @@ class HeuristicClassifier:
         # 41. Compare/Diff/Match patterns  
         if any(x in short_lower for x in ['compare', 'diff', 'match', 'equal', 'same', 'similar']):
             self.discovered_patterns['compare'] += 1
-            return ('Specification', 75.0)
+            return ('Asserter', 75.0)
         
         # 42. Split/Join/Concat patterns
         if any(x in short_lower for x in ['split', 'join', 'concat', 'append', 'prepend', 'extend']):
@@ -443,7 +473,7 @@ class HeuristicClassifier:
         # 45. Schedule/Job/Task/Worker patterns
         if any(x in short_lower for x in ['schedule', 'job', 'task', 'worker', 'cron', 'periodic', 'interval']):
             self.discovered_patterns['scheduler'] += 1
-            return ('Job', 75.0)
+            return ('Command', 75.0)
         
         # 46. Parse/Lex/Token patterns
         if any(x in short_lower for x in ['parse', 'lex', 'token', 'ast', 'syntax', 'grammar']):
@@ -469,7 +499,7 @@ class HeuristicClassifier:
         if short[0].isupper():
             # Classes with specific patterns
             if any(x in short_lower for x in ['exception', 'error']):
-                return ('Exception', 75.0)
+                return ('Handler', 75.0)
             if any(x in short_lower for x in ['factory', 'builder', 'creator']):
                 return ('Factory', 75.0)
             if any(x in short_lower for x in ['handler', 'processor', 'worker']):
@@ -481,9 +511,9 @@ class HeuristicClassifier:
             if any(x in short_lower for x in ['repository', 'store', 'dao']):
                 return ('Repository', 75.0)
             if any(x in short_lower for x in ['client', 'adapter', 'gateway']):
-                return ('Adapter', 75.0)
+                return ('Mapper', 75.0)
             if any(x in short_lower for x in ['config', 'settings', 'options']):
-                return ('Configuration', 75.0)
+                return ('Store', 75.0)
             # Generic class - likely DTO/Entity
             self.discovered_patterns['noun_entity'] += 1
             return ('DTO', 65.0)
