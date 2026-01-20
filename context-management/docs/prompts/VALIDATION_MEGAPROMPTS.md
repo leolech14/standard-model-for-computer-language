@@ -18,7 +18,7 @@ Given the attached `STANDARD_CODE.md` document, systematically extract and categ
 
 2. **Categorize Each Claim** as one of:
    - **Definition**: A term being defined (e.g., "A Node is L3") — unfalsifiable, evaluated for clarity and consistency
-   - **Empirical Claim**: A testable assertion (e.g., "167 atoms cover all AST types") — requires evidence
+   - **Empirical Claim**: A testable assertion (e.g., "200 atoms cover all AST types") — requires evidence
    - **Analogy**: A comparison to another domain (e.g., "Functions are like atoms in physics") — evaluated for pedagogical value
    - **Normative Goal**: A desired outcome (e.g., "Every question should be answerable by one lens") — evaluated for feasibility
    - **Implementation Assumption**: A code/tooling dependency (e.g., "Tree-sitter is used for parsing") — evaluated for portability
@@ -93,7 +93,7 @@ Test this claim against real developer questions.
 
 ### Context
 Standard Code classifies every code entity along 8 dimensions:
-1. **WHAT** (167 atom types)
+1. **WHAT** (200 atom types)
 2. **LAYER** (Interface, Application, Core, Infrastructure, Test)
 3. **ROLE** (33 canonical roles)
 4. **BOUNDARY** (Internal, Input, I/O, Output)
@@ -139,8 +139,8 @@ Rigorously test orthogonality and identify boundary cases.
 ## MEGAPROMPT 4: ATOM COVERAGE & AST MAPPING
 
 ### Context
-Standard Code defines 167 "Atoms" organized into 4 Phases × 4 Families = 16 Families.
-The claim is that these 167 atoms **completely cover** all AST node types across all programming languages.
+Standard Code defines 200 "Atoms" organized into 4 Phases × 4 Families = 16 Families.
+The claim is that these 200 atoms **completely cover** all AST node types across all programming languages.
 
 ### Your Task
 Design and execute a coverage test.
@@ -156,7 +156,7 @@ Design and execute a coverage test.
 
 3. **Coverage Metrics**:
    - **Coverage %**: AST nodes mapped / Total AST nodes
-   - **Atom Utilization %**: Atoms used / 167
+   - **Atom Utilization %**: Atoms used / 200
    - **Unmapped Nodes**: List with proposed fix (new atom or merge)
 
 4. **Stability Test**:

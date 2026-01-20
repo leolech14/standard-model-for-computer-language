@@ -1,4 +1,4 @@
-> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (167 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
+> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (200 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
 
 ---
 
@@ -6,7 +6,7 @@
 
 ## Context
 Standard Code classifies every code entity along 8 dimensions:
-1. **WHAT** (167 atom types)
+1. **WHAT** (200 atom types)
 2. **LAYER** (Interface, Application, Core, Infrastructure, Test)
 3. **ROLE** (33 canonical roles)
 4. **BOUNDARY** (Internal, Input, I/O, Output)

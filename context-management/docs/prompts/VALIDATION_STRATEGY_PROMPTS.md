@@ -15,7 +15,7 @@
 
 ## 4. ATOM COVERAGE & AST MAPPING
 **Prompt:**
-"We claim 167 atoms cover AST node types. For languages [X, Y, Z], propose a methodology to test coverage and mapping stability. Include: (a) how to build the crosswalk from official AST node kinds to our atoms, (b) how to handle language-specific nodes, (c) how to measure 'coverage %', (d) how to evolve atoms without breaking old analyses."
+"We claim 200 atoms cover AST node types. For languages [X, Y, Z], propose a methodology to test coverage and mapping stability. Include: (a) how to build the crosswalk from official AST node kinds to our atoms, (b) how to handle language-specific nodes, (c) how to measure 'coverage %', (d) how to evolve atoms without breaking old analyses."
 
 ## 5. ROLE TAXONOMY VALIDATION
 **Prompt:**

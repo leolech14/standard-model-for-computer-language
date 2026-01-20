@@ -27,7 +27,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).parent.parent / "src" / "core"))
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from core.tree_sitter_engine import TreeSitterUniversalEngine
+from src.core.tree_sitter_engine import TreeSitterUniversalEngine
 
 # Check if tree-sitter is available
 try:

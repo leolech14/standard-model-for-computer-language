@@ -1,7 +1,7 @@
 # COLLIDER - THE IMPLEMENTATION
 ## Standard Model of Code Applied
 
-> **THEORY.md** describes the map. **This document** describes the tool that uses the map.
+> **[THEORY.md](./theory/THEORY.md)** describes the map. **This document** describes the tool that uses the map.
 
 ---
 
@@ -410,8 +410,8 @@ Canonical particle ID format:
 | `src/core/graph_analyzer.py` | Graph operations and metrics |
 | `src/core/topology_reasoning.py` | Shape classification |
 | `src/core/semantic_cortex.py` | Domain inference |
-| `src/core/atom_registry.py` | The 110 Python-side atoms |
-| `schema/atoms.schema.json` | The 227 JSON-side atoms |
+| `src/core/atom_registry.py` | The 94 implemented atoms |
+| `schema/atoms.schema.json` | The 200 documented atoms |
 
 ---
 

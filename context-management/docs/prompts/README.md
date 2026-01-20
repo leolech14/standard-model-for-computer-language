@@ -10,7 +10,7 @@
 
 When executing any validation prompt:
 
-1. **Canonical ≠ Complete**: Numbers like 167 atoms, 33 roles, 8 dimensions are *working sets*, not claims of totality. Finding gaps is expected and valuable.
+1. **Canonical ≠ Complete**: Numbers like 200 atoms, 33 roles, 8 dimensions are *working sets*, not claims of totality. Finding gaps is expected and valuable.
 
 2. **Unknown is First-Class**: Entities that don't fit cleanly are *evidence to evolve the map*, not failures.
 
@@ -27,7 +27,7 @@ When executing any validation prompt:
 | 01 | [01_claims_ledger.md](01_claims_ledger.md) | Extract & categorize all theory claims |
 | 02 | [02_lens_validation.md](02_lens_validation.md) | Test 8 lenses against real questions |
 | 03 | [03_dimension_orthogonality.md](03_dimension_orthogonality.md) | Verify 8D mutual exclusivity |
-| 04 | [04_atom_coverage.md](04_atom_coverage.md) | Test 167 atoms vs AST types |
+| 04 | [04_atom_coverage.md](04_atom_coverage.md) | Test 200 atoms vs AST types |
 | 05 | [05_role_taxonomy.md](05_role_taxonomy.md) | Human annotation study design |
 | 06 | [06_detection_signals.md](06_detection_signals.md) | Evidence model for classification |
 | 07 | [07_confidence_calibration.md](07_confidence_calibration.md) | Design calibrated confidence |

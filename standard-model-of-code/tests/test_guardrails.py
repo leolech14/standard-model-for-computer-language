@@ -1,7 +1,7 @@
 """Tests for guardrails module."""
 
 import pytest
-from core.guardrails import Guardrails, ResourceLimits, ResourceLimitExceeded
+from src.core.guardrails import Guardrails, ResourceLimits, ResourceLimitExceeded
 
 
 class TestResourceLimits:

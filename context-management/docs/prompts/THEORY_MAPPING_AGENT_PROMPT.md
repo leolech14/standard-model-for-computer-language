@@ -506,7 +506,7 @@ Output this JSON when ready:
 
 | Term | Definition |
 |------|------------|
-| **Atom** | Smallest indivisible code unit (167-200 types) |
+| **Atom** | Smallest indivisible code unit (200-200 types) |
 | **Collider** | The tool that detects atoms in code |
 | **Codespace** | The hyper-dimensional space where all software exists |
 | **Dimension** | One of 8 orthogonal classification axes |

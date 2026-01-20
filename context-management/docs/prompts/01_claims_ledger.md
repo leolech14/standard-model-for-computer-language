@@ -1,4 +1,4 @@
-> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (167 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
+> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (200 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
 
 ---
 
@@ -17,7 +17,7 @@ Given the attached `STANDARD_CODE.md` document, systematically extract and categ
 
 2. **Categorize Each Claim** as one of:
    - **Definition**: A term being defined (e.g., "A Node is L3") — unfalsifiable, evaluated for clarity and consistency
-   - **Empirical Claim**: A testable assertion (e.g., "167 atoms cover all AST types") — requires evidence
+   - **Empirical Claim**: A testable assertion (e.g., "200 atoms cover all AST types") — requires evidence
    - **Analogy**: A comparison to another domain (e.g., "Functions are like atoms in physics") — evaluated for pedagogical value
    - **Normative Goal**: A desired outcome (e.g., "Every question should be answerable by one lens") — evaluated for feasibility
    - **Implementation Assumption**: A code/tooling dependency (e.g., "Tree-sitter is used for parsing") — evaluated for portability

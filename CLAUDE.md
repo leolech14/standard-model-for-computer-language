@@ -8,8 +8,8 @@
 |------|-------|
 | Theory | Standard Model of Code |
 | Tool | Collider |
-| Atoms | 94 (implemented) |
-| Roles | 29 (implemented) |
+| Atoms | 200 documented, 94 implemented, 600+ ecosystem potential |
+| Roles | 33 canonical, 29 implemented |
 | Pipeline | 12 stages |
 
 ## Architecture

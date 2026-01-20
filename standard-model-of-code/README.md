@@ -15,7 +15,7 @@ This project has two sides. Pick your path:
 
 ### Theory (The "Why")
 The **Standard Model of Code** is a theoretical framework that treats code like physics:
-- **Atoms**: 167 structural types (94 implemented), e.g., Entity, Repository, Service
+- **Atoms**: 200 structural types (94 implemented), e.g., Entity, Repository, Service
 - **Dimensions**: 8-dimensional classification (RPBL + 4 more)
 - **Layers**: Architectural strata (Domain, Infrastructure, Application...)
 
@@ -359,7 +359,7 @@ From "God Classes" to "Orphaned Code," Collider scans for patterns that indicate
 ## 🧬 What Collider Detects
 
 ### 1. The Atomic Schema
-Our schema maps every code element to one of **167 theoretical structural types** (94 currently implemented):
+Our schema maps every code element to one of **200 theoretical structural types** (94 currently implemented):
 
 - **DATA** (26): `Entity`, `ValueObject`, `DTO`, `Enum`
 - **LOGIC** (61): `Query`, `Command`, `Validator`, `Mapper`

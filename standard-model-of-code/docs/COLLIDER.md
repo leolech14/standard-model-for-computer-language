@@ -330,7 +330,7 @@ Export context for AI agents:
 | README.md | REPO_README.md |
 | CLAUDE.md | CLAUDE.md |
 | docs/TOOL.md | TOOL.md |
-| docs/THEORY.md | THEORY.md |
+| docs/MODEL.md | MODEL.md |
 
 ### Requirements
 

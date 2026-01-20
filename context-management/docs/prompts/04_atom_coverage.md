@@ -1,12 +1,12 @@
-> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (167 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
+> **EPISTEMIC STANCE**: This prompt validates a MAP, not the territory. Canonical sets (200 atoms, 33 roles, 8 dimensions) are *working sets*, not claims of totality. Finding gaps is expected and valuable. Unknown is first-class. All claims are postulates with validation obligations.
 
 ---
 
 # MEGAPROMPT 04: ATOM COVERAGE & AST MAPPING
 
 ## Context
-Standard Code defines 167 "Atoms" organized into 4 Phases × 4 Families = 16 Families.
-The claim is that these 167 atoms **completely cover** all AST node types across all programming languages.
+Standard Code defines 200 "Atoms" organized into 4 Phases × 4 Families = 16 Families.
+The claim is that these 200 atoms **completely cover** all AST node types across all programming languages.
 
 ## Your Task
 Design and execute a coverage test.
@@ -22,7 +22,7 @@ Design and execute a coverage test.
 
 3. **Coverage Metrics**:
    - **Coverage %**: AST nodes mapped / Total AST nodes
-   - **Atom Utilization %**: Atoms used / 167
+   - **Atom Utilization %**: Atoms used / 200
    - **Unmapped Nodes**: List with proposed fix (new atom or merge)
 
 4. **Stability Test**:

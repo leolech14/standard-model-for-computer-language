@@ -1,6 +1,6 @@
 # Project History: The Evolution of the Standard Model of Code
 
-> **Layer:** 3 (Registry) | **Parent:** [THEORY.md](../THEORY.md) | **Index:** [../INDEX.md](../INDEX.md)
+> **Layer:** 3 (Registry) | **Parent:** [MODEL.md](../MODEL.md) | **Index:** [README.md](../README.md)
 > **Purpose:** Chronicle how the theory and tool evolved
 > **Sources:** Git history, Gemini 2.5 Pro forensic extraction, documentation
 

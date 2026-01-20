@@ -1,7 +1,7 @@
 """Tests for output_validation module."""
 
 import pytest
-from core.output_validation import validate_node, validate_edge
+from src.core.output_validation import validate_node, validate_edge
 
 
 class TestValidateNode:

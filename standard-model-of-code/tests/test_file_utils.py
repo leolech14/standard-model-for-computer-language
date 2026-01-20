@@ -1,7 +1,7 @@
 """Tests for file_utils module."""
 
 import pytest
-from core.file_utils import detect_encoding, read_file_safe, is_binary_file
+from src.core.file_utils import detect_encoding, read_file_safe, is_binary_file
 
 
 class TestDetectEncoding:
