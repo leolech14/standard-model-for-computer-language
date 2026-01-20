@@ -18,7 +18,7 @@
 
 ## 3. The Context Sync
 *Align with the global knowledge.*
-1.  **Read the Manual**: [AI_OPERATING_MANUAL.md](file:///Users/lech/PROJECTS_all/PROJECT_elements/context-management/docs/AI_OPERATING_MANUAL.md).
+1.  **Read the Manual**: [AI_USER_GUIDE.md](AI_USER_GUIDE.md).
 2.  **Check the Mirror**:
     ```bash
     python context-management/tools/archive/archive.py status
