@@ -504,6 +504,7 @@ def generate_webgl_html(json_source: Any, output_path: str):
         "modules/refresh-throttle.js",      # Throttled graph updates
         "modules/legend-manager.js",        # Legend system (depends: COLOR, NODE)
         "modules/data-manager.js",          # Data access layer (depends: NODE, COLOR, LEGEND)
+        "modules/vis-state.js",             # Unified visualization state (depends: COLOR)
         "modules/physics.js",               # Force simulation controls (Phase 1)
         "modules/datamap.js",               # Data mapping & filtering (Phase 1)
         "modules/groups.js",                # Node grouping (Phase 1)

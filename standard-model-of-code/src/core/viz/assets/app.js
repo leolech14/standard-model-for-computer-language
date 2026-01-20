@@ -150,16 +150,18 @@ const PERF_MONITOR = {
         if (this.fps < 30) fpsColor = '#ff0';  // Yellow = warning
         if (this.fps < 15) fpsColor = '#f00';  // Red = bad
 
-        // Animation state
-        const animating = LAYOUT_ANIMATION_ID ? '▶ ANIMATING' : '■ IDLE';
-        const animColor = LAYOUT_ANIMATION_ID ? '#0ff' : '#666';
+        // Animation state - use ANIM module if available
+        const isAnimating = typeof ANIM !== 'undefined' && ANIM.isAnimating;
+        const animating = isAnimating ? '▶ ANIMATING' : '■ IDLE';
+        const animColor = isAnimating ? '#0ff' : '#666';
+        const staggerPattern = (typeof ANIM !== 'undefined' && ANIM.staggerPattern) || 'none';
 
         this.hudElement.innerHTML = `
             <div style="color:${fpsColor};font-size:14px;font-weight:bold">${this.fps} FPS</div>
             <div>Frame: ${avgFrameTime}ms</div>
             <div>Dropped: <span style="color:${this.droppedFrames > 10 ? '#f00' : '#0f0'}">${this.droppedFrames}</span></div>
             <div style="color:${animColor}">${animating}</div>
-            <div style="font-size:9px;color:#666;margin-top:4px">Pattern: ${CURRENT_STAGGER_PATTERN || 'none'}</div>
+            <div style="font-size:9px;color:#666;margin-top:4px">Pattern: ${staggerPattern}</div>
         `;
     },
 
@@ -3347,6 +3349,7 @@ const PHYSICS_PRESETS = {
 
 // ═══════════════════════════════════════════════════════════════
 // PRESET BUTTONS - Quick visualization mode selection (Tier, Family, etc.)
+// Uses VIS_STATE for unified state management
 // ═══════════════════════════════════════════════════════════════
 const presetGrid = document.getElementById('dock-presets');
 const presetBtnGrid = document.getElementById('preset-grid');
@@ -3354,39 +3357,40 @@ if (presetBtnGrid) {
     presetBtnGrid.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const presetKey = btn.dataset.preset;
+
+            // Use VIS_STATE for unified state management
+            if (typeof VIS_STATE !== 'undefined') {
+                VIS_STATE.applyPreset(presetKey);
+                return;
+            }
+
+            // Fallback for when VIS_STATE not loaded
             const preset = VIS_PRESETS[presetKey];
             if (!preset) return;
 
-            // Update active states
             presetBtnGrid.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-            // Also clear scheme buttons when switching presets
             document.querySelectorAll('.scheme-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             APPEARANCE_STATE.currentPreset = presetKey;
             APPEARANCE_STATE.colorMode = preset.colorBy;
 
-            // Apply node color mode
             setNodeColorMode(preset.colorBy);
 
-            // Apply edge mode
             const edgeModes = { 'type': 'gradient-tier', 'weight': 'weight', 'resolution': 'gradient-file' };
             EDGE_MODE = edgeModes[preset.edgeBy] || preset.edgeBy || 'gradient-tier';
             applyEdgeMode();
 
-            // Handle flow mode for 'flow' preset
             if (presetKey === 'flow') {
                 if (!flowMode && typeof toggleFlowMode === 'function') toggleFlowMode();
             } else if (flowMode && typeof disableFlowMode === 'function') {
                 disableFlowMode();
             }
 
-            // Refresh gradient edges to pick up new node colors
             if (typeof window.refreshGradientEdgeColors === 'function') {
                 window.refreshGradientEdgeColors();
             }
 
-            // Re-render legends
             if (typeof renderAllLegends === 'function') {
                 renderAllLegends();
             }
@@ -3603,13 +3607,17 @@ function getLinkFileIdx(link, side) {
 // (backward compat shims in edge-system.js)
 
 // Datamap toggles are wired in buildDatamapControls().
-document.getElementById('btn-report').onclick = () => {
-    const panel = document.getElementById('report-panel');
-    const btn = document.getElementById('btn-report');
-    const isOpen = panel.style.display === 'block';
-    panel.style.display = isOpen ? 'none' : 'block';
-    btn.classList.toggle('active', !isOpen);
-};
+const btnReport = document.getElementById('btn-report');
+if (btnReport) {
+    btnReport.onclick = () => {
+        const panel = document.getElementById('report-panel');
+        const btn = document.getElementById('btn-report');
+        if (!panel) return;
+        const isOpen = panel.style.display === 'block';
+        panel.style.display = isOpen ? 'none' : 'block';
+        btn.classList.toggle('active', !isOpen);
+    };
+}
 
 // AI INSIGHTS PANEL TOGGLE
 const btnInsights = document.getElementById('btn-insights');
@@ -3628,21 +3636,27 @@ if (btnInsights) {
 // Call STARS.init() to initialize (done in modules/main.js)
 
 // Reset Layout button - explicitly re-run physics
-document.getElementById('btn-reset-layout').onclick = () => {
-    resetLayout();
-};
+const btnResetLayout = document.getElementById('btn-reset-layout');
+if (btnResetLayout) {
+    btnResetLayout.onclick = () => resetLayout();
+}
 
 // Hints toggle - enable/disable mode toasts
-document.getElementById('btn-hints').onclick = () => {
-    const btn = document.getElementById('btn-hints');
-    HINTS_ENABLED = !HINTS_ENABLED;
-    btn.classList.toggle('active', HINTS_ENABLED);
-    if (HINTS_ENABLED) {
-        showModeToast('Hints enabled');
-    }
-};
+const btnHints = document.getElementById('btn-hints');
+if (btnHints) {
+    btnHints.onclick = () => {
+        HINTS_ENABLED = !HINTS_ENABLED;
+        btnHints.classList.toggle('active', HINTS_ENABLED);
+        if (HINTS_ENABLED) {
+            showModeToast('Hints enabled');
+        }
+    };
+}
 
-document.getElementById('btn-edge-mode').onclick = () => cycleEdgeMode();
+const btnEdgeMode = document.getElementById('btn-edge-mode');
+if (btnEdgeMode) {
+    btnEdgeMode.onclick = () => cycleEdgeMode();
+}
 
 // ====================================================================
 // FLOW MODE: Markov Chain Visualization (Token-Driven)
@@ -4996,29 +5010,24 @@ window.FILE_CONTAINMENT = FILE_CONTAINMENT;
 
 // setFileModeState - MOVED TO modules/file-viz.js (shim delegates to FILE_VIZ.setEnabled)
 
-document.getElementById('btn-files').onclick = () => {
-    setFileModeState(!fileMode);
-};
+const btnFiles = document.getElementById('btn-files');
+if (btnFiles) btnFiles.onclick = () => setFileModeState(!fileMode);
 
 // COLOR mode - atoms colored by file
-document.getElementById('btn-file-color').onclick = () => {
-    setFileVizMode('color');
-};
+const btnFileColor = document.getElementById('btn-file-color');
+if (btnFileColor) btnFileColor.onclick = () => setFileVizMode('color');
 
 // HULLS mode - draw boundary spheres
-document.getElementById('btn-file-hulls').onclick = () => {
-    setFileVizMode('hulls');
-};
+const btnFileHulls = document.getElementById('btn-file-hulls');
+if (btnFileHulls) btnFileHulls.onclick = () => setFileVizMode('hulls');
 
 // CLUSTER mode - force clustering by file
-document.getElementById('btn-file-cluster').onclick = () => {
-    setFileVizMode('cluster');
-};
+const btnFileCluster = document.getElementById('btn-file-cluster');
+if (btnFileCluster) btnFileCluster.onclick = () => setFileVizMode('cluster');
 
 // MAP mode - show file nodes
-document.getElementById('btn-file-map').onclick = () => {
-    setFileVizMode('map');
-};
+const btnFileMap = document.getElementById('btn-file-map');
+if (btnFileMap) btnFileMap.onclick = () => setFileVizMode('map');
 
 // SPHERES mode - show containment spheres (button may be hidden)
 const spheresBtn = document.getElementById('btn-file-spheres');
@@ -5043,21 +5052,27 @@ if (popBtn) {
 }
 
 // Expand mode toggles (only relevant in MAP mode)
-document.getElementById('btn-expand-inline').onclick = () => {
-    FILE_EXPAND_MODE = 'inline';
-    updateExpandButtons();
-    if (GRAPH_MODE === 'hybrid') {
-        refreshGraph();
-    }
-};
+const btnExpandInline = document.getElementById('btn-expand-inline');
+if (btnExpandInline) {
+    btnExpandInline.onclick = () => {
+        FILE_EXPAND_MODE = 'inline';
+        updateExpandButtons();
+        if (GRAPH_MODE === 'hybrid') {
+            refreshGraph();
+        }
+    };
+}
 
-document.getElementById('btn-expand-detach').onclick = () => {
-    FILE_EXPAND_MODE = 'detach';
-    updateExpandButtons();
-    if (GRAPH_MODE === 'hybrid') {
-        refreshGraph();
-    }
-};
+const btnExpandDetach = document.getElementById('btn-expand-detach');
+if (btnExpandDetach) {
+    btnExpandDetach.onclick = () => {
+        FILE_EXPAND_MODE = 'detach';
+        updateExpandButtons();
+        if (GRAPH_MODE === 'hybrid') {
+            refreshGraph();
+        }
+    };
+}
 
 function updateExpandButtons() {
     const inlineBtn = document.getElementById('btn-expand-inline');

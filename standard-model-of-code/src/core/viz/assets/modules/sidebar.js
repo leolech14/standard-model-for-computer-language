@@ -36,6 +36,11 @@ window.SIDEBAR = (function () {
         if (_bound) return;
         _bound = true;
 
+        // Initialize unified state manager first
+        if (typeof VIS_STATE !== 'undefined') {
+            VIS_STATE.init();
+        }
+
         _bindSectionHeaders();
         _bindColorPresets();
         _bindLayoutPresets();
@@ -46,6 +51,11 @@ window.SIDEBAR = (function () {
         initViewModeToggle();
         initSectionResize();   // Enable vertical section resizing
         initSidebarResize();   // Enable horizontal sidebar resizing
+
+        // Sync UI to initial state
+        if (typeof VIS_STATE !== 'undefined') {
+            VIS_STATE.syncUIFromState();
+        }
 
         console.log('[SIDEBAR] Initialized');
     }
@@ -153,7 +163,15 @@ window.SIDEBAR = (function () {
         { category: 'Validation', schemes: ['validator', 'guard'] },
         { category: 'Transform', schemes: ['transformer', 'parser'] },
         { category: 'Events', schemes: ['handler', 'emitter'] },
-        { category: 'Support', schemes: ['utility', 'lifecycle'] }
+        { category: 'Support', schemes: ['utility', 'lifecycle'] },
+
+        // PART C: OKLCH Geometry (Mathematical paths through color space)
+        { category: 'Loops', schemes: ['rainbow-loop', 'rainbow-bright', 'rainbow-dark'] },
+        { category: 'Arcs', schemes: ['arc-warm', 'arc-cool', 'arc-nature'] },
+        { category: 'Spirals', schemes: ['spiral-up', 'spiral-down', 'spiral-chroma'] },
+        { category: 'Waves', schemes: ['wave-lightness', 'wave-chroma', 'pulse'] },
+        { category: 'Ramps', schemes: ['ramp-hue', 'ramp-lightness', 'ramp-chroma'] },
+        { category: 'Paths', schemes: ['helix', 'convergent', 'divergent', 'bicone'] }
     ];
 
     function _bindColorPresets() {
@@ -215,14 +233,9 @@ window.SIDEBAR = (function () {
                 btn.title = p.desc;
                 btn.dataset.preset = p.id;
 
-                // Add color indicator logic if needed (dot)
-                // For now relying on CSS ::before using data-preset, OR we can inject style
-
+                // Click handler - VIS_STATE.syncUIFromState() handles active states
                 btn.addEventListener('click', () => {
                     setColorMode(p.id);
-                    // Update UI active state
-                    document.querySelectorAll('#section-color .btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
                 });
 
                 grid.appendChild(btn);
@@ -300,20 +313,33 @@ window.SIDEBAR = (function () {
                     info = COLOR.getSchemeInfo(schemeName);
                 }
 
-                btn.textContent = info.name;
-                btn.title = info.semantic;
+                btn.title = info.semantic || schemeName;
 
-                // Apply gradient preview background
-                if (typeof COLOR !== 'undefined' && COLOR.getSchemeGradientCSS) {
-                    const gradient = COLOR.getSchemeGradientCSS(schemeName);
-                    btn.style.background = gradient;
+                // Create clean color swatches (5 stops) instead of ugly gradient
+                const swatchContainer = document.createElement('div');
+                swatchContainer.className = 'scheme-swatches';
+
+                if (typeof COLOR !== 'undefined' && COLOR.getSchemeColor) {
+                    // Sample 5 colors from the scheme path
+                    [0, 0.25, 0.5, 0.75, 1].forEach(t => {
+                        const swatch = document.createElement('span');
+                        swatch.className = 'scheme-swatch';
+                        swatch.style.backgroundColor = COLOR.getSchemeColor(schemeName, t);
+                        swatchContainer.appendChild(swatch);
+                    });
                 }
 
+                btn.appendChild(swatchContainer);
+
+                // Label below swatches
+                const label = document.createElement('span');
+                label.className = 'scheme-label';
+                label.textContent = info.name;
+                btn.appendChild(label);
+
+                // Click handler - VIS_STATE.syncUIFromState() handles active states
                 btn.addEventListener('click', () => {
                     applyColorScheme(schemeName);
-                    // Update UI active state
-                    document.querySelectorAll('.scheme-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
                 });
 
                 grid.appendChild(btn);
@@ -325,42 +351,30 @@ window.SIDEBAR = (function () {
     }
 
     /**
-     * Apply a named color scheme
-     * Schemes work with interval-based color modes (complexity, loc, fan_in, etc.)
-     * Automatically switches to complexity mode if in a categorical mode
+     * Apply a named color scheme (palette)
+     *
+     * NEW BEHAVIOR (via VIS_STATE):
+     * - Palette is "armed" but does NOT auto-switch colorBy mode
+     * - Palette only visually applies when colorBy is an interval mode
+     * - When user switches to interval mode, the armed palette becomes active
      */
     function applyColorScheme(schemeName) {
+        // Use VIS_STATE for unified state management
+        if (typeof VIS_STATE !== 'undefined') {
+            VIS_STATE.setPalette(schemeName);
+            return;
+        }
+
+        // Fallback for when VIS_STATE not loaded yet
         if (typeof COLOR !== 'undefined' && COLOR.applyScheme) {
             COLOR.applyScheme(schemeName);
         }
 
-        // Save preference
         try {
             localStorage.setItem('collider_scheme', schemeName);
         } catch (e) { /* ignore */ }
 
-        // Schemes only affect interval-based modes, not categorical modes
-        // If in a categorical mode (tier, family, atom, etc.), switch to complexity
-        const categoricalModes = ['tier', 'family', 'atom', 'ring', 'layer', 'role', 'roleCategory', 'subsystem', 'phase', 'fileType', 'file', 'state', 'visibility'];
-        if (categoricalModes.includes(window.NODE_COLOR_MODE)) {
-            console.log('[SIDEBAR] Switching to complexity mode for scheme visibility');
-            window.NODE_COLOR_MODE = 'complexity';
-            // Update UI button states
-            document.querySelectorAll('.color-btn').forEach(b => {
-                b.classList.toggle('active', b.dataset.mode === 'complexity');
-            });
-        }
-
-        // Trigger graph refresh
-        if (typeof Graph !== 'undefined' && Graph) {
-            if (typeof refreshNodeColors === 'function') {
-                refreshNodeColors();
-            }
-            if (typeof window.refreshGradientEdgeColors === 'function') {
-                window.refreshGradientEdgeColors();
-            }
-        }
-
+        _refreshGraphColors();
         console.log('[SIDEBAR] Applied scheme:', schemeName);
     }
 
@@ -368,8 +382,14 @@ window.SIDEBAR = (function () {
      * Clear active scheme, return to default interval colors
      */
     function clearColorScheme() {
+        // Use VIS_STATE for unified state management
+        if (typeof VIS_STATE !== 'undefined') {
+            VIS_STATE.setPalette(null);
+            return;
+        }
+
+        // Fallback
         if (typeof COLOR !== 'undefined' && COLOR.applyScheme) {
-            // Setting null clears the active scheme
             COLOR.applyScheme(null);
         }
 
@@ -377,17 +397,35 @@ window.SIDEBAR = (function () {
             localStorage.removeItem('collider_scheme');
         } catch (e) { /* ignore */ }
 
-        // Clear UI active states
         document.querySelectorAll('.scheme-btn').forEach(b => b.classList.remove('active'));
 
-        // Refresh graph
-        if (typeof Graph !== 'undefined' && Graph) {
-            if (typeof refreshNodeColors === 'function') {
-                refreshNodeColors();
-            }
-        }
+        _refreshGraphColors();
 
         console.log('[SIDEBAR] Cleared color scheme');
+    }
+
+    /**
+     * Internal: Refresh all node colors and re-render the graph
+     */
+    function _refreshGraphColors() {
+        if (typeof Graph === 'undefined' || !Graph) return;
+
+        // Get current nodes from DataManager or Graph
+        const DM = window.DM;
+        const nodes = DM ? DM.getNodes() : (Graph.graphData ? Graph.graphData().nodes : []);
+
+        // Recompute colors using current mode
+        if (typeof window.applyNodeColors === 'function' && nodes.length > 0) {
+            window.applyNodeColors(nodes);
+        }
+
+        // Trigger WebGL re-render
+        Graph.nodeColor(Graph.nodeColor());
+
+        // Also refresh edges if in gradient mode
+        if (typeof window.refreshGradientEdgeColors === 'function') {
+            window.refreshGradientEdgeColors();
+        }
     }
 
     /**
@@ -419,25 +457,13 @@ window.SIDEBAR = (function () {
                 const preset = btn.dataset.preset;
                 if (!preset) return;
 
-                // Update active state
-                colorBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                // Apply color mode
+                // Apply color mode via VIS_STATE (handles UI sync)
                 setColorMode(preset);
             });
         });
 
-        // Load saved preference
-        try {
-            const saved = localStorage.getItem('collider_scheme');
-            if (saved) {
-                applyColorScheme(saved);
-                // Mark button as active
-                const btn = document.querySelector(`.scheme-btn[data-scheme="${saved}"]`);
-                if (btn) btn.classList.add('active');
-            }
-        } catch (e) { /* ignore */ }
+        // NOTE: Saved preferences are now loaded by VIS_STATE.init()
+        // UI sync is handled by VIS_STATE.syncUIFromState()
     }
 
     // =========================================================================
@@ -573,12 +599,18 @@ window.SIDEBAR = (function () {
     }
 
     function setColorMode(mode) {
+        // Use VIS_STATE for unified state management
+        if (typeof VIS_STATE !== 'undefined') {
+            VIS_STATE.setColorBy(mode);
+            return;
+        }
+
+        // Fallback for when VIS_STATE not loaded yet
         if (typeof APPEARANCE_STATE !== 'undefined') {
             APPEARANCE_STATE.colorMode = mode;
             APPEARANCE_STATE.currentPreset = mode;
         }
 
-        // Call existing function if available
         if (typeof setNodeColorMode === 'function') {
             setNodeColorMode(mode);
         }
@@ -592,12 +624,10 @@ window.SIDEBAR = (function () {
             disableFlowMode();
         }
 
-        // Refresh gradient edges
         if (typeof window !== 'undefined' && typeof window.refreshGradientEdgeColors === 'function') {
             window.refreshGradientEdgeColors();
         }
 
-        // Re-render legends
         if (typeof renderAllLegends === 'function') {
             renderAllLegends();
         }
