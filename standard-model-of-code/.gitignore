@@ -93,3 +93,4 @@ audio/*.sh
 output.md/
 .collider/
 *.backup
+standard-model-of-code/.collider_report/
