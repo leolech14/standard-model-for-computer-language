@@ -568,6 +568,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     from standard_model_enricher import enrich_with_standard_model
     from purpose_field import detect_purpose_field
     from execution_flow import detect_execution_flow
+    from orphan_integrator import analyze_orphans as analyze_orphan_integration
     from performance_predictor import predict_performance
     from roadmap_evaluator import RoadmapEvaluator
     from topology_reasoning import TopologyClassifier
@@ -629,6 +630,21 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         timer.set_output(entry_points=len(exec_flow.entry_points), orphans=len(exec_flow.orphans))
     print(f"   → {len(exec_flow.entry_points)} entry points")
     print(f"   → {len(exec_flow.orphans)} orphans ({exec_flow.dead_code_percent}% dead code)")
+
+    # Stage 4.5: Orphan Integration Analysis (Self-Healing)
+    print("\n🔌 Stage 4.5: Orphan Integration Analysis...")
+    with StageTimer(perf_manager, "Stage 4.5: Orphan Integration") as timer:
+        try:
+            orphan_ids = [o if isinstance(o, str) else o.get('id', '') for o in exec_flow.orphans]
+            orphan_analysis = analyze_orphan_integration(nodes, edges, orphan_ids)
+            suggestable = sum(1 for o in orphan_analysis if o.suggested_callers)
+            timer.set_output(analyzed=len(orphan_analysis), with_suggestions=suggestable)
+            print(f"   → {len(orphan_analysis)} orphans analyzed")
+            print(f"   → {suggestable} with integration suggestions")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Orphan integration analysis skipped: {e}")
+            orphan_analysis = []
 
     # Stage 5: Markov Matrix
     print("\n📊 Stage 5: Markov Transition Matrix...")
@@ -770,7 +786,19 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         'data_flow': data_flow,
         'performance': perf_summary,
         'top_hubs': [],
-        'orphans_list': exec_flow.orphans[:20]  # First 20
+        'orphans_list': exec_flow.orphans[:20],  # First 20
+        'orphan_integration': [
+            {
+                'node_id': o.node_id,
+                'name': o.name,
+                'purpose': o.purpose,
+                'category': o.category,
+                'suggested_callers': o.suggested_callers,
+                'integration_code': o.integration_code,
+                'confidence': o.confidence,
+            }
+            for o in orphan_analysis
+        ] if orphan_analysis else [],
     }
     
     # Compute top hubs
