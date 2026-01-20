@@ -1659,52 +1659,53 @@ function runSelfTest(data) {
         }
     };
 
-    // Test 1: Core UI elements exist (canonical UI: command bar + floating panels + side dock)
+    // Test 1: Core UI structure (dual-sidebar layout)
 
-    // Command bar and buttons
-    test('command-bar-exists', !!document.getElementById('command-bar'));
-    test('cmd-view-exists', !!document.getElementById('cmd-view'));
-    test('cmd-filter-exists', !!document.getElementById('cmd-filter'));
-    test('cmd-style-exists', !!document.getElementById('cmd-style'));
-    test('cmd-settings-exists', !!document.getElementById('cmd-settings'));
+    // Main layout containers
+    test('header-exists', !!document.getElementById('header'));
+    test('left-sidebar-exists', !!document.getElementById('left-sidebar'));
+    test('right-sidebar-exists', !!document.getElementById('right-sidebar'));
+    test('graph-container-exists', !!document.getElementById('3d-graph'));
 
-    // Floating panels
-    test('panel-view-exists', !!document.getElementById('panel-view'));
-    test('panel-filter-exists', !!document.getElementById('panel-filter'));
-    test('panel-style-exists', !!document.getElementById('panel-style'));
-    test('panel-settings-exists', !!document.getElementById('panel-settings'));
+    // Header stats
+    test('stat-nodes-exists', !!document.getElementById('stat-nodes'));
+    test('stat-edges-exists', !!document.getElementById('stat-edges'));
+    test('target-name-exists', !!document.getElementById('target-name'));
 
-    // Side dock
-    const sideDock = document.getElementById('side-dock');
-    test('side-dock-exists', !!sideDock);
-    test('topo-minimap-exists', !!document.getElementById('dock-minimap'));
-    test('preset-grid-exists', !!document.getElementById('dock-presets'));
+    // Left sidebar configuration sections
+    test('section-node-config-exists', !!document.getElementById('section-node-config'));
+    test('section-edge-config-exists', !!document.getElementById('section-edge-config'));
+    test('section-layout-exists', !!document.getElementById('section-layout'));
+    test('section-physics-exists', !!document.getElementById('section-physics'));
+    test('section-filters-exists', !!document.getElementById('section-filters'));
+    test('section-actions-exists', !!document.getElementById('section-actions'));
+
+    // Left sidebar action buttons
+    test('btn-reset-exists', !!document.getElementById('btn-reset'));
+    test('btn-screenshot-exists', !!document.getElementById('btn-screenshot'));
+    test('btn-2d-exists', !!document.getElementById('btn-2d'));
+    test('btn-freeze-exists', !!document.getElementById('btn-freeze'));
+
+    // Right sidebar panels
+    test('hover-panel-exists', !!document.getElementById('hover-panel'));
     test('section-schemes-exists', !!document.getElementById('section-schemes'));
+    test('section-color-exists', !!document.getElementById('section-color'));
 
-    // OKLCH picker
-    test('oklch-picker-exists', !!document.getElementById('oklch-picker'));
+    // Selection elements
+    test('selection-count-exists', !!document.getElementById('selection-count'));
+    test('selection-list-exists', !!document.getElementById('selection-list'));
 
-    // Topo tooltip
-    test('topo-tooltip-exists', !!document.getElementById('topo-tooltip'));
+    // Stats panel
+    test('stats-nodes-exists', !!document.getElementById('stats-nodes'));
+    test('stats-edges-exists', !!document.getElementById('stats-edges'));
 
-    // Bottom dock controls
-    const datamapContainer = document.getElementById('datamap-controls');
-    test('datamap-controls-exist', !!datamapContainer);
-    test('btn-files-exists', !!document.getElementById('btn-files'));
-    test('btn-flow-exists', !!document.getElementById('btn-flow'));
-    test('btn-edge-mode-exists', !!document.getElementById('btn-edge-mode'));
-    test('btn-report-exists', !!document.getElementById('btn-report'));
-    // test('btn-stars-exists', ...);  // REMOVED - starfield feature deleted
-    test('btn-dimensions-exists', !!document.getElementById('btn-dimensions'));
+    // Performance HUD
+    test('perf-hud-exists', !!document.getElementById('perf-hud'));
+    test('perf-fps-exists', !!document.getElementById('perf-fps'));
 
-    // Graph state - STARFIELD test removed
-
-    // Test 1b: Side dock content visibility
-    const sideContent = document.getElementById('side-content');
-    if (sideDock && sideContent) {
-        const contentVisible = window.getComputedStyle(sideContent).display !== 'none';
-        test('side-dock-content-visible', contentVisible);
-    }
+    // Test 1b: Color mode buttons exist
+    const colorButtons = document.querySelectorAll('.color-btn[data-preset]');
+    test('color-mode-buttons-exist', colorButtons.length >= 4);
 
     // Test 1c: HUD Layout Manager tests
     test('hud-layout-manager-exists', typeof HudLayoutManager === 'object' && HudLayoutManager !== null);
@@ -1780,12 +1781,11 @@ function runSelfTest(data) {
         updateHoverPanel(null);
     }
 
-    // Test 2: Metrics panel populated
-    test('metric-edge-resolution', document.getElementById('metric-edge-resolution')?.textContent !== '--');
-    test('metric-call-ratio', document.getElementById('metric-call-ratio')?.textContent !== '--');
-    test('metric-reachability', document.getElementById('metric-reachability')?.textContent !== '--');
-    test('metric-dead-code', document.getElementById('metric-dead-code')?.textContent !== '--');
-    test('metric-topology', document.getElementById('metric-topology')?.textContent !== '--');
+    // Test 2: Stats panel populated (stats-* elements)
+    const statsNodes = document.getElementById('stats-nodes');
+    const statsEdges = document.getElementById('stats-edges');
+    test('stats-panel-nodes-populated', statsNodes && statsNodes.textContent !== '0');
+    test('stats-panel-edges-populated', statsEdges && statsEdges.textContent !== '0');
 
     // Test 3: Data integrity
     test('nodes-count-positive', data.nodes && data.nodes.length > 0);
@@ -1798,9 +1798,14 @@ function runSelfTest(data) {
     test('physics-config-exists', !!data.physics);
 
     // Test 5: Initial state correct
-    const densitySlider = document.getElementById('density-slider2');
-    test('density-slider2-has-value', densitySlider && densitySlider.value !== undefined);
+    const physicsCharge = document.getElementById('physics-charge');
+    test('physics-slider-has-value', physicsCharge && physicsCharge.value !== undefined);
     test('3d-mode-default', IS_3D === true);
+
+    // Test 6: VIS_STATE module loaded
+    test('vis-state-module-exists', typeof VIS_STATE !== 'undefined');
+    test('vis-state-has-applyState', typeof VIS_STATE?.applyState === 'function');
+    test('vis-state-has-getState', typeof VIS_STATE?.getState === 'function');
 
     // Expose results to window for external testing
     window.SELF_TEST_RESULTS = results;
@@ -5329,3 +5334,7 @@ window.getTheme = getTheme;
 window.getAvailableThemes = getAvailableThemes;
 window.cycleTheme = cycleTheme;
 window.THEME_CONFIG = THEME_CONFIG;
+
+// Expose filtering/graph globals for module access
+window.VIS_FILTERS = VIS_FILTERS;
+window.refreshGraph = refreshGraph;
