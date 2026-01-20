@@ -1,694 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Collider Universe v{{VERSION}}</title>
+    <title>Collider v{{VERSION}}</title>
     <style>
-        /* INJECTED STYLES */
-            {
-                {
-                STYLES
-            }
+        /* ═══════════════════════════════════════════════════════════════════
+           MINIMAL COLLIDER UI - Clean, Simple, Functional
+           ═══════════════════════════════════════════════════════════════════ */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: rgba(20, 20, 30, 0.95);
+            --surface-hover: rgba(30, 30, 45, 0.95);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: rgba(255, 255, 255, 0.9);
+            --text-dim: rgba(255, 255, 255, 0.5);
+            --accent: #4a9eff;
+            --accent-dim: rgba(74, 158, 255, 0.3);
+            --green: #22c55e;
+            --yellow: #eab308;
+            --red: #ef4444;
+            --sidebar-width: 240px;
+            --radius: 6px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            font-size: 12px;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            z-index: 9999;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        #loader-status { font-size: 11px; opacity: 0.5; }
+
+        /* Graph container */
+        #3d-graph { width: 100vw; height: 100vh; }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           HEADER - Minimal top bar
+           ═══════════════════════════════════════════════════════════════════ */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 24px;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        .logo span { opacity: 0.4; font-size: 10px; margin-left: 6px; }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            font-size: 11px;
+        }
+        .stat { display: flex; gap: 6px; }
+        .stat-label { opacity: 0.5; }
+        .stat-value { font-weight: 500; font-variant-numeric: tabular-nums; }
+
+        .target-name {
+            margin-left: auto;
+            font-size: 11px;
+            opacity: 0.6;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           SIDEBAR - Clean minimal design
+           ═══════════════════════════════════════════════════════════════════ */
+        #sidebar {
+            position: fixed;
+            top: 44px;
+            right: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 100;
+        }
+
+        #sidebar::-webkit-scrollbar { width: 4px; }
+        #sidebar::-webkit-scrollbar-track { background: transparent; }
+        #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .section {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            padding: 10px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+        .section-header:hover { opacity: 0.9; background: var(--surface-hover); }
+        .section-header .arrow { transition: transform 0.2s; }
+        .section-header.collapsed .arrow { transform: rotate(-90deg); }
+
+        .section-content {
+            padding: 8px 12px 12px;
+            display: grid;
+            gap: 8px;
+        }
+        .section-content.collapsed { display: none; }
+
+        /* Button grid */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+        }
+        .btn-grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .btn-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .btn {
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-dim);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-align: center;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+        }
+        .btn.active {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Sliders */
+        .slider-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+        }
+        .slider-label { opacity: 0.7; }
+        .slider-value { font-variant-numeric: tabular-nums; opacity: 0.9; }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: grab;
+        }
+        input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; }
+
+        /* Filter chips */
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .chip {
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .chip:hover { background: rgba(255, 255, 255, 0.1); }
+        .chip.active { background: var(--accent-dim); border-color: var(--accent); }
+        .chip .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* Toggle switches */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+        }
+        .toggle {
+            width: 32px;
+            height: 18px;
+            background: var(--border);
+            border-radius: 9px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 14px;
+            height: 14px;
+            background: var(--text);
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+        .toggle.active { background: var(--accent); }
+        .toggle.active::after { transform: translateX(14px); }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           HOVER PANEL - Node info on hover
+           ═══════════════════════════════════════════════════════════════════ */
+        #hover-panel {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            min-width: 200px;
+            max-width: 300px;
+            display: none;
+            z-index: 100;
+        }
+        #hover-panel.visible { display: block; }
+
+        .hover-name {
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 4px;
+            word-break: break-all;
+        }
+        .hover-kind {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-bottom: 8px;
+        }
+        .hover-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            padding: 2px 0;
+        }
+        .hover-row .label { opacity: 0.5; }
+        .hover-file {
+            font-size: 9px;
+            opacity: 0.4;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           SELECTION PANEL
+           ═══════════════════════════════════════════════════════════════════ */
+        #selection-panel {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            min-width: 200px;
+            max-width: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 101;
+        }
+        #selection-panel.visible { display: block; }
+
+        .selection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .selection-title { font-weight: 600; font-size: 11px; }
+        .selection-clear {
+            font-size: 9px;
+            padding: 2px 6px;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-dim);
+            cursor: pointer;
+        }
+        .selection-clear:hover { color: var(--text); border-color: var(--text-dim); }
+
+        .selection-item {
+            font-size: 10px;
+            padding: 4px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+        .selection-item:hover { color: var(--accent); }
+        .selection-item:last-child { border-bottom: none; }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           PERFORMANCE HUD
+           ═══════════════════════════════════════════════════════════════════ */
+        #perf-hud {
+            position: fixed;
+            top: 52px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-family: 'SF Mono', Monaco, monospace;
+            z-index: 100;
+            display: none;
+        }
+        #perf-hud.visible { display: block; }
+        .perf-row { display: flex; gap: 12px; }
+        .perf-label { opacity: 0.5; }
+        .perf-value { font-variant-numeric: tabular-nums; }
+        .perf-good { color: var(--green); }
+        .perf-warn { color: var(--yellow); }
+        .perf-bad { color: var(--red); }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           TOAST NOTIFICATIONS
+           ═══════════════════════════════════════════════════════════════════ */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        #toast.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Selection box for drag select */
+        #selection-box {
+            position: fixed;
+            border: 1px solid var(--accent);
+            background: rgba(74, 158, 255, 0.1);
+            pointer-events: none;
+            z-index: 50;
+            display: none;
         }
     </style>
 
-    <!-- ENGINE: UMD builds - works with file:// protocol (no CORS issues) -->
     <script>
         window.process = window.process || { env: { NODE_ENV: "production" } };
         window.global = window.global || window;
     </script>
-    <!-- CDN scripts: synchronous to ensure THREE is available before app.js -->
-    <!-- NOTE: defer doesn't work with inline scripts - they execute before deferred scripts -->
-    <!-- THREE.js loaded first so 3d-force-graph detects and reuses it (avoids duplicate) -->
-    <!-- THREE.js loaded first so 3d-force-graph detects and reuses it (avoids duplicate) -->
     <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
     <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
     <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js"></script>
-    <script src="https://unpkg.com/three@0.149.0/examples/js/geometries/ConvexGeometry.js"></script>
 </head>
 
-<body data-layout="stack">
+<body>
+    <!-- Loader -->
     <div id="loader">
-        <div>INITIALIZING UNIVERSE...</div>
-        <div id="loader-status">DECOMPRESSING DATA...</div>
+        <div>INITIALIZING...</div>
+        <div id="loader-status">Loading data...</div>
     </div>
 
+    <!-- Graph -->
     <div id="3d-graph"></div>
 
-    <div id="hud">
-        <div class="hud-panel top-left" id="header-panel">
-            <h1 style="font-size: 16px; margin: 0 0 8px 0;">COLLIDER <span
-                    style="opacity: 0.5; font-size: 11px;">v{{VERSION}}</span></h1>
-            <div style="font-size: 11px; opacity: 0.7; margin-bottom: 4px;" id="target-name">target</div>
-            <div style="font-size: 10px; opacity: 0.5;" id="timestamp">timestamp</div>
-            <hr style="border-color: rgba(255,255,255,0.1); margin: 10px 0;">
-            <div style="font-size: 9px; opacity: 0.5;">L-Drag Select · R-Drag Rotate · Space+Drag Pan · Scroll Zoom
+    <!-- Header -->
+    <div id="header">
+        <div class="logo">COLLIDER <span>v{{VERSION}}</span></div>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">NODES</span>
+                <span class="stat-value" id="stat-nodes">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">EDGES</span>
+                <span class="stat-value" id="stat-edges">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">ENTROPY</span>
+                <span class="stat-value" id="stat-entropy">--</span>
             </div>
         </div>
+        <div class="target-name" id="target-name"></div>
+    </div>
 
-        <!-- Central stats -->
-        <div class="hud-panel top-center" id="stats-panel">
-            <div class="stat"><span>NODES</span><span class="stat-val" id="stat-nodes">0</span></div>
-            <div class="stat"><span>EDGES</span><span class="stat-val" id="stat-edges">0</span></div>
-            <div class="stat"><span>ENTROPY</span><span class="stat-val" id="stat-entropy">--</span></div>
-        </div>
-
-        <div class="hud-panel metrics-panel" id="metrics-panel">
-            <h1>System Metrics</h1>
-            <div class="metric"><span class="metric-health neutral" id="health-edge-resolution"></span><span
-                    class="metric-label">EDGE RES</span><span class="metric-val" id="metric-edge-resolution">--</span>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <!-- COLOR MODE -->
+        <div class="section">
+            <div class="section-header" data-section="color">
+                <span>COLOR BY</span>
+                <span class="arrow">▼</span>
             </div>
-            <div class="metric"><span class="metric-health neutral" id="health-call-ratio"></span><span
-                    class="metric-label">CALL RATIO</span><span class="metric-val" id="metric-call-ratio">--</span>
-            </div>
-            <div class="metric"><span class="metric-health neutral" id="health-reachability"></span><span
-                    class="metric-label">REACHABILITY</span><span class="metric-val" id="metric-reachability">--</span>
-            </div>
-            <div class="metric"><span class="metric-health neutral" id="health-dead-code"></span><span
-                    class="metric-label">DEAD CODE</span><span class="metric-val" id="metric-dead-code">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-knot-score"></span><span
-                    class="metric-label">KNOT SCORE</span><span class="metric-val" id="metric-knot-score">--</span>
-            </div>
-            <div class="metric"><span class="metric-health neutral" id="health-topology"></span><span
-                    class="metric-label">TOPOLOGY</span><span class="metric-val" id="metric-topology">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-orphans"></span><span
-                    class="metric-label">ORPHANS</span><span class="metric-val" id="metric-orphans">--</span></div>
-            <div class="metric"><span class="metric-health neutral" id="health-top-hubs"></span><span
-                    class="metric-label">TOP HUBS</span><span class="metric-val" id="metric-top-hubs">--</span></div>
-        </div>
-
-        <div class="hud-panel report-panel" id="report-panel">
-            <h1>Collider Report</h1>
-            <div class="report-content" id="report-content"></div>
-        </div>
-
-        <!-- AI INSIGHTS PANEL: Gemini-powered pattern analysis -->
-        <div class="hud-panel insights-panel" id="insights-panel">
-            <h1>AI Insights <span class="insights-badge">✨ Gemini</span></h1>
-            <div class="insights-content" id="insights-content">
-                <div class="insights-placeholder">No AI insights available. Generate with:<br><code>python tools/ai/insights_generator.py &lt;unified_analysis.json&gt;</code></div>
-            </div>
-        </div>
-
-        <!-- NODE HOVER PANEL: Quick info when hovering a node -->
-        <div class="hud-panel hover-panel" id="hover-panel">
-            <div class="hover-panel-header">
-                <span class="hover-panel-name" id="hover-name">Node Name</span>
-                <span class="hover-panel-kind" id="hover-kind">function</span>
-            </div>
-            <div class="hover-panel-row">
-                <span class="label">Atom</span>
-                <span class="value" id="hover-atom">--</span>
-            </div>
-            <div class="hover-panel-row">
-                <span class="label">Family</span>
-                <span class="value highlight" id="hover-family">--</span>
-            </div>
-            <div class="hover-panel-row">
-                <span class="label">Ring</span>
-                <span class="value" id="hover-ring">--</span>
-            </div>
-            <div class="hover-panel-row">
-                <span class="label">Tier</span>
-                <span class="value" id="hover-tier">--</span>
-            </div>
-            <div class="hover-panel-row">
-                <span class="label">Role</span>
-                <span class="value" id="hover-role">--</span>
-            </div>
-            <div class="hover-panel-file" id="hover-file">file_path</div>
-        </div>
-
-        <!-- SELECTION PANEL: Persistent selection summary -->
-        <div class="hud-panel selection-panel" id="selection-panel">
-            <div class="selection-header">
-                <span class="selection-title" id="selection-title">SELECTION</span>
-                <button class="selection-clear" id="selection-clear">CLEAR</button>
-            </div>
-            <div class="selection-list" id="selection-body"></div>
-        </div>
-
-        <!-- FILE INFO PANEL: Shows on node hover -->
-        <div class="hud-panel file-panel" id="file-panel">
-            <div class="file-header">
-                <span class="file-name" id="file-name">filename.py</span>
-                <span class="file-cohesion" id="file-cohesion">Cohesion: 0%</span>
-            </div>
-            <div class="file-meta" id="file-meta">
-                <div>Purpose: <span id="file-purpose">--</span></div>
-                <div>Atoms: <span id="file-atom-count">0</span> | Lines: <span id="file-lines">0-0</span></div>
-                <div>Classes: <span id="file-classes">--</span></div>
-            </div>
-            <div class="file-atoms" id="file-functions">Functions: loading...</div>
-            <div class="file-code" id="file-code">// hover a node to see code</div>
-        </div>
-
-        <!-- SIDE DOCK: Always-open compact sidebar -->
-        <div class="side-dock always-open" id="side-dock">
-            <div class="side-content" id="side-content">
-                <!-- TOPOLOGY: 3D Minimap filter visualization -->
-                <div class="side-section" id="dock-topo">
-                    <div class="side-title collapsible" data-target="topo-content">
-                        <span class="collapse-icon">▶</span> TOPOLOGY
-                    </div>
-                    <div class="collapsible-content collapsed" id="topo-content">
-                    <div class="topo-map-container">
-                        <!-- 3D Minimap Canvas: Hyperboloid showing 3 layers -->
-                        <div class="topo-map" id="dock-minimap" onclick="toggleMinimapExpand(event)">
-                            <canvas id="topo-canvas"></canvas>
-                            <span class="topo-expand-hint">Click to expand</span>
-                        </div>
-                        <!-- The Three Layers of Reality - HIDDEN (uses hardcoded colors) -->
-                        <div class="topo-section-title" style="display:none;">LAYERS (bottom→top)</div>
-                        <div class="topo-legend topo-layers" id="topo-layers" style="display:none;">
-                            <div class="topo-layer-item physical" data-layer="physical">
-                                <span class="layer-icon">⬡</span> PHYSICAL
-                            </div>
-                            <div class="topo-layer-item virtual" data-layer="virtual">
-                                <span class="layer-icon">◉</span> VIRTUAL
-                            </div>
-                            <div class="topo-layer-item semantic" data-layer="semantic">
-                                <span class="layer-icon">✧</span> SEMANTIC
-                            </div>
-                        </div>
-                        <!-- Interactive legends that double as filters -->
-                        <div class="topo-section-title">TIERS (T0→T2)</div>
-                        <div class="topo-legend" id="topo-tiers"></div>
-                        <div class="topo-section-title">ATOM FAMILIES</div>
-                        <div class="topo-legend" id="topo-families"></div>
-                        <div class="topo-section-title">RINGS</div>
-                        <div class="topo-legend" id="topo-rings"></div>
-                        <div class="topo-section-title">EDGES</div>
-                        <div class="topo-edge-filters" id="topo-edges"></div>
-                        <div class="topo-section-title">LAYERS (D2)</div>
-                        <div class="topo-legend" id="topo-layers"></div>
-                        <div class="topo-section-title">EFFECTS (D6)</div>
-                        <div class="topo-legend" id="topo-effects"></div>
-                        <div class="topo-section-title">EDGE FAMILIES</div>
-                        <div class="topo-legend" id="topo-edge-families"></div>
-                        <!-- Mathematical Model - HIDDEN (adds visual clutter) -->
-                        <div class="topo-section-title collapsible" data-target="topo-math" style="display:none;">
-                            <span class="collapse-icon">▶</span> GEOMETRY
-                        </div>
-                        <div class="topo-math collapsed" id="topo-math" style="display:none;">
-                            <div class="math-eq" title="Parametric surface equation">
-                                <span class="math-label">Surface:</span>
-                                <span class="math-formula">S(u,v) = (r(v)cos u, h(v), r(v)sin u)</span>
-                            </div>
-                            <div class="math-eq" title="Radius profile function (hyperbolic cosine)">
-                                <span class="math-label">Profile:</span>
-                                <span class="math-formula">r(v) = a·cosh(k(v-½)) + D(u,v)</span>
-                            </div>
-                            <div class="math-eq" title="Surface normal via cross product of partial derivatives">
-                                <span class="math-label">Normal:</span>
-                                <span class="math-formula">n = ∂S/∂u × ∂S/∂v</span>
-                            </div>
-                            <div class="math-eq" title="Bicubic interpolation for smooth density field">
-                                <span class="math-label">Density:</span>
-                                <span class="math-formula">D(u,v) = Σ wᵢⱼ · cᵢⱼ (bicubic)</span>
-                            </div>
-                            <div class="math-eq" title="Hermite basis for C¹ continuous color blending">
-                                <span class="math-label">Blend:</span>
-                                <span class="math-formula">H(t) = 2t³ - 3t² + 1 (Hermite)</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <!-- PRESETS: Quick visualization modes -->
-                <div class="side-section" id="dock-presets">
-                    <div class="side-title">PRESETS</div>
-                    <div class="preset-grid" id="preset-grid">
-                        <div class="preset-btn active" data-preset="tier" title="Core → Architecture → External">Tier</div>
-                        <div class="preset-btn" data-preset="family" title="LOG, DAT, ORG, EXE, EXT">Family</div>
-                        <div class="preset-btn" data-preset="layer" title="Physical → Virtual → Semantic">Layer</div>
-                        <div class="preset-btn" data-preset="ring" title="Domain architecture layers">Ring</div>
-                        <div class="preset-btn" data-preset="file" title="Each file gets unique hue">File</div>
-                        <div class="preset-btn" data-preset="flow" title="Markov chain flow visualization">Flow</div>
-                    </div>
-
-                    <!-- OKLCH COLOR SCHEMES -->
-                    <div class="side-title color-schemes-title">OKLCH SCHEMES</div>
-                    <div class="color-scheme-grid" id="dock-schemes">
-                        <div class="color-scheme-btn thermal" data-preset="thermal">
-                            <span class="scheme-name">THERMAL</span>
-                            <span class="scheme-tooltip">Heat signature - activity glows hot</span>
-                        </div>
-                        <div class="color-scheme-btn spectrum" data-preset="spectrum">
-                            <span class="scheme-name">SPECTRUM</span>
-                            <span class="scheme-tooltip">Full rainbow - structure as color</span>
-                        </div>
-                        <div class="color-scheme-btn neon" data-preset="neon">
-                            <span class="scheme-name">NEON</span>
-                            <span class="scheme-tooltip">Cyberpunk - electric on void</span>
-                        </div>
-                        <div class="color-scheme-btn ocean" data-preset="ocean">
-                            <span class="scheme-name">OCEAN</span>
-                            <span class="scheme-tooltip">Deep sea - cool depths</span>
-                        </div>
-                        <div class="color-scheme-btn plasma" data-preset="plasma">
-                            <span class="scheme-name">PLASMA</span>
-                            <span class="scheme-tooltip">Energy field - purple/pink glow</span>
-                        </div>
-                        <div class="color-scheme-btn matrix" data-preset="matrix">
-                            <span class="scheme-name">MATRIX</span>
-                            <span class="scheme-tooltip">Phosphor green terminal</span>
-                        </div>
-                        <div class="color-scheme-btn infrared" data-preset="infrared">
-                            <span class="scheme-name">INFRARED</span>
-                            <span class="scheme-tooltip">Night vision - heat on black</span>
-                        </div>
-                        <div class="color-scheme-btn aurora" data-preset="aurora">
-                            <span class="scheme-name">AURORA</span>
-                            <span class="scheme-tooltip">Northern lights shimmer</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LAYOUT: Graph layout presets -->
-                <div class="side-section" id="dock-layouts">
-                    <div class="side-title collapsible" data-target="layout-content">
-                        <span class="collapse-icon">▼</span> LAYOUT
-                    </div>
-                    <div class="collapsible-content" id="layout-content">
-                        <div class="layout-grid" id="layout-grid">
-                            <div class="layout-btn active" data-layout="force" title="Physics-based clustering">Force</div>
-                            <div class="layout-btn" data-layout="orbital" title="Planetary orbit bands">Orbital</div>
-                            <div class="layout-btn" data-layout="radial" title="Concentric tier rings">Radial</div>
-                            <div class="layout-btn" data-layout="spiral" title="DNA helix spiral">Spiral</div>
-                            <div class="layout-btn" data-layout="sphere" title="Spherical shell distribution">Sphere</div>
-                            <div class="layout-btn" data-layout="torus" title="Donut ring arrangement">Torus</div>
-                            <div class="layout-btn" data-layout="grid" title="Structured 3D grid">Grid</div>
-                            <div class="layout-btn" data-layout="cylinder" title="Cylindrical layers">Cylinder</div>
-                            <div class="layout-btn" data-layout="tree" title="Hierarchical tree structure">Tree</div>
-                            <div class="layout-btn" data-layout="flock" title="Organic flocking behavior">Flock</div>
-                            <div class="layout-btn" data-layout="galaxy" title="Spiral galaxy with arms">Galaxy</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VIEW: Color modes and sliders -->
-                <div class="side-section" id="side-view">
-                    <div class="side-title collapsible" data-target="view-content">
-                        <span class="collapse-icon">▼</span> VIEW
-                    </div>
-                    <div class="collapsible-content" id="view-content">
-                        <div class="filter-row">
-                            <span class="filter-label">Nodes</span>
-                            <div class="filter-chips" id="filter-node-color"></div>
-                        </div>
-                        <div class="filter-row">
-                            <span class="filter-label">Edges</span>
-                            <div class="filter-chips" id="filter-edge-mode"></div>
-                        </div>
-                        <div id="appearance-sliders"></div>
-                    </div>
-                </div>
-
-                <!-- GROUPS: Selection groups -->
-                <div class="side-section" id="dock-info">
-                    <div class="side-title collapsible" data-target="groups-content">
-                        <span class="collapse-icon">▼</span> GROUPS
-                    </div>
-                    <div class="collapsible-content" id="groups-content">
-                        <div class="group-list" id="group-list"></div>
-                    </div>
-                </div>
-
-                <!-- DATA: Metadata toggles -->
-                <div class="side-section" id="dock-datamaps">
-                    <div class="side-title collapsible collapsed" data-target="data-content">
-                        <span class="collapse-icon">▶</span> DATA
-                    </div>
-                    <div class="collapsible-content collapsed" id="data-content">
-                        <div class="filter-list" id="filter-metadata"></div>
-                    </div>
+            <div class="section-content" id="section-color">
+                <div class="btn-grid">
+                    <button class="btn active" data-preset="tier">TIER</button>
+                    <button class="btn" data-preset="family">FAMILY</button>
+                    <button class="btn" data-preset="layer">LAYER</button>
+                    <button class="btn" data-preset="ring">RING</button>
+                    <button class="btn" data-preset="file">FILE</button>
+                    <button class="btn" data-preset="flow">FLOW</button>
                 </div>
             </div>
         </div>
 
-        <div class="hud-panel bottom-dock" id="bottom-dock">
-            <div class="datamap-controls" id="datamap-controls"></div>
-            <button class="dock-btn disabled" id="btn-create-group" title="Create a group from selection">CREATE
-                GROUP</button>
-            <button class="dock-btn" id="btn-files">FILES</button>
-            <!-- File visualization mode sub-controls -->
-            <div class="file-mode-controls" id="file-mode-controls">
-                <button class="file-mode-btn active" id="btn-file-color" title="Color atoms by file">COLOR</button>
-                <button class="file-mode-btn" id="btn-file-hulls" title="Draw boundary hulls">HULLS</button>
-                <button class="file-mode-btn" id="btn-file-cluster" title="Force cluster by file">CLUSTER</button>
-                <button class="file-mode-btn" id="btn-file-map" title="Show file nodes">MAP</button>
-                <button class="file-mode-btn" id="btn-file-spheres" title="Show containment spheres">SPHERES</button>
-                <button class="file-mode-btn pop-btn" id="btn-file-pop"
-                    title="Pop boundaries - release particles into chaos!">POP!</button>
+        <!-- LAYOUT -->
+        <div class="section">
+            <div class="section-header" data-section="layout">
+                <span>LAYOUT</span>
+                <span class="arrow">▼</span>
             </div>
-            <div class="file-expand-controls" id="file-expand-controls">
-                <button class="file-expand-btn active" id="btn-expand-inline" title="Expand in place">INLINE</button>
-                <button class="file-expand-btn" id="btn-expand-detach" title="Expand and detach">DETACH</button>
+            <div class="section-content" id="section-layout">
+                <div class="btn-grid">
+                    <button class="btn active" data-layout="force">FORCE</button>
+                    <button class="btn" data-layout="radial">RADIAL</button>
+                    <button class="btn" data-layout="orbital">ORBITAL</button>
+                    <button class="btn" data-layout="sphere">SPHERE</button>
+                    <button class="btn" data-layout="grid">GRID</button>
+                    <button class="btn" data-layout="spiral">SPIRAL</button>
+                </div>
             </div>
-            <button class="dock-btn" id="btn-flow" title="Markov chain - edge thickness by probability">FLOW</button>
-            <button class="dock-btn" id="btn-edge-mode" title="Edge colors: type, resolution, weight, confidence">EDGE:
-                TYPE</button>
-            <button class="dock-btn" id="btn-report">REPORT</button>
-            <button class="dock-btn" id="btn-insights" title="AI-powered pattern analysis">AI</button>
-            <button class="dock-btn active" id="btn-stars" title="Toggle background starfield">STARS</button>
-            <button class="dock-btn" id="btn-reset-layout" title="Re-run physics simulation">RESET</button>
-            <button class="dock-btn active" id="btn-hints" title="Show/hide mode hints">HINTS</button>
-            <button class="dock-btn" id="btn-dimensions">2D</button>
-        </div>
-        <div class="flow-legend" id="flow-legend">FLOW: edge width = transition probability</div>
-        <div class="hud-toast" id="hud-toast"></div>
-
-        <!-- Oval debug overlay (enable in CSS to visualize protected region) -->
-        <div class="oval-debug"></div>
-
-        <!-- ═══════════════════════════════════════════════════════════════════
-             COMMAND BAR - Bottom arc with panel triggers
-             ═══════════════════════════════════════════════════════════════════ -->
-        <div class="command-bar" id="command-bar">
-            <!-- View controls -->
-            <button class="cmd-btn" id="cmd-view">
-                <span class="tooltip">View</span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                </svg>
-            </button>
-            <button class="cmd-btn" id="cmd-filter">
-                <span class="tooltip">Filters</span>
-                <svg viewBox="0 0 24 24">
-                    <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46" />
-                </svg>
-            </button>
-            <button class="cmd-btn" id="cmd-style">
-                <span class="tooltip">Style</span>
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 2a10 10 0 0 0 0 20 4 4 0 0 0 0-8 2 2 0 0 1 0-4 10 10 0 0 0 0-8z" />
-                </svg>
-            </button>
-            <button class="cmd-btn" id="cmd-oklch" onclick="toggleOklchPicker()">
-                <span class="tooltip tooltip-left">OKLCH</span>
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                </svg>
-            </button>
-            <div class="cmd-divider"></div>
-            <!-- Mode toggles -->
-            <button class="cmd-btn" id="cmd-files" onclick="handleCmdFiles()">
-                <span class="tooltip">File Mode</span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14,2 14,8 20,8" />
-                </svg>
-            </button>
-            <button class="cmd-btn" id="cmd-flow" onclick="handleCmdFlow()">
-                <span class="tooltip">Flow Mode</span>
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-                </svg>
-            </button>
-            <button class="cmd-btn active" id="cmd-3d">
-                <span class="tooltip">3D / 2D</span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-            </button>
-            <div class="cmd-divider"></div>
-            <!-- Settings -->
-            <button class="cmd-btn" id="cmd-settings">
-                <span class="tooltip">Settings</span>
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3" />
-                    <path
-                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                </svg>
-            </button>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════════════════════
-             FLOATING PANELS - Semi-lunar shape along oval edges
-             ═══════════════════════════════════════════════════════════════════ -->
-        <!-- View Panel -->
-        <div class="floating-panel" id="panel-view">
-            <div class="panel-header">
-                <span class="panel-title">View</span>
-                <button class="panel-close" onclick="closePanel('view')">&times;</button>
+        <!-- PHYSICS -->
+        <div class="section">
+            <div class="section-header" data-section="physics">
+                <span>PHYSICS</span>
+                <span class="arrow">▼</span>
             </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Dimensions</div>
-                <div class="segmented-control" id="dim-control">
-                    <div class="segment" data-dim="2">2D</div>
-                    <div class="segment active" data-dim="3">3D</div>
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Camera</div>
-                <div class="toggle-row">
-                    <span class="toggle-label">Auto-rotate</span>
-                    <div class="toggle-switch" id="toggle-rotate"></div>
-                </div>
-                <div class="toggle-row">
-                    <span class="toggle-label">Show labels</span>
-                    <div class="toggle-switch active" id="toggle-labels"></div>
-                </div>
-            </div>
-            <div class="panel-section">
+            <div class="section-content" id="section-physics">
                 <div class="slider-row">
                     <div class="slider-header">
-                        <span class="slider-label">Zoom</span>
-                        <span class="slider-value" id="zoom-value">100%</span>
+                        <span class="slider-label">Repulsion</span>
+                        <span class="slider-value" id="physics-charge-val">-120</span>
                     </div>
-                    <input type="range" class="slider-input" id="zoom-slider" min="10" max="300" value="100">
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Panel Layout</div>
-                <div class="segmented-control" id="layout-control">
-                    <div class="segment active" data-layout="stack">Stack</div>
-                    <div class="segment" data-layout="arc-right">Arc R</div>
-                    <div class="segment" data-layout="arc-left">Arc L</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Filter Panel -->
-        <div class="floating-panel" id="panel-filter">
-            <div class="panel-header">
-                <span class="panel-title">Filters</span>
-                <button class="panel-close" onclick="closePanel('filter')">&times;</button>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Tiers</div>
-                <div class="chip-group" id="chips-tiers"></div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Rings</div>
-                <div class="chip-group" id="chips-rings"></div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Edge Types</div>
-                <div class="chip-group" id="chips-edges"></div>
-            </div>
-            <div class="panel-section">
-                <div class="slider-row">
-                    <div class="slider-header">
-                        <span class="slider-label">Density</span>
-                        <span class="slider-value" id="density-value2">100%</span>
-                    </div>
-                    <input type="range" class="slider-input" id="density-slider2" min="0" max="100" value="100">
-                </div>
-            </div>
-        </div>
-
-        <!-- Style Panel -->
-        <div class="floating-panel" id="panel-style">
-            <div class="panel-header">
-                <span class="panel-title">Style</span>
-                <button class="panel-close" onclick="closePanel('style')">&times;</button>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Node Color By</div>
-                <div class="segmented-control" id="node-color-control">
-                    <div class="segment active" data-mode="tier">Tier</div>
-                    <div class="segment" data-mode="ring">Ring</div>
-                    <div class="segment" data-mode="family">Family</div>
-                    <div class="segment" data-mode="file">File</div>
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Edge Color By</div>
-                <div class="segmented-control" id="edge-color-control">
-                    <div class="segment active" data-mode="type">Type</div>
-                    <div class="segment" data-mode="weight">Weight</div>
-                    <div class="segment" data-mode="confidence">Conf</div>
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="slider-row">
-                    <div class="slider-header">
-                        <span class="slider-label">Node Size</span>
-                        <span class="slider-value" id="node-size-value">1.0x</span>
-                    </div>
-                    <input type="range" class="slider-input" id="node-size-slider" min="0.2" max="3" step="0.1"
-                        value="1">
-                </div>
-                <div class="slider-row">
-                    <div class="slider-header">
-                        <span class="slider-label">Edge Opacity</span>
-                        <span class="slider-value" id="edge-opacity-value">60%</span>
-                    </div>
-                    <input type="range" class="slider-input" id="edge-opacity-slider" min="0" max="100" value="60">
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="toggle-row">
-                    <span class="toggle-label">Starfield</span>
-                    <div class="toggle-switch active" id="toggle-stars"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Settings Panel -->
-        <div class="floating-panel" id="panel-settings">
-            <div class="panel-header">
-                <span class="panel-title">Settings</span>
-                <button class="panel-close" onclick="closePanel('settings')">&times;</button>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Theme</div>
-                <div class="theme-switcher" id="theme-switcher">
-                    <button class="theme-btn active" data-theme="dark" onclick="setTheme('dark')" title="Dark theme (default)">
-                        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-                        <span>Dark</span>
-                    </button>
-                    <button class="theme-btn" data-theme="light" onclick="setTheme('light')" title="Light theme">
-                        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="4" fill="currentColor"/><path fill="currentColor" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-                        <span>Light</span>
-                    </button>
-                    <button class="theme-btn" data-theme="high-contrast" onclick="setTheme('high-contrast')" title="High contrast (accessibility)">
-                        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M12 2a10 10 0 0 1 0 20V2Z"/></svg>
-                        <span>High Contrast</span>
-                    </button>
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Layout</div>
-                <div class="slider-row">
-                    <div class="slider-header">
-                        <span class="slider-label">UI Distance from Center</span>
-                        <span class="slider-value" id="oval-margin-value">15%</span>
-                    </div>
-                    <input type="range" class="slider-input" id="oval-margin-slider" min="5" max="30" value="15">
-                </div>
-                <div class="toggle-row">
-                    <span class="toggle-label">Show oval guide</span>
-                    <div class="toggle-switch" id="toggle-oval-debug"></div>
-                </div>
-            </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Physics</div>
-                <div class="toggle-row">
-                    <span class="toggle-label">Freeze layout</span>
-                    <div class="toggle-switch active" id="toggle-freeze"></div>
+                    <input type="range" id="physics-charge" min="-500" max="0" value="-120">
                 </div>
                 <div class="slider-row">
                     <div class="slider-header">
                         <span class="slider-label">Link Distance</span>
-                        <span class="slider-value" id="link-dist-value">30</span>
+                        <span class="slider-value" id="physics-link-val">50</span>
                     </div>
-                    <input type="range" class="slider-input" id="link-dist-slider" min="10" max="100" value="30">
+                    <input type="range" id="physics-link" min="10" max="200" value="50">
+                </div>
+                <div class="slider-row">
+                    <div class="slider-header">
+                        <span class="slider-label">Center Pull</span>
+                        <span class="slider-value" id="physics-center-val">0.05</span>
+                    </div>
+                    <input type="range" id="physics-center" min="0" max="0.5" step="0.01" value="0.05">
+                </div>
+                <div class="slider-row">
+                    <div class="slider-header">
+                        <span class="slider-label">Damping</span>
+                        <span class="slider-value" id="physics-damping-val">0.4</span>
+                    </div>
+                    <input type="range" id="physics-damping" min="0" max="1" step="0.05" value="0.4">
+                </div>
+                <div class="btn-grid btn-grid-4" style="margin-top: 4px;">
+                    <button class="btn" data-physics="default">DEF</button>
+                    <button class="btn" data-physics="tight">TIGHT</button>
+                    <button class="btn" data-physics="loose">LOOSE</button>
+                    <button class="btn" data-physics="explosive">BOOM</button>
                 </div>
             </div>
-            <div class="panel-section">
-                <div class="panel-section-title">Performance</div>
+        </div>
+
+        <!-- APPEARANCE -->
+        <div class="section">
+            <div class="section-header" data-section="appearance">
+                <span>APPEARANCE</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content" id="section-appearance">
+                <div class="slider-row">
+                    <div class="slider-header">
+                        <span class="slider-label">Node Size</span>
+                        <span class="slider-value" id="node-size-val">1.0</span>
+                    </div>
+                    <input type="range" id="node-size" min="0.2" max="3" step="0.1" value="1">
+                </div>
+                <div class="slider-row">
+                    <div class="slider-header">
+                        <span class="slider-label">Edge Opacity</span>
+                        <span class="slider-value" id="edge-opacity-val">0.4</span>
+                    </div>
+                    <input type="range" id="edge-opacity" min="0" max="1" step="0.05" value="0.4">
+                </div>
+                <div class="slider-row">
+                    <div class="slider-header">
+                        <span class="slider-label">Label Size</span>
+                        <span class="slider-value" id="label-size-val">1.0</span>
+                    </div>
+                    <input type="range" id="label-size" min="0" max="2" step="0.1" value="1">
+                </div>
+                <div class="toggle-row" style="margin-top: 4px;">
+                    <span>Show Labels</span>
+                    <div class="toggle active" id="toggle-labels"></div>
+                </div>
                 <div class="toggle-row">
-                    <span class="toggle-label">High quality</span>
-                    <div class="toggle-switch active" id="toggle-quality"></div>
+                    <span>Starfield</span>
+                    <div class="toggle active" id="toggle-stars"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="section">
+            <div class="section-header collapsed" data-section="filters">
+                <span>FILTERS</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content collapsed" id="section-filters">
+                <div style="font-size: 9px; opacity: 0.5; margin-bottom: 4px;">TIERS</div>
+                <div class="chips" id="filter-tiers"></div>
+                <div style="font-size: 9px; opacity: 0.5; margin: 8px 0 4px;">RINGS</div>
+                <div class="chips" id="filter-rings"></div>
+                <div style="font-size: 9px; opacity: 0.5; margin: 8px 0 4px;">EDGES</div>
+                <div class="chips" id="filter-edges"></div>
+            </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="section">
+            <div class="section-header collapsed" data-section="actions">
+                <span>ACTIONS</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="section-content collapsed" id="section-actions">
+                <div class="btn-grid btn-grid-2">
+                    <button class="btn" id="btn-reset">RESET VIEW</button>
+                    <button class="btn" id="btn-screenshot">SCREENSHOT</button>
+                    <button class="btn" id="btn-2d">TOGGLE 2D</button>
+                    <button class="btn" id="btn-freeze">FREEZE</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         SEMANTIC TOOLTIP - Theory descriptions for Standard Model elements
-         ═══════════════════════════════════════════════════════════════════ -->
-    <div class="topo-tooltip" id="topo-tooltip">
-        <div class="topo-tooltip-header">
-            <span class="topo-tooltip-icon" id="tooltip-icon"></span>
-            <div>
-                <div class="topo-tooltip-title" id="tooltip-title"></div>
-                <div class="topo-tooltip-subtitle" id="tooltip-subtitle"></div>
-            </div>
-        </div>
-        <div class="topo-tooltip-body" id="tooltip-body"></div>
-        <div class="topo-tooltip-theory" id="tooltip-theory"></div>
-        <div class="topo-tooltip-examples" id="tooltip-examples"></div>
+    <!-- Hover Panel -->
+    <div id="hover-panel">
+        <div class="hover-name" id="hover-name">Node Name</div>
+        <div class="hover-kind" id="hover-kind">function</div>
+        <div class="hover-row"><span class="label">Atom</span><span id="hover-atom">--</span></div>
+        <div class="hover-row"><span class="label">Family</span><span id="hover-family">--</span></div>
+        <div class="hover-row"><span class="label">Ring</span><span id="hover-ring">--</span></div>
+        <div class="hover-row"><span class="label">Tier</span><span id="hover-tier">--</span></div>
+        <div class="hover-row"><span class="label">Role</span><span id="hover-role">--</span></div>
+        <div class="hover-file" id="hover-file"></div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════════════
-         OKLCH COLOR PICKER - Embedded (no external server needed)
-         ═══════════════════════════════════════════════════════════════════ -->
-    <div class="oklch-picker" id="oklch-picker">
-        <div class="oklch-picker-header">
-            <span class="oklch-picker-title">OKLCH</span>
-            <a href="https://oklch.com" target="_blank" class="oklch-external-link"
-                title="Full picker at oklch.com">↗</a>
-            <button class="oklch-picker-close" onclick="toggleOklchPicker()">&times;</button>
+    <!-- Selection Panel -->
+    <div id="selection-panel">
+        <div class="selection-header">
+            <span class="selection-title" id="selection-title">SELECTED (0)</span>
+            <button class="selection-clear" id="selection-clear">CLEAR</button>
         </div>
-        <div class="oklch-content">
-            <div class="oklch-preview-bar">
-                <div class="oklch-swatch" id="oklch-swatch"></div>
-                <div class="oklch-values">
-                    <input type="text" id="oklch-css" readonly
-                        onclick="this.select();document.execCommand('copy');showToast('Copied!')">
-                </div>
-            </div>
-            <div class="oklch-sliders">
-                <div class="oklch-slider-group">
-                    <label>L <span id="oklch-l-val">70%</span></label>
-                    <input type="range" id="oklch-l" min="0" max="100" value="70" class="oklch-range oklch-range-l">
-                </div>
-                <div class="oklch-slider-group">
-                    <label>C <span id="oklch-c-val">0.15</span></label>
-                    <input type="range" id="oklch-c" min="0" max="0.4" step="0.001" value="0.15"
-                        class="oklch-range oklch-range-c">
-                </div>
-                <div class="oklch-slider-group">
-                    <label>H <span id="oklch-h-val">220°</span></label>
-                    <input type="range" id="oklch-h" min="0" max="360" value="220" class="oklch-range oklch-range-h">
-                </div>
-                <div class="oklch-slider-group">
-                    <label>A <span id="oklch-a-val">100%</span></label>
-                    <input type="range" id="oklch-a" min="0" max="100" value="100" class="oklch-range oklch-range-a">
-                </div>
-            </div>
-            <div class="oklch-gamut-info" id="oklch-gamut">sRGB ✓</div>
-            <canvas id="oklch-canvas-2d" class="oklch-canvas-2d"></canvas>
+        <div id="selection-list"></div>
+    </div>
+
+    <!-- Performance HUD -->
+    <div id="perf-hud">
+        <div class="perf-row">
+            <span class="perf-label">FPS:</span>
+            <span class="perf-value" id="perf-fps">60</span>
+            <span class="perf-label">Frame:</span>
+            <span class="perf-value" id="perf-frame">0ms</span>
         </div>
     </div>
 
+    <!-- Toast -->
+    <div id="toast"></div>
+
+    <!-- Selection box -->
     <div id="selection-box"></div>
 
-    <!-- Selection Detail Modal -->
-    <div class="selection-modal-overlay" id="selection-modal-overlay">
-        <div class="selection-modal" id="selection-modal">
-            <div class="selection-modal-header">
-                <span class="selection-modal-title" id="selection-modal-title">SELECTED NODES</span>
-                <button class="selection-modal-close" id="selection-modal-close">×</button>
-            </div>
-            <div class="selection-modal-stats" id="selection-modal-stats"></div>
-            <div class="selection-modal-body" id="selection-modal-body"></div>
-        </div>
-    </div>
-
     <script>
-        { { APP_JS } }
+        {{APP_JS}}
     </script>
 </body>
-
 </html>

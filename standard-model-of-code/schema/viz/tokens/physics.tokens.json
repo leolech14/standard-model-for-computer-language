@@ -1,0 +1,140 @@
+{
+  "$schema": "design-tokens",
+  "$purpose": "Physics simulation tokens - forces, collision, damping",
+
+  "forces": {
+    "$description": "D3 force simulation parameters",
+
+    "charge": {
+      "$description": "Node repulsion force (negative = repel, positive = attract)",
+      "enabled": { "$value": true },
+      "strength": {
+        "$value": -120,
+        "$min": -500,
+        "$max": 50,
+        "$step": 10,
+        "$description": "Repulsion strength between nodes"
+      },
+      "distanceMax": {
+        "$value": 500,
+        "$min": 100,
+        "$max": 2000,
+        "$step": 50,
+        "$description": "Maximum distance for charge force"
+      }
+    },
+
+    "link": {
+      "$description": "Link/edge distance force",
+      "enabled": { "$value": true },
+      "distance": {
+        "$value": 50,
+        "$min": 10,
+        "$max": 200,
+        "$step": 5,
+        "$description": "Preferred distance between linked nodes"
+      },
+      "strength": {
+        "$value": 0.3,
+        "$min": 0,
+        "$max": 1,
+        "$step": 0.05,
+        "$description": "Link force strength (0-1)"
+      }
+    },
+
+    "center": {
+      "$description": "Centering force pulling nodes to origin",
+      "enabled": { "$value": true },
+      "strength": {
+        "$value": 0.05,
+        "$min": 0,
+        "$max": 0.5,
+        "$step": 0.01,
+        "$description": "Center attraction strength"
+      }
+    },
+
+    "collision": {
+      "$description": "Node collision detection",
+      "enabled": { "$value": false },
+      "radius": {
+        "$value": 5,
+        "$min": 1,
+        "$max": 50,
+        "$step": 1,
+        "$description": "Collision radius around each node"
+      },
+      "strength": {
+        "$value": 0.7,
+        "$min": 0,
+        "$max": 1,
+        "$step": 0.1,
+        "$description": "Collision force strength"
+      }
+    }
+  },
+
+  "simulation": {
+    "$description": "Overall simulation parameters",
+
+    "alpha": {
+      "$description": "Simulation energy/velocity",
+      "initial": { "$value": 1, "$min": 0, "$max": 1, "$step": 0.1 },
+      "min": { "$value": 0.001, "$min": 0, "$max": 0.1, "$step": 0.001 },
+      "decay": { "$value": 0.0228, "$min": 0, "$max": 0.1, "$step": 0.001 }
+    },
+
+    "velocityDecay": {
+      "$value": 0.4,
+      "$min": 0,
+      "$max": 1,
+      "$step": 0.05,
+      "$description": "Velocity damping (0=no friction, 1=instant stop)"
+    },
+
+    "warmupTicks": {
+      "$value": 30,
+      "$min": 0,
+      "$max": 200,
+      "$step": 10,
+      "$description": "Pre-render simulation steps"
+    },
+
+    "cooldownTicks": {
+      "$value": 0,
+      "$min": 0,
+      "$max": 500,
+      "$step": 10,
+      "$description": "Post-render simulation steps (0=infinite)"
+    }
+  },
+
+  "presets": {
+    "$description": "Named physics configurations",
+
+    "default": {
+      "charge": -120,
+      "linkDistance": 50,
+      "centerStrength": 0.05
+    },
+    "tight": {
+      "$description": "Compact clustering",
+      "charge": -80,
+      "linkDistance": 30,
+      "centerStrength": 0.1
+    },
+    "loose": {
+      "$description": "Spread out layout",
+      "charge": -200,
+      "linkDistance": 80,
+      "centerStrength": 0.02
+    },
+    "explosive": {
+      "$description": "Maximum spread",
+      "charge": -400,
+      "linkDistance": 120,
+      "centerStrength": 0.01
+    }
+  }
+}
