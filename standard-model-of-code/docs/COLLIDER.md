@@ -77,22 +77,28 @@
 
 ---
 
-## 3. PIPELINE (12 Stages)
+## 3. PIPELINE (18 Stages)
 
 | Stage | Name | Produces |
 |-------|------|----------|
-| 1 | Classification | atoms |
-| 2 | Role Detection | roles |
-| 3 | Antimatter Detection | violations |
-| 4 | Predictions | missing components |
-| 5 | Insights Engine | recommendations |
-| 6 | Purpose Field | layers |
-| 7 | Execution Flow | reachable_set, orphans |
-| 8 | Performance Analysis | hotspots |
-| 9 | Visualization | HTML report |
-| 10 | Export | unified_analysis.json |
-| 11 | Brain Download | output.md |
-| 12 | Topology | shape classification |
+| 1 | Base Analysis | AST, initial nodes |
+| 2 | Standard Model | atom classification |
+| 2.5 | Ecosystem Discovery | framework detection |
+| 2.7 | Octahedral Dimensions | 8D vectors |
+| 3 | Purpose Field | layers |
+| 4 | Execution Flow | reachable_set, orphans |
+| 5 | Markov Transitions | state matrix |
+| 6 | Knot/Cycle Detection | cycles, knots |
+| 6.5 | Graph Analytics | centrality, clustering |
+| 6.6 | Statistical Metrics | distributions |
+| 7 | Data Flow | data movement graph |
+| 8 | Performance Prediction | hotspots |
+| 8.5 | Constraint Validation | profile checks |
+| 9 | Roadmap Evaluation | maturity score |
+| 10 | Visual Reasoning | topology shape |
+| 11 | Semantic Cortex | high-level patterns |
+| 11b | AI Insights (optional) | LLM analysis |
+| 12 | Consolidated Output | JSON, HTML, MD |
 
 ---
 

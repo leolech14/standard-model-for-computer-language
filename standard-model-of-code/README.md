@@ -315,19 +315,27 @@ Every codebase is reduced to a **graph**: `(Nodes, Edges, Metadata)`
 
 ## ⚙️ The Pipeline (How It Works)
 
-Collider runs **10 stages** in strict order (reordering breaks analysis):
+Collider runs **18 stages** in strict order (reordering breaks analysis):
 
 ```
-Stage 1: Classification   → Extract atoms (94 implemented)
-Stage 2: Role Distribution → Detect semantic roles (Repository, Entity, etc.)
-Stage 3: Antimatter        → Check for violations (cross-layer imports, etc.)
-Stage 4: Predictions       → Predict missing components (symmetry)
-Stage 5: Insights          → Generate actionable recommendations
-Stage 6: Purpose Field     → Map architectural layers
-Stage 7: Execution Flow    → Trace code paths, find dead code
-Stage 8: Performance       → Identify hotspots
-Stage 9: Summary           → Aggregate metrics
-Stage 10: Visualization    → Generate interactive HTML
+Stage 1:   Base Analysis           → AST parsing, initial extraction
+Stage 2:   Standard Model          → Apply atom classification (94 atoms)
+Stage 2.5: Ecosystem Discovery     → Detect frameworks, libraries
+Stage 2.7: Octahedral Dimensions   → 8D semantic classification
+Stage 3:   Purpose Field           → Map architectural layers
+Stage 4:   Execution Flow          → Trace code paths, find dead code
+Stage 5:   Markov Transitions      → State transition analysis
+Stage 6:   Knot/Cycle Detection    → Find circular dependencies
+Stage 6.5: Graph Analytics         → Centrality, clustering metrics
+Stage 6.6: Statistical Metrics     → Distribution analysis
+Stage 7:   Data Flow               → Track data movement
+Stage 8:   Performance Prediction  → Identify hotspots
+Stage 8.5: Constraint Validation   → Check against profiles
+Stage 9:   Roadmap Evaluation      → Maturity assessment
+Stage 10:  Visual Reasoning        → Topology classification
+Stage 11:  Semantic Cortex         → High-level patterns
+Stage 11b: AI Insights (optional)  → LLM enrichment
+Stage 12:  Consolidated Output     → JSON, HTML, Markdown
 ```
 
 **Why this order?** Each stage depends on the output of previous stages. See [COLLIDER.md](docs/COLLIDER.md) for pipeline details.

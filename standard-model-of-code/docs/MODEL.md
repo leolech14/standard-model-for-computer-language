@@ -218,7 +218,7 @@ INFRASTRUCTURE  → Purpose: Implement (technical details handled)
 | 3.4 | Total Space | Semantic space < 50M states |
 | 3.5 | Minimality | WHAT/WHY/HOW are minimal dimensions |
 | 3.6 | Orthogonality | Dimensions are statistically independent |
-| 3.7 | Pipeline DAG | 12-stage pipeline is valid topological order |
+| 3.7 | Pipeline DAG | 18-stage pipeline is valid topological order |
 | 3.8 | Schema Minimality | Canonical schema is minimal |
 
 ### Lean 4 Verification

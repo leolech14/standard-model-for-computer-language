@@ -515,27 +515,49 @@ def print_stores_list(stores: list) -> None:
     print("=" * 70 + "\n")
 
 
+def get_doppler_secret(key: str) -> str | None:
+    """Fetch a secret from Doppler. Returns None if unavailable."""
+    try:
+        result = subprocess.run(
+            ["doppler", "secrets", "get", key, "--plain"],
+            capture_output=True, text=True, timeout=5
+        )
+        if result.returncode == 0:
+            return result.stdout.strip()
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+    return None
+
+
 def create_developer_client():
     """
     Create a Gemini Developer API client for File Search.
 
-    Requires GEMINI_API_KEY environment variable.
-    Get your API key from: https://aistudio.google.com/apikey
+    Uses Doppler as the primary secrets source.
+    Falls back to GEMINI_API_KEY env var if Doppler unavailable.
     """
-    api_key = os.environ.get(GEMINI_API_KEY_ENV)
+    # Primary: Doppler (project: ai-tools, config: dev)
+    api_key = get_doppler_secret("GEMINI_API_KEY")
+    if api_key:
+        print("  [Doppler] GEMINI_API_KEY loaded")
+    else:
+        # Fallback: environment variable
+        api_key = os.environ.get(GEMINI_API_KEY_ENV)
+        if api_key:
+            print("  [Env] GEMINI_API_KEY loaded from environment")
 
     if not api_key:
         print(f"\n{'='*60}")
-        print("FILE SEARCH REQUIRES GEMINI DEVELOPER API")
+        print("FILE SEARCH REQUIRES GEMINI_API_KEY")
         print(f"{'='*60}")
-        print(f"File Search is only available on the Gemini Developer API,")
-        print(f"not Vertex AI. To use File Search features:")
         print()
-        print(f"1. Get an API key from: https://aistudio.google.com/apikey")
-        print(f"2. Set the environment variable:")
+        print("Setup Doppler (recommended):")
+        print("   doppler setup --project ai-tools --config dev")
+        print()
+        print("Or set environment variable:")
         print(f"   export {GEMINI_API_KEY_ENV}='your-api-key'")
         print()
-        print(f"Your Google account (leonardolech3@gmail.com) should work.")
+        print("Get API key from: https://aistudio.google.com/apikey")
         print(f"{'='*60}\n")
         return None
 
@@ -934,7 +956,6 @@ def generate_hypotheses(domain_config):
     domain_scope = domain_config.get('scope', '')
     
     for concept, details in definitions.items():
-        print(f"DEBUG: Processing concept '{concept}', keys: {list(details.keys())}")
         desc = details.get('description', 'No description')
         invariants = details.get('invariants', [])
         anchors = details.get('anchors', [])  # NEW: File anchors for discovery
@@ -964,9 +985,6 @@ def verify_hypothesis(dev_client, vertex_client, hypothesis, store_name, candida
     invariants = hypothesis['invariants']
     
     print(f"Targeting Concept: {concept}")
-    print(f"DEBUG: Hypothesis keys: {list(hypothesis.keys())}")
-    print(f"DEBUG: Anchors value: {hypothesis.get('anchors')}")
-    print(f"DEBUG: PROJECT_ROOT: {PROJECT_ROOT}")
     
     # Phase A: Discovery
     candidate_files = set()
@@ -1249,139 +1267,10 @@ def load_semantic_models():
     with open(SEMANTIC_MODELS_PATH) as f:
         return yaml.safe_load(f)
 
-def generate_hypotheses(domain_config):
-    """
-    Convert domain definitions into testable hypotheses.
-    """
-    hypotheses = []
-    definitions = domain_config.get('definitions', {})
-    
-    for concept, details in definitions.items():
-        desc = details.get('description', 'No description')
-        invariants = details.get('invariants', [])
-        
-        # Formulate the "claim"
-        claim = f"Hypothesis: The concept '{concept}' is implemented according to strict invariants."
-        
-        hypotheses.append({
-            'concept': concept,
-            'claim': claim,
-            'description': desc,
-            'invariants': invariants
-        })
-    
-    return hypotheses
 
-def verify_hypothesis(dev_client, vertex_client, hypothesis, store_name, candidate_override=None):
-    """
-    Execute the Verification Loop:
-    1. Search (Tier 2) for candidates
-    2. Analyze (Tier 1) for compliance
-    3. Monitor (Guardrail) for liabilities
-    """
-    concept = hypothesis['concept']
-    invariants = hypothesis['invariants']
-    
-    print(f"Targeting Concept: {concept}")
-    
-    # Phase A: Discovery (Tier 2)
-    candidate_files = set()
-    
-    # Validation Mode: If explicit candidate provided, prioritize it
-    if candidate_override:
-        print(f"    [Explicit Candidate]: {candidate_override}")
-        candidate_files.add(candidate_override)
-        
-    discovery_query = f"Find code that implements or represents the concept '{concept}'. List relevant classes or modules."
-    # Only search if no override or if we want to augment (for now, override implies exclusive focus for debugging)
-    if not candidate_override and store_name:
-         search_result = search_with_file_search(dev_client, store_name, discovery_query)
-         if search_result.get('citations'):
-            for cite in search_result['citations']:
-                if 'file' in cite:
-                    fpath = cite['file']
-                    if fpath and fpath.startswith('file://'):
-                        fpath = fpath[7:]
-                    if fpath:
-                        candidate_files.add(fpath)
-    
-    if not candidate_files:
-        print("    No candidates found.")
-        return {'verified': False, 'reason': 'No candidates found'}
-    
-    print(f"    Found {len(candidate_files)} candidates: {', '.join([Path(f).name for f in list(candidate_files)[:3]])}...")
-    
-    # Phase B: Deep Verification (Tier 1)
-    files_context = ""
-    valid_files = []
-    
-    # Read first N files to build verification context
-    for fpath in list(candidate_files)[:5]: # Limit to 5 files
-        full_path = Path(fpath)
-        if not full_path.is_absolute():
-            full_path = PROJECT_ROOT / fpath
-        
-        if full_path.exists():
-            try:
-                content = read_file_content(full_path)
-                files_context += f"\\n--- FILE: {fpath} ---\\n{content}\\n"
-                valid_files.append(fpath)
-            except Exception as e:
-                 pass
 
-    if not files_context:
-        return {'verified': False, 'reason': 'Could not read files'}
 
-    print(f"  Phase B: Verifying Invariants...")
-    
-    prompt = f'''
-    You are a Semantic Auditor. Your job is to verify if the code matches the Semantic Definition.
-    
-    CONCEPT: {concept}
-    DESCRIPTION: {hypothesis['description']}
-    
-    INVARIANTS (MUST BE TRUE):
-    {chr(10).join([f'- {i}' for i in invariants])}
-    
-    CODEBASE CONTEXT:
-    {files_context[:50000]}
-    
-    TASK:
-    1. Identify which classes/functions in the context correspond to '{concept}'.
-    2. Check each against the invariants.
-    3. Output a structured report.
-    
-    FORMAT:
-    ### Findings
-    - **Entity**: [Name]
-    - **Status**: [Compliant / Non-Compliant]
-    - **Evidence**: [Quote or reasoning]
-    - **Deviation**: [If non-compliant, explain why]
-    '''
-    
-    response = vertex_client.models.generate_content(
-        model=DEFAULT_MODEL,
-        contents=[Part.from_text(text=prompt)]
-    )
-    analysis_result = response.text
-    
-    # Phase C: Socratic Validation (Semantic Guardrails)
-    print("  Phase C: Running Socratic Validator (Antimatter Check)...")
-    try:
-        with open(SEMANTIC_MODELS_PATH, 'r') as f:
-            full_config = yaml.safe_load(f)
-        validator = SocraticValidator(full_config)
-        socratic_result = validator.validate(vertex_client, DEFAULT_MODEL, files_context, concept)
-    except Exception as e:
-        print(f"  Warning: Socratic Validator failed: {e}")
-        socratic_result = {"status": "ERROR", "error": str(e)}
 
-    return {
-        'verified': True,
-        'candidates': list(candidate_files),
-        'analysis': analysis_result,
-        'guardrails': socratic_result
-    }
 
 def verify_domain(domain, store_name=None, output=None, index=False, candidate=None):
     """Run validation loop for a domain."""
@@ -1469,10 +1358,18 @@ def verify_domain(domain, store_name=None, output=None, index=False, candidate=N
     timestamp = time.strftime('%Y%m%d_%H%M%S')
     json_output_path = intelligence_dir / f"socratic_audit_{domain}_{timestamp}.json"
     
+    # Generation tracking for meta-analysis awareness
     intelligence_data = {
         'timestamp': timestamp,
         'domain': domain,
         'execution_id': f"{domain}-{timestamp}",
+        'generation': 1,  # First-level analysis of code
+        'parent_execution_id': None,  # No parent for primary analysis
+        'analysis_type': 'primary',  # vs 'meta' for analysis-of-analysis
+        'source': {
+            'type': 'repository',
+            'location': str(PROJECT_ROOT)
+        },
         'results': results
     }
     
@@ -1480,6 +1377,21 @@ def verify_domain(domain, store_name=None, output=None, index=False, candidate=N
         json.dump(intelligence_data, f, indent=2, default=str)
     
     print(f"\\n[Output Management] Intelligence stored at: {json_output_path}")
+    
+    # GCS SYNC - Upload to cloud storage
+    GCS_BUCKET = "gs://elements-archive-2026/intelligence"
+    gcs_path = f"{GCS_BUCKET}/{domain}/socratic_audit_{domain}_{timestamp}.json"
+    try:
+        sync_result = subprocess.run(
+            ["gsutil", "cp", str(json_output_path), gcs_path],
+            capture_output=True, text=True, timeout=30
+        )
+        if sync_result.returncode == 0:
+            print(f"[Cloud Sync] Uploaded to: {gcs_path}")
+        else:
+            print(f"[Cloud Sync] Warning: Upload failed - {sync_result.stderr[:100]}")
+    except Exception as e:
+        print(f"[Cloud Sync] Warning: {e}")
 
     final_output = output or f"context-management/reports/socratic_audit_latest.md"
 
@@ -1862,6 +1774,56 @@ Examples:
         if not system_prompt:
             system_prompt = "You are an expert software engineer. Answer questions about the provided codebase. Cite file paths and line numbers."
         interactive_mode(client, args.model, context, system_prompt)
+    if args.set == 'archeology' or args.mode == 'trace':
+        # Evolutionary Trace Mode
+        print("\n--- Generating Evolutionary Trace (Generation 2) ---", file=sys.stderr)
+        
+        trace_prompt = """
+        You are an Archeological Code Analyst (Generation 2).
+        Your task is to trace the evolution of the concept 'ATOM' through the provided legacy documentation.
+
+        Context provided:
+        {context}
+
+        Output Strategy:
+        1. Identify the earliest definition of 'Atom' in the provided text (look at 2025/2026 timestamps).
+        2. Trace how the definition changed in subsequent documents.
+        3. Identify the "Pivot Point" when the definitions shifted significantly.
+        4. Summarize the final state of the concept in the latest provided doc.
+
+        Format your response as markdown:
+        # Evolutionary Trace: The Atom
+        ## Timeline
+        - [Date] [Source]: [Definition Summary]
+        ...
+        ## Analysis
+        [Deep conceptual analysis of the drift]
+        """
+        
+        try:
+             full_prompt = trace_prompt.format(context=context)
+        except Exception:
+             full_prompt = trace_prompt.replace("{context}", context)
+
+        def make_request():
+            return client.models.generate_content(
+                model=args.model,
+                contents=[Part.from_text(text=full_prompt)]
+            )
+        
+        try:
+            response = retry_with_backoff(make_request)
+            print(response.text)
+            if args.output:
+                with open(args.output, 'w') as f:
+                    f.write(response.text)
+                print(f"Stats saved to {args.output}")
+        except Exception as e:
+            print(f"Error during generation: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        sys.exit(0)
+
     elif args.mode == 'insights':
         # Insights mode (Structured JSON)
         if not INSIGHTS_PROMPT:
