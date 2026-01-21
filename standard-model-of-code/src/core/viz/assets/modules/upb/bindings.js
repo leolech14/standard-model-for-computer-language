@@ -142,12 +142,30 @@ const UPB_BINDINGS = (function () {
                 weights.push(binding.weight);
             }
 
-            // BLEND (Phase 3 placeholder: currently just takes last/replace)
-            // TODO: Import UPB_BLENDERS
+            // BLEND using UPB_BLENDERS (Phase 6: Robustness)
             if (values.length > 0) {
-                // Default behavior: Overwrite (last wins) or Average?
-                // For now, simpler is "Last Wins" to match old behavior
-                result[targetKey] = values[values.length - 1];
+                // Get target definition for blend mode and minOutput
+                const ENDPOINTS = window.UPB_ENDPOINTS;
+                const targetDef = ENDPOINTS ? ENDPOINTS.getTarget(targetKey) : null;
+                const blendMode = targetDef?.blendMode || 'replace';
+                const minOutput = targetDef?.minOutput;
+
+                // Apply blending
+                const BLENDERS = window.UPB_BLENDERS;
+                let finalValue;
+                if (BLENDERS && typeof BLENDERS.blend === 'function') {
+                    finalValue = BLENDERS.blend(blendMode, values, weights);
+                } else {
+                    // Fallback: last wins
+                    finalValue = values[values.length - 1];
+                }
+
+                // Apply minOutput clamping
+                if (minOutput !== undefined && finalValue < minOutput) {
+                    finalValue = minOutput;
+                }
+
+                result[targetKey] = finalValue;
             }
         }
         return result;

@@ -585,19 +585,24 @@ const CONTROL_BAR = (function () {
             range: VISUAL_TARGETS[targetKey]?.range
         });
 
-        // 2. Refresh Data Ranges (if needed, usually DM handles this)
-        // For now, we rely on the UPB Binding to calculate ranges per node or usage
-        // But UPB.evaluate needs data ranges (min/max) for normalization.
-        // We calculate them here ad-hoc for the current selection and push to UPB.
-        const values = nodes.map(n => getNodeValue(n, sourceKey)).filter(v => typeof v === 'number');
-        if (values.length > 0) {
-            const min = Math.min(...values);
-            const max = Math.max(...values);
-
-            // Access the underlying graph to set range
-            // TODO: Move this to a central DataManager
+        // 2. Set Data Ranges for normalization (Phase 6: use DATA.getRange)
+        // Map control-bar scope to DATA.getRange scope
+        const dm = typeof DATA !== 'undefined' ? DATA : null;
+        if (dm && typeof dm.getRange === 'function') {
+            const dataScope = _config.scope === 'selection' ? 'selection' :
+                              _config.scope === 'all' ? 'global' : 'visible';
+            const range = dm.getRange(sourceKey, dataScope);
             if (window.UPB.BINDINGS.defaultGraph) {
-                window.UPB.BINDINGS.defaultGraph._dataRanges[sourceKey] = { min, max };
+                window.UPB.BINDINGS.defaultGraph._dataRanges[sourceKey] = range;
+            }
+        } else {
+            // Fallback: calculate ad-hoc if DATA.getRange not available
+            const values = nodes.map(n => getNodeValue(n, sourceKey)).filter(v => typeof v === 'number');
+            if (values.length > 0 && window.UPB.BINDINGS.defaultGraph) {
+                window.UPB.BINDINGS.defaultGraph._dataRanges[sourceKey] = {
+                    min: Math.min(...values),
+                    max: Math.max(...values)
+                };
             }
         }
 

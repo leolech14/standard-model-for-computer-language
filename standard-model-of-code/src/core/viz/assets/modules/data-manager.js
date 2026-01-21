@@ -499,6 +499,82 @@ const DATA = (function() {
         return cache.edgeRanges;
     }
 
+    /**
+     * Get min/max range for a source property across a specific scope.
+     * NOT cached - calculates fresh each call (scopes change dynamically).
+     *
+     * @param {string} sourceKey - Property name (e.g., 'token_estimate', 'in_degree')
+     * @param {string} scope - 'global' | 'visible' | 'selection'
+     * @returns {{ min: number, max: number }} Range object
+     */
+    function getRange(sourceKey, scope = 'global') {
+        // Get node set based on scope
+        let nodes;
+        switch (scope) {
+            case 'selection':
+                nodes = (typeof SELECTION !== 'undefined' && SELECTION.getSelectedNodes)
+                    ? SELECTION.getSelectedNodes()
+                    : [];
+                break;
+            case 'visible':
+                nodes = getVisibleNodes();
+                break;
+            case 'global':
+            default:
+                nodes = raw.nodes;
+                break;
+        }
+
+        // Extract numeric values
+        const values = [];
+        for (const node of nodes) {
+            const val = _getNodeValue(node, sourceKey);
+            if (typeof val === 'number' && !Number.isNaN(val)) {
+                values.push(val);
+            }
+        }
+
+        // Return safe range
+        if (values.length === 0) {
+            return { min: 0, max: 1 };
+        }
+
+        return {
+            min: Math.min(...values),
+            max: Math.max(...values)
+        };
+    }
+
+    /**
+     * Extract a value from a node for a given source key.
+     * Handles nested properties and computed values.
+     */
+    function _getNodeValue(node, sourceKey) {
+        if (!node || !sourceKey) return undefined;
+
+        // Direct property
+        if (node[sourceKey] !== undefined) {
+            return node[sourceKey];
+        }
+
+        // Nested in metrics
+        if (node.metrics && node.metrics[sourceKey] !== undefined) {
+            return node.metrics[sourceKey];
+        }
+
+        // Computed values
+        switch (sourceKey) {
+            case 'in_degree':
+                return (getEdgesTo(node.id) || []).length;
+            case 'out_degree':
+                return (getEdgesFrom(node.id) || []).length;
+            case 'degree':
+                return (getEdgesTo(node.id) || []).length + (getEdgesFrom(node.id) || []).length;
+            default:
+                return undefined;
+        }
+    }
+
     // =========================================================================
     // SELF-TEST
     // =========================================================================
@@ -597,6 +673,7 @@ const DATA = (function() {
         getEdgeTypeCounts,
         getEdgeFamilyCounts,
         getEdgeRanges,
+        getRange,
 
         // Self-test
         selfTest,
@@ -666,6 +743,7 @@ class DataManager {
     getEdgeTypeCounts() { return DATA.getEdgeTypeCounts(); }
     getEdgeFamilyCounts() { return DATA.getEdgeFamilyCounts(); }
     getEdgeRanges() { return DATA.getEdgeRanges(); }
+    getRange(sourceKey, scope) { return DATA.getRange(sourceKey, scope); }
     selfTest() { return DATA.selfTest(); }
 
     // Internal methods

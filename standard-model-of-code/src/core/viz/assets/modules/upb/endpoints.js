@@ -122,41 +122,50 @@ const UPB_ENDPOINTS = (function () {
         nodeSize: {
             category: 'geometry',
             range: [1, 30],
+            minOutput: 1,           // Prevent zero-size nodes
+            blendMode: 'max',       // Multiple bindings → take largest
             label: 'Node Size',
             tags: ['visual', 'geometric', 'magnitude', 'importance']
         },
         xPosition: {
             category: 'geometry',
             range: [-1000, 1000],
+            blendMode: 'average',   // Blend positions via average
             label: 'X Position',
             tags: ['visual', 'geometric', 'spatial', 'horizontal']
         },
-        yPosition: { label: 'Y Position', category: 'position', range: [-500, 500] },
-        zPosition: { label: 'Z Position (depth)', category: 'position', range: [-300, 300] },
-        radius: { label: 'Radial Distance', category: 'position', range: [50, 400] },
+        yPosition: { label: 'Y Position', category: 'position', range: [-500, 500], blendMode: 'average' },
+        zPosition: { label: 'Z Position (depth)', category: 'position', range: [-300, 300], blendMode: 'average' },
+        radius: { label: 'Radial Distance', category: 'position', range: [50, 400], minOutput: 50, blendMode: 'max' },
 
         // Chromatic
         hue: {
             category: 'color',
             range: [0, 360],
+            blendMode: 'replace',   // Hue doesn't blend well
             label: 'Color Hue',
             tags: ['visual', 'chromatic', 'identity', 'cyclical']
         },
         saturation: {
             category: 'color',
             range: [0, 100],
+            blendMode: 'average',
             label: 'Saturation',
             tags: ['visual', 'chromatic', 'intensity', 'purity']
         },
         lightness: {
             category: 'color',
             range: [0, 100],
+            minOutput: 10,          // Prevent invisible (black) nodes
+            blendMode: 'average',
             label: 'Lightness',
             tags: ['visual', 'chromatic', 'brightness', 'fade']
         },
         opacity: {
             category: 'color',
             range: [0.1, 1.0],
+            minOutput: 0.1,         // Prevent fully transparent nodes
+            blendMode: 'multiply',  // Stacked effects multiply
             label: 'Opacity',
             tags: ['visual', 'chromatic', 'presence', 'ghost']
         },
@@ -165,21 +174,24 @@ const UPB_ENDPOINTS = (function () {
         charge: {
             category: 'physics',
             range: [-500, 0],
+            blendMode: 'add',       // Charges accumulate
             label: 'Repulsion',
             tags: ['simulation', 'force', 'space', 'isolation']
         },
         collisionRadius: {
             category: 'physics',
             range: [1, 50],
+            minOutput: 1,           // Minimum collision body
+            blendMode: 'max',
             label: 'Collision Body',
             tags: ['simulation', 'force', 'substance', 'barrier']
         },
-        linkStrength: { label: 'Link Strength', category: 'physics', range: [0, 1] },
-        mass: { label: 'Mass (inertia)', category: 'physics', range: [1, 10] },
+        linkStrength: { label: 'Link Strength', category: 'physics', range: [0, 1], blendMode: 'average' },
+        mass: { label: 'Mass (inertia)', category: 'physics', range: [1, 10], minOutput: 1, blendMode: 'add' },
 
         // Animation
-        pulseSpeed: { label: 'Pulse Speed', category: 'animation', range: [0, 5] },
-        rotationSpeed: { label: 'Rotation Speed', category: 'animation', range: [0, 2] }
+        pulseSpeed: { label: 'Pulse Speed', category: 'animation', range: [0, 5], blendMode: 'max' },
+        rotationSpeed: { label: 'Rotation Speed', category: 'animation', range: [0, 2], blendMode: 'max' }
     };
 
     function getSource(name) {
