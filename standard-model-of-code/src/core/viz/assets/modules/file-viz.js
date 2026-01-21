@@ -23,7 +23,7 @@
  *   FILE_VIZ.apply()                 // Apply current mode
  */
 
-const FILE_VIZ = (function() {
+const FILE_VIZ = (function () {
     'use strict';
 
     // =========================================================================
@@ -113,15 +113,15 @@ const FILE_VIZ = (function() {
             property: 'hue',
             discrete: true,
             values: {
-                code:   210,  // Blue - primary code
+                code: 210,  // Blue - primary code
                 config: 45,   // Orange - configuration
-                doc:    120,  // Green - documentation
-                data:   280,  // Purple - data files
-                test:   340,  // Pink - test files
-                style:  180,  // Cyan - stylesheets
+                doc: 120,  // Green - documentation
+                data: 280,  // Purple - data files
+                test: 340,  // Pink - test files
+                style: 180,  // Cyan - stylesheets
                 script: 30,   // Yellow-Orange - scripts
-                build:  0,    // Red - build files
-                other:  0     // Gray (handled by saturation)
+                build: 0,    // Red - build files
+                other: 0     // Gray (handled by saturation)
             },
             label: 'File Format'
         },
@@ -129,15 +129,15 @@ const FILE_VIZ = (function() {
             property: 'hue',
             discrete: true,
             values: {
-                test:       340,  // Pink
-                config:     45,   // Orange
-                model:      260,  // Purple
-                service:    210,  // Blue
+                test: 340,  // Pink
+                config: 45,   // Orange
+                model: 260,  // Purple
+                service: 210,  // Blue
                 controller: 180,  // Cyan
-                utility:    90,   // Yellow-Green
-                interface:  300,  // Magenta
-                data:       30,   // Orange-Yellow
-                general:    200   // Light Blue
+                utility: 90,   // Yellow-Green
+                interface: 300,  // Magenta
+                data: 30,   // Orange-Yellow
+                general: 200   // Light Blue
             },
             label: 'File Purpose'
         },
@@ -170,7 +170,9 @@ const FILE_VIZ = (function() {
 
     /**
      * Apply a visual mapping to file nodes.
-     * @param {string} mappingKey - Key from VISUAL_MAPPINGS
+     * NOW DELEGATES TO UPB (Universal Property Binder)
+     *
+     * @param {string} mappingKey - Key from VISUAL_MAPPINGS (source property)
      * @param {Array} fileNodes - Array of file node objects
      */
     function applyVisualMapping(mappingKey, fileNodes) {
@@ -192,17 +194,34 @@ const FILE_VIZ = (function() {
         const dataMin = Math.min(...values);
         const dataMax = Math.max(...values);
 
+        // === UPB INTEGRATION ===
+        // Use UPB for scaling if available, with graceful fallback
+        const useUPB = window.UPB && window.UPB_SCALES;
+
         fileNodes.forEach(node => {
             const rawValue = node[mappingKey];
             if (rawValue === undefined || rawValue === null) return;
 
             if (mapping.discrete) {
-                // Categorical mapping
+                // Categorical mapping - direct value lookup
                 const discreteValue = mapping.values[rawValue] ?? mapping.values['other'] ?? 0;
                 _applyVisualProperty(node, mapping.property, discreteValue);
             } else {
-                // Continuous mapping
-                let normalized = _normalizeValue(rawValue, dataMin, dataMax, mapping.scale);
+                // Continuous mapping - use UPB_SCALES
+                let normalized;
+                if (useUPB) {
+                    // Delegate to UPB_SCALES
+                    normalized = window.UPB_SCALES.applyScale(
+                        mapping.scale || 'linear',
+                        rawValue,
+                        dataMin,
+                        dataMax
+                    );
+                } else {
+                    // Fallback to inline (for when UPB not loaded)
+                    normalized = _normalizeValueFallback(rawValue, dataMin, dataMax, mapping.scale);
+                }
+
                 if (mapping.invert) normalized = 1 - normalized;
 
                 const visualMin = mapping.min ?? 0;
@@ -213,10 +232,14 @@ const FILE_VIZ = (function() {
             }
         });
 
-        console.log(`[FILE_VIZ] Applied mapping: ${mappingKey} (${mapping.label})`);
+        console.log(`[FILE_VIZ] Applied mapping: ${mappingKey} (${mapping.label})${useUPB ? ' [via UPB]' : ''}`);
     }
 
-    function _normalizeValue(value, min, max, scale) {
+    /**
+     * FALLBACK scale normalization - used when UPB_SCALES not available.
+     * @deprecated Prefer UPB_SCALES.applyScale() when UPB is loaded.
+     */
+    function _normalizeValueFallback(value, min, max, scale) {
         if (max === min) return 0.5;
 
         let normalized;
@@ -352,7 +375,7 @@ const FILE_VIZ = (function() {
     function applyColors(graphNodes) {
         // Get file boundaries from DATA module or DM global
         const dm = typeof DATA !== 'undefined' ? DATA :
-                   (typeof DM !== 'undefined' ? DM : null);
+            (typeof DM !== 'undefined' ? DM : null);
         const boundaries = dm?.getFileBoundaries ? dm.getFileBoundaries() : [];
         const totalFiles = boundaries.length;
 
@@ -385,7 +408,7 @@ const FILE_VIZ = (function() {
      */
     function buildFileGraph() {
         const dm = typeof DATA !== 'undefined' ? DATA :
-                   (typeof DM !== 'undefined' ? DM : null);
+            (typeof DM !== 'undefined' ? DM : null);
         const boundaries = dm?.getFileBoundaries ? dm.getFileBoundaries() : [];
         const nodes = dm?.getNodes ? dm.getNodes() : [];
         const links = dm?.getLinks ? dm.getLinks() : [];
@@ -616,6 +639,52 @@ const FILE_VIZ = (function() {
         Graph.graphData(_fileGraph);
         applyColors(_fileGraph.nodes);
 
+        // UPB Hook: Re-apply any active bindings to the new file nodes
+        if (window.UPB && typeof window.UPB.apply === 'function') {
+            // CRITICAL FIX: Recalculate ranges for FILE nodes because they track
+            // much larger values (e.g. Total Tokens) than individual Atoms.
+            // Without this, everything gets clamped to 1.0 (Max Size/Color).
+            if (window.UPB.BINDINGS && window.UPB.BINDINGS.defaultGraph) {
+                const activeBindings = window.UPB.BINDINGS.defaultGraph._bindings;
+                const newRanges = {};
+
+                Object.keys(activeBindings).forEach(targetKey => {
+                    const bindings = activeBindings[targetKey];
+                    bindings.forEach(b => {
+                        const sourceKey = b.source;
+                        // Extract values from file nodes for this source
+                        const values = _fileGraph.nodes
+                            .map(n => n[sourceKey])
+                            .filter(v => typeof v === 'number');
+
+                        if (values.length > 0) {
+                            newRanges[sourceKey] = {
+                                min: Math.min(...values),
+                                max: Math.max(...values)
+                            };
+                        }
+                    });
+                });
+
+                // Update graph ranges for this context
+                window.UPB.init(newRanges);
+            }
+
+            const updates = window.UPB.apply(_fileGraph.nodes);
+
+            // Apply updates to nodes
+            updates.forEach(update => {
+                const node = _fileGraph.nodes.find(n => n.id === update.id);
+                if (node && update.visuals) {
+                    Object.keys(update.visuals).forEach(key => {
+                        if (typeof CONTROL_BAR !== 'undefined' && CONTROL_BAR.applyToNode) {
+                            CONTROL_BAR.applyToNode(node, key, update.visuals[key]);
+                        }
+                    });
+                }
+            });
+        }
+
         // Reheat simulation for nice spread
         Graph.d3ReheatSimulation();
 
@@ -818,7 +887,7 @@ const FILE_VIZ = (function() {
 
         // Get graph nodes
         const dm = typeof DATA !== 'undefined' ? DATA :
-                   (typeof DM !== 'undefined' ? DM : null);
+            (typeof DM !== 'undefined' ? DM : null);
         const graphNodes = dm?.getVisibleNodes ?
             dm.getVisibleNodes() :
             (typeof Graph !== 'undefined' ? Graph?.graphData()?.nodes || [] : []);
@@ -1137,7 +1206,7 @@ const FILE_VIZ = (function() {
             const ys = sampled.map(n => n.y || 0);
             const zs = sampled.map(n => n.z || 0);
 
-            const quantileFn = typeof quantile === 'function' ? quantile : (arr, q) => arr.sort((a,b)=>a-b)[Math.floor(arr.length * q)] || 0;
+            const quantileFn = typeof quantile === 'function' ? quantile : (arr, q) => arr.sort((a, b) => a - b)[Math.floor(arr.length * q)] || 0;
             const minX = quantileFn(xs, lowQ);
             const maxX = quantileFn(xs, highQ);
             const minY = quantileFn(ys, lowQ);
@@ -1155,9 +1224,9 @@ const FILE_VIZ = (function() {
             const positions = hullNodes.map(n => new THREE.Vector3(n.x || 0, n.y || 0, n.z || 0));
             const centroid = typeof computeCentroid === 'function' ? computeCentroid(positions) :
                 new THREE.Vector3(
-                    positions.reduce((s,p)=>s+p.x,0)/positions.length,
-                    positions.reduce((s,p)=>s+p.y,0)/positions.length,
-                    positions.reduce((s,p)=>s+p.z,0)/positions.length
+                    positions.reduce((s, p) => s + p.x, 0) / positions.length,
+                    positions.reduce((s, p) => s + p.y, 0) / positions.length,
+                    positions.reduce((s, p) => s + p.z, 0) / positions.length
                 );
             const zRange = maxZ - minZ;
             const extentX = Math.max(0.001, maxX - minX);
@@ -1186,9 +1255,9 @@ const FILE_VIZ = (function() {
                 const rawPositions = nodes.map(n => new THREE.Vector3(n.x || 0, n.y || 0, n.z || 0));
                 const smallCentroid = typeof computeCentroid === 'function' ? computeCentroid(rawPositions) :
                     new THREE.Vector3(
-                        rawPositions.reduce((s,p)=>s+p.x,0)/rawPositions.length,
-                        rawPositions.reduce((s,p)=>s+p.y,0)/rawPositions.length,
-                        rawPositions.reduce((s,p)=>s+p.z,0)/rawPositions.length
+                        rawPositions.reduce((s, p) => s + p.x, 0) / rawPositions.length,
+                        rawPositions.reduce((s, p) => s + p.y, 0) / rawPositions.length,
+                        rawPositions.reduce((s, p) => s + p.z, 0) / rawPositions.length
                     );
                 const maxRadius = rawPositions.reduce((acc, p) => {
                     return Math.max(acc, p.distanceTo(smallCentroid));

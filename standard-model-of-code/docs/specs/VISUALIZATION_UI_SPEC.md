@@ -122,51 +122,42 @@ CONTROL_BAR.createGroupFromSelection()  // Create group
 CONTROL_BAR.removeGroup(id)     // Remove group
 ```
 
-### Data Sources
+### UPB Data Sources (Universal Property Binder)
 
-Available fields that can be mapped FROM:
+The `UPB` module (`modules/upb/endpoints.js`) defines the canonical registry of data sources. 
+**New in v3:** All sources now include **Semantic Tags** for logic blending.
 
-| Key | Label | Type | Domain |
-|-----|-------|------|--------|
-| `size_bytes` | File Size (bytes) | continuous | file |
-| `token_estimate` | Token Count | continuous | file |
-| `line_count` | Line Count | continuous | file |
-| `code_lines` | Code Lines | continuous | file |
-| `complexity_density` | Complexity Density | continuous | file |
-| `cohesion` | Cohesion | continuous | file |
-| `code_ratio` | Code Ratio | continuous | file |
-| `age_days` | Age (days) | continuous | file |
-| `in_degree` | In-Degree (callers) | continuous | node |
-| `out_degree` | Out-Degree (calls) | continuous | node |
-| `tier` | Tier (T0-T4) | discrete | node |
-| `ring` | Ring | discrete | node |
-| `layer` | Layer | discrete | node |
-| `role` | Role | discrete | node |
-| `format_category` | Format | discrete | file |
-| `purpose` | Purpose | discrete | file |
-| `effect` | Effect | discrete | node |
-| `is_test` | Is Test? | boolean | file |
-| `is_config` | Is Config? | boolean | file |
-| `is_stale` | Is Stale? | boolean | file |
+| Key | Label | Type | Domain | Semantic Tags |
+|-----|-------|------|--------|---------------|
+| `token_estimate` | Token Count | continuous | file | `[structural, quantitative, size]` |
+| `line_count` | Line Count | continuous | file | `[structural, quantitative, verticality]` |
+| `complexity_density`| Complexity | continuous | file | `[structural, qualitative, entropy]` |
+| `age_days` | Age (days) | continuous | file | `[temporal, quantitative, decay]` |
+| `in_degree` | In-Degree | continuous | node | `[topological, quantitative, popularity]` |
+| `tier` | Tier (Layer) | discrete | node | `[architectural, categorical, hierarchy]` |
+| `role` | Role | discrete | node | `[semantic, categorical, purpose]` |
+| `is_stale` | Is Stale? | boolean | file | `[temporal, boolean, risk]` |
 
-### Visual Targets
+*(See `modules/upb/endpoints.js` for full registry)*
 
-Available properties that can be mapped TO:
+### UPB Visual Targets
 
-| Key | Label | Category | Range |
-|-----|-------|----------|-------|
-| `nodeSize` | Node Size | appearance | [1, 30] |
-| `hue` | Color Hue | appearance | [0, 360] |
-| `saturation` | Saturation | appearance | [0, 100] |
-| `lightness` | Lightness | appearance | [20, 80] |
-| `opacity` | Opacity | appearance | [0.1, 1.0] |
-| `xPosition` | X Position | position | [-500, 500] |
-| `yPosition` | Y Position | position | [-500, 500] |
-| `zPosition` | Z Position | position | [-300, 300] |
-| `radius` | Radial Distance | position | [50, 400] |
-| `charge` | Charge (repel) | physics | [-500, 0] |
-| `mass` | Mass (inertia) | physics | [1, 10] |
-| `pulseSpeed` | Pulse Speed | animation | [0, 5] |
+All visual properties are now managed by `UPB` and include semantic tags for auto-binding logic.
+
+| Key | Label | Category | Range | Semantic Tags |
+|-----|-------|----------|-------|---------------|
+| `nodeSize` | Node Size | geometry | [1, 30] | `[visual, geometric, magnitude]` |
+| `xPosition` | X Position | geometry | [-1000, 1000] | `[visual, geometric, spatial]` |
+| `hue` | Color Hue | color | [0, 360] | `[visual, chromatic, identity]` |
+| `saturation` | Saturation | color | [0, 100] | `[visual, chromatic, intensity]` |
+| `charge` | Repulsion | physics | [-500, 0] | `[simulation, force, isolation]` |
+| `collisionRadius` | Body Size | physics | [1, 50] | `[simulation, force, barrier]` |
+
+### Universal Property Binder (UPB) Architecture
+The `control-bar.js` no longer contains mapping logic. It delegates to the **UPB Graph**:
+1. `UPB.bind(source, target)`: Creates a persistent link.
+2. `UPB.apply(nodes)`: Evaluates all links and updates node visuals.
+3. `UPB.index.js`: Main entry point.
 
 ### Scale Functions
 

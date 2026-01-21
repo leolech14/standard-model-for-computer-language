@@ -1,0 +1,56 @@
+presets:
+  complexity:
+    description: "Size and color by complexity metrics"
+    bindings:
+      - source: token_estimate
+        target: nodeSize
+        scale: sqrt
+        range: [4, 25]
+      - source: complexity_density
+        target: lightness
+        scale: linear
+        range: [80, 20] # Inverted: Darker = more complex
+      - source: complexity_density
+        target: hue
+        scale: linear
+        range: [140, 0] # Green -> Red
+
+  importance:
+    description: "Highlight high-impact nodes (PageRank + Degree)"
+    bindings:
+      - source: in_degree
+        target: nodeSize
+        scale: log
+        range: [2, 30]
+      - source: pagerank
+        target: hue
+        scale: linear
+        range: [200, 360] # Blue -> Red
+      - source: pagerank
+        target: opacity
+        scale: sqrt
+        range: [0.3, 1.0]
+
+  age:
+    description: "Temporal visualization (Old vs New)"
+    bindings:
+      - source: age_days
+        target: lightness
+        scale: linear
+        range: [30, 90] # Old = Lighter (faded)
+      - source: is_stale
+        target: opacity
+        scale: discrete
+        range: [0.4, 0.9] # Stale = transparent
+
+  hierarchy:
+    description: "Structural Hierarchy (Tiers & Layers)"
+    bindings:
+      - source: tier
+        target: yPosition
+        scale: discrete
+        range: [-400, 400]
+      - source: layer
+        target: hue
+        scale: discrete
+        range: [0, 300]

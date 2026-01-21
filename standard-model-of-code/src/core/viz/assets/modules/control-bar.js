@@ -22,89 +22,27 @@ const CONTROL_BAR = (function () {
     // AVAILABLE DATA SOURCES (what we can map FROM)
     // =========================================================================
 
-    const DATA_SOURCES = {
-        // Structural metrics
-        size_bytes: { label: 'File Size (bytes)', type: 'continuous', domain: 'file' },
-        token_estimate: { label: 'Token Count', type: 'continuous', domain: 'file' },
-        line_count: { label: 'Line Count', type: 'continuous', domain: 'file' },
-        code_lines: { label: 'Code Lines', type: 'continuous', domain: 'file' },
-        complexity_density: { label: 'Complexity Density', type: 'continuous', domain: 'file' },
-        cohesion: { label: 'Cohesion', type: 'continuous', domain: 'file' },
-        code_ratio: { label: 'Code Ratio', type: 'continuous', domain: 'file' },
-
-        // Temporal metrics
-        age_days: { label: 'Age (days)', type: 'continuous', domain: 'file' },
-
-        // Graph metrics
-        in_degree: { label: 'In-Degree (callers)', type: 'continuous', domain: 'node' },
-        out_degree: { label: 'Out-Degree (calls)', type: 'continuous', domain: 'node' },
-        pagerank: { label: 'PageRank', type: 'continuous', domain: 'node' },
-
-        // Categorical
-        tier: { label: 'Tier (T0-T4)', type: 'discrete', values: ['T0', 'T1', 'T2', 'T3', 'T4'] },
-        ring: { label: 'Ring', type: 'discrete', values: ['CORE', 'NEAR', 'FAR', 'OUTER'] },
-        layer: { label: 'Layer', type: 'discrete', values: ['Core', 'Domain', 'Application', 'Interface', 'Infrastructure'] },
-        role: { label: 'Role', type: 'discrete', domain: 'node' },
-        format_category: { label: 'Format', type: 'discrete', values: ['code', 'config', 'doc', 'data', 'test', 'style', 'script', 'build'] },
-        purpose: { label: 'Purpose', type: 'discrete', domain: 'file' },
-        effect: { label: 'Effect', type: 'discrete', values: ['Pure', 'Read', 'Write', 'ReadWrite'] },
-
-        // Boolean
-        is_test: { label: 'Is Test?', type: 'boolean' },
-        is_config: { label: 'Is Config?', type: 'boolean' },
-        is_stale: { label: 'Is Stale?', type: 'boolean' },
-        is_recent: { label: 'Is Recent?', type: 'boolean' }
+    // =========================================================================
+    // AVAILABLE DATA SOURCES (Delegated to UPB)
+    // =========================================================================
+    const DATA_SOURCES = (window.UPB && window.UPB.ENDPOINTS && window.UPB.ENDPOINTS.SOURCES) || {
+        // Fallback for safety if UPB fails to load
+        token_estimate: { label: 'Token Count', type: 'continuous', domain: 'file' }
     };
 
     // =========================================================================
-    // AVAILABLE TARGETS (what we can map TO)
+    // AVAILABLE TARGETS (Delegated to UPB)
     // =========================================================================
-
-    const VISUAL_TARGETS = {
-        // Size
-        nodeSize: { label: 'Node Size', category: 'appearance', range: [1, 30] },
-
-        // Color components
-        hue: { label: 'Color Hue', category: 'appearance', range: [0, 360] },
-        saturation: { label: 'Saturation', category: 'appearance', range: [0, 100] },
-        lightness: { label: 'Lightness', category: 'appearance', range: [20, 80] },
-        opacity: { label: 'Opacity', category: 'appearance', range: [0.1, 1.0] },
-
-        // Position
-        xPosition: { label: 'X Position', category: 'position', range: [-500, 500] },
-        yPosition: { label: 'Y Position', category: 'position', range: [-500, 500] },
-        zPosition: { label: 'Z Position (depth)', category: 'position', range: [-300, 300] },
-        radius: { label: 'Radial Distance', category: 'position', range: [50, 400] },
-
-        // Physics
-        charge: { label: 'Charge (repel)', category: 'physics', range: [-500, 0] },
-        linkStrength: { label: 'Link Strength', category: 'physics', range: [0, 1] },
-        mass: { label: 'Mass (inertia)', category: 'physics', range: [1, 10] },
-
-        // Animation
-        pulseSpeed: { label: 'Pulse Speed', category: 'animation', range: [0, 5] },
-        rotationSpeed: { label: 'Rotation Speed', category: 'animation', range: [0, 2] }
+    const VISUAL_TARGETS = (window.UPB && window.UPB.ENDPOINTS && window.UPB.ENDPOINTS.TARGETS) || {
+        // Fallback
+        nodeSize: { label: 'Node Size', category: 'appearance', range: [1, 30] }
     };
 
     // =========================================================================
-    // SCALE FUNCTIONS
+    // SCALE FUNCTIONS (Delegated to UPB)
     // =========================================================================
-
-    const SCALES = {
-        linear: (v, min, max) => (v - min) / (max - min || 1),
-        log: (v, min, max) => {
-            const logMin = Math.log10(Math.max(1, min));
-            const logMax = Math.log10(Math.max(1, max));
-            const logVal = Math.log10(Math.max(1, v));
-            return (logVal - logMin) / (logMax - logMin || 1);
-        },
-        sqrt: (v, min, max) => {
-            const sqrtMin = Math.sqrt(Math.max(0, min));
-            const sqrtMax = Math.sqrt(Math.max(0, max));
-            const sqrtVal = Math.sqrt(Math.max(0, v));
-            return (sqrtVal - sqrtMin) / (sqrtMax - sqrtMin || 1);
-        },
-        inverse: (v, min, max) => 1 - (v - min) / (max - min || 1)
+    const SCALES = (window.UPB && window.UPB.SCALES && window.UPB.SCALES.SCALES) || {
+        linear: (v, min, max) => (v - min) / (max - min || 1)
     };
 
     // =========================================================================
@@ -293,6 +231,14 @@ const CONTROL_BAR = (function () {
 
         return _container;
     }
+
+    // Expose internal helper for UPB integration
+    function publicApplyToNode(node, k, v) { applyToNode(node, k, v); }
+
+    return {
+        createUI,
+        applyToNode: publicApplyToNode
+    };
 
     function addStyles() {
         if (document.getElementById('control-bar-styles')) return;
@@ -626,6 +572,11 @@ const CONTROL_BAR = (function () {
     }
 
     function applyMapping() {
+        if (!window.UPB) {
+            console.error('UPB not loaded');
+            return;
+        }
+
         const nodes = getTargetNodes();
         if (nodes.length === 0) {
             showToast('No nodes to map. Select nodes or change scope.');
@@ -634,45 +585,41 @@ const CONTROL_BAR = (function () {
 
         const sourceKey = _config.source;
         const targetKey = _config.target;
-        const scaleFn = SCALES[_config.scale] || SCALES.linear;
-        const targetInfo = VISUAL_TARGETS[targetKey];
 
-        // Get value range
-        const values = nodes.map(n => getNodeValue(n, sourceKey)).filter(v => v !== null && v !== undefined);
-        if (values.length === 0) {
-            showToast(`No data for "${sourceKey}" on selected nodes`);
-            return;
-        }
+        // 1. Create/Update Binding in UPB Graph
+        window.UPB.bind(sourceKey, targetKey, {
+            id: `cb-binding-${Date.now()}`,
+            scale: _config.scale,
+            range: VISUAL_TARGETS[targetKey]?.range
+        });
 
-        const sourceInfo = DATA_SOURCES[sourceKey];
-        const isDiscrete = sourceInfo?.type === 'discrete' || sourceInfo?.type === 'boolean';
+        // 2. Refresh Data Ranges (if needed, usually DM handles this)
+        // For now, we rely on the UPB Binding to calculate ranges per node or usage
+        // But UPB.evaluate needs data ranges (min/max) for normalization.
+        // We calculate them here ad-hoc for the current selection and push to UPB.
+        const values = nodes.map(n => getNodeValue(n, sourceKey)).filter(v => typeof v === 'number');
+        if (values.length > 0) {
+            const min = Math.min(...values);
+            const max = Math.max(...values);
 
-        let dataMin, dataMax;
-        if (!isDiscrete) {
-            dataMin = Math.min(...values);
-            dataMax = Math.max(...values);
-        }
-
-        // Apply to each node
-        nodes.forEach(node => {
-            const rawValue = getNodeValue(node, sourceKey);
-            if (rawValue === null || rawValue === undefined) return;
-
-            let mappedValue;
-            if (isDiscrete) {
-                // Map discrete values to evenly spaced range
-                const uniqueValues = sourceInfo.values || [...new Set(values)];
-                const idx = uniqueValues.indexOf(rawValue);
-                mappedValue = idx >= 0 ? idx / Math.max(1, uniqueValues.length - 1) : 0.5;
-            } else {
-                mappedValue = scaleFn(rawValue, dataMin, dataMax);
+            // Access the underlying graph to set range
+            // TODO: Move this to a central DataManager
+            if (window.UPB.BINDINGS.defaultGraph) {
+                window.UPB.BINDINGS.defaultGraph._dataRanges[sourceKey] = { min, max };
             }
+        }
 
-            // Map to target range
-            const [tMin, tMax] = targetInfo.range;
-            const targetValue = tMin + mappedValue * (tMax - tMin);
+        // 3. Apply to Nodes
+        const updates = window.UPB.apply(nodes);
 
-            applyToNode(node, targetKey, targetValue);
+        // 4. Render Updates
+        updates.forEach(update => {
+            const node = nodes.find(n => n.id === update.id);
+            if (node) {
+                Object.keys(update.visuals).forEach(key => {
+                    applyToNode(node, key, update.visuals[key]);
+                });
+            }
         });
 
         // Refresh graph
@@ -682,8 +629,8 @@ const CONTROL_BAR = (function () {
             REFRESH.throttled();
         }
 
-        showToast(`Mapped ${sourceKey} -> ${targetKey} on ${nodes.length} nodes`);
-        console.log(`[CONTROL_BAR] Applied: ${sourceKey} -> ${targetKey}, scale=${_config.scale}, nodes=${nodes.length}`);
+        showToast(`Bound ${sourceKey} -> ${targetKey} via UPB`);
+        console.log(`[CONTROL_BAR] UPB Binding Active: ${sourceKey} -> ${targetKey}`);
     }
 
     function getNodeValue(node, key) {
