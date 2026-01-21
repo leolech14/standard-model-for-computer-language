@@ -4,12 +4,11 @@
  * ═══════════════════════════════════════════════════════════════════════════
  *
  * Handles smooth animated transitions between 2D and 3D graph views.
- * Depends on: Graph, IS_3D, DIMENSION_TRANSITION, STARFIELD, STARFIELD_OPACITY,
- *             BLOOM_PASS, BLOOM_STRENGTH, stableSeed, stableZ, fileMode,
- *             GRAPH_MODE, applyFileVizMode
+ * Depends on: Graph, IS_3D, DIMENSION_TRANSITION, stableSeed, stableZ,
+ *             fileMode, GRAPH_MODE, applyFileVizMode
  *
  * @module DIMENSION
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 window.DIMENSION = (function() {
@@ -68,10 +67,7 @@ window.DIMENSION = (function() {
      */
     function animateChange(target3d, done) {
         const Graph = window.Graph;
-        const STARFIELD = window.STARFIELD;
-        const STARFIELD_OPACITY = window.STARFIELD_OPACITY;
-        const BLOOM_PASS = window.BLOOM_PASS;
-        const BLOOM_STRENGTH = window.BLOOM_STRENGTH;
+        // STARFIELD & BLOOM removed - nodes ARE the stars, post-processing not in r149+ UMD builds
         const stableSeed = window.stableSeed;
         const stableZ = window.stableZ;
 
@@ -83,11 +79,6 @@ window.DIMENSION = (function() {
         const lockPositionsAfterTransition = true;
 
         const easeInOutSine = (t) => 0.5 - 0.5 * Math.cos(Math.PI * t);
-
-        const starStart = STARFIELD ? STARFIELD.material.opacity : 0;
-        const starTarget = target3d ? STARFIELD_OPACITY : 0;
-        const bloomStart = BLOOM_PASS ? BLOOM_PASS.strength : 0;
-        const bloomTarget = BLOOM_PASS ? (target3d ? BLOOM_STRENGTH : 0) : 0;
 
         // Store previous simulation settings
         const previousVelocityDecay = (Graph && Graph.d3VelocityDecay) ? Graph.d3VelocityDecay() : null;
@@ -130,7 +121,6 @@ window.DIMENSION = (function() {
         const animate = (now) => {
             const elapsed = now - startTime;
             const t = Math.min(1, elapsed / duration);
-            const eased = easeInOutSine(t);
 
             // Animate each node's Z position
             nodes.forEach((node) => {
@@ -149,16 +139,6 @@ window.DIMENSION = (function() {
                 node.fz = nextZ;
                 node.vz = 0;
             });
-
-            // Animate starfield and bloom
-            if (STARFIELD) {
-                const nextOpacity = starStart + (starTarget - starStart) * eased;
-                STARFIELD.material.opacity = nextOpacity;
-                STARFIELD.visible = nextOpacity > 0.02;
-            }
-            if (BLOOM_PASS) {
-                BLOOM_PASS.strength = bloomStart + (bloomTarget - bloomStart) * eased;
-            }
 
             if (t < 1) {
                 requestAnimationFrame(animate);
@@ -184,10 +164,6 @@ window.DIMENSION = (function() {
                 });
 
                 Graph.numDimensions(target3d ? 3 : 2);
-
-                if (!target3d && STARFIELD) {
-                    STARFIELD.visible = false;
-                }
 
                 // Restore simulation settings
                 if (Graph && Graph.d3VelocityDecay && previousVelocityDecay !== null) {

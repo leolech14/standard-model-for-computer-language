@@ -71,9 +71,7 @@ const GROUP_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
 let SPACE_PRESSED = false;
 let IS_3D = true;
 let DIMENSION_TRANSITION = false;
-// STARFIELD REMOVED - nodes ARE the stars, no need for confusing background dots
-let BLOOM_PASS = null;
-let BLOOM_STRENGTH = 0;
+// STARFIELD & BLOOM - REMOVED (nodes ARE the stars, post-processing not in r149+ UMD builds)
 // EDGE_MODE - provided by edge-system.js module
 let EDGE_DEFAULT_OPACITY = null;  // Initialized from appearance.tokens at runtime (token value: 0.08)
 
@@ -549,17 +547,7 @@ function populateFilterChips() {
 }
 
 // renderLegendSection, renderAllLegends - MOVED TO modules/legend-manager.js
-
-// Debounce wrapper to prevent DOM thrashing during rapid updates
-let _legendDebounceTimer = null;
-const _originalRenderAllLegends = renderAllLegends;
-renderAllLegends = function () {
-    if (_legendDebounceTimer) clearTimeout(_legendDebounceTimer);
-    _legendDebounceTimer = setTimeout(() => {
-        _originalRenderAllLegends();
-        _legendDebounceTimer = null;
-    }, 100); // 100ms debounce
-};
+// (debounce is now built into legend-manager.js, no monkey-patching needed)
 
 // =====================================================================
 // HUD LAYOUT MANAGER: MIGRATED TO modules/layout.js

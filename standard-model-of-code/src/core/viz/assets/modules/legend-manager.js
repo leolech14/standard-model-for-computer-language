@@ -333,14 +333,20 @@ window.renderLegendSection = function(containerId, dimension, stateSet, onUpdate
 };
 
 // renderAllLegends uses VIS_FILTERS and refreshGraph from app.js globals
+// Includes 100ms debounce to prevent DOM thrashing during rapid updates
+let _legendDebounceTimer = null;
 window.renderAllLegends = function() {
-    const VIS_FILTERS = window.VIS_FILTERS;
-    const refreshGraph = window.refreshGraph;
-    if (VIS_FILTERS && refreshGraph) {
-        LEGEND.renderAll(VIS_FILTERS, refreshGraph);
-    } else {
-        console.warn('[Legend] VIS_FILTERS or refreshGraph not available');
-    }
+    if (_legendDebounceTimer) clearTimeout(_legendDebounceTimer);
+    _legendDebounceTimer = setTimeout(() => {
+        _legendDebounceTimer = null;
+        const VIS_FILTERS = window.VIS_FILTERS;
+        const refreshGraph = window.refreshGraph;
+        if (VIS_FILTERS && refreshGraph) {
+            LEGEND.renderAll(VIS_FILTERS, refreshGraph);
+        } else {
+            console.warn('[Legend] VIS_FILTERS or refreshGraph not available');
+        }
+    }, 100);
 };
 
 console.log('[Module] LEGEND loaded - 10 functions');
