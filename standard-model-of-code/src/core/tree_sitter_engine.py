@@ -41,10 +41,107 @@ except ImportError:
         from classification.universal_classifier import UniversalClassifier
         from parser.python_extractor import PythonASTExtractor
 
+# NEW: Import QueryLoader for external .scm queries
+try:
+    from src.core.queries import get_query_loader
+except ImportError:
+    try:
+        from core.queries import get_query_loader
+    except ImportError:
+        # Fallback: QueryLoader not available (backward compatibility)
+        def get_query_loader():
+            return None
+
+
+def get_query_for_language(language: str, query_type: str = 'symbols') -> Optional[str]:
+    """
+    Get tree-sitter query for a language, with fallback to inline queries.
+
+    P1-08: Integration wrapper for external .scm queries with inline fallback.
+    Attempts to load from QueryLoader first, returns None if not found.
+    Caller responsible for implementing inline query fallback.
+
+    Args:
+        language: Language name (python, javascript, typescript, go, rust, etc.)
+        query_type: Query type (symbols, locals, highlights, injections, patterns)
+
+    Returns:
+        Query string if found, None if not found (caller uses inline fallback)
+    """
+    loader = get_query_loader()
+    if loader is None:
+        return None
+
+    try:
+        query = loader.load_query(language, query_type)
+        if query:
+            return query
+    except Exception:
+        # Fall through to inline queries if loading fails
+        pass
+
+    return None
+
 
 class ParseTimeout(Exception):
     """Raised when parsing exceeds time limit."""
     pass
+
+
+def count_parse_errors(tree) -> dict:
+    """
+    Count ERROR and MISSING nodes in a parsed tree.
+
+    Tree-sitter inserts ERROR nodes when it encounters syntax errors,
+    and MISSING nodes for expected tokens that weren't found.
+
+    Args:
+        tree: tree-sitter Tree object
+
+    Returns:
+        Dict with 'error_count', 'missing_count', 'error_locations', 'missing_locations'
+    """
+    errors = []
+    missing = []
+
+    cursor = tree.walk()
+
+    while True:
+        node = cursor.node
+
+        if node.type == 'ERROR':
+            errors.append({
+                'start_line': node.start_point[0] + 1,
+                'end_line': node.end_point[0] + 1,
+                'start_col': node.start_point[1],
+                'end_col': node.end_point[1],
+            })
+
+        if node.is_missing:
+            missing.append({
+                'expected': node.type,
+                'line': node.start_point[0] + 1,
+                'col': node.start_point[1],
+            })
+
+        # Tree traversal: depth-first
+        if cursor.goto_first_child():
+            continue
+        if cursor.goto_next_sibling():
+            continue
+
+        while cursor.goto_parent():
+            if cursor.goto_next_sibling():
+                break
+        else:
+            break
+
+    return {
+        'error_count': len(errors),
+        'missing_count': len(missing),
+        'error_locations': errors,
+        'missing_locations': missing,
+    }
 
 
 def _find_containing_class(node) -> Optional[str]:
