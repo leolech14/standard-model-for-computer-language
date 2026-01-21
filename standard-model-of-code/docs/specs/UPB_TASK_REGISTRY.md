@@ -729,11 +729,13 @@ Files with color mapping not in original plan:
 
 | # | Task | Factual | Alignment | Status |
 |:-:|------|:-------:|:---------:|:------:|
-| 6.1 | Wire UPB_BLENDERS in bindings.js | 95% | 98% | `[ ] PENDING` |
-| 6.2 | Add minOutput/blendMode to endpoints.js | 92% | 95% | `[ ] PENDING` |
-| 6.3 | Add DATA.getRange() to data-manager.js | 88% | 92% | `[ ] PENDING` |
-| 6.4 | Update control-bar.js to use DATA.getRange() | 90% | 90% | `[ ] PENDING` |
-| 6.5 | Add minOutput support to scales.js | 85% | 88% | `[ ] PENDING` |
+| 6.1 | Wire UPB_BLENDERS in bindings.js | 95% | 98% | `[x] DONE` |
+| 6.2 | Add minOutput/blendMode to endpoints.js | 92% | 95% | `[x] DONE` |
+| 6.3 | Add DATA.getRange() to data-manager.js | 88% | 92% | `[x] DONE` |
+| 6.4 | Update control-bar.js to use DATA.getRange() | 90% | 90% | `[x] DONE` |
+| 6.5 | Add minOutput support to scales.js | 85% | 88% | `[~] OPTIONAL` |
+| 6.6 | Scale transforms documentation | 95% | 98% | `[x] DONE` |
+| 6.7 | Advanced presets with scale demos | 90% | 95% | `[x] DONE` |
 
 ### Confidence Score Definitions
 

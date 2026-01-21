@@ -54,3 +54,108 @@ presets:
         target: hue
         scale: discrete
         range: [0, 300]
+
+  # =====================================================
+  # SCALE TRANSFORM DEMONSTRATIONS
+  # Show the power of different scale functions
+  # =====================================================
+
+  scale_demo_linear:
+    description: "LINEAR: Even distribution (baseline)"
+    bindings:
+      - source: token_estimate
+        target: nodeSize
+        scale: linear
+        range: [2, 30]
+
+  scale_demo_sqrt:
+    description: "SQRT: Compress giants, preserve small differences"
+    bindings:
+      - source: token_estimate
+        target: nodeSize
+        scale: sqrt
+        range: [2, 30]
+
+  scale_demo_log:
+    description: "LOG: Heavy compression, everything visible"
+    bindings:
+      - source: token_estimate
+        target: nodeSize
+        scale: log
+        range: [2, 30]
+
+  scale_demo_exp:
+    description: "EXP: Emphasize extremes, giants dominate"
+    bindings:
+      - source: token_estimate
+        target: nodeSize
+        scale: exp
+        range: [2, 30]
+
+  # =====================================================
+  # ADVANCED COMPOSITIONS
+  # =====================================================
+
+  hotspot_finder:
+    description: "Find performance hotspots (complexity + centrality)"
+    bindings:
+      - source: complexity_density
+        target: nodeSize
+        scale: exp          # Make complex code HUGE
+        range: [3, 40]
+      - source: in_degree
+        target: hue
+        scale: log          # Hubs get distinct colors
+        range: [120, 0]     # Green -> Red
+      - source: out_degree
+        target: pulseSpeed
+        scale: sqrt         # High dependency = fast pulse
+        range: [0, 3]
+
+  freshness_map:
+    description: "Code freshness (new=bright, old=faded)"
+    bindings:
+      - source: age_days
+        target: lightness
+        scale: inverse      # Old = dark, new = bright
+        range: [30, 90]
+      - source: age_days
+        target: opacity
+        scale: inverse      # Old = transparent
+        range: [0.3, 1.0]
+      - source: age_days
+        target: nodeSize
+        scale: inverse      # Old = smaller
+        range: [3, 20]
+
+  debt_detector:
+    description: "Technical debt visualization"
+    bindings:
+      - source: complexity_density
+        target: hue
+        scale: exp          # Complex = RED (amplified)
+        range: [120, 0]
+      - source: line_count
+        target: nodeSize
+        scale: sqrt         # Size by LoC
+        range: [4, 25]
+      - source: cohesion
+        target: saturation
+        scale: inverse      # Low cohesion = vivid warning color
+        range: [100, 30]
+
+  power_law_viz:
+    description: "Reveal power-law distribution in dependencies"
+    bindings:
+      - source: in_degree
+        target: nodeSize
+        scale: log          # Log makes hubs visible but not overwhelming
+        range: [3, 35]
+      - source: in_degree
+        target: charge
+        scale: log          # Hubs push others away
+        range: [-50, -500]
+      - source: out_degree
+        target: opacity
+        scale: sqrt         # Leaves slightly transparent
+        range: [0.4, 1.0]

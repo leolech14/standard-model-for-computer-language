@@ -174,10 +174,11 @@ const CONTROL_BAR = (function () {
             <div class="control-section">
                 <label>SCALING</label>
                 <select id="cb-scale" class="cb-select full-width">
-                    <option value="linear">Linear</option>
-                    <option value="sqrt" selected>Sqrt</option>
-                    <option value="log">Log</option>
-                    <option value="inverse">Inverse</option>
+                    <option value="linear">Linear (even spread)</option>
+                    <option value="sqrt" selected>Sqrt (compress giants)</option>
+                    <option value="log">Log (heavy compress)</option>
+                    <option value="exp">Exp (emphasize extremes)</option>
+                    <option value="inverse">Inverse (flip)</option>
                 </select>
             </div>
         `;
