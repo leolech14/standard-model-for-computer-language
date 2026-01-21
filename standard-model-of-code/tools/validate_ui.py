@@ -218,14 +218,75 @@ def print_report(result: Dict[str, Any], verbose: bool = False) -> None:
     else:
         print(f"STATUS: {failed} TESTS FAILED")
 
-        # Compact failure list with fixes
-        print("\nFAILURE SUMMARY:")
-        print("-" * 70)
+        # Categorize failures by root cause
+        missing_elements = []
+        state_undefined = []
+        graph_issues = []
+        validation_failed = []
+
         for name, r in result['results'].items():
-            if not r.get('passed'):
-                fix = r.get('fix', 'No fix suggestion')
-                print(f"  {name}:")
-                print(f"    -> {fix}")
+            if r.get('passed'):
+                continue
+            if not r.get('elementFound'):
+                missing_elements.append((name, r))
+            elif r.get('stateExists') is False:
+                state_undefined.append((name, r))
+            elif r.get('error') and 'Graph' in str(r.get('error', '')):
+                graph_issues.append((name, r))
+            else:
+                validation_failed.append((name, r))
+
+        # Print by category
+        if missing_elements:
+            print("\n[MISSING DOM ELEMENTS]")
+            for name, r in missing_elements:
+                print(f"  {name}: Add #{r.get('trace', {}).get('element', {}).get('id', name)} to template.html")
+
+        if state_undefined:
+            print("\n[STATE NOT INITIALIZED]")
+            states_needed = set()
+            for name, r in state_undefined:
+                trace = r.get('trace', {})
+                state_path = trace.get('state', {}).get('path', '')
+                if state_path:
+                    states_needed.add(state_path.split('.')[0])
+            if states_needed:
+                print(f"  Root cause: {', '.join(states_needed)} not defined")
+                print(f"  Fix: Ensure these objects are created in app.js before UI bindings")
+            for name, r in state_undefined:
+                trace = r.get('trace', {})
+                state_path = trace.get('state', {}).get('path', '')
+                print(f"    - {name}: needs {state_path}")
+
+        if graph_issues:
+            print("\n[GRAPH NOT READY]")
+            print(f"  Root cause: Graph object not initialized when tests run")
+            print(f"  Fix: Ensure Graph is created before CIRCUIT.runAll() or defer tests")
+            for name, r in graph_issues:
+                print(f"    - {name}: {r.get('error', 'Unknown error')}")
+
+        if validation_failed:
+            print("\n[VALIDATION LOGIC FAILED]")
+            for name, r in validation_failed:
+                expected = r.get('expected')
+                actual = r.get('actual')
+                fix = r.get('fix', '')
+                print(f"  {name}: expected {expected}, got {actual}")
+                if fix:
+                    print(f"    -> {fix}")
+
+        # Quick fix summary
+        print("\n" + "-" * 70)
+        print("QUICK FIX CHECKLIST:")
+        print("-" * 70)
+        if state_undefined:
+            print("[ ] Initialize APPEARANCE_STATE in app.js before binding sliders")
+        if graph_issues:
+            print("[ ] Ensure Graph is created before physics controls are bound")
+        if missing_elements:
+            print("[ ] Add missing elements to template.html")
+        if validation_failed:
+            print("[ ] Check event handler bindings for validation failures")
 
 
 def main():
