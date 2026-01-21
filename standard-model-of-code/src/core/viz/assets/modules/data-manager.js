@@ -31,7 +31,8 @@ const DATA = (function() {
         kpis: {},
         meta: {},
         physics: {},
-        config: {}
+        config: {},
+        codome_boundaries: null
     };
 
     // =========================================================================
@@ -128,6 +129,7 @@ const DATA = (function() {
         raw.meta = data?.meta || {};
         raw.physics = data?.physics || {};
         raw.config = data?.config || {};
+        raw.codome_boundaries = data?.codome_boundaries || null;
 
         // Store analytics data
         Object.keys(analytics).forEach(key => {
@@ -135,6 +137,9 @@ const DATA = (function() {
                 analytics[key] = data[key];
             }
         });
+
+        // Merge CODOME boundaries into main nodes and edges arrays
+        _mergeCodomeBooudaries();
 
         // Build all indexes
         _buildAllIndexes();
@@ -152,6 +157,44 @@ const DATA = (function() {
             `${raw.nodes.length} nodes, ${raw.links.length} edges, ${raw.fileBoundaries.length} files`);
 
         return DATA;
+    }
+
+    // =========================================================================
+    // CODOME BOUNDARY MERGING
+    // =========================================================================
+
+    function _mergeCodomeBooudaries() {
+        if (!raw.codome_boundaries) return;
+
+        const boundaryNodes = raw.codome_boundaries.boundary_nodes || [];
+        const inferredEdges = raw.codome_boundaries.inferred_edges || [];
+
+        if (boundaryNodes.length === 0 && inferredEdges.length === 0) {
+            return;
+        }
+
+        // Mark boundary nodes with _fromCodome flag
+        boundaryNodes.forEach(node => {
+            if (node && typeof node === 'object') {
+                node._fromCodome = true;
+            }
+        });
+
+        // Mark inferred edges with _fromCodome flag
+        inferredEdges.forEach(edge => {
+            if (edge && typeof edge === 'object') {
+                edge._fromCodome = true;
+            }
+        });
+
+        // Merge boundary nodes into main nodes array
+        raw.nodes = raw.nodes.concat(boundaryNodes);
+
+        // Merge inferred edges into main links array
+        raw.links = raw.links.concat(inferredEdges);
+
+        console.log('%c[DATA] CODOME boundaries merged', 'color: #60a5fa; font-weight: bold',
+            `+${boundaryNodes.length} boundary nodes, +${inferredEdges.length} inferred edges`);
     }
 
     // =========================================================================
@@ -316,6 +359,7 @@ const DATA = (function() {
     function getMeta() { return raw.meta; }
     function getPhysics() { return raw.physics; }
     function getConfig() { return raw.config; }
+    function getCodomeBooudaries() { return raw.codome_boundaries; }
     function getAnalytics(key) { return analytics[key]; }
 
     // =========================================================================
@@ -642,6 +686,7 @@ const DATA = (function() {
         getMeta,
         getPhysics,
         getConfig,
+        getCodomeBooudaries,
         getAnalytics,
 
         // Indexed lookups
@@ -721,6 +766,7 @@ class DataManager {
     getMarkov() { return DATA.getMarkov(); }
     getKpis() { return DATA.getKpis(); }
     getMeta() { return DATA.getMeta(); }
+    getCodomeBooudaries() { return DATA.getCodomeBooudaries(); }
     getNode(id) { return DATA.getNode(id); }
     getNodesByTier(tier) { return DATA.getNodesByTier(tier); }
     getNodesByFamily(family) { return DATA.getNodesByFamily(family); }
