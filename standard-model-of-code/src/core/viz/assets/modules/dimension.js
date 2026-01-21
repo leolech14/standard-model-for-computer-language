@@ -26,7 +26,7 @@ window.DIMENSION = (function() {
         window.DIMENSION_TRANSITION = true;
 
         const target3d = !window.IS_3D;
-        const button = document.getElementById('btn-dimensions');
+        const button = document.getElementById('btn-2d');
 
         animateChange(target3d, () => {
             window.IS_3D = target3d;
@@ -46,7 +46,7 @@ window.DIMENSION = (function() {
      * Setup the dimension toggle button
      */
     function setup() {
-        const button = document.getElementById('btn-dimensions');
+        const button = document.getElementById('btn-2d');
         if (!button) return;
 
         const updateLabel = () => {

@@ -70,7 +70,19 @@ const SELECTION_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
 const GROUP_HALO_GEOMETRY = new THREE.SphereGeometry(1, 12, 12);
 let SPACE_PRESSED = false;
 let IS_3D = true;
+// Expose for circuit-breaker tests (dimension-toggle test checks window.IS_3D)
+Object.defineProperty(window, 'IS_3D', {
+    get: () => IS_3D,
+    set: (v) => { IS_3D = v; },
+    configurable: true
+});
 let DIMENSION_TRANSITION = false;
+// Expose for dimension.js module and circuit-breaker tests
+Object.defineProperty(window, 'DIMENSION_TRANSITION', {
+    get: () => DIMENSION_TRANSITION,
+    set: (v) => { DIMENSION_TRANSITION = v; },
+    configurable: true
+});
 // STARFIELD & BLOOM - REMOVED (nodes ARE the stars, post-processing not in r149+ UMD builds)
 // EDGE_MODE - provided by edge-system.js module
 let EDGE_DEFAULT_OPACITY = null;  // Initialized from appearance.tokens at runtime (token value: 0.08)
@@ -197,6 +209,8 @@ let APPEARANCE_STATE = {
     amplifier: 1.0,
     amplifierTarget: 'all'  // 'all', 'edges', 'nodes', 'opacity'
 };
+// Expose for modules and circuit-breaker tests
+window.APPEARANCE_STATE = APPEARANCE_STATE;
 
 // =====================================================================
 // FILE BOUNDARY & SELECTION STATE (declared early to avoid TDZ errors)
@@ -860,6 +874,7 @@ function initGraph(data) {
     APPEARANCE_STATE.edgeOpacity = EDGE_DEFAULT_OPACITY;
     APPEARANCE_STATE.boundaryFill = boundaryConfig.fill_opacity ?? APPEARANCE_STATE.boundaryFill;
     APPEARANCE_STATE.boundaryWire = boundaryConfig.wire_opacity ?? APPEARANCE_STATE.boundaryWire;
+    const background = appearanceConfig.background || {};
     APPEARANCE_STATE.backgroundBase = background.color || '#000000';
     APPEARANCE_STATE.fileLightness = FILE_COLOR_CONFIG.lightness ?? APPEARANCE_STATE.fileLightness;
     const nodeColor = appearanceConfig.node_color || {};
@@ -1002,6 +1017,7 @@ function initGraph(data) {
     window.refreshGradientEdgeColors = refreshGradientEdgeColors;
 
     // TOKEN-DRIVEN: Read render config from THE REMOTE CONTROL
+    const renderConfig = appearanceConfig.render || {};
     const dimensions = renderConfig.dimensions || 3;
     const nodeRes = renderConfig.nodeResolution || 8;
 
@@ -1137,7 +1153,8 @@ function initGraph(data) {
 
     initSelectionState(data);
     setupSelectionInteractions();
-    updateSelectionVisuals();
+    // updateSelectionVisuals is in selection.js (window scope), may not be loaded yet
+    if (typeof updateSelectionVisuals === 'function') updateSelectionVisuals();
 
     // =================================================================
     // CONTROLS: keep default camera behavior, enable damping
@@ -1785,20 +1802,13 @@ function setupConfigControls() {
         if (Graph) Graph.linkDirectionalParticles(Math.round(val));
     }, 0);
 
-    // Show Arrows Toggle
-    bindToggle('cfg-toggle-arrows', APPEARANCE_STATE.showArrows, (active) => {
-        APPEARANCE_STATE.showArrows = active;
-        if (Graph) {
-            Graph.linkDirectionalArrowLength(active ? 6 : 0);
-            Graph.linkDirectionalArrowRelPos(0.9);
-        }
-    });
+    // NOTE: Toggle bindings moved to sidebar.js (_bindAppearanceControls)
+    // Keeping only initial state sync here
+    const arrowToggle = document.getElementById('cfg-toggle-arrows');
+    if (arrowToggle && APPEARANCE_STATE.showArrows) arrowToggle.classList.add('active');
 
-    // Gradient Colors Toggle
-    bindToggle('cfg-toggle-gradient', APPEARANCE_STATE.gradientEdges, (active) => {
-        APPEARANCE_STATE.gradientEdges = active;
-        if (typeof applyEdgeMode === 'function') applyEdgeMode();
-    });
+    const gradientToggle = document.getElementById('cfg-toggle-gradient');
+    if (gradientToggle && APPEARANCE_STATE.gradientEdges) gradientToggle.classList.add('active');
 
     // Highlight Edges on Hover Toggle
     bindToggle('cfg-toggle-edge-hover', true, (active) => {

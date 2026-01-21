@@ -788,17 +788,17 @@ window.SIDEBAR = (function () {
         });
 
         _bindToggle('cfg-toggle-arrows', (active) => {
+            if (typeof APPEARANCE_STATE !== 'undefined') APPEARANCE_STATE.showArrows = active;
             if (typeof Graph !== 'undefined' && Graph) {
-                const linkDirectionalArrowLength = active ? 3.5 : 0;
-                Graph.linkDirectionalArrowLength(linkDirectionalArrowLength);
+                Graph.linkDirectionalArrowLength(active ? 6 : 0);
+                Graph.linkDirectionalArrowRelPos(0.9);
             }
         });
 
         _bindToggle('cfg-toggle-gradient', (active) => {
-            if (typeof VIS_STATE !== 'undefined') {
-                // Trigger re-render of edges
-                window.refreshGradientEdgeColors && window.refreshGradientEdgeColors();
-            }
+            if (typeof APPEARANCE_STATE !== 'undefined') APPEARANCE_STATE.gradientEdges = active;
+            if (typeof applyEdgeMode === 'function') applyEdgeMode();
+            window.refreshGradientEdgeColors && window.refreshGradientEdgeColors();
         });
     }
 
@@ -829,9 +829,11 @@ window.SIDEBAR = (function () {
                 if (typeof applyEdgeMode === 'function') applyEdgeMode();
                 break;
             case 'cfg-edge-width':
+                if (typeof APPEARANCE_STATE !== 'undefined') APPEARANCE_STATE.edgeWidth = val;
                 if (typeof Graph !== 'undefined' && Graph) Graph.linkWidth(val);
                 break;
             case 'cfg-edge-curve':
+                if (typeof APPEARANCE_STATE !== 'undefined') APPEARANCE_STATE.edgeCurvature = val;
                 if (typeof Graph !== 'undefined' && Graph) Graph.linkCurvature(val);
                 break;
             case 'cfg-particle-speed':
@@ -1106,12 +1108,16 @@ window.SIDEBAR = (function () {
 
     function _bindToggle(id, callback) {
         const toggle = document.getElementById(id);
-        if (!toggle) return;
+        if (!toggle) {
+            console.warn('[SIDEBAR] _bindToggle: element not found:', id);
+            return;
+        }
 
         toggle.addEventListener('click', () => {
             const isActive = toggle.classList.toggle('active');
             callback(isActive);
         });
+        console.log('[SIDEBAR] _bindToggle: bound', id);
     }
 
     // =========================================================================
