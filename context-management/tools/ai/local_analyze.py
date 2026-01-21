@@ -1,0 +1,1329 @@
+#!/usr/bin/env python3
+"""
+Local Codebase Analysis Tool v2
+=================================
+A headless AI tool that reads files directly from the local filesystem,
+with proper secret exclusions, line-numbered output, and chat session reuse.
+
+v2 Features:
+- Token budget awareness (warns if exceeding 1M limit)
+- Set composition via 'includes' in analysis_sets.yaml
+- Auto-interactive mode for large contexts
+- Smart query-to-set recommendations
+- FILE SEARCH (RAG): Index files once, query many times with citations
+
+Usage:
+  # One-shot mode (Tier 1: Long Context)
+  python local_analyze.py "Explain the architecture"
+
+  # Interactive mode With Caching (Automatic for large contexts)
+  python local_analyze.py --interactive --set pipeline
+
+  # FILE SEARCH MODE (Tier 2: RAG with Citations)
+  # Index files to a store
+  python local_analyze.py --index --set pipeline --store-name collider-pipeline
+
+  # Query with File Search (citations included)
+  python local_analyze.py --search "How does edge extraction work?" --store-name collider-pipeline
+
+  # List existing stores
+  python local_analyze.py --list-stores
+
+  # Delete a store
+  python local_analyze.py --delete-store collider-pipeline
+
+  # Insights Report (Source Code Analysis)
+  python local_analyze.py --mode insights --file "src/main.py" --output report.json
+
+  # List available sets
+  python local_analyze.py --list-sets
+
+  # Get set recommendations for a query
+  python local_analyze.py --recommend "how does classification work"
+
+IMPORTANT: This script requires the .tools_venv virtual environment.
+"""
+
+import sys
+import os
+from pathlib import Path
+
+# --- Auto-detect and use correct venv ---
+SCRIPT_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent
+TOOLS_VENV = PROJECT_ROOT / ".tools_venv"
+VENV_PYTHON = TOOLS_VENV / "bin" / "python"
+
+
+def _in_correct_venv():
+    """Check if we're running from .tools_venv"""
+    return TOOLS_VENV.as_posix() in sys.prefix
+
+
+if not _in_correct_venv():
+    if VENV_PYTHON.exists():
+        os.execv(str(VENV_PYTHON), [str(VENV_PYTHON)] + sys.argv)
+    else:
+        print("=" * 60)
+        print("ERROR: Required virtual environment not found!")
+        print("=" * 60)
+        print(f"Expected: {TOOLS_VENV}")
+        print()
+        print("To fix, run from PROJECT_elements root:")
+        print("  python -m venv .tools_venv")
+        print("  source .tools_venv/bin/activate")
+        print("  pip install google-genai pyyaml")
+        print("=" * 60)
+        sys.exit(1)
+
+# --- Now safe to import deps (we're in correct venv) ---
+import argparse
+import yaml
+import fnmatch
+import time
+import random
+import subprocess
+from google import genai
+from google.genai.types import Part, Content
+
+# --- Config & Setup ---
+SETS_CONFIG_PATH = PROJECT_ROOT / "context-management/config/analysis_sets.yaml"
+PROMPTS_CONFIG_PATH = PROJECT_ROOT / "context-management/config/prompts.yaml"
+
+# Architecture docs to auto-inject for architect mode
+# Point to canonical MODEL.md
+ARCHITECT_DOCS = [
+    "context-management/docs/COLLIDER_ARCHITECTURE.md",
+    "standard-model-of-code/docs/MODEL.md",
+]
+
+# Load prompts and modes
+if PROMPTS_CONFIG_PATH.exists():
+    with open(PROMPTS_CONFIG_PATH) as f:
+        _prompts_data = yaml.safe_load(f)
+        PRICING = _prompts_data.get("pricing", {})
+        DEFAULT_MODEL = _prompts_data.get("default_model", "gemini-2.0-flash-001")
+        MODES = _prompts_data.get("analysis_prompts", {}).get("modes", {})
+        # Prefer "insights_source" for raw file analysis
+        INSIGHTS_PROMPT = _prompts_data.get("analysis_prompts", {}).get("insights_source") or _prompts_data.get("analysis_prompts", {}).get("insights")
+        # Role validation prompt
+        ROLE_VALIDATION_PROMPT = _prompts_data.get("analysis_prompts", {}).get("role_validation")
+        # Plan validation prompt
+        PLAN_VALIDATION_PROMPT = _prompts_data.get("analysis_prompts", {}).get("plan_validation")
+else:
+    PRICING = {}
+    DEFAULT_MODEL = "gemini-2.0-flash-001"
+    MODES = {}
+    INSIGHTS_PROMPT = None
+    ROLE_VALIDATION_PROMPT = None
+    PLAN_VALIDATION_PROMPT = None
+
+
+def load_sets_config():
+    if not SETS_CONFIG_PATH.exists():
+        return {}
+    with open(SETS_CONFIG_PATH) as f:
+        return yaml.safe_load(f)
+
+
+# Token limits
+MAX_CONTEXT_TOKENS = 1_000_000  # Gemini 2.0 Flash limit
+INTERACTIVE_THRESHOLD = 50_000  # Auto-interactive above this
+
+# File Search configuration
+# NOTE: File Search requires the Gemini Developer API (ai.google.dev), not Vertex AI
+# Set GEMINI_API_KEY environment variable to use File Search features
+FILE_SEARCH_MODEL = "gemini-2.5-pro"  # File Search requires 2.5+ models
+FILE_SEARCH_CHUNK_SIZE = 512  # Tokens per chunk
+FILE_SEARCH_CHUNK_OVERLAP = 50  # Overlap tokens between chunks
+GEMINI_API_KEY_ENV = "GEMINI_API_KEY"  # Environment variable for Developer API key
+
+
+def resolve_set(set_name: str, analysis_sets: dict, resolved: set = None) -> dict:
+    """
+    Resolve a set definition, expanding any 'includes' recursively.
+
+    Returns a dict with:
+      - patterns: list of glob patterns
+      - max_tokens: token budget
+      - auto_interactive: whether to auto-enable interactive mode
+      - description: human-readable description
+    """
+    if resolved is None:
+        resolved = set()
+
+    if set_name in resolved:
+        # Circular dependency protection
+        return {'patterns': [], 'max_tokens': 0, 'auto_interactive': False, 'description': ''}
+
+    resolved.add(set_name)
+
+    if set_name not in analysis_sets:
+        return {'patterns': [], 'max_tokens': 0, 'auto_interactive': False, 'description': f'Unknown set: {set_name}'}
+
+    set_def = analysis_sets[set_name]
+    patterns = list(set_def.get('patterns', []))
+    max_tokens = set_def.get('max_tokens', 100_000)
+    auto_interactive = set_def.get('auto_interactive', False)
+    description = set_def.get('description', '')
+
+    # Resolve includes
+    for included_set in set_def.get('includes', []):
+        included = resolve_set(included_set, analysis_sets, resolved)
+        patterns.extend(included['patterns'])
+        max_tokens = max(max_tokens, included['max_tokens'])
+        auto_interactive = auto_interactive or included['auto_interactive']
+
+    # Remove duplicates while preserving order
+    seen = set()
+    unique_patterns = []
+    for p in patterns:
+        if p not in seen:
+            seen.add(p)
+            unique_patterns.append(p)
+
+    return {
+        'patterns': unique_patterns,
+        'max_tokens': max_tokens,
+        'auto_interactive': auto_interactive,
+        'description': description
+    }
+
+
+def recommend_sets(query: str, recommendations: dict) -> list:
+    """
+    Match a query against recommendation patterns and return suggested sets.
+
+    Uses glob-style matching where * matches any words.
+    """
+    query_lower = query.lower()
+    matches = []
+
+    for pattern, sets in recommendations.items():
+        # Convert "how does * work" to regex-like matching
+        pattern_lower = pattern.lower()
+        # Split pattern into parts around *
+        parts = pattern_lower.split('*')
+
+        # Check if query matches pattern
+        pos = 0
+        matched = True
+        for i, part in enumerate(parts):
+            part = part.strip()
+            if not part:
+                continue
+            idx = query_lower.find(part, pos)
+            if idx == -1:
+                matched = False
+                break
+            pos = idx + len(part)
+
+        if matched:
+            for s in sets:
+                if s not in matches:
+                    matches.append(s)
+
+    return matches
+
+
+def list_available_sets(analysis_sets: dict) -> None:
+    """Print a formatted list of available analysis sets."""
+    print("\n" + "=" * 70)
+    print("AVAILABLE ANALYSIS SETS")
+    print("=" * 70)
+
+    # Group by category based on description markers
+    core_sets = []
+    composed_sets = []
+    task_sets = []
+    legacy_sets = []
+
+    for name, config in analysis_sets.items():
+        desc = config.get('description', '')
+        max_tokens = config.get('max_tokens', 0)
+        has_includes = bool(config.get('includes'))
+        auto_int = config.get('auto_interactive', False)
+
+        entry = {
+            'name': name,
+            'description': desc,
+            'max_tokens': max_tokens,
+            'auto_interactive': auto_int,
+            'has_includes': has_includes
+        }
+
+        if '[LARGE]' in desc or '[EXCEEDS LIMIT]' in desc or '[DANGEROUS]' in desc:
+            legacy_sets.append(entry)
+        elif has_includes:
+            composed_sets.append(entry)
+        elif max_tokens <= 100_000:
+            core_sets.append(entry)
+        else:
+            task_sets.append(entry)
+
+    def print_section(title: str, sets: list):
+        if not sets:
+            return
+        print(f"\n{title}:")
+        print("-" * 50)
+        for s in sets:
+            tokens_str = f"{s['max_tokens']:,}" if s['max_tokens'] < 1_000_000 else f"{s['max_tokens']/1_000_000:.1f}M"
+            flags = []
+            if s['auto_interactive']:
+                flags.append('auto-interactive')
+            if s['has_includes']:
+                flags.append('composed')
+            if s['max_tokens'] > MAX_CONTEXT_TOKENS:
+                flags.append('EXCEEDS LIMIT')
+            flags_str = f" [{', '.join(flags)}]" if flags else ""
+            print(f"  {s['name']:20} {tokens_str:>10} tokens  {s['description']}{flags_str}")
+
+    print_section("CORE SETS (Well-sized, commonly used)", core_sets)
+    print_section("COMPOSED SETS (Combinations)", composed_sets)
+    print_section("TASK-SPECIFIC SETS", task_sets)
+    print_section("LEGACY SETS (Use with caution)", legacy_sets)
+
+    print("\n" + "=" * 70)
+    print("Usage: python local_analyze.py --set <name> \"Your question\"")
+    print("       python local_analyze.py --recommend \"your question\" (get suggestions)")
+    print("=" * 70 + "\n")
+
+
+# =============================================================================
+# FILE SEARCH (RAG) FUNCTIONS
+# =============================================================================
+
+def list_file_search_stores(client) -> list:
+    """List all File Search stores."""
+    try:
+        stores = list(client.file_search_stores.list())
+        return stores
+    except Exception as e:
+        print(f"Error listing stores: {e}")
+        return []
+
+
+def get_or_create_store(client, store_name: str) -> str:
+    """Get existing store by name or create new one. Returns store resource name."""
+    # List existing stores
+    stores = list_file_search_stores(client)
+
+    # Check if store with this display name exists
+    for store in stores:
+        if store.display_name == store_name:
+            print(f"  Found existing store: {store.name}")
+            return store.name
+
+    # Create new store
+    print(f"  Creating new store: {store_name}")
+    store = client.file_search_stores.create(
+        config={'display_name': store_name}
+    )
+    print(f"  Created: {store.name}")
+    return store.name
+
+
+def index_files_to_store(client, store_name: str, files: list, base_dir: Path) -> dict:
+    """
+    Upload and index files to a File Search store.
+
+    Returns dict with stats: {indexed: int, failed: int, errors: list}
+    """
+    stats = {'indexed': 0, 'failed': 0, 'errors': [], 'files': []}
+
+    for file_path in files:
+        rel_path = str(file_path.relative_to(base_dir))
+        try:
+            print(f"  Indexing: {rel_path}...", end=" ", flush=True)
+
+            # Upload and index the file - simplified config for compatibility
+            result = client.file_search_stores.upload_to_file_search_store(
+                file=str(file_path),
+                file_search_store_name=store_name,
+                config={
+                    'display_name': rel_path,
+                }
+            )
+
+            # The result might be an operation or the file directly depending on SDK version
+            # Just check if we got a result without error
+            stats['indexed'] += 1
+            stats['files'].append(rel_path)
+            print("OK")
+
+        except Exception as e:
+            stats['failed'] += 1
+            stats['errors'].append(f"{rel_path}: {e}")
+            print(f"FAILED: {e}")
+
+    return stats
+
+
+def search_with_file_search(client, store_name: str, query: str, model: str = None) -> dict:
+    """
+    Query using File Search and return response with citations.
+
+    Returns dict with:
+      - text: the response text
+      - citations: list of {file, content} dicts
+      - usage: token usage info
+    """
+    from google.genai import types
+
+    model = model or FILE_SEARCH_MODEL
+
+    response = client.models.generate_content(
+        model=model,
+        contents=query,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(
+                file_search=types.FileSearch(
+                    file_search_store_names=[store_name]
+                )
+            )]
+        )
+    )
+
+    result = {
+        'text': response.text,
+        'citations': [],
+        'usage': None
+    }
+
+    # Extract citations from grounding metadata
+    if response.candidates and len(response.candidates) > 0:
+        candidate = response.candidates[0]
+        if hasattr(candidate, 'grounding_metadata') and candidate.grounding_metadata:
+            gm = candidate.grounding_metadata
+            # Extract grounding chunks (the actual citations)
+            if hasattr(gm, 'grounding_chunks') and gm.grounding_chunks:
+                for chunk in gm.grounding_chunks:
+                    citation = {}
+                    if hasattr(chunk, 'retrieved_context'):
+                        ctx = chunk.retrieved_context
+                        if hasattr(ctx, 'uri'):
+                            citation['file'] = ctx.uri
+                        if hasattr(ctx, 'title'):
+                            citation['title'] = ctx.title
+                    if hasattr(chunk, 'web') and chunk.web:
+                        citation['web'] = chunk.web.uri if hasattr(chunk.web, 'uri') else str(chunk.web)
+                    result['citations'].append(citation)
+
+    # Get usage
+    if response.usage_metadata:
+        result['usage'] = {
+            'input_tokens': response.usage_metadata.prompt_token_count,
+            'output_tokens': response.usage_metadata.candidates_token_count
+        }
+
+    return result
+
+
+def delete_file_search_store(client, store_name: str) -> bool:
+    """Delete a File Search store by display name or resource name."""
+    try:
+        # If it looks like a resource name, delete directly
+        if store_name.startswith('fileSearchStores/'):
+            client.file_search_stores.delete(name=store_name)
+            print(f"  Deleted: {store_name}")
+            return True
+
+        # Otherwise, find by display name
+        stores = list_file_search_stores(client)
+        for store in stores:
+            if store.display_name == store_name:
+                client.file_search_stores.delete(name=store.name)
+                print(f"  Deleted: {store.name} ({store.display_name})")
+                return True
+
+        print(f"  Store not found: {store_name}")
+        return False
+
+    except Exception as e:
+        print(f"  Error deleting store: {e}")
+        return False
+
+
+def print_stores_list(stores: list) -> None:
+    """Print formatted list of File Search stores."""
+    if not stores:
+        print("\nNo File Search stores found.")
+        return
+
+    print("\n" + "=" * 70)
+    print("FILE SEARCH STORES")
+    print("=" * 70)
+
+    for store in stores:
+        name = store.name if hasattr(store, 'name') else 'unknown'
+        display_name = store.display_name if hasattr(store, 'display_name') else 'unnamed'
+        create_time = store.create_time if hasattr(store, 'create_time') else 'unknown'
+
+        print(f"\n  Name: {display_name}")
+        print(f"  Resource: {name}")
+        print(f"  Created: {create_time}")
+
+    print("\n" + "=" * 70)
+    print("Commands:")
+    print("  --search \"query\" --store-name <name>  Query a store")
+    print("  --delete-store <name>                  Delete a store")
+    print("=" * 70 + "\n")
+
+
+def create_developer_client():
+    """
+    Create a Gemini Developer API client for File Search.
+
+    Requires GEMINI_API_KEY environment variable.
+    Get your API key from: https://aistudio.google.com/apikey
+    """
+    api_key = os.environ.get(GEMINI_API_KEY_ENV)
+
+    if not api_key:
+        print(f"\n{'='*60}")
+        print("FILE SEARCH REQUIRES GEMINI DEVELOPER API")
+        print(f"{'='*60}")
+        print(f"File Search is only available on the Gemini Developer API,")
+        print(f"not Vertex AI. To use File Search features:")
+        print()
+        print(f"1. Get an API key from: https://aistudio.google.com/apikey")
+        print(f"2. Set the environment variable:")
+        print(f"   export {GEMINI_API_KEY_ENV}='your-api-key'")
+        print()
+        print(f"Your Google account (leonardolech3@gmail.com) should work.")
+        print(f"{'='*60}\n")
+        return None
+
+    client = genai.Client(api_key=api_key)
+    return client
+
+
+def get_gcloud_project():
+    try:
+        res = subprocess.run(["gcloud", "config", "get-value", "project"], capture_output=True, text=True)
+        return res.stdout.strip()
+    except Exception:
+        return None
+
+
+def get_access_token():
+    try:
+        res = subprocess.run(["gcloud", "auth", "print-access-token"], capture_output=True, text=True)
+        return res.stdout.strip()
+    except Exception:
+        return None
+
+
+def list_local_files(base_dir, patterns=None, user_excludes=None):
+    """List files from local filesystem matching patterns.
+    
+    Includes security-sensitive exclusions by default to prevent secret leakage.
+    """
+    base_path = Path(base_dir)
+    all_files = []
+    
+    # SECURITY: Default excludes - prevents secret leakage
+    default_excludes = [
+        # Secrets and credentials
+        ".env", ".env.*", "*.env", ".envrc",
+        "*.key", "*.pem", "*.p12", "*.pfx", "*.crt",
+        "credentials*", "secrets*", "*secret*",
+        ".gcloud", ".aws", ".ssh",
+        "service-account*.json", "*-credentials.json",
+        
+        # Build artifacts and caches
+        "*.DS_Store", "__pycache__", "*.pyc", "*.pyo",
+        ".git", "node_modules", ".npm", ".yarn",
+        "*.zip", "*.tar", "*.gz", "*.rar",
+        "*.lock", "package-lock.json", "yarn.lock",
+        ".tools_venv", ".venv", "venv", "*.egg-info",
+        
+        # Binary files
+        "*.png", "*.jpg", "*.jpeg", "*.gif", "*.ico", "*.webp",
+        "*.mp3", "*.mp4", "*.wav", "*.avi",
+        "*.pdf", "*.doc", "*.docx", "*.xls", "*.xlsx",
+        "*.so", "*.dylib", "*.dll", "*.exe",
+        
+        # IDE and editor
+        ".idea", ".vscode", "*.swp", "*.swo",
+    ]
+    excludes = default_excludes + (user_excludes or [])
+    
+    def should_exclude(path):
+        name = path.name
+        try:
+            rel_path = str(path.relative_to(base_path))
+        except ValueError:
+            rel_path = str(path)
+        
+        for pattern in excludes:
+            # Match against filename
+            if fnmatch.fnmatch(name, pattern):
+                return True
+            # Match against relative path
+            if fnmatch.fnmatch(rel_path, pattern):
+                return True
+            # Match against path components
+            if pattern in rel_path.split(os.sep):
+                return True
+        return False
+    
+    # Walk the directory (sorted for deterministic output)
+    for root, dirs, files in os.walk(base_path):
+        # Filter out excluded directories (modifies in-place)
+        dirs[:] = sorted([d for d in dirs if not should_exclude(Path(root) / d)])
+        
+        for file in sorted(files):
+            file_path = Path(root) / file
+            if should_exclude(file_path):
+                continue
+            all_files.append(file_path)
+    
+    # Filter by patterns if provided
+    if patterns:
+        filtered = []
+        for f in all_files:
+            rel_path = str(f.relative_to(base_path))
+            for pat in patterns:
+                if fnmatch.fnmatch(rel_path, pat):
+                    filtered.append(f)
+                    break
+        return filtered
+    
+    return all_files
+
+
+def read_file_content(file_path, with_line_numbers=False):
+    """Read file content, optionally with line numbers for forensic/interactive modes."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except UnicodeDecodeError:
+        try:
+            with open(file_path, 'r', encoding='latin-1') as f:
+                content = f.read()
+        except Exception:
+            return f"[Binary or unreadable file: {file_path}]"
+    except Exception as e:
+        return f"[Error reading {file_path}: {e}]"
+    
+    if with_line_numbers:
+        lines = content.split('\n')
+        numbered_lines = [f"{i+1:4d}: {line}" for i, line in enumerate(lines)]
+        return '\n'.join(numbered_lines)
+    
+    return content
+
+
+def estimate_cost(input_tokens, output_tokens, model):
+    """Estimate cost including both input and output tokens."""
+    rates = PRICING.get(model, PRICING.get(DEFAULT_MODEL, {"input": 0.10, "output": 0.40}))
+    input_cost = (input_tokens / 1_000_000) * rates.get("input", 0.10)
+    output_cost = (output_tokens / 1_000_000) * rates.get("output", 0.40)
+    return input_cost + output_cost
+
+
+def retry_with_backoff(func, max_retries=5, base_delay=1.0):
+    """Execute function with exponential backoff on rate limit errors."""
+    for attempt in range(max_retries):
+        try:
+            return func()
+        except Exception as e:
+            error_str = str(e).lower()
+            is_rate_limit = any(x in error_str for x in ['429', 'rate limit', 'quota', 'resource exhausted'])
+            
+            if not is_rate_limit or attempt == max_retries - 1:
+                raise
+            
+            delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+            print(f"  Rate limited. Retrying in {delay:.1f}s (attempt {attempt + 1}/{max_retries})...")
+            time.sleep(delay)
+    
+    raise Exception("Max retries exceeded")
+
+
+def create_client():
+    """Create authenticated Gemini client."""
+    project_id = get_gcloud_project()
+    if not project_id:
+        print("Error: No gcloud project set.")
+        print("Run: gcloud config set project <YOUR_PROJECT_ID>")
+        sys.exit(1)
+    
+    access_token = get_access_token()
+    if not access_token:
+        print("Error: Could not get access token.")
+        print("Run: gcloud auth login")
+        sys.exit(1)
+    
+    from google.oauth2 import credentials as oauth2_credentials
+    creds = oauth2_credentials.Credentials(token=access_token)
+    
+    client = genai.Client(
+        vertexai=True,
+        project=project_id,
+        location="us-central1",
+        credentials=creds
+    )
+    
+    return client, project_id
+
+
+def create_cache(client, model, context_text, ttl_minutes=60):
+    """Create a context cache for the session."""
+    try:
+        # Check if caching is supported in this SDK version
+        if not hasattr(client, 'caches'):
+            print("  (Caching API not available in this SDK version, fallback to standard chat)")
+            return None
+
+        print(f"  Creating context cache (TTL {ttl_minutes}m)...")
+        cache = client.caches.create(
+            model=model,
+            contents=[Part.from_text(text=context_text)],
+            config=genai.types.CreateCachedContentConfig(
+                display_name=f"local_analyze_session_{int(time.time())}",
+                ttl=f"{ttl_minutes * 60}s"
+            )
+        )
+        print(f"  ✅ Cache created: {cache.name}")
+        return cache
+    except Exception as e:
+        print(f"  ⚠️ Failed to create cache: {e}")
+        return None
+
+
+def build_context_from_files(files, base_dir, with_line_numbers=False):
+    """Build context string from local files."""
+    context_parts = []
+    total_chars = 0
+    
+    for file_path in files:
+        rel_path = file_path.relative_to(base_dir)
+        content = read_file_content(file_path, with_line_numbers=with_line_numbers)
+        file_block = f"\n--- FILE: {rel_path} ---\n{content}\n--- END FILE ---\n"
+        context_parts.append(file_block)
+        total_chars += len(file_block)
+    
+    return "\n".join(context_parts), total_chars
+
+
+def interactive_mode(client, model, context, system_prompt):
+    """Run interactive REPL mode with caching support.
+    
+    Uses Vertex AI Context Caching if context is large, falling back to history-replay if small or failed.
+    """
+    print("\n" + "=" * 60)
+    print("INTERACTIVE MODE (Chat Session)")
+    print("=" * 60)
+    print("Context loaded. Ask questions about the codebase.")
+    print("Commands: 'exit' or Ctrl+C to quit, 'clear' to reset session")
+    print("=" * 60)
+    
+    # Try to create cache if context is substantial
+    cache = None
+    system_instruction = [Part.from_text(text=system_prompt)]
+    
+    # Heuristic: Cache if > 32k tokens (approx 128k chars). 
+    # Vertex has min cache size limits (32k tokens).
+    if len(context) > 130000:
+       cache = create_cache(client, model, context)
+    
+    # Initialize chat
+    chat = client.chats.create(model=model, config=genai.types.GenerateContentConfig(system_instruction=system_instruction))
+    
+    # Strategy selection
+    if not cache:
+        print("  (Standard Context Injection - Context too small for cache or cache failed)")
+        initial_context = f"CODEBASE CONTEXT:\n{context}\n\nI have loaded this codebase. Ready for questions."
+        # Build conversation history manually with full context
+        conversation_history = [
+            Content(role="user", parts=[Part.from_text(text=initial_context)]),
+            Content(role="model", parts=[Part.from_text(text="I've reviewed the codebase context. What would you like to know?")])
+        ]
+    else:
+        print("  (Using Cached Content Strategy)")
+        conversation_history = [] 
+        # Context is in cache. We just append new messages.
+    
+    total_input_tokens = 0
+    total_output_tokens = 0
+    
+    while True:
+        try:
+            user_input = input("\n> ").strip()
+            
+            if not user_input:
+                continue
+            if user_input.lower() in ['exit', 'quit', 'q']:
+                print(f"\nSession stats: {total_input_tokens:,} input tokens, {total_output_tokens:,} output tokens")
+                print("Goodbye!")
+                if cache:
+                     try:
+                         client.caches.delete(name=cache.name)
+                         print(f"  Cache {cache.name} deleted.")
+                     except Exception as e:
+                         print(f"  Error deleting cache: {e}")
+                break
+
+            if user_input.lower() == 'clear':
+                 conversation_history = []
+                 print("History cleared.")
+                 continue
+            
+            # Add user message
+            conversation_history.append(Content(role="user", parts=[Part.from_text(text=user_input)]))
+            
+            print("\nThinking...")
+            
+            def make_request():
+                config = genai.types.GenerateContentConfig()
+                if cache:
+                     config.cached_content = cache.name
+                
+                return client.models.generate_content(
+                    model=model,
+                    contents=conversation_history,
+                    config=config
+                )
+            
+            response = retry_with_backoff(make_request)
+            print(f"\n{response.text}")
+            
+            # Add assistant response
+            conversation_history.append(Content(role="model", parts=[Part.from_text(text=response.text)]))
+            
+            if response.usage_metadata:
+                total_input_tokens += response.usage_metadata.prompt_token_count
+                total_output_tokens += response.usage_metadata.candidates_token_count
+                # Note: Cached content tokens are billed differently and may not show up in prompt_token_count
+                # in the same way, but this gives a proxy for "active" tokens.
+                print(f"\n[Turn: {response.usage_metadata.prompt_token_count} in, {response.usage_metadata.candidates_token_count} out | Session: {total_input_tokens:,} total in]")
+        
+        except KeyboardInterrupt:
+            print(f"\n\nSession stats: {total_input_tokens:,} input tokens, {total_output_tokens:,} output tokens")
+            print("Goodbye!")
+            if cache:
+                 try:
+                     client.caches.delete(name=cache.name)
+                 except: pass
+            break
+        except Exception as e:
+            print(f"\nError: {e}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Analyze local codebase with Gemini AI (v2)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s "Explain the architecture" --set pipeline
+  %(prog)s --interactive --set constraints
+  %(prog)s --list-sets
+  %(prog)s --recommend "how does classification work"
+        """
+    )
+    parser.add_argument("prompt", nargs='?', default="Analyze this codebase", help="The question or instruction for the AI")
+    parser.add_argument("--dir", help="Directory to analyze (relative to PROJECT_ROOT)")
+    parser.add_argument("--file", help="Specific file(s) to include (comma separated)")
+    parser.add_argument("--set", help="Analysis Set (use --list-sets to see available)")
+    parser.add_argument("--model", default=DEFAULT_MODEL, help="Model to use")
+    parser.add_argument("--mode", default="standard", choices=list(MODES.keys()) + ['interactive', 'insights', 'role_validation', 'plan_validation'], help="Analysis mode")
+    parser.add_argument("--interactive", "-i", action="store_true", help="Enter interactive chat mode")
+    parser.add_argument("--exclude", help="Additional exclude patterns (comma separated)")
+    parser.add_argument("--yes", "-y", action="store_true", help="Skip confirmation")
+    parser.add_argument("--output", "-o", help="Output file path (for insights mode)")
+    parser.add_argument("--max-files", type=int, default=50, help="Maximum files to include")
+    parser.add_argument("--line-numbers", "-n", action="store_true", help="Include line numbers in file content")
+    # v2 arguments
+    parser.add_argument("--list-sets", action="store_true", help="List available analysis sets and exit")
+    parser.add_argument("--recommend", metavar="QUERY", help="Get set recommendations for a query")
+    parser.add_argument("--force-oneshot", action="store_true", help="Force one-shot mode even if auto_interactive is set")
+    # File Search (RAG) arguments
+    parser.add_argument("--index", action="store_true", help="Index files to a File Search store (requires --store-name)")
+    parser.add_argument("--search", metavar="QUERY", help="Query using File Search with citations (requires --store-name)")
+    parser.add_argument("--store-name", help="Name of the File Search store to use")
+    parser.add_argument("--list-stores", action="store_true", help="List all File Search stores")
+    parser.add_argument("--delete-store", metavar="NAME", help="Delete a File Search store by name")
+    args = parser.parse_args()
+
+    # Load config early for --list-sets and --recommend
+    sets_config = load_sets_config()
+    analysis_sets = sets_config.get("analysis_sets", {})
+    recommendations_config = sets_config.get("recommendations", {})
+
+    # Handle --list-sets
+    if args.list_sets:
+        list_available_sets(analysis_sets)
+        sys.exit(0)
+
+    # Handle --recommend
+    if args.recommend:
+        suggested = recommend_sets(args.recommend, recommendations_config)
+        if suggested:
+            print(f"\nRecommended sets for: \"{args.recommend}\"")
+            print("-" * 40)
+            for s in suggested:
+                desc = analysis_sets.get(s, {}).get('description', '')
+                print(f"  --set {s:20} {desc}")
+            print()
+        else:
+            print(f"\nNo specific recommendations for: \"{args.recommend}\"")
+            print("Try: --list-sets to see all available sets\n")
+        sys.exit(0)
+
+    # =========================================================================
+    # FILE SEARCH COMMANDS
+    # =========================================================================
+
+    # Handle --list-stores (needs Developer API client)
+    if args.list_stores:
+        client = create_developer_client()
+        if not client:
+            sys.exit(1)
+        print("Connected to Gemini Developer API")
+        stores = list_file_search_stores(client)
+        print_stores_list(stores)
+        sys.exit(0)
+
+    # Handle --delete-store (needs Developer API client)
+    if args.delete_store:
+        client = create_developer_client()
+        if not client:
+            sys.exit(1)
+        print("Connected to Gemini Developer API")
+        print(f"\nDeleting store: {args.delete_store}")
+        success = delete_file_search_store(client, args.delete_store)
+        sys.exit(0 if success else 1)
+
+    # Handle --search (query with File Search)
+    if args.search:
+        if not args.store_name:
+            print("Error: --search requires --store-name")
+            print("Use --list-stores to see available stores")
+            sys.exit(1)
+
+        client = create_developer_client()
+        if not client:
+            sys.exit(1)
+        print("Connected to Gemini Developer API")
+
+        # Find the store
+        stores = list_file_search_stores(client)
+        store_resource_name = None
+        for store in stores:
+            if store.display_name == args.store_name:
+                store_resource_name = store.name
+                break
+
+        if not store_resource_name:
+            print(f"Error: Store '{args.store_name}' not found")
+            print("Use --list-stores to see available stores")
+            sys.exit(1)
+
+        print(f"\n{'='*60}")
+        print(f"FILE SEARCH QUERY")
+        print(f"{'='*60}")
+        print(f"Store: {args.store_name}")
+        print(f"Model: {FILE_SEARCH_MODEL}")
+        print(f"Query: {args.search}")
+        print(f"{'='*60}\n")
+
+        try:
+            result = search_with_file_search(client, store_resource_name, args.search)
+
+            # Print response
+            print("RESPONSE:")
+            print("-" * 40)
+            print(result['text'])
+
+            # Print citations
+            if result['citations']:
+                print("\n" + "-" * 40)
+                print("CITATIONS:")
+                for i, cite in enumerate(result['citations'], 1):
+                    if 'file' in cite:
+                        print(f"  [{i}] {cite.get('title', cite['file'])}")
+                    elif 'title' in cite:
+                        print(f"  [{i}] {cite['title']}")
+
+            # Print usage
+            if result['usage']:
+                print("\n" + "-" * 40)
+                print(f"Tokens: {result['usage']['input_tokens']:,} in, {result['usage']['output_tokens']:,} out")
+                cost = estimate_cost(result['usage']['input_tokens'], result['usage']['output_tokens'], FILE_SEARCH_MODEL)
+                print(f"Estimated cost: ${cost:.4f}")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+
+        sys.exit(0)
+
+    # Handle --index (index files to store)
+    if args.index:
+        if not args.store_name:
+            print("Error: --index requires --store-name")
+            sys.exit(1)
+
+        # Need to collect files first, so continue to file collection logic below
+        # but mark that we're in index mode
+        pass
+
+    # =========================================================================
+    # STANDARD FLOW (Long Context / Interactive / One-shot)
+    # =========================================================================
+
+    # Determine base directory
+    if args.dir:
+        base_dir = PROJECT_ROOT / args.dir
+    else:
+        base_dir = PROJECT_ROOT
+    
+    if not base_dir.exists():
+        print(f"Error: Directory not found: {base_dir}")
+        sys.exit(1)
+    
+    print(f"Project Root: {PROJECT_ROOT}", file=sys.stderr)
+    print(f"Analyzing:    {base_dir}", file=sys.stderr)
+    print(f"Model:        {args.model}", file=sys.stderr)
+    print(f"Mode:         {'INTERACTIVE' if args.interactive else args.mode.upper()}", file=sys.stderr)
+    
+    # User excludes
+    user_excludes = [p.strip() for p in args.exclude.split(",")] if args.exclude else None
+
+    # Track set metadata for auto-interactive decisions
+    set_auto_interactive = False
+    set_max_tokens = 100_000
+
+    # Collect files
+    patterns = None
+    if args.file:
+        patterns = [p.strip() for p in args.file.split(",")]
+    elif args.set:
+        if args.set not in analysis_sets:
+            print(f"Error: Unknown set '{args.set}'. Available: {list(analysis_sets.keys())}", file=sys.stderr)
+            print(f"Use --list-sets to see descriptions", file=sys.stderr)
+            sys.exit(1)
+
+        # Use resolve_set to handle includes
+        resolved = resolve_set(args.set, analysis_sets)
+        patterns = resolved['patterns']
+        set_auto_interactive = resolved['auto_interactive']
+        set_max_tokens = resolved['max_tokens']
+
+        # Show resolution info
+        print(f"Using Set:    {args.set.upper()} - {resolved['description']}", file=sys.stderr)
+        if resolved.get('patterns') and len(patterns) > len(analysis_sets[args.set].get('patterns', [])):
+            included_sets = analysis_sets[args.set].get('includes', [])
+            print(f"  Composed from: {', '.join(included_sets)}", file=sys.stderr)
+
+        # Warn about token budget
+        if set_max_tokens > MAX_CONTEXT_TOKENS:
+            print(f"\n{'='*60}", file=sys.stderr)
+            print(f"WARNING: Set '{args.set}' has budget {set_max_tokens:,} tokens", file=sys.stderr)
+            print(f"         This EXCEEDS the {MAX_CONTEXT_TOKENS:,} token context limit!", file=sys.stderr)
+            print(f"         Consider using a smaller, more focused set.", file=sys.stderr)
+            print(f"{'='*60}\n", file=sys.stderr)
+    
+    selected_files = list_local_files(base_dir, patterns, user_excludes)
+    
+    # Auto-inject architecture docs for architect mode
+    if args.mode == 'architect':
+        for doc_path in ARCHITECT_DOCS:
+            full_path = PROJECT_ROOT / doc_path
+            if full_path.exists() and full_path not in selected_files:
+                selected_files.insert(0, full_path)
+                print(f"Auto-injected: {doc_path}")
+    
+    # Limit files
+    if len(selected_files) > args.max_files:
+        print(f"\nWarning: Found {len(selected_files)} files, limiting to {args.max_files}")
+        selected_files = selected_files[:args.max_files]
+    
+    if not selected_files:
+        print("No files matched your criteria.")
+        sys.exit(1)
+    
+    print(f"\nSelected {len(selected_files)} files:", file=sys.stderr)
+    for f in selected_files[:5]:
+        try:
+            print(f"  - {f.relative_to(PROJECT_ROOT)}", file=sys.stderr)
+        except ValueError:
+            print(f"  - {f}", file=sys.stderr)
+    if len(selected_files) > 5:
+        print(f"  ... and {len(selected_files) - 5} more", file=sys.stderr)
+
+    # =========================================================================
+    # INDEX MODE: Index files to File Search store
+    # =========================================================================
+    if args.index:
+        print(f"\n{'='*60}")
+        print("FILE SEARCH INDEXING")
+        print(f"{'='*60}")
+        print(f"Store: {args.store_name}")
+        print(f"Files: {len(selected_files)}")
+
+        if not args.yes:
+            confirm = input("\nProceed with indexing? [Y/n] ")
+            if confirm.lower() == 'n':
+                sys.exit(0)
+
+        client = create_developer_client()
+        if not client:
+            sys.exit(1)
+        print("Connected to Gemini Developer API")
+
+        # Get or create store
+        store_resource_name = get_or_create_store(client, args.store_name)
+
+        # Index files
+        print(f"\nIndexing {len(selected_files)} files...")
+        stats = index_files_to_store(client, store_resource_name, selected_files, PROJECT_ROOT)
+
+        # Print summary
+        print(f"\n{'='*60}")
+        print("INDEXING COMPLETE")
+        print(f"{'='*60}")
+        print(f"  Indexed: {stats['indexed']}")
+        print(f"  Failed:  {stats['failed']}")
+
+        if stats['errors']:
+            print("\nErrors:")
+            for err in stats['errors'][:5]:
+                print(f"  - {err}")
+            if len(stats['errors']) > 5:
+                print(f"  ... and {len(stats['errors']) - 5} more")
+
+        print(f"\nTo query this store:")
+        print(f"  python local_analyze.py --search \"your question\" --store-name {args.store_name}")
+        print(f"{'='*60}\n")
+
+        sys.exit(0 if stats['failed'] == 0 else 1)
+
+    # =========================================================================
+    # LONG CONTEXT MODE: Build context and continue
+    # =========================================================================
+
+    # Determine if line numbers should be added
+    use_line_numbers = args.line_numbers or args.mode in ['forensic', 'interactive'] or args.interactive
+    
+    # Build context
+    print("\nBuilding context from local files...", file=sys.stderr)
+    context, total_chars = build_context_from_files(selected_files, PROJECT_ROOT, with_line_numbers=use_line_numbers)
+    estimated_tokens = total_chars // 4  # Rough estimate
+    print(f"Context size: ~{estimated_tokens:,} tokens ({total_chars:,} chars)", file=sys.stderr)
+    if use_line_numbers:
+        print("Line numbers: enabled", file=sys.stderr)
+
+    # Token limit warnings
+    if estimated_tokens > MAX_CONTEXT_TOKENS:
+        print(f"\n{'='*60}", file=sys.stderr)
+        print(f"CRITICAL: Context ({estimated_tokens:,} tokens) EXCEEDS", file=sys.stderr)
+        print(f"          the {MAX_CONTEXT_TOKENS:,} token limit!", file=sys.stderr)
+        print(f"          The API call will likely fail or truncate.", file=sys.stderr)
+        print(f"          Use --set with a smaller set or --max-files", file=sys.stderr)
+        print(f"{'='*60}\n", file=sys.stderr)
+    elif estimated_tokens > MAX_CONTEXT_TOKENS * 0.8:
+        print(f"  Warning: Context is at {estimated_tokens / MAX_CONTEXT_TOKENS * 100:.0f}% of limit", file=sys.stderr)
+
+    # Determine effective mode: auto-interactive if set specifies it or context is large
+    use_interactive = args.interactive or args.mode == 'interactive'
+
+    if not use_interactive and not args.force_oneshot:
+        # Auto-enable interactive for large contexts or if set specifies it
+        if set_auto_interactive:
+            print(f"\n  Auto-interactive: enabled (set '{args.set}' specifies auto_interactive)", file=sys.stderr)
+            use_interactive = True
+        elif estimated_tokens > INTERACTIVE_THRESHOLD:
+            print(f"\n  Auto-interactive: enabled (context > {INTERACTIVE_THRESHOLD:,} tokens)", file=sys.stderr)
+            print(f"                    Use --force-oneshot to override", file=sys.stderr)
+            use_interactive = True
+
+    if not args.yes:
+        mode_str = "INTERACTIVE" if use_interactive else "ONE-SHOT"
+        confirm = input(f"\nProceed with {mode_str} mode? [Y/n] ")
+        if confirm.lower() == 'n':
+            sys.exit(0)
+
+    # Create client
+    client, project_id = create_client()
+    print(f"Connected to project: {project_id}", file=sys.stderr)
+
+    # Get system prompt
+    if use_interactive:
+        system_prompt = MODES.get('interactive', {}).get('prompt', MODES.get('standard', {}).get('prompt', ''))
+        if not system_prompt:
+            system_prompt = "You are an expert software engineer. Answer questions about the provided codebase. Cite file paths and line numbers."
+        interactive_mode(client, args.model, context, system_prompt)
+    elif args.mode == 'insights':
+        # Insights mode (Structured JSON)
+        if not INSIGHTS_PROMPT:
+            print("Error: 'insights' prompt not found in prompts.yaml (or usage of insights_source failed)")
+            sys.exit(1)
+        
+        # Inject context into the prompt placeholder
+        # Note: If context has braces, format might fail. TODO: Safe format or Template.
+        try:
+             full_prompt = INSIGHTS_PROMPT.format(context=context)
+        except Exception:
+             # Fallback for safe formatting if context contains braces
+             full_prompt = INSIGHTS_PROMPT.replace("{context}", context)
+
+        print("\n--- Generating Insights (JSON) ---", file=sys.stderr)
+        
+        def make_request():
+            return client.models.generate_content(
+                model=args.model,
+                contents=[Part.from_text(text=full_prompt)],
+                config=genai.types.GenerateContentConfig(
+                    response_mime_type="application/json"
+                )
+            )
+        
+        try:
+            response = retry_with_backoff(make_request)
+            
+            # Save or print
+            if args.output:
+                with open(args.output, 'w') as f:
+                    f.write(response.text)
+                print(f"\n✅ Insights saved to: {args.output}")
+            else:
+                print(response.text)
+            
+            print("\n-----------------")
+            if response.usage_metadata:
+                input_tokens = response.usage_metadata.prompt_token_count
+                output_tokens = response.usage_metadata.candidates_token_count
+                print(f"Tokens Used: {input_tokens:,} Input, {output_tokens:,} Output")
+                est = estimate_cost(input_tokens, output_tokens, args.model)
+                print(f"Estimated Cost: ${est:.4f}")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+
+    elif args.mode == 'role_validation':
+        # Role Validation mode (Structured JSON for RoleRegistry audit)
+        if not ROLE_VALIDATION_PROMPT:
+            print("Error: 'role_validation' prompt not found in prompts.yaml")
+            sys.exit(1)
+
+        try:
+            full_prompt = ROLE_VALIDATION_PROMPT.format(context=context)
+        except Exception:
+            full_prompt = ROLE_VALIDATION_PROMPT.replace("{context}", context)
+
+        print("\n--- Role Validation Analysis (JSON) ---", file=sys.stderr)
+
+        def make_request():
+            return client.models.generate_content(
+                model=args.model,
+                contents=[Part.from_text(text=full_prompt)],
+                config=genai.types.GenerateContentConfig(
+                    response_mime_type="application/json"
+                )
+            )
+
+        try:
+            response = retry_with_backoff(make_request)
+
+            # Save or print
+            if args.output:
+                with open(args.output, 'w') as f:
+                    f.write(response.text)
+                print(f"\n✅ Role validation report saved to: {args.output}")
+            else:
+                print(response.text)
+
+            print("\n-----------------")
+            if response.usage_metadata:
+                input_tokens = response.usage_metadata.prompt_token_count
+                output_tokens = response.usage_metadata.candidates_token_count
+                print(f"Tokens Used: {input_tokens:,} Input, {output_tokens:,} Output")
+                est = estimate_cost(input_tokens, output_tokens, args.model)
+                print(f"Estimated Cost: ${est:.4f}")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+
+    elif args.mode == 'plan_validation':
+        # Plan Validation mode (Structured JSON for verifying implementation plans)
+        if not PLAN_VALIDATION_PROMPT:
+            print("Error: 'plan_validation' prompt not found in prompts.yaml")
+            sys.exit(1)
+
+        try:
+            full_prompt = PLAN_VALIDATION_PROMPT.format(context=context)
+        except Exception:
+            full_prompt = PLAN_VALIDATION_PROMPT.replace("{context}", context)
+
+        print("\n--- Plan Validation Analysis (JSON) ---", file=sys.stderr)
+
+        def make_request():
+            return client.models.generate_content(
+                model=args.model,
+                contents=[Part.from_text(text=full_prompt)],
+                config=genai.types.GenerateContentConfig(
+                    response_mime_type="application/json"
+                )
+            )
+
+        try:
+            response = retry_with_backoff(make_request)
+
+            # Save or print
+            if args.output:
+                with open(args.output, 'w') as f:
+                    f.write(response.text)
+                print(f"\n✅ Plan validation report saved to: {args.output}")
+            else:
+                print(response.text)
+
+            print("\n-----------------")
+            if response.usage_metadata:
+                input_tokens = response.usage_metadata.prompt_token_count
+                output_tokens = response.usage_metadata.candidates_token_count
+                print(f"Tokens Used: {input_tokens:,} Input, {output_tokens:,} Output")
+                est = estimate_cost(input_tokens, output_tokens, args.model)
+                print(f"Estimated Cost: ${est:.4f}")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+
+    else:
+        # One-shot mode
+        system_prompt = MODES.get(args.mode, {}).get('prompt', '')
+        full_prompt = f"{system_prompt}\n\nCODEBASE CONTEXT:\n{context}\n\nUSER QUERY: {args.prompt}"
+
+        print("\n--- Analyzing ---", file=sys.stderr)
+        
+        def make_request():
+            return client.models.generate_content(
+                model=args.model,
+                contents=[Part.from_text(text=full_prompt)]
+            )
+        
+        try:
+            response = retry_with_backoff(make_request)
+            print(response.text)
+            print("\n-----------------")
+            
+            if response.usage_metadata:
+                input_tokens = response.usage_metadata.prompt_token_count
+                output_tokens = response.usage_metadata.candidates_token_count
+                print(f"Tokens Used: {input_tokens:,} Input, {output_tokens:,} Output")
+                est = estimate_cost(input_tokens, output_tokens, args.model)
+                print(f"Estimated Cost: ${est:.4f}")
+        
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
