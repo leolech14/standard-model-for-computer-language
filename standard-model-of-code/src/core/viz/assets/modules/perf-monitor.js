@@ -4,7 +4,8 @@
  * @responsibility Track frame delivery, detect dropped frames, display HUD
  */
 
-const PERF = (function() {
+// NOTE: Named _PerfMonitorImpl to avoid conflict with performance.js PERF
+const _PerfMonitorImpl = (function() {
     'use strict';
 
     // Configuration
@@ -193,9 +194,8 @@ const PERF = (function() {
     };
 })();
 
-// Backward compatibility alias
-const PERF_MONITOR = PERF;
+// Export as PERF_MONITOR (PERF is provided by performance.js)
+const PERF_MONITOR = _PerfMonitorImpl;
 
-// Expose globally
-window.PERF = PERF;
+// Expose globally - only PERF_MONITOR, PERF comes from performance.js
 window.PERF_MONITOR = PERF_MONITOR;

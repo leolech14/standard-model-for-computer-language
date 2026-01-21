@@ -3,6 +3,7 @@
 Refactored entry point for all standard model tools.
 """
 import sys
+import os
 import argparse
 import re
 import tempfile
@@ -187,6 +188,11 @@ def main():
         "--verbose-timing",
         action="store_true",
         help="Print per-stage timing during execution (implies --timing)"
+    )
+    full_parser.add_argument(
+        "--validate-ui",
+        action="store_true",
+        help="Run circuit breaker UI tests on generated HTML (requires playwright)"
     )
 
     # ==========================================
@@ -397,6 +403,35 @@ def main():
             elif getattr(args, 'timing', False):
                 options["timing"] = True
             run_full_analysis(args.path, args.output, options=options)
+
+            # UI Validation (optional)
+            if getattr(args, 'validate_ui', False):
+                import glob
+                output_dir = args.output or os.path.join(args.path, '.collider')
+                html_files = glob.glob(os.path.join(output_dir, 'output_human-readable_*.html'))
+                if html_files:
+                    newest_html = max(html_files, key=os.path.getmtime)
+                    print(f"\n🧪 Running UI validation on: {os.path.basename(newest_html)}")
+                    try:
+                        # Dynamic import of validate_ui from tools directory
+                        import importlib.util
+                        script_dir = os.path.dirname(os.path.abspath(__file__))
+                        validate_ui_path = os.path.join(script_dir, 'tools', 'validate_ui.py')
+                        spec = importlib.util.spec_from_file_location("validate_ui", validate_ui_path)
+                        validate_ui_module = importlib.util.module_from_spec(spec)
+                        spec.loader.exec_module(validate_ui_module)
+
+                        result = validate_ui_module.validate_ui(newest_html, verbose=True)
+                        validate_ui_module.print_report(result, verbose=True)
+                        if result['failed'] > 0:
+                            print("\n⚠️  UI validation found failures. See above for details.")
+                    except ImportError as e:
+                        if 'playwright' in str(e).lower():
+                            print("⚠️  UI validation requires playwright. Install with: pip install playwright && playwright install chromium")
+                        else:
+                            print(f"⚠️  UI validation import error: {e}")
+                else:
+                    print("⚠️  No HTML output found for UI validation")
         except Exception as e:
             print(f"❌ Full analysis failed: {e}")
             import traceback
