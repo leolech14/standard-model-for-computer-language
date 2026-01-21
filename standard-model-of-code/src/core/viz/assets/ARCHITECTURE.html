@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collider Visualization Architecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --green: #3fb950;
+            --yellow: #d29922;
+            --red: #f85149;
+            --purple: #a371f7;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin: 48px 0 24px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            color: #fff;
+        }
+        h3 {
+            font-size: 1.1rem;
+            margin: 24px 0 12px;
+            color: var(--accent);
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+        .doc-meta {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            font-size: 0.9rem;
+        }
+        .doc-meta strong { color: var(--accent); }
+        .doc-meta .warn { color: var(--yellow); }
+        .diagram-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 16px 0 32px;
+            overflow-x: auto;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th {
+            background: var(--surface);
+            color: #fff;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+        code {
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .status-good { color: var(--green); }
+        .status-warn { color: var(--yellow); }
+        .status-bad { color: var(--red); }
+        .status-plan { color: var(--purple); }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .card-mini {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 16px;
+        }
+        .card-mini code {
+            font-weight: 600;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .badge-done { background: var(--green); color: #000; }
+        .badge-progress { background: var(--yellow); color: #000; }
+        .badge-pending { background: var(--border); color: var(--text); }
+        .badge-planned { background: var(--purple); color: #fff; }
+        .section-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .label-current { background: rgba(63, 185, 80, 0.2); color: var(--green); border: 1px solid var(--green); }
+        .label-roadmap { background: rgba(163, 113, 247, 0.2); color: var(--purple); border: 1px solid var(--purple); }
+        .generated-marker {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-style: italic;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Collider Visualization Architecture</h1>
+    <p class="subtitle">AS-BUILT documentation for the modularized visualization system.</p>
+
+    <div class="doc-meta">
+        <strong>Document Type:</strong> AS-BUILT (reflects current implementation)<br>
+        <strong>Last Validated:</strong> 2026-01-20<br>
+        <strong>Modules Implemented:</strong> 34<br>
+        <strong>Modules Planned (not implemented):</strong> 1 (graph-core.js)<br>
+        <span class="warn">Run <code>tools/check-arch-docs.sh</code> to validate this document against the filesystem.</span>
+    </div>
+
+    <h2>1. Architecture Overview</h2>
+    <p>The visualization system is composed of <strong>34 IIFE modules</strong> that are concatenated at build time by <code>visualize_graph_webgl.py</code>. The modules provide encapsulated functionality while exposing backward-compatible global aliases for existing HTML event handlers.</p>
+
+    <h2>2. Module Dependency Graph</h2>
+    <span class="section-label label-current">Current / As-Built</span>
+    <div class="diagram-container">
+        <pre class="mermaid">
+graph TD
+    subgraph Foundation["Foundation Layer"]
+        CORE["CORE<br/>core.js"]
+        NODE["NODE<br/>node-accessors.js"]
+        COLOR["COLOR<br/>color-engine.js"]
+        UTILS["UTILS<br/>utils.js"]
+    end
+
+    subgraph Data["Data Layer"]
+        DATA["DATA<br/>data-manager.js"]
+        LEGEND["LEGEND<br/>legend-manager.js"]
+        DATAMAP["DATAMAP<br/>datamap.js"]
+    end
+
+    subgraph Animation["Animation Layer"]
+        REFRESH["REFRESH<br/>refresh-throttle.js"]
+        ANIM["ANIM<br/>animation.js"]
+        PHYSICS["PHYSICS<br/>physics.js"]
+        LAYOUT["LAYOUT<br/>layout.js"]
+    end
+
+    subgraph UI["UI Components"]
+        SELECT["SELECT<br/>selection.js"]
+        SIDEBAR["SIDEBAR<br/>sidebar.js"]
+        PANELS["PANELS<br/>panels.js"]
+        CONTROL["CONTROL<br/>control-bar.js"]
+        HUD["HUD<br/>hud.js"]
+        HOVER["HOVER<br/>hover.js"]
+    end
+
+    subgraph Viz["Visualization"]
+        EDGE["EDGE<br/>edge-system.js"]
+        FILE["FILE<br/>file-viz.js"]
+        VIS["VIS-STATE<br/>vis-state.js"]
+        VISIBILITY["VISIBILITY<br/>visibility.js"]
+    end
+
+    subgraph Integration["Integration Layer"]
+        MAIN["MAIN<br/>main.js"]
+        APP["APP.JS<br/>(glue layer)"]
+    end
+
+    CORE --> DATA
+    NODE --> DATA
+    COLOR --> LEGEND
+    DATA --> SIDEBAR
+    DATA --> PANELS
+    COLOR --> EDGE
+    NODE --> EDGE
+    COLOR --> FILE
+    ANIM --> LAYOUT
+    VIS --> MAIN
+    MAIN --> APP
+        </pre>
+    </div>
+    <p><em>Note: Diagram shows primary dependencies. Many modules have cross-dependencies not shown for clarity.</em></p>
+
+    <h2>3. Data Flow Pipeline</h2>
+    <div class="diagram-container">
+        <pre class="mermaid">
+flowchart TB
+    subgraph Python["Python Pipeline"]
+        JSON[("unified_analysis.json")]
+        TOKENS[("Token JSONs")]
+        TEMPLATE["template.html"]
+    end
+
+    subgraph Build["HTML Generation"]
+        COMPRESS["gzip + base64"]
+        INJECT["CSS Variables"]
+        CONCAT["Module Concat (34 files)"]
+    end
+
+    subgraph Browser["Browser Runtime"]
+        DECOMPRESS["pako.inflate"]
+        INIT["Module Init"]
+        RENDER["WebGL Render"]
+    end
+
+    JSON --> COMPRESS
+    TOKENS --> INJECT
+    COMPRESS --> INJECT
+    TEMPLATE --> CONCAT
+    INJECT --> CONCAT
+    CONCAT --> OUTPUT["collider_report.html"]
+    OUTPUT --> DECOMPRESS
+    DECOMPRESS --> INIT
+    INIT --> RENDER
+        </pre>
+    </div>
+
+    <h2>4. Module Inventory (AS-BUILT)</h2>
+    <span class="section-label label-current">Current / As-Built</span>
+    <!-- BEGIN:MODULE_INVENTORY (auto-generated section - do not hand-edit) -->
+    <p class="generated-marker">Auto-generated from filesystem. Run <code>tools/check-arch-docs.sh</code> to update.</p>
+    <div class="grid-3">
+        <div class="card-mini"><code>animation.js</code> - Layout animations</div>
+        <div class="card-mini"><code>circuit-breaker.js</code> - Error recovery</div>
+        <div class="card-mini"><code>color-engine.js</code> - OKLCH color system</div>
+        <div class="card-mini"><code>color-helpers.js</code> - Color utilities</div>
+        <div class="card-mini"><code>control-bar.js</code> - Control bar UI</div>
+        <div class="card-mini"><code>core.js</code> - Constants, utilities</div>
+        <div class="card-mini"><code>data-manager.js</code> - Centralized data</div>
+        <div class="card-mini"><code>datamap.js</code> - Data mapping</div>
+        <div class="card-mini"><code>dimension.js</code> - Dimension handling</div>
+        <div class="card-mini"><code>edge-system.js</code> - Edge coloring</div>
+        <div class="card-mini"><code>file-viz.js</code> - File visualization</div>
+        <div class="card-mini"><code>flow.js</code> - Flow visualization</div>
+        <div class="card-mini"><code>groups.js</code> - Node grouping</div>
+        <div class="card-mini"><code>hover.js</code> - Hover interactions</div>
+        <div class="card-mini"><code>hud.js</code> - HUD display</div>
+        <div class="card-mini"><code>layout-helpers.js</code> - Layout utilities</div>
+        <div class="card-mini"><code>layout.js</code> - Layout algorithms</div>
+        <div class="card-mini"><code>legend-manager.js</code> - Legend system</div>
+        <div class="card-mini"><code>main.js</code> - Entry point + shims</div>
+        <div class="card-mini"><code>node-accessors.js</code> - Node property access</div>
+        <div class="card-mini"><code>node-helpers.js</code> - Node utilities</div>
+        <div class="card-mini"><code>panels.js</code> - HUD panels</div>
+        <div class="card-mini"><code>physics.js</code> - Physics simulation</div>
+        <div class="card-mini"><code>refresh-throttle.js</code> - Throttled updates</div>
+        <div class="card-mini"><code>report.js</code> - Report generation</div>
+        <div class="card-mini"><code>selection.js</code> - Node selection</div>
+        <div class="card-mini"><code>sidebar.js</code> - Sidebar UI</div>
+        <div class="card-mini"><code>spatial.js</code> - Spatial calculations</div>
+        <div class="card-mini"><code>theme.js</code> - Theme management</div>
+        <div class="card-mini"><code>tooltips.js</code> - Tooltip handling</div>
+        <div class="card-mini"><code>ui-builders.js</code> - UI component builders</div>
+        <div class="card-mini"><code>utils.js</code> - Utility functions</div>
+        <div class="card-mini"><code>vis-state.js</code> - Visualization state</div>
+        <div class="card-mini"><code>visibility.js</code> - Visibility management</div>
+    </div>
+    <p style="margin-top: 16px;"><strong>Total: 34 modules</strong></p>
+    <!-- END:MODULE_INVENTORY -->
+
+    <h2>5. Key Module Responsibilities</h2>
+    <span class="section-label label-current">Current / As-Built</span>
+    <div class="grid-2">
+        <div class="card">
+            <h3>CORE <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>SELECTION_SIZE_MULT</code> - Selected node scaling</li>
+                <li><code>PENDULUM</code> - OKLCH color oscillator</li>
+                <li><code>amplify()</code> - Power law amplification</li>
+                <li><code>amplifyContrast()</code> - S-curve contrast</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>NODE <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>getTier()</code> - T0/T1/T2/UNKNOWN</li>
+                <li><code>getFamily()</code> - LOG/DAT/ORG/EXE/EXT</li>
+                <li><code>getRing()</code> - Architectural ring</li>
+                <li><code>getLayer()</code> - D2_LAYER dimension</li>
+                <li><code>getEffect()</code> - D6_EFFECT dimension</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>COLOR <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>get()</code> - Dimension + category lookup</li>
+                <li><code>getInterval()</code> - Numeric gradient</li>
+                <li><code>setTransform()</code> - OKLCH transforms</li>
+                <li><code>subscribe()</code> - Reactive updates</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>REFRESH <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>throttled()</code> - Frame-coalesced refresh</li>
+                <li><code>force()</code> - Immediate refresh</li>
+                <li><code>stats</code> - Performance metrics</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>DATA <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>init()</code> - Load graph data</li>
+                <li><code>getNodes()</code> - All nodes</li>
+                <li><code>getNodeById()</code> - ID lookup</li>
+                <li><code>getTierCounts()</code> - Statistics</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>ANIM <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>applyLayout()</code> - Layout presets</li>
+                <li><code>startFlock()</code> - Flock simulation</li>
+                <li><code>stopAll()</code> - Cancel animations</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>EDGE <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li><code>setMode()</code> - Edge coloring mode</li>
+                <li><code>EDGE_MODE</code> - Current mode state</li>
+                <li><code>EDGE_RANGES</code> - Color ranges</li>
+                <li>Gradient and file-based coloring</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>MAIN <span class="badge badge-done">Implemented</span></h3>
+            <ul>
+                <li>Window shims for HTML onclick</li>
+                <li>Event wiring</li>
+                <li>Initialization sequence</li>
+                <li>Backward compatibility layer</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>6. Integration Layer Status</h2>
+    <span class="section-label label-current">Current / As-Built</span>
+    <div class="card">
+        <h3>app.js <span class="badge badge-done">Integration Layer</span></h3>
+        <p><strong>Status:</strong> EXISTS - serves as the main integration/glue layer.</p>
+        <p><strong>Location:</strong> <code>src/core/viz/assets/app.js</code></p>
+        <p><strong>Role:</strong> Orchestrates module initialization, wires event handlers, and contains functionality not yet extracted into dedicated modules. The 34 modules are concatenated before app.js, which then bootstraps the visualization.</p>
+        <p><em>Note: Original plan marked app.js for deletion. In practice, it remains as the integration entrypoint.</em></p>
+    </div>
+
+    <h2>7. Planned / Not Implemented</h2>
+    <span class="section-label label-roadmap">Roadmap</span>
+    <div class="card">
+        <h3>graph-core.js <span class="badge badge-planned">Planned</span></h3>
+        <p><strong>Status:</strong> NOT IMPLEMENTED - documented in original plan but never created.</p>
+        <p><strong>Intended Role:</strong> Central orchestration for 3D-Force-Graph initialization, filtering, and refresh. This functionality currently resides in <code>app.js</code>.</p>
+        <p><strong>Decision Required:</strong> Either implement as a dedicated module, or remove from architecture plans.</p>
+    </div>
+
+    <h2>8. File Structure (AS-BUILT)</h2>
+    <span class="section-label label-current">Current / As-Built</span>
+    <!-- BEGIN:FILE_STRUCTURE (auto-generated section - do not hand-edit) -->
+    <pre>
+src/core/viz/assets/
+├── modules/                    # 34 IIFE modules
+│   ├── animation.js            <span class="status-good">IMPLEMENTED</span>
+│   ├── circuit-breaker.js      <span class="status-good">IMPLEMENTED</span>
+│   ├── color-engine.js         <span class="status-good">IMPLEMENTED</span>
+│   ├── color-helpers.js        <span class="status-good">IMPLEMENTED</span>
+│   ├── control-bar.js          <span class="status-good">IMPLEMENTED</span>
+│   ├── core.js                 <span class="status-good">IMPLEMENTED</span>
+│   ├── data-manager.js         <span class="status-good">IMPLEMENTED</span>
+│   ├── datamap.js              <span class="status-good">IMPLEMENTED</span>
+│   ├── dimension.js            <span class="status-good">IMPLEMENTED</span>
+│   ├── edge-system.js          <span class="status-good">IMPLEMENTED</span>
+│   ├── file-viz.js             <span class="status-good">IMPLEMENTED</span>
+│   ├── flow.js                 <span class="status-good">IMPLEMENTED</span>
+│   ├── groups.js               <span class="status-good">IMPLEMENTED</span>
+│   ├── hover.js                <span class="status-good">IMPLEMENTED</span>
+│   ├── hud.js                  <span class="status-good">IMPLEMENTED</span>
+│   ├── layout-helpers.js       <span class="status-good">IMPLEMENTED</span>
+│   ├── layout.js               <span class="status-good">IMPLEMENTED</span>
+│   ├── legend-manager.js       <span class="status-good">IMPLEMENTED</span>
+│   ├── main.js                 <span class="status-good">IMPLEMENTED</span>
+│   ├── node-accessors.js       <span class="status-good">IMPLEMENTED</span>
+│   ├── node-helpers.js         <span class="status-good">IMPLEMENTED</span>
+│   ├── panels.js               <span class="status-good">IMPLEMENTED</span>
+│   ├── physics.js              <span class="status-good">IMPLEMENTED</span>
+│   ├── refresh-throttle.js     <span class="status-good">IMPLEMENTED</span>
+│   ├── report.js               <span class="status-good">IMPLEMENTED</span>
+│   ├── selection.js            <span class="status-good">IMPLEMENTED</span>
+│   ├── sidebar.js              <span class="status-good">IMPLEMENTED</span>
+│   ├── spatial.js              <span class="status-good">IMPLEMENTED</span>
+│   ├── theme.js                <span class="status-good">IMPLEMENTED</span>
+│   ├── tooltips.js             <span class="status-good">IMPLEMENTED</span>
+│   ├── ui-builders.js          <span class="status-good">IMPLEMENTED</span>
+│   ├── utils.js                <span class="status-good">IMPLEMENTED</span>
+│   ├── vis-state.js            <span class="status-good">IMPLEMENTED</span>
+│   └── visibility.js           <span class="status-good">IMPLEMENTED</span>
+├── app.js                      <span class="status-good">INTEGRATION LAYER</span>
+├── performance.js              <span class="status-good">EXISTS</span>
+├── styles.css                  # Component styles
+└── template.html               # HTML shell
+    </pre>
+    <!-- END:FILE_STRUCTURE -->
+
+    <h2>9. Implementation Status</h2>
+    <div class="diagram-container">
+        <pre class="mermaid">
+pie title Module Implementation Status
+    "Implemented (34)" : 34
+    "Planned (1)" : 1
+        </pre>
+    </div>
+
+    <h2>10. v2.0 Roadmap (Aspirational)</h2>
+    <span class="section-label label-roadmap">Roadmap</span>
+    <p>The following improvements are documented in <code>ARCHITECTURE_COMPARISON.html</code> and <code>ARCHITECTURE_COMPARISON_V2.html</code>. They represent <strong>proposed enhancements</strong>, not current implementation.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>IIFE Modules</td>
+                <td>Encapsulated modules with private scope</td>
+                <td class="status-good">IMPLEMENTED</td>
+            </tr>
+            <tr>
+                <td><code>init()</code> Dependency Injection</td>
+                <td>Explicit dependencies passed to modules</td>
+                <td class="status-warn">PARTIAL</td>
+            </tr>
+            <tr>
+                <td><code>COLLIDER_CONFIG</code> Injection</td>
+                <td>Build-time config injection from Python</td>
+                <td class="status-bad">NOT IMPLEMENTED</td>
+            </tr>
+            <tr>
+                <td>Error Boundaries</td>
+                <td><code>ERRORS.wrap()</code> for graceful fallback</td>
+                <td class="status-bad">NOT IMPLEMENTED</td>
+            </tr>
+            <tr>
+                <td>Jest Test Suite</td>
+                <td>Automated tests for pure logic modules</td>
+                <td class="status-bad">NOT IMPLEMENTED</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>11. Document Integrity</h2>
+    <p>This document contains auto-generated sections that should be validated against the filesystem. To check document integrity:</p>
+    <pre>
+# From project root:
+./tools/check-arch-docs.sh
+
+# Or manually verify module count:
+ls -1 src/core/viz/assets/modules/*.js | wc -l
+# Expected: 34
+    </pre>
+    <p>Sections marked with <code>&lt;!-- BEGIN:...(auto) --&gt;</code> comments can be regenerated by the validation script.</p>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                darkMode: true,
+                background: '#0d1117',
+                primaryColor: '#238636',
+                primaryTextColor: '#c9d1d9',
+                primaryBorderColor: '#30363d',
+                lineColor: '#8b949e',
+                secondaryColor: '#161b22',
+                tertiaryColor: '#21262d'
+            }
+        });
+    </script>
+</body>
+</html>
