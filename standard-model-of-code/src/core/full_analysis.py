@@ -1167,6 +1167,9 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                 print(f"   → {codome_result['total_boundaries']} codome boundary nodes created")
                 print(f"   → {codome_result['total_inferred_edges']} inferred edges generated")
                 print(f"   → Sources: {codome_result['summary']}")
+                # Add boundary nodes and inferred edges to main lists for visualization
+                nodes.extend(codome_result['boundary_nodes'])
+                edges.extend(codome_result['inferred_edges'])
             else:
                 print("   → No disconnected nodes to link")
         except Exception as e:

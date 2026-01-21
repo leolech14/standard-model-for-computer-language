@@ -439,6 +439,11 @@ def generate_webgl_html(json_source: Any, output_path: str):
             "boundary": n.get('boundary', 'internal'),
             "state": n.get('state', 'stateless'),
             "lifecycle": n.get('lifecycle', 'use'),
+            # ═══ CODOME BOUNDARY NODES (external callers) ═══
+            "is_codome_boundary": n.get('is_codome_boundary', False),
+            "kind": n.get('kind'),
+            "codome_source": n.get('codome_source'),
+            "color_hint": n.get('color_hint'),
             # ═══ METRIC FIELDS (required for interval color modes) ═══
             "in_degree": n.get('in_degree', 0),
             "out_degree": n.get('out_degree', 0),
