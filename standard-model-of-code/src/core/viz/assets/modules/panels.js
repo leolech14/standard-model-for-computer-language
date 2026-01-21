@@ -121,6 +121,157 @@ const PANELS = (function() {
         // Settings panel: Oval margin slider
         _initOvalMarginSlider();
         _initOvalDebugToggle();
+
+        // Style panel sliders (consolidated from app.js)
+        _initStylePanelSliders();
+        _initToggleSwitches();
+        _initSegmentedControls();
+        _initCommandBarActions();
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // STYLE PANEL SLIDERS - Connected to appearance system
+    // ═══════════════════════════════════════════════════════════════════
+
+    function _initStylePanelSliders() {
+        // Node Size Slider
+        const nodeSizeSlider = document.getElementById('node-size-slider');
+        const nodeSizeValue = document.getElementById('node-size-value');
+        if (nodeSizeSlider) {
+            nodeSizeSlider.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value);
+                if (nodeSizeValue) nodeSizeValue.textContent = val.toFixed(1) + 'x';
+                if (typeof APPEARANCE_STATE !== 'undefined') APPEARANCE_STATE.nodeScale = val;
+                if (typeof Graph !== 'undefined' && Graph) {
+                    Graph.nodeVal(node => (node.val || node.size || 1) * val);
+                }
+            });
+        }
+
+        // Edge Opacity Slider
+        const edgeOpacitySlider = document.getElementById('edge-opacity-slider');
+        const edgeOpacityValue = document.getElementById('edge-opacity-value');
+        if (edgeOpacitySlider) {
+            edgeOpacitySlider.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value);
+                if (edgeOpacityValue) edgeOpacityValue.textContent = val + '%';
+                if (typeof APPEARANCE_STATE !== 'undefined') APPEARANCE_STATE.edgeOpacity = val / 100;
+                if (typeof applyEdgeMode === 'function') applyEdgeMode();
+            });
+        }
+
+        // Density Slider (filter panel duplicate)
+        const densitySlider2 = document.getElementById('density-slider2');
+        const densityValue2 = document.getElementById('density-value2');
+        if (densitySlider2) {
+            densitySlider2.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value);
+                if (densityValue2) densityValue2.textContent = val + '%';
+                if (typeof CURRENT_DENSITY !== 'undefined') window.CURRENT_DENSITY = val;
+                if (typeof refreshGraph === 'function') refreshGraph();
+            });
+        }
+    }
+
+    function _initToggleSwitches() {
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+            });
+        });
+    }
+
+    function _initSegmentedControls() {
+        document.querySelectorAll('.segmented-control').forEach(control => {
+            control.querySelectorAll('.segment').forEach(segment => {
+                segment.addEventListener('click', () => {
+                    control.querySelectorAll('.segment').forEach(s => s.classList.remove('active'));
+                    segment.classList.add('active');
+
+                    // Handle dimension change
+                    if (control.id === 'dim-control') {
+                        const dim = segment.dataset.dim;
+                        if (typeof IS_3D !== 'undefined') {
+                            window.IS_3D = (dim !== '2');
+                            if (typeof Graph !== 'undefined' && Graph) Graph.numDimensions(window.IS_3D ? 3 : 2);
+                        }
+                    }
+
+                    // Handle node color mode
+                    if (control.id === 'node-color-control') {
+                        const mode = segment.dataset.mode;
+                        if (mode && typeof setNodeColorMode === 'function') {
+                            setNodeColorMode(mode);
+                        }
+                    }
+
+                    // Handle edge color mode
+                    if (control.id === 'edge-color-control') {
+                        const mode = segment.dataset.mode;
+                        if (mode) {
+                            if (typeof EDGE_MODE !== 'undefined') window.EDGE_MODE = mode;
+                            if (typeof applyEdgeMode === 'function') applyEdgeMode();
+                        }
+                    }
+
+                    // Handle panel layout
+                    if (control.id === 'layout-control') {
+                        const layout = segment.dataset.layout;
+                        if (layout) {
+                            document.body.setAttribute('data-layout', layout);
+                        }
+                    }
+                });
+            });
+        });
+    }
+
+    function _initCommandBarActions() {
+        // Skip if REGISTRY not available (defensive)
+        if (typeof REGISTRY === 'undefined' || !REGISTRY.register) return;
+
+        // File mode toggle
+        REGISTRY.register('cmd-files2', () => {
+            if (typeof setFileModeState === 'function') {
+                const newState = typeof fileMode !== 'undefined' ? !fileMode : true;
+                setFileModeState(newState);
+                const btn = document.getElementById('cmd-files2');
+                if (btn) btn.classList.toggle('active', newState);
+            }
+        }, { desc: 'Toggle File Boundaries Mode' });
+
+        // Flow mode toggle
+        REGISTRY.register('cmd-flow2', () => {
+            if (typeof toggleFlowMode === 'function') {
+                toggleFlowMode();
+                const btn = document.getElementById('cmd-flow2');
+                if (btn && typeof flowMode !== 'undefined') btn.classList.toggle('active', flowMode);
+            }
+        }, { desc: 'Toggle Flow Mode' });
+
+        // 3D toggle
+        REGISTRY.register('cmd-3d', () => {
+            if (typeof toggleDimensions === 'function') {
+                toggleDimensions();
+            } else if (typeof IS_3D !== 'undefined') {
+                window.IS_3D = !window.IS_3D;
+                if (typeof Graph !== 'undefined' && Graph) Graph.numDimensions(window.IS_3D ? 3 : 2);
+                const btnDim = document.getElementById('btn-dimensions');
+                if (btnDim) btnDim.textContent = window.IS_3D ? '2D' : '3D';
+            }
+            const btn = document.getElementById('cmd-3d');
+            if (btn && typeof IS_3D !== 'undefined') btn.classList.toggle('active', window.IS_3D);
+
+            // Update dim-control if exists
+            const dimControl = document.getElementById('dim-control');
+            if (dimControl && typeof IS_3D !== 'undefined') {
+                dimControl.querySelectorAll('.segment').forEach(s => {
+                    s.classList.toggle('active', s.dataset.dim === (window.IS_3D ? '3' : '2'));
+                });
+            }
+        }, { desc: 'Toggle 2D/3D View' });
+
+        console.log('[PANELS] Command bar actions registered');
     }
 
     function _initOvalMarginSlider() {
