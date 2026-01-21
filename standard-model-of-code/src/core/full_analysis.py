@@ -700,13 +700,40 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             in_degree_map = dict(G.in_degree())
             out_degree_map = dict(G.out_degree())
             degree_enriched = 0
+
+            # Threshold for hub classification (top 5% or min 10 connections)
+            all_degrees = [in_degree_map.get(n.get('id', ''), 0) + out_degree_map.get(n.get('id', ''), 0) for n in nodes]
+            hub_threshold = max(10, sorted(all_degrees, reverse=True)[len(all_degrees) // 20] if len(all_degrees) > 20 else 10)
+
             for node in nodes:
                 node_id = node.get('id', '')
-                node['in_degree'] = in_degree_map.get(node_id, 0)
-                node['out_degree'] = out_degree_map.get(node_id, 0)
-                if node['in_degree'] > 0 or node['out_degree'] > 0:
+                in_deg = in_degree_map.get(node_id, 0)
+                out_deg = out_degree_map.get(node_id, 0)
+                node['in_degree'] = in_deg
+                node['out_degree'] = out_deg
+
+                # Compute topology_role (relational property)
+                if in_deg == 0 and out_deg == 0:
+                    node['topology_role'] = 'orphan'
+                elif in_deg == 0 and out_deg > 0:
+                    node['topology_role'] = 'root'
+                elif out_deg == 0 and in_deg > 0:
+                    node['topology_role'] = 'leaf'
+                elif (in_deg + out_deg) >= hub_threshold:
+                    node['topology_role'] = 'hub'
+                else:
+                    node['topology_role'] = 'internal'
+
+                if in_deg > 0 or out_deg > 0:
                     degree_enriched += 1
+
+            # Count topology roles for summary
+            role_counts = {}
+            for node in nodes:
+                role = node.get('topology_role', 'unknown')
+                role_counts[role] = role_counts.get(role, 0) + 1
             print(f"   → {degree_enriched} nodes enriched with degree metrics")
+            print(f"   → Topology roles: {role_counts}")
         except ImportError:
             # Fallback: compute degrees without networkx
             from collections import defaultdict
@@ -719,14 +746,41 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                     out_counts[src] += 1
                 if tgt:
                     in_counts[tgt] += 1
+
+            # Threshold for hub classification (top 5% or min 10 connections)
+            all_degrees = [in_counts.get(n.get('id', ''), 0) + out_counts.get(n.get('id', ''), 0) for n in nodes]
+            hub_threshold = max(10, sorted(all_degrees, reverse=True)[len(all_degrees) // 20] if len(all_degrees) > 20 else 10)
+
             degree_enriched = 0
             for node in nodes:
                 node_id = node.get('id', '')
-                node['in_degree'] = in_counts.get(node_id, 0)
-                node['out_degree'] = out_counts.get(node_id, 0)
-                if node['in_degree'] > 0 or node['out_degree'] > 0:
+                in_deg = in_counts.get(node_id, 0)
+                out_deg = out_counts.get(node_id, 0)
+                node['in_degree'] = in_deg
+                node['out_degree'] = out_deg
+
+                # Compute topology_role (relational property)
+                if in_deg == 0 and out_deg == 0:
+                    node['topology_role'] = 'orphan'
+                elif in_deg == 0 and out_deg > 0:
+                    node['topology_role'] = 'root'
+                elif out_deg == 0 and in_deg > 0:
+                    node['topology_role'] = 'leaf'
+                elif (in_deg + out_deg) >= hub_threshold:
+                    node['topology_role'] = 'hub'
+                else:
+                    node['topology_role'] = 'internal'
+
+                if in_deg > 0 or out_deg > 0:
                     degree_enriched += 1
+
+            # Count topology roles for summary
+            role_counts = {}
+            for node in nodes:
+                role = node.get('topology_role', 'unknown')
+                role_counts[role] = role_counts.get(role, 0) + 1
             print(f"   → {degree_enriched} nodes enriched with degree metrics (fallback)")
+            print(f"   → Topology roles: {role_counts}")
             G = None  # No graph for analytics
 
         # Advanced analytics (optional - requires graph_analyzer)

@@ -140,6 +140,31 @@
 | `is_orphan` | bool | 7 |
 | `is_hotspot` | bool | 8 |
 | `body_source` | string | 1 |
+| `in_degree` | int | 7 |
+| `out_degree` | int | 7 |
+| `topology_role` | string | 7 |
+
+### Relational Properties
+
+Unlike intrinsic properties (atoms, roles, dimensions) which can be determined from a single node, **relational properties** emerge from graph context. You cannot know a node's `topology_role` without analyzing the entire dependency graph.
+
+| Property | Requires | Description |
+|----------|----------|-------------|
+| `in_degree` | edge list | Number of incoming dependencies |
+| `out_degree` | edge list | Number of outgoing dependencies |
+| `topology_role` | full graph | Structural position in dependency graph |
+
+#### Topology Roles
+
+| Role | Condition | Meaning | Typical Atoms |
+|------|-----------|---------|---------------|
+| `orphan` | in=0, out=0 | Disconnected, possibly dead code | - |
+| `root` | in=0, out>0 | Entry point, initiator | Main, Handler, CLI |
+| `leaf` | in>0, out=0 | Terminal node, no dependencies | DTO, Query, Config |
+| `hub` | high degree | Central coordinator, coupling risk | Service, Controller |
+| `internal` | in>0, out>0 | Normal flow-through node | most nodes |
+
+This classification follows graph theory conventions where "leaf" denotes a node with no outgoing edges (nothing depends on it downstream). The term was already used implicitly in `graph_type_inference.py` before being formalized here.
 
 ### Edge (Minimal)
 
