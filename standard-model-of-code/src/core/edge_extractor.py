@@ -1147,7 +1147,7 @@ def extract_decorator_edges(particles: List[Dict]) -> List[Dict]:
     return edges
 
 
-def _extract_exposure_edges_from_body(body: str, file_path: str, particle_by_name: Dict[str, List[Dict]]) -> List[Tuple[Optional[str], str]]:
+def _extract_exposure_edges_from_body(body: str, file_path: str, particle_by_name: Dict[str, List[Dict]]) -> List[Tuple[str, str]]:
     """
     Extract module.exports, export statements from source code.
 

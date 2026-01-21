@@ -192,7 +192,7 @@ def create_unified_output(
     nodes: List[Dict],
     edges: List[Dict],
     stats: Dict,
-    auto_discovery_report: Dict = None,
+    auto_discovery_report: Optional[Dict] = None,
     analysis_time_ms: int = 0,
 ) -> UnifiedAnalysisOutput:
     """
@@ -334,7 +334,7 @@ def create_unified_output(
 
 # === SINGLE ENTRY POINT ===
 
-def analyze(target_path: str, output_dir: str = None, **options) -> UnifiedAnalysisOutput:
+def analyze(target_path: str, output_dir: Optional[str] = None, **options) -> UnifiedAnalysisOutput:
     """
     🎯 SINGLE ENTRY POINT for all Collider analysis.
     
