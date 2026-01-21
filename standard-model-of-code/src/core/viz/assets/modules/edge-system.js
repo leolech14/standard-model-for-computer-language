@@ -88,9 +88,11 @@ const EDGE = (function() {
     };
 
     const DEFAULT_OPACITY = 0.08;
+    const INFERRED_OPACITY = 0.04;  // Lower opacity for inferred edges
     const MIN_WIDTH = 0.6;
     const MAX_WIDTH = 2.2;
     const BASE_WIDTH = 1.0;
+    const DASH_PATTERN = [5, 5];   // Dashed line pattern for inferred edges
 
     // =========================================================================
     // STATE
@@ -108,6 +110,19 @@ const EDGE = (function() {
     // =========================================================================
     // UTILITY FUNCTIONS
     // =========================================================================
+
+    /**
+     * Check if an edge is inferred (from CODOME boundaries).
+     * Inferred edges are marked with:
+     *   - inferred: true
+     *   - family: 'Codome'
+     *   - _fromCodome: true
+     */
+    function isInferredEdge(link) {
+        return link?.inferred === true ||
+               link?.family === 'Codome' ||
+               link?._fromCodome === true;
+    }
 
     function clamp01(value) {
         return Math.max(0, Math.min(1, value));
@@ -132,11 +147,27 @@ const EDGE = (function() {
         return hslColor(h, s, l);
     }
 
-    function normalizeMetric(value, range) {
+    /**
+     * Normalize a metric value to [0,1] range.
+     * NOW DELEGATES TO UPB_SCALES when available.
+     */
+    function normalizeMetric(value, range, scaleName) {
         // If range is degenerate (all same values), return based on absolute value
         if (!range || range.max <= range.min) {
             return clamp01(value);
         }
+
+        // === UPB INTEGRATION ===
+        if (window.UPB_SCALES) {
+            return window.UPB_SCALES.applyScale(
+                scaleName || 'linear',
+                value,
+                range.min,
+                range.max
+            );
+        }
+
+        // Fallback: inline linear normalization
         return clamp01((value - range.min) / (range.max - range.min));
     }
 
@@ -318,6 +349,13 @@ const EDGE = (function() {
     // =========================================================================
 
     function getColor(link) {
+        // Check if UPB has edge color bindings - defer to UPB if so
+        const UPB = typeof window !== 'undefined' ? window.UPB : null;
+        if (UPB && typeof UPB.hasEdgeBinding === 'function' && UPB.hasEdgeBinding()) {
+            // UPB handles edge colors - return null to signal deference
+            return null;
+        }
+
         // Gradient modes
         if (_mode.startsWith('gradient-')) {
             return getGradientColor(link, _mode);
@@ -378,6 +416,18 @@ const EDGE = (function() {
     }
 
     // =========================================================================
+    // EDGE LINE DASH (for inferred edges)
+    // =========================================================================
+
+    function getLineDash(link) {
+        // Return dashed pattern for inferred CODOME edges
+        if (isInferredEdge(link)) {
+            return DASH_PATTERN;  // [5, 5] = 5px dash, 5px gap
+        }
+        return null;  // Solid line for regular edges
+    }
+
+    // =========================================================================
     // APPLY MODE TO GRAPH
     // =========================================================================
 
@@ -403,6 +453,9 @@ const EDGE = (function() {
                 ? overrideOpacity
                 : (link.opacity ?? DEFAULT_OPACITY);
 
+            // Inferred edges have lower base opacity
+            let opacity = isInferredEdge(link) ? INFERRED_OPACITY : baseOpacity;
+
             // File mode dimming
             const fileMode = typeof window !== 'undefined' && window.fileMode;
             const graphMode = typeof GRAPH_MODE !== 'undefined' ? GRAPH_MODE : 'atoms';
@@ -411,11 +464,14 @@ const EDGE = (function() {
                 const tgtIdx = getLinkFileIdx(link, 'target');
                 if (srcIdx >= 0 && tgtIdx >= 0 && srcIdx !== tgtIdx) {
                     const dimFactor = _config.dim?.interfile_factor ?? 0.25;
-                    return baseOpacity * dimFactor;
+                    return opacity * dimFactor;
                 }
             }
-            return baseOpacity;
+            return opacity;
         });
+
+        // Apply dashed line pattern to inferred CODOME edges
+        Graph.linkLineDash(link => getLineDash(link));
 
         // Don't override width in flow mode
         const flowMode = typeof window !== 'undefined' && window.flowMode;
@@ -476,6 +532,7 @@ const EDGE = (function() {
         // Core functions
         getColor,
         getWidth,
+        getLineDash,
         apply,
 
         // Mode management
@@ -501,7 +558,8 @@ const EDGE = (function() {
         // Utility exports
         buildFileHueMap,
         updateRanges,
-        refreshNodeFileIndex
+        refreshNodeFileIndex,
+        isInferredEdge
     };
 })();
 
@@ -529,6 +587,8 @@ Object.defineProperty(window, 'FILE_HUE_MAP', {
 
 function getEdgeColor(link) { return EDGE.getColor(link); }
 function getEdgeWidth(link) { return EDGE.getWidth(link); }
+function getEdgeLineDash(link) { return EDGE.getLineDash(link); }
+function isInferredEdgeGlobal(link) { return EDGE.isInferredEdge(link); }
 function applyEdgeMode() { EDGE.apply(); }
 function setEdgeMode(mode) { EDGE.setMode(mode); }
 function cycleEdgeMode() { EDGE.cycleMode(); }
