@@ -1193,6 +1193,80 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             timer.set_status("WARN", str(e))
             print(f"   ⚠️ Control flow analysis skipped: {e}")
 
+    # Stage 2.10: Pattern-Based Atom Detection
+    print("\n🧬 Stage 2.10: Pattern-Based Atom Detection...")
+    with StageTimer(perf_manager, "Stage 2.10: Pattern Detection") as timer:
+        try:
+            from pattern_matcher import PatternMatcher
+            import tree_sitter
+            import tree_sitter_python
+            import tree_sitter_javascript
+
+            # Initialize pattern matcher
+            pattern_matcher = PatternMatcher()
+
+            # Reuse parsers
+            if 'py_parser' not in dir():
+                py_parser = tree_sitter.Parser()
+                py_parser.language = tree_sitter.Language(tree_sitter_python.language())
+                js_parser = tree_sitter.Parser()
+                js_parser.language = tree_sitter.Language(tree_sitter_javascript.language())
+
+            pattern_stats = {'nodes_enriched': 0, 'atoms_detected': 0, 'by_type': {}}
+
+            for node in nodes:
+                body = node.get('body_source', '')
+                if not body or len(body) < 10:
+                    continue
+
+                file_path = node.get('file_path', '')
+                if file_path.endswith('.py'):
+                    lang, parser = 'python', py_parser
+                elif file_path.endswith(('.js', '.jsx', '.ts', '.tsx')):
+                    lang, parser = 'javascript', js_parser
+                else:
+                    continue
+
+                try:
+                    tree = parser.parse(bytes(body, 'utf8'))
+                    atoms = pattern_matcher.detect_atoms(tree, bytes(body, 'utf8'), lang)
+
+                    if atoms:
+                        # Store detected atoms in node
+                        node['detected_atoms'] = [
+                            {
+                                'type': a.type,
+                                'name': a.name,
+                                'confidence': a.confidence,
+                                'evidence': a.evidence
+                            }
+                            for a in atoms
+                        ]
+
+                        # Update node's atom type if high confidence detection
+                        best_atom = max(atoms, key=lambda a: a.confidence)
+                        if best_atom.confidence >= 0.85:
+                            node['atom_type'] = best_atom.type
+                            node['atom_confidence'] = best_atom.confidence
+
+                        pattern_stats['nodes_enriched'] += 1
+                        pattern_stats['atoms_detected'] += len(atoms)
+
+                        for a in atoms:
+                            pattern_stats['by_type'][a.type] = pattern_stats['by_type'].get(a.type, 0) + 1
+                except Exception:
+                    pass
+
+            timer.set_output(**{k: v for k, v in pattern_stats.items() if k != 'by_type'})
+            print(f"   → {pattern_stats['nodes_enriched']} nodes enriched with atom patterns")
+            print(f"   → {pattern_stats['atoms_detected']} total atoms detected")
+            if pattern_stats['by_type']:
+                top_types = sorted(pattern_stats['by_type'].items(), key=lambda x: -x[1])[:5]
+                print(f"   → Top types: {', '.join(f'{t}:{c}' for t, c in top_types)}")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Pattern detection skipped: {e}")
+
     # Stage 3: Purpose Field
     print("\n🎯 Stage 3: Purpose Field...")
     with StageTimer(perf_manager, "Stage 3: Purpose Field") as timer:
