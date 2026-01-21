@@ -1033,6 +1033,668 @@ const FILE_VIZ = (function() {
     }
 
     // =========================================================================
+    // FILE CONTAINMENT SYSTEM - Spherical fields with particle physics
+    // "Metaphysical force from another dimension" - holding particles together
+    // =========================================================================
+
+    const _containment = {
+        spheres: [],              // Three.js sphere meshes
+        directoryTree: null,      // Parsed directory hierarchy
+        particleActivity: {},     // FileIdx → activity level (0-1)
+        boundariesPopped: false,  // Animation state
+        popProgress: 0,           // 0 = contained, 1 = fully free
+        slowMotionFactor: 0.15,   // Time multiplier for dreamy slow motion
+        collisionEnabled: true,   // Enable soft collisions
+        spatialGrid: null,        // For efficient collision detection
+        gridCellSize: 20,         // Size of spatial hash cells
+        animationFrame: null,
+        isAnimating: false
+    };
+
+    /**
+     * Toggle file expansion for a single file
+     */
+    function toggleFileExpand(fileIdx) {
+        if (!Number.isFinite(fileIdx)) return;
+        captureFileNodePositions();
+        const dm = typeof DATA !== 'undefined' ? DATA : (typeof DM !== 'undefined' ? DM : null);
+        const fileInfo = dm ? dm.getFile(fileIdx) : {};
+        const fileLabel = fileInfo?.file_name || fileInfo?.file || `file-${fileIdx}`;
+        if (_expandedFiles.has(fileIdx)) {
+            _expandedFiles.delete(fileIdx);
+            if (typeof showToast === 'function') showToast(`Collapsed ${fileLabel}`);
+        } else {
+            _expandedFiles.clear();
+            _expandedFiles.add(fileIdx);
+            if (typeof showToast === 'function') showToast(`Expanded ${fileLabel}`);
+        }
+        window.GRAPH_MODE = (_expandedFiles.size > 0) ? 'hybrid' : 'files';
+        if (typeof refreshGraph === 'function') refreshGraph();
+    }
+
+    /**
+     * Draw file boundary hulls
+     */
+    function drawFileBoundaries(data) {
+        const Graph = window.Graph;
+        const IS_3D = window.IS_3D;
+        const APPEARANCE_STATE = window.APPEARANCE_STATE || {};
+        const dm = typeof DATA !== 'undefined' ? DATA : (typeof DM !== 'undefined' ? DM : null);
+
+        let drawn = 0;
+        const boundaryConfig = data?.appearance?.boundary || {};
+        const fillOpacity =
+            (typeof APPEARANCE_STATE.boundaryFill === 'number')
+                ? APPEARANCE_STATE.boundaryFill
+                : (boundaryConfig.fill_opacity || 0.08);
+        const wireOpacity =
+            (typeof APPEARANCE_STATE.boundaryWire === 'number')
+                ? APPEARANCE_STATE.boundaryWire
+                : (boundaryConfig.wire_opacity || 0.3);
+        const padding = boundaryConfig.padding || 1.2;
+        const minExtent = boundaryConfig.min_extent || 6;
+        const quantileRange = boundaryConfig.quantile || 0.9;
+        const lowQ = Math.max(0, (1 - quantileRange) / 2);
+        const highQ = Math.min(1, 1 - lowQ);
+        const boundaryPhysics = data?.physics?.boundary || {};
+        const hullType = String(boundaryPhysics.hullType || 'convex').toLowerCase();
+        const fileBoundaries = dm ? dm.getFileBoundaries() : (data?.file_boundaries || []);
+        const totalFiles = fileBoundaries.length;
+
+        const graphNodes = dm ? dm.getVisibleNodes() : (Graph?.graphData()?.nodes || []);
+        const scene = Graph?.scene();
+        if (!scene) return drawn;
+
+        // Clear existing boundary meshes
+        _boundaryMeshes.forEach(mesh => scene.remove(mesh));
+        _boundaryMeshes = [];
+
+        if (!_enabled) return drawn;
+
+        // Group nodes by file (only use nodes with stable positions)
+        const fileGroups = {};
+        const validNodes = graphNodes.filter(node => {
+            if (!node) return false;
+            if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) return false;
+            if (IS_3D && !Number.isFinite(node.z)) return false;
+            return true;
+        });
+
+        if (!validNodes.length) return drawn;
+
+        validNodes.forEach(node => {
+            const idx = node.fileIdx;
+            if (idx >= 0) {
+                if (!fileGroups[idx]) fileGroups[idx] = [];
+                fileGroups[idx].push(node);
+            }
+        });
+
+        // Draw boundary for each file group
+        Object.entries(fileGroups).forEach(([fileIdx, nodes]) => {
+            const sampled = typeof sampleFileNodes === 'function' ? sampleFileNodes(nodes, 180) : nodes.slice(0, 180);
+            const xs = sampled.map(n => n.x || 0);
+            const ys = sampled.map(n => n.y || 0);
+            const zs = sampled.map(n => n.z || 0);
+
+            const quantileFn = typeof quantile === 'function' ? quantile : (arr, q) => arr.sort((a,b)=>a-b)[Math.floor(arr.length * q)] || 0;
+            const minX = quantileFn(xs, lowQ);
+            const maxX = quantileFn(xs, highQ);
+            const minY = quantileFn(ys, lowQ);
+            const maxY = quantileFn(ys, highQ);
+            const minZ = quantileFn(zs, lowQ);
+            const maxZ = quantileFn(zs, highQ);
+
+            const filtered = sampled.filter(n => {
+                const x = n.x || 0;
+                const y = n.y || 0;
+                const z = n.z || 0;
+                return x >= minX && x <= maxX && y >= minY && y <= maxY && z >= minZ && z <= maxZ;
+            });
+            const hullNodes = filtered.length >= 3 ? filtered : sampled;
+            const positions = hullNodes.map(n => new THREE.Vector3(n.x || 0, n.y || 0, n.z || 0));
+            const centroid = typeof computeCentroid === 'function' ? computeCentroid(positions) :
+                new THREE.Vector3(
+                    positions.reduce((s,p)=>s+p.x,0)/positions.length,
+                    positions.reduce((s,p)=>s+p.y,0)/positions.length,
+                    positions.reduce((s,p)=>s+p.z,0)/positions.length
+                );
+            const zRange = maxZ - minZ;
+            const extentX = Math.max(0.001, maxX - minX);
+            const extentY = Math.max(0.001, maxY - minY);
+            const extentZ = Math.max(0.001, maxZ - minZ);
+            const scaleFixX = Math.max(1, minExtent / extentX);
+            const scaleFixY = Math.max(1, minExtent / extentY);
+            const scaleFixZ = IS_3D ? Math.max(1, minExtent / extentZ) : 1;
+            const scaleX = padding * scaleFixX;
+            const scaleY = padding * scaleFixY;
+            const scaleZ = padding * scaleFixZ;
+            const sizeX = extentX * scaleX;
+            const sizeY = extentY * scaleY;
+            const sizeZ = extentZ * scaleZ;
+
+            const fileIndex = Number.parseInt(fileIdx, 10);
+            const safeFileIdx = Number.isFinite(fileIndex) ? fileIndex : 0;
+            const fileInfo = (fileBoundaries || [])[safeFileIdx] || {};
+            const fileLabel = fileInfo.file || fileInfo.file_name || fileIdx;
+            const color = new THREE.Color(getColor(safeFileIdx, totalFiles, fileLabel));
+
+            let mesh = null;
+            let wireMesh = null;
+
+            if (nodes.length < 3) {
+                const rawPositions = nodes.map(n => new THREE.Vector3(n.x || 0, n.y || 0, n.z || 0));
+                const smallCentroid = typeof computeCentroid === 'function' ? computeCentroid(rawPositions) :
+                    new THREE.Vector3(
+                        rawPositions.reduce((s,p)=>s+p.x,0)/rawPositions.length,
+                        rawPositions.reduce((s,p)=>s+p.y,0)/rawPositions.length,
+                        rawPositions.reduce((s,p)=>s+p.z,0)/rawPositions.length
+                    );
+                const maxRadius = rawPositions.reduce((acc, p) => {
+                    return Math.max(acc, p.distanceTo(smallCentroid));
+                }, 0);
+                const bubbleRadius = Math.max(minExtent * 0.5, maxRadius + minExtent * 0.35);
+                const material = new THREE.MeshBasicMaterial({
+                    color: color, transparent: true, opacity: fillOpacity,
+                    wireframe: false, side: THREE.DoubleSide
+                });
+                if (IS_3D) {
+                    const geometry = new THREE.SphereGeometry(bubbleRadius, 14, 10);
+                    mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.copy(smallCentroid);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                } else {
+                    const geometry = new THREE.CircleGeometry(bubbleRadius, 32);
+                    mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.set(smallCentroid.x, smallCentroid.y, smallCentroid.z);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                }
+            }
+
+            if (!mesh && hullType === 'convex') {
+                if (IS_3D && zRange > 0.001 && positions.length >= 4) {
+                    const ConvexCtor =
+                        (typeof ConvexGeometry !== 'undefined')
+                            ? ConvexGeometry
+                            : (THREE.ConvexGeometry || null);
+                    const relPoints = positions.map(p => p.clone().sub(centroid));
+                    let boundaryGeometry = null;
+                    if (ConvexCtor) {
+                        try { boundaryGeometry = new ConvexCtor(relPoints); }
+                        catch (err) { boundaryGeometry = null; }
+                    }
+                    if (boundaryGeometry) {
+                        const material = new THREE.MeshBasicMaterial({
+                            color: color, transparent: true, opacity: fillOpacity,
+                            wireframe: false, side: THREE.DoubleSide
+                        });
+                        mesh = new THREE.Mesh(boundaryGeometry, material);
+                        mesh.position.copy(centroid);
+                        mesh.scale.set(scaleX, scaleY, scaleZ);
+                        const wireMaterial = new THREE.LineBasicMaterial({
+                            color: color, transparent: true, opacity: wireOpacity
+                        });
+                        const edges = new THREE.EdgesGeometry(boundaryGeometry);
+                        wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                        wireMesh.position.copy(centroid);
+                        wireMesh.scale.copy(mesh.scale);
+                    }
+                }
+
+                if (!mesh) {
+                    const hull2d = typeof buildHull2D === 'function' ?
+                        buildHull2D(positions.map(p => new THREE.Vector2(p.x, p.y))) : null;
+                    if (!hull2d || hull2d.length < 3) return;
+                    const localHull = hull2d.map(p => new THREE.Vector2(p.x - centroid.x, p.y - centroid.y));
+                    const shape = new THREE.Shape(localHull);
+                    const boundaryGeometry = new THREE.ShapeGeometry(shape);
+                    const material = new THREE.MeshBasicMaterial({
+                        color: color, transparent: true, opacity: fillOpacity,
+                        wireframe: false, side: THREE.DoubleSide
+                    });
+                    mesh = new THREE.Mesh(boundaryGeometry, material);
+                    mesh.position.set(centroid.x, centroid.y, centroid.z);
+                    mesh.scale.set(scaleX, scaleY, 1);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const wireGeometry = new THREE.BufferGeometry().setFromPoints(
+                        localHull.map(p => new THREE.Vector3(p.x, p.y, 0))
+                    );
+                    wireMesh = new THREE.LineLoop(wireGeometry, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                    wireMesh.scale.copy(mesh.scale);
+                }
+            } else if (!mesh && hullType === 'box') {
+                const material = new THREE.MeshBasicMaterial({
+                    color: color, transparent: true, opacity: fillOpacity,
+                    wireframe: false, side: THREE.DoubleSide
+                });
+                if (IS_3D) {
+                    const geometry = new THREE.BoxGeometry(sizeX, sizeY, sizeZ);
+                    mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.copy(centroid);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                } else {
+                    const geometry = new THREE.PlaneGeometry(sizeX, sizeY);
+                    mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.set(centroid.x, centroid.y, centroid.z);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                }
+            } else if (!mesh) {
+                const radius = 0.5 * Math.max(sizeX, sizeY, IS_3D ? sizeZ : 0);
+                const material = new THREE.MeshBasicMaterial({
+                    color: color, transparent: true, opacity: fillOpacity,
+                    wireframe: false, side: THREE.DoubleSide
+                });
+                if (IS_3D) {
+                    const geometry = new THREE.SphereGeometry(radius, 18, 14);
+                    mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.copy(centroid);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                } else {
+                    const geometry = new THREE.CircleGeometry(radius, 40);
+                    mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.set(centroid.x, centroid.y, centroid.z);
+                    const wireMaterial = new THREE.LineBasicMaterial({
+                        color: color, transparent: true, opacity: wireOpacity
+                    });
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    wireMesh = new THREE.LineSegments(edges, wireMaterial);
+                    wireMesh.position.copy(mesh.position);
+                }
+            }
+
+            if (!mesh) return;
+            scene.add(mesh);
+            _boundaryMeshes.push(mesh);
+            drawn += 1;
+            if (wireMesh) {
+                scene.add(wireMesh);
+                _boundaryMeshes.push(wireMesh);
+            }
+        });
+        return drawn;
+    }
+
+    /**
+     * Build directory tree from file paths
+     */
+    function buildDirectoryTree(data) {
+        const fileBoundaries = data?.file_boundaries || [];
+        const tree = { name: '/', path: '', depth: 0, children: {}, files: [], totalNodes: 0 };
+
+        fileBoundaries.forEach((file, idx) => {
+            const filePath = file.file || file.file_name || '';
+            const parts = filePath.split('/').filter(p => p);
+            let current = tree;
+
+            parts.forEach((part, partIdx) => {
+                const isFile = partIdx === parts.length - 1;
+                if (isFile) {
+                    current.files.push({
+                        name: part, path: filePath, fileIdx: idx,
+                        nodeCount: (file.atom_ids || []).length, activity: 0
+                    });
+                } else {
+                    if (!current.children[part]) {
+                        current.children[part] = {
+                            name: part, path: parts.slice(0, partIdx + 1).join('/'),
+                            depth: partIdx + 1, children: {}, files: [], totalNodes: 0
+                        };
+                    }
+                    current = current.children[part];
+                }
+            });
+        });
+
+        _containment.directoryTree = tree;
+        return tree;
+    }
+
+    /**
+     * Compute activity levels from markov transitions
+     */
+    function computeFileActivity(data) {
+        const markov = data?.markov || {};
+        const highEntropy = markov.high_entropy_nodes || [];
+        const transitions = markov.transitions || {};
+        const fileActivity = {};
+
+        (data?.file_boundaries || []).forEach((file, idx) => {
+            const atomIds = file.atom_ids || [];
+            let activity = 0;
+            atomIds.forEach(atomId => {
+                if (highEntropy.some(h => h.node === atomId)) activity += 0.3;
+                const fanout = Object.keys(transitions[atomId] || {}).length;
+                activity += Math.min(fanout / 10, 0.5);
+            });
+            fileActivity[idx] = Math.min(1, activity / Math.max(1, atomIds.length));
+        });
+
+        _containment.particleActivity = fileActivity;
+        return fileActivity;
+    }
+
+    /**
+     * Draw containment spheres/boxes
+     */
+    function drawContainmentSpheres(_data) {
+        const Graph = window.Graph;
+        const flowMode = window.flowMode;
+        const dm = typeof DATA !== 'undefined' ? DATA : (typeof DM !== 'undefined' ? DM : null);
+
+        const scene = Graph?.scene();
+        if (!scene) return;
+        const graphNodes = dm ? dm.getVisibleNodes() : (Graph?.graphData()?.nodes || []);
+
+        // Clear existing
+        _containment.spheres.forEach(s => {
+            if (s.mesh) scene.remove(s.mesh);
+            if (s.wireframe) scene.remove(s.wireframe);
+            if (s.glow) scene.remove(s.glow);
+        });
+        _containment.spheres = [];
+
+        const hullsActive = document.getElementById('btn-file-hulls')?.classList.contains('active');
+        if (!_enabled || flowMode || !hullsActive || _containment.boundariesPopped) return;
+
+        // Group nodes by file
+        const fileGroups = {};
+        graphNodes.filter(n => n && Number.isFinite(n.x)).forEach(node => {
+            if (node.fileIdx >= 0) {
+                if (!fileGroups[node.fileIdx]) fileGroups[node.fileIdx] = [];
+                fileGroups[node.fileIdx].push(node);
+            }
+        });
+
+        Object.entries(fileGroups).forEach(([fileIdx, nodes]) => {
+            if (nodes.length < 3) return;
+
+            let minX = Infinity, maxX = -Infinity;
+            let minY = Infinity, maxY = -Infinity;
+            let minZ = Infinity, maxZ = -Infinity;
+
+            nodes.forEach(n => {
+                minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x);
+                minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y);
+                minZ = Math.min(minZ, n.z || 0); maxZ = Math.max(maxZ, n.z || 0);
+            });
+
+            const pad = 10;
+            const width = (maxX - minX) + pad * 2;
+            const height = (maxY - minY) + pad * 2;
+            const depth = (maxZ - minZ) + pad * 2;
+
+            if (width < 5 || height < 5 || depth < 5) return;
+
+            const cx = (minX + maxX) / 2;
+            const cy = (minY + maxY) / 2;
+            const cz = (minZ + maxZ) / 2;
+
+            const geometry = new THREE.BoxGeometry(width, height, depth);
+            const color = new THREE.Color(nodes[0].color || '#4488ff');
+
+            const material = new THREE.MeshLambertMaterial({
+                color: color, transparent: true, opacity: 0.15,
+                depthWrite: false, side: THREE.DoubleSide,
+                blending: THREE.AdditiveBlending
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(cx, cy, cz);
+            scene.add(mesh);
+
+            const wireGeo = new THREE.EdgesGeometry(geometry);
+            const wireMat = new THREE.LineBasicMaterial({
+                color: color, transparent: true, opacity: 0.4,
+                blending: THREE.AdditiveBlending
+            });
+            const wireframe = new THREE.LineSegments(wireGeo, wireMat);
+            wireframe.position.set(cx, cy, cz);
+            scene.add(wireframe);
+
+            _containment.spheres.push({
+                mesh, wireframe,
+                fileIdx: parseInt(fileIdx),
+                velocity: new THREE.Vector3(0, 0, 0),
+                activity: _containment.particleActivity[fileIdx] || 0,
+                nodes: nodes.map(n => n.id)
+            });
+        });
+    }
+
+    /**
+     * Start containment animation loop
+     */
+    function startContainmentAnimation() {
+        if (_containment.isAnimating) return;
+        _containment.isAnimating = true;
+        const Graph = window.Graph;
+        const IS_3D = window.IS_3D;
+
+        function animate() {
+            if (!_containment.isAnimating) return;
+
+            const time = Date.now() * 0.001 * _containment.slowMotionFactor;
+            const graphNodes = Graph?.graphData()?.nodes || [];
+
+            if (_containment.boundariesPopped) {
+                if (typeof applySoftCollisions === 'function') {
+                    applySoftCollisions(graphNodes, _containment.gridCellSize, 0.4);
+                }
+
+                graphNodes.forEach(node => {
+                    if (!node || !node.__physics) return;
+                    const p = node.__physics;
+                    const wander = 0.08;
+                    p.vx += (Math.sin(time * 0.7 + (node.__wanderPhase || 0)) - 0.5) * wander;
+                    p.vy += (Math.cos(time * 0.5 + (node.__wanderPhase || 0) * 1.3) - 0.5) * wander;
+                    if (IS_3D) p.vz += (Math.sin(time * 0.6 + (node.__wanderPhase || 0) * 0.7) - 0.5) * wander;
+                    p.vx *= 0.985;
+                    p.vy *= 0.985;
+                    p.vz *= 0.985;
+                    node.x += p.vx;
+                    node.y += p.vy;
+                    if (IS_3D) node.z = (node.z || 0) + p.vz;
+                });
+            } else {
+                _containment.spheres.forEach(sphere => {
+                    const activity = sphere.activity;
+                    const pulse = Math.sin(time * 2 + sphere.fileIdx) * 0.5 + 0.5;
+                    if (sphere.mesh?.material) {
+                        sphere.mesh.material.opacity = 0.04 + activity * 0.12 * pulse;
+                    }
+                    if (sphere.wireframe?.material) {
+                        sphere.wireframe.material.opacity = 0.08 + activity * 0.2 * pulse;
+                    }
+                    if (activity < 0.05) return;
+
+                    sphere.nodes.forEach(nodeId => {
+                        const node = graphNodes.find(n => n.id === nodeId);
+                        if (!node || !Number.isFinite(node.x)) return;
+                        if (!node.__activityPhase) {
+                            node.__activityPhase = {
+                                x: Math.random() * Math.PI * 2,
+                                y: Math.random() * Math.PI * 2,
+                                z: Math.random() * Math.PI * 2
+                            };
+                        }
+                        const amp = activity * 0.4;
+                        const freq = 0.5 + activity * 0.5;
+                        const phase = node.__activityPhase;
+                        node.__renderOffsetX = Math.sin(time * freq + phase.x) * amp;
+                        node.__renderOffsetY = Math.sin(time * freq * 1.2 + phase.y) * amp;
+                        if (IS_3D) node.__renderOffsetZ = Math.sin(time * freq * 0.9 + phase.z) * amp;
+                    });
+                });
+            }
+
+            if (Graph) Graph.refresh();
+            _containment.animationFrame = requestAnimationFrame(animate);
+        }
+
+        animate();
+    }
+
+    /**
+     * Stop containment animation
+     */
+    function stopContainmentAnimation() {
+        _containment.isAnimating = false;
+        if (_containment.animationFrame) {
+            cancelAnimationFrame(_containment.animationFrame);
+        }
+    }
+
+    /**
+     * Pop boundaries - release particles into free Brownian motion
+     */
+    function popBoundaries(duration = 3000) {
+        if (_containment.boundariesPopped) {
+            restoreBoundaries(duration);
+            return;
+        }
+
+        console.log('[Containment] Popping boundaries...');
+        _containment.boundariesPopped = true;
+        const startTime = Date.now();
+        const Graph = window.Graph;
+        const IS_3D = window.IS_3D;
+        const scene = Graph?.scene();
+        const graphNodes = Graph?.graphData()?.nodes || [];
+
+        graphNodes.forEach(node => {
+            if (!node || !Number.isFinite(node.x)) return;
+            node.__physics = {
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5,
+                vz: IS_3D ? (Math.random() - 0.5) * 1.5 : 0
+            };
+            node.__wanderPhase = Math.random() * Math.PI * 2;
+        });
+
+        function animatePop() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(1, elapsed / duration);
+            _containment.popProgress = progress;
+            const eased = 1 - Math.pow(1 - progress, 3);
+
+            _containment.spheres.forEach(s => {
+                if (s.mesh?.material) s.mesh.material.opacity = (1 - eased) * 0.1;
+                if (s.wireframe?.material) s.wireframe.material.opacity = (1 - eased) * 0.25;
+                if (s.glow?.material) s.glow.material.opacity = (1 - eased) * 0.08;
+            });
+
+            if (progress < 1) {
+                requestAnimationFrame(animatePop);
+            } else {
+                _containment.spheres.forEach(s => {
+                    if (s.mesh) scene.remove(s.mesh);
+                    if (s.wireframe) scene.remove(s.wireframe);
+                    if (s.glow) scene.remove(s.glow);
+                });
+                _containment.spheres = [];
+                console.log('[Containment] Particles now FREE - Brownian motion with collisions');
+            }
+
+            if (Graph) Graph.refresh();
+        }
+
+        animatePop();
+        startContainmentAnimation();
+    }
+
+    /**
+     * Restore boundaries
+     */
+    function restoreBoundaries(duration = 2000) {
+        if (!_containment.boundariesPopped) return;
+
+        console.log('[Containment] Restoring boundaries...');
+        const startTime = Date.now();
+        const Graph = window.Graph;
+        const IS_3D = window.IS_3D;
+        const dm = typeof DATA !== 'undefined' ? DATA : (typeof DM !== 'undefined' ? DM : null);
+        const graphNodes = Graph?.graphData()?.nodes || [];
+
+        graphNodes.forEach(node => {
+            if (!node || !Number.isFinite(node.x)) return;
+            node.__freePos = { x: node.x, y: node.y, z: node.z || 0 };
+        });
+
+        function animateRestore() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(1, elapsed / duration);
+            _containment.popProgress = 1 - progress;
+            const eased = Math.pow(progress, 2);
+
+            graphNodes.forEach(node => {
+                if (!node || !node.__freePos || !node.__originalPos) return;
+                node.x = node.__freePos.x + (node.__originalPos.x - node.__freePos.x) * eased;
+                node.y = node.__freePos.y + (node.__originalPos.y - node.__freePos.y) * eased;
+                if (IS_3D) node.z = node.__freePos.z + ((node.__originalPos.z || 0) - node.__freePos.z) * eased;
+            });
+
+            if (progress < 1) {
+                requestAnimationFrame(animateRestore);
+            } else {
+                _containment.boundariesPopped = false;
+                drawContainmentSpheres(null);
+                console.log('[Containment] Boundaries restored');
+            }
+
+            if (Graph) Graph.refresh();
+        }
+
+        animateRestore();
+    }
+
+    /**
+     * Update expand mode buttons
+     */
+    function updateExpandButtons() {
+        const inlineBtn = document.getElementById('btn-expand-inline');
+        const detachBtn = document.getElementById('btn-expand-detach');
+        if (inlineBtn) inlineBtn.classList.toggle('active', _expandMode === 'inline');
+        if (detachBtn) detachBtn.classList.toggle('active', _expandMode === 'detach');
+    }
+
+    /**
+     * Handle cmd-files button click
+     */
+    function handleCmdFiles() {
+        const btn = document.getElementById('cmd-files');
+        const isActive = btn ? btn.classList.contains('active') : false;
+        setEnabled(!isActive);
+    }
+
+    // =========================================================================
     // CONFIGURATION
     // =========================================================================
 
@@ -1107,7 +1769,21 @@ const FILE_VIZ = (function() {
 
         // Internal state access (for migration)
         get boundaryMeshes() { return _boundaryMeshes; },
-        set boundaryMeshes(val) { _boundaryMeshes = val; }
+        set boundaryMeshes(val) { _boundaryMeshes = val; },
+
+        // FILE CONTAINMENT SYSTEM - Moved from app.js
+        toggleFileExpand,
+        drawFileBoundaries,
+        buildDirectoryTree,
+        computeFileActivity,
+        drawContainmentSpheres,
+        startContainmentAnimation,
+        stopContainmentAnimation,
+        popBoundaries,
+        restoreBoundaries,
+        updateExpandButtons,
+        handleCmdFiles,
+        get containment() { return _containment; }
     };
 })();
 
@@ -1219,3 +1895,37 @@ Object.defineProperty(window, 'fileCohesionActive', {
     get: () => FILE_VIZ.fileCohesionActive,
     configurable: true
 });
+
+// File containment system shims - moved from app.js
+function toggleFileExpand(fileIdx) { FILE_VIZ.toggleFileExpand(fileIdx); }
+function drawFileBoundaries(data) { return FILE_VIZ.drawFileBoundaries(data); }
+function buildDirectoryTree(data) { return FILE_VIZ.buildDirectoryTree(data); }
+function computeFileActivity(data, graphNodes) { return FILE_VIZ.computeFileActivity(data, graphNodes); }
+function drawContainmentSpheres(data) { FILE_VIZ.drawContainmentSpheres(data); }
+function startContainmentAnimation() { FILE_VIZ.startContainmentAnimation(); }
+function stopContainmentAnimation() { FILE_VIZ.stopContainmentAnimation(); }
+function popBoundaries(duration) { FILE_VIZ.popBoundaries(duration); }
+function restoreBoundaries(duration) { FILE_VIZ.restoreBoundaries(duration); }
+function updateExpandButtons() { FILE_VIZ.updateExpandButtons(); }
+function handleCmdFiles() { FILE_VIZ.handleCmdFiles(); }
+
+// Expose to global for button bindings and backward compatibility
+window.popBoundaries = popBoundaries;
+window.restoreBoundaries = restoreBoundaries;
+window.toggleFileExpand = toggleFileExpand;
+window.drawFileBoundaries = drawFileBoundaries;
+window.buildDirectoryTree = buildDirectoryTree;
+window.computeFileActivity = computeFileActivity;
+window.drawContainmentSpheres = drawContainmentSpheres;
+window.startContainmentAnimation = startContainmentAnimation;
+window.stopContainmentAnimation = stopContainmentAnimation;
+window.updateExpandButtons = updateExpandButtons;
+window.handleCmdFiles = handleCmdFiles;
+
+// FILE_CONTAINMENT state exposed via module
+Object.defineProperty(window, 'FILE_CONTAINMENT', {
+    get: () => FILE_VIZ.containment,
+    configurable: true
+});
+
+console.log('[Module] FILE_VIZ loaded - file visualization, boundaries, containment');

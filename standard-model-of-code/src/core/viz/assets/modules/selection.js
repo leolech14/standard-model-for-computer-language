@@ -450,6 +450,417 @@ const SELECT = (function() {
     }
 
     // =========================================================================
+    // UI HELPERS
+    // =========================================================================
+
+    function formatCountList(items, limit = 4) {
+        return items.slice(0, limit).map(([key, count]) => `${key} ${count}`).join(' · ') || '--';
+    }
+
+    function appendSelectionRow(container, label, value) {
+        const row = document.createElement('div');
+        row.className = 'selection-row';
+        const labelEl = document.createElement('span');
+        labelEl.className = 'label';
+        labelEl.textContent = label;
+        const valueEl = document.createElement('span');
+        valueEl.textContent = value || '--';
+        row.appendChild(labelEl);
+        row.appendChild(valueEl);
+        container.appendChild(row);
+    }
+
+    // =========================================================================
+    // SELECTION PANEL
+    // =========================================================================
+
+    function updateSelectionPanel() {
+        const panel = document.getElementById('selection-panel');
+        const body = document.getElementById('selection-body');
+        const title = document.getElementById('selection-title');
+        if (!panel || !body) return;
+
+        const nodes = getSelectedNodes();
+        if (!nodes.length) {
+            panel.classList.remove('visible');
+            body.innerHTML = '';
+            return;
+        }
+
+        panel.classList.add('visible');
+        if (title) title.textContent = `SELECTION (${nodes.length})`;
+        body.innerHTML = '';
+
+        if (nodes.length <= 3) {
+            nodes.forEach(node => {
+                const item = document.createElement('div');
+                item.className = 'selection-item';
+                const name = document.createElement('div');
+                name.className = 'selection-name';
+                name.textContent = node.name || node.id || 'Unknown';
+                item.appendChild(name);
+                appendSelectionRow(item, 'Family', typeof getNodeAtomFamily === 'function' ? getNodeAtomFamily(node) : '--');
+                appendSelectionRow(item, 'Ring', typeof getNodeRing === 'function' ? getNodeRing(node) : '--');
+                appendSelectionRow(item, 'Tier', typeof getNodeTier === 'function' ? getNodeTier(node) : '--');
+                appendSelectionRow(item, 'Role', node.role || '--');
+                const filePath = node.file_path || node.file || '';
+                if (filePath) {
+                    const shortPath = filePath.length > 48 ? '...' + filePath.slice(-45) : filePath;
+                    appendSelectionRow(item, 'File', shortPath);
+                }
+                body.appendChild(item);
+            });
+        } else {
+            const summary = document.createElement('div');
+            summary.className = 'selection-summary';
+
+            const families = typeof collectCounts === 'function' ? collectCounts(nodes, n => typeof getNodeAtomFamily === 'function' ? getNodeAtomFamily(n) : '--') : [];
+            const rings = typeof collectCounts === 'function' ? collectCounts(nodes, n => typeof getNodeRing === 'function' ? getNodeRing(n) : '--') : [];
+            const tiers = typeof collectCounts === 'function' ? collectCounts(nodes, n => typeof getNodeTier === 'function' ? getNodeTier(n) : '--') : [];
+
+            const total = document.createElement('div');
+            total.textContent = `Total: ${nodes.length} nodes`;
+            summary.appendChild(total);
+
+            const familyRow = document.createElement('div');
+            familyRow.textContent = `Family: ${formatCountList(families)}`;
+            summary.appendChild(familyRow);
+
+            const ringRow = document.createElement('div');
+            ringRow.textContent = `Ring: ${formatCountList(rings)}`;
+            summary.appendChild(ringRow);
+
+            const tierRow = document.createElement('div');
+            tierRow.textContent = `Tier: ${formatCountList(tiers)}`;
+            summary.appendChild(tierRow);
+
+            const numericKeys = [
+                ['tokens', 'TOKENS'],
+                ['bytes', 'BYTES'],
+                ['loc', 'LOC'],
+                ['lines', 'LINES'],
+                ['lines_of_code', 'LOC'],
+                ['size', 'SIZE']
+            ];
+            const totals = {};
+            nodes.forEach(node => {
+                numericKeys.forEach(([key]) => {
+                    const value = Number(node[key]);
+                    if (Number.isFinite(value)) {
+                        totals[key] = (totals[key] || 0) + value;
+                    }
+                });
+            });
+            numericKeys.forEach(([key, label]) => {
+                if (totals[key]) {
+                    const row = document.createElement('div');
+                    row.textContent = `${label}: ${Math.round(totals[key])}`;
+                    summary.appendChild(row);
+                }
+            });
+
+            body.appendChild(summary);
+        }
+
+        if (typeof HudLayoutManager !== 'undefined' && HudLayoutManager.reflow) {
+            HudLayoutManager.reflow();
+        }
+    }
+
+    // =========================================================================
+    // SELECTION MODAL
+    // =========================================================================
+
+    function showSelectionModal() {
+        const nodes = getSelectedNodes();
+        if (!nodes.length) {
+            if (typeof showToast === 'function') showToast('No nodes selected');
+            return;
+        }
+
+        const overlay = document.getElementById('selection-modal-overlay');
+        const title = document.getElementById('selection-modal-title');
+        const statsContainer = document.getElementById('selection-modal-stats');
+        const body = document.getElementById('selection-modal-body');
+
+        if (!overlay || !body) return;
+
+        // Calculate aggregates
+        let totalTokens = 0, totalBytes = 0, totalLoc = 0;
+        const tierCounts = {};
+        const ringCounts = {};
+        const familyCounts = {};
+
+        nodes.forEach(node => {
+            totalTokens += Number(node.tokens) || 0;
+            totalBytes += Number(node.bytes) || 0;
+            totalLoc += Number(node.loc || node.lines || node.lines_of_code) || 0;
+
+            const tier = typeof getNodeTier === 'function' ? getNodeTier(node) : '--';
+            const ring = typeof getNodeRing === 'function' ? getNodeRing(node) : '--';
+            const family = typeof getNodeAtomFamily === 'function' ? getNodeAtomFamily(node) : '--';
+
+            tierCounts[tier] = (tierCounts[tier] || 0) + 1;
+            ringCounts[ring] = (ringCounts[ring] || 0) + 1;
+            familyCounts[family] = (familyCounts[family] || 0) + 1;
+        });
+
+        const maxVal = Math.max(...nodes.map(n => n.val || n.size || 1));
+
+        title.textContent = `SELECTED NODES (${nodes.length})`;
+
+        // Build stats bar
+        statsContainer.innerHTML = '';
+        const stats = [
+            ['NODES', nodes.length.toLocaleString()],
+            ['TOKENS', totalTokens.toLocaleString()],
+            ['BYTES', totalBytes.toLocaleString()],
+            ['LOC', totalLoc.toLocaleString()],
+            ['TIERS', Object.keys(tierCounts).join(', ')],
+            ['FAMILIES', Object.keys(familyCounts).length]
+        ];
+        stats.forEach(([label, value]) => {
+            if (value && value !== '0') {
+                const stat = document.createElement('div');
+                stat.className = 'selection-modal-stat';
+                stat.innerHTML = `
+                    <span class="selection-modal-stat-label">${label}</span>
+                    <span class="selection-modal-stat-value">${value}</span>
+                `;
+                statsContainer.appendChild(stat);
+            }
+        });
+
+        // Build table
+        const sortedNodes = [...nodes].sort((a, b) => (b.val || b.size || 1) - (a.val || a.size || 1));
+
+        body.innerHTML = `
+            <table class="selection-modal-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Tier</th>
+                        <th>Ring</th>
+                        <th>Family</th>
+                        <th>Level</th>
+                        <th>Tokens</th>
+                        <th>LOC</th>
+                        <th>Relevance</th>
+                    </tr>
+                </thead>
+                <tbody id="selection-modal-tbody"></tbody>
+            </table>
+        `;
+
+        const tbody = document.getElementById('selection-modal-tbody');
+        sortedNodes.forEach(node => {
+            const tier = typeof getNodeTier === 'function' ? getNodeTier(node) : '--';
+            const ring = typeof getNodeRing === 'function' ? getNodeRing(node) : '--';
+            const family = typeof getNodeAtomFamily === 'function' ? getNodeAtomFamily(node) : '--';
+            const level = node.level || node.scale_level || 'L3';
+            const tokens = Number(node.tokens) || '--';
+            const loc = Number(node.loc || node.lines || node.lines_of_code) || '--';
+            const relevance = ((node.val || node.size || 1) / maxVal * 100).toFixed(0);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="node-name" title="${node.name || node.id}">${node.name || node.id}</td>
+                <td><span class="level-badge tier-badge">${tier}</span></td>
+                <td><span class="level-badge ring-badge">${ring}</span></td>
+                <td><span class="level-badge family-badge">${family}</span></td>
+                <td>${level}</td>
+                <td class="numeric">${typeof tokens === 'number' ? tokens.toLocaleString() : tokens}</td>
+                <td class="numeric">${typeof loc === 'number' ? loc.toLocaleString() : loc}</td>
+                <td>
+                    <div class="relevance-bar">
+                        <div class="relevance-fill" style="width: ${relevance}%"></div>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        overlay.classList.add('visible');
+    }
+
+    function hideSelectionModal() {
+        const overlay = document.getElementById('selection-modal-overlay');
+        if (overlay) overlay.classList.remove('visible');
+    }
+
+    function initSelectionModal() {
+        const overlay = document.getElementById('selection-modal-overlay');
+        const closeBtn = document.getElementById('selection-modal-close');
+        const selectionTitle = document.getElementById('selection-title');
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', hideSelectionModal);
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) hideSelectionModal();
+            });
+        }
+
+        if (selectionTitle) {
+            selectionTitle.style.cursor = 'pointer';
+            selectionTitle.addEventListener('click', showSelectionModal);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'i' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                const activeEl = document.activeElement;
+                if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA')) return;
+                if (getSelectedNodes().length > 0) {
+                    e.preventDefault();
+                    showSelectionModal();
+                }
+            }
+            if (e.key === 'Escape') {
+                hideSelectionModal();
+            }
+        });
+    }
+
+    // =========================================================================
+    // SELECTION BOX / MARQUEE
+    // =========================================================================
+
+    let _selectionBox = null;
+
+    function updateSelectionBox(rect) {
+        if (!_selectionBox) _selectionBox = document.getElementById('selection-box');
+        if (!_selectionBox) return;
+        _selectionBox.style.display = 'block';
+        _selectionBox.style.left = `${rect.left}px`;
+        _selectionBox.style.top = `${rect.top}px`;
+        _selectionBox.style.width = `${rect.width}px`;
+        _selectionBox.style.height = `${rect.height}px`;
+    }
+
+    function getNodeScreenPosition(node) {
+        if (typeof Graph === 'undefined' || !Graph?.camera || !node) return null;
+        if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) return null;
+        const camera = Graph.camera();
+        const vector = new THREE.Vector3(node.x, node.y, node.z || 0);
+        vector.project(camera);
+        const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+        const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+        return { x, y };
+    }
+
+    function selectNodesInBox(rect, additive = true) {
+        if (typeof Graph === 'undefined' || !Graph?.graphData) return;
+        const nodes = Graph.graphData().nodes || [];
+        const selected = [];
+        nodes.forEach(node => {
+            const pos = getNodeScreenPosition(node);
+            if (!pos) return;
+            if (pos.x >= rect.left && pos.x <= rect.right &&
+                pos.y >= rect.top && pos.y <= rect.bottom) {
+                if (node.id) selected.push(node.id);
+            }
+        });
+        if (selected.length) {
+            set(selected, additive);
+        }
+    }
+
+    function setupSelectionInteractions() {
+        const clearBtn = document.getElementById('selection-clear');
+        if (clearBtn) {
+            clearBtn.onclick = () => clear();
+        }
+
+        const groupBtn = document.getElementById('btn-create-group');
+        if (groupBtn && typeof createGroupFromSelection === 'function') {
+            groupBtn.onclick = () => createGroupFromSelection();
+        }
+
+        _selectionBox = document.getElementById('selection-box');
+        if (typeof Graph === 'undefined' || !Graph?.renderer || !_selectionBox) return;
+
+        const canvas = Graph.renderer().domElement;
+        if (!canvas) return;
+
+        const onPointerDown = (e) => {
+            if (e.button !== 0) return;
+            if (typeof SPACE_PRESSED !== 'undefined' && SPACE_PRESSED) return;
+            if (e.target !== canvas) return;
+            if (typeof HOVERED_NODE !== 'undefined' && HOVERED_NODE) return;
+            _marqueeActive = true;
+            _marqueeAdditive = !!e.shiftKey;
+            _marqueeStart = { x: e.clientX, y: e.clientY };
+            updateSelectionBox(typeof getBoxRect === 'function' ? getBoxRect(_marqueeStart, _marqueeStart) : { left: e.clientX, top: e.clientY, width: 0, height: 0 });
+            if (Graph.controls()) {
+                Graph.controls().enabled = false;
+            }
+            e.preventDefault();
+        };
+
+        const onPointerMove = (e) => {
+            if (!_marqueeActive || !_marqueeStart) return;
+            updateSelectionBox(typeof getBoxRect === 'function' ? getBoxRect(_marqueeStart, { x: e.clientX, y: e.clientY }) : { left: Math.min(_marqueeStart.x, e.clientX), top: Math.min(_marqueeStart.y, e.clientY), width: Math.abs(e.clientX - _marqueeStart.x), height: Math.abs(e.clientY - _marqueeStart.y), right: Math.max(_marqueeStart.x, e.clientX), bottom: Math.max(_marqueeStart.y, e.clientY) });
+        };
+
+        const finishSelection = (e) => {
+            if (!_marqueeActive || !_marqueeStart) return;
+            const rect = typeof getBoxRect === 'function' ? getBoxRect(_marqueeStart, { x: e.clientX, y: e.clientY }) : { left: Math.min(_marqueeStart.x, e.clientX), top: Math.min(_marqueeStart.y, e.clientY), width: Math.abs(e.clientX - _marqueeStart.x), height: Math.abs(e.clientY - _marqueeStart.y), right: Math.max(_marqueeStart.x, e.clientX), bottom: Math.max(_marqueeStart.y, e.clientY) };
+            _selectionBox.style.display = 'none';
+            const additive = _marqueeAdditive;
+            _marqueeActive = false;
+            _marqueeStart = null;
+            _marqueeAdditive = false;
+            _lastMarqueeEndTs = Date.now();
+            if (Graph.controls()) {
+                Graph.controls().enabled = true;
+            }
+            const didDrag = rect.width > 4 && rect.height > 4;
+            if (didDrag) {
+                selectNodesInBox(rect, additive);
+            }
+        };
+
+        canvas.addEventListener('pointerdown', onPointerDown, { passive: false });
+        canvas.addEventListener('pointermove', onPointerMove, { passive: true });
+        canvas.addEventListener('pointerup', finishSelection, { passive: true });
+        canvas.addEventListener('pointerleave', finishSelection, { passive: true });
+    }
+
+    // =========================================================================
+    // SYNC AND INIT
+    // =========================================================================
+
+    function syncSelectionAfterGraphUpdate() {
+        if (typeof Graph === 'undefined' || !Graph?.graphData) return;
+        const visibleIds = new Set((Graph.graphData().nodes || []).map(n => n.id));
+        const idsToRemove = [];
+        Array.from(_ids).forEach(id => {
+            if (!visibleIds.has(id)) {
+                idsToRemove.push(id);
+            }
+        });
+        if (idsToRemove.length > 0) {
+            remove(idsToRemove);
+        } else {
+            _updateVisuals();
+        }
+        _updateGroupButtonState();
+    }
+
+    function initSelectionState(data) {
+        if (typeof buildDatasetKey === 'function') {
+            window.DATASET_KEY = buildDatasetKey(data);
+            window.GROUPS_STORAGE_KEY = `collider_groups_${window.DATASET_KEY}`;
+        }
+        if (typeof loadGroups === 'function') loadGroups();
+        if (typeof renderGroupList === 'function') renderGroupList();
+        updateSelectionPanel();
+        _updateGroupButtonState();
+    }
+
+    // =========================================================================
     // PUBLIC API
     // =========================================================================
 
@@ -487,7 +898,19 @@ const SELECT = (function() {
 
         // Internal access (for migration)
         _selectionOriginals,
-        _originalColorsForDim
+        _originalColorsForDim,
+
+        // UI (moved from app.js)
+        updateSelectionPanel,
+        showSelectionModal,
+        hideSelectionModal,
+        initSelectionModal,
+        updateSelectionBox,
+        getNodeScreenPosition,
+        selectNodesInBox,
+        setupSelectionInteractions,
+        syncSelectionAfterGraphUpdate,
+        initSelectionState
     };
 })();
 
@@ -510,3 +933,17 @@ function startSelectionAnimation() { SELECT.startAnimation(); }
 function stopSelectionAnimation() { SELECT.stopAnimation(); }
 function ensureNodeOverlays(node) { return SELECT.ensureOverlays(node); }
 function updateOverlayScale(node) { SELECT.updateOverlayScale(node); }
+
+// UI functions (moved from app.js)
+function updateSelectionPanel() { SELECT.updateSelectionPanel(); }
+function showSelectionModal() { SELECT.showSelectionModal(); }
+function hideSelectionModal() { SELECT.hideSelectionModal(); }
+function initSelectionModal() { SELECT.initSelectionModal(); }
+function updateSelectionBox(rect) { SELECT.updateSelectionBox(rect); }
+function getNodeScreenPosition(node) { return SELECT.getNodeScreenPosition(node); }
+function selectNodesInBox(rect, additive) { SELECT.selectNodesInBox(rect, additive); }
+function setupSelectionInteractions() { SELECT.setupSelectionInteractions(); }
+function syncSelectionAfterGraphUpdate() { SELECT.syncSelectionAfterGraphUpdate(); }
+function initSelectionState(data) { SELECT.initSelectionState(data); }
+
+console.log('[Module] SELECT loaded - selection UI, modal, marquee, animation');
