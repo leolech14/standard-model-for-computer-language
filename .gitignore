@@ -91,3 +91,4 @@ build/
 # ARCHIVE (offloaded to GCS: gs://elements-archive-2026/)
 # =============================================================================
 archive/
+standard-model-of-code/collider_output/
