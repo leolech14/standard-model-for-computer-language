@@ -295,10 +295,14 @@ window.UI_BUILDERS = (function() {
      *
      * @param {string} containerId - Container element ID
      * @param {Array} sliderDefs - Array of slider definitions:
-     *   { id, label, min, max, step, value, description?, className? }
-     * @param {Function} onChange - Callback: (sliderId, newValue) => void
+     *   { id, label, min, max, step, value, onChange?, description?, className? }
+     * @param {Function} globalOnChange - Optional global callback: (sliderId, newValue) => void
+     *
+     * Supports two patterns:
+     * 1. Individual: Each sliderDef has its own onChange(value) handler
+     * 2. Global: A single globalOnChange(sliderId, value) handles all
      */
-    function buildAppearanceSliders(containerId, sliderDefs, onChange) {
+    function buildAppearanceSliders(containerId, sliderDefs, globalOnChange) {
         const container = document.getElementById(containerId);
         if (!container) return;
         container.innerHTML = '';
@@ -333,7 +337,9 @@ window.UI_BUILDERS = (function() {
             input.oninput = () => {
                 const val = parseFloat(input.value);
                 valueDisplay.textContent = val.toFixed(def.step < 1 ? 2 : 0);
-                if (onChange) onChange(def.id, val);
+                // Support both patterns: individual onChange or global
+                if (def.onChange) def.onChange(val);
+                if (globalOnChange) globalOnChange(def.id, val);
             };
 
             wrapper.appendChild(header);

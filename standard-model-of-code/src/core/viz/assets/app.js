@@ -2500,11 +2500,14 @@ const VIS_PRESETS = {
 // normalizeDatamapConfig, resolveDatamapConfigs, datamapMatches - MOVED TO modules/datamap.js
 // buildDatamapToggle, buildExclusiveOptions - MOVED TO modules/ui-builders.js
 
+// ═══════════════════════════════════════════════════════════════════════════
+// APPEARANCE SLIDERS - Orchestration layer (uses UI_BUILDERS for pure UI)
+// This function owns the business logic: what sliders exist, their values,
+// and what happens when they change. UI_BUILDERS.buildAppearanceSliders
+// handles the DOM creation.
+// ═══════════════════════════════════════════════════════════════════════════
 
 function buildAppearanceSliders(containerId, sliderConfigs) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = '';
 
     const resolveSlider = (key, fallback) => {
         const config = (sliderConfigs && sliderConfigs[key]) ? sliderConfigs[key] : {};
@@ -2778,52 +2781,9 @@ function buildAppearanceSliders(containerId, sliderConfigs) {
         })()
     ];
 
-    sliderDefs.forEach(def => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'slider-row' + (def.className ? ' ' + def.className : '');
-
-        // Header row with label and value
-        const header = document.createElement('div');
-        header.className = 'slider-header';
-        const label = document.createElement('span');
-        label.className = 'slider-label';
-        label.textContent = def.label;
-        const valueDisplay = document.createElement('span');
-        valueDisplay.className = 'slider-value';
-        valueDisplay.id = def.id + '-value';
-        const safeValue = def.value ?? def.min ?? 0;  // Fallback to min or 0 if value is null
-        valueDisplay.textContent = safeValue.toFixed(def.step < 1 ? 2 : 0);
-        header.appendChild(label);
-        header.appendChild(valueDisplay);
-
-        // The slider input
-        const input = document.createElement('input');
-        input.type = 'range';
-        input.className = 'slider-input';
-        input.id = def.id;
-        input.min = def.min;
-        input.max = def.max;
-        input.step = def.step;
-        input.value = safeValue;
-        input.oninput = () => {
-            const val = parseFloat(input.value);
-            valueDisplay.textContent = val.toFixed(def.step < 1 ? 2 : 0);
-            def.onChange(val);
-        };
-
-        wrapper.appendChild(header);
-        wrapper.appendChild(input);
-
-        // Optional description for meta-sliders
-        if (def.description) {
-            const desc = document.createElement('div');
-            desc.className = 'slider-desc';
-            desc.textContent = def.description;
-            wrapper.appendChild(desc);
-        }
-
-        container.appendChild(wrapper);
-    });
+    // Use UI_BUILDERS for pure DOM creation (decoupled architecture)
+    // Each sliderDef has its own onChange handler - business logic stays here
+    UI_BUILDERS.buildAppearanceSliders(containerId, sliderDefs);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
