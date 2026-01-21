@@ -965,11 +965,15 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             G = nx.DiGraph()
             for node in nodes:
                 G.add_node(node.get('id', ''), **{k: v for k, v in node.items() if k != 'body_source'})
+            # Only count behavioral edges (calls, invokes) for topology classification
+            # Structural edges (contains, inherits) would give false in_degree to all nested nodes
+            behavioral_edge_types = {'calls', 'invokes'}
             for edge in edges:
-                src = edge.get('source', edge.get('from', ''))
-                tgt = edge.get('target', edge.get('to', ''))
-                if src and tgt:
-                    G.add_edge(src, tgt)
+                if edge.get('edge_type') in behavioral_edge_types:
+                    src = edge.get('source', edge.get('from', ''))
+                    tgt = edge.get('target', edge.get('to', ''))
+                    if src and tgt:
+                        G.add_edge(src, tgt)
 
             # Compute in_degree and out_degree for each node
             in_degree_map = dict(G.in_degree())
@@ -1046,13 +1050,16 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             from collections import defaultdict
             in_counts = defaultdict(int)
             out_counts = defaultdict(int)
+            # Only count behavioral edges (calls, invokes) for topology classification
+            behavioral_edge_types = {'calls', 'invokes'}
             for edge in edges:
-                src = edge.get('source', edge.get('from', ''))
-                tgt = edge.get('target', edge.get('to', ''))
-                if src:
-                    out_counts[src] += 1
-                if tgt:
-                    in_counts[tgt] += 1
+                if edge.get('edge_type') in behavioral_edge_types:
+                    src = edge.get('source', edge.get('from', ''))
+                    tgt = edge.get('target', edge.get('to', ''))
+                    if src:
+                        out_counts[src] += 1
+                    if tgt:
+                        in_counts[tgt] += 1
 
             # Threshold for hub classification (top 5% or min 10 connections)
             all_degrees = [in_counts.get(n.get('id', ''), 0) + out_counts.get(n.get('id', ''), 0) for n in nodes]
@@ -1168,6 +1175,11 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                 print(f"   → {codome_result['total_inferred_edges']} inferred edges generated")
                 print(f"   → Sources: {codome_result['summary']}")
                 # Add boundary nodes and inferred edges to main lists for visualization
+                # Mark with _fromCodome flag for UI filtering
+                for bn in codome_result['boundary_nodes']:
+                    bn['_fromCodome'] = True
+                for ie in codome_result['inferred_edges']:
+                    ie['_fromCodome'] = True
                 nodes.extend(codome_result['boundary_nodes'])
                 edges.extend(codome_result['inferred_edges'])
             else:
