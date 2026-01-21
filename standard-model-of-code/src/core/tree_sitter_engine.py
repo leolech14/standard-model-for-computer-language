@@ -47,6 +47,42 @@ class ParseTimeout(Exception):
     pass
 
 
+def _find_containing_class(node) -> Optional[str]:
+    """
+    Walk up the AST to find the containing class for a node.
+    Returns the class name if found, None otherwise.
+
+    This enables structural 'contains' edges (class contains method).
+    """
+    # Node types that represent class containers
+    CLASS_TYPES = {
+        'class_declaration',      # JS/TS
+        'class_definition',       # Python
+        'class_specifier',        # C++
+        'struct_item',            # Rust
+        'impl_item',              # Rust impl block
+        'interface_declaration',  # TS
+        'type_declaration',       # Go (for struct/interface)
+    }
+
+    current = node.parent
+    while current:
+        if current.type in CLASS_TYPES:
+            # Extract the class name
+            name_node = current.child_by_field_name('name')
+            if name_node:
+                return name_node.text.decode('utf8')
+            # Go type_declaration wraps type_spec
+            if current.type == 'type_declaration':
+                for child in current.children:
+                    if child.type == 'type_spec':
+                        name_node = child.child_by_field_name('name')
+                        if name_node:
+                            return name_node.text.decode('utf8')
+        current = current.parent
+    return None
+
+
 def parse_with_timeout(parser, source_bytes: bytes, timeout_seconds: int = 30):
     """Parse source with timeout protection.
 
@@ -396,27 +432,30 @@ class TreeSitterUniversalEngine:
             (func_literal) @func
             """
         else:
-            # JS/TS/JSX/TSX query for React components + hooks
+            # JS/TS/JSX/TSX query for ALL functions, classes, and methods
             query_scm = """
+            ; All function declarations (not filtered by case)
             (function_declaration name: (identifier) @func.name) @func
-            (#match? @func.name "^[A-Z]")
-            
+
+            ; Arrow functions assigned to variables
             (variable_declarator
               name: (identifier) @func.name
               value: (arrow_function) @func
             )
-            (#match? @func.name "^[A-Z]")
-            
+
+            ; Function expressions assigned to variables
             (variable_declarator
               name: (identifier) @func.name
               value: (function_expression) @func
             )
-            (#match? @func.name "^[A-Z]")
-            
+
+            ; Class declarations
             (class_declaration name: (identifier) @class.name) @class
-            (#match? @class.name "^[A-Z]")
-            
-            ; Hook calls
+
+            ; Class methods (method_definition inside class_body)
+            (method_definition name: (property_identifier) @method.name) @method
+
+            ; Hook calls (for React analysis)
             (call_expression
               function: (identifier) @hook.name
               (#match? @hook.name "^use[A-Z]")
@@ -487,13 +526,14 @@ class TreeSitterUniversalEngine:
                                     p_name = name_node.text.decode('utf8')
                                 break
                 elif tag == 'method':
-                    # Go method (has receiver)
+                    # Method (Go or JS/TS)
                     p_type = 'Method'
                     symbol_kind = 'method'
                     name_node = node.child_by_field_name('name')
                     if name_node:
                         p_name = name_node.text.decode('utf8')
-                    # Try to get receiver type for full name
+
+                    # Go method (has receiver)
                     receiver_node = node.child_by_field_name('receiver')
                     if receiver_node:
                         # Extract receiver type (e.g., (s *Server) -> Server)
@@ -504,6 +544,12 @@ class TreeSitterUniversalEngine:
                                     receiver_type = type_child.text.decode('utf8').lstrip('*')
                                     p_name = f"{receiver_type}.{p_name}"
                                 break
+
+                    # JS/TS method_definition: parent chain to class_declaration
+                    if node.type == 'method_definition':
+                        class_name = _find_containing_class(node)
+                        if class_name:
+                            p_name = f"{class_name}.{p_name}"
                 elif tag == 'trait':
                     p_type = 'Trait'
                     symbol_kind = 'trait'
@@ -575,6 +621,15 @@ class TreeSitterUniversalEngine:
                     body_source=node_source,
                 )
                 particle['tags'] = ['tree-sitter', parser_name]
+
+                # Find containing class for structural 'contains' edges
+                containing_class = _find_containing_class(node)
+                if containing_class:
+                    particle['parent'] = containing_class
+                    # Update kind to 'method' if it's a function inside a class
+                    if symbol_kind == 'function':
+                        particle['kind'] = 'method'
+
                 # Store byte ranges for hook enrichment
                 particle['_node_start_byte'] = node.start_byte
                 particle['_node_end_byte'] = node.end_byte

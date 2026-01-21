@@ -256,6 +256,8 @@ def create_unified_output(
             "atom": node.get("atom", ""),
             "dimensions": node.get("dimensions", {}),
             "metadata": node.get("metadata", {}),
+            # Structural containment (parent class for methods)
+            "parent": node.get("parent", ""),
         }
         output.nodes.append(unified_node)
     
