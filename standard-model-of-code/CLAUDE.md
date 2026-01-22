@@ -7,10 +7,25 @@
 | Theory | Standard Model of Code |
 | Tool | Collider |
 | Purpose | Find basic constituents of computer programs |
-| Atoms | 3,616 total (80 core + 3,536 ecosystem), 250+ ecosystems |
+| Atoms | 3,616 total (see breakdown below) |
 | Roles | 33 canonical, 29 implemented |
 | Pipeline | 18 stages |
 | Body Coverage | ~36% nodes have `body_source` |
+
+## Atom Inventory (Statistical Analysis)
+
+| Tier | Count | Coverage | Description |
+|------|-------|----------|-------------|
+| Base | 22 | ~90% structural | Core semantic roles (Function, Class, Variable) |
+| T0 | 42 | 100% parseable | AST atoms (definitional) |
+| T1 | 21 | ~20-40% | Standard library patterns |
+| T2 | 3,531 | 0-60% variable | Ecosystem-specific (178 ecosystems) |
+
+**Key insight:** 4 base atoms (LOG.FNC.M, ORG.AGG.M, DAT.VAR.A, ORG.MOD.O) cover ~80-90% of code structure. T2 atoms provide semantic enrichment, not structural coverage.
+
+**Data quality:** 77% of T2 atoms are security-focused (from Semgrep). Functional patterns need expansion.
+
+See `docs/reports/ATOM_STATISTICAL_ANALYSIS.md` for full analysis.
 
 ## Canonical Sources
 
@@ -24,6 +39,7 @@
 | **Tree-sitter Validation** | `docs/specs/TREE_SITTER_VALIDATION_REPORT.md` | Evidence-based validation (authoritative) |
 | **Tree-sitter Tasks** | `docs/specs/TREE_SITTER_TASK_REGISTRY.md` | 46 tasks with confidence scores |
 | **Codome Research** | `docs/research/CODOME_EDGE_DISCOVERY.md` | Boundary nodes, inferred edges, known bugs |
+| **Atom Statistics** | `docs/reports/ATOM_STATISTICAL_ANALYSIS.md` | Coverage model, quality issues, honest numbers |
 
 ## Commands
 
