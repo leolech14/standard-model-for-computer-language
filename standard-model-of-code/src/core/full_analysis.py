@@ -1161,7 +1161,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                     cc = metrics['cyclomatic_complexity']
                     depth = metrics['max_nesting_depth']
 
-                    # Store in node
+                    # Store in node (nested for full detail)
                     node['control_flow'] = {
                         'cyclomatic_complexity': cc,
                         'complexity_rating': get_complexity_rating(cc),
@@ -1172,6 +1172,12 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                         'loops': metrics['loops'],
                         'early_returns': metrics['early_returns']
                     }
+
+                    # P3-09: Flatten key metrics for UPB binding
+                    node['cyclomatic_complexity'] = cc
+                    node['complexity_rating'] = get_complexity_rating(cc)
+                    node['max_nesting_depth'] = depth
+                    node['nesting_rating'] = get_nesting_rating(depth)
 
                     cf_stats['nodes_analyzed'] += 1
                     cc_sum += cc

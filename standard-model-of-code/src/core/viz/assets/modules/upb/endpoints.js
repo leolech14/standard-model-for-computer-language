@@ -160,6 +160,46 @@ const UPB_ENDPOINTS = (function () {
             label: 'Topology Role',
             values: ['orphan', 'root', 'leaf', 'hub', 'internal'],
             tags: ['topological', 'categorical', 'structure']
+        },
+
+        // =====================================================================
+        // CONTROL FLOW METRICS (P3-09)
+        // =====================================================================
+
+        // Cyclomatic Complexity (McCabe metric)
+        cyclomatic_complexity: {
+            Type: 'continuous',
+            domain: 'node',
+            label: 'Cyclomatic Complexity',
+            range: [1, 50],
+            tags: ['complexity', 'control-flow', 'quantitative', 'tree-sitter']
+        },
+
+        // Complexity Rating (categorical)
+        complexity_rating: {
+            Type: 'discrete',
+            domain: 'node',
+            label: 'Complexity Rating',
+            values: ['simple', 'moderate', 'complex', 'very_complex'],
+            tags: ['complexity', 'control-flow', 'categorical']
+        },
+
+        // Max Nesting Depth
+        max_nesting_depth: {
+            Type: 'continuous',
+            domain: 'node',
+            label: 'Nesting Depth',
+            range: [0, 10],
+            tags: ['complexity', 'control-flow', 'quantitative', 'tree-sitter']
+        },
+
+        // Nesting Rating (categorical)
+        nesting_rating: {
+            Type: 'discrete',
+            domain: 'node',
+            label: 'Nesting Rating',
+            values: ['shallow', 'moderate', 'deep', 'very_deep'],
+            tags: ['complexity', 'control-flow', 'categorical']
         }
     };
 

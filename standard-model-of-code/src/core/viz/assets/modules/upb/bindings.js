@@ -238,6 +238,37 @@ const UPB_BINDINGS = (function () {
             // orphan=red, root=green, leaf=blue, hub=purple, internal=gray
             range: [0, 360],
             description: 'Topology roles have distinct colors'
+        },
+
+        // =====================================================================
+        // CONTROL FLOW PRESETS (P3-09)
+        // =====================================================================
+
+        // Cyclomatic Complexity → Node Size (complex functions are larger)
+        'complexity-size': {
+            source: 'cyclomatic_complexity',
+            target: 'nodeSize',
+            scale: 'sqrt',    // Compress outliers
+            range: [3, 30],
+            description: 'Complex functions appear larger'
+        },
+
+        // Nesting Depth → Saturation (deeply nested = more vivid warning)
+        'nesting-saturation': {
+            source: 'max_nesting_depth',
+            target: 'saturation',
+            scale: 'linear',
+            range: [20, 100],
+            description: 'Deeply nested code appears more vivid'
+        },
+
+        // Complexity → Hue (simple=green, complex=red gradient)
+        'complexity-hue': {
+            source: 'cyclomatic_complexity',
+            target: 'hue',
+            scale: 'linear',
+            range: [120, 0],  // Green (120) → Red (0)
+            description: 'Simple=green, Complex=red'
         }
     };
 

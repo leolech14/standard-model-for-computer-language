@@ -136,6 +136,12 @@ const CONTROL_BAR = (function () {
                         <option value="betweenness_centrality">Betweenness (Bridge)</option>
                         <option value="topology_role">Topology Role</option>
                     </optgroup>
+                    <optgroup label="Control Flow (P3-09)">
+                        <option value="cyclomatic_complexity">Cyclomatic Complexity</option>
+                        <option value="complexity_rating">Complexity Rating</option>
+                        <option value="max_nesting_depth">Nesting Depth</option>
+                        <option value="nesting_rating">Nesting Rating</option>
+                    </optgroup>
                 </select>
             </div>
         `;
