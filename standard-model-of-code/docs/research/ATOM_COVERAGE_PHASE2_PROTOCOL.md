@@ -36,6 +36,48 @@ Claims upgrade only when evidence supports them:
 
 ---
 
+## Standard Run Configuration
+
+> **All metrics in Phase 2 claims are computed from deterministic baseline runs.**
+
+### Mode A: Deterministic Baseline (for all stats/claims)
+
+```bash
+./collider full <repo> --output <dir>
+# NO additional flags
+```
+
+| Setting | Value | Rationale |
+|---------|-------|-----------|
+| LLM enrichment | OFF | Non-deterministic |
+| AI insights | OFF | Non-deterministic |
+| `--ai-insights` flag | NOT USED | Would add Gemini variation |
+| Ignore patterns | Standard (vendor, node_modules, build) | Consistency |
+
+### Mode B: Augmented (for product storytelling only)
+
+```bash
+./collider full <repo> --output <dir> --ai-insights
+```
+
+Used for marketing/demos but **never for research claims**.
+
+### Metric Consistency Note
+
+Phase 1 reported `Unknown: 8.3%` for self-repo (commit `ef487fb`).
+Recent run showed `Unknown: 0%` due to:
+1. Improved atom mappings between commits
+2. Different analysis file version
+
+**Rule:** All Phase 2 metrics must reference:
+- Collider commit SHA
+- Analysis file path
+- Run timestamp
+
+This prevents "tool changed mid-study" criticism.
+
+---
+
 ## Study A: Structural Atom Generalization
 
 ### Hypotheses
@@ -321,6 +363,94 @@ artifacts/atom-research/
 | Top-4 mass stability | Δ < 5% from baseline | Warn |
 | T2 precision stability | Δ < 3% from baseline | Warn |
 | Unknown rate improvement | Never increases from baseline | Fail |
+
+---
+
+## Study D: D3_ROLE Tiered Classification
+
+> **Status:** IMPLEMENTED (2026-01-22)
+> **Commit:** (pending)
+
+### Problem Statement
+
+The `classify_role()` method in `dimension_classifier.py` used tree-sitter `roles.scm` queries but was **never called** in the pipeline. D3_ROLE was assigned purely via heuristics (path patterns, naming conventions).
+
+### Solution: Tiered Classification
+
+| Tier | Method | Confidence | Source |
+|------|--------|------------|--------|
+| 0 | Tree-sitter `roles.scm` queries | 70-95% | AST pattern matching |
+| 1 | Heuristic fallback | 30-70% | Path, name, inheritance |
+
+### Implementation
+
+**File:** `src/core/classification/universal_classifier.py`
+
+**Changes:**
+1. Import `TreeSitterDimensionClassifier` (line 44-51)
+2. Initialize `ts_role_classifier` in `__init__` (line 62-63)
+3. Tiered classification in `_derive_dimensions()` (lines 610-640)
+
+**Logic:**
+```python
+# Tier 0: Tree-sitter (if available and body_source exists)
+ts_role_result = self.ts_role_classifier.classify_role(source=body, name=name, language=lang)
+
+if ts_role_result and ts_role_result.get('confidence', 0) >= 70:
+    dims["D3_ROLE"] = ts_role_result['role']
+    dims["D3_ROLE_SOURCE"] = "tree-sitter"
+    dims["D3_ROLE_CONFIDENCE"] = ts_role_result['confidence']
+else:
+    # Tier 1: Heuristic fallback
+    dims["D3_ROLE"] = role  # from existing classification
+    dims["D3_ROLE_SOURCE"] = "heuristic"
+```
+
+### New Schema Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `D3_ROLE_SOURCE` | string | `"tree-sitter"` or `"heuristic"` |
+| `D3_ROLE_CONFIDENCE` | int | 0-100, only present for tree-sitter |
+| `D3_ROLE_EVIDENCE` | list | Matched patterns (tree-sitter only) |
+
+### Validation Results (L0)
+
+Tested on `src/core/classification/` (17 nodes):
+
+| Metric | Value |
+|--------|-------|
+| Tree-sitter classified | 4 (24%) |
+| Heuristic fallback | 12 (71%) |
+| No source | 1 (5%) |
+| Avg confidence (TS) | 81.2% |
+
+**Roles detected via tree-sitter:**
+- `__init__` → Lifecycle (85%)
+- `classify_function_pattern` → Handler (80%)
+- `_get_function_type_by_name` → Handler (80%)
+
+### Cross-Language Validation
+
+| Language | Status | Test |
+|----------|--------|------|
+| Python | ✅ Working | Repository, Validator, Handler detected |
+| JavaScript | ✅ Working | Repository (90%), boundary=io, state=stateful |
+| TypeScript | ✅ Working | Shares JS queries |
+
+### Promotion Path
+
+| Level | Requirement | Status |
+|-------|-------------|--------|
+| L0 | Works on 1 repo | ✅ ACHIEVED |
+| L1 | Works on 7 repos with >20% TS coverage | Pending |
+| L2 | Works on 100+ repos | Pending |
+
+### Connection to Other Studies
+
+- **Study A (Structural):** D1_WHAT coverage is orthogonal to D3_ROLE
+- **Study C (Functional):** roles.scm queries ARE functional pattern detection
+- **Security skew:** Roles are NOT security-skewed (unlike T2 atoms)
 
 ---
 

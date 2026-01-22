@@ -41,6 +41,15 @@ except ImportError:
     except ImportError:
         AtomRegistry = None  # type: ignore
 
+# Tree-sitter dimension classifier for D3_ROLE (roles.scm queries)
+try:
+    from core.dimension_classifier import TreeSitterDimensionClassifier
+except ImportError:
+    try:
+        from dimension_classifier import TreeSitterDimensionClassifier
+    except ImportError:
+        TreeSitterDimensionClassifier = None  # type: ignore
+
 
 class UniversalClassifier:
     """Classifies code particles based on patterns, paths, and naming conventions."""
@@ -50,6 +59,8 @@ class UniversalClassifier:
         self.role_registry = get_role_registry()
         # V3: Initialize AtomRegistry for T2 ecosystem detection
         self.atom_registry = AtomRegistry() if AtomRegistry else None
+        # V4: Tree-sitter dimension classifier for D3_ROLE (roles.scm queries)
+        self.ts_role_classifier = TreeSitterDimensionClassifier() if TreeSitterDimensionClassifier else None
         # V2: Initialize simplified Atom map (hardcoded for speed, could load from atoms.json)
         self.atom_map = {
             "class": "ORG.AGG.M", # Default Aggregate
@@ -597,9 +608,36 @@ class UniversalClassifier:
             dims["D2_LAYER"] = "Unknown"
 
         # =====================================================================
-        # D3_ROLE: DDD Tactical Role
+        # D3_ROLE: DDD Tactical Role (TIERED CLASSIFICATION)
         # =====================================================================
-        dims["D3_ROLE"] = role
+        # Tier 0: Tree-sitter roles.scm queries (AST-based, highest confidence)
+        # Tier 1: Existing heuristic (path, name, base class patterns)
+
+        ts_role_result = None
+        if self.ts_role_classifier and body:
+            file_path_orig = particle.get("file_path", "")
+            language = 'python'  # default
+            if file_path_orig.endswith(('.js', '.jsx')):
+                language = 'javascript'
+            elif file_path_orig.endswith(('.ts', '.tsx')):
+                language = 'typescript'
+
+            ts_role_result = self.ts_role_classifier.classify_role(
+                source=body,
+                name=particle.get("name", ""),
+                language=language
+            )
+
+        if ts_role_result and ts_role_result.get('confidence', 0) >= 70:
+            # Tier 0 succeeded with high confidence
+            dims["D3_ROLE"] = ts_role_result['role']
+            dims["D3_ROLE_CONFIDENCE"] = ts_role_result['confidence']
+            dims["D3_ROLE_SOURCE"] = "tree-sitter"
+            dims["D3_ROLE_EVIDENCE"] = ts_role_result.get('evidence', [])
+        else:
+            # Tier 1 fallback: existing heuristic
+            dims["D3_ROLE"] = role
+            dims["D3_ROLE_SOURCE"] = "heuristic"
 
         # =====================================================================
         # D4_BOUNDARY: Information Flow Boundary

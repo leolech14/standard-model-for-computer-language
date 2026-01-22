@@ -305,6 +305,68 @@ tree.root_node.has_error  # bool
 
 ---
 
+## 11. D3_ROLE CLASSIFICATION (VALIDATED 2026-01-22)
+
+### 11.1 Implementation Status
+
+The `classify_role()` method in `dimension_classifier.py` is now **wired into the pipeline** via `universal_classifier.py`.
+
+| Component | Status | Evidence |
+|-----------|--------|----------|
+| `roles.scm` queries | ✅ Loaded | Python, JavaScript, TypeScript |
+| `classify_role()` method | ✅ Called | `universal_classifier.py:625-629` |
+| Tiered fallback | ✅ Working | Tree-sitter → Heuristic |
+
+### 11.2 Coverage Metrics
+
+Tested on `src/core/classification/` (17 nodes):
+
+| Source | Count | Percentage |
+|--------|-------|------------|
+| tree-sitter | 4 | 24% |
+| heuristic | 12 | 71% |
+| none | 1 | 5% |
+
+**Average confidence (tree-sitter):** 81.2%
+
+### 11.3 Detected Role Patterns
+
+| Role | Confidence | Pattern |
+|------|------------|---------|
+| Repository | 90% | `find_by_*`, `save`, `query` methods |
+| Validator | 85% | `validate_*`, raises `ValidationError` |
+| Handler | 80% | `*_pattern`, processing methods |
+| Lifecycle | 85% | `__init__`, `__del__`, `close` |
+| Service | 85% | Business logic orchestration |
+
+### 11.4 Cross-Language Results
+
+```python
+# Python
+UserRepository → Repository (90%, tree-sitter)
+validate_email → Validator (85%, tree-sitter)
+
+# JavaScript
+UserService → Repository (90%, tree-sitter)
+  boundary: io
+  state: stateful
+```
+
+### 11.5 Schema Impact
+
+New fields in `dimensions` object:
+
+```json
+{
+  "D3_ROLE": "Repository",
+  "D3_ROLE_SOURCE": "tree-sitter",
+  "D3_ROLE_CONFIDENCE": 90,
+  "D3_ROLE_EVIDENCE": ["find_by_id", "save"]
+}
+```
+
+---
+
 ## DOCUMENT STATUS
 
 - [x] API availability validated
@@ -315,5 +377,6 @@ tree.root_node.has_error  # bool
 - [x] Current usage audited
 - [x] Corrections documented
 - [x] Recommendations prioritized
+- [x] D3_ROLE classification validated (2026-01-22)
 
 **This document supersedes assumptions in TREE_SITTER_INTEGRATION_SPEC.md for any conflicts.**

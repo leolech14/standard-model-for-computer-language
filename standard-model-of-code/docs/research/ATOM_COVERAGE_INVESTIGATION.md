@@ -1064,3 +1064,4 @@ python tools/research/atom_coverage.py analysis.json --check-unknown 10
 | 2026-01-22 | Added Atoms vs Roles distinction (Gemini validation fix) | Claude Opus 4.5 |
 | 2026-01-22 | **HARDENING**: Scoped claims, operational definitions, evidence ledgers, falsification tests, runnable snippets | Claude Opus 4.5 |
 | 2026-01-22 | Added Claims Ladder + Phase 2 reference | Claude Opus 4.5 |
+| 2026-01-22 | **D3_ROLE WIRING**: Tree-sitter `classify_role()` integrated into pipeline. See Phase 2 Protocol Study D. | Claude Opus 4.5 |
