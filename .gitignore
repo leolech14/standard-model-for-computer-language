@@ -92,3 +92,7 @@ build/
 # =============================================================================
 archive/
 standard-model-of-code/collider_output/
+
+# Context Management Logs
+**/socratic_audit_pipeline_*.json
+context-management/intelligence/socratic_audit_pipeline_*.json
