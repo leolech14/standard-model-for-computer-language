@@ -132,15 +132,16 @@ class TestReactT2AtomAssignment:
         result = engine.analyze_file(str(FIXTURES_DIR / "class_component.tsx"))
 
         particles = result.get("particles", [])
-        error_boundary = next((p for p in particles if p["name"] == "ErrorBoundary"), None)
+        # Use Counter (plain class component), not ErrorBoundary (which is EXT.REACT.018)
+        counter = next((p for p in particles if p["name"] == "Counter"), None)
 
-        assert error_boundary is not None, "ErrorBoundary not found"
-        dims = error_boundary.get("dimensions", {})
+        assert counter is not None, "Counter not found"
+        dims = counter.get("dimensions", {})
 
         assert dims.get("D1_ECOSYSTEM") == "react", \
-            f"ErrorBoundary should detect react ecosystem, got {dims.get('D1_ECOSYSTEM')}"
+            f"Counter should detect react ecosystem, got {dims.get('D1_ECOSYSTEM')}"
         assert dims.get("D1_WHAT") == "EXT.REACT.002", \
-            f"ErrorBoundary (class component) should get EXT.REACT.002, got {dims.get('D1_WHAT')}"
+            f"Counter (class component) should get EXT.REACT.002, got {dims.get('D1_WHAT')}"
 
 
 @requires_tree_sitter

@@ -358,11 +358,20 @@ class AtomRegistry:
                 # Only .jsx/.tsx are React by extension; .js/.ts need import evidence
                 "file_patterns": [".jsx", ".tsx"],
                 "code_patterns": {
-                    # Functional Component - any function returning JSX
-                    "EXT.REACT.001": ["function", "return", "<", "/>"],  
-                    # Class Component
-                    "EXT.REACT.002": ["class", "extends", "React.Component"],  
-                    # Hooks - require parentheses to avoid substring false positives
+                    # Order matters: more specific patterns FIRST (dict preserves insertion order)
+                    # Error Boundary - most specific class component pattern
+                    "EXT.REACT.018": ["componentDidCatch", "getDerivedStateFromError"],
+                    # Class Component - check BEFORE functional (class has return/JSX in render())
+                    "EXT.REACT.002": ["extends React.Component", "extends Component", "extends PureComponent"],
+                    # Context - must be CREATING context, not just using Provider
+                    "EXT.REACT.015": ["createContext(", "React.createContext("],
+                    # Portal
+                    "EXT.REACT.016": ["createPortal"],
+                    # Suspense
+                    "EXT.REACT.017": ["Suspense"],
+                    # Fragment
+                    "EXT.REACT.019": ["Fragment", "<>"],
+                    # Hooks - check BEFORE generic functional component (hooks are functions too)
                     "EXT.REACT.005": ["useState("],
                     "EXT.REACT.006": ["useEffect("],
                     "EXT.REACT.007": ["useContext("],
@@ -370,16 +379,8 @@ class AtomRegistry:
                     "EXT.REACT.009": ["useCallback("],
                     "EXT.REACT.010": ["useRef("],
                     "EXT.REACT.011": ["useReducer("],
-                    # Context
-                    "EXT.REACT.015": ["createContext", "Context.Provider"],
-                    # Portal
-                    "EXT.REACT.016": ["createPortal"],
-                    # Suspense
-                    "EXT.REACT.017": ["Suspense"],
-                    # Error Boundary
-                    "EXT.REACT.018": ["componentDidCatch", "getDerivedStateFromError"],
-                    # Fragment
-                    "EXT.REACT.019": ["Fragment", "<>"],
+                    # Functional Component - LAST fallback for functions returning JSX
+                    "EXT.REACT.001": ["function", "return", "<", "/>"],
                 }
             },
             "ml": {
