@@ -16,8 +16,7 @@
 cd standard-model-of-code && ./collider full /path/to/repo --output /tmp/out
 
 # AI query (this project uses Gemini)
-# AI query (this project uses Gemini)
-python context-management/tools/ai/analyze.py "query" --set brain_core
+python context-management/tools/ai/analyze.py "query" --set brain
 
 # Socratic Verification (Antimatter Law Check)
 python context-management/tools/ai/analyze.py --verify pipeline

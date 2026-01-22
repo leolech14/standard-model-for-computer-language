@@ -3,7 +3,7 @@
 > Master registry tracking tree-sitter integration implementation status.
 >
 > **Created:** 2026-01-21
-> **Last Updated:** 2026-01-22 (Full dimension coverage for JS/Go/Rust)
+> **Last Updated:** 2026-01-22 (Full dimension coverage for JS including D6:EFFECT)
 > **Status:** PHASES 1-4, 6-7 COMPLETE, PHASE 5 DEFERRED
 
 ---
@@ -12,12 +12,12 @@
 
 | Phase | Status | Evidence |
 |-------|--------|----------|
-| **Phase 1: Foundation** | ✅ COMPLETE | `queries/`, loader, 24 .scm files |
+| **Phase 1: Foundation** | ✅ COMPLETE | `queries/`, loader, 25 .scm files |
 | **Phase 2: Scope Analysis** | ✅ COMPLETE | `scope_analyzer.py` (824 lines) |
 | **Phase 3: Control Flow** | ✅ COMPLETE | `control_flow_analyzer.py` (475 lines) |
 | **Phase 4: Pattern Detection** | ✅ COMPLETE | `data_flow_analyzer.py` (872 lines), patterns.scm |
 | **Phase 5: Advanced Features** | ⏸️ DEFERRED | Cross-file, injections - low alignment |
-| **Phase 6: D3 ROLE Queries** | ✅ COMPLETE | roles.scm (Python, JavaScript, TypeScript), imports.scm |
+| **Phase 6: D3 ROLE Queries** | ✅ COMPLETE | roles.scm (Python, JavaScript, TypeScript, Go, Rust), imports.scm |
 | **Phase 7: Visualization** | ✅ COMPLETE | UPB wiring, 15 SOURCES, 11 PRESETS |
 
 **Tests:** 216 passing (100%)
@@ -50,7 +50,7 @@ src/core/queries/
 │   ├── lifecycle.scm        # D7:LIFECYCLE
 │   ├── imports.scm          # Import/export extraction
 │   └── roles.scm            # D3:ROLE detection (278 lines)
-├── javascript/              # 8 queries (full dimension coverage)
+├── javascript/              # 9 queries (full dimension coverage)
 │   ├── symbols.scm
 │   ├── locals.scm
 │   ├── patterns.scm
@@ -58,7 +58,8 @@ src/core/queries/
 │   ├── roles.scm            # D3:ROLE (358 lines)
 │   ├── boundary.scm         # D4:BOUNDARY (219 lines)
 │   ├── state.scm            # D5:STATE (249 lines)
-│   └── lifecycle.scm        # D7:LIFECYCLE (252 lines)
+│   ├── lifecycle.scm        # D7:LIFECYCLE (252 lines)
+│   └── data_flow.scm        # D6:EFFECT (267 lines)
 ├── typescript/              # 2 queries
 │   ├── symbols.scm
 │   └── roles.scm            # D3:ROLE + interfaces/types (207 lines)
@@ -126,6 +127,10 @@ These tasks have low alignment with core mission and are deferred:
 
 | Hash | Description |
 |------|-------------|
+| `2102f8d` | JavaScript data_flow.scm for D6:EFFECT purity |
+| `76103db` | JavaScript dimension queries (D4, D5, D7) |
+| `19f2617` | Go and Rust roles.scm |
+| `5bd8d53` | JavaScript and TypeScript roles.scm |
 | `1212338` | Data flow analyzer (D6:EFFECT purity) |
 | `288ee4b` | Wire tree-sitter data to visualization (P7) |
 | `17f93cd` | Wire control flow metrics (P3-09) |
@@ -141,6 +146,6 @@ These tasks have low alignment with core mission and are deferred:
 - [x] Phase 3 Control Flow: COMPLETE
 - [x] Phase 4 Pattern Detection: COMPLETE
 - [ ] Phase 5 Advanced Features: DEFERRED
-- [x] Phase 6 D3 ROLE Queries: COMPLETE (roles.scm for Python, JavaScript, TypeScript)
+- [x] Phase 6 D3 ROLE Queries: COMPLETE (roles.scm for Python, JavaScript, TypeScript, Go, Rust)
 - [x] Phase 7 Visualization: COMPLETE
 - [x] All tests passing (216/216)
