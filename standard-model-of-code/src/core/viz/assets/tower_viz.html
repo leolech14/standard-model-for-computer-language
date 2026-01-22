@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Tower of Code - 3D Axial Holarchy</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+
+    <!-- 1. Libraries -->
+    <script src="//unpkg.com/three@0.149.0/build/three.min.js"></script>
+    <script src="//unpkg.com/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="//unpkg.com/d3-force-3d@3.0.3/dist/d3-force-3d.min.js"></script>
+
+    <!-- 2. Visualization Modules -->
+    <script src="modules/HolarchyMapper.js"></script>
+    <script src="modules/AxialLayout.js"></script>
+    <script src="modules/TowerRenderer.js"></script>
+    <script src="modules/CodomeHUD.js"></script>
+    <script src="modules/InteractionManager.js"></script>
+</head>
+
+<body>
+    <script>
+        // Main Entry Point
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('TowerViz: Starting...');
+
+            // A. Generate Mock Data (Test Graph)
+            // We create a hierarchy: 1 System -> 5 Packages -> 20 Files -> 50 Classes -> 200 Functions
+            const nodes = [];
+            const links = [];
+
+            function addNode(type, parentId = null) {
+                const id = type + '_' + nodes.length;
+                const node = { id, type, parentId };
+                nodes.push(node);
+                if (parentId) links.push({ source: id, target: parentId }); // Link to parent
+                return id;
+            }
+
+            // L7 System
+            const sysId = addNode('system');
+
+            // L6 Packages
+            for (let p = 0; p < 5; p++) {
+                const pkgId = addNode('package', sysId);
+
+                // L5 Files
+                for (let f = 0; f < 3; f++) {
+                    const fileId = addNode('file', pkgId);
+
+                    // L4 Classes
+                    for (let c = 0; c < 3; c++) {
+                        const classId = addNode('class', fileId);
+
+                        // L3 Functions
+                        for (let m = 0; m < 4; m++) {
+                            addNode('function', classId);
+                        }
+                    }
+                }
+            }
+
+            // Add some cross-links (flow)
+            for (let i = 0; i < 50; i++) {
+                const src = nodes[Math.floor(Math.random() * nodes.length)].id;
+                const tgt = nodes[Math.floor(Math.random() * nodes.length)].id;
+                if (src !== tgt) links.push({ source: src, target: tgt });
+            }
+
+            const graphData = { nodes, links };
+            console.log('Generated Graph:', graphData);
+
+            // B. Map Holarchy Levels (Data Layer)
+            HolarchyMapper.mapGraph(graphData);
+
+            // C. Run Layout Simulation (Physics Layer)
+            // Note: d3-force-3d is global as `d3` or `d3.forceSimulation`?
+            // The CDN usually exposes `d3` global with force-3d attached or just `d3` if it's the standalone bundle.
+            // d3-force-3d standalone exposes `d3.forceSimulation`.
+            const layout = AxialLayout.createSimulation(graphData, d3);
+
+            // D. Initialize Renderer (Visual Layer)
+            const viz = TowerRenderer.init(document.body, graphData);
+
+            // E. Initialize HUD (UI Layer)
+            CodomeHUD.init(document.body);
+
+            // F. Initialize Interaction (Input Layer)
+            InteractionManager.init(viz.camera, viz.scene, viz.renderer.domElement, CodomeHUD);
+
+            // G. Tick Loop (Sync Physics -> Visuals)
+            // TowerRenderer has its own loop, but we need to tick physics
+            // We can hook into TowerRenderer loop or run independently.
+            // For now, let's just let D3 run its internal timer, and TowerRenderer reads the positions in its animate loop.
+            // D3 updates node.x/y/z automatically. TowerRenderer reads them.
+            // It just works.
+        });
+    </script>
+</body>
+
+</html>

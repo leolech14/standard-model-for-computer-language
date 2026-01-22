@@ -13,7 +13,7 @@
  *   EDGE.apply()                  // Apply current mode to graph
  */
 
-const EDGE = (function() {
+const EDGE = (function () {
     'use strict';
 
     // =========================================================================
@@ -120,8 +120,8 @@ const EDGE = (function() {
      */
     function isInferredEdge(link) {
         return link?.inferred === true ||
-               link?.family === 'Codome' ||
-               link?._fromCodome === true;
+            link?.family === 'Codome' ||
+            link?._fromCodome === true;
     }
 
     function clamp01(value) {
@@ -194,7 +194,7 @@ const EDGE = (function() {
         _fileHueMap.clear();
         // Try DATA module first, then DM global
         const dm = typeof DATA !== 'undefined' ? DATA :
-                   (typeof DM !== 'undefined' ? DM : null);
+            (typeof DM !== 'undefined' ? DM : null);
         if (!dm || !dm.getFileBoundaries) return;
 
         const files = dm.getFileBoundaries();
@@ -471,7 +471,9 @@ const EDGE = (function() {
         });
 
         // Apply dashed line pattern to inferred CODOME edges
-        Graph.linkLineDash(link => getLineDash(link));
+        if (typeof Graph.linkLineDash === 'function') {
+            Graph.linkLineDash(link => getLineDash(link));
+        }
 
         // Don't override width in flow mode
         const flowMode = typeof window !== 'undefined' && window.flowMode;
