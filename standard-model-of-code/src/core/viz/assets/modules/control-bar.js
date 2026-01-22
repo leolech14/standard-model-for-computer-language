@@ -142,6 +142,12 @@ const CONTROL_BAR = (function () {
                         <option value="max_nesting_depth">Nesting Depth</option>
                         <option value="nesting_rating">Nesting Rating</option>
                     </optgroup>
+                    <optgroup label="RPBL Character">
+                        <option value="rpbl_responsibility">Responsibility (R)</option>
+                        <option value="rpbl_purity">Purity (P)</option>
+                        <option value="rpbl_boundary">Boundary (B)</option>
+                        <option value="rpbl_lifecycle">Lifecycle (L)</option>
+                    </optgroup>
                 </select>
             </div>
         `;

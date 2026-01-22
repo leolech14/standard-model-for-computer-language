@@ -1015,6 +1015,15 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     with StageTimer(perf_manager, "Stage 2: Standard Model Enrichment") as timer:
         nodes = enrich_with_standard_model(nodes)
         rpbl_count = sum(1 for n in nodes if n.get('rpbl'))
+
+        # Flatten RPBL scores for UPB binding (P4-05/07/08)
+        for node in nodes:
+            rpbl = node.get('rpbl', {})
+            node['rpbl_responsibility'] = rpbl.get('responsibility', 0)
+            node['rpbl_purity'] = rpbl.get('purity', 0)
+            node['rpbl_boundary'] = rpbl.get('boundary', 0)
+            node['rpbl_lifecycle'] = rpbl.get('lifecycle', 0)
+
         timer.set_output(nodes=len(nodes), rpbl_enriched=rpbl_count)
     print(f"   → {rpbl_count} nodes with RPBL scores")
 

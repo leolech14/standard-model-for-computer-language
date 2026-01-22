@@ -200,6 +200,46 @@ const UPB_ENDPOINTS = (function () {
             label: 'Nesting Rating',
             values: ['shallow', 'moderate', 'deep', 'very_deep'],
             tags: ['complexity', 'control-flow', 'categorical']
+        },
+
+        // =====================================================================
+        // RPBL SCORES (P4-05/07/08) - Theory Character Dimensions
+        // =====================================================================
+
+        // Responsibility (R) - How much does this node do?
+        rpbl_responsibility: {
+            Type: 'continuous',
+            domain: 'node',
+            label: 'Responsibility (R)',
+            range: [0, 10],
+            tags: ['rpbl', 'theory', 'D3', 'quantitative']
+        },
+
+        // Purity (P) - How pure is this node?
+        rpbl_purity: {
+            Type: 'continuous',
+            domain: 'node',
+            label: 'Purity (P)',
+            range: [0, 10],
+            tags: ['rpbl', 'theory', 'D6', 'quantitative']
+        },
+
+        // Boundary (B) - How exposed is this node?
+        rpbl_boundary: {
+            Type: 'continuous',
+            domain: 'node',
+            label: 'Boundary (B)',
+            range: [0, 10],
+            tags: ['rpbl', 'theory', 'D4', 'quantitative']
+        },
+
+        // Lifecycle (L) - What lifecycle stage?
+        rpbl_lifecycle: {
+            Type: 'continuous',
+            domain: 'node',
+            label: 'Lifecycle (L)',
+            range: [0, 10],
+            tags: ['rpbl', 'theory', 'D7', 'quantitative']
         }
     };
 

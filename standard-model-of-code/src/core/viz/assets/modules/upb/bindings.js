@@ -269,6 +269,46 @@ const UPB_BINDINGS = (function () {
             scale: 'linear',
             range: [120, 0],  // Green (120) → Red (0)
             description: 'Simple=green, Complex=red'
+        },
+
+        // =====================================================================
+        // RPBL PRESETS (P4-05/07/08) - Theory Character Visualization
+        // =====================================================================
+
+        // Responsibility → Size (high responsibility = larger)
+        'responsibility-size': {
+            source: 'rpbl_responsibility',
+            target: 'nodeSize',
+            scale: 'linear',
+            range: [3, 25],
+            description: 'High responsibility nodes appear larger'
+        },
+
+        // Purity → Lightness (pure = bright, impure = dark)
+        'rpbl-purity-lightness': {
+            source: 'rpbl_purity',
+            target: 'lightness',
+            scale: 'linear',
+            range: [30, 90],
+            description: 'Pure code appears brighter'
+        },
+
+        // Boundary → Saturation (exposed = vivid, internal = muted)
+        'boundary-saturation': {
+            source: 'rpbl_boundary',
+            target: 'saturation',
+            scale: 'linear',
+            range: [20, 100],
+            description: 'Exposed boundaries appear more vivid'
+        },
+
+        // Lifecycle → Opacity (stable = solid, transient = faded)
+        'lifecycle-opacity': {
+            source: 'rpbl_lifecycle',
+            target: 'opacity',
+            scale: 'linear',
+            range: [0.3, 1.0],
+            description: 'Long-lived code appears more solid'
         }
     };
 
