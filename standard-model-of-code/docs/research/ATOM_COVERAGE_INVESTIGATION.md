@@ -1012,6 +1012,48 @@ Collider        1,274       17       1%    python
 
 ---
 
+## Claims Ladder
+
+Claims upgrade only when evidence supports them:
+
+| Level | Status | Evidence Required | Current Claims |
+|-------|--------|-------------------|----------------|
+| L0 | Observed in 1 repo | Single run | - |
+| L1 | **CURRENT** | 7 repos, causal chains | Pareto distribution (93-97%) |
+| L2 | Pending | 100+ stratified repos, CI | - |
+| L3 | Future | Stable across versions, regression gates | - |
+
+**Rule:** Never upgrade claim wording without meeting evidence requirements for the target level.
+
+---
+
+## Phase 2: Generalization Program
+
+This document represents **Phase 1** (discovery + causal proof). Phase 2 will generalize findings.
+
+| Goal | Success Metric | Status |
+|------|----------------|--------|
+| G1: Generalization | Pareto claim holds across 100+ stratified repos | Pending |
+| G2: T2 Quality | Precision measured per ecosystem (target: >85%) | Pending |
+| G3: Functional Enrichment | Security/functional ratio: 77/23 → 55/45 | Pending |
+
+**Protocol:** See `docs/research/ATOM_COVERAGE_PHASE2_PROTOCOL.md`
+
+**Research Tooling:**
+```bash
+# Inventory analysis
+python tools/research/atom_inventory.py --output inventory.json
+
+# Coverage from analysis
+python tools/research/atom_coverage.py .collider/unified_analysis.json
+
+# Quality checks (for CI)
+python tools/research/atom_inventory.py --check-duplicates
+python tools/research/atom_coverage.py analysis.json --check-unknown 10
+```
+
+---
+
 ## Version History
 
 | Date | Change | Author |
@@ -1021,3 +1063,4 @@ Collider        1,274       17       1%    python
 | 2026-01-22 | Confidence scores validated | Claude Opus 4.5 |
 | 2026-01-22 | Added Atoms vs Roles distinction (Gemini validation fix) | Claude Opus 4.5 |
 | 2026-01-22 | **HARDENING**: Scoped claims, operational definitions, evidence ledgers, falsification tests, runnable snippets | Claude Opus 4.5 |
+| 2026-01-22 | Added Claims Ladder + Phase 2 reference | Claude Opus 4.5 |
