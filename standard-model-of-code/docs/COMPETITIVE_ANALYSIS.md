@@ -196,34 +196,210 @@ class SecurityModule:
 
 ---
 
+#### M7: Compliance Modules (Enterprise Requirement)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **OWASP Top 10** | HIGH | All major tools | Security vulnerability rules |
+| **PCI-DSS Rules** | MEDIUM | Veracode, Checkmarx | Payment card compliance |
+| **GDPR Data Flow** | MEDIUM | Snyk, SonarQube | Privacy compliance tracking |
+| **Code Smell Rules** | HIGH | SonarQube, CodeClimate | Maintainability rules |
+| **False Positive Tuning** | HIGH | All tools | Suppress/configure rules |
+
+**Why needed:** Enterprise customers require compliance certifications. Without OWASP/PCI-DSS rules, Collider cannot be adopted in regulated industries.
+
+---
+
+#### M8: Cloud/SaaS Modules (Deployment Options)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **Hosted SaaS** | HIGH | All major tools | Cloud-hosted analysis |
+| **Multi-tenant** | MEDIUM | SonarCloud, Snyk | Organization support |
+| **Multi-repo Support** | MEDIUM | All major tools | Monorepo + multi-repo |
+| **Self-hosted Docker** | HIGH | SonarQube | On-prem deployment |
+
+**Why needed:** Currently Collider is CLI-only. Teams need shared dashboards and centralized analysis.
+
+---
+
+#### M9: Collaboration Modules (Team Features)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **PR Comments** | HIGH | All CI tools | Auto-comment on PRs |
+| **Issue Assignment** | MEDIUM | SonarQube, Snyk | Assign findings to devs |
+| **Team Dashboards** | MEDIUM | CodeClimate | Aggregate team metrics |
+| **Annotations API** | LOW | GitHub | In-file annotations |
+
+**Why needed:** Individual analysis is useful; team-wide visibility drives adoption.
+
+---
+
+#### M10: Historical/Trends Modules (Time-Series)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **Trend Charts** | HIGH | CodeClimate, SonarQube | Metrics over time |
+| **Regression Detection** | HIGH | All CI tools | Alert on degradation |
+| **Technical Debt Tracker** | MEDIUM | SonarQube | Debt accumulation |
+| **Custom Dashboards** | LOW | Enterprise tools | Build custom reports |
+
+**Why needed:** Point-in-time analysis is insufficient. Teams need to see improvement/degradation trends.
+
+---
+
+#### M11: Quality Gates Modules (CI Blocking)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **Pass/Fail Thresholds** | HIGH | All CI tools | Block merge on violations |
+| **Custom Gate Rules** | MEDIUM | SonarQube | Define custom criteria |
+| **Baseline Comparison** | MEDIUM | Snyk | Compare to baseline |
+| **Branch Policies** | LOW | GitHub/GitLab | Enforce on specific branches |
+
+**Why needed:** Without quality gates, Collider is advisory-only. Teams need enforcement.
+
+---
+
+#### M12: Incremental Analysis Modules (Performance)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **Diff-only Analysis** | HIGH | Semgrep, SonarQube | Analyze only changed files |
+| **Result Caching** | MEDIUM | All tools | Cache unchanged results |
+| **Parallel Processing** | MEDIUM | Built-in potential | Multi-core analysis |
+| **Streaming Results** | LOW | Large codebase need | Progressive output |
+
+**Why needed:** Full analysis on every PR is slow. Incremental mode enables CI adoption.
+
+---
+
+#### M13: API/SDK Modules (Programmatic Access)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **REST API** | HIGH | All SaaS tools | Programmatic access |
+| **GraphQL API** | LOW | Modern tools | Flexible queries |
+| **Webhooks** | MEDIUM | All CI tools | Event notifications |
+| **Python SDK** | MEDIUM | Snyk, Semgrep | Native integration |
+
+**Why needed:** Enables custom tooling, dashboards, and integration with internal systems.
+
+---
+
+#### M14: Duplicate Detection Modules (Code Quality)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **Clone Detection** | MEDIUM | SonarQube, PMD | Find copy-pasted code |
+| **Near-duplicate** | LOW | Advanced tools | Similar but not identical |
+| **Cross-repo Clones** | LOW | Enterprise need | Duplicates across repos |
+
+**Why needed:** DRY violations are a common code smell. Most competitors detect them.
+
+---
+
+#### M15: Test Coverage Modules (Quality Metrics)
+
+| Module | Priority | Competitors | Description |
+|--------|----------|-------------|-------------|
+| **Coverage Import** | HIGH | CodeClimate | Import lcov/cobertura |
+| **Coverage Overlay** | MEDIUM | Unique to Collider | Show coverage on 3D graph |
+| **Uncovered Complexity** | HIGH | Unique | High complexity + low coverage |
+| **Test Gap Analysis** | MEDIUM | SonarQube | Identify untested areas |
+
+**Why needed:** Coverage data combined with complexity creates powerful insights unique to Collider.
+
+---
+
+## COMPLETE GAP COVERAGE MATRIX
+
+| Gap | Module | Priority |
+|-----|--------|----------|
+| Languages (5 → 15+) | M1 | HIGH |
+| SAST/Security Rules | M2 | HIGH |
+| CI/CD Integration | M3 | HIGH |
+| IDE Plugins | M3 | HIGH |
+| Export Formats (SARIF) | M4 | HIGH |
+| Coupling/Cohesion | M5 | HIGH |
+| Diff Visualization | M6 | HIGH |
+| OWASP/PCI-DSS Compliance | M7 | HIGH |
+| Code Smell Rules | M7 | HIGH |
+| Cloud/SaaS Deployment | M8 | HIGH |
+| PR Comments | M9 | HIGH |
+| Team Dashboards | M9 | MEDIUM |
+| Trend Charts | M10 | HIGH |
+| Regression Detection | M10 | HIGH |
+| Quality Gates | M11 | HIGH |
+| Incremental Analysis | M12 | HIGH |
+| REST API | M13 | HIGH |
+| Clone Detection | M14 | MEDIUM |
+| Test Coverage Import | M15 | HIGH |
+| Coverage Overlay | M15 | MEDIUM |
+
+**Total Gaps Identified:** 24
+**Gaps Covered by M1-M15:** 24 (100%)
+
+---
+
 ## IMPLEMENTATION PRIORITY MATRIX
 
 ```
-                        HIGH VALUE
-                            │
-     ┌──────────────────────┼──────────────────────┐
-     │                      │                      │
-     │   M2: Security    ★  │  ★  M1: Languages    │
-     │   M3: GitHub CI      │     M3: VS Code      │
-     │   M4: SARIF          │     M5: Coupling     │
-     │                      │                      │
-LOW ─┼──────────────────────┼──────────────────────┼─ HIGH
-EFFORT                      │                      EFFORT
-     │                      │                      │
-     │   M6: Diff View      │     M5: AI Refactor  │
-     │   M4: GraphML        │     M6: AR/VR        │
-     │                      │                      │
-     └──────────────────────┼──────────────────────┘
-                            │
-                        LOW VALUE
+                           HIGH VALUE
+                               │
+      ┌────────────────────────┼────────────────────────┐
+      │                        │                        │
+      │  M3: GitHub CI    ★    │   ★   M1: Languages    │
+      │  M4: SARIF             │       M3: VS Code      │
+      │  M11: Quality Gates    │       M8: Docker       │
+      │  M12: Incremental      │       M2: SAST         │
+      │                        │                        │
+ LOW ─┼────────────────────────┼────────────────────────┼─ HIGH
+EFFORT                         │                        EFFORT
+      │                        │                        │
+      │  M6: Diff View         │       M7: Compliance   │
+      │  M15: Coverage Import  │       M8: SaaS         │
+      │  M9: PR Comments       │       M10: Dashboards  │
+      │                        │       M13: REST API    │
+      │                        │                        │
+      └────────────────────────┼────────────────────────┘
+                               │
+                           LOW VALUE
 ```
 
-**Recommended Order:**
+**Recommended Implementation Phases:**
+
+### Phase 1: CI Adoption (M3, M4, M11, M12)
+Quick wins that enable CI/CD integration:
 1. **M3: GitHub Actions** - Low effort, high visibility
 2. **M4: SARIF Export** - Enables GitHub Security tab
-3. **M1: Java Support** - Largest language gap
-4. **M3: VS Code Extension** - Developer adoption
-5. **M2: SAST Scanner** - Competitive necessity
+3. **M11: Quality Gates** - Pass/fail thresholds
+4. **M12: Incremental** - Fast re-analysis for PRs
+
+### Phase 2: Developer Experience (M1, M3-IDE, M6)
+Expand reach and usability:
+5. **M1: Java/C++ Support** - Largest language gaps
+6. **M3: VS Code Extension** - IDE integration
+7. **M6: Diff Visualization** - Compare analyses
+
+### Phase 3: Security & Compliance (M2, M7)
+Enterprise requirements:
+8. **M2: SAST Scanner** - Security rules
+9. **M7: OWASP/PCI-DSS** - Compliance certification
+
+### Phase 4: Platform Features (M8, M9, M10, M13)
+Team and enterprise scale:
+10. **M8: Cloud/SaaS** - Hosted deployment
+11. **M9: Collaboration** - PR comments, team dashboards
+12. **M10: Historical Trends** - Time-series analysis
+13. **M13: REST API** - Programmatic access
+
+### Phase 5: Advanced Features (M5, M14, M15)
+Differentiation and depth:
+14. **M5: Coupling/Cohesion** - Architecture metrics
+15. **M14: Clone Detection** - DRY violations
+16. **M15: Test Coverage** - Coverage overlay on 3D graph
 
 ---
 
@@ -231,22 +407,65 @@ EFFORT                      │                      EFFORT
 
 ### Current Baseline
 
-| Metric | Current | Target (6mo) | Target (12mo) |
-|--------|---------|--------------|---------------|
-| Languages | 5 | 10 | 15 |
-| CI/CD Integrations | 0 | 2 | 4 |
-| IDE Plugins | 0 | 1 | 2 |
-| Security Rules | 0 | 50 | 200 |
-| Export Formats | 2 (JSON, HTML) | 4 | 6 |
+| Metric | Current | Target (6mo) | Target (12mo) | Target (24mo) |
+|--------|---------|--------------|---------------|---------------|
+| Languages | 5 | 10 | 15 | 20 |
+| CI/CD Integrations | 0 | 2 | 4 | 4 |
+| IDE Plugins | 0 | 1 | 2 | 3 |
+| Security Rules | 0 | 50 | 200 | 500 |
+| Export Formats | 2 (JSON, HTML) | 4 | 6 | 8 |
+| Modules Implemented | 0/15 | 4/15 | 8/15 | 15/15 |
+| API Endpoints | 0 | 0 | 10 | 50 |
+| Team Features | 0 | 0 | 3 | 10 |
+
+### Module Implementation Tracking
+
+| Module | Status | Target |
+|--------|--------|--------|
+| M1: Languages | 5/20 | 6mo: 10, 12mo: 15 |
+| M2: Security | 0% | 6mo: SAST basics |
+| M3: Integrations | 0% | 6mo: GitHub Actions + SARIF |
+| M4: Export | 33% | 6mo: SARIF |
+| M5: Analysis | 0% | 12mo: Coupling |
+| M6: Visualization | 0% | 6mo: Diff view |
+| M7: Compliance | 0% | 12mo: OWASP Top 10 |
+| M8: Cloud/SaaS | 0% | 12mo: Docker |
+| M9: Collaboration | 0% | 12mo: PR comments |
+| M10: Trends | 0% | 18mo: Basic charts |
+| M11: Quality Gates | 0% | 6mo: Pass/fail |
+| M12: Incremental | 0% | 6mo: Diff-only |
+| M13: API/SDK | 0% | 12mo: REST API |
+| M14: Duplicates | 0% | 18mo: Clone detection |
+| M15: Coverage | 0% | 12mo: Import |
 
 ### Competitive Parity Checklist
 
-- [ ] Language coverage ≥ 15 (vs SonarQube 30)
-- [ ] SARIF export for GitHub Security
-- [ ] GitHub Actions integration
-- [ ] VS Code extension
-- [ ] Basic SAST rules (OWASP Top 10)
-- [ ] Dependency vulnerability scanning
+**Phase 1 (CI Adoption):**
+- [ ] GitHub Actions integration (M3)
+- [ ] SARIF export for GitHub Security (M4)
+- [ ] Quality gates - pass/fail thresholds (M11)
+- [ ] Incremental analysis for PRs (M12)
+
+**Phase 2 (Developer Experience):**
+- [ ] Language coverage ≥ 15 (M1)
+- [ ] VS Code extension (M3)
+- [ ] Diff visualization (M6)
+
+**Phase 3 (Security & Compliance):**
+- [ ] Basic SAST rules - OWASP Top 10 (M2)
+- [ ] Compliance rules - PCI-DSS basics (M7)
+- [ ] False positive tuning (M7)
+
+**Phase 4 (Platform Features):**
+- [ ] Docker self-hosted deployment (M8)
+- [ ] PR auto-comments (M9)
+- [ ] Historical trend charts (M10)
+- [ ] REST API (M13)
+
+**Phase 5 (Advanced Features):**
+- [ ] Coupling/cohesion metrics (M5)
+- [ ] Clone detection (M14)
+- [ ] Test coverage overlay (M15)
 
 ---
 
@@ -284,4 +503,5 @@ This is NOT something SonarQube, Semgrep, or any competitor offers.
 
 | Date | Change |
 |------|--------|
-| 2026-01-22 | Initial creation with competitive analysis and module roadmap |
+| 2026-01-22 | Initial creation with competitive analysis and 6-module roadmap |
+| 2026-01-22 | Expanded to 15 modules (M1-M15) covering all 24 identified gaps |
