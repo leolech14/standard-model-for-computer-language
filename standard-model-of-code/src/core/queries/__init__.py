@@ -45,15 +45,29 @@ class QueryBundle:
     highlights: Optional[str] = None   # Syntax highlighting query
     injections: Optional[str] = None   # Language injection query
     patterns: Optional[str] = None     # Pattern detection query
+    imports: Optional[str] = None      # Import/export extraction
+    boundary: Optional[str] = None     # D4 boundary classification
+    state: Optional[str] = None        # D5 state classification
+    lifecycle: Optional[str] = None    # D7 lifecycle classification
+    data_flow: Optional[str] = None    # Data flow analysis
+    roles: Optional[str] = None        # D3 role classification
     _raw_files: Dict[str, str] = field(default_factory=dict)
 
     def has_query(self, query_type: str) -> bool:
         """Check if a query type is available."""
-        return getattr(self, query_type, None) is not None
+        # Check explicit attribute first, then raw files
+        attr_val = getattr(self, query_type, None)
+        if attr_val is not None:
+            return True
+        return query_type in self._raw_files
 
     def get_query(self, query_type: str) -> Optional[str]:
         """Get a query by type name."""
-        return getattr(self, query_type, None)
+        # Check explicit attribute first, then raw files
+        attr_val = getattr(self, query_type, None)
+        if attr_val is not None:
+            return attr_val
+        return self._raw_files.get(query_type)
 
 
 class QueryLoader:
@@ -61,7 +75,7 @@ class QueryLoader:
 
     # Standard query types (including dimension classifiers)
     QUERY_TYPES = ['symbols', 'locals', 'highlights', 'injections', 'patterns',
-                   'boundary', 'state', 'lifecycle', 'data_flow']
+                   'boundary', 'state', 'lifecycle', 'data_flow', 'imports', 'roles']
 
     # Language aliases (multiple extensions map to same queries)
     LANGUAGE_ALIASES = {
@@ -145,6 +159,12 @@ class QueryLoader:
             highlights=raw_files.get('highlights'),
             injections=raw_files.get('injections'),
             patterns=raw_files.get('patterns'),
+            imports=raw_files.get('imports'),
+            boundary=raw_files.get('boundary'),
+            state=raw_files.get('state'),
+            lifecycle=raw_files.get('lifecycle'),
+            data_flow=raw_files.get('data_flow'),
+            roles=raw_files.get('roles'),
             _raw_files=raw_files,
         )
 

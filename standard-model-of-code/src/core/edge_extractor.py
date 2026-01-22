@@ -44,6 +44,23 @@ try:
 except ImportError:
     tree_sitter_typescript = None
 
+# Scope analyzer for reference resolution
+try:
+    from src.core.scope_analyzer import QueryBasedScopeAnalyzer, ScopeGraph
+    SCOPE_ANALYZER_AVAILABLE = True
+except ImportError:
+    try:
+        from core.scope_analyzer import QueryBasedScopeAnalyzer, ScopeGraph
+        SCOPE_ANALYZER_AVAILABLE = True
+    except ImportError:
+        try:
+            from scope_analyzer import QueryBasedScopeAnalyzer, ScopeGraph
+            SCOPE_ANALYZER_AVAILABLE = True
+        except ImportError:
+            SCOPE_ANALYZER_AVAILABLE = False
+            QueryBasedScopeAnalyzer = None
+            ScopeGraph = None
+
 
 # =============================================================================
 # JS MODULE RESOLVER - Track aliases, window exports, and resolve member calls
@@ -616,16 +633,25 @@ class TreeSitterEdgeStrategy(EdgeExtractionStrategy):
     """
     Base class for Tree-sitter based edge extraction.
     Parses body_source as AST and runs queries for precise call detection.
+
+    Enhanced with scope analysis:
+    - Uses QueryBasedScopeAnalyzer to build scope graph
+    - Filters out calls to local definitions (parameters, local variables)
+    - Higher confidence for calls that resolve to known particles
     """
-    
+
     def __init__(self, parser: Any, language_name: str):
         self.parser = parser
         self.language_name = language_name
-    
+        # Initialize scope analyzer if available
+        self.scope_analyzer: Optional[Any] = None
+        if SCOPE_ANALYZER_AVAILABLE and QueryBasedScopeAnalyzer is not None:
+            self.scope_analyzer = QueryBasedScopeAnalyzer()
+
     def get_call_node_types(self) -> Set[str]:
         """Return set of AST node types that represent function calls."""
         return {'call', 'call_expression'}
-    
+
     def extract_callee_name(self, node: Any, source_bytes: bytes) -> Optional[str]:
         """Extract the function/method name from a call node."""
         # Try 'function' field first (Python, JS)
@@ -641,7 +667,38 @@ class TreeSitterEdgeStrategy(EdgeExtractionStrategy):
                 if attr:
                     return attr.text.decode()
         return None
-    
+
+    def extract_callee_with_location(self, node: Any, source_bytes: bytes) -> Optional[Tuple[str, int]]:
+        """Extract callee name and its byte position for scope resolution."""
+        func_node = node.child_by_field_name('function')
+        if func_node:
+            if func_node.type == 'identifier':
+                return (func_node.text.decode(), func_node.start_byte)
+            if func_node.type in ('attribute', 'member_expression'):
+                attr = func_node.child_by_field_name('attribute') or func_node.child_by_field_name('property')
+                if attr:
+                    return (attr.text.decode(), attr.start_byte)
+        return None
+
+    def get_local_definitions(self, tree: Any, source: str) -> Set[str]:
+        """
+        Get names that are defined locally within this scope.
+        These should not create edges to global particles.
+        """
+        if not self.scope_analyzer:
+            return set()
+
+        try:
+            scope_graph = self.scope_analyzer.analyze(tree, source, self.language_name)
+            local_names = set()
+            for defn in scope_graph.definitions.values():
+                # Only include non-global definitions
+                if defn.scope_id != 0:  # scope_id 0 is typically the root/global scope
+                    local_names.add(defn.name)
+            return local_names
+        except Exception:
+            return set()
+
     def extract_edges(self, particle: Dict, particle_by_name: Dict[str, List[Dict]]) -> List[Dict]:
         edges = []
         body = particle.get('body_source', '')
@@ -656,6 +713,9 @@ class TreeSitterEdgeStrategy(EdgeExtractionStrategy):
             tree = self.parser.parse(source_bytes)
         except Exception:
             return edges  # Fallback to empty if parsing fails
+
+        # Get local definitions to filter out local calls
+        local_defs = self.get_local_definitions(tree, body)
 
         call_types = self.get_call_node_types()
         found_calls: Set[str] = set()
@@ -672,6 +732,10 @@ class TreeSitterEdgeStrategy(EdgeExtractionStrategy):
 
         # Match against known particles (prefer same-file)
         for call in found_calls:
+            # Skip if the call refers to a local definition (parameter, local var)
+            if call in local_defs:
+                continue
+
             target = _find_target_particle(call, caller_file, particle_by_name)
             if target:
                 target_id = _get_particle_id(target)

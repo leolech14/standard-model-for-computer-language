@@ -560,10 +560,10 @@ class TreeSitterUniversalEngine:
             """
         
         try:
-            query = tree_sitter.Query(tree_sitter.Language(lang_obj), query_scm)
+            query = tree_sitter.Query(ts_lang, query_scm)
         except Exception as e:
             # Fallback for languages that might error on the complex query
-            print(f"DEBUG: Complex query failed ({e}), using simple query")
+            logging.debug(f"Complex query failed ({e}), using simple query")
             if parser_name == "rust":
                 query_scm = """
                 (function_item) @func
@@ -574,7 +574,7 @@ class TreeSitterUniversalEngine:
                 (function_declaration) @func
                 (class_declaration) @class
                 """
-            query = tree_sitter.Query(tree_sitter.Language(lang_obj), query_scm)
+            query = tree_sitter.Query(ts_lang, query_scm)
 
         cursor = tree_sitter.QueryCursor(query)
         captures = cursor.captures(root_node)

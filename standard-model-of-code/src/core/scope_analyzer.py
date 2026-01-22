@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SCOPE ANALYZER - Lexical scope analysis using tree-sitter AST.
+SCOPE ANALYZER - Query-based lexical scope analysis using tree-sitter.
 
 Provides scope-aware analysis for:
 - Variable binding resolution (ref → def)
@@ -8,9 +8,10 @@ Provides scope-aware analysis for:
 - Variable shadowing detection (code smell)
 
 Architecture:
-- Per-file stateful traversal (O(n) not O(n²))
-- Manual AST traversal (language-agnostic, robust)
-- Visitor pattern compatible with EdgeExtractor
+- Uses .scm query files (locals.scm) with @local.scope, @local.definition, @local.reference
+- Implements tree-sitter-highlight algorithm for resolution
+- Supports Python PEP 227 (class bodies don't propagate scope)
+- Supports JavaScript TDZ (Temporal Dead Zone for let/const)
 
 Usage:
     from src.core.scope_analyzer import analyze_scopes, find_unused_definitions
@@ -20,9 +21,11 @@ Usage:
     shadowed = find_shadowed_definitions(scope_graph)
 """
 
+import logging
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Tuple
-from pathlib import Path
+from typing import Dict, List, Optional, Set, Tuple, Any
+
+logger = logging.getLogger(__name__)
 
 
 # =============================================================================
@@ -40,6 +43,7 @@ class Definition:
     end_line: int
     scope_id: int
     kind: str = 'variable'  # variable, function, parameter, class, import
+    available_after_byte: int = 0  # When the definition becomes usable (for TDZ)
 
     def __hash__(self):
         return hash((self.name, self.node_id, self.scope_id))
@@ -83,6 +87,7 @@ class ScopeGraph:
     definitions: Dict[int, Definition] = field(default_factory=dict)  # by node_id
     references: List[Reference] = field(default_factory=list)
     root_scope_id: int = 0
+    query_based: bool = False  # True if used .scm queries
 
     def get_scope(self, scope_id: int) -> Optional[Scope]:
         return self.scopes.get(scope_id)
@@ -95,15 +100,314 @@ class ScopeGraph:
 
 
 # =============================================================================
-# SCOPE-DEFINING NODE TYPES BY LANGUAGE
+# QUERY-BASED SCOPE ANALYZER
 # =============================================================================
 
+class QueryBasedScopeAnalyzer:
+    """
+    Scope analyzer using tree-sitter .scm queries.
+
+    Uses locals.scm with:
+    - @local.scope: Node that creates a new scope
+    - @local.definition: Node that defines a name
+    - @local.definition-value: Initializer (for available_after_byte)
+    - @local.reference: Node that references a name
+    """
+
+    # Scope types that don't inherit (Python PEP 227)
+    NON_INHERITING_SCOPES = {
+        'python': {'class_definition'},
+    }
+
+    # Hoisted definitions (JavaScript var, function declarations)
+    HOISTED_PATTERNS = {
+        'javascript': {'variable_declaration', 'function_declaration'},
+        'typescript': {'variable_declaration', 'function_declaration'},
+    }
+
+    def __init__(self):
+        self._queries: Dict[str, Any] = {}
+        self._parsers: Dict[str, Any] = {}
+
+    def _ensure_query(self, language: str) -> bool:
+        """Load the locals.scm query for a language."""
+        if language in self._queries:
+            return True
+
+        try:
+            import tree_sitter
+
+            # Get query loader
+            try:
+                from src.core.queries import get_query_loader
+            except ImportError:
+                try:
+                    from core.queries import get_query_loader
+                except ImportError:
+                    from queries import get_query_loader
+
+            loader = get_query_loader()
+            query_text = loader.load_query(language, 'locals')
+
+            if not query_text:
+                logger.debug(f"No locals.scm for {language}")
+                return False
+
+            # Get language object
+            if language == 'python':
+                import tree_sitter_python
+                lang_obj = tree_sitter_python.language()
+            elif language == 'javascript':
+                import tree_sitter_javascript
+                lang_obj = tree_sitter_javascript.language()
+            elif language == 'typescript':
+                import tree_sitter_typescript
+                lang_obj = tree_sitter_typescript.language_typescript()
+            else:
+                return False
+
+            ts_lang = tree_sitter.Language(lang_obj)
+            self._queries[language] = tree_sitter.Query(ts_lang, query_text)
+
+            # Create parser
+            parser = tree_sitter.Parser()
+            parser.language = ts_lang
+            self._parsers[language] = parser
+
+            return True
+
+        except Exception as e:
+            logger.warning(f"Failed to load locals query for {language}: {e}")
+            return False
+
+    def analyze(self, tree, source: bytes, language: str, file_path: str = '') -> ScopeGraph:
+        """
+        Analyze scopes using .scm query captures.
+
+        Algorithm:
+        1. Run locals.scm query to get all captures
+        2. Build scope tree from @local.scope captures
+        3. Associate definitions with scopes from @local.definition
+        4. Collect references from @local.reference
+        5. Resolve references using tree-sitter-highlight algorithm
+        """
+        import tree_sitter
+
+        graph = ScopeGraph(file_path=file_path, language=language, query_based=True)
+
+        if not self._ensure_query(language):
+            logger.debug(f"Falling back to manual analysis for {language}")
+            return _analyze_manual(tree, source, language, file_path)
+
+        query = self._queries[language]
+        cursor = tree_sitter.QueryCursor(query)
+        captures = cursor.captures(tree.root_node)
+
+        # Collect captures by type
+        scope_nodes = []
+        definition_nodes = []
+        definition_value_nodes = {}  # node_id -> value_node
+        reference_nodes = []
+
+        for capture_name, nodes in captures.items():
+            for node in nodes:
+                if capture_name == 'local.scope':
+                    scope_nodes.append(node)
+                elif capture_name == 'local.definition':
+                    definition_nodes.append(node)
+                elif capture_name == 'local.definition-value':
+                    # Associate with parent definition
+                    # Find the sibling definition node
+                    definition_value_nodes[node.id] = node
+                elif capture_name == 'local.reference':
+                    reference_nodes.append(node)
+
+        # Sort scopes by start position (ensures parents processed before children)
+        scope_nodes.sort(key=lambda n: (n.start_byte, -n.end_byte))
+
+        # Build scope tree
+        scope_stack: List[int] = []
+        next_scope_id = 0
+        node_to_scope: Dict[int, int] = {}  # node_id -> scope_id
+
+        non_inheriting = self.NON_INHERITING_SCOPES.get(language, set())
+
+        for node in scope_nodes:
+            # Pop scopes that have ended
+            while scope_stack:
+                top_scope = graph.scopes[scope_stack[-1]]
+                if node.start_byte >= top_scope.end_byte:
+                    scope_stack.pop()
+                else:
+                    break
+
+            parent_id = scope_stack[-1] if scope_stack else None
+            inherits = node.type not in non_inheriting
+
+            scope = Scope(
+                id=next_scope_id,
+                parent_id=parent_id,
+                start_byte=node.start_byte,
+                end_byte=node.end_byte,
+                start_line=node.start_point[0] + 1,
+                end_line=node.end_point[0] + 1,
+                kind=node.type,
+                inherits=inherits,
+            )
+
+            graph.scopes[next_scope_id] = scope
+            node_to_scope[node.id] = next_scope_id
+
+            if parent_id is not None:
+                graph.scopes[parent_id].children.append(next_scope_id)
+
+            if next_scope_id == 0:
+                graph.root_scope_id = 0
+
+            scope_stack.append(next_scope_id)
+            next_scope_id += 1
+
+        # Build definitions
+        hoisted = self.HOISTED_PATTERNS.get(language, set())
+
+        for node in definition_nodes:
+            # Find containing scope
+            scope_id = _find_containing_scope(node, graph.scopes)
+            if scope_id is None:
+                scope_id = graph.root_scope_id
+
+            name = source[node.start_byte:node.end_byte].decode('utf8', errors='replace')
+
+            # Determine available_after_byte
+            # Check if this definition has an associated value
+            parent = node.parent
+            is_hoisted = parent and parent.type in hoisted
+
+            if is_hoisted:
+                # Hoisted: available from scope start
+                available_after = graph.scopes[scope_id].start_byte
+            else:
+                # Not hoisted: available after definition ends
+                # Look for definition-value sibling
+                value_byte = node.end_byte
+                if parent:
+                    for sibling in parent.children:
+                        if sibling.id in definition_value_nodes:
+                            value_byte = sibling.end_byte
+                            break
+                available_after = value_byte
+
+            # Determine kind
+            kind = _infer_definition_kind(node, parent)
+
+            definition = Definition(
+                name=name,
+                node_id=node.id,
+                start_byte=node.start_byte,
+                end_byte=node.end_byte,
+                start_line=node.start_point[0] + 1,
+                end_line=node.end_point[0] + 1,
+                scope_id=scope_id,
+                kind=kind,
+                available_after_byte=available_after,
+            )
+
+            graph.definitions[node.id] = definition
+            if scope_id in graph.scopes:
+                graph.scopes[scope_id].definitions.append(definition)
+
+        # Collect references (filter out definitions)
+        definition_ids = set(graph.definitions.keys())
+
+        for node in reference_nodes:
+            if node.id in definition_ids:
+                continue  # Skip - this is a definition, not a reference
+
+            scope_id = _find_containing_scope(node, graph.scopes)
+            if scope_id is None:
+                scope_id = graph.root_scope_id
+
+            name = source[node.start_byte:node.end_byte].decode('utf8', errors='replace')
+
+            ref = Reference(
+                name=name,
+                node_id=node.id,
+                start_byte=node.start_byte,
+                start_line=node.start_point[0] + 1,
+                scope_id=scope_id,
+            )
+
+            graph.references.append(ref)
+
+        # Resolve references
+        _resolve_all_references(graph)
+
+        return graph
+
+
+def _find_containing_scope(node, scopes: Dict[int, Scope]) -> Optional[int]:
+    """Find the innermost scope containing a node."""
+    best_scope_id = None
+    best_size = float('inf')
+
+    for scope_id, scope in scopes.items():
+        if scope.start_byte <= node.start_byte and node.end_byte <= scope.end_byte:
+            size = scope.end_byte - scope.start_byte
+            if size < best_size:
+                best_size = size
+                best_scope_id = scope_id
+
+    return best_scope_id
+
+
+def _infer_definition_kind(node, parent) -> str:
+    """Infer the kind of definition from node context."""
+    if not parent:
+        return 'variable'
+
+    parent_type = parent.type
+
+    # Function-related
+    if parent_type in ('function_definition', 'function_declaration'):
+        # Check if this is the function name or a parameter
+        name_node = parent.child_by_field_name('name')
+        if name_node and name_node.id == node.id:
+            return 'function'
+        return 'parameter'
+
+    if parent_type in ('parameters', 'formal_parameters', 'typed_parameter',
+                       'default_parameter', 'list_splat_pattern', 'dictionary_splat_pattern',
+                       'rest_pattern', 'object_pattern', 'array_pattern'):
+        return 'parameter'
+
+    # Class
+    if parent_type in ('class_definition', 'class_declaration'):
+        name_node = parent.child_by_field_name('name')
+        if name_node and name_node.id == node.id:
+            return 'class'
+
+    # Import
+    if parent_type in ('import_statement', 'import_from_statement', 'aliased_import',
+                       'import_specifier', 'import_clause', 'namespace_import'):
+        return 'import'
+
+    # Variable declarator
+    if parent_type == 'variable_declarator':
+        return 'variable'
+
+    return 'variable'
+
+
+# =============================================================================
+# MANUAL FALLBACK ANALYZER (when queries unavailable)
+# =============================================================================
+
+# Scope-defining node types by language (fallback)
 SCOPE_NODES = {
     'python': {
         'module': ('module', True),
         'function': ('function_definition', True),
-        'async_function': ('function_definition', True),  # with async
-        'class': ('class_definition', False),  # PEP 227: class scope doesn't inherit
+        'class': ('class_definition', False),
         'lambda': ('lambda', True),
         'comprehension': ('list_comprehension', True),
         'dict_comprehension': ('dictionary_comprehension', True),
@@ -117,7 +421,7 @@ SCOPE_NODES = {
         'arrow': ('arrow_function', True),
         'method': ('method_definition', True),
         'class': ('class_declaration', True),
-        'block': ('statement_block', True),  # for let/const
+        'block': ('statement_block', True),
         'for': ('for_statement', True),
         'for_in': ('for_in_statement', True),
         'catch': ('catch_clause', True),
@@ -136,44 +440,15 @@ SCOPE_NODES = {
     },
 }
 
-# Definition node types by language
-DEFINITION_NODES = {
-    'python': [
-        'identifier',  # in assignment, parameter, for loop, etc.
-    ],
-    'javascript': [
-        'identifier',  # in var/let/const, function name, parameter
-    ],
-    'typescript': [
-        'identifier',
-    ],
-}
 
-
-# =============================================================================
-# CORE ANALYSIS FUNCTIONS
-# =============================================================================
-
-def analyze_scopes(tree, source: bytes, language: str, file_path: str = '') -> ScopeGraph:
-    """
-    Analyze scopes in a parsed tree.
-
-    Args:
-        tree: tree-sitter Tree object
-        source: Source code as bytes
-        language: Language name (python, javascript, typescript)
-        file_path: Optional file path for reporting
-
-    Returns:
-        ScopeGraph with all scopes, definitions, and references
-    """
-    graph = ScopeGraph(file_path=file_path, language=language)
+def _analyze_manual(tree, source: bytes, language: str, file_path: str = '') -> ScopeGraph:
+    """Manual AST traversal fallback when queries unavailable."""
+    graph = ScopeGraph(file_path=file_path, language=language, query_based=False)
 
     scope_types = _get_scope_types(language)
     scope_stack: List[int] = []
     next_scope_id = 0
 
-    # Create root scope from root node
     root = tree.root_node
     root_scope = Scope(
         id=next_scope_id,
@@ -190,15 +465,10 @@ def analyze_scopes(tree, source: bytes, language: str, file_path: str = '') -> S
     scope_stack.append(next_scope_id)
     next_scope_id += 1
 
-    # Traverse tree
-    cursor = tree.walk()
-
     def visit_node(node, depth=0):
         nonlocal next_scope_id
 
         node_type = node.type
-
-        # Check if this node creates a new scope
         scope_info = scope_types.get(node_type)
         created_scope = False
 
@@ -218,7 +488,6 @@ def analyze_scopes(tree, source: bytes, language: str, file_path: str = '') -> S
             )
             graph.scopes[next_scope_id] = new_scope
 
-            # Link to parent
             if parent_id is not None and parent_id in graph.scopes:
                 graph.scopes[parent_id].children.append(next_scope_id)
 
@@ -226,23 +495,16 @@ def analyze_scopes(tree, source: bytes, language: str, file_path: str = '') -> S
             next_scope_id += 1
             created_scope = True
 
-        # Check for definitions
-        _extract_definitions(node, graph, scope_stack, language, source)
+        _extract_definitions_manual(node, graph, scope_stack, language, source)
+        _extract_references_manual(node, graph, scope_stack, language)
 
-        # Check for references (identifiers in expression context)
-        _extract_references(node, graph, scope_stack, language)
-
-        # Visit children
         for child in node.children:
             visit_node(child, depth + 1)
 
-        # Pop scope if we created one
         if created_scope and scope_stack:
             scope_stack.pop()
 
     visit_node(root)
-
-    # Resolve references
     _resolve_all_references(graph)
 
     return graph
@@ -251,150 +513,96 @@ def analyze_scopes(tree, source: bytes, language: str, file_path: str = '') -> S
 def _get_scope_types(language: str) -> Dict[str, Tuple[str, bool]]:
     """Get scope-creating node types for a language."""
     lang_scopes = SCOPE_NODES.get(language, SCOPE_NODES.get('python', {}))
-    # Invert to map node_type -> (name, inherits)
     return {v[0]: (k, v[1]) for k, v in lang_scopes.items()}
 
 
-def _extract_definitions(node, graph: ScopeGraph, scope_stack: List[int],
-                         language: str, source: bytes):
-    """Extract definitions from a node based on context."""
+def _extract_definitions_manual(node, graph: ScopeGraph, scope_stack: List[int],
+                                language: str, source: bytes):
+    """Extract definitions manually (fallback)."""
     if not scope_stack:
         return
 
     current_scope_id = scope_stack[-1]
+    parent = node.parent
+    if not parent:
+        return
 
-    # Python-specific definition extraction
+    if node.type != 'identifier':
+        return
+
+    # Check definition contexts
+    is_def = False
+    kind = 'variable'
+
     if language == 'python':
-        _extract_python_definitions(node, graph, current_scope_id, source)
-    elif language in ('javascript', 'typescript'):
-        _extract_js_definitions(node, graph, current_scope_id, source)
-
-
-def _extract_python_definitions(node, graph: ScopeGraph, scope_id: int, source: bytes):
-    """Extract Python definitions."""
-    parent = node.parent
-    if not parent:
-        return
-
-    # Function/class name
-    if node.type == 'identifier':
-        if parent.type == 'function_definition' and _is_name_field(node, parent):
-            _add_definition(node, graph, scope_id, 'function', source)
-        elif parent.type == 'class_definition' and _is_name_field(node, parent):
-            _add_definition(node, graph, scope_id, 'class', source)
-        # Parameters
+        if parent.type == 'function_definition':
+            name_node = parent.child_by_field_name('name')
+            if name_node and name_node.id == node.id:
+                is_def, kind = True, 'function'
+        elif parent.type == 'class_definition':
+            name_node = parent.child_by_field_name('name')
+            if name_node and name_node.id == node.id:
+                is_def, kind = True, 'class'
         elif parent.type in ('parameters', 'typed_parameter', 'default_parameter'):
-            _add_definition(node, graph, scope_id, 'parameter', source)
-        # Assignment target
-        elif parent.type == 'assignment' and _is_left_side(node, parent):
-            _add_definition(node, graph, scope_id, 'variable', source)
-        # For loop variable
-        elif parent.type == 'for_statement' and _is_left_side(node, parent):
-            _add_definition(node, graph, scope_id, 'variable', source)
-        # Import
+            is_def, kind = True, 'parameter'
+        elif parent.type == 'assignment':
+            for child in parent.children:
+                if child.type == '=':
+                    break
+                if child.id == node.id:
+                    is_def, kind = True, 'variable'
+                    break
+        elif parent.type == 'for_statement':
+            for child in parent.children:
+                if child.type == 'in':
+                    break
+                if child.id == node.id:
+                    is_def, kind = True, 'variable'
+                    break
         elif parent.type in ('import_statement', 'import_from_statement', 'aliased_import'):
-            _add_definition(node, graph, scope_id, 'import', source)
+            is_def, kind = True, 'import'
 
-
-def _extract_js_definitions(node, graph: ScopeGraph, scope_id: int, source: bytes):
-    """Extract JavaScript/TypeScript definitions."""
-    parent = node.parent
-    if not parent:
-        return
-
-    if node.type == 'identifier':
-        # Function name
-        if parent.type == 'function_declaration' and _is_name_field(node, parent):
-            _add_definition(node, graph, scope_id, 'function', source)
-        # Class name
-        elif parent.type == 'class_declaration' and _is_name_field(node, parent):
-            _add_definition(node, graph, scope_id, 'class', source)
-        # Variable declarator
-        elif parent.type == 'variable_declarator' and _is_name_field(node, parent):
-            _add_definition(node, graph, scope_id, 'variable', source)
-        # Parameters
+    elif language in ('javascript', 'typescript'):
+        if parent.type == 'function_declaration':
+            name_node = parent.child_by_field_name('name')
+            if name_node and name_node.id == node.id:
+                is_def, kind = True, 'function'
+        elif parent.type == 'class_declaration':
+            name_node = parent.child_by_field_name('name')
+            if name_node and name_node.id == node.id:
+                is_def, kind = True, 'class'
+        elif parent.type == 'variable_declarator':
+            name_node = parent.child_by_field_name('name')
+            if name_node and name_node.id == node.id:
+                is_def, kind = True, 'variable'
         elif parent.type == 'formal_parameters':
-            _add_definition(node, graph, scope_id, 'parameter', source)
-        # Import specifier
+            is_def, kind = True, 'parameter'
         elif parent.type in ('import_specifier', 'import_clause', 'namespace_import'):
-            _add_definition(node, graph, scope_id, 'import', source)
+            is_def, kind = True, 'import'
+
+    if is_def:
+        name = source[node.start_byte:node.end_byte].decode('utf8', errors='replace')
+        definition = Definition(
+            name=name,
+            node_id=node.id,
+            start_byte=node.start_byte,
+            end_byte=node.end_byte,
+            start_line=node.start_point[0] + 1,
+            end_line=node.end_point[0] + 1,
+            scope_id=current_scope_id,
+            kind=kind,
+            available_after_byte=node.end_byte,
+        )
+        graph.definitions[node.id] = definition
+        if current_scope_id in graph.scopes:
+            graph.scopes[current_scope_id].definitions.append(definition)
 
 
-def _is_name_field(node, parent) -> bool:
-    """Check if node is the 'name' field of its parent."""
-    # Try to get the 'name' field directly
-    try:
-        name_node = parent.child_by_field_name('name')
-        if name_node and name_node.id == node.id:
-            return True
-    except (AttributeError, TypeError):
-        pass
-
-    # Fallback: first identifier child for function/class definitions
-    if parent.type in ('function_definition', 'class_definition', 'function_declaration',
-                       'class_declaration', 'variable_declarator'):
-        for child in parent.children:
-            if child.type == 'identifier':
-                return child.id == node.id
-    return False
-
-
-def _is_left_side(node, parent) -> bool:
-    """Check if node is on the left side of an assignment/for loop."""
-    if parent.type == 'assignment':
-        # Left side is before the '=' operator
-        for child in parent.children:
-            if child.type == '=':
-                break
-            if child.id == node.id or _contains_node(child, node):
-                return True
-    elif parent.type == 'for_statement':
-        # Left side is the loop variable (before 'in')
-        for child in parent.children:
-            if child.type == 'in':
-                break
-            if child.id == node.id or _contains_node(child, node):
-                return True
-    return False
-
-
-def _contains_node(container, target) -> bool:
-    """Check if container node contains target node."""
-    if container.id == target.id:
-        return True
-    for child in container.children:
-        if _contains_node(child, target):
-            return True
-    return False
-
-
-def _add_definition(node, graph: ScopeGraph, scope_id: int, kind: str, source: bytes):
-    """Add a definition to the graph."""
-    name = source[node.start_byte:node.end_byte].decode('utf8', errors='replace')
-
-    definition = Definition(
-        name=name,
-        node_id=node.id,
-        start_byte=node.start_byte,
-        end_byte=node.end_byte,
-        start_line=node.start_point[0] + 1,
-        end_line=node.end_point[0] + 1,
-        scope_id=scope_id,
-        kind=kind,
-    )
-
-    graph.definitions[node.id] = definition
-
-    if scope_id in graph.scopes:
-        graph.scopes[scope_id].definitions.append(definition)
-
-
-def _extract_references(node, graph: ScopeGraph, scope_stack: List[int], language: str):
-    """Extract identifier references (not definitions)."""
+def _extract_references_manual(node, graph: ScopeGraph, scope_stack: List[int], language: str):
+    """Extract references manually (fallback)."""
     if not scope_stack or node.type != 'identifier':
         return
 
-    # Skip if this is a definition (already processed)
     if node.id in graph.definitions:
         return
 
@@ -403,14 +611,15 @@ def _extract_references(node, graph: ScopeGraph, scope_stack: List[int], languag
         return
 
     # Skip definition contexts
-    if parent.type in ('function_definition', 'class_definition', 'function_declaration',
-                       'class_declaration', 'variable_declarator', 'parameters',
-                       'formal_parameters', 'typed_parameter', 'default_parameter',
-                       'import_statement', 'import_from_statement', 'import_specifier'):
+    skip_parents = ('function_definition', 'class_definition', 'function_declaration',
+                    'class_declaration', 'variable_declarator', 'parameters',
+                    'formal_parameters', 'typed_parameter', 'default_parameter',
+                    'import_statement', 'import_from_statement', 'import_specifier')
+
+    if parent.type in skip_parents:
         return
 
     current_scope_id = scope_stack[-1]
-
     ref = Reference(
         name=node.text.decode('utf8', errors='replace') if node.text else '',
         node_id=node.id,
@@ -418,19 +627,18 @@ def _extract_references(node, graph: ScopeGraph, scope_stack: List[int], languag
         start_line=node.start_point[0] + 1,
         scope_id=current_scope_id,
     )
-
     graph.references.append(ref)
 
+
+# =============================================================================
+# RESOLUTION AND DETECTION FUNCTIONS
+# =============================================================================
 
 def _resolve_all_references(graph: ScopeGraph):
     """Resolve all references to their definitions."""
     for ref in graph.references:
         ref.resolved_def = resolve_reference(ref, graph)
 
-
-# =============================================================================
-# RESOLUTION AND DETECTION FUNCTIONS
-# =============================================================================
 
 def resolve_reference(ref: Reference, graph: ScopeGraph) -> Optional[Definition]:
     """
@@ -440,7 +648,7 @@ def resolve_reference(ref: Reference, graph: ScopeGraph) -> Optional[Definition]
     1. Start from reference's scope
     2. Walk scopes innermost → outermost
     3. For each scope, check definitions newest → oldest
-    4. Match if: name matches AND ref.start_byte >= def.end_byte (defined before use)
+    4. Match if: name matches AND ref.start_byte >= def.available_after_byte
     5. Stop if scope.inherits == False
     """
     current_scope_id = ref.scope_id
@@ -453,8 +661,8 @@ def resolve_reference(ref: Reference, graph: ScopeGraph) -> Optional[Definition]
         # Check definitions in this scope (reverse order = newest first)
         for definition in reversed(scope.definitions):
             if definition.name == ref.name:
-                # Definition must be before reference (or same position for params)
-                if ref.start_byte >= definition.start_byte:
+                # Check temporal ordering (TDZ compliance)
+                if ref.start_byte >= definition.available_after_byte:
                     return definition
 
         # Stop if scope doesn't inherit (class body in Python)
@@ -467,25 +675,17 @@ def resolve_reference(ref: Reference, graph: ScopeGraph) -> Optional[Definition]
 
 
 def find_unused_definitions(graph: ScopeGraph) -> List[Definition]:
-    """
-    Find definitions that are never referenced.
-
-    Returns:
-        List of unused Definition objects
-    """
-    # Collect all referenced definition node_ids
+    """Find definitions that are never referenced."""
     referenced_ids: Set[int] = set()
     for ref in graph.references:
         if ref.resolved_def:
             referenced_ids.add(ref.resolved_def.node_id)
 
-    # Find definitions not in referenced set
     unused = []
     for node_id, definition in graph.definitions.items():
         if node_id not in referenced_ids:
-            # Skip certain kinds that are expected to be "unused" locally
+            # Skip kinds that might be used externally
             if definition.kind in ('import', 'class', 'function'):
-                # These might be exported/used externally
                 continue
             unused.append(definition)
 
@@ -493,12 +693,7 @@ def find_unused_definitions(graph: ScopeGraph) -> List[Definition]:
 
 
 def find_shadowed_definitions(graph: ScopeGraph) -> List[Tuple[Definition, Definition]]:
-    """
-    Find definitions that shadow outer scope definitions.
-
-    Returns:
-        List of (inner_def, outer_def) pairs where inner shadows outer
-    """
+    """Find definitions that shadow outer scope definitions."""
     shadowed_pairs = []
 
     for scope_id, scope in graph.scopes.items():
@@ -506,7 +701,6 @@ def find_shadowed_definitions(graph: ScopeGraph) -> List[Tuple[Definition, Defin
             continue
 
         for inner_def in scope.definitions:
-            # Look for same name in ancestor scopes
             outer_def = _find_in_ancestors(inner_def.name, scope.parent_id, graph)
             if outer_def:
                 shadowed_pairs.append((inner_def, outer_def))
@@ -534,8 +728,32 @@ def _find_in_ancestors(name: str, scope_id: Optional[int], graph: ScopeGraph) ->
 
 
 # =============================================================================
-# CONVENIENCE FUNCTIONS
+# PUBLIC API
 # =============================================================================
+
+# Singleton analyzer
+_analyzer: Optional[QueryBasedScopeAnalyzer] = None
+
+
+def analyze_scopes(tree, source: bytes, language: str, file_path: str = '') -> ScopeGraph:
+    """
+    Analyze scopes in a parsed tree.
+
+    Args:
+        tree: tree-sitter Tree object
+        source: Source code as bytes
+        language: Language name (python, javascript, typescript)
+        file_path: Optional file path for reporting
+
+    Returns:
+        ScopeGraph with all scopes, definitions, and references
+    """
+    global _analyzer
+    if _analyzer is None:
+        _analyzer = QueryBasedScopeAnalyzer()
+
+    return _analyzer.analyze(tree, source, language, file_path)
+
 
 def get_scope_summary(graph: ScopeGraph) -> dict:
     """Get summary statistics for a scope graph."""
@@ -547,6 +765,7 @@ def get_scope_summary(graph: ScopeGraph) -> dict:
         'unresolved_references': sum(1 for r in graph.references if not r.resolved_def),
         'unused_definitions': len(find_unused_definitions(graph)),
         'shadowed_pairs': len(find_shadowed_definitions(graph)),
+        'query_based': graph.query_based,
     }
 
 
@@ -563,6 +782,12 @@ def outer():
         y = 3  # unused
         print(x)
     inner()
+
+class MyClass:
+    value = 10
+    def method(self):
+        # value not accessible here (PEP 227)
+        return self.value
 '''
 
     parser = tree_sitter.Parser()
@@ -572,16 +797,19 @@ def outer():
     graph = analyze_scopes(tree, code, 'python', 'test.py')
 
     print("=" * 60)
-    print("SCOPE ANALYSIS TEST")
+    print("SCOPE ANALYSIS TEST (Query-Based)")
     print("=" * 60)
+    print(f"Query-based: {graph.query_based}")
+
     print(f"\nScopes: {len(graph.scopes)}")
     for sid, scope in graph.scopes.items():
-        print(f"  [{sid}] {scope.kind} (lines {scope.start_line}-{scope.end_line})")
+        inherit_str = "" if scope.inherits else " [no-inherit]"
+        print(f"  [{sid}] {scope.kind} (lines {scope.start_line}-{scope.end_line}){inherit_str}")
         for d in scope.definitions:
-            print(f"       def: {d.name} ({d.kind})")
+            print(f"       def: {d.name} ({d.kind}) available@{d.available_after_byte}")
 
     print(f"\nReferences: {len(graph.references)}")
-    for ref in graph.references:
+    for ref in graph.references[:10]:  # First 10
         resolved = f"-> {ref.resolved_def.name}@L{ref.resolved_def.start_line}" if ref.resolved_def else "UNRESOLVED"
         print(f"  {ref.name}@L{ref.start_line} {resolved}")
 
