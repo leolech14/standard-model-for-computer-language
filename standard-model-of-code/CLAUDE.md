@@ -7,7 +7,7 @@
 | Theory | Standard Model of Code |
 | Tool | Collider |
 | Purpose | Find basic constituents of computer programs |
-| Atoms | 200 documented, 94 implemented, 600+ ecosystem potential |
+| Atoms | 3,616 total (80 core + 3,536 ecosystem), 250+ ecosystems |
 | Roles | 33 canonical, 29 implemented |
 | Pipeline | 18 stages |
 | Body Coverage | ~36% nodes have `body_source` |
@@ -58,6 +58,7 @@
 | **UI Validator** | `tools/validate_ui.py` |
 | File Enricher | `src/core/file_enricher.py` |
 | **Tree-sitter Engine** | `src/core/tree_sitter_engine.py` |
+| **Query Loader** | `src/core/queries/__init__.py` |
 | **Edge Extractor** | `src/core/edge_extractor.py` |
 | **Codome Boundaries** | `src/core/full_analysis.py:165-298` |
 | Module pattern | `docs/specs/VISUALIZATION_UI_SPEC.md#state-unification-pattern` |

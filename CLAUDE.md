@@ -8,7 +8,7 @@
 |------|-------|
 | Theory | Standard Model of Code |
 | Tool | Collider |
-| Atoms | 200 documented, 94 implemented, 600+ ecosystem potential |
+| Atoms | 3,616 total (80 core + 3,536 ecosystem), 250+ ecosystems |
 | Roles | 33 canonical, 29 implemented |
 | Pipeline | 18 stages (see `full_analysis.py`) |
 
@@ -74,7 +74,7 @@ doppler secrets set SECRET_NAME="value" --project ai-tools --config dev
 | Analyze codebase | `./collider full <path> --output <dir>` |
 | With AI insights | `./collider full <path> --ai-insights` |
 | Run tests | `cd standard-model-of-code && pytest tests/ -q` |
-| AI query | `.tools_venv/bin/python context-management/tools/ai/analyze.py "<query>" --set brain_core` |
+| AI query | `.tools_venv/bin/python context-management/tools/ai/analyze.py "<query>" --set brain` |
 | **Socratic Audit** | `python context-management/tools/ai/analyze.py --verify pipeline` |
 | Mirror to GCS | `python context-management/tools/archive/archive.py mirror` |
 | Offload large files | `python context-management/tools/archive/archive.py offload` |
