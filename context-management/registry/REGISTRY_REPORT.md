@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-21T18:49:38.379808
+**Generated At**: 2026-01-22T02:31:21.608890
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -42,11 +42,11 @@
 | SYNCED | `.claude/rules/brain.md` | 755 | 755 |
 | SYNCED | `.gemini/context/body.md` | 936 | 936 |
 | SYNCED | `.gemini/context/brain.md` | 1010 | 1010 |
-| SYNCED | `.gitignore` | 2493 | 2493 |
+| SYNCED | `.gitignore` | 2617 | 2617 |
 | SYNCED | `AGENTS.md` | 1217 | 1217 |
-| SYNCED | `CLAUDE.md` | 5774 | 5774 |
+| SYNCED | `CLAUDE.md` | 5769 | 5769 |
 | SYNCED | `Dockerfile` | 1369 | 1369 |
-| SYNCED | `GEMINI.md` | 1892 | 1892 |
+| SYNCED | `GEMINI.md` | 1849 | 1849 |
 | CLOUD_ONLY | `Liabilities` | - | 156077 |
 | SYNCED | `PROJECT_MAP.md` | 3008 | 3008 |
 | SYNCED | `README.md` | 841 | 841 |
@@ -371,9 +371,9 @@
 | SYNCED | `collider_output_small/output_llm-oriented_src_20260121_080924.json` | 12823661 | 12823661 |
 | SYNCED | `collider_output_small/output_llm-oriented_src_20260121_082117.json` | 12816877 | 12816877 |
 | SYNCED | `collider_output_small/unified_analysis.json` | 11332250 | 11332250 |
-| SYNCED | `context-management/.agent/FILTER_SYSTEM_AUDIT.md` | 21005 | 21005 |
+| SYNCED | `context-management/.agent/FILTER_SYSTEM_AUDIT.md` | 21201 | 21201 |
 | SYNCED | `context-management/.agent/SET_MAPPING_IMPLEMENTATION.md` | 29970 | 29970 |
-| SYNCED | `context-management/.agent/UI_REFACTOR_REPORT.md` | 21436 | 21436 |
+| SYNCED | `context-management/.agent/UI_REFACTOR_REPORT.md` | 21632 | 21632 |
 | SYNCED | `context-management/.agent/orientation/C1_ATOM_ENUMERATION.md` | 9910 | 9910 |
 | SYNCED | `context-management/.agent/orientation/C2_JSON_SCHEMA.md` | 17821 | 17821 |
 | SYNCED | `context-management/.agent/orientation/C3_TRAINING_CORPUS.md` | 18725 | 18725 |
@@ -387,7 +387,7 @@
 | SYNCED | `context-management/.agent/orientation/graph.schema.json` | 6447 | 6447 |
 | SYNCED | `context-management/.agent/orientation/particle.schema.json` | 13597 | 13597 |
 | SYNCED | `context-management/.agent/workflows/publish.md` | 489 | 489 |
-| SYNCED | `context-management/config/analysis_sets.yaml` | 6765 | 6765 |
+| SYNCED | `context-management/config/analysis_sets.yaml` | 9071 | 9071 |
 | SYNCED | `context-management/config/documentation_map.yaml` | 2170 | 2170 |
 | SYNCED | `context-management/config/insights_schema.json` | 5684 | 5684 |
 | SYNCED | `context-management/config/prompts.yaml` | 9942 | 9942 |
@@ -407,11 +407,13 @@
 | SYNCED | `context-management/docs/STORAGE_ARCHITECTURE.md` | 17715 | 17715 |
 | SYNCED | `context-management/docs/TIMELINE_ANALYSIS.md` | 13274 | 13274 |
 | SYNCED | `context-management/docs/TOOL.md` | 20164 | 20164 |
-| SYNCED | `context-management/docs/WORKFLOW_FACTORY.md` | 6490 | 6490 |
+| SYNCED | `context-management/docs/WORKFLOW_FACTORY.md` | 6485 | 6485 |
 | SYNCED | `context-management/docs/agent_school/AGENT_ANTI_PATTERNS.md` | 11510 | 11510 |
+| SYNCED | `context-management/docs/agent_school/AGENT_BOOT.md` | 3874 | 3874 |
 | SYNCED | `context-management/docs/agent_school/DOD.md` | 2756 | 2756 |
 | SYNCED | `context-management/docs/agent_school/INDEX.md` | 2515 | 2515 |
-| SYNCED | `context-management/docs/agent_school/REPO_FACTS.md` | 2436 | 2436 |
+| SYNCED | `context-management/docs/agent_school/REPO_FACTS.md` | 2472 | 2472 |
+| SYNCED | `context-management/docs/agent_school/REPO_GURU_PROMPT.md` | 4460 | 4460 |
 | SYNCED | `context-management/docs/agent_school/WORKFLOWS.md` | 4769 | 4769 |
 | SYNCED | `context-management/docs/archive/AUTOMATED_TASK_GENERATION.md` | 14752 | 14752 |
 | SYNCED | `context-management/docs/archive/CLEANUP_PLAN.md` | 7067 | 7067 |
@@ -467,7 +469,7 @@
 | SYNCED | `context-management/docs/assets/topology_map_complete_1767765983418.png` | 799218 | 799218 |
 | SYNCED | `context-management/docs/assets/topology_map_minimal_1767766025094.png` | 433735 | 433735 |
 | SYNCED | `context-management/docs/operations/AGENT_INITIATION.md` | 1255 | 1255 |
-| SYNCED | `context-management/docs/operations/AGENT_KERNEL.md` | 1402 | 1402 |
+| SYNCED | `context-management/docs/operations/AGENT_KERNEL.md` | 1328 | 1328 |
 | SYNCED | `context-management/docs/prompts/01_claims_ledger.md` | 2300 | 2300 |
 | SYNCED | `context-management/docs/prompts/02_lens_validation.md` | 1972 | 1972 |
 | SYNCED | `context-management/docs/prompts/03_dimension_orthogonality.md` | 2073 | 2073 |
@@ -496,5 +498,3 @@
 | SYNCED | `context-management/docs/theory/ADDITIONAL_THEORIES.md` | 8174 | 8174 |
 | SYNCED | `context-management/docs/theory/FOUNDATIONAL_THEORIES.md` | 21132 | 21132 |
 | SYNCED | `context-management/docs/theory/SYNTHESIS_GAP_IMPLEMENTATION.md` | 8415 | 8415 |
-| SYNCED | `context-management/docs/theory/THEORY.md` | 176006 | 176006 |
-| SYNCED | `context-management/docs/theory/VALUE_SCENARIOS.md` | 14984 | 14984 |
