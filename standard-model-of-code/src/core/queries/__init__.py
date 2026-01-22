@@ -59,8 +59,9 @@ class QueryBundle:
 class QueryLoader:
     """Loads and caches tree-sitter query files (.scm)."""
 
-    # Standard query types
-    QUERY_TYPES = ['symbols', 'locals', 'highlights', 'injections', 'patterns']
+    # Standard query types (including dimension classifiers)
+    QUERY_TYPES = ['symbols', 'locals', 'highlights', 'injections', 'patterns',
+                   'boundary', 'state', 'lifecycle', 'data_flow']
 
     # Language aliases (multiple extensions map to same queries)
     LANGUAGE_ALIASES = {

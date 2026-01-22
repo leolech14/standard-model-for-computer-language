@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """
-DIMENSION CLASSIFIER
-====================
+DIMENSION CLASSIFIER (Tree-sitter Native)
+==========================================
 
 Classifies the 3 missing octahedral dimensions from the Standard Model theory:
 - D4 BOUNDARY: Internal/Input/I-O/Output
 - D5 STATE: Stateful/Stateless
 - D7 LIFECYCLE: Create/Use/Destroy
 
-Each node (atom) is classified using AST patterns and heuristics.
+Primary: Tree-sitter AST queries (.scm files)
+Fallback: Regex patterns (legacy, for languages without queries)
 
 Usage:
     from dimension_classifier import DimensionClassifier
-    
+
     classifier = DimensionClassifier()
     node['boundary'] = classifier.classify_boundary(node).value
     node['state'] = classifier.classify_state(node).value
@@ -20,8 +21,12 @@ Usage:
 """
 
 import re
+import logging
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from pathlib import Path
+from typing import Dict, List, Optional, Any, Set
+
+logger = logging.getLogger(__name__)
 
 
 class BoundaryType(Enum):
@@ -41,16 +46,182 @@ class StateType(Enum):
 class LifecyclePhase(Enum):
     """D7: What lifecycle phase is this code in?"""
     CREATE = "create"        # Initialization: __init__, factory, builder
-    USE = "use"              # Normal operation: business logic  
+    USE = "use"              # Normal operation: business logic
     DESTROY = "destroy"      # Cleanup: __del__, close, dispose, cleanup
 
 
-class DimensionClassifier:
+# =============================================================================
+# TREE-SITTER DIMENSION CLASSIFIER
+# =============================================================================
+
+class TreeSitterDimensionClassifier:
     """
-    Classifies code atoms across the 3 missing octahedral dimensions.
-    Uses AST patterns and naming conventions for heuristic classification.
+    Tree-sitter based dimension classifier.
+    Uses .scm query files for accurate AST-based pattern detection.
     """
-    
+
+    def __init__(self):
+        self._parser = None
+        self._language = None
+        self._queries: Dict[str, Any] = {}
+        self._query_text: Dict[str, str] = {}
+        self._initialized = False
+
+    def _ensure_initialized(self, language: str = 'python') -> bool:
+        """Lazy initialization of tree-sitter parser and queries."""
+        if self._initialized and self._current_language == language:
+            return True
+
+        try:
+            import tree_sitter
+
+            # Get language module
+            if language == 'python':
+                import tree_sitter_python
+                lang_obj = tree_sitter_python.language()
+            elif language == 'javascript':
+                import tree_sitter_javascript
+                lang_obj = tree_sitter_javascript.language()
+            elif language == 'typescript':
+                import tree_sitter_typescript
+                lang_obj = tree_sitter_typescript.language_typescript()
+            else:
+                logger.debug(f"No tree-sitter support for {language}")
+                return False
+
+            # Create parser
+            self._parser = tree_sitter.Parser()
+            self._language = tree_sitter.Language(lang_obj)
+            self._parser.language = self._language
+            self._current_language = language
+
+            # Load queries
+            self._load_queries(language)
+
+            self._initialized = True
+            return True
+
+        except ImportError as e:
+            logger.debug(f"Tree-sitter not available: {e}")
+            return False
+        except Exception as e:
+            logger.warning(f"Failed to initialize tree-sitter: {e}")
+            return False
+
+    def _load_queries(self, language: str):
+        """Load .scm query files for dimension classification."""
+        import tree_sitter
+
+        try:
+            from src.core.queries import get_query_loader
+        except ImportError:
+            try:
+                from core.queries import get_query_loader
+            except ImportError:
+                from queries import get_query_loader
+
+        loader = get_query_loader()
+
+        for query_type in ['boundary', 'state', 'lifecycle']:
+            query_text = loader.load_query(language, query_type)
+            if query_text:
+                try:
+                    self._queries[query_type] = tree_sitter.Query(self._language, query_text)
+                    self._query_text[query_type] = query_text
+                    logger.debug(f"Loaded {query_type}.scm for {language}")
+                except Exception as e:
+                    logger.warning(f"Failed to compile {query_type} query: {e}")
+
+    def classify_boundary(self, source: str, language: str = 'python') -> BoundaryType:
+        """Classify boundary type using tree-sitter queries."""
+        if not self._ensure_initialized(language):
+            return None
+
+        if 'boundary' not in self._queries:
+            return None
+
+        tree = self._parser.parse(bytes(source, 'utf8'))
+        captures = self._run_query('boundary', tree.root_node)
+
+        has_input = any('input' in tag for tag in captures)
+        has_output = any('output' in tag for tag in captures)
+
+        if has_input and has_output:
+            return BoundaryType.IO
+        elif has_input:
+            return BoundaryType.INPUT
+        elif has_output:
+            return BoundaryType.OUTPUT
+        else:
+            return BoundaryType.INTERNAL
+
+    def classify_state(self, source: str, language: str = 'python') -> StateType:
+        """Classify state type using tree-sitter queries."""
+        if not self._ensure_initialized(language):
+            return None
+
+        if 'state' not in self._queries:
+            return None
+
+        tree = self._parser.parse(bytes(source, 'utf8'))
+        captures = self._run_query('state', tree.root_node)
+
+        # Any state-related capture indicates stateful
+        if captures:
+            return StateType.STATEFUL
+        return StateType.STATELESS
+
+    def classify_lifecycle(self, source: str, name: str, language: str = 'python') -> LifecyclePhase:
+        """Classify lifecycle phase using tree-sitter queries."""
+        if not self._ensure_initialized(language):
+            return None
+
+        if 'lifecycle' not in self._queries:
+            return None
+
+        tree = self._parser.parse(bytes(source, 'utf8'))
+        captures = self._run_query('lifecycle', tree.root_node)
+
+        # Check capture tags for lifecycle phase
+        has_create = any('create' in tag for tag in captures)
+        has_destroy = any('destroy' in tag for tag in captures)
+
+        if has_create:
+            return LifecyclePhase.CREATE
+        elif has_destroy:
+            return LifecyclePhase.DESTROY
+        else:
+            return LifecyclePhase.USE
+
+    def _run_query(self, query_type: str, root_node) -> Set[str]:
+        """Run a query and return set of capture tag names."""
+        import tree_sitter
+
+        query = self._queries.get(query_type)
+        if not query:
+            return set()
+
+        cursor = tree_sitter.QueryCursor(query)
+        captures = cursor.captures(root_node)
+
+        # Extract all capture tag names
+        tags = set()
+        for tag, nodes in captures.items():
+            if nodes:  # Only add if there are actual matches
+                tags.add(tag)
+        return tags
+
+
+# =============================================================================
+# REGEX FALLBACK CLASSIFIER (Legacy)
+# =============================================================================
+
+class RegexDimensionClassifier:
+    """
+    Regex-based dimension classifier (fallback).
+    Used when tree-sitter is not available or for unsupported languages.
+    """
+
     # I/O detection patterns
     IO_PATTERNS = {
         'input': [
@@ -83,7 +254,7 @@ class DimensionClassifier:
             r'logging\.',             # logging calls
         ],
     }
-    
+
     # State detection patterns
     STATE_PATTERNS = [
         r'self\.\w+\s*=',             # instance variable assignment
@@ -91,14 +262,14 @@ class DimensionClassifier:
         r'\bglobal\s+\w+',            # global declaration
         r'nonlocal\s+\w+',            # nonlocal (closure)
     ]
-    
+
     # Lifecycle phase detection
     LIFECYCLE_PATTERNS = {
         'create': [
             r'^__init__$',            # Python constructor
             r'^__new__$',             # Python allocator
             r'^create',               # create_x
-            r'^build',                # build_x  
+            r'^build',                # build_x
             r'^make',                 # make_x
             r'^init',                 # init_x
             r'^setup',                # setup_x
@@ -119,7 +290,7 @@ class DimensionClassifier:
             r'^clear$',               # clear()
         ],
     }
-    
+
     def __init__(self):
         # Compile regex patterns for performance
         self.input_regexes = [re.compile(p, re.IGNORECASE) for p in self.IO_PATTERNS['input']]
@@ -127,24 +298,14 @@ class DimensionClassifier:
         self.state_regexes = [re.compile(p) for p in self.STATE_PATTERNS]
         self.create_regexes = [re.compile(p, re.IGNORECASE) for p in self.LIFECYCLE_PATTERNS['create']]
         self.destroy_regexes = [re.compile(p, re.IGNORECASE) for p in self.LIFECYCLE_PATTERNS['destroy']]
-    
-    def classify_boundary(self, node: Dict[str, Any]) -> BoundaryType:
-        """
-        Classify the I/O boundary type of a node.
-        
-        Args:
-            node: Node dict with 'body_source', 'signature', etc.
-            
-        Returns:
-            BoundaryType enum value
-        """
-        body = node.get('body_source', '') or node.get('body', '') or ''
-        signature = node.get('signature', '') or ''
+
+    def classify_boundary(self, body: str, signature: str = '') -> BoundaryType:
+        """Classify the I/O boundary type."""
         combined = f"{signature}\n{body}"
-        
+
         has_input = any(r.search(combined) for r in self.input_regexes)
         has_output = any(r.search(combined) for r in self.output_regexes)
-        
+
         if has_input and has_output:
             return BoundaryType.IO
         elif has_input:
@@ -153,67 +314,141 @@ class DimensionClassifier:
             return BoundaryType.OUTPUT
         else:
             return BoundaryType.INTERNAL
-    
+
+    def classify_state(self, body: str, kind: str = 'function') -> StateType:
+        """Classify whether code maintains state."""
+        # Classes are inherently stateful
+        if kind == 'class':
+            return StateType.STATEFUL
+
+        # Check for state patterns in body
+        for regex in self.state_regexes:
+            if regex.search(body):
+                return StateType.STATEFUL
+
+        # Methods that modify self are stateful
+        if 'self.' in body and '=' in body:
+            if re.search(r'self\.\w+\s*[+\-*/%]?=', body):
+                return StateType.STATEFUL
+
+        return StateType.STATELESS
+
+    def classify_lifecycle(self, name: str) -> LifecyclePhase:
+        """Classify the lifecycle phase."""
+        # Check create patterns
+        for regex in self.create_regexes:
+            if regex.search(name):
+                return LifecyclePhase.CREATE
+
+        # Check destroy patterns
+        for regex in self.destroy_regexes:
+            if regex.search(name):
+                return LifecyclePhase.DESTROY
+
+        return LifecyclePhase.USE
+
+
+# =============================================================================
+# UNIFIED DIMENSION CLASSIFIER (Public API)
+# =============================================================================
+
+class DimensionClassifier:
+    """
+    Unified dimension classifier.
+    Uses tree-sitter when available, falls back to regex.
+
+    This maintains the original API while using tree-sitter under the hood.
+    """
+
+    def __init__(self):
+        self._ts_classifier = TreeSitterDimensionClassifier()
+        self._regex_classifier = RegexDimensionClassifier()
+        self._use_tree_sitter = True  # Try tree-sitter first
+
+    def _get_language(self, node: Dict[str, Any]) -> str:
+        """Detect language from node or file path."""
+        file_path = node.get('file_path', '')
+        if file_path.endswith('.py'):
+            return 'python'
+        elif file_path.endswith(('.js', '.jsx')):
+            return 'javascript'
+        elif file_path.endswith(('.ts', '.tsx')):
+            return 'typescript'
+        return 'python'  # default
+
+    def classify_boundary(self, node: Dict[str, Any]) -> BoundaryType:
+        """
+        Classify the I/O boundary type of a node.
+
+        Args:
+            node: Node dict with 'body_source', 'signature', 'file_path', etc.
+
+        Returns:
+            BoundaryType enum value
+        """
+        body = node.get('body_source', '') or node.get('body', '') or ''
+        signature = node.get('signature', '') or ''
+
+        # Try tree-sitter first
+        if self._use_tree_sitter and body:
+            language = self._get_language(node)
+            result = self._ts_classifier.classify_boundary(body, language)
+            if result is not None:
+                return result
+
+        # Fallback to regex
+        return self._regex_classifier.classify_boundary(body, signature)
+
     def classify_state(self, node: Dict[str, Any]) -> StateType:
         """
         Classify whether a node maintains state.
-        
+
         Args:
-            node: Node dict with 'body_source', 'kind', etc.
-            
+            node: Node dict with 'body_source', 'kind', 'file_path', etc.
+
         Returns:
             StateType enum value
         """
         body = node.get('body_source', '') or node.get('body', '') or ''
         kind = node.get('kind', 'function')
-        name = node.get('name', '')
-        
-        # Classes are inherently stateful
-        if kind == 'class':
-            return StateType.STATEFUL
-        
-        # Check for state patterns in body
-        for regex in self.state_regexes:
-            if regex.search(body):
-                return StateType.STATEFUL
-        
-        # Methods that modify self are stateful
-        if 'self.' in body and '=' in body:
-            # Simple check: self.x = ... pattern
-            if re.search(r'self\.\w+\s*[+\-*/%]?=', body):
-                return StateType.STATEFUL
-        
-        return StateType.STATELESS
-    
+
+        # Try tree-sitter first
+        if self._use_tree_sitter and body:
+            language = self._get_language(node)
+            result = self._ts_classifier.classify_state(body, language)
+            if result is not None:
+                return result
+
+        # Fallback to regex
+        return self._regex_classifier.classify_state(body, kind)
+
     def classify_lifecycle(self, node: Dict[str, Any]) -> LifecyclePhase:
         """
         Classify the lifecycle phase of a node.
-        
+
         Args:
-            node: Node dict with 'name', etc.
-            
+            node: Node dict with 'name', 'body_source', 'file_path', etc.
+
         Returns:
             LifecyclePhase enum value
         """
         name = node.get('name', '')
-        
-        # Check create patterns
-        for regex in self.create_regexes:
-            if regex.search(name):
-                return LifecyclePhase.CREATE
-        
-        # Check destroy patterns
-        for regex in self.destroy_regexes:
-            if regex.search(name):
-                return LifecyclePhase.DESTROY
-        
-        # Default: normal operation
-        return LifecyclePhase.USE
-    
+        body = node.get('body_source', '') or node.get('body', '') or ''
+
+        # Try tree-sitter first (uses both name and body)
+        if self._use_tree_sitter and body:
+            language = self._get_language(node)
+            result = self._ts_classifier.classify_lifecycle(body, name, language)
+            if result is not None:
+                return result
+
+        # Fallback to regex (name-based only)
+        return self._regex_classifier.classify_lifecycle(name)
+
     def classify_all(self, node: Dict[str, Any]) -> Dict[str, str]:
         """
         Classify all 3 dimensions for a node.
-        
+
         Returns:
             Dict with 'boundary', 'state', 'lifecycle' string values
         """
@@ -228,32 +463,32 @@ def classify_all_dimensions(nodes: List[Dict[str, Any]]) -> int:
     """
     Classify all 3 missing dimensions for a list of nodes.
     Modifies nodes in-place.
-    
+
     Args:
         nodes: List of node dicts
-        
+
     Returns:
         Number of nodes classified
     """
     classifier = DimensionClassifier()
     count = 0
-    
+
     for node in nodes:
         dims = classifier.classify_all(node)
-        
+
         # Add to node
         node['boundary'] = dims['boundary']
         node['state'] = dims['state']
         node['lifecycle'] = dims['lifecycle']
-        
+
         # Also add to dimensions sub-dict if it exists
         if 'dimensions' in node and isinstance(node['dimensions'], dict):
             node['dimensions']['boundary'] = dims['boundary']
             node['dimensions']['state'] = dims['state']
             node['dimensions']['lifecycle'] = dims['lifecycle']
-        
+
         count += 1
-    
+
     return count
 
 
@@ -263,30 +498,38 @@ if __name__ == "__main__":
         {
             'name': '__init__',
             'kind': 'method',
-            'body_source': 'self.data = []'
+            'body_source': 'self.data = []',
+            'file_path': 'test.py'
         },
         {
             'name': 'process',
             'kind': 'function',
-            'body_source': 'result = compute(x); print(result); return result'
+            'body_source': 'result = compute(x); print(result); return result',
+            'file_path': 'test.py'
         },
         {
             'name': 'read_file',
             'kind': 'function',
-            'body_source': 'with open(path) as f: return f.read()'
+            'body_source': 'with open(path) as f: return f.read()',
+            'file_path': 'test.py'
         },
         {
             'name': 'cleanup',
             'kind': 'function',
-            'body_source': 'self.conn.close()'
+            'body_source': 'self.conn.close()',
+            'file_path': 'test.py'
         },
     ]
-    
+
     classifier = DimensionClassifier()
-    
-    print("Dimension Classification Demo")
+
+    print("Dimension Classification Demo (Tree-sitter + Regex Fallback)")
     print("=" * 60)
-    
+
+    # Check if tree-sitter is available
+    ts_available = classifier._ts_classifier._ensure_initialized('python')
+    print(f"Tree-sitter available: {ts_available}")
+
     for node in test_nodes:
         dims = classifier.classify_all(node)
         print(f"\n{node['name']}:")

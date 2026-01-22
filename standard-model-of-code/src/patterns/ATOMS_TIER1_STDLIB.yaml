@@ -1,6 +1,7 @@
 ---
 atoms:
-  - id: T1_IO
+  # IO Family (4 atoms)
+  - id: T1_IO_FILE
     symbol: File
     name: File System Operations
     description: Basic file read/write operations.
@@ -8,15 +9,9 @@ atoms:
     family: IO
     dimensions: [logical, standard]
     traits: [persistent, structured]
-    capabilities:
-      - read
-      - write
-      - append
-      - delete
-      - exists
-      - metadata
+    capabilities: [read, write, append, delete, exists, metadata]
 
-  - id: T1_IO
+  - id: T1_IO_SOCKET
     symbol: Sock
     name: Socket Operations
     description: Network socket creation and management.
@@ -24,15 +19,9 @@ atoms:
     family: NET
     dimensions: [logical, standard]
     traits: [networked, stream]
-    capabilities:
-      - connect
-      - bind
-      - listen
-      - accept
-      - send
-      - receive
+    capabilities: [connect, bind, listen, accept, send, receive]
 
-  - id: T1_IO
+  - id: T1_IO_STREAM
     symbol: Stre
     name: Stream Operations
     description: Generic input/output stream handling.
@@ -40,14 +29,9 @@ atoms:
     family: IO
     dimensions: [logical, standard]
     traits: [stream, buffered]
-    capabilities:
-      - read
-      - write
-      - flush
-      - seek
-      - pipe
+    capabilities: [read, write, flush, seek, pipe]
 
-  - id: T1_IO
+  - id: T1_IO_CONSOLE
     symbol: Cons
     name: Console Input/Output
     description: Standard input/output operations for console applications.
@@ -55,14 +39,10 @@ atoms:
     family: IO
     dimensions: [logical, standard]
     traits: [interactive, stream]
-    capabilities:
-      - read
-      - write
-      - error
-      - clear
-      - prompt
+    capabilities: [read, write, error, clear, prompt]
 
-  - id: T1_NET
+  # NET Family (4 atoms)
+  - id: T1_NET_HTTP
     symbol: Http
     name: HTTP Client
     description: Basic HTTP client functionality.
@@ -70,15 +50,9 @@ atoms:
     family: NET
     dimensions: [logical, standard]
     traits: [networked, request-response]
-    capabilities:
-      - get
-      - post
-      - put
-      - delete
-      - head
-      - patch
+    capabilities: [get, post, put, delete, head, patch]
 
-  - id: T1_NET
+  - id: T1_NET_REQUEST
     symbol: Reqs
     name: HTTP Request
     description: Construction and manipulation of HTTP requests.
@@ -86,13 +60,9 @@ atoms:
     family: NET
     dimensions: [logical, standard]
     traits: [request, mutable]
-    capabilities:
-      - set_method
-      - set_headers
-      - set_body
-      - set_url
+    capabilities: [set_method, set_headers, set_body, set_url]
 
-  - id: T1_NET
+  - id: T1_NET_RESPONSE
     symbol: Resp
     name: HTTP Response
     description: Handling of HTTP responses.
@@ -100,12 +70,9 @@ atoms:
     family: NET
     dimensions: [logical, standard]
     traits: [response, immutable]
-    capabilities:
-      - get_status
-      - get_headers
-      - get_body
+    capabilities: [get_status, get_headers, get_body]
 
-  - id: T1_NET
+  - id: T1_NET_URL
     symbol: URL
     name: URL Parsing and Manipulation
     description: Parsing, construction, and manipulation of URLs.
@@ -113,14 +80,10 @@ atoms:
     family: NET
     dimensions: [logical, standard]
     traits: [structured, string]
-    capabilities:
-      - parse
-      - construct
-      - validate
-      - encode
-      - decode
+    capabilities: [parse, construct, validate, encode, decode]
 
-  - id: T1_ASYNC
+  # ASYNC Family (4 atoms)
+  - id: T1_ASYNC_THREAD
     symbol: Thrd
     name: Thread Management
     description: Thread creation and management for concurrent execution.
@@ -128,14 +91,9 @@ atoms:
     family: ASYNC
     dimensions: [logical, concurrency]
     traits: [parallel, os-level]
-    capabilities:
-      - create
-      - join
-      - sleep
-      - terminate
-      - priority
+    capabilities: [create, join, sleep, terminate, priority]
 
-  - id: T1_ASYNC
+  - id: T1_ASYNC_TASK
     symbol: Task
     name: Task Execution
     description: Asynchronous task execution.
@@ -143,14 +101,9 @@ atoms:
     family: ASYNC
     dimensions: [logical, concurrency]
     traits: [asynchronous, lightweight]
-    capabilities:
-      - create
-      - start
-      - await
-      - cancel
-      - poll
+    capabilities: [create, start, await, cancel, poll]
 
-  - id: T1_ASYNC
+  - id: T1_ASYNC_LOCK
     symbol: Lock
     name: Lock Mechanism
     description: Synchronization primitives to protect shared resources.
@@ -158,12 +111,9 @@ atoms:
     family: ASYNC
     dimensions: [logical, concurrency]
     traits: [synchronization, exclusive]
-    capabilities:
-      - acquire
-      - release
-      - try_acquire
+    capabilities: [acquire, release, try_acquire]
 
-  - id: T1_ASYNC
+  - id: T1_ASYNC_CHANNEL
     symbol: Chan
     name: Channel Communication
     description: Inter-thread/process communication channels.
@@ -171,12 +121,10 @@ atoms:
     family: ASYNC
     dimensions: [logical, concurrency]
     traits: [message-passing, buffered]
-    capabilities:
-      - send
-      - receive
-      - close
+    capabilities: [send, receive, close]
 
-  - id: T1_DATA
+  # DATA Family (4 atoms)
+  - id: T1_DATA_JSON
     symbol: JSN
     name: JSON Serialization/Deserialization
     description: Parsing and generation of JSON data.
@@ -184,12 +132,9 @@ atoms:
     family: DATA
     dimensions: [logical, data]
     traits: [structured, text]
-    capabilities:
-      - parse
-      - stringify
-      - validate
+    capabilities: [parse, stringify, validate]
 
-  - id: T1_DATA
+  - id: T1_DATA_DATETIME
     symbol: Date
     name: Date and Time Manipulation
     description: Date and time representation and operations.
@@ -197,14 +142,9 @@ atoms:
     family: DATA
     dimensions: [logical, data]
     traits: [temporal, numeric]
-    capabilities:
-      - create
-      - format
-      - parse
-      - add
-      - subtract
+    capabilities: [create, format, parse, add, subtract]
 
-  - id: T1_DATA
+  - id: T1_DATA_REGEX
     symbol: Regx
     name: Regular Expression Matching
     description: Pattern matching with regular expressions.
@@ -212,13 +152,9 @@ atoms:
     family: DATA
     dimensions: [logical, data]
     traits: [pattern-matching, text]
-    capabilities:
-      - match
-      - search
-      - replace
-      - split
+    capabilities: [match, search, replace, split]
 
-  - id: T1_DATA
+  - id: T1_DATA_BUFFER
     symbol: Buff
     name: Data Buffer Management
     description: Raw data buffer operations.
@@ -226,13 +162,10 @@ atoms:
     family: DATA
     dimensions: [logical, data]
     traits: [binary, mutable]
-    capabilities:
-      - read
-      - write
-      - allocate
-      - resize
+    capabilities: [read, write, allocate, resize]
 
-  - id: T1_MATH
+  # MATH Family (2 atoms)
+  - id: T1_MATH_RANDOM
     symbol: Rand
     name: Random Number Generation
     description: Generation of pseudo-random numbers.
@@ -240,12 +173,9 @@ atoms:
     family: MATH
     dimensions: [logical, numeric]
     traits: [probabilistic, stateless]
-    capabilities:
-      - generate_int
-      - generate_float
-      - seed
+    capabilities: [generate_int, generate_float, seed]
 
-  - id: T1_MATH
+  - id: T1_MATH_OPS
     symbol: Math
     name: Mathematical Operations
     description: Basic math operations.
@@ -253,15 +183,10 @@ atoms:
     family: MATH
     dimensions: [logical, numeric]
     traits: [deterministic, stateless]
-    capabilities:
-      - add
-      - subtract
-      - multiply
-      - divide
-      - power
-      - sqrt
+    capabilities: [add, subtract, multiply, divide, power, sqrt]
 
-  - id: T1_SYS
+  # SYS Family (3 atoms)
+  - id: T1_SYS_PATH
     symbol: Path
     name: Path Manipulation
     description: File and directory path manipulation.
@@ -269,15 +194,9 @@ atoms:
     family: SYS
     dimensions: [logical, system]
     traits: [structured, string]
-    capabilities:
-      - join
-      - split
-      - normalize
-      - exists
-      - is_file
-      - is_dir
+    capabilities: [join, split, normalize, exists, is_file, is_dir]
 
-  - id: T1_SYS
+  - id: T1_SYS_ENV
     symbol: Env
     name: Environment Variable Access
     description: Access to environment variables.
@@ -285,13 +204,9 @@ atoms:
     family: SYS
     dimensions: [logical, system]
     traits: [global, string]
-    capabilities:
-      - get
-      - set
-      - delete
-      - list
+    capabilities: [get, set, delete, list]
 
-  - id: T1_SYS
+  - id: T1_SYS_PROCESS
     symbol: Proc
     name: Process Management
     description: Process creation and management.
@@ -299,8 +214,4 @@ atoms:
     family: SYS
     dimensions: [logical, system]
     traits: [os-level, concurrent]
-    capabilities:
-      - spawn
-      - exec
-      - wait
-      - terminate
+    capabilities: [spawn, exec, wait, terminate]

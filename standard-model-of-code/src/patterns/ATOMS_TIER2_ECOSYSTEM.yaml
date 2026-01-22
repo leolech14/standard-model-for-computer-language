@@ -1,188 +1,142 @@
 ---
 atoms:
-  - id: T2_UI
+  # UI Family (4 atoms)
+  - id: T2_UI_REACT_COMPONENT
     name: React Component
     symbol: React
     family: UI
     tier: 2
     description: A reusable UI element in React.
-    dimensions:
-      - front_end
-      - component
-      - javascript
+    dimensions: [front_end, component, javascript]
 
-  - id: T2_UI
+  - id: T2_UI_REACT_HOOK
     name: React Hook
     symbol: HookR
     family: UI
     tier: 2
     description: A custom React hook to manage state or side effects.
-    dimensions:
-      - front_end
-      - hook
-      - javascript
+    dimensions: [front_end, hook, javascript]
 
-  - id: T2_UI
+  - id: T2_UI_VIEW
     name: View
     symbol: ViewX
     family: UI
     tier: 2
     description: A display in a UI framework.
-    dimensions:
-      - front_end
-      - display
-      - ui
+    dimensions: [front_end, display, ui]
 
-  - id: T2_UI
+  - id: T2_UI_WIDGET
     name: Widget
     symbol: Wdget
     family: UI
     tier: 2
     description: A pre-built UI element in a library.
-    dimensions:
-      - front_end
-      - component
-      - ui
+    dimensions: [front_end, component, ui]
 
-  - id: T2_WEB
+  # WEB Family (3 atoms)
+  - id: T2_WEB_CONTROLLER
     name: Controller
     symbol: Cntrl
     family: WEB
     tier: 2
     description: Handles requests and responses in a web application.
-    dimensions:
-      - back_end
-      - web
-      - request_handling
+    dimensions: [back_end, web, request_handling]
 
-  - id: T2_WEB
+  - id: T2_WEB_ROUTE
     name: Route
     symbol: Route
     family: WEB
     tier: 2
     description: Defines a path to a specific handler in a web server.
-    dimensions:
-      - back_end
-      - web
-      - pathing
+    dimensions: [back_end, web, pathing]
 
-  - id: T2_WEB
+  - id: T2_WEB_MIDDLEWARE
     name: Middleware
     symbol: Mware
     family: WEB
     tier: 2
     description: Intercepts and processes requests/responses in a web framework.
-    dimensions:
-      - back_end
-      - web
-      - processing
+    dimensions: [back_end, web, processing]
 
-  - id: T2_DATA_ENG
+  # DATA_ENG Family (3 atoms)
+  - id: T2_DATA_DATAFRAME
     name: Pandas DataFrame
     symbol: PndsDF
     family: DATA_ENG
     tier: 2
     description: A two-dimensional labeled data structure in Pandas.
-    dimensions:
-      - data_science
-      - data_structure
-      - tabular
+    dimensions: [data_science, data_structure, tabular]
 
-  - id: T2_DATA_ENG
+  - id: T2_DATA_SERIES
     name: Pandas Series
     symbol: PndsSr
     family: DATA_ENG
     tier: 2
     description: A one-dimensional labeled array in Pandas.
-    dimensions:
-      - data_science
-      - data_structure
-      - array
+    dimensions: [data_science, data_structure, array]
 
-  - id: T2_DATA_ENG
+  - id: T2_DATA_PIPELINE
     name: Data Pipeline
     symbol: Pipeln
     family: DATA_ENG
     tier: 2
     description: A series of steps for data transformation and processing.
-    dimensions:
-      - data_science
-      - data_processing
-      - ETL
+    dimensions: [data_science, data_processing, ETL]
 
-  - id: T2_ML
+  # ML Family (4 atoms)
+  - id: T2_ML_MODEL
     name: ML Model
     symbol: MLModl
     family: ML
     tier: 2
     description: A trained machine learning model for prediction.
-    dimensions:
-      - machine_learning
-      - model
-      - prediction
+    dimensions: [machine_learning, model, prediction]
 
-  - id: T2_ML
+  - id: T2_ML_LAYER
     name: Neural Network Layer
     symbol: NLayer
     family: ML
     tier: 2
     description: A building block of a neural network.
-    dimensions:
-      - machine_learning
-      - deep_learning
-      - neural_network
+    dimensions: [machine_learning, deep_learning, neural_network]
 
-  - id: T2_ML
+  - id: T2_ML_TENSOR
     name: Tensor
     symbol: Tnsor
     family: ML
     tier: 2
     description: A multi-dimensional array used in machine learning.
-    dimensions:
-      - machine_learning
-      - data_structure
-      - array
+    dimensions: [machine_learning, data_structure, array]
 
-  - id: T2_ML
+  - id: T2_ML_OPTIMIZER
     name: Optimizer
     symbol: Optmz
     family: ML
     tier: 2
     description: An algorithm that adjusts the parameters of a model.
-    dimensions:
-      - machine_learning
-      - optimization
-      - algorithm
+    dimensions: [machine_learning, optimization, algorithm]
 
-  - id: T2_CLOUD
+  # CLOUD Family (3 atoms)
+  - id: T2_CLOUD_BUCKET
     name: Cloud Storage Bucket
     symbol: Bucket
     family: CLOUD
     tier: 2
     description: A container for storing objects in cloud storage.
-    dimensions:
-      - cloud
-      - storage
-      - object_store
+    dimensions: [cloud, storage, object_store]
 
-  - id: T2_CLOUD
+  - id: T2_CLOUD_FUNCTION
     name: Cloud Function
     symbol: Funct
     family: CLOUD
     tier: 2
     description: A serverless function that executes in the cloud.
-    dimensions:
-      - cloud
-      - serverless
-      - compute
+    dimensions: [cloud, serverless, compute]
 
-  - id: T2_CLOUD
+  - id: T2_CLOUD_QUEUE
     name: Message Queue
     symbol: Queue
     family: CLOUD
     tier: 2
     description: A service for asynchronous communication between components.
-    dimensions:
-      - cloud
-      - messaging
-      - async
+    dimensions: [cloud, messaging, async]
