@@ -249,12 +249,18 @@ analysis_sets:
       - "standard-model-of-code/artifacts/atom-research/*.yaml"
 
   research_atoms:
-    description: "Atom definitions for coverage analysis"
+    description: "Atom definitions for coverage analysis (explicit, no noise)"
     max_tokens: 150000
     patterns:
-      - "standard-model-of-code/src/patterns/ATOMS*.yaml"
-      - "standard-model-of-code/src/patterns/*.yaml"
-      - "standard-model-of-code/src/patterns/*.json"
+      # Core atom definitions (explicit files)
+      - "standard-model-of-code/src/patterns/ATOMS_TIER0_CORE.yaml"
+      - "standard-model-of-code/src/patterns/ATOMS_TIER1_STDLIB.yaml"
+      - "standard-model-of-code/src/patterns/ATOMS_TIER2_ECOSYSTEM.yaml"
+      - "standard-model-of-code/src/patterns/ATOMS_UNIVERSAL_INDEX.yaml"
+      - "standard-model-of-code/src/patterns/atoms.json"
+      # Mined T2 atoms (if needed for research)
+      - "standard-model-of-code/src/patterns/t2_mined/*.yaml"
+      # Exclude: canonical_types.json, universal_patterns.json (not atom definitions)
 
   research_full:
     description: "Complete research context (documents + tools + atoms)"

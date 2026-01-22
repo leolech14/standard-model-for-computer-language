@@ -504,25 +504,46 @@ python tools/research/summarize_corpus.py artifacts/2026-01-22/ --output summary
 
 ## AI Orchestration
 
-Phase 2 uses multi-AI validation for research rigor. See **AI_ORCHESTRATION_PROTOCOL.md** for full details.
+Phase 2 uses multi-AI validation with **hard gates** (must pass) and **soft votes** (advisory).
 
-### Quick Reference
+See **AI_ORCHESTRATION_PROTOCOL.md** for full details.
 
-| System | Model | Role | Analysis Set |
-|--------|-------|------|--------------|
-| Gemini | gemini-2.5-pro | Structural analysis | `research_full` |
-| Perplexity | sonar-pro | External validation | N/A (web) |
-| ChatGPT | o3 Extended | Falsification audit | N/A (manual) |
+### Core Principle
 
-### Ensemble Validation Rule
+**AI systems advise; artifacts + metrics decide.**
 
-No claim advances to L2 without:
-1. Deterministic metric computation (Mode A)
-2. Gemini analysis with line-level citations
-3. Perplexity external validation with URLs
-4. ChatGPT falsification attempt
+### Hard Gates (All Must Pass)
 
-**Convergence threshold:** 2/3 AI systems must agree to promote.
+| Gate | Requirement |
+|------|-------------|
+| **G1** | Deterministic metrics computed (Mode A) |
+| **G2** | Metrics satisfy claim's numeric bounds |
+| **G3** | No unresolved credible falsification |
+| **G4** | All audit artifacts saved |
+| **G5** | Human signoff recorded |
+
+### Veto Condition
+
+If ChatGPT (or any system) produces a credible falsification:
+1. Investigate immediately
+2. Either refute with evidence, OR
+3. **Claim stays at L1** (blocked)
+
+### System Roles
+
+| System | Model | Scope | Role |
+|--------|-------|-------|------|
+| Gemini | gemini-2.5-pro | Internal | Structural analysis, code validation |
+| Perplexity | sonar-pro | External | Literature context (NOT internal validation) |
+| ChatGPT | o3 Extended | External | Falsification, peer review prep |
+
+### Soft Votes (Advisory)
+
+2/3 AI agreement applies to wording, scope, and caveats. It does NOT override failing hard gates.
+
+### Decision Records
+
+Use **DECISION_TEMPLATE.md** for all promotion decisions. Machine-readable YAML frontmatter enables CI/tooling.
 
 ### Commands
 
@@ -531,7 +552,7 @@ No claim advances to L2 without:
 .tools_venv/bin/python context-management/tools/ai/analyze.py \
   "[query]" --set research_full --mode forensic
 
-# Perplexity (via MCP)
+# Perplexity (via MCP) - external context only
 mcp__perplexity__perplexity_research
 
 # ChatGPT (manual with adversarial prompt)
@@ -546,3 +567,4 @@ mcp__perplexity__perplexity_research
 |------|--------|--------|
 | 2026-01-22 | Initial protocol draft | Claude Opus 4.5 |
 | 2026-01-22 | Added AI orchestration section | Claude Opus 4.5 |
+| 2026-01-22 | Hardening: hard gates vs soft votes, veto condition, decision template | Claude Opus 4.5 |
