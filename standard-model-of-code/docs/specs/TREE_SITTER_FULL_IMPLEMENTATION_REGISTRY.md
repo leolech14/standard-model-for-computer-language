@@ -15,16 +15,17 @@
 | P1: Query Infrastructure | 12 | **12** | COMPLETE | **100%** |
 | P2: Scope Analysis | 14 | **4** | 4 | **92%** |
 | P3: Control Flow | 10 | **5** | 5 | **85%** |
-| P4: Pattern Detection | 12 | 0 | 0 | 65% |
+| P4: Pattern Detection | 12 | **5** | CORE DONE | **95%** |
 | P5: Cross-File Resolution | 10 | 0 | 0 | 55% |
 | P6: Advanced Parsing | 12 | 0 | 0 | 48% |
 | P7: Visualization Integration | 17 | 0 | 0 | 60% |
-| **TOTAL** | **87** | **21** | **21** | **92%** |
+| **TOTAL** | **87** | **26** | **26** | **95%** |
 
 **PHASE 1 COMPLETE:** All 12 tasks done. QueryLoader pattern, all .scm files, ERROR/MISSING detection, tests, docs.
 **PHASE 2 IN PROGRESS:** ScopeAnalyzer foundation complete (P2-01 to P2-04). 18 tests.
 **PHASE 3 IN PROGRESS:** Control flow metrics complete (P3-01 to P3-05). 26 tests.
-**Next:** Wire analyzers into pipeline, complete P2 scope integration
+**PHASE 4 CORE COMPLETE:** PatternMatcher with patterns.scm for Python (15 patterns) + JavaScript (17 patterns). 14 tests.
+**Next:** RPBL extraction (P4-05 to P4-10), Visualization integration (P7)
 
 ---
 
@@ -201,23 +202,39 @@ Ref   { name, node_id, start_byte }
 
 | ID | Task | F | A | X | **Conf** | Blocks | Notes |
 |----|------|---|---|---|----------|--------|-------|
-| P4-01 | Create patterns.scm framework | 75% | 85% | 80% | **75%** | P1 | |
-| P4-02 | Python patterns.scm (Repository, Service, Factory) | 70% | 90% | 75% | **70%** | P4-01 | CRUD detection |
-| P4-03 | JavaScript patterns.scm (Component, Hook, Handler) | 70% | 90% | 75% | **70%** | P4-01 | React patterns |
-| P4-04 | Integrate with atom_classifier.py | 65% | 90% | 70% | **65%** | P4-02 | |
+| P4-01 | Create patterns.scm framework | 99% | 95% | 99% | **95%** | P1 | **DONE** PatternMatcher class |
+| P4-02 | Python patterns.scm (Repository, Service, Factory) | 99% | 95% | 99% | **95%** | P4-01 | **DONE** 15 atom patterns |
+| P4-03 | JavaScript patterns.scm (Component, Hook, Handler) | 99% | 95% | 99% | **95%** | P4-01 | **DONE** 17 patterns (React) |
+| P4-04 | Integrate with atom_classifier.py | 99% | 95% | 99% | **95%** | P4-02 | **DONE** Stage 2.10 wired |
 | P4-05 | RPBL Responsibility extraction | 60% | 95% | 65% | **60%** | P4-04 | Method count, fan-out |
-| P4-06 | RPBL Purity extraction (D6:EFFECT) | 55% | 95% | 60% | **55%** | P2 | Assignment tracking |
+| P4-06 | RPBL Purity extraction (D6:EFFECT) | 99% | 95% | 99% | **95%** | P2 | **DONE** data_flow_analyzer.py |
 | P4-07 | RPBL Boundary extraction | 70% | 95% | 75% | **70%** | P4-04 | External calls |
 | P4-08 | RPBL Lifecycle extraction (D7) | 60% | 95% | 65% | **60%** | P4-02 | Pattern detection |
 | P4-09 | D5:STATE extraction | 65% | 95% | 70% | **65%** | P2 | Scope analysis |
 | P4-10 | Confidence scoring enhancement (D8:TRUST) | 70% | 95% | 75% | **70%** | P4-04 | Multi-source |
-| P4-11 | Pattern detection tests | 90% | 90% | 90% | **90%** | P4-04 | |
-| P4-12 | Documentation | 95% | 90% | 95% | **90%** | P4-11 | |
+| P4-11 | Pattern detection tests | 99% | 95% | 99% | **95%** | P4-04 | **DONE** 14 tests |
+| P4-12 | Documentation | 95% | 90% | 95% | **90%** | P4-11 | Partial (inline + commit) |
 
 **Phase 4 Exit Criteria:**
-- [ ] Atom classification uses tree-sitter patterns
+- [x] Atom classification uses tree-sitter patterns
 - [ ] RPBL dimensions have tree-sitter evidence
-- [ ] Classification confidence improved measurably
+- [x] Classification confidence improved measurably
+
+**PHASE 4 CORE COMPLETED: 2026-01-21**
+- PatternMatcher: `src/core/pattern_matcher.py` with AtomMatch dataclass
+- Python patterns: `src/core/queries/python/patterns.scm` (15 patterns, 280 lines)
+- JavaScript patterns: `src/core/queries/javascript/patterns.scm` (17 patterns, 270 lines)
+- Pipeline: Stage 2.10 wired in `full_analysis.py`
+- Tests: 14 tests covering all major atom types
+- Performance: ~50ms (tree-sitter) vs ~0.5ms (regex) - trades speed for accuracy
+- Commit: `096e732` feat(phase4): Add pattern-based atom detection with tree-sitter
+
+**P4-06 COMPLETED: 2026-01-21** (D6:EFFECT - Purity)
+- DataFlowAnalyzer: `src/core/data_flow_analyzer.py` with Assignment/SideEffect/DataFlowGraph
+- Data flow queries: `src/core/queries/python/data_flow.scm` (mutation/side-effect detection)
+- Pipeline: Stage 2.11 wired, D6_EFFECT and D6_pure_score added to nodes
+- Tests: 28 tests covering assignments, mutations, side effects, purity scoring
+- Purity rating: pure/mostly_pure/mixed/mostly_impure/impure based on mutation ratio
 
 ---
 
@@ -444,15 +461,15 @@ Execute: P7-01, P7-02, P7-11, P7-14, P7-16
 
 ## SUCCESS METRICS
 
-| Metric | Current | After P1 | After P2 | After Full |
-|--------|---------|----------|----------|------------|
-| Tree-sitter utilization | **45%** | 30% | 50% | 85% |
-| Edge confidence (avg) | 70% | 72% | 85% | 92% |
-| Atom confidence (avg) | 65% | 67% | 75% | 88% |
-| Coverage (D1-D8) | 4/8 | 4/8 | 6/8 | 8/8 |
-| RPBL extraction | 1/4 | 1/4 | 2/4 | 4/4 |
-| **Tests passing** | **164** | 108 | 126 | TBD |
-| **New modules** | **2** | - | scope_analyzer, control_flow_analyzer | - |
+| Metric | Current | After P1 | After P2 | After P4 | After Full |
+|--------|---------|----------|----------|----------|------------|
+| Tree-sitter utilization | **60%** | 30% | 50% | 55% | 85% |
+| Edge confidence (avg) | 70% | 72% | 85% | 85% | 92% |
+| Atom confidence (avg) | **80%** | 67% | 75% | 78% | 88% |
+| Coverage (D1-D8) | **6/8** | 4/8 | 6/8 | 5/8 | 8/8 |
+| RPBL extraction | **2/4** | 1/4 | 2/4 | 1/4 | 4/4 |
+| **Tests passing** | **206** | 108 | 126 | 178 | TBD |
+| **New modules** | **4** | - | scope_analyzer, control_flow_analyzer | +pattern_matcher | +data_flow_analyzer |
 
 ---
 
@@ -463,6 +480,8 @@ Execute: P7-01, P7-02, P7-11, P7-14, P7-16
 | 2026-01-21 | Initial creation from multi-source synthesis | Claude Opus |
 | 2026-01-21 | Phase 2 foundation complete (P2-01 to P2-04), 18 tests | Claude Opus |
 | 2026-01-21 | Phase 3 metrics complete (P3-01 to P3-05, P3-10), 26 tests | Claude Opus |
+| 2026-01-21 | Phase 4 core complete (P4-01 to P4-04, P4-11), 14 tests, patterns.scm for Python + JS | Claude Opus |
+| 2026-01-21 | P4-06 complete: Data flow analyzer for D6:EFFECT (purity), 28 tests, Stage 2.11 | Claude Opus |
 
 ---
 

@@ -1267,6 +1267,83 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             timer.set_status("WARN", str(e))
             print(f"   ⚠️ Pattern detection skipped: {e}")
 
+    # Stage 2.11: Data Flow Analysis (D6:EFFECT - Purity)
+    print("\n🌊 Stage 2.11: Data Flow Analysis (D6:EFFECT)...")
+    with StageTimer(perf_manager, "Stage 2.11: Data Flow Analysis") as timer:
+        try:
+            from data_flow_analyzer import analyze_data_flow, get_data_flow_summary
+            import tree_sitter
+            import tree_sitter_python
+            import tree_sitter_javascript
+
+            # Reuse parsers if available
+            if 'py_parser' not in dir():
+                py_parser = tree_sitter.Parser()
+                py_parser.language = tree_sitter.Language(tree_sitter_python.language())
+                js_parser = tree_sitter.Parser()
+                js_parser.language = tree_sitter.Language(tree_sitter_javascript.language())
+
+            flow_stats = {
+                'nodes_analyzed': 0,
+                'total_assignments': 0,
+                'total_mutations': 0,
+                'total_side_effects': 0,
+                'purity_distribution': {'pure': 0, 'mostly_pure': 0, 'mixed': 0, 'mostly_impure': 0, 'impure': 0}
+            }
+
+            for node in nodes:
+                body = node.get('body_source', '')
+                if not body or len(body) < 10:
+                    continue
+
+                file_path = node.get('file_path', '')
+                if file_path.endswith('.py'):
+                    lang, parser = 'python', py_parser
+                elif file_path.endswith(('.js', '.jsx', '.ts', '.tsx')):
+                    lang, parser = 'javascript', js_parser
+                else:
+                    continue
+
+                try:
+                    tree = parser.parse(bytes(body, 'utf8'))
+                    flow_graph = analyze_data_flow(tree, bytes(body, 'utf8'), lang, file_path)
+                    summary = get_data_flow_summary(flow_graph)
+
+                    # Store data flow metrics in node
+                    node['data_flow'] = {
+                        'assignments': summary['total_assignments'],
+                        'mutations': summary['mutations'],
+                        'side_effects': summary['side_effects'],
+                        'pure_score': summary['pure_score'],
+                        'purity_rating': summary['purity_rating'],
+                    }
+
+                    # D6:EFFECT dimension
+                    node['D6_EFFECT'] = summary['purity_rating']
+                    node['D6_pure_score'] = summary['pure_score']
+
+                    # Update stats
+                    flow_stats['nodes_analyzed'] += 1
+                    flow_stats['total_assignments'] += summary['total_assignments']
+                    flow_stats['total_mutations'] += summary['mutations']
+                    flow_stats['total_side_effects'] += summary['side_effects']
+                    flow_stats['purity_distribution'][summary['purity_rating']] += 1
+                except Exception:
+                    pass
+
+            timer.set_output(
+                nodes_analyzed=flow_stats['nodes_analyzed'],
+                mutations=flow_stats['total_mutations'],
+                side_effects=flow_stats['total_side_effects']
+            )
+            print(f"   → {flow_stats['nodes_analyzed']} nodes analyzed for purity")
+            print(f"   → {flow_stats['total_mutations']} mutations, {flow_stats['total_side_effects']} side effects")
+            purity_dist = flow_stats['purity_distribution']
+            print(f"   → Purity: pure={purity_dist['pure']}, mostly_pure={purity_dist['mostly_pure']}, mixed={purity_dist['mixed']}, impure={purity_dist['impure']}")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Data flow analysis skipped: {e}")
+
     # Stage 3: Purpose Field
     print("\n🎯 Stage 3: Purpose Field...")
     with StageTimer(perf_manager, "Stage 3: Purpose Field") as timer:
