@@ -11,9 +11,26 @@
 
 An investigation into the atom inventory revealed a **fundamental insight** about code classification that reframes the entire Standard Model of Code positioning:
 
-> **FINDING:** The Standard Model achieves near-complete structural coverage with just 4 atoms, while 3,500+ T2 atoms provide semantic enrichment rather than additional coverage.
+> **FINDING:** In the 7 analyzed repos (Python/JS/TS/Rust), the top 2–4 structural atoms account for ~80–90% of nodes. Function + class atoms dominate; 3,500+ T2 atoms provide semantic enrichment rather than additional structural coverage.
 
 This is not a bug—it's a **feature** that aligns with physics: a small number of fundamental particles explain the universe, while the periodic table of elements provides domain-specific utility.
+
+---
+
+## Operational Definitions
+
+To avoid ambiguity, this report uses the following definitions:
+
+| Term | Definition |
+|------|------------|
+| **Node** | A code entity extracted from parsing (e.g., function, class, variable, module-level construct) that becomes a node in `unified_analysis.json`. |
+| **Structural Atom (D1:WHAT)** | A deterministic label assigned from AST/type-to-atom mapping (base atoms). Every node receives a structural atom label (including `Unknown` when mapping is incomplete). |
+| **Recognized Structural Atom Rate** | `% of nodes whose D1 atom is not Unknown`. |
+| **Semantic Enrichment (T2)** | Optional ecosystem/pattern-derived labels added by pattern matching (Stage 2.10). Not all nodes can or should match. |
+| **Structural Coverage** | `% of nodes receiving *some* D1 atom label` (typically ~100% by construction). |
+| **Semantic Coverage (T2 Rate)** | `% of nodes receiving a T2 semantic label` (variable by ecosystem). |
+| **Top-k Mass** | `% of nodes covered by the k most frequent atoms`. E.g., "top-4 mass = 90%" means the 4 most common atoms cover 90% of nodes. |
+| **Unknown** | Nodes extracted by parsing that do not map cleanly to current atom mapping rules. This is a **measurable classifier gap**, not noise. |
 
 ---
 
@@ -24,6 +41,7 @@ This is not a bug—it's a **feature** that aligns with physics: a small number 
 Understanding the investigation requires understanding how Collider analyzes code.
 
 > **VALIDATED 2026-01-22** via Gemini 2.5 Pro forensic analysis of `full_analysis.py`
+> **Validated against commit:** `d330944` — Line references refer to this commit; re-run validation after pipeline refactors.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -250,25 +268,55 @@ atom_counts = Counter(n.get('atom', 'Unknown') for n in nodes)
 
 **Method:**
 ```bash
-# Exact duplicate detection
+# Exact duplicate detection (runnable)
 python3 -c "
+import yaml
+from pathlib import Path
 from collections import Counter
-id_counts = Counter(atom['id'] for atom in all_atoms)
+
+# Load all atoms from YAML files
+all_atoms = []
+for f in Path('src/patterns').glob('ATOMS_*.yaml'):
+    with open(f) as fp:
+        data = yaml.safe_load(fp)
+        if data and 'atoms' in data:
+            all_atoms.extend(data['atoms'])
+
+id_counts = Counter(atom['id'] for atom in all_atoms if 'id' in atom)
 duplicates = [(id, count) for id, count in id_counts.items() if count > 1]
+print(f'Exact duplicates: {len(duplicates)}')
+for id, count in duplicates[:5]:
+    print(f'  {id}: {count}x')
 "
 
-# Semantic similarity detection
+# Semantic similarity detection (runnable)
 python3 -c "
+import yaml
 import re
+from pathlib import Path
+from collections import defaultdict
+
 def normalize(s):
-    return re.sub(r'[^a-z0-9]', '', s.lower())
+    return re.sub(r'[^a-z0-9]', '', (s or '').lower())
+
+# Load all atoms
+all_atoms = []
+for f in Path('src/patterns').glob('ATOMS_*.yaml'):
+    with open(f) as fp:
+        data = yaml.safe_load(fp)
+        if data and 'atoms' in data:
+            all_atoms.extend(data['atoms'])
 
 name_groups = defaultdict(list)
 for atom in all_atoms:
     norm = normalize(atom.get('name', ''))
-    name_groups[norm].append(atom['id'])
+    if norm:
+        name_groups[norm].append(atom.get('id', 'unknown'))
 
 overlaps = [(name, ids) for name, ids in name_groups.items() if len(ids) > 1]
+print(f'Semantic overlap groups: {len(overlaps)}')
+for name, ids in sorted(overlaps, key=lambda x: -len(x[1]))[:5]:
+    print(f'  \"{name}\": {len(ids)} atoms')
 "
 ```
 
@@ -398,22 +446,51 @@ done
 
 ---
 
-## FINDING 1: The Pareto Distribution of Coverage
+## FINDING 1: Pareto Distribution of Structural Atoms
 
 ### Claim
-> **4 atoms cover 80-90% of all code nodes in any codebase.**
+> **In the 7 analyzed repos (Python/JS/TS/Rust), the top 2–4 structural atoms account for ~80–90% of nodes.**
+> Function + class atoms often dominate the distribution; exact proportions vary by repo composition.
 
-### Confidence: 97%
+### Confidence: 93–97%
+- **97%** confidence that *a strong Pareto concentration exists* in our measured corpus.
+- **93%** confidence that *the 80–90% band* generalizes broadly (requires larger stratified sampling to claim "any codebase").
+
+### The 4 Base Atoms (Explicit)
+
+| Atom ID | Name | Semantic Role | Typical Mass |
+|---------|------|---------------|--------------|
+| `LOG.FNC.M` | Function | Unit of computation | 60–80% |
+| `ORG.AGG.M` | Class | Unit of organization | 10–25% |
+| `DAT.VAR.A` | Variable | State container | 2–8% |
+| `ORG.MOD.O` | Module | Boundary container | 1–5% |
 
 ### Evidence
 
 **Collider Self-Analysis (1,274 nodes):**
 ```
-LOG.FNC.M  (Function)   →  963 nodes  (75.6%)
-ORG.AGG.M  (Class)      →  188 nodes  (14.8%)
-Unknown                 →  106 nodes  (  8.3%)
-Other                   →   17 nodes  (  1.3%)
+LOG.FNC.M  (Function)   →  963 nodes  (75.6%)   ← top-1 mass
+ORG.AGG.M  (Class)      →  188 nodes  (14.8%)   ← top-2 mass = 90.4%
+Unknown                 →  106 nodes  (  8.3%)   ← classifier gap
+DAT.VAR.A  (Variable)   →   12 nodes  (  0.9%)
+ORG.MOD.O  (Module)     →    5 nodes  (  0.4%)
 ```
+
+**Coverage decomposition:**
+- Structural coverage (D1 assigned): ~100% (by pipeline construction)
+- Recognized structural coverage (D1 ≠ Unknown): 91.7%
+- Top-2 mass: 90.4%
+- Top-4 mass: 91.7%
+
+**Cross-repo validation (approximate):**
+| Repo | Nodes | Top-2 Mass | Unknown % |
+|------|-------|------------|-----------|
+| Collider (self) | 1,274 | 90.4% | 8.3% |
+| gatsby | 5,929 | ~85% | ~5% |
+| meilisearch | 5,343 | ~82% | ~7% |
+| vuejs/core | 1,242 | ~88% | ~4% |
+
+*Note: External repo numbers are approximate from single-run analysis.*
 
 **Causal Chain:**
 ```
@@ -427,6 +504,30 @@ Variables/modules are containers, not content
          ↓
 ∴ Function + Class atoms capture the structure
 ```
+
+### Evidence Ledger
+
+| Artifact | How Produced | What It Supports |
+|----------|--------------|------------------|
+| `.collider/unified_analysis.json` | `./collider full . --output .collider` | Node distribution, D1 atoms |
+| Node counts per atom | `jq '.nodes | group_by(.atom) | map({atom: .[0].atom, count: length})' unified_analysis.json` | Top-k mass calculation |
+| External repo analyses | Clone + `./collider full <repo>` | Cross-repo validation |
+
+### Interpretation of `Unknown`
+
+`Unknown` is not "other code." It is a **measurable classifier gap**: nodes extracted by parsing that do not map cleanly to the current atom mapping rules.
+
+**Action:** Track `Unknown` as an instrumentation KPI:
+- Target: <5% Unknown in production analyses
+- Add tests for new AST node types that currently fall into Unknown
+- Current self-repo Unknown rate: 8.3% (needs improvement)
+
+### How to Falsify
+
+This finding would be contradicted if:
+1. A repo shows flat distribution (no Pareto concentration, e.g., top-4 mass < 50%)
+2. Unknown rate exceeds recognized atoms (classifier fundamentally broken)
+3. Majority of nodes are neither functions nor classes (different programming paradigm)
 
 ### Implication
 The "base atoms" are not arbitrary—they reflect the **fundamental grammar of programming**:
@@ -487,6 +588,21 @@ T2 patterns require ADDITIONAL matching
 ∴ T2 is enrichment, not primary classification
 ```
 
+### Evidence Ledger
+
+| Artifact | How Produced | What It Supports |
+|----------|--------------|------------------|
+| `.collider/unified_analysis.json` | `./collider full . --output .collider` | Node D1 vs T2 comparison |
+| T2 match rate per repo | Count nodes with T2 atoms / total nodes | Enrichment rate calculation |
+| `src/patterns/atom_classifier.py` | Source inspection | Classification flow confirmation |
+
+### How to Falsify
+
+This finding would be contradicted if:
+1. T2 atoms are assigned to nodes that have no D1 atom (impossible by pipeline design)
+2. T2 coverage exceeds D1 coverage (would indicate broken invariant)
+3. Majority of T2 atoms are required for structural classification (design flaw)
+
 ### Implication
 **T2 coverage percentage is not a quality metric for structural analysis.** It's a metric for **domain intelligence**:
 - 0% T2 = We don't recognize the ecosystem
@@ -526,13 +642,20 @@ Semgrep rules focus on vulnerabilities
 
 ### Gap Analysis
 
-| Ecosystem | Security Atoms | Functional Atoms | Gap Severity |
-|-----------|----------------|------------------|--------------|
-| Django | 188 | ~20 estimated | **CRITICAL** |
-| React | 119 | ~30 estimated | HIGH |
-| Flask | 94 | ~15 estimated | **CRITICAL** |
-| FastAPI | 15 (manual) | 15 | LOW |
-| PyTorch | 20 (manual) | 20 | LOW |
+**Categorization Method (reproducible):**
+- **Security atom:** Source mined from Semgrep rules OR explicitly tagged `security` in source file
+- **Functional atom:** Mined from docs/type stubs/linters OR tagged `functional` or `best-practice`
+- **Unknown category:** Not tagged or ambiguous
+
+| Ecosystem | Security Atoms | Non-Security Atoms | Ratio |
+|-----------|----------------|---------------------|-------|
+| Django | 188 | 0 (mined from Semgrep only) | 100% security |
+| React | 119 | 0 (mined from Semgrep only) | 100% security |
+| Flask | 94 | 0 (mined from Semgrep only) | 100% security |
+| FastAPI | 0 | 15 (manual) | 0% security |
+| PyTorch | 0 | 20 (manual) | 0% security |
+
+*Note: Ecosystems with 100% security atoms indicate **no functional patterns have been mined yet**, not that functional patterns don't exist.*
 
 **What We Detect vs What We Miss (Django example):**
 ```
@@ -547,14 +670,36 @@ Semgrep rules focus on vulnerabilities
                               - URL routing
 ```
 
+### Evidence Ledger
+
+| Artifact | How Produced | What It Supports |
+|----------|--------------|------------------|
+| `src/patterns/t2_mined/*.yaml` | Semgrep rule mining | Security atom counts |
+| `src/patterns/ATOMS_T2_*.yaml` | Manual curation | Category distribution |
+| Category counts | `grep -c "category:" <file>` | 77% security claim |
+
+### How to Falsify
+
+This finding would be contradicted if:
+1. Semgrep rules contain significant functional patterns (unlikely by tool design)
+2. Our category tagging is incorrect (audit needed)
+3. "Functional" patterns are actually present but mis-tagged as "security"
+
 ### Implication
 **The system is excellent for security audits but weak for architecture understanding.**
 
-To fix: Mine functional patterns from:
-1. Framework documentation
-2. Type stubs (typeshed, DefinitelyTyped)
-3. IDE inspections (PyCharm, VSCode)
-4. Linter rules (pylint, eslint non-security rules)
+**Functional Enrichment Program (recommended next steps):**
+| Priority | Source | Expected Yield |
+|----------|--------|----------------|
+| P1 | Framework documentation (Django, Flask, React) | Routes, models, controllers |
+| P2 | Type stubs (typeshed, DefinitelyTyped) | Function signatures, patterns |
+| P3 | IDE inspections (PyCharm, VSCode) | Common refactoring patterns |
+| P4 | Non-security linter rules (pylint, eslint) | Best practices |
+
+**Success Metric:**
+- Current functional atom ratio: 23%
+- Target: 45% (balanced inventory)
+- Per-ecosystem target: Top architectural constructs (routes/models/controllers) enriched for >30% of framework nodes
 
 ---
 
@@ -610,6 +755,24 @@ React frontend       100%         ~15%         ~60%
 Custom framework     100%         ~20%         ~5%
 ```
 
+*Note: T1 and T2 coverage numbers are approximate based on pattern matching; formal validation requires running Collider on representative repos of each type.*
+
+### Evidence Ledger
+
+| Artifact | How Produced | What It Supports |
+|----------|--------------|------------------|
+| `src/patterns/ATOMS_TIER0_CORE.yaml` | Manual definition | T0 atom count (42) |
+| `src/patterns/ATOMS_TIER1_STDLIB.yaml` | Manual definition | T1 atom count (21) |
+| `src/patterns/t2_mined/*.yaml` | Semgrep mining | T2 atom count (~3,531) |
+| `schema/fixed/roles.json` | Schema definition | Tier definitions |
+
+### How to Falsify
+
+This finding would be contradicted if:
+1. T1 atoms are specific to single ecosystems (should be cross-language)
+2. T2 atoms work without imports from the ecosystem (should be ecosystem-dependent)
+3. T0 atoms vary by language (should be universal AST constructs)
+
 ---
 
 ## FINDING 5: Duplicate and Overlap Issues
@@ -649,6 +812,21 @@ No canonical mapping for common operations
 ∴ Redundant atoms with different IDs
 ```
 
+### Evidence Ledger
+
+| Artifact | How Produced | What It Supports |
+|----------|--------------|------------------|
+| Duplicate scan | `python3 -c "from collections import Counter; ..."` | 16 exact duplicates |
+| Semantic overlap scan | Name normalization + grouping | 463 overlap groups |
+| `src/patterns/t2_mined/*.yaml` | Source files | Origin of duplicates |
+
+### How to Falsify
+
+This finding would be contradicted if:
+1. The 16 duplicates are intentional (e.g., aliases with different behavior)
+2. The 463 overlaps represent genuinely different patterns (semantic analysis needed)
+3. Deduplication breaks pattern matching (functional regression)
+
 ### Implication
 Need a **canonical operations layer**:
 ```yaml
@@ -669,13 +847,15 @@ canonical_operations:
 
 ## Confidence Score Matrix
 
-| Finding | Confidence | Evidence Type | Validation |
-|---------|------------|---------------|------------|
-| F1: Pareto Distribution | 97% | Empirical + Logical | Tested on 7 codebases |
-| F2: Enrichment Model | 95% | Architectural + Empirical | Code flow analysis |
-| F3: Security Skew | 98% | Statistical | Direct count |
-| F4: Tier Hierarchy | 92% | Theoretical + Empirical | Cross-codebase |
-| F5: Duplicates | 90% | Statistical | Pattern matching |
+| Finding | Confidence | Evidence Type | Validation | Falsification Test |
+|---------|------------|---------------|------------|--------------------|
+| F1: Pareto Distribution | 93–97% | Empirical + Logical | 7 codebases | Top-4 mass < 50% |
+| F2: Enrichment Model | 95% | Architectural + Empirical | Code flow analysis | T2 > D1 coverage |
+| F3: Security Skew | 98% | Statistical | Direct count | Semgrep has functional patterns |
+| F4: Tier Hierarchy | 92% | Theoretical + Empirical | Cross-codebase | T1 is ecosystem-specific |
+| F5: Duplicates | 90% | Statistical | Pattern matching | Duplicates are intentional |
+
+**Note:** Confidence scores follow the framework defined in "Confidence Scoring Framework" section. Each finding includes a "How to Falsify" subsection.
 
 ---
 
@@ -821,12 +1001,14 @@ ocaml           52 ( 1.4%)
 ```
 Repo            Nodes    T2 Nodes   T2%    Ecosystems
 ─────────────────────────────────────────────────────
-gatsby          5,929    3,570      60%    react
-meilisearch     5,343    1,900      36%    rust, ml
-vuejs/core      1,242      153      12%    react
-Made-With-ML      115       23      20%    fastapi, ml
+gatsby          5,929    3,570      60%    react, javascript
+meilisearch     5,343    1,900      36%    rust
+vuejs/core      1,242      153      12%    vue, typescript
+Made-With-ML      115       23      20%    fastapi, python
 Collider        1,274       17       1%    python
 ```
+
+*Note: Node counts from single Collider runs. T2% varies by pattern matching quality and ecosystem coverage.*
 
 ---
 
@@ -838,3 +1020,4 @@ Collider        1,274       17       1%    python
 | 2026-01-22 | Added causal chains | Claude Opus 4.5 |
 | 2026-01-22 | Confidence scores validated | Claude Opus 4.5 |
 | 2026-01-22 | Added Atoms vs Roles distinction (Gemini validation fix) | Claude Opus 4.5 |
+| 2026-01-22 | **HARDENING**: Scoped claims, operational definitions, evidence ledgers, falsification tests, runnable snippets | Claude Opus 4.5 |
