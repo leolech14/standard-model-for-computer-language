@@ -317,6 +317,25 @@ function getNodeColor(node) {
 - Top hub: `layout.js::get` (310 in-degree) - potential risk point
 - See `docs/research/CENTRALITY_ANALYSIS.md` for details
 
+### T2 Ecosystem Detection (Jan 21, 2026)
+
+**Problem:** Framework detection (Django/Flask/FastAPI) was at 0% due to `all()` bug in `detect_t2_atom()`.
+
+**Quick Fix Applied:**
+- Changed `all()` to `any()` for keyword matching
+- Patterns now detect correctly (verified Django, Flask, FastAPI)
+
+**Long-term Recommendation (from Oracle/Perplexity):**
+- String matching is fundamentally limited
+- Production tools (Semgrep, Bandit) use AST-based detection
+- Tree-sitter queries can match structural patterns, not just text
+- Example: Detect `@app.route` as a decorator node, not a substring
+
+**Next Steps for T2 Detection:**
+- [ ] Write tree-sitter queries for Django/Flask/FastAPI patterns
+- [ ] Replace string matching with structural AST queries
+- [ ] Test against real framework repositories
+
 ### Next Session
 - [ ] Correlate topology_role with git history (change frequency, bug fixes)
 - [ ] Implement betweenness centrality in full_analysis.py
