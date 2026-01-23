@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-23T05:28:29.138287
+**Generated At**: 2026-01-23T05:41:13.905970
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -37,7 +37,10 @@
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_14.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_15.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/Ferramenta Local-First de Mapa de Calor de Analogias \342\200\223 Especifica\303\247\303\243o Completa.pdf"` | 0 | - |
-| SYNCED | `.agent/KERNEL.md` | 8360 | 8360 |
+| SYNCED | `.agent/KERNEL.md` | 8498 | 8498 |
+| SYNCED | `.agent/SUBSYSTEM_INTEGRATION.md` | 10019 | 10019 |
+| SYNCED | `.agent/hooks/README.md` | 585 | 585 |
+| SYNCED | `.agent/hooks/post-commit` | 914 | 914 |
 | SYNCED | `.agent/intelligence/truths/history/truths_20260123_052327.yaml` | 409 | 409 |
 | SYNCED | `.agent/intelligence/truths/history/truths_20260123_052436.yaml` | 405 | 405 |
 | SYNCED | `.agent/intelligence/truths/repo_truths.yaml` | 405 | 405 |
@@ -50,7 +53,7 @@
 | SYNCED | `.agent/runs/RUN-20260122-194058-claude.yaml` | 2816 | 2816 |
 | SYNCED | `.agent/schema/run.schema.yaml` | 3736 | 3736 |
 | SYNCED | `.agent/schema/task.schema.yaml` | 3190 | 3190 |
-| SYNCED | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` | 15687 | 15687 |
+| SYNCED | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` | 15762 | 15762 |
 | SYNCED | `.agent/tools/audit_unicode.py` | 9255 | 9255 |
 | SYNCED | `.agent/tools/bare` | 4323 | 4323 |
 | SYNCED | `.agent/tools/check_stale.sh` | 698 | 698 |
@@ -64,7 +67,7 @@
 | SYNCED | `.gemini/context/brain.md` | 1010 | 1010 |
 | SYNCED | `.gitignore` | 2617 | 2617 |
 | SYNCED | `AGENTS.md` | 1217 | 1217 |
-| SYNCED | `CLAUDE.md` | 6282 | 6282 |
+| SYNCED | `CLAUDE.md` | 6405 | 6405 |
 | SYNCED | `Dockerfile` | 1369 | 1369 |
 | SYNCED | `GEMINI.md` | 1849 | 1849 |
 | CLOUD_ONLY | `Liabilities` | - | 156077 |
@@ -419,7 +422,7 @@
 | SYNCED | `context-management/docs/DOCS_REORG_TASK_REGISTRY.md` | 12208 | 12208 |
 | SYNCED | `context-management/docs/EVAL_LOG.md` | 895 | 895 |
 | SYNCED | `context-management/docs/HOLOGRAPHIC_DEPLOYMENT_MANUAL.md` | 3644 | 3644 |
-| SYNCED | `context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md` | 3455 | 3455 |
+| SYNCED | `context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md` | 3549 | 3549 |
 | SYNCED | `context-management/docs/INFALLIBLE_PLAN_DOCS_CLEANUP.md` | 8294 | 8294 |
 | SYNCED | `context-management/docs/ORIENTATION_FILES.md` | 5089 | 5089 |
 | SYNCED | `context-management/docs/README.md` | 1484 | 1484 |
@@ -495,6 +498,3 @@
 | SYNCED | `context-management/docs/prompts/03_dimension_orthogonality.md` | 2073 | 2073 |
 | SYNCED | `context-management/docs/prompts/04_atom_coverage.md` | 1576 | 1576 |
 | SYNCED | `context-management/docs/prompts/05_role_taxonomy.md` | 1597 | 1597 |
-| SYNCED | `context-management/docs/prompts/06_detection_signals.md` | 1867 | 1867 |
-| SYNCED | `context-management/docs/prompts/07_confidence_calibration.md` | 1881 | 1881 |
-| SYNCED | `context-management/docs/prompts/08_edge_semantics.md` | 1803 | 1803 |

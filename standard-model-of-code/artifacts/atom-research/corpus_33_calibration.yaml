@@ -84,15 +84,15 @@ repos:
     stars: 16000
     notes: "CLI framework built on Click"
 
-  # Python - Library (large)
-  - name: pydantic
-    url: https://github.com/pydantic/pydantic
+  # Python - Library (medium) - REPLACED pydantic (timeout)
+  - name: attrs
+    url: https://github.com/python-attrs/attrs
     ref: main
     language: python
     domain: library
-    size: large
-    stars: 21000
-    notes: "Data validation, heavy type system"
+    size: medium
+    stars: 5200
+    notes: "Data classes library - replaces pydantic (162K LOC timeout)"
 
 # =============================================================================
 # TYPESCRIPT (6 repos)

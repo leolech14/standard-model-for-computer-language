@@ -1,0 +1,1069 @@
+# Validation Corpus: 102 Repositories
+# Purpose: L2 → L3 hypothesis validation (n≥100 requirement)
+#
+# Stratification: 6 languages × 17 repos each = 102 total
+# Base: 33 calibration repos (validated)
+# Addition: 69 new repos
+#
+# Usage: python tools/cloud/orchestrate_corpus.py artifacts/atom-research/corpus_102_validation.yaml
+
+version: 2
+corpus_id: validation_102
+generated_at_utc: "2026-01-23T12:00:00Z"
+purpose: "L2 validation corpus - test hypotheses H1-H6 with n≥100"
+
+notes: |
+  This corpus extends the 33-repo calibration set to 102 repos.
+  All calibration repos are included for continuity.
+  New repos selected for:
+  - Domain diversity (library, web, CLI, systems, ML)
+  - Size diversity (small, medium, large)
+  - Hard cases (metaprogramming, monorepos, generated code)
+
+config:
+  deterministic: true
+  ai_insights: false
+  timeout_per_repo: 600  # 10 minutes max
+
+stratification:
+  languages: [python, typescript, javascript, go, rust, java]
+  target_per_language: 17
+  domains: [web_backend, web_frontend, cli, library, ml, systems]
+
+# =============================================================================
+# PYTHON (17 repos)
+# =============================================================================
+# Calibration: fastapi, httpx, instructor, rich, typer, attrs (6)
+# New: 11 repos
+# =============================================================================
+repos:
+  # --- CALIBRATION (6) ---
+  - name: fastapi
+    url: https://github.com/tiangolo/fastapi
+    ref: master
+    language: python
+    domain: web_backend
+    size: large
+    stars: 75000
+    notes: "CALIBRATION - Async web framework"
+
+  - name: httpx
+    url: https://github.com/encode/httpx
+    ref: master
+    language: python
+    domain: library
+    size: medium
+    stars: 13000
+    notes: "CALIBRATION - HTTP client"
+
+  - name: instructor
+    url: https://github.com/jxnl/instructor
+    ref: main
+    language: python
+    domain: ml
+    size: small
+    stars: 8000
+    notes: "CALIBRATION - LLM structured outputs"
+
+  - name: rich
+    url: https://github.com/Textualize/rich
+    ref: master
+    language: python
+    domain: cli
+    size: medium
+    stars: 50000
+    notes: "CALIBRATION - Terminal formatting"
+
+  - name: typer
+    url: https://github.com/tiangolo/typer
+    ref: master
+    language: python
+    domain: cli
+    size: small
+    stars: 16000
+    notes: "CALIBRATION - CLI framework"
+
+  - name: attrs
+    url: https://github.com/python-attrs/attrs
+    ref: main
+    language: python
+    domain: library
+    size: medium
+    stars: 5200
+    notes: "CALIBRATION - Data classes library"
+
+  # --- NEW PYTHON (11) ---
+  - name: click
+    url: https://github.com/pallets/click
+    ref: main
+    language: python
+    domain: library
+    size: medium
+    stars: 15000
+    notes: "CLI creation toolkit"
+
+  - name: requests
+    url: https://github.com/psf/requests
+    ref: main
+    language: python
+    domain: library
+    size: medium
+    stars: 52000
+    notes: "HTTP library for humans"
+
+  - name: flask
+    url: https://github.com/pallets/flask
+    ref: main
+    language: python
+    domain: web_backend
+    size: medium
+    stars: 68000
+    notes: "Micro web framework"
+
+  - name: django-rest-framework
+    url: https://github.com/encode/django-rest-framework
+    ref: master
+    language: python
+    domain: web_backend
+    size: large
+    stars: 28000
+    notes: "REST API toolkit"
+
+  - name: uvicorn
+    url: https://github.com/encode/uvicorn
+    ref: master
+    language: python
+    domain: web_backend
+    size: small
+    stars: 8500
+    notes: "ASGI server"
+
+  - name: pytest
+    url: https://github.com/pytest-dev/pytest
+    ref: main
+    language: python
+    domain: library
+    size: large
+    stars: 12000
+    notes: "Testing framework"
+
+  - name: black
+    url: https://github.com/psf/black
+    ref: main
+    language: python
+    domain: cli
+    size: medium
+    stars: 39000
+    notes: "Code formatter"
+
+  - name: ruff
+    url: https://github.com/astral-sh/ruff
+    ref: main
+    language: python
+    domain: cli
+    size: large
+    stars: 35000
+    notes: "Fast Python linter (Rust core)"
+    hard_case: multi_language
+
+  - name: pendulum
+    url: https://github.com/sdispater/pendulum
+    ref: master
+    language: python
+    domain: library
+    size: medium
+    stars: 6200
+    notes: "Datetime library"
+
+  - name: arrow
+    url: https://github.com/arrow-py/arrow
+    ref: master
+    language: python
+    domain: library
+    size: small
+    stars: 8700
+    notes: "Datetime library alternative"
+
+  - name: orjson
+    url: https://github.com/ijl/orjson
+    ref: master
+    language: python
+    domain: library
+    size: medium
+    stars: 6000
+    notes: "Fast JSON library (Rust core)"
+    hard_case: multi_language
+
+# =============================================================================
+# TYPESCRIPT (17 repos)
+# =============================================================================
+# Calibration: zod, trpc, prisma, hono, solid, drizzle-orm (6)
+# New: 11 repos
+# =============================================================================
+
+  # --- CALIBRATION (6) ---
+  - name: zod
+    url: https://github.com/colinhacks/zod
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 34000
+    notes: "CALIBRATION - Schema validation"
+
+  - name: trpc
+    url: https://github.com/trpc/trpc
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 35000
+    notes: "CALIBRATION - End-to-end typesafe APIs"
+    hard_case: monorepo
+
+  - name: prisma
+    url: https://github.com/prisma/prisma
+    ref: main
+    language: typescript
+    domain: library
+    size: large
+    stars: 40000
+    notes: "CALIBRATION - ORM, generated code"
+    hard_case: generated_code
+
+  - name: hono
+    url: https://github.com/honojs/hono
+    ref: main
+    language: typescript
+    domain: web_backend
+    size: medium
+    stars: 20000
+    notes: "CALIBRATION - Fast web framework"
+
+  - name: solid
+    url: https://github.com/solidjs/solid
+    ref: main
+    language: typescript
+    domain: web_frontend
+    size: medium
+    stars: 32000
+    notes: "CALIBRATION - Reactive UI library"
+
+  - name: drizzle-orm
+    url: https://github.com/drizzle-team/drizzle-orm
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 25000
+    notes: "CALIBRATION - TypeScript ORM"
+
+  # --- NEW TYPESCRIPT (11) ---
+  - name: zustand
+    url: https://github.com/pmndrs/zustand
+    ref: main
+    language: typescript
+    domain: library
+    size: small
+    stars: 48000
+    notes: "Minimal state management"
+
+  - name: jotai
+    url: https://github.com/pmndrs/jotai
+    ref: main
+    language: typescript
+    domain: library
+    size: small
+    stars: 19000
+    notes: "Primitive state management"
+
+  - name: tanstack-query
+    url: https://github.com/TanStack/query
+    ref: main
+    language: typescript
+    domain: library
+    size: large
+    stars: 43000
+    notes: "Async state management"
+    hard_case: monorepo
+
+  - name: tanstack-router
+    url: https://github.com/TanStack/router
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 8000
+    notes: "Type-safe routing"
+
+  - name: effect
+    url: https://github.com/Effect-TS/effect
+    ref: main
+    language: typescript
+    domain: library
+    size: large
+    stars: 7500
+    notes: "Functional effects system"
+    hard_case: metaprogramming
+
+  - name: ts-pattern
+    url: https://github.com/gvergnaud/ts-pattern
+    ref: main
+    language: typescript
+    domain: library
+    size: small
+    stars: 12000
+    notes: "Pattern matching library"
+
+  - name: type-fest
+    url: https://github.com/sindresorhus/type-fest
+    ref: main
+    language: typescript
+    domain: library
+    size: small
+    stars: 14000
+    notes: "TypeScript type utilities"
+
+  - name: neverthrow
+    url: https://github.com/supermacro/neverthrow
+    ref: master
+    language: typescript
+    domain: library
+    size: small
+    stars: 4500
+    notes: "Result type for TS"
+
+  - name: tRPC-openapi
+    url: https://github.com/jlalmes/trpc-openapi
+    ref: master
+    language: typescript
+    domain: library
+    size: small
+    stars: 2500
+    notes: "OpenAPI for tRPC"
+
+  - name: kysely
+    url: https://github.com/kysely-org/kysely
+    ref: master
+    language: typescript
+    domain: library
+    size: medium
+    stars: 11000
+    notes: "Type-safe SQL builder"
+
+  - name: vitest
+    url: https://github.com/vitest-dev/vitest
+    ref: main
+    language: typescript
+    domain: library
+    size: large
+    stars: 13000
+    notes: "Vite-native testing"
+
+# =============================================================================
+# JAVASCRIPT (17 repos)
+# =============================================================================
+# Calibration: preact, express, esbuild, lodash (4)
+# New: 13 repos
+# =============================================================================
+
+  # --- CALIBRATION (4) ---
+  - name: preact
+    url: https://github.com/preactjs/preact
+    ref: main
+    language: javascript
+    domain: web_frontend
+    size: small
+    stars: 37000
+    notes: "CALIBRATION - Lightweight React"
+
+  - name: express
+    url: https://github.com/expressjs/express
+    ref: master
+    language: javascript
+    domain: web_backend
+    size: medium
+    stars: 65000
+    notes: "CALIBRATION - Node.js framework"
+
+  - name: esbuild
+    url: https://github.com/evanw/esbuild
+    ref: main
+    language: javascript
+    domain: systems
+    size: medium
+    stars: 38000
+    notes: "CALIBRATION - Fast bundler"
+    hard_case: multi_language
+
+  - name: lodash
+    url: https://github.com/lodash/lodash
+    ref: main
+    language: javascript
+    domain: library
+    size: medium
+    stars: 60000
+    notes: "CALIBRATION - Utility library"
+
+  # --- NEW JAVASCRIPT (13) ---
+  - name: axios
+    url: https://github.com/axios/axios
+    ref: v1.x
+    language: javascript
+    domain: library
+    size: medium
+    stars: 106000
+    notes: "HTTP client"
+
+  - name: dayjs
+    url: https://github.com/iamkun/dayjs
+    ref: dev
+    language: javascript
+    domain: library
+    size: small
+    stars: 47000
+    notes: "Lightweight dates"
+
+  - name: date-fns
+    url: https://github.com/date-fns/date-fns
+    ref: main
+    language: javascript
+    domain: library
+    size: large
+    stars: 35000
+    notes: "Date utility library"
+
+  - name: uuid
+    url: https://github.com/uuidjs/uuid
+    ref: main
+    language: javascript
+    domain: library
+    size: small
+    stars: 15000
+    notes: "UUID generation"
+
+  - name: validator
+    url: https://github.com/validatorjs/validator.js
+    ref: master
+    language: javascript
+    domain: library
+    size: medium
+    stars: 23000
+    notes: "String validation"
+
+  - name: chalk
+    url: https://github.com/chalk/chalk
+    ref: main
+    language: javascript
+    domain: cli
+    size: small
+    stars: 22000
+    notes: "Terminal colors"
+
+  - name: commander
+    url: https://github.com/tj/commander.js
+    ref: master
+    language: javascript
+    domain: cli
+    size: small
+    stars: 27000
+    notes: "CLI framework"
+
+  - name: yargs
+    url: https://github.com/yargs/yargs
+    ref: main
+    language: javascript
+    domain: cli
+    size: medium
+    stars: 11000
+    notes: "CLI argument parser"
+
+  - name: fastify
+    url: https://github.com/fastify/fastify
+    ref: main
+    language: javascript
+    domain: web_backend
+    size: medium
+    stars: 32000
+    notes: "Fast web framework"
+
+  - name: koa
+    url: https://github.com/koajs/koa
+    ref: master
+    language: javascript
+    domain: web_backend
+    size: small
+    stars: 35000
+    notes: "Next-gen Express"
+
+  - name: pino
+    url: https://github.com/pinojs/pino
+    ref: main
+    language: javascript
+    domain: library
+    size: small
+    stars: 14000
+    notes: "Fast JSON logger"
+
+  - name: immer
+    url: https://github.com/immerjs/immer
+    ref: main
+    language: javascript
+    domain: library
+    size: small
+    stars: 27000
+    notes: "Immutable state"
+
+  - name: rxjs
+    url: https://github.com/ReactiveX/rxjs
+    ref: master
+    language: javascript
+    domain: library
+    size: large
+    stars: 31000
+    notes: "Reactive extensions"
+
+# =============================================================================
+# GO (17 repos)
+# =============================================================================
+# Calibration: cobra, hugo, gin, fiber, lazygit, k9s (6)
+# New: 11 repos
+# =============================================================================
+
+  # --- CALIBRATION (6) ---
+  - name: cobra
+    url: https://github.com/spf13/cobra
+    ref: main
+    language: go
+    domain: library
+    size: medium
+    stars: 38000
+    notes: "CALIBRATION - CLI framework"
+
+  - name: hugo
+    url: https://github.com/gohugoio/hugo
+    ref: master
+    language: go
+    domain: systems
+    size: large
+    stars: 76000
+    notes: "CALIBRATION - Static site generator"
+
+  - name: gin
+    url: https://github.com/gin-gonic/gin
+    ref: master
+    language: go
+    domain: web_backend
+    size: medium
+    stars: 79000
+    notes: "CALIBRATION - HTTP framework"
+
+  - name: fiber
+    url: https://github.com/gofiber/fiber
+    ref: main
+    language: go
+    domain: web_backend
+    size: medium
+    stars: 34000
+    notes: "CALIBRATION - Express-inspired"
+
+  - name: lazygit
+    url: https://github.com/jesseduffield/lazygit
+    ref: master
+    language: go
+    domain: cli
+    size: medium
+    stars: 53000
+    notes: "CALIBRATION - Terminal git UI"
+
+  - name: k9s
+    url: https://github.com/derailed/k9s
+    ref: master
+    language: go
+    domain: cli
+    size: medium
+    stars: 27000
+    notes: "CALIBRATION - Kubernetes CLI"
+
+  # --- NEW GO (11) ---
+  - name: viper
+    url: https://github.com/spf13/viper
+    ref: master
+    language: go
+    domain: library
+    size: medium
+    stars: 27000
+    notes: "Configuration library"
+
+  - name: logrus
+    url: https://github.com/sirupsen/logrus
+    ref: master
+    language: go
+    domain: library
+    size: small
+    stars: 25000
+    notes: "Structured logger"
+
+  - name: zap
+    url: https://github.com/uber-go/zap
+    ref: master
+    language: go
+    domain: library
+    size: medium
+    stars: 22000
+    notes: "Fast structured logger"
+
+  - name: echo
+    url: https://github.com/labstack/echo
+    ref: master
+    language: go
+    domain: web_backend
+    size: medium
+    stars: 30000
+    notes: "High-perf web framework"
+
+  - name: chi
+    url: https://github.com/go-chi/chi
+    ref: master
+    language: go
+    domain: web_backend
+    size: small
+    stars: 18000
+    notes: "Lightweight HTTP router"
+
+  - name: fx
+    url: https://github.com/uber-go/fx
+    ref: master
+    language: go
+    domain: library
+    size: small
+    stars: 5800
+    notes: "Dependency injection"
+
+  - name: wire
+    url: https://github.com/google/wire
+    ref: main
+    language: go
+    domain: library
+    size: small
+    stars: 13000
+    notes: "Compile-time DI"
+    hard_case: metaprogramming
+
+  - name: air
+    url: https://github.com/air-verse/air
+    ref: master
+    language: go
+    domain: cli
+    size: small
+    stars: 18000
+    notes: "Live reload for Go"
+
+  - name: goreleaser
+    url: https://github.com/goreleaser/goreleaser
+    ref: main
+    language: go
+    domain: cli
+    size: medium
+    stars: 14000
+    notes: "Release automation"
+
+  - name: gorm
+    url: https://github.com/go-gorm/gorm
+    ref: master
+    language: go
+    domain: library
+    size: medium
+    stars: 37000
+    notes: "ORM library"
+
+  - name: ent
+    url: https://github.com/ent/ent
+    ref: master
+    language: go
+    domain: library
+    size: large
+    stars: 16000
+    notes: "Entity framework"
+    hard_case: generated_code
+
+# =============================================================================
+# RUST (17 repos)
+# =============================================================================
+# Calibration: serde, ripgrep, bat, fd, alacritty, starship (6)
+# New: 11 repos
+# =============================================================================
+
+  # --- CALIBRATION (6) ---
+  - name: serde
+    url: https://github.com/serde-rs/serde
+    ref: master
+    language: rust
+    domain: library
+    size: large
+    stars: 9000
+    notes: "CALIBRATION - Serialization"
+
+  - name: ripgrep
+    url: https://github.com/BurntSushi/ripgrep
+    ref: master
+    language: rust
+    domain: cli
+    size: medium
+    stars: 49000
+    notes: "CALIBRATION - Fast grep"
+
+  - name: bat
+    url: https://github.com/sharkdp/bat
+    ref: master
+    language: rust
+    domain: cli
+    size: small
+    stars: 50000
+    notes: "CALIBRATION - Cat with syntax"
+
+  - name: fd
+    url: https://github.com/sharkdp/fd
+    ref: master
+    language: rust
+    domain: cli
+    size: small
+    stars: 34000
+    notes: "CALIBRATION - Fast find"
+
+  - name: alacritty
+    url: https://github.com/alacritty/alacritty
+    ref: master
+    language: rust
+    domain: systems
+    size: large
+    stars: 56000
+    notes: "CALIBRATION - GPU terminal"
+
+  - name: starship
+    url: https://github.com/starship/starship
+    ref: master
+    language: rust
+    domain: cli
+    size: medium
+    stars: 45000
+    notes: "CALIBRATION - Cross-shell prompt"
+
+  # --- NEW RUST (11) ---
+  - name: clap
+    url: https://github.com/clap-rs/clap
+    ref: master
+    language: rust
+    domain: library
+    size: medium
+    stars: 14000
+    notes: "CLI argument parser"
+
+  - name: tokio
+    url: https://github.com/tokio-rs/tokio
+    ref: master
+    language: rust
+    domain: library
+    size: large
+    stars: 27000
+    notes: "Async runtime"
+
+  - name: hyper
+    url: https://github.com/hyperium/hyper
+    ref: master
+    language: rust
+    domain: library
+    size: medium
+    stars: 14000
+    notes: "HTTP library"
+
+  - name: axum
+    url: https://github.com/tokio-rs/axum
+    ref: main
+    language: rust
+    domain: web_backend
+    size: medium
+    stars: 19000
+    notes: "Ergonomic web framework"
+
+  - name: actix-web
+    url: https://github.com/actix/actix-web
+    ref: main
+    language: rust
+    domain: web_backend
+    size: medium
+    stars: 22000
+    notes: "Fast web framework"
+
+  - name: reqwest
+    url: https://github.com/seanmonstar/reqwest
+    ref: master
+    language: rust
+    domain: library
+    size: medium
+    stars: 10000
+    notes: "HTTP client"
+
+  - name: sqlx
+    url: https://github.com/launchbadge/sqlx
+    ref: main
+    language: rust
+    domain: library
+    size: medium
+    stars: 13000
+    notes: "Async SQL toolkit"
+
+  - name: diesel
+    url: https://github.com/diesel-rs/diesel
+    ref: master
+    language: rust
+    domain: library
+    size: large
+    stars: 13000
+    notes: "Safe ORM"
+    hard_case: metaprogramming
+
+  - name: thiserror
+    url: https://github.com/dtolnay/thiserror
+    ref: master
+    language: rust
+    domain: library
+    size: small
+    stars: 4600
+    notes: "Error derive macro"
+
+  - name: anyhow
+    url: https://github.com/dtolnay/anyhow
+    ref: master
+    language: rust
+    domain: library
+    size: small
+    stars: 5600
+    notes: "Flexible error handling"
+
+  - name: tracing
+    url: https://github.com/tokio-rs/tracing
+    ref: master
+    language: rust
+    domain: library
+    size: medium
+    stars: 5500
+    notes: "Structured diagnostics"
+
+# =============================================================================
+# JAVA (17 repos)
+# =============================================================================
+# Calibration: spring-boot, gson, guava, lombok, jackson-core (5)
+# New: 12 repos
+# WARNING: Java uses fallback parser (no tree-sitter queries)
+# =============================================================================
+
+  # --- CALIBRATION (5) ---
+  - name: spring-boot
+    url: https://github.com/spring-projects/spring-boot
+    ref: main
+    language: java
+    domain: web_backend
+    size: large
+    stars: 75000
+    notes: "CALIBRATION - Enterprise framework"
+    hard_case: large_framework
+    query_support: false
+
+  - name: gson
+    url: https://github.com/google/gson
+    ref: main
+    language: java
+    domain: library
+    size: medium
+    stars: 23000
+    notes: "CALIBRATION - JSON serialization"
+    query_support: false
+
+  - name: guava
+    url: https://github.com/google/guava
+    ref: master
+    language: java
+    domain: library
+    size: large
+    stars: 50000
+    notes: "CALIBRATION - Core libraries"
+    query_support: false
+
+  - name: lombok
+    url: https://github.com/projectlombok/lombok
+    ref: master
+    language: java
+    domain: library
+    size: small
+    stars: 13000
+    notes: "CALIBRATION - Annotation processor"
+    hard_case: metaprogramming
+    query_support: false
+
+  - name: jackson-core
+    url: https://github.com/FasterXML/jackson-core
+    ref: "2.18"
+    language: java
+    domain: library
+    size: medium
+    stars: 2300
+    notes: "CALIBRATION - JSON processor"
+    query_support: false
+
+  # --- NEW JAVA (12) ---
+  - name: junit5
+    url: https://github.com/junit-team/junit5
+    ref: main
+    language: java
+    domain: library
+    size: large
+    stars: 6500
+    notes: "Testing framework"
+    query_support: false
+
+  - name: mockito
+    url: https://github.com/mockito/mockito
+    ref: main
+    language: java
+    domain: library
+    size: medium
+    stars: 15000
+    notes: "Mocking framework"
+    query_support: false
+
+  - name: slf4j
+    url: https://github.com/qos-ch/slf4j
+    ref: master
+    language: java
+    domain: library
+    size: small
+    stars: 2300
+    notes: "Logging facade"
+    query_support: false
+
+  - name: logback
+    url: https://github.com/qos-ch/logback
+    ref: master
+    language: java
+    domain: library
+    size: medium
+    stars: 3000
+    notes: "Logging implementation"
+    query_support: false
+
+  - name: retrofit
+    url: https://github.com/square/retrofit
+    ref: trunk
+    language: java
+    domain: library
+    size: medium
+    stars: 43000
+    notes: "HTTP client"
+    query_support: false
+
+  - name: okhttp
+    url: https://github.com/square/okhttp
+    ref: master
+    language: java
+    domain: library
+    size: medium
+    stars: 46000
+    notes: "HTTP & HTTP/2 client"
+    query_support: false
+
+  - name: rxjava
+    url: https://github.com/ReactiveX/RxJava
+    ref: 3.x
+    language: java
+    domain: library
+    size: large
+    stars: 48000
+    notes: "Reactive extensions"
+    query_support: false
+
+  - name: dagger
+    url: https://github.com/google/dagger
+    ref: master
+    language: java
+    domain: library
+    size: medium
+    stars: 18000
+    notes: "Dependency injection"
+    hard_case: metaprogramming
+    query_support: false
+
+  - name: mybatis-3
+    url: https://github.com/mybatis/mybatis-3
+    ref: master
+    language: java
+    domain: library
+    size: medium
+    stars: 20000
+    notes: "SQL mapper"
+    query_support: false
+
+  - name: caffeine
+    url: https://github.com/ben-manes/caffeine
+    ref: master
+    language: java
+    domain: library
+    size: medium
+    stars: 16000
+    notes: "Caching library"
+    query_support: false
+
+  - name: javaparser
+    url: https://github.com/javaparser/javaparser
+    ref: master
+    language: java
+    domain: library
+    size: large
+    stars: 5300
+    notes: "Java source parser"
+    query_support: false
+
+  - name: vavr
+    url: https://github.com/vavr-io/vavr
+    ref: master
+    language: java
+    domain: library
+    size: medium
+    stars: 5700
+    notes: "Functional library"
+    query_support: false
+
+# =============================================================================
+# SUMMARY
+# =============================================================================
+#
+# Total: 102 repos (17 × 6 languages)
+#
+# Language distribution:
+#   - Python: 17 (6 calibration + 11 new)
+#   - TypeScript: 17 (6 calibration + 11 new)
+#   - JavaScript: 17 (4 calibration + 13 new)
+#   - Go: 17 (6 calibration + 11 new)
+#   - Rust: 17 (6 calibration + 11 new)
+#   - Java: 17 (5 calibration + 12 new)
+#
+# Domain distribution (approximate):
+#   - library: ~55 repos
+#   - web_backend: ~16 repos
+#   - cli: ~18 repos
+#   - web_frontend: ~3 repos
+#   - systems: ~6 repos
+#   - ml: ~2 repos
+#
+# Hard cases:
+#   - monorepo: trpc, tanstack-query
+#   - generated_code: prisma, ent
+#   - multi_language: esbuild, ruff, orjson
+#   - large_framework: spring-boot
+#   - metaprogramming: effect, lombok, wire, diesel, dagger
+#
+# Query support:
+#   - FULL: Python, TypeScript, JavaScript, Go, Rust (85 repos)
+#   - NONE: Java (17 repos) - tests fallback behavior
+#
+# =============================================================================
