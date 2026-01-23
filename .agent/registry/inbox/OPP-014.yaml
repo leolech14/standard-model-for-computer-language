@@ -1,0 +1,24 @@
+id: OPP-014
+title: Update template.html
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.404688+00:00'
+description: "### Task 4.2: Update template.html\n\n| Metric | Score | Rationale |\n\
+  |--------|-------|-----------|\n| **Confidence** | 99% | Simple script tag addition\
+  \ |\n| **Alignment** | 100% | Same pattern as existing scripts |\n| **Usefulness**\
+  \ | 100% | Required for UPB to load |\n\n**Target File:** `viz/assets/template.html`\n\
+  \n#### Step-by-Step Instructions\n\n```\nSTEP 1: Find script loading section\n \
+  \  - Look for <!-- Module Scripts --> or similar\n   - Or find where control-bar.js\
+  \ is loaded\n\nSTEP 2: Add UPB scripts"
+urgency: HIGH
+confidence:
+  factual: 99
+  alignment: 100
+  current: 100
+  onwards: 99
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-4.2
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

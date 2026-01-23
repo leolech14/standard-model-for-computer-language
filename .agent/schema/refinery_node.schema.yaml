@@ -1,0 +1,447 @@
+# RefineryNode Schema v1.0.0
+# The canonical atomic unit for the Context Refinery system
+# Created: 2026-01-23 | SPRINT-002 | TASK-007
+#
+# SOURCES UNIFIED:
+# 1. semantic_models.yaml (Atom concept, D1-D8 dimensions)
+# 2. EnrichedNode from COLLIDER_ARCHITECTURE.md (full node structure)
+# 3. R8_EPISTEMOLOGY lens (provenance model) from STORAGE_ARCHITECTURE.md
+# 4. 4D confidence scoring (Factual, Alignment, Current, Onwards)
+#
+# DESIGN PRINCIPLES:
+# - Atomization: Everything becomes a Node with ID
+# - Provenance: All outputs trace to inputs
+# - Delta-First: Content hash enables change detection
+# - Confidence-Aware: 4D scoring for quality gates
+#
+# EXAMPLE:
+# ---
+# id: "ATOM-0001"
+# type: "function"
+# name: "validate_user"
+# source_path: "src/services/user.py"
+# source_line_start: 45
+# source_line_end: 67
+# content_hash: "sha256:abc123..."
+# summary: "Validates user input against schema"
+# relationships:
+#   contains: []
+#   calls: ["ATOM-0002", "ATOM-0005"]
+#   imports: ["ATOM-1000"]
+#   related_to: ["ATOM-0003"]
+# confidence:
+#   factual: 95
+#   alignment: 90
+#   current: 85
+#   onwards: 80
+#   composite: 80
+# timestamps:
+#   created_at: "2026-01-23T10:00:00Z"
+#   updated_at: "2026-01-23T10:00:00Z"
+#   source_modified_at: "2026-01-20T14:30:00Z"
+# metadata:
+#   role: "Validator"
+#   layer: "Domain"
+
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "https://elements-archive-2026/schema/refinery_node.schema.yaml"
+title: "RefineryNode"
+description: "The atomic unit of the Context Refinery - a semantic node with full provenance"
+version: "1.0.0"
+
+type: object
+required:
+  - id
+  - type
+  - source_path
+  - content_hash
+  - summary
+  - confidence
+  - timestamps
+
+properties:
+  # ============================================================================
+  # IDENTITY (R1) - Who am I?
+  # ============================================================================
+  id:
+    type: string
+    description: "Unique identifier. Format: ATOM-XXXX, NODE-XXXX, or CLUSTER-XXXX"
+    pattern: "^(ATOM|NODE|CLUSTER|FILE|OPP|TASK)-[A-Za-z0-9_-]+$"
+    examples:
+      - "ATOM-0001"
+      - "NODE-validate_user"
+      - "CLUSTER-auth"
+      - "FILE-src_services_user_py"
+
+  type:
+    type: string
+    description: "The kind of semantic unit this node represents"
+    enum:
+      # Code elements
+      - function
+      - class
+      - method
+      - variable
+      - constant
+      - module
+      - package
+      # Documentation elements
+      - doc
+      - spec
+      - config
+      # Aggregations
+      - file
+      - cluster
+      - boundary
+      - concept
+      # Meta elements
+      - task
+      - opportunity
+      - insight
+
+  name:
+    type: string
+    description: "Human-readable name for the node"
+    maxLength: 255
+
+  # ============================================================================
+  # PROVENANCE (R8) - Where did I come from?
+  # ============================================================================
+  source_path:
+    type: string
+    description: "Original file path (relative to repo root)"
+    examples:
+      - "src/services/user.py"
+      - "context-management/config/analysis_sets.yaml"
+
+  source_line_start:
+    type: integer
+    minimum: 1
+    description: "Starting line number in source file"
+
+  source_line_end:
+    type: integer
+    minimum: 1
+    description: "Ending line number in source file"
+
+  content_hash:
+    type: string
+    description: "SHA256 hash of source content for delta detection"
+    pattern: "^sha256:[a-f0-9]{64}$"
+    examples:
+      - "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+
+  derived_from:
+    type: array
+    description: "IDs of source nodes this was derived from (for clusters, summaries)"
+    items:
+      type: string
+    examples:
+      - ["ATOM-0001", "ATOM-0002", "ATOM-0003"]
+
+  # ============================================================================
+  # CONTENT - What do I contain?
+  # ============================================================================
+  summary:
+    type: string
+    description: "Human-readable digest of the node's meaning/purpose"
+    maxLength: 1000
+
+  body_source:
+    type: string
+    description: "Actual source code or content (optional, for small nodes)"
+    maxLength: 10000
+
+  keywords:
+    type: array
+    description: "Semantic keywords extracted from content"
+    items:
+      type: string
+    maxItems: 20
+
+  # ============================================================================
+  # RELATIONSHIPS (R5) - Who do I connect to?
+  # ============================================================================
+  relationships:
+    type: object
+    description: "Links to other nodes by relationship type"
+    properties:
+      contains:
+        type: array
+        description: "Child nodes this node contains (class -> methods)"
+        items:
+          type: string
+      contained_by:
+        type: string
+        description: "Parent node that contains this node"
+      calls:
+        type: array
+        description: "Nodes this node calls/invokes"
+        items:
+          type: string
+      called_by:
+        type: array
+        description: "Nodes that call this node"
+        items:
+          type: string
+      imports:
+        type: array
+        description: "Modules/packages this node imports"
+        items:
+          type: string
+      imported_by:
+        type: array
+        description: "Nodes that import this one"
+        items:
+          type: string
+      inherits:
+        type: array
+        description: "Parent classes this node inherits from"
+        items:
+          type: string
+      inherited_by:
+        type: array
+        description: "Child classes that inherit from this node"
+        items:
+          type: string
+      implements:
+        type: array
+        description: "Interfaces this node implements"
+        items:
+          type: string
+      related_to:
+        type: array
+        description: "Semantically related nodes (soft link)"
+        items:
+          type: string
+      documents:
+        type: array
+        description: "Code nodes this doc node documents"
+        items:
+          type: string
+      documented_by:
+        type: array
+        description: "Doc nodes that document this code node"
+        items:
+          type: string
+
+  # ============================================================================
+  # CONFIDENCE (4D Scoring) - How much can I be trusted?
+  # ============================================================================
+  confidence:
+    type: object
+    description: "4D confidence scoring for quality gates"
+    required:
+      - factual
+      - alignment
+      - current
+      - onwards
+      - composite
+    properties:
+      factual:
+        type: integer
+        minimum: 0
+        maximum: 100
+        description: "F: Correctness of facts stated about this node"
+      alignment:
+        type: integer
+        minimum: 0
+        maximum: 100
+        description: "A: How well this node aligns with project goals/patterns"
+      current:
+        type: integer
+        minimum: 0
+        maximum: 100
+        description: "C: How up-to-date this node's information is"
+      onwards:
+        type: integer
+        minimum: 0
+        maximum: 100
+        description: "O: How useful this node is for future work"
+      composite:
+        type: integer
+        minimum: 0
+        maximum: 100
+        description: "min(factual, alignment, current, onwards) - the weakest link"
+      evidence:
+        type: array
+        description: "Evidence supporting the confidence scores"
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [docstring, type_hints, tests, usage, manual_review]
+            strength:
+              type: string
+              enum: [weak, moderate, strong]
+            source:
+              type: string
+      uncertainties:
+        type: array
+        description: "Known gaps or uncertainties about this node"
+        items:
+          type: string
+      requires_review:
+        type: boolean
+        description: "Flag indicating this node needs human review"
+        default: false
+
+  # ============================================================================
+  # DIMENSIONS (D1-D8) - Where am I in semantic space?
+  # ============================================================================
+  dimensions:
+    type: object
+    description: "8-dimensional classification from Standard Model of Code"
+    properties:
+      D1_WHAT:
+        type: string
+        description: "What type of atom is this?"
+        examples: ["Function", "Class", "Module", "Variable"]
+      D2_LAYER:
+        type: string
+        description: "Architectural layer"
+        enum: [Domain, Application, Infrastructure, Presentation, Unknown]
+      D3_ROLE:
+        type: string
+        description: "Semantic role (from 33 canonical roles)"
+        examples: ["Query", "Command", "DTO", "Factory", "Validator"]
+      D4_BOUNDARY:
+        type: string
+        description: "Internal/External boundary"
+        enum: [Internal, External, Input, Output, I-O, Hybrid, Unknown]
+      D5_STATE:
+        type: string
+        description: "Statefulness"
+        enum: [Stateless, Stateful, Unknown]
+      D6_EFFECT:
+        type: string
+        description: "Side effect type"
+        enum: [Pure, Read, Write, ReadModify, Effectful, Unknown]
+      D7_LIFECYCLE:
+        type: string
+        description: "When created/destroyed"
+        enum: [Singleton, Transient, Scoped, Use, Unknown]
+      D8_TRUST:
+        type: integer
+        minimum: 0
+        maximum: 100
+        description: "Trust level (0-100)"
+
+  # ============================================================================
+  # TIMESTAMPS - When did things happen?
+  # ============================================================================
+  timestamps:
+    type: object
+    description: "Temporal metadata for delta detection and freshness"
+    required:
+      - created_at
+      - updated_at
+    properties:
+      created_at:
+        type: string
+        format: date-time
+        description: "When this node was first created"
+      updated_at:
+        type: string
+        format: date-time
+        description: "When this node was last modified"
+      source_modified_at:
+        type: string
+        format: date-time
+        description: "When the source file was last modified (from git)"
+      last_analyzed_at:
+        type: string
+        format: date-time
+        description: "When this node was last processed by the refinery"
+      expires_at:
+        type: string
+        format: date-time
+        description: "When this node should be considered stale"
+
+  # ============================================================================
+  # METADATA - Extensible key-value pairs
+  # ============================================================================
+  metadata:
+    type: object
+    description: "Extensible metadata (role-specific, analysis results, etc.)"
+    additionalProperties: true
+    properties:
+      language:
+        type: string
+        description: "Programming language"
+        examples: ["python", "typescript", "go", "yaml"]
+      complexity:
+        type: integer
+        description: "Cyclomatic complexity (for functions)"
+      lines_of_code:
+        type: integer
+        description: "LOC count"
+      analysis_set:
+        type: string
+        description: "Which analysis set this belongs to"
+        examples: ["brain", "body", "viz", "complete"]
+      cluster_id:
+        type: string
+        description: "Parent cluster this node belongs to"
+      pagerank:
+        type: number
+        description: "PageRank centrality score"
+      is_hub:
+        type: boolean
+        description: "True if this is a hub node (many outgoing edges)"
+      is_authority:
+        type: boolean
+        description: "True if this is an authority node (many incoming edges)"
+      tags:
+        type: array
+        description: "User-defined tags"
+        items:
+          type: string
+
+# ============================================================================
+# REFINERY-SPECIFIC TYPES
+# ============================================================================
+definitions:
+  # A cluster is a special node that aggregates other nodes
+  ClusterNode:
+    allOf:
+      - $ref: "#"
+      - properties:
+          type:
+            const: cluster
+          members:
+            type: array
+            description: "IDs of nodes in this cluster"
+            items:
+              type: string
+          centroid_id:
+            type: string
+            description: "ID of the most representative node"
+          coherence_score:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "How semantically coherent the cluster is"
+
+  # A boundary node marks an analysis region
+  BoundaryNode:
+    allOf:
+      - $ref: "#"
+      - properties:
+          type:
+            const: boundary
+          region_name:
+            type: string
+            description: "Name of the boundary region"
+            examples: ["brain", "body", "viz"]
+          include_patterns:
+            type: array
+            items:
+              type: string
+            description: "Glob patterns for files in this boundary"
+          exclude_patterns:
+            type: array
+            items:
+              type: string
+            description: "Glob patterns for files to exclude"

@@ -1,0 +1,24 @@
+id: OPP-020
+title: Add DATA.getRange() to data-manager.js
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.408601+00:00'
+description: "### Task 6.3: Add DATA.getRange() to data-manager.js\n\n| Metric | Score\
+  \ | Evidence |\n|--------|-------|----------|\n| **Factual** | 88% | RAG citation:\
+  \ `data-manager.js` has `getEdgeRanges()` but no generic `getRange()` |\n| **Alignment**\
+  \ | 92% | Matches stress test \"scope-aware domains\" requirement |\n\n**Location:**\
+  \ `modules/data-manager.js` → Aggregations section\n\n**New Function:**\n```javascript\n\
+  function getRange(sourceKey, scope) {\n    scope = scope || 'global';\n    var cacheKey\
+  \ = sourceKey + ':'"
+urgency: MEDIUM
+confidence:
+  factual: 80
+  alignment: 92
+  current: 80
+  onwards: 84
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-6.3
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

@@ -1,0 +1,85 @@
+{
+  "timestamp": "20260123_073613",
+  "domain": "theory",
+  "execution_id": "theory-20260123_073613",
+  "generation": 1,
+  "parent_execution_id": null,
+  "analysis_type": "primary",
+  "source": {
+    "type": "repository",
+    "location": "/Users/lech/PROJECTS_all/PROJECT_elements"
+  },
+  "results": [
+    {
+      "hypothesis": {
+        "concept": "Atom",
+        "claim": "Hypothesis: The concept 'Atom' is implemented according to strict invariants.",
+        "description": "The fundamental unit of code meaning.",
+        "invariants": [
+          "Must have a unique ID in the format 'FILE::NAME'",
+          "Must have a 'kind' (Function/Class/Variable)"
+        ],
+        "anchors": [
+          {
+            "file": "standard-model-of-code/schema/atoms.schema.json",
+            "pattern": "properties"
+          },
+          {
+            "file": "standard-model-of-code/src/core/atom_registry.py",
+            "pattern": "class AtomRegistry"
+          }
+        ],
+        "scope": "standard-model-of-code/docs/theory/**"
+      },
+      "result": {
+        "verified": true,
+        "candidates": [
+          "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/src/core/atom_registry.py"
+        ],
+        "analysis": "### Findings\n- **Entity**: `AtomDefinition`\n- **Status**: Non-Compliant\n- **Evidence**: The `AtomDefinition` class is defined as:\n```python\n@dataclass\nclass AtomDefinition:\n    \"\"\"A canonical atom in the taxonomy.\"\"\"\n    id: int                          # Unique ID (1-96 from original, 97+ are discoveries)\n    name: str                        # PascalCase name (e.g., \"PureFunction\")\n    ast_types: List[str]             # Tree-sitter node types that map to this\n    category: str                    # Data Foundations, Logic & Flow, Organization, Execution\n    fundamental: str                 # Bits, Variables, Functions, etc.\n    tier: str                        # T0 (core), T1 (architectural), T2 (ecosystem)\n    composition: str                 # atom, molecule, organelle (complexity level)\n    description: str                 # What this atom represents\n    detection_rule: str              # How to detect it\n```\n- **Deviation**: The implementation of `AtomDefinition` violates both invariants:\n    1.  **ID Format**: The invariant requires a unique ID in the format 'FILE::NAME'. The code implements the `id` as an `int`. There is no `FILE` component to the identifier.\n    2.  **Kind Field**: The invariant requires a 'kind' field with possible values of 'Function', 'Class', or 'Variable'. The `AtomDefinition` class does not have a `kind` field. While it has a `fundamental` field (e.g., \"Variables\", \"Functions\"), this field uses a different and broader set of categories (e.g., \"Bits\", \"Primitives\", \"Expressions\", \"Aggregates\") and does not match the required invariant.",
+        "guardrails": {
+          "compliant": false,
+          "violations": [
+            {
+              "law_id": "AM002",
+              "severity": "HIGH",
+              "reasoning": "The `_load_t2_extensions` method's implementation directly contradicts its purpose and documentation. It is documented to 'Load T2 ecosystem-specific atoms from schema/atoms/extensions/*.json' but instead contains a large, hardcoded dictionary (`self.ecosystem_patterns`). This is a severe architectural drift, as the component has abandoned its role as a dynamic loader and has become a static configuration holder, violating the intended separation of code and configuration."
+            },
+            {
+              "law_id": "AM004",
+              "severity": "HIGH",
+              "reasoning": "Due to the architectural drift in `_load_t2_extensions`, several components are orphaned. The imported `json` module is never used. The `extensions_dir` variable is calculated and checked for existence but then ignored. The class attribute `self.t2_atoms` is initialized in the constructor but is never populated or used, indicating an incomplete or broken feature."
+            },
+            {
+              "law_id": "AM001",
+              "severity": "MEDIUM",
+              "reasoning": "The class demonstrates context myopia by hardcoding a large volume of detection pattern data (`self.ecosystem_patterns`) that, according to the project's own structure and comments, should exist in external `schema/**/*.json` files. This duplicates configuration data within the application logic, ignoring the broader context of a schema-driven design and making the system harder to maintain and extend."
+            }
+          ],
+          "critique_summary": "The registry critically fails its architectural mandate by hardcoding T2 extension detection logic instead of dynamically loading it from specified schema files, resulting in severe architectural drift and orphaned code."
+        }
+      }
+    },
+    {
+      "hypothesis": {
+        "concept": "Dimension",
+        "claim": "Hypothesis: The concept 'Dimension' is implemented according to strict invariants.",
+        "description": "An axis of the 8D semantic space.",
+        "invariants": [
+          "Must have a fixed set of allowed values (Enum)"
+        ],
+        "anchors": [
+          {
+            "file": "standard-model-of-code/src/core/dimensions.py",
+            "pattern": "class D*"
+          }
+        ],
+        "scope": "standard-model-of-code/docs/theory/**"
+      },
+      "result": {
+        "verified": false,
+        "reason": "No candidates found"
+      }
+    }
+  ]
+}

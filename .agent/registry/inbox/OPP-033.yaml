@@ -1,0 +1,18 @@
+id: OPP-033
+title: 'Phase 5 Advanced Features: DEFERRED'
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.417671+00:00'
+description: 'Phase 5 Advanced Features: DEFERRED'
+urgency: MEDIUM
+confidence:
+  factual: 80
+  alignment: 80
+  current: 80
+  onwards: 80
+related_to:
+- standard-model-of-code/docs/specs/TREE_SITTER_TASK_REGISTRY.md
+metadata:
+  source_id: TREE-005
+  source_registry: tree_sitter
+  category: TREE_SITTER
+  original_status: PENDING

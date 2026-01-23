@@ -1,0 +1,24 @@
+id: OPP-019
+title: Add minOutput/blendMode to endpoints.js TARGETS
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.407983+00:00'
+description: "### Task 6.2: Add minOutput/blendMode to endpoints.js TARGETS\n\n| Metric\
+  \ | Score | Evidence |\n|--------|-------|----------|\n| **Factual** | 92% | RAG\
+  \ citation: `endpoints.js` TARGETS schema confirmed |\n| **Alignment** | 95% | Matches\
+  \ stress test \"target constraints\" requirement |\n\n**Location:** `modules/upb/endpoints.js`\
+  \ → `TARGETS` object\n\n**Current Schema:**\n```javascript\nnodeSize: {\n    category:\
+  \ 'geometry',\n    range: [1, 30],\n    label: 'Node Size'\n}\n```\n\n**Target Schema:**\n\
+  ```javascript\nnod"
+urgency: MEDIUM
+confidence:
+  factual: 80
+  alignment: 95
+  current: 80
+  onwards: 85
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-6.2
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

@@ -1,0 +1,40 @@
+id: OPP-021
+title: Update control-bar.js to use DATA.getRange()
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.409146+00:00'
+description: '### Task 6.4: Update control-bar.js to use DATA.getRange()
+
+
+  | Metric | Score | Evidence |
+
+  |--------|-------|----------|
+
+  | **Factual** | 90% | RAG citation: `control-bar.js` applyMapping() has inline min/max
+  calculation |
+
+  | **Alignment** | 90% | Matches stress test "single source of truth" requirement
+  |
+
+
+  **Location:** `modules/control-bar.js` → `applyMapping()` function
+
+
+  **Current Code (ad-hoc):**
+
+  ```javascript
+
+  const values = nodes.map(n => getNodeValue(n, sourceKey)).filter(v => typeof v ===
+  ''nu'
+urgency: MEDIUM
+confidence:
+  factual: 80
+  alignment: 90
+  current: 80
+  onwards: 83
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-6.4
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

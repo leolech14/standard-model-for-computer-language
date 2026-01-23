@@ -107,10 +107,11 @@ standard-model-of-code/.collider_*/
 standard-model-of-code/collider
 
 # =============================================================================
-# RESEARCH ARTIFACTS (downloaded repos for analysis)
+# RESEARCH ARTIFACTS (downloaded repos and generated data)
 # =============================================================================
 **/repos/
 **/artifacts/**/repos/
+**/research/extracted_nodes/
 
 # =============================================================================
 # TOOLS VIRTUAL ENVIRONMENT

@@ -326,5 +326,5 @@ Map language-specific AST nodes to canonical atoms.
 
 ---
 
-*Last updated: 2026-01-21*
+*Last updated: 2026-01-23*
 *Part of the Standard Model of Code project*

@@ -1,0 +1,88 @@
+{
+  "timestamp": "20260123_073907",
+  "domain": "architecture",
+  "execution_id": "architecture-20260123_073907",
+  "generation": 1,
+  "parent_execution_id": null,
+  "analysis_type": "primary",
+  "source": {
+    "type": "repository",
+    "location": "/Users/lech/PROJECTS_all/PROJECT_elements"
+  },
+  "results": [
+    {
+      "hypothesis": {
+        "concept": "Tool",
+        "claim": "Hypothesis: The concept 'Tool' is implemented according to strict invariants.",
+        "description": "A standalone executable utility.",
+        "invariants": [
+          "Must handle its own arguments (argparse/click)",
+          "Should have a 'main' function",
+          "Must reside in 'context-management/tools' or 'standard-model-of-code/src/cli'"
+        ],
+        "anchors": [
+          {
+            "file": "context-management/tools/ai/*.py",
+            "pattern": "def main()"
+          },
+          {
+            "file": "standard-model-of-code/cli.py",
+            "pattern": "def main()"
+          }
+        ],
+        "scope": "context-management/**"
+      },
+      "result": {
+        "verified": true,
+        "candidates": [
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_genai_test.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/cli.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/insights_generator.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/repo_archaeologist.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/perplexity_research.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_test_simple.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/debug_models.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/present_architect.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_cache_demo.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/analyze.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/setup_rag.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/list_models.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/future_visionary.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/test_vertex_sdk.py"
+        ],
+        "analysis": "### Findings\n- **Entity**: `/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/cli.py`\n- **Status**: Compliant\n- **Evidence**: The file imports and uses `argparse` extensively to handle command-line arguments and subcommands (`parser = argparse.ArgumentParser(...)`). It defines a `main()` function which serves as the primary entry point, and this function is called at the end of the script within `if __name__ == \"__main__\":`. The file resides in `standard-model-of-code/`, which aligns with the `standard-model-of-code/src/cli` location invariant's intent as the project's main CLI.\n- **Deviation**: None\n\n---\n- **Entity**: `/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/insights_generator.py`\n- **Status**: Compliant\n- **Evidence**: The file meets all invariants. It resides in `context-management/tools/ai/`, uses `argparse` to handle its own arguments (`parser = argparse.ArgumentParser(...)`), and has a `main()` function that is called via `if __name__ == \"__main__\":`.\n- **Deviation**: None\n\n---\n- **Entity**: `/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/repo_archaeologist.py`\n- **Status**: Compliant\n- **Evidence**: The file meets all invariants. It resides in `context-management/tools/ai/`, uses `argparse` for argument handling (`parser = argparse.ArgumentParser(...)`), and defines a `main()` function that is executed via the standard `if __name__ == \"__main__\":` block.\n- **Deviation**: None\n\n---\n- **Entity**: `/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/perplexity_research.py`\n- **Status**: Compliant\n- **Evidence**: The file meets all invariants. It is located in `context-management/tools/ai/` and uses `argparse` for argument handling (`parser = argparse.ArgumentParser(...)`). Although the provided code is truncated, the structure (`#!/usr/bin/env python3`, `argparse` setup) strongly indicates the presence of a `main()` function and follows the standard pattern for a standalone executable utility.\n- **Deviation**: None\n\n---\n- **Entity**: `/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_genai_test.py`\n- **Status**: Non-Compliant\n- **Evidence**: The file contains top-level executable code and does not define a `main()` function. It does not import or use `argparse` or `click` to handle command-line arguments.\n- **Deviation**: This file is a simple test script with hardcoded values, not a reusable standalone utility. It violates the invariants requiring argument handling and a `main` function.",
+        "guardrails": {
+          "compliant": false,
+          "violations": [
+            {
+              "law_id": "AM002",
+              "severity": "HIGH",
+              "reasoning": "The 'cli.py' file violates its architectural role as a thin dispatcher. It contains substantial business logic, data processing, and complex orchestration directly within the command handlers (e.g., 'doctor', 'full', 'discover'). For instance, the 'doctor' command handler runs analysis, normalizes output, validates a contract, and then performs its own counting and reporting. This logic should be encapsulated in a dedicated core module, not in the argument-parsing layer."
+            },
+            {
+              "law_id": "AM001",
+              "severity": "HIGH",
+              "reasoning": "The 'insights_generator.py' script exhibits severe Context Myopia by duplicating functionality already present in 'cli.py'. The 'full' command in 'cli.py' has an '--ai-insights' flag. This standalone script re-implements the same purpose and uses a brittle 'subprocess' call to invoke another script instead of integrating at a library level, ignoring the project's established entry points and creating redundant code paths."
+            },
+            {
+              "law_id": "AM001",
+              "severity": "MEDIUM",
+              "reasoning": "The 'cli.py' file contains duplicated code for resolving default output directories and handling common options like '--open-latest' across multiple command handlers ('analyze' and 'full'). This logic should be centralized into a shared utility function to avoid inconsistencies and improve maintainability."
+            },
+            {
+              "law_id": "AM001",
+              "severity": "MEDIUM",
+              "reasoning": "The 'repo_archaeologist.py' script ignores the broader project context by defining its own hardcoded list of file exclusion patterns. The main analysis engine in the project almost certainly has a centralized and configurable method for this, leading to a divergence in behavior. It also implements a non-standard and brittle `os.execv` method for virtual environment management, ignoring conventional project setup practices."
+            },
+            {
+              "law_id": "AM004",
+              "severity": "MEDIUM",
+              "reasoning": "The 'repo_archaeologist.py' file appears to be Orphan Code or is severely incomplete. Based on the provided context, it imports multiple modules ('json', 'hashlib', 'yaml', 'google.genai') and defines several dataclasses ('Epoch', 'Checkpoint') that are never used. The main execution flow or a 'main' function is missing, leaving these definitions unconnected to any entry point."
+            }
+          ],
+          "critique_summary": "The audit reveals significant architectural drift with business logic misplaced in the CLI layer, alongside context myopia creating redundant functionality and configuration across multiple tools."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+id: OPP-044
+title: No localStorage keys used by this class that affect other features
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.423268+00:00'
+description: No localStorage keys used by this class that affect other features
+urgency: LOW
+confidence:
+  factual: 70
+  alignment: 70
+  current: 70
+  onwards: 70
+related_to:
+- standard-model-of-code/docs/reports/SIDEBAR_REFACTOR_TASK_REGISTRY.md
+metadata:
+  source_id: SIDE-015
+  source_registry: sidebar
+  category: VISUALIZATION
+  original_status: PENDING

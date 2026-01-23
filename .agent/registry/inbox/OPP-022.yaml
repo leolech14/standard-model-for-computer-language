@@ -1,0 +1,24 @@
+id: OPP-022
+title: Add minOutput support to scales.js
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.409677+00:00'
+description: "### Task 6.5: Add minOutput support to scales.js\n\n| Metric | Score\
+  \ | Evidence |\n|--------|-------|----------|\n| **Factual** | 85% | RAG citation:\
+  \ `scales.js` applyScale() clamps to [0, 1] |\n| **Alignment** | 88% | Matches stress\
+  \ test \"never invisible\" requirement |\n\n**Location:** `modules/upb/scales.js`\
+  \ → `applyScale()` function\n\n**Current Code:**\n```javascript\nfunction applyScale(name,\
+  \ value, min, max, domain) {\n    const fn = SCALES[name] || SCALES.linear;\n  \
+  \  const result = fn(value, min, max"
+urgency: MEDIUM
+confidence:
+  factual: 80
+  alignment: 88
+  current: 80
+  onwards: 82
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-6.5
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: DEFERRED

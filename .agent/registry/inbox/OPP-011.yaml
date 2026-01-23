@@ -1,0 +1,24 @@
+id: OPP-011
+title: Create bindings.js
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.402721+00:00'
+description: "### Task 2.1: Create bindings.js\n\n| Metric | Score | Rationale |\n\
+  |--------|-------|-----------|\n| **Confidence** | 88% | New abstraction, but follows\
+  \ existing patterns |\n| **Alignment** | 90% | Prototype pattern matches codebase\
+  \ style |\n| **Usefulness** | 95% | Core UPB value - enables many-to-many |\n\n\
+  **Source File:** NEW (references control-bar.js applyMapping logic)\n**Target File:**\
+  \ `modules/upb/bindings.js`\n**Max Lines:** 250\n\n#### Step-by-Step Instructions\n\
+  \n```\nSTEP 1: Create file\n   touch s"
+urgency: MEDIUM
+confidence:
+  factual: 88
+  alignment: 90
+  current: 95
+  onwards: 91
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-2.1
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

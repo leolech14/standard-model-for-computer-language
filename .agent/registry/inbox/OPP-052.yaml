@@ -1,0 +1,18 @@
+id: OPP-052
+title: Topology tooltip colors work
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.427246+00:00'
+description: Topology tooltip colors work
+urgency: LOW
+confidence:
+  factual: 70
+  alignment: 70
+  current: 70
+  onwards: 70
+related_to:
+- standard-model-of-code/docs/reports/MODULARIZATION_TASKS.md
+metadata:
+  source_id: MODU-008
+  source_registry: modularization
+  category: REFACTORING
+  original_status: PENDING

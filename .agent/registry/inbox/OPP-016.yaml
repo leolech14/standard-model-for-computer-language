@@ -1,0 +1,24 @@
+id: OPP-016
+title: Integrate file-viz.js (NEW - Gap Fill)
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.406046+00:00'
+description: "### Task 4.4: Integrate file-viz.js (NEW - Gap Fill)\n\n| Metric | Score\
+  \ | Rationale |\n|--------|-------|-----------|\n| **Confidence** | 78% | Has its\
+  \ own color mapping, needs careful integration |\n| **Alignment** | 85% | Uses similar\
+  \ patterns |\n| **Usefulness** | 75% | Unifies file node coloring with UPB |\n\n\
+  **Target File:** `modules/file-viz.js`\n**Lines to Modify:** ~15-20 lines\n\n####\
+  \ Step-by-Step Instructions\n\n```\nSTEP 1: Locate getColor() function in file-viz.js\n\
+  \   - Find the function that dete"
+urgency: MEDIUM
+confidence:
+  factual: 78
+  alignment: 85
+  current: 75
+  onwards: 79
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-4.4
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

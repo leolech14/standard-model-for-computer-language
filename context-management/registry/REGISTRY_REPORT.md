@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-23T07:29:41.780198
+**Generated At**: 2026-01-23T08:06:19.153214
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -50,11 +50,14 @@
 | SYNCED | `.agent/intelligence/truths/history/truths_20260123_052436.yaml` | 405 | 405 |
 | SYNCED | `.agent/intelligence/truths/repo_truths.yaml` | 405 | 405 |
 | SYNCED | `.agent/manifest.yaml` | 2235 | 2235 |
-| SYNCED | `.agent/registry/INDEX.md` | 2789 | 2789 |
+| SYNCED | `.agent/registry/INDEX.md` | 3013 | 3013 |
 | SYNCED | `.agent/registry/README.md` | 4173 | 4173 |
 | SYNCED | `.agent/registry/active/TASK-001.yaml` | 1654 | 1654 |
 | SYNCED | `.agent/registry/active/TASK-002.yaml` | 703 | 703 |
 | SYNCED | `.agent/registry/active/TASK-003.yaml` | 1050 | 1050 |
+| SYNCED | `.agent/registry/active/TASK-004.yaml` | 2546 | 2546 |
+| SYNCED | `.agent/registry/active/TASK-005.yaml` | 1314 | 1314 |
+| SYNCED | `.agent/registry/active/TASK-006.yaml` | 1656 | 1656 |
 | SYNCED | `.agent/registry/claimed/README.md` | 1836 | 1836 |
 | SYNCED | `.agent/registry/inbox/OPP-001.yaml` | 575 | 575 |
 | SYNCED | `.agent/registry/inbox/OPP-002.yaml` | 594 | 594 |
@@ -75,6 +78,7 @@
 | SYNCED | `.agent/tools/boost_confidence.py` | 15252 | 15252 |
 | SYNCED | `.agent/tools/check_stale.sh` | 698 | 698 |
 | SYNCED | `.agent/tools/claim_task.sh` | 1952 | 1952 |
+| SYNCED | `.agent/tools/execute_cutting_phase1.sh` | 6662 | 6662 |
 | SYNCED | `.agent/tools/promote_opportunity.py` | 4753 | 4753 |
 | SYNCED | `.agent/tools/promote_opportunity.sh` | 4235 | 4235 |
 | SYNCED | `.agent/tools/release_task.sh` | 2092 | 2092 |
@@ -494,7 +498,3 @@
 | SYNCED | `context-management/docs/assets/real_architecture_map.png` | 791406 | 791406 |
 | SYNCED | `context-management/docs/assets/real_constellation_9nodes.png` | 705151 | 705151 |
 | SYNCED | `context-management/docs/assets/sixteen_levels_tower_1767765458713.png` | 925357 | 925357 |
-| SYNCED | `context-management/docs/assets/standard_model_infographic.png` | 841871 | 841871 |
-| SYNCED | `context-management/docs/assets/theory_synthesis_map_1767767058336.png` | 517549 | 517549 |
-| SYNCED | `context-management/docs/assets/three_planes_existence_1767765477409.png` | 816056 | 816056 |
-| SYNCED | `context-management/docs/assets/topology_map_complete_1767765983418.png` | 799218 | 799218 |

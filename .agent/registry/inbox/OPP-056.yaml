@@ -1,0 +1,18 @@
+id: OPP-056
+title: Hover panel shows node info
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.428688+00:00'
+description: Hover panel shows node info
+urgency: LOW
+confidence:
+  factual: 70
+  alignment: 70
+  current: 70
+  onwards: 70
+related_to:
+- standard-model-of-code/docs/reports/MODULARIZATION_TASKS.md
+metadata:
+  source_id: MODU-012
+  source_registry: modularization
+  category: REFACTORING
+  original_status: PENDING

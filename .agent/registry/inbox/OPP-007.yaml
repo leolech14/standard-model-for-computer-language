@@ -1,0 +1,134 @@
+# Context Refinery - RAG + Long Context Hybrid System
+# Created: 2026-01-23T07:50:00Z
+# Source: Grok vision + Gemini infrastructure analysis
+
+id: OPP-007
+title: "Context Refinery: Continuous Context Refinement System"
+source: RESEARCH
+discovered_at: '2026-01-23T07:50:00Z'
+urgency: HIGH
+
+description: |
+  A "Continuous Context Refinement" system that combines RAG + Long Context
+  to create a semantic distillation pipeline for the entire repository.
+
+  THE VISION:
+  1. MAP the entire corpus (repo + history + archives) at LOW resolution
+  2. REFINE progressively by semantic clusters
+  3. ATOMIZE into semantic nodes with IDs and provenance
+  4. RECOMPILE on-demand into optimal context packages for queries
+
+  KEY PRINCIPLES:
+  - Outside-In: Coarse-to-fine, map before detail
+  - Delta-First: Only reprocess what changed
+  - Atomization: Everything becomes a Node with ID
+  - Provenance: All outputs trace to inputs
+  - Autonomy with Governance: Discover freely, execute with gates
+
+  THE LOOP:
+  ```
+  Anel 1 (Outside): Inventory + Boundaries + Clusters → Map
+  Anel 2 (Inside):  Prioritize + Distill + Atomize → Understanding
+  Anel 3 (Outside): Synthesize + Update Map → Richer Global View
+  ```
+
+  COLLIDER ANALOGY:
+  "We apply Collider logic to context: break the repository into semantic
+  units and reaggregate them as distilled matter for reasoning."
+
+existing_infrastructure:
+  mapping:
+    assets: ["analysis_sets.yaml", "find_relocation_candidates.py"]
+    confidence: 95
+  refinement:
+    assets: ["12-Stage Collider Pipeline", "HSL"]
+    confidence: 90
+  atomization:
+    assets: ["semantic_models.yaml", "UnifiedNode", "R8_EPISTEMOLOGY"]
+    confidence: 90
+  recompilation:
+    assets: ["ACI", "Workflow Factory", "Analysis Sets"]
+    confidence: 85
+  governance:
+    assets: ["Antimatter Laws", "4D Scoring", "Token Budgets"]
+    confidence: 95
+  storage:
+    assets: ["intelligence/", "registry/", "File Search Stores"]
+    confidence: 80
+
+implementation_phases:
+  - phase: 1
+    name: "Formalize Atom Schema"
+    description: "Unify RefineryNode spec from semantic_models + EnrichedNode + R8"
+    effort: MEDIUM
+    gap_filled: "Scattered schemas → single source of truth"
+
+  - phase: 2
+    name: "Build DataManager API"
+    description: "O(1) lookups: getNodeById, getNodesByFile, getEdgesFrom"
+    effort: MEDIUM
+    gap_filled: "Files → queryable system"
+
+  - phase: 3
+    name: "Implement ACI Router"
+    description: "Query → tier selection → RAG or Long Context path"
+    effort: MEDIUM
+    gap_filled: "Concept → working tool"
+
+  - phase: 4
+    name: "Connect HSL + Delta Processing"
+    description: "Incremental refinement on file changes, not full reprocess"
+    effort: HIGH
+    gap_filled: "Full corpus processing → delta-first efficiency"
+
+artifacts_to_produce:
+  - "state/live.yaml - Global map at low resolution"
+  - "clusters/*.yaml - Semantic groupings"
+  - "atoms/*.yaml - Atomic nodes with provenance"
+  - "coverage/ledger.yaml - Processing history"
+  - "drift/*.yaml - What needs reprocessing"
+  - "context_packs/*.md - Compiled context for queries"
+
+vocabulary:
+  corpus: "Universe of processable material"
+  boundary: "High-level frontier (analysis_sets)"
+  cluster: "Dynamic semantic grouping"
+  atom: "Semantic unit with ID + metadata"
+  digest: "Low-resolution global synthesis"
+  delta: "What changed since last processing"
+  drift: "How much meaning/structure changed"
+  provenance: "Traceability to sources"
+  distillation: "Reduce noise, preserve meaning"
+  compilation: "Assemble context package for query"
+
+integration_points:
+  BARE: "Produces knowledge continuously"
+  ACI: "Consumes atoms for query routing"
+  HSL: "Validates semantic invariants"
+  Registry: "Governs what becomes execution"
+
+suggested_action: |
+  1. Create .agent/specs/CONTEXT_REFINERY.md with full design
+  2. Define RefineryNode schema in .agent/schema/
+  3. Prototype Phase 1 (atom schema unification)
+  4. Add to SPRINT-003 or dedicated refinery sprint
+
+confidence:
+  factual: 90
+  alignment: 98
+  current: 80
+  onwards: 95
+
+research_sources:
+  - "Grok session on Context Refinery vision"
+  - "Gemini analysis: 20260123_074615_find_in_our_context_management_layer.md"
+  - "WORKFLOW_FACTORY.md RAG+LC hybrid patterns"
+  - "DATA_LAYER_REFACTORING_MAP.md DataManager blueprint"
+
+tags:
+  - context-refinery
+  - rag
+  - long-context
+  - semantic-distillation
+  - bare-phase-2
+  - high-impact

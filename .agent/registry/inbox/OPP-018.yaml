@@ -1,0 +1,45 @@
+id: OPP-018
+title: Wire UPB_BLENDERS in bindings.js
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.407387+00:00'
+description: '### Task 6.1: Wire UPB_BLENDERS in bindings.js
+
+
+  | Metric | Score | Evidence |
+
+  |--------|-------|----------|
+
+  | **Factual** | 95% | RAG citation: `bindings.js` TODO comment confirmed |
+
+  | **Alignment** | 98% | Matches stress test "deterministic blending" requirement
+  |
+
+
+  **Location:** `modules/upb/bindings.js` → `BindingGraph.prototype.evaluate()`
+
+
+  **Current Code (placeholder):**
+
+  ```javascript
+
+  // TODO: Import UPB_BLENDERS
+
+  result[targetKey] = values[values.length - 1];  // "last wins"
+
+  ```
+
+
+  **Target Co'
+urgency: MEDIUM
+confidence:
+  factual: 80
+  alignment: 98
+  current: 80
+  onwards: 86
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-6.1
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

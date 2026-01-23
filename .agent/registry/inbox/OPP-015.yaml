@@ -1,0 +1,24 @@
+id: OPP-015
+title: Update control-bar.js to delegate
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.405373+00:00'
+description: "### Task 4.3: Update control-bar.js to delegate\n\n| Metric | Score\
+  \ | Rationale |\n|--------|-------|-----------|\n| **Confidence** | 85% | Requires\
+  \ careful fallback handling |\n| **Alignment** | 90% | Pattern matches existing\
+  \ global checks |\n| **Usefulness** | 70% | Transition step, can be removed later\
+  \ |\n\n**Target File:** `modules/control-bar.js`\n\n#### Step-by-Step Instructions\n\
+  \n```\nSTEP 1: Find DATA_SOURCES definition (lines 25-57)\n   - Comment out or delete\
+  \ the entire object\n\nSTEP 2: Replace with"
+urgency: LOW
+confidence:
+  factual: 85
+  alignment: 90
+  current: 70
+  onwards: 81
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-4.3
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

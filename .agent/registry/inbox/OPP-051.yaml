@@ -1,0 +1,18 @@
+id: OPP-051
+title: Node colors render correctly
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.426868+00:00'
+description: Node colors render correctly
+urgency: LOW
+confidence:
+  factual: 70
+  alignment: 70
+  current: 70
+  onwards: 70
+related_to:
+- standard-model-of-code/docs/reports/MODULARIZATION_TASKS.md
+metadata:
+  source_id: MODU-007
+  source_registry: modularization
+  category: REFACTORING
+  original_status: PENDING

@@ -1,0 +1,69 @@
+# TASK-007: Define RefineryNode Schema
+# Sprint: SPRINT-002 (Context Refinery Foundation)
+# Phase: 1 (Foundation)
+
+id: TASK-007
+title: "Define RefineryNode schema"
+status: COMPLETE
+priority: CRITICAL
+completed_at: "2026-01-23T11:30:00Z"
+
+description: |
+  Create the canonical schema for a RefineryNode - the atomic unit of the
+  Context Refinery system.
+
+  A RefineryNode represents a semantic unit with:
+  - Unique ID and provenance
+  - Content summary/digest
+  - Relationships to other nodes
+  - Confidence scores
+  - Temporal metadata
+
+  SOURCES TO UNIFY:
+  1. semantic_models.yaml (Atom concept, dimensions D1-D8)
+  2. EnrichedNode from COLLIDER_ARCHITECTURE.md
+  3. R8_EPISTEMOLOGY lens (provenance model)
+  4. 4D confidence scoring (Factual, Alignment, Current, Onwards)
+
+  REQUIRED FIELDS:
+  - id: Unique identifier (format: ATOM-XXXX or NODE-XXXX)
+  - type: Node type (file, function, class, cluster, concept)
+  - source_path: Original file path (provenance)
+  - content_hash: SHA256 of source content
+  - summary: Human-readable digest
+  - relationships: Links to other nodes (contains, calls, imports, related_to)
+  - confidence: 4D scores
+  - timestamps: created_at, updated_at, source_modified_at
+  - metadata: Extensible key-value pairs
+
+  DELIVERABLE:
+  .agent/schema/refinery_node.schema.yaml
+
+confidence:
+  factual: 90
+  alignment: 98
+  current: 85
+  onwards: 95
+
+acceptance_criteria:
+  - Schema file exists at .agent/schema/refinery_node.schema.yaml
+  - Schema includes all required fields listed above
+  - Schema is valid YAML with JSON Schema compatible structure
+  - Schema reviewed against semantic_models.yaml for compatibility
+  - Example node provided in schema comments
+
+tracking:
+  created_at: "2026-01-23T08:30:00Z"
+  promoted_from: OPP-007
+  sprint: SPRINT-002
+  phase: 1
+
+related_to:
+  - context-management/config/semantic_models.yaml
+  - .agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md
+  - .agent/registry/inbox/OPP-007.yaml
+
+blocks:
+  - TASK-008
+  - TASK-009
+  - TASK-010

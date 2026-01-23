@@ -1,0 +1,24 @@
+id: OPP-017
+title: Integrate edge-system.js (NEW - Gap Fill)
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.406849+00:00'
+description: "### Task 4.5: Integrate edge-system.js (NEW - Gap Fill)\n\n| Metric\
+  \ | Score | Rationale |\n|--------|-------|-----------|\n| **Confidence** | 75%\
+  \ | Has getColor() for edges, medium complexity |\n| **Alignment** | 85% | Similar\
+  \ delegation pattern |\n| **Usefulness** | 70% | Enables edge color binding via\
+  \ UPB |\n\n**Target File:** `modules/edge-system.js`\n**Lines to Modify:** ~10-15\
+  \ lines\n\n#### Step-by-Step Instructions\n\n```\nSTEP 1: Locate getColor() function\
+  \ in edge-system.js\n   - Find the function that "
+urgency: LOW
+confidence:
+  factual: 75
+  alignment: 85
+  current: 70
+  onwards: 76
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-4.5
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

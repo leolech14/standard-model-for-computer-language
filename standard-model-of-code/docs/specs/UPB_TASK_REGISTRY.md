@@ -1,5 +1,9 @@
 # UPB Task Registry (RAG-Validated)
 
+> **STATUS: ARCHIVED (2026-01-23)**
+> Phase 6 complete. Tasks consolidated to `.agent/registry/active/`.
+> See: `.agent/registry/INDEX.md`
+
 > Each task scored by RAG queries against viz_core and body analysis sets
 > Last Gap Analysis: 2026-01-21
 

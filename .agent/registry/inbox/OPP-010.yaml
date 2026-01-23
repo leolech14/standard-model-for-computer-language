@@ -1,0 +1,24 @@
+id: OPP-010
+title: Create presets.yaml (NEW - Gap Fill)
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.402190+00:00'
+description: "### Task 1.3: Create presets.yaml (NEW - Gap Fill)\n\n| Metric | Score\
+  \ | Rationale |\n|--------|-------|-----------|\n| **Confidence** | 90% | YAML config\
+  \ pattern used elsewhere in codebase |\n| **Alignment** | 88% | Matches controls.tokens.json\
+  \ pattern |\n| **Usefulness** | 82% | Enables declarative binding configuration\
+  \ |\n\n**Source File:** NEW\n**Target File:** `modules/upb/presets/defaults.yaml`\n\
+  **Max Lines:** 100\n\n#### Step-by-Step Instructions\n\n```\nSTEP 1: Create presets\
+  \ directory\n   mkdir -p stan"
+urgency: MEDIUM
+confidence:
+  factual: 90
+  alignment: 88
+  current: 82
+  onwards: 86
+related_to:
+- standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md
+metadata:
+  source_id: UPB-1.3
+  source_registry: upb
+  category: VISUALIZATION
+  original_status: PENDING

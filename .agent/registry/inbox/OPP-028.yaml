@@ -1,0 +1,24 @@
+id: OPP-028
+title: Update semantic_models.yaml
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.414087+00:00'
+description: "### P3-02: Update semantic_models.yaml\n\n**Confidence:** 95% (Execute)\n\
+  \n| Attribute | Value |\n|-----------|-------|\n| **File** | `context-management/config/semantic_models.yaml`\
+  \ |\n| **Dependencies** | P3-01 |\n\n**Update to reflect new architecture:**\n\n\
+  ```yaml\npipeline:\n  scope: \"standard-model-of-code/src/core/**\"\n  definitions:\n\
+  \    Stage:\n      description: \"A processing unit in the analysis pipeline.\"\n\
+  \      role: \"Processing\"\n      invariants:\n        - \"Must inherit from BaseStage\"\
+  \n        - \"M"
+urgency: HIGH
+confidence:
+  factual: 95
+  alignment: 95
+  current: 95
+  onwards: 95
+related_to:
+- standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md
+metadata:
+  source_id: PIPE-P3-02
+  source_registry: pipeline
+  category: PIPELINE
+  original_status: PENDING

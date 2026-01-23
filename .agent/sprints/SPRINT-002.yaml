@@ -1,0 +1,112 @@
+id: SPRINT-002
+name: Context Refinery Foundation
+version_target: 0.3.0
+status: EXECUTING
+goal: 'Build the foundation of the Context Refinery - a RAG + Long Context hybrid
+
+  system that maps, refines, atomizes, and recompiles context on demand.
+
+
+  This is the META-SOLUTION that will improve all future work.
+
+  '
+philosophy: '"We apply Collider logic to context: break the repository into semantic
+
+  units and reaggregate them as distilled matter for reasoning."
+
+  '
+principles:
+- name: Outside-In
+  description: Coarse-to-fine, map before detail
+- name: Delta-First
+  description: Only reprocess what changed
+- name: Atomization
+  description: Everything becomes a Node with ID
+- name: Provenance
+  description: All outputs trace to inputs
+- name: Autonomy with Governance
+  description: Discover freely, execute with gates
+definition_of_done:
+- id: DOD-001
+  description: RefineryNode schema defined
+  status: COMPLETE
+  completed_at: "2026-01-23T11:30:00Z"
+  acceptance: .agent/schema/refinery_node.schema.yaml exists and is valid
+  evidence: Schema created with 300+ lines, unifying semantic_models, EnrichedNode, R8_EPISTEMOLOGY, and 4D scoring
+- id: DOD-002
+  description: Corpus inventory tool working
+  status: PENDING
+  acceptance: Can generate inventory.yaml listing all files with metadata
+- id: DOD-003
+  description: Boundary mapper using analysis_sets.yaml
+  status: PENDING
+  acceptance: Can classify files into regions/boundaries
+- id: DOD-004
+  description: Delta detector for incremental processing
+  status: PENDING
+  acceptance: Can identify what changed since last run (git-based)
+- id: DOD-005
+  description: Basic atom generator for one cluster
+  status: PENDING
+  acceptance: Can produce atoms/*.yaml for a single analysis set
+- id: DOD-006
+  description: State/live.yaml global map produced
+  status: PENDING
+  acceptance: Low-resolution map of entire corpus exists
+tasks:
+- id: TASK-007
+  title: Define RefineryNode schema
+  phase: 1
+  confidence: 90
+- id: TASK-008
+  title: Build corpus inventory tool
+  phase: 1
+  confidence: 85
+- id: TASK-009
+  title: Build boundary mapper
+  phase: 1
+  confidence: 85
+- id: TASK-010
+  title: Build delta detector
+  phase: 2
+  confidence: 80
+- id: TASK-011
+  title: Build basic distiller/atomizer
+  phase: 2
+  confidence: 75
+- id: TASK-012
+  title: Build global state synthesizer
+  phase: 2
+  confidence: 75
+existing_infrastructure:
+- asset: analysis_sets.yaml
+  use: Boundary definitions
+  confidence: 95
+- asset: semantic_models.yaml
+  use: Base for RefineryNode schema
+  confidence: 90
+- asset: truth_validator.py
+  use: Pattern for inventory/stats
+  confidence: 85
+- asset: HSL triggers
+  use: Delta detection on file change
+  confidence: 80
+artifacts_to_produce:
+- path: .agent/schema/refinery_node.schema.yaml
+  description: Canonical atom/node schema
+- path: .agent/intelligence/inventory/corpus_inventory.yaml
+  description: Full file listing with metadata
+- path: .agent/intelligence/boundaries/boundary_map.yaml
+  description: Files classified into regions
+- path: .agent/intelligence/state/live.yaml
+  description: Low-resolution global map
+- path: .agent/intelligence/atoms/
+  description: Atomic semantic nodes
+integration:
+  BARE: Refinery becomes BARE Phase 2
+  ACI: Consumes atoms for query routing
+  HSL: Triggers delta reprocessing
+started: null
+target_completion: '2026-01-30'
+created_by: claude (user override of Gemini recommendation)
+executing_at: '2026-01-23T11:21:06.086662+00:00'

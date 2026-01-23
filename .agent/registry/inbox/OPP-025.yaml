@@ -1,0 +1,24 @@
+id: OPP-025
+title: Define PipelineManager
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.412128+00:00'
+description: "### P1-03: Define PipelineManager\n\n**Confidence:** 97% (Execute)\n\
+  \n| Attribute | Value |\n|-----------|-------|\n| **File** | `src/core/pipeline/manager.py`\
+  \ |\n| **Lines** | ~150 |\n| **Dependencies** | P1-01, P1-02 |\n\n**Structure:**\n\
+  \n```python\nfrom typing import List, Optional\nfrom .base_stage import BaseStage\n\
+  from .state import CodebaseState\nfrom ..observability import StageTimer\n\nclass\
+  \ PipelineManager:\n    \"\"\"Orchestrates pipeline stage execution.\"\"\"\n\n \
+  \   def __init__(self, stages: List[BaseStage]"
+urgency: HIGH
+confidence:
+  factual: 97
+  alignment: 97
+  current: 97
+  onwards: 97
+related_to:
+- standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md
+metadata:
+  source_id: PIPE-P1-03
+  source_registry: pipeline
+  category: PIPELINE
+  original_status: PENDING

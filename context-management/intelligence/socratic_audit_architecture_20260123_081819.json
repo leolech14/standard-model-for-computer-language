@@ -1,0 +1,73 @@
+{
+  "timestamp": "20260123_081819",
+  "domain": "architecture",
+  "execution_id": "architecture-20260123_081819",
+  "generation": 1,
+  "parent_execution_id": null,
+  "analysis_type": "primary",
+  "source": {
+    "type": "repository",
+    "location": "/Users/lech/PROJECTS_all/PROJECT_elements"
+  },
+  "results": [
+    {
+      "hypothesis": {
+        "concept": "Tool",
+        "claim": "Hypothesis: The concept 'Tool' is implemented according to strict invariants.",
+        "description": "A standalone executable utility.",
+        "invariants": [
+          "Must handle its own arguments (argparse/click)",
+          "Should have a 'main' function",
+          "Must reside in 'context-management/tools' or 'standard-model-of-code/src/cli'"
+        ],
+        "anchors": [
+          {
+            "file": "context-management/tools/ai/*.py",
+            "pattern": "def main()"
+          },
+          {
+            "file": "standard-model-of-code/cli.py",
+            "pattern": "def main()"
+          }
+        ],
+        "scope": "context-management/**"
+      },
+      "result": {
+        "verified": true,
+        "candidates": [
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/present_architect.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_cache_demo.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/insights_generator.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/test_vertex_sdk.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/perplexity_research.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/repo_archaeologist.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_test_simple.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/future_visionary.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/setup_rag.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/cli.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/list_models.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/analyze.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/gemini_genai_test.py",
+          "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/debug_models.py"
+        ],
+        "analysis": "### Findings\n- **Entity**: `present_architect.py`\n- **Status**: Compliant\n- **Evidence**: The file meets all invariants. It resides in `context-management/tools`, uses `argparse` to handle command-line arguments (`--target`, `--output`, `--quick`, etc.), and has a `main()` function called within an `if __name__ == \"__main__\":` block.\n- **Deviation**: None\n\n---\n- **Entity**: `gemini_cache_demo.py`\n- **Status**: Non-Compliant\n- **Evidence**: The script is a standalone executable with a `main` function and resides in the correct directory (`context-management/tools`).\n- **Deviation**: The script does not handle its own arguments using `argparse` or `click`. It is a demonstration script that runs without any command-line parameters.\n\n---\n- **Entity**: `insights_generator.py`\n- **Status**: Compliant\n- **Evidence**: The file meets all invariants. It is located in `context-management/tools`, uses `argparse.ArgumentParser` to define and parse arguments (`collider_json`, `--output`, `--model`), and defines and calls a `main()` function.\n- **Deviation**: None\n\n---\n- **Entity**: `test_vertex_sdk.py`\n- **Status**: Non-Compliant\n- **Evidence**: The file is located in `context-management/tools`.\n- **Deviation**: The script violates two invariants. First, it does not have a `main` function; its primary function is named `test_vertex_sdk`. Second, it does not handle any command-line arguments with `argparse` or `click`.\n\n---\n- **Entity**: `perplexity_research.py`\n- **Status**: Compliant\n- **Evidence**: The file meets all invariants. It resides in `context-management/tools`, uses `argparse` to handle a positional `query` argument and options like `--model` and `--file`, and has a `main()` function that is executed at runtime.\n- **Deviation**: None",
+        "guardrails": {
+          "compliant": false,
+          "violations": [
+            {
+              "law_id": "AM001",
+              "severity": "HIGH",
+              "reasoning": "The reviewed tool scripts demonstrate severe Context Myopia by implementing multiple, inconsistent methods for handling secrets and API client initialization. 'present_architect.py' uses a direct environment variable for its API key, 'gemini_cache_demo.py' shells out to the 'gcloud' CLI to generate an access token, and 'perplexity_research.py' uses the 'doppler' CLI. This indicates a lack of a shared, project-wide utility for configuration and authentication, leading to duplicated and divergent logic."
+            },
+            {
+              "law_id": "AM001",
+              "severity": "MEDIUM",
+              "reasoning": "The 'insights_generator.py' script violates Context Myopia by using 'subprocess' to execute another local Python script ('analyze.py'). This approach ignores Python's native module system for code reuse and creates a brittle, indirect dependency by shelling out to the OS instead of directly importing and calling the necessary functions from the target module."
+            }
+          ],
+          "critique_summary": "The audit is a failure; the collection of tools is non-compliant due to severe Context Myopia, reflected in fragmented credential management strategies and improper inter-process communication instead of modular code reuse."
+        }
+      }
+    }
+  ]
+}

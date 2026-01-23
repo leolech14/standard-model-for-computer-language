@@ -1,0 +1,50 @@
+id: OPP-026
+title: Create Pipeline Package Structure
+source: MIGRATION
+discovered_at: '2026-01-23T11:14:32.412657+00:00'
+description: '### P1-04: Create Pipeline Package Structure
+
+
+  **Confidence:** 95% (Execute)
+
+
+  | Attribute | Value |
+
+  |-----------|-------|
+
+  | **Files** | `src/core/pipeline/__init__.py` |
+
+  | **Lines** | ~20 |
+
+  | **Dependencies** | P1-01, P1-02, P1-03 |
+
+
+  **Directory Structure:**
+
+
+  ```
+
+  src/core/pipeline/
+
+  ├── __init__.py          # Public exports
+
+  ├── base_stage.py        # BaseStage ABC
+
+  ├── state.py             # CodebaseState dataclass
+
+  ├── manager.py           # PipelineManager
+
+  └── stages/              # Stage implemen'
+urgency: HIGH
+confidence:
+  factual: 95
+  alignment: 95
+  current: 95
+  onwards: 95
+related_to:
+- standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md
+metadata:
+  source_id: PIPE-P1-04
+  source_registry: pipeline
+  category: PIPELINE
+  original_status: PENDING
