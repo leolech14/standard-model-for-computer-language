@@ -1,0 +1,15 @@
+id: 123
+subject: Consolidate .agent directories
+score: 85
+risk: A
+category: REPO-ORG
+description: Merge context-management/.agent into root .agent
+status: pending
+created: '2026-01-23T08:58:15.231310+00:00'
+commit: null
+4d_scores:
+  factual: 85
+  alignment: 85
+  current: 85
+  onwards: 85
+history: []

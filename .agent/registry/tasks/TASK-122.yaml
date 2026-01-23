@@ -1,0 +1,15 @@
+id: 122
+subject: Clean .collider_* test directories
+score: 90
+risk: A
+category: REPO-ORG
+description: Delete 16 stale .collider_* directories, add to .gitignore
+status: pending
+created: '2026-01-23T08:58:15.186443+00:00'
+commit: null
+4d_scores:
+  factual: 90
+  alignment: 90
+  current: 90
+  onwards: 90
+history: []

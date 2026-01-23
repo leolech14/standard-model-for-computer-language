@@ -1,0 +1,15 @@
+id: 125
+subject: Audit .gitignore for outputs
+score: 90
+risk: A
+category: REPO-ORG
+description: Add .collider_*, repos/, .tools_venv/ patterns
+status: pending
+created: '2026-01-23T08:58:15.320523+00:00'
+commit: null
+4d_scores:
+  factual: 90
+  alignment: 90
+  current: 90
+  onwards: 90
+history: []

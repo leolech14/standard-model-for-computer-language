@@ -1,0 +1,15 @@
+id: 127
+subject: Unify registry locations
+score: 75
+risk: A
+category: REPO-ORG
+description: Document registry purposes, create README
+status: pending
+created: '2026-01-23T08:58:23.731552+00:00'
+commit: null
+4d_scores:
+  factual: 75
+  alignment: 75
+  current: 75
+  onwards: 75
+history: []
