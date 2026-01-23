@@ -54,6 +54,43 @@ See `docs/reports/ATOM_STATISTICAL_ANALYSIS.md` for full analysis.
 | Install | `pip install -e .` |
 | Run tests | `pytest tests/` |
 
+## Visualization Development Workflow
+
+**CRITICAL:** The final HTML report is a **build artifact**, not a source file.
+
+### Source Files (EDIT THESE)
+
+| File | Purpose |
+|------|---------|
+| `src/core/viz/assets/template.html` | HTML structure with `{{VERSION}}`, `{{STYLES}}`, `{{APP_JS}}` placeholders |
+| `src/core/viz/assets/styles.css` | All CSS styles |
+| `src/core/viz/assets/modules/*.js` | Modular JavaScript (48 files) |
+| `src/core/viz/assets/app.js` | Legacy JS (being replaced by modules) |
+
+### The Correct Workflow
+
+1. **Edit source files** in `src/core/viz/assets/`
+2. **Regenerate**: `./collider full <path> --output <dir>`
+3. **View result**: Open the generated `collider_report.html`
+
+### What NOT to Do
+
+- **DO NOT** edit any `collider_report.html` or `output_*.html` directly (they are build artifacts)
+- **DO NOT** look for `index.html` in viz/assets (it was deleted - it was a trap)
+- **DO NOT** test changes by opening source files in browser (they have placeholders, not real code)
+
+### Generation Pipeline
+
+```
+template.html + styles.css + 48 modules/*.js
+        ↓
+    visualize_graph_webgl.py
+        ↓
+    collider_report.html (standalone, all JS inlined)
+```
+
+See `tools/visualize_graph_webgl.py` for the generation logic.
+
 ## File Lookup
 
 | Task | File |
