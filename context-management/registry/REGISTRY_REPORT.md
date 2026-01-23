@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-23T05:06:36.769051
+**Generated At**: 2026-01-23T05:28:29.138287
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -38,19 +38,25 @@
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_15.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/Ferramenta Local-First de Mapa de Calor de Analogias \342\200\223 Especifica\303\247\303\243o Completa.pdf"` | 0 | - |
 | SYNCED | `.agent/KERNEL.md` | 8360 | 8360 |
+| SYNCED | `.agent/intelligence/truths/history/truths_20260123_052327.yaml` | 409 | 409 |
+| SYNCED | `.agent/intelligence/truths/history/truths_20260123_052436.yaml` | 405 | 405 |
+| SYNCED | `.agent/intelligence/truths/repo_truths.yaml` | 405 | 405 |
 | SYNCED | `.agent/manifest.yaml` | 2235 | 2235 |
 | SYNCED | `.agent/registry/INDEX.md` | 2376 | 2376 |
-| SYNCED | `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` | 11132 | 11132 |
+| SYNCED | `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` | 22109 | 22109 |
 | SYNCED | `.agent/registry/active/TASK-000.yaml` | 1441 | 1441 |
 | SYNCED | `.agent/registry/active/TASK-001.yaml` | 1419 | 1419 |
 | SYNCED | `.agent/registry/claimed/README.md` | 1836 | 1836 |
 | SYNCED | `.agent/runs/RUN-20260122-194058-claude.yaml` | 2816 | 2816 |
 | SYNCED | `.agent/schema/run.schema.yaml` | 3736 | 3736 |
 | SYNCED | `.agent/schema/task.schema.yaml` | 3190 | 3190 |
+| SYNCED | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` | 15687 | 15687 |
 | SYNCED | `.agent/tools/audit_unicode.py` | 9255 | 9255 |
+| SYNCED | `.agent/tools/bare` | 4323 | 4323 |
 | SYNCED | `.agent/tools/check_stale.sh` | 698 | 698 |
 | SYNCED | `.agent/tools/claim_task.sh` | 1952 | 1952 |
 | SYNCED | `.agent/tools/release_task.sh` | 2092 | 2092 |
+| SYNCED | `.agent/tools/truth_validator.py` | 8309 | 8309 |
 | SYNCED | `.agent/workflows/testing_suite.md` | 2080 | 2080 |
 | SYNCED | `.claude/rules/body.md` | 680 | 680 |
 | SYNCED | `.claude/rules/brain.md` | 755 | 755 |
@@ -492,9 +498,3 @@
 | SYNCED | `context-management/docs/prompts/06_detection_signals.md` | 1867 | 1867 |
 | SYNCED | `context-management/docs/prompts/07_confidence_calibration.md` | 1881 | 1881 |
 | SYNCED | `context-management/docs/prompts/08_edge_semantics.md` | 1803 | 1803 |
-| SYNCED | `context-management/docs/prompts/09_analysis_pipeline.md` | 1758 | 1758 |
-| SYNCED | `context-management/docs/prompts/10_correctness_definitions.md` | 1690 | 1690 |
-| SYNCED | `context-management/docs/prompts/11_benchmark_design.md` | 1715 | 1715 |
-| SYNCED | `context-management/docs/prompts/12_semantic_similarity.md` | 1777 | 1777 |
-| SYNCED | `context-management/docs/prompts/13_entropy_complexity.md` | 1684 | 1684 |
-| SYNCED | `context-management/docs/prompts/14_governance_evolution.md` | 1806 | 1806 |
