@@ -1,45 +1,65 @@
 #!/usr/bin/env python3
 """
-Local Codebase Analysis Tool v2
+Local Codebase Analysis Tool v3
 =================================
 A headless AI tool that reads files directly from the local filesystem,
 with proper secret exclusions, line-numbered output, and chat session reuse.
 
-v2 Features:
+v3 Features:
+- ACI (Adaptive Context Intelligence): Auto-select tier and context for any query
 - Token budget awareness (warns if exceeding 1M limit)
 - Set composition via 'includes' in analysis_sets.yaml
 - Auto-interactive mode for large contexts
 - Smart query-to-set recommendations
 - FILE SEARCH (RAG): Index files once, query many times with citations
+- .agent/ context sets: agent_kernel, agent_tasks, agent_intelligence, agent_specs, agent_full
 
 Usage:
-  # One-shot mode (Tier 1: Long Context)
-  python local_analyze.py "Explain the architecture"
+  # ACI MODE (Recommended) - Auto-selects tier and context
+  python analyze.py --aci "how does atom classification work"
+  python analyze.py --aci "what tasks are ready to execute"
+  python analyze.py --aci "how many Python files in the repo"
+
+  # Force specific tier with ACI
+  python analyze.py --aci --tier perplexity "latest Python type hint best practices 2026"
+  python analyze.py --aci --tier long_context "explain the pipeline architecture"
+
+  # Debug ACI routing decision
+  python analyze.py --aci --aci-debug "how does edge extraction work"
+
+  # One-shot mode (Tier 2: Long Context)
+  python analyze.py "Explain the architecture"
 
   # Interactive mode With Caching (Automatic for large contexts)
-  python local_analyze.py --interactive --set pipeline
+  python analyze.py --interactive --set pipeline
 
-  # FILE SEARCH MODE (Tier 2: RAG with Citations)
+  # FILE SEARCH MODE (Tier 1: RAG with Citations)
   # Index files to a store
-  python local_analyze.py --index --set pipeline --store-name collider-pipeline
+  python analyze.py --index --set pipeline --store-name collider-pipeline
 
   # Query with File Search (citations included)
-  python local_analyze.py --search "How does edge extraction work?" --store-name collider-pipeline
+  python analyze.py --search "How does edge extraction work?" --store-name collider-pipeline
 
   # List existing stores
-  python local_analyze.py --list-stores
+  python analyze.py --list-stores
 
   # Delete a store
-  python local_analyze.py --delete-store collider-pipeline
+  python analyze.py --delete-store collider-pipeline
 
   # Insights Report (Source Code Analysis)
-  python local_analyze.py --mode insights --file "src/main.py" --output report.json
+  python analyze.py --mode insights --file "src/main.py" --output report.json
 
   # List available sets
-  python local_analyze.py --list-sets
+  python analyze.py --list-sets
 
   # Get set recommendations for a query
-  python local_analyze.py --recommend "how does classification work"
+  python analyze.py --recommend "how does classification work"
+
+ACI Tiers:
+  - INSTANT (Tier 0): Cached truths for counts/stats (<100ms)
+  - RAG (Tier 1): File Search for targeted lookups (~5s)
+  - LONG_CONTEXT (Tier 2): Full context Gemini reasoning (~60s)
+  - PERPLEXITY (Tier 3): External web research (~30s)
 
 IMPORTANT: This script requires the .tools_venv virtual environment.
 """
@@ -94,6 +114,23 @@ try:
     HAS_DUAL_FORMAT_SAVER = True
 except ImportError:
     HAS_DUAL_FORMAT_SAVER = False
+
+# Import ACI (Adaptive Context Intelligence) module
+try:
+    from aci import (
+        analyze_and_route,
+        tier_from_string,
+        format_routing_decision,
+        load_repo_truths,
+        answer_from_truths,
+        optimize_context,
+        format_context_summary,
+        Tier,
+    )
+    from aci.feedback_loop import log_aci_query, get_feedback_loop
+    HAS_ACI = True
+except ImportError:
+    HAS_ACI = False
 
 # --- Config & Setup ---
 SETS_CONFIG_PATH = PROJECT_ROOT / "context-management/config/analysis_sets.yaml"
@@ -1655,6 +1692,10 @@ Examples:
     parser.add_argument("--verify", metavar="DOMAIN", help="Run semantic verification/Socratic check on a domain")
     parser.add_argument("--candidate", help="Target file for verification (overrides search)")
     parser.add_argument("--briefing", action="store_true", help="Print system briefing for agent orientation")
+    # ACI (Adaptive Context Intelligence) arguments
+    parser.add_argument("--aci", action="store_true", help="Enable Adaptive Context Intelligence (auto-select tier and context)")
+    parser.add_argument("--tier", choices=["instant", "rag", "long_context", "perplexity"], help="Force specific ACI tier")
+    parser.add_argument("--aci-debug", action="store_true", help="Show detailed ACI routing decision")
     args = parser.parse_args()
 
     # Load config early for --list-sets and --recommend
@@ -1670,13 +1711,72 @@ Examples:
     # Handle --verify (Socratic Layer)
     if args.verify:
         verify_domain(
-            args.verify, 
-            store_name=args.store_name, 
-            output=args.output, 
-            index=args.index, 
+            args.verify,
+            store_name=args.store_name,
+            output=args.output,
+            index=args.index,
             candidate=args.candidate
         )
         sys.exit(0)
+
+    # =========================================================================
+    # ACI (Adaptive Context Intelligence) MODE
+    # =========================================================================
+    if args.aci:
+        if not HAS_ACI:
+            print("Error: ACI module not available. Check aci/ directory.", file=sys.stderr)
+            sys.exit(1)
+
+        print(f"\n{'='*60}", file=sys.stderr)
+        print("ADAPTIVE CONTEXT INTELLIGENCE (ACI)", file=sys.stderr)
+        print(f"{'='*60}", file=sys.stderr)
+
+        # Analyze and route the query
+        force_tier = args.tier if args.tier else ""
+        decision = analyze_and_route(args.prompt, force_tier=force_tier)
+
+        if args.aci_debug:
+            print(f"\n{format_routing_decision(decision)}", file=sys.stderr)
+
+        print(f"Query: {args.prompt[:80]}{'...' if len(args.prompt) > 80 else ''}", file=sys.stderr)
+        print(f"Tier:  {decision.tier.value.upper()}", file=sys.stderr)
+        print(f"Sets:  {', '.join(decision.primary_sets)}", file=sys.stderr)
+        print(f"{'='*60}\n", file=sys.stderr)
+
+        # TIER 0: INSTANT - Try to answer from cached truths
+        if decision.tier == Tier.INSTANT or decision.use_truths:
+            truths = load_repo_truths(PROJECT_ROOT)
+            if truths:
+                instant_answer = answer_from_truths(args.prompt, truths)
+                if instant_answer:
+                    print(f"[INSTANT] {instant_answer}")
+                    print(f"\n(Source: .agent/intelligence/truths/repo_truths.yaml)", file=sys.stderr)
+                    sys.exit(0)
+                elif decision.tier == Tier.INSTANT:
+                    print("Could not answer from truths. Falling back to RAG.", file=sys.stderr)
+                    decision = analyze_and_route(args.prompt, force_tier="rag")
+
+        # TIER 3: PERPLEXITY - External research
+        if decision.tier == Tier.PERPLEXITY:
+            print("[PERPLEXITY] External research tier selected.", file=sys.stderr)
+            print("Use the Perplexity MCP server for this query:", file=sys.stderr)
+            print(f"  Query: {args.prompt}", file=sys.stderr)
+            print("\nOr use --tier long_context to search internally.", file=sys.stderr)
+            # Could integrate with Perplexity MCP here in future
+            sys.exit(0)
+
+        # TIER 1 & 2: RAG and LONG_CONTEXT - Continue with normal flow
+        # Override args.set with ACI-selected sets
+        if decision.primary_sets and not args.set:
+            # Use the first set as primary
+            args.set = decision.primary_sets[0]
+            print(f"ACI auto-selected set: {args.set}", file=sys.stderr)
+
+        # Inject agent context if needed
+        if decision.inject_agent and args.set:
+            if not args.set.startswith("agent_"):
+                print(f"ACI injecting agent context alongside {args.set}", file=sys.stderr)
+                # We'll handle this in the set resolution below
 
     # Handle --list-sets
     if args.list_sets:

@@ -1,0 +1,211 @@
+# Adaptive Context Intelligence (ACI) Configuration
+# Controls tier routing thresholds, keywords, and behavior
+#
+# Version: 1.0.0
+# Updated: 2026-01-23
+
+# =============================================================================
+# TIER THRESHOLDS
+# =============================================================================
+tiers:
+  instant:
+    description: "Use cached truths for simple counts/stats"
+    max_response_time_ms: 100
+    requires_truths: true
+
+  rag:
+    description: "Use File Search for targeted lookups"
+    max_response_time_ms: 5000
+    preferred_model: "gemini-2.5-pro"
+    fallback_to: "long_context"
+
+  long_context:
+    description: "Use full context sets for reasoning"
+    max_response_time_ms: 60000
+    preferred_model: "gemini-2.5-pro"
+    max_tokens: 200000
+
+  perplexity:
+    description: "Use external research for web knowledge"
+    max_response_time_ms: 30000
+    requires_api_key: true
+    fallback_to: "long_context"
+
+# =============================================================================
+# TOKEN BUDGETS (from KERNEL.md research)
+# =============================================================================
+token_budgets:
+  guru: 50000          # Focused analysis, low risk
+  architect: 150000    # Multi-file reasoning, medium risk
+  archeologist: 200000 # Deep exploration, high risk
+  hard_cap: 200000     # Absolute maximum (lost-in-middle effects)
+
+# =============================================================================
+# INTENT KEYWORDS
+# Additional keywords for intent detection (supplements query_analyzer.py)
+# =============================================================================
+intent_keywords:
+  architecture:
+    - "design pattern"
+    - "module structure"
+    - "dependency"
+    - "coupling"
+    - "cohesion"
+  debug:
+    - "stack trace"
+    - "segfault"
+    - "memory leak"
+    - "deadlock"
+    - "race condition"
+  research:
+    - "state of the art"
+    - "alternative to"
+    - "library for"
+    - "framework for"
+  task:
+    - "what's next"
+    - "highest priority"
+    - "blocked by"
+    - "unblock"
+
+# =============================================================================
+# AGENT CONTEXT INJECTION
+# =============================================================================
+agent_context:
+  # Keywords that trigger agent context injection
+  trigger_keywords:
+    - "task"
+    - "sprint"
+    - "agent"
+    - "kernel"
+    - "bare"
+    - "truths"
+    - "registry"
+    - "confidence"
+    - "4d"
+    - "claim"
+    - "run"
+    - "handoff"
+    - "boot"
+    - "protocol"
+    - "manifest"
+
+  # Injection levels
+  levels:
+    minimal:
+      sets: ["agent_kernel"]
+      description: "Just boot protocol"
+    standard:
+      sets: ["agent_kernel", "agent_tasks"]
+      description: "Boot + active tasks"
+    full:
+      sets: ["agent_full"]
+      description: "Complete agent context"
+
+  # Default level when injection is triggered
+  default_level: "standard"
+
+# =============================================================================
+# EXTERNAL SCOPE INDICATORS
+# Phrases that indicate external knowledge is needed
+# =============================================================================
+external_indicators:
+  - "best practice"
+  - "latest"
+  - "2026"
+  - "2025"
+  - "industry standard"
+  - "recommendation"
+  - "compare with"
+  - "vs"
+  - "versus"
+  - "trend"
+  - "state of the art"
+  - "modern approach"
+  - "current"
+  - "popular"
+  - "widely used"
+
+# =============================================================================
+# COMPLEXITY INDICATORS
+# =============================================================================
+complexity:
+  simple:
+    - "single"
+    - "one"
+    - "quick"
+    - "just"
+    - "only"
+    - "specific"
+    - "this file"
+    - "this function"
+    - "count"
+    - "how many"
+
+  complex:
+    - "all"
+    - "every"
+    - "complete"
+    - "comprehensive"
+    - "full"
+    - "entire"
+    - "across"
+    - "refactor"
+    - "redesign"
+    - "architecture"
+
+# =============================================================================
+# FEEDBACK CONFIGURATION
+# =============================================================================
+feedback:
+  enabled: true
+  storage_path: ".agent/intelligence/aci_feedback.yaml"
+  max_entries: 1000
+
+  # Thresholds for auto-suggestions
+  high_retry_rate: 0.3
+  high_avg_tokens: 150000
+
+# =============================================================================
+# ROUTING OVERRIDES
+# Force specific tiers for certain patterns
+# =============================================================================
+routing_overrides:
+  # Queries containing these patterns always use specified tier
+  instant:
+    - "how many * files"
+    - "count of *"
+    - "total * in repo"
+
+  perplexity:
+    - "* best practice * 2026"
+    - "latest * recommendation"
+    - "compare * vs *"
+
+# =============================================================================
+# ANALYSIS SETS AUTO-SELECTION
+# Maps query topics to preferred analysis sets
+# =============================================================================
+set_mappings:
+  visualization:
+    - "viz_core"
+    - "viz"
+  constraint:
+    - "constraints"
+  role:
+    - "role_registry"
+    - "classifiers"
+  atom:
+    - "research_atoms"
+    - "schema"
+  classifier:
+    - "classifiers"
+  pipeline:
+    - "pipeline"
+  schema:
+    - "schema"
+  test:
+    - "tests"
+  research:
+    - "research_core"
+    - "research_full"

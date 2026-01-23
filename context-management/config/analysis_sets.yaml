@@ -305,6 +305,69 @@ analysis_sets:
       - classifiers
       - tests
 
+  # ==========================================================================
+  # AGENT SETS - .agent/ directory for ACI (Adaptive Context Intelligence)
+  # ==========================================================================
+
+  agent_kernel:
+    description: "Agent boot protocol and manifest (~30k tokens)"
+    max_tokens: 30000
+    critical_files:
+      - ".agent/KERNEL.md"
+    positional_strategy: "front-load"
+    patterns:
+      - ".agent/KERNEL.md"
+      - ".agent/manifest.yaml"
+      - ".agent/SUBSYSTEM_INTEGRATION.md"
+      - ".agent/OPEN_CONCERNS.md"
+
+  agent_tasks:
+    description: "Active tasks, sprints, and registry (~50k tokens)"
+    max_tokens: 50000
+    critical_files:
+      - ".agent/registry/INDEX.md"
+    positional_strategy: "front-load"
+    patterns:
+      - ".agent/registry/INDEX.md"
+      - ".agent/registry/active/*.yaml"
+      - ".agent/registry/tasks/*.yaml"
+      - ".agent/sprints/*.yaml"
+      - ".agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md"
+
+  agent_intelligence:
+    description: "BARE truths, drift reports, metrics (~40k tokens)"
+    max_tokens: 40000
+    patterns:
+      - ".agent/intelligence/truths/*.yaml"
+      - ".agent/intelligence/drift/*.yaml"
+      - ".agent/intelligence/metrics/*.yaml"
+      - ".agent/intelligence/concepts/*.yaml"
+
+  agent_specs:
+    description: "BARE spec, workflows, schemas (~60k tokens)"
+    max_tokens: 60000
+    critical_files:
+      - ".agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md"
+    positional_strategy: "sandwich"
+    patterns:
+      - ".agent/specs/*.md"
+      - ".agent/workflows/*.md"
+      - ".agent/schema/*.yaml"
+
+  agent_full:
+    description: "Complete .agent/ context for task/planning queries (~150k tokens)"
+    max_tokens: 150000
+    auto_interactive: true
+    critical_files:
+      - ".agent/KERNEL.md"
+      - ".agent/registry/INDEX.md"
+    positional_strategy: "sandwich"
+    includes:
+      - agent_kernel
+      - agent_tasks
+      - agent_intelligence
+      - agent_specs
+
 # ==========================================================================
 # RECOMMENDATIONS - Maps question types to sets
 # ==========================================================================
@@ -335,3 +398,20 @@ recommendations:
     - research_full
   "falsify * hypothesis":
     - research_validation
+  "what * task":
+    - agent_tasks
+    - agent_kernel
+  "which * task":
+    - agent_tasks
+  "task * ready":
+    - agent_tasks
+  "boot * agent":
+    - agent_kernel
+  "agent * protocol":
+    - agent_kernel
+  "bare * engine":
+    - agent_specs
+  "truths * validation":
+    - agent_intelligence
+  "sprint * status":
+    - agent_tasks
