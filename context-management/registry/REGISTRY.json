@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-01-23T02:10:33.713544",
+  "generated_at": "2026-01-23T02:20:56.685437",
   "stats": {
     "total_files": 1113,
     "local_only": 48,
     "cloud_only": 23,
-    "synced": 1040
+    "synced": 1042
   },
   "files": {
     "\"assets/Analogias \\342\\200\\234Quentes\\342\\200\\235 em Espa\\303\\247os Conceituais Multi-camadas.pdf\"": {
@@ -4096,18 +4096,18 @@
       "cloud_size": 859494
     },
     "context-management/registry/REGISTRY.json": {
-      "status": "DRIFT_MODIFIED",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/registry/REGISTRY.json",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/registry/REGISTRY.json",
-      "local_size": 438817,
-      "cloud_size": 438571
+      "local_size": 438911,
+      "cloud_size": 438911
     },
     "context-management/registry/REGISTRY_REPORT.md": {
-      "status": "DRIFT_MODIFIED",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/registry/REGISTRY_REPORT.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/registry/REGISTRY_REPORT.md",
-      "local_size": 41290,
-      "cloud_size": 41315
+      "local_size": 41289,
+      "cloud_size": 41289
     },
     "context-management/reports/context_bubble_analysis.html": {
       "status": "SYNCED",
