@@ -17,7 +17,7 @@
 #   - standard_cs: Conventional CS term (31 terms)
 #
 # Last updated: 2026-01-23
-# Total terms: 110
+# Total terms: 111
 # ============================================================================
 
 schema_version: "1.0.0"
@@ -371,6 +371,36 @@ terms:
   # ---------------------------------------------------------------------------
   # Levels & Hierarchy
   # ---------------------------------------------------------------------------
+
+  level_blindness:
+    canonical_name: "Level Blindness"
+    category: original_invention
+    introduced:
+      version: "0.5.0"
+      date: "2026-01-23"
+      by: "Leonardo Lech"
+    definition: |
+      The principle that entities operating at one abstraction level
+      perceive lower levels only through abstracted interfaces, not
+      raw implementation. A System "sees" its Packages as contracts,
+      not as collections of bytes. A Function "sees" its calls as
+      black boxes, not as token streams.
+    key_insight: |
+      Not physical blindness (we CAN inspect tokens with debuggers)
+      but OPERATIONAL blindness (we CHOOSE not to at runtime).
+      This selective ignorance is what makes abstraction useful.
+      Each level has its own "umwelt" - its perceived world.
+    inspired_by:
+      - term: "Flatland"
+        author: "Edwin Abbott (1884)"
+        insight: "2D beings cannot perceive 3D - dimensional blindness"
+      - term: "Umwelt"
+        author: "Jakob von Uexkull (1909)"
+        insight: "Each organism has its own perceived world"
+    not_to_be_confused_with:
+      - "Physical impossibility - we CAN inspect lower levels"
+      - "Ignorance - this is deliberate, useful abstraction"
+    related_terms: [sixteen_levels, abstraction, containment, holon]
 
   sixteen_levels:
     canonical_name: "16-Level Abstraction Hierarchy"
