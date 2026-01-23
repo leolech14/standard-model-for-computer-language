@@ -380,6 +380,8 @@ class BAREDaemon:
 | **Git hooks** | Post-commit triggers TruthValidator, OpportunityExplorer |
 | **GCS** | Intelligence store mirrors to cloud |
 
+**See also:** `.agent/SUBSYSTEM_INTEGRATION.md` for full integration map.
+
 ---
 
 ## Confidence Assessment

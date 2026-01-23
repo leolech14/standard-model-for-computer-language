@@ -1,7 +1,9 @@
 # The Holographic-Socratic Layer
 
-> **Holographic**: Every partial query reconstructs the whole truth.  
+> **Holographic**: Every partial query reconstructs the whole truth.
 > **Socratic**: Perpetual questioning that refines understanding.
+
+**Implementation:** `analyze.py --verify` | **Integration:** `.agent/SUBSYSTEM_INTEGRATION.md`
 
 ## What Is It?
 

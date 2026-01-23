@@ -248,6 +248,8 @@ Attention
 | Project config | `CLAUDE.md`, `context-management/docs/` |
 | Collider code | `standard-model-of-code/src/` |
 | AI tools | `context-management/tools/` |
+| **Subsystem integration** | `.agent/SUBSYSTEM_INTEGRATION.md` |
+| **BARE spec** | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` |
 
 ---
 

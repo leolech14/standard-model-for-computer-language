@@ -18,6 +18,9 @@
 |------------|------|---------|
 | **Body** | `standard-model-of-code/` | Collider engine |
 | **Brain** | `context-management/` | AI tools, cloud mirror |
+| **Agent** | `.agent/` | Task registry, BARE, intelligence |
+
+**Full integration map:** `.agent/SUBSYSTEM_INTEGRATION.md`
 
 ## Agent Onboarding (START HERE)
 
