@@ -263,7 +263,7 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 ---
 
 ### ☑️ TASK-103: Add auto-save to analyze.py responses
-**Commit:** pending
+**Commit:** d16826d
 
 **Deliverables:**
 - Import DualFormatSaver with graceful fallback (try/except)

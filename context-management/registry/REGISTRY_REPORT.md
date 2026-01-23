@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-23T02:20:56.685437
+**Generated At**: 2026-01-23T04:56:20.652788
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -37,10 +37,10 @@
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_14.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_15.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/Ferramenta Local-First de Mapa de Calor de Analogias \342\200\223 Especifica\303\247\303\243o Completa.pdf"` | 0 | - |
-| SYNCED | `.agent/KERNEL.md` | 5771 | 5771 |
+| SYNCED | `.agent/KERNEL.md` | 8360 | 8360 |
 | SYNCED | `.agent/manifest.yaml` | 2235 | 2235 |
 | SYNCED | `.agent/registry/INDEX.md` | 2376 | 2376 |
-| SYNCED | `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` | 8655 | 8655 |
+| SYNCED | `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` | 11132 | 11132 |
 | SYNCED | `.agent/registry/active/TASK-000.yaml` | 1441 | 1441 |
 | SYNCED | `.agent/registry/active/TASK-001.yaml` | 1419 | 1419 |
 | SYNCED | `.agent/registry/claimed/README.md` | 1836 | 1836 |
@@ -401,7 +401,7 @@
 | SYNCED | `context-management/.agent/orientation/graph.schema.json` | 6447 | 6447 |
 | SYNCED | `context-management/.agent/orientation/particle.schema.json` | 13597 | 13597 |
 | SYNCED | `context-management/.agent/workflows/publish.md` | 489 | 489 |
-| SYNCED | `context-management/config/analysis_sets.yaml` | 11138 | 11138 |
+| SYNCED | `context-management/config/analysis_sets.yaml` | 12529 | 12529 |
 | SYNCED | `context-management/config/documentation_map.yaml` | 2170 | 2170 |
 | SYNCED | `context-management/config/insights_schema.json` | 5684 | 5684 |
 | SYNCED | `context-management/config/prompts.yaml` | 9942 | 9942 |
@@ -421,7 +421,7 @@
 | SYNCED | `context-management/docs/STORAGE_ARCHITECTURE.md` | 17715 | 17715 |
 | SYNCED | `context-management/docs/TIMELINE_ANALYSIS.md` | 13274 | 13274 |
 | SYNCED | `context-management/docs/TOOL.md` | 20164 | 20164 |
-| SYNCED | `context-management/docs/WORKFLOW_FACTORY.md` | 10779 | 10779 |
+| SYNCED | `context-management/docs/WORKFLOW_FACTORY.md` | 18403 | 18403 |
 | SYNCED | `context-management/docs/agent_school/AGENT_ANTI_PATTERNS.md` | 11510 | 11510 |
 | SYNCED | `context-management/docs/agent_school/AGENT_BOOT.md` | 3874 | 3874 |
 | SYNCED | `context-management/docs/agent_school/DOD.md` | 2756 | 2756 |
