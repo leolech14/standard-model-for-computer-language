@@ -1,0 +1,50 @@
+{
+  "metrics": {
+    "n_nodes": 6728,
+    "n_unique_atoms": 25,
+    "top_1_mass": 43.04,
+    "top_2_mass": 61.61,
+    "top_4_mass": 85.0,
+    "unknown_rate": 0.09,
+    "recognized_rate": 99.91,
+    "t2_enrichment_rate": 0.0,
+    "entropy": 2.576,
+    "gini": 0.808
+  },
+  "atom_distribution": {
+    "LOG.FNC.M": 2896,
+    "ORG.MOD.O": 1249,
+    "ORG.AGG.M": 1081,
+    "EXT.FASTAPI.005": 493,
+    "EXT.FASTAPI.004": 257,
+    "EXT.FASTAPI.QUERY.004": 177,
+    "EXT.FASTAPI.BODY.006": 121,
+    "EXT.FASTAPI.001": 85,
+    "EXT.FASTAPI.EXCEPTION.014": 63,
+    "EXT.FASTAPI.PATH.005": 63,
+    "EXT.FASTAPI.008": 56,
+    "EXT.FASTAPI.006": 54,
+    "EXT.FASTAPI.010": 52,
+    "EXT.FP.002": 23,
+    "EXT.REACT.001": 13,
+    "EXT.FASTAPI.003": 9,
+    "EXT.FASTAPI.007": 9,
+    "EXT.FASTAPI.002": 6,
+    "ORG.SVC.M": 6,
+    "Unknown": 6
+  },
+  "base_atom_distribution": {
+    "LOG.FNC.M": 2896,
+    "ORG.MOD.O": 1249,
+    "DAT.VAR.A": 0,
+    "ORG.AGG.M": 1081,
+    "Unknown": 6,
+    "other": 1496
+  },
+  "ecosystems_detected": [],
+  "quality": {
+    "unknown_count": 6,
+    "t2_count": 0,
+    "pareto_check": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "instructor",
+    "url": "https://github.com/jxnl/instructor",
+    "ref": "main",
+    "actual_sha": "61c2663b54d4",
+    "language": "python",
+    "domain": "ml",
+    "size": "small"
+  },
+  "run": {
+    "utc": "2026-01-23T05:57:07.037941+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "d22682107550",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

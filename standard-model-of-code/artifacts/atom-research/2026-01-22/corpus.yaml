@@ -1,0 +1,114 @@
+# Phase 2 Pilot Corpus
+# 10 repos for initial validation before full 100+ run
+#
+# Usage: python tools/research/run_corpus.py artifacts/atom-research/corpus_pilot.yaml
+
+version: 1
+generated_at_utc: "2026-01-22T00:00:00Z"
+notes: |
+  Pilot corpus for Phase 2 validation.
+  Repos pinned to specific commits for reproducibility.
+  Mix of languages, domains, and sizes.
+
+# Configuration for this corpus run
+config:
+  deterministic: true
+  ai_insights: false
+  output_base: "artifacts/atom-research"
+
+# Stratification targets
+stratification:
+  languages: [python, javascript, typescript, rust, go]
+  domains: [web_backend, web_frontend, cli, library, systems]
+  sizes: [small, medium, large]
+
+repos:
+  # Python - Web Backend
+  - name: fastapi
+    url: https://github.com/tiangolo/fastapi
+    ref: master  # TODO: Pin to specific SHA before run
+    language: python
+    domain: web_backend
+    size: large
+    notes: "Popular async web framework"
+
+  # Python - Library
+  - name: httpx
+    url: https://github.com/encode/httpx
+    ref: master  # TODO: Pin to specific SHA before run
+    language: python
+    domain: library
+    size: medium
+    notes: "HTTP client library"
+
+  # JavaScript - Web Frontend
+  - name: preact
+    url: https://github.com/preactjs/preact
+    ref: main  # TODO: Pin to specific SHA before run
+    language: javascript
+    domain: web_frontend
+    size: medium
+    notes: "Lightweight React alternative"
+
+  # TypeScript - Web Frontend
+  - name: solid
+    url: https://github.com/solidjs/solid
+    ref: main  # TODO: Pin to specific SHA before run
+    language: typescript
+    domain: web_frontend
+    size: medium
+    notes: "Reactive UI library"
+
+  # Rust - Systems
+  - name: ripgrep
+    url: https://github.com/BurntSushi/ripgrep
+    ref: master  # TODO: Pin to specific SHA before run
+    language: rust
+    domain: cli
+    size: medium
+    notes: "Fast grep replacement"
+
+  # Go - CLI
+  - name: cobra
+    url: https://github.com/spf13/cobra
+    ref: main  # TODO: Pin to specific SHA before run
+    language: go
+    domain: library
+    size: medium
+    notes: "CLI framework"
+
+  # TypeScript - Library
+  - name: zod
+    url: https://github.com/colinhacks/zod
+    ref: main  # TODO: Pin to specific SHA before run
+    language: typescript
+    domain: library
+    size: medium
+    notes: "TypeScript schema validation"
+
+  # Python - ML
+  - name: instructor
+    url: https://github.com/jxnl/instructor
+    ref: main  # TODO: Pin to specific SHA before run
+    language: python
+    domain: library
+    size: small
+    notes: "Structured LLM outputs"
+
+  # JavaScript - Web Backend
+  - name: hono
+    url: https://github.com/honojs/hono
+    ref: main  # TODO: Pin to specific SHA before run
+    language: typescript
+    domain: web_backend
+    size: medium
+    notes: "Fast web framework"
+
+  # Rust - Library
+  - name: serde
+    url: https://github.com/serde-rs/serde
+    ref: master  # TODO: Pin to specific SHA before run
+    language: rust
+    domain: library
+    size: large
+    notes: "Serialization framework"

@@ -1,0 +1,433 @@
+# Calibration Corpus: 33 Repositories
+# Purpose: Calibrate Collider detectors, fix bugs, validate before 99-repo run
+#
+# Stratification: 6 languages x 5-6 repos each
+# Includes: Hard cases (monorepo, large framework, generated-code-heavy)
+#
+# Usage: python tools/research/run_corpus.py artifacts/atom-research/corpus_33_calibration.yaml
+
+version: 2
+corpus_id: calibration_33
+generated_at_utc: "2026-01-23T00:00:00Z"
+purpose: "L1 calibration corpus - fix bugs, tune detectors before L2 validation"
+
+notes: |
+  This corpus is designed to stress-test Collider across:
+  - 6 programming languages
+  - Multiple domains (web, CLI, library, ML, systems)
+  - Hard cases (monorepos, large frameworks, config-heavy)
+
+  Gate to 99-repo run: All core bugs fixed, no major regressions from pilot.
+
+config:
+  deterministic: true
+  ai_insights: false
+  timeout_per_repo: 600  # 10 minutes max
+
+stratification:
+  languages: [python, typescript, javascript, go, rust, java]
+  domains: [web_backend, web_frontend, cli, library, ml, systems]
+  sizes: [small, medium, large]
+  hard_cases: [monorepo, large_framework, config_heavy]
+
+# =============================================================================
+# PYTHON (6 repos)
+# =============================================================================
+repos:
+  # Python - Web Backend (large)
+  - name: fastapi
+    url: https://github.com/tiangolo/fastapi
+    ref: master
+    language: python
+    domain: web_backend
+    size: large
+    stars: 75000
+    notes: "Async web framework, heavy type hints"
+
+  # Python - Library (medium)
+  - name: httpx
+    url: https://github.com/encode/httpx
+    ref: master
+    language: python
+    domain: library
+    size: medium
+    stars: 13000
+    notes: "HTTP client, already in pilot"
+
+  # Python - Library/ML (small)
+  - name: instructor
+    url: https://github.com/jxnl/instructor
+    ref: main
+    language: python
+    domain: ml
+    size: small
+    stars: 8000
+    notes: "LLM structured outputs, already in pilot"
+
+  # Python - CLI (medium)
+  - name: rich
+    url: https://github.com/Textualize/rich
+    ref: master
+    language: python
+    domain: cli
+    size: medium
+    stars: 50000
+    notes: "Terminal formatting library"
+
+  # Python - CLI (small)
+  - name: typer
+    url: https://github.com/tiangolo/typer
+    ref: master
+    language: python
+    domain: cli
+    size: small
+    stars: 16000
+    notes: "CLI framework built on Click"
+
+  # Python - Library (large)
+  - name: pydantic
+    url: https://github.com/pydantic/pydantic
+    ref: main
+    language: python
+    domain: library
+    size: large
+    stars: 21000
+    notes: "Data validation, heavy type system"
+
+# =============================================================================
+# TYPESCRIPT (6 repos)
+# =============================================================================
+
+  # TypeScript - Library (medium)
+  - name: zod
+    url: https://github.com/colinhacks/zod
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 34000
+    notes: "Schema validation, already in pilot"
+
+  # TypeScript - Library (medium)
+  - name: trpc
+    url: https://github.com/trpc/trpc
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 35000
+    notes: "End-to-end typesafe APIs"
+    hard_case: monorepo
+
+  # TypeScript - Library (large)
+  - name: prisma
+    url: https://github.com/prisma/prisma
+    ref: main
+    language: typescript
+    domain: library
+    size: large
+    stars: 40000
+    notes: "ORM, generated code heavy"
+    hard_case: generated_code
+
+  # TypeScript - Web Backend (medium)
+  - name: hono
+    url: https://github.com/honojs/hono
+    ref: main
+    language: typescript
+    domain: web_backend
+    size: medium
+    stars: 20000
+    notes: "Fast web framework"
+
+  # TypeScript - Web Frontend (medium) - FROM PILOT
+  - name: solid
+    url: https://github.com/solidjs/solid
+    ref: main
+    language: typescript
+    domain: web_frontend
+    size: medium
+    stars: 32000
+    notes: "Reactive UI library - PILOT CONTINUITY"
+
+  # TypeScript - Library (medium)
+  - name: drizzle-orm
+    url: https://github.com/drizzle-team/drizzle-orm
+    ref: main
+    language: typescript
+    domain: library
+    size: medium
+    stars: 25000
+    notes: "TypeScript ORM"
+
+# =============================================================================
+# JAVASCRIPT (4 repos)
+# =============================================================================
+
+  # JavaScript - Web Frontend (small)
+  - name: preact
+    url: https://github.com/preactjs/preact
+    ref: main
+    language: javascript
+    domain: web_frontend
+    size: small
+    stars: 37000
+    notes: "Lightweight React alternative"
+
+  # JavaScript - Web Backend (medium)
+  - name: express
+    url: https://github.com/expressjs/express
+    ref: master
+    language: javascript
+    domain: web_backend
+    size: medium
+    stars: 65000
+    notes: "Classic Node.js framework"
+
+  # JavaScript - Build Tool (medium)
+  - name: esbuild
+    url: https://github.com/evanw/esbuild
+    ref: main
+    language: javascript
+    domain: systems
+    size: medium
+    stars: 38000
+    notes: "Fast bundler (Go core, JS API)"
+    hard_case: multi_language
+
+  # JavaScript - Library (medium)
+  - name: lodash
+    url: https://github.com/lodash/lodash
+    ref: main
+    language: javascript
+    domain: library
+    size: medium
+    stars: 60000
+    notes: "Utility library, many small functions"
+
+# =============================================================================
+# GO (6 repos)
+# =============================================================================
+
+  # Go - Library (medium)
+  - name: cobra
+    url: https://github.com/spf13/cobra
+    ref: main
+    language: go
+    domain: library
+    size: medium
+    stars: 38000
+    notes: "CLI framework, already in pilot"
+
+  # Go - Systems (large)
+  - name: hugo
+    url: https://github.com/gohugoio/hugo
+    ref: master
+    language: go
+    domain: systems
+    size: large
+    stars: 76000
+    notes: "Static site generator"
+
+  # Go - Web Backend (medium)
+  - name: gin
+    url: https://github.com/gin-gonic/gin
+    ref: master
+    language: go
+    domain: web_backend
+    size: medium
+    stars: 79000
+    notes: "HTTP web framework"
+
+  # Go - Web Backend (medium)
+  - name: fiber
+    url: https://github.com/gofiber/fiber
+    ref: main
+    language: go
+    domain: web_backend
+    size: medium
+    stars: 34000
+    notes: "Express-inspired web framework"
+
+  # Go - CLI (medium)
+  - name: lazygit
+    url: https://github.com/jesseduffield/lazygit
+    ref: master
+    language: go
+    domain: cli
+    size: medium
+    stars: 53000
+    notes: "Terminal UI for git"
+
+  # Go - CLI (medium)
+  - name: k9s
+    url: https://github.com/derailed/k9s
+    ref: master
+    language: go
+    domain: cli
+    size: medium
+    stars: 27000
+    notes: "Kubernetes CLI manager"
+
+# =============================================================================
+# RUST (6 repos)
+# =============================================================================
+
+  # Rust - Library (large) - FROM PILOT
+  - name: serde
+    url: https://github.com/serde-rs/serde
+    ref: master
+    language: rust
+    domain: library
+    size: large
+    stars: 9000
+    notes: "Serialization framework - PILOT CONTINUITY"
+
+  # Rust - CLI (medium)
+  - name: ripgrep
+    url: https://github.com/BurntSushi/ripgrep
+    ref: master
+    language: rust
+    domain: cli
+    size: medium
+    stars: 49000
+    notes: "Fast grep replacement"
+
+  # Rust - CLI (small)
+  - name: bat
+    url: https://github.com/sharkdp/bat
+    ref: master
+    language: rust
+    domain: cli
+    size: small
+    stars: 50000
+    notes: "Cat clone with syntax highlighting"
+
+  # Rust - CLI (small)
+  - name: fd
+    url: https://github.com/sharkdp/fd
+    ref: master
+    language: rust
+    domain: cli
+    size: small
+    stars: 34000
+    notes: "Fast find alternative"
+
+  # Rust - Systems (large)
+  - name: alacritty
+    url: https://github.com/alacritty/alacritty
+    ref: master
+    language: rust
+    domain: systems
+    size: large
+    stars: 56000
+    notes: "GPU-accelerated terminal"
+
+  # Rust - CLI (medium)
+  - name: starship
+    url: https://github.com/starship/starship
+    ref: master
+    language: rust
+    domain: cli
+    size: medium
+    stars: 45000
+    notes: "Cross-shell prompt"
+
+# =============================================================================
+# JAVA (5 repos) - WARNING: No tree-sitter queries yet!
+# =============================================================================
+# NOTE: Java repos included to TEST FALLBACK BEHAVIOR.
+# Collider has .java extension mapping but NO query files in src/core/queries/java/
+# These repos will stress-test the generic parser fallback path.
+# Expected outcome: Higher unknown rates, potential failures to detect.
+
+  # Java - Web Backend (large) - HARD CASE
+  - name: spring-boot
+    url: https://github.com/spring-projects/spring-boot
+    ref: main
+    language: java
+    domain: web_backend
+    size: large
+    stars: 75000
+    notes: "Enterprise framework - NO JAVA QUERIES YET"
+    hard_case: large_framework
+    query_support: false
+
+  # Java - Library (medium)
+  - name: gson
+    url: https://github.com/google/gson
+    ref: main
+    language: java
+    domain: library
+    size: medium
+    stars: 23000
+    notes: "JSON serialization - NO JAVA QUERIES YET"
+    query_support: false
+
+  # Java - Library (large)
+  - name: guava
+    url: https://github.com/google/guava
+    ref: master
+    language: java
+    domain: library
+    size: large
+    stars: 50000
+    notes: "Google core libraries - NO JAVA QUERIES YET"
+    query_support: false
+
+  # Java - Library (small)
+  - name: lombok
+    url: https://github.com/projectlombok/lombok
+    ref: master
+    language: java
+    domain: library
+    size: small
+    stars: 13000
+    notes: "Annotation processor, metaprogramming - NO JAVA QUERIES YET"
+    hard_case: metaprogramming
+    query_support: false
+
+  # Java - Library (medium)
+  - name: jackson-core
+    url: https://github.com/FasterXML/jackson-core
+    ref: 2.18
+    language: java
+    domain: library
+    size: medium
+    stars: 2300
+    notes: "JSON processor core - NO JAVA QUERIES YET"
+    query_support: false
+
+# =============================================================================
+# SUMMARY
+# =============================================================================
+#
+# Languages: Python(6), TypeScript(6), JavaScript(4), Go(6), Rust(6), Java(5) = 33
+#
+# Pilot continuity: 8 of 10 pilot repos included (httpx, instructor, zod, cobra, preact, hono, solid, serde)
+# Missing from pilot: fastapi (upgraded), ripgrep (in Rust section)
+#
+# Domains:
+#   - web_backend: 6 (fastapi, hono, express, gin, fiber, spring-boot)
+#   - web_frontend: 2 (preact, solid)
+#   - cli: 8 (rich, typer, ripgrep, bat, fd, starship, lazygit, k9s)
+#   - library: 13 (httpx, pydantic, zod, trpc, prisma, drizzle, lodash, cobra, serde, gson, guava, lombok, jackson)
+#   - ml: 1 (instructor)
+#   - systems: 3 (esbuild, hugo, alacritty)
+#
+# Hard cases:
+#   - monorepo: trpc
+#   - generated_code: prisma
+#   - multi_language: esbuild (Go core, JS API)
+#   - large_framework: spring-boot
+#   - metaprogramming: lombok
+#
+# Query support:
+#   - FULL: Python, TypeScript, JavaScript, Go, Rust (28 repos)
+#   - NONE: Java (5 repos) - will test fallback behavior
+#
+# Size distribution:
+#   - small: 6
+#   - medium: 20
+#   - large: 7
+#

@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "gson",
+    "url": "https://github.com/google/gson",
+    "ref": "main",
+    "actual_sha": "286843d4a90a",
+    "language": "java",
+    "domain": "library",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T06:12:50.776482+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

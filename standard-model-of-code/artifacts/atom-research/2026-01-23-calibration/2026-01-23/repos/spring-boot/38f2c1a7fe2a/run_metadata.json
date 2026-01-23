@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "spring-boot",
+    "url": "https://github.com/spring-projects/spring-boot",
+    "ref": "main",
+    "actual_sha": "38f2c1a7fe2a",
+    "language": "java",
+    "domain": "web_backend",
+    "size": "large"
+  },
+  "run": {
+    "utc": "2026-01-23T06:12:46.282600+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

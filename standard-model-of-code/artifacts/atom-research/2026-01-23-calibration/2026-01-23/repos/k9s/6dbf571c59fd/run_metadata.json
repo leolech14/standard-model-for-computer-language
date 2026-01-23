@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "k9s",
+    "url": "https://github.com/derailed/k9s",
+    "ref": "master",
+    "actual_sha": "6dbf571c59fd",
+    "language": "go",
+    "domain": "cli",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T06:11:04.923626+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

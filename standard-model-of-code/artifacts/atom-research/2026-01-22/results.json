@@ -1,0 +1,38 @@
+[
+  {
+    "name": "cobra",
+    "status": "success",
+    "sha": "61968e893eee",
+    "n_nodes": 448,
+    "top_4_mass": 96.43,
+    "unknown_rate": 0.22,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "httpx",
+    "status": "success",
+    "sha": "ae1b9f66238f",
+    "n_nodes": 1306,
+    "top_4_mass": 99.31,
+    "unknown_rate": 0.38,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "instructor",
+    "status": "success",
+    "sha": "3fe0c7664bd1",
+    "n_nodes": 2506,
+    "top_4_mass": 98.32,
+    "unknown_rate": 0.2,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "zod",
+    "status": "success",
+    "sha": "cbf77bb12bdf",
+    "n_nodes": 711,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.42,
+    "t2_rate": 0.0
+  }
+]

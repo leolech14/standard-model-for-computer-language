@@ -1,0 +1,38 @@
+{
+  "metrics": {
+    "n_nodes": 322,
+    "n_unique_atoms": 8,
+    "top_1_mass": 72.67,
+    "top_2_mass": 86.02,
+    "top_4_mass": 95.03,
+    "unknown_rate": 0.93,
+    "recognized_rate": 99.07,
+    "t2_enrichment_rate": 0.0,
+    "entropy": 1.348,
+    "gini": 0.708
+  },
+  "atom_distribution": {
+    "LOG.FNC.M": 234,
+    "EXT.RUST.005": 43,
+    "EXT.RUST.006": 21,
+    "ORG.AGG.M": 8,
+    "EXT.RUST.003": 8,
+    "EXT.RUST.008": 4,
+    "Unknown": 3,
+    "EXT.RUST.001": 1
+  },
+  "base_atom_distribution": {
+    "ORG.AGG.M": 8,
+    "ORG.MOD.O": 0,
+    "DAT.VAR.A": 0,
+    "LOG.FNC.M": 234,
+    "Unknown": 3,
+    "other": 77
+  },
+  "ecosystems_detected": [],
+  "quality": {
+    "unknown_count": 3,
+    "t2_count": 0,
+    "pareto_check": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "cobra",
+    "url": "https://github.com/spf13/cobra",
+    "ref": "main",
+    "actual_sha": "61968e893eee",
+    "language": "go",
+    "domain": "library",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-22T18:18:45.025261+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "6cc04bc9da5d",
+    "research_tooling_commit": "6cc04bc9da5d",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

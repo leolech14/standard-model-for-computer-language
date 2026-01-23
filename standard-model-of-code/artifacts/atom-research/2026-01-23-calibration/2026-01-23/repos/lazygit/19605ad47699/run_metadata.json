@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "lazygit",
+    "url": "https://github.com/jesseduffield/lazygit",
+    "ref": "master",
+    "actual_sha": "19605ad47699",
+    "language": "go",
+    "domain": "cli",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T06:10:58.661032+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

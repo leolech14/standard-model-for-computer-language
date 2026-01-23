@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "express",
+    "url": "https://github.com/expressjs/express",
+    "ref": "master",
+    "actual_sha": "a479419b16f5",
+    "language": "javascript",
+    "domain": "web_backend",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T06:08:41.210112+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

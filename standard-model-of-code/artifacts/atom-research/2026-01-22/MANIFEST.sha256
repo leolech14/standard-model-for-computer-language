@@ -1,0 +1,50 @@
+# MANIFEST.sha256 - Run Seal for Audit Pack
+# Generated: 2026-01-22
+# Purpose: Immutable record of all artifacts at publication time
+# Verification: ./tools/research/verify_manifest.sh artifacts/atom-research/2026-01-22/
+#
+# Format: <sha256sum>  <relative_path>
+#
+# ============================================================================
+# CORE ARTIFACTS
+# ============================================================================
+6c7d6bffb5e4f606bc1be9fcd60f250eb127672a39b77f374e76c815deb72986  artifacts/atom-research/2026-01-22/corpus.yaml
+6ecdd426934f39913b1c7790ea36fb6ebc73255e50893eb04a6e58e1097f361d  artifacts/atom-research/2026-01-22/results.json
+7ae85b4480296eab613ee511ef3aa16843645b47d39d21a6d521f2fd602d0395  artifacts/atom-research/2026-01-22/summary.md
+8b49c931759c019afc3dcb7ed568c1f69f834b4f0a21065fd187d9ac8da30887  artifacts/atom-research/2026-01-22/summary.csv
+
+# ============================================================================
+# AI AUDIT ARTIFACTS
+# ============================================================================
+6238394f392779d6f9ecc28adfc5eaf9c1a1dfe42473de676317a7a364961c38  artifacts/atom-research/2026-01-22/ai-audit/adversarial_finding_1.md
+3fcdbb8fef4870ff124570bacc89ae7fbf93dc22096be83b818e9511c7722e93  artifacts/atom-research/2026-01-22/ai-audit/decision_finding_1.md
+a82da1f0ab15ca8507782702aaa2cd93f12f91865e63ab1cec60ff798573b847  artifacts/atom-research/2026-01-22/ai-audit/gemini_finding_1.md
+3d3251ce8d8dce132daf944649ed0131af7fa2bccc02fb03a7ac673b26bfa084  artifacts/atom-research/2026-01-22/ai-audit/perplexity_finding_1.md
+
+# ============================================================================
+# PROMPT FILES (for provenance chain)
+# ============================================================================
+ed4cf7c9462eb1f51c3c92056a24f6f6e6dfe893861639b6d7b7956429e20cec  tools/research/prompts/finding_1_chatgpt.txt
+91652e5f6edcc27ff1143bc9426595b77bea71119d053961eb4f53eb3e7c37bd  tools/research/prompts/finding_1_gemini.txt
+ce182385ae54c4d148277988d353c095d1496a1636fc9e3a97967f6e035967d9  tools/research/prompts/finding_1_perplexity.txt
+9fd7f32366f863401346b9d3bef358aafed28f75b354123c1ca8d71ec273f34c  tools/research/prompts/finding_1_adversarial_perplexity.json
+
+# ============================================================================
+# COVERAGE DATA (repos/)
+# ============================================================================
+35cf71571838379328b1e9a7887dbc868a62603cdef90e243951914948cdd963  artifacts/atom-research/2026-01-22/repos/cobra/61968e893eee/coverage.json
+09407734d516046f3b52b0fff2611a40b21823bfad32a5539029968d2242cece  artifacts/atom-research/2026-01-22/repos/httpx/ae1b9f66238f/coverage.json
+81984bf308d2e7923fae6ce82d9fcc0928dc04aeffb975a39ac60828cc7b237e  artifacts/atom-research/2026-01-22/repos/instructor/3fe0c7664bd1/coverage.json
+e250d35309ecbbf03a48e4a1f08438eb8375edbc965dcd27674e92b50e8bdb58  artifacts/atom-research/2026-01-22/repos/zod/cbf77bb12bdf/coverage.json
+
+# ============================================================================
+# RUN METADATA (repos/)
+# ============================================================================
+9f592afc07c8ebf81b5eff0cc056fcda82644cb7d5fc1b8b164dfc3e46b18fa7  artifacts/atom-research/2026-01-22/repos/cobra/61968e893eee/output_llm-oriented_cobra_20260122_151844.json
+59e9b7a5b4d0a4bc390ffc4e159044ecc02a670fa146348994086d1fbacf0451  artifacts/atom-research/2026-01-22/repos/cobra/61968e893eee/run_metadata.json
+81ddc518cf0c67c1fc5579d91f43ac0f22110af11be5244286b3b6dd819313fc  artifacts/atom-research/2026-01-22/repos/httpx/ae1b9f66238f/output_llm-oriented_httpx_20260122_151838.json
+32db28713e0b250dfc5acf1cd4cd3611a3f3c67f1b3008ca839bd4a55a4b4778  artifacts/atom-research/2026-01-22/repos/httpx/ae1b9f66238f/run_metadata.json
+7a575199a9ce121e46caceeb9b31dfaf9ac0697cc0119a91de97af7faa2c62a5  artifacts/atom-research/2026-01-22/repos/instructor/3fe0c7664bd1/output_llm-oriented_instructor_20260122_151543.json
+ba3b7b969cbc589d633a50ff0177f3796ee7d712e06fd7d735efb1d87daf201a  artifacts/atom-research/2026-01-22/repos/instructor/3fe0c7664bd1/run_metadata.json
+07566c652cb74506ae32c1e0f7f01819f95090f6fc4322a8896f8bd96f011938  artifacts/atom-research/2026-01-22/repos/zod/cbf77bb12bdf/output_llm-oriented_zod_20260122_151852.json
+e5ee2b980a6c417d43dfc4cfab3c66f1ca884137adad6c52f2adfd29f271cddf  artifacts/atom-research/2026-01-22/repos/zod/cbf77bb12bdf/run_metadata.json

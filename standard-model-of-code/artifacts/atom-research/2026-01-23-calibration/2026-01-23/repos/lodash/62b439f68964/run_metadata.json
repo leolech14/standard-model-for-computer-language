@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "lodash",
+    "url": "https://github.com/lodash/lodash",
+    "ref": "main",
+    "actual_sha": "62b439f68964",
+    "language": "javascript",
+    "domain": "library",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T06:08:57.377513+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

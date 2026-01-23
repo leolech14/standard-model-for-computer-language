@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "fastapi",
+    "url": "https://github.com/tiangolo/fastapi",
+    "ref": "master",
+    "actual_sha": "597b435ae7f0",
+    "language": "python",
+    "domain": "web_backend",
+    "size": "large"
+  },
+  "run": {
+    "utc": "2026-01-23T05:56:03.104467+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "d22682107550",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

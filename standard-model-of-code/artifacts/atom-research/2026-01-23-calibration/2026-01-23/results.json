@@ -1,0 +1,287 @@
+[
+  {
+    "name": "fastapi",
+    "status": "success",
+    "sha": "597b435ae7f0",
+    "n_nodes": 6728,
+    "top_4_mass": 85.0,
+    "unknown_rate": 0.09,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "httpx",
+    "status": "success",
+    "sha": "ae1b9f66238f",
+    "n_nodes": 1306,
+    "top_4_mass": 99.31,
+    "unknown_rate": 0.38,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "instructor",
+    "status": "success",
+    "sha": "61c2663b54d4",
+    "n_nodes": 2516,
+    "top_4_mass": 98.33,
+    "unknown_rate": 0.2,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "rich",
+    "status": "success",
+    "sha": "96dd4b60e3a7",
+    "n_nodes": 2292,
+    "top_4_mass": 99.43,
+    "unknown_rate": 0.22,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "typer",
+    "status": "success",
+    "sha": "e7123728eb3e",
+    "n_nodes": 2334,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.21,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "pydantic",
+    "status": "failed",
+    "error": "collider"
+  },
+  {
+    "name": "zod",
+    "status": "success",
+    "sha": "7b43bc64e7a2",
+    "n_nodes": 710,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.42,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "trpc",
+    "status": "success",
+    "sha": "163ec4ec05be",
+    "n_nodes": 850,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.35,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "prisma",
+    "status": "success",
+    "sha": "b6fd1bd092e1",
+    "n_nodes": 2597,
+    "top_4_mass": 99.96,
+    "unknown_rate": 0.12,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "hono",
+    "status": "success",
+    "sha": "bcc81b1fc062",
+    "n_nodes": 331,
+    "top_4_mass": 99.7,
+    "unknown_rate": 0.91,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "solid",
+    "status": "success",
+    "sha": "a5b51fe200fd",
+    "n_nodes": 643,
+    "top_4_mass": 99.53,
+    "unknown_rate": 0.47,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "drizzle-orm",
+    "status": "success",
+    "sha": "a086f59fba7f",
+    "n_nodes": 1927,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.1,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "preact",
+    "status": "success",
+    "sha": "60db6f4f1276",
+    "n_nodes": 351,
+    "top_4_mass": 97.72,
+    "unknown_rate": 0.85,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "express",
+    "status": "success",
+    "sha": "a479419b16f5",
+    "n_nodes": 55,
+    "top_4_mass": 100.0,
+    "unknown_rate": 1.82,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "esbuild",
+    "status": "success",
+    "sha": "cd832972927f",
+    "n_nodes": 3254,
+    "top_4_mass": 97.23,
+    "unknown_rate": 0.12,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "lodash",
+    "status": "success",
+    "sha": "62b439f68964",
+    "n_nodes": 114,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.88,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "cobra",
+    "status": "success",
+    "sha": "61968e893eee",
+    "n_nodes": 448,
+    "top_4_mass": 96.43,
+    "unknown_rate": 0.22,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "hugo",
+    "status": "success",
+    "sha": "192e3c453e90",
+    "n_nodes": 5160,
+    "top_4_mass": 88.86,
+    "unknown_rate": 0.08,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "gin",
+    "status": "success",
+    "sha": "b2b489dbf482",
+    "n_nodes": 1037,
+    "top_4_mass": 95.37,
+    "unknown_rate": 0.19,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "fiber",
+    "status": "failed",
+    "error": "Command '['git', 'checkout', 'master']' returned non-zero exit status 1."
+  },
+  {
+    "name": "lazygit",
+    "status": "success",
+    "sha": "19605ad47699",
+    "n_nodes": 16368,
+    "top_4_mass": 93.6,
+    "unknown_rate": 0.02,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "k9s",
+    "status": "success",
+    "sha": "6dbf571c59fd",
+    "n_nodes": 1856,
+    "top_4_mass": 89.92,
+    "unknown_rate": 0.16,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "serde",
+    "status": "success",
+    "sha": "d17902059e77",
+    "n_nodes": 2259,
+    "top_4_mass": 90.13,
+    "unknown_rate": 0.09,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "ripgrep",
+    "status": "success",
+    "sha": "0a88cccd5188",
+    "n_nodes": 2548,
+    "top_4_mass": 96.59,
+    "unknown_rate": 0.12,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "bat",
+    "status": "success",
+    "sha": "cd06fe46e001",
+    "n_nodes": 1642,
+    "top_4_mass": 92.63,
+    "unknown_rate": 0.18,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "fd",
+    "status": "success",
+    "sha": "bf81fb98fae7",
+    "n_nodes": 322,
+    "top_4_mass": 95.03,
+    "unknown_rate": 0.93,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "alacritty",
+    "status": "success",
+    "sha": "08134af85335",
+    "n_nodes": 1665,
+    "top_4_mass": 94.65,
+    "unknown_rate": 0.18,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "starship",
+    "status": "success",
+    "sha": "6109716afee0",
+    "n_nodes": 2142,
+    "top_4_mass": 96.36,
+    "unknown_rate": 0.09,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "spring-boot",
+    "status": "success",
+    "sha": "38f2c1a7fe2a",
+    "n_nodes": 6450,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.05,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "gson",
+    "status": "success",
+    "sha": "286843d4a90a",
+    "n_nodes": 183,
+    "top_4_mass": 100.0,
+    "unknown_rate": 1.09,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "guava",
+    "status": "success",
+    "sha": "0bf87046267c",
+    "n_nodes": 2057,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.0,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "lombok",
+    "status": "success",
+    "sha": "04876622d9ce",
+    "n_nodes": 2088,
+    "top_4_mass": 100.0,
+    "unknown_rate": 0.1,
+    "t2_rate": 0.0
+  },
+  {
+    "name": "jackson-core",
+    "status": "failed",
+    "error": "Command '['git', 'checkout', '2.x']' returned non-zero exit status 1."
+  }
+]

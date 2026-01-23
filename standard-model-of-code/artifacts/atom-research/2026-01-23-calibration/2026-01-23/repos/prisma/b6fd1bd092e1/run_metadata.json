@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "prisma",
+    "url": "https://github.com/prisma/prisma",
+    "ref": "main",
+    "actual_sha": "b6fd1bd092e1",
+    "language": "typescript",
+    "domain": "library",
+    "size": "large"
+  },
+  "run": {
+    "utc": "2026-01-23T06:08:14.155619+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "d16826d0b4bf",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}

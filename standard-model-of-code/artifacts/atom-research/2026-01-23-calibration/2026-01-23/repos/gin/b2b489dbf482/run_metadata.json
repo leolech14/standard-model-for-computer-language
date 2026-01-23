@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "gin",
+    "url": "https://github.com/gin-gonic/gin",
+    "ref": "master",
+    "actual_sha": "b2b489dbf482",
+    "language": "go",
+    "domain": "web_backend",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T06:09:23.054967+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "bc738660c35f",
+    "research_tooling_commit": "2d55fae9a477",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}
