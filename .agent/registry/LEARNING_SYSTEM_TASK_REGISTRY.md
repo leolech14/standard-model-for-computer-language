@@ -1,7 +1,7 @@
 # Learning System - Task Confidence Registry
 
 > Confidence-scored task evaluation for the Learning Repository architecture.
-> **Version:** 3.1.0 | **Reassessed:** 2026-01-23
+> **Version:** 3.2.0 | **Reassessed:** 2026-01-23
 
 ## Status Legend
 
@@ -41,23 +41,23 @@
 ## Quick View
 
 ```
-☑️  TASK-100  Delete index.html
-☑️  TASK-115  Atomic task reservation
-☑️  TASK-101  SYSTEM_KERNEL.md
+☑️  TASK-100  Delete index.html                   [b6063fa]
+☑️  TASK-115  Atomic task reservation             [8df0de9]
+☑️  TASK-116  Reconcile registries                [54a198e]
+☑️  TASK-117  State machine enforcement           [54a198e]
+☑️  TASK-110  Document Socratic Research Loop     [pending commit]
+☑️  TASK-101  SYSTEM_KERNEL.md                    [dc3ae00]
 ☑️  MCP-001   BEST_PRACTICES.md
 ☑️  MCP-003   Dual-format utility
 ☑️  MCP-004   SHA-256 checksums
-🟢 TASK-110  Document Socratic Research Loop      [90%]
 🟢 TASK-111  Update analysis_sets.yaml            [85%]
 🟢 TASK-112  Re-evaluate token budgets            [85%]
 🟢 TASK-114  Add Context Engineering docs         [85%]
 🟢 TASK-106  Dataset optimization guide           [85%]
-🟡 TASK-116  Reconcile registries                 [90%→95%]
 🟡 TASK-104  Pre-commit hook                      [80%→85%]
 🟡 TASK-102  --research-loop                      [75%→85%]
 🟡 TASK-103  analyze.py storage                   [70%→85%]
 🚧 TASK-113  Positional strategy                  [needs 111]
-🚧 TASK-117  State machine enforcement            [needs research]
 💤 TASK-105  Live-reload for viz
 💤 TASK-108  Knowledge embodiment workflow
 💤 TASK-109  Deploy HSL to Cloud Run
@@ -104,25 +104,37 @@
 
 ---
 
-## 🟢 READY NOW (Meets Threshold)
+### ☑️  TASK-116: Reconcile MCP Factory registry with .agent/
+**Commit:** 54a198e
 
-### 🟢 TASK-110: Document Socratic Research Loop
-**Risk:** A | **Threshold:** 85% | **Score:** 90%
-
-| Dimension | Score | Rationale |
-|-----------|-------|-----------|
-| Factual | 95% | Pattern used extensively in sessions |
-| Alignment | 90% | Documents core research workflow |
-| Current | 95% | WORKFLOW_FACTORY.md exists, needs Recipe 6 |
-| Onwards | 90% | Enables reproducible research |
-
-**Implementation:**
-1. Add Recipe 6 to `context-management/docs/WORKFLOW_FACTORY.md`
-2. Document: Gemini → Perplexity → Gemini synthesis → Task Candidates
-
-**Unblocks:** Nothing directly, but captures institutional knowledge
+**Deliverables:**
+- MCP Factory registry marked as SECONDARY source
+- SSOT pointer to `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md`
+- TASK-006 marked as MIGRATED → .agent/TASK-001
 
 ---
+
+### ☑️  TASK-117: Enforce explicit task state machine
+**Commit:** 54a198e
+
+**Deliverables:**
+- `claim_task.sh`: Strict gate - rejects non-SCOPED/PLANNED tasks
+- `release_task.sh`: Warn mode - logs fast completions and state skips
+- `KERNEL.md`: State machine diagram and tool usage docs
+
+---
+
+### ☑️  TASK-110: Document Socratic Research Loop
+**Commit:** pending
+
+**Deliverables:**
+- Recipe 6 added to `context-management/docs/WORKFLOW_FACTORY.md`
+- Documents: Gemini → Perplexity → File reads → Synthesis → Execute
+- Includes execution thresholds (A/A+/A++) and example session
+
+---
+
+## 🟢 READY NOW (Meets Threshold)
 
 ### 🟢 TASK-111: Update analysis_sets.yaml schema
 **Risk:** A | **Threshold:** 85% | **Score:** 85%
@@ -261,10 +273,10 @@ NEEDS BOOST:
 
 | Status | Count | Tasks |
 |--------|-------|-------|
-| ☑️  COMPLETE | 6 | 100, 115, 101, MCP-001, MCP-003, MCP-004 |
-| 🟢 READY | 5 | 110, 111, 112, 114, 106 |
-| 🟡 NEEDS BOOST | 4 | 116, 104, 102, 103 |
-| 🚧 BLOCKED | 2 | 113, 117 |
+| ☑️  COMPLETE | 9 | 100, 115, 116, 117, 110, 101, MCP-001, MCP-003, MCP-004 |
+| 🟢 READY | 4 | 111, 112, 114, 106 |
+| 🟡 NEEDS BOOST | 3 | 104, 102, 103 |
+| 🚧 BLOCKED | 1 | 113 |
 | 💤 DEFERRED | 3 | 105, 108, 109 |
 | ⛔ REJECTED | 1 | MCP-007 |
 | **TOTAL** | **21** | |
@@ -279,3 +291,4 @@ NEEDS BOOST:
 | 2.0.0 | 2026-01-22 | Merged AGENT-SYS tasks, added risk thresholds |
 | 3.0.0 | 2026-01-23 | Reassessed: 6 tasks complete, updated blockers |
 | 3.1.0 | 2026-01-23 | Added emoji status legend, Quick View section |
+| 3.2.0 | 2026-01-23 | Session complete: +3 tasks (116, 117, 110), Socratic Loop documented |

@@ -108,6 +108,111 @@ python local_analyze.py --search "How do stages get added to full_analysis?" \
 python local_analyze.py --set pipeline "I want to add a new Stage 9 for X"
 ```
 
+### Recipe 6: Socratic Research Loop (Confidence Boosting)
+
+**Purpose:** Boost confidence on tasks until they meet execution thresholds.
+
+**The Loop:**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    SOCRATIC RESEARCH LOOP                           │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│   1. IDENTIFY GAP                                                   │
+│      Task at 85%, needs 95% (A+ threshold)                          │
+│      Which dimension is the bottleneck?                             │
+│                                                                     │
+│   2. GEMINI: Internal Validation                                    │
+│      "Does our codebase support this approach?"                     │
+│      Boosts: Factual, Current                                       │
+│                                                                     │
+│   3. PERPLEXITY: External Validation                                │
+│      "What do industry best practices say?"                         │
+│      Boosts: Factual (external confirmation)                        │
+│                                                                     │
+│   4. FILE READS: Ground Truth                                       │
+│      Read actual files to verify assumptions                        │
+│      Boosts: Factual (to 95%+)                                      │
+│                                                                     │
+│   5. SYNTHESIS: Revised Score                                       │
+│      Update 4D matrix with evidence                                 │
+│      If min(4D) >= threshold → EXECUTE                              │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+**Step 1: Identify the Bottleneck**
+```bash
+# Check task confidence
+cat .agent/registry/active/TASK-XXX.yaml | grep -A5 "confidence:"
+
+# 4D dimensions:
+# - Factual: Is my understanding correct?
+# - Alignment: Does this serve the mission?
+# - Current: Does this fit codebase as-is?
+# - Onwards: Does this fit where we're heading?
+```
+
+**Step 2: Gemini Internal Validation**
+```bash
+python context-management/tools/ai/analyze.py \
+  "Validate approach for [TASK]: [description].
+   Check if codebase supports this. Cite specific files." \
+  --set [relevant_set]
+```
+
+**Step 3: Perplexity External Validation**
+```
+Use MCP: mcp__perplexity__perplexity_ask
+Query: "Best practices for [topic]. Technical validation needed."
+```
+
+**Step 4: Ground Truth File Reads**
+```bash
+# Read the actual files Gemini cited
+# Verify claims match reality
+```
+
+**Step 5: Update Confidence**
+```yaml
+# Before:
+confidence:
+  factual: 85   # "I think this is right"
+
+# After (with evidence):
+confidence:
+  factual: 95   # "Gemini confirmed, Perplexity validated, files read"
+```
+
+**Execution Thresholds:**
+
+| Grade | Threshold | Task Type |
+|-------|-----------|-----------|
+| A | 85% | Standard tasks (docs, config) |
+| A+ | 95% | Multi-file changes, new systems |
+| A++ | 99% | High-risk refactors, deletions |
+
+**Example Session:**
+```
+TASK-117: Enforce state machine (85%, needs 95%)
+
+1. Bottleneck: Factual (85%) - "Is hybrid approach right?"
+
+2. Gemini: "Codebase has claim_task.sh and release_task.sh.
+   Adding validation is straightforward."
+   → Current: 85% → 95%
+
+3. Perplexity: "Hybrid approach (strict gate + warn mode) is
+   best practice for git-based systems."
+   → Factual: 85% → 95%
+
+4. File reads: Confirmed tools exist, schema has states
+
+5. Synthesis: min(95, 95, 95, 95) = 95% → MEETS A+ THRESHOLD
+```
+
+---
+
 ## Decision Matrix
 
 | Question Type | Use | Why |
