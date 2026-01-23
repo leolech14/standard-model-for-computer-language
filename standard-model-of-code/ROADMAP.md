@@ -197,6 +197,107 @@ Phase 4 (auditability + determinism)
 
 ---
 
+## Phase 10 — Adaptive Intelligence Layer (SURVEY)
+
+**Goal:** Make Collider smart about WHAT to analyze before HOW to analyze.
+
+### Problem Statement
+Collider currently parses everything blindly. Analyzing `viz/assets/` produced 4,342 nodes where 80% (3,500+) came from vendor libraries (`three.min.js`, `3d-force-graph.min.js`). The signal-to-noise ratio is destroyed.
+
+### Solution: Pre-Analysis Survey Phase
+
+```
+┌────────────────────────────────────────────────────────────┐
+│  NEW: Stage 0 — SURVEY (AI-Powered)                        │
+├────────────────────────────────────────────────────────────┤
+│  1. Directory scan (fast, no parsing)                      │
+│  2. Pattern detection:                                     │
+│     - vendor/, node_modules/, lib/, dist/                  │
+│     - *.min.js, *.bundle.js (minified)                     │
+│     - *.generated.ts, *.pb.go (generated)                  │
+│     - __fixtures__/, testdata/ (test data)                 │
+│  3. Heuristics:                                            │
+│     - Single-line files > 10KB = minified                  │
+│     - Avg line length > 500 chars = minified               │
+│     - No whitespace variance = obfuscated                  │
+│  4. AI classification (analyze.py):                        │
+│     - "Is this vendor code?" → exclude                     │
+│     - "What's the project structure?" → configure          │
+│     - "Estimated complexity?" → warn/adapt                 │
+│  5. Output: analysis_config.yaml                           │
+│     - exclude_patterns: [...]                              │
+│     - focus_paths: [...]                                   │
+│     - estimated_nodes: N                                   │
+│     - recommended_flags: [...]                             │
+└────────────────────────────────────────────────────────────┘
+                              ↓
+┌────────────────────────────────────────────────────────────┐
+│  Stage 1 — AST Parsing (with config applied)               │
+│  Now only parses YOUR code, not vendor libraries           │
+└────────────────────────────────────────────────────────────┘
+```
+
+### Deliverables
+
+1. **Survey Module** (`src/core/survey.py`)
+   - Fast directory scanner (no AST, just file stats)
+   - Pattern-based exclusion detector
+   - Minification heuristics
+   - Token/complexity estimator
+
+2. **AI Integration** (optional, via analyze.py)
+   - Gemini-powered project understanding
+   - Smart exclusion recommendations
+   - "What kind of codebase is this?"
+
+3. **CLI Integration**
+   - `./collider survey <path>` — Run survey only, output config
+   - `./collider full <path> --survey` — Auto-survey before analysis
+   - `./collider full <path> --exclude vendor/` — Manual exclusion
+
+4. **Interactive Mode**
+   ```
+   $ ./collider full ./my-app
+
+   [SURVEY] Detected potential exclusions:
+     - node_modules/     (1,247 files, ~50MB)
+     - vendor/three.js   (minified, 30K lines)
+     - dist/             (build output)
+
+   Exclude these? [Y/n/customize]:
+   ```
+
+### Acceptance Tests
+- Survey completes in <5s for repos up to 10K files
+- Minified file detection accuracy >95%
+- Vendor directory detection accuracy 100%
+- Analysis of `viz/assets/` with survey → <500 nodes (vs 4,342)
+
+### Metrics
+- `survey_time_ms`
+- `exclusion_accuracy`
+- `signal_to_noise_ratio = your_code_nodes / total_nodes`
+- `analysis_speedup = time_without_survey / time_with_survey`
+
+### Implementation Phases
+
+| Sub-phase | Deliverable | Complexity |
+|-----------|-------------|------------|
+| 10.1 | Pattern-based exclusions (no AI) | LOW |
+| 10.2 | Minification heuristics | LOW |
+| 10.3 | CLI --exclude flag | LOW |
+| 10.4 | Interactive survey mode | MEDIUM |
+| 10.5 | AI-powered classification | MEDIUM |
+| 10.6 | Auto-survey by default | LOW |
+
+### Why This Matters
+- **Focus**: Analyze YOUR code, not npm's code
+- **Speed**: 10x faster on typical JS/TS projects
+- **Signal**: Clean graphs that show YOUR architecture
+- **UX**: Users don't need to know what to exclude
+
+---
+
 ## Phase 9 — Governance
 
 **Goal:** Keep the theory coherent and implementation evolvable.

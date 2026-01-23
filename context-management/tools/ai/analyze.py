@@ -132,6 +132,13 @@ try:
 except ImportError:
     HAS_ACI = False
 
+# Import Perplexity research for Tier 3 queries
+try:
+    from perplexity_research import research as perplexity_research, auto_save_research
+    HAS_PERPLEXITY = True
+except ImportError:
+    HAS_PERPLEXITY = False
+
 # --- Config & Setup ---
 SETS_CONFIG_PATH = PROJECT_ROOT / "context-management/config/analysis_sets.yaml"
 PROMPTS_CONFIG_PATH = PROJECT_ROOT / "context-management/config/prompts.yaml"
@@ -159,7 +166,9 @@ if PROMPTS_CONFIG_PATH.exists():
     with open(PROMPTS_CONFIG_PATH) as f:
         _prompts_data = yaml.safe_load(f)
         PRICING = _prompts_data.get("pricing", {})
-        DEFAULT_MODEL = _prompts_data.get("default_model", "gemini-2.5-pro")
+        DEFAULT_MODEL = _prompts_data.get("default_model", "gemini-3-pro-preview")
+        FAST_MODEL = _prompts_data.get("fast_model", "gemini-2.0-flash-001")
+        FALLBACK_MODELS = _prompts_data.get("fallback_models", ["gemini-2.5-pro", "gemini-2.0-flash-001"])
         MODES = _prompts_data.get("analysis_prompts", {}).get("modes", {})
         # Prefer "insights_source" for raw file analysis
         INSIGHTS_PROMPT = _prompts_data.get("analysis_prompts", {}).get("insights_source") or _prompts_data.get("analysis_prompts", {}).get("insights")
@@ -167,13 +176,27 @@ if PROMPTS_CONFIG_PATH.exists():
         ROLE_VALIDATION_PROMPT = _prompts_data.get("analysis_prompts", {}).get("role_validation")
         # Plan validation prompt
         PLAN_VALIDATION_PROMPT = _prompts_data.get("analysis_prompts", {}).get("plan_validation")
+        # Backend configuration (vertex or aistudio)
+        _CONFIGURED_BACKEND = _prompts_data.get("backend", "vertex")
+        _VERTEX_PROJECT = _prompts_data.get("vertex_project")  # None = use gcloud config
+        _VERTEX_LOCATION = _prompts_data.get("vertex_location", "us-central1")
 else:
     PRICING = {}
-    DEFAULT_MODEL = "gemini-2.5-pro"
+    DEFAULT_MODEL = "gemini-3-pro-preview"
+    FAST_MODEL = "gemini-2.0-flash-001"
+    FALLBACK_MODELS = ["gemini-2.5-pro", "gemini-2.0-flash-001"]
     MODES = {}
     INSIGHTS_PROMPT = None
     ROLE_VALIDATION_PROMPT = None
     PLAN_VALIDATION_PROMPT = None
+    _CONFIGURED_BACKEND = "vertex"
+    _VERTEX_PROJECT = None
+    _VERTEX_LOCATION = "us-central1"
+
+# Environment variable overrides for backend selection
+# GEMINI_BACKEND=vertex|aistudio overrides config file
+GEMINI_BACKEND_ENV = "GEMINI_BACKEND"
+BACKEND = os.environ.get(GEMINI_BACKEND_ENV, _CONFIGURED_BACKEND).lower()
 
 
 def load_sets_config():
@@ -190,7 +213,7 @@ INTERACTIVE_THRESHOLD = 50_000  # Auto-interactive above this
 # File Search configuration
 # NOTE: File Search requires the Gemini Developer API (ai.google.dev), not Vertex AI
 # Set GEMINI_API_KEY environment variable to use File Search features
-FILE_SEARCH_MODEL = "gemini-2.5-pro"  # File Search requires 2.5+ models
+FILE_SEARCH_MODEL = "gemini-3-pro-preview"  # Upgraded to Gemini 3 Pro (2026-01-23)
 FILE_SEARCH_CHUNK_SIZE = 512  # Tokens per chunk
 FILE_SEARCH_CHUNK_OVERLAP = 50  # Overlap tokens between chunks
 GEMINI_API_KEY_ENV = "GEMINI_API_KEY"  # Environment variable for Developer API key
@@ -913,30 +936,71 @@ def retry_with_backoff(func, max_retries=5, base_delay=1.0):
 
 
 def create_client():
-    """Create authenticated Gemini client."""
-    project_id = get_gcloud_project()
-    if not project_id:
-        print("Error: No gcloud project set.")
-        print("Run: gcloud config set project <YOUR_PROJECT_ID>")
+    """Create Gemini client based on configured backend.
+
+    Backend selection (in order of precedence):
+    1. GEMINI_BACKEND env var (vertex|aistudio)
+    2. Config file (prompts.yaml -> backend)
+    3. Default: aistudio (simpler, just needs API key)
+
+    AI Studio: Requires GEMINI_API_KEY env var
+    Vertex AI: Requires gcloud auth + project
+    """
+    # Check for backend override
+    backend = BACKEND  # Already resolved from env/config
+
+    if backend == "aistudio":
+        # AI Studio (Developer API) - simple API key auth
+        api_key = os.environ.get(GEMINI_API_KEY_ENV)
+        if not api_key:
+            print(f"\n{'='*60}")
+            print("GEMINI API KEY REQUIRED")
+            print(f"{'='*60}")
+            print(f"\nBackend: AI Studio (Developer API)")
+            print(f"Model: {DEFAULT_MODEL}")
+            print()
+            print("Setup:")
+            print("  1. Get API key from: https://aistudio.google.com/apikey")
+            print(f"  2. export {GEMINI_API_KEY_ENV}='your-api-key'")
+            print()
+            print("Or use Vertex AI backend:")
+            print("  export GEMINI_BACKEND=vertex")
+            print(f"{'='*60}\n")
+            sys.exit(1)
+
+        client = genai.Client(api_key=api_key)
+        return client, "aistudio"
+
+    elif backend == "vertex":
+        # Vertex AI - GCP enterprise auth
+        project_id = _VERTEX_PROJECT or get_gcloud_project()
+        if not project_id:
+            print("Error: No gcloud project set.")
+            print("Run: gcloud config set project <YOUR_PROJECT_ID>")
+            print("Or set vertex_project in prompts.yaml")
+            sys.exit(1)
+
+        access_token = get_access_token()
+        if not access_token:
+            print("Error: Could not get access token.")
+            print("Run: gcloud auth application-default login")
+            sys.exit(1)
+
+        from google.oauth2 import credentials as oauth2_credentials
+        creds = oauth2_credentials.Credentials(token=access_token)
+
+        client = genai.Client(
+            vertexai=True,
+            project=project_id,
+            location=_VERTEX_LOCATION,
+            credentials=creds
+        )
+
+        return client, project_id
+
+    else:
+        print(f"Error: Unknown backend '{backend}'. Use 'aistudio' or 'vertex'.")
         sys.exit(1)
-    
-    access_token = get_access_token()
-    if not access_token:
-        print("Error: Could not get access token.")
-        print("Run: gcloud auth login")
-        sys.exit(1)
-    
-    from google.oauth2 import credentials as oauth2_credentials
-    creds = oauth2_credentials.Credentials(token=access_token)
-    
-    client = genai.Client(
-        vertexai=True,
-        project=project_id,
-        location="us-central1",
-        credentials=creds
-    )
-    
-    return client, project_id
 
 
 def create_cache(client, model, context_text, ttl_minutes=60):
@@ -1759,11 +1823,53 @@ Examples:
         # TIER 3: PERPLEXITY - External research
         if decision.tier == Tier.PERPLEXITY:
             print("[PERPLEXITY] External research tier selected.", file=sys.stderr)
-            print("Use the Perplexity MCP server for this query:", file=sys.stderr)
-            print(f"  Query: {args.prompt}", file=sys.stderr)
-            print("\nOr use --tier long_context to search internally.", file=sys.stderr)
-            # Could integrate with Perplexity MCP here in future
-            sys.exit(0)
+            if not HAS_PERPLEXITY:
+                print("Perplexity module not available. Falling back to LONG_CONTEXT.", file=sys.stderr)
+                decision = analyze_and_route(args.prompt, force_tier="long_context")
+            else:
+                start_time = time.time()
+                try:
+                    print(f"[PERPLEXITY] Executing research query...", file=sys.stderr)
+                    result = perplexity_research(args.prompt)
+                    duration_ms = int((time.time() - start_time) * 1000)
+
+                    # Display results
+                    print("\n" + "=" * 60)
+                    print("PERPLEXITY RESEARCH RESULTS")
+                    print("=" * 60)
+                    print(result.get("content", "No content returned"))
+
+                    # Display citations
+                    citations = result.get("citations", [])
+                    if citations:
+                        print("\n" + "-" * 60)
+                        print("CITATIONS:")
+                        for i, cite in enumerate(citations, 1):
+                            print(f"  [{i}] {cite}")
+
+                    # Auto-save
+                    saved_path = auto_save_research(args.prompt, result, result.get("model", "sonar-pro"))
+                    print(f"\n[Auto-saved to: {saved_path}]", file=sys.stderr)
+
+                    # Log to feedback loop if available
+                    if HAS_ACI:
+                        from aci import analyze_query
+                        profile = analyze_query(args.prompt)
+                        usage = result.get("usage", {})
+                        log_aci_query(
+                            profile=profile,
+                            decision=decision,
+                            tokens_input=usage.get("prompt_tokens", 0),
+                            tokens_output=usage.get("completion_tokens", 0),
+                            success=True,
+                            duration_ms=duration_ms
+                        )
+
+                    sys.exit(0)
+                except Exception as e:
+                    print(f"[PERPLEXITY] Error: {e}", file=sys.stderr)
+                    print("Falling back to LONG_CONTEXT tier.", file=sys.stderr)
+                    decision = analyze_and_route(args.prompt, force_tier="long_context")
 
         # TIER 1 & 2: RAG and LONG_CONTEXT - Continue with normal flow
         # Override args.set with ACI-selected sets

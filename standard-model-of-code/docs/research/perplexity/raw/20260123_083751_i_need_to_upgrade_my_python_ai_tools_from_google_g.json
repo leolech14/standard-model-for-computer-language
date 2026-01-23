@@ -1,0 +1,470 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T08:37:51.436347",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "I need to upgrade my Python AI tools from google-genai SDK to Vertex AI with Gemini 3 Pro. Research:\n\n1. What is Gemini 3 Pro? Is it released? What are the model IDs?\n2. Vertex AI Python SDK - latest version and how to use it with Gemini models\n3. Key differences between google-genai SDK and Vertex AI SDK\n4. Authentication methods for Vertex AI (service accounts, ADC)\n5. Code examples for Gemini on Vertex AI with long context (1M+ tokens)\n6. Pricing comparison between direct Gemini API and Vertex AI\n7. Best practices for production Gemini deployments on Vertex AI in 2026\n\nProvide specific Python code examples and model IDs.",
+    "query_length": 631,
+    "checksum": "sha256:96677e9a6167b1294aea4f32898d6385a391ff7f98a6f0d1fb81b471280c45e1"
+  },
+  "response": {
+    "id": "4ad79f2d-76a7-4e79-a59b-1868b8d2221d",
+    "model": "sonar-deep-research",
+    "created": 1769168271,
+    "usage": {
+      "prompt_tokens": 143,
+      "completion_tokens": 7973,
+      "total_tokens": 8116,
+      "citation_tokens": 51394,
+      "num_search_queries": 30,
+      "reasoning_tokens": 338521,
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.064,
+        "citation_tokens_cost": 0.103,
+        "reasoning_tokens_cost": 1.016,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.332
+      }
+    },
+    "citations": [
+      "https://ai.google.dev/gemini-api/docs/deprecations",
+      "https://dev.to/polar3130/differences-in-response-models-between-the-vertex-ai-sdk-and-the-gen-ai-sdk-4m49",
+      "https://docs.cloud.google.com/python/docs/reference/vertexai/latest",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/sdks/overview",
+      "https://cloud.google.com/vertex-ai",
+      "https://docs.cloud.google.com/vertex-ai/docs/authentication",
+      "https://ai.google.dev/gemini-api/docs/long-context",
+      "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "https://github.com/google/adk-python/issues/718",
+      "https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/long-context/intro_long_context.ipynb",
+      "https://ai.google.dev/gemini-api/docs/migrate-to-cloud",
+      "https://ai.google.dev/gemini-api/docs/long-context",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/deploy/overview",
+      "https://ai.google.dev/gemini-api/docs/migrate",
+      "https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/long-context/intro_long_context.ipynb",
+      "https://cloud.google.com/resources/content/ai-agent-trends-2026",
+      "https://forum.langchain.com/t/upgrade-google-generative-ai-sdk-integration-from-google-generative-ai-to-google-genai/2110",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-use",
+      "https://metana.io/blog/gemini-3-vs-gemini-2-5/",
+      "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "https://ai.google.dev/gemini-api/docs/caching",
+      "https://vertu.com/lifestyle/gemini-2-5-pro-vs-gemini-3-0-why-the-older-model-is-outperforming-the-newest-flagship/",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview",
+      "https://github.com/googleapis/python-genai",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking",
+      "https://www.freecodecamp.org/news/how-to-reduce-latency-in-your-generative-ai-apps-with-gemini-and-cloud-run/",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/sdks/overview",
+      "https://ai.google.dev/gemini-api/docs/thinking",
+      "https://news.ycombinator.com/item?id=44377931",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro",
+      "https://docs.cloud.google.com/vertex-ai/docs/general/custom-service-account",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/document-understanding",
+      "https://ai.google.dev/gemini-api/docs/models",
+      "https://github.com/google/adk-python/discussions/396",
+      "https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/use-cases/document-processing/document_processing.ipynb",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro",
+      "https://cloud.google.com/blog/topics/developers-practitioners/gemini-live-api-real-time-ai-for-manufacturing",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas",
+      "https://cloud.google.com/blog/products/ai-machine-learning/gemini-3-is-available-for-enterprise",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/live-api/best-practices",
+      "https://ai.google.dev/gemini-api/docs/rate-limits",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/samples/generativeaionvertexai-gemini-chat-completions-streaming",
+      "https://docs.cloud.google.com/vertex-ai/docs/pipelines/configure-retries",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/function-calling",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/samples/googlegenaisdk-textgen-with-txt-stream",
+      "https://firebase.google.com/docs/ai-logic/faq-and-troubleshooting",
+      "https://ai.google.dev/gemini-api/docs/function-calling",
+      "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/deprecations",
+      "https://firebase.google.com/docs/ai-logic/chat",
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://github.com/langchain4j/langchain4j/discussions/3383",
+      "https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-gemini-multiturn-chat-nonstreaming",
+      "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/migrate/openai/overview",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/batch-prediction-gemini",
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/migrate/openai/examples",
+      "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/batch-prediction-api"
+    ],
+    "search_results": [
+      {
+        "title": "Gemini deprecations | Gemini API - Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/deprecations",
+        "snippet": "Preview models ; gemini-3-pro-preview, November 18, 2025, No shutdown date announced ; gemini-3-pro-image-preview, November 20, 2025, No shutdown date announced.",
+        "source": "web"
+      },
+      {
+        "title": "Differences in Response Models between the Vertex AI SDK and the ...",
+        "url": "https://dev.to/polar3130/differences-in-response-models-between-the-vertex-ai-sdk-and-the-gen-ai-sdk-4m49",
+        "snippet": "Both the Vertex AI SDK and the Gen AI SDK can call the Gemini API in Vertex AI, but their usage patterns differ slightly. Below are minimal ...",
+        "source": "web"
+      },
+      {
+        "title": "Vertex Generative AI SDK for Python - Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/python/docs/reference/vertexai/latest",
+        "snippet": "The Gen AI Modules in the Vertex SDK help developers use Google's generative AI Gemini models to build AI-powered features and applications in Vertex.",
+        "source": "web"
+      },
+      {
+        "title": "Gemini 3 Pro | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro",
+        "snippet": "Gemini 3 Pro models aren't designed around prioritizing supporting audio ... Release date: November 18, 2025. Security controls. Online prediction. Data ...",
+        "source": "web"
+      },
+      {
+        "title": "Google Gen AI SDK | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/sdks/overview",
+        "snippet": "To learn more about the differences between the Gemini Developer API and Gemini on Vertex AI, see Migrate from the Gemini Developer API to the Gemini API in ...",
+        "source": "web"
+      },
+      {
+        "title": "Vertex AI Platform | Google Cloud",
+        "url": "https://cloud.google.com/vertex-ai",
+        "snippet": "Vertex AI offers access to the latest Gemini models from Google, including Gemini 3. ... Train a model using Vertex AI and the Python SDK · Learn to build and ...",
+        "source": "web"
+      },
+      {
+        "title": "Authenticate to Vertex AI | Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/docs/authentication",
+        "snippet": "To set up a local ADC file with service account impersonation, use the --impersonate-service-account flag with the gcloud auth application-default login command ...",
+        "source": "web"
+      },
+      {
+        "title": "Long context | Gemini API - Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/long-context",
+        "snippet": "This document gives you an overview of what you can achieve using models with context windows of 1M and more tokens.",
+        "source": "web"
+      },
+      {
+        "title": "Vertex AI Pricing | Google Cloud",
+        "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "snippet": "Discover flexible pricing for training, deployment, and prediction for Generative AI models with Vertex AI. Build and scale intelligent applications ...",
+        "source": "web"
+      },
+      {
+        "title": "ADK 0.5.0: LlmAgent with Gemini model fails Vertex AI ADC ... - GitHub",
+        "url": "https://github.com/google/adk-python/issues/718",
+        "snippet": "The problem prevents the use of Gemini models via Vertex AI with service account authentication for LlmAgent in this ADK version. To ...",
+        "source": "web"
+      },
+      {
+        "title": "generative-ai/gemini/long-context/intro_long_context.ipynb at main",
+        "url": "https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/long-context/intro_long_context.ipynb",
+        "snippet": "Gemini 2.0 Flash comes standard with a 1 million token context window, and Gemini 2.0 comes with a 2 million token context window. Historically, large ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini Developer API v.s. Vertex AI",
+        "url": "https://ai.google.dev/gemini-api/docs/migrate-to-cloud",
+        "snippet": "When developing generative AI solutions with Gemini, Google offers two API products: the Gemini Developer API and the Vertex AI Gemini API.",
+        "source": "web"
+      },
+      {
+        "title": "Long context | Gemini API - Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/long-context",
+        "snippet": "Gemini is the first model capable of accepting 1 million tokens. In practice, 1 million tokens would look like: 50,000 lines of code (with the standard 80 ...",
+        "source": "web"
+      },
+      {
+        "title": "Deploy generative AI models - Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/deploy/overview",
+        "snippet": "Deploy button: Most of the generative models in the Model Garden have a Deploy button that walks you through deploying to Vertex AI. If you don't see a Deploy ...",
+        "source": "web"
+      },
+      {
+        "title": "Migrate to the Google GenAI SDK | Gemini API",
+        "url": "https://ai.google.dev/gemini-api/docs/migrate",
+        "snippet": "This guide provides before-and-after examples of migrated code to help you get started. Note: The Go examples omit imports and other boilerplate code to improve ...",
+        "source": "web"
+      },
+      {
+        "title": "generative-ai/gemini/long-context/intro_long_context.ipynb at main",
+        "url": "https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/long-context/intro_long_context.ipynb",
+        "snippet": "In practice, 1 million tokens would look like: 50,000 lines of code (with the standard 80 characters per line); All the text messages you have sent in the last ...",
+        "source": "web"
+      },
+      {
+        "title": "AI agent trends 2026 report | Google Cloud",
+        "url": "https://cloud.google.com/resources/content/ai-agent-trends-2026",
+        "snippet": "Our new report reveals the 5 top trends in agentic AI that can help transform businesses, for 2026 and beyond. Download your copy.",
+        "source": "web"
+      },
+      {
+        "title": "Upgrade Google Generative AI SDK integration from ...",
+        "url": "https://forum.langchain.com/t/upgrade-google-generative-ai-sdk-integration-from-google-generative-ai-to-google-genai/2110",
+        "snippet": "Change the dependency to @google/genai (for JavaScript/TypeScript). Update documentation, examples, and plugin code to reference the new SDK ...",
+        "source": "web"
+      },
+      {
+        "title": "Use a context cache | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-use",
+        "snippet": "You can use REST APIs or the Python SDK to reference content stored in a context cache in a generative AI application. Before it can be used, you must first ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini 3 vs. Gemini 2.5: What are the Main Differences - Metana",
+        "url": "https://metana.io/blog/gemini-3-vs-gemini-2-5/",
+        "snippet": "Gemini 3 improves coding accuracy by 35 percent and solves far more real GitHub issues than Gemini 2.5 Pro. Multimodal abilities are ...",
+        "source": "web"
+      },
+      {
+        "title": "Vertex AI Pricing | Google Cloud",
+        "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "snippet": "Discover flexible pricing for training, deployment, and prediction for Generative AI models with Vertex AI. Build and scale intelligent applications ...",
+        "source": "web"
+      },
+      {
+        "title": "Context caching | Gemini API | Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/caching",
+        "snippet": "Using the Gemini API explicit caching feature, you can pass some content to the model once, cache the input tokens, and then refer to the cached tokens for ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini 2.5 Pro vs 3.0: Is Newer Always Better? - Vertu",
+        "url": "https://vertu.com/lifestyle/gemini-2-5-pro-vs-gemini-3-0-why-the-older-model-is-outperforming-the-newest-flagship/",
+        "snippet": "Discover why Gemini 2.5 Pro outperforms Gemini 3.0 in logical reasoning, coding precision, and instruction following.",
+        "source": "web"
+      },
+      {
+        "title": "Provisioned Throughput overview | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview",
+        "snippet": "You want deterministic generative AI costs by paying a fixed monthly or weekly price with control of overages. Provisioned Throughput is one of two ways to ...",
+        "source": "web"
+      },
+      {
+        "title": "Google Gen AI Python SDK provides an interface for ... - GitHub",
+        "url": "https://github.com/googleapis/python-genai",
+        "snippet": "Google Gen AI Python SDK provides an interface for developers to integrate Google's generative models into their Python applications.",
+        "source": "web"
+      },
+      {
+        "title": "Thinking | Generative AI on Vertex AI - Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking",
+        "snippet": "The thinking process is enabled by default. When you use Vertex AI Studio, you can view the full thinking process together with the model's generated response.",
+        "source": "web"
+      },
+      {
+        "title": "How to Reduce Latency in Your Generative AI Apps with Gemini and ...",
+        "url": "https://www.freecodecamp.org/news/how-to-reduce-latency-in-your-generative-ai-apps-with-gemini-and-cloud-run/",
+        "snippet": "The script uses Vertex AI and the high-performance Gemini 2.5 Flash generative model. This core logic of the application is a simple Flask ...",
+        "source": "web"
+      },
+      {
+        "title": "Google Gen AI SDK | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/sdks/overview",
+        "snippet": "The Google Gen AI SDK for Python is available on PyPI and GitHub: google-genai on PyPI · python-genai on GitHub. To learn more, see the Python SDK reference.",
+        "source": "web"
+      },
+      {
+        "title": "Gemini thinking | Gemini API - Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/thinking",
+        "snippet": "Gemini models engage in dynamic thinking by default, automatically adjusting the amount of reasoning effort based on the complexity of the user's request.",
+        "source": "web"
+      },
+      {
+        "title": "It took me a while but I think the difference between Vertex and ...",
+        "url": "https://news.ycombinator.com/item?id=44377931",
+        "snippet": "Gemini is “just” an LLM. The other difference is that reliability for the gemini api is garbage, whereas for vertex ai it is fantastic.",
+        "source": "web"
+      },
+      {
+        "title": "Gemini 3 Pro | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro",
+        "snippet": "Gemini 3 Pro is our most advanced reasoning Gemini model, capable of solving complex problems. Gemini 3 Pro can comprehend vast datasets and challenging ...",
+        "source": "web"
+      },
+      {
+        "title": "Use a custom service account | Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/docs/general/custom-service-account",
+        "snippet": "This guide describes how to configure Vertex AI to use a custom service account in the following scenarios: When you perform custom training, ...",
+        "source": "web"
+      },
+      {
+        "title": "Document understanding | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/document-understanding",
+        "snippet": "This page shows you how to add PDFs to your requests to Gemini in Vertex AI by using the Google Cloud console and the Vertex AI API.",
+        "source": "web"
+      },
+      {
+        "title": "Gemini models | Gemini API - Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/models",
+        "snippet": "Gemini 3 Pro. The best model in the world for multimodal understanding, and our most powerful agentic and vibe-coding model yet, delivering richer visuals ...",
+        "source": "web"
+      },
+      {
+        "title": "Support Service Account Authentication for Vertex AI Without gcloud ...",
+        "url": "https://github.com/google/adk-python/discussions/396",
+        "snippet": "My current approach (outside of ADK) is to create a Google service account and use the following Python code: credentials = Credentials ...",
+        "source": "web"
+      },
+      {
+        "title": "Document Processing with Gemini - generative-ai - GitHub",
+        "url": "https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/use-cases/document-processing/document_processing.ipynb",
+        "snippet": "In this tutorial, you will learn how to use the Gemini API in Vertex AI with the Google Gen AI SDK for Python to process PDF documents. You will complete ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini 3 Pro | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro",
+        "snippet": "Knowledge cutoff date, January 2025. Versions. gemini-3-pro-preview. Launch stage: Public preview; Release date: November 18, 2025. Security controls. Online ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini Live API: Real-time AI for Manufacturing | Google Cloud Blog",
+        "url": "https://cloud.google.com/blog/topics/developers-practitioners/gemini-live-api-real-time-ai-for-manufacturing",
+        "snippet": "This tutorial will show you how to leverage the Gemini API to build an automated quality inspection system that overcomes the common ...",
+        "source": "web"
+      },
+      {
+        "title": "Generative AI on Vertex AI quotas and system limits",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas",
+        "snippet": "There are no predefined quota limits on batch inference for Gemini models. Instead, the batch service provides access to a large, shared pool of resources, ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini 3 is available for enterprise | Google Cloud Blog",
+        "url": "https://cloud.google.com/blog/products/ai-machine-learning/gemini-3-is-available-for-enterprise",
+        "snippet": "For developers: You can start building with Gemini 3 Pro in preview on Vertex AI today. Gemini 3 is also available in Google Antigravity, ...",
+        "source": "web"
+      },
+      {
+        "title": "Best practices with Gemini Live API | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/live-api/best-practices",
+        "snippet": "To get the best performance out of Gemini Live API, we recommend having a clearly-defined set of system instructions (SIs) that defines the agent persona, ...",
+        "source": "web"
+      },
+      {
+        "title": "Rate limits | Gemini API - Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "snippet": "Rate limits regulate the number of requests you can make to the Gemini API within a given timeframe. These limits help maintain fair usage, protect against ...",
+        "source": "web"
+      },
+      {
+        "title": "Generate streaming text by using Gemini and the Chat Completions ...",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/samples/generativeaionvertexai-gemini-chat-completions-streaming",
+        "snippet": "Generate streaming text by using the Chat Completions API, which lets you send requests to Vertex AI models by using the OpenAI libraries.",
+        "source": "web"
+      },
+      {
+        "title": "Configure retries for a pipeline task | Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/docs/pipelines/configure-retries",
+        "snippet": "Learn how to configure retry policies in Vertex AI Pipelines to handle pipeline task failures in Vertex AI Pipelines.",
+        "source": "web"
+      },
+      {
+        "title": "Introduction to function calling | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/function-calling",
+        "snippet": "Function calling, also known as tool use, provides the LLM with definitions of external tools (for example, a get_current_weather function).",
+        "source": "web"
+      },
+      {
+        "title": "Generate streaming text content with Generative Model",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/samples/googlegenaisdk-textgen-with-txt-stream",
+        "snippet": "Generate content with the Gemini API in Vertex AI. Code sample. Go Java Node.js Python More. Before trying this sample, follow the Go setup instructions in the ...",
+        "source": "web"
+      },
+      {
+        "title": "FAQ and troubleshooting | Firebase AI Logic - Google",
+        "url": "https://firebase.google.com/docs/ai-logic/faq-and-troubleshooting",
+        "snippet": "This page provides answers to frequently asked questions (FAQs) and troubleshooting information about the Gemini API and the Firebase AI Logic SDKs.",
+        "source": "web"
+      },
+      {
+        "title": "Function calling with the Gemini API | Google AI for Developers",
+        "url": "https://ai.google.dev/gemini-api/docs/function-calling",
+        "snippet": "Function calling modes; Automatic function calling (Python only). Automatic function schema declaration. Multi-tool use: Combine native tools with function ...",
+        "source": "web"
+      },
+      {
+        "title": "Vertex AI Pricing | Google Cloud",
+        "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "snippet": "Discover flexible pricing for training, deployment, and prediction for Generative AI models with Vertex AI. Build and scale intelligent applications ...",
+        "source": "web"
+      },
+      {
+        "title": "Generative AI on Vertex AI deprecations",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/deprecations",
+        "snippet": "The Generative AI module will be removed on June 24, 2026. For information about migrating to the Google Gen AI SDK, see Vertex AI SDK migration guide. Imagen ...",
+        "source": "web"
+      },
+      {
+        "title": "Build multi-turn conversations (chat) using the Gemini API - Firebase",
+        "url": "https://firebase.google.com/docs/ai-logic/chat",
+        "snippet": "Using the Gemini API, you can build freeform conversations across multiple turns. The Firebase AI Logic SDK simplifies the process by managing the state of the ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini Developer API pricing",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "snippet": "Preview models may change before becoming stable and have more restrictive rate limits. Image input is set at 560 tokens or $0.0011 per image.",
+        "source": "web"
+      },
+      {
+        "title": "Switching VertexAI Gemini to use Google Gen AI library ... - GitHub",
+        "url": "https://github.com/langchain4j/langchain4j/discussions/3383",
+        "snippet": "The Generative AI module in the Vertex AI SDK is deprecated and will no longer be available after June 24, 2026. The Google Gen AI SDK contains all the ...",
+        "source": "web"
+      },
+      {
+        "title": "Create a multi-turn non-streaming conversation with Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-gemini-multiturn-chat-nonstreaming",
+        "snippet": "Sample demonstrating how to set-up the Vertex AI SDK and create a non-streaming conversation with three consecutive messages sent to the model.",
+        "source": "web"
+      },
+      {
+        "title": "Vertex AI Pricing | Google Cloud",
+        "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "snippet": "Gemini 3 Pro Preview. Input (text, image, video, audio), $2 ; Gemini 3 Pro Preview · Text output (response and reasoning), $12 ; Gemini 3 Pro Preview · Image Output ...",
+        "source": "web"
+      },
+      {
+        "title": "Using OpenAI libraries with Vertex AI - Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/migrate/openai/overview",
+        "snippet": "The Chat Completions API works as an Open AI-compatible endpoint, designed to make it easier to interface with Gemini on Vertex AI by using the OpenAI ...",
+        "source": "web"
+      },
+      {
+        "title": "Batch inference with Gemini - Vertex AI - Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/batch-prediction-gemini",
+        "snippet": "Processing Time: Batch jobs are processed asynchronously and are not designed for real-time applications. Most jobs complete within 24 hours after it starts ...",
+        "source": "web"
+      },
+      {
+        "title": "Gemini Developer API pricing",
+        "url": "https://ai.google.dev/gemini-api/docs/pricing",
+        "snippet": "Image input is set at 560 tokens or $0.0011 per image. Image output is priced at $120 per 1,000,000 tokens.",
+        "source": "web"
+      },
+      {
+        "title": "Examples | Generative AI on Vertex AI - Google Cloud Documentation",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/migrate/openai/examples",
+        "snippet": "To see an example of using the Chat Completions API, run the \"Call Gemini with the OpenAI Library\" notebook in one of the following environments: Open in ...",
+        "source": "web"
+      },
+      {
+        "title": "Get batch predictions for Gemini | Generative AI on Vertex AI",
+        "url": "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/batch-prediction-api",
+        "snippet": "Batch predictions let you send a large number of multimodal prompts in a single batch request. For more information about the batch workflow and how to ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Upgrading Python AI Tools: Migration to Vertex AI with Gemini 3 Pro in 2026\n\n**Gemini 3 Pro represents a significant leap forward in Google's generative AI capabilities, now available in preview on Vertex AI as of November 2025 with model ID `gemini-3-pro-preview`[1][4]. This comprehensive report addresses the critical transition from the google-genai SDK to Vertex AI's latest infrastructure, providing developers with specific guidance on authentication methods, SDK selection, code migration patterns, and production deployment strategies. With the Vertex AI SDK's generative AI modules scheduled for removal on June 24, 2026[3][50], understanding the modern SDK landscape and leveraging Gemini 3 Pro's advanced reasoning capabilities at scale represents an essential modernization effort for any production Python-based AI application.**\n\n## Understanding Gemini 3 Pro and Its Availability\n\nGemini 3 Pro emerged as Google's most advanced reasoning model, released into public preview on November 18, 2025[1][4]. The model fundamentally restructures how developers approach complex problem-solving in AI applications, introducing capabilities that exceed its predecessor Gemini 2.5 Pro in several critical dimensions. The primary model identifier for Gemini 3 Pro on Vertex AI is `gemini-3-pro-preview`, with a specialized image-focused variant `gemini-3-pro-image-preview` released November 20, 2025[1]. These preview models currently have no announced shutdown date, indicating Google's commitment to maintaining their availability as the platform matures[1].\n\nThe architectural capabilities of Gemini 3 Pro reflect substantial improvements in high-level reasoning, complex instruction following, tool use, and agentic use cases[4][31]. When developers migrate from Gemini 2.5 Pro to Gemini 3 Pro, they encounter a model specifically engineered for efficiency and action, trained to provide concise, direct answers and to attempt solving user intent as quickly as possible[4]. A critical distinction from previous versions involves the model's design philosophy: Gemini 3 Pro prioritizes being helpful, which occasionally means the model may guess when information is missing or prioritize a satisfying answer over strict adherence to instructions—behavior that developers can mitigate or modify through careful prompting strategies[4][31].\n\nThe technical specifications of Gemini 3 Pro showcase its readiness for enterprise deployment. The model maintains a 1 million token context window, providing developers the ability to process vast datasets including text, audio, images, video, PDFs, and even entire code repositories[4][31]. Knowledge cutoff for the preview model is January 2025, with maximum output tokens set at 65,536 characters[4]. The model performs particularly well on reasoning tasks—on Humanity's Last Exam it achieved 37.5% accuracy compared to Gemini 2.5 Pro's 21.6%, and on ARC-AGI-2 abstract reasoning tests it reached 31.1% versus 2.5 Pro's 4.9%[20]. For developers working with code, Gemini 3 Pro demonstrates 35% higher accuracy in real development environments compared to version 2.5[20].\n\nMultimodal capabilities represent another area of significant advancement. Gemini 3 Pro exhibits substantially improved understanding of images, videos, and cross-modal reasoning[20]. The model handles low-quality images more effectively and understands video context with greater accuracy than previous versions[20]. However, developers should note that Gemini 3 Pro models are not specifically designed for audio understanding or image segmentation use cases—specialized models exist for these needs[4][31]. Information-dense or complicated graphs, tables, and charts occasionally cause the model to incorrectly extract information or misinterpret resources, a limitation addressed through presenting key information in straightforward manner[4][31].\n\n## Vertex AI Platform Architecture and SDK Landscape\n\nThe Vertex AI ecosystem represents Google's comprehensive, unified AI development platform, providing managed APIs, enterprise-ready features, and deep integration with Google Cloud infrastructure[6]. As a platform, Vertex AI encompasses far more than just Gemini models—it includes training capabilities, model tuning, deployment infrastructure, and advanced MLOps tooling[6]. Within this broader ecosystem, the Gemini API on Vertex AI functions as a managed API, meaning models like Gemini 3 Pro are immediately accessible without requiring custom deployment[14].\n\nUnderstanding the SDK landscape is crucial for modern Python development. Google currently maintains multiple SDK options, each with distinct purposes and deprecation timelines[2][3][5]. The **Google AI Python SDK** (`google-generativeai`) targets exclusively the Gemini Developer API and does not work with Vertex AI[2]. Importantly, this SDK is now deprecated and scheduled for end-of-life at August 2025[2][18]. The **Vertex AI SDK** (`google-cloud-aiplatform`) is dedicated to Vertex AI and provided comprehensive generative AI support through its generative models module, but that module became deprecated on June 24, 2025 and will be removed entirely on June 24, 2026[3][50].\n\nThe forward-looking solution is the **Google Gen AI SDK** (`google-genai`), which emerged as the unified approach supporting both the Gemini Developer API and the Vertex AI Gemini API through a single codebase[2][5][25]. This SDK represents Google's strategic direction and is the recommended option for all new development[2][25]. Installation is straightforward via pip:\n\n```python\npip install google-genai\n```\n\nThe Gen AI SDK handles authentication differently depending on the backend. For the Gemini Developer API, it uses API key authentication. For Vertex AI, it integrates with Google Cloud's identity and access management systems[25]. This dual capability eliminates the need to maintain separate code paths, significantly streamlining development workflows.\n\nThe deprecation timeline creates urgency for teams still using older SDKs. The Generative AI module in the Vertex AI SDK (`vertexai.generative_models`, `vertexai.language_models`, `vertexai.vision_models`, and related modules) will cease to exist on June 24, 2026[3][50]. Any production applications relying on these modules must complete migration to the Gen AI SDK before this deadline. Teams should begin assessment and planning immediately to ensure sufficient runway for thorough testing and validation.\n\n## SDK Comparison: Google Gen AI SDK vs Vertex AI SDK\n\nThe architectural differences between the Gen AI SDK and the legacy Vertex AI SDK go deeper than mere naming conventions. Both can call the Gemini API in Vertex AI, but their usage patterns and response models differ in important ways that affect application architecture[2]. Understanding these distinctions is essential for making informed decisions during migration.\n\nThe **Vertex AI SDK** (`google-cloud-aiplatform`) returns response objects using the `GenerationResponse` class[2]. This class bundles generated content with rich metadata about the generation process. The SDK integrates deeply with Vertex AI's broader infrastructure, making it natural for applications already using Vertex AI for training, tuning, or other ML operations[2][3]. Example code using the Vertex AI SDK follows this pattern:\n\n```python\nimport vertexai\nfrom vertexai.generative_models import GenerativeModel\n\nPROJECT_ID = \"your-project-id\"\nREGION = \"us-central1\"\n\nvertexai.init(project=PROJECT_ID, location=REGION)\n\nmodel = GenerativeModel(\"gemini-2.0-flash\")\nprompt = \"What is the capital of Japan?\"\nresponse = model.generate_content(prompt)\n\nprint(response.text)  # -> Tokyo is the capital of Japan.\n```\n\nThe **Google Gen AI SDK** (`google-genai`) returns response objects as Pydantic-based `GenerateContentResponse` instances[2]. While both SDKs provide the response text through a `.text` property, the underlying response object structure differs. The Gen AI SDK surfaces more generation-time metadata than the Vertex AI SDK[2]. When migrating between SDKs, developers must be aware that calling `to_dict()` on a `GenerateContentResponse` produces an error—the proper method is `model_dump(mode='json')`[2]. Equivalent code using the Gen AI SDK appears as:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"your-project-id\",\n    location=\"us-central1\"\n)\n\nresponse = client.models.generate_content(\n    model=\"gemini-2.0-flash\",\n    contents=\"What is the capital of Japan?\"\n)\n\nprint(response.text)  # -> Tokyo is the capital of Japan.\n```\n\nThe key architectural advantage of the Gen AI SDK is its unified approach. A single client can switch between Gemini Developer API and Vertex AI backends by adjusting initialization parameters, eliminating the cognitive load of managing separate SDK codebases[2][12][25]. For applications that might integrate multiple Google AI services or require flexibility in deployment options, this unified SDK represents a substantial operational simplification.\n\nResponse serialization behaviors illustrate the importance of understanding SDK differences. To dump full response metadata to JSON using the Gen AI SDK, the correct pattern is:\n\n```python\nfrom google import genai\nimport json\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"your-project-id\",\n    location=\"us-central1\"\n)\n\nresponse = client.models.generate_content(\n    model=\"gemini-2.0-flash\",\n    contents=\"What is the capital of Japan?\"\n)\n\nprint(json.dumps(response.model_dump(mode='json'), indent=2, ensure_ascii=False))\n```\n\nThis serialization approach enables introspection of intermediate artifacts and detailed analysis of model reasoning, valuable for production monitoring and debugging[2].\n\n## Authentication and Credential Management for Vertex AI\n\nSuccessful deployment of AI applications on Vertex AI fundamentally depends on proper authentication configuration. Google Cloud employs Identity and Access Management (IAM) for authorization, and Vertex AI supports multiple authentication methods suitable for different deployment contexts[7]. Understanding these authentication approaches is essential for both local development and production deployment.\n\n**Application Default Credentials (ADC)** represents the preferred authentication method for Vertex AI applications[7]. ADC automatically detects credentials based on the execution environment, eliminating the need to manually manage credentials in application code. When developing locally, ADC first looks for a `GOOGLE_APPLICATION_CREDENTIALS` environment variable pointing to a service account JSON file. If this variable is not set, ADC checks for user credentials obtained through `gcloud auth application-default login`[7].\n\nFor local development environments, setting up ADC requires running a single command:\n\n```bash\ngcloud auth application-default login\n```\n\nThis command opens a sign-in screen, and after authentication, credentials are stored in the local credential file used by ADC[7]. Applications can then create Vertex AI clients without explicitly passing credentials:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"your-project-id\",\n    location=\"us-central1\"\n)\n```\n\nFor production deployments, especially in containerized environments like Cloud Run or Kubernetes, the authentication approach shifts to service accounts. A **service account** is a special Google Cloud identity designed for applications rather than users[7][32]. Service accounts have associated IAM roles that grant specific permissions for accessing Google Cloud resources. Creating a service account involves:\n\n```bash\ngcloud iam service-accounts create my-genai-service-account\n```\n\nOnce created, the service account must be granted appropriate IAM roles. For basic Vertex AI usage with Gemini models, the `roles/aiplatform.user` role provides sufficient permissions:\n\n```bash\ngcloud projects add-iam-policy-binding PROJECT_ID \\\n    --member=serviceAccount:my-genai-service-account@PROJECT_ID.iam.gserviceaccount.com \\\n    --role=roles/aiplatform.user\n```\n\nWhen deploying on Google Cloud infrastructure like Cloud Run, the simplest approach involves attaching the service account to the running container[7][32]. Cloud Run automatically provides credentials through the environment, making ADC discover them without explicit configuration. This approach avoids storing sensitive JSON files in container images—a critical security best practice.\n\nFor deployment in non-Google Cloud environments or when explicit service account impersonation is needed, create a service account key:\n\n```bash\ngcloud iam service-accounts keys create key.json \\\n    --iam-account=my-genai-service-account@PROJECT_ID.iam.gserviceaccount.com\n```\n\nThe resulting `key.json` file is then referenced through the `GOOGLE_APPLICATION_CREDENTIALS` environment variable:\n\n```bash\nexport GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json\n```\n\nApplications authenticate automatically when this environment variable is set:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"your-project-id\",\n    location=\"us-central1\"\n)\n# Credentials are automatically loaded from GOOGLE_APPLICATION_CREDENTIALS\n```\n\nFor containerized deployments where storing the JSON file in the image is undesirable, Google Cloud offers the `GOOGLE_APPLICATION_CREDENTIALS` environment variable approach with credentials supplied through secret management systems[35]. Configuration center systems can deliver credential content at runtime, avoiding static credential storage in container images.\n\nEnvironment variable configuration for the Gen AI SDK provides another layer of flexibility[25]. Rather than passing parameters to the client constructor, developers can set environment variables:\n\n```bash\nexport GOOGLE_GENAI_USE_VERTEXAI=true\nexport GOOGLE_CLOUD_PROJECT=\"your-project-id\"\nexport GOOGLE_CLOUD_LOCATION=\"us-central1\"\n```\n\nWith these variables set, the client can be instantiated without arguments:\n\n```python\nfrom google import genai\n\nclient = genai.Client()  # Automatically uses Vertex AI with environment variables\n```\n\nThis pattern is particularly valuable for containerized deployments where configuration is typically managed through environment variables rather than code parameters[25].\n\n## Code Migration: From Deprecation to Modern Implementation\n\nMigrating from deprecated SDKs to the Google Gen AI SDK requires systematic assessment and careful execution. The migration is generally straightforward for basic text generation use cases but requires attention to detail for advanced features like function calling, caching, and streaming.\n\nFor simple text generation, the conceptual mapping is direct. Legacy Vertex AI SDK code:\n\n```python\nimport vertexai\nfrom vertexai.generative_models import GenerativeModel\n\nvertexai.init(project=\"my-project\", location=\"us-central1\")\nmodel = GenerativeModel(\"gemini-3-pro-preview\")\nresponse = model.generate_content(\"Explain quantum computing\")\nprint(response.text)\n```\n\nBecomes with the Gen AI SDK:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Explain quantum computing\"\n)\n\nprint(response.text)\n```\n\nThe migration for streaming responses follows a similar pattern. Legacy streaming code:\n\n```python\nimport vertexai\nfrom vertexai.generative_models import GenerativeModel\n\nvertexai.init(project=\"my-project\", location=\"us-central1\")\nmodel = GenerativeModel(\"gemini-3-pro-preview\")\nresponse = model.generate_content(\"Write a story\", stream=True)\n\nfor chunk in response:\n    print(chunk.text, end=\"\", flush=True)\n```\n\nBecomes:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\nfor chunk in client.models.generate_content_stream(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Write a story\"\n):\n    print(chunk.text, end=\"\", flush=True)\n```\n\nFor more advanced patterns involving function calling, the migration requires careful attention to the new parameter structure. With Gemini 3 Pro's enhanced tool use capabilities, function calling becomes more critical for building agentic systems. Legacy function calling using the Vertex AI SDK involved declaring functions through a `Tool` object:\n\n```python\nimport vertexai\nfrom vertexai.generative_models import GenerativeModel, Tool, FunctionDeclaration\n\ndef get_weather(location: str) -> str:\n    return f\"Sunny in {location}\"\n\nvertexai.init(project=\"my-project\", location=\"us-central1\")\n\nweather_func = FunctionDeclaration(\n    name=\"get_weather\",\n    description=\"Gets weather for a location\",\n    parameters={\n        \"type\": \"object\",\n        \"properties\": {\n            \"location\": {\"type\": \"string\"}\n        },\n        \"required\": [\"location\"]\n    }\n)\n\ntool = Tool(function_declarations=[weather_func])\nmodel = GenerativeModel(\"gemini-3-pro-preview\", tools=[tool])\n\nresponse = model.generate_content(\"What's the weather in Boston?\")\nprint(response.candidates[0].content.parts[0].function_call.name)\n```\n\nThe Gen AI SDK simplifies this through automatic function support. The SDK can accept Python functions directly and automatically convert them to declarations:\n\n```python\nfrom google import genai\nfrom google.genai.types import GenerateContentConfig\n\ndef get_weather(location: str) -> str:\n    \"\"\"Gets the current weather for a location.\"\"\"\n    return f\"Sunny in {location}\"\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"What's the weather in Boston?\",\n    config=GenerateContentConfig(tools=[get_weather])\n)\n\nprint(response.text)\n```\n\nThe Gen AI SDK handles the complete function calling cycle automatically—detecting function call responses, executing the corresponding Python function, and returning the final text response[25]. This automation substantially reduces boilerplate code and decreases the likelihood of implementation errors.\n\n## Advanced Features: Leveraging Gemini 3 Pro's Capabilities at Scale\n\nGemini 3 Pro's most distinctive capabilities lie in its advanced reasoning and tool use, complemented by efficient handling of massive context windows. Modern Python applications can leverage these capabilities through specific Gen AI SDK features designed for production scenarios.\n\n### Extended Context Windows and Long-Context Processing\n\nThe 1 million token context window fundamentally changes how applications approach data processing[8][13]. To put this in perspective, 1 million tokens represents approximately 50,000 lines of code, 8 average-length English novels, or transcripts of over 200 podcast episodes[8][13]. This capacity eliminates many traditional limitations that previously required complex retrieval-augmented generation (RAG) architectures or sliding window techniques[8][13].\n\nApplications can now process entire documents, codebases, or datasets in a single request:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n# Load a large PDF or document\nwith open(\"large_document.pdf\", \"rb\") as f:\n    document_content = f.read()\n\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=[\n        \"Analyze this document and identify key risks:\",\n        {\n            \"file_data\": {\n                \"mime_type\": \"application/pdf\",\n                \"data\": document_content\n            }\n        }\n    ]\n)\n\nprint(response.text)\n```\n\nHowever, extended context introduces new considerations around cost and latency. While Gemini 3 Pro is highly capable of extracting information with up to 99% accuracy from large contexts, the model's latency increases with input size—developers face inherent tradeoffs between information retrieval accuracy and request latency[8][13].\n\n**Context caching** emerges as the critical optimization for applications repeatedly processing the same large corpus[22]. Rather than transmitting identical tokens with each request, caching stores cached tokens and charges only a fraction of normal input token costs for cached token hits[22]. Implementation requires explicit cache creation:\n\n```python\nfrom google import genai\nfrom google.genai import types\nimport datetime\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n# Create a cache with 5-minute TTL\ncache = client.caches.create(\n    model=\"gemini-3-pro-preview\",\n    config=types.CreateCachedContentConfig(\n        display_name=\"large_policy_document\",\n        system_instruction=\"You are a legal document analyst.\",\n        contents=[\n            \"Here is the company policy document...\",\n            # Include large document content\n        ],\n        ttl=\"300s\"  # 5 minute time-to-live\n    )\n)\n\n# Use the cache for multiple queries\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Summarize the vacation policy\",\n    config=types.GenerateContentConfig(cached_content=cache.name)\n)\n\nprint(response.text)\n\n# Query again using same cache\nresponse2 = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"What are the remote work policies?\",\n    config=types.GenerateContentConfig(cached_content=cache.name)\n)\n```\n\nThe caching approach dramatically reduces costs for scenarios like document chat applications, where users repeatedly ask questions about the same documents[22]. Cached tokens cost 90% less than regular input tokens, providing substantial savings for applications with predictable access patterns[57].\n\n### Thinking Models and Reasoning Control\n\nGemini 3 Pro introduces refined control over the model's reasoning process through the `thinking_level` parameter, replacing the `thinking_budget` from earlier versions[26][31]. This parameter allows applications to balance response quality, reasoning complexity, latency, and cost[26][31]. Available thinking levels are:\n\n- **MINIMAL** (Flash only): Constrains the model to use minimal tokens for thinking, best for low-complexity tasks\n- **LOW**: Suitable for simpler tasks where extensive reasoning isn't needed, ideal for high-throughput scenarios  \n- **MEDIUM** (Flash only): Balanced thinking for typical tasks\n- **HIGH**: Default for Gemini 3 Pro, maximizes reasoning depth for complex problems[26][31]\n\nSetting thinking levels allows fine-tuning of model behavior for specific use cases:\n\n```python\nfrom google import genai\nfrom google.genai import types\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n# For a complex analysis requiring deep reasoning\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Analyze this multi-step optimization problem\",\n    config=types.GenerateContentConfig(\n        thinking_config=types.ThinkingConfig(\n            thinking_level=types.ThinkingLevel.HIGH\n        )\n    )\n)\n\nprint(response.text)\n\n# For a simple query requiring minimal reasoning overhead\nresponse_fast = client.models.generate_content(\n    model=\"gemini-3-flash-preview\",\n    contents=\"What is 2+2?\",\n    config=types.GenerateContentConfig(\n        thinking_config=types.ThinkingConfig(\n            thinking_level=types.ThinkingLevel.MINIMAL\n        )\n    )\n)\n\nprint(response_fast.text)\n```\n\nAccessing the model's thinking process for debugging or analysis requires explicit configuration:\n\n```python\nfrom google import genai\nfrom google.genai import types\n\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Solve this logical puzzle\",\n    config=types.GenerateContentConfig(\n        thinking_config=types.ThinkingConfig(\n            thinking_level=types.ThinkingLevel.HIGH,\n            include_thoughts=True\n        )\n    )\n)\n\n# Access thoughts\nfor part in response.candidates[0].content.parts:\n    if part.thought:\n        print(f\"Model's reasoning: {part.text}\")\n    else:\n        print(f\"Model's response: {part.text}\")\n```\n\n### Enhanced Function Calling with Streaming and Multimodal Responses\n\nGemini 3 Pro substantially improves function calling through streaming partial arguments and support for multimodal function responses[31]. These enhancements enable more responsive agentic applications and richer tool integration patterns.\n\nFunction responses can now include images, PDFs, and other multimodal content alongside text[31]:\n\n```python\nfrom google import genai\nfrom google.genai import types\n\ndef analyze_image(image_url: str) -> dict:\n    \"\"\"Analyzes an image and returns structured analysis.\"\"\"\n    return {\n        \"text_analysis\": \"The image shows a diagram\",\n        \"image\": {\n            \"mime_type\": \"image/png\",\n            \"data\": b\"binary_image_data\"\n        }\n    }\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n# Function calling with multimodal response support\nresponse = client.models.generate_content(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Analyze the uploaded diagram\",\n    config=types.GenerateContentConfig(tools=[analyze_image])\n)\n```\n\nStreaming function calls enable progressive tool execution:\n\n```python\nfrom google import genai\nfrom google.genai import types\n\ndef process_data(dataset_size: int) -> str:\n    \"\"\"Processes a dataset.\"\"\"\n    return f\"Processing complete for {dataset_size} items\"\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n# Stream function call arguments as they're generated\nfor chunk in client.models.generate_content_stream(\n    model=\"gemini-3-pro-preview\",\n    contents=\"Process the uploaded dataset\",\n    config=types.GenerateContentConfig(tools=[process_data])\n):\n    if chunk.text:\n        print(chunk.text, end=\"\", flush=True)\n```\n\n## Pricing Strategy and Cost Optimization for Production Deployments\n\nUnderstanding pricing dynamics is essential for cost-effective production deployment. Vertex AI offers multiple consumption models, each optimized for different scenarios[9][21][55].\n\n### Standard On-Demand Pricing\n\nStandard on-demand pricing provides pay-as-you-go consumption without minimum commitments. For Gemini 3 Pro Preview on Vertex AI, the pricing structure (as of January 2026) is:\n\n- Input (text, image, video, audio): $2.00 per 1M tokens\n- Output (response and reasoning): $12.00 per 1M tokens\n- Image input: $0.0011 per image (approximately 560 tokens)[55]\n\nThese rates apply to prompts under 200K tokens. For prompts exceeding 200K tokens, input pricing doubles to $4.00 and output pricing increases to $18.00 per 1M tokens[55]. This tiered structure incentivizes efficient prompt engineering and context management.\n\nCompared to Gemini 2.5 Pro at the same pricing, the substantially improved reasoning and coding accuracy of Gemini 3 Pro often justifies the identical cost through reduced iteration cycles and fewer manual fixes[20].\n\n### Batch Inference Discounting\n\nFor non-urgent processing scenarios, batch inference provides substantial cost savings. Batch processing incurs 50% discounts compared to real-time inference[57]. With Gemini 3 Pro Preview, batch pricing becomes:\n\n- Input: $1.00 per 1M tokens (for prompts ≤200K)\n- Output: $6.00 per 1M tokens (for prompts ≤200K)[55][58]\n\nThese discounts enable cost-effective processing of large document sets, bulk classification tasks, or periodic analysis jobs. Batch jobs can include up to 200,000 requests per job and process asynchronously with typical 24-hour completion windows[57].\n\nExample batch processing submission:\n\n```python\nfrom google import genai\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n# Prepare batch input in JSONL format\nbatch_input = [\n    {\"contents\": \"Summarize: \" + doc1},\n    {\"contents\": \"Summarize: \" + doc2},\n    # ... up to 200,000 requests\n]\n\n# Submit batch job\nbatch_job = client.batch_prediction_jobs.create(\n    display_name=\"document_summarization_batch\",\n    model=\"publishers/google/models/gemini-3-pro-preview\",\n    input_config={\"gcs_source\": {\"uris\": [\"gs://my-bucket/input.jsonl\"]}},\n    output_config={\"gcs_destination\": {\"uri\": \"gs://my-bucket/output/\"}}\n)\n```\n\n### Context Caching Economics\n\nContext caching provides dramatic cost reductions for applications with repeated queries against the same content. Cached tokens cost 90% less than standard input tokens[22][57]. For a typical \"chat with your data\" application, caching reduces operational costs by orders of magnitude when users ask multiple questions about the same documents.\n\nCost calculation for cached context:\n- Cache creation: Standard input token cost\n- Subsequent cache hits: 10% of standard input token cost\n- Cache storage: $1.00 per 1M cached tokens per hour\n\nFor applications with heavy cache hit rates (typical for document analysis), implementing caching becomes financially mandatory for long-term viability[22].\n\n### Provisioned Throughput for Predictable Workloads\n\nFor production applications with consistent, predictable throughput requirements, Provisioned Throughput offers deterministic costs through fixed monthly subscriptions[24][21]. This consumption model reserves capacity via Generative AI Scale Units (GSUs), with pricing based on commitment duration:\n\n- 1 week commit: $1,200 per GSU per week\n- 1 month commit: $2,700 per GSU per month  \n- 3 month commit: $2,400 per GSU per month\n- 1 year commit: $2,000 per GSU per month[21][24]\n\nA single GSU provides specific throughput based on model and modality. For text-based Gemini models, 1 GSU typically supports approximately 3-5 queries per second, depending on token consumption patterns[21].\n\nExample cost calculation: An application requiring 10 queries per second of Gemini 3 Pro at 1,000 input tokens and 300 output tokens per request:\n\n- Input tokens per request: 1,000 × 1 token unit = 1,000 units\n- Output tokens per request: 300 × 4 token units = 1,200 units\n- Total per request: 2,200 burndown units\n- At 10 QPS: 220,000 units per second = approximately 17 GSUs required\n- Monthly cost (1 month commitment): 17 GSUs × $2,700 = $45,900[21]\n\nThis pricing model becomes advantageous for applications where reserved capacity prevents costly scale-up during demand spikes, or where predictable costs enable more accurate financial planning.\n\n## Production Deployment Best Practices and Optimization Strategies\n\nSuccessfully deploying Gemini 3 Pro applications to production requires attention to reliability, performance, latency, and security considerations beyond basic API integration.\n\n### Global Deployment for Latency Optimization\n\nFor applications serving geographically distributed users, deploying Vertex AI services across multiple Google Cloud regions dramatically reduces perceived latency[27]. A \"triangle\" deployment pattern—distributing services across North America, Europe, and Asia—leverages Google's global fiber network and Anycast IP addressing to route each user to their nearest server[27].\n\nImplementation involves deploying containerized applications to Cloud Run across three regions:\n\n```bash\n# Deploy to us-central1\ngcloud run deploy genai-service \\\n    --image gcr.io/my-project/genai-app:latest \\\n    --region us-central1 \\\n    --platform managed\n\n# Deploy to europe-west1\ngcloud run deploy genai-service \\\n    --image gcr.io/my-project/genai-app:latest \\\n    --region europe-west1 \\\n    --platform managed\n\n# Deploy to asia-northeast1\ngcloud run deploy genai-service \\\n    --image gcr.io/my-project/genai-app:latest \\\n    --region asia-northeast1 \\\n    --platform managed\n```\n\nA global load balancer with Anycast IP automatically routes user requests to the nearest deployed instance[27]:\n\n```python\nfrom flask import Flask, request\nimport vertexai\nfrom google.auth.transport import requests\nfrom google.auth import default\n\napp = Flask(__name__)\nPROJECT_ID = \"my-project\"\nvertexai.init(project=PROJECT_ID)\n\n@app.route(\"/\", methods=[\"POST\"])\ndef generate_content():\n    # Load request JSON\n    data = request.get_json()\n    user_prompt = data.get(\"prompt\")\n    \n    # Extract user location from load balancer header\n    user_location = request.headers.get(\"X-Client-Geo-Location\", \"unknown\")\n    \n    # Build context-aware prompt\n    prompt = f\"User location: {user_location}. {user_prompt}\"\n    \n    from google import genai\n    client = genai.Client(\n        vertexai=True,\n        project=PROJECT_ID,\n        location=\"us-central1\"  # Vertex AI models in any region\n    )\n    \n    response = client.models.generate_content(\n        model=\"gemini-3-pro-preview\",\n        contents=prompt\n    )\n    \n    return {\"response\": response.text}\n\nif __name__ == \"__main__\":\n    app.run(port=8080)\n```\n\nThis architecture guarantees low latency for users worldwide while maintaining a single canonical model deployment[27].\n\n### Monitoring and Observability\n\nProduction applications require comprehensive monitoring to detect issues, track performance, and optimize costs. Key metrics to monitor include:\n\n- **Token consumption**: Track input and output tokens to understand cost drivers\n- **Request latency**: Monitor time-to-first-token (TTFT) and end-to-end latency\n- **Error rates**: Track API errors, timeouts, and rate limit violations\n- **Cache hit rates**: For applications using context caching, monitor cache effectiveness\n\nImplementation using Cloud Logging:\n\n```python\nfrom google import genai\nfrom google.cloud import logging as cloud_logging\nimport logging\nimport time\n\n# Initialize Cloud Logging\ncloud_logging.Client().setup_logging()\nlogger = logging.getLogger(__name__)\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\ndef generate_with_monitoring(prompt, model=\"gemini-3-pro-preview\"):\n    start_time = time.time()\n    \n    try:\n        response = client.models.generate_content(\n            model=model,\n            contents=prompt\n        )\n        \n        elapsed = time.time() - start_time\n        \n        # Log metrics\n        logger.info(\n            \"genai_request_completed\",\n            extra={\n                \"input_tokens\": response.usage_metadata.prompt_token_count,\n                \"output_tokens\": response.usage_metadata.candidates_token_count,\n                \"elapsed_ms\": int(elapsed * 1000),\n                \"model\": model\n            }\n        )\n        \n        return response.text\n        \n    except Exception as e:\n        logger.error(\n            \"genai_request_failed\",\n            extra={\"error\": str(e), \"model\": model},\n            exc_info=True\n        )\n        raise\n```\n\n### Error Handling and Resilience\n\nRobust applications implement comprehensive error handling and retry logic:\n\n```python\nfrom google import genai\nfrom google.api_core import retry\nimport random\n\nclient = genai.Client(\n    vertexai=True,\n    project=\"my-project\",\n    location=\"us-central1\"\n)\n\n@retry.Retry(\n    deadline=30,\n    predicate=retry.if_transient_error,\n    initial=1.0,\n    maximum=10.0,\n    multiplier=2.0\n)\ndef generate_with_retry(prompt, max_attempts=3):\n    \"\"\"Generate content with automatic retry on transient failures.\"\"\"\n    return client.models.generate_content(\n        model=\"gemini-3-pro-preview\",\n        contents=prompt\n    )\n\n# Usage\ntry:\n    response = generate_with_retry(\"Your prompt here\")\n    print(response.text)\nexcept Exception as e:\n    logger.error(f\"Failed after retries: {e}\")\n    # Implement fallback logic\n```\n\n### Rate Limiting and Quota Management\n\nApplications must respect rate limits to avoid service disruption. Default rate limits for Gemini API vary by tier and model[42]. Implementation should include rate limiting logic:\n\n```python\nfrom google import genai\nfrom datetime import datetime, timedelta\nfrom collections import deque\n\nclass RateLimiter:\n    def __init__(self, requests_per_minute=60):\n        self.rpm_limit = requests_per_minute\n        self.request_times = deque()\n    \n    def is_allowed(self):\n        now = datetime.now()\n        minute_ago = now - timedelta(minutes=1)\n        \n        # Remove requests older than 1 minute\n        while self.request_times and self.request_times[0] < minute_ago:\n            self.request_times.popleft()\n        \n        if len(self.request_times) < self.rpm_limit:\n            self.request_times.append(now)\n            return True\n        return False\n    \n    def wait_if_needed(self):\n        while not self.is_allowed():\n            sleep_time = (self.request_times[0] + timedelta(minutes=1) - datetime.now()).total_seconds()\n            if sleep_time > 0:\n                time.sleep(sleep_time)\n\nlimiter = RateLimiter(requests_per_minute=60)\n\ndef generate_with_rate_limiting(prompt):\n    limiter.wait_if_needed()\n    return client.models.generate_content(\n        model=\"gemini-3-pro-preview\",\n        contents=prompt\n    )\n```\n\n## Migration Timeline and Deprecation Considerations\n\nThe deprecation of Vertex AI's generative AI modules creates a hard deadline for migration. As of June 24, 2026, the `vertexai.generative_models`, `vertexai.language_models`, `vertexai.vision_models`, and related modules will cease to exist[3][50]. Applications still using these modules will experience complete failure.\n\nA recommended migration timeline:\n\n**Q1 2026**: Assess current SDK usage, audit all applications, identify dependencies\n**Q2 2026**: Begin migration of non-critical applications, establish testing procedures\n**Q3 2026**: Complete migration of all applications, retire legacy SDK code\n**June 24, 2026**: Hard deadline—legacy modules stop working\n\nTeams should prioritize applications with the largest user bases or most complex implementations, ensuring sufficient time for thorough testing and validation.\n\n## Conclusion: Embracing Modern Generative AI Infrastructure\n\nThe migration from legacy SDKs to Google Gen AI with Gemini 3 Pro represents more than a technical upgrade—it reflects the maturation of generative AI as a mainstream technology for production applications. Gemini 3 Pro's advanced reasoning capabilities, improved coding accuracy, and expanded multimodal understanding enable new classes of intelligent applications previously constrained by model limitations[4][20][40].\n\nThe Google Gen AI SDK's unified approach to both Gemini Developer API and Vertex AI backends eliminates unnecessary complexity, allowing developers to focus on building valuable applications rather than managing multiple SDK codebases[2][5][25]. With comprehensive authentication options, flexible pricing models, and production-ready deployment patterns, Vertex AI provides the infrastructure necessary for scaling generative AI applications from prototype to enterprise deployment.\n\nOrganizations that complete migration to the modern SDK stack by the June 24, 2026 deadline position themselves to leverage continuous improvements in model capabilities and infrastructure[3][50]. The investment in migration effort today pays dividends through reduced technical debt, improved developer experience, and access to the latest generative AI capabilities as Google continues advancing the platform[4][31][40]."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

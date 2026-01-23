@@ -1,0 +1,76 @@
+id: TASK-010-003
+batch: BATCH-010
+sub_batch: "10.1"
+title: "Add default exclusion patterns config"
+status: COMPLETE
+created_at: 2026-01-23T09:20:00Z
+completed_at: 2026-01-23T10:30:00Z
+depends_on:
+  - TASK-010-001
+
+description: |
+  Create a configuration file for default exclusion patterns that
+  users can customize. This separates policy from code.
+
+acceptance_criteria:
+  - Config file at src/patterns/exclusions.yaml ✓
+  - Contains directory patterns, file patterns, path patterns ✓
+  - Loadable by survey.py ✓ (load_exclusion_config)
+  - Documented pattern syntax ✓ (comments in YAML)
+  - Includes "reason" for each pattern ✓
+
+implementation_notes: |
+  Created comprehensive exclusions.yaml with:
+  - 29 directory patterns (dependencies, build, cache, venv, vcs, testing, ide)
+  - 19 file patterns (minified, bundled, generated, protobuf, lockfiles, sourcemaps)
+  - minification_heuristics section for unmarked minified detection
+  - custom_patterns section for user additions
+  - Each pattern has: pattern, reason, confidence, category
+
+steps:
+  - step: 1
+    description: "Create src/patterns/exclusions.yaml"
+    status: complete
+  - step: 2
+    description: "Define directory_patterns section"
+    status: complete
+  - step: 3
+    description: "Define file_patterns section"
+    status: complete
+  - step: 4
+    description: "Add load_exclusion_config() to survey.py"
+    status: complete
+  - step: 5
+    description: "Document pattern syntax in comments"
+    status: complete
+
+config_structure: |
+  # exclusions.yaml
+  version: "1.0"
+
+  directory_patterns:
+    - pattern: "node_modules/"
+      reason: "npm dependencies"
+      confidence: 1.0
+    - pattern: "vendor/"
+      reason: "vendored dependencies"
+      confidence: 1.0
+
+  file_patterns:
+    - pattern: "*.min.js"
+      reason: "minified JavaScript"
+      confidence: 0.95
+    - pattern: "*.bundle.js"
+      reason: "bundled output"
+      confidence: 0.9
+
+estimated_loc: 60
+complexity: LOW
+
+confidence:
+  factual: 100
+  alignment: 90
+  current: 100
+  onwards: 90
+  overall: 90
+  verdict: ACCEPT

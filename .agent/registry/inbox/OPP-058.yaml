@@ -1,0 +1,50 @@
+id: OPP-058
+title: "Fix FILES view mode toggle - Graph data not switching"
+source: DIAGNOSTIC
+discovered_at: "2026-01-23T08:50:00Z"
+category: VISUALIZATION
+description: |
+  The FILES view mode toggle button in Collider visualization clicks and updates
+  internal state (FILE_VIZ.mode='map', FILE_VIZ.enabled=true, GRAPH_MODE='files')
+  but never actually switches the graph data from atoms to file nodes.
+
+  Root cause: sidebar.js:558-572 calls FILE_VIZ.setMode('map') and
+  FILE_VIZ.setEnabled(true), expecting applyFileGraphMode() to call
+  Graph.graphData(_fileGraph). But the chain breaks somewhere.
+
+  Evidence:
+  - FILE_VIZ.getFileGraph() returns valid graph (59 nodes, 347 links)
+  - Graph.graphData().nodes.length still shows 4340 atoms after clicking FILES
+  - Manual Graph.graphData(FILE_VIZ.getFileGraph()) works correctly
+
+  Fix location: sidebar.js setViewMode() or file-viz.js apply()
+suggested_action: "Add explicit Graph.graphData(fileGraph) call in setViewMode('files')"
+urgency: HIGH
+files_affected:
+  - "standard-model-of-code/src/core/viz/assets/modules/sidebar.js"
+  - "standard-model-of-code/src/core/viz/assets/modules/file-viz.js"
+related_to:
+  - "OPP-059"
+  - "File visualization system"
+
+# --- 4D CONFIDENCE ---
+confidence:
+  factual: 98      # Verified through browser console + Gemini validation
+  alignment: 90    # Core visualization feature
+  current: 98      # Code paths confirmed by Gemini analysis
+  onwards: 85      # Fits file-level analysis roadmap
+  overall: 85      # min(98, 90, 98, 85)
+  verdict: ACCEPT
+
+# --- AI VALIDATION ---
+ai_validation:
+  model: gemini-3-pro-preview
+  date: 2026-01-23
+  verdict: "VALID - sidebar.js relies on implicit side effect from FILE_VIZ.setEnabled(true) to swap data model. Chain is fragile. Should explicitly call Graph.graphData(FILE_VIZ.getFileGraph())."
+  research_file: "standard-model-of-code/docs/research/gemini/docs/20260123_085448_validate_these_bugs_in_sidebar_js_and_file_viz_js.md"
+
+# --- RESOLVED ---
+status: COMPLETE
+resolved_at: 2026-01-23T09:05:00Z
+fix_applied: "Added explicit Graph.graphData(fileGraph) call in setViewMode('files') at sidebar.js:565-566"
+verified: true

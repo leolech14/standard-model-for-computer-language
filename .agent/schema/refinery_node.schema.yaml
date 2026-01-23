@@ -1,6 +1,7 @@
-# RefineryNode Schema v1.0.0
+# RefineryNode Schema v1.1.0
 # The canonical atomic unit for the Context Refinery system
 # Created: 2026-01-23 | SPRINT-002 | TASK-007
+# Updated: 2026-01-23 | AI Enrichment Round (added Q-scores, Holonic, Topology, LLM)
 #
 # SOURCES UNIFIED:
 # 1. semantic_models.yaml (Atom concept, D1-D8 dimensions)
@@ -47,7 +48,7 @@ $schema: "http://json-schema.org/draft-07/schema#"
 $id: "https://elements-archive-2026/schema/refinery_node.schema.yaml"
 title: "RefineryNode"
 description: "The atomic unit of the Context Refinery - a semantic node with full provenance"
-version: "1.0.0"
+version: "1.1.0"
 
 type: object
 required:
@@ -288,6 +289,63 @@ properties:
         default: false
 
   # ============================================================================
+  # PURPOSE INTELLIGENCE (Q-Scores) - How well do I fulfill my purpose?
+  # Added per AI enrichment round 2026-01-23
+  # ============================================================================
+  purpose:
+    type: object
+    description: "Purpose emergence (π) and quality scores (Q) from MODEL.md"
+    properties:
+      atomic_purpose:
+        type: string
+        description: "π₁(node) - The atomic purpose of this single element"
+        examples: ["validate input", "fetch user", "transform data"]
+      composite_purpose:
+        type: string
+        description: "π₂(class) - Emergent purpose from contained elements"
+      layer_purpose:
+        type: string
+        description: "π₃(layer) - Purpose contribution to architectural layer"
+      q_scores:
+        type: object
+        description: "Quantitative measure of how well node fulfills purpose"
+        properties:
+          Q_alignment:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "How well implementation aligns with stated purpose"
+          Q_coherence:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "Internal consistency of the node"
+          Q_density:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "Signal-to-noise ratio (meaningful code vs boilerplate)"
+          Q_completeness:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "How fully the node implements its contract"
+          Q_simplicity:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "Inverse of unnecessary complexity"
+          Q_intrinsic:
+            type: number
+            minimum: 0
+            maximum: 1
+            description: "min(alignment, coherence, density, completeness, simplicity)"
+      quality_tier:
+        type: string
+        enum: [Sharp, Clear, Muddy, Unknown]
+        description: "Sharp (Q>0.85), Clear (0.6-0.85), Muddy (<0.6)"
+
+  # ============================================================================
   # DIMENSIONS (D1-D8) - Where am I in semantic space?
   # ============================================================================
   dimensions:
@@ -327,6 +385,96 @@ properties:
         minimum: 0
         maximum: 100
         description: "Trust level (0-100)"
+
+  # ============================================================================
+  # HOLONIC CONTEXT - Where am I in the part-whole hierarchy?
+  # Added per AI enrichment round 2026-01-23 (Koestler's Holons)
+  # ============================================================================
+  holonic:
+    type: object
+    description: "Position in the 16-level scale (L1-L16) and part-whole relationships"
+    properties:
+      level:
+        type: string
+        enum: ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10", "L11", "L12", "L13", "L14", "L15", "L16"]
+        description: "Position in 16-level scale (L1=Bit, L8=System, L16=Universe)"
+        examples: ["L3", "L4", "L5"]
+      parent_id:
+        type: string
+        description: "ID of the containing holon (e.g., class contains method)"
+      children_ids:
+        type: array
+        description: "IDs of contained holons"
+        items:
+          type: string
+      is_whole:
+        type: boolean
+        description: "True if this node contains other nodes"
+      is_part:
+        type: boolean
+        description: "True if this node is contained by another"
+      emergence_contribution:
+        type: string
+        description: "How this part contributes to the whole's emergent purpose"
+
+  # ============================================================================
+  # TOPOLOGY - Graph position and centrality metrics
+  # Added per AI enrichment round 2026-01-23 (grouped by tier)
+  # ============================================================================
+  topology:
+    type: object
+    description: "Graph-based metrics grouped by computational tier"
+    properties:
+      local:
+        type: object
+        description: "Simple, local graph properties (L5-scale)"
+        properties:
+          in_degree:
+            type: integer
+            description: "Number of incoming edges"
+          out_degree:
+            type: integer
+            description: "Number of outgoing edges"
+          is_leaf:
+            type: boolean
+            description: "True if out_degree == 0"
+          is_root:
+            type: boolean
+            description: "True if in_degree == 0"
+      global:
+        type: object
+        description: "Emergent, global graph properties (L7-scale)"
+        properties:
+          pagerank:
+            type: number
+            description: "PageRank centrality score"
+          betweenness_centrality:
+            type: number
+            description: "Betweenness centrality (bridge importance)"
+          topology_role:
+            type: string
+            enum: [root, leaf, hub, authority, bridge, internal, orphan]
+            description: "Structural role in dependency graph"
+          is_hotspot:
+            type: boolean
+            description: "True if frequently modified or highly connected"
+          community_id:
+            type: string
+            description: "ID of detected community/cluster"
+      disconnection:
+        type: object
+        description: "Rich classification for orphan/disconnected nodes"
+        properties:
+          reachability_source:
+            type: string
+            enum: [unreachable, test_only, main_only, conditional]
+            description: "How this node can be reached"
+          connection_gap:
+            type: string
+            description: "Explanation of why node appears disconnected"
+          is_false_positive:
+            type: boolean
+            description: "True if orphan status is a misclassification"
 
   # ============================================================================
   # TIMESTAMPS - When did things happen?
@@ -396,6 +544,58 @@ properties:
       tags:
         type: array
         description: "User-defined tags"
+        items:
+          type: string
+
+  # ============================================================================
+  # LLM ENRICHMENT - Ring-fenced area for AI analysis
+  # Added per AI enrichment round 2026-01-23 (Semantic Cortex hook)
+  # ============================================================================
+  llm_enrichment:
+    type: object
+    description: "Isolated area for non-deterministic AI-generated insights"
+    additionalProperties: true
+    properties:
+      model:
+        type: string
+        description: "Which model produced the enrichment"
+        examples: ["gemini-2.5-pro", "claude-3-opus"]
+      generated_at:
+        type: string
+        format: date-time
+        description: "When the AI analysis was performed"
+      summary:
+        type: string
+        description: "AI-generated summary of node purpose/behavior"
+      intent_classification:
+        type: string
+        description: "AI classification of what this code intends to do"
+      refactoring_suggestions:
+        type: array
+        description: "AI-suggested improvements"
+        items:
+          type: object
+          properties:
+            suggestion:
+              type: string
+            rationale:
+              type: string
+            priority:
+              type: string
+              enum: [low, medium, high]
+      semantic_tags:
+        type: array
+        description: "AI-inferred semantic tags"
+        items:
+          type: string
+      confidence:
+        type: number
+        minimum: 0
+        maximum: 1
+        description: "AI's confidence in its analysis"
+      warnings:
+        type: array
+        description: "Potential issues detected by AI"
         items:
           type: string
 

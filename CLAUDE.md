@@ -25,6 +25,20 @@
 
 **Full integration map:** `.agent/SUBSYSTEM_INTEGRATION.md`
 
+## Roadmap (Single Source of Truth)
+
+**`.agent/ROADMAP.yaml`** - The unified, machine-readable roadmap for the entire project.
+
+| What | Where |
+|------|-------|
+| **Roadmap** | `.agent/ROADMAP.yaml` |
+| **Task Batches** | `.agent/registry/batches/` |
+| **Active Tasks** | `.agent/registry/active/` |
+| **Opportunities** | `.agent/registry/inbox/` |
+| **Registry Index** | `.agent/registry/INDEX.md` |
+
+**Current Focus:** Phase 3 (Reachability) + Phase 10 (Survey/Intelligence Layer)
+
 ## Agent Onboarding (START HERE)
 
 New AI agents MUST complete initiation before working:
@@ -140,13 +154,14 @@ The visualization intelligence layer - many-to-many binding between data and vis
 | Configure AI tool | `context-management/config/analysis_sets.yaml` |
 | Configure archive | `context-management/tools/archive/config.yaml` |
 
-## GCP Config
+## AI Config
 
 | Setting | Value |
 |---------|-------|
+| Model | `gemini-3-pro-preview` |
+| Backend | AI Studio (default) or Vertex AI |
 | Project | `elements-archive-2026` |
 | Bucket | `gs://elements-archive-2026/` |
-| Model | `gemini-2.5-pro` |
 | Account | `leonardolech3@gmail.com` |
 
 ## Archive

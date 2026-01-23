@@ -16,13 +16,13 @@ tiers:
   rag:
     description: "Use File Search for targeted lookups"
     max_response_time_ms: 5000
-    preferred_model: "gemini-2.5-pro"
+    preferred_model: "gemini-3-pro-preview"
     fallback_to: "long_context"
 
   long_context:
     description: "Use full context sets for reasoning"
     max_response_time_ms: 60000
-    preferred_model: "gemini-2.5-pro"
+    preferred_model: "gemini-3-pro-preview"
     max_tokens: 200000
 
   perplexity:

@@ -1,0 +1,125 @@
+# ============================================================
+# TASK BATCH: Phase 10 - Adaptive Intelligence Layer (SURVEY)
+# ============================================================
+# Roadmap: standard-model-of-code/ROADMAP.md (Phase 10)
+# ============================================================
+
+id: BATCH-010
+title: "Adaptive Intelligence Layer (SURVEY)"
+roadmap_phase: 10
+status: PLANNING
+created_at: 2026-01-23T09:15:00Z
+
+description: |
+  Make Collider smart about WHAT to analyze before HOW to analyze.
+  Pre-analysis survey phase that detects vendor code, minified files,
+  and adapts analysis strategy using AI (analyze.py/Gemini).
+
+north_star: |
+  Running `./collider full ./my-app` on a typical JS project should
+  automatically exclude node_modules/vendor and produce a clean graph
+  of YOUR code only.
+
+success_metrics:
+  - signal_to_noise_ratio: ">= 0.9"  # 90% of nodes are YOUR code
+  - survey_time: "< 5s for 10K files"
+  - minified_detection_accuracy: ">= 95%"
+  - user_intervention_required: "0 for typical projects"
+
+# ============================================================
+# SUB-BATCHES (Implementation Phases)
+# ============================================================
+
+sub_batches:
+
+  - id: "10.1"
+    title: "Pattern-based exclusions (no AI)"
+    complexity: LOW
+    status: READY
+    tasks:
+      - TASK-010-001: "Create survey.py module skeleton"
+      - TASK-010-002: "Implement directory pattern detector"
+      - TASK-010-003: "Add default exclusion patterns config"
+      - TASK-010-004: "Write pattern detection tests"
+
+  - id: "10.2"
+    title: "Minification heuristics"
+    complexity: LOW
+    status: READY
+    depends_on: ["10.1"]
+    tasks:
+      - TASK-010-005: "Implement single-line file detector"
+      - TASK-010-006: "Implement avg-line-length heuristic"
+      - TASK-010-007: "Implement whitespace variance check"
+      - TASK-010-008: "Write minification detection tests"
+
+  - id: "10.3"
+    title: "CLI --exclude flag"
+    complexity: LOW
+    status: READY
+    depends_on: ["10.1"]
+    tasks:
+      - TASK-010-009: "Add --exclude CLI argument to cli.py"
+      - TASK-010-010: "Wire exclusions into full_analysis.py"
+      - TASK-010-011: "Add --exclude documentation"
+
+  - id: "10.4"
+    title: "Interactive survey mode"
+    complexity: MEDIUM
+    status: BLOCKED
+    depends_on: ["10.1", "10.2", "10.3"]
+    tasks:
+      - TASK-010-012: "Add ./collider survey command"
+      - TASK-010-013: "Implement interactive exclusion prompt"
+      - TASK-010-014: "Generate analysis_config.yaml output"
+      - TASK-010-015: "Add --survey flag to full command"
+
+  - id: "10.5"
+    title: "AI-powered classification"
+    complexity: MEDIUM
+    status: BLOCKED
+    depends_on: ["10.4"]
+    tasks:
+      - TASK-010-016: "Create survey analysis set for analyze.py"
+      - TASK-010-017: "Implement AI exclusion recommendations"
+      - TASK-010-018: "Add project structure classification"
+      - TASK-010-019: "Integrate AI survey into interactive mode"
+
+  - id: "10.6"
+    title: "Auto-survey by default"
+    complexity: LOW
+    status: BLOCKED
+    depends_on: ["10.4", "10.5"]
+    tasks:
+      - TASK-010-020: "Make --survey default behavior"
+      - TASK-010-021: "Add --no-survey flag to skip"
+      - TASK-010-022: "Update documentation"
+      - TASK-010-023: "Add integration tests"
+
+# ============================================================
+# EXECUTION ORDER
+# ============================================================
+
+execution_order:
+  immediate:
+    - "10.1"  # Pattern-based exclusions
+    - "10.2"  # Minification heuristics
+    - "10.3"  # CLI --exclude flag
+  next:
+    - "10.4"  # Interactive survey mode
+  future:
+    - "10.5"  # AI-powered classification
+    - "10.6"  # Auto-survey by default
+
+# ============================================================
+# RELATED
+# ============================================================
+
+related:
+  opportunities:
+    - OPP-058  # File viz toggle bug (discovered this need)
+    - OPP-059  # File viz restore bug
+  research:
+    - "standard-model-of-code/docs/research/gemini/docs/20260123_085448_*.md"
+  documentation:
+    - "standard-model-of-code/ROADMAP.md#phase-10"

@@ -6,12 +6,27 @@ Analyzes incoming queries to determine:
 - Complexity: How difficult/broad is the query
 - Scope: Internal (codebase) vs External (web research)
 - Agent Context: Whether .agent/ files are relevant
+
+Configuration is loaded from aci_config.yaml and merged with defaults.
 """
 
 from enum import Enum
 from dataclasses import dataclass
-from typing import List
+from typing import List, Dict, Any
 import re
+
+
+# =============================================================================
+# CONFIGURATION LOADING
+# =============================================================================
+
+def _get_config() -> Dict[str, Any]:
+    """Get ACI config, with lazy import to avoid circular dependency."""
+    try:
+        from . import ACI_CONFIG
+        return ACI_CONFIG
+    except ImportError:
+        return {}
 
 
 class QueryIntent(Enum):
@@ -96,30 +111,89 @@ INTENT_KEYWORDS = {
     ],
 }
 
-# External scope indicators
-EXTERNAL_INDICATORS = [
+# =============================================================================
+# CONFIGURABLE INDICATORS (merged with aci_config.yaml)
+# =============================================================================
+
+# Defaults - these are used if config doesn't override
+_DEFAULT_EXTERNAL_INDICATORS = [
     "best practice", "latest", "2026", "2025", "industry",
     "standard", "recommendation", "compare with", "vs",
     "trend", "state of the art", "modern", "current"
 ]
 
-# Agent context indicators
-AGENT_INDICATORS = [
+_DEFAULT_AGENT_INDICATORS = [
     "task", "sprint", "agent", "kernel", "bare", "truths",
     "registry", "confidence", "4d", "claim", "run", "handoff",
     "boot", "protocol", "manifest"
 ]
 
-# Complexity indicators
-COMPLEX_INDICATORS = [
+_DEFAULT_COMPLEX_INDICATORS = [
     "all", "every", "complete", "comprehensive", "full",
     "entire", "across", "refactor", "redesign", "architecture"
 ]
 
-SIMPLE_INDICATORS = [
+_DEFAULT_SIMPLE_INDICATORS = [
     "single", "one", "quick", "just", "only", "specific",
     "this file", "this function", "count", "how many"
 ]
+
+
+def get_external_indicators() -> List[str]:
+    """Get external scope indicators from config or defaults."""
+    config = _get_config()
+    config_indicators = config.get("external_indicators", [])
+    # Merge: config extends defaults
+    return list(set(_DEFAULT_EXTERNAL_INDICATORS + config_indicators))
+
+
+def get_agent_indicators() -> List[str]:
+    """Get agent context indicators from config or defaults."""
+    config = _get_config()
+    config_indicators = config.get("agent_context", {}).get("trigger_keywords", [])
+    return list(set(_DEFAULT_AGENT_INDICATORS + config_indicators))
+
+
+def get_complexity_indicators() -> Dict[str, List[str]]:
+    """Get complexity indicators from config or defaults."""
+    config = _get_config()
+    complexity_config = config.get("complexity", {})
+    return {
+        "simple": complexity_config.get("simple", _DEFAULT_SIMPLE_INDICATORS),
+        "complex": complexity_config.get("complex", _DEFAULT_COMPLEX_INDICATORS),
+    }
+
+
+def get_intent_keywords() -> Dict[QueryIntent, List[str]]:
+    """Get intent keywords, merging config with defaults."""
+    config = _get_config()
+    config_keywords = config.get("intent_keywords", {})
+
+    # Start with defaults
+    merged = dict(INTENT_KEYWORDS)
+
+    # Merge in config keywords (extends, doesn't replace)
+    intent_map = {
+        "architecture": QueryIntent.ARCHITECTURE,
+        "debug": QueryIntent.DEBUG,
+        "research": QueryIntent.RESEARCH,
+        "task": QueryIntent.TASK,
+    }
+
+    for key, intent in intent_map.items():
+        if key in config_keywords:
+            existing = set(merged.get(intent, []))
+            existing.update(config_keywords[key])
+            merged[intent] = list(existing)
+
+    return merged
+
+
+# Legacy module-level aliases (for backward compatibility)
+EXTERNAL_INDICATORS = _DEFAULT_EXTERNAL_INDICATORS
+AGENT_INDICATORS = _DEFAULT_AGENT_INDICATORS
+COMPLEX_INDICATORS = _DEFAULT_COMPLEX_INDICATORS
+SIMPLE_INDICATORS = _DEFAULT_SIMPLE_INDICATORS
 
 
 def _extract_keywords(query: str) -> List[str]:
@@ -152,10 +226,13 @@ def _detect_intent(query: str, keywords: List[str]) -> tuple[QueryIntent, float]
     """Detect query intent with confidence score."""
     query_lower = query.lower()
 
+    # Get intent keywords from config (merged with defaults)
+    intent_keywords = get_intent_keywords()
+
     best_intent = QueryIntent.UNKNOWN
     best_score = 0.0
 
-    for intent, indicators in INTENT_KEYWORDS.items():
+    for intent, indicators in intent_keywords.items():
         score = 0.0
         for indicator in indicators:
             if indicator in query_lower:
@@ -176,13 +253,18 @@ def _detect_complexity(query: str, keywords: List[str]) -> QueryComplexity:
     """Estimate query complexity."""
     query_lower = query.lower()
 
+    # Get indicators from config
+    indicators = get_complexity_indicators()
+    simple_indicators = indicators["simple"]
+    complex_indicators = indicators["complex"]
+
     # Check for simple indicators
-    for indicator in SIMPLE_INDICATORS:
+    for indicator in simple_indicators:
         if indicator in query_lower:
             return QueryComplexity.SIMPLE
 
     # Check for complex indicators
-    complex_count = sum(1 for ind in COMPLEX_INDICATORS if ind in query_lower)
+    complex_count = sum(1 for ind in complex_indicators if ind in query_lower)
     if complex_count >= 2:
         return QueryComplexity.COMPLEX
 
@@ -199,7 +281,9 @@ def _detect_scope(query: str, keywords: List[str]) -> QueryScope:
     """Detect if query needs external knowledge."""
     query_lower = query.lower()
 
-    external_count = sum(1 for ind in EXTERNAL_INDICATORS if ind in query_lower)
+    # Get indicators from config
+    external_indicators = get_external_indicators()
+    external_count = sum(1 for ind in external_indicators if ind in query_lower)
 
     if external_count >= 2:
         return QueryScope.EXTERNAL
@@ -217,8 +301,9 @@ def _needs_agent_context(query: str, intent: QueryIntent) -> bool:
     if intent == QueryIntent.TASK:
         return True
 
-    # Check for agent-specific keywords
-    for indicator in AGENT_INDICATORS:
+    # Check for agent-specific keywords from config
+    agent_indicators = get_agent_indicators()
+    for indicator in agent_indicators:
         if indicator in query_lower:
             return True
 

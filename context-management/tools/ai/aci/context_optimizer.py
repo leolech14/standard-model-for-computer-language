@@ -4,7 +4,7 @@ Context Optimizer for Adaptive Context Intelligence (ACI)
 Handles:
 - Automatic injection of .agent/ context when needed
 - Strategic positioning of critical files (sandwich/front-load)
-- Context budget management
+- Context budget management (from aci_config.yaml)
 - Truths integration for instant queries
 """
 
@@ -12,6 +12,47 @@ from dataclasses import dataclass
 from typing import List, Dict, Optional
 from pathlib import Path
 import yaml
+
+# =============================================================================
+# CONFIGURATION
+# =============================================================================
+# Load from aci_config.yaml via the module's config loader.
+# Defaults are provided as fallback if config is unavailable.
+
+_DEFAULT_TOKEN_BUDGETS = {
+    "guru": 50_000,        # Focused analysis
+    "architect": 150_000,  # Multi-file reasoning
+    "archeologist": 200_000,  # Deep exploration
+    "perilous": 200_001,   # Avoid - lost-in-middle effects
+}
+
+_DEFAULT_HARD_CAP = 200_000  # Maximum recommended tokens
+
+def _get_config():
+    """Get ACI config, with lazy import to avoid circular dependency."""
+    try:
+        # Import here to avoid circular import at module load time
+        from . import ACI_CONFIG
+        return ACI_CONFIG
+    except ImportError:
+        return {}
+
+def get_token_budgets() -> Dict[str, int]:
+    """Get token budgets from config or defaults."""
+    config = _get_config()
+    config_budgets = config.get("token_budgets", {})
+    # Merge config over defaults
+    budgets = _DEFAULT_TOKEN_BUDGETS.copy()
+    budgets.update(config_budgets)
+    return budgets
+
+def get_hard_cap() -> int:
+    """Get hard cap from config or default."""
+    config = _get_config()
+    return config.get("token_budgets", {}).get("hard_cap", _DEFAULT_HARD_CAP)
+
+# Note: Use get_token_budgets() and get_hard_cap() functions directly.
+# Module-level constants removed to ensure config is always read.
 
 
 @dataclass
@@ -23,17 +64,6 @@ class OptimizedContext:
     critical_files: List[str]    # Files to position strategically
     estimated_tokens: int        # Estimated total token count
     budget_warning: bool         # True if exceeding recommended budget
-
-
-# Token budget tiers from KERNEL.md
-TOKEN_BUDGETS = {
-    "guru": 50_000,        # Focused analysis
-    "architect": 150_000,  # Multi-file reasoning
-    "archeologist": 200_000,  # Deep exploration
-    "perilous": 200_001,   # Avoid - lost-in-middle effects
-}
-
-HARD_CAP = 200_000  # Maximum recommended tokens
 
 
 def load_repo_truths(project_root: Path) -> Optional[Dict]:
@@ -228,9 +258,10 @@ def optimize_context(
     critical_files = get_critical_files_for_sets(sets, sets_config)
     positioning = get_positional_strategy(sets, sets_config)
 
-    # Estimate tokens
+    # Estimate tokens and check against config-driven hard cap
     estimated_tokens = estimate_tokens_for_sets(sets, sets_config)
-    budget_warning = estimated_tokens > HARD_CAP
+    hard_cap = get_hard_cap()
+    budget_warning = estimated_tokens > hard_cap
 
     return OptimizedContext(
         sets=sets,
@@ -257,6 +288,6 @@ def format_context_summary(ctx: OptimizedContext) -> str:
         lines.append("Truths: loaded")
 
     if ctx.budget_warning:
-        lines.append(f"WARNING: Exceeds {HARD_CAP:,} token budget!")
+        lines.append(f"WARNING: Exceeds {get_hard_cap():,} token budget!")
 
     return "\n".join(lines)

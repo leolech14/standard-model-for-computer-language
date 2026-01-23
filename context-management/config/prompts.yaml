@@ -321,18 +321,72 @@ analysis_prompts:
         Format code snippets with markdown.
       output_format: "text"
 
+# =============================================================================
+# BACKEND CONFIGURATION
+# =============================================================================
+# Backend options: "aistudio" (simple) or "vertex" (enterprise)
+#
+# AI STUDIO (default) - Developer API:
+#   - Requires: GEMINI_API_KEY environment variable
+#   - Setup: export GEMINI_API_KEY="your-key" (from aistudio.google.com)
+#   - Best for: Most users, simple setup, full Gemini 3 Pro access
+#
+# VERTEX AI - Enterprise/GCP:
+#   - Requires: gcloud auth, GCP project
+#   - Setup: gcloud auth application-default login
+#   - Best for: Enterprise compliance, GCP billing integration
+#   - Override: GEMINI_BACKEND=vertex
+#
+backend: "aistudio"
+
+# GCP project/location for Vertex AI (can be overridden by gcloud config)
+vertex_project: null  # Uses gcloud config if null
+vertex_location: "us-central1"
+
+# =============================================================================
+# MODEL CONFIGURATION
+# =============================================================================
+# Gemini 3 Pro (Preview) - Latest flagship model (Nov 2025)
+default_model: "gemini-3-pro-preview"
+
+# Fast model for simple queries
+fast_model: "gemini-2.0-flash-001"
+
+# Fallback chain if primary model unavailable
+fallback_models:
+  - "gemini-2.5-pro"
+  - "gemini-2.0-flash-001"
+
+# =============================================================================
+# PRICING (per 1M tokens)
+# =============================================================================
 pricing:
-  gemini-2.0-flash-001: 
-    input: 0.10
-    output: 0.40
+  # Gemini 3 Pro Preview - Advanced reasoning, 1M context
+  gemini-3-pro-preview:
+    input: 2.00
+    output: 12.00
+    input_long: 4.00      # >200k tokens
+    output_long: 18.00    # >200k tokens
+
+  # Gemini 3 Flash Preview - Fast, cost-effective
+  gemini-3-flash-preview:
+    input: 0.15
+    output: 0.60
+
+  # Gemini 2.5 Pro - Previous flagship (stable)
   gemini-2.5-pro:
     input: 1.25
     output: 5.00
+
+  # Gemini 2.0 Flash - Legacy fast model
+  gemini-2.0-flash-001:
+    input: 0.10
+    output: 0.40
+
+  # Legacy models
   gemini-1.5-pro-001:
     input: 1.25
     output: 5.00
   gemini-1.5-pro-002:
     input: 1.25
     output: 5.00
-
-default_model: "gemini-2.5-pro"

@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T08:47:26.480888",
+    "source": "gemini",
+    "model": "gemini-3-pro-preview",
+    "query": "What is the default model configured? Reply in one line.",
+    "query_length": 56,
+    "checksum": "sha256:5dae942d68fdbf3df57725579e7d213c931d0362b452887394b271a3d686152d"
+  },
+  "response": {
+    "content": "The default configuration is set to the **dark** theme with **3D** dimensions and a **force** layout (defined in `theme.tokens.json` and `controls.tokens.json`).",
+    "mode": "standard"
+  }
+}

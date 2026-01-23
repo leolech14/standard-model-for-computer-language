@@ -1,0 +1,335 @@
+# ============================================================
+# COLLIDER EXCLUSION PATTERNS
+# ============================================================
+# Default patterns for pre-analysis survey to detect and exclude
+# vendor code, generated files, and build artifacts.
+#
+# Phase: 10 (Adaptive Intelligence Layer)
+# Task: TASK-010-003
+# ============================================================
+
+version: "1.0"
+
+# ============================================================
+# DIRECTORY PATTERNS
+# ============================================================
+# Patterns ending with / match directory names anywhere in path.
+# Example: "vendor/" matches /foo/vendor/, /bar/vendor/, etc.
+
+directory_patterns:
+
+  # --- Package Managers ---
+  - pattern: "node_modules/"
+    reason: "npm/yarn/pnpm dependencies"
+    confidence: 1.0
+    category: "dependencies"
+
+  - pattern: "vendor/"
+    reason: "vendored dependencies (Go, PHP, etc.)"
+    confidence: 1.0
+    category: "dependencies"
+
+  - pattern: ".vendor/"
+    reason: "hidden vendor directory"
+    confidence: 1.0
+    category: "dependencies"
+
+  - pattern: "bower_components/"
+    reason: "Bower dependencies (legacy)"
+    confidence: 1.0
+    category: "dependencies"
+
+  # --- Build Outputs ---
+  - pattern: "dist/"
+    reason: "distribution/build output"
+    confidence: 1.0
+    category: "build"
+
+  - pattern: "build/"
+    reason: "build output"
+    confidence: 0.9  # Sometimes contains source
+    category: "build"
+
+  - pattern: "out/"
+    reason: "build output"
+    confidence: 0.9
+    category: "build"
+
+  - pattern: "target/"
+    reason: "build output (Rust, Java)"
+    confidence: 1.0
+    category: "build"
+
+  - pattern: "lib/"
+    reason: "compiled library output"
+    confidence: 0.7  # Often contains source in JS projects
+    category: "build"
+
+  # --- Framework Caches ---
+  - pattern: ".next/"
+    reason: "Next.js build cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".nuxt/"
+    reason: "Nuxt.js build cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".svelte-kit/"
+    reason: "SvelteKit build cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".vite/"
+    reason: "Vite cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".turbo/"
+    reason: "Turborepo cache"
+    confidence: 1.0
+    category: "cache"
+
+  # --- Language Caches ---
+  - pattern: "__pycache__/"
+    reason: "Python bytecode cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".pytest_cache/"
+    reason: "pytest cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".mypy_cache/"
+    reason: "mypy type checker cache"
+    confidence: 1.0
+    category: "cache"
+
+  - pattern: ".ruff_cache/"
+    reason: "ruff linter cache"
+    confidence: 1.0
+    category: "cache"
+
+  # --- Virtual Environments ---
+  - pattern: ".venv/"
+    reason: "Python virtual environment"
+    confidence: 1.0
+    category: "environment"
+
+  - pattern: "venv/"
+    reason: "Python virtual environment"
+    confidence: 1.0
+    category: "environment"
+
+  - pattern: "env/"
+    reason: "Python virtual environment"
+    confidence: 0.8  # Could be config
+    category: "environment"
+
+  - pattern: ".env/"
+    reason: "Python virtual environment"
+    confidence: 0.9
+    category: "environment"
+
+  # --- Version Control ---
+  - pattern: ".git/"
+    reason: "Git internals"
+    confidence: 1.0
+    category: "vcs"
+
+  - pattern: ".svn/"
+    reason: "Subversion internals"
+    confidence: 1.0
+    category: "vcs"
+
+  - pattern: ".hg/"
+    reason: "Mercurial internals"
+    confidence: 1.0
+    category: "vcs"
+
+  # --- Test Coverage ---
+  - pattern: "coverage/"
+    reason: "test coverage data"
+    confidence: 1.0
+    category: "testing"
+
+  - pattern: ".nyc_output/"
+    reason: "NYC coverage data"
+    confidence: 1.0
+    category: "testing"
+
+  - pattern: "htmlcov/"
+    reason: "HTML coverage report"
+    confidence: 1.0
+    category: "testing"
+
+  # --- IDE/Editor ---
+  - pattern: ".idea/"
+    reason: "JetBrains IDE config"
+    confidence: 1.0
+    category: "ide"
+
+  - pattern: ".vscode/"
+    reason: "VS Code config"
+    confidence: 0.9  # May have useful configs
+    category: "ide"
+
+# ============================================================
+# FILE PATTERNS
+# ============================================================
+# Glob patterns for individual files.
+
+file_patterns:
+
+  # --- Minified Code ---
+  - pattern: "*.min.js"
+    reason: "minified JavaScript"
+    confidence: 0.99
+    category: "minified"
+
+  - pattern: "*.min.css"
+    reason: "minified CSS"
+    confidence: 0.99
+    category: "minified"
+
+  - pattern: "*.min.mjs"
+    reason: "minified ES module"
+    confidence: 0.99
+    category: "minified"
+
+  # --- Bundled Code ---
+  - pattern: "*.bundle.js"
+    reason: "bundled JavaScript"
+    confidence: 0.95
+    category: "bundled"
+
+  - pattern: "*.chunk.js"
+    reason: "code-split chunk"
+    confidence: 0.95
+    category: "bundled"
+
+  - pattern: "*.umd.js"
+    reason: "UMD bundle"
+    confidence: 0.95
+    category: "bundled"
+
+  - pattern: "*.cjs"
+    reason: "CommonJS bundle"
+    confidence: 0.7  # Could be source
+    category: "bundled"
+
+  # --- Generated Code ---
+  - pattern: "*.generated.*"
+    reason: "generated code"
+    confidence: 0.95
+    category: "generated"
+
+  - pattern: "*.g.dart"
+    reason: "Dart generated code"
+    confidence: 0.99
+    category: "generated"
+
+  - pattern: "*.freezed.dart"
+    reason: "Freezed generated code"
+    confidence: 0.99
+    category: "generated"
+
+  # --- Protobuf Generated ---
+  - pattern: "*.pb.go"
+    reason: "protobuf generated (Go)"
+    confidence: 1.0
+    category: "generated"
+
+  - pattern: "*.pb.ts"
+    reason: "protobuf generated (TypeScript)"
+    confidence: 1.0
+    category: "generated"
+
+  - pattern: "*.pb.js"
+    reason: "protobuf generated (JavaScript)"
+    confidence: 1.0
+    category: "generated"
+
+  - pattern: "*_pb2.py"
+    reason: "protobuf generated (Python)"
+    confidence: 1.0
+    category: "generated"
+
+  - pattern: "*_pb2_grpc.py"
+    reason: "gRPC generated (Python)"
+    confidence: 1.0
+    category: "generated"
+
+  # --- Lock Files ---
+  - pattern: "package-lock.json"
+    reason: "npm lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  - pattern: "yarn.lock"
+    reason: "yarn lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  - pattern: "pnpm-lock.yaml"
+    reason: "pnpm lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  - pattern: "Cargo.lock"
+    reason: "Cargo lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  - pattern: "poetry.lock"
+    reason: "Poetry lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  - pattern: "Gemfile.lock"
+    reason: "Bundler lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  - pattern: "composer.lock"
+    reason: "Composer lock file"
+    confidence: 1.0
+    category: "lockfile"
+
+  # --- Source Maps ---
+  - pattern: "*.map"
+    reason: "source map"
+    confidence: 0.95
+    category: "sourcemap"
+
+  - pattern: "*.js.map"
+    reason: "JavaScript source map"
+    confidence: 1.0
+    category: "sourcemap"
+
+  - pattern: "*.css.map"
+    reason: "CSS source map"
+    confidence: 1.0
+    category: "sourcemap"
+
+# ============================================================
+# MINIFICATION HEURISTICS
+# ============================================================
+# Thresholds for detecting unmarked minified files.
+
+minification_heuristics:
+  single_line_size_kb: 10     # Single-line file > 10KB = minified
+  avg_line_length: 500        # Avg line > 500 chars = minified
+  max_reasonable_line: 1000   # Any line > 1000 = suspicious
+  whitespace_ratio_min: 0.05  # < 5% whitespace = minified
+
+# ============================================================
+# CUSTOM PATTERNS (User-defined)
+# ============================================================
+# Add project-specific patterns here.
+
+custom_patterns:
+  directories: []
+  files: []

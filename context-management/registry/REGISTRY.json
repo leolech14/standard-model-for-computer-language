@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-01-23T08:06:19.153214",
+  "generated_at": "2026-01-23T09:02:27.108431",
   "stats": {
-    "total_files": 1491,
+    "total_files": 1562,
     "local_only": 50,
     "cloud_only": 24,
-    "synced": 1417
+    "synced": 1487
   },
   "files": {
     "\"assets/Analogias \\342\\200\\234Quentes\\342\\200\\235 em Espa\\303\\247os Conceituais Multi-camadas.pdf\"": {
@@ -242,15 +242,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/KERNEL.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/KERNEL.md",
-      "local_size": 8612,
-      "cloud_size": 8612
+      "local_size": 8632,
+      "cloud_size": 8632
     },
-    ".agent/OPEN_CONCERNS.md": {
+    ".agent/META_REGISTRY.yaml": {
       "status": "SYNCED",
-      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/OPEN_CONCERNS.md",
-      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/OPEN_CONCERNS.md",
-      "local_size": 10852,
-      "cloud_size": 10852
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/META_REGISTRY.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/META_REGISTRY.yaml",
+      "local_size": 2488,
+      "cloud_size": 2488
     },
     ".agent/SUBSYSTEM_INTEGRATION.md": {
       "status": "SYNCED",
@@ -294,6 +294,13 @@
       "local_size": 914,
       "cloud_size": 914
     },
+    ".agent/intelligence/LEGACY_SPRAWL_MAP.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/LEGACY_SPRAWL_MAP.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/LEGACY_SPRAWL_MAP.md",
+      "local_size": 5923,
+      "cloud_size": 5923
+    },
     ".agent/intelligence/confidence_reports/20260123_064434_batch_confidence.json": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/confidence_reports/20260123_064434_batch_confidence.json",
@@ -301,19 +308,26 @@
       "local_size": 14948,
       "cloud_size": 14948
     },
-    ".agent/intelligence/truths/history/truths_20260123_052327.yaml": {
+    ".agent/intelligence/confidence_reports/20260123_080709_batch_confidence.json": {
       "status": "SYNCED",
-      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/truths/history/truths_20260123_052327.yaml",
-      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/truths/history/truths_20260123_052327.yaml",
-      "local_size": 409,
-      "cloud_size": 409
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/confidence_reports/20260123_080709_batch_confidence.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/confidence_reports/20260123_080709_batch_confidence.json",
+      "local_size": 15967,
+      "cloud_size": 15967
     },
-    ".agent/intelligence/truths/history/truths_20260123_052436.yaml": {
+    ".agent/intelligence/confidence_reports/20260123_081036_batch_confidence.json": {
       "status": "SYNCED",
-      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/truths/history/truths_20260123_052436.yaml",
-      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/truths/history/truths_20260123_052436.yaml",
-      "local_size": 405,
-      "cloud_size": 405
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/confidence_reports/20260123_081036_batch_confidence.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/confidence_reports/20260123_081036_batch_confidence.json",
+      "local_size": 16572,
+      "cloud_size": 16572
+    },
+    ".agent/intelligence/confidence_reports/20260123_082626_batch_confidence.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/confidence_reports/20260123_082626_batch_confidence.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/confidence_reports/20260123_082626_batch_confidence.json",
+      "local_size": 16449,
+      "cloud_size": 16449
     },
     ".agent/intelligence/truths/repo_truths.yaml": {
       "status": "SYNCED",
@@ -326,22 +340,22 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/manifest.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/manifest.yaml",
-      "local_size": 2235,
-      "cloud_size": 2235
+      "local_size": 2561,
+      "cloud_size": 2561
     },
     ".agent/registry/INDEX.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/INDEX.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/INDEX.md",
-      "local_size": 3013,
-      "cloud_size": 3013
+      "local_size": 5258,
+      "cloud_size": 5258
     },
     ".agent/registry/README.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/README.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/README.md",
-      "local_size": 4173,
-      "cloud_size": 4173
+      "local_size": 4195,
+      "cloud_size": 4195
     },
     ".agent/registry/active/TASK-001.yaml": {
       "status": "SYNCED",
@@ -368,22 +382,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-004.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-004.yaml",
-      "local_size": 2546,
-      "cloud_size": 2546
+      "local_size": 2905,
+      "cloud_size": 2905
     },
-    ".agent/registry/active/TASK-005.yaml": {
+    ".agent/registry/active/TASK-007.yaml": {
       "status": "SYNCED",
-      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-005.yaml",
-      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-005.yaml",
-      "local_size": 1314,
-      "cloud_size": 1314
-    },
-    ".agent/registry/active/TASK-006.yaml": {
-      "status": "SYNCED",
-      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-006.yaml",
-      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-006.yaml",
-      "local_size": 1656,
-      "cloud_size": 1656
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-007.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-007.yaml",
+      "local_size": 2005,
+      "cloud_size": 2005
     },
     ".agent/registry/claimed/README.md": {
       "status": "SYNCED",
@@ -434,6 +441,363 @@
       "local_size": 1353,
       "cloud_size": 1353
     },
+    ".agent/registry/inbox/OPP-007.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-007.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-007.yaml",
+      "local_size": 4432,
+      "cloud_size": 4432
+    },
+    ".agent/registry/inbox/OPP-008.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-008.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-008.yaml",
+      "local_size": 922,
+      "cloud_size": 922
+    },
+    ".agent/registry/inbox/OPP-009.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-009.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-009.yaml",
+      "local_size": 927,
+      "cloud_size": 927
+    },
+    ".agent/registry/inbox/OPP-010.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-010.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-010.yaml",
+      "local_size": 947,
+      "cloud_size": 947
+    },
+    ".agent/registry/inbox/OPP-011.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-011.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-011.yaml",
+      "local_size": 927,
+      "cloud_size": 927
+    },
+    ".agent/registry/inbox/OPP-012.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-012.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-012.yaml",
+      "local_size": 923,
+      "cloud_size": 923
+    },
+    ".agent/registry/inbox/OPP-013.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-013.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-013.yaml",
+      "local_size": 922,
+      "cloud_size": 922
+    },
+    ".agent/registry/inbox/OPP-014.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-014.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-014.yaml",
+      "local_size": 931,
+      "cloud_size": 931
+    },
+    ".agent/registry/inbox/OPP-015.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-015.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-015.yaml",
+      "local_size": 941,
+      "cloud_size": 941
+    },
+    ".agent/registry/inbox/OPP-016.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-016.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-016.yaml",
+      "local_size": 948,
+      "cloud_size": 948
+    },
+    ".agent/registry/inbox/OPP-017.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-017.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-017.yaml",
+      "local_size": 949,
+      "cloud_size": 949
+    },
+    ".agent/registry/inbox/OPP-018.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-018.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-018.yaml",
+      "local_size": 935,
+      "cloud_size": 935
+    },
+    ".agent/registry/inbox/OPP-019.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-019.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-019.yaml",
+      "local_size": 966,
+      "cloud_size": 966
+    },
+    ".agent/registry/inbox/OPP-020.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-020.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-020.yaml",
+      "local_size": 950,
+      "cloud_size": 950
+    },
+    ".agent/registry/inbox/OPP-021.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-021.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-021.yaml",
+      "local_size": 943,
+      "cloud_size": 943
+    },
+    ".agent/registry/inbox/OPP-022.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-022.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-022.yaml",
+      "local_size": 948,
+      "cloud_size": 948
+    },
+    ".agent/registry/inbox/OPP-023.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-023.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-023.yaml",
+      "local_size": 960,
+      "cloud_size": 960
+    },
+    ".agent/registry/inbox/OPP-024.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-024.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-024.yaml",
+      "local_size": 965,
+      "cloud_size": 965
+    },
+    ".agent/registry/inbox/OPP-025.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-025.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-025.yaml",
+      "local_size": 957,
+      "cloud_size": 957
+    },
+    ".agent/registry/inbox/OPP-026.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-026.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-026.yaml",
+      "local_size": 986,
+      "cloud_size": 986
+    },
+    ".agent/registry/inbox/OPP-027.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-027.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-027.yaml",
+      "local_size": 941,
+      "cloud_size": 941
+    },
+    ".agent/registry/inbox/OPP-028.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-028.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-028.yaml",
+      "local_size": 964,
+      "cloud_size": 964
+    },
+    ".agent/registry/inbox/OPP-029.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-029.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-029.yaml",
+      "local_size": 925,
+      "cloud_size": 925
+    },
+    ".agent/registry/inbox/OPP-030.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-030.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-030.yaml",
+      "local_size": 944,
+      "cloud_size": 944
+    },
+    ".agent/registry/inbox/OPP-031.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-031.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-031.yaml",
+      "local_size": 786,
+      "cloud_size": 786
+    },
+    ".agent/registry/inbox/OPP-032.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-032.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-032.yaml",
+      "local_size": 953,
+      "cloud_size": 953
+    },
+    ".agent/registry/inbox/OPP-033.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-033.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-033.yaml",
+      "local_size": 453,
+      "cloud_size": 453
+    },
+    ".agent/registry/inbox/OPP-034.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-034.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-034.yaml",
+      "local_size": 499,
+      "cloud_size": 499
+    },
+    ".agent/registry/inbox/OPP-035.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-035.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-035.yaml",
+      "local_size": 409,
+      "cloud_size": 409
+    },
+    ".agent/registry/inbox/OPP-036.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-036.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-036.yaml",
+      "local_size": 405,
+      "cloud_size": 405
+    },
+    ".agent/registry/inbox/OPP-037.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-037.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-037.yaml",
+      "local_size": 405,
+      "cloud_size": 405
+    },
+    ".agent/registry/inbox/OPP-038.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-038.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-038.yaml",
+      "local_size": 413,
+      "cloud_size": 413
+    },
+    ".agent/registry/inbox/OPP-039.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-039.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-039.yaml",
+      "local_size": 411,
+      "cloud_size": 411
+    },
+    ".agent/registry/inbox/OPP-040.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-040.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-040.yaml",
+      "local_size": 411,
+      "cloud_size": 411
+    },
+    ".agent/registry/inbox/OPP-041.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-041.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-041.yaml",
+      "local_size": 397,
+      "cloud_size": 397
+    },
+    ".agent/registry/inbox/OPP-042.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-042.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-042.yaml",
+      "local_size": 515,
+      "cloud_size": 515
+    },
+    ".agent/registry/inbox/OPP-043.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-043.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-043.yaml",
+      "local_size": 457,
+      "cloud_size": 457
+    },
+    ".agent/registry/inbox/OPP-044.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-044.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-044.yaml",
+      "local_size": 513,
+      "cloud_size": 513
+    },
+    ".agent/registry/inbox/OPP-045.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-045.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-045.yaml",
+      "local_size": 470,
+      "cloud_size": 470
+    },
+    ".agent/registry/inbox/OPP-046.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-046.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-046.yaml",
+      "local_size": 470,
+      "cloud_size": 470
+    },
+    ".agent/registry/inbox/OPP-047.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-047.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-047.yaml",
+      "local_size": 458,
+      "cloud_size": 458
+    },
+    ".agent/registry/inbox/OPP-048.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-048.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-048.yaml",
+      "local_size": 458,
+      "cloud_size": 458
+    },
+    ".agent/registry/inbox/OPP-049.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-049.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-049.yaml",
+      "local_size": 470,
+      "cloud_size": 470
+    },
+    ".agent/registry/inbox/OPP-050.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-050.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-050.yaml",
+      "local_size": 454,
+      "cloud_size": 454
+    },
+    ".agent/registry/inbox/OPP-051.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-051.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-051.yaml",
+      "local_size": 432,
+      "cloud_size": 432
+    },
+    ".agent/registry/inbox/OPP-052.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-052.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-052.yaml",
+      "local_size": 432,
+      "cloud_size": 432
+    },
+    ".agent/registry/inbox/OPP-053.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-053.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-053.yaml",
+      "local_size": 442,
+      "cloud_size": 442
+    },
+    ".agent/registry/inbox/OPP-054.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-054.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-054.yaml",
+      "local_size": 432,
+      "cloud_size": 432
+    },
+    ".agent/registry/inbox/OPP-055.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-055.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-055.yaml",
+      "local_size": 434,
+      "cloud_size": 434
+    },
+    ".agent/registry/inbox/OPP-056.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-056.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-056.yaml",
+      "local_size": 430,
+      "cloud_size": 430
+    },
+    ".agent/registry/inbox/OPP-057.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-057.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-057.yaml",
+      "local_size": 414,
+      "cloud_size": 414
+    },
     ".agent/runs/RUN-20260122-194058-claude.yaml": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/runs/RUN-20260122-194058-claude.yaml",
@@ -448,6 +812,13 @@
       "local_size": 2768,
       "cloud_size": 2768
     },
+    ".agent/schema/refinery_node.schema.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/schema/refinery_node.schema.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/schema/refinery_node.schema.yaml",
+      "local_size": 20893,
+      "cloud_size": 20893
+    },
     ".agent/schema/run.schema.yaml": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/schema/run.schema.yaml",
@@ -459,15 +830,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/schema/task.schema.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/schema/task.schema.yaml",
-      "local_size": 3190,
-      "cloud_size": 3190
+      "local_size": 3238,
+      "cloud_size": 3238
     },
     ".agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md",
-      "local_size": 15762,
-      "cloud_size": 15762
+      "local_size": 5292,
+      "cloud_size": 5292
     },
     ".agent/specs/BARE_LIVE.md": {
       "status": "SYNCED",
@@ -489,6 +860,13 @@
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/sprints/SPRINT-001.yaml",
       "local_size": 1612,
       "cloud_size": 1612
+    },
+    ".agent/sprints/SPRINT-002.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/sprints/SPRINT-002.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/sprints/SPRINT-002.yaml",
+      "local_size": 3471,
+      "cloud_size": 3471
     },
     ".agent/tools/audit_unicode.py": {
       "status": "SYNCED",
@@ -522,8 +900,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/claim_task.sh",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/claim_task.sh",
-      "local_size": 1952,
-      "cloud_size": 1952
+      "local_size": 2045,
+      "cloud_size": 2045
     },
     ".agent/tools/execute_cutting_phase1.sh": {
       "status": "SYNCED",
@@ -531,6 +909,13 @@
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/execute_cutting_phase1.sh",
       "local_size": 6662,
       "cloud_size": 6662
+    },
+    ".agent/tools/import_legacy_tasks.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/import_legacy_tasks.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/import_legacy_tasks.py",
+      "local_size": 16057,
+      "cloud_size": 16057
     },
     ".agent/tools/promote_opportunity.py": {
       "status": "SYNCED",
@@ -574,13 +959,6 @@
       "local_size": 8309,
       "cloud_size": 8309
     },
-    ".agent/workflows/testing_suite.md": {
-      "status": "SYNCED",
-      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/workflows/testing_suite.md",
-      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/workflows/testing_suite.md",
-      "local_size": 2080,
-      "cloud_size": 2080
-    },
     ".claude/rules/body.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.claude/rules/body.md",
@@ -592,8 +970,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.claude/rules/brain.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.claude/rules/brain.md",
-      "local_size": 762,
-      "cloud_size": 762
+      "local_size": 1075,
+      "cloud_size": 1075
     },
     ".gemini/context/body.md": {
       "status": "SYNCED",
@@ -613,8 +991,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.gitignore",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.gitignore",
-      "local_size": 3596,
-      "cloud_size": 3596
+      "local_size": 3631,
+      "cloud_size": 3631
     },
     "AGENTKNOWLEDGEDUMP.md": {
       "status": "SYNCED",
@@ -641,8 +1019,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/CLAUDE.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/CLAUDE.md",
-      "local_size": 6818,
-      "cloud_size": 6818
+      "local_size": 6870,
+      "cloud_size": 6870
     },
     "Dockerfile": {
       "status": "SYNCED",
@@ -2930,8 +3308,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/config/aci_config.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/config/aci_config.yaml",
-      "local_size": 5457,
-      "cloud_size": 5457
+      "local_size": 5469,
+      "cloud_size": 5469
     },
     "context-management/config/analysis_sets.yaml": {
       "status": "SYNCED",
@@ -2958,8 +3336,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/config/prompts.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/config/prompts.yaml",
-      "local_size": 11607,
-      "cloud_size": 11607
+      "local_size": 13524,
+      "cloud_size": 13524
     },
     "context-management/config/semantic_models.yaml": {
       "status": "SYNCED",
@@ -3773,6 +4151,27 @@
       "local_size": 155,
       "cloud_size": 155
     },
+    "context-management/intelligence/socratic_audit_architecture_20260123_073907.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/intelligence/socratic_audit_architecture_20260123_073907.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/intelligence/socratic_audit_architecture_20260123_073907.json",
+      "local_size": 8159,
+      "cloud_size": 8159
+    },
+    "context-management/intelligence/socratic_audit_architecture_20260123_081819.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/intelligence/socratic_audit_architecture_20260123_081819.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/intelligence/socratic_audit_architecture_20260123_081819.json",
+      "local_size": 5866,
+      "cloud_size": 5866
+    },
+    "context-management/intelligence/socratic_audit_theory_20260123_073613.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/intelligence/socratic_audit_theory_20260123_073613.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/intelligence/socratic_audit_theory_20260123_073613.json",
+      "local_size": 5522,
+      "cloud_size": 5522
+    },
     "context-management/llm-threads/Agent": {
       "status": "CLOUD_ONLY",
       "local_path": null,
@@ -4246,15 +4645,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/registry/REGISTRY.json",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/registry/REGISTRY.json",
-      "local_size": 661369,
-      "cloud_size": 661369
+      "local_size": 690066,
+      "cloud_size": 690066
     },
     "context-management/registry/REGISTRY_REPORT.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/registry/REGISTRY_REPORT.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/registry/REGISTRY_REPORT.md",
-      "local_size": 40499,
-      "cloud_size": 40499
+      "local_size": 38835,
+      "cloud_size": 38835
     },
     "context-management/reports/context_bubble_analysis.html": {
       "status": "SYNCED",
@@ -4316,8 +4715,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/analyze.py",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/analyze.py",
-      "local_size": 92349,
-      "cloud_size": 92349
+      "local_size": 94856,
+      "cloud_size": 94856
     },
     "context-management/tools/ai/analyze.py.legacy": {
       "status": "SYNCED",
@@ -7399,6 +7798,55 @@
       "local_size": 8028,
       "cloud_size": 8028
     },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_074615_find_in_our_context_management_layer_all_existing.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_074615_find_in_our_context_management_layer_all_existing.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_074615_find_in_our_context_management_layer_all_existing.md",
+      "local_size": 11696,
+      "cloud_size": 11696
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_080638_where_should_handoff_documents_be_saved___a_handof.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_080638_where_should_handoff_documents_be_saved___a_handof.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_080638_where_should_handoff_documents_be_saved___a_handof.md",
+      "local_size": 6162,
+      "cloud_size": 6162
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_080919_honest_evaluation__is_the_run_record_handoff_syste.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_080919_honest_evaluation__is_the_run_record_handoff_syste.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_080919_honest_evaluation__is_the_run_record_handoff_syste.md",
+      "local_size": 8317,
+      "cloud_size": 8317
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_081157_confidence_boost_analysis_for_these_opportunities.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_081157_confidence_boost_analysis_for_these_opportunities.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_081157_confidence_boost_analysis_for_these_opportunities.md",
+      "local_size": 9746,
+      "cloud_size": 9746
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_081924_validate_the__agent_registry__task_system__check.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_081924_validate_the__agent_registry__task_system__check.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_081924_validate_the__agent_registry__task_system__check.md",
+      "local_size": 6404,
+      "cloud_size": 6404
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_082205_audit_the_new_import_legacy_tasks_py_tool_at__agen.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_082205_audit_the_new_import_legacy_tasks_py_tool_at__agen.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_082205_audit_the_new_import_legacy_tasks_py_tool_at__agen.md",
+      "local_size": 1620,
+      "cloud_size": 1620
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_082639_audit_the_current_state_of__agent__directory__what.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_082639_audit_the_current_state_of__agent__directory__what.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_082639_audit_the_current_state_of__agent__directory__what.md",
+      "local_size": 7072,
+      "cloud_size": 7072
+    },
     "standard-model-of-code/docs/research/gemini/docs/graph": {
       "status": "CLOUD_ONLY",
       "local_path": null,
@@ -7559,6 +8007,55 @@
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_072748_agent_handoff_test__assume_you_are_a_new_agent_arr.json",
       "local_size": 8044,
       "cloud_size": 8044
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_074615_find_in_our_context_management_layer_all_existing.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_074615_find_in_our_context_management_layer_all_existing.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_074615_find_in_our_context_management_layer_all_existing.json",
+      "local_size": 11722,
+      "cloud_size": 11722
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_080638_where_should_handoff_documents_be_saved___a_handof.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_080638_where_should_handoff_documents_be_saved___a_handof.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_080638_where_should_handoff_documents_be_saved___a_handof.json",
+      "local_size": 6125,
+      "cloud_size": 6125
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_080919_honest_evaluation__is_the_run_record_handoff_syste.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_080919_honest_evaluation__is_the_run_record_handoff_syste.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_080919_honest_evaluation__is_the_run_record_handoff_syste.json",
+      "local_size": 8325,
+      "cloud_size": 8325
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_081157_confidence_boost_analysis_for_these_opportunities.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_081157_confidence_boost_analysis_for_these_opportunities.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_081157_confidence_boost_analysis_for_these_opportunities.json",
+      "local_size": 9721,
+      "cloud_size": 9721
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_081924_validate_the__agent_registry__task_system__check.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_081924_validate_the__agent_registry__task_system__check.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_081924_validate_the__agent_registry__task_system__check.json",
+      "local_size": 6330,
+      "cloud_size": 6330
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_082205_audit_the_new_import_legacy_tasks_py_tool_at__agen.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_082205_audit_the_new_import_legacy_tasks_py_tool_at__agen.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_082205_audit_the_new_import_legacy_tasks_py_tool_at__agen.json",
+      "local_size": 1492,
+      "cloud_size": 1492
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_082639_audit_the_current_state_of__agent__directory__what.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_082639_audit_the_current_state_of__agent__directory__what.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_082639_audit_the_current_state_of__agent__directory__what.json",
+      "local_size": 7020,
+      "cloud_size": 7020
     },
     "standard-model-of-code/docs/research/perplexity/20260123_064049_i_m_designing_a__registry_of_registries__system_fo.md": {
       "status": "SYNCED",
@@ -7998,8 +8495,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md",
-      "local_size": 33354,
-      "cloud_size": 33354
+      "local_size": 33494,
+      "cloud_size": 33494
     },
     "standard-model-of-code/docs/specs/VISUALIZATION_UI_SPEC.md": {
       "status": "SYNCED",
@@ -9465,10 +9962,10 @@
       "cloud_size": 36671
     },
     "standard-model-of-code/src/core/viz/assets/modules/sidebar.js": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/src/core/viz/assets/modules/sidebar.js",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/src/core/viz/assets/modules/sidebar.js",
-      "local_size": 54280,
+      "local_size": 54967,
       "cloud_size": 54280
     },
     "standard-model-of-code/src/core/viz/assets/modules/spatial.js": {

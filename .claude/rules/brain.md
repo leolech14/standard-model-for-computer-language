@@ -7,8 +7,21 @@ paths:
 
 ## AI Analysis Tool
 - Location: `tools/ai/analyze.py`
-- Requires: `gcloud auth application-default login`
-- Model: `gemini-2.5-pro` (default, best quality)
+- Model: `gemini-3-pro-preview` (default, best reasoning)
+- Backend: AI Studio (default) or Vertex AI (optional)
+
+### Setup (AI Studio - Recommended)
+```bash
+export GEMINI_API_KEY="your-key"  # from aistudio.google.com
+doppler run -- python analyze.py "your query"
+```
+
+### Setup (Vertex AI - Enterprise)
+```bash
+export GEMINI_BACKEND=vertex
+gcloud auth application-default login
+python analyze.py "your query"
+```
 
 ## Analysis Sets
 - Defined in: `config/analysis_sets.yaml`

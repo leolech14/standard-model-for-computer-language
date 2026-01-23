@@ -1,0 +1,76 @@
+id: TASK-010-002
+batch: BATCH-010
+sub_batch: "10.1"
+title: "Implement directory pattern detector"
+status: COMPLETE
+created_at: 2026-01-23T09:20:00Z
+completed_at: 2026-01-23T10:30:00Z
+depends_on:
+  - TASK-010-001
+
+description: |
+  Implement the core pattern detection logic that identifies vendor
+  directories, node_modules, dist folders, and other common exclusion
+  targets based on path patterns.
+
+acceptance_criteria:
+  - Detects vendor/, node_modules/, lib/, dist/, build/ ✓
+  - Detects .min.js, .bundle.js, .generated.* patterns ✓
+  - Returns list of paths matching exclusion patterns ✓
+  - Configurable pattern list (not hardcoded) ✓
+  - Handles nested directories correctly ✓
+
+implementation_notes: |
+  Implemented in survey.py:
+  - DEFAULT_DIRECTORY_PATTERNS: 17 patterns
+  - DEFAULT_FILE_PATTERNS: 13 patterns
+  - path_matches_pattern(): directory, glob, and exact matching
+  - scan_for_exclusions(): returns (dir_exclusions, file_exclusions) tuples
+  - Early termination: stops descent into excluded directories
+  - ExclusionMatch dataclass with path, pattern, reason, confidence, file_count, size
+
+steps:
+  - step: 1
+    description: "Define DEFAULT_EXCLUSION_PATTERNS constant"
+    status: complete
+  - step: 2
+    description: "Implement path_matches_pattern(path, pattern) helper"
+    status: complete
+  - step: 3
+    description: "Implement scan_for_exclusions(root, patterns) function"
+    status: complete
+  - step: 4
+    description: "Add recursive directory walking with early termination"
+    status: complete
+  - step: 5
+    description: "Return structured exclusion report"
+    status: complete
+
+patterns_to_detect:
+  directories:
+    - "vendor/"
+    - "node_modules/"
+    - "lib/"
+    - "dist/"
+    - "build/"
+    - "__pycache__/"
+    - ".git/"
+    - "coverage/"
+  files:
+    - "*.min.js"
+    - "*.min.css"
+    - "*.bundle.js"
+    - "*.generated.*"
+    - "*.pb.go"
+    - "*.pb.ts"
+
+estimated_loc: 80
+complexity: LOW
+
+confidence:
+  factual: 95
+  alignment: 95
+  current: 95
+  onwards: 90
+  overall: 90
+  verdict: ACCEPT

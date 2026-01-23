@@ -1,9 +1,9 @@
 # Agent Manifest - Machine-Readable Discovery
-# Version: 1.0.0
-# Updated: 2026-01-22
+# Version: 2.0.0
+# Updated: 2026-01-23
 
 # Schema version for this manifest format
-manifest_version: "1.0.0"
+manifest_version: "2.0.0"
 
 # Project identification
 project:
@@ -30,6 +30,17 @@ agent_system:
 
   # Dashboard
   registry: .agent/registry/INDEX.md
+
+  # Documentation
+  docs:
+    consolidation: .agent/docs/CONSOLIDATION_REPORT.md
+
+  # Task management tools
+  tools:
+    import_legacy: .agent/tools/import_legacy_tasks.py
+    boost_confidence: .agent/tools/boost_confidence.py
+    task_registry: .agent/tools/task_registry.py
+    promote: .agent/tools/promote_opportunity.py
 
 # Project structure (Concepts / Objects duality)
 structure:

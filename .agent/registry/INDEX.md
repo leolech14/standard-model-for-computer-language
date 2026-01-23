@@ -8,8 +8,9 @@
 ## Quick Stats
 
 ```
-Inbox:      57 opportunities (50 imported from legacy + 7 original)
-Active:     6 tasks
+Inbox:      59 opportunities (50 imported from legacy + 9 new)
+Active:     9 tasks (6 original + 3 Phase 10)
+Batches:    1 (BATCH-010 Survey)
 Archived:   1 task
 Sprints:    1 active (SPRINT-001)
 Legacy:     10 registries CONSOLIDATED into unified system
@@ -52,7 +53,7 @@ All tasks now use the unified 4D scoring system:
 
 ---
 
-## Discovery Inbox (57 opportunities)
+## Discovery Inbox (59 opportunities)
 
 ### High Priority (>= 90% confidence)
 
@@ -65,6 +66,8 @@ All tasks now use the unified 4D scoring system:
 | OPP-027 | Refactor run_full_analysis() | PIPELINE | 95% |
 | OPP-013 | Create index.js | VISUALIZATION | 94% |
 | OPP-014 | Update template.html | VISUALIZATION | 99% |
+| **OPP-058** | **Fix FILES view toggle - data not switching** | **VISUALIZATION** | **85%** |
+| **OPP-059** | **Fix ATOMS view toggle - data not restored** | **VISUALIZATION** | **85%** |
 
 ### Medium Priority (75-89%)
 
@@ -82,7 +85,7 @@ All tasks now use the unified 4D scoring system:
 | Category | Count | Avg Confidence |
 |----------|------:|---------------:|
 | PIPELINE | 10 | 95% |
-| VISUALIZATION | 22 | 85% |
+| VISUALIZATION | 24 | 85% |
 | TOKEN_SYSTEM | 8 | 70% |
 | TREE_SITTER | 1 | 80% |
 | MODULARIZATION | 13 | 70% |
@@ -102,6 +105,27 @@ All tasks now use the unified 4D scoring system:
 
 ---
 
+## Task Batches (Roadmap-Linked)
+
+| Batch | Phase | Title | Status | Tasks |
+|-------|-------|-------|--------|-------|
+| BATCH-010 | 10 | Adaptive Intelligence Layer (SURVEY) | PLANNING | 23 |
+
+### BATCH-010 Sub-Batches
+
+| Sub | Title | Complexity | Status | Tasks |
+|-----|-------|------------|--------|-------|
+| 10.1 | Pattern-based exclusions | LOW | READY | 4 |
+| 10.2 | Minification heuristics | LOW | READY | 4 |
+| 10.3 | CLI --exclude flag | LOW | READY | 3 |
+| 10.4 | Interactive survey mode | MEDIUM | BLOCKED | 4 |
+| 10.5 | AI-powered classification | MEDIUM | BLOCKED | 4 |
+| 10.6 | Auto-survey by default | LOW | BLOCKED | 4 |
+
+**Start with:** 10.1, 10.2, 10.3 (parallel, no dependencies)
+
+---
+
 ## Execution Priority
 
 ```
@@ -112,6 +136,15 @@ READY NOW (>= 95%):
   4. OPP-026  Pipeline Package Structure  [95%]
   5. OPP-027  Refactor run_full_analysis  [95%]
   6. OPP-014  Update template.html        [99%]
+
+FILE VIZ BUGS (COMPLETE):
+  ✓ OPP-058  Fix FILES toggle - data not switching  [FIXED]
+  ✓ OPP-059  Fix ATOMS toggle - data not restored   [FIXED]
+
+PHASE 10 SURVEY (NEW):
+  7. TASK-010-001  Create survey.py skeleton         [95%]
+  8. TASK-010-002  Directory pattern detector        [90%]
+  9. TASK-010-003  Default exclusion patterns config [90%]
 
 BATCH PROMOTE:
   ./promote_opportunity.py OPP-023 OPP-024 OPP-025 OPP-026 OPP-027
@@ -146,9 +179,9 @@ These files are now **read-only reference**. All tasks have been migrated:
 
 | Field | Value |
 |-------|-------|
-| Registry Version | 3.0.0 |
+| Registry Version | 3.0.1 |
 | Last Updated | 2026-01-23 |
 | Consolidation | COMPLETE |
 | Tasks Imported | 50 |
-| Total Opportunities | 57 |
+| Total Opportunities | 59 |
 | Total Active Tasks | 6 |

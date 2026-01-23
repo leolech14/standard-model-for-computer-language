@@ -368,6 +368,47 @@ analysis_sets:
       - agent_intelligence
       - agent_specs
 
+  # ==========================================================================
+  # ACI (Adaptive Context Intelligence) - The Curriculum Compiler
+  # ==========================================================================
+
+  aci_core:
+    description: "ACI module source code - the curriculum compiler"
+    max_tokens: 30000
+    critical_files:
+      - "context-management/tools/ai/aci/tier_router.py"
+      - "context-management/tools/ai/aci/context_optimizer.py"
+    positional_strategy: "front-load"
+    patterns:
+      - "context-management/tools/ai/aci/*.py"
+      - "context-management/config/aci_config.yaml"
+
+  aci_siblings:
+    description: "ACI sibling subsystems (HSL, Perplexity, analyze.py)"
+    max_tokens: 50000
+    patterns:
+      - "context-management/tools/ai/analyze.py"
+      - "context-management/tools/ai/perplexity_research.py"
+      - "context-management/tools/hsl_daemon.py"
+      - "context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md"
+
+  aci_audit:
+    description: "Full ACI audit context - code + config + siblings + docs"
+    max_tokens: 100000
+    auto_interactive: true
+    critical_files:
+      - "context-management/tools/ai/aci/tier_router.py"
+      - "context-management/tools/ai/aci/context_optimizer.py"
+      - "context-management/config/aci_config.yaml"
+    positional_strategy: "sandwich"
+    includes:
+      - aci_core
+      - aci_siblings
+    patterns:
+      - "context-management/docs/AI_USER_GUIDE.md"
+      - "context-management/config/analysis_sets.yaml"
+      - "context-management/config/prompts.yaml"
+
 # ==========================================================================
 # RECOMMENDATIONS - Maps question types to sets
 # ==========================================================================

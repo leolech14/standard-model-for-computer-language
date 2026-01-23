@@ -557,29 +557,39 @@ window.SIDEBAR = (function () {
         // Apply view mode via FILE_VIZ module
         if (mode === 'files') {
             // Switch to file-nodes view
-            if (typeof FILE_VIZ !== 'undefined') {
+            if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined') {
                 // Build the file graph first (required before switching mode)
                 FILE_VIZ.buildFileGraph();
-                window.GRAPH_MODE = 'files';
-                FILE_VIZ.graphMode = 'files';
-                FILE_VIZ.setMode('map');
-                FILE_VIZ.setEnabled(true);
+                const fileGraph = FILE_VIZ.getFileGraph();
+                if (fileGraph) {
+                    // EXPLICIT data switch - don't rely on side effects (OPP-058 fix)
+                    Graph.graphData(fileGraph);
+                    window.GRAPH_MODE = 'files';
+                    FILE_VIZ.setMode('map');
+                    FILE_VIZ.setEnabled(true);
+                    console.log('[SIDEBAR] View mode: FILES - switched to', fileGraph.nodes.length, 'file nodes');
+                } else {
+                    console.warn('[SIDEBAR] Failed to build file graph');
+                }
             } else if (typeof window.GRAPH_MODE !== 'undefined') {
                 window.GRAPH_MODE = 'files';
                 if (typeof buildFileGraph === 'function') buildFileGraph(null);
                 if (typeof refreshGraph === 'function') refreshGraph();
             }
-            console.log('[SIDEBAR] View mode: FILES - showing file nodes');
         } else {
             // Switch to atoms view
-            if (typeof FILE_VIZ !== 'undefined') {
-                FILE_VIZ.graphMode = 'atoms';
+            if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined' && typeof DM !== 'undefined') {
                 FILE_VIZ.setEnabled(false);
+                window.GRAPH_MODE = 'atoms';
+                // EXPLICIT data restore - don't leave file nodes in graph (OPP-059 fix)
+                const nodes = DM.getNodes();
+                const links = DM.getLinks();
+                Graph.graphData({ nodes, links });
+                console.log('[SIDEBAR] View mode: ATOMS - restored', nodes.length, 'atom nodes');
             } else if (typeof window.GRAPH_MODE !== 'undefined') {
                 window.GRAPH_MODE = 'atoms';
                 if (typeof refreshGraph === 'function') refreshGraph();
             }
-            console.log('[SIDEBAR] View mode: ATOMS - showing individual atoms');
         }
 
         // Show toast notification
