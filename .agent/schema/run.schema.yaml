@@ -1,0 +1,143 @@
+# Run Schema - World of Concepts
+# A RUN represents ONE AGENT'S ATTEMPT to advance a task (tactical, per-session)
+# Instantiated as RUN-{timestamp}-{agent}.yaml files in runs/
+
+schema_version: "1.0.0"
+kind: RunSchema
+
+# Run Definition
+run:
+  # Required fields
+  id:
+    type: string
+    pattern: "^RUN-[0-9]{8}-[0-9]{6}-[a-z]+$"
+    description: "Format: RUN-YYYYMMDD-HHMMSS-{agent}"
+
+  task_id:
+    type: string
+    pattern: "^TASK-[0-9]{3}$"
+    description: The task this run is attempting
+
+  agent:
+    type: string
+    enum: [claude, gemini, codex, human, other]
+    description: Which agent is executing this run
+
+  # Status lifecycle
+  status:
+    type: enum
+    values:
+      - STARTED        # Run begun, reading context
+      - IN_PROGRESS    # Actively working
+      - HANDOFF_READY  # Reached stopping point, context preserved for next agent
+      - DONE           # Task completed by this run
+      - ABANDONED      # Run terminated without progress
+    default: STARTED
+
+  # Session context
+  session:
+    started:
+      type: datetime
+      description: When this run began
+
+    ended:
+      type: datetime
+      nullable: true
+      description: When this run completed/stopped
+
+    context_file:
+      type: string
+      nullable: true
+      description: Path to session transcript if available
+
+  # Progress tracking
+  progress:
+    steps_planned:
+      type: integer
+      description: Total steps identified
+
+    steps_completed:
+      type: integer
+      description: Steps finished in this run
+
+    step_log:
+      type: array
+      items:
+        type: object
+        properties:
+          step: { type: integer }
+          action: { type: string }
+          file: { type: string, nullable: true }
+          timestamp: { type: datetime }
+      description: Step-by-step audit trail
+
+  # Handoff information
+  handoff:
+    summary:
+      type: string
+      description: What was accomplished in this run
+
+    next_steps:
+      type: array
+      items: string
+      description: What the next agent should do
+
+    blockers:
+      type: array
+      items: string
+      description: Issues preventing completion
+
+    artifacts:
+      type: array
+      items: string
+      description: Files created/modified in this run
+
+  # Quality
+  confidence_delta:
+    type: object
+    properties:
+      factual: { type: integer, range: [-100, 100] }
+      alignment: { type: integer, range: [-100, 100] }
+      current: { type: integer, range: [-100, 100] }
+      onwards: { type: integer, range: [-100, 100] }
+    description: How this run changed task confidence scores
+
+# Example instantiation (RUN-20260122-183000-claude.yaml)
+example: |
+  id: RUN-20260122-183000-claude
+  task_id: TASK-001
+  agent: claude
+  status: HANDOFF_READY
+  session:
+    started: 2026-01-22T18:30:00Z
+    ended: 2026-01-22T19:45:00Z
+    context_file: null
+  progress:
+    steps_planned: 10
+    steps_completed: 6
+    step_log:
+      - step: 1
+        action: Read existing perplexity_mcp_server.py
+        file: context-management/tools/mcp/perplexity_mcp_server.py
+        timestamp: 2026-01-22T18:32:00Z
+      - step: 2
+        action: Analyzed BEST_PRACTICES.md for patterns
+        file: mcp_factory/knowledge/BEST_PRACTICES.md
+        timestamp: 2026-01-22T18:35:00Z
+  handoff:
+    summary: |
+      Created template directory structure and base files.
+      Server skeleton working, needs tool implementations.
+    next_steps:
+      - Add tool handler templates
+      - Add README with usage instructions
+      - Create tests
+    blockers: []
+    artifacts:
+      - templates/python_stdio_server/server.py
+      - templates/python_stdio_server/pyproject.toml
+  confidence_delta:
+    factual: +5
+    alignment: 0
+    current: +10
+    onwards: 0

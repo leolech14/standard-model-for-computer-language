@@ -1,0 +1,54 @@
+# TASK-000: Bootstrap Agent Coordination System
+# Status: EXECUTING
+# Priority: CRITICAL (bootstrap task)
+
+id: TASK-000
+title: Bootstrap agent coordination system (.agent/)
+description: |
+  Create the multi-agent, multi-session task coordination system.
+
+  Acceptance Criteria:
+  - .agent/ directory structure created
+  - KERNEL.md bootstrap file written
+  - task.schema.yaml and run.schema.yaml defined
+  - manifest.yaml for machine-readable discovery
+  - registry/INDEX.md dashboard created
+  - Sample TASK and RUN demonstrate the system
+
+status: EXECUTING
+
+# 4D Confidence Matrix
+confidence:
+  factual: 95      # Architecture validated by Gemini
+  alignment: 100   # Directly enables multi-agent coordination
+  current: 90      # Building on existing patterns (PROJECT_atman)
+  onwards: 95      # Foundation for all future agent work
+
+# Computed: overall = min(95, 100, 90, 95) = 90
+# Verdict: ACCEPT
+
+# Dependencies
+blocks: []  # All future tasks depend on this system
+
+blocked_by: []  # No blockers
+
+# Metadata
+created: 2026-01-22T18:00:00Z
+updated: 2026-01-22T19:45:00Z
+
+# Runs
+runs:
+  - RUN-20260122-194058-claude
+
+# Output artifacts
+output:
+  files_created:
+    - .agent/KERNEL.md
+    - .agent/manifest.yaml
+    - .agent/schema/task.schema.yaml
+    - .agent/schema/run.schema.yaml
+    - .agent/registry/INDEX.md
+    - .agent/registry/active/TASK-000.yaml
+    - .agent/registry/active/TASK-001.yaml
+  files_modified: []
+  commits: []

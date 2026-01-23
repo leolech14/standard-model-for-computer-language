@@ -1,0 +1,87 @@
+# Agent Manifest - Machine-Readable Discovery
+# Version: 1.0.0
+# Updated: 2026-01-22
+
+# Schema version for this manifest format
+manifest_version: "1.0.0"
+
+# Project identification
+project:
+  name: PROJECT_elements
+  description: Standard Model of Code - Find the basic constituents of computer programs
+  owner: leonardo.lech@gmail.com
+  repository: https://github.com/leolech14/standard-model-of-code
+
+# Agent coordination system
+agent_system:
+  version: "1.0.0"
+  bootstrap: .agent/KERNEL.md
+
+  # Schema definitions (World of Concepts)
+  schemas:
+    task: .agent/schema/task.schema.yaml
+    run: .agent/schema/run.schema.yaml
+
+  # Instance locations (World of Objects)
+  instances:
+    active_tasks: .agent/registry/active/
+    archived_tasks: .agent/registry/archive/
+    runs: .agent/runs/
+
+  # Dashboard
+  registry: .agent/registry/INDEX.md
+
+# Project structure (Concepts / Objects duality)
+structure:
+  body:
+    path: standard-model-of-code/
+    purpose: Collider engine (implementation)
+    concepts: standard-model-of-code/docs/
+    objects: standard-model-of-code/src/
+
+  brain:
+    path: context-management/
+    purpose: AI tools and context management
+    concepts: context-management/docs/
+    objects: context-management/tools/
+
+# Integration points
+integrations:
+  secrets:
+    provider: doppler
+    project: ai-tools
+    config: dev
+
+  cloud:
+    provider: gcp
+    project: elements-archive-2026
+    bucket: gs://elements-archive-2026/
+
+  ai_tools:
+    gemini: context-management/tools/ai/analyze.py
+    perplexity: context-management/tools/mcp/perplexity_mcp_server.py
+
+# Agent capabilities
+agents:
+  claude:
+    capabilities: [code, planning, implementation, testing]
+    config: CLAUDE.md
+
+  gemini:
+    capabilities: [research, validation, exploration]
+    config: context-management/tools/ai/analyze.py
+
+  codex:
+    capabilities: [code_generation, quick_tasks]
+    config: null
+
+  perplexity:
+    capabilities: [web_research, citations]
+    config: context-management/tools/mcp/perplexity_mcp_server.py
+
+# Validation rules
+validation:
+  task_id_pattern: "^TASK-[0-9]{3}$"
+  run_id_pattern: "^RUN-[0-9]{8}-[0-9]{6}-[a-z]+$"
+  confidence_range: [0, 100]
+  required_handoff_fields: [summary, next_steps, artifacts]

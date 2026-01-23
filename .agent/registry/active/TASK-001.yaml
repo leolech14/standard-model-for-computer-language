@@ -1,0 +1,52 @@
+# TASK-001: Create Python MCP Server Template
+# Status: SCOPED
+# Priority: HIGH (90% confidence)
+
+id: TASK-001
+title: Create Python MCP server template
+description: |
+  Create a reusable template for Python stdio MCP servers.
+
+  Acceptance Criteria:
+  - Template generates working server in <5 minutes
+  - Follows BEST_PRACTICES.md patterns
+  - Includes auto-save pipeline integration
+  - Has comprehensive docstrings
+  - Includes test scaffolding
+
+status: SCOPED
+
+# 4D Confidence Matrix
+confidence:
+  factual: 90      # Have reference implementation (perplexity_mcp_server.py)
+  alignment: 95    # Core to MCP Factory mission
+  current: 80      # Need BEST_PRACTICES.md (DONE)
+  onwards: 95      # Foundation for scaffold.py
+
+# Computed: overall = min(90, 95, 80, 95) = 80
+# Verdict: ACCEPT
+
+# Dependencies
+blocks:
+  - TASK-008  # scaffold.py depends on this template
+
+blocked_by: []  # TASK-001 (BEST_PRACTICES.md) is now complete
+
+# Metadata
+created: 2026-01-22T14:00:00Z
+updated: 2026-01-22T20:00:00Z
+
+# Runs that have attempted this task
+runs: []
+
+# Output artifacts (populated when complete)
+output:
+  files_created: []
+  files_modified: []
+  commits: []
+
+# Source: Migrated from mcp_factory/TASK_CONFIDENCE_REGISTRY.md TASK-006
+migration_note: |
+  This task was originally TASK-006 in the MCP Factory task registry.
+  Renumbered to TASK-001 in the new .agent/ system as it's the first
+  task to be tracked here.

@@ -1,0 +1,135 @@
+# Task Schema - World of Concepts
+# A TASK represents WHAT should be true in the repository (strategic, persistent)
+# Instantiated as TASK-XXX.yaml files in registry/active/
+
+schema_version: "1.0.0"
+kind: TaskSchema
+
+# Task Definition
+task:
+  # Required fields
+  id:
+    type: string
+    pattern: "^TASK-[0-9]{3}$"
+    description: Unique task identifier
+
+  title:
+    type: string
+    max_length: 80
+    description: Brief, actionable description
+
+  description:
+    type: string
+    description: Full context and acceptance criteria
+
+  # Status lifecycle
+  status:
+    type: enum
+    values:
+      - DISCOVERY    # Opportunity identified, not yet scoped
+      - SCOPED       # Requirements clear, ready to plan
+      - PLANNED      # Implementation approach defined
+      - EXECUTING    # Work in progress (one or more RUNs)
+      - VALIDATING   # Work complete, awaiting verification
+      - COMPLETE     # Verified and merged
+      - ARCHIVED     # Closed (success or abandoned)
+    default: DISCOVERY
+
+  # 4D Confidence Matrix (adopted from PROJECT_atman)
+  confidence:
+    factual:
+      type: integer
+      range: [0, 100]
+      description: Is my understanding of current state correct?
+
+    alignment:
+      type: integer
+      range: [0, 100]
+      description: Does this serve the project's mission?
+
+    current:
+      type: integer
+      range: [0, 100]
+      description: Does this fit codebase as it exists?
+
+    onwards:
+      type: integer
+      range: [0, 100]
+      description: Does this fit where we're heading?
+
+    # Computed field
+    overall:
+      type: computed
+      formula: "min(factual, alignment, current, onwards)"
+      description: Conservative aggregate (bottleneck thinking)
+
+  # Verdicts based on overall confidence
+  verdict:
+    type: computed
+    rules:
+      - condition: "overall >= 75"
+        value: "ACCEPT"
+      - condition: "overall >= 50"
+        value: "DEFER"
+      - condition: "overall < 50"
+        value: "REJECT"
+
+  # Relationships
+  blocks:
+    type: array
+    items: string
+    description: Task IDs this task blocks
+
+  blocked_by:
+    type: array
+    items: string
+    description: Task IDs blocking this task
+
+  # Tracking
+  created:
+    type: datetime
+    description: When task was discovered
+
+  updated:
+    type: datetime
+    description: Last modification timestamp
+
+  runs:
+    type: array
+    items: string
+    description: RUN IDs that attempted this task
+
+  # Output
+  output:
+    type: object
+    properties:
+      files_created:
+        type: array
+        items: string
+      files_modified:
+        type: array
+        items: string
+      commits:
+        type: array
+        items: string
+    description: Artifacts produced by completed runs
+
+# Example instantiation (TASK-001.yaml)
+example: |
+  id: TASK-001
+  title: Create Python MCP server template
+  description: |
+    Create a reusable template for Python stdio MCP servers.
+    Acceptance: Template generates working server in <5 min.
+  status: SCOPED
+  confidence:
+    factual: 90
+    alignment: 95
+    current: 80
+    onwards: 95
+  blocks: [TASK-008]
+  blocked_by: []
+  created: 2026-01-22T14:00:00Z
+  updated: 2026-01-22T18:30:00Z
+  runs: []
+  output: {}
