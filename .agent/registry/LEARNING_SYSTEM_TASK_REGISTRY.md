@@ -50,18 +50,20 @@
 ☑️  MCP-001   BEST_PRACTICES.md
 ☑️  MCP-003   Dual-format utility
 ☑️  MCP-004   SHA-256 checksums
-☑️  TASK-111  Update analysis_sets.yaml            [93d4de9]
-🟢 TASK-112  Re-evaluate token budgets            [85%]
+☑️  TASK-111  Update analysis_sets.yaml           [93d4de9]
+☑️  TASK-118  Make registry optional in mirror    [pending commit]
+☑️  TASK-119  Reduce token budgets to ≤200k       [pending commit]
 🟢 TASK-114  Add Context Engineering docs         [85%]
 🟢 TASK-106  Dataset optimization guide           [85%]
+🟢 TASK-113  Positional strategy                  [85%] ← unblocked
 🟡 TASK-104  Pre-commit hook                      [80%→85%]
 🟡 TASK-102  --research-loop                      [75%→85%]
 🟡 TASK-103  analyze.py storage                   [70%→85%]
-🟢 TASK-113  Positional strategy                  [85%] ← unblocked
 💤 TASK-105  Live-reload for viz
 💤 TASK-108  Knowledge embodiment workflow
 💤 TASK-109  Deploy HSL to Cloud Run
 ⛔ MCP-007   Node.js template
+⛔ TASK-112  Re-evaluate token budgets            [subsumed by TASK-119]
 ```
 
 ---
@@ -131,6 +133,36 @@
 - Recipe 6 added to `context-management/docs/WORKFLOW_FACTORY.md`
 - Documents: Gemini → Perplexity → File reads → Synthesis → Execute
 - Includes execution thresholds (A/A+/A++) and example session
+
+---
+
+### ☑️  TASK-118: Make registry generation optional in mirror
+**Commit:** pending
+
+**Problem:** Cloud mirror auto-generates registry after every sync, causing
+"always dirty" git status for registry files even when no real changes occurred.
+
+**Deliverables:**
+- Added `--no-registry` flag to `archive.py mirror` command
+- Registry generation now conditional (skipped if flag present)
+- File: `context-management/tools/archive/archive.py`
+
+---
+
+### ☑️  TASK-119: Reduce token budgets to ≤200k
+**Commit:** pending
+
+**Problem:** Perplexity research + ChatGPT Deep Research confirmed 200k is the
+effective usable limit. Sets above this suffer lost-in-middle effects.
+
+**Deliverables:**
+- Reduced `archeology` from 300k → 200k
+- Reduced `architecture_review` from 250k → 200k
+- Reduced `implementation_review` from 350k → 200k
+- Reduced `research_full` from 350k → 200k
+- File: `context-management/config/analysis_sets.yaml`
+
+**Note:** Subsumes TASK-112 (Re-evaluate token budgets)
 
 ---
 
@@ -253,18 +285,15 @@
 ## Execution Priority
 
 ```
-HIGHEST VALUE:
-1. 🟢 TASK-110  Document Socratic Research Loop      [90%]
-2. ☑️  TASK-111  Update analysis_sets.yaml            [93d4de9] ← unblocks 113
-3. 🟢 TASK-114  Add Context Engineering docs         [85%]
-
-NEXT TIER:
-4. 🟢 TASK-112  Re-evaluate token budgets            [85%]
-5. 🟢 TASK-106  Dataset optimization guide           [85%]
+HIGHEST VALUE (READY):
+1. 🟢 TASK-114  Add Context Engineering docs         [85%]
+2. 🟢 TASK-106  Dataset optimization guide           [85%]
+3. 🟢 TASK-113  Positional strategy                  [85%] ← unblocked
 
 NEEDS BOOST:
-6. 🟡 TASK-116  Reconcile registries                 [90%→95%]
-7. 🟡 TASK-102  --research-loop                      [75%→85%]
+4. 🟡 TASK-104  Pre-commit hook                      [80%→85%]
+5. 🟡 TASK-102  --research-loop                      [75%→85%]
+6. 🟡 TASK-103  analyze.py storage                   [70%→85%]
 ```
 
 ---
@@ -273,13 +302,12 @@ NEEDS BOOST:
 
 | Status | Count | Tasks |
 |--------|-------|-------|
-| ☑️  COMPLETE | 9 | 100, 115, 116, 117, 110, 101, MCP-001, MCP-003, MCP-004 |
-| 🟢 READY | 4 | 111, 112, 114, 106 |
+| ☑️  COMPLETE | 12 | 100, 115, 116, 117, 110, 101, 111, 118, 119, MCP-001, MCP-003, MCP-004 |
+| 🟢 READY | 3 | 114, 106, 113 |
 | 🟡 NEEDS BOOST | 3 | 104, 102, 103 |
-| 🚧 BLOCKED | 1 | 113 |
 | 💤 DEFERRED | 3 | 105, 108, 109 |
-| ⛔ REJECTED | 1 | MCP-007 |
-| **TOTAL** | **21** | |
+| ⛔ REJECTED | 2 | MCP-007, 112 (subsumed) |
+| **TOTAL** | **23** | |
 
 ---
 
@@ -292,3 +320,4 @@ NEEDS BOOST:
 | 3.0.0 | 2026-01-23 | Reassessed: 6 tasks complete, updated blockers |
 | 3.1.0 | 2026-01-23 | Added emoji status legend, Quick View section |
 | 3.2.0 | 2026-01-23 | Session complete: +3 tasks (116, 117, 110), Socratic Loop documented |
+| 3.3.0 | 2026-01-23 | Context purity: +2 tasks (118, 119), token budgets reduced to ≤200k |

@@ -86,7 +86,7 @@ analysis_sets:
   # --- BOX 5: THE PAST (Archeology) ---
   archeology:
     description: "The Geologic Record (Generation 2 Analysis)"
-    max_tokens: 300000
+    max_tokens: 200000  # Reduced from 300k - 200k is effective limit
     patterns:
       - "archive/docs_smc_2026-01-19/**"
       - "archive/docs_registry_2026-01-19/**"
@@ -174,7 +174,7 @@ analysis_sets:
 
   architecture_review:
     description: "Full architecture review (pipeline + classifiers + constraints)"
-    max_tokens: 250000
+    max_tokens: 200000  # Reduced from 250k - 200k is effective limit
     auto_interactive: true
     critical_files:
       - "standard-model-of-code/src/core/full_analysis.py"
@@ -188,7 +188,7 @@ analysis_sets:
 
   implementation_review:
     description: "Implementation review (pipeline + schema + theory)"
-    max_tokens: 350000
+    max_tokens: 200000  # Reduced from 350k - 200k is effective limit
     auto_interactive: true
     includes:
       - pipeline
@@ -287,7 +287,7 @@ analysis_sets:
 
   research_full:
     description: "Complete research context (documents + tools + atoms)"
-    max_tokens: 350000
+    max_tokens: 200000  # Reduced from 350k - 200k is effective limit
     auto_interactive: true
     critical_files:
       - "standard-model-of-code/docs/research/ATOM_COVERAGE_INVESTIGATION.md"

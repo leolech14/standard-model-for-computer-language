@@ -517,10 +517,16 @@ def get_project_files(root_path):
 
 
 def cmd_mirror(args):
-    """Mirror repository to GCS."""
+    """Mirror repository to GCS.
+
+    Options:
+        --dry-run      Preview changes without uploading
+        --no-registry  Skip auto-generating registry after mirror
+    """
     config = load_config()
     dry_run = "--dry-run" in args
-    
+    skip_registry = "--no-registry" in args
+
     if "mirror" not in config:
         print("Error: 'mirror' section missing in config.yaml")
         return
@@ -655,9 +661,13 @@ def cmd_mirror(args):
 
     print()
     print("Mirror complete.")
-    
-    # Auto-generate registry after mirror
-    generate_registry(bucket, prefix, account)
+
+    # Auto-generate registry after mirror (unless --no-registry)
+    if not skip_registry:
+        generate_registry(bucket, prefix, account)
+    else:
+        print("Skipping registry generation (--no-registry)")
+
 
 
 def generate_registry(bucket: str, prefix: str, account: str):
