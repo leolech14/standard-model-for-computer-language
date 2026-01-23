@@ -51,11 +51,11 @@
 ☑️  MCP-003   Dual-format utility
 ☑️  MCP-004   SHA-256 checksums
 ☑️  TASK-111  Update analysis_sets.yaml           [93d4de9]
-☑️  TASK-118  Make registry optional in mirror    [pending commit]
-☑️  TASK-119  Reduce token budgets to ≤200k       [pending commit]
-🟢 TASK-114  Add Context Engineering docs         [85%]
-🟢 TASK-106  Dataset optimization guide           [85%]
-🟢 TASK-113  Positional strategy                  [85%] ← unblocked
+☑️  TASK-118  Make registry optional in mirror    [6090fce]
+☑️  TASK-119  Reduce token budgets to ≤200k       [6090fce]
+☑️  TASK-114  Add Context Engineering docs        [pending commit]
+☑️  TASK-106  Dataset optimization guide          [pending commit]
+☑️  TASK-113  Positional strategy                 [5c7b35b]
 🟡 TASK-104  Pre-commit hook                      [80%→85%]
 🟡 TASK-102  --research-loop                      [75%→85%]
 🟡 TASK-103  analyze.py storage                   [70%→85%]
@@ -166,9 +166,42 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 
 ---
 
-## 🟢 READY NOW (Meets Threshold)
+### ☑️  TASK-114: Add Context Engineering docs to KERNEL.md
+**Commit:** pending
 
-### 🟢 TASK-111: Update analysis_sets.yaml schema
+**Deliverables:**
+- Added "Context Engineering" section to `.agent/KERNEL.md`
+- Documents: Lost-in-middle effect, U-shaped attention diagram
+- Includes: Token budget tiers (Guru/Architect/Archeologist/Perilous)
+- Practical rules: ROI thinking, edge positioning, critical_files usage
+
+---
+
+### ☑️  TASK-106: Dataset optimization guide
+**Commit:** pending
+
+**Deliverables:**
+- Added "Dataset Optimization Strategy" section to WORKFLOW_FACTORY.md
+- Documents: RAG vs Long Context decision matrix
+- Includes: Purity principles, token budget decision tree
+- Anti-patterns table with solutions
+
+---
+
+### ☑️  TASK-113: Implement positional strategy in analyze.py
+**Status:** Already implemented (discovered during execution)
+
+**Implementation found at:**
+- `analyze.py:875-934` - `build_context_from_files()` function
+- Supports both `sandwich` and `front-load` strategies
+- Prints strategy info to stderr when active
+- Called correctly from main() at lines 1905-1909
+
+---
+
+## 🟡 NEEDS CONFIDENCE BOOST
+
+### 🟡 TASK-111: Update analysis_sets.yaml schema
 **Risk:** A | **Threshold:** 85% | **Score:** 85%
 
 | Dimension | Score | Rationale |
