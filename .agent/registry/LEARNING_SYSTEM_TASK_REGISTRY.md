@@ -338,7 +338,9 @@ and executing Socratic Research Loop queries until tasks meet execution threshol
 **Risk:** A+ | **Threshold:** 95% | **Score:** 65%
 
 **Vision:** Background process that discovers new task opportunities by analyzing
-codebase changes, research outputs, and conversation patterns.
+codebase changes, research outputs, and conversation patterns. Tasks are auto-generated
+and wait in a **Discovery Inbox** for human/terminal agent approval before promotion
+to the main registry.
 
 | Dimension | Score | Rationale |
 |-----------|-------|-----------|
@@ -374,8 +376,31 @@ codebase changes, research outputs, and conversation patterns.
 │  │ transcripts │              │ - User requests         │        │
 │  └─────────────┘              │ - Unfinished threads    │        │
 │                               └─────────────────────────┘        │
-│                                                                  │
-│  OUTPUT: New TASK-XXX entries with initial 4D scores             │
+│                                          │                       │
+│                                          ▼                       │
+│                          ┌───────────────────────────┐           │
+│                          │   DISCOVERY INBOX         │           │
+│                          │   .agent/registry/inbox/  │           │
+│                          │                           │           │
+│                          │   DRAFT-001.yaml          │           │
+│                          │   DRAFT-002.yaml          │           │
+│                          │   ...                     │           │
+│                          └───────────────────────────┘           │
+│                                          │                       │
+│                                          ▼                       │
+│                          ┌───────────────────────────┐           │
+│                          │   APPROVAL PIPELINE       │           │
+│                          │                           │           │
+│                          │   Terminal Agent reviews: │           │
+│                          │   - Dedup vs existing     │           │
+│                          │   - Validate 4D scores    │           │
+│                          │   - Check alignment       │           │
+│                          │                           │           │
+│                          │   Actions:                │           │
+│                          │   [ACCEPT] → main registry│           │
+│                          │   [REJECT] → archive      │           │
+│                          │   [MERGE]  → combine      │           │
+│                          └───────────────────────────┘           │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -386,15 +411,26 @@ codebase changes, research outputs, and conversation patterns.
 3. `research_gap_detector.py` - Finds unanswered questions in research/
 4. `drift_detector.py` - Parses Socratic audits for violations
 5. `idea_extractor.py` - Mines conversation logs for user requests
-6. `task_proposer.py` - Creates draft TASK entries with 4D scores
+6. `task_proposer.py` - Creates DRAFT entries in inbox with 4D scores
+7. `approval_agent.py` - Terminal agent for review/accept/reject
+
+**Directory Structure:**
+```
+.agent/registry/
+├── active/           # Tasks being worked on
+├── inbox/            # Discovery Inbox (DRAFT-XXX.yaml)
+├── claimed/          # Claimed tasks (locks)
+└── archive/          # Rejected/completed drafts
+```
 
 **Dependencies:**
 - Git hooks (post-commit trigger)
 - HSL daemon (socratic audits)
 - Perplexity research directory
 - Claude conversation logs
+- Terminal agent (human or automated reviewer)
 
-**To Boost:** Define signals taxonomy, scoring heuristics, conflict resolution
+**To Boost:** Define signals taxonomy, scoring heuristics, approval criteria
 
 ---
 
