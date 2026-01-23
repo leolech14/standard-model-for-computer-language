@@ -1,0 +1,470 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T11:04:46.855432",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "I am building an Adaptive Context Intelligence system that needs to perform SEMANTIC QUERY MATCHING against a codebase knowledge graph. The graph has:\n\n1. ATOMS (167 structural code types like Entity, Repository, Service, Controller)\n2. DIMENSIONS (8 classification axes)\n3. SCALES (16 hierarchical levels from Bit to Universe)\n4. PURPOSE fields that indicate semantic relationships\n\nI need to research:\n\n1. How to implement semantic similarity matching between a natural language query and graph nodes\n2. Graph traversal algorithms for finding upstream/downstream related concepts\n3. How to use PURPOSE/intent fields to determine semantic distance\n4. Techniques for 'emergent entity consolidation' - grouping related nodes into higher-level concepts\n5. How RAG systems integrate with knowledge graphs for context selection\n\nProvide practical implementation approaches with code examples where possible. Focus on Python implementations that could work with YAML-defined schemas.",
+    "query_length": 978,
+    "checksum": "sha256:f20033e9b7d0d7484a5816bbfaff0827e16df11b8248253852deb7805e950e57"
+  },
+  "response": {
+    "id": "099334a8-8c1a-4749-88cc-5e364d5d0a3f",
+    "model": "sonar-deep-research",
+    "created": 1769177086,
+    "usage": {
+      "prompt_tokens": 190,
+      "completion_tokens": 8669,
+      "total_tokens": 8859,
+      "citation_tokens": 53134,
+      "num_search_queries": 30,
+      "reasoning_tokens": 316894,
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.069,
+        "citation_tokens_cost": 0.106,
+        "reasoning_tokens_cost": 0.951,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.277
+      }
+    },
+    "citations": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4005080/",
+      "https://graphable.ai/blog/best-graph-traversal-algorithms/",
+      "https://mlnotes.substack.com/p/how-to-integrate-knowledge-graph",
+      "https://www.geeksforgeeks.org/nlp/different-techniques-for-sentence-semantic-similarity-in-nlp/",
+      "https://web.stanford.edu/class/cs520/2020/notes/What_is_a_Knowledge_Graph.html",
+      "https://www.databricks.com/blog/building-improving-and-deploying-knowledge-graph-rag-systems-databricks",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11131308/",
+      "https://insightland.org/blog/intent-based-search-why-ai-understands-customers-better-than-keywords/",
+      "https://arxiv.org/html/2506.02509v1",
+      "https://www.implicit.cloud/article/knowledge-graph-entity-graph",
+      "https://milvus.io/ai-quick-reference/how-does-intentbased-search-improve-customer-experience",
+      "https://www.emergentmind.com/papers/1709.10436",
+      "https://sbert.net/docs/sentence_transformer/usage/semantic_textual_similarity.html",
+      "https://github.com/neo4j/neo4j-graphrag-python",
+      "https://www.puppygraph.com/blog/knowledge-graph-in-machine-learning",
+      "https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html",
+      "https://python.plainenglish.io/exploring-graph-databases-with-python-and-neo4j-917cb22d3828",
+      "https://docs.celonis.com/en/knowledge-model---yaml-definitions.html",
+      "https://practicaldatamodeling.substack.com/p/semantics-ontology-and-taxonomy-and",
+      "https://stellargraph.readthedocs.io/en/stable/demos/embeddings/node2vec-embeddings.html",
+      "https://aclanthology.org/2025.emnlp-main.788/",
+      "https://factorfirm.com/thinkhub/ontology-101-what-it-is-why-it-matters-and-how-to-use-it/",
+      "https://www.kaggle.com/code/shakshisharma/graph-embeddings-deepwalk-and-node2vec",
+      "https://arxiv.org/pdf/2509.19125.pdf",
+      "https://vlg.cs.dartmouth.edu/semanticembedding/semantic_manifold.files/ft_eccv12.pdf",
+      "https://resources.ironmountain.com/blogs-and-articles/f/from-queries-to-insights-iron-mountain-hybrid-knowledge-graph-querying-tool",
+      "https://github.com/abdouskamel/HMGE",
+      "https://ceur-ws.org/Vol-3396/paper17.pdf",
+      "https://arxiv.org/html/2508.02999v1",
+      "https://www.emergentmind.com/topics/hierarchical-knowledge-graph-aggregation",
+      "https://www.tigerdata.com/learn/implementing-cosine-similarity-in-python",
+      "https://www.amazon.science/blog/improving-entity-linking-between-texts-and-knowledge-bases",
+      "https://arxiv.org/abs/2502.12918",
+      "https://memgraph.com/blog/cosine-similarity-python-scikit-learn",
+      "https://www.ontotext.com/knowledgehub/fundamentals/what-is-entity-linking/",
+      "https://www.vldb.org/pvldb/vol18/p5031-li.pdf",
+      "https://www.freecodecamp.org/news/graph-algorithms-in-python-bfs-dfs-and-beyond/",
+      "https://networkx.org/documentation/stable/tutorial.html",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC11623068/",
+      "https://www.youtube.com/watch?v=_qeVmseIQv0",
+      "https://networkx.org/documentation/stable/reference/algorithms/traversal.html",
+      "https://gianvitopio.di.uniba.it/pdf/DS%202015%20-%20Multiwebclass.pdf",
+      "https://pytorch-geometric.readthedocs.io/en/2.6.1/notes/create_gnn.html",
+      "https://github.com/alishams21/yaml2graph",
+      "https://docs.python.org/3/library/ast.html",
+      "https://github.com/pyg-team/pytorch_geometric",
+      "https://nexus-forge.readthedocs.io/en/latest/interaction.html",
+      "https://www.codemag.com/Article/2507081/Identifying-and-Reducing-Test-Case-Combinatorial-Explosions-with-Python%E2%80%99s-Abstract-Syntax-Tree-AST-and-Pytest-Framework",
+      "https://milvus.io/blog/getting-started-with-hnswlib.md",
+      "https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html",
+      "https://www.searchenginejournal.com/nlp-nlu-semantic-search/444694/",
+      "https://www.pinecone.io/learn/series/faiss/hnsw/",
+      "https://docs.scipy.org/doc/scipy/reference/cluster.hierarchy.html",
+      "https://milvus.io/ai-quick-reference/what-is-search-query-normalization",
+      "https://arxiv.org/abs/1910.02915",
+      "https://www.emergentmind.com/topics/cluster-consistent-neural-architectures",
+      "https://web.stanford.edu/class/cs520/2020/notes/What_Are_Some_Inference_Algorithms.html",
+      "https://www.qt.io/blog/atomic-design-systems-why-the-labels-dont-matter",
+      "https://arxiv.org/abs/1906.07633",
+      "https://blogs.oracle.com/database/accelerate-your-informed-decisionmaking-enable-path-analytics-on-knowledge-graphs"
+    ],
+    "search_results": [
+      {
+        "title": "A Grammar-Based Semantic Similarity Algorithm for Natural ...",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4005080/",
+        "snippet": "The proposed algorithm determines the similarity of two natural language sentences from the grammar information and the semantic similarity of words that the ...",
+        "source": "web"
+      },
+      {
+        "title": "The 2 Most Valuable Graph Traversal Algorithms - Graphable",
+        "url": "https://graphable.ai/blog/best-graph-traversal-algorithms/",
+        "snippet": "Why are graph traversal algorithms so valuable? They visit all connected nodes in the graph. In this article, find out more about how they ...",
+        "source": "web"
+      },
+      {
+        "title": "How to Integrate Knowledge Graph to Your RAG Systems?",
+        "url": "https://mlnotes.substack.com/p/how-to-integrate-knowledge-graph",
+        "snippet": "When integrated with a RAG system, the knowledge graph can significantly enhance the system's capabilities. Instead of relying solely on the ...",
+        "source": "web"
+      },
+      {
+        "title": "Different Techniques for Sentence Semantic Similarity in NLP",
+        "url": "https://www.geeksforgeeks.org/nlp/different-techniques-for-sentence-semantic-similarity-in-nlp/",
+        "snippet": "Semantic similarity is the similarity between two words or two sentences/phrase/text. It measures how close or how different the two pieces ...",
+        "source": "web"
+      },
+      {
+        "title": "What is a Knowledge Graph?",
+        "url": "https://web.stanford.edu/class/cs520/2020/notes/What_is_a_Knowledge_Graph.html",
+        "snippet": "A knowledge graph is a directed labeled graph in which the labels have well-defined meanings. A directed labeled graph consists of nodes, edges, and labels.",
+        "source": "web"
+      },
+      {
+        "title": "Building, Improving, and Deploying Knowledge Graph RAG Systems ...",
+        "url": "https://www.databricks.com/blog/building-improving-and-deploying-knowledge-graph-rag-systems-databricks",
+        "snippet": "The primary advantage of GraphRAG over standard RAG lies in its ability to perform exact matching during the retrieval step.",
+        "source": "web"
+      },
+      {
+        "title": "Semantic units: organizing knowledge graphs into ... - PubMed Central",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11131308/",
+        "snippet": "Semantic units structure a knowledge graph into identifiable and semantically meaningful subgraphs by adding another layer of triples on top of the ...",
+        "source": "web"
+      },
+      {
+        "title": "Intent-based search: why AI understands customers better than ...",
+        "url": "https://insightland.org/blog/intent-based-search-why-ai-understands-customers-better-than-keywords/",
+        "snippet": "AI analyzes query meaning using semantic embeddings and NLP, delivering relevant answers to even vague or unconventional queries. No ...",
+        "source": "web"
+      },
+      {
+        "title": "In-context Clustering-based Entity Resolution with Large Language ...",
+        "url": "https://arxiv.org/html/2506.02509v1",
+        "snippet": "Pairwise questioning-based ER consists of two phases: matching and combining (excluding blocking for simplicity). Matching aims to determine if ...",
+        "source": "web"
+      },
+      {
+        "title": "Knowledge Graphs and Entity Graphs - When You Need One vs ...",
+        "url": "https://www.implicit.cloud/article/knowledge-graph-entity-graph",
+        "snippet": "The first step to building an entity graph is creating a clear understanding of the types of entities that are important to your organization. This means ...",
+        "source": "web"
+      },
+      {
+        "title": "How does intent-based search improve customer experience? - Milvus",
+        "url": "https://milvus.io/ai-quick-reference/how-does-intentbased-search-improve-customer-experience",
+        "snippet": "Intent-based search improves customer experience by focusing on the underlying goal of a user's query rather than relying solely on keyword matching.",
+        "source": "web"
+      },
+      {
+        "title": "Unsupervised String Transformation Learning for Entity Consolidation",
+        "url": "https://www.emergentmind.com/papers/1709.10436",
+        "snippet": "Our approach first uses an unsupervised method to generate groups of value pairs that can be transformed in the same way (i.e., they share a transformation).",
+        "source": "web"
+      },
+      {
+        "title": "Semantic Textual Similarity — Sentence Transformers documentation",
+        "url": "https://sbert.net/docs/sentence_transformer/usage/semantic_textual_similarity.html",
+        "snippet": "For Semantic Textual Similarity (STS), we want to produce embeddings for all texts involved and calculate the similarities between them.",
+        "source": "web"
+      },
+      {
+        "title": "Neo4j GraphRAG for Python - GitHub",
+        "url": "https://github.com/neo4j/neo4j-graphrag-python",
+        "snippet": "The official Neo4j GraphRAG package for Python enables developers to build graph retrieval augmented generation (GraphRAG) applications using the power of Neo4 ...",
+        "source": "web"
+      },
+      {
+        "title": "Knowledge Graph in Machine Learning: All You Need to Know",
+        "url": "https://www.puppygraph.com/blog/knowledge-graph-in-machine-learning",
+        "snippet": "Knowledge graphs organize information in a structured graph format, detailing relationships between entities within a domain, and are essential ...",
+        "source": "web"
+      },
+      {
+        "title": "Semantic Search — Sentence Transformers documentation",
+        "url": "https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html",
+        "snippet": "This function performs by default a cosine similarity search between a list of query embeddings and a list of corpus embeddings. It can be used for ...",
+        "source": "web"
+      },
+      {
+        "title": "Exploring Graph Databases with Python and Neo4j",
+        "url": "https://python.plainenglish.io/exploring-graph-databases-with-python-and-neo4j-917cb22d3828",
+        "snippet": "Neo4j is great for storage and traversal, but Python's NetworkX library gives you powerful graph analytics like centrality, clustering, and ...",
+        "source": "web"
+      },
+      {
+        "title": "Knowledge Model - YAML Definitions",
+        "url": "https://docs.celonis.com/en/knowledge-model---yaml-definitions.html",
+        "snippet": "A Knowledge Model as represented in YAML consists of different segments. The first segment contains the required meta-information about the KM.",
+        "source": "web"
+      },
+      {
+        "title": "Semantics, Ontology, and Taxonomy, and Metadata",
+        "url": "https://practicaldatamodeling.substack.com/p/semantics-ontology-and-taxonomy-and",
+        "snippet": "In that case, an ontology captures the informal meaning and expresses it in a formal semantic model for human and machine interpretability.",
+        "source": "web"
+      },
+      {
+        "title": "Node representation learning with Node2Vec",
+        "url": "https://stellargraph.readthedocs.io/en/stable/demos/embeddings/node2vec-embeddings.html",
+        "snippet": "An example of implementing the Node2Vec representation learning algorithm using components from the stellargraph and gensim libraries.",
+        "source": "web"
+      },
+      {
+        "title": "Context-Aware Hierarchical Taxonomy Generation for Scientific ...",
+        "url": "https://aclanthology.org/2025.emnlp-main.788/",
+        "snippet": "We propose a novel context-aware hierarchical taxonomy generation framework that integrates LLM-guided multi-aspect encoding with dynamic clustering. Our method ...",
+        "source": "web"
+      },
+      {
+        "title": "Ontology 101: What It Is, Why It Matters, and How to Use It - Factor Firm",
+        "url": "https://factorfirm.com/thinkhub/ontology-101-what-it-is-why-it-matters-and-how-to-use-it/",
+        "snippet": "An ontology defines the objects and concepts, their attributes, and the relationships between them. A knowledge graph applies that structure, ...",
+        "source": "web"
+      },
+      {
+        "title": "Graph Embeddings - DeepWalk and Node2Vec - Kaggle",
+        "url": "https://www.kaggle.com/code/shakshisharma/graph-embeddings-deepwalk-and-node2vec",
+        "snippet": "Graph embedding is an approach that is used to transform nodes, edges, and their features into vector space (a lower dimension) whilst maximally preserving ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Context-Aware Hierarchical Taxonomy Generation for Scientific ...",
+        "url": "https://arxiv.org/pdf/2509.19125.pdf",
+        "snippet": "Our approach uniquely integrates LLMs with clustering in a context-aware multi-aspect framework, resulting in coherent and precise hierarchical ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Measuring Image Distances via Embedding in a Semantic Manifold",
+        "url": "https://vlg.cs.dartmouth.edu/semanticembedding/semantic_manifold.files/ft_eccv12.pdf",
+        "snippet": "The shortest path distance between two nodes of the graph can then be viewed as a measure of their semantic relatedness. The shortest path distances are ...",
+        "source": "web"
+      },
+      {
+        "title": "From queries to insights: how Iron Mountain's hybrid knowledge ...",
+        "url": "https://resources.ironmountain.com/blogs-and-articles/f/from-queries-to-insights-iron-mountain-hybrid-knowledge-graph-querying-tool",
+        "snippet": "Hybrid search algorithm: Combines keyword graph traversal, vector similarity search, and embedding-enhanced exploration for complete recall ...",
+        "source": "web"
+      },
+      {
+        "title": "HMGE : Hierarchical Aggregations for High-Dimensional Multiplex ...",
+        "url": "https://github.com/abdouskamel/HMGE",
+        "snippet": "Hierarchical aggregation consists in learning a hierarchical combination of the graph dimensions and refining the embeddings at each hierarchy level. Non-linear ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Calculation of the Semantic Distance between Ontology Concepts",
+        "url": "https://ceur-ws.org/Vol-3396/paper17.pdf",
+        "snippet": "This method will require additional parameters for the ontology graph – each node must additionally contain data about these semantic distances.",
+        "source": "web"
+      },
+      {
+        "title": "AGENTiGraph: A Multi-Agent Knowledge Graph Framework ... - arXiv",
+        "url": "https://arxiv.org/html/2508.02999v1",
+        "snippet": "The flexible design of AGENTiGraph, including intent classification, task planning, and automatic knowledge integration, ensures seamless ...",
+        "source": "web"
+      },
+      {
+        "title": "Hierarchical Knowledge Graph Aggregation - Emergent Mind",
+        "url": "https://www.emergentmind.com/topics/hierarchical-knowledge-graph-aggregation",
+        "snippet": "It employs schema-based, clustering, and neural methods to aggregate and compress information, thereby enhancing performance in link prediction ...",
+        "source": "web"
+      },
+      {
+        "title": "Implementing Cosine Similarity in Python - Tiger Data",
+        "url": "https://www.tigerdata.com/learn/implementing-cosine-similarity-in-python",
+        "snippet": "Cosine similarity measures the similarity between two non-zero vectors by calculating the cosine of the angle between them in vector space.",
+        "source": "web"
+      },
+      {
+        "title": "Improving “entity linking” between texts and knowledge bases",
+        "url": "https://www.amazon.science/blog/improving-entity-linking-between-texts-and-knowledge-bases",
+        "snippet": "Entity linking (EL) is the process of automatically linking entity mentions in text to the corresponding entries in a knowledge base (a database of facts ...",
+        "source": "web"
+      },
+      {
+        "title": "[2502.12918] Query Rewriting via LLMs - arXiv",
+        "url": "https://arxiv.org/abs/2502.12918",
+        "snippet": "We investigate here, how the remarkable cognitive capabilities of LLMs can be leveraged for performant query rewriting while incorporating safeguards and ...",
+        "source": "web"
+      },
+      {
+        "title": "Understanding Cosine Similarity in Python with Scikit-Learn",
+        "url": "https://memgraph.com/blog/cosine-similarity-python-scikit-learn",
+        "snippet": "Cosine similarity is a measure of similarity between two non-zero vectors of an inner product space based on the cosine of the angle between them.",
+        "source": "web"
+      },
+      {
+        "title": "What is Entity Linking | Ontotext Fundamentals",
+        "url": "https://www.ontotext.com/knowledgehub/fundamentals/what-is-entity-linking/",
+        "snippet": "Entity linking makes content easy to organize and discover and transforms the information encoded in the text into structured knowledge.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] R-Bot: An LLM-based Query Rewrite System - VLDB Endowment",
+        "url": "https://www.vldb.org/pvldb/vol18/p5031-li.pdf",
+        "snippet": "We first design a multi-source rewrite evidence preparation pipeline to generate query rewrite evidences for guiding LLMs to avoid hallucinations. We then ...",
+        "source": "web"
+      },
+      {
+        "title": "Graph Algorithms in Python: BFS, DFS, and Beyond - freeCodeCamp",
+        "url": "https://www.freecodecamp.org/news/graph-algorithms-in-python-bfs-dfs-and-beyond/",
+        "snippet": "In this guide, we will explore two core traversal techniques: Breadth-First Search (BFS) and Depth-First Search (DFS). Moving on from there, we ...",
+        "source": "web"
+      },
+      {
+        "title": "Tutorial — NetworkX 3.6.1 documentation",
+        "url": "https://networkx.org/documentation/stable/tutorial.html",
+        "snippet": "This guide can help you start working with NetworkX. Creating a graph Create an empty graph with no nodes and no edges.",
+        "source": "web"
+      },
+      {
+        "title": "Hierarchical multi-label classification model for science and ... - NIH",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11623068/",
+        "snippet": "This study proposes a hierarchical multi-label classification model for science and technology news, enhanced by heterogeneous graph semantics.",
+        "source": "web"
+      },
+      {
+        "title": "Graph Traversal Algorithms: DFS & BFS - YouTube",
+        "url": "https://www.youtube.com/watch?v=_qeVmseIQv0",
+        "snippet": "... depth-first search (DFS) and breadth ... Graph Traversal Algorithms: DFS & BFS. 501 views · 2 years ago. #induction #leetcode #Python ...",
+        "source": "web"
+      },
+      {
+        "title": "Traversal — NetworkX 3.6.1 documentation - Algorithms",
+        "url": "https://networkx.org/documentation/stable/reference/algorithms/traversal.html",
+        "snippet": "Basic algorithms for depth-first searching the nodes of a graph. Breadth First Search Basic algorithms for breadth-first searching the nodes of a graph.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Hierarchical Multidimensional Classification of web documents with ...",
+        "url": "https://gianvitopio.di.uniba.it/pdf/DS%202015%20-%20Multiwebclass.pdf",
+        "snippet": "In this paper, we propose the hier- archical multidimensional classification task, where documents can be classified according to different dimensions/ ...",
+        "source": "web"
+      },
+      {
+        "title": "Creating Message Passing Networks - PyTorch Geometric",
+        "url": "https://pytorch-geometric.readthedocs.io/en/2.6.1/notes/create_gnn.html",
+        "snippet": "PyG provides the MessagePassing base class, which helps in creating such kinds of message passing graph neural networks by automatically taking care of message ...",
+        "source": "web"
+      },
+      {
+        "title": "alishams21/yaml2graph: Turn YAML into a Knowledge Graph in ...",
+        "url": "https://github.com/alishams21/yaml2graph",
+        "snippet": "yaml2graph is a knowledge graph builder library that converts YAML definitions into a fully operational and customizable knowledge graph.",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python ...",
+        "source": "web"
+      },
+      {
+        "title": "pyg-team/pytorch_geometric: Graph Neural Network Library for ...",
+        "url": "https://github.com/pyg-team/pytorch_geometric",
+        "snippet": "A GNN layer specifies how to perform message passing, i.e. by designing different message, aggregation and update functions as defined here. These GNN layers ...",
+        "source": "web"
+      },
+      {
+        "title": "Building Knowledge graph Concepts - Blue Brain Nexus Forge",
+        "url": "https://nexus-forge.readthedocs.io/en/latest/interaction.html",
+        "snippet": "a Model implementing a schema language to validate and constraint knowledge graphs. By default, Nexus Forge comes with a DemoModel supporting the JSON ...",
+        "source": "web"
+      },
+      {
+        "title": "Identifying and Reducing Test Case Combinatorial Explosions with ...",
+        "url": "https://www.codemag.com/Article/2507081/Identifying-and-Reducing-Test-Case-Combinatorial-Explosions-with-Python%E2%80%99s-Abstract-Syntax-Tree-AST-and-Pytest-Framework",
+        "snippet": "This article presents a hybrid approach, combining Python's Abstract Syntax Tree (AST) analysis and the parameterized testing framework Pytest to identify a ...",
+        "source": "web"
+      },
+      {
+        "title": "Getting Started with HNSWlib - Milvus Blog",
+        "url": "https://milvus.io/blog/getting-started-with-hnswlib.md",
+        "snippet": "This section will demonstrate using HNSWlib as a vector search library by creating an HNSW index, inserting data, and performing searches.",
+        "source": "web"
+      },
+      {
+        "title": "linkage — SciPy v1.17.0 Manual",
+        "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html",
+        "snippet": "Perform hierarchical/agglomerative clustering. The input y may be either a 1-D condensed distance matrix or a 2-D array of observation vectors.",
+        "source": "web"
+      },
+      {
+        "title": "How NLP & NLU Work For Semantic Search - Search Engine Journal",
+        "url": "https://www.searchenginejournal.com/nlp-nlu-semantic-search/444694/",
+        "snippet": "NLP and NLU make semantic search more intelligent through tasks like normalization, typo tolerance, and entity recognition.",
+        "source": "web"
+      },
+      {
+        "title": "Hierarchical Navigable Small Worlds (HNSW) - Pinecone",
+        "url": "https://www.pinecone.io/learn/series/faiss/hnsw/",
+        "snippet": "Hierarchical Navigable Small World (HNSW) graphs are among the top-performing indexes for vector similarity search. HNSW is a hugely popular technology that ...",
+        "source": "web"
+      },
+      {
+        "title": "Hierarchical clustering (scipy.cluster.hierarchy)",
+        "url": "https://docs.scipy.org/doc/scipy/reference/cluster.hierarchy.html",
+        "snippet": "These are routines for agglomerative clustering. linkage (y[, method, metric, optimal_ordering]). Perform hierarchical/agglomerative clustering. single (y).",
+        "source": "web"
+      },
+      {
+        "title": "What is search query normalization? - Milvus",
+        "url": "https://milvus.io/ai-quick-reference/what-is-search-query-normalization",
+        "snippet": "Search query normalization is the process of standardizing user-inputted search terms to improve consistency and accuracy in search systems.",
+        "source": "web"
+      },
+      {
+        "title": "Commonsense Knowledge Base Completion with Structural and ...",
+        "url": "https://arxiv.org/abs/1910.02915",
+        "snippet": "In this paper, we present novel KB completion models that can address these challenges by exploiting the structural and semantic context of nodes.",
+        "source": "web"
+      },
+      {
+        "title": "Cluster-Consistent Neural Architectures - Emergent Mind",
+        "url": "https://www.emergentmind.com/topics/cluster-consistent-neural-architectures",
+        "snippet": "Cluster-consistent neural architectures are designs that explicitly integrate clustering in their structure and loss functions to improve ...",
+        "source": "web"
+      },
+      {
+        "title": "What are Knowledge Graph Inference Algorithms?",
+        "url": "https://web.stanford.edu/class/cs520/2020/notes/What_Are_Some_Inference_Algorithms.html",
+        "snippet": "The shortest path in a graph is a path between two nodes in a graph such that the sum of the weights of the edges is minimized. If there is no weight associated ...",
+        "source": "web"
+      },
+      {
+        "title": "Atomic Design Systems: Why the Labels Don't Matter - Qt",
+        "url": "https://www.qt.io/blog/atomic-design-systems-why-the-labels-dont-matter",
+        "snippet": "A semantic system in design is a methodology where every element's name directly communicates its meaning, purpose, and behavior within the ...",
+        "source": "web"
+      },
+      {
+        "title": "From Clustering to Cluster Explanations via Neural Networks - arXiv",
+        "url": "https://arxiv.org/abs/1906.07633",
+        "snippet": "We propose a new framework that can, for the first time, explain cluster assignments in terms of input features in an efficient and reliable manner.",
+        "source": "web"
+      },
+      {
+        "title": "Enable Path Analytics on Knowledge Graphs | database",
+        "url": "https://blogs.oracle.com/database/accelerate-your-informed-decisionmaking-enable-path-analytics-on-knowledge-graphs",
+        "snippet": "Graph algorithms such as PageRank, Dijkstra's shortest path and clustering can be run on property graphs. Property graphs are particularly well ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Semantic Query Matching Against Knowledge Graphs: Building an Adaptive Context Intelligence System\n\nThis report presents a comprehensive framework for implementing semantic query matching against a structured knowledge graph with 167 atomic code types, 8 classification dimensions, and 16 hierarchical scales. By synthesizing natural language processing techniques, graph algorithms, and knowledge representation methods, organizations can build intelligent systems that understand user intent and efficiently traverse complex code domain knowledge to retrieve contextually relevant entities. The approach integrates semantic embeddings for query understanding, hybrid graph traversal for relationship discovery, purpose-driven semantic distance calculations, emergent entity consolidation for abstraction hierarchies, and retrieval augmented generation integration to provide context-aware intelligence. This report explores both theoretical foundations and practical Python implementations suitable for YAML-defined schemas and real-world deployment scenarios.\n\n## Understanding Semantic Similarity in Knowledge Graph Contexts\n\nSemantic similarity represents a fundamental capability for matching natural language queries against structured knowledge graphs.[1][4] Unlike traditional keyword-based matching that relies on exact string matching, semantic similarity measures the conceptual closeness between a user's query and nodes within the knowledge graph, enabling systems to understand user intent even when terminology differs significantly. In the context of an Adaptive Context Intelligence system with 167 structural code types, semantic similarity becomes essential for bridging the gap between how humans naturally express their information needs and how those needs map to formal code entities in the knowledge graph.\n\nThe challenge of semantic similarity extends beyond simple word overlap.[1] Consider a user asking about \"data stores\" in a codebase knowledge graph—while this natural language query does not explicitly mention \"Repository\" or \"Database,\" the system should recognize the semantic equivalence and retrieve relevant entities accordingly. Traditional approaches like the Boolean model or basic vector space models fall short because they ignore syntactic information and may miss relationships that exist through conceptual pathways rather than direct term overlap.[1] Modern approaches integrate grammatical structures and word-level semantic relationships through ontologies like WordNet, understanding not just what words appear but how they relate semantically within domain-specific contexts.\n\nWord embeddings such as Word2Vec provide a foundation for semantic understanding by representing words as high-dimensional vectors where semantically similar words cluster together in vector space.[4][16] The skip-gram architecture used in Word2Vec learns word representations by predicting surrounding context words, capturing both semantic and syntactic relationships. For your knowledge graph system, this means that code type names and their descriptions can be embedded into a continuous vector space where \"Service\" and \"Component\" might be closer to each other than \"Service\" and \"Configuration,\" reflecting their conceptual proximity in software architecture discourse.\n\nSentence-level embeddings offer a more sophisticated approach applicable to matching longer natural language queries against structured entities.[4][13] Sentence Transformers (SBERT) extend BERT by adding pooling operations to derive fixed-size sentence embeddings, using mean pooling which research has shown works best empirically. When a user submits a query like \"find all services that handle user authentication,\" the SBERT model converts this natural language statement into a high-dimensional vector that captures the semantic intent of the entire phrase, rather than treating each word independently. This enables matching against the PURPOSE fields in your graph nodes, which typically encode semantic relationships describing why entities exist and what role they play in the larger codebase architecture.\n\nThe semantic similarity calculation between embeddings typically uses cosine similarity, a metric that measures the angle between two vectors in high-dimensional space.[31][34] Cosine similarity yields values between -1 and 1, where 1 indicates identical direction (perfect similarity), 0 indicates orthogonal vectors (completely unrelated), and -1 indicates opposite directions. For practical implementation in Python, the formula involves computing the dot product of two normalized vectors and dividing by the product of their magnitudes:\n\n\\[\\text{cosine\\_similarity}(A, B) = \\frac{A \\cdot B}{||A|| \\cdot ||B||}\\][31][34]\n\nThis metric offers computational efficiency with O(n) complexity for n-dimensional vectors and works effectively in high-dimensional spaces where Euclidean distance can become unreliable due to the curse of dimensionality. The orientation-based nature of cosine similarity means that documents of vastly different lengths can still be considered similar if they discuss the same topic, which proves advantageous when matching brief queries against detailed PURPOSE descriptions.\n\n## Implementing Semantic Query Understanding with Natural Language Processing\n\nSemantic query understanding extends beyond simple similarity calculations to include intent classification and entity recognition within user queries.[8][51] An effective Adaptive Context Intelligence system must distinguish between different types of user intents—whether someone is asking for a specific entity, seeking relationships between entities, requesting paths through the graph, or looking for entities matching certain criteria. Query normalization preprocessing ensures consistent matching regardless of superficial formatting differences. Text normalization includes lowercasing, punctuation removal, diacritical mark handling, and stemming or lemmatization to reduce word variations to their base forms.[51][54]\n\nConsider implementing a query analysis pipeline that performs multiple preprocessing steps in sequence. First, text normalization converts the user's natural language input into a standardized format, handling variations like \"UserAuthService\" versus \"user auth service\" or \"user-auth-service.\" Tokenization breaks the normalized text into individual tokens, which then proceed through stemming to reduce words to their root forms. The word \"implementing\" stems to \"implement,\" allowing queries about \"implementation\" to match entities described as \"implement\" in PURPOSE fields. While aggressive stemming can introduce noise by conflating unrelated terms, judicious application in domain-specific contexts typically improves recall without significantly harming precision.[51]\n\nNamed Entity Recognition (NER) identifies key entities and concepts within queries, extracting components that should match against graph node types and dimensions.[35] A query like \"show me all Repository entities that handle caching\" should extract \"Repository\" as the primary entity type and \"caching\" as a secondary concept that might map to multiple PURPOSE field entries or DIMENSION classifications. This extraction guidance ensures that the query-matching algorithm focuses on the most relevant nodes in the graph rather than attempting to match the entire query string against every node's description.\n\nQuery intent classification determines what kind of result the user seeks.[8][29] Queries can be categorized into several broad types: ENTITY_LOOKUP (find specific nodes by name or identifier), RELATIONSHIP_DISCOVERY (understand how entities connect), SEMANTIC_SEARCH (find conceptually similar entities), PROPERTY_FILTERING (find entities matching specific criteria), and PATH_DISCOVERY (find sequences of entities connected by relationships). Each intent type may require different algorithms and matching strategies. A path discovery query might prioritize graph traversal algorithms, while a semantic search query prioritizes embedding similarity calculations.\n\nThe query rewriting technique transforms user queries into optimized forms more suitable for matching against the knowledge graph.[33][36] A user might ask \"which Controllers work with which Services?\", but the system could rewrite this as a RELATIONSHIP_DISCOVERY query specifically looking for edges between Controller nodes and Service nodes. More sophisticated rewriting might decompose complex multi-part queries into simpler sub-queries that can be answered independently and then combined. Large language models enable this query rewriting by understanding domain context and reformulating queries in ways that leverage the knowledge graph's structure and organization schemes.\n\n## Graph Embedding and Semantic Distance Calculation\n\nGraph embeddings extend word embedding concepts to entire graphs, representing nodes, edges, and their relationships as continuous vectors that preserve graph structure in vector space.[5][20][23] For your knowledge graph with 167 node types, 8 dimensions, and 16 hierarchical scales, graph embeddings enable sophisticated similarity calculations that account for graph topology rather than treating nodes as isolated entities. The Node2Vec algorithm generates node embeddings by performing random walks on the graph to create sentences of nodes, then applying Word2Vec to learn embeddings where nodes appearing in similar contexts have similar embeddings.[20]\n\nThe Node2Vec algorithm operates in two phases: random walk generation and embedding learning.[20] The random walk phase produces a corpus of node sequences by simulating random walks from each node in the graph. These walks are biased to explore neighborhoods at different depths, controlled by parameters p (return parameter) and q (in-out parameter). Setting p lower than 1.0 encourages returning to recently visited nodes (breadth-first exploration), while q lower than 1.0 encourages exploring outward to distant nodes (depth-first exploration). For code domain graphs, a balanced configuration might use p=1.0 and q=1.0 for uniform exploration, or adjust these parameters to emphasize local structure (high p) or long-range dependencies (low q) based on domain requirements.\n\nAfter generating random walks, the embedding learning phase treats node sequences as sentences and applies Word2Vec's skip-gram model to learn embeddings. Each node ID becomes a token, and the model learns to predict neighboring nodes in random walk sequences, resulting in an embedding matrix where semantically related nodes (those appearing together frequently in walks) have similar vector representations. These embeddings capture both direct connections and higher-order structural patterns, enabling similarity calculations that account for transitive relationships through intermediate nodes.\n\nFor your purpose-driven graph system, semantic distance should incorporate PURPOSE field semantics alongside structural graph distance.[28] The inverse-additive metric provides a principled approach to calculating semantic distance in graphs with multiple paths between nodes, extending beyond simple shortest path calculations to consider all pathways and their semantic weight.[28] When multiple paths exist between two nodes in an ontology or knowledge graph, the inverse-additive metric combines path lengths across all routes:\n\n\\[R(A, B) = \\frac{1}{\\sum_{i=1}^{K} \\frac{1}{N_i}}\\]\n\nwhere K is the number of different paths from A to B and N_i is the number of transitions (edge hops) along the i-th path.[28] This formulation gives more weight to shorter paths while still accounting for longer alternative pathways, providing a nuanced similarity measure that considers graph structure comprehensively.\n\nImplementing semantic distance with PURPOSE field awareness requires augmenting graph distances with semantic similarity between PURPOSE descriptions. A hybrid approach combines structural distance (based on graph topology) with semantic distance (based on PURPOSE field similarity). The combined distance for nodes A and B might be calculated as:\n\n\\[\\text{distance}(A, B) = \\alpha \\cdot \\text{structural\\_distance}(A, B) + (1-\\alpha) \\cdot \\text{semantic\\_distance}(PURPOSE_A, PURPOSE_B)\\]\n\nwhere \\(\\alpha\\) is a weighting parameter (typically 0.5 for balanced consideration) and semantic_distance between PURPOSE fields can be computed using cosine similarity of their embeddings.[28] This hybrid approach recognizes that graph structure alone may not capture all relevant semantic relationships—two nodes might be topologically distant but semantically similar if their PURPOSE fields describe functionally equivalent roles.\n\n## Graph Traversal Algorithms for Upstream and Downstream Discovery\n\nGraph traversal algorithms enable efficient navigation through knowledge graphs to discover upstream dependencies and downstream dependents of code entities. Two fundamental traversal algorithms—Depth-First Search (DFS) and Breadth-First Search (BFS)—provide different exploration strategies suitable for different query types.[2][37] Both algorithms have identical time complexity O(V + E) where V is the number of vertices (nodes) and E is the number of edges, but they differ in exploration patterns and result characteristics.\n\nDepth-First Search explores the graph by following one path as far as possible before backtracking to explore alternative branches.[2][37] Starting from a root node, DFS recursively visits the first unvisited neighbor, then that neighbor's first unvisited neighbor, continuing depth-ward until reaching a leaf node with no unvisited neighbors. The algorithm then backtracks to explore other branches from previously visited nodes. This exploration pattern makes DFS particularly effective for discovering dependency chains—understanding the complete path of dependencies that a code component requires. For example, if a Service depends on multiple Repositories, and those Repositories depend on Configurations, DFS will trace through the entire dependency chain depth-first before exploring alternative branches.\n\n```python\ndef dfs_upstream_dependencies(graph, start_node, visited=None):\n    \"\"\"\n    Perform DFS to find all upstream dependencies of a node.\n    \n    Args:\n        graph: Dictionary mapping nodes to their upstream dependencies\n        start_node: Starting node for traversal\n        visited: Set of already visited nodes\n        \n    Returns:\n        Set of all upstream nodes reachable from start_node\n    \"\"\"\n    if visited is None:\n        visited = set()\n    \n    if start_node not in visited:\n        visited.add(start_node)\n        \n        # For upstream dependencies, follow incoming edges\n        if start_node in graph:\n            for dependency in graph[start_node]:\n                dfs_upstream_dependencies(graph, dependency, visited)\n    \n    return visited\n```\n\nBreadth-First Search explores the graph level by level, visiting all neighbors of the current level before proceeding to the next level.[2][37] Starting from a root node, BFS adds it to a queue, then repeatedly removes a node from the queue, visits it, and adds all its unvisited neighbors to the queue. This exploration pattern makes BFS effective for finding the shortest paths between nodes in unweighted graphs and for understanding the immediate neighborhood of a node before exploring more distant regions. In code domain contexts, BFS answers questions like \"what directly depends on this Service?\" or \"what is the immediate ecosystem around this Entity?\"\n\n```python\nfrom collections import deque\n\ndef bfs_downstream_dependents(graph, start_node):\n    \"\"\"\n    Perform BFS to find all downstream dependents of a node.\n    \n    Args:\n        graph: Dictionary mapping nodes to their downstream dependents\n        start_node: Starting node for traversal\n        \n    Returns:\n        Dictionary mapping distance (hops) to set of nodes at that distance\n    \"\"\"\n    visited = {start_node}\n    queue = deque([(start_node, 0)])  # (node, distance)\n    distances = {start_node: 0}\n    \n    while queue:\n        node, dist = queue.popleft()\n        \n        # For downstream dependents, follow outgoing edges\n        if node in graph:\n            for dependent in graph[node]:\n                if dependent not in visited:\n                    visited.add(dependent)\n                    distances[dependent] = dist + 1\n                    queue.append((dependent, dist + 1))\n    \n    return distances\n```\n\nAdvanced traversal strategies combine BFS and DFS characteristics for more sophisticated queries. Bidirectional search explores simultaneously from both the start node and goal node, meeting in the middle and potentially reducing the search space significantly. For discovering paths between two entities in your knowledge graph, bidirectional search proves particularly efficient when connections span many hierarchical levels. Iterative deepening combines DFS's space efficiency with BFS's optimality, performing repeated depth-limited DFS searches with increasing depth limits until finding a result.\n\nThe choice between traversal algorithms depends on the specific query semantics and graph characteristics. For discovering all transitive dependencies of a Service entity, DFS efficiently explores complete dependency chains before backtracking. For finding entities within a specific distance (e.g., \"what's within 3 hops of this Entity?\"), BFS provides level-by-level exploration naturally suited to distance-based queries. For graphs with DAG (Directed Acyclic Graph) structure common in code dependencies, topological sorting algorithms build traversal order that respects dependency relationships, enabling queries like \"in what order should these Components be initialized?\"\n\nGraph traversal becomes more powerful when combined with filtering criteria based on DIMENSION or SCALE attributes. A filtered BFS might explore only downstream dependents classified as certain DIMENSION types, effectively answering queries like \"what Repositories depend on this Service?\" by filtering traversal results to only include Repository-type nodes. This selective traversal dramatically reduces result sets when searching large graphs with many relationship types.\n\n## Emergent Entity Consolidation and Hierarchical Organization\n\nEmergent entity consolidation addresses the challenge of organizing related nodes into higher-level conceptual abstractions, creating hierarchical structures that match the 16-scale model in your knowledge graph.[7][21][30] Rather than treating each of the 167 atomic code types as isolated entities, consolidation methods group semantically related atoms into larger conceptual units—what might be called \"molecules\" or \"organisms\" in hierarchical organization schemes. This creates a multi-resolution view of the knowledge graph where users can operate at appropriate abstraction levels.\n\nSemantic clustering forms the foundation of entity consolidation, grouping nodes based on similarity metrics that consider both graph structure and semantic content.[21][30] Hierarchical clustering approaches recursively partition node sets into increasingly specific groups. Hierarchical agglomerative clustering starts with each node as its own cluster, then iteratively merges the most similar clusters according to a linkage criterion.[50] Single linkage merges clusters based on minimum distance between any two points, complete linkage based on maximum distance, and average linkage on mean distance. For code domain graphs, average linkage typically provides good balance, merging clusters that are generally similar rather than being dominated by a single outlier pair.\n\nThe LLM-guided multi-aspect encoding approach described in recent taxonomy generation research applies directly to knowledge graph consolidation.[21][24] Rather than generating hierarchies based on single similarity metrics, multi-aspect encoding captures multiple perspectives—methodology aspect, dataset aspect, evaluation aspect, etc. For code entities, different consolidation aspects might include functional aspect (\"what does this entity do?\"), architectural aspect (\"what layer of the architecture does this serve?\"), and dependency aspect (\"what other entities does this depend on?\"). Generating aspect-specific summaries through LLM processing, then performing clustering on each aspect independently and merging results, produces hierarchical taxonomies with better coherence and interpretability.\n\n```python\nfrom sklearn.cluster import AgglomerativeClustering\nimport numpy as np\n\ndef hierarchical_entity_consolidation(nodes, embeddings, aspect_weights=None):\n    \"\"\"\n    Perform hierarchical consolidation of entities based on embeddings.\n    \n    Args:\n        nodes: List of node identifiers\n        embeddings: Array of shape (n_nodes, embedding_dim) containing node embeddings\n        aspect_weights: Optional weights for different semantic aspects\n        \n    Returns:\n        Dictionary mapping consolidation levels to cluster assignments\n    \"\"\"\n    if aspect_weights is None:\n        aspect_weights = {'structural': 0.33, 'semantic': 0.33, 'topological': 0.34}\n    \n    # Perform hierarchical clustering with multiple linkage methods\n    consolidation_levels = {}\n    \n    for n_clusters in range(len(nodes), 1, -1):\n        clustering = AgglomerativeClustering(\n            n_clusters=n_clusters,\n            linkage='average',\n            metric='cosine'\n        )\n        labels = clustering.fit_predict(embeddings)\n        consolidation_levels[n_clusters] = labels\n    \n    return consolidation_levels\n```\n\nSemantic units provide a formal framework for organizing knowledge graphs into identifiable and semantically meaningful subgraphs by adding a layer of metadata triples above conventional data triples.[7] Rather than treating all 167 atomic types uniformly, semantic units group related atoms with their own resource representations. Each semantic unit corresponds to a distinct conceptual grouping—a set of Repositories and their associated query Handlers might form one semantic unit at a given hierarchical level, while Controllers and their routing Configurations form another. This layered organization enables distinguishing between the data graph layer (containing the original 167 atoms) and the semantic-units graph layer (containing higher-order organizational structures).\n\nThe granularity tree concept organizes knowledge at five representational levels: individual triples (the lowest level), statement units (individual facts about entities), compound units (combinations of related statements), higher-order groupings, and the complete graph.[7] For code domain knowledge graphs, Level 1 triples might represent basic facts like \"ServiceA depends on RepositoryB,\" Level 2 statement units group related triples about a particular Service's dependencies, Level 3 compound units might combine dependency statements with configuration requirements, and higher levels abstract to architectural layers or subsystems. This multi-level organization supports queries at appropriate granularity—users asking about individual dependencies get atomic triple answers, while users asking about architectural coherence get compound unit answers aggregating multiple related facts.\n\n## Integration with Retrieval Augmented Generation Systems\n\nRetrieval Augmented Generation (RAG) systems combine information retrieval with large language model generation to answer questions with grounded, contextualized responses.[3][6][14] Traditional RAG systems use vector similarity search to retrieve relevant documents, then pass them as context to language models for answer generation. Knowledge Graph RAG systems, sometimes called GraphRAG, enhance this approach by leveraging graph structure to retrieve not just semantically similar information but contextually connected information through explicit relationships.[6][26]\n\nThe primary advantage of GraphRAG over standard vector-only RAG lies in exact matching capabilities during retrieval combined with relationship-aware context.[6] When a user queries \"which Services handle authentication?\", a vector-only RAG system retrieves documents most semantically similar to the query through cosine similarity calculations. A GraphRAG system additionally understands that \"authentication\" might relate to multiple entity types through different relationship types—Services with PURPOSE fields mentioning \"authentication,\" Handlers with security-related classifications, Controllers implementing authentication flows. By traversing these explicit relationships in the knowledge graph, GraphRAG retrieves not just similar entities but coherently connected entity networks that provide richer context.\n\nHybrid search algorithms combine three complementary retrieval strategies simultaneously: graph-based reasoning, vector similarity search, and text-based keyword matching.[26] Graph-based reasoning understands and traverses relationships defined explicitly in the knowledge graph, retrieving context-rich results aligned with business ontology. When querying \"employees assigned to projects governed by policies,\" graph reasoning follows the actual assigned_to and governed_by relationship edges, returning precise structural results. Vector similarity search captures fuzzy semantic matching, retrieving entities whose embeddings are similar to the query even if exact structural connections don't exist. Text-based keyword matching provides a safety net, ensuring relevant entities aren't missed due to embedding limitations.\n\nThese three strategies execute in parallel, each generating result sets that are later merged and ranked by relevance.[26] The advantage of parallelization is that one strategy's limitations don't block others—if graph traversal returns no results due to missing edges, vector search might still retrieve semantically similar entities; if vector search fails due to poor embedding quality, keyword matching provides fallback results. Result combination involves deduplication (removing entities returned by multiple strategies), relevance ranking (sorting by combined scores from all strategies), and intelligent limiting (returning the most directly relevant entities while suppressing redundant results).\n\n```python\nclass HybridGraphRAGRetriever:\n    \"\"\"\n    Hybrid retriever combining graph traversal, vector similarity, and keyword search.\n    \"\"\"\n    \n    def __init__(self, graph, embeddings, text_index):\n        self.graph = graph\n        self.embeddings = embeddings\n        self.text_index = text_index\n    \n    def retrieve_parallel(self, query, top_k=10):\n        \"\"\"\n        Execute three retrieval strategies in parallel and merge results.\n        \"\"\"\n        import concurrent.futures\n        \n        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:\n            graph_future = executor.submit(self._graph_retrieval, query)\n            vector_future = executor.submit(self._vector_retrieval, query)\n            text_future = executor.submit(self._text_retrieval, query)\n            \n            graph_results = graph_future.result()\n            vector_results = vector_future.result()\n            text_results = text_future.result()\n        \n        return self._merge_and_rank(graph_results, vector_results, text_results, top_k)\n    \n    def _graph_retrieval(self, query):\n        \"\"\"Retrieve by traversing knowledge graph structure.\"\"\"\n        # Extract entities from query and traverse relationships\n        entities = self._extract_entities(query)\n        results = {}\n        \n        for entity in entities:\n            if entity in self.graph:\n                # BFS to find related entities\n                for neighbor, distance in self._bfs_neighbors(entity).items():\n                    if neighbor not in results:\n                        results[neighbor] = {'graph_score': 1.0 / (1 + distance)}\n        \n        return results\n    \n    def _vector_retrieval(self, query):\n        \"\"\"Retrieve by semantic embedding similarity.\"\"\"\n        from sklearn.metrics.pairwise import cosine_similarity\n        \n        # Embed query and find similar node embeddings\n        query_embedding = self._embed(query)\n        scores = cosine_similarity([query_embedding], self.embeddings)[0]\n        \n        results = {}\n        for idx, score in enumerate(scores):\n            if score > 0.5:  # Similarity threshold\n                results[self._get_node_id(idx)] = {'vector_score': float(score)}\n        \n        return results\n    \n    def _text_retrieval(self, query):\n        \"\"\"Retrieve by keyword and text matching.\"\"\"\n        # Use inverted index for keyword matching\n        keywords = query.lower().split()\n        results = {}\n        \n        for keyword in keywords:\n            matching_nodes = self.text_index.find_matches(keyword)\n            for node_id, match_strength in matching_nodes.items():\n                if node_id not in results:\n                    results[node_id] = {'text_score': 0.0}\n                results[node_id]['text_score'] += match_strength\n        \n        return results\n    \n    def _merge_and_rank(self, graph_results, vector_results, text_results, top_k):\n        \"\"\"Merge results from all strategies and rank by combined score.\"\"\"\n        all_nodes = set()\n        all_nodes.update(graph_results.keys())\n        all_nodes.update(vector_results.keys())\n        all_nodes.update(text_results.keys())\n        \n        combined_scores = {}\n        for node in all_nodes:\n            graph_score = graph_results.get(node, {}).get('graph_score', 0)\n            vector_score = vector_results.get(node, {}).get('vector_score', 0)\n            text_score = text_results.get(node, {}).get('text_score', 0)\n            \n            # Normalize scores and compute weighted combination\n            combined_scores[node] = (0.4 * graph_score + \n                                    0.4 * vector_score + \n                                    0.2 * text_score)\n        \n        # Return top-k nodes sorted by combined score\n        ranked = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)\n        return [node for node, score in ranked[:top_k]]\n```\n\nContext selection in GraphRAG systems determines which retrieved entities should be included in the language model's context window, balancing information richness against token limits.[6][26] Rather than including all retrieved entities, sophisticated context selection algorithms include directly relevant entities plus strategically selected neighbors that provide surrounding context. An entity retrieved as highly relevant should include its immediate dependencies (upstream context) and dependents (downstream context) to give the language model understanding of how the entity fits into larger systems.\n\n## Multi-Agent Knowledge Graph Frameworks\n\nAdvanced systems employ multi-agent architectures where specialized agents handle different aspects of query processing and knowledge graph interaction.[29] An AGENTiGraph framework demonstrates this approach with six key agents: User Intent Agent, Task Planning Agent, Knowledge Graph Interaction Agent, Reasoning Agent, Response Generation Agent, and supporting agents for specific tasks.[29] Each agent specializes in a particular aspect of the query-to-answer pipeline, coordinating through a message-passing architecture.\n\nThe User Intent Agent performs natural language understanding, determining what the user actually wants to know.[29] Using few-shot learning and chain-of-thought reasoning, this agent classifies queries into task types—Relation Judgment (verify semantic connections), Prerequisite Prediction (identify foundational concepts), Path Searching (find connection sequences), Concept Clustering (reveal macro structures), Subgraph Completion (uncover hidden associations). This specialized intent classification improves downstream processing by routing queries to appropriate handling strategies.\n\nThe Task Planning Agent decomposes complex queries into executable tasks, leveraging chain-of-thought reasoning to model task dependencies and optimize execution order.[29] A query like \"find all Services that depend on Repositories handling authentication\" decomposes into: (1) identify Repositories with authentication PURPOSE, (2) find Services depending on those Repositories, (3) filter to only include direct dependencies. Task planning ensures efficiency by executing tasks in dependency order and potentially parallelizing independent tasks.\n\nThe Knowledge Graph Interaction Agent bridges tasks and the actual graph by generating formal queries in graph query languages (Cypher for Neo4j, SPARQL for RDF graphs).[29] Using few-shot learning and the ReAct framework (Reasoning + Acting), this agent dynamically refines queries based on intermediate results, adapting to diverse graph structures without extensive pre-training. When a query against the code domain graph needs to find entities satisfying multiple DIMENSION criteria, the agent constructs appropriate graph queries accounting for the specific schema and relationship types.\n\n## Practical Implementation Architecture\n\nA complete implementation architecture integrates all components—semantic similarity matching, graph traversal, entity consolidation, and RAG—into a cohesive system. The foundation consists of graph representation using YAML schemas describing atoms, dimensions, scales, and purpose fields. Graph storage employs either property graph databases (Neo4j) or RDF stores depending on query patterns and scale requirements. Embedding generation creates vector representations for semantic similarity calculations. Query processing pipelines orchestrate normalization, intent classification, and appropriate algorithm selection. Result ranking and presentation layers deliver actionable insights to users.\n\n```python\nclass AdaptiveContextIntelligenceSystem:\n    \"\"\"\n    Complete system for semantic query matching against code domain knowledge graph.\n    \"\"\"\n    \n    def __init__(self, graph_yaml_path, embedding_model='all-MiniLM-L6-v2'):\n        from sentence_transformers import SentenceTransformer\n        \n        # Load graph schema from YAML\n        self.graph_schema = self._load_yaml_schema(graph_yaml_path)\n        self.embedding_model = SentenceTransformer(embedding_model)\n        \n        # Initialize components\n        self.graph_db = self._initialize_graph_db()\n        self.embeddings = self._generate_embeddings()\n        self.intent_classifier = self._setup_intent_classification()\n        self.consolidation_hierarchies = self._build_hierarchies()\n    \n    def process_query(self, user_query):\n        \"\"\"\n        End-to-end query processing pipeline.\n        \"\"\"\n        # Step 1: Query normalization and analysis\n        normalized_query = self._normalize_query(user_query)\n        intent = self.intent_classifier.classify(normalized_query)\n        entities = self._extract_entities(normalized_query)\n        \n        # Step 2: Select appropriate retrieval strategy based on intent\n        if intent == 'ENTITY_LOOKUP':\n            results = self._entity_lookup(entities)\n        elif intent == 'RELATIONSHIP_DISCOVERY':\n            results = self._relationship_discovery(entities)\n        elif intent == 'SEMANTIC_SEARCH':\n            results = self._semantic_search(normalized_query)\n        elif intent == 'PATH_DISCOVERY':\n            results = self._path_discovery(entities)\n        else:\n            results = self._hybrid_search(normalized_query)\n        \n        # Step 3: Enhance results with context\n        enriched_results = self._enrich_with_context(results)\n        \n        # Step 4: Consolidate and present\n        consolidated = self._consolidate_results(enriched_results)\n        return self._format_response(consolidated)\n    \n    def _semantic_search(self, query):\n        \"\"\"\n        Retrieve nodes semantically similar to query using embeddings.\n        \"\"\"\n        # Embed the query\n        query_embedding = self.embedding_model.encode([query])[0]\n        \n        # Compute similarity to all node embeddings\n        from sklearn.metrics.pairwise import cosine_similarity\n        similarities = cosine_similarity(\n            [query_embedding], \n            self.embeddings\n        )[0]\n        \n        # Get nodes with similarity > threshold\n        threshold = 0.6\n        similar_nodes = []\n        for node_id, node_embedding in self.embeddings.items():\n            similarity = cosine_similarity(\n                [query_embedding], \n                [node_embedding]\n            )[0][0]\n            if similarity > threshold:\n                similar_nodes.append((node_id, similarity))\n        \n        # Sort by similarity score (descending)\n        similar_nodes.sort(key=lambda x: x[1], reverse=True)\n        return similar_nodes[:10]  # Return top 10\n    \n    def _path_discovery(self, entities):\n        \"\"\"\n        Find paths connecting specified entities through the graph.\n        \"\"\"\n        if len(entities) < 2:\n            return []\n        \n        paths = []\n        for i in range(len(entities) - 1):\n            source = entities[i]\n            target = entities[i + 1]\n            \n            # Use bidirectional BFS to find shortest path\n            path = self._bidirectional_bfs(source, target)\n            if path:\n                paths.append(path)\n        \n        return paths\n    \n    def _bidirectional_bfs(self, source, target):\n        \"\"\"\n        Bidirectional BFS for finding shortest path.\n        \"\"\"\n        from collections import deque\n        \n        if source == target:\n            return [source]\n        \n        # Forward search from source\n        forward_queue = deque([(source, [source])])\n        forward_visited = {source}\n        \n        # Backward search from target\n        backward_queue = deque([(target, [target])])\n        backward_visited = {target}\n        \n        while forward_queue and backward_queue:\n            # Forward step\n            if forward_queue:\n                node, path = forward_queue.popleft()\n                for neighbor in self.graph_db.get_neighbors(node):\n                    if neighbor in backward_visited:\n                        # Found connection\n                        backward_path = self._reconstruct_path(neighbor, backward_visited)\n                        return path + backward_path[::-1]\n                    \n                    if neighbor not in forward_visited:\n                        forward_visited.add(neighbor)\n                        forward_queue.append((neighbor, path + [neighbor]))\n            \n            # Backward step\n            if backward_queue:\n                node, path = backward_queue.popleft()\n                for neighbor in self.graph_db.get_neighbors(node, reverse=True):\n                    if neighbor in forward_visited:\n                        # Found connection\n                        forward_path = self._reconstruct_path(neighbor, forward_visited)\n                        return forward_path + path[::-1]\n                    \n                    if neighbor not in backward_visited:\n                        backward_visited.add(neighbor)\n                        backward_queue.append((neighbor, path + [neighbor]))\n        \n        return None  # No path found\n    \n    def _enrich_with_context(self, results):\n        \"\"\"\n        Add contextual information to retrieved entities.\n        \"\"\"\n        enriched = []\n        \n        for node_id, score in results:\n            node_data = self.graph_db.get_node(node_id)\n            \n            # Add immediate neighbors for context\n            upstream = self._bfs_neighbors(node_id, direction='in', depth=1)\n            downstream = self._bfs_neighbors(node_id, direction='out', depth=1)\n            \n            enriched.append({\n                'node_id': node_id,\n                'data': node_data,\n                'score': score,\n                'upstream': list(upstream.keys()),\n                'downstream': list(downstream.keys())\n            })\n        \n        return enriched\n    \n    def _consolidate_results(self, enriched_results, level=None):\n        \"\"\"\n        Apply hierarchical consolidation to results.\n        \"\"\"\n        if level is None:\n            # Auto-select consolidation level based on result count\n            level = 'moderate'  # or 'detailed', 'abstract'\n        \n        consolidated = []\n        for item in enriched_results:\n            consolidated_item = {\n                'node_id': item['node_id'],\n                'score': item['score']\n            }\n            \n            # Include appropriate level of detail\n            if level == 'abstract':\n                # Only include high-level semantic information\n                consolidated_item['semantic_unit'] = self._get_semantic_unit(\n                    item['node_id']\n                )\n            elif level == 'moderate':\n                # Include node data and immediate context\n                consolidated_item['data'] = item['data']\n                consolidated_item['context'] = {\n                    'upstream_count': len(item['upstream']),\n                    'downstream_count': len(item['downstream'])\n                }\n            else:  # 'detailed'\n                # Include full details\n                consolidated_item.update(item)\n            \n            consolidated.append(consolidated_item)\n        \n        return consolidated\n    \n    def _normalize_query(self, query):\n        \"\"\"\n        Normalize query for consistent processing.\n        \"\"\"\n        import re\n        \n        # Lowercase\n        normalized = query.lower()\n        \n        # Remove punctuation except hyphens and underscores\n        normalized = re.sub(r'[^\\w\\s\\-_]', '', normalized)\n        \n        # Normalize whitespace\n        normalized = ' '.join(normalized.split())\n        \n        return normalized\n    \n    def _load_yaml_schema(self, yaml_path):\n        \"\"\"Load knowledge graph schema from YAML file.\"\"\"\n        import yaml\n        \n        with open(yaml_path, 'r') as f:\n            return yaml.safe_load(f)\n    \n    def _initialize_graph_db(self):\n        \"\"\"Initialize graph database connection.\"\"\"\n        # Implementation depends on chosen database\n        # This is a placeholder\n        pass\n    \n    def _generate_embeddings(self):\n        \"\"\"Generate embeddings for all graph nodes.\"\"\"\n        embeddings = {}\n        \n        for node_id in self.graph_db.get_all_nodes():\n            node_data = self.graph_db.get_node(node_id)\n            # Combine node name and PURPOSE field for embedding\n            text = f\"{node_data['name']} {node_data.get('purpose', '')}\"\n            embedding = self.embedding_model.encode(text)\n            embeddings[node_id] = embedding\n        \n        return embeddings\n    \n    def _setup_intent_classification(self):\n        \"\"\"Set up intent classification model.\"\"\"\n        # Implementation using transformers or rule-based approach\n        pass\n    \n    def _build_hierarchies(self):\n        \"\"\"Build hierarchical consolidation structures.\"\"\"\n        # Implementation of hierarchical clustering and semantic units\n        pass\n```\n\n## Advanced Techniques and Optimization\n\nLarge-scale knowledge graphs with 167 node types benefit from approximation techniques for scalable similarity search. Hierarchical Navigable Small Worlds (HNSW) provides approximate nearest neighbor search with O(log n) complexity, enabling fast retrieval from millions of vectors.[52] HNSW organizes vectors in a hierarchical multi-layer structure where each layer contains increasingly coarse proximity information. Search proceeds from the top layer's coarse approximation, progressively refining through lower layers until reaching the bottom layer containing exact nearest neighbors. This hierarchical approach achieves near-optimal performance with massive speedups compared to exhaustive search.[49][52]\n\n```python\nimport hnswlib\nimport numpy as np\n\nclass HNSWGraphEmbeddingIndex:\n    \"\"\"\n    HNSW index for fast approximate nearest neighbor search on graph embeddings.\n    \"\"\"\n    \n    def __init__(self, embedding_dim, max_elements=100000):\n        self.embedding_dim = embedding_dim\n        self.max_elements = max_elements\n        \n        # Create HNSW index\n        self.index = hnswlib.Index(space='cosine', dim=embedding_dim)\n        self.index.init_index(\n            max_elements=max_elements,\n            ef_construction=200,  # Higher = more accurate but slower\n            M=16  # Number of bi-directional links\n        )\n        \n        self.node_id_map = {}  # Map from internal IDs to node IDs\n        self.current_id = 0\n    \n    def add_node_embedding(self, node_id, embedding):\n        \"\"\"Add a node embedding to the index.\"\"\"\n        self.index.add_items(\n            np.array([embedding], dtype=np.float32),\n            np.array([self.current_id], dtype=np.uint32)\n        )\n        self.node_id_map[self.current_id] = node_id\n        self.current_id += 1\n    \n    def search_similar(self, query_embedding, k=10, ef_search=100):\n        \"\"\"Find k most similar embeddings to query.\"\"\"\n        self.index.ef = ef_search  # Set search effort\n        \n        labels, distances = self.index.knn_query(\n            np.array([query_embedding], dtype=np.float32),\n            k=k\n        )\n        \n        # Convert internal IDs back to node IDs and distances to similarities\n        results = []\n        for internal_id, distance in zip(labels[0], distances[0]):\n            node_id = self.node_id_map[internal_id]\n            # Convert cosine distance to similarity (1 - distance)\n            similarity = 1 - distance\n            results.append((node_id, similarity))\n        \n        return results\n```\n\nQuery result caching significantly improves performance for repeated or similar queries. A cache stores results of previous queries indexed by normalized query string, enabling instant retrieval of previously computed results. For knowledge graphs where the underlying structure changes infrequently, caching queries for hours or days can dramatically reduce computation. Semantic similarity between queries enables broader cache hits—if a previous query for \"Services depending on Repositories\" was cached, a new query for \"Services relying on Data Stores\" might match and reuse cached results with update verification.\n\nSchema-aware indexing creates specialized indexes accounting for graph structure. Type-specific indexes separate nodes by their ATOM type, enabling rapid filtering to specific node categories. Dimension-based indexes facilitate queries constrained by specific classification dimensions. Scale-based indexes support hierarchical queries. Combined indexes enable efficient queries like \"all Repository nodes at Scale 5 classified under Dimension 3,\" avoiding exhaustive graph scans.\n\n## Conclusion: Synthesis and Recommendations\n\nBuilding an effective Adaptive Context Intelligence system requires careful integration of semantic similarity matching, graph algorithms, entity consolidation, and retrieval augmented generation. The 167 atomic code types, 8 classification dimensions, 16 hierarchical scales, and PURPOSE semantic fields provide rich structure for intelligent querying when properly leveraged. Semantic similarity calculations using transformer-based embeddings bridge the gap between natural language user expressions and formal graph structures. Graph traversal algorithms efficiently discover upstream dependencies and downstream dependents, enabling comprehensive context understanding. PURPOSE fields guide semantic distance calculations that account for functional relationships beyond pure structural topology. Hierarchical entity consolidation creates multi-resolution views appropriate for different abstraction levels. Hybrid GraphRAG approaches combine graph traversal, vector similarity, and keyword matching for robust retrieval.\n\nPractical implementations should prioritize incremental development, starting with basic semantic similarity and vector search before adding complexity. YAML schema definitions enable flexible configuration accommodating domain-specific requirements without code modification. Python implementations using libraries like sentence-transformers, NetworkX, and HNSW provide accessible starting points for prototyping. Integration with existing graph databases (Neo4j, RDF stores) leverages mature infrastructure for scalability. Multi-agent architectures enable specialized handling of different query types and processing stages.\n\nOrganizations implementing these techniques should invest in comprehensive evaluation frameworks measuring both retrieval quality (precision, recall) and result usability (relevance, interpretability, response time). Iterative refinement through user feedback and usage analytics steadily improves system performance. Careful attention to semantic distance tuning, graph traversal depth limitations, and entity consolidation granularity balances comprehensiveness against cognitive overload in result presentation. The adaptive aspects of such systems emerge not from any single technique but from orchestrated coordination of multiple complementary approaches, each contributing distinctive capabilities that together enable context-aware intelligence exceeding what any single method could achieve alone."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

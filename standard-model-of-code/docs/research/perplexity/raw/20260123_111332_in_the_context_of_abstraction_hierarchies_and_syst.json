@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T11:13:32.524072",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "In the context of abstraction hierarchies and systems theory:\n\n1. Is there academic support for the idea that each level of abstraction represents a fundamentally different 'world' or 'reality' that cannot fully perceive the levels above or below it?\n\n2. How does this relate to:\n   - Flatland (Edwin Abbott) - 2D beings can't perceive 3D\n   - Emergence - higher-level properties don't exist at lower levels\n   - Downward causation - higher levels constraining lower levels\n\n3. Are there theories about 'dimensional blindness' - where entities at one level cannot perceive or understand entities at other levels?\n\n4. How does Koestler's holon concept address this - does each level have its own 'umwelt' (perceived world)?\n\nI'm developing a theory that treats software abstraction levels (Token → Statement → Function → Class → Package → System) as genuinely different 'dimensions' where higher levels abstract away lower levels completely.",
+    "query_length": 940,
+    "checksum": "sha256:e36f31dfb73b88d34de2cd8343b9604e50a316a64e1be11c886f49471407d7e4"
+  },
+  "response": {
+    "id": "0306e704-1123-49c0-a009-3333eb95402b",
+    "model": "sonar-pro",
+    "created": 1769177612,
+    "usage": {
+      "prompt_tokens": 201,
+      "completion_tokens": 588,
+      "total_tokens": 789,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.009,
+        "request_cost": 0.006,
+        "total_cost": 0.015
+      }
+    },
+    "citations": [
+      "https://www.uni-bielefeld.de/fakultaeten/philosophie/abteilung/personen/haueis/Chapter_5_Evolving_Concepts_of_Hierarchy.pdf",
+      "https://kevinbinz.com/2016/01/14/abstraction-hierarchy/",
+      "https://www.youtube.com/watch?v=dImyZdy2k7g",
+      "https://selfawarepatterns.com/2021/03/20/a-perceptual-hierarchy-of-consciousness/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5494206/",
+      "https://onlinelibrary.wiley.com/doi/10.1111/j.1545-5300.1991.00435.x"
+    ],
+    "search_results": [
+      {
+        "title": "[PDF] Evolving Concepts of “Hierarchy” in Systems Neuroscience",
+        "url": "https://www.uni-bielefeld.de/fakultaeten/philosophie/abteilung/personen/haueis/Chapter_5_Evolving_Concepts_of_Hierarchy.pdf",
+        "last_updated": "2025-09-09",
+        "snippet": "Thus, the representational hierarchy view posits principles based on increasing abstraction for both unimodal and association cortices and for the overall ...",
+        "source": "web"
+      },
+      {
+        "title": "Abstraction Hierarchy: Perception-Action Cycles - Fewer Lacunae",
+        "url": "https://kevinbinz.com/2016/01/14/abstraction-hierarchy/",
+        "date": "2016-01-14",
+        "last_updated": "2025-09-17",
+        "snippet": "As information travels through the brain, it becomes more abstract, and resultant behavior more flexible. This is the brain's abstraction hierarchy.",
+        "source": "web"
+      },
+      {
+        "title": "Systems Hierarchy & Abstraction - YouTube",
+        "url": "https://www.youtube.com/watch?v=dImyZdy2k7g",
+        "date": "2015-03-29",
+        "last_updated": "2025-09-13",
+        "snippet": "... systems-thinking-81815390 Up until now we have been talking about systems on one level of analysis, our model so far has consisted of simple ...",
+        "source": "web"
+      },
+      {
+        "title": "A perceptual hierarchy of consciousness",
+        "url": "https://selfawarepatterns.com/2021/03/20/a-perceptual-hierarchy-of-consciousness/",
+        "date": "2021-03-20",
+        "last_updated": "2026-01-23",
+        "snippet": "A perceptual hierarchy of consciousness · Introspective perception. · The perceived. · The perceivable. · The unperceivable.",
+        "source": "web"
+      },
+      {
+        "title": "Understanding Social Hierarchies: The Neural and Psychological ...",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5494206/",
+        "date": "2015-02-20",
+        "last_updated": "2026-01-23",
+        "snippet": "Social groups across species rapidly self-organize into hierarchies, where members vary in their level of power, influence, skill, or dominance.",
+        "source": "web"
+      },
+      {
+        "title": "Rethinking Levels of Abstraction in Family Systems Theories - 1991",
+        "url": "https://onlinelibrary.wiley.com/doi/10.1111/j.1545-5300.1991.00435.x",
+        "snippet": "The new framework has three categories that are called Levels I, II, and III. The most abstract level (III) includes phenomena such as family paradigms and ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Academic Support for Abstraction Hierarchies as Distinct \"Worlds\"\n\nThe search results provide partial support for the idea that different levels of abstraction represent distinct organizational levels with different governing rules, though they don't fully endorse the notion that each level constitutes a fundamentally separate \"world\" incapable of perceiving adjacent levels.\n\n## Hierarchical Organization and Emergence\n\nThe strongest support comes from systems theory research. According to systems hierarchy concepts, **higher integrative levels are thought to be more complex and demonstrate more variation and characteristics than lower integrative levels because of emergence, and each level has its own unique internal dynamics**[3]. Critically, **the rules governing any given level may be qualitatively different from those of another, and this will be particularly pronounced when comparing the two extremes of the system's micro and macro levels**[3].\n\nThis aligns partially with your intuition: different levels do operate under different principles. However, the search results emphasize that **within emergent hierarchical systems there will always be a complex dynamic between the rules that govern the system on the micro level and those that govern it on the macro level**[3], suggesting some form of interaction rather than complete perceptual isolation.\n\n## Abstraction as Selective Representation\n\nThe neuroscience literature provides relevant context. **As information travels through the brain, it becomes more abstract, and resultant behavior more flexible**[2]. In this model, **lower levels of the hierarchy represent simpler perceptual features while higher levels represent more abstract categories**[1]. Importantly, **specific information is passed along feedforward pathways and is represented more abstractly by higher levels in the hierarchy**[1].\n\nThis suggests abstraction operates through *selective filtering and generalization* rather than complete imperceptibility. A higher level doesn't fail to perceive lower levels—it perceives them through an abstracted lens.\n\n## Limitations in the Search Results\n\nThe search results do **not** directly address:\n- Whether each level constitutes a genuinely separate \"reality\" that cannot perceive adjacent levels\n- Specific discussion of dimensional blindness\n- Detailed treatment of Koestler's holon concept or umwelt\n- How these principles apply to software architecture hierarchies\n\nThe results acknowledge that **hierarchies are oversimplified epistemic crutches for conveying complex dynamics**[4], which is relevant to your software model but suggests caution about overstating the impermeability of levels.\n\n## Relevance to Your Software Theory\n\nYour framework treats software abstraction levels as genuinely different dimensions where higher levels \"abstract away\" lower levels completely. The systems theory support here is mixed: while different levels do have qualitatively different properties and rules, the evidence suggests ongoing dynamic interaction rather than complete perceptual separation. A token fundamentally cannot \"see\" a system, but a system's constraints causally propagate downward to tokens in ways that suggest some form of informational coupling rather than mutual imperception."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}
