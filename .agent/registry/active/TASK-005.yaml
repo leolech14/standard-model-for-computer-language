@@ -1,0 +1,43 @@
+# TASK-005: Consolidate research directories
+# Status: SCOPED
+# Priority: MEDIUM (80% confidence)
+
+id: TASK-005
+title: Consolidate research directories
+description: |
+  Merge scattered research outputs to a single canonical location.
+
+  Current State:
+  - standard-model-of-code/docs/research/gemini/
+  - standard-model-of-code/docs/research/perplexity/
+  - context-management/intelligence/logs/ (some research mixed in)
+
+  Target: All research outputs go to standard-model-of-code/docs/research/
+
+  Acceptance Criteria:
+  - Single canonical location for all AI research outputs
+  - DualFormatSaver configured to use canonical path
+  - No research files in context-management/intelligence/
+
+status: SCOPED
+
+# 4D Confidence Matrix
+confidence:
+  factual: 85       # Research dirs exist, verified in boost_confidence assessment
+  alignment: 100    # Core to project organization
+  current: 90       # DualFormatSaver already supports configurable paths
+  onwards: 95       # Foundation for clean research archive
+
+# Computed: min(85, 100, 90, 95) = 85
+# Verdict: READY
+
+blocked_by: []
+blocks: []
+
+created: 2026-01-23T10:00:00Z
+updated: 2026-01-23T10:00:00Z
+
+# Migrated from Claude Code native task #3
+migration_note: |
+  Originally tracked as Claude Code session task #3.
+  Migrated to repo registry for persistence.

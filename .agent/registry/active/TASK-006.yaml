@@ -1,0 +1,51 @@
+# TASK-006: Unify registry locations
+# Status: SCOPED
+# Priority: HIGH (critical for maintainability)
+
+id: TASK-006
+title: Unify registry locations and task systems
+description: |
+  Document and consolidate the multiple task/registry systems in the repo.
+
+  Current Fragmentation:
+  1. .agent/registry/active/ - New YAML task system
+  2. .agent/registry/archive/legacy_learning_system/ - Old markdown system (deleted)
+  3. Claude Code native tasks - Session-only, ephemeral
+  4. Various *_TASK_REGISTRY.md files in docs/
+
+  Target Architecture:
+  - Single source of truth: .agent/registry/active/
+  - Archive: .agent/registry/archive/
+  - Opportunities inbox: .agent/registry/inbox/
+  - Document in REGISTRY_OF_REGISTRIES.md
+
+  Acceptance Criteria:
+  - All persistent tasks in .agent/registry/active/
+  - Legacy markdown registries marked as deprecated or removed
+  - Clear documentation of the canonical task system
+  - task_registry.py and boost_confidence.py point to correct paths
+
+status: SCOPED
+
+# 4D Confidence Matrix
+confidence:
+  factual: 90       # Multiple systems verified to exist
+  alignment: 100    # Core to project coherence
+  current: 85       # Some cleanup done, more needed
+  onwards: 95       # Foundation for BARE automation
+
+# Computed: min(90, 100, 85, 95) = 85
+# Verdict: READY
+
+blocked_by: []
+blocks: []
+
+created: 2026-01-23T10:00:00Z
+updated: 2026-01-23T10:00:00Z
+
+# Migrated from Claude Code native task #4
+migration_note: |
+  Originally tracked as Claude Code session task #4.
+  Migrated to repo registry for persistence.
+  Partially addressed in this session (legacy tasks deleted,
+  tools updated to use active/ directory).
