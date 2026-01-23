@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-23T07:14:06.493472
+**Generated At**: 2026-01-23T07:21:32.477545
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -51,25 +51,31 @@
 | SYNCED | `.agent/intelligence/truths/repo_truths.yaml` | 405 | 405 |
 | SYNCED | `.agent/manifest.yaml` | 2235 | 2235 |
 | SYNCED | `.agent/registry/INDEX.md` | 2789 | 2789 |
-| DRIFT_MODIFIED | `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` | 0 | 24413 |
-| DRIFT_MODIFIED | `.agent/registry/active/TASK-000.yaml` | 0 | 1441 |
+| SYNCED | `.agent/registry/README.md` | 4173 | 4173 |
 | SYNCED | `.agent/registry/active/TASK-001.yaml` | 1654 | 1654 |
 | SYNCED | `.agent/registry/active/TASK-002.yaml` | 703 | 703 |
+| SYNCED | `.agent/registry/active/TASK-003.yaml` | 1050 | 1050 |
 | SYNCED | `.agent/registry/claimed/README.md` | 1836 | 1836 |
 | SYNCED | `.agent/registry/inbox/OPP-001.yaml` | 575 | 575 |
-| DRIFT_MODIFIED | `.agent/registry/tasks/TASK-126.yaml` | 0 | 292 |
-| DRIFT_MODIFIED | `.agent/registry/tasks/TASK-127.yaml` | 0 | 288 |
+| SYNCED | `.agent/registry/inbox/OPP-002.yaml` | 594 | 594 |
+| SYNCED | `.agent/registry/inbox/OPP-003.yaml` | 652 | 652 |
+| SYNCED | `.agent/registry/inbox/OPP-004.yaml` | 770 | 770 |
+| SYNCED | `.agent/registry/inbox/OPP-005.yaml` | 1538 | 1538 |
+| SYNCED | `.agent/registry/inbox/OPP-006.yaml` | 1353 | 1353 |
 | SYNCED | `.agent/runs/RUN-20260122-194058-claude.yaml` | 2816 | 2816 |
 | SYNCED | `.agent/schema/opportunity.schema.yaml` | 2768 | 2768 |
 | SYNCED | `.agent/schema/run.schema.yaml` | 3736 | 3736 |
 | SYNCED | `.agent/schema/task.schema.yaml` | 3190 | 3190 |
 | SYNCED | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` | 15762 | 15762 |
-| SYNCED | `.agent/sprints/SPRINT-001.yaml` | 1515 | 1515 |
+| SYNCED | `.agent/specs/BARE_LIVE.md` | 19636 | 19636 |
+| SYNCED | `.agent/specs/CUTTING_PLAN.md` | 21627 | 21627 |
+| SYNCED | `.agent/sprints/SPRINT-001.yaml` | 1612 | 1612 |
 | SYNCED | `.agent/tools/audit_unicode.py` | 9255 | 9255 |
 | SYNCED | `.agent/tools/bare` | 4235 | 4235 |
 | SYNCED | `.agent/tools/boost_confidence.py` | 15252 | 15252 |
 | SYNCED | `.agent/tools/check_stale.sh` | 698 | 698 |
 | SYNCED | `.agent/tools/claim_task.sh` | 1952 | 1952 |
+| SYNCED | `.agent/tools/promote_opportunity.py` | 4753 | 4753 |
 | SYNCED | `.agent/tools/promote_opportunity.sh` | 4235 | 4235 |
 | SYNCED | `.agent/tools/release_task.sh` | 2092 | 2092 |
 | SYNCED | `.agent/tools/sprint.py` | 5803 | 5803 |
@@ -411,22 +417,6 @@
 | SYNCED | `collider_output_small/output_llm-oriented_src_20260121_080924.json` | 12823661 | 12823661 |
 | SYNCED | `collider_output_small/output_llm-oriented_src_20260121_082117.json` | 12816877 | 12816877 |
 | SYNCED | `collider_output_small/unified_analysis.json` | 11332250 | 11332250 |
-| DRIFT_MODIFIED | `context-management/.agent/FILTER_SYSTEM_AUDIT.md` | 0 | 21201 |
-| DRIFT_MODIFIED | `context-management/.agent/SET_MAPPING_IMPLEMENTATION.md` | 0 | 29970 |
-| DRIFT_MODIFIED | `context-management/.agent/UI_REFACTOR_REPORT.md` | 0 | 21632 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/C1_ATOM_ENUMERATION.md` | 0 | 9910 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/C2_JSON_SCHEMA.md` | 0 | 17821 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/C3_TRAINING_CORPUS.md` | 0 | 18725 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/CLAUDE.md` | 0 | 2327 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/DOCS_README.md` | 0 | 1350 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/ORIENTATION_FILES.md` | 0 | 5089 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/REPO_README.md` | 0 | 17151 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/ROADMAP.md` | 0 | 6171 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/THEORY.md` | 0 | 176006 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/TOOL.md` | 0 | 19962 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/graph.schema.json` | 0 | 6447 |
-| DRIFT_MODIFIED | `context-management/.agent/orientation/particle.schema.json` | 0 | 13597 |
-| DRIFT_MODIFIED | `context-management/.agent/workflows/publish.md` | 0 | 489 |
 | SYNCED | `context-management/config/aci_config.yaml` | 5457 | 5457 |
 | SYNCED | `context-management/config/analysis_sets.yaml` | 14848 | 14848 |
 | SYNCED | `context-management/config/documentation_map.yaml` | 2170 | 2170 |
@@ -498,3 +488,13 @@
 | SYNCED | `context-management/docs/assets/periodic_table_code_complete.png` | 795484 | 795484 |
 | SYNCED | `context-management/docs/assets/periodic_table_code_v3.png` | 869096 | 869096 |
 | SYNCED | `context-management/docs/assets/periodic_table_dense.png` | 916760 | 916760 |
+| SYNCED | `context-management/docs/assets/periodic_table_neon.png` | 817205 | 817205 |
+| SYNCED | `context-management/docs/assets/periodic_table_poster.png` | 981864 | 981864 |
+| SYNCED | `context-management/docs/assets/purpose_field_cosmology_1767765494131.png` | 847034 | 847034 |
+| SYNCED | `context-management/docs/assets/real_architecture_map.png` | 791406 | 791406 |
+| SYNCED | `context-management/docs/assets/real_constellation_9nodes.png` | 705151 | 705151 |
+| SYNCED | `context-management/docs/assets/sixteen_levels_tower_1767765458713.png` | 925357 | 925357 |
+| SYNCED | `context-management/docs/assets/standard_model_infographic.png` | 841871 | 841871 |
+| SYNCED | `context-management/docs/assets/theory_synthesis_map_1767767058336.png` | 517549 | 517549 |
+| SYNCED | `context-management/docs/assets/three_planes_existence_1767765477409.png` | 816056 | 816056 |
+| SYNCED | `context-management/docs/assets/topology_map_complete_1767765983418.png` | 799218 | 799218 |
