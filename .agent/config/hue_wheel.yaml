@@ -1,0 +1,60 @@
+# Semantic Hue Wheel for File Tree Visualization
+# Hue values are degrees (0-360) in OKLCH color space
+# Maps file extensions to semantic colors for visual navigation
+
+families:
+  logic:
+    description: "Programming languages"
+    hue_range: [180, 300]  # Cyan to Purple
+    extensions:
+      .py: 220
+      .pyx: 225
+      .pyi: 218
+      .js: 200
+      .jsx: 205
+      .ts: 210
+      .tsx: 215
+      .go: 240
+      .rs: 260
+      .java: 250
+      .c: 270
+      .cpp: 275
+      .h: 272
+      .rb: 290
+      .php: 285
+
+  config:
+    description: "Configuration and data files"
+    hue_range: [30, 90]  # Orange to Yellow-Green
+    extensions:
+      .json: 45
+      .yaml: 50
+      .yml: 50
+      .toml: 55
+      .ini: 60
+      .env: 40
+      .xml: 65
+
+  docs:
+    description: "Documentation and text"
+    hue_range: [90, 150]  # Yellow-Green to Green
+    extensions:
+      .md: 110
+      .txt: 100
+      .rst: 115
+      .html: 130
+      .css: 140
+
+  assets:
+    description: "Binary and media files"
+    hue_range: [300, 360]  # Magenta to Red
+    extensions:
+      .png: 320
+      .jpg: 325
+      .gif: 330
+      .svg: 315
+      .pdf: 340
+      .zip: 350
+
+  default:
+    hue: 0  # Red for unknown types

@@ -1,0 +1,127 @@
+# CARD-SES-001: Start Session
+# Initialize session state and load critical context
+
+id: CARD-SES-001
+title: "Start Session"
+description: "Initialize a new agent session. Loads project context, checks for active sprint, scans inbox for opportunities, and displays the decision deck state. Essential first card to play in any session."
+
+phase_gate: [ANY]
+
+preconditions:
+  - check: "session_not_active()"
+    description: "No session state file exists at .agent/state/session.yaml"
+  - check: "project_initialized()"
+    description: "PROJECT_elements directory structure exists"
+    files_must_exist:
+      - "CLAUDE.md"
+      - "context-management/docs/operations/AGENT_KERNEL.md"
+
+steps:
+  - action: "Load CLAUDE.md"
+    description: "Read project CLAUDE.md to understand architecture and commands"
+    checkpoint: false
+    context_file: "CLAUDE.md"
+
+  - action: "Load AGENT_KERNEL.md"
+    description: "Read AGENT_KERNEL.md for session rules, non-negotiables, and initiation protocol"
+    checkpoint: false
+    context_file: "context-management/docs/operations/AGENT_KERNEL.md"
+
+  - action: "Check active sprint"
+    description: "Read .agent/sprints/ to identify current SPRINT-NNN.yaml"
+    checkpoint: false
+    scan_directory: ".agent/sprints/"
+    pattern: "SPRINT-[0-9]{3}.yaml"
+
+  - action: "Scan inbox for opportunities"
+    description: "Check .agent/registry/inbox/ for pending OPP-*.yaml files"
+    checkpoint: false
+    scan_directory: ".agent/registry/inbox/"
+    pattern: "OPP-[0-9]{3}.yaml"
+
+  - action: "Check active tasks"
+    description: "Review .agent/registry/active/ for current TASK-*.yaml files"
+    checkpoint: false
+    scan_directory: ".agent/registry/active/"
+    pattern: "TASK-[0-9]{3}.yaml"
+
+  - action: "Initialize session state"
+    description: "Create .agent/state/session.yaml with timestamp and status=ACTIVE"
+    checkpoint: true
+    creates_file: ".agent/state/session.yaml"
+
+  - action: "Display Decision Deck"
+    description: "Show available cards in .agent/deck/ and current meters from .agent/state/meters.yaml"
+    checkpoint: false
+    read_file: ".agent/state/meters.yaml"
+
+outcomes:
+  success:
+    state_changes:
+      - "Session state file created at .agent/state/session.yaml"
+      - "status = ACTIVE"
+      - "session_start_timestamp = ISO8601"
+      - "active_sprint = identified"
+      - "inbox_count = counted"
+      - "active_task_count = counted"
+      - "meters initialized or refreshed"
+    unlocks: [CARD-REG-001, CARD-REG-002, CARD-ANA-001, CARD-RES-001, CARD-GIT-001, CARD-DOC-001, CARD-WLD-000]
+    meters:
+      focus: 1
+      readiness: 1
+    display:
+      - "session.yaml contents (timestamp, active_sprint, inbox_count, task_count)"
+      - "meters.yaml current state (focus, reliability, discovery, debt, readiness)"
+      - "Available cards table (id, title, phase_gate, risk_level)"
+      - "Next recommended action based on phase and pending items"
+
+  failure:
+    state_changes:
+      - "Session state not created"
+      - "Context files not found or unreadable"
+    meters:
+      reliability: -1
+      readiness: -1
+    diagnostics:
+      - "Check CLAUDE.md path"
+      - "Check AGENT_KERNEL.md path"
+      - "Verify .agent/state/ directory exists"
+
+rollback:
+  possible: true
+  steps:
+    - "rm .agent/state/session.yaml"
+    - "Meters will revert to previous values on next session start"
+  warning: "Removing session.yaml may hide incomplete work - review .agent/state/meters.yaml for context"
+
+context_injection:
+  - path: "CLAUDE.md"
+    sections: ["Architecture", "Commands", "File Lookup"]
+  - path: "context-management/docs/operations/AGENT_KERNEL.md"
+    sections: ["Non-Negotiables", "Session Rules", "Commit Protocol"]
+  - path: ".agent/sprints/SPRINT-*.yaml"
+    sections: ["phase", "focus"]
+  - path: ".agent/registry/INDEX.md"
+    sections: ["Active Tasks", "Discovery Inbox"]
+  - path: ".agent/state/meters.yaml"
+    sections: ["all"]
+
+cost:
+  tokens_estimate: 500
+  risk_level: LOW
+  side_effects: "Creates session.yaml state file, meters may increment focus"
+
+tags: [session, initialization, foundational, meta, every-session]
+
+# Session state schema (created by this card):
+# .agent/state/session.yaml
+# ├── session_id: UUID or timestamp-based
+# ├── status: ACTIVE | PAUSED | COMPLETE
+# ├── created_at: ISO8601 timestamp
+# ├── active_sprint: SPRINT-NNN
+# ├── inbox_count: N (number of opportunities pending)
+# ├── active_task_count: N (number of active tasks)
+# └── context_loaded:
+#     ├── claude_md: true/false
+#     ├── agent_kernel: true/false
+#     └── meters: true/false

@@ -14,16 +14,15 @@ and implements OKLCH→RGB conversion for web rendering.
 """
 
 import math
-import os
 from pathlib import Path
-from typing import Tuple
+from typing import Optional, Tuple, Union
 import yaml
 
 
 class OKLCHColorMapper:
     """Maps file metadata to OKLCH color space with semantic hue wheel."""
 
-    def __init__(self, config_path: str = None):
+    def __init__(self, config_path: Optional[Union[str, Path]] = None):
         """
         Initialize color mapper with hue wheel configuration.
 
@@ -33,9 +32,11 @@ class OKLCHColorMapper:
         if config_path is None:
             # Auto-locate relative to this file
             base = Path(__file__).parent.parent
-            config_path = base / "config" / "hue_wheel.yaml"
+            resolved_path = base / "config" / "hue_wheel.yaml"
+        else:
+            resolved_path = Path(config_path)
 
-        self.config_path = Path(config_path)
+        self.config_path = resolved_path
         self.hue_map = self._load_hue_wheel()
 
     def _load_hue_wheel(self) -> dict:
