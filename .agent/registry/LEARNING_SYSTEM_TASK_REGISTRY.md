@@ -50,14 +50,14 @@
 ☑️  MCP-001   BEST_PRACTICES.md
 ☑️  MCP-003   Dual-format utility
 ☑️  MCP-004   SHA-256 checksums
-🟢 TASK-111  Update analysis_sets.yaml            [85%]
+☑️  TASK-111  Update analysis_sets.yaml            [93d4de9]
 🟢 TASK-112  Re-evaluate token budgets            [85%]
 🟢 TASK-114  Add Context Engineering docs         [85%]
 🟢 TASK-106  Dataset optimization guide           [85%]
 🟡 TASK-104  Pre-commit hook                      [80%→85%]
 🟡 TASK-102  --research-loop                      [75%→85%]
 🟡 TASK-103  analyze.py storage                   [70%→85%]
-🚧 TASK-113  Positional strategy                  [needs 111]
+🟢 TASK-113  Positional strategy                  [85%] ← unblocked
 💤 TASK-105  Live-reload for viz
 💤 TASK-108  Knowledge embodiment workflow
 💤 TASK-109  Deploy HSL to Cloud Run
@@ -255,7 +255,7 @@
 ```
 HIGHEST VALUE:
 1. 🟢 TASK-110  Document Socratic Research Loop      [90%]
-2. 🟢 TASK-111  Update analysis_sets.yaml            [85%] ← unblocks 113
+2. ☑️  TASK-111  Update analysis_sets.yaml            [93d4de9] ← unblocks 113
 3. 🟢 TASK-114  Add Context Engineering docs         [85%]
 
 NEXT TIER:
