@@ -56,7 +56,7 @@
 ☑️  TASK-114  Add Context Engineering docs        [pending commit]
 ☑️  TASK-106  Dataset optimization guide          [pending commit]
 ☑️  TASK-113  Positional strategy                 [5c7b35b]
-🟢 TASK-103  analyze.py auto-save                 [85%] ← boosted
+☑️  TASK-103  analyze.py auto-save                 [d16826d]
 💤 TASK-104  Pre-commit hook                      [nice-to-have]
 💤 TASK-102  --research-loop                      [complex scope]
 💤 TASK-105  Live-reload for viz
@@ -262,18 +262,19 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 
 ---
 
-### 🟢 TASK-103: Add auto-save to analyze.py responses
-**Risk:** A | **Threshold:** 85% | **Score:** 85% | **BOOSTED**
+### ☑️ TASK-103: Add auto-save to analyze.py responses
+**Commit:** pending
 
-**Investigation:**
-- analyze.py only saves with explicit --output flag
-- Should auto-save like Perplexity MCP (DualFormatSaver)
-- Clear implementation: use output_formatters.py
+**Deliverables:**
+- Import DualFormatSaver with graceful fallback (try/except)
+- Auto-save to `standard-model-of-code/docs/research/gemini/`
+- All modes covered: one-shot, trace, insights, role_validation, plan_validation
+- Format: `{timestamp}_{query_slug}.{md,json}`
 
 **Implementation:**
-1. Import DualFormatSaver from utils/output_formatters.py
-2. Auto-save Gemini responses to `docs/research/gemini/`
-3. Format: `{timestamp}_{query_slug}.{md,json}`
+- `analyze.py:155-170` - DualFormatSaver import + config
+- `analyze.py:171-205` - auto_save_gemini_response() helper
+- Auto-save calls in all response modes
 
 ---
 
@@ -312,12 +313,14 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 ## Execution Priority
 
 ```
-READY:
-1. 🟢 TASK-103  analyze.py auto-save                 [85%] ← execute now
+ALL READY TASKS COMPLETE!
 
-DEFERRED (after investigation):
+DEFERRED:
 - 💤 TASK-104  Pre-commit hook     (nice-to-have, not core mission)
 - 💤 TASK-102  --research-loop     (complex scope, needs design)
+- 💤 TASK-105  Live-reload for viz
+- 💤 TASK-108  Knowledge embodiment workflow
+- 💤 TASK-109  Deploy HSL to Cloud Run
 
 POTENTIAL NEW TASKS:
 - Build subgraph retrieval API (GraphRAG runtime)
@@ -331,8 +334,8 @@ POTENTIAL NEW TASKS:
 
 | Status | Count | Tasks |
 |--------|-------|-------|
-| ☑️  COMPLETE | 15 | 100, 115, 116, 117, 110, 101, 111, 118, 119, 114, 106, 113, MCP-001, MCP-003, MCP-004 |
-| 🟢 READY | 1 | 103 (auto-save) |
+| ☑️  COMPLETE | 16 | 100, 103, 115, 116, 117, 110, 101, 111, 118, 119, 114, 106, 113, MCP-001, MCP-003, MCP-004 |
+| 🟢 READY | 0 | (all ready tasks complete) |
 | 💤 DEFERRED | 5 | 104, 102, 105, 108, 109 |
 | ⛔ REJECTED | 2 | MCP-007, 112 (subsumed) |
 | **TOTAL** | **23** | |
@@ -351,3 +354,4 @@ POTENTIAL NEW TASKS:
 | 3.3.0 | 2026-01-23 | Context purity: +2 tasks (118, 119), token budgets reduced to ≤200k |
 | 3.4.0 | 2026-01-23 | All ready tasks complete: +3 (114, 106, 113), RAG/LC thresholds documented |
 | 3.5.0 | 2026-01-23 | Boost analysis: TASK-103 boosted to 85%, TASK-104/102 deferred |
+| 3.6.0 | 2026-01-23 | TASK-103 complete: analyze.py auto-save with DualFormatSaver |
