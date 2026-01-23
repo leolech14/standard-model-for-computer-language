@@ -14,7 +14,7 @@
  *   SELECT.ids                          // Get Set of selected IDs
  */
 
-const SELECT = (function() {
+const SELECT = (function () {
     'use strict';
 
     // =========================================================================
@@ -178,7 +178,7 @@ const SELECT = (function() {
         return '#' + [rOut, gOut, bOut].map(x => x.toString(16).padStart(2, '0')).join('');
     }
 
-    function _dimColor(hexColor, factor = 0.33) {
+    function _dimColor(hexColor, factor = 0.2) {
         const hex = hexColor.replace('#', '');
         const r = Math.round(parseInt(hex.substr(0, 2), 16) * (1 - factor));
         const g = Math.round(parseInt(hex.substr(2, 2), 16) * (1 - factor));
@@ -323,7 +323,7 @@ const SELECT = (function() {
                 } else {
                     const orig = _originalColorsForDim.get(node.id);
                     if (orig) {
-                        node.color = _dimColor(orig.color, 0.5);
+                        node.color = _dimColor(orig.color, 0.4); // Less aggressive dimming (was 0.5)
                         node.val = orig.val * 0.7;
                     }
                 }
@@ -818,7 +818,12 @@ const SELECT = (function() {
             }
             const didDrag = rect.width > 4 && rect.height > 4;
             if (didDrag) {
+                // Only update timestamp if we actually dragged, to prevent blocking valid background clicks
+                _lastMarqueeEndTs = Date.now();
                 selectNodesInBox(rect, additive);
+            } else {
+                // If it was just a click, do NOT update timestamp so maybeClear() can work
+                _lastMarqueeEndTs = 0;
             }
         };
 

@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-22T02:31:21.608890
+**Generated At**: 2026-01-23T02:10:33.713544
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -37,6 +37,20 @@
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_14.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_15.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/Ferramenta Local-First de Mapa de Calor de Analogias \342\200\223 Especifica\303\247\303\243o Completa.pdf"` | 0 | - |
+| SYNCED | `.agent/KERNEL.md` | 5771 | 5771 |
+| SYNCED | `.agent/manifest.yaml` | 2235 | 2235 |
+| SYNCED | `.agent/registry/INDEX.md` | 2376 | 2376 |
+| SYNCED | `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` | 8655 | 8655 |
+| SYNCED | `.agent/registry/active/TASK-000.yaml` | 1441 | 1441 |
+| SYNCED | `.agent/registry/active/TASK-001.yaml` | 1419 | 1419 |
+| SYNCED | `.agent/registry/claimed/README.md` | 1836 | 1836 |
+| SYNCED | `.agent/runs/RUN-20260122-194058-claude.yaml` | 2816 | 2816 |
+| SYNCED | `.agent/schema/run.schema.yaml` | 3736 | 3736 |
+| SYNCED | `.agent/schema/task.schema.yaml` | 3190 | 3190 |
+| SYNCED | `.agent/tools/audit_unicode.py` | 9255 | 9255 |
+| SYNCED | `.agent/tools/check_stale.sh` | 698 | 698 |
+| SYNCED | `.agent/tools/claim_task.sh` | 1952 | 1952 |
+| SYNCED | `.agent/tools/release_task.sh` | 2092 | 2092 |
 | SYNCED | `.agent/workflows/testing_suite.md` | 2080 | 2080 |
 | SYNCED | `.claude/rules/body.md` | 680 | 680 |
 | SYNCED | `.claude/rules/brain.md` | 755 | 755 |
@@ -44,7 +58,7 @@
 | SYNCED | `.gemini/context/brain.md` | 1010 | 1010 |
 | SYNCED | `.gitignore` | 2617 | 2617 |
 | SYNCED | `AGENTS.md` | 1217 | 1217 |
-| SYNCED | `CLAUDE.md` | 5769 | 5769 |
+| SYNCED | `CLAUDE.md` | 6282 | 6282 |
 | SYNCED | `Dockerfile` | 1369 | 1369 |
 | SYNCED | `GEMINI.md` | 1849 | 1849 |
 | CLOUD_ONLY | `Liabilities` | - | 156077 |
@@ -387,7 +401,7 @@
 | SYNCED | `context-management/.agent/orientation/graph.schema.json` | 6447 | 6447 |
 | SYNCED | `context-management/.agent/orientation/particle.schema.json` | 13597 | 13597 |
 | SYNCED | `context-management/.agent/workflows/publish.md` | 489 | 489 |
-| SYNCED | `context-management/config/analysis_sets.yaml` | 9071 | 9071 |
+| SYNCED | `context-management/config/analysis_sets.yaml` | 11138 | 11138 |
 | SYNCED | `context-management/config/documentation_map.yaml` | 2170 | 2170 |
 | SYNCED | `context-management/config/insights_schema.json` | 5684 | 5684 |
 | SYNCED | `context-management/config/prompts.yaml` | 9942 | 9942 |
@@ -407,7 +421,7 @@
 | SYNCED | `context-management/docs/STORAGE_ARCHITECTURE.md` | 17715 | 17715 |
 | SYNCED | `context-management/docs/TIMELINE_ANALYSIS.md` | 13274 | 13274 |
 | SYNCED | `context-management/docs/TOOL.md` | 20164 | 20164 |
-| SYNCED | `context-management/docs/WORKFLOW_FACTORY.md` | 6485 | 6485 |
+| SYNCED | `context-management/docs/WORKFLOW_FACTORY.md` | 10779 | 10779 |
 | SYNCED | `context-management/docs/agent_school/AGENT_ANTI_PATTERNS.md` | 11510 | 11510 |
 | SYNCED | `context-management/docs/agent_school/AGENT_BOOT.md` | 3874 | 3874 |
 | SYNCED | `context-management/docs/agent_school/DOD.md` | 2756 | 2756 |
@@ -484,17 +498,3 @@
 | SYNCED | `context-management/docs/prompts/12_semantic_similarity.md` | 1777 | 1777 |
 | SYNCED | `context-management/docs/prompts/13_entropy_complexity.md` | 1684 | 1684 |
 | SYNCED | `context-management/docs/prompts/14_governance_evolution.md` | 1806 | 1806 |
-| SYNCED | `context-management/docs/prompts/EDUCATION_AGENT_PROMPT.md` | 3269 | 3269 |
-| SYNCED | `context-management/docs/prompts/README.md` | 2953 | 2953 |
-| SYNCED | `context-management/docs/prompts/THEORY_MAPPING_AGENT_PROMPT.md` | 20954 | 20954 |
-| SYNCED | `context-management/docs/prompts/VALIDATION_MEGAPROMPTS.md` | 22329 | 22329 |
-| SYNCED | `context-management/docs/prompts/VALIDATION_STRATEGY_PROMPTS.md` | 4819 | 4819 |
-| SYNCED | `context-management/docs/prompts/VISUALIZATION_PROMPTS.md` | 30279 | 30279 |
-| SYNCED | `context-management/docs/proposals/COLLIDER_AI_INSIGHTS_PROPOSAL.md` | 16530 | 16530 |
-| SYNCED | `context-management/docs/reports/CONTEXT_ARCHITECTURE_DISCOVERY_2026-01-20.md` | 3774 | 3774 |
-| SYNCED | `context-management/docs/roadmaps/C1_ATOM_ENUMERATION.md` | 9910 | 9910 |
-| SYNCED | `context-management/docs/roadmaps/C2_JSON_SCHEMA.md` | 17821 | 17821 |
-| SYNCED | `context-management/docs/roadmaps/C3_TRAINING_CORPUS.md` | 18725 | 18725 |
-| SYNCED | `context-management/docs/theory/ADDITIONAL_THEORIES.md` | 8174 | 8174 |
-| SYNCED | `context-management/docs/theory/FOUNDATIONAL_THEORIES.md` | 21132 | 21132 |
-| SYNCED | `context-management/docs/theory/SYNTHESIS_GAP_IMPLEMENTATION.md` | 8415 | 8415 |

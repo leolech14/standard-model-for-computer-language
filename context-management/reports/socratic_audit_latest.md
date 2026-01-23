@@ -1,33 +1,81 @@
-# Validated Semantic Map: PIPELINE\n\nDate: 2026-01-22 02:11:07\n\n## Concept: Stage\n> A processing unit in the analysis pipeline.\n\n### Findings
-- **Entity**: `run_full_analysis` and its component functions (e.g., `create_codome_boundaries`, `detect_knots`, etc.)
-- **Status**: Non-Compliant
-- **Evidence**: The analysis pipeline is implemented as a large orchestrator function, `run_full_analysis`, which calls other standalone functions to perform discrete processing steps. For example, `create_codome_boundaries` is defined as `def create_codome_boundaries(nodes: List[Dict], edges: List[Dict]) -> Dict[str, Any]:`.
-- **Deviation**: The implementation follows a procedural/functional paradigm, which violates the object-oriented structure required by the Semantic Definition.
-    - **Inheritance**: The processing units are functions, not classes. They cannot inherit from a `BaseStage` class.
-    - **Execution Method**: As functions, they are invoked directly by their name. They do not implement an `execute` or `run` method as part of a class interface.
-    - **Return Type**: The functions return standard Python dictionaries (e.g., `-> Dict[str, Any]`) rather than a standardized `ProcessingResult` or `AnalysisResult` class instance.
-    - **Statelessness**: While the functions are technically stateless as they lack instance variables, some functions (e.g., `detect_js_imports` called by `create_codome_boundaries`) modify their mutable input arguments (the `edges` list) in place, which goes against the spirit of a pure, stateless processing unit.\n\n### Semantic Guardrails (Antimatter Check)\n**PASSED**: No liabilities detected.\n\n## Concept: Extractor\n> Component responsible for raw data ingestion.\n\n### Findings
-
-Here is the semantic audit report for the provided codebase against the 'Extractor' concept.
+# Validated Semantic Map: PIPELINE\n\nDate: 2026-01-23 02:06:26\n\n## Concept: Stage\n> A processing unit in the analysis pipeline.\n\n### Findings
+The codebase uses a procedural approach for its analysis pipeline, where standalone functions act as processing units. This architectural choice is in direct conflict with the object-oriented `Stage` concept, which requires class-based implementation. Consequently, no entities in the provided file are compliant.
 
 ---
+- **Entity**: `compute_markov_matrix`
+- **Status**: Non-Compliant
+- **Evidence**: The entity is defined as a standalone function:
+  ```python
+  def compute_markov_matrix(nodes: List[Dict], edges: List[Dict]) -> Dict:
+      """
+      Compute Markov transition matrix from call graph.
+      ...
+      """
+  ```
+- **Deviation**: The function fails to meet multiple invariants:
+    - It is a standalone function and does not inherit from a `BaseStage` class.
+    - It does not implement an `execute` or `run` method; its name is `compute_markov_matrix`.
+    - It returns a standard Python `Dict`, not a `ProcessingResult` or `AnalysisResult` object.
+    - It violates the spirit of statelessness by modifying its `edges` input list in-place (`edge['markov_weight'] = ...`).
 
+---
+- **Entity**: `detect_knots`
+- **Status**: Non-Compliant
+- **Evidence**: The entity is defined as a standalone function:
+  ```python
+  def detect_knots(nodes: List[Dict], edges: List[Dict]) -> Dict:
+      """
+      Detect dependency knots (cycles) and tangles in the graph.
+      ...
+      """
+  ```
+- **Deviation**: The function fails to meet multiple invariants:
+    - It is a standalone function and does not inherit from a `BaseStage` class.
+    - It does not implement an `execute` or `run` method; its name is `detect_knots`.
+    - It returns a standard Python `Dict`, not a `ProcessingResult` or `AnalysisResult` object.
+
+---
+- **Entity**: `compute_data_flow`
+- **Status**: Non-Compliant
+- **Evidence**: The entity is defined as a standalone function:
+  ```python
+  def compute_data_flow(nodes: List[Dict], edges: List[Dict]) -> Dict:
+      """
+      Analyze data flow patterns across the codebase.
+      """
+  ```
+- **Deviation**: The function fails to meet multiple invariants:
+    - It is a standalone function and does not inherit from a `BaseStage` class.
+    - It does not implement an `execute` or `run` method; its name is `compute_data_flow`.
+    - It returns a standard Python `Dict`, not a `ProcessingResult` or `AnalysisResult` object.
+
+---
+- **Entity**: `create_codome_boundaries`
+- **Status**: Non-Compliant
+- **Evidence**: The entity is defined as a standalone function:
+  ```python
+  def create_codome_boundaries(nodes: List[Dict], edges: List[Dict]) -> Dict[str, Any]:
+      """
+      Create synthetic codome boundary nodes and inferred edges.
+      ...
+      """
+  ```
+- **Deviation**: The function fails to meet multiple invariants:
+    - It is a standalone function and does not inherit from a `BaseStage` class.
+    - It does not implement an `execute` or `run` method.
+    - It returns a standard Python `Dict`, not a `ProcessingResult` or `AnalysisResult` object.
+    - It violates the spirit of statelessness by modifying its `edges` input list via calls to `detect_js_imports` and `detect_class_instantiation`.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM004]**: The function 'compute_data_flow' is defined as an incomplete stub with its signature trailing off (`-> Di`). This code is non-functional, cannot be called, and represents incomplete or abandoned work. It is classic orphan code that adds clutter and potential confusion without providing any functionality. (Severity: HIGH)\n- 🔴 **[AM004]**: The module imports 'FileEnricher' from 'src.core.file_enricher', but this import is never used anywhere in the provided file. This constitutes an unnecessary dependency and dead code at the module level. (Severity: LOW)\n- 🔴 **[AM004]**: Within the 'build_file_index' function, the variable 'node_to_file' is initialized and populated with data from the nodes list, but it is never read or used for any subsequent computation. This is a small but clear instance of orphan code within a function. (Severity: LOW)\n- 🔴 **[AM004]**: The 'detect_knots' function initializes and populates a 'reverse' graph dictionary. However, this variable is never subsequently read or used in the cycle detection logic, making its creation and population useless work. (Severity: LOW)\n\n## Concept: Extractor\n> Component responsible for raw data ingestion.\n\n### Findings
 - **Entity**: `SmartExtractor`
 - **Status**: Compliant
-- **Evidence**:
-    - **Invariant 1 (Must operate on raw file content or AST):** The class explicitly reads raw source files and parses them into an AST.
-        - **Raw Content:** The `_enrich_from_source` method reads the file: `content = file_path.read_text(encoding='utf-8', errors='ignore')` and stores its lines: `self._file_cache[str(file_path)] = content.splitlines()`.
-        - **AST Operation:** The `_enrich_from_ast` method parses the source code into an AST: `tree = ast.parse(source)` and walks it to extract structural details like base classes, decorators, and docstrings: `for node in ast.walk(tree): ...`.
-    - **Invariant 2 (Must not perform complex semantic reasoning):** The class aggregates factual data and uses simple heuristics, but it does not perform deep semantic analysis. Its primary purpose is to prepare a "rich context packet for LLM classification," explicitly deferring complex reasoning to a downstream component (the LLM Classifier). Its most complex logic, `_infer_layer`, is a simple path-based pattern match (`if any(p in normalized for p in patterns):`), which is a heuristic, not complex reasoning.
-- **Deviation**: None. The component is a clear implementation of an Extractor, gathering data from source code and its structure to prepare it for another component's analysis.
+- **Evidence**: The class fulfills the definition of an Extractor by ingesting raw data from the codebase to prepare it for another component.
+    - **Invariant 1 (Operates on raw file/AST):** The class directly reads source files (`file_path.read_text`) and parses them into an AST (`ast.parse(source)`) to extract information like code excerpts, docstrings, decorators, and base classes.
+    - **Invariant 2 (No complex semantic reasoning):** The class's primary role is data aggregation. While `_infer_layer` performs a heuristic analysis, it is a simple, pattern-based check against file paths (`LAYER_PATTERNS`), not a complex analysis of the code's behavior or purpose. This is a form of pre-processing, not the architectural reasoning reserved for a Classifier.
+- **Deviation**: None.
 
 ---
-
 - **Entity**: `EdgeExtractionStrategy` (and its concrete implementations)
 - **Status**: Compliant
-- **Evidence**:
-    - **Invariant 1 (Must operate on raw file content or AST):** All strategies operate on either raw source code strings or a Tree-sitter AST.
-        - **Raw Content (Regex-based):** The `PythonEdgeStrategy` and `JavascriptEdgeStrategy` use regular expressions on the raw `body_source` string: `calls = re.findall(r'(?:self\.)?(\w+)\s*\(', body)`.
-        - **AST Operation (Tree-sitter based):** The `TreeSitterEdgeStrategy` and its subclasses parse the `body_source` into an AST and query it for call nodes: `tree = self.parser.parse(source_bytes)` and `if node.type in call_types: ...`.
-    - **Invariant 2 (Must not perform complex semantic reasoning):** The strategies focus on identifying factual, structural relationships (calls, uses, inheritance) rather than interpreting their architectural meaning. Even the advanced `JavaScriptTreeSitterStrategy`, which uses a `JSModuleResolver` to resolve import aliases and a `QueryBasedScopeAnalyzer`, is performing sophisticated *structural* analysis to correctly identify the target of a call. This is an advanced form of data extraction (finding the "who calls whom" facts) and does not cross into interpreting the *purpose* or *role* of that call, which is the domain of a Classifier.
-- **Deviation**: None. The purpose of these strategies is to extract a call graph and other relationships directly from the code structure, which is a form of raw data ingestion.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM002]**: In `edge_extractor.py`, the use of a global singleton `_js_module_resolver` introduces mutable global state into the extraction process. This violates the intended stateless role of an extractor, creates side effects, and complicates testing and concurrency. State should be managed via instantiation or dependency injection, not global variables. (Severity: HIGH)\n- 🔴 **[AM002]**: In `smart_extractor.py`, the function `format_card_for_llm` violates the extractor's role by adding presentation logic. An extractor's responsibility is to extract and structure data (`ComponentCard`), not format it into a prompt for a specific consumer (the LLM). This formatting logic should reside in a separate presentation or prompt-engineering layer. (Severity: MEDIUM)\n- 🔴 **[AM001]**: In `edge_extractor.py`, the hardcoded `STDLIB_MODULES` set is a re-implementation of functionality available programmatically in Python (e.g., via `sys.stdlib_module_names` in Py3.10+). This manual list is brittle, incomplete, and ignores the broader context of the Python standard library, leading to future maintenance debt. (Severity: MEDIUM)\n- 🔴 **[AM004]**: In `edge_extractor.py`, the abstract base class `EdgeExtractionStrategy` is defined but never subclassed or used within the provided code. While likely intended for extension, it stands as orphan code in this context, as no concrete strategy implementations are present to fulfill its architectural purpose. (Severity: LOW)\n- 🔴 **[AM001]**: The series of `try-except ImportError` blocks in `edge_extractor.py` for `scope_analyzer` indicates a fragile project structure. This is myopic to standard Python packaging solutions (e.g., setup.py with editable installs) which provide a canonical way to handle intra-project imports without resorting to brittle path guessing. (Severity: LOW)\n\n
+- **Evidence**: The strategies are responsible for extracting structural relationships (edges) from source code, which is a form of raw data ingestion.
+    - **Invariant 1 (Operates on raw file/AST):** The strategies operate on either raw source code snippets via regex (e.g., `PythonEdgeStrategy`: `re.findall(..., body)`) or on an AST generated by Tree-sitter (e.g., `TreeSitterEdgeStrategy`: `tree = self.parser.parse(source_bytes)`).
+    - **Invariant 2 (No complex semantic reasoning):** The goal of these strategies is to identify factual, structural relationships like function calls or class inheritance. Even advanced implementations like `JavaScriptTreeSitterStrategy` that use a `JSModuleResolver` and scope analysis are performing language-level semantic resolution to accurately identify *what calls what*. This is distinct from the *architectural* reasoning a Classifier would perform (e.g., classifying a component's role). The reasoning is confined to correctly extracting the code's structure.
+- **Deviation**: None.\n\n### Semantic Guardrails (Antimatter Check)\n**PASSED**: No liabilities detected.\n\n

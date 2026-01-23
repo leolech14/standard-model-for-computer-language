@@ -234,14 +234,25 @@ def run_corpus(corpus_file: Path, output_base: Path, only_repos: list[str] | Non
                 results.append({"name": name, "status": "failed", "error": "collider"})
                 continue
 
-            # Run coverage analysis
-            analysis_file = repo_output / "unified_analysis.json"
-            coverage_file = repo_output / "coverage.json"
+            # Find the analysis output file (Collider outputs timestamped files)
+            # Look for output_llm-oriented_*.json pattern
+            analysis_files = list(repo_output.glob("output_llm-oriented_*.json"))
+            if not analysis_files:
+                # Fallback to unified_analysis.json for compatibility
+                analysis_file = repo_output / "unified_analysis.json"
+                if not analysis_file.exists():
+                    print(f"  FAILED: No analysis output found")
+                    results.append({"name": name, "status": "failed", "error": "no_output"})
+                    continue
+            else:
+                # Use the most recent one (by filename, which includes timestamp)
+                analysis_file = sorted(analysis_files)[-1]
+                # Create symlink for consistency
+                unified_link = repo_output / "unified_analysis.json"
+                if not unified_link.exists():
+                    unified_link.symlink_to(analysis_file.name)
 
-            if not analysis_file.exists():
-                print(f"  FAILED: No unified_analysis.json")
-                results.append({"name": name, "status": "failed", "error": "no_output"})
-                continue
+            coverage_file = repo_output / "coverage.json"
 
             print(f"  Running coverage analysis...")
             coverage = run_coverage(analysis_file, coverage_file)

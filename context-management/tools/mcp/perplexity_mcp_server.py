@@ -8,16 +8,17 @@ ALL research outputs to a structured directory.
 Pipeline:
     1. Receive query via JSON-RPC
     2. Call Perplexity API
-    3. DETERMINISTIC SAVE:
-       - raw/{timestamp}_{slug}.json  (full API response)
+    3. DETERMINISTIC SAVE (via DualFormatSaver):
+       - raw/{timestamp}_{slug}.json  (full API response + SHA-256 checksum)
        - docs/{timestamp}_{slug}.md   (human-readable markdown)
     4. Return response with save confirmation
 
 This ensures ZERO information loss from research queries.
 
 Usage:
-    # Add to ~/.claude/settings.json mcpServers:
-    "perplexity-local": {
+    # Add to ~/.claude.json projects[path].mcpServers:
+    "perplexity": {
+        "type": "stdio",
         "command": "python3",
         "args": ["/path/to/perplexity_mcp_server.py"]
     }
@@ -27,16 +28,20 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 from typing import Optional
+
+# Add parent to path for utils import
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from utils.output_formatters import DualFormatSaver
 
 # === Configuration ===
 SCRIPT_DIR = Path(__file__).parent.resolve()
 PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent
 RESEARCH_BASE = PROJECT_ROOT / "standard-model-of-code" / "docs" / "research" / "perplexity"
-RAW_DIR = RESEARCH_BASE / "raw"       # Full JSON responses
-DOCS_DIR = RESEARCH_BASE / "docs"     # Human-readable markdown
+
+# Initialize the dual-format saver with SHA-256 checksums
+SAVER = DualFormatSaver(base_path=RESEARCH_BASE)
 
 # === API Key Management ===
 def get_api_key() -> str:
@@ -62,112 +67,8 @@ def get_api_key() -> str:
 
 
 # === Deterministic Auto-Save Pipeline ===
-def generate_filename(query: str) -> str:
-    """Generate deterministic filename from timestamp and query."""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    slug = "".join(c if c.isalnum() else "_" for c in query[:50]).strip("_").lower()
-    return f"{timestamp}_{slug}"
-
-
-def save_raw_json(filename: str, query: str, api_response: dict, model: str) -> Path:
-    """
-    Save COMPLETE API response as JSON.
-    This preserves ALL information from Perplexity.
-    """
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
-
-    # Structure: full API response + our metadata
-    raw_data = {
-        "_meta": {
-            "saved_at": datetime.now().isoformat(),
-            "model": model,
-            "query": query,
-            "query_length": len(query),
-            "source": "perplexity-local-mcp"
-        },
-        "api_response": api_response  # COMPLETE response from Perplexity
-    }
-
-    filepath = RAW_DIR / f"{filename}.json"
-    filepath.write_text(json.dumps(raw_data, indent=2, ensure_ascii=False))
-    return filepath
-
-
-def save_markdown_doc(filename: str, query: str, api_response: dict, model: str) -> Path:
-    """
-    Save human-readable markdown summary.
-    """
-    DOCS_DIR.mkdir(parents=True, exist_ok=True)
-
-    # Extract content from API response
-    content = api_response.get("choices", [{}])[0].get("message", {}).get("content", "")
-    citations = api_response.get("citations", [])
-    usage = api_response.get("usage", {})
-
-    md_content = f"""# Perplexity Research: {query[:100]}{'...' if len(query) > 100 else ''}
-
-> **Date:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-> **Model:** {model}
-> **Source:** MCP Server (auto-saved)
-> **Raw JSON:** `raw/{filename}.json`
-
----
-
-## Query
-
-{query}
-
----
-
-## Response
-
-{content}
-
----
-
-## Citations
-
-"""
-    if citations:
-        for i, citation in enumerate(citations, 1):
-            md_content += f"{i}. {citation}\n"
-    else:
-        md_content += "_No citations provided_\n"
-
-    # Add usage stats if available
-    if usage:
-        md_content += f"""
----
-
-## Usage Stats
-
-- Prompt tokens: {usage.get('prompt_tokens', 'N/A')}
-- Completion tokens: {usage.get('completion_tokens', 'N/A')}
-- Total tokens: {usage.get('total_tokens', 'N/A')}
-"""
-
-    filepath = DOCS_DIR / f"{filename}.md"
-    filepath.write_text(md_content)
-    return filepath
-
-
-def auto_save_research(query: str, api_response: dict, model: str) -> dict:
-    """
-    DETERMINISTIC PIPELINE: Save both raw JSON and markdown.
-
-    Returns dict with paths to saved files.
-    """
-    filename = generate_filename(query)
-
-    # Save both formats
-    raw_path = save_raw_json(filename, query, api_response, model)
-    doc_path = save_markdown_doc(filename, query, api_response, model)
-
-    return {
-        "raw": raw_path,
-        "doc": doc_path,
-        "filename": filename
-    }
+# Now provided by DualFormatSaver from utils.output_formatters
+# Features: dual-format (JSON + MD), SHA-256 checksums, zero information loss
 
 
 # === Perplexity API ===
@@ -217,7 +118,7 @@ def handle_initialize(_params: dict) -> dict:
             "tools": {}
         },
         "serverInfo": {
-            "name": "perplexity-local",
+            "name": "perplexity",
             "version": "1.0.0"
         }
     }
@@ -311,14 +212,19 @@ def handle_tool_call(name: str, arguments: dict) -> dict:
         # Call Perplexity API
         api_response = call_perplexity(messages, model)
 
-        # DETERMINISTIC PIPELINE: Save full API response
+        # DETERMINISTIC PIPELINE: Save full API response (with SHA-256 checksum)
         try:
-            saved = auto_save_research(query_text, api_response, model)
+            result = SAVER.save(
+                query=query_text,
+                response=api_response,
+                source="perplexity-mcp",
+                model=model
+            )
             save_note = (
                 f"\n\n---\n"
-                f"_Auto-saved:_\n"
-                f"- Raw: `{saved['raw'].relative_to(PROJECT_ROOT)}`\n"
-                f"- Doc: `{saved['doc'].relative_to(PROJECT_ROOT)}`"
+                f"_Auto-saved (SHA-256: {result.checksum[:20]}...):_\n"
+                f"- Raw: `{result.raw_path.relative_to(PROJECT_ROOT)}`\n"
+                f"- Doc: `{result.md_path.relative_to(PROJECT_ROOT)}`"
             )
         except Exception as e:
             save_note = f"\n\n---\n_Auto-save failed: {e}_"
@@ -344,10 +250,10 @@ def handle_tool_call(name: str, arguments: dict) -> dict:
 def main():
     """Main MCP server loop."""
     # Log startup
-    sys.stderr.write(f"[perplexity-local] Starting MCP server\n")
-    sys.stderr.write(f"[perplexity-local] Research base: {RESEARCH_BASE}\n")
-    sys.stderr.write(f"[perplexity-local] Raw JSON dir: {RAW_DIR}\n")
-    sys.stderr.write(f"[perplexity-local] Markdown dir: {DOCS_DIR}\n")
+    sys.stderr.write(f"[perplexity] Starting MCP server\n")
+    sys.stderr.write(f"[perplexity] Research base: {RESEARCH_BASE}\n")
+    sys.stderr.write(f"[perplexity] Raw JSON dir: {SAVER.raw_dir}\n")
+    sys.stderr.write(f"[perplexity] Markdown dir: {SAVER.docs_dir}\n")
     sys.stderr.flush()
 
     while True:
@@ -378,7 +284,7 @@ def main():
                 write_message({"jsonrpc": "2.0", "id": msg_id, "result": result})
 
         except Exception as e:
-            sys.stderr.write(f"[perplexity-local] Error: {e}\n")
+            sys.stderr.write(f"[perplexity] Error: {e}\n")
             sys.stderr.flush()
             if msg_id is not None:
                 write_message({
