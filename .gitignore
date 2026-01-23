@@ -96,3 +96,23 @@ standard-model-of-code/collider_output/
 # Context Management Logs
 **/socratic_audit_pipeline_*.json
 context-management/intelligence/socratic_audit_pipeline_*.json
+
+# =============================================================================
+# COLLIDER OUTPUTS (test directories)
+# =============================================================================
+.collider/
+.collider_*/
+standard-model-of-code/.collider/
+standard-model-of-code/.collider_*/
+standard-model-of-code/collider
+
+# =============================================================================
+# RESEARCH ARTIFACTS (downloaded repos for analysis)
+# =============================================================================
+**/repos/
+**/artifacts/**/repos/
+
+# =============================================================================
+# TOOLS VIRTUAL ENVIRONMENT
+# =============================================================================
+.tools_venv/
