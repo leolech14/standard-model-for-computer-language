@@ -1,0 +1,101 @@
+# Task: Inbox Triage Tool
+# Created: 2026-01-23T14:10:00Z
+# Owner: Claude (this session)
+
+id: TASK-017
+title: "Build Inbox Triage Tool - Score and Prioritize Opportunities"
+status: EXECUTING
+owner: claude-session-20260123
+
+description: |
+  Build a tool to triage the opportunity inbox:
+  1. Score all opportunities with 4D confidence (factual/alignment/current/onwards)
+  2. Detect duplicates (opps that match existing tasks)
+  3. Categorize by source and type
+  4. Generate priority ranking
+  5. Support batch archive of low-value items
+
+  Current state: 57 opportunities, 0 scored, many duplicates suspected.
+
+  Deliverables:
+  - .agent/tools/triage_inbox.py
+  - Triage report for current inbox
+  - Archive duplicates (OPP-023 to OPP-057 suspected)
+
+confidence:
+  factual: 95      # Inbox EXISTS at .agent/registry/inbox/ with 57 items
+  alignment: 100   # Critical missing link in discovery pipeline
+  current: 90      # Schema exists (.agent/schema/opportunity.schema.yaml), tools exist
+  onwards: 100     # Foundation for auto-discovery (BARE OpportunityExplorer)
+  verdict: 90      # min(95, 100, 90, 100)
+
+evidence:
+  factual:
+    - ".agent/registry/inbox/ contains 57 OPP-*.yaml files"
+    - ".agent/schema/opportunity.schema.yaml defines structure"
+    - "promote_opportunity.py exists and works"
+  alignment:
+    - "BARE-Live spec identifies OpportunityExplorer as Phase 4"
+    - "Current inbox has 0 scored items - blocking promotion"
+  current:
+    - "boost_confidence.py provides 4D scoring pattern"
+    - "DualFormatSaver available for output"
+  onwards:
+    - "Enables approval gates (70%+ threshold for promotion)"
+    - "Foundation for automated triage in BARE"
+
+tracking:
+  created_at: "2026-01-23T14:10:00Z"
+  started_at: "2026-01-23T14:10:00Z"
+  sprint: SPRINT-002
+
+acceptance_criteria:
+  - triage_inbox.py exists and runs without error
+  - All 57 opportunities scored
+  - Duplicates identified and archived
+  - Priority report generated
+  - Task registry updated with step tracking
+
+steps:
+  - id: TASK-017-S01
+    title: "Create triage tool"
+    status: COMPLETE
+
+  - id: TASK-017-S02
+    title: "Run triage report"
+    status: COMPLETE
+
+  - id: TASK-017-S03
+    title: "Archive duplicates"
+    status: COMPLETE
+
+  - id: TASK-017-S04
+    title: "Archive noise"
+    status: COMPLETE
+
+  - id: TASK-017-S05
+    title: "Review 50-69% items"
+    status: SKIPPED
+    note: "3 items (OPP-004, OPP-006, OPP-007) - deferred to manual review"
+
+  - id: TASK-017-S06
+    title: "Commit"
+    status: IN_PROGRESS
+
+  - id: TASK-017-S07
+    title: "Mark complete"
+    status: PENDING
+
+steps_completed:
+  - TASK-017-S01
+  - TASK-017-S02
+  - TASK-017-S03
+  - TASK-017-S04
+
+output_artifacts:
+  - path: ".agent/tools/triage_inbox.py"
+    type: "tool"
+    description: "Inbox triage and scoring tool"
+  - path: ".agent/intelligence/triage_reports/20260123_141045_triage.json"
+    type: "report"
+    description: "Initial triage report"

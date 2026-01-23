@@ -1,0 +1,990 @@
+{
+  "generated_at": "2026-01-23T17:10:45.575509+00:00",
+  "summary": {
+    "total_opportunities": 57,
+    "total_active_tasks": 16,
+    "high_value": 1,
+    "low_value": 36,
+    "duplicates": 16,
+    "noise": 22
+  },
+  "scored": [
+    {
+      "id": "OPP-002",
+      "title": "Fix promote_opportunity.sh multiline bug",
+      "source": "BARE",
+      "scores": {
+        "factual": 70,
+        "alignment": 75,
+        "current": 70,
+        "onwards": 70,
+        "verdict": 70
+      }
+    },
+    {
+      "id": "OPP-001",
+      "title": "Deep comparison with LangGraph architecture",
+      "source": "RESEARCH",
+      "scores": {
+        "factual": 70,
+        "alignment": 80,
+        "current": 65,
+        "onwards": 60,
+        "verdict": 60
+      }
+    },
+    {
+      "id": "OPP-004",
+      "title": "Document registry architecture",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 50,
+        "onwards": 55,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-006",
+      "title": "Pipeline Refactor - Class-Based Stage Architecture",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 65,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-007",
+      "title": "Context Refinery: Continuous Context Refinement System",
+      "source": "RESEARCH",
+      "scores": {
+        "factual": 80,
+        "alignment": 70,
+        "current": 50,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-008",
+      "title": "Create scales.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-009",
+      "title": "Create endpoints.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-011",
+      "title": "Create bindings.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-012",
+      "title": "Create blenders.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-013",
+      "title": "Create index.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-014",
+      "title": "Update template.html",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-023",
+      "title": "Define BaseStage Abstract Class",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-024",
+      "title": "Extend Existing CodebaseState",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-025",
+      "title": "Define PipelineManager",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-026",
+      "title": "Create Pipeline Package Structure",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-027",
+      "title": "Refactor run_full_analysis()",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-028",
+      "title": "Update semantic_models.yaml",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-029",
+      "title": "Update Tests",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 75,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-030",
+      "title": "Remove Mutation Side Effects",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-031",
+      "title": "Remove I/O from Processing Stages",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-032",
+      "title": "Run Holographic Socratic Audit",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 50,
+        "current": 70,
+        "onwards": 75,
+        "verdict": 50
+      }
+    },
+    {
+      "id": "OPP-003",
+      "title": "Consolidate research directories",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 70,
+        "alignment": 40,
+        "current": 50,
+        "onwards": 60,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-005",
+      "title": "Token System Refactoring - Remove Hardcoded Values from app.",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 65,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-010",
+      "title": "Create presets.yaml (NEW - Gap Fill)",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-015",
+      "title": "Update control-bar.js to delegate",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 55,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-016",
+      "title": "Integrate file-viz.js (NEW - Gap Fill)",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-017",
+      "title": "Integrate edge-system.js (NEW - Gap Fill)",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 55,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-018",
+      "title": "Wire UPB_BLENDERS in bindings.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-019",
+      "title": "Add minOutput/blendMode to endpoints.js TARGETS",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-020",
+      "title": "Add DATA.getRange() to data-manager.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-021",
+      "title": "Update control-bar.js to use DATA.getRange()",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-022",
+      "title": "Add minOutput support to scales.js",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 80,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 65,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-033",
+      "title": "Phase 5 Advanced Features: DEFERRED",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 60,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-034",
+      "title": "All preset properties mapped to token paths (NEEDS MAPPING)",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-035",
+      "title": "color.status.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-036",
+      "title": "color.edge.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-037",
+      "title": "color.data.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-038",
+      "title": "color.gradient.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-039",
+      "title": "color.console.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-040",
+      "title": "color.schemes.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-041",
+      "title": "shadow.*",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-042",
+      "title": "Edge cases documented (partial - need to verify filter inter",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-043",
+      "title": "No other code calls `HudLayoutManager`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-044",
+      "title": "No localStorage keys used by this class that affect other fe",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-045",
+      "title": "`[Module] NODE_HELPERS loaded - 11 functions`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-046",
+      "title": "`[Module] COLOR_HELPERS loaded - 6 functions`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-047",
+      "title": "`[Module] PHYSICS loaded - 4 functions`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-048",
+      "title": "`[Module] DATAMAP loaded - 7 functions`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-049",
+      "title": "`[Module] GROUPS_MODULE loaded - 8 functions`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-050",
+      "title": "`[Module] HOVER loaded - 3 functions`",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-051",
+      "title": "Node colors render correctly",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-052",
+      "title": "Topology tooltip colors work",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-053",
+      "title": "Physics sliders adjust simulation",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-054",
+      "title": "Datamap toggles filter nodes",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-055",
+      "title": "Groups can be created/deleted",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-056",
+      "title": "Hover panel shows node info",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 55,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    },
+    {
+      "id": "OPP-057",
+      "title": "Click selects nodes",
+      "source": "MIGRATION",
+      "scores": {
+        "factual": 50,
+        "alignment": 40,
+        "current": 70,
+        "onwards": 50,
+        "verdict": 40
+      }
+    }
+  ],
+  "duplicates": [
+    {
+      "opp_id": "OPP-001",
+      "opp_title": "Deep comparison with LangGraph architecture",
+      "task_id": "TASK-002",
+      "task_title": "Deep comparison with LangGraph architecture",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-001.yaml"
+    },
+    {
+      "opp_id": "OPP-009",
+      "opp_title": "Create endpoints.js",
+      "task_id": "TASK-013",
+      "task_title": "Create endpoints.js",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-009.yaml"
+    },
+    {
+      "opp_id": "OPP-011",
+      "opp_title": "Create bindings.js",
+      "task_id": "TASK-013",
+      "task_title": "Create endpoints.js",
+      "similarity": 0.7027027027027027,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-011.yaml"
+    },
+    {
+      "opp_id": "OPP-012",
+      "opp_title": "Create blenders.js",
+      "task_id": "TASK-013",
+      "task_title": "Create endpoints.js",
+      "similarity": 0.7567567567567568,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-012.yaml"
+    },
+    {
+      "opp_id": "OPP-013",
+      "opp_title": "Create index.js",
+      "task_id": "TASK-013",
+      "task_title": "Create endpoints.js",
+      "similarity": 0.7058823529411765,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-013.yaml"
+    },
+    {
+      "opp_id": "OPP-014",
+      "opp_title": "Update template.html",
+      "task_id": "TASK-014",
+      "task_title": "Update template.html",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-014.yaml"
+    },
+    {
+      "opp_id": "OPP-023",
+      "opp_title": "Define BaseStage Abstract Class",
+      "task_id": "TASK-003",
+      "task_title": "Define BaseStage Abstract Class",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-023.yaml"
+    },
+    {
+      "opp_id": "OPP-024",
+      "opp_title": "Extend Existing CodebaseState",
+      "task_id": "TASK-004",
+      "task_title": "Extend Existing CodebaseState",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-024.yaml"
+    },
+    {
+      "opp_id": "OPP-025",
+      "opp_title": "Define PipelineManager",
+      "task_id": "TASK-005",
+      "task_title": "Define PipelineManager",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-025.yaml"
+    },
+    {
+      "opp_id": "OPP-026",
+      "opp_title": "Create Pipeline Package Structure",
+      "task_id": "TASK-006",
+      "task_title": "Create Pipeline Package Structure",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-026.yaml"
+    },
+    {
+      "opp_id": "OPP-027",
+      "opp_title": "Refactor run_full_analysis()",
+      "task_id": "TASK-007",
+      "task_title": "Refactor run_full_analysis()",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-027.yaml"
+    },
+    {
+      "opp_id": "OPP-028",
+      "opp_title": "Update semantic_models.yaml",
+      "task_id": "TASK-008",
+      "task_title": "Update semantic_models.yaml",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-028.yaml"
+    },
+    {
+      "opp_id": "OPP-029",
+      "opp_title": "Update Tests",
+      "task_id": "TASK-009",
+      "task_title": "Update Tests",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-029.yaml"
+    },
+    {
+      "opp_id": "OPP-030",
+      "opp_title": "Remove Mutation Side Effects",
+      "task_id": "TASK-010",
+      "task_title": "Remove Mutation Side Effects",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-030.yaml"
+    },
+    {
+      "opp_id": "OPP-031",
+      "opp_title": "Remove I/O from Processing Stages",
+      "task_id": "TASK-011",
+      "task_title": "Remove I/O from Processing Stages",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-031.yaml"
+    },
+    {
+      "opp_id": "OPP-032",
+      "opp_title": "Run Holographic Socratic Audit",
+      "task_id": "TASK-012",
+      "task_title": "Run Holographic Socratic Audit",
+      "similarity": 1.0,
+      "opp_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-032.yaml"
+    }
+  ],
+  "categories": {
+    "by_source": {
+      "RESEARCH": [
+        "OPP-001",
+        "OPP-007"
+      ],
+      "BARE": [
+        "OPP-002"
+      ],
+      "MIGRATION": [
+        "OPP-003",
+        "OPP-004",
+        "OPP-005",
+        "OPP-006",
+        "OPP-008",
+        "OPP-009",
+        "OPP-010",
+        "OPP-011",
+        "OPP-012",
+        "OPP-013",
+        "OPP-014",
+        "OPP-015",
+        "OPP-016",
+        "OPP-017",
+        "OPP-018",
+        "OPP-019",
+        "OPP-020",
+        "OPP-021",
+        "OPP-022",
+        "OPP-023",
+        "OPP-024",
+        "OPP-025",
+        "OPP-026",
+        "OPP-027",
+        "OPP-028",
+        "OPP-029",
+        "OPP-030",
+        "OPP-031",
+        "OPP-032",
+        "OPP-033",
+        "OPP-034",
+        "OPP-035",
+        "OPP-036",
+        "OPP-037",
+        "OPP-038",
+        "OPP-039",
+        "OPP-040",
+        "OPP-041",
+        "OPP-042",
+        "OPP-043",
+        "OPP-044",
+        "OPP-045",
+        "OPP-046",
+        "OPP-047",
+        "OPP-048",
+        "OPP-049",
+        "OPP-050",
+        "OPP-051",
+        "OPP-052",
+        "OPP-053",
+        "OPP-054",
+        "OPP-055",
+        "OPP-056",
+        "OPP-057"
+      ]
+    },
+    "by_urgency": {
+      "MEDIUM": [
+        "OPP-001",
+        "OPP-003",
+        "OPP-005",
+        "OPP-008",
+        "OPP-010",
+        "OPP-011",
+        "OPP-012",
+        "OPP-013",
+        "OPP-016",
+        "OPP-018",
+        "OPP-019",
+        "OPP-020",
+        "OPP-021",
+        "OPP-022",
+        "OPP-033"
+      ],
+      "HIGH": [
+        "OPP-002",
+        "OPP-006",
+        "OPP-007",
+        "OPP-009",
+        "OPP-014",
+        "OPP-023",
+        "OPP-024",
+        "OPP-025",
+        "OPP-026",
+        "OPP-027",
+        "OPP-028",
+        "OPP-029",
+        "OPP-030",
+        "OPP-031",
+        "OPP-032"
+      ],
+      "LOW": [
+        "OPP-004",
+        "OPP-015",
+        "OPP-017",
+        "OPP-034",
+        "OPP-035",
+        "OPP-036",
+        "OPP-037",
+        "OPP-038",
+        "OPP-039",
+        "OPP-040",
+        "OPP-041",
+        "OPP-042",
+        "OPP-043",
+        "OPP-044",
+        "OPP-045",
+        "OPP-046",
+        "OPP-047",
+        "OPP-048",
+        "OPP-049",
+        "OPP-050",
+        "OPP-051",
+        "OPP-052",
+        "OPP-053",
+        "OPP-054",
+        "OPP-055",
+        "OPP-056",
+        "OPP-057"
+      ]
+    },
+    "noise": [
+      "OPP-008",
+      "OPP-009",
+      "OPP-011",
+      "OPP-012",
+      "OPP-013",
+      "OPP-014",
+      "OPP-025",
+      "OPP-029",
+      "OPP-035",
+      "OPP-036",
+      "OPP-037",
+      "OPP-038",
+      "OPP-039",
+      "OPP-040",
+      "OPP-041",
+      "OPP-045",
+      "OPP-046",
+      "OPP-047",
+      "OPP-048",
+      "OPP-049",
+      "OPP-050",
+      "OPP-057"
+    ]
+  },
+  "recommendations": [
+    "PROMOTE: 1 opportunities score >= 70% (ready for promotion)",
+    "REVIEW: 20 opportunities score 50-69%",
+    "ARCHIVE: 36 opportunities score < 50% (low value)",
+    "DUPLICATES: 16 match existing tasks (archive)",
+    "NOISE: 22 appear to be checklist items"
+  ]
+}
