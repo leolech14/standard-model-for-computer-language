@@ -1,0 +1,32 @@
+graph TB
+    subgraph "REGISTRY 1: Learning System"
+        direction LR
+        R1_TasksDir[".agent/registry/tasks/"]
+        R1_Task100["TASK-100.yaml"]
+        R1_Task127["TASK-127.yaml"]
+        R1_Master["LEARNING_SYSTEM_TASK_REGISTRY.md"]
+
+        R1_TasksDir -- Contains --> R1_Task100
+        R1_TasksDir -- Contains --> R1_Task127
+        R1_Task100 --> R1_Master
+        R1_Task127 --> R1_Master
+    end
+
+    subgraph "REGISTRY 2: Primary Agent System"
+        direction LR
+        R2_Inbox[".agent/registry/inbox/"]
+        R2_Opp["OPP-XXX.yaml"]
+        R2_ActiveDir[".agent/registry/active/"]
+        R2_Task001["TASK-001.yaml"]
+        R2_SprintsDir[".agent/sprints/"]
+        R2_Sprint["SPRINT-XXX.yaml"]
+
+        R2_Inbox -- Contains --> R2_Opp
+        R2_Opp -- Becomes --> R2_Task001
+        R2_Sprint -- Schedules --> R2_Task001
+        R2_Task001 -- Placed In --> R2_ActiveDir
+    end
+
+    AnalysisDocs["DOCS_REORG_TASK_REGISTRY.md"]
+    AnalysisDocs -- Generates tasks --> R1_Master
+    AnalysisDocs -- Generates opportunities --> R2_Inbox

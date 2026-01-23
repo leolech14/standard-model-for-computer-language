@@ -1,0 +1,52 @@
+graph TB
+    subgraph "CONSOLIDATED TASK REGISTRY"
+        direction LR
+        
+        subgraph "Input Stage"
+            style InboxDir fill:#ccf,stroke:#333,stroke-width:2px
+            AnalysisDoc("`DOCS_REORG_TASK_REGISTRY.md`")
+            InboxDir("fa:fa-inbox .agent/registry/inbox/")
+            NewOpp("OPP-XXX.yaml")
+            NewTask("TASK-XXX.yaml")
+
+            AnalysisDoc -- "Creates ideas" --> InboxDir
+            InboxDir -- "Contains" --> NewOpp & NewTask
+        end
+
+        subgraph "Planning Stage"
+             style SprintDir fill:#cfc,stroke:#333,stroke-width:2px
+             SprintDir("fa:fa-calendar .agent/sprints/")
+             CurrentSprint("SPRINT-001.yaml")
+             SprintDir -- "Contains" --> CurrentSprint
+        end
+
+        subgraph "Execution Stage"
+            style ActiveDir fill:#f99,stroke:#333,stroke-width:2px
+            ActiveDir("fa:fa-folder-open .agent/registry/active/")
+            ActiveTask("TASK-128.yaml")
+            ActiveDir -- "Contains" --> ActiveTask
+        end
+        
+        subgraph "Archive Stage"
+            style ArchiveDir fill:#eee,stroke:#333,stroke-width:2px
+            ArchiveDir("fa:fa-archive .agent/registry/archive/")
+            DoneTask("TASK-101.yaml")
+            ArchiveDir -- "Contains" --> DoneTask
+        end
+
+        subgraph "View Layer"
+            style MasterView fill:#f9f,stroke:#333,stroke-width:2px
+            MasterView("`TASK_REGISTRY.md`<br/>(Auto-Generated Overview)")
+        end
+        
+        %% Workflow
+        NewTask -- "Selected for" --> CurrentSprint
+        CurrentSprint -- "Activates" --> ActiveTask
+        ActiveTask -- "On Completion" --> DoneTask
+        
+        %% Auto-generation of master view
+        InboxDir -.-> MasterView
+        ActiveDir -.-> MasterView
+        ArchiveDir -.-> MasterView
+    end
+    style AnalysisDoc fill:#f8f,stroke:#333,stroke-width:2px
