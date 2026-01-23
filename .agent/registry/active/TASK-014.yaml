@@ -1,0 +1,25 @@
+id: TASK-014
+title: Update template.html
+description: "### Task 4.2: Update template.html\n\n| Metric | Score | Rationale |\n\
+  |--------|-------|-----------|\n| **Confidence** | 99% | Simple script tag addition\
+  \ |\n| **Alignment** | 100% | Same pattern as existing scripts |\n| **Usefulness**\
+  \ | 100% | Required for UPB to load |\n\n**Target File:** `viz/assets/template.html`\n\
+  \n#### Step-by-Step Instructions\n\n```\nSTEP 1: Find script loading section\n \
+  \  - Look for <!-- Module Scripts --> or similar\n   - Or find where control-bar.js\
+  \ is loaded\n\nSTEP 2: Add UPB scripts"
+status: COMPLETE
+confidence:
+  factual: 99
+  alignment: 100
+  current: 100
+  onwards: 99
+created: '2026-01-23T14:41:14.250200+00:00'
+updated: '2026-01-23T15:17:32.618954+00:00'
+promoted_from: OPP-014
+category: VISUALIZATION
+runs: []
+output: {}
+risk: A++
+steps: []
+blocked_by: []
+blocks: []

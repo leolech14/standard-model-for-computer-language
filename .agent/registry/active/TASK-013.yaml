@@ -1,0 +1,25 @@
+id: TASK-013
+title: Create endpoints.js
+description: "### Task 1.2: Create endpoints.js\n\n| Metric | Score | Rationale |\n\
+  |--------|-------|-----------|\n| **Confidence** | 96% | Direct extraction from\
+  \ control-bar.js:25-87 |\n| **Alignment** | 95% | IIFE pattern, same structure as\
+  \ existing |\n| **Usefulness** | 90% | Central source of truth for all bindings\
+  \ |\n\n**Source File:** `control-bar.js` lines 25-87\n**Target File:** `modules/upb/endpoints.js`\n\
+  **Max Lines:** 180\n\n#### Step-by-Step Instructions\n\n```\nSTEP 1: Create file\n\
+  \   touch standard-model-of-cod"
+status: COMPLETE
+confidence:
+  factual: 96
+  alignment: 95
+  current: 90
+  onwards: 93
+created: '2026-01-23T14:41:14.248417+00:00'
+updated: '2026-01-23T15:17:32.617522+00:00'
+promoted_from: OPP-009
+category: VISUALIZATION
+runs: []
+output: {}
+risk: A
+steps: []
+blocked_by: []
+blocks: []

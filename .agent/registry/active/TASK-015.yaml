@@ -1,0 +1,31 @@
+id: TASK-015
+title: Implement CCI Metrics in Survey Module
+description: "Add Codome Completeness Index (CCI) calculation to survey.py.\n\n##\
+  \ Background\nThe CCI measures how complete and accurate our code analysis is:\n\
+  - Sensitivity (Recall): What % of source code did we capture?\n- Specificity: What\
+  \ % of vendor code did we exclude?\n- F2 Score: Recall-weighted harmonic mean (prioritizes\
+  \ completeness)\n\n## Acceptance Criteria\n1. Add CCIMetrics dataclass to survey.py\
+  \ with:\n   - sensitivity (float)\n   - specificity (float)\n   - precision (float)\n\
+  \   - f2_score (float)\n   - gmean (float)\n   - verdict (str: EXCELLENT/GOOD/FAIR/POOR)\n\
+  \n2. Add calculate_cci() function that computes metrics from:\n   - total_source_files\
+  \ (ground truth)\n   - analyzed_files (our output)\n   - excluded_vendor_files\n\
+  \   - false_negatives (source files with 0 nodes)\n\n3. Update SurveyResult to include\
+  \ cci: Optional[CCIMetrics]\n\n4. Update print_survey_report() to display CCI metrics\n\
+  \n## Dependencies\n- survey.py (exists)\n- CODOME_COMPLETENESS_INDEX.md spec (exists)\n\
+  \n## References\n- Spec: standard-model-of-code/docs/specs/CODOME_COMPLETENESS_INDEX.md\n\
+  - Session summary: .agent/intelligence/session_summary_20260123_phase10_survey_cci.md\n"
+status: COMPLETE
+confidence:
+  factual: 95
+  alignment: 95
+  current: 95
+  onwards: 90
+created: '2026-01-23T11:45:00.000000+00:00'
+updated: '2026-01-23T15:17:32.620376+00:00'
+category: SURVEY
+runs: []
+output: {}
+risk: A
+steps: []
+blocked_by: []
+blocks: []
