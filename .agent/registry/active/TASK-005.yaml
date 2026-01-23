@@ -1,0 +1,25 @@
+id: TASK-005
+title: Define PipelineManager
+description: "### P1-03: Define PipelineManager\n\n**Confidence:** 97% (Execute)\n\
+  \n| Attribute | Value |\n|-----------|-------|\n| **File** | `src/core/pipeline/manager.py`\
+  \ |\n| **Lines** | ~150 |\n| **Dependencies** | P1-01, P1-02 |\n\n**Structure:**\n\
+  \n```python\nfrom typing import List, Optional\nfrom .base_stage import BaseStage\n\
+  from .state import CodebaseState\nfrom ..observability import StageTimer\n\nclass\
+  \ PipelineManager:\n    \"\"\"Orchestrates pipeline stage execution.\"\"\"\n\n \
+  \   def __init__(self, stages: List[BaseStage]"
+status: COMPLETE
+confidence:
+  factual: 97
+  alignment: 97
+  current: 97
+  onwards: 97
+created: '2026-01-23T14:41:07.771715+00:00'
+updated: '2026-01-23T15:17:32.605314+00:00'
+promoted_from: OPP-025
+category: PIPELINE
+runs: []
+output: {}
+risk: A+
+steps: []
+blocked_by: []
+blocks: []

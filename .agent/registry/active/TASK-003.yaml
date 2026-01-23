@@ -1,0 +1,25 @@
+id: TASK-003
+title: Define BaseStage Abstract Class
+description: "### P1-01: Define BaseStage Abstract Class\n\n**Confidence:** 97% (Execute)\n\
+  \n| Attribute | Value |\n|-----------|-------|\n| **File** | `src/core/pipeline/base_stage.py`\
+  \ |\n| **Lines** | ~50 |\n| **Dependencies** | None |\n| **Atom ID** | `ORG.SYS.A`\
+  \ (Organization, System, Abstract) |\n| **Pattern** | Follow `EdgeExtractionStrategy(ABC)`\
+  \ at `edge_extractor.py:415` |\n\n**Interface:**\n\n```python\nfrom abc import ABC,\
+  \ abstractmethod\nfrom typing import TYPE_CHECKING\n\nif TYPE_CHECKING:\n    from\
+  \ ..data_manageme"
+status: COMPLETE
+confidence:
+  factual: 97
+  alignment: 97
+  current: 97
+  onwards: 97
+created: '2026-01-23T14:40:51.433497+00:00'
+updated: '2026-01-23T15:17:32.602743+00:00'
+promoted_from: OPP-023
+category: PIPELINE
+runs: []
+output: {}
+risk: A+
+steps: []
+blocked_by: []
+blocks: []

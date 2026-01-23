@@ -1,0 +1,26 @@
+id: TASK-006
+title: Create Pipeline Package Structure
+description: "### P1-04: Create Pipeline Package Structure\n\n**Confidence:** 95%\
+  \ (Execute)\n\n| Attribute | Value |\n|-----------|-------|\n| **Files** | `src/core/pipeline/__init__.py`\
+  \ |\n| **Lines** | ~20 |\n| **Dependencies** | P1-01, P1-02, P1-03 |\n\n**Directory\
+  \ Structure:**\n\n```\nsrc/core/pipeline/\n\u251C\u2500\u2500 __init__.py      \
+  \    # Public exports\n\u251C\u2500\u2500 base_stage.py        # BaseStage ABC\n\
+  \u251C\u2500\u2500 state.py             # CodebaseState dataclass\n\u251C\u2500\u2500\
+  \ manager.py           # PipelineManager\n\u2514\u2500\u2500 stages/           \
+  \   # Stage implemen"
+status: COMPLETE
+confidence:
+  factual: 95
+  alignment: 95
+  current: 95
+  onwards: 95
+created: '2026-01-23T14:41:07.772720+00:00'
+updated: '2026-01-23T15:17:32.606724+00:00'
+promoted_from: OPP-026
+category: PIPELINE
+runs: []
+output: {}
+risk: A+
+steps: []
+blocked_by: []
+blocks: []
