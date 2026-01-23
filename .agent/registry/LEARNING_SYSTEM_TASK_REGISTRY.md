@@ -56,9 +56,9 @@
 ☑️  TASK-114  Add Context Engineering docs        [pending commit]
 ☑️  TASK-106  Dataset optimization guide          [pending commit]
 ☑️  TASK-113  Positional strategy                 [5c7b35b]
-🟡 TASK-104  Pre-commit hook                      [80%→85%]
-🟡 TASK-102  --research-loop                      [75%→85%]
-🟡 TASK-103  analyze.py storage                   [70%→85%]
+🟢 TASK-103  analyze.py auto-save                 [85%] ← boosted
+💤 TASK-104  Pre-commit hook                      [nice-to-have]
+💤 TASK-102  --research-loop                      [complex scope]
 💤 TASK-105  Live-reload for viz
 💤 TASK-108  Knowledge embodiment workflow
 💤 TASK-109  Deploy HSL to Cloud Run
@@ -262,24 +262,18 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 
 ---
 
-### 🟡 TASK-104: Add pre-commit hook for validate_ui.py
-**Risk:** A | **Threshold:** 85% | **Current:** 80% | **Gap:** +5%
+### 🟢 TASK-103: Add auto-save to analyze.py responses
+**Risk:** A | **Threshold:** 85% | **Score:** 85% | **BOOSTED**
 
-**To Boost:** Confirm alignment with mission (nice-to-have vs essential)
+**Investigation:**
+- analyze.py only saves with explicit --output flag
+- Should auto-save like Perplexity MCP (DualFormatSaver)
+- Clear implementation: use output_formatters.py
 
----
-
-### 🟡 TASK-102: Implement --research-loop in analyze.py
-**Risk:** A | **Threshold:** 85% | **Current:** 75% | **Gap:** +10%
-
-**Note:** Now unblocked (TASK-101 complete). Needs implementation design.
-
----
-
-### 🟡 TASK-103: Validate analyze.py response storage
-**Risk:** A | **Threshold:** 85% | **Current:** 70% | **Gap:** +15%
-
-**Note:** Now unblocked. Need to audit analyze.py output behavior.
+**Implementation:**
+1. Import DualFormatSaver from utils/output_formatters.py
+2. Auto-save Gemini responses to `docs/research/gemini/`
+3. Format: `{timestamp}_{query_slug}.{md,json}`
 
 ---
 
@@ -318,12 +312,12 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 ## Execution Priority
 
 ```
-ALL READY TASKS COMPLETE!
+READY:
+1. 🟢 TASK-103  analyze.py auto-save                 [85%] ← execute now
 
-NEEDS BOOST:
-1. 🟡 TASK-104  Pre-commit hook                      [80%→85%]
-2. 🟡 TASK-102  --research-loop                      [75%→85%]
-3. 🟡 TASK-103  analyze.py storage                   [70%→85%]
+DEFERRED (after investigation):
+- 💤 TASK-104  Pre-commit hook     (nice-to-have, not core mission)
+- 💤 TASK-102  --research-loop     (complex scope, needs design)
 
 POTENTIAL NEW TASKS:
 - Build subgraph retrieval API (GraphRAG runtime)
@@ -338,9 +332,8 @@ POTENTIAL NEW TASKS:
 | Status | Count | Tasks |
 |--------|-------|-------|
 | ☑️  COMPLETE | 15 | 100, 115, 116, 117, 110, 101, 111, 118, 119, 114, 106, 113, MCP-001, MCP-003, MCP-004 |
-| 🟢 READY | 0 | — |
-| 🟡 NEEDS BOOST | 3 | 104, 102, 103 |
-| 💤 DEFERRED | 3 | 105, 108, 109 |
+| 🟢 READY | 1 | 103 (auto-save) |
+| 💤 DEFERRED | 5 | 104, 102, 105, 108, 109 |
 | ⛔ REJECTED | 2 | MCP-007, 112 (subsumed) |
 | **TOTAL** | **23** | |
 
@@ -357,3 +350,4 @@ POTENTIAL NEW TASKS:
 | 3.2.0 | 2026-01-23 | Session complete: +3 tasks (116, 117, 110), Socratic Loop documented |
 | 3.3.0 | 2026-01-23 | Context purity: +2 tasks (118, 119), token budgets reduced to ≤200k |
 | 3.4.0 | 2026-01-23 | All ready tasks complete: +3 (114, 106, 113), RAG/LC thresholds documented |
+| 3.5.0 | 2026-01-23 | Boost analysis: TASK-103 boosted to 85%, TASK-104/102 deferred |
