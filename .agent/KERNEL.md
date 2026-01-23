@@ -69,6 +69,41 @@ PROJECT_elements/
 
 ---
 
+## Task State Machine
+
+Tasks follow a defined lifecycle. The tools enforce this (strict on claim, warn on release).
+
+```
+DISCOVERY → SCOPED → PLANNED → EXECUTING → VALIDATING → COMPLETE → ARCHIVED
+                ↑                    ↓
+                └──── RETRY ─────────┘
+```
+
+| State | Description | Can Claim? |
+|-------|-------------|------------|
+| DISCOVERY | Opportunity identified, not scoped | No |
+| SCOPED | Requirements clear, ready to plan | **Yes** |
+| PLANNED | Implementation approach defined | **Yes** |
+| EXECUTING | Work in progress (has active RUN) | No |
+| VALIDATING | Work done, awaiting verification | No |
+| COMPLETE | Verified and merged | No |
+| ARCHIVED | Closed (success or abandoned) | No |
+
+### Using the Tools
+
+```bash
+# Claim a task (strict: only SCOPED/PLANNED)
+.agent/tools/claim_task.sh TASK-001 my-agent
+
+# Release when done (warn mode: logs unusual patterns)
+.agent/tools/release_task.sh TASK-001 COMPLETE
+
+# Check for stale claims (>30 min)
+.agent/tools/check_stale.sh
+```
+
+---
+
 ## 4D Confidence Model
 
 Every task is scored on four dimensions:
@@ -165,6 +200,11 @@ python context-management/tools/archive/archive.py mirror
 
 | Field | Value |
 |-------|-------|
-| Kernel Version | 1.0.0 |
+| Kernel Version | 1.1.0 |
 | Created | 2026-01-22 |
-| Last Updated | 2026-01-22 |
+| Last Updated | 2026-01-23 |
+
+### Changelog
+
+- **1.1.0** (2026-01-23): Added Task State Machine section, tool usage docs
+- **1.0.0** (2026-01-22): Initial kernel with boot protocol, 4D model, TASK/RUN separation
