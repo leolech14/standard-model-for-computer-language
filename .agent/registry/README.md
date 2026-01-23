@@ -1,7 +1,7 @@
 # Agent Task Registry
 
 > Single source of truth for task management in PROJECT_elements.
-> **Version:** 2.0.0 | **Updated:** 2026-01-23
+> **Version:** 2.1.0 | **Updated:** 2026-01-23
 
 ---
 
@@ -30,14 +30,14 @@ Opportunity discovered → OPP-XXX in inbox/
                     TASK-XXX in active/
 ```
 
-### 2. Task Lifecycle
+### 2. Task Lifecycle (5-state simplified)
 
 ```
-DISCOVERY → SCOPED → PLANNED → EXECUTING → VALIDATING → COMPLETE
-                                    ↓
-                              ./claim_task.sh TASK-XXX
-                                    ↓
-                              ./release_task.sh TASK-XXX COMPLETE
+DISCOVERY → READY → EXECUTING → COMPLETE → ARCHIVED
+                       ↓
+                 ./claim_task.sh TASK-XXX
+                       ↓
+                 ./release_task.sh TASK-XXX COMPLETE
 ```
 
 ### 3. Sprint Integration
@@ -87,7 +87,7 @@ Tasks selected for sprint → .agent/sprints/SPRINT-XXX.yaml
 **Required fields:**
 - `id`: TASK-XXX format
 - `title`: Brief description
-- `status`: DISCOVERY, SCOPED, PLANNED, EXECUTING, VALIDATING, COMPLETE
+- `status`: DISCOVERY, READY, EXECUTING, COMPLETE, ARCHIVED
 - `description`: Full context
 
 **4D Confidence Scoring:**
@@ -159,3 +159,4 @@ The Learning System Task Registry (TASK-100 to TASK-127) was archived on 2026-01
 |---------|------|---------|
 | 1.0.0 | 2026-01-22 | Initial INDEX.md |
 | 2.0.0 | 2026-01-23 | Consolidated from Learning System, full README |
+| 2.1.0 | 2026-01-23 | Simplified to 5-state lifecycle (CUTTING_PLAN Phase 4) |

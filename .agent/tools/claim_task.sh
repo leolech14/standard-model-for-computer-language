@@ -1,7 +1,7 @@
 #!/bin/bash
 # Atomic Task Claim Script
 # Uses filesystem mv for race-condition-free task reservation
-# Enforces state machine: only SCOPED or PLANNED tasks can be claimed
+# Enforces state machine: only READY tasks can be claimed (v2.0)
 
 set -e
 
@@ -28,20 +28,21 @@ if [ ! -f "$SOURCE" ]; then
 fi
 
 # STATE MACHINE ENFORCEMENT (strict gate)
-# Valid claimable states: SCOPED, PLANNED
+# Valid claimable states: READY (v2.0 simplified lifecycle)
+# Legacy support: SCOPED, PLANNED also accepted for migration period
 TASK_STATUS=$(grep -E "^status:" "$SOURCE" | head -1 | awk '{print $2}')
 case "$TASK_STATUS" in
-    SCOPED|PLANNED)
-        # Valid - proceed with claim
+    READY|SCOPED|PLANNED)
+        # Valid - proceed with claim (SCOPED/PLANNED = legacy support)
         ;;
     DISCOVERY)
         echo "ERROR: Task ${TASK_ID} is in DISCOVERY state"
-        echo "Tasks must be SCOPED or PLANNED before claiming."
-        echo "Tip: Update the task file to set status: SCOPED"
+        echo "Tasks must be READY before claiming."
+        echo "Tip: Update the task file to set status: READY"
         exit 1
         ;;
-    EXECUTING|VALIDATING)
-        echo "ERROR: Task ${TASK_ID} is already ${TASK_STATUS}"
+    EXECUTING)
+        echo "ERROR: Task ${TASK_ID} is already EXECUTING"
         echo "Another agent may be working on it."
         exit 1
         ;;

@@ -78,31 +78,32 @@ PROJECT_elements/                 # Particle/Wave Architecture
 
 ## Task State Machine
 
-Tasks follow a defined lifecycle. The tools enforce this (strict on claim, warn on release).
+Tasks follow a simple 5-state lifecycle:
 
 ```
-DISCOVERY → SCOPED → PLANNED → EXECUTING → VALIDATING → COMPLETE → ARCHIVED
-                ↑                    ↓
-                └──── RETRY ─────────┘
+DISCOVERY → READY → EXECUTING → COMPLETE → ARCHIVED
 ```
 
 | State | Description | Can Claim? |
 |-------|-------------|------------|
-| DISCOVERY | Opportunity identified, not scoped | No |
-| SCOPED | Requirements clear, ready to plan | **Yes** |
-| PLANNED | Implementation approach defined | **Yes** |
+| DISCOVERY | Opportunity identified, needs scoping | No |
+| READY | Scoped and claimable | **Yes** |
 | EXECUTING | Work in progress (has active RUN) | No |
-| VALIDATING | Work done, awaiting verification | No |
-| COMPLETE | Verified and merged | No |
+| COMPLETE | Work done, verified, merged | No |
 | ARCHIVED | Closed (success or abandoned) | No |
+
+**Simplification notes:**
+- SCOPED + PLANNED merged into READY (both mean "ready to work")
+- VALIDATING absorbed into EXECUTING (verification is part of work)
+- No RETRY state - if work fails, task returns to READY
 
 ### Using the Tools
 
 ```bash
-# Claim a task (strict: only SCOPED/PLANNED)
+# Claim a task (only READY)
 .agent/tools/claim_task.sh TASK-001 my-agent
 
-# Release when done (warn mode: logs unusual patterns)
+# Release when done
 .agent/tools/release_task.sh TASK-001 COMPLETE
 
 # Check for stale claims (>30 min)
@@ -250,6 +251,7 @@ Attention
 | AI tools | `context-management/tools/` |
 | **Subsystem integration** | `.agent/SUBSYSTEM_INTEGRATION.md` |
 | **BARE spec** | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` |
+| **Consolidation report** | `.agent/docs/CONSOLIDATION_REPORT.md` |
 
 ---
 
@@ -275,12 +277,13 @@ python context-management/tools/archive/archive.py mirror
 
 | Field | Value |
 |-------|-------|
-| Kernel Version | 1.3.0 |
+| Kernel Version | 1.4.0 |
 | Created | 2026-01-22 |
 | Last Updated | 2026-01-23 |
 
 ### Changelog
 
+- **1.4.0** (2026-01-23): Simplified state machine from 7 to 5 states (CUTTING_PLAN Phase 4)
 - **1.3.0** (2026-01-23): Enhanced boot protocol with mandatory claim verification (prevents multi-agent race conditions after compaction)
 - **1.2.0** (2026-01-23): Added Context Engineering section (lost-in-middle, token tiers, quality rules)
 - **1.1.0** (2026-01-23): Added Task State Machine section, tool usage docs

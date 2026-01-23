@@ -2,7 +2,7 @@
 # A TASK represents WHAT should be true in the repository (strategic, persistent)
 # Instantiated as TASK-XXX.yaml files in registry/active/
 
-schema_version: "1.0.0"
+schema_version: "2.0.0"  # Simplified 5-state lifecycle (CUTTING_PLAN Phase 4)
 kind: TaskSchema
 
 # Task Definition
@@ -22,18 +22,17 @@ task:
     type: string
     description: Full context and acceptance criteria
 
-  # Status lifecycle
+  # Status lifecycle (simplified 5-state)
   status:
     type: enum
     values:
-      - DISCOVERY    # Opportunity identified, not yet scoped
-      - SCOPED       # Requirements clear, ready to plan
-      - PLANNED      # Implementation approach defined
-      - EXECUTING    # Work in progress (one or more RUNs)
-      - VALIDATING   # Work complete, awaiting verification
-      - COMPLETE     # Verified and merged
+      - DISCOVERY    # Opportunity identified, needs scoping
+      - READY        # Scoped and claimable (replaces SCOPED + PLANNED)
+      - EXECUTING    # Work in progress (has active RUN)
+      - COMPLETE     # Work done, verified, merged
       - ARCHIVED     # Closed (success or abandoned)
     default: DISCOVERY
+    # Migration: SCOPED/PLANNED → READY, VALIDATING → EXECUTING
 
   # 4D Confidence Matrix (adopted from PROJECT_atman)
   confidence:
@@ -121,7 +120,7 @@ example: |
   description: |
     Create a reusable template for Python stdio MCP servers.
     Acceptance: Template generates working server in <5 min.
-  status: SCOPED
+  status: READY
   confidence:
     factual: 90
     alignment: 95
