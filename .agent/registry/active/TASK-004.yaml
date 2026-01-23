@@ -4,12 +4,13 @@
 
 id: TASK-004
 title: "Execute CUTTING_PLAN: Bulk to Lean transition"
-status: IN_PROGRESS
+status: COMPLETE
 priority: HIGH
 owner: claude-opus-4-5-20251101
 
 created_at: "2026-01-23T07:30:00Z"
-updated_at: "2026-01-23T08:45:00Z"
+updated_at: "2026-01-23T09:15:00Z"
+completed_at: "2026-01-23T09:15:00Z"
 
 description: |
   Execute the 5-phase CUTTING_PLAN to simplify the .agent/ infrastructure.
@@ -57,9 +58,11 @@ phases:
 
   - id: 5
     name: "Trim BARE Spec"
-    status: READY
-    effort: "30 minutes"
-    description: "Scope BARE.md to only what's implemented; move rest to Roadmap section"
+    status: COMPLETE
+    completed_at: "2026-01-23T09:10:00Z"
+    description: "Trimmed from 441 to 147 lines; unimplemented moved to Roadmap"
+    files_modified:
+      - ".agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md"
 
 acceptance_criteria:
   - "Files archived to archive/agent_cuts/2026-01-23/ with PROVENANCE.yaml"
