@@ -390,7 +390,7 @@ repos:
   # Java - Library (medium)
   - name: jackson-core
     url: https://github.com/FasterXML/jackson-core
-    ref: 2.18
+    ref: "2.18"
     language: java
     domain: library
     size: medium

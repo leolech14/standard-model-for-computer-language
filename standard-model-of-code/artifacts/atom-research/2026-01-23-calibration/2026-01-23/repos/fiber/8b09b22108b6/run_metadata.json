@@ -1,0 +1,28 @@
+{
+  "repo": {
+    "name": "fiber",
+    "url": "https://github.com/gofiber/fiber",
+    "ref": "main",
+    "actual_sha": "8b09b22108b6",
+    "language": "go",
+    "domain": "web_backend",
+    "size": "medium"
+  },
+  "run": {
+    "utc": "2026-01-23T07:57:01.128275+00:00",
+    "duration_seconds": null
+  },
+  "tooling": {
+    "collider_commit": "39587f804cf8",
+    "research_tooling_commit": "07e5b23230d6",
+    "python_version": "3.14.0"
+  },
+  "config": {
+    "deterministic": true,
+    "ai_insights": false
+  },
+  "outputs": {
+    "unified_analysis": "unified_analysis.json",
+    "coverage": "coverage.json"
+  }
+}
