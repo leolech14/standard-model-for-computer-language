@@ -1,0 +1,39 @@
+id: OPP-006
+title: "Pipeline Refactor - Class-Based Stage Architecture"
+source: MIGRATION
+discovered_at: "2026-01-23T12:00:00Z"
+description: |
+  35 tasks to refactor pipeline from functions to class-based stages.
+  All tasks are 95%+ confidence based on HSL audit findings.
+
+  Critical Finding: CodebaseState ALREADY EXISTS at data_management.py:106
+
+  Phases:
+  - P1 Foundation (4 tasks): BaseStage ABC, CodebaseState, PipelineManager, Package
+  - P2 Wrappers (25 tasks): One wrapper class per pipeline stage
+  - P3 Integration (3 tasks): Refactor run_full_analysis(), update semantic_models, tests
+  - P4 Cleanup (3 tasks): Remove mutations, remove I/O, HSL audit
+
+  Why this matters:
+  - Current: Standalone functions violate BaseStage inheritance invariant
+  - Target: L4 CONTAINERs with standardized execute(state) interface
+  - Benefit: Composite pattern, testability, HSL compliance
+
+suggested_action: |
+  Create dedicated sprint for pipeline refactoring.
+  Phase 1 first (foundation) - enables all subsequent phases.
+  P1-02 is already done (CodebaseState exists).
+
+urgency: HIGH
+defer_until: null
+
+legacy_registry:
+  path: "standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md"
+  task_count: 35
+  all_ready: true
+  confidence_range: "95-100%"
+
+related_to:
+  - "HSL compliance"
+  - "full_analysis.py"
+  - "Pipeline architecture"

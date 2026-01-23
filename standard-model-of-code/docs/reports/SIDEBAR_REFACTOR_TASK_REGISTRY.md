@@ -1,5 +1,12 @@
 # Sidebar Refactor Task Registry
 
+> **ARCHIVED:** UI refactoring tasks for visualization sidebar.
+> 1/13 tasks complete (S001), 12 ready but deferred.
+> Can be re-opened when UI work resumes.
+> Archived: 2026-01-23
+
+---
+
 > Complete UI refactor with confidence verification.
 > Each task must achieve 95%+ confidence before execution.
 

@@ -1,10 +1,16 @@
 # TREE-SITTER FULL IMPLEMENTATION REGISTRY
 
+> **ARCHIVED:** Duplicate of TREE_SITTER_TASK_REGISTRY.md (which is more concise).
+> Archived to GCS: `gs://elements-archive-2026/archive/legacy_registries/`
+> Date: 2026-01-23
+
+---
+
 > **The definitive task list for full tree-sitter capabilities in Collider.**
 >
 > **Created:** 2026-01-21
 > **Sources:** Perplexity Research, GPT-52-PRO Analysis, Gemini RAG, Claude Opus Synthesis
-> **Status:** MASTER REGISTRY - 87 tasks across 7 phases
+> **Status:** ARCHIVED (was MASTER REGISTRY - 87 tasks across 7 phases)
 
 ---
 

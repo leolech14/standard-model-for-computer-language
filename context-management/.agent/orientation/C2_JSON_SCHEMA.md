@@ -1,1 +1,0 @@
-../../../context-management/docs/roadmaps/C2_JSON_SCHEMA.md

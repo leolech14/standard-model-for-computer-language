@@ -1,0 +1,42 @@
+# Task promoted from opportunity OPP-002
+# Created: 2026-01-23T09:32:29.213179+00:00
+# Completed: 2026-01-23T09:35:00Z
+
+id: TASK-003
+title: Fix promote_opportunity.sh multiline bug
+status: COMPLETE
+description: |
+  The bash-based promote_opportunity.sh uses grep to extract YAML fields,
+  which fails for multiline descriptions.
+
+  Root cause: grep only captures first line of multiline YAML values.
+
+  Solution: Python version with proper YAML parsing (promote_opportunity.py).
+
+  ---
+  Promoted from: OPP-002
+  Original urgency: HIGH
+
+confidence:
+  factual: 100
+  alignment: 100
+  current: 100
+  onwards: 100
+  verdict: 100
+
+tracking:
+  created_at: '2026-01-23T09:32:29Z'
+  promoted_from: OPP-002
+  completed_at: '2026-01-23T09:35:00Z'
+
+related_to:
+  - .agent/tools/promote_opportunity.sh
+  - TASK-002
+
+steps_completed:
+  - "Created promote_opportunity.py with proper YAML parsing"
+  - "Updated promote_opportunity.sh to delegate to Python"
+  - "Tested with OPP-002 multiline description"
+
+output_artifacts:
+  - .agent/tools/promote_opportunity.py

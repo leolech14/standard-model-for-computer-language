@@ -1,0 +1,147 @@
+{
+  "n_repos": 33,
+  "hypotheses": [
+    {
+      "id": "H1a",
+      "name": "Top-4 Mass Central Tendency",
+      "status": "PASS",
+      "metric": 98.77,
+      "threshold": 90.0,
+      "details": "Median: 98.8%, CI95: [85.0%, 100.0%]",
+      "evidence": {
+        "n": 33,
+        "median": 98.77,
+        "min": 85.0,
+        "max": 100.0,
+        "ci95_lower": 85.0,
+        "ci95_upper": 100.0
+      }
+    },
+    {
+      "id": "H1b",
+      "name": "Top-4 Mass Tail Robustness",
+      "status": "PASS",
+      "metric": 0.0,
+      "threshold": 10.0,
+      "details": "Repos below 80%: 0/33 (0.0%)",
+      "evidence": {
+        "n": 33,
+        "below_80_count": 0,
+        "below_80_pct": 0.0,
+        "below_80_repos": []
+      }
+    },
+    {
+      "id": "H2",
+      "name": "Function Atom Dominance",
+      "status": "WARN",
+      "metric": 57.57575757575758,
+      "threshold": 50.0,
+      "details": "Global: 57.6%. Failing languages: ['go (0%)', 'java (0%)']",
+      "evidence": {
+        "global_fnc_dominant": 19,
+        "global_total": 33,
+        "global_pct": 57.6,
+        "by_language": {
+          "rust": {
+            "count": 6,
+            "total": 6,
+            "pct": 100.0
+          },
+          "python": {
+            "count": 6,
+            "total": 6,
+            "pct": 100.0
+          },
+          "go": {
+            "count": 0,
+            "total": 6,
+            "pct": 0.0
+          },
+          "typescript": {
+            "count": 4,
+            "total": 6,
+            "pct": 66.7
+          },
+          "javascript": {
+            "count": 3,
+            "total": 4,
+            "pct": 75.0
+          },
+          "java": {
+            "count": 0,
+            "total": 5,
+            "pct": 0.0
+          }
+        },
+        "failing_languages": [
+          "go (0%)",
+          "java (0%)"
+        ]
+      }
+    },
+    {
+      "id": "H3",
+      "name": "Language Effect Bound",
+      "status": "PASS",
+      "metric": 5.515000000000001,
+      "threshold": 15.0,
+      "details": "Spread: 5.5pp (java=100.0% to go=94.5%)",
+      "evidence": {
+        "spread_pp": 5.52,
+        "medians_by_language": {
+          "java": 100.0,
+          "typescript": 99.98,
+          "python": 99.04,
+          "javascript": 98.86,
+          "rust": 94.84,
+          "go": 94.48
+        },
+        "max_language": "java",
+        "min_language": "go"
+      }
+    },
+    {
+      "id": "H4",
+      "name": "Unknown Rate Bound",
+      "status": "PASS",
+      "metric": 0.18,
+      "threshold": 1.0,
+      "details": "Median: 0.18%, Max: 1.82%",
+      "evidence": {
+        "n": 33,
+        "median": 0.18,
+        "max": 1.82,
+        "mean": 0.336,
+        "above_10_count": 0,
+        "above_10_repos": []
+      }
+    },
+    {
+      "id": "H5",
+      "name": "Domain Effect Bound",
+      "status": "WARN",
+      "metric": 5.349999999999994,
+      "threshold": 10.0,
+      "details": "Spread: 5.3pp. Insufficient domains: ['ml (n=1)', 'web_frontend (n=2)']",
+      "evidence": {
+        "spread_pp": 5.35,
+        "medians_by_domain": {
+          "library": 100.0,
+          "web_backend": 98.11,
+          "cli": 95.69,
+          "systems": 94.65
+        },
+        "insufficient_domains": [
+          "ml (n=1)",
+          "web_frontend (n=2)"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "warn": 2
+  }
+}

@@ -1,1 +1,0 @@
-../../../context-management/docs/theory/THEORY.md

@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-01-23T05:41:13.905970",
+  "generated_at": "2026-01-23T07:14:06.493472",
   "stats": {
-    "total_files": 1428,
-    "local_only": 56,
+    "total_files": 1483,
+    "local_only": 48,
     "cloud_only": 23,
-    "synced": 1347
+    "synced": 1391
   },
   "files": {
     "\"assets/Analogias \\342\\200\\234Quentes\\342\\200\\235 em Espa\\303\\247os Conceituais Multi-camadas.pdf\"": {
@@ -242,15 +242,43 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/KERNEL.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/KERNEL.md",
-      "local_size": 8498,
-      "cloud_size": 8498
+      "local_size": 8612,
+      "cloud_size": 8612
+    },
+    ".agent/OPEN_CONCERNS.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/OPEN_CONCERNS.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/OPEN_CONCERNS.md",
+      "local_size": 10852,
+      "cloud_size": 10852
     },
     ".agent/SUBSYSTEM_INTEGRATION.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/SUBSYSTEM_INTEGRATION.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/SUBSYSTEM_INTEGRATION.md",
-      "local_size": 10019,
-      "cloud_size": 10019
+      "local_size": 10021,
+      "cloud_size": 10021
+    },
+    ".agent/agents/claude/todo.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/agents/claude/todo.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/agents/claude/todo.yaml",
+      "local_size": 75,
+      "cloud_size": 75
+    },
+    ".agent/agents/gemini/todo.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/agents/gemini/todo.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/agents/gemini/todo.yaml",
+      "local_size": 75,
+      "cloud_size": 75
+    },
+    ".agent/agents/grok/todo.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/agents/grok/todo.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/agents/grok/todo.yaml",
+      "local_size": 73,
+      "cloud_size": 73
     },
     ".agent/hooks/README.md": {
       "status": "SYNCED",
@@ -265,6 +293,13 @@
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/hooks/post-commit",
       "local_size": 914,
       "cloud_size": 914
+    },
+    ".agent/intelligence/confidence_reports/20260123_064434_batch_confidence.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/confidence_reports/20260123_064434_batch_confidence.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/intelligence/confidence_reports/20260123_064434_batch_confidence.json",
+      "local_size": 14948,
+      "cloud_size": 14948
     },
     ".agent/intelligence/truths/history/truths_20260123_052327.yaml": {
       "status": "SYNCED",
@@ -298,29 +333,36 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/INDEX.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/INDEX.md",
-      "local_size": 2376,
-      "cloud_size": 2376
+      "local_size": 2789,
+      "cloud_size": 2789
     },
     ".agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md",
-      "local_size": 22109,
-      "cloud_size": 22109
+      "local_size": 0,
+      "cloud_size": 24413
     },
     ".agent/registry/active/TASK-000.yaml": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-000.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-000.yaml",
-      "local_size": 1441,
+      "local_size": 0,
       "cloud_size": 1441
     },
     ".agent/registry/active/TASK-001.yaml": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-001.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-001.yaml",
-      "local_size": 1419,
-      "cloud_size": 1419
+      "local_size": 1654,
+      "cloud_size": 1654
+    },
+    ".agent/registry/active/TASK-002.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/active/TASK-002.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/active/TASK-002.yaml",
+      "local_size": 703,
+      "cloud_size": 703
     },
     ".agent/registry/claimed/README.md": {
       "status": "SYNCED",
@@ -329,12 +371,40 @@
       "local_size": 1836,
       "cloud_size": 1836
     },
+    ".agent/registry/inbox/OPP-001.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/inbox/OPP-001.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/inbox/OPP-001.yaml",
+      "local_size": 575,
+      "cloud_size": 575
+    },
+    ".agent/registry/tasks/TASK-126.yaml": {
+      "status": "DRIFT_MODIFIED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/tasks/TASK-126.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/tasks/TASK-126.yaml",
+      "local_size": 0,
+      "cloud_size": 292
+    },
+    ".agent/registry/tasks/TASK-127.yaml": {
+      "status": "DRIFT_MODIFIED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/registry/tasks/TASK-127.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/registry/tasks/TASK-127.yaml",
+      "local_size": 0,
+      "cloud_size": 288
+    },
     ".agent/runs/RUN-20260122-194058-claude.yaml": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/runs/RUN-20260122-194058-claude.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/runs/RUN-20260122-194058-claude.yaml",
       "local_size": 2816,
       "cloud_size": 2816
+    },
+    ".agent/schema/opportunity.schema.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/schema/opportunity.schema.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/schema/opportunity.schema.yaml",
+      "local_size": 2768,
+      "cloud_size": 2768
     },
     ".agent/schema/run.schema.yaml": {
       "status": "SYNCED",
@@ -357,6 +427,13 @@
       "local_size": 15762,
       "cloud_size": 15762
     },
+    ".agent/sprints/SPRINT-001.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/sprints/SPRINT-001.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/sprints/SPRINT-001.yaml",
+      "local_size": 1515,
+      "cloud_size": 1515
+    },
     ".agent/tools/audit_unicode.py": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/audit_unicode.py",
@@ -368,8 +445,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/bare",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/bare",
-      "local_size": 4323,
-      "cloud_size": 4323
+      "local_size": 4235,
+      "cloud_size": 4235
+    },
+    ".agent/tools/boost_confidence.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/boost_confidence.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/boost_confidence.py",
+      "local_size": 15252,
+      "cloud_size": 15252
     },
     ".agent/tools/check_stale.sh": {
       "status": "SYNCED",
@@ -385,12 +469,33 @@
       "local_size": 1952,
       "cloud_size": 1952
     },
+    ".agent/tools/promote_opportunity.sh": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/promote_opportunity.sh",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/promote_opportunity.sh",
+      "local_size": 4235,
+      "cloud_size": 4235
+    },
     ".agent/tools/release_task.sh": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/release_task.sh",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/release_task.sh",
       "local_size": 2092,
       "cloud_size": 2092
+    },
+    ".agent/tools/sprint.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/sprint.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/sprint.py",
+      "local_size": 5803,
+      "cloud_size": 5803
+    },
+    ".agent/tools/task_registry.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.agent/tools/task_registry.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.agent/tools/task_registry.py",
+      "local_size": 11376,
+      "cloud_size": 11376
     },
     ".agent/tools/truth_validator.py": {
       "status": "SYNCED",
@@ -410,15 +515,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.claude/rules/body.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.claude/rules/body.md",
-      "local_size": 680,
-      "cloud_size": 680
+      "local_size": 684,
+      "cloud_size": 684
     },
     ".claude/rules/brain.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.claude/rules/brain.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.claude/rules/brain.md",
-      "local_size": 755,
-      "cloud_size": 755
+      "local_size": 762,
+      "cloud_size": 762
     },
     ".gemini/context/body.md": {
       "status": "SYNCED",
@@ -438,8 +543,15 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/.gitignore",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/.gitignore",
-      "local_size": 2617,
-      "cloud_size": 2617
+      "local_size": 3391,
+      "cloud_size": 3391
+    },
+    "AGENTKNOWLEDGEDUMP.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/AGENTKNOWLEDGEDUMP.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/AGENTKNOWLEDGEDUMP.md",
+      "local_size": 16116,
+      "cloud_size": 16116
     },
     "AGENTS.md": {
       "status": "SYNCED",
@@ -448,12 +560,19 @@
       "local_size": 1217,
       "cloud_size": 1217
     },
+    "ARCHITECTURE_MAP.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/ARCHITECTURE_MAP.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/ARCHITECTURE_MAP.md",
+      "local_size": 6124,
+      "cloud_size": 6124
+    },
     "CLAUDE.md": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/CLAUDE.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/CLAUDE.md",
-      "local_size": 6405,
-      "cloud_size": 6405
+      "local_size": 6818,
+      "cloud_size": 6818
     },
     "Dockerfile": {
       "status": "SYNCED",
@@ -2738,123 +2857,130 @@
       "cloud_size": 11332250
     },
     "context-management/.agent/FILTER_SYSTEM_AUDIT.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/FILTER_SYSTEM_AUDIT.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/FILTER_SYSTEM_AUDIT.md",
-      "local_size": 21201,
+      "local_size": 0,
       "cloud_size": 21201
     },
     "context-management/.agent/SET_MAPPING_IMPLEMENTATION.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/SET_MAPPING_IMPLEMENTATION.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/SET_MAPPING_IMPLEMENTATION.md",
-      "local_size": 29970,
+      "local_size": 0,
       "cloud_size": 29970
     },
     "context-management/.agent/UI_REFACTOR_REPORT.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/UI_REFACTOR_REPORT.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/UI_REFACTOR_REPORT.md",
-      "local_size": 21632,
+      "local_size": 0,
       "cloud_size": 21632
     },
     "context-management/.agent/orientation/C1_ATOM_ENUMERATION.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/C1_ATOM_ENUMERATION.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/C1_ATOM_ENUMERATION.md",
-      "local_size": 9910,
+      "local_size": 0,
       "cloud_size": 9910
     },
     "context-management/.agent/orientation/C2_JSON_SCHEMA.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/C2_JSON_SCHEMA.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/C2_JSON_SCHEMA.md",
-      "local_size": 17821,
+      "local_size": 0,
       "cloud_size": 17821
     },
     "context-management/.agent/orientation/C3_TRAINING_CORPUS.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/C3_TRAINING_CORPUS.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/C3_TRAINING_CORPUS.md",
-      "local_size": 18725,
+      "local_size": 0,
       "cloud_size": 18725
     },
     "context-management/.agent/orientation/CLAUDE.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/CLAUDE.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/CLAUDE.md",
-      "local_size": 2327,
+      "local_size": 0,
       "cloud_size": 2327
     },
     "context-management/.agent/orientation/DOCS_README.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/DOCS_README.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/DOCS_README.md",
-      "local_size": 1350,
+      "local_size": 0,
       "cloud_size": 1350
     },
     "context-management/.agent/orientation/ORIENTATION_FILES.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/ORIENTATION_FILES.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/ORIENTATION_FILES.md",
-      "local_size": 5089,
+      "local_size": 0,
       "cloud_size": 5089
     },
     "context-management/.agent/orientation/REPO_README.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/REPO_README.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/REPO_README.md",
-      "local_size": 17151,
+      "local_size": 0,
       "cloud_size": 17151
     },
     "context-management/.agent/orientation/ROADMAP.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/ROADMAP.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/ROADMAP.md",
-      "local_size": 6171,
+      "local_size": 0,
       "cloud_size": 6171
     },
     "context-management/.agent/orientation/THEORY.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/THEORY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/THEORY.md",
-      "local_size": 176006,
+      "local_size": 0,
       "cloud_size": 176006
     },
     "context-management/.agent/orientation/TOOL.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/TOOL.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/TOOL.md",
-      "local_size": 19962,
+      "local_size": 0,
       "cloud_size": 19962
     },
     "context-management/.agent/orientation/graph.schema.json": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/graph.schema.json",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/graph.schema.json",
-      "local_size": 6447,
+      "local_size": 0,
       "cloud_size": 6447
     },
     "context-management/.agent/orientation/particle.schema.json": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/orientation/particle.schema.json",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/orientation/particle.schema.json",
-      "local_size": 13597,
+      "local_size": 0,
       "cloud_size": 13597
     },
     "context-management/.agent/workflows/publish.md": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/.agent/workflows/publish.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/.agent/workflows/publish.md",
-      "local_size": 489,
+      "local_size": 0,
       "cloud_size": 489
+    },
+    "context-management/config/aci_config.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/config/aci_config.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/config/aci_config.yaml",
+      "local_size": 5457,
+      "cloud_size": 5457
     },
     "context-management/config/analysis_sets.yaml": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/config/analysis_sets.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/config/analysis_sets.yaml",
-      "local_size": 12529,
-      "cloud_size": 12529
+      "local_size": 14848,
+      "cloud_size": 14848
     },
     "context-management/config/documentation_map.yaml": {
       "status": "SYNCED",
@@ -2874,8 +3000,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/config/prompts.yaml",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/config/prompts.yaml",
-      "local_size": 9942,
-      "cloud_size": 9942
+      "local_size": 11607,
+      "cloud_size": 11607
     },
     "context-management/config/semantic_models.yaml": {
       "status": "SYNCED",
@@ -2916,8 +3042,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/docs/DOCS_REORG_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/docs/DOCS_REORG_TASK_REGISTRY.md",
-      "local_size": 12208,
-      "cloud_size": 12208
+      "local_size": 12382,
+      "cloud_size": 12382
     },
     "context-management/docs/EVAL_LOG.md": {
       "status": "SYNCED",
@@ -4159,18 +4285,18 @@
       "cloud_size": 859494
     },
     "context-management/registry/REGISTRY.json": {
-      "status": "DRIFT_MODIFIED",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/registry/REGISTRY.json",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/registry/REGISTRY.json",
-      "local_size": 627280,
-      "cloud_size": 626155
+      "local_size": 640582,
+      "cloud_size": 640582
     },
     "context-management/registry/REGISTRY_REPORT.md": {
-      "status": "DRIFT_MODIFIED",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/registry/REGISTRY_REPORT.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/registry/REGISTRY_REPORT.md",
-      "local_size": 41150,
-      "cloud_size": 41140
+      "local_size": 40681,
+      "cloud_size": 40681
     },
     "context-management/reports/context_bubble_analysis.html": {
       "status": "SYNCED",
@@ -4193,12 +4319,47 @@
       "local_size": 10212,
       "cloud_size": 10212
     },
+    "context-management/tools/ai/aci/__init__.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/aci/__init__.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/aci/__init__.py",
+      "local_size": 1815,
+      "cloud_size": 1815
+    },
+    "context-management/tools/ai/aci/context_optimizer.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/aci/context_optimizer.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/aci/context_optimizer.py",
+      "local_size": 7607,
+      "cloud_size": 7607
+    },
+    "context-management/tools/ai/aci/feedback_loop.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/aci/feedback_loop.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/aci/feedback_loop.py",
+      "local_size": 8182,
+      "cloud_size": 8182
+    },
+    "context-management/tools/ai/aci/query_analyzer.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/aci/query_analyzer.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/aci/query_analyzer.py",
+      "local_size": 10404,
+      "cloud_size": 10404
+    },
+    "context-management/tools/ai/aci/tier_router.py": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/aci/tier_router.py",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/aci/tier_router.py",
+      "local_size": 10470,
+      "cloud_size": 10470
+    },
     "context-management/tools/ai/analyze.py": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/ai/analyze.py",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/ai/analyze.py",
-      "local_size": 87636,
-      "cloud_size": 87636
+      "local_size": 92349,
+      "cloud_size": 92349
     },
     "context-management/tools/ai/analyze.py.legacy": {
       "status": "SYNCED",
@@ -4421,8 +4582,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/mcp/mcp_factory/TASK_CONFIDENCE_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/context-management/tools/mcp/mcp_factory/TASK_CONFIDENCE_REGISTRY.md",
-      "local_size": 7056,
-      "cloud_size": 7056
+      "local_size": 7173,
+      "cloud_size": 7173
     },
     "context-management/tools/mcp/mcp_factory/TASK_STEP_LOG.md": {
       "status": "SYNCED",
@@ -4705,10 +4866,10 @@
       "cloud_size": 0
     },
     "standard-model-of-code/.collider_baseline/baseline_meta.json": {
-      "status": "SYNCED",
+      "status": "DRIFT_MODIFIED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/.collider_baseline/baseline_meta.json",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/.collider_baseline/baseline_meta.json",
-      "local_size": 129,
+      "local_size": 0,
       "cloud_size": 129
     },
     "standard-model-of-code/.colliderignore": {
@@ -6517,6 +6678,13 @@
       "local_size": 11023,
       "cloud_size": 11023
     },
+    "standard-model-of-code/artifacts/atom-research/corpus_102_validation.yaml": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/artifacts/atom-research/corpus_102_validation.yaml",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/artifacts/atom-research/corpus_102_validation.yaml",
+      "local_size": 24550,
+      "cloud_size": 24550
+    },
     "standard-model-of-code/artifacts/atom-research/corpus_33_calibration.yaml": {
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/artifacts/atom-research/corpus_33_calibration.yaml",
@@ -6787,8 +6955,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/reports/ARCHITECTURE_DEBT_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/reports/ARCHITECTURE_DEBT_REGISTRY.md",
-      "local_size": 12041,
-      "cloud_size": 12041
+      "local_size": 12263,
+      "cloud_size": 12263
     },
     "standard-model-of-code/docs/reports/ATOM_STATISTICAL_ANALYSIS.md": {
       "status": "SYNCED",
@@ -6822,8 +6990,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/reports/DOCS_IMPROVEMENT_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/reports/DOCS_IMPROVEMENT_TASK_REGISTRY.md",
-      "local_size": 14180,
-      "cloud_size": 14180
+      "local_size": 14342,
+      "cloud_size": 14342
     },
     "standard-model-of-code/docs/reports/FACT_RECONCILIATION_2026-01-19.md": {
       "status": "SYNCED",
@@ -6878,8 +7046,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/reports/SIDEBAR_REFACTOR_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/reports/SIDEBAR_REFACTOR_TASK_REGISTRY.md",
-      "local_size": 37922,
-      "cloud_size": 37922
+      "local_size": 38109,
+      "cloud_size": 38109
     },
     "standard-model-of-code/docs/reports/TAXONOMY_GAP_REPORT.md": {
       "status": "SYNCED",
@@ -6899,8 +7067,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/reports/TOKEN_SYSTEM_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/reports/TOKEN_SYSTEM_TASK_REGISTRY.md",
-      "local_size": 22632,
-      "cloud_size": 22632
+      "local_size": 22840,
+      "cloud_size": 22840
     },
     "standard-model-of-code/docs/reports/TOKEN_SYSTEM_VERIFICATION_PROTOCOL.md": {
       "status": "SYNCED",
@@ -7134,25 +7302,109 @@
       "cloud_size": 10114
     },
     "standard-model-of-code/docs/research/gemini/docs/20260123_052906_generate_a_validation_query_for_perplexity__sonar.md": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_052906_generate_a_validation_query_for_perplexity__sonar.md",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_052906_generate_a_validation_query_for_perplexity__sonar.md",
       "local_size": 6833,
-      "cloud_size": 0
+      "cloud_size": 6833
     },
     "standard-model-of-code/docs/research/gemini/docs/20260123_053643_analyze_the_alignment_between_these_project_elemen.md": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_053643_analyze_the_alignment_between_these_project_elemen.md",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_053643_analyze_the_alignment_between_these_project_elemen.md",
       "local_size": 11185,
-      "cloud_size": 0
+      "cloud_size": 11185
     },
     "standard-model-of-code/docs/research/gemini/docs/20260123_053826_alignment_analysis__consolidate_project_elements_s.md": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_053826_alignment_analysis__consolidate_project_elements_s.md",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_053826_alignment_analysis__consolidate_project_elements_s.md",
       "local_size": 13090,
-      "cloud_size": 0
+      "cloud_size": 13090
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_054820_validate_this_sprint_system_architecture_before_we.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_054820_validate_this_sprint_system_architecture_before_we.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_054820_validate_this_sprint_system_architecture_before_we.md",
+      "local_size": 7095,
+      "cloud_size": 7095
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_055110_perform_a_comprehensive_health_check_on_the_curren.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_055110_perform_a_comprehensive_health_check_on_the_curren.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_055110_perform_a_comprehensive_health_check_on_the_curren.md",
+      "local_size": 9587,
+      "cloud_size": 9587
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_055620_given_the_existing_bare_architecture_in__agent_spe.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_055620_given_the_existing_bare_architecture_in__agent_spe.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_055620_given_the_existing_bare_architecture_in__agent_spe.md",
+      "local_size": 6307,
+      "cloud_size": 6307
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_060650_honest_opinion__evaluate_naming_analogies_for_proj.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_060650_honest_opinion__evaluate_naming_analogies_for_proj.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_060650_honest_opinion__evaluate_naming_analogies_for_proj.md",
+      "local_size": 10168,
+      "cloud_size": 10168
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_062700_based_on_agentknowledgedump_md__what_is_the_curren.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_062700_based_on_agentknowledgedump_md__what_is_the_curren.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_062700_based_on_agentknowledgedump_md__what_is_the_curren.md",
+      "local_size": 4921,
+      "cloud_size": 4921
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_063123_why_doesn_t_our_bare_system_automatically_boost_ta.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_063123_why_doesn_t_our_bare_system_automatically_boost_ta.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_063123_why_doesn_t_our_bare_system_automatically_boost_ta.md",
+      "local_size": 7470,
+      "cloud_size": 7470
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_063828_compare_these_two_task_registry_systems_and_create.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_063828_compare_these_two_task_registry_systems_and_create.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_063828_compare_these_two_task_registry_systems_and_create.md",
+      "local_size": 9542,
+      "cloud_size": 9542
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_064244_based_on_the_perplexity_research_saved_to_standard.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_064244_based_on_the_perplexity_research_saved_to_standard.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_064244_based_on_the_perplexity_research_saved_to_standard.md",
+      "local_size": 13249,
+      "cloud_size": 13249
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_065122_given_the_existing__agent__infrastructure_in_proje.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_065122_given_the_existing__agent__infrastructure_in_proje.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_065122_given_the_existing__agent__infrastructure_in_proje.md",
+      "local_size": 9208,
+      "cloud_size": 9208
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_065929_audit_for_cutting__analyze_the_current__agent__inf.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_065929_audit_for_cutting__analyze_the_current__agent__inf.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_065929_audit_for_cutting__analyze_the_current__agent__inf.md",
+      "local_size": 7624,
+      "cloud_size": 7624
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_070110_given_the_cutting_audit_results__propose_the_minim.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_070110_given_the_cutting_audit_results__propose_the_minim.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_070110_given_the_cutting_audit_results__propose_the_minim.md",
+      "local_size": 2832,
+      "cloud_size": 2832
+    },
+    "standard-model-of-code/docs/research/gemini/docs/20260123_070244_based_on_the_current_state_of_project_elements__re.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/docs/20260123_070244_based_on_the_current_state_of_project_elements__re.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/docs/20260123_070244_based_on_the_current_state_of_project_elements__re.md",
+      "local_size": 8824,
+      "cloud_size": 8824
     },
     "standard-model-of-code/docs/research/gemini/raw/.gitkeep": {
       "status": "SYNCED",
@@ -7176,25 +7428,130 @@
       "cloud_size": 10111
     },
     "standard-model-of-code/docs/research/gemini/raw/20260123_052906_generate_a_validation_query_for_perplexity__sonar.json": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_052906_generate_a_validation_query_for_perplexity__sonar.json",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_052906_generate_a_validation_query_for_perplexity__sonar.json",
       "local_size": 6757,
-      "cloud_size": 0
+      "cloud_size": 6757
     },
     "standard-model-of-code/docs/research/gemini/raw/20260123_053643_analyze_the_alignment_between_these_project_elemen.json": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_053643_analyze_the_alignment_between_these_project_elemen.json",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_053643_analyze_the_alignment_between_these_project_elemen.json",
       "local_size": 11259,
-      "cloud_size": 0
+      "cloud_size": 11259
     },
     "standard-model-of-code/docs/research/gemini/raw/20260123_053826_alignment_analysis__consolidate_project_elements_s.json": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_053826_alignment_analysis__consolidate_project_elements_s.json",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_053826_alignment_analysis__consolidate_project_elements_s.json",
       "local_size": 13269,
-      "cloud_size": 0
+      "cloud_size": 13269
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_054820_validate_this_sprint_system_architecture_before_we.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_054820_validate_this_sprint_system_architecture_before_we.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_054820_validate_this_sprint_system_architecture_before_we.json",
+      "local_size": 7061,
+      "cloud_size": 7061
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_055110_perform_a_comprehensive_health_check_on_the_curren.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_055110_perform_a_comprehensive_health_check_on_the_curren.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_055110_perform_a_comprehensive_health_check_on_the_curren.json",
+      "local_size": 9582,
+      "cloud_size": 9582
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_055620_given_the_existing_bare_architecture_in__agent_spe.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_055620_given_the_existing_bare_architecture_in__agent_spe.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_055620_given_the_existing_bare_architecture_in__agent_spe.json",
+      "local_size": 6221,
+      "cloud_size": 6221
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_060650_honest_opinion__evaluate_naming_analogies_for_proj.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_060650_honest_opinion__evaluate_naming_analogies_for_proj.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_060650_honest_opinion__evaluate_naming_analogies_for_proj.json",
+      "local_size": 10215,
+      "cloud_size": 10215
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_062700_based_on_agentknowledgedump_md__what_is_the_curren.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_062700_based_on_agentknowledgedump_md__what_is_the_curren.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_062700_based_on_agentknowledgedump_md__what_is_the_curren.json",
+      "local_size": 4822,
+      "cloud_size": 4822
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_063123_why_doesn_t_our_bare_system_automatically_boost_ta.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_063123_why_doesn_t_our_bare_system_automatically_boost_ta.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_063123_why_doesn_t_our_bare_system_automatically_boost_ta.json",
+      "local_size": 7435,
+      "cloud_size": 7435
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_063828_compare_these_two_task_registry_systems_and_create.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_063828_compare_these_two_task_registry_systems_and_create.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_063828_compare_these_two_task_registry_systems_and_create.json",
+      "local_size": 10566,
+      "cloud_size": 10566
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_064244_based_on_the_perplexity_research_saved_to_standard.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_064244_based_on_the_perplexity_research_saved_to_standard.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_064244_based_on_the_perplexity_research_saved_to_standard.json",
+      "local_size": 13397,
+      "cloud_size": 13397
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_065122_given_the_existing__agent__infrastructure_in_proje.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_065122_given_the_existing__agent__infrastructure_in_proje.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_065122_given_the_existing__agent__infrastructure_in_proje.json",
+      "local_size": 9184,
+      "cloud_size": 9184
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_065929_audit_for_cutting__analyze_the_current__agent__inf.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_065929_audit_for_cutting__analyze_the_current__agent__inf.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_065929_audit_for_cutting__analyze_the_current__agent__inf.json",
+      "local_size": 7564,
+      "cloud_size": 7564
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_070110_given_the_cutting_audit_results__propose_the_minim.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_070110_given_the_cutting_audit_results__propose_the_minim.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_070110_given_the_cutting_audit_results__propose_the_minim.json",
+      "local_size": 2746,
+      "cloud_size": 2746
+    },
+    "standard-model-of-code/docs/research/gemini/raw/20260123_070244_based_on_the_current_state_of_project_elements__re.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/gemini/raw/20260123_070244_based_on_the_current_state_of_project_elements__re.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/gemini/raw/20260123_070244_based_on_the_current_state_of_project_elements__re.json",
+      "local_size": 8838,
+      "cloud_size": 8838
+    },
+    "standard-model-of-code/docs/research/perplexity/20260123_064049_i_m_designing_a__registry_of_registries__system_fo.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/20260123_064049_i_m_designing_a__registry_of_registries__system_fo.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/20260123_064049_i_m_designing_a__registry_of_registries__system_fo.md",
+      "local_size": 7671,
+      "cloud_size": 7671
+    },
+    "standard-model-of-code/docs/research/perplexity/20260123_065832_best_practices_for_cutting_complexity_in_ai_assist.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/20260123_065832_best_practices_for_cutting_complexity_in_ai_assist.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/20260123_065832_best_practices_for_cutting_complexity_in_ai_assist.md",
+      "local_size": 4438,
+      "cloud_size": 4438
+    },
+    "standard-model-of-code/docs/research/perplexity/20260123_070024_minimal_viable_registry_manifest_pattern_for_softw.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/20260123_070024_minimal_viable_registry_manifest_pattern_for_softw.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/20260123_070024_minimal_viable_registry_manifest_pattern_for_softw.md",
+      "local_size": 4565,
+      "cloud_size": 4565
     },
     "standard-model-of-code/docs/research/perplexity/README.md": {
       "status": "SYNCED",
@@ -7323,11 +7680,25 @@
       "cloud_size": 9014
     },
     "standard-model-of-code/docs/research/perplexity/docs/20260123_052958_you_are_an_expert_in_distributed_systems__software.md": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/docs/20260123_052958_you_are_an_expert_in_distributed_systems__software.md",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/docs/20260123_052958_you_are_an_expert_in_distributed_systems__software.md",
       "local_size": 12060,
-      "cloud_size": 0
+      "cloud_size": 12060
+    },
+    "standard-model-of-code/docs/research/perplexity/docs/20260123_055650_i_am_a_senior_software_engineer_designing_a_task_r.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/docs/20260123_055650_i_am_a_senior_software_engineer_designing_a_task_r.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/docs/20260123_055650_i_am_a_senior_software_engineer_designing_a_task_r.md",
+      "local_size": 7347,
+      "cloud_size": 7347
+    },
+    "standard-model-of-code/docs/research/perplexity/docs/20260123_063241_i_m_building_a_task_management_system_for_ai_agent.md": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/docs/20260123_063241_i_m_building_a_task_management_system_for_ai_agent.md",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/docs/20260123_063241_i_m_building_a_task_management_system_for_ai_agent.md",
+      "local_size": 4867,
+      "cloud_size": 4867
     },
     "standard-model-of-code/docs/research/perplexity/docs/20260123_context_window_tradeoffs_chatgpt.md": {
       "status": "SYNCED",
@@ -7442,11 +7813,25 @@
       "cloud_size": 11101
     },
     "standard-model-of-code/docs/research/perplexity/raw/20260123_052958_you_are_an_expert_in_distributed_systems__software.json": {
-      "status": "LOCAL_ONLY",
+      "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/raw/20260123_052958_you_are_an_expert_in_distributed_systems__software.json",
-      "cloud_uri": null,
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/raw/20260123_052958_you_are_an_expert_in_distributed_systems__software.json",
       "local_size": 15375,
-      "cloud_size": 0
+      "cloud_size": 15375
+    },
+    "standard-model-of-code/docs/research/perplexity/raw/20260123_055650_i_am_a_senior_software_engineer_designing_a_task_r.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/raw/20260123_055650_i_am_a_senior_software_engineer_designing_a_task_r.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/raw/20260123_055650_i_am_a_senior_software_engineer_designing_a_task_r.json",
+      "local_size": 10652,
+      "cloud_size": 10652
+    },
+    "standard-model-of-code/docs/research/perplexity/raw/20260123_063241_i_m_building_a_task_management_system_for_ai_agent.json": {
+      "status": "SYNCED",
+      "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/research/perplexity/raw/20260123_063241_i_m_building_a_task_management_system_for_ai_agent.json",
+      "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/research/perplexity/raw/20260123_063241_i_m_building_a_task_management_system_for_ai_agent.json",
+      "local_size": 8572,
+      "cloud_size": 8572
     },
     "standard-model-of-code/docs/specs/AI_INTERFACE_SPEC.md": {
       "status": "SYNCED",
@@ -7466,8 +7851,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md",
-      "local_size": 19609,
-      "cloud_size": 19609
+      "local_size": 19817,
+      "cloud_size": 19817
     },
     "standard-model-of-code/docs/specs/README.md": {
       "status": "SYNCED",
@@ -7480,8 +7865,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/specs/REGISTRY_OF_REGISTRIES.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/specs/REGISTRY_OF_REGISTRIES.md",
-      "local_size": 11546,
-      "cloud_size": 11546
+      "local_size": 12726,
+      "cloud_size": 12726
     },
     "standard-model-of-code/docs/specs/SCALE_TRANSFORMS.md": {
       "status": "SYNCED",
@@ -7508,8 +7893,8 @@
       "status": "SYNCED",
       "local_path": "/Users/lech/PROJECTS_all/PROJECT_elements/standard-model-of-code/docs/specs/TREE_SITTER_FULL_IMPLEMENTATION_REGISTRY.md",
       "cloud_uri": "gs://elements-archive-2026/repository_mirror/latest/standard-model-of-code/docs/specs/TREE_SITTER_FULL_IMPLEMENTATION_REGISTRY.md",
-      "local_size": 23028,
-      "cloud_size": 23028
+      "local_size": 23226,
+      "cloud_size": 23226
     },
     "standard-model-of-code/docs/specs/TREE_SITTER_INTEGRATION_SPEC.md": {
       "status": "SYNCED",

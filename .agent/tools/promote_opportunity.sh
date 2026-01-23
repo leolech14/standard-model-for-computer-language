@@ -1,17 +1,23 @@
 #!/bin/bash
 # promote_opportunity.sh - Promote an opportunity from inbox to active task
 #
+# DELEGATES TO: promote_opportunity.py (Python version with proper YAML parsing)
+#
 # Usage:
 #   ./promote_opportunity.sh <opportunity-file> [task-id]
 #
 # Example:
-#   ./promote_opportunity.sh inbox/OPP-001.yaml TASK-125
-#
-# If task-id is not provided, generates next available ID.
-
-set -e
+#   ./promote_opportunity.sh OPP-001.yaml TASK-125
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Delegate to Python version
+exec "$SCRIPT_DIR/promote_opportunity.py" "$@"
+
+# --- LEGACY BASH CODE BELOW (kept for reference) ---
+exit 0
+
+set -e
 AGENT_DIR="$(dirname "$SCRIPT_DIR")"
 INBOX_DIR="$AGENT_DIR/registry/inbox"
 ACTIVE_DIR="$AGENT_DIR/registry/active"

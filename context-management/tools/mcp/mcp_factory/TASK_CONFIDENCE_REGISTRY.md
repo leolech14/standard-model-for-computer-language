@@ -1,9 +1,14 @@
 # MCP Factory - Task Confidence Registry
 
-> **STATUS: SECONDARY REGISTRY** - Primary task tracking moved to `.agent/registry/`
-> See: `.agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md` for consolidated view.
->
-> This registry retained for MCP-specific tasks not yet migrated.
+> **ARCHIVED:** Superseded by `.agent/registry/` system.
+> TASK-006 migrated to `.agent/registry/active/TASK-001.yaml`
+> Archived to GCS: `gs://elements-archive-2026/archive/legacy_registries/`
+> Date: 2026-01-23
+
+---
+
+> **STATUS: ARCHIVED** - Primary task tracking moved to `.agent/registry/`
+> See: `.agent/registry/INDEX.md` for consolidated view.
 
 ---
 

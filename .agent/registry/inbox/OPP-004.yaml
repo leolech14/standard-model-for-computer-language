@@ -1,0 +1,30 @@
+# Migrated from Learning System TASK-127
+# Created: 2026-01-23T06:50:00Z
+# NOTE: Partially completed by registry consolidation
+
+id: OPP-004
+title: Document registry architecture
+source: MIGRATION
+discovered_at: '2026-01-23T06:50:00Z'
+urgency: LOW
+
+description: |
+  After consolidation, document the unified registry system:
+  - .agent/registry/inbox/ - Discovery Inbox (OPP-XXX)
+  - .agent/registry/active/ - Active tasks (TASK-XXX)
+  - .agent/registry/archive/ - Completed/rejected
+  - .agent/sprints/ - Sprint management
+
+  Create README.md in registry/ explaining the system.
+
+suggested_action: Create .agent/registry/README.md with architecture docs
+
+category: REPO-ORG
+
+confidence:
+  factual: 90
+  alignment: 85
+  current: 90
+  onwards: 85
+
+migrated_from: TASK-127

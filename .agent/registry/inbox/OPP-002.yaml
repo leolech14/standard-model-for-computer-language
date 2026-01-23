@@ -1,0 +1,22 @@
+id: OPP-002
+title: Fix promote_opportunity.sh multiline bug
+source: BARE
+discovered_at: '2026-01-23T09:30:00Z'
+description: 'The bash-based promote_opportunity.sh uses grep to extract YAML fields,
+
+  which fails for multiline descriptions.
+
+
+  Root cause: grep only captures first line of multiline YAML values.
+
+
+  Solution implemented: Python version with proper YAML parsing.
+
+  '
+suggested_action: Replace bash script with Python implementation
+urgency: HIGH
+related_to:
+- .agent/tools/promote_opportunity.sh
+- TASK-002
+promoted_to: TASK-003
+promoted_at: '2026-01-23T09:32:29.213179+00:00'

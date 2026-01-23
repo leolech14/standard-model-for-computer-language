@@ -1,0 +1,28 @@
+# Migrated from Learning System TASK-126
+# Created: 2026-01-23T06:50:00Z
+
+id: OPP-003
+title: Consolidate research directories
+source: MIGRATION
+discovered_at: '2026-01-23T06:50:00Z'
+urgency: MEDIUM
+
+description: |
+  Research outputs are spread across 3 locations:
+  - standard-model-of-code/research/
+  - standard-model-of-code/tools/research/
+  - standard-model-of-code/docs/research/ (CANONICAL)
+
+  Action: Consolidate all research to docs/research/
+
+suggested_action: Move all research files to standard-model-of-code/docs/research/
+
+category: REPO-ORG
+
+confidence:
+  factual: 80
+  alignment: 80
+  current: 80
+  onwards: 80
+
+migrated_from: TASK-126

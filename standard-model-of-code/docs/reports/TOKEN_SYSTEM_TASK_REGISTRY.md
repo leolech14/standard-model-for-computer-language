@@ -1,5 +1,11 @@
 # Token System Task Registry
 
+> **DEPRECATED:** This registry has been migrated to `.agent/registry/inbox/OPP-005.yaml`
+> The task definitions below remain valid but should be promoted via the new system.
+> Last updated: 2026-01-23
+
+---
+
 > Actionable tasks with step-by-step instructions and confidence verification.
 > Each task must achieve 95%+ confidence before marking complete.
 

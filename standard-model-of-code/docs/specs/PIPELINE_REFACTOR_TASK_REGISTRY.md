@@ -1,5 +1,11 @@
 # PIPELINE REFACTOR TASK REGISTRY
 
+> **DEPRECATED:** This registry has been migrated to `.agent/registry/inbox/OPP-006.yaml`
+> The task definitions below remain valid but should be promoted via the new system.
+> Last updated: 2026-01-23
+
+---
+
 > Master registry tracking pipeline class-based refactoring implementation.
 >
 > **Created:** 2026-01-22

@@ -1,5 +1,11 @@
 # Architecture Debt Registry
 
+> **REFERENCE ONLY:** This is architectural analysis, not executable tasks.
+> Contains deep forensics of app.js issues - valuable for context but not actionable.
+> Moved to reference documentation status: 2026-01-23
+
+---
+
 > Critical architectural issues identified for future remediation.
 >
 > **Created:** 2026-01-19

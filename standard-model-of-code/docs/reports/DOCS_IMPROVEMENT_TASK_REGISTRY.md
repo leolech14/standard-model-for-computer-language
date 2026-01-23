@@ -1,8 +1,14 @@
 # Documentation Improvement Task Registry
 
+> **ARCHIVED:** Low priority documentation polish tasks.
+> 1/10 tasks complete (T-DOC-010). Remaining tasks deferred.
+> Archived: 2026-01-23
+
+---
+
 **Date:** 2026-01-19
 **Author:** Claude + Leonardo
-**Status:** ACTIVE
+**Status:** ARCHIVED (was ACTIVE)
 **Validation Source:** Gemini 2.5 Pro Forensic Analysis
 
 ---

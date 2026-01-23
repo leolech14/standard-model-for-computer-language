@@ -1,5 +1,11 @@
 # Documentation Reorganization Task Registry
 
+> **ARCHIVED:** This registry is complete (7/10 tasks done, 3 deferred/rejected).
+> No further action needed. Retained for historical reference.
+> Archived: 2026-01-23
+
+---
+
 > Confidence-scored evaluation of proposed documentation changes.
 
 **Date:** 2026-01-20

@@ -43,9 +43,8 @@ def cmd_concepts():
 
 def cmd_boost():
     """Run ConfidenceBooster."""
-    print("ConfidenceBooster not yet implemented (Phase 4)")
-    print("See: TASK-120 in .agent/registry/LEARNING_SYSTEM_TASK_REGISTRY.md")
-    return 1
+    from boost_confidence import main
+    return main()
 
 
 def cmd_discover():
@@ -101,12 +100,12 @@ def cmd_status():
     print("BARE - Background Auto-Refinement Engine")
     print("=" * 60)
     print("\nProcessors:")
-    print("  [OK]   TruthValidator    - Phase 1 (implemented)")
-    print("  [TODO] CrossValidator    - Phase 2")
-    print("  [TODO] ConceptMapper     - Phase 3")
-    print("  [TODO] ConfidenceBooster - Phase 4 (see TASK-120)")
+    print("  [OK]   TruthValidator      - Phase 1 (implemented)")
+    print("  [TODO] CrossValidator      - Phase 2")
+    print("  [TODO] ConceptMapper       - Phase 3")
+    print("  [OK]   ConfidenceBooster   - Phase 4 (implemented)")
     print("  [TODO] OpportunityExplorer - Phase 4 (see TASK-121)")
-    print("  [TODO] SelfOptimizer     - Phase 5")
+    print("  [TODO] SelfOptimizer       - Phase 5")
 
     # Check for existing truths
     truths_path = TOOLS_DIR.parent / "intelligence" / "truths" / "repo_truths.yaml"

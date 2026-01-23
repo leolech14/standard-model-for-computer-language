@@ -1,0 +1,46 @@
+id: OPP-005
+title: "Token System Refactoring - Remove Hardcoded Values from app.js"
+source: MIGRATION
+discovered_at: "2026-01-23T12:00:00Z"
+description: |
+  10 frontend tasks to remove hardcoded values from app.js and use token system.
+  All tasks are 95%+ confidence with step-by-step instructions.
+
+  Tasks:
+  - T001: Remove EDGE_DEFAULT_OPACITY hardcode (98%)
+  - T002: Remove EDGE_MODE_CONFIG hardcoded values (98%)
+  - T003: Remove EDGE_COLOR_CONFIG hardcoded values (98%)
+  - T004: Merge PENDULUM with animation tokens (97%)
+  - T005: Sync node-size slider max with render max (99%)
+  - T006: Remove duplicate color schemes from app.js (96%)
+  - T007: Tokenize LAYOUT_PRESETS motion speeds (95%)
+  - T008: Tokenize FLOW_PRESETS (95%)
+  - T009: Complete light theme tokens (95%)
+  - T010: Complete high-contrast theme tokens (95%)
+
+  Previous attempt (2026-01-19) failed due to:
+  - Mixed unrelated tasks
+  - No incremental testing
+  - Script concatenation broke variable hoisting
+
+  Lessons: Execute ONE task at a time, test after EVERY change.
+
+suggested_action: |
+  Create sprint for frontend token cleanup.
+  Execute T001-T004 first (critical conflicts).
+  Then T005-T006 (user experience).
+  Finally T007-T010 (enhancements).
+
+urgency: MEDIUM
+defer_until: "After pipeline refactor stabilizes"
+
+legacy_registry:
+  path: "standard-model-of-code/docs/reports/TOKEN_SYSTEM_TASK_REGISTRY.md"
+  task_count: 10
+  all_ready: true
+  confidence_range: "95-99%"
+
+related_to:
+  - "app.js refactoring"
+  - "Token system"
+  - "Visualization"

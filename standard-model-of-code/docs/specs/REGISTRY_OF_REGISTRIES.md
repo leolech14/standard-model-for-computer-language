@@ -128,15 +128,39 @@ The visualization intelligence layer has its own taxonomy.
 
 ---
 
-## 4. Task Registries (Living Documents)
+## 4. Task Registries
+
+> **Note:** As of 2026-01-23, task management is consolidated into `.agent/registry/`.
+> Legacy markdown registries below are deprecated or archived. See `.agent/registry/INDEX.md`.
+
+### Primary System (YAML-based)
 
 | Registry | Status | Location | Description |
 |----------|--------|----------|-------------|
-| **UPB Tasks** | **Phase 6 Done** | `docs/specs/UPB_TASK_REGISTRY.md` | Universal Property Binder implementation |
-| **Tree-sitter Tasks** | **46 tasks** | `docs/specs/TREE_SITTER_TASK_REGISTRY.md` | Language support expansion |
-| **Architecture Debt** | **Living** | `docs/reports/ARCHITECTURE_DEBT_REGISTRY.md` | Known technical debt |
-| **Docs Improvement** | **Active** | `docs/reports/DOCS_IMPROVEMENT_TASK_REGISTRY.md` | Documentation backlog |
-| **Docs Reorg** | **Active** | `context-management/docs/DOCS_REORG_TASK_REGISTRY.md` | Brain hemisphere docs |
+| **Agent Registry** | **ACTIVE** | `.agent/registry/INDEX.md` | Central task management |
+| **Discovery Inbox** | **ACTIVE** | `.agent/registry/inbox/*.yaml` | Opportunities pending promotion |
+
+### Legacy Registries (Consolidated 2026-01-23)
+
+| Registry | Status | Location | Description |
+|----------|--------|----------|-------------|
+| **Tree-sitter Tasks** | **KEPT** | `docs/specs/TREE_SITTER_TASK_REGISTRY.md` | 46 tasks, canonical source |
+| **Pipeline Refactor** | **MIGRATED** | `docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md` | 35 tasks → OPP-006 |
+| **Token System** | **MIGRATED** | `docs/reports/TOKEN_SYSTEM_TASK_REGISTRY.md` | 10 tasks → OPP-005 |
+| **UPB Tasks** | **ARCHIVED** | `docs/specs/UPB_TASK_REGISTRY.md` | Phase 6 complete |
+| **Architecture Debt** | **REFERENCE** | `docs/reports/ARCHITECTURE_DEBT_REGISTRY.md` | Analysis, not tasks |
+| **Docs Improvement** | **ARCHIVED** | `docs/reports/DOCS_IMPROVEMENT_TASK_REGISTRY.md` | 1/10 done, low priority |
+| **Docs Reorg** | **ARCHIVED** | `context-management/docs/DOCS_REORG_TASK_REGISTRY.md` | 7/10 done |
+| **Sidebar Refactor** | **ARCHIVED** | `docs/reports/SIDEBAR_REFACTOR_TASK_REGISTRY.md` | 1/13 done, deferred |
+
+### Archived to GCS (Duplicates/Superseded)
+
+Files archived to `gs://elements-archive-2026/archive/legacy_registries/`:
+
+- `TREE_SITTER_FULL_IMPLEMENTATION_REGISTRY.md` - duplicate of TREE_SITTER_TASK_REGISTRY
+- `TASK_CONFIDENCE_REGISTRY.md` - superseded by .agent/registry/
+
+Local copies retained with ARCHIVED headers pointing to GCS location.
 
 ---
 
