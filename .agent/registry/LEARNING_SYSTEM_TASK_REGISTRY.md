@@ -318,15 +318,17 @@ effective usable limit. Sets above this suffer lost-in-middle effects.
 ## Execution Priority
 
 ```
-HIGHEST VALUE (READY):
-1. 🟢 TASK-114  Add Context Engineering docs         [85%]
-2. 🟢 TASK-106  Dataset optimization guide           [85%]
-3. 🟢 TASK-113  Positional strategy                  [85%] ← unblocked
+ALL READY TASKS COMPLETE!
 
 NEEDS BOOST:
-4. 🟡 TASK-104  Pre-commit hook                      [80%→85%]
-5. 🟡 TASK-102  --research-loop                      [75%→85%]
-6. 🟡 TASK-103  analyze.py storage                   [70%→85%]
+1. 🟡 TASK-104  Pre-commit hook                      [80%→85%]
+2. 🟡 TASK-102  --research-loop                      [75%→85%]
+3. 🟡 TASK-103  analyze.py storage                   [70%→85%]
+
+POTENTIAL NEW TASKS:
+- Build subgraph retrieval API (GraphRAG runtime)
+- Automate RAG → LC hybrid pipeline
+- Community auto-summarization
 ```
 
 ---
@@ -335,8 +337,8 @@ NEEDS BOOST:
 
 | Status | Count | Tasks |
 |--------|-------|-------|
-| ☑️  COMPLETE | 12 | 100, 115, 116, 117, 110, 101, 111, 118, 119, MCP-001, MCP-003, MCP-004 |
-| 🟢 READY | 3 | 114, 106, 113 |
+| ☑️  COMPLETE | 15 | 100, 115, 116, 117, 110, 101, 111, 118, 119, 114, 106, 113, MCP-001, MCP-003, MCP-004 |
+| 🟢 READY | 0 | — |
 | 🟡 NEEDS BOOST | 3 | 104, 102, 103 |
 | 💤 DEFERRED | 3 | 105, 108, 109 |
 | ⛔ REJECTED | 2 | MCP-007, 112 (subsumed) |
@@ -354,3 +356,4 @@ NEEDS BOOST:
 | 3.1.0 | 2026-01-23 | Added emoji status legend, Quick View section |
 | 3.2.0 | 2026-01-23 | Session complete: +3 tasks (116, 117, 110), Socratic Loop documented |
 | 3.3.0 | 2026-01-23 | Context purity: +2 tasks (118, 119), token budgets reduced to ≤200k |
+| 3.4.0 | 2026-01-23 | All ready tasks complete: +3 (114, 106, 113), RAG/LC thresholds documented |

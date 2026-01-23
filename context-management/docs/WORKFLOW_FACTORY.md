@@ -276,3 +276,161 @@ File Search stores are indexed separately but should mirror these patterns:
 | `schema` | `collider-schema` |
 
 Keep them in sync: when you update an analysis set, re-index the corresponding store.
+
+---
+
+## Dataset Optimization Strategy
+
+### RAG vs Long Context: Concrete Thresholds
+
+Based on industry benchmarks (Databricks, PNNL, Perplexity research 2026-01-23):
+
+| Corpus Size | Approach | Rationale |
+|-------------|----------|-----------|
+| **<16k tokens** | Long Context only | LC performs well, no retrieval overhead |
+| **16k-50k tokens** | Long Context OR Hybrid | Sweet spot for LC; hybrid if needle queries |
+| **50k-128k tokens** | Hybrid preferred | LC degrades; RAG + focused LC wins |
+| **>128k tokens** | RAG required | LC saturation; RAG scales to 2M+ tokens |
+
+**Model-Specific Saturation Points:**
+
+| Model | LC Degrades After |
+|-------|-------------------|
+| GPT-4-turbo / Claude-3-sonnet | 16k tokens |
+| GPT-4-0125-preview | 64k tokens |
+| Llama-3.1-405B | 32k tokens |
+| Mixtral | 4k tokens |
+| Gemini 2.5 Pro | ~200k effective (per ChatGPT research) |
+
+### Hybrid Workflow: RAG → Long Context
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    HYBRID WORKFLOW                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  1. RETRIEVAL PHASE (RAG)                                   │
+│     ┌─────────────┐      ┌─────────────┐                    │
+│     │ Large Corpus│ ───► │ Vector/BM25 │ ───► Top-K chunks  │
+│     │  (2M+ tokens)│      │  Retrieval  │      (5-20 docs)  │
+│     └─────────────┘      └─────────────┘                    │
+│                                                             │
+│  2. CONTEXT ASSEMBLY (16k-48k tokens optimal)               │
+│     ┌───────────────────────────────────────────┐           │
+│     │ [Critical files at START]                 │ ← Sandwich│
+│     │ [Retrieved chunks in MIDDLE]              │           │
+│     │ [Instructions + critical recap at END]    │           │
+│     └───────────────────────────────────────────┘           │
+│                                                             │
+│  3. REASONING PHASE (Long Context)                          │
+│     ┌─────────────┐      ┌─────────────┐                    │
+│     │  Assembled  │ ───► │   Gemini    │ ───► Answer +      │
+│     │   Context   │      │  Reasoning  │      citations     │
+│     └─────────────┘      └─────────────┘                    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Performance (OP-RAG benchmarks):**
+- 16k tokens: 44.43 F1
+- 48k tokens: 47.25 F1 (peak)
+- 117k tokens: 34.26 F1 (degraded)
+
+### When to Use Each Approach
+
+| Approach | Best For | Why |
+|----------|----------|-----|
+| **RAG (File Search)** | Needle queries, citations, repeated Q&A | Fast, cheap, scales to any corpus |
+| **Long Context** | Cross-file reasoning, architecture review | Holistic view, sees relationships |
+| **Hybrid** | Debug workflows, feature implementation | RAG finds files, Long Context reasons |
+
+### Dataset Purity Principles
+
+**Purity = Signal / (Signal + Noise)**
+
+A pure dataset has high information density. An impure dataset dilutes relevant information with noise.
+
+```
+High Purity (Good):              Low Purity (Bad):
+┌────────────────────┐           ┌────────────────────┐
+│ ████████████████   │           │ ██                 │
+│ ████████████████   │           │    █     █         │
+│ ████████████████   │           │      █      █      │
+│ Signal             │           │ Signal scattered   │
+└────────────────────┘           │ in noise           │
+                                 └────────────────────┘
+```
+
+### Designing High-Purity Sets
+
+1. **Start focused** - Begin with exact files needed, expand only if insufficient
+2. **Exclude archive/** - Historical files pollute context with outdated patterns
+3. **Prefer explicit patterns** - `src/core/full_analysis.py` over `src/**/*.py`
+4. **Use critical_files** - Mark essential files for positional strategy
+5. **Cap at 200k** - Beyond this, lost-in-middle dominates
+
+### Token Budget Decision Tree
+
+```
+Is this a needle query? (find specific thing)
+  YES → Use RAG (File Search)
+  NO  ↓
+
+Do you need cross-file reasoning?
+  NO  → Use focused set (<50k tokens)
+  YES ↓
+
+How many files need simultaneous view?
+  2-5 files   → Compose micro-set (50k-100k)
+  5-10 files  → Use composed set (100k-150k)
+  10+ files   → Split into phases or use RAG + focused follow-up
+```
+
+### Anti-Patterns to Avoid
+
+| Anti-Pattern | Problem | Solution |
+|--------------|---------|----------|
+| `**/*.py` glob | Includes everything | Use explicit file lists |
+| No token limit | Silent degradation | Always set `max_tokens` |
+| Archive in context | Outdated patterns confuse | Exclude `archive/**` |
+| Duplicate content | Wastes tokens, confuses | Dedupe before analysis |
+| Huge composed sets | >200k = lost-in-middle | Break into focused phases |
+
+### Reference
+
+See `.agent/KERNEL.md` → Context Engineering for attention patterns and quality rules.
+
+---
+
+## GraphRAG Integration Status
+
+### What's Implemented
+
+| Component | Status | Location |
+|-----------|--------|----------|
+| **Gemini File Search (Vector RAG)** | ✓ IMPLEMENTED | `analyze.py:412-625` |
+| **GraphRAG Export** | ✓ IMPLEMENTED | `export_graphrag.py` |
+| **Collider Graph Component** | ✓ 9/10 aligned | Entity/edge/community |
+| **Positional Strategy** | ✓ IMPLEMENTED | `analyze.py:875-934` |
+
+### What's Missing (GraphRAG Gap)
+
+| Component | Status | Action Needed |
+|-----------|--------|---------------|
+| Query-time Graph Retrieval | ✗ NOT IMPLEMENTED | Build subgraph retrieval API |
+| Community Summarization | ⚠️ PARTIAL | Auto-summary per community |
+| Hybrid Orchestration | ⚠️ MANUAL | Automate RAG → LC pipeline |
+
+### Collider → GraphRAG Alignment
+
+From `docs/research/GRAPHRAG_LANDSCAPE.md`:
+
+| Pillar | Score | Implementation |
+|--------|-------|----------------|
+| Entity Extraction | 10/10 | `TreeSitterUniversalEngine` |
+| Edge Building | 10/10 | `edge_extractor.py` |
+| Community Detection | 10/10 | `graph_analyzer.py` |
+| Summarization | 8/10 | `ComponentCard` + AI insights |
+| Multi-hop Reasoning | 9/10 | Knots, Markov, execution flow |
+
+**Bottom Line:** Collider is a near-perfect "Graph" component. Missing the "RAG runtime" layer that combines retrieval with reasoning.

@@ -125,6 +125,72 @@ Every task is scored on four dimensions:
 
 ---
 
+## Context Engineering
+
+When assembling context for AI analysis, follow these research-backed principles:
+
+### The Lost-in-the-Middle Effect
+
+LLMs have U-shaped attention - they attend best to **beginning** and **end** of context.
+
+```
+Attention
+    ^
+    |  *                           *
+    |   *                         *
+    |    *                       *
+    |     *       Lost         *
+    |      *    in the       *
+    |       *   Middle     *
+    |        * * * * * * *
+    +---------------------------------> Position
+       Start              End
+```
+
+**Mitigation: Sandwich Method**
+```
+[Critical instructions]     ← Beginning (high attention)
+[Supporting context]        ← Middle (lower attention)
+[Key facts + instructions]  ← End (high attention)
+```
+
+### Token Budget Tiers
+
+| Tier | Budget | Use Case | Risk |
+|------|--------|----------|------|
+| Guru | <50k | Focused analysis | Low |
+| Architect | 50k-150k | Multi-file reasoning | Medium |
+| Archeologist | 150k-200k | Deep exploration | High |
+| Perilous | >200k | Avoid | Very High |
+
+**Hard cap: 200k tokens.** Beyond this, lost-in-middle effects dominate.
+
+### Token Quality > Quantity
+
+**High-value tokens:**
+- Directly relevant facts
+- Canonical excerpts (not paraphrases)
+- Disambiguating identifiers
+- Clean structure (headings, bullets)
+
+**Negative-value tokens (remove these):**
+- Irrelevant background
+- Redundant paraphrases
+- Contradictory instructions
+- Confusable near-misses
+- Unfiltered logs
+
+### Practical Rules
+
+1. **Treat tokens as budget with ROI** - If it doesn't change the decision, remove it
+2. **Position critical content at edges** - Start and end of context
+3. **Use `critical_files` + `positional_strategy`** - In `analysis_sets.yaml`
+4. **Prefer RAG for search, focused sets for reasoning**
+
+**Reference:** `docs/research/perplexity/docs/20260123_context_window_tradeoffs_chatgpt.md`
+
+---
+
 ## Agent Responsibilities
 
 ### Starting a Session
@@ -200,11 +266,12 @@ python context-management/tools/archive/archive.py mirror
 
 | Field | Value |
 |-------|-------|
-| Kernel Version | 1.1.0 |
+| Kernel Version | 1.2.0 |
 | Created | 2026-01-22 |
 | Last Updated | 2026-01-23 |
 
 ### Changelog
 
+- **1.2.0** (2026-01-23): Added Context Engineering section (lost-in-middle, token tiers, quality rules)
 - **1.1.0** (2026-01-23): Added Task State Machine section, tool usage docs
 - **1.0.0** (2026-01-22): Initial kernel with boot protocol, 4D model, TASK/RUN separation
