@@ -8,6 +8,15 @@
 #   max_tokens: Token budget (approximate). Sets exceeding this warn user.
 #   auto_interactive: If true, automatically use interactive mode
 #   includes: Other sets to compose (optional)
+#   critical_files: Files to position strategically in context (optional)
+#   positional_strategy: How to position critical files (optional)
+#       - "sandwich": Place at beginning AND end (for U-shaped attention)
+#       - "front-load": Place at beginning only (for primacy bias)
+#
+# Context Engineering Note:
+#   LLMs have attention patterns that favor beginning and end of context.
+#   Use critical_files + positional_strategy to ensure key files aren't
+#   "lost in the middle" of large context windows.
 #
 # WARNING: The 'archive/' directory contains legacy/historical files.
 #          Most sets should NOT include archive/** to avoid context pollution.
@@ -101,6 +110,9 @@ analysis_sets:
     description: "Visualization core (control bar, data manager, template)"
     max_tokens: 100000
     auto_interactive: true
+    critical_files:
+      - "standard-model-of-code/src/core/viz/assets/template.html"
+    positional_strategy: "front-load"
     patterns:
       - "standard-model-of-code/src/core/viz/assets/modules/*.js"
       - "standard-model-of-code/src/core/viz/assets/template.html"
@@ -111,6 +123,10 @@ analysis_sets:
     description: "Theoretical framework and documentation"
     max_tokens: 200000
     auto_interactive: true
+    critical_files:
+      - "standard-model-of-code/docs/MODEL.md"
+      - "standard-model-of-code/docs/COLLIDER.md"
+    positional_strategy: "sandwich"
     patterns:
       - "standard-model-of-code/docs/MODEL.md"
       - "standard-model-of-code/docs/COLLIDER.md"
@@ -137,6 +153,9 @@ analysis_sets:
     description: "Main analysis pipeline (driver, graph builder, extractors)"
     max_tokens: 120000
     auto_interactive: true
+    critical_files:
+      - "standard-model-of-code/src/core/full_analysis.py"
+    positional_strategy: "front-load"
     patterns:
       - "standard-model-of-code/src/core/full_analysis.py"
       - "standard-model-of-code/src/core/graph_analyzer.py"
@@ -157,6 +176,10 @@ analysis_sets:
     description: "Full architecture review (pipeline + classifiers + constraints)"
     max_tokens: 250000
     auto_interactive: true
+    critical_files:
+      - "standard-model-of-code/src/core/full_analysis.py"
+      - "standard-model-of-code/docs/COLLIDER.md"
+    positional_strategy: "sandwich"
     includes:
       - pipeline
       - classifiers
@@ -266,6 +289,9 @@ analysis_sets:
     description: "Complete research context (documents + tools + atoms)"
     max_tokens: 350000
     auto_interactive: true
+    critical_files:
+      - "standard-model-of-code/docs/research/ATOM_COVERAGE_INVESTIGATION.md"
+    positional_strategy: "sandwich"
     includes:
       - research_core
       - research_tools
