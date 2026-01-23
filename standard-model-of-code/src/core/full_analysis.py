@@ -1025,6 +1025,12 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         elif not target.is_dir():
             print("\n🔍 Stage 0: Survey... SKIPPED (single file)")
 
+    # Add any extra exclusions from --exclude flag
+    extra_excludes = options.get("extra_excludes", [])
+    if extra_excludes:
+        exclude_paths.extend(extra_excludes)
+        print(f"   → Added {len(extra_excludes)} extra exclusions from --exclude flag")
+
     from unified_analysis import analyze
     from standard_model_enricher import enrich_with_standard_model
     from purpose_field import detect_purpose_field

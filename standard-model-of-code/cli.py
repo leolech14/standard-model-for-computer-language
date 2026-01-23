@@ -194,6 +194,17 @@ def main():
         action="store_true",
         help="Run circuit breaker UI tests on generated HTML (requires playwright)"
     )
+    full_parser.add_argument(
+        "--no-survey",
+        action="store_true",
+        help="Skip pre-analysis survey (exclude detection for vendor/minified code)"
+    )
+    full_parser.add_argument(
+        "--exclude",
+        action="append",
+        default=[],
+        help="Additional paths to exclude from analysis (can be repeated)"
+    )
 
     # ==========================================
     # GRAPH Command
@@ -402,6 +413,13 @@ def main():
                 options["timing"] = True  # verbose implies timing
             elif getattr(args, 'timing', False):
                 options["timing"] = True
+            # Survey options (Phase 10)
+            if getattr(args, 'no_survey', False):
+                options["no_survey"] = True
+            # Additional exclusions (--exclude flag)
+            exclude_list = getattr(args, 'exclude', [])
+            if exclude_list:
+                options["extra_excludes"] = exclude_list
             run_full_analysis(args.path, args.output, options=options)
 
             # UI Validation (optional)
