@@ -182,6 +182,31 @@ const ANIM = (function () {
                     z: Math.sin(spiralAngle) * dist
                 };
             }
+        },
+        'tree': {
+            name: 'TREE', icon: '▼', description: 'Hierarchical tree (root top)',
+            motion: 'static', cooldown: 0,
+            getPosition: (node, idx, total, time, tierGroups) => {
+                // Simple hierarchical layout: arrange by tier levels
+                // T0 at top, T1 in middle, T2 at bottom
+                const tier = NODE.getTier(node);
+                const tierList = ['T0', 'T1', 'T2'];
+                const tierIdx = tierList.indexOf(tier);
+                const tierY = tierIdx * 150 - 150;  // T0=-150, T1=0, T2=150
+
+                // Within each tier, spread nodes horizontally
+                const tierNodes = tierGroups?.[tier] || [];
+                const nodeInTierIdx = tierNodes.indexOf(node);
+                const tierCount = tierNodes.length || 1;
+                const spread = Math.min(400, tierCount * 40);
+                const tierX = (nodeInTierIdx - tierCount / 2) * (spread / tierCount);
+
+                return {
+                    x: tierX,
+                    y: tierY,
+                    z: tierIdx * 30
+                };
+            }
         }
     };
 
