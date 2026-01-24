@@ -1031,6 +1031,106 @@ def retry_with_backoff(func, max_retries=5, base_delay=1.0):
     raise Exception("Max retries exceeded")
 
 
+def create_gemini_cache(content: str, model: str, display_name: str = "repopack_cache") -> str:
+    """
+    Create a Gemini context cache for expensive content.
+
+    Uses cached_contents API to store large context snapshots that can be
+    reused across multiple queries without re-transmission costs.
+
+    Args:
+        content: Content to cache (RepoPack formatted)
+        model: Model name (e.g., 'gemini-2.0-flash')
+        display_name: Human-readable cache name for tracking
+
+    Returns:
+        Cache resource name (cachedContents/xxx) if successful, empty string otherwise
+    """
+    try:
+        from google import genai
+        from google.genai import types
+
+        client = genai.Client()
+
+        # Create cache with 1 hour TTL (3600 seconds)
+        # Gemini will store this for later reuse
+        cache = client.caches.create(
+            model=model,
+            config=types.CreateCachedContentConfig(
+                display_name=display_name,
+                contents=[content],
+                ttl="3600s"  # 1 hour validity
+            )
+        )
+
+        return cache.name
+    except Exception as e:
+        print(f"[Cache creation failed] {e}", file=sys.stderr)
+        return ""
+
+
+def get_or_create_cache(repo_path: str, model: str, force_new: bool = False) -> str:
+    """
+    Get existing valid cache or create a new one for current repo state.
+
+    Implements the "expensive per snapshot, cheap per question" pattern:
+    - Check cache_registry for valid cache
+    - If found and valid, reuse it
+    - If not found or expired, create new cache from RepoPack
+    - Register new cache in registry
+
+    Args:
+        repo_path: Path to repository root
+        model: Model name
+        force_new: Force creation of new cache (ignore existing)
+
+    Returns:
+        Cache resource name if available, empty string otherwise
+    """
+    try:
+        from aci.cache_registry import CacheRegistry
+        from aci.repopack import format_repopack, get_cache_key
+
+        repo_path = Path(repo_path)
+        registry = CacheRegistry()
+        workspace_key = get_cache_key(repo_path)
+
+        # Check for existing valid cache (unless force_new)
+        if not force_new:
+            existing = registry.get_valid_cache(model, workspace_key)
+            if existing:
+                print(f"[Cache hit] Using existing cache: {existing.cache_name}", file=sys.stderr)
+                return existing.cache_name
+
+        # Cache miss - create new cache from RepoPack
+        print(f"[Cache miss] Creating new cache for {workspace_key}", file=sys.stderr)
+
+        # Format repo as RepoPack (deterministic, cacheable format)
+        repopack = format_repopack(repo_path)
+
+        # Create cache
+        cache_name = create_gemini_cache(repopack, model)
+
+        if cache_name:
+            # Count tokens for registry tracking
+            token_count = count_tokens(repopack, model)
+
+            # Register cache in local registry
+            registry.register(
+                cache_name=cache_name,
+                model=model,
+                workspace_key=workspace_key,
+                ttl_seconds=3600,  # 1 hour
+                token_count=token_count if token_count > 0 else 0
+            )
+            print(f"[Cache created] {cache_name} ({token_count} tokens)", file=sys.stderr)
+
+        return cache_name
+    except Exception as e:
+        print(f"[Cache error] {e}", file=sys.stderr)
+        return ""
+
+
 def enrich_query_for_perplexity(query: str, decision, analysis_sets: dict) -> str:
     """
     Enrich a query with local context before sending to Perplexity.
