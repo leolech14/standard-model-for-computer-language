@@ -20,6 +20,11 @@ from collections import Counter, defaultdict
 from typing import Dict, List, Any, Optional
 
 from src.core.file_enricher import FileEnricher
+from src.core.graph_framework import (
+    build_nx_graph, find_entry_points, propagate_context, classify_node_role
+)
+from src.core.graph_metrics import compute_centrality_metrics
+from src.core.intent_extractor import build_node_intent_profile
 
 
 # =============================================================================
@@ -947,6 +952,122 @@ def _generate_ai_insights(full_output: Dict, output_dir: Path, options: Dict) ->
             pass
 
 
+def build_pipeline_snapshot(perf_manager, nodes: List[Dict], edges: List[Dict], target_path: str) -> Dict[str, Any]:
+    """
+    Build pipeline_snapshot from PerformanceManager for Pipeline Navigator UI.
+
+    Converts the observability data to the format expected by pipeline-navigator.js:
+    - stages: array of stage snapshots with timing/status
+    - total_duration_ms: total pipeline time
+    - stages_succeeded/failed: counts
+    - final_nodes/edges: final counts
+
+    See: src/core/viz/assets/modules/pipeline-navigator.js
+    """
+    perf_data = perf_manager.to_dict()
+
+    # Map stage names from observability format to pipeline navigator format
+    # Observability uses "Stage N: Name" format, JS uses "stage_N" format
+    def normalize_stage_name(name: str) -> str:
+        """Convert 'Stage 1: Base Analysis' to 'stage_1'."""
+        import re
+        match = re.match(r'Stage\s+(\d+(?:\.\d+)?)', name)
+        if match:
+            num = match.group(1).replace('.', '_')
+            return f'stage_{num}'
+        return name.lower().replace(' ', '_').replace(':', '')
+
+    stages = []
+    for stage in perf_data.get('stages', []):
+        stage_name = normalize_stage_name(stage.get('stage_name', ''))
+
+        # Determine status
+        status = stage.get('status', 'OK')
+        is_error = status == 'FAIL'
+        is_skipped = status == 'SKIP'
+
+        stage_snapshot = {
+            'stage_name': stage_name,
+            'stage_number': None,  # Could parse from name
+            'duration_ms': stage.get('latency_ms', 0),
+            'error': stage.get('error') if is_error else None,
+            'skipped': is_skipped,
+            'input_valid': True,
+            'output_valid': not is_error,
+            # Node/edge counts - not tracked per-stage currently
+            'nodes_before': 0,
+            'nodes_after': 0,
+            'edges_before': 0,
+            'edges_after': 0,
+            'nodes_added': 0,
+            'nodes_removed': 0,
+            'edges_added': 0,
+            'edges_removed': 0,
+            'fields_added': [],
+            'metadata_keys_added': [],
+            'sample_node_before': None,
+            'sample_node_after': None,
+        }
+        stages.append(stage_snapshot)
+
+    summary = perf_data.get('summary', {})
+
+    return {
+        'target_path': target_path,
+        'started_at': None,  # Not tracked
+        'completed_at': None,
+        'total_duration_ms': summary.get('total_latency_ms', 0),
+        'stages': stages,
+        'final_nodes': len(nodes),
+        'final_edges': len(edges),
+        'final_metadata_keys': [],
+        'stages_succeeded': summary.get('ok_count', 0),
+        'stages_failed': summary.get('fail_count', 0),
+        'stages_skipped': 0,
+    }
+
+
+def run_pipeline_analysis(target_path: str, options: Dict[str, Any] = None) -> "CodebaseState":
+    """
+    Run analysis using the new Pipeline architecture.
+
+    This is the refactored entry point that uses BaseStage classes
+    and PipelineManager for orchestration.
+
+    Args:
+        target_path: Path to codebase to analyze
+        options: Analysis options
+
+    Returns:
+        CodebaseState with all analysis results
+    """
+    from .pipeline import create_default_pipeline
+    from .data_management import CodebaseState
+
+    print("\n" + "=" * 60)
+    print("🚀 COLLIDER PIPELINE ANALYSIS")
+    print("=" * 60)
+
+    # Initialize state
+    state = CodebaseState(target_path)
+
+    # Create pipeline
+    pipeline = create_default_pipeline(options)
+
+    print(f"\n📋 Pipeline: {len(pipeline.stages)} stages")
+    for i, stage in enumerate(pipeline.stages, 1):
+        print(f"   {i}. {stage.name}")
+
+    # Execute pipeline
+    print("\n" + "-" * 40)
+    state = pipeline.run(state)
+    print("-" * 40)
+
+    print(f"\n✅ Analysis complete: {len(state.nodes)} nodes, {len(state.edges)} edges")
+
+    return state
+
+
 def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[str, Any] = None) -> Dict:
     """Run complete analysis with all theoretical frameworks."""
 
@@ -993,7 +1114,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         print("\n🔍 Stage 0: Survey (Pre-Analysis Intelligence)...")
         with StageTimer(perf_manager, "Stage 0: Survey") as timer:
             try:
-                from survey import run_survey, print_survey_report
+                from src.core.survey import run_survey, print_survey_report
                 survey_result = run_survey(str(target))
 
                 # Collect exclusion paths
@@ -1719,6 +1840,71 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             timer.set_status("WARN", str(e))
             print(f"   ⚠️ Statistical metrics skipped: {e}")
 
+    # Stage 6.7: Semantic Purpose Analysis (PURPOSE = f(edges))
+    print("\n🎯 Stage 6.7: Semantic Purpose Analysis...")
+    semantic_analysis = {'entry_points': [], 'node_context': {}, 'centrality': {}, 'role_distribution': {}}
+    with StageTimer(perf_manager, "Stage 6.7: Semantic Purpose") as timer:
+        try:
+            # Build NetworkX graph from nodes/edges
+            G = build_nx_graph(nodes, edges)
+
+            # Find entry points (main, CLI, routes, handlers)
+            entry_points = find_entry_points(G)
+            semantic_analysis['entry_points'] = entry_points
+
+            # Propagate context from entry points downstream (top-down comprehension)
+            node_context = propagate_context(G, entry_points, max_depth=15)
+            semantic_analysis['node_context'] = {
+                'reachable_count': len(node_context),
+                'max_depth': max((ctx.get('depth_from_entry', 0) for ctx in node_context.values()), default=0)
+            }
+
+            # Compute closeness centrality (Stage 6.5 already has betweenness/pagerank)
+            centrality = compute_centrality_metrics(G)
+
+            # Enrich nodes with semantic roles and context
+            role_counts = {'utility': 0, 'orchestrator': 0, 'hub': 0, 'leaf': 0}
+            for node in nodes:
+                node_id = node.get('id')
+                if not node_id:
+                    continue
+
+                # Add closeness centrality
+                if node_id in centrality:
+                    node['closeness_centrality'] = centrality[node_id].get('closeness', 0.0)
+
+                # Classify semantic role from degree metrics
+                in_deg = node.get('in_degree', 0)
+                out_deg = node.get('out_degree', 0)
+                semantic_role = classify_node_role(in_deg, out_deg)
+                node['semantic_role'] = semantic_role
+                role_counts[semantic_role] += 1
+
+                # Add context propagation data
+                if node_id in node_context:
+                    ctx = node_context[node_id]
+                    node['depth_from_entry'] = ctx.get('depth_from_entry', -1)
+                    node['reachable_from_entry'] = True
+                    if ctx.get('call_chain'):
+                        node['call_chain_length'] = len(ctx['call_chain'])
+                else:
+                    node['reachable_from_entry'] = False
+                    node['depth_from_entry'] = -1
+
+            semantic_analysis['role_distribution'] = role_counts
+
+            timer.set_output(
+                entry_points=len(entry_points),
+                reachable=len(node_context),
+                roles=sum(role_counts.values())
+            )
+            print(f"   → {len(entry_points)} entry points detected")
+            print(f"   → {len(node_context)} nodes reachable from entry")
+            print(f"   → Roles: {role_counts['utility']} utility, {role_counts['orchestrator']} orchestrator, {role_counts['hub']} hub, {role_counts['leaf']} leaf")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Semantic purpose analysis skipped: {e}")
+
     # Stage 6.8: Codome Boundary Generation
     print("\n🌐 Stage 6.8: Codome Boundary Generation...")
     codome_result = {'boundary_nodes': [], 'inferred_edges': [], 'summary': {}}
@@ -1931,6 +2117,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         'knots': knots,
         'graph_analytics': graph_analytics if 'graph_analytics' in dir() else {},
         'statistical_metrics': statistical_metrics if 'statistical_metrics' in dir() else {},
+        'semantic_analysis': semantic_analysis if 'semantic_analysis' in dir() else {},
         'data_flow': data_flow,
         'performance': perf_summary,
         'constraint_field': constraint_report if constraint_report else {},
@@ -2074,6 +2261,15 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             except Exception as e:
                 timer.set_status("FAIL", str(e))
                 print(f"   ⚠️ AI insights generation failed: {e}")
+
+    # Build pipeline snapshot for Pipeline Navigator (before output generation)
+    # This converts PerformanceManager timing to the format expected by pipeline-navigator.js
+    full_output['pipeline_snapshot'] = build_pipeline_snapshot(
+        perf_manager,
+        nodes,
+        edges,
+        str(target)
+    )
 
     # Stage 12: Write consolidated outputs
     print("\n📦 Stage 12: Generating Consolidated Outputs...")
