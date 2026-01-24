@@ -22,7 +22,9 @@ description: '### P4-01: Remove Mutation Side Effects
   | Scope | 1117 | `node[''scope_analysis''] = ...` | Copy then modify |
 
   | Control Flow | 1174, 1186-1189 | `node[''control_flow''] = ...` | '
-status: READY
+status: WONT_DO
+closure_reason: "SPEC-DRIVEN: No bug fixed. Mutations are standard pipeline pattern. DOD criterion was aspirational, not bug-driven. Working code > theoretical purity."
+closed_at: "2026-01-23"
 confidence:
   factual: 95
   alignment: 95

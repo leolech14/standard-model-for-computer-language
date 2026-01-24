@@ -4,7 +4,10 @@
 
 id: TASK-018
 title: "Implement Decision Deck Layer MVP"
-status: IN_PROGRESS
+status: WONT_DO
+closure_reason: "META-TOOLING UNUSED: Created 8 cards + deal_cards.py but never actually used them. Spec theater. Cards exist in .agent/deck/ - archive if needed later."
+closed_at: "2026-01-23"
+validated_by: "Gemini analyze.py - confirmed closure correct, suggests archiving code"
 priority: HIGH
 domain: observer
 

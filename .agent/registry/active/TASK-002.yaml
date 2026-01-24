@@ -1,6 +1,8 @@
 id: TASK-002
 title: Deep comparison with LangGraph architecture
-status: READY
+status: WONT_DO
+closure_reason: "SPEC-DRIVEN: Research theater with no product impact. LangGraph comparison is intellectual curiosity. Revisit when scaling is a real problem, not hypothetical."
+closed_at: "2026-01-23"
 description: 'Perplexity validation revealed LangGraph has production-grade
 
   state management with graph checkpoints. Could inform scaling

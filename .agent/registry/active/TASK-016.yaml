@@ -13,7 +13,10 @@ description: "Auto-trigger Precision Context Fetcher when survey detects False N
   - TASK-015 (CCI metrics must exist first)\n- precision_fetcher.py (exists)\n\n##\
   \ References\n- Precision Fetcher: context-management/tools/ai/research/precision_fetcher.py\n\
   - CCI Spec: standard-model-of-code/docs/specs/CODOME_COMPLETENESS_INDEX.md\n"
-status: BLOCKED
+status: DEFERRED
+deferral_reason: "NICE-TO-HAVE: Manual precision fetching works. Auto-integration adds complexity without proven accuracy benefit. Revisit if manual workflow becomes painful."
+deferred_at: "2026-01-23"
+validated_by: "Gemini analyze.py - approach sound but questioned if truly nice-to-have"
 blocked_by:
 - TASK-015
 confidence:

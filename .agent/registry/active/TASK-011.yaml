@@ -18,7 +18,9 @@ description: '### P4-02: Remove I/O from Processing Stages
 
 
   '
-status: READY
+status: WONT_DO
+closure_reason: "SPEC-DRIVEN: No bug fixed. print() statements aid debugging. Logging framework adds complexity without value. Keep debugging tools."
+closed_at: "2026-01-23"
 confidence:
   factual: 90
   alignment: 90

@@ -1,6 +1,8 @@
 id: TASK-065
 title: Always-Green Continuous Refinement Pipeline
-status: READY
+status: DEFERRED
+deferral_reason: "Steps 1-2 COMPLETE (HSL daemon + rate limiting). Steps 3-6 require GCP Cloud Functions setup which adds cost and complexity. Local-first approach works. Revisit when scaling demands cloud."
+deferred_at: "2026-01-23"
 priority: P0
 domain: infrastructure
 description: ''
