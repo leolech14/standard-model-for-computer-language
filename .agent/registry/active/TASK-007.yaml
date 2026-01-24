@@ -1,0 +1,106 @@
+id: TASK-007
+title: Refactor run_full_analysis()
+description: '### P3-01: Refactor run_full_analysis()
+
+
+  **Confidence:** 95% (Execute)
+
+
+  | Attribute | Value |
+
+  |-----------|-------|
+
+  | **File** | `src/core/full_analysis.py:950` |
+
+  | **Current Size** | 2087 lines |
+
+  | **Dependencies** | All P2 tasks |
+
+
+  **Evidence:**
+
+  - Entry point at line 950: `def run_full_analysis(target_path: str, output_dir:
+  str = None, options: Dict[str, Any] = None)`
+
+  - Already uses `PerformanceManager` at line 972 and `StageTimer` throughout
+
+  - `CodebaseState` already exists at `data_managemen'
+status: EXECUTING
+confidence:
+  factual: 95
+  alignment: 95
+  current: 95
+  onwards: 95
+created: '2026-01-23T14:41:07.773752+00:00'
+updated: '2026-01-23T15:42:21.819667+00:00'
+promoted_from: OPP-027
+category: PIPELINE
+runs: []
+output: {}
+sprint_id: SPRINT-002
+risk: A+
+steps:
+- id: STEP-01
+  action: Create BaseAnalysisStage (Stage 1)
+  status: DONE
+  evidence:
+    note: Created base_analysis.py
+    at: '2026-01-23T15:38:50.248787+00:00'
+- id: STEP-02
+  action: Create StandardModelStage (Stage 2)
+  status: DONE
+  evidence:
+    note: Created standard_model.py
+    at: '2026-01-23T15:38:50.300094+00:00'
+  depends_on:
+  - STEP-01
+- id: STEP-03
+  action: Create PurposeFieldStage (Stage 3)
+  status: DONE
+  evidence:
+    note: Created purpose_field.py
+    at: '2026-01-23T15:38:50.359948+00:00'
+  depends_on:
+  - STEP-02
+- id: STEP-04
+  action: Create EdgeExtractionStage (Stage 4)
+  status: DONE
+  evidence:
+    note: Created edge_extraction.py
+    at: '2026-01-23T15:40:03.342161+00:00'
+  depends_on:
+  - STEP-03
+- id: STEP-05
+  action: Create GraphAnalyticsStage (Stage 6.5)
+  status: DONE
+  evidence:
+    note: Created graph_analytics.py
+    at: '2026-01-23T15:40:03.389614+00:00'
+  depends_on:
+  - STEP-04
+- id: STEP-06
+  action: Wire stages into PipelineManager
+  status: DONE
+  evidence:
+    note: Created create_default_pipeline() factory
+    at: '2026-01-23T15:41:51.441485+00:00'
+  depends_on:
+  - STEP-05
+- id: STEP-07
+  action: Update run_full_analysis to use manager
+  status: DONE
+  evidence:
+    note: Added run_pipeline_analysis() to full_analysis.py
+    at: '2026-01-23T15:42:21.819503+00:00'
+  depends_on:
+  - STEP-06
+- id: STEP-08
+  action: Run tests to verify no regression
+  status: PENDING
+  evidence: null
+  depends_on:
+  - STEP-07
+blocked_by: []
+blocks: []
+claimed_by: claude
+claimed_at: '2026-01-23T15:34:23.466399+00:00'

@@ -80,11 +80,12 @@ steps:
 
   - id: TASK-017-S06
     title: "Commit"
-    status: IN_PROGRESS
+    status: COMPLETE
+    commit: "1ec88f6"
 
   - id: TASK-017-S07
     title: "Mark complete"
-    status: PENDING
+    status: COMPLETE
 
 steps_completed:
   - TASK-017-S01

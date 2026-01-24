@@ -1,0 +1,37 @@
+id: TASK-011
+title: Remove I/O from Processing Stages
+description: '### P4-02: Remove I/O from Processing Stages
+
+
+  **Confidence:** 90% (Almost Ready)
+
+
+  | Issue | Location | Fix |
+
+  |-------|----------|-----|
+
+  | `print()` statements | lines 975-980, etc. | Replace with `logging.info()` |
+
+  | PerformanceManager init | line 972 | Move to PipelineManager constructor |
+
+  | File I/O | OutputStage | Already isolated in Stage 12 |
+
+
+  '
+status: READY
+confidence:
+  factual: 90
+  alignment: 90
+  current: 90
+  onwards: 90
+created: '2026-01-23T14:41:07.777646+00:00'
+updated: '2026-01-23T15:17:32.614301+00:00'
+promoted_from: OPP-031
+category: PIPELINE
+runs: []
+output: {}
+sprint_id: SPRINT-002
+risk: A
+steps: []
+blocked_by: []
+blocks: []

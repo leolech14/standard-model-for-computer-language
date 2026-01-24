@@ -1,0 +1,36 @@
+# TASK-020: Fix HSL Daemon - Doppler Injection
+# Promoted from: OPP-061
+# Priority: P0 (Critical Path)
+
+id: TASK-020
+title: "Fix HSL Daemon - Doppler Injection for API Keys"
+promoted_from: OPP-061
+status: COMPLETE
+created: 2026-01-23
+started: 2026-01-23
+
+confidence:
+  factual: 98
+  alignment: 95
+  current: 98
+  onwards: 95
+  overall: 95
+
+execution_plan:
+  - step: 1
+    action: "Update com.elements.hsl-daemon.plist with Doppler injection"
+    status: PENDING
+  - step: 2
+    action: "Update com.elements.socratic-audit.plist with Doppler injection"
+    status: PENDING
+  - step: 3
+    action: "Reload LaunchAgents"
+    status: PENDING
+  - step: 4
+    action: "Verify daemons running (exit code 0)"
+    status: PENDING
+
+validation:
+  - "launchctl list | grep elements"
+  - "No exit code 1"
+  - "Logs show successful API connection"

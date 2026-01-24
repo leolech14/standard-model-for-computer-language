@@ -1,0 +1,31 @@
+id: TASK-016
+title: Integrate Precision Fetcher with Survey
+description: "Auto-trigger Precision Context Fetcher when survey detects False Negatives.\n\
+  \n## Background\nWhen CCI attribution reveals OUR_FAULT gaps (parser blind spots),\
+  \ the system\nshould automatically fetch external knowledge from Perplexity SONAR-PRO\
+  \ to\nresolve the gap.\n\n## Acceptance Criteria\n1. Add detect_false_negatives()\
+  \ to survey.py:\n   - Identify source files that returned 0 nodes\n   - Create GapProfile\
+  \ for each FN\n\n2. Add optional auto_fetch parameter to run_survey():\n   - When\
+  \ True, trigger precision fetch for each FN\n   - Store results in .agent/intelligence/external_cache/\n\
+  \n3. Add guidance_available field to SurveyResult:\n   - List of GapProfile IDs\
+  \ that have cached guidance\n\n4. CLI integration:\n   - Add --fetch-guidance flag\
+  \ to collider full command\n   - Print guidance summary when available\n\n## Dependencies\n\
+  - TASK-015 (CCI metrics must exist first)\n- precision_fetcher.py (exists)\n\n##\
+  \ References\n- Precision Fetcher: context-management/tools/ai/research/precision_fetcher.py\n\
+  - CCI Spec: standard-model-of-code/docs/specs/CODOME_COMPLETENESS_INDEX.md\n"
+status: BLOCKED
+blocked_by:
+- TASK-015
+confidence:
+  factual: 90
+  alignment: 90
+  current: 85
+  onwards: 85
+created: '2026-01-23T11:45:00.000000+00:00'
+updated: '2026-01-23T15:17:32.622067+00:00'
+category: SURVEY
+runs: []
+output: {}
+risk: A
+steps: []
+blocks: []

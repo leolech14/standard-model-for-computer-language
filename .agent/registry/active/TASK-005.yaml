@@ -14,7 +14,7 @@ confidence:
   current: 97
   onwards: 97
 created: '2026-01-23T14:41:07.771715+00:00'
-updated: '2026-01-23T15:17:32.605314+00:00'
+updated: '2026-01-23T15:31:34.576930+00:00'
 promoted_from: OPP-025
 category: PIPELINE
 runs: []
@@ -23,3 +23,4 @@ risk: A+
 steps: []
 blocked_by: []
 blocks: []
+sprint_id: SPRINT-002

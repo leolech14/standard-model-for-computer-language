@@ -1,0 +1,140 @@
+# TASK-019: Implement Gemini Context Caching for FLASH_DEEP Tier
+# Promoted from: OPP-058
+# Sprint: SPRINT-003 (Context Refinery Foundation)
+# Confidence: 90% → STEPS MAPPED
+
+id: TASK-019
+title: "Implement Gemini Context Caching for FLASH_DEEP Tier"
+status: COMPLETE
+sprint: SPRINT-003
+promoted_from: OPP-058
+
+description: |
+  Upgrade ACI FLASH_DEEP tier to use Gemini's explicit context caching.
+  Transform "expensive per question" into "expensive per snapshot, cheap thereafter."
+
+created_at: "2026-01-23T16:15:00Z"
+updated_at: "2026-01-23T16:15:00Z"
+
+confidence:
+  factual: 0.95
+  alignment: 1.00
+  current: 0.90
+  onwards: 1.00
+  overall: 0.90
+
+# STEPS: Individual actions mapped at 85%+ confidence
+steps:
+  - id: STEP-001
+    action: "Add cache registry module"
+    file: "context-management/tools/ai/aci/cache_registry.py"
+    description: |
+      Create new module to track cached contexts:
+      - cache_key (commit SHA + workspace dirty hash)
+      - cache_name (from Gemini API)
+      - ttl (expiration time)
+      - model (which model the cache is for)
+    status: PENDING
+    confidence: 0.95
+
+  - id: STEP-002
+    action: "Add dynamic token limits"
+    file: "context-management/tools/ai/aci/tier_router.py"
+    description: |
+      Replace hardcoded MAX_FLASH_DEEP_TOKENS with:
+      model_info = client.models.get(model=model_name)
+      limit = model_info.input_token_limit
+    status: PENDING
+    confidence: 0.95
+
+  - id: STEP-003
+    action: "Add count_tokens before send"
+    file: "context-management/tools/ai/analyze.py"
+    description: |
+      Before sending to Gemini, validate context size with count_tokens().
+      If over limit, escalate or truncate.
+    status: PENDING
+    confidence: 0.90
+
+  - id: STEP-004
+    action: "Implement RepoPack v1 format"
+    file: "context-management/tools/ai/aci/repopack.py"
+    description: |
+      Create new module for deterministic context formatting:
+      1. REPO_ID (commit SHA, branch, timestamp)
+      2. FILE_TREE (depth-limited)
+      3. SUBSYSTEMS (ACI sets)
+      4. PUBLIC_API_INDEX
+      5. COLLIDER_FACTS
+      6. DOCS/SPECS
+      7. RAW_CODE (hot files only)
+      8. QUESTION (last)
+    status: PENDING
+    confidence: 0.85
+
+  - id: STEP-005
+    action: "Implement cache creation"
+    file: "context-management/tools/ai/analyze.py"
+    description: |
+      Add caching logic to FLASH_DEEP tier using client.caches.create()
+    status: PENDING
+    confidence: 0.90
+
+  - id: STEP-006
+    action: "Implement cache lookup/reuse"
+    file: "context-management/tools/ai/analyze.py"
+    description: |
+      Before creating new cache, check registry.
+      If valid cache exists, use cached_content=cache.name
+    status: PENDING
+    confidence: 0.90
+
+  - id: STEP-007
+    action: "Add evidence protocol"
+    file: "context-management/config/aci_config.yaml"
+    description: |
+      Add system instruction requiring file-path citations.
+    status: PENDING
+    confidence: 0.95
+
+  - id: STEP-008
+    action: "Update model references"
+    file: "context-management/tools/ai/analyze.py"
+    description: |
+      Migrate from deprecated gemini-2.0-flash (shuts down March 31, 2026)
+      to gemini-3-flash-preview or gemini-2.5-pro.
+    status: PENDING
+    confidence: 0.85
+
+  - id: STEP-009
+    action: "Add tests"
+    file: "context-management/tests/test_aci_caching.py"
+    description: |
+      Test cases for cache creation, lookup, token counting, RepoPack format.
+    status: PENDING
+    confidence: 0.90
+
+evidence:
+  blueprint: "standard-model-of-code/docs/research/gemini/docs/20260123_gemini_long_context_blueprint.md"
+  loop_validation: "Perplexity validated (2026-01-23)"
+
+execution_order:
+  - phase: 1
+    steps: [STEP-001, STEP-002, STEP-003]
+    rationale: "Foundation - registry and limits"
+  - phase: 2
+    steps: [STEP-004, STEP-007]
+    rationale: "Format and evidence protocol"
+  - phase: 3
+    steps: [STEP-005, STEP-006]
+    rationale: "Core caching implementation"
+  - phase: 4
+    steps: [STEP-008, STEP-009]
+    rationale: "Migration and testing"
+
+tags:
+  - aci
+  - gemini
+  - caching
+  - flash-deep
+  - context-management

@@ -1,6 +1,6 @@
 id: TASK-061
 title: Fix HSL Daemon Locally
-status: READY
+status: COMPLETE
 priority: P0
 domain: infrastructure
 description: ''

@@ -1,6 +1,6 @@
 id: TASK-066
 title: Handle Gemini API Rate Limiting (429)
-status: READY
+status: COMPLETE
 priority: P1
 domain: infrastructure
 description: ''
