@@ -30,14 +30,14 @@ def main():
         help="Analyze a repository and emit the canonical output bundle",
         description="Runs the canonical full analysis and produces both LLM-oriented JSON and human-readable HTML."
     )
-    
+
     # Positional path argument
     analyze_parser.add_argument(
         "path",
         nargs="?",
         help="Path to the repository or directory to analyze"
     )
-    
+
     # Flags
     analyze_parser.add_argument(
         "--output",
@@ -59,8 +59,8 @@ def main():
     )
     analyze_parser.set_defaults(open_latest=None)
     analyze_parser.add_argument(
-        "--language", 
-        default=None, 
+        "--language",
+        default=None,
         help="Force specific language analysis"
     )
     analyze_parser.add_argument(
@@ -111,7 +111,32 @@ def main():
         help="Run comprehensive system health checks (Newman Layer)",
         description="Validates integrity of static analysis, graph generation, and LLM connectivity."
     )
-    
+
+    # ==========================================
+    # GRADE Command - Codebase Health Score
+    # ==========================================
+    grade_parser = subparsers.add_parser(
+        "grade",
+        help="Get codebase health grade (A-F) based on topology and complexity",
+        description="Analyzes codebase structure and returns a health score (0-10) with letter grade."
+    )
+    grade_parser.add_argument(
+        "path",
+        nargs="?",
+        default=".",
+        help="Path to the repository to analyze (default: current directory)"
+    )
+    grade_parser.add_argument(
+        "--verbose", "-v",
+        action="store_true",
+        help="Show component scores breakdown"
+    )
+    grade_parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output results as JSON"
+    )
+
     # ==========================================
     # AUDIT Command
     # ==========================================
@@ -343,6 +368,85 @@ def main():
     )
 
     # ==========================================
+    # PROVE Command - Self-Proving Validation (Phase 4)
+    # ==========================================
+    prove_parser = subparsers.add_parser(
+        "prove",
+        help="Run self-proof validation (pass/fail + diagnostics)",
+        description="Single command that validates codebase graph integrity and returns pass/fail status."
+    )
+    prove_parser.add_argument(
+        "path",
+        nargs="?",
+        default=".",
+        help="Path to the repository to validate (default: current directory)"
+    )
+    prove_parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.80,
+        help="Minimum proof_score to pass (default: 0.80 = 80%%)"
+    )
+    prove_parser.add_argument(
+        "--include-tests",
+        action="store_true",
+        help="Include test functions as entrypoints"
+    )
+    prove_parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output results as JSON"
+    )
+    prove_parser.add_argument(
+        "--verbose", "-v",
+        action="store_true",
+        help="Show detailed diagnostics including witness paths"
+    )
+
+    # ==========================================
+    # CHARTS Command - Scientific Data Visualization
+    # ==========================================
+    charts_parser = subparsers.add_parser(
+        "charts",
+        help="Generate scientific charts from analysis data",
+        description="Publication-quality data visualization for code metrics."
+    )
+    charts_parser.add_argument(
+        "analysis_path",
+        nargs="?",
+        default=None,
+        help="Path to unified_analysis.json (default: .collider/unified_analysis.json)"
+    )
+    charts_parser.add_argument(
+        "--output", "-o",
+        default="charts",
+        help="Output directory for charts (default: charts/)"
+    )
+    charts_parser.add_argument(
+        "--style", "-s",
+        choices=["publication", "dark", "minimal", "poster"],
+        default="publication",
+        help="Chart style (default: publication)"
+    )
+    charts_parser.add_argument(
+        "--format", "-f",
+        action="append",
+        dest="formats",
+        choices=["png", "pdf", "svg"],
+        help="Output format (can repeat, default: png pdf)"
+    )
+    charts_parser.add_argument(
+        "--html",
+        action="store_true",
+        help="Generate interactive HTML viewer"
+    )
+    charts_parser.add_argument(
+        "--open",
+        action="store_true",
+        help="Open HTML viewer in browser after generation"
+    )
+
+    # ==========================================
     # SYMMETRY Command - Wave-Particle Symmetry Analysis
     # ==========================================
     symmetry_parser = subparsers.add_parser(
@@ -381,7 +485,7 @@ def main():
 
     # Parse
     args = parser.parse_args()
-    
+
     if args.command == "discover":
         from src.core.discovery_engine import DiscoveryEngine
         # Path already imported globally at top of file
@@ -426,10 +530,257 @@ def main():
             compare_results(result, args.compare)
         sys.exit(0 if result.overall_status == "PASS" else 1)
 
+    elif args.command == "prove":
+        from src.core.validation.self_proof import SelfProofValidator
+        import json
+
+        target_path = Path(args.path).resolve()
+        if not target_path.exists():
+            print(f"Error: Path not found: {target_path}")
+            sys.exit(1)
+
+        print(f"Self-Proof Validation")
+        print(f"   Target: {target_path}")
+        print(f"   Threshold: {args.threshold:.0%}")
+        if args.include_tests:
+            print(f"   Including tests: Yes")
+        print()
+
+        validator = SelfProofValidator(
+            target_path,
+            include_tests=getattr(args, 'include_tests', False)
+        )
+        result = validator.prove(threshold=args.threshold)
+
+        if getattr(args, 'json', False):
+            # JSON output
+            output = {
+                "passed": result.passed,
+                "proof_score": result.proof_score,
+                "registry_accuracy": result.registry_accuracy,
+                "connection_coverage": result.connection_coverage,
+                "edge_accuracy": result.edge_accuracy,
+                "reachability": result.reachability,
+                "phantoms": result.phantoms,
+                "determinism_hash": result.determinism_hash,
+                "failure_reasons": result.failure_reasons,
+                "filesystem_components": result.filesystem_components,
+                "registry_components": result.registry_components,
+                "entrypoints_count": len(result.entrypoints),
+                "unreachable_count": len(result.unreachable),
+            }
+            if args.verbose:
+                output["entrypoints"] = result.entrypoints[:20]
+                output["unreachable"] = result.unreachable[:20]
+                output["witness_paths_sample"] = dict(list(result.witness_paths.items())[:5])
+            print(json.dumps(output, indent=2))
+        else:
+            # Human-readable output
+            status_icon = "PASS" if result.passed else "FAIL"
+            print(f"   Result: {status_icon}")
+            print()
+            print(f"   Metrics:")
+            print(f"      proof_score:        {result.proof_score:.1%}")
+            print(f"      registry_accuracy:  {result.registry_accuracy:.1%}")
+            print(f"      connection_coverage:{result.connection_coverage:.1%}")
+            print(f"      edge_accuracy:      {result.edge_accuracy:.1%}")
+            print(f"      reachability:       {result.reachability:.1%}")
+            print()
+            print(f"   Counts:")
+            print(f"      atomic nodes:       {result.registry_components}")
+            print(f"      entrypoints:        {len(result.entrypoints)}")
+            print(f"      unreachable:        {len(result.unreachable)}")
+            print(f"      phantoms:           {result.phantoms}")
+            print()
+            print(f"   Determinism hash: {result.determinism_hash}")
+
+            if result.failure_reasons:
+                print()
+                print(f"   Failure reasons:")
+                for reason in result.failure_reasons:
+                    print(f"      - {reason}")
+
+            if args.verbose:
+                print()
+                print(f"   Entrypoints (first 10):")
+                for ep in sorted(result.entrypoints)[:10]:
+                    print(f"      - {ep}")
+
+                if result.unreachable:
+                    print()
+                    print(f"   Unreachable (first 10):")
+                    for ur in sorted(result.unreachable)[:10]:
+                        print(f"      - {ur}")
+
+                if result.witness_paths:
+                    print()
+                    print(f"   Witness paths (sample):")
+                    for node_id, path in list(result.witness_paths.items())[:3]:
+                        print(f"      {node_id}:")
+                        print(f"         via: {' -> '.join(path[:5])}")
+                        if len(path) > 5:
+                            print(f"         ... ({len(path)} total hops)")
+
+        sys.exit(0 if result.passed else 1)
+
+    elif args.command == "charts":
+        from src.core.scientific_charts import generate_charts
+
+        # Find analysis file
+        analysis_path = args.analysis_path
+        if not analysis_path:
+            # Try common locations
+            for candidate in ['.collider/unified_analysis.json', 'unified_analysis.json',
+                              'output/unified_analysis.json']:
+                if Path(candidate).exists():
+                    analysis_path = candidate
+                    break
+
+        if not analysis_path or not Path(analysis_path).exists():
+            print(f"Error: Analysis file not found. Run 'collider full' first or specify path.")
+            print("Usage: collider charts <analysis.json> --output charts/")
+            sys.exit(1)
+
+        formats = args.formats or ['png', 'pdf']
+        output_dir = args.output
+
+        try:
+            generated = generate_charts(
+                analysis_path=analysis_path,
+                output_dir=output_dir,
+                style=args.style,
+                formats=formats
+            )
+            print(f"\nGenerated {len(generated)} chart files in {output_dir}/")
+
+            # Generate HTML viewer if requested
+            if getattr(args, 'html', False) or getattr(args, 'open', False):
+                from src.core.chart_viewer import generate_chart_viewer
+                html_path = str(Path(output_dir) / 'charts_report.html')
+                generate_chart_viewer([output_dir], html_path)
+                print(f"Generated HTML viewer: {html_path}")
+
+                if getattr(args, 'open', False):
+                    import subprocess
+                    subprocess.run(['open', html_path], check=False)
+                    print("Opened in browser")
+
+            sys.exit(0)
+        except Exception as e:
+            print(f"Error generating charts: {e}")
+            import traceback
+            traceback.print_exc()
+            sys.exit(1)
+
     elif args.command == "health":
         from src.core.newman_runner import run_health_check
         sys.exit(run_health_check(exit_on_fail=True))
-    
+
+    elif args.command == "grade":
+        from src.core.full_analysis import run_full_analysis
+        from src.core.topology_reasoning import (
+            LandscapeProfile,
+            LandscapeHealthIndex,
+            TopologyClassifier,
+            ElevationModel,
+            compute_gradient
+        )
+        import json as json_module
+
+        target_path = Path(args.path).resolve()
+        if not target_path.exists():
+            print(f"Error: Path not found: {target_path}")
+            sys.exit(1)
+
+        # Run analysis (silent mode - minimal output)
+        temp_output = tempfile.mkdtemp(prefix="collider_grade_")
+        try:
+            result = run_full_analysis(str(target_path), temp_output, options={"open_latest": False})
+        except Exception as e:
+            print(f"Error: Analysis failed: {e}")
+            sys.exit(1)
+
+        # Extract nodes and edges from result
+        nodes = result.get("nodes", [])
+        edges = result.get("edges", [])
+
+        if not nodes:
+            print("Error: No nodes found in analysis")
+            sys.exit(1)
+
+        # Compute topology (Betti numbers)
+        classifier = TopologyClassifier()
+        betti = classifier.compute_betti_numbers(nodes, edges)
+
+        # Compute elevations
+        elevation_model = ElevationModel()
+        elevation_map = elevation_model.compute_elevation_map(nodes, edges)
+        elevations = {nid: er.elevation for nid, er in elevation_map.items()}
+
+        # Compute gradients
+        gradients = []
+        for edge in edges:
+            src = edge.get('source', '')
+            tgt = edge.get('target', '')
+            if src in elevations and tgt in elevations:
+                gradients.append(compute_gradient(elevations[src], elevations[tgt]))
+
+        # Extract alignment data (Q_purity from D6_pure_score, weighted by confidence + pagerank)
+        alignment_data = {}
+        for node in nodes:
+            node_id = node.get('id', '')
+            if not node_id:
+                continue
+
+            # Use D6_pure_score as Q_purity (already [0,1])
+            purity = node.get('D6_pure_score')
+            if purity is None:
+                continue  # Skip nodes without purity data
+
+            alignment_data[node_id] = {
+                'purity': purity,
+                'confidence': node.get('confidence', 0.5),
+                'pagerank': node.get('pagerank', 0.0)
+            }
+
+        # Build profile and compute health
+        profile = LandscapeProfile(
+            b0=betti.b0,
+            b1=betti.b1,
+            elevations=elevations,
+            gradients=gradients,
+            alignment_data=alignment_data
+        )
+
+        lhi = LandscapeHealthIndex()
+        health = lhi.compute(profile)
+
+        # Output
+        if getattr(args, 'json', False):
+            output = {
+                "path": str(target_path),
+                "nodes": len(nodes),
+                "edges": len(edges),
+                "nodes_with_alignment": len(alignment_data),
+                "health_index": health['index'],
+                "grade": health['grade'],
+                "formula": "H = 0.25*T + 0.25*E + 0.25*Gd + 0.25*A",
+                "betti": {"b0": betti.b0, "b1": betti.b1},
+                "component_scores": health['component_scores']
+            }
+            print(json_module.dumps(output, indent=2))
+        else:
+            print(f"Health: {health['index']:.1f}/10 ({health['grade']})")
+            if getattr(args, 'verbose', False):
+                print(f"\n   Path: {target_path}")
+                print(f"   Nodes: {len(nodes)}, Edges: {len(edges)}")
+                print(f"   Nodes with alignment data: {len(alignment_data)}")
+                print(f"   Topology: b0={betti.b0} (components), b1={betti.b1} (cycles)")
+                print(f"\n   Component Scores (H = T + E + Gd + A):")
+                for component, score in health['component_scores'].items():
+                    print(f"      {component}: {score:.1f}/10")
+
+        sys.exit(0)
 
     elif args.command == "audit":
         from src.core.audit_runner import run_full_audit
@@ -568,21 +919,21 @@ def main():
         if nodes:
             print("   atom_family counts:", dict(atom_family_counts))
             print("   tier counts:", dict(tier_counts))
-    
+
     elif args.command == "graph":
         from src.core.graph_analyzer import analyze_full, generate_report, load_graph, shortest_path
-        
+
         if not args.graph_path:
             print("❌ Error: graph.json path required")
             sys.exit(1)
-        
+
         graph_path = Path(args.graph_path)
         if not graph_path.exists():
             print(f"❌ Error: Graph file not found: {args.graph_path}")
             sys.exit(1)
-        
+
         print(f"🔬 Analyzing graph: {args.graph_path}")
-        
+
         if args.shortest_path:
             # Handle shortest path query
             parts = args.shortest_path.split(":")
@@ -629,9 +980,9 @@ def main():
 
     elif args.command == "fix":
         from src.core.fix_generator import FixGenerator
-        
+
         generator = FixGenerator("python") # Default to python for now
-        
+
         # Context building
         context = {
             "entity": args.entity.lower(),
@@ -641,9 +992,9 @@ def main():
             "class": args.entity,
             "Class": args.entity.capitalize()
         }
-        
+
         template = generator.generate_fix(args.schema, context)
-        
+
         if template:
             if args.output:
                 out_path = Path(args.output)
@@ -656,7 +1007,7 @@ def main():
         else:
             print(f"❌ Could not generate fix for schema: {args.schema}")
             sys.exit(1)
-    
+
     elif args.command == "symmetry":
         from src.core.symmetry_reporter import run_symmetry_analysis
 
