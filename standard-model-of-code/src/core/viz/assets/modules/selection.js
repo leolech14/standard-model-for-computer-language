@@ -145,48 +145,6 @@ const SELECT = (function () {
     }
 
     // =========================================================================
-    // OKLCH COLOR UTILITIES
-    // =========================================================================
-
-    function _oklchToHex(L, C, H) {
-        const hRad = H * Math.PI / 180;
-        const a = C * Math.cos(hRad);
-        const b = C * Math.sin(hRad);
-
-        const l_ = L / 100 + 0.3963377774 * a + 0.2158037573 * b;
-        const m_ = L / 100 - 0.1055613458 * a - 0.0638541728 * b;
-        const s_ = L / 100 - 0.0894841775 * a - 1.2914855480 * b;
-
-        const l = l_ * l_ * l_;
-        const m = m_ * m_ * m_;
-        const s = s_ * s_ * s_;
-
-        let rLin = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
-        let gLin = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
-        let bLin = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
-
-        const gamma = x => x <= 0 ? 0 : x >= 1 ? 1 : x < 0.0031308 ? 12.92 * x : 1.055 * Math.pow(x, 1 / 2.4) - 0.055;
-
-        let rOut = Math.round(gamma(rLin) * 255);
-        let gOut = Math.round(gamma(gLin) * 255);
-        let bOut = Math.round(gamma(bLin) * 255);
-
-        rOut = Math.max(0, Math.min(255, rOut));
-        gOut = Math.max(0, Math.min(255, gOut));
-        bOut = Math.max(0, Math.min(255, bOut));
-
-        return '#' + [rOut, gOut, bOut].map(x => x.toString(16).padStart(2, '0')).join('');
-    }
-
-    function _dimColor(hexColor, factor = 0.2) {
-        const hex = hexColor.replace('#', '');
-        const r = Math.round(parseInt(hex.substr(0, 2), 16) * (1 - factor));
-        const g = Math.round(parseInt(hex.substr(2, 2), 16) * (1 - factor));
-        const b = Math.round(parseInt(hex.substr(4, 2), 16) * (1 - factor));
-        return '#' + [r, g, b].map(x => Math.max(0, Math.min(255, x)).toString(16).padStart(2, '0')).join('');
-    }
-
-    // =========================================================================
     // PENDULUM ANIMATION
     // =========================================================================
 
@@ -225,7 +183,7 @@ const SELECT = (function () {
         const C = Math.max(0.18, p2.center + Math.sin(p2.angle + phaseOffset * Math.PI * 2) * p2.amplitude);
         const L = p3.center + Math.sin(p3.phase + phaseOffset * Math.PI * 4) * p3.amplitude;
 
-        return _oklchToHex(L, C, H);
+        return COLOR.toHex({ l: L / 100, c: C, h: H });
     }
 
     function _getNodeSpatialPhase(node) {
@@ -323,7 +281,7 @@ const SELECT = (function () {
                 } else {
                     const orig = _originalColorsForDim.get(node.id);
                     if (orig) {
-                        node.color = _dimColor(orig.color, 0.4); // Less aggressive dimming (was 0.5)
+                        node.color = COLOR.interpolate(orig.color, '#000000', 0.4); // Less aggressive dimming (was 0.5)
                         node.val = orig.val * 0.7;
                     }
                 }
