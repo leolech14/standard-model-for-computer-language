@@ -8,7 +8,7 @@
 
 ## Pipeline Overview
 
-The Collider analysis pipeline processes codebases through **27 stages** organized into **5 phases**:
+The Collider analysis pipeline processes codebases through **28 stages** organized into **5 phases**:
 
 ```
 PHASE 1: EXTRACTION (Stages 0-2)
@@ -240,6 +240,18 @@ PHASE 5: OUTPUT (Stages 9-12)
 
 ---
 
+### Stage 6.7: Semantic Purpose Analysis
+| Attribute | Value |
+|-----------|-------|
+| **File** | `graph_framework.py`, `graph_metrics.py`, `intent_extractor.py` |
+| **Input** | `nodes[]`, `edges[]` |
+| **Output** | `nodes[]` with `semantic_role`, `intent_profile`, centrality metrics |
+| **Functions** | `build_nx_graph()`, `classify_node_role()`, `build_node_intent_profile()` |
+
+**Purpose:** Implement PURPOSE = f(edges) - determine code purpose through relationships, not content. Classifies nodes as utility/orchestrator/hub/leaf based on degree patterns. Extracts intent from docstrings and git commit history.
+
+---
+
 ### Stage 6.8: Codome Boundaries
 | Attribute | Value |
 |-----------|-------|
@@ -423,6 +435,7 @@ Stage 12 ◄──────────────────────�
 | 6 | `KnotDetectionStage` | IMPLEMENTED |
 | 6.5 | `GraphAnalyticsStage` | IMPLEMENTED |
 | 6.6 | `StatisticalMetricsStage` | IMPLEMENTED |
+| 6.7 | `SemanticPurposeStage` | IMPLEMENTED |
 | 6.8 | `CodomeBoundaryStage` | IMPLEMENTED |
 | 7 | `DataFlowMacroStage` | IMPLEMENTED |
 | 8 | `PerformancePredictionStage` | IMPLEMENTED |

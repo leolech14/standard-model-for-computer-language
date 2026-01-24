@@ -9,7 +9,7 @@
 | Purpose | Find basic constituents of computer programs |
 | Atoms | 3,616 total (see breakdown below) |
 | Roles | 33 canonical, 29 implemented |
-| Pipeline | 27 stages (5 phases) |
+| Pipeline | 28 stages (5 phases) |
 | **Node Count** | 1,179 core / 1,961 full (see `docs/specs/NODE_COUNT_GROUND_TRUTH.md`) |
 | Body Coverage | ~36% nodes have `body_source` |
 
