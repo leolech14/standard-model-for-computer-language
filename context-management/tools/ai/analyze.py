@@ -2505,65 +2505,100 @@ Examples:
 
         # TIER 4: FLASH_DEEP - Gemini 2.0 Flash with 2M context
         if decision.tier == Tier.FLASH_DEEP:
-            print("[FLASH_DEEP] 2M context tier selected - loading comprehensive context...", file=sys.stderr)
+            print("[FLASH_DEEP] 2M context tier selected - checking for cached context...", file=sys.stderr)
             flash_start = time.time()
 
             try:
-                # Load ALL sets for comprehensive analysis
-                comprehensive_sets = decision.primary_sets or [
-                    "pipeline", "theory", "architecture_review",
-                    "agent_full", "visualization", "classifiers"
-                ]
+                # STEP 1: Try to get or create a cache for this repo state
+                cache_name = get_or_create_cache(str(PROJECT_ROOT), FAST_MODEL)
 
-                # Collect all files from all sets
-                all_files = []
-                all_patterns = []
-                for set_name in comprehensive_sets:
-                    set_def = analysis_sets.get(set_name, {})
-                    all_patterns.extend(set_def.get('patterns', []))
-                    for cf in set_def.get('critical_files', []):
-                        full_path = PROJECT_ROOT / cf
-                        if full_path.exists():
-                            all_files.append(str(full_path))
-                    # Handle includes
-                    for inc in set_def.get('includes', []):
-                        inc_def = analysis_sets.get(inc, {})
-                        all_patterns.extend(inc_def.get('patterns', []))
+                # Create Flash client
+                flash_client, _ = create_client()
+                from google.genai import types
 
-                # Resolve glob patterns
-                all_patterns = list(set(all_patterns))  # dedupe
-                for pattern in all_patterns:
-                    full_pattern = str(PROJECT_ROOT / pattern)
-                    import glob as glob_module
-                    matches = glob_module.glob(full_pattern, recursive=True)
-                    all_files.extend([m for m in matches if Path(m).is_file()])
+                # STEP 2: Use cached context if available, otherwise fall back to full context
+                if cache_name:
+                    print(f"[FLASH_DEEP] Using cached context: {cache_name}", file=sys.stderr)
 
-                all_files = list(set(all_files))  # dedupe
-                print(f"[FLASH_DEEP] Loading {len(all_files)} files from {len(comprehensive_sets)} sets", file=sys.stderr)
+                    # Build query only (context comes from cache)
+                    flash_prompt = f"""User query for comprehensive codebase analysis:
 
-                # Build massive context
-                context_parts = []
-                total_chars = 0
-                max_chars = MAX_FLASH_DEEP_TOKENS * 4  # ~4 chars per token
+{args.prompt}
 
-                for fpath in sorted(all_files):
-                    if total_chars >= max_chars:
-                        break
-                    try:
-                        content = read_file_content(fpath)
-                        rel_path = Path(fpath).relative_to(PROJECT_ROOT)
-                        file_block = f"\n{'='*60}\nFILE: {rel_path}\n{'='*60}\n{content}\n"
-                        context_parts.append(file_block)
-                        total_chars += len(file_block)
-                    except Exception:
-                        pass
+Please provide a thorough, comprehensive answer based on the full project context available."""
 
-                context = "\n".join(context_parts)
-                estimated_tokens = len(context) // 4
-                print(f"[FLASH_DEEP] Context: {estimated_tokens:,} tokens (~{len(context):,} chars)", file=sys.stderr)
+                    def make_cached_request():
+                        return flash_client.models.generate_content(
+                            model=FAST_MODEL,
+                            contents=flash_prompt,
+                            config=types.GenerateContentConfig(
+                                cached_content=cache_name,
+                                temperature=0.7,
+                                max_output_tokens=8192  # Allow longer responses for comprehensive queries
+                            )
+                        )
 
-                # Build prompt
-                flash_prompt = f"""You are analyzing a comprehensive snapshot of the Standard Model of Code project.
+                    response = retry_with_backoff(make_cached_request)
+                    is_cached = True
+                    estimated_tokens = 0  # Cache size tracking will be in cache registry
+                else:
+                    print("[FLASH_DEEP] Cache unavailable, building full context...", file=sys.stderr)
+
+                    # Load ALL sets for comprehensive analysis
+                    comprehensive_sets = decision.primary_sets or [
+                        "pipeline", "theory", "architecture_review",
+                        "agent_full", "visualization", "classifiers"
+                    ]
+
+                    # Collect all files from all sets
+                    all_files = []
+                    all_patterns = []
+                    for set_name in comprehensive_sets:
+                        set_def = analysis_sets.get(set_name, {})
+                        all_patterns.extend(set_def.get('patterns', []))
+                        for cf in set_def.get('critical_files', []):
+                            full_path = PROJECT_ROOT / cf
+                            if full_path.exists():
+                                all_files.append(str(full_path))
+                        # Handle includes
+                        for inc in set_def.get('includes', []):
+                            inc_def = analysis_sets.get(inc, {})
+                            all_patterns.extend(inc_def.get('patterns', []))
+
+                    # Resolve glob patterns
+                    all_patterns = list(set(all_patterns))  # dedupe
+                    for pattern in all_patterns:
+                        full_pattern = str(PROJECT_ROOT / pattern)
+                        import glob as glob_module
+                        matches = glob_module.glob(full_pattern, recursive=True)
+                        all_files.extend([m for m in matches if Path(m).is_file()])
+
+                    all_files = list(set(all_files))  # dedupe
+                    print(f"[FLASH_DEEP] Loading {len(all_files)} files from {len(comprehensive_sets)} sets", file=sys.stderr)
+
+                    # Build massive context
+                    context_parts = []
+                    total_chars = 0
+                    max_chars = MAX_FLASH_DEEP_TOKENS * 4  # ~4 chars per token
+
+                    for fpath in sorted(all_files):
+                        if total_chars >= max_chars:
+                            break
+                        try:
+                            content = read_file_content(fpath)
+                            rel_path = Path(fpath).relative_to(PROJECT_ROOT)
+                            file_block = f"\n{'='*60}\nFILE: {rel_path}\n{'='*60}\n{content}\n"
+                            context_parts.append(file_block)
+                            total_chars += len(file_block)
+                        except Exception:
+                            pass
+
+                    context = "\n".join(context_parts)
+                    estimated_tokens = len(context) // 4
+                    print(f"[FLASH_DEEP] Context: {estimated_tokens:,} tokens (~{len(context):,} chars)", file=sys.stderr)
+
+                    # Build prompt with full context
+                    flash_prompt = f"""You are analyzing a comprehensive snapshot of the Standard Model of Code project.
 You have access to {len(all_files)} files totaling ~{estimated_tokens:,} tokens.
 
 COMPREHENSIVE CODEBASE CONTEXT:
@@ -2575,29 +2610,28 @@ USER QUERY:
 
 Please provide a thorough, comprehensive answer using the full context available."""
 
-                # Create Flash client and execute
-                print(f"[FLASH_DEEP] Executing with {FAST_MODEL}...", file=sys.stderr)
-                flash_client, _ = create_client()
-
-                from google.genai import types
-                def make_request():
-                    return flash_client.models.generate_content(
-                        model=FAST_MODEL,
-                        contents=flash_prompt,
-                        config=types.GenerateContentConfig(
-                            temperature=0.7,
-                            max_output_tokens=8192  # Allow longer responses for comprehensive queries
+                    def make_request():
+                        return flash_client.models.generate_content(
+                            model=FAST_MODEL,
+                            contents=flash_prompt,
+                            config=types.GenerateContentConfig(
+                                temperature=0.7,
+                                max_output_tokens=8192  # Allow longer responses for comprehensive queries
+                            )
                         )
-                    )
 
-                response = retry_with_backoff(make_request)
+                    response = retry_with_backoff(make_request)
+                    is_cached = False
 
                 flash_result = response.text
                 duration_ms = int((time.time() - flash_start) * 1000)
 
                 # Display results
                 print("\n" + "=" * 60)
-                print(f"FLASH_DEEP ANALYSIS ({FAST_MODEL}, {estimated_tokens:,} tokens context)")
+                cache_note = " (cached)" if is_cached else ""
+                print(f"FLASH_DEEP ANALYSIS ({FAST_MODEL}){cache_note}")
+                if estimated_tokens > 0:
+                    print(f"Context: {estimated_tokens:,} tokens")
                 print("=" * 60)
                 print(flash_result)
 
