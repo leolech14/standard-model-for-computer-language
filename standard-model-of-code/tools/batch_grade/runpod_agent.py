@@ -90,6 +90,9 @@ cd standard-model-of-code
 # Install dependencies - use pip install -e for collider with all deps
 pip install -q -e . pyyaml
 
+# Install tmate for web-accessible session sharing (optional)
+apt-get update -qq && apt-get install -y -qq tmate > /dev/null 2>&1 || true
+
 echo "=== SETUP COMPLETE ==="
 '''
 
@@ -99,7 +102,10 @@ set -e
 # Navigate to actual collider location
 cd /workspace/collider/standard-model-of-code
 echo "=== STARTING BATCH GRADE ==="
-python tools/batch_grade/run_batch_local.py --workers {workers} --timeout {timeout} {limit_arg}
+
+# Run with unbuffered output for real-time streaming
+PYTHONUNBUFFERED=1 python -u tools/batch_grade/run_batch_local.py --workers {workers} --timeout {timeout} {limit_arg} 2>&1 | tee /workspace/batch_grade.log
+
 echo "=== BATCH GRADE COMPLETE ==="
 
 # Signal completion
