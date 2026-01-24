@@ -16,13 +16,13 @@ tiers:
   rag:
     description: "Use File Search for targeted lookups"
     max_response_time_ms: 5000
-    preferred_model: "gemini-3-pro-preview"
+    preferred_model: "gemini-2.0-flash-001"
     fallback_to: "long_context"
 
   long_context:
     description: "Use full context sets for reasoning"
     max_response_time_ms: 60000
-    preferred_model: "gemini-3-pro-preview"
+    preferred_model: "gemini-2.0-flash-001"
     max_tokens: 200000
 
   perplexity:
@@ -67,7 +67,7 @@ intent_keywords:
     - "highest priority"
     - "blocked by"
     - "unblock"
-
+  
 # =============================================================================
 # AGENT CONTEXT INJECTION
 # =============================================================================
@@ -167,6 +167,25 @@ feedback:
   high_avg_tokens: 150000
 
 # =============================================================================
+# EVIDENCE PROTOCOL
+# Require citations in AI responses for code references
+# =============================================================================
+evidence_protocol:
+  enabled: true
+  requirement: |
+    IMPORTANT: When referencing code or files, always provide:
+    1. File path (e.g., src/core/pipeline.py)
+    2. Line numbers when citing specific code (e.g., lines 45-52)
+    3. Function/class names when relevant
+
+    Format: `file_path:line_number` or `file_path:function_name`
+    Example: "The validation logic in src/core/validator.py:validate_input (lines 23-45)"
+
+  system_prompt_suffix: |
+    You MUST cite file paths and line numbers when referencing code.
+    Use format: file_path:line_number or file_path:function_name
+
+# =============================================================================
 # ROUTING OVERRIDES
 # Force specific tiers for certain patterns
 # =============================================================================
@@ -209,3 +228,15 @@ set_mappings:
   research:
     - "research_core"
     - "research_full"
+
+# =============================================================================
+# PRECISION CONTEXT FETCHING (Perplexity SONAR-PRO)
+# Used for OUR_FAULT gap resolution in CCI attribution
+# =============================================================================
+research:
+  model: "sonar-pro"
+  max_monthly_budget_usd: 5.00
+  cache_ttl_hours: 168  # 1 week
+  timeout_seconds: 60
+  temperature: 0.1  # Low for factual precision
+  max_retries: 3
