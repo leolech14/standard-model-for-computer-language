@@ -160,6 +160,18 @@ const COLOR = (function () {
     };
 
     // =========================================================================
+    // TELEMETRY: Cached reference to COLOR_TELEM (avoids window lookup in hot path)
+    // =========================================================================
+
+    let _telemetryRef = null;
+    function _getTelemetry() {
+        if (!_telemetryRef && typeof window !== 'undefined' && window.COLOR_TELEM) {
+            _telemetryRef = window.COLOR_TELEM;
+        }
+        return _telemetryRef;
+    }
+
+    // =========================================================================
     // INTERVAL MAPPINGS: For numeric data -> color gradients
     // =========================================================================
 
@@ -882,6 +894,11 @@ function _toHex(oklch) {
     let g = -1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3;
     let bl = -0.0041960863 * l3 - 0.7034186147 * m3 + 1.7076147010 * s3;
 
+    // TELEMETRY: Detect gamut clipping BEFORE clamping (with float tolerance)
+    const clipped = r < -0.0001 || r > 1.0001 ||
+                    g < -0.0001 || g > 1.0001 ||
+                    bl < -0.0001 || bl > 1.0001;
+
     // Clamp and convert to sRGB
     const toSRGB = (x) => {
         x = Math.max(0, Math.min(1, x));
@@ -896,7 +913,10 @@ function _toHex(oklch) {
     g = Math.max(0, Math.min(255, g));
     bl = Math.max(0, Math.min(255, bl));
 
-    return '#' + [r, g, bl].map(x => x.toString(16).padStart(2, '0')).join('');
+    const hex = '#' + [r, g, bl].map(x => x.toString(16).padStart(2, '0')).join('');
+
+    // Return object with hex and clipping info for telemetry
+    return { hex, clipped };
 }
 
 /**
@@ -961,7 +981,7 @@ function hexToOklch(hex) {
     };
 }
 
-function _applyTransform(oklch) {
+function _applyTransform(oklch, source = 'unknown') {
     const t = transform;
 
     // Apply transforms
@@ -974,7 +994,16 @@ function _applyTransform(oklch) {
         c = Math.pow(c / 0.4, 1 / t.amplifier) * 0.4;
     }
 
-    return _toHex({ h, c, l });
+    // Get hex with clipping info
+    const result = _toHex({ h, c, l });
+
+    // TELEMETRY: Emit at wormhole boundary (OKLCH -> hex)
+    const telem = _getTelemetry();
+    if (telem?.enabled) {
+        telem.emit(source, l, c, h, result.hex, result.clipped);
+    }
+
+    return result.hex;  // Backward compatible: still returns hex string
 }
 
 // =========================================================================
@@ -989,8 +1018,11 @@ function _applyTransform(oklch) {
  */
 function get(dimension, category) {
     const base = palette[dimension]?.[category];
-    if (!base) return _toHex({ h: 0, c: 0.02, l: 0.40 }); // Fallback gray
-    return _applyTransform(base);
+    if (!base) {
+        const fallback = _toHex({ h: 0, c: 0.02, l: 0.40 });
+        return fallback.hex; // Fallback gray
+    }
+    return _applyTransform(base, `palette:${dimension}`);
 }
 
 /**
@@ -1012,7 +1044,10 @@ function getInterval(intervalName, value) {
 
     // Fall back to hardcoded interval if no scheme active
     const interval = intervals[intervalName];
-    if (!interval) return _toHex({ h: 0, c: 0.02, l: 0.40 });
+    if (!interval) {
+        const fallback = _toHex({ h: 0, c: 0.02, l: 0.40 });
+        return fallback.hex;
+    }
 
     const stops = interval.stops;
 
@@ -1038,7 +1073,7 @@ function getInterval(intervalName, value) {
         l: lower.l + (upper.l - lower.l) * t
     };
 
-    return _applyTransform(interpolated);
+    return _applyTransform(interpolated, `gradient:${intervalName}`);
 }
 
 /**
@@ -1078,7 +1113,7 @@ function interpolate(color1, color2, t) {
     const c = (c1.c !== undefined ? c1.c : c1.C) + ((c2.c !== undefined ? c2.c : c2.C) - (c1.c !== undefined ? c1.c : c1.C)) * t;
     const l = (c1.l !== undefined ? c1.l : c1.L) + ((c2.l !== undefined ? c2.l : c2.L) - (c1.l !== undefined ? c1.l : c1.L)) * t;
 
-    return _applyTransform({ h, c, l });
+    return _applyTransform({ h, c, l }, 'func:interpolate');
 }
 
 /**
@@ -1163,19 +1198,26 @@ function getScheme(schemeName) {
  */
 function getSchemeColor(schemeName, t) {
     const scheme = schemePaths[schemeName];
-    if (!scheme) return _toHex({ h: 0, c: 0.02, l: 0.40 });
+    if (!scheme) {
+        const fallback = _toHex({ h: 0, c: 0.02, l: 0.40 });
+        return fallback.hex;
+    }
 
     const v = Math.max(0, Math.min(1, t));
+    const source = `scheme:${schemeName}`;
 
     // GENERATOR MODE: Mathematical function (OKLCH geometry)
     if (scheme.generator && typeof scheme.generator === 'function') {
         const oklch = scheme.generator(v);
-        return _applyTransform(oklch);
+        return _applyTransform(oklch, source);
     }
 
     // STOPS MODE: Discrete points with interpolation
     const stops = scheme.stops;
-    if (!stops || stops.length === 0) return _toHex({ h: 0, c: 0.02, l: 0.40 });
+    if (!stops || stops.length === 0) {
+        const fallback = _toHex({ h: 0, c: 0.02, l: 0.40 });
+        return fallback.hex;
+    }
 
     // Find surrounding stops
     let lower = stops[0];
@@ -1199,7 +1241,7 @@ function getSchemeColor(schemeName, t) {
         l: lower.l + (upper.l - lower.l) * interp
     };
 
-    return _applyTransform(interpolated);
+    return _applyTransform(interpolated, source);
 }
 
 /**
@@ -1266,6 +1308,27 @@ function getSchemeInfo(schemeName) {
 }
 
 // =========================================================================
+// PUBLIC toHex WRAPPER (backward compatible)
+// =========================================================================
+
+/**
+ * Convert OKLCH to hex color (public API)
+ * @param {object} oklch - {h, c, l} OKLCH values
+ * @returns {string} Hex color string
+ */
+function toHex(oklch) {
+    const result = _toHex(oklch);
+
+    // Emit telemetry for public API calls
+    const telem = _getTelemetry();
+    if (telem?.enabled) {
+        telem.emit('api:public', oklch.l, oklch.c, oklch.h, result.hex, result.clipped);
+    }
+
+    return result.hex;  // Return just the hex string for backward compatibility
+}
+
+// =========================================================================
 // DEBUG
 // =========================================================================
 
@@ -1291,7 +1354,7 @@ return {
     interpolate,
 
     // OKLCH Conversion (for UPB integration)
-    toHex: _toHex,
+    toHex,
     hexToOklch,
 
     // Transform controls

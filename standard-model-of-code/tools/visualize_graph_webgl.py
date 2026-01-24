@@ -528,6 +528,7 @@ def generate_webgl_html(json_source: Any, output_path: str):
         "modules/node-accessors.js",        # Node property functions
         "modules/node-helpers.js",          # Node classification & colors (Phase 1)
         "modules/color-helpers.js",         # Color utilities (Phase 1)
+        "modules/color-telemetry.js",       # OKLCH observability (must load before color-engine)
         "modules/color-engine.js",          # OKLCH color system
         "modules/refresh-throttle.js",      # Throttled graph updates
         "modules/legend-manager.js",        # Legend system (depends: COLOR, NODE)
