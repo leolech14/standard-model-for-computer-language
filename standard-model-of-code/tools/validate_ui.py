@@ -124,6 +124,28 @@ def validate_ui(
                 }
             ''')
 
+            # Run COLOR contract tests if available
+            color_test_available = page.evaluate('typeof COLOR_TEST !== "undefined"')
+            if color_test_available:
+                if verbose:
+                    print("Running COLOR_TEST.runAll()...")
+
+                color_results = page.evaluate('''
+                    () => {
+                        const results = COLOR_TEST.runAll();
+                        return results;
+                    }
+                ''')
+
+                if color_results:
+                    result['color_test'] = {
+                        'passed': color_results.get('passed', False),
+                        'summary': color_results.get('summary', ''),
+                        'results': color_results.get('results', {})
+                    }
+                    if verbose:
+                        print(f"  COLOR_TEST: {color_results.get('summary', 'unknown')}")
+
             if test_results:
                 result['passed'] = test_results.get('passed', 0)
                 result['failed'] = test_results.get('failed', 0)
@@ -211,9 +233,23 @@ def print_report(result: Dict[str, Any], verbose: bool = False) -> None:
                 if fix:
                     print(f"    FIX: {fix}")
 
+    # COLOR_TEST results (if present)
+    if 'color_test' in result:
+        color = result['color_test']
+        print("\n" + "-" * 70)
+        print("COLOR ENGINE CONTRACT TESTS")
+        print("-" * 70)
+        print(f"Summary: {color.get('summary', 'N/A')}")
+        if verbose and color.get('results'):
+            for name, test_res in color['results'].items():
+                status = test_res.get('status', 'UNKNOWN')
+                detail = f"{test_res.get('passed', 0)}/{test_res.get('total', 0)}"
+                print(f"  [{'+' if status == 'PASS' else 'X'}] {name}: {detail}")
+
     # Summary
     print("\n" + "=" * 70)
-    if failed == 0:
+    color_pass = result.get('color_test', {}).get('passed', True)
+    if failed == 0 and color_pass:
         print("STATUS: ALL TESTS PASSED")
     else:
         print(f"STATUS: {failed} TESTS FAILED")
@@ -319,7 +355,8 @@ def main():
         print_report(result, verbose=args.verbose)
 
     # Exit with error code if tests failed
-    if result['failed'] > 0 or result['errors']:
+    color_failed = not result.get('color_test', {}).get('passed', True)
+    if result['failed'] > 0 or result['errors'] or color_failed:
         sys.exit(1)
     sys.exit(0)
 

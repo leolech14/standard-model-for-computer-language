@@ -573,6 +573,7 @@ def generate_webgl_html(json_source: Any, output_path: str):
         "modules/control-bar.js",           # Visual mapping command bar (uses UPB)
         "modules/main.js",                  # Entry point + wiring
         "modules/circuit-breaker.js",       # UI control self-test (run with CIRCUIT.runAll())
+        "modules/color-contract-test.js",   # COLOR engine contract tests (run with COLOR_TEST.runAll())
     ]
 
     print(f"Loading assets from {viz_assets}...")

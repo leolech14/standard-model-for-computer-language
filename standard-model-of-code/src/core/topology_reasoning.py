@@ -217,12 +217,13 @@ class LandscapeHealthIndex:
         Returns:
             dict with 'index', 'grade', 'component_scores'
         """
+        node_count = len(profile.elevations) if profile.elevations else 1
         scores = {
-            'cycles': self._cycle_health(profile.b1),
+            'cycles': self._cycle_health(profile.b1, node_count),
             'elevation': self._elevation_health(profile.elevations),
             'gradients': self._gradient_health(profile.gradients),
             'coupling': self._coupling_health(profile),
-            'isolation': self._isolation_health(profile.b0, len(profile.elevations))
+            'isolation': self._isolation_health(profile.b0, node_count)
         }
 
         index = sum(scores[k] * self.weights[k] for k in scores)
@@ -233,14 +234,28 @@ class LandscapeHealthIndex:
             'component_scores': {k: round(v, 2) for k, v in scores.items()}
         }
 
-    def _cycle_health(self, b1: int) -> float:
-        """b₁ = 0 is perfect (10), degrades as cycles increase."""
+    def _cycle_health(self, b1: int, node_count: int) -> float:
+        """b₁ = 0 is perfect (10), degrades as cycle ratio increases.
+
+        Normalized by codebase size: cycle_ratio = b1 / nodes
+        - ratio < 0.5: excellent (score 8-10)
+        - ratio 0.5-1.0: good (score 6-8)
+        - ratio 1.0-2.0: moderate (score 4-6)
+        - ratio > 2.0: concerning (score 2-4)
+
+        Uses logarithmic scaling to avoid harsh penalties for large codebases.
+        """
         if b1 == 0:
             return 10.0
-        elif b1 <= 5:
-            return 10.0 - (b1 * 1.5)
-        else:
-            return max(1.0, 10.0 - (b1 * 0.5))
+
+        # Normalize by codebase size
+        cycle_ratio = b1 / max(1, node_count)
+
+        # Logarithmic scaling: log(1 + ratio) grows slowly for large ratios
+        # Scale factor of 3 maps ratio=1.0 to ~2.1 penalty, ratio=2.0 to ~3.3 penalty
+        penalty = math.log1p(cycle_ratio) * 3.0
+
+        return max(1.0, min(10.0, 10.0 - penalty))
 
     def _elevation_health(self, elevations: Dict[str, float]) -> float:
         """Lower average elevation = healthier."""
@@ -266,12 +281,38 @@ class LandscapeHealthIndex:
         return max(3.0, 10.0 - (avg_elev * 0.5))
 
     def _isolation_health(self, b0: int, n: int) -> float:
-        """Ideal is sqrt(n) components. Too many or too few is bad."""
+        """Measure component cohesion.
+
+        Uses nodes-per-component ratio:
+        - ratio 10-50: excellent (well-organized modules)
+        - ratio 5-10 or 50-100: good
+        - ratio < 5: too fragmented (many tiny components)
+        - ratio > 100: monolithic (too few components)
+
+        Single component (b0=1) is acceptable for small codebases but
+        concerning for large ones.
+        """
         if n == 0:
             return 5.0
-        ideal = max(2, int(n ** 0.5))
-        deviation = abs(b0 - ideal) / ideal
-        return max(2.0, 10.0 - (deviation * 5))
+        if b0 == 0:
+            return 5.0  # Edge case
+
+        # Nodes per component
+        nodes_per_component = n / b0
+
+        # Ideal range: 10-50 nodes per component
+        if 10 <= nodes_per_component <= 50:
+            return 10.0
+        elif 5 <= nodes_per_component < 10 or 50 < nodes_per_component <= 100:
+            return 8.0
+        elif nodes_per_component < 5:
+            # Too fragmented - penalize logarithmically
+            fragmentation = 5 / nodes_per_component  # How many times worse than ideal
+            return max(3.0, 10.0 - math.log1p(fragmentation) * 2)
+        else:
+            # Too monolithic (> 100 nodes/component)
+            monolith_ratio = nodes_per_component / 50  # How many times worse than ideal
+            return max(3.0, 10.0 - math.log1p(monolith_ratio) * 2)
 
     def _to_grade(self, score: float) -> str:
         """Convert numeric score to letter grade."""
@@ -364,7 +405,7 @@ class TopologyClassifier:
         for edge in edges:
             in_degrees[edge.get('target', '')] += 1
             out_degrees[edge.get('source', '')] += 1
-        
+
         degrees = [in_degrees[n['id']] + out_degrees[n['id']] for n in nodes]
         max_degree = max(degrees) if degrees else 0
         avg_degree = statistics.mean(degrees) if degrees else 0
@@ -375,11 +416,11 @@ class TopologyClassifier:
         # 3. Hierarchy Analysis (Layers vs Cycles)
         # We can reuse Knot Score from existing analysis, but calculate a hierarchy score
         # Simple proxy: Ratio of feedback edges (cycles) to feedforward edges
-        
+
         # 4. Classification Logic
         shape = "UNKNOWN"
         description = "Undefined structure"
-        
+
         # Check STRICT_LAYERS first (ideal state: connected, no cycles)
         if num_cycles == 0 and num_components == 1:
             shape = "STRICT_LAYERS"
@@ -438,12 +479,12 @@ class TopologyClassifier:
             if s and t:
                 adj[s].add(t)
                 adj[t].add(s)
-        
+
         visited = set()
         components = []
-        
+
         node_ids = set(n['id'] for n in nodes)
-        
+
         for node in node_ids:
             if node not in visited:
                 component = []
@@ -457,7 +498,7 @@ class TopologyClassifier:
                             visited.add(neighbor)
                             queue.append(neighbor)
                 components.append(component)
-        
+
         return components
 
     def compute_betti_numbers(self, nodes: List[Dict], edges: List[Dict]) -> BettiNumbers:
