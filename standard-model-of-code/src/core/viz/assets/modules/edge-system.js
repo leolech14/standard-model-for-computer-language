@@ -53,7 +53,7 @@ const EDGE = (function () {
         mono: 'Minimal monochrome'
     };
 
-    // Gradient color palettes for different modes
+    // Gradient color palettes for different modes (HSL reference for documentation)
     const PALETTES = {
         tier: {
             // Cool to Warm: Entry (blue) → Core (purple) → Exit (orange)
@@ -84,6 +84,31 @@ const EDGE = (function () {
             similar: { h: 150, s: 60, l: 50 },    // Green - same type
             related: { h: 200, s: 65, l: 48 },    // Cyan - related
             different: { h: 340, s: 75, l: 50 }   // Pink - different
+        }
+    };
+
+    // Pre-computed hex colors for OKLCH interpolation (COLOR engine)
+    const PALETTE_HEX = {
+        tier: {
+            T0: '#4a90d9',      // Blue (h:210, s:70, l:55)
+            T1: '#9966cc',      // Purple (h:280, s:65, l:50)
+            T2: '#e68a00',      // Orange (h:30, s:80, l:50)
+            UNKNOWN: '#666666'  // Gray
+        },
+        flow: {
+            cold: '#3d6a99',    // Blue (h:220, s:60, l:45)
+            warm: '#d9a620',    // Yellow (h:45, s:85, l:50)
+            hot: '#e63946'      // Red (h:0, s:90, l:55)
+        },
+        depth: {
+            shallow: '#66b3b3', // Cyan (h:180, s:50, l:65)
+            mid: '#7733cc',     // Purple (h:260, s:70, l:50)
+            deep: '#b3267a'     // Magenta (h:320, s:80, l:40)
+        },
+        semantic: {
+            similar: '#40bf80',   // Green (h:150, s:60, l:50)
+            related: '#4d99b3',   // Cyan (h:200, s:65, l:48)
+            different: '#d94073'  // Pink (h:340, s:75, l:50)
         }
     };
 
@@ -126,25 +151,6 @@ const EDGE = (function () {
 
     function clamp01(value) {
         return Math.max(0, Math.min(1, value));
-    }
-
-    function hslColor(hue, saturation, lightness) {
-        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    }
-
-    function interpolateHSL(hsl1, hsl2, t) {
-        t = clamp01(t);
-        // Handle hue interpolation (shortest path on color wheel)
-        let h1 = hsl1.h, h2 = hsl2.h;
-        let dh = h2 - h1;
-        if (Math.abs(dh) > 180) {
-            if (dh > 0) h1 += 360;
-            else h2 += 360;
-        }
-        const h = (h1 + (h2 - h1) * t) % 360;
-        const s = hsl1.s + (hsl2.s - hsl1.s) * t;
-        const l = hsl1.l + (hsl2.l - hsl1.l) * t;
-        return hslColor(h, s, l);
     }
 
     /**
@@ -260,23 +266,18 @@ const EDGE = (function () {
             const tgtTier = window.getNodeTierValue(tgtNode);
             const avgTier = (srcTier + tgtTier) / 2;
 
-            const palette = PALETTES.tier;
             let color;
             if (avgTier < 0.5) {
-                color = interpolateHSL(palette.T0, palette.T1, avgTier * 2);
+                color = COLOR.interpolate(PALETTE_HEX.tier.T0, PALETTE_HEX.tier.T1, avgTier * 2);
             } else if (avgTier < 1.5) {
-                color = interpolateHSL(palette.T0, palette.T1, (avgTier - 0.5));
+                color = COLOR.interpolate(PALETTE_HEX.tier.T0, PALETTE_HEX.tier.T1, (avgTier - 0.5));
             } else {
-                color = interpolateHSL(palette.T1, palette.T2, (avgTier - 1) / 2);
+                color = COLOR.interpolate(PALETTE_HEX.tier.T1, PALETTE_HEX.tier.T2, (avgTier - 1) / 2);
             }
 
             // Highlight tier transitions (edges crossing tiers)
             if (srcTier !== tgtTier) {
-                return hslColor(
-                    parseInt(color.slice(4)),
-                    75,  // Higher saturation
-                    55   // Brighter
-                );
+                return COLOR.toHex({ h: 45, c: 0.25, l: 0.55 });  // Bright saturated yellow for transitions
             }
             return color;
         }
@@ -284,11 +285,10 @@ const EDGE = (function () {
         if (mode === 'gradient-file') {
             const srcFile = srcNode?.fileIdx ?? -1;
             const tgtFile = tgtNode?.fileIdx ?? -1;
-            const palette = PALETTES.file;
 
             if (srcFile === tgtFile && srcFile >= 0) {
                 const hue = _fileHueMap.get(srcFile) ?? (srcFile * 37 % 360);
-                return hslColor(hue, palette.saturation, palette.lightness);
+                return COLOR.toHex({ h: hue, c: 0.20, l: 0.48 });
             } else {
                 const srcHue = _fileHueMap.get(srcFile) ?? 0;
                 const tgtHue = _fileHueMap.get(tgtFile) ?? 180;
@@ -296,20 +296,19 @@ const EDGE = (function () {
                 if (Math.abs(srcHue - tgtHue) > 180) {
                     midHue = (midHue + 180) % 360;
                 }
-                return hslColor(midHue, palette.saturation * 0.6, palette.lightness * 1.1);
+                return COLOR.toHex({ h: midHue, c: 0.12, l: 0.50 });
             }
         }
 
         if (mode === 'gradient-flow') {
             const mw = link.markov_weight ?? link.weight ?? 0;
-            const palette = PALETTES.flow;
 
             if (mw < 0.3) {
-                return interpolateHSL(palette.cold, palette.warm, mw / 0.3);
+                return COLOR.interpolate(PALETTE_HEX.flow.cold, PALETTE_HEX.flow.warm, mw / 0.3);
             } else if (mw < 0.7) {
-                return interpolateHSL(palette.warm, palette.hot, (mw - 0.3) / 0.4);
+                return COLOR.interpolate(PALETTE_HEX.flow.warm, PALETTE_HEX.flow.hot, (mw - 0.3) / 0.4);
             } else {
-                return hslColor(palette.hot.h, palette.hot.s + 10, palette.hot.l + 10);
+                return PALETTE_HEX.flow.hot;
             }
         }
 
@@ -317,27 +316,25 @@ const EDGE = (function () {
             const srcDepth = window.getNodeDepth(srcNode);
             const tgtDepth = window.getNodeDepth(tgtNode);
             const avgDepth = (srcDepth + tgtDepth) / 2;
-            const palette = PALETTES.depth;
 
             if (avgDepth < 0.33) {
-                return interpolateHSL(palette.shallow, palette.mid, avgDepth * 3);
+                return COLOR.interpolate(PALETTE_HEX.depth.shallow, PALETTE_HEX.depth.mid, avgDepth * 3);
             } else if (avgDepth < 0.66) {
-                return interpolateHSL(palette.mid, palette.deep, (avgDepth - 0.33) * 3);
+                return COLOR.interpolate(PALETTE_HEX.depth.mid, PALETTE_HEX.depth.deep, (avgDepth - 0.33) * 3);
             } else {
-                return hslColor(palette.deep.h, palette.deep.s, palette.deep.l - 10);
+                return PALETTE_HEX.depth.deep;
             }
         }
 
         if (mode === 'gradient-semantic') {
             const similarity = window.getSemanticSimilarity(srcNode, tgtNode);
-            const palette = PALETTES.semantic;
 
             if (similarity > 0.7) {
-                return interpolateHSL(palette.related, palette.similar, (similarity - 0.7) / 0.3);
+                return COLOR.interpolate(PALETTE_HEX.semantic.related, PALETTE_HEX.semantic.similar, (similarity - 0.7) / 0.3);
             } else if (similarity > 0.3) {
-                return interpolateHSL(palette.different, palette.related, (similarity - 0.3) / 0.4);
+                return COLOR.interpolate(PALETTE_HEX.semantic.different, PALETTE_HEX.semantic.related, (similarity - 0.3) / 0.4);
             } else {
-                return hslColor(palette.different.h, palette.different.s + 10, palette.different.l);
+                return PALETTE_HEX.semantic.different;
             }
         }
 
@@ -372,14 +369,14 @@ const EDGE = (function () {
             const weight = typeof link.weight === 'number' ? link.weight : 1;
             const t = normalizeMetric(weight, _ranges.weight);
             return typeof COLOR !== 'undefined' ?
-                COLOR.getInterval('weight', t) : hslColor(30, 70, 50 + t * 30);
+                COLOR.getInterval('weight', t) : COLOR.toHex({ h: 30, c: 0.20, l: 0.50 + t * 0.30 });
         }
 
         if (_mode === 'confidence') {
             const confidence = typeof link.confidence === 'number' ? link.confidence : 1;
             const t = normalizeMetric(confidence, _ranges.confidence);
             return typeof COLOR !== 'undefined' ?
-                COLOR.getInterval('confidence', t) : hslColor(200, 70, 50 + t * 30);
+                COLOR.getInterval('confidence', t) : COLOR.toHex({ h: 200, c: 0.20, l: 0.50 + t * 0.30 });
         }
 
         if (_mode === 'mono') {
