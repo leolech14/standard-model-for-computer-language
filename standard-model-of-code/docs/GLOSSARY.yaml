@@ -11,13 +11,13 @@
 #   - not_to_be_confused_with: disambiguation
 #
 # CATEGORIES:
-#   - original_invention: We created this term (36 terms)
+#   - original_invention: We created this term (40 terms)
 #   - physics_metaphor: Borrowed from physics with new meaning (18 terms)
 #   - borrowed_theory: Academic concept with attribution (22 terms)
 #   - standard_cs: Conventional CS term (31 terms)
 #
 # Last updated: 2026-01-24
-# Total terms: 112
+# Total terms: 116
 # ============================================================================
 
 schema_version: "1.0.0"
@@ -548,6 +548,111 @@ terms:
       5. Verify with external validation (analyze.py)
     antonym: '"bolted-on" - a feature obviously added later, creating cognitive load'
     related_terms: [agent_school, alien_architecture, brain_body_architecture]
+
+  # ---------------------------------------------------------------------------
+  # Law Taxonomy (2026-01-24)
+  # ---------------------------------------------------------------------------
+
+  natural_law_of_code:
+    canonical_name: "Natural Law of Code"
+    category: original_invention
+    introduced:
+      version: "1.5.0"
+      date: "2026-01-24"
+      by: "Leonardo Lech"
+    definition: |
+      A constraint proven by mathematics (information theory, computability,
+      thermodynamics) or graph theory that imposes unavoidable cost when violated,
+      independent of language, paradigm, culture, resources, or intent.
+    recognition_test: |
+      1. Is it mathematical/physical? (not social/conventional)
+      2. Can you violate it with infinite willpower and resources?
+      3. Does it hold if no one knows about it?
+      4. Does it operate through mechanism, not coordination?
+      If YES to #1, NO to #2, YES to #3 and #4: Natural Law.
+    examples:
+      - "Kolmogorov bound: Cannot compress below intrinsic complexity"
+      - "Landauer's principle: Bit erasure costs >= kT ln 2 energy"
+      - "Rice's theorem: Non-trivial semantic properties are undecidable"
+      - "Graph centrality: High-degree nodes concentrate risk (topological fact)"
+    antonym: roadmap_law
+    related_terms: [roadmap_law, moore_law_drift, empirical_law]
+
+  roadmap_law:
+    canonical_name: "Roadmap Law"
+    category: original_invention
+    introduced:
+      version: "1.5.0"
+      date: "2026-01-24"
+      by: "Leonardo Lech"
+    definition: |
+      A simple empirical trend that becomes a target the ecosystem organizes
+      around, thereby extending or shaping the trend through coordination.
+      Holds partly because people plan and invest to make it hold.
+    recognition_test: |
+      If violating the "law" just means "the industry misses its targets,"
+      it's a Roadmap Law, not a Natural Law.
+    canonical_example: |
+      Moore's Law (1965): Gordon Moore observed transistor density doubling
+      yearly at minimum cost. The industry turned this into a planning target,
+      making it self-fulfilling. It held for 50 years not because physics
+      demanded it, but because Intel, TSMC, and others coordinated around it.
+    key_insight: |
+      Roadmap Laws are Schelling points - coordination mechanisms that work
+      because everyone agrees to aim for them. Natural Laws work whether
+      anyone agrees or not.
+    related_terms: [natural_law_of_code, moore_law_drift, empirical_law]
+
+  moore_law_drift:
+    canonical_name: "Moore-Law Drift"
+    category: original_invention
+    introduced:
+      version: "1.5.0"
+      date: "2026-01-24"
+      by: "Leonardo Lech"
+    definition: |
+      The antipattern where an observed trend gets promoted to "law" status
+      through social coordination and repetition, then mistaken for an
+      invariant constraint. Named after Moore's Law, which was a techno-economic
+      forecast that became an industry roadmap, not a physical law.
+    mechanism: |
+      1. Someone observes a trend and makes a prediction
+      2. The prediction is named (naming = weaponized compression)
+      3. Industry coordinates around the prediction as a target
+      4. The trend holds because people make it hold
+      5. Longevity promotes it from "trend" to "law" in popular usage
+      6. People forget it was ever a prediction
+    warning: |
+      When hunting Natural Laws of Code, watch for Moore-Law Drift.
+      Ask: "Would this hold if the industry stopped believing in it?"
+      If NO, it's coordination, not constraint.
+    historical_note: |
+      The term "Moore's Law" was coined by Carver Mead, not Gordon Moore.
+      Moore's original 1965 paper was about minimum cost curves, not
+      physical limits. The 18-month cadence is a press misquote; Moore's
+      revised (1975) cadence was ~2 years.
+    related_terms: [natural_law_of_code, roadmap_law]
+
+  empirical_law:
+    canonical_name: "Empirical Law"
+    category: original_invention
+    introduced:
+      version: "1.5.0"
+      date: "2026-01-24"
+      by: "Leonardo Lech"
+    definition: |
+      A pattern observed across many systems that holds statistically but
+      can be falsified under specific conditions. Between Natural Law
+      (unfalsifiable by design) and Heuristic (weak correlation).
+    canonical_example: |
+      Lehman's Laws of Software Evolution (1974): Eight empirical patterns
+      observed in large systems. Laws L1, L6, L7 hold universally. Laws
+      L2, L4, L5 were partially falsified by Linux's accelerating growth
+      (Godfrey & Tu, 2000).
+    key_distinction: |
+      Empirical Laws are discovered through observation and can be wrong.
+      Natural Laws are proven through mathematics and cannot be violated.
+    related_terms: [natural_law_of_code, roadmap_law, lehmans_laws]
 
   # ---------------------------------------------------------------------------
   # Visualization
