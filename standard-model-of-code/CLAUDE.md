@@ -9,7 +9,8 @@
 | Purpose | Find basic constituents of computer programs |
 | Atoms | 3,616 total (see breakdown below) |
 | Roles | 33 canonical, 29 implemented |
-| Pipeline | 18 stages |
+| Pipeline | 27 stages (5 phases) |
+| **Node Count** | 1,179 core / 1,961 full (see `docs/specs/NODE_COUNT_GROUND_TRUTH.md`) |
 | Body Coverage | ~36% nodes have `body_source` |
 
 ## Atom Inventory (Statistical Analysis)
@@ -41,6 +42,10 @@ See `docs/reports/ATOM_STATISTICAL_ANALYSIS.md` for full analysis.
 | **Codome Research** | `docs/research/CODOME_EDGE_DISCOVERY.md` | Boundary nodes, inferred edges, known bugs |
 | **Atom Statistics** | `docs/reports/ATOM_STATISTICAL_ANALYSIS.md` | Coverage model, quality issues, honest numbers |
 | **Atom Investigation** | `docs/research/ATOM_COVERAGE_INVESTIGATION.md` | Causal analysis, confidence scores, implications |
+| **Codome Landscape** | `docs/specs/CODOME_LANDSCAPE.md` | Topology, elevation, gradients, Betti numbers |
+| **Landscape Implementation** | `docs/specs/LANDSCAPE_IMPLEMENTATION_GUIDE.md` | Algorithms, pipeline integration, health index |
+| **Node Count Ground Truth** | `docs/specs/NODE_COUNT_GROUND_TRUTH.md` | Canonical scope definitions, expected counts |
+| **Open Concerns** | `docs/OPEN_CONCERNS.md` | Active issues, tech debt, session logs |
 
 ## Commands
 
@@ -228,6 +233,30 @@ See `docs/research/CODOME_EDGE_DISCOVERY.md` for details.
   "file_path": "src/services/user.py",
   "start_line": 45,
   "end_line": 67,
-  "body_source": "def validate(self, data):\n    ..."
+  "body_source": "def validate(self, data):\n    ...",
+
+  "// Stage 6.7: Semantic Purpose Analysis (PURPOSE = f(edges))": "",
+  "semantic_role": "utility",
+  "closeness_centrality": 0.027,
+  "reachable_from_entry": true,
+  "depth_from_entry": 2,
+  "is_bridge": false,
+  "is_influential": true,
+  "is_coordinator": false,
+  "intent_profile": {
+    "has_docstring": true,
+    "docstring": "Validates user data against schema",
+    "has_commits": true,
+    "commit_intents": ["fix", "feature"]
+  }
 }
 ```
+
+### Semantic Role Classification
+
+| Role | Description | Degree Pattern |
+|------|-------------|----------------|
+| `utility` | Serves many callers | High in, low out |
+| `orchestrator` | Coordinates many callees | Low in, high out |
+| `hub` | Critical junction | High in, high out |
+| `leaf` | Specialized/isolated | Low in, low out |
