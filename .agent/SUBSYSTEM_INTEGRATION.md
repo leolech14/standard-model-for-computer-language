@@ -49,6 +49,7 @@
 │   ═══════════════════════════════════════════════════════════════════════   │
 │                                                                              │
 │   PARALLEL: Archive/Mirror syncs to GCS on every commit                      │
+│             Commit Hygiene (pre-commit) validates before commit              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -66,6 +67,7 @@
 | S5 | **Task Registry** | State | `.agent/registry/` | Work item tracking |
 | S6 | **BARE** | Engine | `.agent/tools/bare` | Background auto-refinement |
 | S7 | **Archive/Mirror** | Utility | `context-management/tools/archive/` | Cloud sync (GCS) |
+| S8 | **Commit Hygiene** | Guard | `.pre-commit-config.yaml`, `commitlint.config.js` | Enforce Conventional Commits |
 
 ---
 
@@ -105,6 +107,7 @@
 | Git commit → Archive | post-commit hook | Shell script | ACTIVE |
 | Git commit → BARE | post-commit hook | Shell script | ACTIVE |
 | analyze.py → Research | Auto-save to docs/research/ | File write | ACTIVE |
+| **Git commit ← Commit Hygiene** | pre-commit + commit-msg hooks | Block invalid commits | **ACTIVE** |
 
 ### Proposed (from Gemini analysis)
 
@@ -178,6 +181,12 @@ For each subsystem, these are the key files to understand:
 - Config: `context-management/tools/archive/config.yaml`
 - Bucket: `gs://elements-archive-2026/`
 
+### Commit Hygiene (S8)
+- Pre-commit config: `.pre-commit-config.yaml`
+- Commitlint config: `commitlint.config.js`
+- Install: `pre-commit install --hook-type commit-msg --hook-type pre-commit`
+- Kernel reference: `.agent/KERNEL.md` (Non-Negotiables #2)
+
 ---
 
 ## Integration Checklist
@@ -196,4 +205,5 @@ When adding a new subsystem:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | 2026-01-24 | Added Commit Hygiene (S8) - pre-commit + commitlint |
 | 1.0.0 | 2026-01-23 | Initial integration map (validated by Gemini analysis) |

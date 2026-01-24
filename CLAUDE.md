@@ -25,6 +25,22 @@
 
 **Full integration map:** `.agent/SUBSYSTEM_INTEGRATION.md`
 
+## Wave-Particle Symmetry (Documentation Standard)
+
+**Current:** 🥈 Silver (81/100) | **Target:** 🥇 Gold (90+)
+
+The standard for "perfect documentation" - when every code construct has a corresponding doc, and every doc claim has code proof.
+
+| Doc | Purpose |
+|-----|---------|
+| `.agent/specs/WAVE_PARTICLE_SYMMETRY.md` | Full spec, scoring rubric, tiers |
+| `.agent/intelligence/WAVE_PARTICLE_BALANCE.md` | Current metrics from Collider |
+| `.agent/intelligence/PRIORITY_MATRIX.md` | Action plan to reach Gold |
+
+```
+Symmetry Score = Structural(25) + Behavioral(25) + Examples(20) + References(15) + Freshness(15)
+```
+
 ## Roadmap (Single Source of Truth)
 
 **`.agent/ROADMAP.yaml`** - The unified, machine-readable roadmap for the entire project.
@@ -84,8 +100,21 @@ doppler secrets set SECRET_NAME="value" --project ai-tools --config dev
 
 | Secret | Purpose |
 |--------|---------|
-| `GEMINI_API_KEY` | File Search RAG queries |
+| `GEMINI_API_KEY` | Gemini AI queries (required) |
+| `PERPLEXITY_API_KEY` | External research grounding |
 | `ANTHROPIC_API_KEY` | Claude API (if needed) |
+
+### Environment Variables (Full Reference)
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `GEMINI_API_KEY` | AI Studio authentication | Required |
+| `PERPLEXITY_API_KEY` | Research validation | Optional |
+| `GCS_BUCKET` | Cloud storage bucket | `elements-archive-2026` |
+| `PROJECT_ROOT` | Override project root path | Auto-detected |
+| `CI` | Disable interactive prompts | `false` |
+| `NONINTERACTIVE` | Force non-interactive mode | `false` |
+| `SESSION_LOG` | Path to session log file | None |
 
 ## Research Rules (Non-Negotiable)
 
@@ -111,6 +140,7 @@ After ANY Perplexity query (MCP or otherwise), immediately save the response usi
 
 | Task | Command |
 |------|---------|
+| **Setup commit hooks** | `pre-commit install --hook-type commit-msg --hook-type pre-commit` |
 | Analyze codebase | `./collider full <path> --output <dir>` |
 | With AI insights | `./collider full <path> --ai-insights` |
 | Run tests | `cd standard-model-of-code && pytest tests/ -q` |
@@ -119,13 +149,27 @@ After ANY Perplexity query (MCP or otherwise), immediately save the response usi
 | Mirror to GCS | `python context-management/tools/archive/archive.py mirror` |
 | Offload large files | `python context-management/tools/archive/archive.py offload` |
 
-## Holographic-Socratic Layer
+## Background AI Processing Layer
 
-The **Holographic-Socratic Layer** is a 24/7 AI guardian that detects drift between documentation and implementation. It runs automatically via `PROJECT_sentinel` and stores structured intelligence to GCS.
+Five autonomous engines that continuously refine, validate, and enrich the repository:
+
+| Engine | Purpose | Trigger | Status |
+|--------|---------|---------|--------|
+| **BARE** | Self-refinement (truths, confidence) | Post-commit | PARTIAL |
+| **AEP** | Task enrichment pipeline | Cron/Cloud | TOOLS OK |
+| **HSL** | Semantic validation (Antimatter Laws) | Daily 6AM | WORKING |
+| **REFINERY** | Context atomization | On-demand | PLANNED |
+| **CENTRIPETAL** | Deep 12-round analysis | Manual | TOOL OK |
+
+**Full map:** `context-management/docs/BACKGROUND_AI_LAYER_MAP.md`
+
+### Holographic-Socratic Layer (HSL)
+
+The 24/7 AI guardian that detects drift between documentation and implementation.
 
 - **Config**: `context-management/config/semantic_models.yaml`
 - **Docs**: `context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md`
-- **Output**: `gs://elements-archive-2026/intelligence/`
+- **Output**: `context-management/reports/socratic_audit_*.md`
 
 
 ## Universal Property Binder (UPB)
@@ -177,33 +221,61 @@ The visualization intelligence layer - many-to-many binding between data and vis
 2. Run tests before commit
 3. Know which realm you're in (Particle/Wave/Observer)
 4. Large outputs → offload to GCS
+5. **NEVER stop without path forward** → priority matrix with confidence scores
 
-## Commit Convention: AI-Native
+## Handoff Protocol (MANDATORY)
 
-For significant commits, structure messages as **knowledge transfer artifacts** for future AI agents:
+Every session end MUST include:
+
+```markdown
+## Path Forward
+
+| Priority | Next Action | Confidence | Blocker |
+|----------|-------------|------------|---------|
+| P0 | [Immediate action] | 95% | None |
+| P1 | [High priority] | 85% | Needs X |
+| P2 | [Should do] | 70% | Blocked by Y |
+
+**Recommendation**: [What to do first based on goal]
+**Risk**: [Unknowns or concerns]
+```
+
+See `context-management/docs/agent_school/DOD.md` for full template.
+
+## Commit Convention: AI-Native (Enforced)
+
+**All commits must follow Conventional Commits format.** This is enforced by pre-commit hooks.
 
 ```
-<type>: <summary>
+<type>(<scope>): <subject>
+
+[optional body with details]
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+| Element | Required | Values |
+|---------|----------|--------|
+| **type** | Yes | `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert` |
+| **scope** | No | `collider`, `viz`, `agent`, `aci`, `hsl`, `refinery`, `archive` |
+| **subject** | Yes | Imperative, lowercase, no period |
+
+**Config:** `.pre-commit-config.yaml`, `commitlint.config.js`
+
+For significant commits, add structured body as **knowledge transfer artifact**:
+
+```
+feat(collider): Add topology health grading
 
 ## CHANGES
 | File | Description |
 |------|-------------|
 
-## API (if changed)
-// Usage: MODULE.function()
-
-## FINDING CODE
-grep -r "PATTERN" path/
-
 ## TESTING
-./collider full . --output .collider_report
+pytest tests/ -q
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
-
-Types: `feat`, `fix`, `refactor`, `docs`, `chore`
-
-This is a **pattern**, not automation. Apply it when commits are significant.
 
 ## Domain Handoff
 

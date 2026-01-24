@@ -230,10 +230,24 @@ Attention
 ## Non-Negotiables
 
 1. **Git is truth** - All state lives in files, commits are transactions
-2. **Never skip the RUN record** - Even quick fixes get documented
-3. **Log before doing** - Announce intent, then act
-4. **Handoff explicitly** - Next agent should understand state without reading code
-5. **Conservative confidence** - When unsure, score lower
+2. **Conventional Commits** - All commits must follow format: `<type>(<scope>): <subject>`
+3. **Never skip the RUN record** - Even quick fixes get documented
+4. **Log before doing** - Announce intent, then act
+5. **Handoff explicitly** - Next agent should understand state without reading code
+6. **Conservative confidence** - When unsure, score lower
+
+### Commit Format (Enforced by pre-commit hooks)
+
+```
+<type>(<scope>): <subject>
+
+[optional body]
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+**Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+**Scopes:** `collider`, `viz`, `agent`, `aci`, `hsl`, `refinery`, `archive` (optional but recommended)
 
 ---
 
@@ -249,8 +263,10 @@ Attention
 | Project config | `CLAUDE.md`, `context-management/docs/` |
 | Collider code | `standard-model-of-code/src/` |
 | AI tools | `context-management/tools/` |
+| **Commit hygiene** | `.pre-commit-config.yaml`, `commitlint.config.js` |
 | **Subsystem integration** | `.agent/SUBSYSTEM_INTEGRATION.md` |
 | **BARE spec** | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` |
+| **Background AI Layer** | `context-management/docs/BACKGROUND_AI_LAYER_MAP.md` |
 | **Consolidation report** | `.agent/docs/CONSOLIDATION_REPORT.md` |
 
 ---
@@ -258,6 +274,9 @@ Attention
 ## Quick Commands
 
 ```bash
+# Setup commit hooks (required once per clone)
+pre-commit install --hook-type commit-msg --hook-type pre-commit
+
 # Analyze codebase with Collider
 ./collider full <path> --output <dir>
 
@@ -277,12 +296,13 @@ python context-management/tools/archive/archive.py mirror
 
 | Field | Value |
 |-------|-------|
-| Kernel Version | 1.4.0 |
+| Kernel Version | 1.5.0 |
 | Created | 2026-01-22 |
-| Last Updated | 2026-01-23 |
+| Last Updated | 2026-01-24 |
 
 ### Changelog
 
+- **1.5.0** (2026-01-24): Added Conventional Commits as Non-Negotiable #2, pre-commit hooks setup
 - **1.4.0** (2026-01-23): Simplified state machine from 7 to 5 states (CUTTING_PLAN Phase 4)
 - **1.3.0** (2026-01-23): Enhanced boot protocol with mandatory claim verification (prevents multi-agent race conditions after compaction)
 - **1.2.0** (2026-01-23): Added Context Engineering section (lost-in-middle, token tiers, quality rules)
