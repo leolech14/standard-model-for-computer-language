@@ -293,9 +293,9 @@ def _determine_sets(profile: QueryProfile, tier: Tier) -> List[str]:
     if not sets:
         sets = ["theory"]
 
-    # Limit based on tier capacity
-    max_sets = 10 if tier == Tier.FLASH_DEEP else 5
-    return sets[:max_sets]
+    # NO CAP HERE - sanitize_sets() handles capping after alias/validation/dedup
+    # Early capping here would drop valid sets when invalid ones crowd the front
+    return sets
 
 
 def route_query(query: str, force_tier: Optional[Tier] = None, use_semantic: bool = True) -> RoutingDecision:

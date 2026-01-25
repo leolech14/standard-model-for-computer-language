@@ -2657,10 +2657,18 @@ Please provide a thorough, comprehensive answer based on the full project contex
                     print("[FLASH_DEEP] Cache unavailable, building full context...", file=sys.stderr)
 
                     # Load ALL sets for comprehensive analysis
-                    comprehensive_sets = decision.primary_sets or [
+                    raw_sets = decision.primary_sets or [
                         "pipeline", "theory", "architecture_review",
                         "agent_full", "visualization", "classifiers"
                     ]
+
+                    # Sanitize sets (FLASH_DEEP allows 10 sets for 2M context)
+                    valid_set_names = set(analysis_sets.keys())
+                    comprehensive_sets, dropped_sets = sanitize_sets(
+                        raw_sets, valid_set_names, max_sets=10
+                    )
+                    if dropped_sets:
+                        print(f"[FLASH_DEEP] Dropped invalid sets: {dropped_sets}", file=sys.stderr)
 
                     # Collect all files from all sets
                     all_files = []

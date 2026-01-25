@@ -89,8 +89,11 @@ class ElevationModel:
         mi = metrics.get('maintainability_index', 80)
 
         # Component contributions (see LANDSCAPE_IMPLEMENTATION_GUIDE.md)
+        # Use logarithmic scaling to prevent outliers from dominating
         cc_elev = math.log(max(1, cc / 5)) if cc > 0 else 0
-        fo_elev = max(0, (fo - 8) ** 2) / 16 if fo > 8 else 0
+        # Fan-out: use log scaling instead of quadratic to handle high fan-out gracefully
+        # log(1 + 816) ≈ 6.7 vs old formula (816)^2/16 = 41616
+        fo_elev = math.log1p(max(0, fo - 8)) if fo > 8 else 0
         loc_elev = math.log(loc / 100) if loc > 100 else 0
         mi_elev = -(mi - 80) / 20
 
@@ -127,6 +130,11 @@ class ElevationModel:
         result = {}
         for node in nodes:
             node_id = node.get('id', '')
+
+            # Skip synthetic boundary nodes (they skew metrics)
+            if node_id.startswith('__codome__::'):
+                continue
+
             metrics = {
                 'cyclomatic_complexity': node.get('cyclomatic_complexity', 1),
                 'fan_out': fan_out[node_id],
