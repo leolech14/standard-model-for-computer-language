@@ -29,7 +29,7 @@ Schema loader performs preflight validation:
 - External membrane rules enforced
 
 Usage:
-    from aci.research_engine import ResearchEngine
+    from aci.schema_orchestrator import ResearchEngine
 
     engine = ResearchEngine()
 
