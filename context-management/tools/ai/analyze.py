@@ -133,6 +133,19 @@ try:
 except ImportError:
     HAS_ACI = False
 
+# Import Research Engine (multi-configuration orchestration)
+try:
+    from aci import (
+        get_research_engine,
+        list_research_schemas,
+        describe_research_schema,
+        get_research_capabilities,
+        execute_research,
+    )
+    HAS_RESEARCH_ENGINE = True
+except ImportError:
+    HAS_RESEARCH_ENGINE = False
+
 # Import Industrial UI for styled output
 try:
     from industrial_ui import GeminiUI, Colors as C
@@ -2438,6 +2451,13 @@ Examples:
     parser.add_argument("--aci", action="store_true", help="Enable Adaptive Context Intelligence (auto-select tier and context)")
     parser.add_argument("--tier", choices=["instant", "rag", "long_context", "perplexity", "flash_deep", "deep", "hybrid"], help="Force specific ACI tier (deep = flash_deep = 2M context, hybrid = internal + external)")
     parser.add_argument("--aci-debug", action="store_true", help="Show detailed ACI routing decision")
+    # Research Schema arguments (multi-configuration orchestration)
+    parser.add_argument("--research", metavar="SCHEMA", help="Execute a predefined research schema (use --list-research-schemas)")
+    parser.add_argument("--research-custom", metavar="JSON", help="Execute custom ad-hoc research schema (JSON config)")
+    parser.add_argument("--list-research-schemas", action="store_true", help="List available research schemas")
+    parser.add_argument("--describe-schema", metavar="NAME", help="Show detailed schema description")
+    parser.add_argument("--research-capabilities", action="store_true", help="Show all research engine capabilities")
+    parser.add_argument("--override", action="append", metavar="KEY=VALUE", help="Override schema parameter (e.g., runs[0].token_budget=200000)")
     args = parser.parse_args()
 
     # Load config early for --list-sets and --recommend

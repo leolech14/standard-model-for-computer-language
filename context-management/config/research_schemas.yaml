@@ -1,0 +1,540 @@
+# Research Schemas Configuration
+# ================================
+# TARGET AUDIENCE: AI AGENTS
+#
+# This file defines reusable research patterns that orchestrate
+# multiple ACI queries with different configurations to produce
+# validated, multi-perspective answers.
+#
+# AI AGENT INSTRUCTIONS:
+# ----------------------
+# 1. Use --research <schema_name> to execute a predefined schema
+# 2. Use --research-custom <json> for ad-hoc configurations
+# 3. Use --list-research-schemas to discover available schemas
+# 4. Use --describe-schema <name> to see schema details
+#
+# JOYSTICK PARAMETERS (overridable per-run):
+# ------------------------------------------
+# - model: Which LLM to use
+# - tier: ACI execution tier (see TIER CATALOG below)
+# - sets: Which analysis_sets to load
+# - token_budget: Maximum tokens for context
+# - temperature: Model creativity (0.0-1.0)
+# - system_prompt: Override default behavior
+#
+# TIER CATALOG (validated on load):
+# ---------------------------------
+# - instant: Cached truths (<100ms, $0)
+# - rag: File Search with citations (~5s, $0.01)
+# - long_context: Full Gemini reasoning (~60s, $0.10)
+# - perplexity: External web research (~30s, $0.05)
+# - flash_deep: 2M context window (~90s, $0.20)
+# - hybrid: Internal + external combined (~120s, $0.15)
+#
+# RUN TYPES:
+# ----------
+# - internal: Uses repo context (sets, token_budget allowed)
+# - external: Web/API only (sets/token_budget IGNORED, membrane enforced)
+#
+# SYNTHESIS STRATEGIES:
+# --------------------
+# - consensus: Find agreement across runs (majority voting)
+# - quality_gradient: Compare answer quality at different depths
+# - dialectic: Thesis + antithesis → synthesis
+# - triangulation: Cross-reference multiple angles
+# - bayesian: Update confidence based on evidence types
+# - hierarchical: Multi-scale aggregation
+
+# =============================================================================
+# GLOBAL DEFAULTS
+# =============================================================================
+# All runs inherit these unless explicitly overridden.
+
+defaults:
+  model: "gemini-3-pro-preview"
+  tier: "long_context"
+  temperature: 0.2
+  token_budget: 100000
+  type: "internal"  # internal | external
+
+# =============================================================================
+# MODEL ALIASES (runtime validation)
+# =============================================================================
+# Canonical model IDs. Schema loader MUST validate against this list.
+
+model_catalog:
+  - "gemini-3-pro-preview"      # Primary reasoning model
+  - "gemini-2.5-pro"            # Stable fallback
+  - "gemini-2.0-flash-001"      # Fast, cost-effective
+  - "sonar-pro"                 # Perplexity default
+
+# =============================================================================
+# SCHEMA DEFINITIONS
+# =============================================================================
+
+research_schemas:
+
+  # ---------------------------------------------------------------------------
+  # VALIDATION_TRIO: Cross-model verification for high-stakes claims
+  # ---------------------------------------------------------------------------
+  # USE WHEN: You need high confidence in an answer
+  # COST: ~$0.50 (3 API calls)
+  # TIME: ~90s (parallel) or ~180s (sequential)
+  # ---------------------------------------------------------------------------
+  validation_trio:
+    description: "Cross-model verification: Run same query through 3 configurations"
+    purpose: "Detect hallucinations and build consensus"
+    recommended_for:
+      - "Architectural claims"
+      - "Count/inventory questions"
+      - "Existence checks (does X exist?)"
+
+    runs:
+      - name: "reasoning"
+        description: "Deep reasoning with full context"
+        type: "internal"
+        model: "gemini-3-pro-preview"
+        tier: "long_context"
+        sets: ["theory", "pipeline"]
+        token_budget: 150000
+        temperature: 0.2
+
+      - name: "fast"
+        description: "Quick validation with focused context"
+        type: "internal"
+        model: "gemini-2.0-flash-001"
+        tier: "long_context"
+        sets: ["theory"]
+        token_budget: 50000
+        temperature: 0.1
+
+      - name: "external"
+        description: "External grounding (if applicable)"
+        type: "external"
+        tier: "perplexity"
+        # DSL condition: scope must be EXTERNAL or HYBRID
+        condition:
+          scope_in: ["EXTERNAL", "HYBRID"]
+        # SKIP if condition fails (do NOT duplicate reasoning)
+        fallback: "skip"
+
+    synthesis:
+      strategy: "consensus"
+      min_agreement: 2  # At least 2/3 must agree
+      # CRITICAL: Require distinct sources to prevent artificial agreement
+      distinct_sources_required: true
+      output_format: "structured"
+      fields:
+        - consensus_answer
+        - agreement_score
+        - disagreements
+        - citations_by_run
+        - sources_used  # Which runs actually contributed
+
+  # ---------------------------------------------------------------------------
+  # DEPTH_LADDER: Find optimal context size for query type
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Calibrating token budgets or testing context sensitivity
+  # COST: ~$0.80 (4 API calls at increasing sizes)
+  # TIME: ~120s
+  # ---------------------------------------------------------------------------
+  depth_ladder:
+    description: "Test answer quality at increasing context depths"
+    purpose: "Find minimum viable context for a query class"
+    recommended_for:
+      - "Query type calibration"
+      - "Cost optimization research"
+      - "Context sensitivity analysis"
+
+    runs:
+      - name: "minimal"
+        description: "Minimal context - test baseline"
+        type: "internal"
+        sets: ["theory"]
+        token_budget: 10000
+        label: "10K"
+
+      - name: "focused"
+        description: "Focused context - single domain"
+        type: "internal"
+        sets: ["pipeline"]
+        token_budget: 50000
+        label: "50K"
+
+      - name: "balanced"
+        description: "Balanced context - multiple domains"
+        type: "internal"
+        sets: ["pipeline", "theory", "classifiers"]
+        token_budget: 150000
+        label: "150K"
+
+      - name: "comprehensive"
+        description: "Maximum context - full analysis"
+        type: "internal"
+        tier: "flash_deep"
+        sets: ["architecture_review", "agent_full", "theory"]
+        token_budget: 500000
+        label: "500K"
+
+    synthesis:
+      strategy: "quality_gradient"
+      # DETERMINISTIC metrics only (no LLM self-judgment)
+      metrics:
+        deterministic:
+          - citation_count: "Count of file:line references"
+          - output_length: "Response token count"
+          - set_coverage: "Fraction of input sets mentioned"
+          - code_block_count: "Number of code snippets"
+        # Qualitative metrics require separate judge run
+        qualitative_judge:
+          enabled: false  # Set true to add judge run
+          model: "gemini-2.0-flash-001"
+          criteria:
+            - completeness
+            - specificity
+            - confidence
+      output_format: "ladder_report"
+
+  # ---------------------------------------------------------------------------
+  # ADVERSARIAL_PAIR: Thesis vs Antithesis → Synthesis
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Testing robustness of a claim or hypothesis
+  # COST: ~$0.40 (2 API calls + synthesis)
+  # TIME: ~90s
+  # ---------------------------------------------------------------------------
+  adversarial_pair:
+    description: "Generate opposing perspectives, then reconcile"
+    purpose: "Stress-test claims and find edge cases"
+    recommended_for:
+      - "Hypothesis validation"
+      - "Design decision evaluation"
+      - "Risk assessment"
+
+    runs:
+      - name: "advocate"
+        description: "Find supporting evidence"
+        type: "internal"
+        system_prompt: |
+          You are an ADVOCATE. Your task is to find ALL evidence that SUPPORTS
+          the following claim. Be thorough and cite specific code locations.
+          Do not mention counterarguments.
+        sets: ["theory", "pipeline", "docs_core"]
+        temperature: 0.3
+
+      - name: "skeptic"
+        description: "Find opposing evidence"
+        type: "internal"
+        system_prompt: |
+          You are a SKEPTIC. Your task is to find ALL evidence that CONTRADICTS
+          or WEAKENS the following claim. Look for edge cases, exceptions, and
+          gaps. Do not mention supporting evidence.
+        sets: ["theory", "pipeline", "docs_core"]
+        temperature: 0.3
+
+    synthesis:
+      strategy: "dialectic"
+      output_format: "structured"
+      fields:
+        - thesis: "Supporting arguments"
+        - antithesis: "Opposing arguments"
+        - synthesis: "Reconciled position"
+        - robustness_score: "0-100"
+        - vulnerabilities: "Identified weak points"
+
+  # ---------------------------------------------------------------------------
+  # FORENSIC_INVESTIGATION: Multi-angle bug/issue analysis
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Debugging complex issues
+  # COST: ~$0.60 (4 specialized runs)
+  # TIME: ~150s
+  # ---------------------------------------------------------------------------
+  forensic_investigation:
+    description: "Investigate issue from multiple angles"
+    purpose: "Root cause analysis through triangulation"
+    recommended_for:
+      - "Bug investigation"
+      - "Test failure analysis"
+      - "Performance regression hunting"
+
+    runs:
+      - name: "structural"
+        description: "Analyze code structure"
+        type: "internal"
+        system_prompt: |
+          Analyze the CODE STRUCTURE that could cause this issue.
+          Focus on: function signatures, class hierarchies, data flow.
+          Cite specific files and line numbers.
+        sets: ["pipeline", "classifiers"]
+
+      - name: "behavioral"
+        description: "Analyze runtime behavior"
+        type: "internal"
+        system_prompt: |
+          Analyze the RUNTIME BEHAVIOR that could cause this issue.
+          Focus on: control flow, state mutations, error paths.
+          Cite specific functions and their interactions.
+        sets: ["pipeline", "tests"]
+
+      - name: "dependency"
+        description: "Analyze dependencies"
+        type: "internal"
+        system_prompt: |
+          Trace DEPENDENCIES that could be involved in this issue.
+          Focus on: imports, external calls, configuration.
+          Cite specific dependency chains.
+        sets: ["schema", "constraints"]
+
+      - name: "historical"
+        description: "Check for recent changes"
+        type: "internal"
+        system_prompt: |
+          Based on the code patterns, identify what CHANGES could have
+          introduced this issue. Look for: incomplete refactors,
+          missing migrations, version mismatches.
+        sets: ["docs_core", "research_core"]
+
+    synthesis:
+      strategy: "triangulation"
+      output_format: "investigation_report"
+      fields:
+        - primary_hypothesis
+        - supporting_evidence
+        - alternative_hypotheses
+        - recommended_actions
+        - confidence_level
+
+  # ---------------------------------------------------------------------------
+  # CONFIDENCE_CALIBRATION: Bayesian evidence evaluation
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Need precise confidence score for a claim
+  # COST: ~$0.50 (4 evidence-gathering runs)
+  # TIME: ~120s
+  # ---------------------------------------------------------------------------
+  confidence_calibration:
+    description: "Calibrate confidence through evidence classification"
+    purpose: "Produce justified confidence scores"
+    recommended_for:
+      - "Claim verification"
+      - "Documentation accuracy"
+      - "Architecture compliance"
+
+    runs:
+      - name: "direct_evidence"
+        description: "Find direct proof"
+        type: "internal"
+        system_prompt: |
+          Find DIRECT evidence for this claim. Direct evidence means:
+          - Explicit code that implements the claim
+          - Documentation that states the claim
+          - Tests that verify the claim
+          Provide file:line citations for each piece of evidence.
+        citation_required: true
+        sets: ["pipeline", "theory", "tests"]
+
+      - name: "indirect_evidence"
+        description: "Find circumstantial support"
+        type: "internal"
+        system_prompt: |
+          Find INDIRECT evidence for this claim. Indirect evidence means:
+          - Related code that implies the claim
+          - Patterns consistent with the claim
+          - Absence of contradicting code
+          Explain the reasoning chain for each piece.
+        sets: ["pipeline", "schema"]
+
+      - name: "counter_evidence"
+        description: "Find contradictions"
+        type: "internal"
+        system_prompt: |
+          Find COUNTER-EVIDENCE against this claim. Look for:
+          - Code that contradicts the claim
+          - Documentation inconsistencies
+          - Test failures or gaps
+          Be thorough - even weak counter-evidence matters.
+        sets: ["pipeline", "theory", "tests"]
+
+      - name: "external_check"
+        description: "External validation"
+        type: "external"
+        tier: "perplexity"
+        # DSL condition: run only if scope is not purely internal
+        condition:
+          scope_not: "INTERNAL"
+        fallback: "skip"
+
+    synthesis:
+      strategy: "bayesian"
+      prior: 0.5  # Start with maximum uncertainty
+      weights:
+        direct_evidence: 0.4
+        indirect_evidence: 0.2
+        counter_evidence: -0.3
+        external_check: 0.1
+      output_format: "confidence_scorecard"
+
+  # ---------------------------------------------------------------------------
+  # SEMANTIC_PROBE: Test understanding at different abstraction levels
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Exploring a concept across the scale hierarchy
+  # COST: ~$0.40 (3 runs at different levels)
+  # TIME: ~90s
+  # ---------------------------------------------------------------------------
+  semantic_probe:
+    description: "Probe concept at different abstraction levels"
+    purpose: "Understand how a concept manifests across scales"
+    recommended_for:
+      - "Concept exploration"
+      - "Architecture understanding"
+      - "Scale-level analysis"
+
+    runs:
+      - name: "node_level"
+        description: "L3 NODE: Function/method level"
+        type: "internal"
+        system_prompt: |
+          Analyze this at the NODE level (L3 - functions/methods).
+          What specific functions implement this concept?
+          Cite function names and signatures.
+        sets: ["pipeline", "classifiers"]
+
+      - name: "module_level"
+        description: "L5 MODULE: File level"
+        type: "internal"
+        system_prompt: |
+          Analyze this at the MODULE level (L5 - files).
+          Which files are responsible for this concept?
+          How do they organize the functionality?
+        sets: ["pipeline", "docs_core"]
+
+      - name: "system_level"
+        description: "L7 SYSTEM: Subsystem level"
+        type: "internal"
+        system_prompt: |
+          Analyze this at the SYSTEM level (L7 - subsystems).
+          Which subsystems interact around this concept?
+          What are the integration points?
+        sets: ["agent_kernel", "theory"]
+
+    synthesis:
+      strategy: "hierarchical"
+      output_format: "scale_map"
+      fields:
+        - l3_nodes: "Functions involved"
+        - l5_modules: "Files involved"
+        - l7_systems: "Subsystems involved"
+        - cross_level_flows: "How data/control flows across levels"
+
+  # ---------------------------------------------------------------------------
+  # QUICK_VALIDATE: Fast 2-run validation (cost-optimized)
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Need quick validation without full trio
+  # COST: ~$0.15 (2 cheap runs)
+  # TIME: ~30s
+  # ---------------------------------------------------------------------------
+  quick_validate:
+    description: "Fast validation with minimal cost"
+    purpose: "Quick sanity check for simple claims"
+    recommended_for:
+      - "Simple existence checks"
+      - "Count verification"
+      - "Location queries"
+
+    runs:
+      - name: "primary"
+        type: "internal"
+        model: "gemini-2.0-flash-001"
+        sets: ["theory"]
+        token_budget: 30000
+        temperature: 0.1
+
+      - name: "verify"
+        type: "internal"
+        model: "gemini-2.0-flash-001"
+        sets: ["pipeline"]
+        token_budget: 30000
+        temperature: 0.1
+        system_prompt: "Verify the following claim with code evidence."
+
+    synthesis:
+      strategy: "consensus"
+      min_agreement: 2
+      distinct_sources_required: true
+      output_format: "brief"
+
+# =============================================================================
+# EXTERNAL MEMBRANE ENFORCEMENT
+# =============================================================================
+# Runs with type: "external" have these rules ENFORCED by the loader:
+#
+# 1. sets: IGNORED (external queries don't use repo context)
+# 2. token_budget: IGNORED (no context to budget)
+# 3. system_prompt: SANITIZED (no "cite file:line" allowed)
+# 4. Query: Passed through prepare_perplexity_query() ALWAYS
+#
+# Violation = loader error, not silent override.
+
+external_membrane:
+  strict: true
+  banned_in_external_prompts:
+    - "file:line"
+    - "cite specific code"
+    - "reference the repository"
+    - "look in the codebase"
+
+# =============================================================================
+# GUARDRAILS
+# =============================================================================
+
+guardrails:
+  max_token_budget_per_run: 1000000
+  max_token_budget_per_schema: 2000000
+  max_runs_per_schema: 10
+  rate_limit_per_minute: 30
+  cost_alert_threshold_usd: 1.00
+
+# =============================================================================
+# AI AGENT QUICK REFERENCE
+# =============================================================================
+#
+# SCHEMA SELECTION GUIDE:
+# -----------------------
+# | Need                          | Use Schema            |
+# |-------------------------------|-----------------------|
+# | High confidence answer        | validation_trio       |
+# | Optimize token budget         | depth_ladder          |
+# | Test hypothesis robustness    | adversarial_pair      |
+# | Debug complex issue           | forensic_investigation|
+# | Precise confidence score      | confidence_calibration|
+# | Explore across scale levels   | semantic_probe        |
+# | Quick sanity check            | quick_validate        |
+#
+# PARAMETER OVERRIDE SYNTAX:
+# --------------------------
+# python analyze.py --research validation_trio \
+#   --override "runs[0].token_budget=200000" \
+#   --override "runs[1].sets=['pipeline','schema']" \
+#   "Your query here"
+#
+# CUSTOM SCHEMA SYNTAX:
+# ---------------------
+# python analyze.py --research-custom '{
+#   "runs": [
+#     {"name": "a", "model": "gemini-3-pro-preview", "type": "internal", "sets": ["theory"]},
+#     {"name": "b", "type": "external", "tier": "perplexity"}
+#   ],
+#   "synthesis": {"strategy": "consensus", "distinct_sources_required": true}
+# }' "Your query here"
+#
+# OUTPUT FORMATS:
+# ---------------
+# --output-format structured  (default: YAML)
+# --output-format json
+# --output-format markdown
+# --output-format brief
+#
+# CONDITION DSL:
+# --------------
+# scope_in: ["EXTERNAL", "HYBRID"]   # Scope must be one of these
+# scope_not: "INTERNAL"               # Scope must NOT be this
+# complexity_gte: 3                   # Complexity >= threshold
+# intent_in: ["EXPLAIN", "ANALYZE"]   # Intent must match

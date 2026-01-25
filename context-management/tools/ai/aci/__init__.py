@@ -108,6 +108,21 @@ from .refinery import (
     YamlChunker,
 )
 
+from .research_engine import (
+    ResearchEngine,
+    ResearchSchema,
+    RunConfig,
+    RunResult,
+    CompositeResult,
+    SynthesisStrategy,
+    OutputFormat,
+    get_research_engine,
+    execute_research,
+    list_research_schemas,
+    describe_research_schema,
+    get_research_capabilities,
+)
+
 __all__ = [
     # Configuration
     "ACI_CONFIG",
@@ -155,6 +170,19 @@ __all__ = [
     "PythonChunker",
     "MarkdownChunker",
     "YamlChunker",
+    # Research Engine (Multi-configuration orchestration)
+    "ResearchEngine",
+    "ResearchSchema",
+    "RunConfig",
+    "RunResult",
+    "CompositeResult",
+    "SynthesisStrategy",
+    "OutputFormat",
+    "get_research_engine",
+    "execute_research",
+    "list_research_schemas",
+    "describe_research_schema",
+    "get_research_capabilities",
 ]
 
 
