@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T20:25:33.245915",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "STRUCTURED DATA REQUEST: AI agent onboarding optimization - second pass.\n\nContext: We redesigned an AI agent onboarding system. First review cut required reading from 1,219 lines to 138 lines. Second review by fresh agent found new issues.\n\nISSUES FOUND:\n1. Conflicting boot instructions (old doc says boot.sh, new doc says ./concierge)\n2. Task inbox shows count (34 items) but no preview - agent can't prioritize\n3. No value proposition - agent doesn't know WHY the system matters\n4. Tutorial too skeletal (6 lines) vs theory docs (340+ lines)\n5. Physics metaphors (Wave/Particle/Observer for code/context/agent) add cognitive load\n6. Glossary overwhelming before first action\n\nProvide STRUCTURED DATA:\n\n1. PRIORITY MATRIX:\n| Issue | Impact (1-10) | Effort (1-10) | Priority Score | Rationale |\n\n2. MINIMUM VIABLE GLOSSARY:\n| Term | Definition (1 sentence) | When Needed |\n(What 5-10 terms does a day-1 agent ACTUALLY need?)\n\n3. VALUE PROPOSITION TEMPLATE:\n| Benefit | Pain it prevents | One-liner |\n\n4. METAPHOR DECISION MATRIX:\n| Metaphor | Keep/Remove | Where to Keep | Where to Remove |\n\n5. INBOX PREVIEW SPEC:\n| Field | Show in Preview? | Why |\n\nNo prose. Tables only.",
+    "query_length": 1174,
+    "checksum": "sha256:79faf8704ed6be6772f7e30e64dbe7a3663828b0c6172f334ad07bca64b85e1a"
+  },
+  "response": {
+    "id": "5eb6b3e6-3a06-4cff-901c-d8cbff816086",
+    "model": "sonar-pro",
+    "created": 1769383533,
+    "usage": {
+      "prompt_tokens": 298,
+      "completion_tokens": 821,
+      "total_tokens": 1119,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.012,
+        "request_cost": 0.006,
+        "total_cost": 0.019
+      }
+    },
+    "citations": [
+      "https://www.vonage.com/resources/articles/agent-onboarding/",
+      "https://www.moveworks.com/us/en/resources/blog/what-are-modern-employee-onboarding-best-practices",
+      "https://devblogs.microsoft.com/ise/agent-onboarding-process-for-agentic-systems/",
+      "https://www.moxo.com/blog/ai-onboarding-best-practices",
+      "https://blogs.nvidia.com/blog/onboarding-teams-ai-agents-productivity-revenue-businesses/",
+      "https://www.hrmorning.com/articles/onboarding-ai/",
+      "https://support.zendesk.com/hc/en-us/articles/8357751802138-Best-practices-for-testing-advanced-AI-agents"
+    ],
+    "search_results": [
+      {
+        "title": "Agent Onboarding: Ramp Agents 2X Faster | Boost CX ROI - Vonage",
+        "url": "https://www.vonage.com/resources/articles/agent-onboarding/",
+        "date": "2025-12-19",
+        "last_updated": "2026-01-16",
+        "snippet": "AI workspaces cut training time, lower attrition, increase agent efficiency, improve call quality with real-time coaching, CRM workflows, ...",
+        "source": "web"
+      },
+      {
+        "title": "A Guide to Employee Onboarding Best Practices - Moveworks",
+        "url": "https://www.moveworks.com/us/en/resources/blog/what-are-modern-employee-onboarding-best-practices",
+        "date": "2025-09-17",
+        "last_updated": "2026-01-25",
+        "snippet": "AI fix: Use centralized dashboards or tracking systems that give all stakeholders real-time visibility. Set up AI-powered alerts, reminders, and ...",
+        "source": "web"
+      },
+      {
+        "title": "Agent Onboarding Process for Agentic Systems: Maintain accuracy ...",
+        "url": "https://devblogs.microsoft.com/ise/agent-onboarding-process-for-agentic-systems/",
+        "date": "2025-12-10",
+        "last_updated": "2026-01-24",
+        "snippet": "Best Practices for Naming Agents · Ensure Uniqueness: Assign each agent a unique name to avoid conflicts or errors during orchestration. · Be ...",
+        "source": "web"
+      },
+      {
+        "title": "AI onboarding best practices: Essential checklist for businesses ...",
+        "url": "https://www.moxo.com/blog/ai-onboarding-best-practices",
+        "date": "2026-01-20",
+        "last_updated": "2026-01-20",
+        "snippet": "AI projects fail without onboarding. Get best practices and a practical checklist for objectives, exec buy-in, data readiness, ...",
+        "source": "web"
+      },
+      {
+        "title": "AI On: How Onboarding Teams of AI Agents Drives Productivity and ...",
+        "url": "https://blogs.nvidia.com/blog/onboarding-teams-ai-agents-productivity-revenue-businesses/",
+        "date": "2025-09-19",
+        "last_updated": "2025-09-19",
+        "snippet": "1. Choose the Right AI Agent for the Task · 2. Upskill AI Agents by Connecting Them to Data · 3. Onboard AI Agents Into Lines of Business · 4.",
+        "source": "web"
+      },
+      {
+        "title": "Onboarding AI in the workplace: 6 best practices for HR - HRMorning",
+        "url": "https://www.hrmorning.com/articles/onboarding-ai/",
+        "date": "2023-12-04",
+        "last_updated": "2026-01-24",
+        "snippet": "1. Remember previous tech shifts · 2. Identify support objectives · 3. Align business objectives · 4. Ensure AI supplements · 5. Avoid replacing ...",
+        "source": "web"
+      },
+      {
+        "title": "Best practices for testing advanced AI agents - Zendesk help",
+        "url": "https://support.zendesk.com/hc/en-us/articles/8357751802138-Best-practices-for-testing-advanced-AI-agents",
+        "date": "2025-09-05",
+        "last_updated": "2026-01-23",
+        "snippet": "✓ DO take screenshots to accompany your recommendations and feedback. ✓ DO take screenshots of any and all scenarios in which the AI agents fail ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "### 1. PRIORITY MATRIX\n| Issue | Impact (1-10) | Effort (1-10) | Priority Score | Rationale |\n|-------|---------------|---------------|----------------|-----------|\n| 1. Conflicting boot instructions | 10 | 2 | 8 | Blocks initial access; critical for day-1 start; quick fix aligns docs[1][3] |\n| 2. Task inbox shows count but no preview | 9 | 3 | 6 | Prevents prioritization; real-time visibility boosts efficiency[1][2] |\n| 3. No value proposition | 8 | 1 | 7 | Reduces motivation; clear benefits accelerate ramp-up[1][2] |\n| 4. Tutorial too skeletal vs theory docs | 7 | 4 | 3 | Imbalances learning; embed structured paths[1][2] |\n| 5. Physics metaphors add cognitive load | 6 | 1 | 5 | Increases confusion; simplify for clarity[1] |\n| 6. Glossary overwhelming before first action | 5 | 2 | 3 | Delays action; defer to need[2][3] |\n\n### 2. MINIMUM VIABLE GLOSSARY\n| Term | Definition (1 sentence) | When Needed |\n|------|--------------------------|-------------|\n| Boot | Command to start the AI agent system (use ./concierge). | First login |\n| Inbox | Queue of pending tasks with count and previews for prioritization. | Daily task review |\n| Concierge | Primary executable for initializing the agent environment. | System startup |\n| Wave/Particle/Observer | Conceptual model for code (wave), context (particle), agent (observer) interactions. | Advanced debugging |\n| Ramp-up | Time to achieve full productivity via structured onboarding. | Progress tracking |\n| Agent Assist | Real-time AI guidance during tasks. | Live interactions |\n| Golden Dataset | Benchmark data for agent evaluation and onboarding. | Performance checks |\n\n### 3. VALUE PROPOSITION TEMPLATE\n| Benefit | Pain it prevents | One-liner |\n|---------|------------------|-----------|\n| Faster ramp-up | Prolonged confusion and errors | \"Ramp 2X faster with AI-guided onboarding, reducing errors from day one.\"[1] |\n| Clear task prioritization | Inbox overload without previews | \"Preview tasks instantly to focus on high-impact work, not guesswork.\"[2] |\n| Reduced cognitive load | Overwhelming docs and metaphors | \"Streamlined guides deliver clarity, so you learn by doing, not reading.\"[1] |\n| Consistent performance | Conflicting instructions | \"Unified boot process ensures reliable starts every time.\"[3] |\n| Ongoing support | Skeletal tutorials | \"Embedded coaching turns theory into immediate productivity.\"[1][2] |\n\n### 4. METAPHOR DECISION MATRIX\n| Metaphor | Keep/Remove | Where to Keep | Where to Remove |\n|----------|-------------|---------------|-----------------|\n| Wave (code) | Remove | Advanced theory docs | Boot, tutorial, glossary |\n| Particle (context) | Remove | Deep reference guides | Inbox, day-1 onboarding |\n| Observer (agent) | Keep | Glossary (minimal) | Tutorials, initial instructions |\n\n### 5. INBOX PREVIEW SPEC\n| Field | Show in Preview? | Why |\n|-------|-------------------|-----|\n| Task Title | Yes | Quick identification and prioritization[1][2] |\n| Priority Level | Yes | Enables focus on urgent items[2] |\n| Snippet/Preview Text | Yes | Context without full open; reduces clicks[1] |\n| Assignee | Yes | Clarity on ownership and handoffs[3] |\n| Due Date | Yes | Time sensitivity for planning[2] |\n| Status | Yes | Avoid duplicates; track progress[1] |\n| Full Description | No | Prevents overload; expand on click |"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

@@ -1,7 +1,8 @@
 # Agent Task Registry - Dashboard
 
 > Quick view of all tasks and opportunities.
-> **Updated:** 2026-01-23 (Post-Consolidation)
+> **Updated:** 2026-01-25
+> **Concerns:** See `standard-model-of-code/docs/OPEN_CONCERNS.md`
 
 ---
 

@@ -1,0 +1,470 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T14:56:49.091223",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "I'm developing software with AI coding agents (Claude, Copilot, Cursor, etc.) and facing a specific problem: multiple AI sessions make changes without committing, leading to 300+ uncommitted files that neither I nor the AI agents fully understand.\n\nWhat are modern solutions for this problem? I'm looking for:\n\n1. Git workflows or tools designed for AI-assisted development (auto-commit strategies, semantic commits)\n2. Open-source tools that track AI agent changes and auto-checkpoint\n3. Development environment configurations that enforce commit discipline\n4. Any emerging best practices for human-AI pair programming hygiene\n5. Tools that can retroactively analyze uncommitted changes and suggest logical commit groupings\n\nI want practical solutions - could be git hooks, CLI tools, IDE plugins, workflow patterns, or configuration approaches. Preferably open-source or built into existing tools.",
+    "query_length": 899,
+    "checksum": "sha256:2748c0fcec2b81c5ad4aa382f737b974fdd8f84b017b3429d8dd213851708bef"
+  },
+  "response": {
+    "id": "11bf2efe-3abb-4bb1-997a-911fd6538c1d",
+    "model": "sonar-deep-research",
+    "created": 1769277409,
+    "usage": {
+      "prompt_tokens": 175,
+      "completion_tokens": 5131,
+      "total_tokens": 5306,
+      "citation_tokens": 52194,
+      "num_search_queries": 30,
+      "reasoning_tokens": 327864,
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.041,
+        "citation_tokens_cost": 0.104,
+        "reasoning_tokens_cost": 0.984,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.279
+      }
+    },
+    "citations": [
+      "https://blog.gitbutler.com/gitbutler-agent-assist",
+      "https://www.conventionalcommits.org/en/about/",
+      "https://forgecode.dev/blog/ai-agent-best-practices/",
+      "https://www.tensorzero.com/blog/automatically-evaluating-ai-coding-assistants-with-each-git-commit/",
+      "https://github.com/semantic-release/semantic-release",
+      "https://www.harness.io/harness-devops-academy/version-control-system-best-practices",
+      "https://pypi.org/project/git-autocommit-hook/",
+      "https://dev.to/zhangzewei/pre-commit-with-husky-lint-staged-2kcm",
+      "https://docs.qodo.ai/qodo-documentation/qodo-gen/code-review/review-uncommitted-changes",
+      "https://pre-commit.com",
+      "https://github.com/lint-staged/lint-staged",
+      "https://www.jetbrains.com/help/idea/managing-changelists.html",
+      "https://cursor.com/docs/integrations/git",
+      "https://github.blog/changelog/2025-11-13-manage-copilot-coding-agent-tasks-in-visual-studio-code/",
+      "https://github.com/opencode-ai/opencode",
+      "https://cursor.com/docs/integrations/github",
+      "https://github.com/fork-dev/TrackerWin/issues/2100",
+      "https://refact.ai",
+      "https://www.datacamp.com/tutorial/git-reset-soft-complete-guide",
+      "https://github.com/di-sukharev/opencommit",
+      "https://dev.to/alfreedom/automate-your-changelog-with-git-cliff-and-keep-a-changelog-2go8",
+      "https://git-scm.com/docs/git-reset",
+      "https://dev.to/disukharev/opencommit-gpt-cli-to-auto-generate-impressive-commits-in-1-second-46dh",
+      "https://git-cliff.org",
+      "https://github.com/newsroom/press-releases/coding-agent-for-github-copilot",
+      "https://code.claude.com/docs/en/checkpointing",
+      "https://www.datacamp.com/tutorial/windsurf-ai-agentic-code-editor",
+      "https://github.blog/changelog/2025-11-13-manage-copilot-coding-agent-tasks-in-visual-studio-code/",
+      "https://github.com/p32929/ccheckpoints",
+      "https://windsurf.com",
+      "https://github.com/renatogalera/ai-commit",
+      "https://github.com/JetBrains-Research/PyNose",
+      "https://monorepo.tools/ai",
+      "https://www.ksred.com/automating-git-commits-using-ai/",
+      "https://www.jit.io/resources/appsec-tools/top-python-code-analysis-tools-to-improve-code-quality",
+      "https://graphite.com/guides/strategies-managing-dependencies-monorepo",
+      "https://aider.chat",
+      "https://dev.to/iredox10/mastering-git-stash-a-handy-tool-for-managing-uncommitted-changes-4ba3",
+      "https://learn.microsoft.com/en-us/visualstudio/ide/copilot-agent-mode?view=visualstudio",
+      "https://www.youtube.com/watch?v=3skLPyFL8xU",
+      "https://www.atlassian.com/git/tutorials/saving-changes/git-stash",
+      "https://davidmelamed.com/2025/08/08/overview-of-advanced-ai-coding-agents-august-2025/",
+      "https://blog.itdepends.be/parallel-workflows-git-worktrees-agents/",
+      "https://commitizen-tools.github.io/commitizen/",
+      "https://code.visualstudio.com/docs/getstarted/tips-and-tricks",
+      "https://news.ycombinator.com/item?id=46027947",
+      "https://github.com/commitizen/cz-cli",
+      "https://forum.cursor.com/t/smarter-diff-visualization-for-ai-code-edits-like-git-in-visual-studio/92375",
+      "https://blog.gitbutler.com/automate-your-ai-workflows-with-claude-code-hooks",
+      "https://graphite.com/guides/how-do-stacked-diffs-work",
+      "https://www.ranger.net/post/version-control-best-practices-ai-code",
+      "https://blog.gitbutler.com/stacked-branches-with-gitbutler",
+      "https://newsletter.pragmaticengineer.com/p/stacked-diffs",
+      "https://github.com/f/git-rewrite-commits",
+      "https://www.kernel.org/pub/software/scm/git/docs/git-diff-index.html",
+      "https://nx.dev/docs/features/enhance-ai",
+      "https://www.lyzr.ai/blog/agent-orchestration/",
+      "https://git-scm.com/docs/git-diff-index",
+      "https://github.com/nrwl/nx/issues/5570",
+      "https://www.epam.com/insights/ai/blogs/single-responsibility-agents-and-multi-agent-workflows"
+    ],
+    "search_results": [
+      {
+        "title": "Getting Started With GitButler Agents | Butler's Log",
+        "url": "https://blog.gitbutler.com/gitbutler-agent-assist",
+        "snippet": "An automatic AI session per branch · Automatic commit per prompt with context-driven commit messages · The ability to run multiple AI tasks in ...",
+        "source": "web"
+      },
+      {
+        "title": "Tools - Conventional Commits",
+        "url": "https://www.conventionalcommits.org/en/about/",
+        "snippet": "git-mkver: A tool to automatically apply Semantic Versioning to git repositories based on Conventional Commits. git-semver: A cli tool for calculating the ...",
+        "source": "web"
+      },
+      {
+        "title": "AI Agent Best Practices: 12 Lessons from AI Pair Programming for ...",
+        "url": "https://forgecode.dev/blog/ai-agent-best-practices/",
+        "snippet": "5. Version Control Is Your Safety Net​ · Commit granularly with git add -p so diffs stay readable · Never let uncommitted changes pile up: clean ...",
+        "source": "web"
+      },
+      {
+        "title": "Automatically Evaluating AI Coding Assistants with Each Git Commit",
+        "url": "https://www.tensorzero.com/blog/automatically-evaluating-ai-coding-assistants-with-each-git-commit/",
+        "snippet": "We'd need to link git commits to the set of inferences that might have contributed to it. Each commit might contain a mix of code written by a ...",
+        "source": "web"
+      },
+      {
+        "title": "semantic-release/semantic-release: :package::rocket - GitHub",
+        "url": "https://github.com/semantic-release/semantic-release",
+        "snippet": "semantic-release automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing ...",
+        "source": "web"
+      },
+      {
+        "title": "Best practices for version control to enhance development workflows",
+        "url": "https://www.harness.io/harness-devops-academy/version-control-system-best-practices",
+        "snippet": "In this article, you'll learn crucial best practices to keep your repository organized, streamline branching and merging, maintain security, and leverage ...",
+        "source": "web"
+      },
+      {
+        "title": "git-autocommit-hook - PyPI",
+        "url": "https://pypi.org/project/git-autocommit-hook/",
+        "snippet": "Automatically pre-fills commit messages using git hooks. Optionally uses the mistral function-calling API to let the model access other ...",
+        "source": "web"
+      },
+      {
+        "title": "Pre-commit with husky & lint-staged - DEV Community",
+        "url": "https://dev.to/zhangzewei/pre-commit-with-husky-lint-staged-2kcm",
+        "snippet": "Husky is a popular Git hook tool that helps developers enforce and automate certain actions and scripts before committing or pushing code to a Git repository.",
+        "source": "web"
+      },
+      {
+        "title": "Review Uncommitted Changes | IDE - Qodo Documentation",
+        "url": "https://docs.qodo.ai/qodo-documentation/qodo-gen/code-review/review-uncommitted-changes",
+        "snippet": "Thematic Walkthrough Groups modified files by topics such as features, fixes, refactors, and more - helping you review related changes together.",
+        "source": "web"
+      },
+      {
+        "title": "pre-commit",
+        "url": "https://pre-commit.com",
+        "snippet": "Git hook scripts are useful for identifying simple issues before submission to code review. We run our hooks on every commit to automatically point out ...",
+        "source": "web"
+      },
+      {
+        "title": "lint-staged/lint-staged: — Run tasks like formatters and ... - GitHub",
+        "url": "https://github.com/lint-staged/lint-staged",
+        "snippet": "This project contains a script that will run arbitrary shell tasks with a list of staged files as an argument, filtered by a specified glob pattern.",
+        "source": "web"
+      },
+      {
+        "title": "Group changes into changelists | IntelliJ IDEA - JetBrains",
+        "url": "https://www.jetbrains.com/help/idea/managing-changelists.html",
+        "snippet": "With changelists, you can group changes related to different tasks and commit these sets of changes independently.",
+        "source": "web"
+      },
+      {
+        "title": "Git | Cursor Docs",
+        "url": "https://cursor.com/docs/integrations/git",
+        "snippet": "Cursor provides AI-powered Git features to streamline your workflow, including automatic commit message generation and intelligent merge conflict resolution. AI ...",
+        "source": "web"
+      },
+      {
+        "title": "Manage Copilot coding agent tasks in Visual Studio Code",
+        "url": "https://github.blog/changelog/2025-11-13-manage-copilot-coding-agent-tasks-in-visual-studio-code/",
+        "snippet": "View session logs directly in VS Code by clicking the Agent sessions panel. See the rationale behind Copilot's commits as they happen, right in ...",
+        "source": "web"
+      },
+      {
+        "title": "opencode-ai/opencode: A powerful AI coding agent. Built ... - GitHub",
+        "url": "https://github.com/opencode-ai/opencode",
+        "snippet": "OpenCode is a Go-based CLI application that brings AI assistance to your terminal. It provides a TUI (Terminal User Interface) for ...",
+        "source": "web"
+      },
+      {
+        "title": "GitHub | Cursor Docs",
+        "url": "https://cursor.com/docs/integrations/github",
+        "snippet": "You can trigger an agent to read context, implement fixes, and push commits by commenting @cursor [prompt] on any PR or issue. If you have Bugbot enabled, you ...",
+        "source": "web"
+      },
+      {
+        "title": "AI-Generated commit message feature similar to github copilot in VS ...",
+        "url": "https://github.com/fork-dev/TrackerWin/issues/2100",
+        "snippet": "In Visual Studio Code, there's a feature with GitHub Copilot that automatically generates commit messages. This feature is quite helpful as ...",
+        "source": "web"
+      },
+      {
+        "title": "AI Coding Agent for Software Development - Refact.ai - Refact.ai",
+        "url": "https://refact.ai",
+        "snippet": "AI Agent for Coding - Refact.ai adapts to your workflow, automating coding, debugging, and testing with full context awareness. An open-source alternative ...",
+        "source": "web"
+      },
+      {
+        "title": "Git Reset Soft: Complete Guide with Examples - DataCamp",
+        "url": "https://www.datacamp.com/tutorial/git-reset-soft-complete-guide",
+        "snippet": "Master git reset --soft with practical examples, workflows, and safety protocols. Learn to manage commit history, split commits, ...",
+        "source": "web"
+      },
+      {
+        "title": "di-sukharev/opencommit: top #1 and most feature rich GPT ... - GitHub",
+        "url": "https://github.com/di-sukharev/opencommit",
+        "snippet": "OpenCommit is now available as a GitHub Action which automatically improves all new commits messages when you push to remote! This is great if you want to ...",
+        "source": "web"
+      },
+      {
+        "title": "Automate Your CHANGELOG with Git Cliff and Keep a Changelog",
+        "url": "https://dev.to/alfreedom/automate-your-changelog-with-git-cliff-and-keep-a-changelog-2go8",
+        "snippet": "In this post I'll show how to use the git-cliff tool to automatically generate and maintain a CHANGELOG.md file following the Keep a Changelog standard.",
+        "source": "web"
+      },
+      {
+        "title": "git-reset Documentation - Git",
+        "url": "https://git-scm.com/docs/git-reset",
+        "snippet": "This form resets the current branch head to <commit> and possibly updates the index (resetting it to the tree of <commit> ) and the working tree depending on < ...",
+        "source": "web"
+      },
+      {
+        "title": "OpenCommit: GPT generates impressive commits in 1 second (open ...",
+        "url": "https://dev.to/disukharev/opencommit-gpt-cli-to-auto-generate-impressive-commits-in-1-second-46dh",
+        "snippet": "The commit message should be a meaningful short message to understand what was done in the scope of the task/project, and not just list all the ...",
+        "source": "web"
+      },
+      {
+        "title": "git-cliff: A highly customizable changelog generator ⛰️",
+        "url": "https://git-cliff.org",
+        "snippet": "git-cliff uses regex-powered custom parsers and the changelog can be customized easily with a configuration file to match the desired format.",
+        "source": "web"
+      },
+      {
+        "title": "GitHub Introduces Coding Agent For GitHub Copilot",
+        "url": "https://github.com/newsroom/press-releases/coding-agent-for-github-copilot",
+        "snippet": "At Microsoft Build 2025, GitHub introduced a new, enterprise-ready coding agent for Copilot – integrated, responsible and secured by ...",
+        "source": "web"
+      },
+      {
+        "title": "Checkpointing - Claude Code Docs",
+        "url": "https://code.claude.com/docs/en/checkpointing",
+        "snippet": "Checkpoints persist across sessions, so you can access them in resumed conversations; Automatically cleaned up along with sessions after 30 days (configurable) ...",
+        "source": "web"
+      },
+      {
+        "title": "Windsurf AI Agentic Code Editor: Features, Setup, and Use Cases",
+        "url": "https://www.datacamp.com/tutorial/windsurf-ai-agentic-code-editor",
+        "snippet": "With Inline AI, you can ask Windsurf to make changes to specific lines of code, generate docstrings, refactor sections, and more—all without ...",
+        "source": "web"
+      },
+      {
+        "title": "Manage Copilot coding agent tasks in Visual Studio Code",
+        "url": "https://github.blog/changelog/2025-11-13-manage-copilot-coding-agent-tasks-in-visual-studio-code/",
+        "snippet": "You can now track and manage Copilot coding agent without leaving Visual Studio Code. Everything you need now lives in one streamlined, ...",
+        "source": "web"
+      },
+      {
+        "title": "GitHub - p32929/ccheckpoints: A checkpoint system for Claude ...",
+        "url": "https://github.com/p32929/ccheckpoints",
+        "snippet": "CCheckpoints hooks into Claude Code CLI to automatically save checkpoints every time you interact with Claude Code CLI. It creates a timeline of your entire ...",
+        "source": "web"
+      },
+      {
+        "title": "Windsurf - The best AI for Coding",
+        "url": "https://windsurf.com",
+        "snippet": "A powerful, seamless, and collaborative flow. It is the most powerful way to code with AI. Cascade, an agent that codes, fixes and thinks 10 steps ahead.",
+        "source": "web"
+      },
+      {
+        "title": "GitHub - renatogalera/ai-commit",
+        "url": "https://github.com/renatogalera/ai-commit",
+        "snippet": "AI-Commit: Git workflow with AI-powered commit messages, instant code reviews, and style enforcement—all in one CLI tool.",
+        "source": "web"
+      },
+      {
+        "title": "JetBrains-Research/PyNose: A test smell detector for Python. - GitHub",
+        "url": "https://github.com/JetBrains-Research/PyNose",
+        "snippet": "PyNose can be used inside the IDE to study the test smells within a specific opened project. This can help python developers avoid test smells in their code.",
+        "source": "web"
+      },
+      {
+        "title": "AI & Monorepos",
+        "url": "https://monorepo.tools/ai",
+        "snippet": "Monorepos provide AI assistants with a unified workspace view , enabling better dependency tracing and cross-module understanding. AI operating efficiently in ...",
+        "source": "web"
+      },
+      {
+        "title": "GitPilotAI: Streamlining Git with AI and Go - Kyle Redelinghuys",
+        "url": "https://www.ksred.com/automating-git-commits-using-ai/",
+        "snippet": "Explore GitPilotAI, an AI-driven tool enhancing Git workflow. Automates commits and maintains coding flow. Open source tooling for all ...",
+        "source": "web"
+      },
+      {
+        "title": "Top 10 Python Code Analysis Tools in 2026 to Improve Code Quality",
+        "url": "https://www.jit.io/resources/appsec-tools/top-python-code-analysis-tools-to-improve-code-quality",
+        "snippet": "Best overall Python analysis tool: Jit﻿ · Best Python analysis tool for adherence to code standards: Pylint﻿ · Best Python analysis tool for SMBs: ...",
+        "source": "web"
+      },
+      {
+        "title": "Strategies for effectively managing dependencies in a monorepo",
+        "url": "https://graphite.com/guides/strategies-managing-dependencies-monorepo",
+        "snippet": "This guide explains how to manage dependencies in a monorepo using best practices like single version policies, workspace tools, and merge queues.",
+        "source": "web"
+      },
+      {
+        "title": "Aider - AI Pair Programming in Your Terminal",
+        "url": "https://aider.chat",
+        "snippet": "Git integration​​ Aider automatically commits changes with sensible commit messages. Use familiar git tools to easily diff, manage and undo AI changes.",
+        "source": "web"
+      },
+      {
+        "title": "Mastering Git Stash: A Handy Tool for Managing Uncommitted ...",
+        "url": "https://dev.to/iredox10/mastering-git-stash-a-handy-tool-for-managing-uncommitted-changes-4ba3",
+        "snippet": "git stash allows you to temporarily save your uncommitted changes (both staged and unstaged) to a stack-like structure. This way, you can apply ...",
+        "source": "web"
+      },
+      {
+        "title": "Use Agent Mode - Visual Studio (Windows) - Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/visualstudio/ide/copilot-agent-mode?view=visualstudio",
+        "snippet": "Use the GitHub Copilot agent to iterate on code in Visual Studio by making code edits, running commands, and reading error/build context.",
+        "source": "web"
+      },
+      {
+        "title": "Enhance Your AI Coding Workflow with One Simple Tool - YouTube",
+        "url": "https://www.youtube.com/watch?v=3skLPyFL8xU",
+        "snippet": "Learn how to supercharge your AI coding assistant by giving it instant access to any GitHub repository! In this tutorial, I'll show you how ...",
+        "source": "web"
+      },
+      {
+        "title": "git stash - Saving Changes | Atlassian Git Tutorial",
+        "url": "https://www.atlassian.com/git/tutorials/saving-changes/git-stash",
+        "snippet": "The git stash command takes your uncommitted changes (both staged and unstaged), saves them away for later use, and then reverts them from your working copy.",
+        "source": "web"
+      },
+      {
+        "title": "Overview of Advanced AI Coding Agents (August 2025)",
+        "url": "https://davidmelamed.com/2025/08/08/overview-of-advanced-ai-coding-agents-august-2025/",
+        "snippet": "Terminal and IDE Integration: Developers interact with Claude Code via the terminal (CLI) and it also integrates with popular IDEs like VS Code ...",
+        "source": "web"
+      },
+      {
+        "title": "Parallel Workflows with Git Worktrees and AI Agents - IT depends",
+        "url": "https://blog.itdepends.be/parallel-workflows-git-worktrees-agents/",
+        "snippet": "Each worktree is isolated - changes in one don't affect the others; They share the same Git database - so they're lightweight and fast; You ...",
+        "source": "web"
+      },
+      {
+        "title": "Commitizen",
+        "url": "https://commitizen-tools.github.io/commitizen/",
+        "snippet": "Commitizen is a powerful release management tool that helps teams maintain consistent and meaningful commit messages while automating version management.",
+        "source": "web"
+      },
+      {
+        "title": "Visual Studio Code tips and tricks",
+        "url": "https://code.visualstudio.com/docs/getstarted/tips-and-tricks",
+        "snippet": "Try out VS Code's code editing features, like multi-cursor editing, IntelliSense, Snippets, Emmet, and more. Open the Welcome page from the Help > Editor ...",
+        "source": "web"
+      },
+      {
+        "title": "A desktop app for isolated, parallel agentic development",
+        "url": "https://news.ycombinator.com/item?id=46027947",
+        "snippet": "This is usually solved by using git worktree but this solution requires 1 new folder name and branch for each new agent, and each folder will ...",
+        "source": "web"
+      },
+      {
+        "title": "The commitizen command line utility. #BlackLivesMatter - GitHub",
+        "url": "https://github.com/commitizen/cz-cli",
+        "snippet": "When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time. No more waiting until later for a git commit hook ...",
+        "source": "web"
+      },
+      {
+        "title": "Smarter diff visualization for AI code edits (like Git in Visual Studio)",
+        "url": "https://forum.cursor.com/t/smarter-diff-visualization-for-ai-code-edits-like-git-in-visual-studio/92375",
+        "snippet": "Please adopt a smarter diff mechanism — like the one in Visual Studio's Git integration — that highlights only the new if statement as an ...",
+        "source": "web"
+      },
+      {
+        "title": "Automate Your AI Workflows with Claude Code Hooks | Butler's Log",
+        "url": "https://blog.gitbutler.com/automate-your-ai-workflows-with-claude-code-hooks",
+        "snippet": "Claude Code's new hooks system is a powerful tool for automating your agent workflows. We'll do a quick overview of what's possible and ...",
+        "source": "web"
+      },
+      {
+        "title": "How do stacked diffs work - Graphite",
+        "url": "https://graphite.com/guides/how-do-stacked-diffs-work",
+        "snippet": "To create a stacked diff, developers start with a base branch and make a series of changes, each dependent on the last. Tools like Graphite facilitate this ...",
+        "source": "web"
+      },
+      {
+        "title": "Version Control Best Practices for AI Code - Ranger",
+        "url": "https://www.ranger.net/post/version-control-best-practices-ai-code",
+        "snippet": "AI-generated changes should be reviewed as rigorously as human-written code. The key difference lies in what reviewers focus on.",
+        "source": "web"
+      },
+      {
+        "title": "Stacked Branches with GitButler | Butler's Log",
+        "url": "https://blog.gitbutler.com/stacked-branches-with-gitbutler",
+        "snippet": "GitButler can now manage dependent branches that are stacked, including managing stacked GitHub PRs. Stacked Branches with GitButler.",
+        "source": "web"
+      },
+      {
+        "title": "Stacked Diffs (and why you should know about them)",
+        "url": "https://newsletter.pragmaticengineer.com/p/stacked-diffs",
+        "snippet": "Stacking refers to breaking down a pull request (PR) for a feature into several, smaller PRs which all depend on each other – hence the term “stacked”.",
+        "source": "web"
+      },
+      {
+        "title": "AI-powered git commit message rewriter using Ollama or GPT - GitHub",
+        "url": "https://github.com/f/git-rewrite-commits",
+        "snippet": "How It Works · Analyze: Reads your staged changes or commit history · Generate: Uses AI to create meaningful, conventional commit messages · Apply: Updates your ...",
+        "source": "web"
+      },
+      {
+        "title": "git-diff-index(1) - The Linux Kernel Archives",
+        "url": "https://www.kernel.org/pub/software/scm/git/docs/git-diff-index.html",
+        "snippet": "Compute the dirstat numbers by counting the number of files changed. Each changed file counts equally in the dirstat analysis. This is the ...",
+        "source": "web"
+      },
+      {
+        "title": "Enhance Your LLM - Nx",
+        "url": "https://nx.dev/docs/features/enhance-ai",
+        "snippet": "Learn how Nx enhances your AI assistant by providing rich workspace metadata, architectural insights, and project relationships to make your LLM smarter and ...",
+        "source": "web"
+      },
+      {
+        "title": "Agent Orchestration 101: Making Multiple AI Agents Work as One",
+        "url": "https://www.lyzr.ai/blog/agent-orchestration/",
+        "snippet": "Agent orchestration enables multiple AI agents to work together efficiently, coordinating tasks, sharing context, and driving complex workflows with ...",
+        "source": "web"
+      },
+      {
+        "title": "git-diff-index Documentation - Git",
+        "url": "https://git-scm.com/docs/git-diff-index",
+        "snippet": "Compute the dirstat numbers by counting the number of files changed. Each changed file counts equally in the dirstat analysis. This is the computationally ...",
+        "source": "web"
+      },
+      {
+        "title": "Support for dependency-aware \"watch\" tasks on nx run-many #5570",
+        "url": "https://github.com/nrwl/nx/issues/5570",
+        "snippet": "Nx could either detect when a watch cycle completes (harder/brittle, in my opinion) or helps manage concurrent processes for dependencies.",
+        "source": "web"
+      },
+      {
+        "title": "Single-Responsibility Agents vs Multi-Agent Workflows - EPAM",
+        "url": "https://www.epam.com/insights/ai/blogs/single-responsibility-agents-and-multi-agent-workflows",
+        "snippet": "Uses separate folders to track current state and proposed changes, with memory files and templates for each workflow stage. BMAD-Method - ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Comprehensive Guide to Managing Uncommitted Changes in AI-Assisted Development Workflows\n\nThe emergence of AI coding assistants has fundamentally transformed how developers approach software engineering, yet it has simultaneously introduced a critical organizational challenge that mirrors the problem of context management at scale. When multiple AI sessions execute code modifications without enforcing a structured commit discipline, projects can accumulate hundreds of uncommitted changes that neither developers nor the AI agents themselves fully understand, creating a state of entropy that undermines the fundamental purpose of version control. This comprehensive research report examines modern solutions, emerging best practices, and practical implementations for maintaining commit hygiene in AI-assisted development workflows, drawing from cutting-edge tools, frameworks, and methodologies that are reshaping how teams collaborate with autonomous coding agents.\n\n## AI-Integrated Version Control Systems as the Foundation\n\nThe most elegant solutions to the uncommitted changes problem originate from development platforms that have fundamentally reconceived version control to accommodate AI-assisted workflows rather than forcing AI agents into traditional Git paradigms designed exclusively for human developers. GitButler represents a paradigm shift in this regard, introducing what the platform calls **virtual branches**—a concept that dissolves the boundary between the workspace and version control by making every Git operation a first-class citizen within the development interface[1]. Rather than treating AI code generation as something that happens outside the development process, GitButler has integrated agent experiences directly into the workspace, creating automatic AI sessions per branch with automatic commits that include context-driven commit messages[1].\n\nThe architectural elegance of this approach lies in its recognition that the problem isn't really about Git itself, but rather about organizational structure. When an AI agent operates in isolation without clear boundaries, its changes accumulate in an undifferentiated workspace. GitButler solves this by ensuring that each AI session runs inside a branch, where changes are tracked, committed, and visible just like human-written code[1]. This transforms code generation from an external process into a parallel development activity that shares the same organizational principles as human contributions. The platform manages context automatically, tracks file modifications, generates commit messages through analysis of the actual changes, and maintains context for subsequent AI interactions[1].\n\nGitHub has similarly advanced its approach through the Copilot coding agent, which now operates within an enterprise-ready framework that leverages GitHub's native control layer[25]. The agent starts work when developers assign a GitHub issue to Copilot or request it to begin working through chat in VS Code, and crucially, it pushes commits to a **draft pull request** rather than directly to the main branch[25]. This architecture provides visibility into agent work through session logs, allows developers to give feedback through pull request reviews, and maintains branch protections as a safety mechanism[25]. The agent's pull requests require human approval before CI/CD workflows execute, creating an explicit checkpoint that prevents uncommitted or poorly organized changes from propagating downstream[25].\n\nCursor, another leading AI code editor, has implemented agent functionality that produces code changes directly editable in the IDE, with a CLI option that allows running the agent entirely from the terminal for integration into CI pipelines[42]. The platform emphasizes developer control through the ability to approve or undo changes stepwise, while providing rules files that steer the AI's coding style and conventions[42]. This combination of immediate feedback (line-by-line approval in the IDE) with structural guidance (coding rules) creates a workflow where developers maintain continuous visibility and control over agent-generated code.\n\n## Conventional Commits and Semantic Versioning for Automated Organization\n\nWhile AI-integrated platforms handle the structural problems of code organization, the semantic problem of explaining **what** each commit accomplishes remains critical. The Conventional Commits specification has emerged as the de facto standard for structuring commit messages in a way that machines can parse and humans can understand[2][5]. This is particularly important for AI-assisted workflows because conventional commits enable downstream automation—the same message that explains the change to a human reviewer can trigger semantic version bumping, changelog generation, and release coordination.\n\nOpenCommit, an open-source tool that generates commit messages using OpenAI's APIs, demonstrates how AI can be directed to follow conventional commit conventions[20]. The tool operates by staging files, scanning the diff, and sending the complete diff to a language model with instructions to generate a detailed but brief overview of the changes[34]. Critically, the tool supports multiple prompt modules—developers can configure it to use either the default conventional-commit format or switch to @commitlint, which respects local configuration rules[20]. This allows teams to enforce their own commit message standards while gaining the productivity benefits of automatic generation.\n\nThe git-autocommit-hook tool takes a different architectural approach, using Mistral's API with Retrieval-Augmented Generation (RAG) to provide context to the language model[7]. By maintaining a vector database of the codebase and optionally using function-calling APIs to access other files, this approach can generate more contextually aware commit messages while respecting team conventions[7]. The tool operates as a git hook, automatically pre-filling commit messages without requiring developers to change their workflow substantially.\n\nTools like semantic-release automate the entire downstream chain: analyzing commits according to conventional commit rules, determining the next semantic version, generating release notes, and publishing packages—all triggered by commit history[5]. This creates a powerful flywheel where human developers (or AI agents) writing properly formatted commits automatically produce versioned releases with changelogs, eliminating manual release management and ensuring consistency[5].\n\n## Git Hooks as Enforcement Mechanisms for Commit Discipline\n\nPre-commit hooks represent a critical layer of automation that can enforce commit standards before changes enter version control, preventing malformed or uncommitted code from accumulating in the first place. The pre-commit framework provides a declarative configuration system where teams can specify which checks to run, in what order, and against which file patterns[10]. Unlike ad-hoc shell scripts, pre-commit automatically manages dependencies, handles language-specific tools, and provides clear output when checks fail, giving developers immediate feedback about what needs to be fixed.\n\nHusky, paired with lint-staged, creates a particularly elegant workflow for Node.js projects[8][11]. Husky manages git hooks by creating shell scripts that run automatically at git lifecycle events like pre-commit, pre-push, and prepare-commit-msg[8]. Lint-staged takes the list of staged files and runs configured tools only on those files, rather than the entire codebase, which dramatically accelerates feedback loops[11]. A developer can configure eslint, prettier, and unit tests to run automatically against only the files they're committing, receiving feedback in seconds rather than minutes, which maintains the cognitive flow that's essential to productive development[8].\n\nThe distinction between pre-commit and post-commit hooks becomes particularly important in AI-assisted workflows. Pre-commit hooks can prevent obviously malformed code from being committed, but they execute before the commit message is finalized. The prepare-commit-msg hook, by contrast, runs after the user specifies what they're committing but before they leave the editor, making it the ideal place to auto-generate or validate commit messages[10]. Tools like commitlint can be configured to validate that commit messages follow conventional commit format, rejecting commits that don't meet standards and providing immediate feedback about the expected format[2][11].\n\n## Checkpoint and Session-Based Tracking Systems\n\nFor developers working with AI coding assistants that don't integrate directly with Git, checkpoint systems provide a secondary mechanism for capturing work at meaningful intervals. Claude Code's checkpointing feature automatically captures code state before each edit, creating a timeline that developers can navigate with the `/rewind` command to restore code to prior states while keeping or discarding conversation history as desired[26]. This provides a safety net for experimental changes without requiring explicit commits.\n\nCCheckpoints, an open-source tool designed specifically for Claude Code CLI, extends this concept by automatically saving checkpoints every time the user interacts with Claude Code, creating a timeline that developers can view in a beautiful web dashboard[29]. The tool hooks into Claude Code's lifecycle to track every message submission and session completion, storing data in a local SQLite database that persists across sessions[29]. This enables developers to understand their entire coding journey, compare changes between checkpoints, and quickly revert to prior states if an agent exploration didn't work out.\n\nThe architectural advantage of checkpoint systems is that they operate orthogonally to version control—a developer can maintain checkpoints for experimental work while only committing polished, tested changes to Git. This separation allows for lower-friction capture of work in progress without polluting commit history with intermediate states. However, checkpoints should be understood as complementary to, not replacements for, version control; the sources explicitly recommend continuing to use Git for permanent history and collaboration[26].\n\n## Git Worktrees for Parallel Agent Isolation\n\nWhen managing multiple AI agents working on different tasks simultaneously, or when humans and AI agents need to work in parallel, Git worktrees provide a lightweight mechanism for maintaining completely isolated working directories while sharing a single Git database[43]. A worktree is essentially a separate checkout of a repository at a different path, allowing multiple branches to be worked on simultaneously without context switching in a single terminal[43].\n\nThe workflow described in several sources involves creating an agent worktree on a new branch, letting the agent work in isolation in that directory, then removing the worktree and optionally deleting the branch when the work is complete[43]. The beauty of this approach is that each worktree is isolated—changes in one don't affect others—yet they share the same Git database, making them lightweight and fast compared to maintaining multiple full clones[43]. If an agent makes a mess, the developer can simply delete that worktree and try again without affecting their main working directory[43].\n\nFor teams coordinating multiple agents, this pattern becomes particularly powerful. One developer can be working on primary features in the main worktree while multiple AI agents each work in their own worktrees on parallel tasks[43]. Because each worktree has its own branch, there's automatic protection against conflicting changes to the same files—Git prevents checking out the same branch twice, preventing the worst-case merge disasters[43]. The worktree approach complements rather than competes with tools like GitButler; while GitButler uses virtual branches within a single workspace, worktrees are better for scenarios requiring true filesystem isolation or when working across multiple projects.\n\n## Monorepo Tooling and Workspace-Aware AI Context\n\nAs AI agents become more sophisticated, their effectiveness depends critically on having sufficient context about the codebase architecture. In monorepos containing dozens or hundreds of projects, file-level context becomes inadequate—an AI agent needs to understand project relationships, dependency graphs, and architectural patterns to make intelligent cross-project changes[33][56]. Modern monorepo tools increasingly provide Model Context Protocol (MCP) servers that give AI assistants structured information about workspace architecture.\n\nNx's MCP server, for example, exposes tools for workspace analysis, code generation, and documentation lookup that enable AI assistants to move beyond file-level reasoning to understand high-level architecture[56]. When an AI agent has access to project graphs showing which projects depend on which others, ownership information identifying who's responsible for each project, and documentation about architectural patterns, it can make more intelligent decisions about where to implement functionality and how to coordinate changes across the monorepo[56].\n\nThis architectural context prevents a category of errors that would otherwise occur: an agent generating code in one project that violates dependency constraints, introduces circular dependencies, or duplicates functionality that exists elsewhere in the monorepo[56]. By providing the \"map view\" of the codebase rather than just individual files, MCP-aware tooling dramatically improves agent effectiveness and reduces the need for human review and correction[56].\n\n## Intelligent Commit Grouping and Retroactive Analysis\n\nFor situations where uncommitted changes have already accumulated, tools like TensorZero's evaluation framework provide a methodology for retroactively understanding what an AI agent produced and linking inferences to commits. The core challenge is that a single commit might contain code generated from multiple inferences, each inference might have affected multiple commits, and the relationship between LLM output and final committed code is often indirect and complex[4].\n\nTensorZero addresses this through tree-edit distance (TED) analysis: for each snippet generated by the AI, the system searches through the committed code to find the subtree with the smallest tree-edit distance, calculating a normalized distance ratio where 1.0 represents a perfect match and lower scores indicate partial matches or transformations[4]. By analyzing every inference against the committed code, the system builds a dataset linking specific prompts and model configurations to their actual impact on the codebase[4].\n\nWhile TED analysis is most useful prospectively as part of a feedback loop to optimize prompts and models, the underlying principle suggests an approach for retroactive analysis: compute tree-edit distances between uncommitted changes and previous committed code to identify logical groupings. Changes with high similarity to existing code in a specific area of the codebase probably belong in a commit focused on that area. Changes that transform existing code in specific ways might indicate refactoring that should be grouped together. This could enable development tools to suggest \"you made changes in three separate logical areas that might warrant three separate commits\" based on analyzing the actual code modifications.\n\n## Best Practices for Sustainable AI-Assisted Development\n\nSeveral synthesis principles emerge from examining successful AI-assisted development workflows. The first critical practice involves **planning before generation**: rather than asking an AI agent to build a complete feature and then reviewing the result, sophisticated teams write explicit plans in markdown, ask the AI to critique the plan before implementation, and save the plan as a reference document for all subsequent prompts[3]. This single practice eliminates approximately eighty percent of \"the AI got confused halfway through\" moments because the AI maintains consistent context throughout the development process[3].\n\nThe second practice involves **edit-test loops rather than pure generation**: instead of asking the AI to write complete implementations, ask it to write failing tests that capture desired behavior, review those tests to ensure they test the right things, then ask the AI to make the tests pass[3]. This transforms AI code generation from a creative task (which is error-prone) to an implementation task (which is more reliable). The AI gets incremental feedback about whether its changes actually work, not just whether they compile.\n\nVersion control discipline represents the third pillar: commit granularly with `git add -p` to stage small logical changes, never let uncommitted changes pile up as they become increasingly difficult to untangle, and use meaningful commit messages that help both humans and AI understand context[3]. When working with AI agents, this becomes even more critical—each logical agent contribution should be tracked as a separate branch or commit so that if problems emerge, they can be reverted cleanly and the cause diagnosed accurately[3].\n\nThe fourth practice involves **context management and incremental re-indexing**: after major changes to the codebase, tell the AI agent to re-index its understanding through tools like gitingest.com for codebase summaries or re-running initial analysis commands[3]. AI agents can hallucinate about what exists in the codebase if working from stale context, and explicitly refreshing context prevents subtle bugs where the agent generates code based on outdated assumptions[3].\n\nThe fifth practice is **treating AI output like junior developer pull requests**[3]: security reviews checking for injection vulnerabilities and hardcoded secrets, performance reviews looking for N+1 queries and unnecessary allocations, correctness reviews testing edge cases and verifying error handling. The AI is intelligent but not wise; human developers must bring experience and judgment to the review process[3].\n\n## Development Environment Configurations and Workflow Integration\n\nBeyond tool choices, the way development environments are configured shapes team behavior around commits. GitButler provides a complete reimagining of this through its virtual branches interface, which makes branches as visible and manageable as files in an editor[1]. Developers can drag and drop commits between branches, edit commit messages, and squash or split commits through point-and-click interfaces rather than command-line tools that many developers find cumbersome[1]. This lower friction around commit management means developers are more likely to maintain clean history.\n\nIDEs like IntelliJ IDEA support changelists, which allow developers to group uncommitted changes related to different tasks, then commit them independently[12]. This feature is particularly valuable when working on multiple features in parallel or when an AI agent has made changes touching multiple logical areas. Rather than committing everything together, developers can organize changes into logical groupings before committing.\n\nGitHub's Agent Sessions feature in VS Code provides centralized visibility into what coding agents are doing, showing rationale behind Copilot's commits as they happen, right in context[14][28]. This in-IDE visibility means developers don't need to context-switch to understand what agents have accomplished or to provide corrections and feedback. The ability to see, comment on, and guide agent work in real-time prevents the situation where an agent runs unsupervised and produces work that diverges significantly from requirements.\n\n## Emerging Specialized Tools for AI-Assisted Workflows\n\nBeyond the mainstream tools, a ecosystem of specialized implementations addresses specific aspects of the uncommitted-changes problem. Aider, a terminal-based AI pair programming tool, automatically commits changes with sensible commit messages, allowing developers to use familiar git tools to diff, manage, and undo AI changes[37]. By committing after each AI-assisted code block, Aider creates a natural checkpoint structure that prevents changes from accumulating.\n\nOpenCode, a Go-based CLI application with a TUI interface, tracks file changes during sessions and provides session management capabilities that let developers save and resume conversations while maintaining awareness of what changed[15]. The tool integrates with Language Server Protocol for code intelligence and supports custom commands that developers can create to quickly send predefined prompts.\n\nAI-Commit goes beyond simple commit message generation by adding an AI code review subcommand that provides basic feedback on staged changes before committing, combined with a semantic release mode that can automatically determine version bumps[31]. The tool's interactive TUI allows developers to refine commit messages, change commit types, or regenerate messages based on changes to the staged content, maintaining developer control while leveraging AI efficiency.\n\nGitPilotAI, a Go CLI tool, maintains focus on the core problem: a developer stages files, GitPilotAI scans the diff, generates a logical description through OpenAI's API, and immediately pushes the commit and change to the remote[34]. By automating the investigation step that interrupts developer flow—going through each changed file to construct a coherent narrative of what changed—the tool helps developers stay in the zone while still maintaining meaningful commits[34].\n\n## Changelog and Release Automation for Organized History\n\nOnce commits are organized according to conventional commit format, the downstream benefits multiply through tools that parse commit history to generate changelogs and manage releases. Git-cliff, a highly customizable changelog generator written in Rust, uses regex-powered custom parsers to group commits by type and generate formatted changelogs[21][24]. The tool can be configured with Keep a Changelog format or custom templates, and when integrated into CI/CD pipelines, automatically generates and commits changelog updates alongside version tags[21].\n\nCommitizen provides both a CLI tool for generating standardized commits and automation for calculating version bumps and generating changelogs[44]. By analyzing commit history since the last release, Commitizen determines whether changes warrant a major, minor, or patch version bump according to semantic versioning rules, then updates version files and generates release notes[44].\n\nThe practical effect is that teams maintaining conventional commit discipline and integrating these tools into their CI/CD get automated releases with changelogs that accurately reflect changes, without manual work[21][44]. For teams working with AI agents, this means the agent-generated commits that follow conventional format automatically contribute to organized, versioned releases that communicate clearly with users about what changed and why.\n\n## Multi-Agent Orchestration and Coordination\n\nAs AI-assisted development evolves toward scenarios where multiple agents work in parallel on different aspects of the same system, orchestration becomes critical. Agent orchestration enables multiple AI agents to work together efficiently, coordinating tasks, sharing context, and driving complex workflows without manual intervention between steps[57]. Centralized orchestration, where a single orchestrator agent manages other agents, works well for linear, predictable workflows[57]. Decentralized orchestration, where agents make local decisions and communicate with peers, works better for parallel, experimental tasks[57].\n\nIn the context of uncommitted changes, orchestration provides a mechanism for ensuring that parallel agent work remains organized. Rather than multiple agents all writing to the same uncommitted changes, an orchestration layer can assign each agent to a specific branch or worktree, collect their outputs as commits, and coordinate integration back to main. GitButler's approach to this—using agent hooks to detect when agents modify files and automatically committing those changes to agent-specific branches—provides a concrete example of how orchestration prevents change accumulation[49].\n\n## Review and Quality Enforcement in Hybrid Workflows\n\nThe role of code review changes fundamentally when AI agents are contributors alongside humans. Rather than manual review of everything, an effective pattern is \"AI reviews first\": the human author requests an AI code review in their IDE or after opening a PR, receives feedback and suggestions, addresses those comments, and only then requests human review[51]. This can reduce back-and-forth communication by about a third while ensuring that obviously fixable issues don't consume human reviewer time[51].\n\nHowever, important caveats apply: AI excels at mechanical correctness issues—catching unused imports, typos, missing error handling, basic security issues—but struggles with architectural decisions, business logic alignment, and understanding implicit requirements[51]. Human reviewers must focus on these higher-level concerns while letting AI handle routine checks. Branch protections and required reviews remain critical even with AI contributors, ensuring that at least one human approves changes before they merge[25][51].\n\n## Preventing and Managing Uncommitted Change Accumulation\n\nThe most straightforward prevention strategy combines several mechanisms: enforce commits at regular intervals through automation, maintain clear branch organization so developers understand what each branch contains, and provide UI/UX that makes committing easy and low-friction. GitButler's virtual branches interface, where developers can see at a glance what's on each branch and quickly commit changes through the UI, addresses the UX problem directly[1].\n\nFor teams using more traditional setups, configuring git hooks to warn developers when uncommitted changes reach a threshold (e.g., more than 20 files modified) can trigger awareness. While developers can override warnings, the explicit notice prevents the common situation where uncommitted changes accumulate without the developer realizing it. Combining warnings with pre-commit hooks that validate commit messages ensures that when developers finally commit, the message meets team standards.\n\nWhen uncommitted changes have accumulated to problematic levels, the retroactive solution involves several steps. First, run `git status` to see what's changed and `git diff` to examine actual modifications. Second, use `git add -p` to selectively stage changes by hunk, reading each hunk and deciding whether it belongs in the same logical group. Third, commit frequently with clear messages as changes are staged. This approach, while labor-intensive, forces deliberate thinking about what changes belong together and produces a cleaner commit history than trying to commit everything at once.\n\nFor more sophisticated analysis, tools scanning code changes could identify natural commit boundaries by looking for groups of files that have high dependency connections versus low connections across groups. Changes within a feature module are likely related and should be committed together; changes that span feature modules might need more careful review. While such analysis tools aren't yet widely available, the tree-edit distance approaches used by TensorZero point toward their feasibility.\n\n## Conclusion and Emerging Best Practices\n\nManaging uncommitted changes in AI-assisted development requires attention at multiple layers: the version control system itself must accommodate AI workflows rather than forcing AI into human-centric paradigms, commit conventions must be standardized and enforced so that downstream automation can extract meaning, development environments must make committing frictionless and provide visibility into what's committed versus pending, and review processes must be calibrated to verify that AI-generated code meets human standards without creating bottlenecks.\n\nThe most mature solutions integrate these layers: GitButler's virtual branches handle organizational structure, conventional commits enable automation, pre-commit hooks enforce discipline, and interactive review creates checkpoints before changes propagate. GitHub Copilot's draft PRs achieve similar goals through GitHub's native concepts. Cursor's agent mode provides interactive approval workflows. Aider's immediate commits prevent accumulation by design.\n\nEmerging best practice patterns include planning before generation, using edit-test loops, committing granularly, maintaining fresh context, and treating AI output with the same review rigor applied to junior developers. Teams implementing these patterns report dramatically improved workflow satisfaction and code quality compared to working with AI without structure.\n\nAs AI coding assistants become more sophisticated and more teams adopt agentic workflows, the tools and practices discussed here represent the current frontier of keeping development organized. The field is evolving rapidly, with tools adding new capabilities and teams discovering new patterns regularly. The fundamental principle, however, remains constant: code organization is a prerequisite for sustainable development, whether that code is written by humans or AI agents. Version control discipline, meaningful commits, and human oversight remain as essential as ever, just applied in different ways to accommodate the new capabilities and challenges that AI brings to software development."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

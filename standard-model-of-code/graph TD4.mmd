@@ -1,0 +1,53 @@
+graph TD
+    A[Source Code] --> B(Tree-Sitter Engine);
+    B --> C{Parse Tree};
+    C --> D(Python Extractor);
+    C --> E(Universal Classifier);
+    D --> F(Unified Analysis);
+    E --> F;
+    F --> G{Codebase State};
+    G --> H(Edge Extractor);
+    H --> F;
+    F --> I(Full Analysis);
+    I --> J(Standard Model Enricher);
+    I --> K(Purpose Field);
+    I --> L(Execution Flow);
+    I --> M(Performance Predictor);
+    I --> N(Topology Reasoning);
+    I --> O(Semantic Cortex);
+    J --> G;
+    K --> G;
+    L --> G;
+
+    I --> P{Markov Matrix};
+    I --> Q{Knot Detection};
+    I --> R{Data Flow};
+    I --> S{File Index};
+    
+    subgraph Analysis{
+    F;I;J;K;L;M;N;O;P;Q;R;S
+    }
+
+    STYLE Analysis fill:#f9f,stroke:#333,stroke-width:2px
+
+    subgraph Viz{
+    
+    T(Appearance Tokens);
+    U(Controls Tokens);
+    I --> T;
+    I --> U;
+    T --> V(Token Resolver);
+    U --> V;
+    V --> W(Appearance Engine);
+    V --> X(Controls Engine);
+    W --> Y[HTML Output];
+    X --> Y;
+    }
+
+    STYLE Viz fill:#ccf,stroke:#333,stroke-width:2px
+    
+
+    I --> Z(Output Generator);
+    Z --> AA(Normalize Output);
+    Z --> Y;
+    AA --> BB[JSON];

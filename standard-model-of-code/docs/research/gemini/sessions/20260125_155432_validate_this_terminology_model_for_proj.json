@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-25 15:54:08",
+  "session_end": "2026-01-25 15:54:32",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769367248.6598961,
+      "timestamp_str": "2026-01-25 15:54:08",
+      "role": "user",
+      "content": "Validate this terminology model for PROJECT_elements:\n\nPROJECTOME = all project contents (Codome + Contextome)\nCODOME = all executable code (.py, .js, .ts)\nCONTEXTOME = all non-executable content (.md, .yaml, .json config)\nDOMAINS = vertical slices through both (Pipeline, Viz, Governance, AI Tools)\n\nScore each term 0-100 on:\n1. FACTUAL: Does this match the actual codebase structure?\n2. ALIGNMENT: Does this serve the project mission?\n3. USEFULNESS: Would AI agents benefit from this terminology?\n\nReturn scores in table format."
+    }
+  ]
+}

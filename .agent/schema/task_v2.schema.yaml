@@ -1,0 +1,237 @@
+# Task Schema v2 - Unified Format
+# ================================
+# Created: 2026-01-25
+# Purpose: Normalize all task YAML files across the agent registry
+#
+# Migration: task.schema.yaml + opportunity.schema.yaml → task_v2.schema.yaml
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "task_v2.schema.yaml"
+title: "Agent Task Schema v2"
+description: "Unified schema for tasks, opportunities, and work items"
+
+type: object
+required:
+  - id
+  - title
+  - status
+  - created_at
+  - domain
+
+properties:
+  # =============================================================================
+  # IDENTITY
+  # =============================================================================
+  id:
+    type: string
+    pattern: "^(TASK|OPP)-[0-9]{3}(-[0-9]{3})?$"
+    description: "Unique identifier (TASK-XXX or OPP-XXX)"
+    examples: ["TASK-001", "OPP-042", "TASK-010-001"]
+
+  title:
+    type: string
+    minLength: 5
+    maxLength: 100
+    description: "Brief title in imperative form"
+
+  source_id:
+    type: string
+    description: "Original opportunity ID if promoted from inbox"
+
+  # =============================================================================
+  # LIFECYCLE
+  # =============================================================================
+  status:
+    type: string
+    enum:
+      - INBOX        # Opportunity, not yet promoted
+      - READY        # Promoted, ready to start
+      - IN_PROGRESS  # Active work
+      - BLOCKED      # Waiting on dependency
+      - COMPLETE     # Successfully finished
+      - WONT_DO      # Rejected or obsolete
+      - DEFERRED     # Postponed to later
+    description: "Current lifecycle status"
+
+  created_at:
+    type: string
+    format: date-time
+    description: "ISO 8601 creation timestamp"
+
+  updated_at:
+    type: string
+    format: date-time
+    description: "ISO 8601 last update timestamp"
+
+  completed_at:
+    type: string
+    format: date-time
+    description: "ISO 8601 completion timestamp (if COMPLETE/WONT_DO/DEFERRED)"
+
+  # =============================================================================
+  # CLASSIFICATION
+  # =============================================================================
+  domain:
+    type: string
+    enum:
+      - pipeline       # Collider analysis pipeline
+      - visualization  # UI, 3D rendering, controls
+      - infrastructure # Build, deploy, CI/CD
+      - governance     # Tasks, sprints, registry
+      - theory         # Standard Model concepts
+      - ai_tools       # ACI, research, analysis
+      - documentation  # Docs, specs, guides
+    description: "Primary domain (replaces 'category')"
+
+  priority:
+    type: string
+    enum: ["P0", "P1", "P2", "P3"]
+    default: "P2"
+    description: "Priority level (P0=critical, P3=nice-to-have)"
+
+  tags:
+    type: array
+    items:
+      type: string
+    description: "Freeform labels for filtering"
+
+  # =============================================================================
+  # CONTENT
+  # =============================================================================
+  description:
+    type: string
+    description: "Detailed description in Markdown"
+
+  closure_reason:
+    type: string
+    description: "Required if status is WONT_DO or DEFERRED"
+
+  # =============================================================================
+  # 4D CONFIDENCE (Unified)
+  # =============================================================================
+  confidence:
+    type: object
+    description: "4-dimensional confidence scoring"
+    properties:
+      factual:
+        type: number
+        minimum: 0
+        maximum: 100
+        description: "Is my understanding of current state correct?"
+      alignment:
+        type: number
+        minimum: 0
+        maximum: 100
+        description: "Does this serve the project's mission?"
+      current:
+        type: number
+        minimum: 0
+        maximum: 100
+        description: "Does this fit the codebase as it exists?"
+      onwards:
+        type: number
+        minimum: 0
+        maximum: 100
+        description: "Does this fit where we're heading?"
+      overall:
+        type: number
+        minimum: 0
+        maximum: 100
+        description: "min(factual, alignment, current, onwards)"
+      verdict:
+        type: string
+        enum: ["ACCEPT", "DEFER", "REJECT"]
+        description: ">=75% ACCEPT, 50-74% DEFER, <50% REJECT"
+    required:
+      - factual
+      - alignment
+      - current
+      - onwards
+      - overall
+      - verdict
+
+  # =============================================================================
+  # EXECUTION
+  # =============================================================================
+  steps:
+    type: array
+    description: "Ordered execution steps (replaces 'execution_plan' and 'deliverables')"
+    items:
+      type: object
+      required:
+        - id
+        - action
+        - status
+      properties:
+        id:
+          type: string
+          pattern: "^S[0-9]{2}$"
+          description: "Step ID (S01, S02, ...)"
+        action:
+          type: string
+          description: "What to do"
+        status:
+          type: string
+          enum: ["PENDING", "IN_PROGRESS", "DONE", "SKIPPED"]
+        evidence:
+          type: object
+          properties:
+            file:
+              type: string
+              description: "Path to evidence file"
+            line:
+              type: integer
+              description: "Line number if applicable"
+            note:
+              type: string
+              description: "Explanation of completion"
+
+  output_artifacts:
+    type: array
+    description: "Files produced by this task"
+    items:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+        description:
+          type: string
+
+  # =============================================================================
+  # DEPENDENCIES
+  # =============================================================================
+  dependencies:
+    type: object
+    properties:
+      blocked_by:
+        type: array
+        items:
+          type: string
+        description: "Task IDs that must complete first"
+      blocks:
+        type: array
+        items:
+          type: string
+        description: "Task IDs waiting on this task"
+
+# =============================================================================
+# MIGRATION NOTES
+# =============================================================================
+# Field Mappings from v1:
+#   created → created_at
+#   updated → updated_at
+#   category → domain (lowercase)
+#   execution_plan → steps
+#   deliverables.pending → steps (status: PENDING)
+#   deliverables.completed → steps (status: DONE)
+#   risk → priority (A++=P0, A=P1, B=P2, C=P3)
+#
+# New Required Fields:
+#   - domain (was optional category)
+#   - confidence.verdict (calculated)
+#
+# Removed Fields:
+#   - complexity (use priority instead)
+#   - closed_at, deferred_at (use completed_at + status)

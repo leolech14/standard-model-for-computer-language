@@ -425,6 +425,202 @@ research_schemas:
         - cross_level_flows: "How data/control flows across levels"
 
   # ---------------------------------------------------------------------------
+  # CLAUDE_HISTORY_INGEST: Load Claude Code conversation history
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Mining past conversations for insights, decisions, patterns
+  # COST: ~$0.30 (1 large context load + synthesis)
+  # TIME: ~120s (depends on history size)
+  # ---------------------------------------------------------------------------
+  claude_history_ingest:
+    description: "Load Claude Code JSONL history into long context for mining"
+    purpose: "Extract insights, decisions, and patterns from past conversations"
+    recommended_for:
+      - "Finding past architectural decisions"
+      - "Recovering lost context from compacted sessions"
+      - "Building knowledge graph from conversation history"
+      - "Mining implementation patterns across sessions"
+
+    # Source configuration (used by history loader)
+    source:
+      type: "claude_code_jsonl"
+      location: "~/.claude/projects/-Users-lech-PROJECTS-all-PROJECT-elements/"
+      # Selection modes
+      selection:
+        mode: "recent"  # recent | specific | all | date_range
+        count: 5        # For "recent" mode: last N sessions
+        # For "specific" mode: session_ids: ["abc123", "def456"]
+        # For "date_range" mode: start_date, end_date
+
+    # Pre-processing pipeline
+    preprocessing:
+      # Extract only meaningful content
+      extract_types:
+        - "user"        # User messages
+        - "assistant"   # Assistant responses
+        # Skip: file-history-snapshot, thinking (unless requested)
+      include_thinking: false  # Include <thinking> blocks?
+      max_tokens_per_session: 100000  # Truncate long sessions
+      deduplication: true  # Remove duplicate content
+      # Transform to structured format
+      output_format: "conversation_turns"  # conversation_turns | raw_jsonl | summary
+
+    runs:
+      - name: "history_load"
+        description: "Load conversation history into 1M+ context"
+        type: "internal"
+        tier: "flash_deep"  # 2M context window
+        model: "gemini-2.0-flash-001"  # Fast, large context
+        token_budget: 1000000
+        temperature: 0.1
+        system_prompt: |
+          You are analyzing Claude Code conversation history from PROJECT_elements.
+          The history contains past AI-human collaboration sessions about:
+          - Standard Model of Code (Collider, atoms, roles)
+          - Wave-Particle architecture
+          - Purpose Field theory
+          - ACI system design
+
+          Extract and organize:
+          1. KEY DECISIONS: Architectural choices made
+          2. INSIGHTS: Theoretical discoveries
+          3. PATTERNS: Recurring implementation approaches
+          4. OPEN QUESTIONS: Unresolved issues mentioned
+          5. CODE CHANGES: Significant modifications referenced
+
+          Cite session IDs and approximate positions when referencing.
+
+      - name: "cross_reference"
+        description: "Validate history insights against current codebase"
+        type: "internal"
+        tier: "long_context"
+        model: "gemini-3-pro-preview"
+        sets: ["theory", "pipeline", "docs_core"]
+        token_budget: 150000
+        temperature: 0.2
+        system_prompt: |
+          You are cross-referencing insights from past conversation history
+          against the CURRENT state of the codebase.
+
+          For each insight or decision mentioned:
+          1. VERIFY: Is it still accurate?
+          2. TRACE: Where is it implemented now?
+          3. DRIFT: Has implementation diverged from discussion?
+
+          Cite specific files and line numbers.
+
+    synthesis:
+      strategy: "triangulation"
+      output_format: "structured"
+      fields:
+        - decisions_extracted: "Key architectural decisions with session source"
+        - insights_mined: "Theoretical insights discovered"
+        - patterns_identified: "Recurring implementation patterns"
+        - drift_detected: "Where reality differs from discussion"
+        - knowledge_graph: "Entity-relationship map of concepts discussed"
+        - open_questions: "Unresolved issues from history"
+
+  # ---------------------------------------------------------------------------
+  # MIND_MAP_BUILDER: Build knowledge graph from history
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Creating visual/structural representation of knowledge
+  # COST: ~$0.50 (multi-pass extraction)
+  # TIME: ~180s
+  # ---------------------------------------------------------------------------
+  mind_map_builder:
+    description: "Build knowledge graph/mind map from conversation history"
+    purpose: "Create structured knowledge representation for RAG indexing"
+    recommended_for:
+      - "Building searchable knowledge base"
+      - "Creating concept maps"
+      - "Identifying knowledge gaps"
+      - "Preparing RAG corpus"
+
+    source:
+      type: "claude_code_jsonl"
+      location: "~/.claude/projects/-Users-lech-PROJECTS-all-PROJECT-elements/"
+      selection:
+        mode: "all"  # Process entire history
+
+    preprocessing:
+      extract_types: ["user", "assistant"]
+      include_thinking: true  # Include reasoning for deeper extraction
+      deduplication: true
+      output_format: "conversation_turns"
+
+    runs:
+      - name: "entity_extraction"
+        description: "Extract named entities and concepts"
+        type: "internal"
+        tier: "flash_deep"
+        model: "gemini-2.0-flash-001"
+        token_budget: 1000000
+        temperature: 0.0  # Deterministic
+        system_prompt: |
+          Extract ALL named entities from this conversation history.
+
+          Categories:
+          - CONCEPTS: Theoretical terms (Purpose Field, Wave-Particle, etc.)
+          - FILES: Code files mentioned (path/to/file.py)
+          - FUNCTIONS: Specific functions/methods
+          - SCHEMAS: Data structures/formats
+          - TOOLS: Commands/utilities
+          - PEOPLE: Contributors (if mentioned)
+
+          Output as JSON array:
+          [{"entity": "...", "type": "...", "context": "...", "frequency": N}]
+
+      - name: "relationship_extraction"
+        description: "Extract relationships between entities"
+        type: "internal"
+        tier: "flash_deep"
+        model: "gemini-2.0-flash-001"
+        token_budget: 1000000
+        temperature: 0.0
+        system_prompt: |
+          Given the entities extracted, identify RELATIONSHIPS between them.
+
+          Relationship types:
+          - implements: X implements Y
+          - depends_on: X depends on Y
+          - contains: X contains Y
+          - contradicts: X contradicts Y
+          - evolved_from: X evolved from Y
+          - related_to: X is related to Y
+
+          Output as JSON array:
+          [{"source": "...", "target": "...", "type": "...", "evidence": "..."}]
+
+      - name: "cluster_analysis"
+        description: "Identify topic clusters"
+        type: "internal"
+        tier: "long_context"
+        model: "gemini-3-pro-preview"
+        token_budget: 200000
+        temperature: 0.2
+        system_prompt: |
+          Analyze the extracted entities and relationships to identify
+          TOPIC CLUSTERS - groups of related concepts that form coherent
+          knowledge domains.
+
+          For each cluster:
+          1. NAME: Descriptive cluster name
+          2. CORE_CONCEPTS: Central entities
+          3. PERIPHERY: Related but less central
+          4. GAPS: Missing concepts that should exist
+          5. MATURITY: How well-developed is this area?
+
+    synthesis:
+      strategy: "hierarchical"
+      output_format: "knowledge_graph"
+      fields:
+        - entities: "All extracted entities with metadata"
+        - relationships: "Entity relationship map"
+        - clusters: "Topic clusters with maturity scores"
+        - gaps: "Identified knowledge gaps"
+        - rag_ready_chunks: "Chunks prepared for RAG indexing"
+        - mermaid_diagram: "Mermaid.js visualization code"
+
+  # ---------------------------------------------------------------------------
   # QUICK_VALIDATE: Fast 2-run validation (cost-optimized)
   # ---------------------------------------------------------------------------
   # USE WHEN: Need quick validation without full trio
@@ -507,6 +703,8 @@ guardrails:
 # | Precise confidence score      | confidence_calibration|
 # | Explore across scale levels   | semantic_probe        |
 # | Quick sanity check            | quick_validate        |
+# | Mine Claude Code history      | claude_history_ingest |
+# | Build knowledge graph         | mind_map_builder      |
 #
 # PARAMETER OVERRIDE SYNTAX:
 # --------------------------

@@ -1,6 +1,6 @@
 # Master File Registry
 
-**Generated At**: 2026-01-25T01:49:20.236529
+**Generated At**: 2026-01-25T20:36:23.644507
 
 | Status | File | Local Size | Cloud Size |
 |---|---|---|---|
@@ -37,13 +37,13 @@
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_14.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/C\303\263digo_\303\251_Biologia_Engenharia_Evolutiva_Page_15.png"` | 0 | - |
 | LOCAL_ONLY | `"assets/Ferramenta Local-First de Mapa de Calor de Analogias \342\200\223 Especifica\303\247\303\243o Completa.pdf"` | 0 | - |
-| SYNCED | `.agent/CODOME_MANIFEST.yaml` | 19260 | 19260 |
+| SYNCED | `.agent/CODOME_MANIFEST.yaml` | 23652 | 23652 |
 | SYNCED | `.agent/CONSOLIDATED_POSSIBILITIES.md` | 5847 | 5847 |
 | SYNCED | `.agent/KERNEL.md` | 9451 | 9451 |
-| SYNCED | `.agent/META_REGISTRY.yaml` | 2488 | 2488 |
+| SYNCED | `.agent/META_REGISTRY.yaml` | 2489 | 2489 |
 | SYNCED | `.agent/ROADMAP.yaml` | 8202 | 8202 |
 | SYNCED | `.agent/SPRAWL_CONSOLIDATION_PLAN.md` | 2707 | 2707 |
-| SYNCED | `.agent/SUBSYSTEM_INTEGRATION.md` | 12240 | 12240 |
+| SYNCED | `.agent/SUBSYSTEM_INTEGRATION.md` | 13912 | 13912 |
 | SYNCED | `.agent/agents/claude/todo.yaml` | 75 | 75 |
 | SYNCED | `.agent/agents/gemini/todo.yaml` | 75 | 75 |
 | SYNCED | `.agent/agents/grok/todo.yaml` | 73 | 73 |
@@ -56,16 +56,16 @@
 | SYNCED | `.agent/deck/CARD-RES-002.yaml` | 1614 | 1614 |
 | SYNCED | `.agent/deck/CARD-SES-001.yaml` | 4633 | 4633 |
 | SYNCED | `.agent/deck/CARD-WLD-000.yaml` | 1786 | 1786 |
-| SYNCED | `.agent/docs/CONSOLIDATION_REPORT.md` | 11473 | 11473 |
+| SYNCED | `.agent/docs/CONSOLIDATION_REPORT.md` | 11478 | 11478 |
 | SYNCED | `.agent/hooks/README.md` | 585 | 585 |
-| SYNCED | `.agent/hooks/post-commit` | 914 | 914 |
+| SYNCED | `.agent/hooks/post-commit` | 1099 | 1099 |
 | SYNCED | `.agent/intelligence/AI_ENRICHMENT_CHALLENGE_REPORT.md` | 5594 | 5594 |
 | SYNCED | `.agent/intelligence/LEGACY_SPRAWL_MAP.md` | 5923 | 5923 |
-| SYNCED | `.agent/intelligence/PRIORITY_MATRIX.md` | 7193 | 7193 |
-| SYNCED | `.agent/intelligence/SELF_PORTRAIT.md` | 9058 | 9058 |
-| SYNCED | `.agent/intelligence/SOS_MAP_TRUTH.md` | 7773 | 7773 |
+| SYNCED | `.agent/intelligence/PRIORITY_MATRIX.md` | 6941 | 6941 |
+| SYNCED | `.agent/intelligence/SELF_PORTRAIT.md` | 9095 | 9095 |
+| SYNCED | `.agent/intelligence/SOS_MAP_TRUTH.md` | 7814 | 7814 |
 | SYNCED | `.agent/intelligence/WAVE_PARTICLE_BALANCE.md` | 5176 | 5176 |
-| SYNCED | `.agent/intelligence/aci_feedback.yaml` | 2918 | 2918 |
+| SYNCED | `.agent/intelligence/aci_feedback.yaml` | 7560 | 7560 |
 | SYNCED | `.agent/intelligence/chunks/aci_chunks.json` | 119621 | 119621 |
 | SYNCED | `.agent/intelligence/confidence_reports/20260123_064434_batch_confidence.json` | 14948 | 14948 |
 | SYNCED | `.agent/intelligence/confidence_reports/20260123_080709_batch_confidence.json` | 15967 | 15967 |
@@ -88,10 +88,10 @@
 | SYNCED | `.agent/intelligence/triage_reports/20260123_172553_triage.json` | 8133 | 8133 |
 | SYNCED | `.agent/intelligence/triage_reports/20260123_172808_triage.json` | 8133 | 8133 |
 | SYNCED | `.agent/intelligence/truths/repo_truths.yaml` | 405 | 405 |
-| SYNCED | `.agent/manifest.yaml` | 2561 | 2561 |
-| SYNCED | `.agent/registry/INDEX.md` | 6666 | 6666 |
-| SYNCED | `.agent/registry/METRICS.md` | 2742 | 2742 |
-| SYNCED | `.agent/registry/README.md` | 4195 | 4195 |
+| SYNCED | `.agent/manifest.yaml` | 2563 | 2563 |
+| SYNCED | `.agent/registry/INDEX.md` | 6718 | 6718 |
+| SYNCED | `.agent/registry/METRICS.md` | 2768 | 2768 |
+| SYNCED | `.agent/registry/README.md` | 4203 | 4203 |
 | SYNCED | `.agent/registry/SYMMETRY_SPRINT.yaml` | 7573 | 7573 |
 | SYNCED | `.agent/registry/active/TASK-002.yaml` | 1190 | 1190 |
 | SYNCED | `.agent/registry/active/TASK-003.yaml` | 898 | 898 |
@@ -162,45 +162,48 @@
 | SYNCED | `.agent/schema/refinery_node.schema.yaml` | 20893 | 20893 |
 | SYNCED | `.agent/schema/run.schema.yaml` | 3736 | 3736 |
 | SYNCED | `.agent/schema/task.schema.yaml` | 3238 | 3238 |
-| SYNCED | `.agent/specs/AUTONOMOUS_ENRICHMENT_PIPELINE.md` | 9248 | 9248 |
-| SYNCED | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` | 5292 | 5292 |
+| SYNCED | `.agent/specs/AUTONOMOUS_ENRICHMENT_PIPELINE.md` | 9305 | 9305 |
+| SYNCED | `.agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md` | 5302 | 5302 |
+| SYNCED | `.agent/specs/BACKGROUND_SERVICES_ONTOLOGY.md` | 5369 | 5369 |
 | SYNCED | `.agent/specs/BARE_LIVE.md` | 19636 | 19636 |
 | SYNCED | `.agent/specs/CUTTING_PLAN.md` | 21627 | 21627 |
-| SYNCED | `.agent/specs/DECISION_DECK_LAYER.md` | 14002 | 14002 |
-| SYNCED | `.agent/specs/SCALE_TERMINOLOGY.md` | 8969 | 8969 |
+| SYNCED | `.agent/specs/DECISION_DECK_LAYER.md` | 13999 | 13999 |
+| SYNCED | `.agent/specs/SCALE_TERMINOLOGY.md` | 8983 | 8983 |
 | SYNCED | `.agent/specs/WAVE_PARTICLE_SYMMETRY.md` | 10308 | 10308 |
 | SYNCED | `.agent/sprints/SPRINT-001.yaml` | 1612 | 1612 |
 | SYNCED | `.agent/sprints/SPRINT-002.yaml` | 3471 | 3471 |
 | SYNCED | `.agent/sprints/SPRINT-003.yaml` | 4126 | 4126 |
-| SYNCED | `.agent/state/meters.yaml` | 1156 | 1156 |
+| SYNCED | `.agent/state/meters.yaml` | 1064 | 1064 |
 | SYNCED | `.agent/tools/add_task_steps.py` | 6278 | 6278 |
-| SYNCED | `.agent/tools/aep_orchestrator.py` | 5559 | 5559 |
 | SYNCED | `.agent/tools/audit_unicode.py` | 9255 | 9255 |
 | SYNCED | `.agent/tools/bare` | 4235 | 4235 |
-| SYNCED | `.agent/tools/batch_promote.py` | 11443 | 11443 |
-| SYNCED | `.agent/tools/boost_confidence.py` | 15252 | 15252 |
+| SYNCED | `.agent/tools/batch_promote.py` | 11452 | 11452 |
 | SYNCED | `.agent/tools/centripetal_scan.py` | 12063 | 12063 |
 | SYNCED | `.agent/tools/check_stale.sh` | 698 | 698 |
 | SYNCED | `.agent/tools/claim_task.sh` | 2045 | 2045 |
 | SYNCED | `.agent/tools/cloud/auto_boost_function.py` | 9369 | 9369 |
 | SYNCED | `.agent/tools/cloud/deploy.sh` | 3233 | 3233 |
 | SYNCED | `.agent/tools/cloud/sync_registry.py` | 7122 | 7122 |
+| SYNCED | `.agent/tools/confidence_validator.py` | 15326 | 15326 |
 | SYNCED | `.agent/tools/deal_cards.py` | 10029 | 10029 |
-| SYNCED | `.agent/tools/deal_cards_ui.py` | 9780 | 9780 |
+| SYNCED | `.agent/tools/deal_cards_ui.py` | 11430 | 11430 |
+| SYNCED | `.agent/tools/enrichment_orchestrator.py` | 5547 | 5547 |
 | SYNCED | `.agent/tools/execute_cutting_phase1.sh` | 6662 | 6662 |
+| SYNCED | `.agent/tools/fact_loader.py` | 8362 | 8362 |
 | SYNCED | `.agent/tools/import_legacy_tasks.py` | 16057 | 16057 |
 | SYNCED | `.agent/tools/industrial_triage.py` | 11038 | 11038 |
 | SYNCED | `.agent/tools/oklch_color.py` | 9757 | 9757 |
+| SYNCED | `.agent/tools/play_card.py` | 6712 | 6712 |
 | SYNCED | `.agent/tools/priority_matrix.py` | 16661 | 16661 |
 | SYNCED | `.agent/tools/promote_opportunity.py` | 4753 | 4753 |
 | SYNCED | `.agent/tools/promote_opportunity.sh` | 4235 | 4235 |
 | SYNCED | `.agent/tools/release_task.sh` | 2092 | 2092 |
+| SYNCED | `.agent/tools/session_manager.py` | 10946 | 10946 |
 | SYNCED | `.agent/tools/size_normalizer.py` | 2821 | 2821 |
 | SYNCED | `.agent/tools/sprint.py` | 5803 | 5803 |
 | SYNCED | `.agent/tools/symmetry_check.py` | 11804 | 11804 |
-| SYNCED | `.agent/tools/task_registry.py` | 11376 | 11376 |
+| SYNCED | `.agent/tools/task_store.py` | 11387 | 11387 |
 | SYNCED | `.agent/tools/triage_inbox.py` | 13843 | 13843 |
-| SYNCED | `.agent/tools/truth_validator.py` | 8309 | 8309 |
 | SYNCED | `.agent/tools/update_task_hierarchy.py` | 5661 | 5661 |
 | SYNCED | `.agent/tools/validate_manifest.py` | 6767 | 6767 |
 | SYNCED | `.agent/tools/wave_particle_balance.py` | 6291 | 6291 |
@@ -208,12 +211,12 @@
 | SYNCED | `.claude/rules/brain.md` | 1075 | 1075 |
 | SYNCED | `.gemini/context/body.md` | 936 | 936 |
 | SYNCED | `.gemini/context/brain.md` | 1010 | 1010 |
-| SYNCED | `.gitignore` | 3676 | 3676 |
+| SYNCED | `.gitignore` | 3912 | 3912 |
 | SYNCED | `.pre-commit-config.yaml` | 2352 | 2352 |
 | SYNCED | `AGENTKNOWLEDGEDUMP.md` | 16116 | 16116 |
 | SYNCED | `AGENTS.md` | 1217 | 1217 |
-| SYNCED | `ARCHITECTURE_MAP.md` | 6124 | 6124 |
-| SYNCED | `CLAUDE.md` | 11063 | 11063 |
+| SYNCED | `ARCHITECTURE_MAP.md` | 6115 | 6115 |
+| SYNCED | `CLAUDE.md` | 1651 | 1651 |
 | SYNCED | `Dockerfile` | 1369 | 1369 |
 | SYNCED | `GEMINI.md` | 1849 | 1849 |
 | CLOUD_ONLY | `Liabilities` | - | 156077 |
@@ -495,6 +498,3 @@
 | SYNCED | `archive/spectrometer_legacy/spectrometer_v9_fixed.py` | 30984 | 30984 |
 | SYNCED | `archive/spectrometer_legacy/spectrometer_v9_raw_haiku.py` | 34345 | 34345 |
 | SYNCED | `archive/spectrometer_legacy/spectrometer_v9_universal.py` | 23818 | 23818 |
-| SYNCED | `archive/spectrometer_v7_final.zip` | 22 | 22 |
-| SYNCED | `archive/zombie_code/2026-01-18/__init__.py` | 80 | 80 |
-| SYNCED | `archive/zombie_code/2026-01-18/analyze_coupling.py` | 3147 | 3147 |

@@ -1,0 +1,470 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T21:20:09.166041",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "Best approaches for parsing markdown documentation to extract API mentions and function references. Looking for: 1) Python libraries for markdown AST parsing, 2) Techniques for extracting code references from markdown (inline code, code blocks, headers like ## function_name()), 3) How documentation generators like Sphinx, MkDocs, pdoc extract API references. Focus on practical implementation patterns.",
+    "query_length": 404,
+    "checksum": "sha256:df6617c2621ffc25d72fc86a42f986c8bad1c27eb1e585b80978fe142d11e18d"
+  },
+  "response": {
+    "id": "7fc27631-2d79-4c97-b420-df2a627eee59",
+    "model": "sonar-deep-research",
+    "created": 1769214009,
+    "usage": {
+      "prompt_tokens": 78,
+      "completion_tokens": 6993,
+      "total_tokens": 7071,
+      "citation_tokens": 57259,
+      "num_search_queries": 30,
+      "reasoning_tokens": 385431,
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.056,
+        "citation_tokens_cost": 0.115,
+        "reasoning_tokens_cost": 1.156,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.477
+      }
+    },
+    "citations": [
+      "https://dev.to/waylonwalker/using-a-python-markdown-ast-to-find-all-paragraphs-2876",
+      "https://zuplo.com/learning-center/document-apis-with-markdown",
+      "https://github.com/Python-Markdown/markdown/blob/master/markdown/blockprocessors.py",
+      "https://github.com/miyuchina/mistletoe",
+      "https://docs.readme.com/main/discuss/6744e389bf72cf01ae1dad8c",
+      "https://python-markdown.github.io/reference/markdown/blockparser/",
+      "https://www.sphinx-doc.org/en/master/extdev/index.html",
+      "https://mkdocstrings.github.io/reference/api/",
+      "https://pdoc3.github.io/pdoc/doc/pdoc/",
+      "https://www.sphinx-doc.org/en/master/man/sphinx-apidoc.html",
+      "https://www.mkdocs.org/dev-guide/api/",
+      "https://pdoc.dev/docs/pdoc.html",
+      "https://hackmd.io/@jufyzdslTuqXiBCKUiA96g/SJdNTtdPp",
+      "https://dev.to/codingnninja/how-to-extract-title-description-or-metadata-from-markdown-3nn8",
+      "https://github.com/aleclarson/markdown-ast",
+      "https://regexr.com/4h9sh",
+      "https://github.com/deepset-ai/haystack/issues/3056",
+      "https://weblog.west-wind.com/posts/2022/Feb/16/Escaping-Markdown-Code-Snippets-and-Inline-Code-as-Markdown",
+      "https://github.com/miyuchina/mistletoe",
+      "https://pypi.org/project/markdown-analysis/",
+      "https://www.youtube.com/watch?v=44ECcwKpsPA",
+      "https://mistletoe-ebp.readthedocs.io/en/latest/using/intro.html",
+      "https://python-markdown.github.io/reference/",
+      "https://www.michaelperrin.fr/blog/2019/02/advanced-regular-expressions",
+      "https://dev.to/waylonwalker/using-a-python-markdown-ast-to-find-all-paragraphs-2876",
+      "https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html",
+      "https://github.com/squidfunk/mkdocs-material/discussions/3909",
+      "https://www.youtube.com/watch?v=U8SXIlCTLuk",
+      "https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html",
+      "https://www.mkdocs.org/dev-guide/api/",
+      "https://www.markdownguide.org/basic-syntax/",
+      "https://github.com/erusev/parsedown",
+      "https://zuplo.com/learning-center/document-apis-with-markdown",
+      "https://www.digitalocean.com/community/tutorials/how-to-use-python-markdown-to-convert-markdown-text-to-html",
+      "https://parsedown.org/tests/inline_link",
+      "https://community.ibm.com/community/user/blogs/hiren-dave/2025/05/27/markdown-documentation-best-practices-for-document",
+      "https://docs.python.org/3/library/inspect.html",
+      "https://github.com/miyuchina/mistletoe",
+      "https://docs.landing.ai/ade/ade-extract-schema-json",
+      "https://docs.python.org/3/library/ast.html",
+      "https://pypi.org/project/mistletoe-ebp/",
+      "https://github.com/njvack/markdown-to-json",
+      "https://bookdown.org/yihui/rmarkdown-cookbook/lua-filters.html",
+      "https://tree-sitter.github.io/tree-sitter/using-parsers/",
+      "https://discuss.python.org/t/another-attempt-at-docstrings-for-names-and-parameters-using/67931",
+      "https://pandoc.org/lua-filters.html",
+      "https://github.com/tree-sitter-grammars/tree-sitter-markdown",
+      "https://www.datacamp.com/tutorial/docstrings-python",
+      "https://github.com/Python-Markdown/markdown/blob/master/markdown/inlinepatterns.py",
+      "https://zuplo.com/learning-center/document-apis-with-markdown",
+      "https://arumoy.me/blogs/python-ast-extract-module-method-names/",
+      "https://hackmd.io/@jufyzdslTuqXiBCKUiA96g/SJdNTtdPp",
+      "https://github.com/DavidAnson/markdownlint/blob/main/helpers/README.md",
+      "https://docs.python.org/3/library/ast.html",
+      "https://mkdocstrings.github.io/usage/handlers/",
+      "https://realpython.com/python-markitdown/",
+      "https://mystmd.org/guide/cross-references",
+      "https://mkdocstrings.github.io/python/",
+      "https://www.kaggle.com/code/ksmooi/markdown-extraction-for-rag-workflows-markitdown",
+      "https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html"
+    ],
+    "search_results": [
+      {
+        "title": "Using a Python Markdown ast to Find All Paragraphs",
+        "url": "https://dev.to/waylonwalker/using-a-python-markdown-ast-to-find-all-paragraphs-2876",
+        "snippet": "It allows me to go over the markdown page and get only paragraph text. This will ignore headings, blockquotes, and code fences.",
+        "source": "web"
+      },
+      {
+        "title": "Efficiently Document APIs with Markdown: A Developer's Guide",
+        "url": "https://zuplo.com/learning-center/document-apis-with-markdown",
+        "snippet": "In this guide, you'll discover how to leverage Markdown's simplicity to create docs that aren't just maintainable—they're genuinely helpful and ...",
+        "source": "web"
+      },
+      {
+        "title": "markdown/markdown/blockprocessors.py at master - GitHub",
+        "url": "https://github.com/Python-Markdown/markdown/blob/master/markdown/blockprocessors.py",
+        "snippet": "\"\"\" Build the default block parser used by Markdown. \"\"\" parser = BlockParser(md). parser.blockprocessors.register(EmptyBlockProcessor(parser) ...",
+        "source": "web"
+      },
+      {
+        "title": "miyuchina/mistletoe: A fast, extensible and spec-compliant ... - GitHub",
+        "url": "https://github.com/miyuchina/mistletoe",
+        "snippet": "Apart from being the fastest CommonMark-compliant Markdown parser implementation in pure Python, mistletoe also supports easy definitions of custom tokens.",
+        "source": "web"
+      },
+      {
+        "title": "Is there a way to export/extract my API documentation pages to ...",
+        "url": "https://docs.readme.com/main/discuss/6744e389bf72cf01ae1dad8c",
+        "snippet": "You can export your documentation from ReadMe in Markdown format, but it's important to note that the export process has some limitations.",
+        "source": "web"
+      },
+      {
+        "title": "blockparser — Python-Markdown 3.10 documentation",
+        "url": "https://python-markdown.github.io/reference/markdown/blockparser/",
+        "snippet": "The block parser handles basic parsing of Markdown blocks. It doesn't concern itself with inline elements such as bold or italics, but rather just catches ...",
+        "source": "web"
+      },
+      {
+        "title": "Documentation » Sphinx API",
+        "url": "https://www.sphinx-doc.org/en/master/extdev/index.html",
+        "snippet": "Its API provides methods to do with access to metadata, resolving references, etc. It can also be used by extensions to cache information that should persist ...",
+        "source": "web"
+      },
+      {
+        "title": "API reference - mkdocstrings",
+        "url": "https://mkdocstrings.github.io/reference/api/",
+        "snippet": "Automatic documentation from sources, for MkDocs ... Parse a line from a Sphinx v2 inventory file and return an InventoryItem from it. Attributes ...",
+        "source": "web"
+      },
+      {
+        "title": "pdoc API documentation",
+        "url": "https://pdoc3.github.io/pdoc/doc/pdoc/",
+        "snippet": "pdoc provides types, functions, and a command-line interface for accessing public documentation of Python modules",
+        "source": "web"
+      },
+      {
+        "title": "sphinx-apidoc — Sphinx documentation",
+        "url": "https://www.sphinx-doc.org/en/master/man/sphinx-apidoc.html",
+        "snippet": "sphinx-apidoc is a tool for automatic generation of Sphinx sources that, using the autodoc extension, document a whole package in the style of other automatic ...",
+        "source": "web"
+      },
+      {
+        "title": "API Reference - MkDocs",
+        "url": "https://www.mkdocs.org/dev-guide/api/",
+        "snippet": "A MkDocs File object. It represents how the contents of one file should be populated in the destination site.",
+        "source": "web"
+      },
+      {
+        "title": "pdoc API documentation",
+        "url": "https://pdoc.dev/docs/pdoc.html",
+        "snippet": "pdoc auto-generates API documentation that follows your project's Python module hierarchy. pdoc's main feature is a focus on simplicity.",
+        "source": "web"
+      },
+      {
+        "title": "RegEx and Markdown - HackMD",
+        "url": "https://hackmd.io/@jufyzdslTuqXiBCKUiA96g/SJdNTtdPp",
+        "snippet": "Combining multiple regular expression patterns that focus on different areas of the markdown language (eg, code blocks, bold, alert boxes).",
+        "source": "web"
+      },
+      {
+        "title": "How to extract title, description or metadata from markdown",
+        "url": "https://dev.to/codingnninja/how-to-extract-title-description-or-metadata-from-markdown-3nn8",
+        "snippet": "Step 1: Declare a function named \"extractMarkdownMetadata\" · Step 2: Write a regex that matches anything within --- and --- · Step 3: Extract ...",
+        "source": "web"
+      },
+      {
+        "title": "aleclarson/markdown-ast: Tiny markdown parser - GitHub",
+        "url": "https://github.com/aleclarson/markdown-ast",
+        "snippet": "Fork of snarkdown that returns an array of AST nodes, instead of an HTML string. TypeScript support included! ... The goal is to support Github-style markdown.",
+        "source": "web"
+      },
+      {
+        "title": "Markdown code block - RegExr",
+        "url": "https://regexr.com/4h9sh",
+        "snippet": "Groups multiple tokens together and creates a capture group for extracting a substring or using a backreference.",
+        "source": "web"
+      },
+      {
+        "title": "Extract headings from Markdown files · Issue #3056 - GitHub",
+        "url": "https://github.com/deepset-ai/haystack/issues/3056",
+        "snippet": "When adding this, we need to make sure in the PreProcessor's split method to keep only those headings that are relevant for each split.",
+        "source": "web"
+      },
+      {
+        "title": "Escaping Markdown Code Snippets and Inline Code as Markdown",
+        "url": "https://weblog.west-wind.com/posts/2022/Feb/16/Escaping-Markdown-Code-Snippets-and-Inline-Code-as-Markdown",
+        "snippet": "Double backticks escape single ticks inside of the code block. However, if the code block **starts or ends with a backtick you have to add an ...",
+        "source": "web"
+      },
+      {
+        "title": "miyuchina/mistletoe: A fast, extensible and spec-compliant ... - GitHub",
+        "url": "https://github.com/miyuchina/mistletoe",
+        "snippet": "Apart from being the fastest CommonMark-compliant Markdown parser implementation in pure Python, mistletoe also supports easy definitions of custom tokens.",
+        "source": "web"
+      },
+      {
+        "title": "markdown-analysis - PyPI",
+        "url": "https://pypi.org/project/markdown-analysis/",
+        "snippet": "It provides extensive parsing capabilities to extract and categorize various elements within a Markdown document, including headers, sections, links, images, ...",
+        "source": "web"
+      },
+      {
+        "title": "Extract Markdown Links with RegEx: A Beginner's Guide - YouTube",
+        "url": "https://www.youtube.com/watch?v=44ECcwKpsPA",
+        "snippet": "Learn how to extract Markdown links from text using regular expressions (RegEx)! This tutorial is designed for beginners and provides a ...",
+        "source": "web"
+      },
+      {
+        "title": "Getting Started — mistletoe documentation",
+        "url": "https://mistletoe-ebp.readthedocs.io/en/latest/using/intro.html",
+        "snippet": "markdown without extra does not parse some CommonMark syntax, like fenced code blocks (see Python-Markdown Extra). mistletoe uses only CommonMark compliant ...",
+        "source": "web"
+      },
+      {
+        "title": "Library Reference — Python-Markdown 3.10.1 documentation",
+        "url": "https://python-markdown.github.io/reference/",
+        "snippet": "Python-Markdown is intended to be a python library module used by various projects to convert Markdown syntax into HTML.",
+        "source": "web"
+      },
+      {
+        "title": "Advanced regular expression features to match Markdown links",
+        "url": "https://www.michaelperrin.fr/blog/2019/02/advanced-regular-expressions",
+        "snippet": "Step 1: improve readability · Step 2: fix title matching with a look behind expression · Step 3: Use recursive regular expressions for complex ...",
+        "source": "web"
+      },
+      {
+        "title": "Using a Python Markdown ast to Find All Paragraphs",
+        "url": "https://dev.to/waylonwalker/using-a-python-markdown-ast-to-find-all-paragraphs-2876",
+        "snippet": "It allows me to go over the markdown page and get only paragraph text. This will ignore headings, blockquotes, and code fences.",
+        "source": "web"
+      },
+      {
+        "title": "sphinx.ext.autodoc – Include documentation from docstrings",
+        "url": "https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html",
+        "snippet": "This extension can import the modules you are documenting, and pull in documentation from docstrings in a semi-automatic way.",
+        "source": "web"
+      },
+      {
+        "title": "Using Material for MkDocs and PyMdownX for some REST API Doc ...",
+        "url": "https://github.com/squidfunk/mkdocs-material/discussions/3909",
+        "snippet": "The goal was to make API documentation that MIMICS OpenAPI in terms of design. With that said is the shown content NOT the result of using OpenAPI.",
+        "source": "web"
+      },
+      {
+        "title": "Walking The AST - Programming Language From Scratch - YouTube",
+        "url": "https://www.youtube.com/watch?v=U8SXIlCTLuk",
+        "snippet": "In this video I show you how to walk a AST tree using a tree-walk interpreter. We will add the NULL type to our language as well.",
+        "source": "web"
+      },
+      {
+        "title": "sphinx.ext.autosummary – Generate autodoc summaries",
+        "url": "https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html",
+        "snippet": "This extension generates function/method/attribute summary lists, similar to those output eg by Epydoc and other API doc generation tools.",
+        "source": "web"
+      },
+      {
+        "title": "API Reference - MkDocs",
+        "url": "https://www.mkdocs.org/dev-guide/api/",
+        "snippet": "A MkDocs File object. It represents how the contents of one file should be populated in the destination site.",
+        "source": "web"
+      },
+      {
+        "title": "Basic Syntax - Markdown Guide",
+        "url": "https://www.markdownguide.org/basic-syntax/",
+        "snippet": "To create a heading, add number signs ( # ) in front of a word or phrase. The number of number signs you use should correspond to the heading level.",
+        "source": "web"
+      },
+      {
+        "title": "erusev/parsedown: Better Markdown Parser in PHP",
+        "url": "https://github.com/erusev/parsedown",
+        "snippet": "This helps it recognise inline elements (or inlines). We call this approach \"line based\". We believe that Parsedown is the first Markdown parser to use it. ...",
+        "source": "web"
+      },
+      {
+        "title": "Efficiently Document APIs with Markdown: A Developer's Guide",
+        "url": "https://zuplo.com/learning-center/document-apis-with-markdown",
+        "snippet": "Use proper heading hierarchies for screen readers; Provide alt text for all images and diagrams; Ensure sufficient color contrast for ...",
+        "source": "web"
+      },
+      {
+        "title": "How To Use Python-Markdown to Convert Markdown Text to HTML",
+        "url": "https://www.digitalocean.com/community/tutorials/how-to-use-python-markdown-to-convert-markdown-text-to-html",
+        "snippet": "In this tutorial, you will install the Python-Markdown library, use it to convert Markdown strings to HTML, convert Markdown files to HTML files,",
+        "source": "web"
+      },
+      {
+        "title": "Inline Link",
+        "url": "https://parsedown.org/tests/inline_link",
+        "snippet": "Fast and extensible Markdown parser in PHP. It supports GitHub Flavored Markdown and it adheres to CommonMark.",
+        "source": "web"
+      },
+      {
+        "title": "Markdown Documentation: Best Practices for Documentation",
+        "url": "https://community.ibm.com/community/user/blogs/hiren-dave/2025/05/27/markdown-documentation-best-practices-for-document",
+        "snippet": "This guide will drill down the markdown best practices. We'll walk you through the entire process, from initial planning to long-term maintenance.",
+        "source": "web"
+      },
+      {
+        "title": "inspect — Inspect live objects — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/inspect.html",
+        "snippet": "The Signature object represents the call signature of a callable object and its return annotation. To retrieve a Signature object, use the signature() function.",
+        "source": "web"
+      },
+      {
+        "title": "miyuchina/mistletoe: A fast, extensible and spec-compliant ... - GitHub",
+        "url": "https://github.com/miyuchina/mistletoe",
+        "snippet": "Apart from being the fastest CommonMark-compliant Markdown parser implementation in pure Python, mistletoe also supports easy definitions of custom tokens.",
+        "source": "web"
+      },
+      {
+        "title": "Extraction Schema (JSON) - LandingAI - Overview",
+        "url": "https://docs.landing.ai/ade/ade-extract-schema-json",
+        "snippet": "Overview. To extract fields from parsed documents, provide a JSON schema that defines what structured data should be extracted from Markdown content.",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python ...",
+        "source": "web"
+      },
+      {
+        "title": "mistletoe-ebp - PyPI",
+        "url": "https://pypi.org/project/mistletoe-ebp/",
+        "snippet": "mistletoe is a Markdown parser in pure Python, designed to be fast, spec-compliant and fully customizable. Apart from being the fastest ...",
+        "source": "web"
+      },
+      {
+        "title": "A tool to turn Markdown into a nested JSON structure. - GitHub",
+        "url": "https://github.com/njvack/markdown-to-json",
+        "snippet": "A simple tool to convert Markdown (CommonMark dialect) data into JSON. It uses headings as JSON keys, and the stuff following headings as values.",
+        "source": "web"
+      },
+      {
+        "title": "4.20 Manipulate Markdown via Pandoc Lua filters (*) | R - Bookdown",
+        "url": "https://bookdown.org/yihui/rmarkdown-cookbook/lua-filters.html",
+        "snippet": "Pandoc has a built-in Lua interpreter, so you do not need to install additional tools. The Lua scripts are called “Lua filters” for Pandoc.",
+        "source": "web"
+      },
+      {
+        "title": "Using Parsers - Tree-sitter",
+        "url": "https://tree-sitter.github.io/tree-sitter/using-parsers/",
+        "snippet": "Tree-sitter's parsing functionality is implemented through its C API, with all functions documented in the tree_sitter/api.h header file, but if you're ...",
+        "source": "web"
+      },
+      {
+        "title": "Another attempt at docstrings for names and parameters--using \"||\"",
+        "url": "https://discuss.python.org/t/another-attempt-at-docstrings-for-names-and-parameters-using/67931",
+        "snippet": "The main proposal is to introduce a new token, || , to mark the start of a docstring or a continuation of a docstring from the previous line.",
+        "source": "web"
+      },
+      {
+        "title": "Pandoc Lua Filters",
+        "url": "https://pandoc.org/lua-filters.html",
+        "snippet": "Traditional pandoc filters accept a JSON representation of the pandoc AST and produce an altered JSON representation of the AST. They may be written in any ...",
+        "source": "web"
+      },
+      {
+        "title": "Markdown grammar for tree-sitter - GitHub",
+        "url": "https://github.com/tree-sitter-grammars/tree-sitter-markdown",
+        "snippet": "A Markdown parser for tree-sitter. screenshot. The parser is designed to read markdown according to the CommonMark Spec, but some extensions to the spec ...",
+        "source": "web"
+      },
+      {
+        "title": "Python Docstrings Tutorial : Examples & Format for Pydoc, Numpy ...",
+        "url": "https://www.datacamp.com/tutorial/docstrings-python",
+        "snippet": "In Python, you can access a docstring using the __doc__ attribute of the object. For example, you could access the docstring for a function using my_function. ...",
+        "source": "web"
+      },
+      {
+        "title": "markdown/markdown/inlinepatterns.py at master · Python ... - GitHub",
+        "url": "https://github.com/Python-Markdown/markdown/blob/master/markdown/inlinepatterns.py",
+        "snippet": "Inline patterns are handled by means of `Pattern` subclasses, one per regular expression. Each pattern object uses a single regular expression and must support ...",
+        "source": "web"
+      },
+      {
+        "title": "Efficiently Document APIs with Markdown: A Developer's Guide",
+        "url": "https://zuplo.com/learning-center/document-apis-with-markdown",
+        "snippet": "Set up automated checks for broken links and outdated examples; Create tests that validate your documentation examples against your actual API.",
+        "source": "web"
+      },
+      {
+        "title": "Extracting the Module and Function Names from Python ASTs",
+        "url": "https://arumoy.me/blogs/python-ast-extract-module-method-names/",
+        "snippet": "We can use the ast.parse method to create a AST from a given Python source code. Here is an example of how a function call is represented in a AST.",
+        "source": "web"
+      },
+      {
+        "title": "RegEx and Markdown - HackMD",
+        "url": "https://hackmd.io/@jufyzdslTuqXiBCKUiA96g/SJdNTtdPp",
+        "snippet": "Just to emphasis this is a simple markdown project demo. Using basic regular expressions to match markdown patterns in a document.",
+        "source": "web"
+      },
+      {
+        "title": "markdownlint/helpers/README.md at main - GitHub",
+        "url": "https://github.com/DavidAnson/markdownlint/blob/main/helpers/README.md",
+        "snippet": "Overview. The Markdown linter markdownlint offers a variety of built-in validation rules and supports the creation of custom rules.",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python ...",
+        "source": "web"
+      },
+      {
+        "title": "Handlers - mkdocstrings",
+        "url": "https://mkdocstrings.github.io/usage/handlers/",
+        "snippet": "mkdocstrings provides a way for third-party packages to extend or alter the behavior of handlers. For example, an extension of the Python handler could add ...",
+        "source": "web"
+      },
+      {
+        "title": "Python MarkItDown: Convert Documents Into LLM-Ready Markdown",
+        "url": "https://realpython.com/python-markitdown/",
+        "snippet": "In the following sections, you'll code quick examples of how to use MarkItDown to generate image descriptions and extract text from image files.",
+        "source": "web"
+      },
+      {
+        "title": "Cross-references - MyST Markdown",
+        "url": "https://mystmd.org/guide/cross-references",
+        "snippet": "Create numbered cross-references to labeled content (e.g. a figure, document, or table) and automatically generates links with hover previews.",
+        "source": "web"
+      },
+      {
+        "title": "Overview - mkdocstrings-python",
+        "url": "https://mkdocstrings.github.io/python/",
+        "snippet": "A Python handler for mkdocstrings. The Python handler uses Griffe to collect documentation from Python source code. The word \"griffe\" can sometimes be used ...",
+        "source": "web"
+      },
+      {
+        "title": "Markdown Extraction for RAG Workflows (MarkItDown) - Kaggle",
+        "url": "https://www.kaggle.com/code/ksmooi/markdown-extraction-for-rag-workflows-markitdown",
+        "snippet": "In this article, we'll explore practical examples of using MarkItDown's Python API to convert various types of files. We'll cover the following input files ...",
+        "source": "web"
+      },
+      {
+        "title": "4.7 Cross-referencing within documents | R Markdown Cookbook",
+        "url": "https://bookdown.org/yihui/rmarkdown-cookbook/cross-ref.html",
+        "snippet": "Cross-referencing is a useful way of directing your readers through your document, and can be automatically done within R Markdown.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Parsing Markdown Documentation to Extract API Mentions and Function References: A Comprehensive Technical Guide\n\nThis report examines the most effective approaches for parsing markdown documentation to extract API mentions and function references through abstract syntax tree (AST) analysis and pattern matching techniques. By synthesizing evidence from multiple documentation generation frameworks, Python parsing libraries, and specialized tools, we present practical implementation patterns that enable automated extraction of code references from markdown sources. The analysis encompasses three primary approaches: direct AST parsing using pure Python implementations, regular expression-based pattern matching for specific markdown elements, and integration with established documentation generation systems. Key findings indicate that AST-based approaches provide superior accuracy and maintainability compared to regex solutions, with mistletoe and python-markdown offering the most suitable libraries for production implementations.\n\n## Foundational Concepts in Markdown AST Parsing\n\n### Understanding Abstract Syntax Trees in Markdown Contexts\n\nThe abstract syntax tree represents the structural decomposition of markdown documents into hierarchical nodes that reflect the semantic meaning of the source material[4][19][22]. Unlike simple string manipulation or regular expressions, AST-based parsing preserves the complete document structure, enabling developers to distinguish between code references in different contexts—such as inline code versus code blocks—with high precision. When a markdown parser processes a document, it tokenizes the raw text according to the CommonMark specification or a related dialect, then constructs a tree where each node represents a distinct markdown element such as a heading, paragraph, list item, code block, or emphasis[6][23].\n\nThe advantage of working with AST representations becomes apparent when dealing with complex markdown structures that contain nested elements or ambiguous syntax. For instance, an asterisk character might indicate emphasis (italic text), multiplication in mathematics, or a bullet point in a list depending on its context. The parser's recursive descent through the document structure automatically disambiguates these cases, whereas pattern-based approaches would require complex lookahead and lookbehind assertions that become brittle and difficult to maintain. Furthermore, the AST provides metadata about each element including its position in the source document, which facilitates error reporting and enables mapping extracted references back to their original locations[1][25].\n\n### Document Processing Pipeline Architecture\n\nDocumentation extraction systems typically follow a standardized pipeline: source markdown files are read and parsed into an AST, the tree is traversed to locate relevant nodes, content is extracted and transformed, and finally the results are organized into a structured format suitable for further processing[7][8][10]. This pipeline approach enables modular design where each stage can be tested independently and specialized tools can be composed together. For example, a markdown parser creates the AST, a visitor pattern implementation extracts specific node types, a reference resolver maps identifiers to their definitions, and finally a formatter outputs the results in the desired structure.\n\nThe flexibility of this architecture makes it possible to target different output formats—whether JSON, HTML, LaTeX, or custom formats—by changing only the final formatting stage while reusing the extraction logic[4][19]. Additionally, the same extraction pipeline can be applied to multiple markdown files by iterating over the file collection and applying the parser to each document sequentially or in parallel, depending on performance requirements.\n\n## Python Libraries for Markdown AST Parsing\n\n### Mistletoe: Fast CommonMark-Compliant Parsing\n\nMistletoe represents one of the most capable pure Python markdown parsers currently available, specifically designed to achieve both speed and strict CommonMark specification compliance[4][19][22][38][41]. The library parses markdown documents into a complete AST that can be traversed programmatically or rendered to multiple output formats including HTML, LaTeX, and even Markdown itself. The architecture separates the parsing phase from the rendering phase, allowing developers to manipulate the AST between parsing and output without re-parsing the source material.\n\n```python\nimport mistletoe\nfrom mistletoe import Document, HTMLRenderer\n\n# Parse a markdown file and access the AST\nwith open('example.md', 'r') as fin:\n    with HTMLRenderer() as renderer:\n        doc = Document(fin)\n        # Now doc is an AST that can be traversed\n        rendered = renderer.render(doc)\n```\n\nThe library's architecture defines specific token types for different markdown elements: block-level tokens like Document, Heading, Paragraph, CodeBlock, Quote, and List, as well as span-level tokens like Emphasis, Strong, Code, Link, and Image[4][19]. Each token implements a `children` attribute that contains nested tokens, enabling recursive tree traversal. This design allows extraction code to walk the tree and identify specific patterns—for instance, extracting all code blocks or all links—by checking node types and filtering accordingly.\n\nMistletoe's performance characteristics make it particularly suitable for batch processing large documentation sets. Benchmarks demonstrate that mistletoe substantially outperforms other Python markdown parsers, including the popular markdown library and mistune, when processing complex CommonMark documents. This performance advantage stems from the library's efficient lexical analysis and the strategic use of Python's built-in data structures for managing parsing state[22].\n\n### Python-Markdown: Extensible Architecture for Custom Processing\n\nThe Python-Markdown library provides an alternative approach emphasizing extensibility through a plugin architecture that allows custom block processors and inline processors to be registered[3][6][23][34]. Unlike mistletoe's focus on specification compliance, Python-Markdown prioritizes flexibility, enabling developers to create custom extensions that handle non-standard markdown dialects or add domain-specific markup capabilities. The library's block parser architecture decomposes markdown into blocks—which might be paragraphs, lists, code blocks, or other block-level elements—and then applies each registered block processor in sequence until all blocks are consumed.\n\n```python\nimport markdown\nfrom markdown.blockparser import BlockParser\n\n# Create a markdown processor with optional extensions\nmd = markdown.Markdown(extensions=['extra', 'codehilite'])\n\n# Convert markdown to HTML\nhtml = md.convert(markdown_text)\n\n# Access the internal element tree for programmatic extraction\ntree = md.parser.parseDocument([markdown_text]).getroot()\n```\n\nThe Python-Markdown library stores the parsed document as an ElementTree structure rather than a custom AST, which provides compatibility with XML processing tools while requiring developers to navigate the tree using ElementTree APIs. This approach proves advantageous when integration with existing XML processing pipelines is needed, though it may introduce additional cognitive overhead compared to libraries with more specialized AST representations. The extensive extension ecosystem for Python-Markdown makes it valuable when standard markdown dialects prove insufficient—for instance, when documentation includes tables, definition lists, or footnotes that are not part of core CommonMark.\n\n### Specialized Analysis Libraries\n\nThe markdown-analysis library presents a focused approach specifically designed for extracting and categorizing various markdown elements without requiring rendering to alternative formats[20]. This library provides convenient methods like `identify_headers()`, `identify_paragraphs()`, `identify_code_blocks()`, `identify_links()`, and `identify_lists()` that return structured data about each element type. The advantage of such a specialized library emerges when the extraction task primarily involves identifying and analyzing specific element types rather than creating complex transformations of the document structure.\n\n```python\nfrom mrkdwn_analysis import MarkdownAnalyzer\n\nanalyzer = MarkdownAnalyzer(\"path/to/document.md\")\n\n# Extract different element types\nheaders = analyzer.identify_headers()\ncode_blocks = analyzer.identify_code_blocks()\nlinks = analyzer.identify_links()\n\n# Get summary statistics\nanalysis = analyzer.analyse()\nprint(analysis)  # Contains counts of various element types\n```\n\n## Techniques for Extracting Code References from Markdown\n\n### Inline Code Extraction and Analysis\n\nInline code in markdown—typically delimited by single backticks in the source and rendered within `<code>` tags in HTML—frequently contains API references, function names, variable names, and type annotations that warrant extraction and analysis[23][34]. Extracting inline code requires identifying code span tokens within paragraphs and preserving their textual content while discarding the delimiters. When traversing an AST generated by mistletoe or similar parsers, inline code appears as span-level tokens with a specific type like `Code` or `InlineCode`, and the extraction process becomes straightforward: collect all code spans, retrieve their content, and store them with metadata about their containing paragraph or section.\n\nThe distinction between inline code and other similar elements proves important for accurate extraction. Emphasis delimiters (*text* for italics, **text** for bold) superficially resemble code delimiters but serve different semantic purposes. AST parsing automatically disambiguates these cases—the parser's grammar rules ensure that backticks generate code tokens while asterisks generate emphasis tokens. By contrast, regex-based approaches struggle with this distinction, particularly when the document contains escaped characters or edge cases like backticks appearing within emphasis regions.\n\n### Code Block Extraction with Language Identification\n\nCode blocks in markdown—typically delimited by triple backticks (``` or ~~~) with optional language identifiers on the opening fence—often contain executable examples, implementation details, or pseudo-code that can be analyzed to extract API usage patterns[1][3][25][34]. The markdown grammar treats code blocks as distinct block-level elements with a content region and metadata attributes. When parsed into an AST, code blocks typically include both the raw code content and the language identifier (e.g., \"python\", \"javascript\", \"bash\"), enabling specialized processing based on the code's language.\n\n```python\nimport mistletoe\nfrom mistletoe import Document\n\ndef extract_code_blocks(markdown_text, language=None):\n    \"\"\"Extract code blocks from markdown, optionally filtered by language.\"\"\"\n    code_blocks = []\n    \n    doc = Document(markdown_text)\n    for token in doc.children:\n        if hasattr(token, '__class__') and token.__class__.__name__ == 'CodeBlock':\n            # Check language if filter specified\n            if language is None or token.language == language:\n                code_blocks.append({\n                    'language': token.language or 'plaintext',\n                    'content': token.children.content if token.children else ''\n                })\n    \n    return code_blocks\n```\n\nWhen extracting code blocks, the language identifier enables specialized processing. For Python code blocks, a secondary AST parser (Python's built-in `ast` module) can analyze the code to extract function definitions, class definitions, and function calls—thereby identifying specific API usage within the documentation[51]. Similarly, JavaScript code blocks can be parsed to extract function names and object property accesses. This two-level parsing approach—first parsing the markdown to locate code blocks, then parsing the code itself to extract specific constructs—enables sophisticated analysis that would be impractical with simple pattern matching.\n\n### Header-Based Function Name Extraction\n\nDocumentation frequently adopts conventions where section headers directly correspond to function or class names, particularly in API reference documentation[2][31][33]. A header like `## function_name()` or `### ClassName.method_name()` explicitly indicates the API element being documented. Extracting these references requires identifying heading tokens, analyzing their text content for patterns matching API naming conventions, and normalizing the extracted names to remove formatting characters and parentheses.\n\nThe challenge in header-based extraction involves distinguishing between headers that name API elements and headers that serve descriptive or organizational purposes. A robust approach employs multiple heuristics: function names typically match language-specific identifier patterns; they often include parentheses to indicate they are callable; they may include class prefixes separated by dots or double colons; and the documentation conventions within a specific project can be learned from header patterns observed in the document. Combining multiple heuristics reduces false positives and increases recall in extracting legitimate API references.\n\n### Regular Expression-Based Pattern Matching for Markdown Links\n\nWhile AST-based parsing provides the most robust approach, targeted regular expressions can efficiently extract specific patterns when precision requirements permit[21][24]. For instance, markdown link syntax `[text](url)` can be matched with carefully crafted regex patterns, though the need to handle edge cases—such as links containing parentheses in the URL, nested brackets in the link text, and escaped characters—rapidly increases the regex complexity[24].\n\n```python\nimport re\n\n# Basic markdown link extraction\n# Handles simple cases but not all edge cases\nMARKDOWN_LINK_PATTERN = r'\\[([^\\]]+)\\]\\(([^)]+)\\)'\n\ntext = \"See [the documentation](https://example.com/docs) for details.\"\nmatches = re.findall(MARKDOWN_LINK_PATTERN, text)\n# matches = [('the documentation', 'https://example.com/docs')]\n```\n\nFor more sophisticated markdown link extraction—particularly when links contain parentheses or special characters—a recursive regex pattern or a multi-stage parsing process becomes necessary. The markdown specification permits complex URL syntax including embedded parentheses, which single-pass regex patterns cannot reliably handle. In such cases, an AST-based approach proves superior: the parser has already disambiguated the markdown syntax, and extracting links becomes a matter of identifying link tokens and retrieving their target URLs without worrying about edge cases that the parser has already resolved[24].\n\n### Combined Extraction Workflow\n\nA complete extraction workflow typically combines multiple techniques to capture different types of API references. The process might proceed as follows: parse the markdown into an AST, traverse the AST to locate code blocks and extract API calls embedded within them, identify headers that name API elements, extract inline code references and analyze them for API names, and finally consolidate all references into a unified collection with metadata about their source location and context[20].\n\n## Documentation Generators and Their API Reference Extraction Strategies\n\n### Sphinx Autodoc: Dynamic Documentation from Source Code\n\nSphinx, a widely-used documentation generator for Python projects, employs a fundamentally different approach from pure markdown parsing: it executes Python code to extract documentation programmatically from source files and runtime introspection[10][26]. The `sphinx.ext.autodoc` extension uses Python's `inspect` module to traverse module hierarchies, extract docstrings from functions, classes, and modules, and generate reStructuredText (Sphinx's markup language) that incorporates this extracted documentation[26][37].\n\nWhen processing API documentation, Sphinx's autodoc extension constructs directives like `.. autofunction:: module.function` or `.. autoclass:: module.ClassName`, which trigger introspection of the specified Python objects. The extension retrieves the object's signature—parameter names, types, and default values—from the source code's AST using Python's built-in `ast` module, and combines this with docstring content to create comprehensive documentation[26][37][40]. This approach ensures that documentation stays synchronized with source code changes, as the documentation is generated dynamically from the current source state rather than being manually maintained as static files.\n\nThe `sphinx-apidoc` tool automates the initial generation of Sphinx source files by scanning a Python package and creating `.rst` files that reference all discovered modules, classes, and functions[10]. The resulting files use autodoc directives to reference source objects, enabling developers to review and enhance auto-generated documentation before including it in the final build. This hybrid approach balances automation with manual control—the initial structure derives from the package layout, but developers can add custom content, reorder elements, or exclude items that should not appear in the documentation.\n\n### MkDocs and mkdocstrings: Markdown-Based API Documentation\n\nMkDocs provides a documentation framework built around markdown files organized in a directory structure, with the `mkdocstrings` extension enabling automatic API documentation extraction while maintaining a primarily markdown-based workflow[8][11][55][58]. Unlike Sphinx, which generates documentation from directives embedded in reStructuredText, mkdocstrings uses special markdown syntax within regular markdown files to trigger API documentation generation.\n\n```markdown\n## Function API\n\n::: python\n    my_module.my_function\n```\n\nThe mkdocstrings architecture separates concerns through a handler system: the Python handler (implemented in mkdocstrings-python) collects documentation from Python source using the Griffe library, which parses Python source code into an AST to extract signatures, docstrings, and other metadata[58]. When the markdown processor encounters mkdocstrings directives, it invokes the appropriate handler to collect and render the referenced API elements. The collected data is then rendered using Jinja2 templates, enabling customization of the output appearance while reusing the data collection logic.\n\nGriffe, the underlying library used by mkdocstrings-python, visits the Python source AST to extract detailed information about modules, classes, functions, and attributes[58]. Unlike dynamic introspection approaches used by Sphinx, Griffe performs static analysis of the source code, which avoids executing potentially unsafe code while still capturing comprehensive metadata. This approach proves particularly valuable in documentation builds where running arbitrary code would be inappropriate or impossible.\n\n### pdoc: Minimal Configuration Documentation Generation\n\nThe pdoc tool exemplifies an even simpler approach: it generates HTML API documentation by introspecting Python modules at runtime, requiring no configuration files or manual documentation markup[9][12]. When invoked on a Python module, pdoc imports the module, examines its public interface using Python's introspection capabilities, and generates styled HTML documentation that includes docstrings formatted as markdown. The tool automatically creates cross-references between objects, renders type annotations, and supports multiple docstring formats including NumPy-style and Google-style docstrings.\n\nFrom a markdown perspective, pdoc treats docstrings as markdown source and renders them to HTML for inclusion in the generated documentation[12]. The tool also supports extracting documentation for module variables by recognizing assignment statements followed by docstrings—a pattern that the Python AST module can identify even though simple string literals following assignments do not technically represent docstrings in Python's grammar[12]. This capability extends the range of documentable entities beyond what Python's formal syntax would suggest.\n\n### Pandoc: AST Manipulation Through Lua Filters\n\nPandoc, a universal document converter, takes a different approach by representing documents internally as ASTs and allowing users to manipulate these ASTs through Lua filters before rendering[43][46]. When Pandoc reads a markdown document, it constructs an AST where each node represents a document element—headers, paragraphs, code blocks, links, etc. Users can write Lua filter scripts that traverse this AST and modify it: for instance, a filter might normalize heading levels, transform link URLs, or extract specific elements for separate processing.\n\nThe Lua filter approach proves valuable for documentation extraction because it operates on Pandoc's intermediate AST representation, which abstracts away markdown syntax details while preserving semantic structure. A filter function receives a node representing a markdown element, can examine its properties, modify it if needed, and return the modified or original node. This enables sophisticated document transformations: extracting all code blocks and rendering them separately, creating a table of contents, or removing internal documentation markers before generating public documentation.\n\n## Practical Implementation Patterns\n\n### Pattern One: Complete AST Traversal for Comprehensive Extraction\n\n```python\nimport mistletoe\nfrom mistletoe import Document\nfrom collections import defaultdict\n\nclass APIReferenceExtractor:\n    \"\"\"Extracts API references from markdown using complete AST traversal.\"\"\"\n    \n    def __init__(self):\n        self.references = defaultdict(list)\n        self.current_section = None\n    \n    def extract_from_file(self, filepath):\n        \"\"\"Extract all API references from a markdown file.\"\"\"\n        with open(filepath, 'r') as f:\n            doc = Document(f)\n        \n        self._traverse_tree(doc)\n        return self.references\n    \n    def _traverse_tree(self, node, depth=0):\n        \"\"\"Recursively traverse the AST and extract references.\"\"\"\n        node_type = node.__class__.__name__\n        \n        # Track current section from headings\n        if node_type == 'Heading':\n            heading_text = self._extract_text(node)\n            self.current_section = heading_text\n        \n        # Extract inline code references\n        elif node_type == 'InlineCode':\n            code_content = node.content\n            self.references['inline_code'].append({\n                'content': code_content,\n                'section': self.current_section\n            })\n        \n        # Extract code blocks with language\n        elif node_type == 'CodeBlock':\n            language = getattr(node, 'language', 'plaintext')\n            code_content = node.children.content if node.children else ''\n            \n            # Extract function/class calls from Python blocks\n            if language == 'python':\n                calls = self._extract_python_calls(code_content)\n                self.references['python_calls'].extend(calls)\n            \n            self.references['code_blocks'].append({\n                'language': language,\n                'content': code_content,\n                'section': self.current_section\n            })\n        \n        # Extract links which might reference API docs\n        elif node_type == 'Link':\n            link_text = self._extract_text(node)\n            link_target = node.target\n            if 'api' in link_target.lower() or 'reference' in link_text.lower():\n                self.references['api_links'].append({\n                    'text': link_text,\n                    'target': link_target,\n                    'section': self.current_section\n                })\n        \n        # Traverse child nodes\n        if hasattr(node, 'children'):\n            for child in node.children:\n                self._traverse_tree(child, depth + 1)\n    \n    def _extract_text(self, node):\n        \"\"\"Extract plain text from a node and its children.\"\"\"\n        if hasattr(node, 'content') and isinstance(node.content, str):\n            return node.content\n        \n        text_parts = []\n        if hasattr(node, 'children'):\n            for child in node.children:\n                if hasattr(child, 'content') and isinstance(child.content, str):\n                    text_parts.append(child.content)\n                else:\n                    text_parts.append(self._extract_text(child))\n        \n        return ''.join(text_parts)\n    \n    def _extract_python_calls(self, code_content):\n        \"\"\"Extract function/method calls from Python code.\"\"\"\n        import ast\n        try:\n            tree = ast.parse(code_content)\n            calls = []\n            for node in ast.walk(tree):\n                if isinstance(node, ast.Call):\n                    func_name = self._get_call_name(node)\n                    if func_name:\n                        calls.append({'name': func_name})\n            return calls\n        except SyntaxError:\n            return []\n    \n    def _get_call_name(self, call_node):\n        \"\"\"Extract function/method name from a Call node.\"\"\"\n        if isinstance(call_node.func, ast.Name):\n            return call_node.func.id\n        elif isinstance(call_node.func, ast.Attribute):\n            parts = []\n            node = call_node.func\n            while isinstance(node, ast.Attribute):\n                parts.append(node.attr)\n                node = node.value\n            if isinstance(node, ast.Name):\n                parts.append(node.id)\n            return '.'.join(reversed(parts))\n        return None\n```\n\nThis pattern demonstrates complete document traversal, context tracking across sections, and specialized processing for different element types. The architecture proves extensible: additional extraction logic can be added for new reference types without modifying the core traversal mechanism.\n\n### Pattern Two: Targeted Section-Based Extraction\n\n```python\nimport re\nfrom pathlib import Path\n\nclass APIDocumentationExtractor:\n    \"\"\"Extracts API documentation organized by headers.\"\"\"\n    \n    def __init__(self, markdown_dir):\n        self.markdown_dir = Path(markdown_dir)\n        self.api_docs = {}\n    \n    def extract_all(self):\n        \"\"\"Extract API documentation from all markdown files.\"\"\"\n        for md_file in self.markdown_dir.rglob('*.md'):\n            self.extract_from_file(md_file)\n        return self.api_docs\n    \n    def extract_from_file(self, filepath):\n        \"\"\"Extract API documentation structure from a markdown file.\"\"\"\n        with open(filepath, 'r') as f:\n            content = f.read()\n        \n        # Split on h2 headers to identify API sections\n        sections = re.split(r'^## ', content, flags=re.MULTILINE)\n        \n        for section in sections[1:]:  # Skip content before first h2\n            lines = section.split('\\n')\n            section_name = lines.strip()\n            \n            # Extract function signature if it matches naming patterns\n            api_info = self._parse_section(section_name, '\\n'.join(lines[1:]))\n            \n            if api_info:\n                self.api_docs[section_name] = api_info\n    \n    def _parse_section(self, header, content):\n        \"\"\"Parse a section to extract API information.\"\"\"\n        # Match patterns like \"function_name()\", \"ClassName.method()\", etc.\n        func_pattern = r'^(\\w+(?:\\.\\w+)*)\\s*\\([^)]*\\)\\s*(?:-\\s*(.+))?$'\n        match = re.match(func_pattern, header)\n        \n        if not match:\n            return None\n        \n        func_name = match.group(1)\n        brief = match.group(2) or ''\n        \n        # Extract parameters section\n        params = self._extract_parameters(content)\n        \n        # Extract returns section\n        returns = self._extract_returns(content)\n        \n        # Extract examples\n        examples = self._extract_examples(content)\n        \n        return {\n            'name': func_name,\n            'brief': brief,\n            'parameters': params,\n            'returns': returns,\n            'examples': examples\n        }\n    \n    def _extract_parameters(self, content):\n        \"\"\"Extract parameter information from section content.\"\"\"\n        # Match sections starting with \"Parameters:\" or \"Args:\"\n        param_section = re.search(\n            r'(?:Parameters|Args):\\s*\\n((?:(?:- |\\* ).+\\n?)+)',\n            content,\n            re.IGNORECASE\n        )\n        \n        if not param_section:\n            return []\n        \n        params = []\n        for line in param_section.group(1).strip().split('\\n'):\n            if line.strip().startswith(('- ', '* ')):\n                # Parse parameter descriptions\n                param_line = line.strip()[2:]\n                params.append(param_line)\n        \n        return params\n    \n    def _extract_returns(self, content):\n        \"\"\"Extract return value information.\"\"\"\n        returns_section = re.search(\n            r'(?:Returns?|Return Value):\\s*\\n(.+?)(?=\\n\\n|\\Z)',\n            content,\n            re.DOTALL | re.IGNORECASE\n        )\n        \n        return returns_section.group(1).strip() if returns_section else None\n    \n    def _extract_examples(self, content):\n        \"\"\"Extract code examples from section.\"\"\"\n        examples = []\n        \n        # Match code blocks following \"Example:\" headers\n        code_blocks = re.findall(\n            r'(?:Example|Usage):\\s*\\n```(?:[\\w]+)?\\s*\\n(.+?)\\n```',\n            content,\n            re.DOTALL | re.IGNORECASE\n        )\n        \n        examples.extend(code_blocks)\n        return examples\n```\n\nThis pattern suits documentation with strong structural conventions—for instance, when all API functions have dedicated h2 sections with consistent naming and content organization. The regex-based approach provides high performance for well-structured documents while sacrificing the robustness of AST parsing.\n\n### Pattern Three: Griffe-Based Static Analysis for Python Modules\n\n```python\nfrom griffe.loader import GriffeLoader\nfrom griffe.docstrings.google import parse as parse_google_docstring\n\nclass PythonAPIExtractor:\n    \"\"\"Extract API references from Python source using Griffe.\"\"\"\n    \n    def __init__(self, module_name):\n        self.loader = GriffeLoader()\n        self.module = self.loader.load(module_name)\n    \n    def extract_all_apis(self):\n        \"\"\"Extract all public APIs from the module.\"\"\"\n        apis = {\n            'classes': self._extract_classes(),\n            'functions': self._extract_functions(),\n            'variables': self._extract_variables()\n        }\n        return apis\n    \n    def _extract_classes(self):\n        \"\"\"Extract class definitions and their members.\"\"\"\n        classes = []\n        \n        for member in self.module.members.values():\n            if member.is_class:\n                class_info = {\n                    'name': member.name,\n                    'docstring': member.docstring.value if member.docstring else '',\n                    'methods': [],\n                    'attributes': []\n                }\n                \n                # Extract methods and attributes\n                for sub_member in member.members.values():\n                    if sub_member.is_function and not sub_member.name.startswith('_'):\n                        class_info['methods'].append({\n                            'name': sub_member.name,\n                            'signature': str(sub_member),\n                            'docstring': sub_member.docstring.value if sub_member.docstring else ''\n                        })\n                    elif not sub_member.is_function and not sub_member.name.startswith('_'):\n                        class_info['attributes'].append({\n                            'name': sub_member.name,\n                            'annotation': str(sub_member.annotation) if sub_member.annotation else '',\n                            'docstring': sub_member.docstring.value if sub_member.docstring else ''\n                        })\n                \n                classes.append(class_info)\n        \n        return classes\n    \n    def _extract_functions(self):\n        \"\"\"Extract function definitions.\"\"\"\n        functions = []\n        \n        for member in self.module.members.values():\n            if member.is_function and not member.name.startswith('_'):\n                func_info = {\n                    'name': member.name,\n                    'signature': str(member),\n                    'docstring': member.docstring.value if member.docstring else '',\n                    'parameters': [],\n                    'returns': None\n                }\n                \n                # Parse docstring for structured information\n                if member.docstring:\n                    parsed = parse_google_docstring(member.docstring.value)\n                    if parsed:\n                        func_info['parsed_docstring'] = parsed\n                \n                functions.append(func_info)\n        \n        return functions\n    \n    def _extract_variables(self):\n        \"\"\"Extract module-level variables.\"\"\"\n        variables = []\n        \n        for member in self.module.members.values():\n            if not member.is_function and not member.is_class and not member.name.startswith('_'):\n                var_info = {\n                    'name': member.name,\n                    'annotation': str(member.annotation) if member.annotation else '',\n                    'docstring': member.docstring.value if member.docstring else ''\n                }\n                variables.append(var_info)\n        \n        return variables\n```\n\nThis pattern leverages static analysis tools specifically designed for Python introspection, providing access to metadata that might not be readily available through simple markdown parsing. The Griffe library handles complexities like inheritance, decorators, and type annotations that would require substantial custom implementation in a from-scratch approach.\n\n## Best Practices and Recommendations\n\n### Selecting the Appropriate Parsing Strategy\n\nThe choice between AST-based parsing and regex-based pattern matching depends on several factors: the consistency and structure of the markdown source, performance requirements, accuracy needs, and the complexity of references to be extracted. AST-based approaches excel when documents follow consistent markup conventions and extraction accuracy is critical, as they automatically handle edge cases and ambiguous syntax that plague regex solutions. Conversely, regex-based approaches shine in high-performance scenarios where documents have highly predictable structure and only simple patterns require extraction, as the regex matching overhead proves lower than full parsing and AST traversal.\n\nFor most production documentation systems, beginning with an AST-based approach using established libraries like mistletoe or python-markdown provides a more maintainable foundation. The upfront development cost is modest compared to the long-term maintenance burden of increasingly complex regex patterns that must handle new edge cases as the documentation evolves.\n\n### Combining Static and Dynamic Analysis\n\nThe most comprehensive approaches combine static analysis of markdown structure—to identify where API references might appear—with dynamic analysis of referenced source code—to extract detailed metadata about the APIs themselves. This hybrid strategy appears in frameworks like Sphinx (which combines reStructuredText parsing with Python introspection) and mkdocstrings (which combines markdown parsing with Griffe static analysis). By separating concerns, this approach enables each component to focus on its specialized task while maintaining flexibility to replace individual components as requirements evolve.\n\n### Metadata Preservation and Context Tracking\n\nWhen extracting references from markdown, preserving metadata about each reference's location and context proves invaluable for later processing. Include information such as the source file path, line number where the reference appears, containing section or heading, and surrounding paragraph text. This metadata enables mapping extracted references back to their source for verification, generating error messages that precisely identify problematic references, and analyzing how references are distributed across documentation.\n\n### Handling Markdown Dialect Variations\n\nWhile CommonMark provides a standardized specification, practical markdown documents frequently use dialect extensions: GitHub Flavored Markdown (GFM) adds tables and strikethrough, MultiMarkdown adds footnotes and metadata, and many documentation systems add custom extensions. Rather than attempting to build a parser that handles all variations, select a parsing library that supports the dialects used in the target documentation. Both mistletoe and python-markdown provide extension mechanisms for adding support for non-standard constructs; Python-Markdown's extension ecosystem particularly suits this purpose. Alternatively, frameworks like Pandoc that abstract over multiple markdown representations can bridge dialect differences.\n\n### Performance Considerations for Large Documentation Sets\n\nWhen processing documentation with hundreds or thousands of markdown files, parsing performance becomes consequential. Batch processing can be accelerated through parallel processing, caching of parse results, and incremental re-parsing of modified files. Storing parsed ASTs in an intermediate format enables separating the parsing phase (which can be performed once) from the reference extraction phase (which might be performed multiple times with different extraction strategies). Tools like Pandoc's JSON AST representation provide standardized intermediate formats for this purpose.\n\n### Validation and Error Handling\n\nRobust extraction systems implement validation to detect malformed references, broken links, and inconsistencies. When extracting code references from markdown source, validate that identifiers correspond to known APIs in the target modules. When extracting links, check that URLs resolve. When extracting docstring patterns from headers, verify that extracted names match language-specific identifier conventions. Comprehensive error reporting helps maintain documentation quality and guides developers to correct problematic documentation.\n\n## Conclusion\n\nParsing markdown documentation to extract API mentions and function references requires careful selection of tools and techniques matched to the specific characteristics of the target documentation. Abstract syntax tree-based parsing using libraries like mistletoe and python-markdown provides the most robust foundation, automatically handling markdown syntax complexities and edge cases that would require increasingly brittle regular expressions. For documentation organized around documented Python modules, integration with static analysis tools like Griffe or dynamic introspection using Python's inspect module enables extraction of detailed metadata alongside markdown-based references. Hybrid approaches that combine markdown parsing with source code analysis provide the most comprehensive solution for projects where documentation includes both narrative sections and API references.\n\nThe practical implementation patterns presented—complete AST traversal, targeted section-based extraction, and Griffe-based static analysis—offer starting points that can be adapted to specific documentation systems and organizational conventions. Success requires understanding both the capabilities and limitations of available tools, selecting approaches appropriate to the documentation structure and accuracy requirements, and investing in infrastructure for validation, error reporting, and metadata preservation that supports long-term documentation maintenance and evolution."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

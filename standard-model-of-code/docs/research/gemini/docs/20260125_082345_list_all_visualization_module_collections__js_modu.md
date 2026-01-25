@@ -1,0 +1,165 @@
+# Research: List ALL visualization module collections: JS modules (count each), CSS token categories, control ty...
+
+> **Date:** 2026-01-25 08:23:45
+> **Source:** gemini
+> **Model:** gemini-3-pro-preview
+> **Checksum:** `sha256:d93f893e0d2c589acdead203e39c68638484280d1c158c85190b1ad919dbe38d`
+> **Raw JSON:** `raw/20260125_082345_list_all_visualization_module_collections__js_modu.json`
+
+---
+
+## Query
+
+List ALL visualization module collections: JS modules (count each), CSS token categories, control types, layout algorithms, color systems. Be specific.
+
+---
+
+## Response
+
+Based on the codebase context provided, here is the comprehensive inventory of the visualization system's module collections.
+
+### 1. JavaScript Modules (45 Modules)
+The system is modularized into **45** distinct functional units (42 files in `modules/` + 3 inlined in `template.html`).
+
+**Core & Infrastructure**
+1.  **main.js**: Entry point and module wiring.
+2.  **app.js**: Legacy monolith (being decomposed).
+3.  **core.js**: Foundation constants (`SELECTION_SIZE_MULT`, `PENDULUM`).
+4.  **data-manager.js (`DATA`)**: O(1) indexed lookups and cached aggregations.
+5.  **registry.js**: Centralized command and DOM element registration.
+6.  **hardware-info.js**: WebGL/GPU capability detection.
+7.  **perf-monitor.js**: FPS tracking and frame drop detection.
+8.  **refresh-throttle.js**: Frame-budget-aware render throttling.
+9.  **worker-layout.js** (Implied by architecture context, though file content not explicitly shown, standard in D3).
+
+**Visual Engine & Rendering**
+10. **animation.js (`ANIM`)**: Layout transitions and spatial hashing.
+11. **color-engine.js (`COLOR`)**: OKLCH color space mathematics and palette management.
+12. **edge-system.js (`EDGE`)**: Edge width, opacity, and gradient modes.
+13. **node-accessors.js (`NODE`)**: Standardized property getters (Tier, Family, Ring).
+14. **node-helpers.js**: Logic for node coloring and sizing modes.
+15. **tower-renderer.js**: Three.js engine for the 3D Axial Holarchy.
+16. **hull-visualizer.js**: SDF-based organic membrane rendering (GLSL shaders).
+17. **legend-manager.js**: Dynamic legend generation and filtering.
+
+**UI & Interaction**
+18. **sidebar.js**: Controls for color, physics, and layout presets.
+19. **panels.js**: Floating panel management and UI dimming.
+20. **layout.js**: UI layout engine (collision avoidance for panels).
+21. **hud.js**: Heads-up display fade behavior and stats.
+22. **hover.js**: Node hover interactions and detail panels.
+23. **selection.js (`SELECT`)**: Multi-select, marquee, and halo visuals.
+24. **control-bar.js**: Dynamic data-to-visual mapping interface.
+25. **codome-hud.js**: Level indicator for Axial layout.
+26. **settings-panel.js**: Input configuration (Mouse/Keyboard).
+27. **pipeline-navigator.js**: Interactive visualization of the analysis pipeline.
+28. **report.js**: AI insights and "Brain Download" rendering.
+
+**Specialized Visualizations**
+29. **flow.js**: High-entropy node highlighting and particle systems.
+30. **file-viz.js**: Orchestrator for file-based visualization modes.
+31. **file-tree-layout.js**: 3D Cone Tree algorithm implementation.
+32. **file-color-model.js**: Pure color generation strategies for files.
+33. **axial-layout.js**: Physics engine for the "Tower" visualization.
+34. **spatial.js**: Convex hulls and spatial hashing.
+35. **dimension.js**: 2D/3D transition animation logic.
+
+**Logic & Theory**
+36. **theory.js**: Standard Model of Code topology constants.
+37. **holarchy-mapper.js**: Transforms graph nodes into 16-level scale.
+38. **physics.js**: D3 force simulation parameter management.
+39. **layout-forces.js**: Custom D3 forces (Cluster, Cohesion, Radial).
+40. **layout-helpers.js**: Position persistence and freeze/unfreeze logic.
+41. **groups.js**: Node grouping logic.
+42. **datamap.js**: Data mapping and filtering logic.
+43. **theme.js**: Runtime theme switching.
+44. **property-query.js**: Resolution strategy for node properties.
+45. **circuit-breaker.js**: Runtime UI validator and self-test system.
+
+---
+
+### 2. CSS Token Categories
+Styles are bridged from legacy variables to a token system defined in `styles.css`.
+
+*   **Color - Backgrounds**: `bg-base`, `bg-elevated`, `bg-panel`, `bg-overlay`.
+*   **Color - Text**: `text-primary`, `text-secondary`, `text-muted`, `text-tertiary`.
+*   **Color - Accents**: `accent-primary`, `accent-secondary`, `status-success`, `status-warning`, `status-error`.
+*   **Color - Visualization**: `viz-node-glow`, `viz-edge-glow`, `viz-selection`.
+*   **Spacing**: `spacing-1` through `spacing-12` (grid system).
+*   **Typography**: `family-sans`, `family-mono`, `size-xs` through `size-2xl`.
+*   **Borders**: `border-default`, `border-strong`, `border-faint`.
+*   **Effects**: `shadow-sm` through `shadow-xl`, `blur-sm` through `blur-lg`.
+*   **Layout**: `z-index` layers, `offset` calculations, `size-panel-width`.
+
+---
+
+### 3. Control Types & UI Elements
+Interactive elements found in `template.html` and generated by JS.
+
+*   **Toggles**: Binary switches (e.g., "Show Labels", "Pulse Animation").
+*   **Sliders**: Continuous numeric inputs (e.g., "Node Size", "Repulsion").
+    *   *Meta-Slider*: "Amplifier" (Gamma correction for colors).
+*   **Segmented Controls**: Multi-state toggles (e.g., 2D/3D, Size Mode).
+*   **Filter Chips**: Clickable tags for Tiers, Rings, and Edge Types.
+*   **Color Swatches**: Gradient previews for scheme selection.
+*   **Action Buttons**: Grid-layout buttons (Reset, Screenshot, Freeze).
+*   **Marquee**: Drag-to-select box.
+*   **Collapsible Headers**: Accordion-style section management.
+*   **Resize Handles**: Vertical (sections) and Horizontal (sidebar) drag handles.
+
+---
+
+### 4. Layout Algorithms (12 Types)
+Available via `ANIM` module, `AxialLayout`, and `FILE_TREE`.
+
+1.  **Force**: Physics-based clustering (default).
+2.  **Radial**: Concentric tier rings.
+3.  **Orbital**: Planetary orbit bands based on family.
+4.  **Sphere**: Global surface distribution.
+5.  **Grid**: 3D lattice structure.
+6.  **Spiral**: DNA-like helix.
+7.  **Tree**: Hierarchical tree (Root at top).
+8.  **Galaxy**: Spiral arms based on family.
+9.  **Flock**: Swarming bird simulation (Boids).
+10. **Cone Tree**: 3D hierarchical cones for directories (`file-tree-layout.js`).
+11. **Axial (The Tower)**: Vertical 16-level holarchy (`AxialLayout.js`).
+12. **File Map**: Clustering by file association (`file-viz.js`).
+
+---
+
+### 5. Color Systems
+Managed by the `color-engine.js` (OKLCH) module.
+
+**A. Schemes (33 Named Gradients)**
+*   **Sequential**: Viridis, Plasma, Magma, Inferno, Cividis, Turbo, Mako, Rocket.
+*   **Diverging**: Coolwarm, Spectral.
+*   **Thematic**: Thermal, Nightvision, Ocean, Terrain, Electric.
+*   **Semantic Roles**: Query, Finder, Command, Creator, Destroyer, Factory, Repository, Cache, Service, Orchestrator, Validator, Guard, Transformer, Parser, Handler, Emitter, Utility, Lifecycle.
+*   **Geometry**: Rainbow-loop, Arcs, Spirals, Waves, Ramps, Helix.
+
+**B. Flow Presets (6 Modes)**
+*   **EMBER**: Orange/Red high-contrast.
+*   **OCEAN**: Cyan/Blue cool tones.
+*   **PLASMA**: Purple/Magenta neon.
+*   **MATRIX**: Green digital rain style.
+*   **PULSE**: Red/Pink alert style.
+*   **AURORA**: Teal/Aqua ethereal style.
+
+**C. Edge Modes (8 Types)**
+1.  **Gradient-Tier**: Interpolates T0 → T1 → T2.
+2.  **Gradient-File**: Interpolates between file hues.
+3.  **Gradient-Flow**: Cold (Blue) to Hot (Red) based on Markov weight.
+4.  **Gradient-Depth**: Shallow (Cyan) to Deep (Magenta).
+5.  **Gradient-Semantic**: Similar (Green) to Different (Pink).
+6.  **Type**: Categorical color by edge type.
+7.  **Weight**: Intensity based on edge weight.
+8.  **Mono**: Minimal monochrome.
+
+**D. Stagger Patterns (Animation)**
+*   Radial, Tier, Distance, File, Spiral, Random.
+
+---
+
+## Citations
+
+_No citations provided_

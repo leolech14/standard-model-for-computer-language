@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T19:40:49.009879",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Three.js r149 support for Display P3 output using drawingBufferColorSpace. How to enable wide gamut rendering in Three.js versions prior to r152 ColorManagement update? What are the limitations and workarounds?",
+    "query_length": 210,
+    "checksum": "sha256:38c83dbd561301a4f293896362189d584f4f3a160c7ce754981d4abab5a1df43"
+  },
+  "response": {
+    "id": "109c622d-df15-499d-afb7-a38cb0ef4351",
+    "model": "sonar-pro",
+    "created": 1769294448,
+    "usage": {
+      "prompt_tokens": 44,
+      "completion_tokens": 443,
+      "total_tokens": 487,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.007,
+        "request_cost": 0.006,
+        "total_cost": 0.013
+      }
+    },
+    "citations": [
+      "https://ccameron-chromium.github.io/webgl-examples/p3.html",
+      "https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawingBufferColorSpace",
+      "https://forum.babylonjs.com/t/display-p3-colorspace/40456",
+      "https://github.com/mrdoob/three.js/issues/26479",
+      "https://threejs.org/docs/pages/module-ColorSpaces.html",
+      "https://discourse.threejs.org/t/how-to-work-with-display-p3-wide-gamut-color-profile-in-webgl-three-js/6471",
+      "https://threejs.org/docs/",
+      "https://discourse.threejs.org/t/issue-with-srgbcolorspace-output-after-upgrade-r164/66217",
+      "https://caniuse.com/mdn-api_webglrenderingcontext_drawingbuffercolorspace"
+    ],
+    "search_results": [
+      {
+        "title": "Setting the Drawing Buffer Color Space",
+        "url": "https://ccameron-chromium.github.io/webgl-examples/p3.html",
+        "last_updated": "2025-09-11",
+        "snippet": "To set the drawing buffer color space, set the aforementioned drawingBufferColorSpace. The valid values for this to be set to are 'srgb' and 'display-p3'.",
+        "source": "web"
+      },
+      {
+        "title": "WebGLRenderingContext: drawingBufferColorSpace property",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawingBufferColorSpace",
+        "date": "2024-09-28",
+        "last_updated": "2025-03-26",
+        "snippet": "drawingBufferColorSpace property specifies the color space of the WebGL drawing buffer. Along with the default ( srgb ), the display-p3 color ...",
+        "source": "web"
+      },
+      {
+        "title": "Display-P3 colorspace - Feature requests - Babylon.js Forum",
+        "url": "https://forum.babylonjs.com/t/display-p3-colorspace/40456",
+        "date": "2023-05-03",
+        "last_updated": "2025-10-21",
+        "snippet": "The WebGLRenderingContext.unpackColorSpace property specifies the color space to convert to when importing textures. Along with the default (srgb), the display ...",
+        "source": "web"
+      },
+      {
+        "title": "Roadmap for supporting wide-gamut color workflows #26479 - GitHub",
+        "url": "https://github.com/mrdoob/three.js/issues/26479",
+        "date": "2023-07-23",
+        "last_updated": "2025-06-23",
+        "snippet": "Roadmap and discussion for supporting for wide-gamut color spaces in three.js. Many displays now support Display P3 (+50% larger gamut volume ...",
+        "source": "web"
+      },
+      {
+        "title": "module-ColorSpaces – three.js docs",
+        "url": "https://threejs.org/docs/pages/module-ColorSpaces.html",
+        "date": "2020-01-01",
+        "last_updated": "2025-12-09",
+        "snippet": "Implementation object for the Extended-sRGB color space. .LinearDisplayP3ColorSpace : string (constant). Display-P3-Linear color space.",
+        "source": "web"
+      },
+      {
+        "title": "How to work with Display P3 Wide-gamut color profile in WebGL ...",
+        "url": "https://discourse.threejs.org/t/how-to-work-with-display-p3-wide-gamut-color-profile-in-webgl-three-js/6471",
+        "date": "2019-03-09",
+        "last_updated": "2025-11-12",
+        "snippet": "Hello there. I wonder if anyone here knows if it is possible to work with P3 wide-gamut color profiles in WebGL and Three.js.",
+        "source": "web"
+      },
+      {
+        "title": "WebGLRenderer.outputColorSpace – three.js docs",
+        "url": "https://threejs.org/docs/",
+        "last_updated": "2026-01-24",
+        "snippet": "This renderer uses WebGL 2 to display scenes. WebGL 1 is not supported since ... Tells the renderer to clear its color, depth or stencil drawing buffer(s).",
+        "source": "web"
+      },
+      {
+        "title": "Issue with SRGBColorSpace output after upgrade (r164) - Questions",
+        "url": "https://discourse.threejs.org/t/issue-with-srgbcolorspace-output-after-upgrade-r164/66217",
+        "date": "2024-05-30",
+        "last_updated": "2026-01-23",
+        "snippet": "three.js defaults new textures to NoColorSpace, R3F defaults to SRGBColorSpace. I'm not sure at what point in the texture lifecycle that happens ...",
+        "source": "web"
+      },
+      {
+        "title": "WebGLRenderingContext API: drawingBufferColorSpace - CanIUse",
+        "url": "https://caniuse.com/mdn-api_webglrenderingcontext_drawingbuffercolorspace",
+        "date": "2012-12-01",
+        "last_updated": "2025-06-27",
+        "snippet": "Browser support tables for modern web technologies. Created & maintained by @Fyrd, design by @Lensco. Support data contributions by the GitHub community.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Based on the search results, Three.js r149 does not have built-in support for Display P3 output through ColorManagement. However, you can access the underlying WebGL `drawingBufferColorSpace` property directly to enable wide-gamut rendering.\n\n## Direct WebGL Access Approach\n\nSince Three.js r149 predates the ColorManagement updates in r152, you can manually set the drawing buffer color space by accessing the WebGL context:[1][2]\n\n```javascript\nconst canvas = document.getElementById(\"canvas\");\nconst renderer = new THREE.WebGLRenderer({ canvas });\nconst gl = renderer.getContext();\n\n// Enable Display P3 color space\ngl.drawingBufferColorSpace = \"display-p3\";\n```\n\nThis sets the **drawing buffer to Display P3**, allowing the renderer to output in the wider color gamut.[1][2]\n\n## Browser and Version Requirements\n\nDisplay P3 support via `drawingBufferColorSpace` is **available by default in Chrome 104 and later**.[1] To detect support before attempting to use it, check for the property's presence:[1]\n\n```javascript\nif ('drawingBufferColorSpace' in gl) {\n  gl.drawingBufferColorSpace = 'display-p3';\n}\n```\n\n## Key Limitations\n\n- **No automatic color space management:** Unlike r152 and later, r149 lacks integrated ColorManagement for handling color conversions across textures, shaders, and output. You must manually manage color space conversions.\n- **Texture unpacking:** The `unpackColorSpace` property must be set separately for texture imports to be properly converted to Display P3.[2]\n- **Shader conversions:** Color conversion in shaders is not automated and must be implemented manually.[1]\n\n## Recommended Workaround\n\nFor optimal performance, **upload texture data without conversion** (using `Uint8ClampedArray`) and perform color conversion to the `drawingBufferColorSpace` via shaders on the GPU, rather than on the CPU.[1] This avoids conversion overhead during texture loading.\n\nThe most practical solution is to **upgrade to Three.js r152 or later**, where Display P3 support is integrated into ColorManagement with proper handling of color spaces across the entire rendering pipeline.[4][5]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

@@ -1,0 +1,250 @@
+[
+  {
+    "name": "microsoft/vscode",
+    "url": "https://github.com/microsoft/vscode.git",
+    "stars": 180978,
+    "language": "TypeScript",
+    "size_kb": 1113207,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "langflow-ai/langflow",
+    "url": "https://github.com/langflow-ai/langflow.git",
+    "stars": 144182,
+    "language": "Python",
+    "size_kb": 1085386,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "kubernetes/kubernetes",
+    "url": "https://github.com/kubernetes/kubernetes.git",
+    "stars": 120038,
+    "language": "Go",
+    "size_kb": 1437854,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "nodejs/node",
+    "url": "https://github.com/nodejs/node.git",
+    "stars": 115358,
+    "language": "JavaScript",
+    "size_kb": 1407683,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "mrdoob/three.js",
+    "url": "https://github.com/mrdoob/three.js.git",
+    "stars": 110519,
+    "language": "JavaScript",
+    "size_kb": 1552477,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "iptv-org/iptv",
+    "url": "https://github.com/iptv-org/iptv.git",
+    "stars": 110134,
+    "language": "TypeScript",
+    "size_kb": 1136812,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "pytorch/pytorch",
+    "url": "https://github.com/pytorch/pytorch.git",
+    "stars": 96874,
+    "language": "Python",
+    "size_kb": 1211930,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "puppeteer/puppeteer",
+    "url": "https://github.com/puppeteer/puppeteer.git",
+    "stars": 93383,
+    "language": "TypeScript",
+    "size_kb": 1284363,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "storybookjs/storybook",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "stars": 89117,
+    "language": "TypeScript",
+    "size_kb": 1095452,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "grafana/grafana",
+    "url": "https://github.com/grafana/grafana.git",
+    "stars": 71865,
+    "language": "TypeScript",
+    "size_kb": 1401832,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "PaddlePaddle/PaddleOCR",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR.git",
+    "stars": 68709,
+    "language": "Python",
+    "size_kb": 1730767,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "nocodb/nocodb",
+    "url": "https://github.com/nocodb/nocodb.git",
+    "stars": 61686,
+    "language": "TypeScript",
+    "size_kb": 1399753,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "gatsbyjs/gatsby",
+    "url": "https://github.com/gatsbyjs/gatsby.git",
+    "stars": 55976,
+    "language": "JavaScript",
+    "size_kb": 1143692,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "ionic-team/ionic-framework",
+    "url": "https://github.com/ionic-team/ionic-framework.git",
+    "stars": 52309,
+    "language": "TypeScript",
+    "size_kb": 1562544,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "RocketChat/Rocket.Chat",
+    "url": "https://github.com/RocketChat/Rocket.Chat.git",
+    "stars": 44397,
+    "language": "TypeScript",
+    "size_kb": 1943135,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "SimplifyJobs/Summer2026-Internships",
+    "url": "https://github.com/SimplifyJobs/Summer2026-Internships.git",
+    "stars": 43191,
+    "language": "Python",
+    "size_kb": 1765302,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "janhq/jan",
+    "url": "https://github.com/janhq/jan.git",
+    "stars": 40171,
+    "language": "TypeScript",
+    "size_kb": 1467955,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "calcom/cal.com",
+    "url": "https://github.com/calcom/cal.com.git",
+    "stars": 39856,
+    "language": "TypeScript",
+    "size_kb": 1112620,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "ToolJet/ToolJet",
+    "url": "https://github.com/ToolJet/ToolJet.git",
+    "stars": 37331,
+    "language": "JavaScript",
+    "size_kb": 1539010,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "NervJS/taro",
+    "url": "https://github.com/NervJS/taro.git",
+    "stars": 37248,
+    "language": "TypeScript",
+    "size_kb": 1590943,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "frappe/erpnext",
+    "url": "https://github.com/frappe/erpnext.git",
+    "stars": 31250,
+    "language": "Python",
+    "size_kb": 1576486,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "motiondivision/motion",
+    "url": "https://github.com/motiondivision/motion.git",
+    "stars": 30831,
+    "language": "TypeScript",
+    "size_kb": 1658710,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "iperov/DeepFaceLive",
+    "url": "https://github.com/iperov/DeepFaceLive.git",
+    "stars": 30428,
+    "language": "Python",
+    "size_kb": 1540184,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "StevenBlack/hosts",
+    "url": "https://github.com/StevenBlack/hosts.git",
+    "stars": 29695,
+    "language": "Python",
+    "size_kb": 1730959,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "fanmingming/live",
+    "url": "https://github.com/fanmingming/live.git",
+    "stars": 27423,
+    "language": "JavaScript",
+    "size_kb": 1615325,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "BabylonJS/Babylon.js",
+    "url": "https://github.com/BabylonJS/Babylon.js.git",
+    "stars": 25005,
+    "language": "TypeScript",
+    "size_kb": 1373493,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "Infisical/infisical",
+    "url": "https://github.com/Infisical/infisical.git",
+    "stars": 24563,
+    "language": "TypeScript",
+    "size_kb": 1257804,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "blackmatrix7/ios_rule_script",
+    "url": "https://github.com/blackmatrix7/ios_rule_script.git",
+    "stars": 24473,
+    "language": "JavaScript",
+    "size_kb": 1185647,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "MobSF/Mobile-Security-Framework-MobSF",
+    "url": "https://github.com/MobSF/Mobile-Security-Framework-MobSF.git",
+    "stars": 20253,
+    "language": "JavaScript",
+    "size_kb": 1521517,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "tabler/tabler-icons",
+    "url": "https://github.com/tabler/tabler-icons.git",
+    "stars": 20080,
+    "language": "JavaScript",
+    "size_kb": 1143473,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "gravitational/teleport",
+    "url": "https://github.com/gravitational/teleport.git",
+    "stars": 19736,
+    "language": "Go",
+    "size_kb": 1334698,
+    "reason": "skipped_too_large"
+  }
+]

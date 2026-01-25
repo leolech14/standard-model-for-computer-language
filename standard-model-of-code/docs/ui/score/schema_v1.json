@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Collider UI Score Schema v1",
+  "description": "Scoring schema for UI variant comparison (0-5 per dimension, weighted to 100)",
+  "type": "object",
+  "properties": {
+    "variant": {
+      "type": "string",
+      "description": "Variant identifier (e.g., 'baseline_dark', 'aquarela_paper')"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Score date (YYYY-MM-DD)"
+    },
+    "scorer": {
+      "type": "string",
+      "description": "Who/what produced this score (human/agent)"
+    },
+    "total_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Weighted total (computed from dimensions)"
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "clarity_readability": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 20 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "hierarchy_focus": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 15 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "affordance_discoverability": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 15 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "consistency_systemization": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 10 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "brand_material_fit": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 10 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "data_ui_separation": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 10 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "responsiveness": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 10 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        },
+        "accessibility": {
+          "type": "object",
+          "properties": {
+            "score": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "weight": { "type": "integer", "const": 10 },
+            "notes": { "type": "string" }
+          },
+          "required": ["score", "weight"]
+        }
+      },
+      "required": [
+        "clarity_readability",
+        "hierarchy_focus",
+        "affordance_discoverability",
+        "consistency_systemization",
+        "brand_material_fit",
+        "data_ui_separation",
+        "responsiveness",
+        "accessibility"
+      ]
+    },
+    "region_breakdown": {
+      "type": "object",
+      "description": "Per-region scores to identify where UI fails",
+      "properties": {
+        "hud.left": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "hud.center": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "hud.right": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "rail.left.top": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "rail.left.body": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "canvas.main": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "rail.right.top": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "rail.right.body": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "dock.future": { "type": "integer", "minimum": 0, "maximum": 5 }
+      }
+    },
+    "recommendation": {
+      "type": "string",
+      "description": "Direction recommendation based on this score"
+    }
+  },
+  "required": ["variant", "date", "total_score", "dimensions"]
+}

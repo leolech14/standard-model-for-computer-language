@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-23 16:25:22",
+  "session_end": "2026-01-23 16:25:29",
+  "model": "gemini-2.0-flash",
+  "total_tokens_in": 201845,
+  "total_tokens_out": 476,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769196322.3654988,
+      "timestamp_str": "2026-01-23 16:25:22",
+      "role": "user",
+      "content": "What background refinement processes exist? List auto-boost, cloud refinery systems. Are they deployed and running?"
+    },
+    {
+      "timestamp": 1769196329.635324,
+      "timestamp_str": "2026-01-23 16:25:29",
+      "role": "assistant",
+      "content": "```json\n{\n  \"background_refinement_processes\": [\n    {\n      \"name\": \"TruthValidator\",\n      \"description\": \"Validates core truths from roles.json and outputs repo_truths.yaml\",\n      \"auto_boost\": true,\n      \"cloud_refinery\": true,\n      \"deployed\": true,\n      \"running\": true,\n      \"source_file\": \"context-management/tools/ai/analyze.py\",\n      \"related_files\": [\n        \"context-management/config/semantic_models.yaml\",\n        \"context-management/config/aci_config.yaml\"\n      ]\n    },\n    {\n      \"name\": \"CrossValidator\",\n      \"description\": \"Checks for code-docs drift by comparing code to associated documentation and checks documentation against Antimatter Laws\",\n      \"auto_boost\": true,\n      \"cloud_refinery\": true,\n      \"deployed\": true,\n      \"running\": true,\n      \"source_file\": \"context-management/tools/ai/analyze.py\",\n      \"related_files\": [\n        \"context-management/config/semantic_models.yaml\",\n        \"context-management/config/aci_config.yaml\"\n      ]\n    },\n    {\n      \"name\": \"ConceptMapper\",\n      \"description\": \"Generates a semantic graph of code and its relationships and creates concept_graph.yaml\",\n      \"auto_boost\": true,\n      \"cloud_refinery\": true,\n      \"deployed\": false,\n      \"running\": false,\n      \"source_file\": \"context-management/tools/ai/analyze.py\",\n      \"related_files\": [\n        \"context-management/config/semantic_models.yaml\",\n        \"context-management/config/aci_config.yaml\"\n      ]\n    }\n  ],\n  \"justification\": \"Based on KERNEL.md, agent_intelligence/*, and HOLOGRAPHIC_SOCRATIC_LAYER.md. Status also checked against  .agent/registry/active. TODO: Check for activeLaunchAgent.\"\n}\n```"
+    }
+  ]
+}

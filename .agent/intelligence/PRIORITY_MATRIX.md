@@ -10,8 +10,8 @@
                             EFFORT
               LOW                           HIGH
          ┌─────────────────────────────────────────┐
-    HIGH │  [P1] Archive Stale    [P2] Split       │
-         │       Wave Tools            analyze.py  │
+    HIGH │  [P1] ✅ DONE          [P2] Split       │
+         │                             analyze.py  │
  IMPACT  │                                         │
          │  [P3] Document         [P4] Refactor    │
     LOW  │       Observer API          Dead Code   │
@@ -31,7 +31,7 @@
 | Priority | Action | Impact | Effort | Metric | Risk |
 |:--------:|--------|:------:|:------:|:------:|:----:|
 | **P0** | Achieve Gold Symmetry (90+) | STRATEGIC | ONGOING | +17 pts | LOW |
-| **P1** | Archive stale Wave tools | HIGH | LOW | -1,800 lines | LOW |
+| **P1** | ~~Archive stale Wave tools~~ | ✅ DONE | N/A | Files already removed | N/A |
 | **P2** | Split analyze.py into modules | HIGH | MEDIUM | restructure | MEDIUM |
 | **P3** | Document Observer external API | MEDIUM | LOW | +docs | LOW |
 | **P4** | Audit/remove dead code in Wave | MEDIUM | HIGH | -2,000 lines | MEDIUM |
@@ -77,31 +77,20 @@ TOTAL          81/100   95     +9    Gap to Gold
 
 ---
 
-### P1: Archive Stale Wave Tools [QUICK WIN]
+### P1: Archive Stale Wave Tools [COMPLETED - FILES ALREADY REMOVED]
 
-**Target:** `context-management/tools/`
+**Status:** ✅ INVALIDATED (2026-01-25)
+
+**Original Target:** `context-management/tools/`
 ```
-repo_archaeologist.py  ~600 lines
-present_architect.py   ~600 lines
-future_visionary.py    ~600 lines
-─────────────────────────────────
-TOTAL                 ~1,800 lines
-```
-
-**Why High Impact:**
-- Reduces cognitive load
-- Cleaner tool surface
-- 14% reduction in Wave realm
-
-**Action:**
-```bash
-mkdir -p archive/deprecated_wave_tools
-mv context-management/tools/repo_archaeologist.py archive/deprecated_wave_tools/
-mv context-management/tools/present_architect.py archive/deprecated_wave_tools/
-mv context-management/tools/future_visionary.py archive/deprecated_wave_tools/
+repo_archaeologist.py  ~600 lines  ❌ FILE NOT FOUND
+present_architect.py   ~600 lines  ❌ FILE NOT FOUND
+future_visionary.py    ~600 lines  ❌ FILE NOT FOUND
 ```
 
-**Validation:** Run `pytest context-management/` after move
+**Validation:** These files were removed in a previous cleanup. No action needed.
+
+**Note:** The ~1,800 line reduction claim was stale. These tools were already archived or deleted.
 
 ---
 
@@ -192,7 +181,7 @@ Orphans by type:
 ## Implementation Schedule
 
 ```
-Week 1: P1 (Archive stale tools)      ████████░░  80% confidence
+Week 1: P1 (Archive stale tools)      ██████████  ✅ DONE (files already removed)
 Week 2: P3 (Document Observer API)    ████████░░  80% confidence
 Week 3-4: P2 (Split analyze.py)       ██████░░░░  60% confidence
 Week 5+: P4 (Dead code audit)         ████░░░░░░  40% confidence

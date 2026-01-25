@@ -4,6 +4,23 @@
 
 ---
 
+## Summary (Updated 2026-01-25)
+
+| Universe | Registries | Items | Description |
+|----------|------------|-------|-------------|
+| **Codome** | 42 | ~4,100 | Source files, functions, classes |
+| **Contextome** | 18 | ~700 | Docs, configs, AI artifacts |
+| **Visualization** | 14 | ~200 | UI, 3D rendering, controls |
+| **Governance** | 12 | ~160 | Tasks, sprints, confidence |
+| **TOTAL** | **86** | **~5,160** | Full project universe |
+
+See also:
+- **Codome**: Measured by Collider pipeline → `unified_analysis.json`
+- **[Contextome](../../../context-management/docs/CONTEXTOME.md)**: Documentation/AI context universe
+- **Machine-readable**: `.agent/CODOME_MANIFEST.yaml`
+
+---
+
 ## Philosophy
 
 Every classification system in this project is a **Registry**. Registries are:
@@ -27,6 +44,19 @@ The fundamental building blocks of the Standard Model of Code.
 | **Phases** | **4** | (embedded in atoms) | DATA, LOGIC, ORGANIZATION, EXECUTION |
 | **Layers** | **4** | (embedded in topology) | Domain, Application, Infrastructure, Presentation |
 | **Tiers** | **3** | `src/patterns/ATOMS_TIER*.yaml` | T0 (Core), T1 (Stdlib), T2 (Ecosystem) |
+
+### Python Registry Classes (8)
+
+| Class | Location | Purpose | Status |
+|-------|----------|---------|--------|
+| `AtomRegistry` | `src/core/atom_registry.py:46` | Canonical atom taxonomy loader | Active |
+| `TypeRegistry` | `src/core/type_registry.py:25` | 36 canonical types | Active |
+| `RoleRegistry` | `src/core/registry/role_registry.py:25` | 33 semantic roles | Active |
+| `PatternRegistry` | `src/core/registry/pattern_registry.py:35` | Detection patterns | Active |
+| `SchemaRegistry` | `src/core/registry/schema_registry.py:58` | 13 JSON schemas | Active |
+| `WorkflowRegistry` | `src/core/registry/workflow_registry.py:23` | Pipeline workflows | **SKELETON** |
+| `PatternRepository` | `src/core/registry/pattern_repository.py` | Pattern storage | Active |
+| `SchemaRepository` | `src/core/registry/schema_repository.py` | Schema storage | Active |
 
 ### The 8 Dimensions
 
@@ -308,6 +338,8 @@ Map language-specific AST nodes to canonical atoms.
 
 ## Summary: All Registries at a Glance
 
+### By Category (Original Enumeration)
+
 | Category | Registries | Total Items |
 |----------|------------|-------------|
 | Core Ontological | 6 | ~350 |
@@ -322,9 +354,21 @@ Map language-specific AST nodes to canonical atoms.
 | Crosswalks | 5 | - |
 | Purpose/Quality | 2 | ~10 |
 | Analysis Config | 3 | ~33 |
-| **TOTAL** | **60 registries** | **~560 items** |
+| **Subtotal (documented)** | **60** | **~560** |
+
+### By Universe (Comprehensive Scan 2026-01-25)
+
+| Universe | Registries | Items | Key Contents |
+|----------|------------|-------|--------------|
+| **Codome** | 42 | ~4,100 | Python modules, JS files, schemas, queries |
+| **Contextome** | 18 | ~700 | Docs, configs, research, agent artifacts |
+| **Visualization** | 14 | ~200 | UI modules, CSS tokens, presets |
+| **Governance** | 12 | ~160 | Tasks, sprints, opportunities, confidence |
+| **TOTAL** | **86** | **~5,160** | Full enumeration |
+
+**Delta:** 26 registries and ~4,600 items were undocumented before the 2026-01-25 scan.
 
 ---
 
-*Last updated: 2026-01-23*
+*Last updated: 2026-01-25*
 *Part of the Standard Model of Code project*

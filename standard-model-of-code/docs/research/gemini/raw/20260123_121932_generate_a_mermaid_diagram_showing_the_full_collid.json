@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T12:19:32.539113",
+    "source": "gemini",
+    "model": "gemini-2.0-flash-001",
+    "query": "generate a mermaid diagram showing the full collider pipeline from start to output",
+    "query_length": 82,
+    "checksum": "sha256:39ec0888d3444c65d6341da9a10d49ea680b069148af3bcea3c38c8d9d1bfe1e"
+  },
+  "response": {
+    "content": "```mermaid\ngraph TD\n    A[Source Code] --> B(Tree-Sitter Engine);\n    B --> C{Parse Tree};\n    C --> D(Python Extractor);\n    C --> E(Universal Classifier);\n    D --> F(Unified Analysis);\n    E --> F;\n    F --> G{Codebase State};\n    G --> H(Edge Extractor);\n    H --> F;\n    F --> I(Full Analysis);\n    I --> J(Standard Model Enricher);\n    I --> K(Purpose Field);\n    I --> L(Execution Flow);\n    I --> M(Performance Predictor);\n    I --> N(Topology Reasoning);\n    I --> O(Semantic Cortex);\n    J --> G;\n    K --> G;\n    L --> G;\n\n    I --> P{Markov Matrix};\n    I --> Q{Knot Detection};\n    I --> R{Data Flow};\n    I --> S{File Index};\n    \n    subgraph Analysis{\n    F;I;J;K;L;M;N;O;P;Q;R;S\n    }\n\n    STYLE Analysis fill:#f9f,stroke:#333,stroke-width:2px\n\n    subgraph Viz{\n    \n    T(Appearance Tokens);\n    U(Controls Tokens);\n    I --> T;\n    I --> U;\n    T --> V(Token Resolver);\n    U --> V;\n    V --> W(Appearance Engine);\n    V --> X(Controls Engine);\n    W --> Y[HTML Output];\n    X --> Y;\n    }\n\n    STYLE Viz fill:#ccf,stroke:#333,stroke-width:2px\n    \n\n    I --> Z(Output Generator);\n    Z --> AA(Normalize Output);\n    Z --> Y;\n    AA --> BB[JSON];\n\n```\n",
+    "mode": "standard"
+  }
+}

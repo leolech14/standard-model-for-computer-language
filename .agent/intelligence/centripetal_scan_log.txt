@@ -1,0 +1,299 @@
+======================================================================
+CENTRIPETAL SCAN - 12-Round Progressive Resolution Analysis
+======================================================================
+Started: 2026-01-23T16:18:10.915471
+Output: /Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/centripetal_scans
+
+
+======================================================================
+ROUND 1/12 [MACRO]
+======================================================================
+Query: List ALL top-level directories in this repository. For each directory, provide:
+- Name
+- Apparent pu...
+Set: theory
+Running...
+
+Response length: 683 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    THEORY - Theoretical framework and documentation
+
+Selected 50 files:
+  - context-management/docs/ACI_DATASET_MANAGEMENT.md
+  - context-management/docs/AI_USER_GUIDE.md
+  - context-management/docs/ASSET_INVENTORY.md
+  - context-management/docs/COLLIDER_ARCHITECTURE.md
+  - context-management/docs/DATA_LAYER_RE...
+Saved: 20260123_161810_round_01_macro.md
+
+======================================================================
+ROUND 2/12 [MACRO]
+======================================================================
+Query: Based on the directory structure, identify the REALMS (major subsystems):
+- What are the 3-5 main re...
+Set: architecture_review
+Running...
+
+Response length: 850 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    ARCHITECTURE_REVIEW - Full architecture review (pipeline + classifiers + constraints)
+  Composed from: pipeline, classifiers, constraints
+
+Selected 18 files:
+  - standard-model-of-code/schema/constraints/rules.yaml
+  - standard-model-of-code/schema/constraints/taxonomy.yaml
+  - standard-model-of-code/schema/...
+Saved: 20260123_161810_round_02_macro.md
+
+======================================================================
+ROUND 3/12 [MACRO]
+======================================================================
+Query: Map the ENTRY POINTS of this codebase:
+- CLI entry points (executables, scripts)
+- API entry points ...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_03_macro.md
+
+======================================================================
+ROUND 4/12 [MESO]
+======================================================================
+Query: For each REALM identified, list the MODULES within it:
+- Module name and path
+- Primary responsibili...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_04_meso.md
+
+======================================================================
+ROUND 5/12 [MESO]
+======================================================================
+Query: Map the DATA FLOW through this system:
+- What data structures flow between modules?
+- What is the ca...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_05_meso.md
+
+======================================================================
+ROUND 6/12 [MESO]
+======================================================================
+Query: Identify INTEGRATION POINTS:
+- Where do the realms connect?
+- What shared schemas or protocols exist...
+Set: architecture_review
+Running...
+
+Response length: 850 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    ARCHITECTURE_REVIEW - Full architecture review (pipeline + classifiers + constraints)
+  Composed from: pipeline, classifiers, constraints
+
+Selected 18 files:
+  - standard-model-of-code/schema/constraints/rules.yaml
+  - standard-model-of-code/schema/constraints/taxonomy.yaml
+  - standard-model-of-code/schema/...
+Saved: 20260123_161810_round_06_meso.md
+
+======================================================================
+ROUND 7/12 [MICRO]
+======================================================================
+Query: For the CORE modules (most important 10 files), provide:
+- File path
+- Line count (estimate)
+- Main ...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_07_micro.md
+
+======================================================================
+ROUND 8/12 [MICRO]
+======================================================================
+Query: Map the CONFIGURATION landscape:
+- All YAML/JSON config files
+- What each config controls
+- Default ...
+Set: brain
+Running...
+
+Response length: 605 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    BRAIN - [LARGE] Full context-management directory
+
+Selected 50 files:
+  - context-management/config/aci_config.yaml
+  - context-management/config/analysis_sets.yaml
+  - context-management/config/documentation_map.yaml
+  - context-management/config/prompts.yaml
+  - context-management/config/semantic_models.ya...
+Saved: 20260123_161810_round_08_micro.md
+
+======================================================================
+ROUND 9/12 [MICRO]
+======================================================================
+Query: Identify PATTERNS used consistently across the codebase:
+- Naming conventions (files, functions, var...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_09_micro.md
+
+======================================================================
+ROUND 10/12 [NANO]
+======================================================================
+Query: Find INVARIANTS - things that must always be true:
+- Type constraints that are enforced
+- Validation...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_10_nano.md
+
+======================================================================
+ROUND 11/12 [NANO]
+======================================================================
+Query: Identify EDGE CASES and DEFENSIVE CODE:
+- Error handling blocks
+- Fallback behaviors
+- Timeout handl...
+Set: pipeline
+Running...
+
+Response length: 697 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)
+
+Selected 5 files:
+  - standard-model-of-code/src/core/edge_extractor.py
+  - standard-model-of-code/src/core/full_analysis.py
+  - standard-model-of-code/src/core/graph_analyzer.py
+  - standard-model-of-code/src/core/smart_extractor.py
+  - ...
+Saved: 20260123_161810_round_11_nano.md
+
+======================================================================
+ROUND 12/12 [NANO]
+======================================================================
+Query: SYNTHESIS: Based on all analysis, provide:
+
+1. ONE-SENTENCE summary of what this codebase does
+2. TH...
+Set: architecture_review
+Running...
+
+Response length: 850 chars
+Preview: ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements
+Analyzing:    /Users/lech/PROJECTS_all/PROJECT_elements
+Model:        gemini-3-pro-preview
+Mode:         STANDARD
+Using Set:    ARCHITECTURE_REVIEW - Full architecture review (pipeline + classifiers + constraints)
+  Composed from: pipeline, classifiers, constraints
+
+Selected 18 files:
+  - standard-model-of-code/schema/constraints/rules.yaml
+  - standard-model-of-code/schema/constraints/taxonomy.yaml
+  - standard-model-of-code/schema/...
+Saved: 20260123_161810_round_12_nano.md
+
+======================================================================
+CENTRIPETAL SCAN COMPLETE
+======================================================================
+Results: /Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/centripetal_scans/20260123_161810_complete_scan.json
+Summary: /Users/lech/PROJECTS_all/PROJECT_elements/.agent/intelligence/centripetal_scans/20260123_161810_SUMMARY.md

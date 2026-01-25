@@ -128,15 +128,169 @@ entries:
   fallback_used: false
   duration_ms: 32069
   error: null
+- timestamp: '2026-01-25T20:04:01.304998+00:00'
+  query: 'Best practices for building a cloud-based knowledge refinery on GCP. Requirements:
+    24/7 processing, ingests JSON analysis files, distills through multiple layers
+    (raw to enriched to insights), provide'
+  intent: research
+  complexity: complex
+  scope: hybrid
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - algorithms
+  - services
+  - theory
+  tokens_input: 73
+  tokens_output: 1041
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 13825
+  error: null
+- timestamp: '2026-01-25T20:13:03.650131+00:00'
+  query: 'In PROJECT_elements, where should a new system spec for ''Cloud Refinery''
+    (a 24/7 cloud intelligence layer that refines Collider output into a Projectome)
+    be documented? Options: 1) context-management/'
+  intent: architecture
+  complexity: complex
+  scope: hybrid
+  tier: perplexity
+  sets_used:
+  - services
+  - orchestration
+  - tests
+  - agent_kernel
+  - agent_tasks
+  - pipeline
+  - theory
+  - architecture_review
+  tokens_input: 81
+  tokens_output: 256
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 4088
+  error: null
+- timestamp: '2026-01-25T21:54:59.583412+00:00'
+  query: 'In software project epistemology, what frameworks exist for understanding
+    the duality between: 1) The code itself (measured reality, executable, deterministic)
+    and 2) Everything needed to interpret co'
+  intent: architecture
+  complexity: complex
+  scope: external
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - algorithms
+  - infrastructure
+  - data_access
+  - theory
+  - architecture_review
+  tokens_input: 105
+  tokens_output: 878
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 10452
+  error: null
+- timestamp: '2026-01-25T21:55:34.653267+00:00'
+  query: 'Semiotic frameworks for software: how do signifier-signified relationships
+    apply to code? Specifically: 1) Code as signifier, behavior as signified 2) The
+    role of documentation/context as ''interpretan'
+  intent: explain
+  complexity: simple
+  scope: internal
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - data_access
+  - domain
+  - entities
+  - theory
+  - docs_core
+  - role_registry
+  tokens_input: 104
+  tokens_output: 796
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 15685
+  error: null
+- timestamp: '2026-01-25T22:14:35.561458+00:00'
+  query: 'Cognitive science models for: 1) Background cognitive processing / subconscious
+    rumination as integration mechanism 2) Self-reflection systems that look both
+    inward (memory, RAG-like retrieval) and ou'
+  intent: architecture
+  complexity: complex
+  scope: hybrid
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - algorithms
+  - domain
+  - entities
+  - theory
+  - architecture_review
+  tokens_input: 115
+  tokens_output: 362
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 7098
+  error: null
+- timestamp: '2026-01-25T22:15:20.709066+00:00'
+  query: 'Predictive processing and active inference frameworks for knowledge systems:
+    1) Karl Friston''s Free Energy Principle - how systems minimize surprise by updating
+    internal models 2) Predictive coding - '
+  intent: architecture
+  complexity: complex
+  scope: internal
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - algorithms
+  - domain
+  - entities
+  - theory
+  - architecture_review
+  tokens_input: 96
+  tokens_output: 674
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 8238
+  error: null
+- timestamp: '2026-01-25T22:22:15.841623+00:00'
+  query: 'Methodologies for rigorous analogy construction and validation: 1) Structure-mapping
+    theory (Gentner) - systematic comparison of relational structures 2) Analogy scoring/evaluation
+    frameworks - how to'
+  intent: architecture
+  complexity: simple
+  scope: internal
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - classifiers
+  - theory
+  - architecture_review
+  tokens_input: 103
+  tokens_output: 523
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 6608
+  error: null
 stats:
-  total_queries: 7
+  total_queries: 14
   by_tier:
-    perplexity: 1
+    perplexity: 8
     long_context: 6
   by_intent:
-    research: 1
-    architecture: 2
+    research: 2
+    architecture: 7
     unknown: 1
     validate: 3
+    explain: 1
   success_rate: 1.0
-  avg_tokens: 78966
+  avg_tokens: 39530

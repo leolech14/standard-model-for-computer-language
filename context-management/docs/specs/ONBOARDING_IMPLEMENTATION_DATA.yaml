@@ -1,0 +1,408 @@
+# ONBOARDING REDESIGN - STRUCTURED IMPLEMENTATION DATA
+# Generated: 2026-01-25
+# Sources: Claude Consumer Review, Gemini Architect Analysis, Perplexity Research (60+ citations)
+# Status: VALIDATED, READY FOR IMPLEMENTATION
+
+---
+metadata:
+  version: "1.0.0"
+  created: "2026-01-25"
+  validated_by:
+    - source: "Claude Opus 4.5"
+      role: "Consumer Review"
+    - source: "Gemini 3 Pro"
+      role: "Architect Analysis"
+    - source: "Perplexity sonar-deep-research"
+      role: "Academic Validation (60+ citations)"
+
+---
+# CURRENT STATE METRICS
+current_state:
+  docs_to_read_before_action: 10
+  tokens_consumed_by_onboarding: 25000
+  time_to_first_action_minutes: 30
+  competing_entry_points: 4
+  middle_position_info_percentage: 60  # degraded attention zone
+  agent_dod_compliance_rate: 0.60
+
+# TARGET STATE METRICS
+target_state:
+  docs_to_read_before_action: 0  # boot.sh handles it
+  tokens_consumed_by_onboarding: 2000
+  time_to_first_action_minutes: 2
+  competing_entry_points: 1
+  middle_position_info_percentage: 0  # JIT retrieval at boundaries
+  agent_dod_compliance_rate: 0.90
+
+---
+# OPTIMIZATION MATRIX (Impact/Effort Prioritization)
+optimization_matrix:
+  - id: OPT-001
+    optimization: "Single boot command with context-aware output"
+    impact: 10
+    effort: 3
+    priority_score: 3.33  # impact/effort
+    evidence: "Liu et al. 2023 - position info at context boundaries"
+
+  - id: OPT-002
+    optimization: "Delete redundant entry point docs"
+    impact: 8
+    effort: 1
+    priority_score: 8.0
+    evidence: "Cognitive Load Theory - reduce extraneous load"
+
+  - id: OPT-003
+    optimization: "Slim CLAUDE.md to 20 lines"
+    impact: 7
+    effort: 1
+    priority_score: 7.0
+    evidence: "Progressive disclosure - core first, details on demand"
+
+  - id: OPT-004
+    optimization: "Create QUICK_START.md (20 lines)"
+    impact: 9
+    effort: 1
+    priority_score: 9.0
+    evidence: "Just-in-time learning - immediate productivity"
+
+  - id: OPT-005
+    optimization: "Hierarchical constraint presentation"
+    impact: 8
+    effort: 2
+    priority_score: 4.0
+    evidence: "OpenAI 2024 - 63% improvement with priority levels"
+
+  - id: OPT-006
+    optimization: "JIT context retrieval for deep docs"
+    impact: 9
+    effort: 5
+    priority_score: 1.8
+    evidence: "Anthropic Claude Code architecture"
+
+  - id: OPT-007
+    optimization: "Tutorial mode (--tutorial)"
+    impact: 6
+    effort: 4
+    priority_score: 1.5
+    evidence: "Premium UX - hands-on > reading"
+
+---
+# KILL LIST (Files to Delete)
+kill_list:
+  - file: "context-management/docs/operations/AGENT_INITIATION.md"
+    reason: "Redundant pointer cascade - just links to other docs"
+    risk: LOW
+    action: DELETE
+
+  - file: "context-management/docs/agent_school/INDEX.md"
+    reason: "Checklist is boot.sh's job - static form never validated"
+    risk: LOW
+    action: DELETE
+
+  - file: "context-management/docs/agent_school/REPO_FACTS.md"
+    reason: "Static facts rot - boot.sh generates live data"
+    risk: LOW
+    action: DELETE
+
+  - file: "context-management/docs/agent_school/AGENT_BOOT.md"
+    reason: "Merge into boot.sh output - instructions in tool not manual"
+    risk: LOW
+    action: DELETE
+
+  - file: "context-management/docs/AI_USER_GUIDE.md"
+    reason: "Graduate-level theory - archive to deep/ folder"
+    risk: MEDIUM
+    action: ARCHIVE
+    destination: "context-management/docs/deep/AI_USER_GUIDE.md"
+
+---
+# CREATE LIST (New Artifacts)
+create_list:
+  - artifact: "QUICK_START.md"
+    location: "PROJECT_elements/QUICK_START.md"
+    purpose: "True entry point - 3 commands to productivity"
+    token_budget: 500
+    position_in_context: START
+    priority: P0
+
+  - artifact: "COOKBOOK.md"
+    location: "PROJECT_elements/COOKBOOK.md"
+    purpose: "Copy-paste task recipes"
+    token_budget: 2000
+    position_in_context: JIT_RETRIEVAL
+    priority: P1
+
+  - artifact: "concierge.py"
+    location: ".agent/tools/concierge.py"
+    purpose: "Smart boot with context awareness"
+    token_budget: 0  # generates output
+    position_in_context: N/A
+    priority: P0
+
+  - artifact: "deep/"
+    location: "context-management/docs/deep/"
+    purpose: "Theory archive for curious agents"
+    token_budget: 0  # not loaded by default
+    position_in_context: JIT_RETRIEVAL
+    priority: P1
+
+---
+# REFACTOR LIST (Files to Modify)
+refactor_list:
+  - file: "CLAUDE.md"
+    current_lines: 97
+    target_lines: 20
+    changes:
+      - remove: "Dense reference material"
+      - keep: "Single entry point to boot.sh"
+      - keep: "Core commands table"
+      - keep: "3 non-negotiable rules"
+    priority: P0
+
+  - file: "context-management/docs/operations/AGENT_KERNEL.md"
+    current_lines: 56
+    target_lines: 40
+    changes:
+      - add: "Explicit priority levels (P0, P1, P2)"
+      - keep: "DoD summary"
+      - keep: "Micro-loop"
+      - remove: "Deep doc index (move to JIT)"
+    priority: P1
+
+  - file: "context-management/tools/maintenance/boot.sh"
+    changes:
+      - add: "Call concierge.py for smart output"
+      - add: "Context-aware greeting with task resume option"
+      - add: "Inline rules (not 'read file X')"
+    priority: P0
+
+---
+# CONTEXT WINDOW BUDGET ALLOCATION
+context_budget:
+  total_tokens: 100000  # typical context window
+
+  sections:
+    - section: "System Identity + Core Rules"
+      percentage: 2
+      token_range: "0-2000"
+      position: START
+      justification: "High attention at start - critical constraints"
+
+    - section: "Current Task Context"
+      percentage: 30
+      token_range: "2000-32000"
+      position: EARLY
+      justification: "Primary working memory"
+
+    - section: "JIT Retrieved Docs"
+      percentage: 20
+      token_range: "32000-52000"
+      position: MIDDLE_LATE
+      justification: "Query-driven, positioned near end"
+
+    - section: "Agent Working Space"
+      percentage: 40
+      token_range: "52000-92000"
+      position: LATE
+      justification: "Reasoning, tool outputs"
+
+    - section: "User Query + Response"
+      percentage: 8
+      token_range: "92000-100000"
+      position: END
+      justification: "High attention at end"
+
+---
+# POSITION OPTIMIZATION (Lost-in-the-Middle Mitigation)
+position_optimization:
+  - info_type: "Non-negotiable rules (DoD)"
+    optimal_position: START
+    attention_score: HIGH
+    reason: "Stable prefix for adherence"
+
+  - info_type: "Current task context"
+    optimal_position: START
+    attention_score: HIGH
+    reason: "Primary focus area"
+
+  - info_type: "Retrieved documentation"
+    optimal_position: END
+    attention_score: HIGH
+    reason: "Recency bias advantage"
+
+  - info_type: "Historical summaries"
+    optimal_position: MIDDLE
+    attention_score: LOW
+    reason: "Compressed, isolated - acceptable degradation"
+
+  - info_type: "Tool outputs"
+    optimal_position: END
+    attention_score: HIGH
+    reason: "Append-only maintains recency"
+
+---
+# ANTI-PATTERNS TO AVOID
+anti_patterns:
+  - pattern: "Pointer cascade"
+    description: "Doc A says read Doc B which says read Doc C"
+    why_fails: "Fills context with preamble, pushes task to middle"
+    alternative: "Single entry point generates complete context"
+
+  - pattern: "Static facts in docs"
+    description: "Hardcoded paths, versions, commands in markdown"
+    why_fails: "Facts rot, drift from reality"
+    alternative: "Boot script generates live facts dynamically"
+
+  - pattern: "Theory before action"
+    description: "Must understand Wave/Particle before doing anything"
+    why_fails: "Cognitive overload, unnecessary extraneous load"
+    alternative: "JIT retrieval when agent hits conceptual blocker"
+
+  - pattern: "Flat constraint lists"
+    description: "All rules presented as equal priority"
+    why_fails: "No conflict resolution, ambiguous behavior"
+    alternative: "Explicit priority hierarchy (P0, P1, P2)"
+
+  - pattern: "Multiple entry points"
+    description: "4 docs all claiming to be 'start here'"
+    why_fails: "Confusion, inconsistent onboarding paths"
+    alternative: "Single CLAUDE.md pointing to single boot command"
+
+---
+# PROMPT STRUCTURE TEMPLATE
+prompt_structure:
+  - section: "Role + Identity"
+    order: 1
+    token_budget_percent: 2
+    content: "You are an agent working on PROJECT_elements..."
+
+  - section: "Priority 0 Rules"
+    order: 2
+    token_budget_percent: 1
+    content: "NEVER leave uncommitted changes. Run tests before done."
+
+  - section: "Current Task"
+    order: 3
+    token_budget_percent: 10
+    content: "Dynamic - from task registry or user input"
+
+  - section: "Retrieved Context"
+    order: 4
+    token_budget_percent: 20
+    content: "JIT - only what agent queries for"
+
+  - section: "Working Space"
+    order: 5
+    token_budget_percent: 60
+    content: "Agent reasoning, tool outputs, conversation"
+
+  - section: "User Query"
+    order: 6
+    token_budget_percent: 7
+    content: "Current turn input - high attention zone"
+
+---
+# IMPLEMENTATION PHASES
+implementation_phases:
+  phase_0:
+    name: "The Concierge"
+    priority: CRITICAL
+    estimated_hours: 4
+    tasks:
+      - task: "Create concierge.py"
+        file: ".agent/tools/concierge.py"
+        description: "Context-aware boot with task resume, meter display, inline rules"
+
+      - task: "Slim CLAUDE.md"
+        file: "CLAUDE.md"
+        description: "97 lines -> 20 lines, point to ./concierge only"
+
+      - task: "Create QUICK_START.md"
+        file: "QUICK_START.md"
+        description: "20 lines, 3 commands, immediate productivity"
+
+  phase_1:
+    name: "Kill the Cascade"
+    priority: HIGH
+    estimated_hours: 2
+    tasks:
+      - task: "Delete AGENT_INITIATION.md"
+      - task: "Delete INDEX.md"
+      - task: "Delete REPO_FACTS.md"
+      - task: "Delete AGENT_BOOT.md"
+      - task: "Archive AI_USER_GUIDE.md to deep/"
+
+  phase_2:
+    name: "Progressive Docs"
+    priority: MEDIUM
+    estimated_hours: 3
+    tasks:
+      - task: "Create deep/ folder"
+      - task: "Move theory docs to deep/"
+      - task: "Create COOKBOOK.md with task recipes"
+      - task: "Add hierarchical priorities to AGENT_KERNEL.md"
+
+  phase_3:
+    name: "Premium Features"
+    priority: LOW
+    estimated_hours: 4
+    tasks:
+      - task: "Tutorial mode (--tutorial)"
+      - task: "Session resume intelligence"
+      - task: "Meter-based suggestions"
+
+---
+# SUCCESS METRICS
+success_metrics:
+  - metric: "Onboarding completion time"
+    current: "30 min"
+    target: "2 min"
+    measurement: "Time from boot to first productive action"
+
+  - metric: "Docs read before action"
+    current: "10+"
+    target: "0"
+    measurement: "Count of files agent must read"
+
+  - metric: "DoD compliance rate"
+    current: "60%"
+    target: "90%"
+    measurement: "Agent follows all DoD checklist items"
+
+  - metric: "Context token efficiency"
+    current: "25000 tokens preamble"
+    target: "2000 tokens preamble"
+    measurement: "Tokens consumed before task context"
+
+  - metric: "Lost-in-middle exposure"
+    current: "60% of info in degraded zone"
+    target: "0% (JIT at boundaries)"
+    measurement: "Position analysis of loaded docs"
+
+---
+# RESEARCH CITATIONS (Key Sources)
+citations:
+  - id: "liu2023"
+    title: "Lost in the Middle: How Language Models Use Long Contexts"
+    source: "Stanford, 2023"
+    finding: "30%+ accuracy drop for middle-positioned information"
+
+  - id: "sweller_clt"
+    title: "Cognitive Load Theory"
+    source: "Sweller et al."
+    finding: "Working memory limited to 4±1 items; extraneous load degrades all performance"
+
+  - id: "anthropic2024"
+    title: "Effective Context Engineering for AI Agents"
+    source: "Anthropic Engineering"
+    finding: "Hybrid static+dynamic context; JIT retrieval preserves reasoning quality"
+
+  - id: "openai2024"
+    title: "Instruction Hierarchies"
+    source: "OpenAI, 2024"
+    finding: "63% improvement with explicit priority hierarchies"
+
+  - id: "nielsen_progressive"
+    title: "Progressive Disclosure"
+    source: "Nielsen Norman Group"
+    finding: "Users understand systems better when core is isolated from secondary"

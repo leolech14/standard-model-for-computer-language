@@ -1,0 +1,463 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T21:22:15.911941",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "Python AST techniques for determining public vs private visibility of functions, classes, and modules. Looking for: 1) Conventions (_underscore, __dunder, __all__), 2) How to detect exported symbols from __all__, 3) How tools like pdoc, sphinx-autodoc, or interrogate determine what's 'public', 4) Tree-sitter approaches for multi-language visibility detection. Include code examples.",
+    "query_length": 384,
+    "checksum": "sha256:c24793068f289da8775c5b2683e07839723e5778e75e5ac5d791cdd6bbf3b18b"
+  },
+  "response": {
+    "id": "4aadc099-a2d0-4186-915e-1587192ead9d",
+    "model": "sonar-deep-research",
+    "created": 1769214135,
+    "usage": {
+      "prompt_tokens": 90,
+      "completion_tokens": 7450,
+      "total_tokens": 7540,
+      "citation_tokens": 54134,
+      "num_search_queries": 30,
+      "reasoning_tokens": 347426,
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.06,
+        "citation_tokens_cost": 0.108,
+        "reasoning_tokens_cost": 1.042,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.36
+      }
+    },
+    "citations": [
+      "https://www.geeksforgeeks.org/python/access-modifiers-in-python-public-private-and-protected/",
+      "https://realpython.com/python-all-attribute/",
+      "https://www.datacamp.com/tutorial/python-private-methods-explained",
+      "https://docs.python.org/3.5/library/ast.html",
+      "https://learn.scientific-python.org/development/patterns/exports/",
+      "https://docs.python.org/3/tutorial/classes.html",
+      "https://pdoc.dev/docs/pdoc.html",
+      "https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html",
+      "https://interrogate.readthedocs.io",
+      "https://pdoc3.github.io/pdoc/doc/pdoc/",
+      "https://github.com/readthedocs/sphinx_rtd_theme/issues/842",
+      "https://coverage.readthedocs.io",
+      "https://ast-grep.github.io/advanced/custom-language.html",
+      "https://blog.pulsar-edit.dev/posts/20230927-savetheclocktower-modern-tree-sitter-part-2/",
+      "https://docs.python.org/3/library/ast.html",
+      "https://tree-sitter.github.io",
+      "https://github.com/neovim/neovim/issues/33346",
+      "https://discuss.python.org/t/log-importer-modules-from-within-the-module-that-is-being-imported/20855",
+      "https://docs.python.org/3/library/ast.html",
+      "https://discuss.python.org/t/inspect-getmembers-seems-to-show-extra-members-on-python-3-7/7035",
+      "https://www.pythonmorsels.com/inspecting-python-objects/",
+      "https://github.com/xbeat/Machine-Learning/blob/main/Exploring%20Python's%20Abstract%20Syntax%20Tree%20Manipulation.md",
+      "https://docs.python.org/3/library/inspect.html",
+      "https://betterprogramming.pub/how-to-use-underscore-properly-in-python-37df5e05ba4c",
+      "https://www.mattlayman.com/blog/2018/decipher-python-ast/",
+      "https://dev.to/shrsv/unraveling-tree-sitter-queries-your-guide-to-code-analysis-magic-41il",
+      "https://realpython.com/python-all-attribute/",
+      "https://docs.python.org/3/library/ast.html",
+      "https://www.dropstone.io/blog/ast-parsing-tree-sitter-40-languages",
+      "https://docs.python.org/3/library/ast.html",
+      "https://metallapan.se/post/using-the-ast-to-hack-constants-into-python/",
+      "https://www.digitalocean.com/community/tutorials/python-static-method",
+      "https://gabrielelanaro.github.io/blog/2014/12/12/extract-docstrings.html",
+      "https://www.youtube.com/watch?v=l67JN5mQnKI",
+      "https://machinelearningplus.com/python/python-method-decorators-classmethod-vs-staticmethod-vs-property/",
+      "https://deepsource.com/blog/python-asts-by-building-your-own-linter",
+      "https://arumoy.me/blogs/python-ast-extract-module-method-names/",
+      "https://docs.python.org/3/library/importlib.metadata.html",
+      "https://libcst.readthedocs.io/en/latest/tutorial.html",
+      "https://discuss.python.org/t/controlled-walking-of-nested-ast-nodes/3513",
+      "https://docs.python.org/3.10/library/importlib.metadata.html",
+      "https://docs.python.org/3/library/pydoc.html",
+      "https://mkdocstrings.github.io/griffe/guide/users/recommendations/public-apis/",
+      "https://docs.python.org/3/library/ast.html",
+      "https://docs.readthedocs.com/platform/latest/tutorial/index.html",
+      "https://peps.python.org/pep-0008/",
+      "https://blog.yonatan.dev/ast-scout-code-structure-visualization-tool/",
+      "https://discuss.python.org/t/how-name-resolution-works-in-python/26452",
+      "https://www.digitalocean.com/community/tutorials/python-static-method",
+      "https://dev.to/shrsv/diving-into-tree-sitter-parsing-code-with-python-like-a-pro-17h8",
+      "https://www.geeksforgeeks.org/python/name-mangling-in-python/",
+      "https://docs.python.org/3/whatsnew/3.8.html",
+      "https://www.youtube.com/watch?v=bP0zl4K_LY8",
+      "https://discuss.python.org/t/implement-inspect-getmembers-static/2550",
+      "https://devmethodologies.blogspot.com/2013/07/best-practice-in-c-for-modules.html",
+      "https://github.com/python/typeshed",
+      "https://docs.python.org/3/library/inspect.html",
+      "https://dev.to/koffeinfrei/private-methods-are-a-code-smell-5d14",
+      "https://peps.python.org/pep-0800/"
+    ],
+    "search_results": [
+      {
+        "title": "Access Modifiers in Python : Public, Private and Protected",
+        "url": "https://www.geeksforgeeks.org/python/access-modifiers-in-python-public-private-and-protected/",
+        "snippet": "Access modifiers in Python control which parts of a class can be accessed from outside the class, from within the class, or by subclasses.",
+        "source": "web"
+      },
+      {
+        "title": "Python's __all__: Packages, Modules, and Wildcard Imports",
+        "url": "https://realpython.com/python-all-attribute/",
+        "snippet": "If you have a large module with many public names, then you can use __all__ to create a list of exportable names so that wildcard imports don't pollute the ...",
+        "source": "web"
+      },
+      {
+        "title": "Python Private Methods Explained - DataCamp",
+        "url": "https://www.datacamp.com/tutorial/python-private-methods-explained",
+        "snippet": "In Python, the convention to denote private methods is by prefixing the method name with a single underscore (_) or double underscores (__).",
+        "source": "web"
+      },
+      {
+        "title": "https://docs.python.org/3.5/library/ast.html",
+        "url": "https://docs.python.org/3.5/library/ast.html",
+        "snippet": "No information is available for this page. · Learn why",
+        "source": "web"
+      },
+      {
+        "title": "Exports - Scientific Python Development Guide",
+        "url": "https://learn.scientific-python.org/development/patterns/exports/",
+        "snippet": "What objects in a module can you use? One common convention is that starting a name with a single underscore makes it “private” (though really “hidden” might be ...",
+        "source": "web"
+      },
+      {
+        "title": "9. Classes — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/tutorial/classes.html",
+        "snippet": "In C++ terminology, normally class members (including the data members) are public (except see below Private Variables), and all member functions are virtual.",
+        "source": "web"
+      },
+      {
+        "title": "pdoc API documentation",
+        "url": "https://pdoc.dev/docs/pdoc.html",
+        "snippet": "pdoc auto-generates API documentation that follows your project's Python module hierarchy. pdoc's main feature is a focus on simplicity.",
+        "source": "web"
+      },
+      {
+        "title": "sphinx.ext.autodoc – Include documentation from docstrings",
+        "url": "https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html",
+        "snippet": "This extension can import the modules you are documenting, and pull in documentation from docstrings in a semi-automatic way.",
+        "source": "web"
+      },
+      {
+        "title": "interrogate: explain yourself — Python docstring coverage (v1.7.0)",
+        "url": "https://interrogate.readthedocs.io",
+        "snippet": "interrogate checks your code base for missing docstrings. Documentation should be as important as code itself. And it should live within code.",
+        "source": "web"
+      },
+      {
+        "title": "pdoc API documentation",
+        "url": "https://pdoc3.github.io/pdoc/doc/pdoc/",
+        "snippet": "Python package `pdoc` provides types, functions, and a command-line interface for accessing public documentation of Python modules, and for presenting …",
+        "source": "web"
+      },
+      {
+        "title": "Show module functions and/or class methods in sidebar (autodoc)",
+        "url": "https://github.com/readthedocs/sphinx_rtd_theme/issues/842",
+        "snippet": "I use sphinx.ext.autodoc features to add documentation for modules (and their members) and classes (and their members). I would like to show ...",
+        "source": "web"
+      },
+      {
+        "title": "Coverage.py — Coverage.py 7.13.1 documentation",
+        "url": "https://coverage.readthedocs.io",
+        "snippet": "Coverage.py is a tool for measuring code coverage of Python programs. It monitors your program, noting which parts of the code have been executed.",
+        "source": "web"
+      },
+      {
+        "title": "Custom Language Support | ast-grep",
+        "url": "https://ast-grep.github.io/advanced/custom-language.html",
+        "snippet": "Tree-sitter is a popular parser generator library that ast-grep uses to support many languages. However, not all Tree-sitter compatible ...",
+        "source": "web"
+      },
+      {
+        "title": "Modern Tree-sitter, part 2: why scopes matter - Pulsar Blog",
+        "url": "https://blog.pulsar-edit.dev/posts/20230927-savetheclocktower-modern-tree-sitter-part-2/",
+        "snippet": "When you load a JavaScript file in Pulsar — or VSCode, or Sublime Text — this grammar will find all your strings and mark them with scope names.",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python ...",
+        "source": "web"
+      },
+      {
+        "title": "Tree-sitter: Introduction",
+        "url": "https://tree-sitter.github.io",
+        "snippet": "Tree-sitter is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the ...",
+        "source": "web"
+      },
+      {
+        "title": "Treesitter-aware search · Issue #33346 · neovim/neovim - GitHub",
+        "url": "https://github.com/neovim/neovim/issues/33346",
+        "snippet": "No way to structurally restrict the scope of searching (and replacing/acting) with :s and friends. Expected behavior. Allow scoping :s with ...",
+        "source": "web"
+      },
+      {
+        "title": "Log importer modules from within the module that is being imported",
+        "url": "https://discuss.python.org/t/log-importer-modules-from-within-the-module-that-is-being-imported/20855",
+        "snippet": "module2 imports module1 using the import statement. I want to have some way inside the module1 to detect (from within the module1 itself) which ...",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar.",
+        "source": "web"
+      },
+      {
+        "title": "Inspect.getmembers() seems to show extra members on Python >= 3.7",
+        "url": "https://discuss.python.org/t/inspect-getmembers-seems-to-show-extra-members-on-python-3-7/7035",
+        "snippet": "Hi all, I've encountered a weird issue with inspect.getmembers() and would like some help. Background: I've been adding type hints to a ...",
+        "source": "web"
+      },
+      {
+        "title": "Inspecting objects in Python",
+        "url": "https://www.pythonmorsels.com/inspecting-python-objects/",
+        "snippet": "I rely on 4 functions for inspecting Python objects: type, help, dir, and vars.",
+        "source": "web"
+      },
+      {
+        "title": "Exploring Python's Abstract Syntax Tree Manipulation.md - GitHub",
+        "url": "https://github.com/xbeat/Machine-Learning/blob/main/Exploring%20Python's%20Abstract%20Syntax%20Tree%20Manipulation.md",
+        "snippet": "ASTs can be used to generate code dynamically. Here's an example of a simple Object-Relational Mapping (ORM) system that generates Python classes from a schema ...",
+        "source": "web"
+      },
+      {
+        "title": "inspect — Inspect live objects — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/inspect.html",
+        "snippet": "The inspect module provides several useful functions to help get information about live objects such as modules, classes, methods, functions, tracebacks, frame ...",
+        "source": "web"
+      },
+      {
+        "title": "How To Use the Underscore (_) Properly in Python | by",
+        "url": "https://betterprogramming.pub/how-to-use-underscore-properly-in-python-37df5e05ba4c",
+        "snippet": "Both single ( _ ) and double ( __ ) underscore can prepend a class variable name to indicate that the variable should be private. Does it keep ...",
+        "source": "web"
+      },
+      {
+        "title": "Deciphering Python: How to use Abstract Syntax Trees (AST) to ...",
+        "url": "https://www.mattlayman.com/blog/2018/decipher-python-ast/",
+        "snippet": "A NodeVisitor can respond to any type of node in the Python AST. To visit a particular type of node, we must implement a method that looks like visit_<node type> ...",
+        "source": "web"
+      },
+      {
+        "title": "Unraveling Tree-Sitter Queries: Your Guide to Code Analysis Magic",
+        "url": "https://dev.to/shrsv/unraveling-tree-sitter-queries-your-guide-to-code-analysis-magic-41il",
+        "snippet": "This post dives into how Tree-Sitter queries work, why they're useful, and how you can wield them for tasks like code analysis, linting, or building editor ...",
+        "source": "web"
+      },
+      {
+        "title": "Python's __all__: Packages, Modules, and Wildcard Imports",
+        "url": "https://realpython.com/python-all-attribute/",
+        "snippet": "The __all__ variable is a list of strings where each string represents the name of a variable, function, class, or module that you want to expose to wildcard ...",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python ...",
+        "source": "web"
+      },
+      {
+        "title": "AST Parsing at Scale: Tree-sitter Across 40 Languages - Dropstone",
+        "url": "https://www.dropstone.io/blog/ast-parsing-tree-sitter-40-languages",
+        "snippet": "Using Tree-sitter as our parsing backbone, we achieve real-time, incremental AST analysis across 40+ programming languages—enabling semantic ...",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The result will be a tree of objects whose classes all inherit from ast.AST . An abstract syntax tree can be compiled into a Python code object using the built- ...",
+        "source": "web"
+      },
+      {
+        "title": "Using the AST to hack constants into Python | Metallapan AB",
+        "url": "https://metallapan.se/post/using-the-ast-to-hack-constants-into-python/",
+        "snippet": "I started hacking on a 'practical' application of the AST – making (some) constants faster than local variables, instead of slower by inlining them on import.",
+        "source": "web"
+      },
+      {
+        "title": "Python staticmethod: When and How to Use Static Methods",
+        "url": "https://www.digitalocean.com/community/tutorials/python-static-method",
+        "snippet": "Learn what a static method is in Python, when to use @staticmethod , and how it differs from class and instance methods.",
+        "source": "web"
+      },
+      {
+        "title": "How to extract docstrings from Python files with ast - Gabriele Lanaro",
+        "url": "https://gabrielelanaro.github.io/blog/2014/12/12/extract-docstrings.html",
+        "snippet": "How to extract docstrings from Python files with ast. In this post we will learn how to use the ast module to extract docstrings from Python ...",
+        "source": "web"
+      },
+      {
+        "title": "Practical Python parsing with the ast standard module - YouTube",
+        "url": "https://www.youtube.com/watch?v=l67JN5mQnKI",
+        "snippet": "Practical Python parsing with the ast standard module - Domenico Nucera - PyCon Italia 2025 Elevator Pitch: Ever needed to parse Python ...",
+        "source": "web"
+      },
+      {
+        "title": "Python Method Decorators- @classmethod vs @staticmethod vs ...",
+        "url": "https://machinelearningplus.com/python/python-method-decorators-classmethod-vs-staticmethod-vs-property/",
+        "snippet": "Class methods, static methods, and property decorators are three powerful Python features that control how methods behave in classes.",
+        "source": "web"
+      },
+      {
+        "title": "Learn Python ASTs by building your own linter - DeepSource",
+        "url": "https://deepsource.com/blog/python-asts-by-building-your-own-linter",
+        "snippet": "It's short for Abstract Syntax Tree. In programmer terms, \"ASTs are a programmatic way to understand the structure of your source code\".",
+        "source": "web"
+      },
+      {
+        "title": "Extracting the Module and Function Names from Python ASTs",
+        "url": "https://arumoy.me/blogs/python-ast-extract-module-method-names/",
+        "snippet": "We can use the ast.parse method to create a AST from a given Python source code. Here is an example of how a function call is represented in a AST.",
+        "source": "web"
+      },
+      {
+        "title": "importlib.metadata – Accessing package metadata — Python 3.14.2 ...",
+        "url": "https://docs.python.org/3/library/importlib.metadata.html",
+        "snippet": "importlib.metadata is a library that provides access to the metadata of an installed Distribution Package, such as its entry points or its top-level names.",
+        "source": "web"
+      },
+      {
+        "title": "Parsing and Visiting — LibCST documentation - Read the Docs",
+        "url": "https://libcst.readthedocs.io/en/latest/tutorial.html",
+        "snippet": "In this tutorial, we demonstrate a common four-step-workflow to build an automated refactoring (codemod) application.",
+        "source": "web"
+      },
+      {
+        "title": "Controlled Walking of Nested AST Nodes - Python Discussions",
+        "url": "https://discuss.python.org/t/controlled-walking-of-nested-ast-nodes/3513",
+        "snippet": "NodeVisitor subclasses there are also Function and Argument classes that are used to represent function definitions and arguments & contain the ...",
+        "source": "web"
+      },
+      {
+        "title": "Using importlib.metadata — Python 3.10.19 documentation",
+        "url": "https://docs.python.org/3.10/library/importlib.metadata.html",
+        "snippet": "importlib.metadata is a library that provides for access to installed package metadata. Built in part on Python's import system.",
+        "source": "web"
+      },
+      {
+        "title": "pydoc — Documentation generator and online help system ...",
+        "url": "https://docs.python.org/3/library/pydoc.html",
+        "snippet": "The pydoc module automatically generates documentation from Python modules. The documentation can be presented as pages of text on the console, served to a web ...",
+        "source": "web"
+      },
+      {
+        "title": "Public APIs - Griffe - mkdocstrings",
+        "url": "https://mkdocstrings.github.io/griffe/guide/users/recommendations/public-apis/",
+        "snippet": "By declaring __all__ , your public API becomes explicit, and explicit is better than implicit. But __all__ only works for module-level objects. Within classes, ...",
+        "source": "web"
+      },
+      {
+        "title": "ast — Abstract syntax trees — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/ast.html",
+        "snippet": "The ast module helps Python applications to process trees of the Python abstract syntax grammar. The abstract syntax itself might change with each Python ...",
+        "source": "web"
+      },
+      {
+        "title": "Read the Docs tutorial",
+        "url": "https://docs.readthedocs.com/platform/latest/tutorial/index.html",
+        "snippet": "In this tutorial you will learn how to host a public documentation project on Read the Docs Community.",
+        "source": "web"
+      },
+      {
+        "title": "PEP 8 – Style Guide for Python Code",
+        "url": "https://peps.python.org/pep-0008/",
+        "snippet": "This document gives coding conventions for the Python code comprising the standard library in the main Python distribution.",
+        "source": "web"
+      },
+      {
+        "title": "Slaying God-Classes with \"AST Scout\", a code structure ...",
+        "url": "https://blog.yonatan.dev/ast-scout-code-structure-visualization-tool/",
+        "snippet": "A tool that can analyze a Javascript\\Typescript Class\\Module and visualize the relationship between its public API and its implementation details.",
+        "source": "web"
+      },
+      {
+        "title": "How name resolution works in Python",
+        "url": "https://discuss.python.org/t/how-name-resolution-works-in-python/26452",
+        "snippet": "I want to understand the name resolution from the perspective of AST. Till now what I have understood is that name resolution occurs in two step ...",
+        "source": "web"
+      },
+      {
+        "title": "Python staticmethod: When and How to Use Static Methods",
+        "url": "https://www.digitalocean.com/community/tutorials/python-static-method",
+        "snippet": "Learn what a static method is in Python, when to use @staticmethod , and how it differs from class and instance methods.",
+        "source": "web"
+      },
+      {
+        "title": "Diving into Tree-Sitter: Parsing Code with Python Like a Pro",
+        "url": "https://dev.to/shrsv/diving-into-tree-sitter-parsing-code-with-python-like-a-pro-17h8",
+        "snippet": "Tree-Sitter is a powerful parsing library that lets you analyze and manipulate code like a seasoned compiler engineer.",
+        "source": "web"
+      },
+      {
+        "title": "Name mangling in Python - GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/python/name-mangling-in-python/",
+        "snippet": "In Python, name mangling prevents accidental name conflicts in classes, mainly during inheritance. It applies to variables or methods ...",
+        "source": "web"
+      },
+      {
+        "title": "What's New In Python 3.8 — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/whatsnew/3.8.html",
+        "snippet": "This article explains the new features in Python 3.8, compared to 3.7. Python 3.8 was released on October 14, 2019. For full details, see the changelog.",
+        "source": "web"
+      },
+      {
+        "title": "How to Use Tree Sitter Queries in Python - YouTube",
+        "url": "https://www.youtube.com/watch?v=bP0zl4K_LY8",
+        "snippet": "... Tree Sitter to parse source code. I explain how to use Tree Sitter Queries to extract specific parts from a parsed Syntax Tree and how to ...",
+        "source": "web"
+      },
+      {
+        "title": "Implement inspect.getmembers_static - Ideas - Python Discussions",
+        "url": "https://discuss.python.org/t/implement-inspect-getmembers-static/2550",
+        "snippet": "As discussed in this Pull Request, inspect.getmembers will call properties and other dynamic attributes, as it is using the getattr method.",
+        "source": "web"
+      },
+      {
+        "title": "Best Practice in C for Modules - Software Development",
+        "url": "https://devmethodologies.blogspot.com/2013/07/best-practice-in-c-for-modules.html",
+        "snippet": "I discuss best practice in designing and implementing modules in C (and C++). The most important aspect is that each module should have a simple, well-defined ...",
+        "source": "web"
+      },
+      {
+        "title": "python/typeshed: Collection of library stubs for Python, with static types",
+        "url": "https://github.com/python/typeshed",
+        "snippet": "Typeshed contains external type annotations for the Python standard library and Python builtins, as well as third-party packages that are contributed by ...",
+        "source": "web"
+      },
+      {
+        "title": "inspect — Inspect live objects — Python 3.14.2 documentation",
+        "url": "https://docs.python.org/3/library/inspect.html",
+        "snippet": "getmembers_static() may not be able to retrieve all members that getmembers can fetch (like dynamically created attributes) and may find members that getmembers ...",
+        "source": "web"
+      },
+      {
+        "title": "Private methods are a code smell - DEV Community",
+        "url": "https://dev.to/koffeinfrei/private-methods-are-a-code-smell-5d14",
+        "snippet": "A private method of one class could be a public method of another class. Every functionality is a public interface of something.",
+        "source": "web"
+      },
+      {
+        "title": "PEP 800 – Disjoint bases in the type system | peps.python.org",
+        "url": "https://peps.python.org/pep-0800/",
+        "snippet": "The __disjoint_base__ attribute may be used for runtime introspection. However, there is no runtime enforcement of this decorator on user- ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Python AST Techniques for Determining Public vs Private Visibility of Functions, Classes, and Modules\n\nPublic application programming interfaces and private implementation details represent fundamental concepts in software architecture, and Python provides multiple mechanisms for distinguishing between them through conventions, metadata attributes, and syntactic analysis. This comprehensive report explores the techniques for determining public versus private visibility in Python codebases, examining naming conventions, the `__all__` attribute, Abstract Syntax Tree analysis, tool-based approaches, and cross-language parsing strategies with Tree-Sitter. By understanding these visibility detection methods, developers can create more sophisticated code analysis tools, documentation generators, and static analyzers that respect Python's explicit-is-better-than-implicit philosophy while maintaining accuracy across diverse codebases and programming paradigms.\n\n## Understanding Python Visibility Conventions\n\nPython does not enforce strict privacy through language-level access control mechanisms like those found in Java or C++[1]. Instead, Python relies on well-established naming conventions that communicate developer intent to other programmers and tools[1]. These conventions serve as a social contract within the Python community, indicating whether a particular element should be considered part of the public API or reserved for internal use[6]. Understanding these conventions forms the foundation for programmatic visibility detection, as they determine how modules, classes, functions, and variables are categorized by analysis tools.\n\nThe most fundamental visibility convention in Python is the **underscore prefix**, which signals non-public scope to developers and tools[1][5][6]. When a name starts with a single leading underscore, it is considered protected or non-public, indicating that the name should not be accessed outside the class or module in which it is defined, except by subclasses[1][3]. This convention does not prevent access through direct attribute manipulation, but it communicates clear intent to library consumers that modifying or using such elements may break their code when the library is updated[5]. In practice, for library authors, this means they can modify or remove any object prefixed with a single underscore without worrying about compatibility concerns, while for library users, attempting to use anything starting with an underscore carries the risk of encountering breaking changes at any time[5].\n\nThe **double underscore prefix** invokes a different mechanism called **name mangling**, which provides a degree of pseudo-privacy through automatic name transformation by the Python interpreter[1][3]. When an attribute or method name begins with double underscores (but does not end with double underscores), Python internally renames it to `_ClassName__attributename`[3][51]. This transformation occurs at the bytecode compilation stage and is meant primarily to prevent accidental name conflicts in inheritance hierarchies rather than to enforce true privacy[3][51]. For example, if a parent class defines `__private` and a child class also defines `__private`, name mangling ensures they become `_Parent__private` and `_Child__private` respectively, preventing the child's attribute from accidentally shadowing the parent's[51]. While name mangling makes attributes less accessible from outside the class, it remains a convention-based protection mechanism rather than enforcement-based, as the mangled name can still be accessed if one knows the class name[3].\n\nModule-level dunder names (names with double leading and trailing underscores) such as `__all__`, `__author__`, and `__version__` occupy a special place in Python's visibility system[46]. These names are used for module metadata and special configuration, with `__all__` being the most significant for visibility determination[46]. According to PEP 8, module-level dunder names should be placed after the module docstring but before any import statements[46], establishing a consistent location where visibility declarations appear in source files.\n\nBeyond simple prefixing, Python's name resolution and scoping rules create natural visibility boundaries. Names that are imported from other modules are not considered public parts of the current module's API, even if they lack underscore prefixes[2]. This distinction is crucial because a module importing something as `from other_module import something` creates a reference to that object, but the object itself was defined elsewhere[2]. Documentation generation tools and visibility analyzers must account for this distinction when determining what constitutes a module's actual public API versus what happens to be accessible within it[2].\n\n## The __all__ Attribute: Explicit Public API Declaration\n\nThe `__all__` attribute represents Python's primary mechanism for explicitly declaring the public interface of a module or package[2][27]. By defining `__all__` as a list of strings, module authors establish a precise, machine-readable declaration of which names should be considered part of the module's public API[2][27]. This attribute serves multiple critical functions: it controls what gets imported during wildcard imports (`from module import *`), it provides a human-readable list of public objects without examining the entire codebase, it informs static analysis tools about the public API including re-exports of imported objects, and it can influence tab completion and directory listing behavior in interactive environments[2][5].\n\nWhen `__all__` is defined in a module, the names listed in it are considered public regardless of naming conventions, while names not in the list are considered non-public even if they lack underscore prefixes[2][27]. This creates a powerful override mechanism for cases where module authors want to export something that might otherwise be considered private by convention, or conversely, to hide something that might otherwise appear public[27]. For instance, a module might import a utility function from another package and include it in `__all__` to intentionally re-export it as part of its public API[2][27].\n\nConsider a practical example where a module defines multiple functions but only exports specific ones through `__all__`:\n\n```python\n# math_operations.py\n\ndef add(a, b):\n    \"\"\"Public: Add two numbers.\"\"\"\n    return a + b\n\ndef _internal_helper(x):\n    \"\"\"Private helper function.\"\"\"\n    return x * 2\n\ndef subtract(a, b):\n    \"\"\"Public: Subtract two numbers.\"\"\"\n    return a - b\n\n__all__ = [\"add\", \"subtract\"]\n```\n\nIn this example, even though `_internal_helper` lacks underscore prefixes within the list, a wildcard import (`from math_operations import *`) will only bring in `add` and `subtract`[27]. Conversely, if a module imported a function that lacked a leading underscore but the author did not intend it as part of the public API, they could exclude it from `__all__`[2].\n\nWhen `__all__` is not defined, Python follows the convention that all names without leading underscores, excluding imported names, are considered public[2][10]. This default behavior means that `__all__` is optional but becomes increasingly important as modules grow in complexity and as the distinction between implementation details and public interface becomes more critical[43]. Some documentation generation tools and static analyzers treat the absence of `__all__` in significant modules as a code quality issue, recommending that module authors explicitly declare their public API[43].\n\nFor packages containing multiple submodules, `__all__` can be used in the package's `__init__.py` file to control what is exposed at the package level, allowing authors to hide internal module structure from users[5][43]. This practice enables sophisticated API design where multiple internal modules collaborate to provide a cohesive public interface through a single entry point[5].\n\n## Abstract Syntax Tree Analysis for Visibility Detection\n\nThe Python `ast` module provides the foundational tools for programmatic analysis of Python source code's structure, including visibility information[15][28][44]. An Abstract Syntax Tree is a tree representation of the syntactic structure of source code, where each node represents a construct in the language (such as a function definition, class, assignment, or name reference)[15][25]. By parsing Python source code into an AST, developers can examine and analyze code properties without executing it, making AST analysis ideal for static visibility detection[15][25].\n\nThe basic approach to AST-based visibility analysis begins with parsing source code into a tree structure using `ast.parse()`[15][28][44]. This function takes a string of Python source code and returns an `ast.Module` object representing the entire module, which contains a `body` attribute that is a list of all top-level statements and definitions[15]. From this module node, analysis proceeds by traversing the tree and identifying nodes representing functions, classes, and other definitions that might be public or private[25].\n\nConsider a foundational example demonstrating AST parsing and examination:\n\n```python\nimport ast\n\ndef analyze_module_visibility(source_code):\n    \"\"\"Parse source code and identify public/private definitions.\"\"\"\n    tree = ast.parse(source_code)\n    \n    # Check if __all__ is explicitly defined\n    all_defined = None\n    public_via_all = set()\n    \n    for node in ast.walk(tree):\n        if isinstance(node, ast.Assign):\n            # Check for __all__ assignment\n            for target in node.targets:\n                if isinstance(target, ast.Name) and target.id == \"__all__\":\n                    if isinstance(node.value, ast.List):\n                        all_defined = []\n                        for elt in node.value.elts:\n                            if isinstance(elt, ast.Constant):\n                                all_defined.append(elt.value)\n                        public_via_all = set(all_defined)\n    \n    # Identify all top-level definitions\n    definitions = {\n        'functions': [],\n        'classes': [],\n        'variables': []\n    }\n    \n    for node in tree.body:\n        if isinstance(node, ast.FunctionDef):\n            name = node.name\n            is_public = determine_visibility(name, public_via_all, all_defined)\n            definitions['functions'].append({\n                'name': name,\n                'public': is_public,\n                'lineno': node.lineno\n            })\n        elif isinstance(node, ast.ClassDef):\n            name = node.name\n            is_public = determine_visibility(name, public_via_all, all_defined)\n            definitions['classes'].append({\n                'name': name,\n                'public': is_public,\n                'lineno': node.lineno,\n                'methods': extract_class_methods(node, public_via_all, all_defined)\n            })\n    \n    return definitions, all_defined\n\ndef determine_visibility(name, public_via_all, all_defined):\n    \"\"\"Determine if a name should be considered public.\"\"\"\n    # If __all__ is explicitly defined, only names in it are public\n    if all_defined is not None:\n        return name in public_via_all\n    \n    # Otherwise, follow naming convention (no leading underscore means public)\n    return not name.startswith('_')\n\ndef extract_class_methods(class_node, public_via_all, all_defined):\n    \"\"\"Extract methods from a class definition.\"\"\"\n    methods = []\n    for node in class_node.body:\n        if isinstance(node, ast.FunctionDef):\n            name = node.name\n            # Class members follow different rules than module-level\n            # Names starting with _ are considered private by convention\n            is_public = not name.startswith('_')\n            methods.append({\n                'name': name,\n                'public': is_public,\n                'is_dunder': name.startswith('__') and name.endswith('__')\n            })\n    return methods\n```\n\nThis example demonstrates how AST analysis can identify definitions and assess their visibility status. The approach parses source code into an AST, searches for `__all__` definitions to determine if the module explicitly declares its public API, and then examines each function and class definition to classify them as public or private based on naming conventions and explicit declarations[25].\n\nThe `ast.NodeVisitor` class provides a more structured approach to tree traversal by implementing the visitor pattern[15][25]. Rather than manually iterating through all nodes, developers can subclass `NodeVisitor` and implement methods named `visit_<NodeType>` that get called automatically when those specific node types are encountered during traversal[15][25][37]. This approach is particularly useful for more complex analysis tasks:\n\n```python\nimport ast\n\nclass VisibilityAnalyzer(ast.NodeVisitor):\n    \"\"\"Visitor that analyzes and collects visibility information.\"\"\"\n    \n    def __init__(self):\n        self.public_names = set()\n        self.all_defined = False\n        self.module_docstring = None\n        self.functions = []\n        self.classes = []\n        self.current_class = None\n    \n    def visit_Module(self, node):\n        \"\"\"Visit the module node.\"\"\"\n        # Extract module docstring\n        if (node.body and \n            isinstance(node.body[0], ast.Expr) and\n            isinstance(node.body[0].value, ast.Constant) and\n            isinstance(node.body[0].value.value, str)):\n            self.module_docstring = node.body[0].value.value\n        \n        # Continue visiting child nodes\n        self.generic_visit(node)\n    \n    def visit_Assign(self, node):\n        \"\"\"Check for __all__ definition.\"\"\"\n        for target in node.targets:\n            if isinstance(target, ast.Name) and target.id == \"__all__\":\n                self.all_defined = True\n                if isinstance(node.value, ast.List):\n                    for elt in node.value.elts:\n                        if isinstance(elt, ast.Constant):\n                            self.public_names.add(elt.value)\n        self.generic_visit(node)\n    \n    def visit_FunctionDef(self, node):\n        \"\"\"Visit function definitions.\"\"\"\n        visibility = self._determine_visibility(node.name)\n        \n        func_info = {\n            'name': node.name,\n            'lineno': node.lineno,\n            'public': visibility == 'public',\n            'visibility': visibility,\n            'docstring': ast.get_docstring(node),\n            'parent_class': self.current_class\n        }\n        self.functions.append(func_info)\n        \n        # Don't traverse nested functions\n        if self.current_class is None:\n            self.generic_visit(node)\n    \n    def visit_ClassDef(self, node):\n        \"\"\"Visit class definitions.\"\"\"\n        visibility = self._determine_visibility(node.name)\n        \n        class_info = {\n            'name': node.name,\n            'lineno': node.lineno,\n            'public': visibility == 'public',\n            'visibility': visibility,\n            'docstring': ast.get_docstring(node),\n            'methods': []\n        }\n        \n        # Visit class methods\n        old_class = self.current_class\n        self.current_class = node.name\n        \n        for item in node.body:\n            if isinstance(item, ast.FunctionDef):\n                method_visibility = self._determine_visibility(item.name)\n                class_info['methods'].append({\n                    'name': item.name,\n                    'visibility': method_visibility,\n                    'public': method_visibility == 'public'\n                })\n        \n        self.current_class = old_class\n        self.classes.append(class_info)\n    \n    def _determine_visibility(self, name):\n        \"\"\"Determine visibility based on naming convention.\"\"\"\n        if name.startswith('__') and name.endswith('__'):\n            return 'dunder'\n        elif name.startswith('__'):\n            return 'private'\n        elif name.startswith('_'):\n            return 'protected'\n        elif self.all_defined and name not in self.public_names:\n            return 'private'\n        else:\n            return 'public'\n```\n\nThis visitor-based approach automatically handles tree traversal, making it easier to implement complex analysis logic. The visitor pattern also integrates well with `ast.generic_visit()`, which can be called to continue traversing child nodes when custom logic needs to be inserted at specific points[15][25].\n\nName mangling detection requires special attention in AST analysis. When a name begins with double underscores within a class definition, the analyzer must recognize that Python will mangle the name internally[3][51]. This mangling means that accessing `obj.__private_attribute` will fail with an `AttributeError`, but accessing `obj._ClassName__private_attribute` will succeed[3][51]. Advanced visibility analyzers that aim to provide accurate introspection information should account for this transformation:\n\n```python\nimport ast\n\ndef detect_name_mangling(class_node):\n    \"\"\"Identify attributes that will be subject to name mangling.\"\"\"\n    mangled_attributes = []\n    \n    for node in ast.walk(class_node):\n        if isinstance(node, ast.Attribute):\n            # Check if this is a self.__ reference\n            if (isinstance(node.value, ast.Name) and \n                node.value.id == 'self' and\n                node.attr.startswith('__') and\n                not node.attr.endswith('__')):\n                mangled_attributes.append({\n                    'name': node.attr,\n                    'mangled_name': f'_{class_node.name}{node.attr}',\n                    'lineno': node.lineno\n                })\n    \n    return mangled_attributes\n```\n\n## Tool-Based Visibility Detection Approaches\n\nProfessional documentation and analysis tools have developed sophisticated methods for determining visibility that go beyond simple naming convention analysis. These tools often combine multiple signals including naming conventions, `__all__` declarations, explicit metadata annotations, docstring analysis, and configuration settings. Understanding how established tools implement visibility detection provides insights into best practices and handles edge cases that simple approaches might miss.\n\nThe **pdoc** documentation generator determines visibility through a multi-layered approach[7][10]. When analyzing a module, pdoc first checks if `__all__` is defined; if it is, then only identifiers contained in that list are considered public, regardless of naming conventions[7][10]. If `__all__` is not defined, pdoc considers all items public that do not start with an underscore and that are defined in the current module (not imported from elsewhere)[7][10]. This distinction between defined and imported objects is crucial, as it prevents accidentally exposing third-party dependencies as part of a module's public API[10].\n\nBeyond this basic logic, pdoc provides mechanisms for fine-grained control over visibility through special docstring annotations. Objects can be marked as private using the `@private` docstring annotation, or conversely, objects starting with underscores can be marked as public using the `@public` annotation[7]. This flexibility allows library authors to override the default visibility determination when special cases arise.\n\nFor improved integration with interactive environments, pdoc can be configured with a custom `__dir__()` function that returns only the public API, causing tab completion to show exclusively public names[5]. This technique demonstrates how visibility information can be operationalized to improve the developer experience:\n\n```python\n__all__ = [\"public_function\", \"PublicClass\"]\n\ndef public_function():\n    \"\"\"This is part of the public API.\"\"\"\n    pass\n\ndef _private_function():\n    \"\"\"This is private.\"\"\"\n    pass\n\ndef __dir__():\n    \"\"\"Control what appears in dir() and tab completion.\"\"\"\n    return __all__\n```\n\n**Sphinx's autodoc extension** approaches visibility determination through a combination of naming conventions and explicit metadata in docstrings[8]. By default, autodoc only includes public members with a docstring or inline documentation comments (`#:`)[8]. If `__all__` exists, it will be used to define which members are public, unless the `:members:` option is explicitly set[8]. Autodoc also supports the `:meta private:` and `:meta public:` docstring directives to explicitly mark members' visibility status, allowing authors to override default behavior for specific cases[8].\n\nThe presence of `__all__` in a module significantly changes autodoc's behavior. When `__all__` is defined, autodoc restricts automatic documentation generation to only the members listed in it[8]. This design choice respects the module author's explicit visibility declaration and prevents accidentally documenting implementation details.\n\n**interrogate** focuses on docstring coverage rather than direct visibility analysis, but it intersects with visibility concerns by checking whether documented functions and methods are considered public or private[9]. The tool can be configured to ignore specific categories of objects through command-line options and configuration files[9]. For instance, the `:ignore-private:` option tells interrogate to exclude private methods from coverage calculations, recognizing that private implementation details may not require documentation to the same degree as public APIs[9].\n\nThese tool-based approaches demonstrate that visibility determination in practice involves:\n\nFirst, checking explicit declarations like `__all__`[2][7][8]\n\nSecond, applying naming convention analysis (underscores)[1][3]\n\nThird, distinguishing between locally-defined and imported objects[2][10]\n\nFourth, allowing explicit override through docstring annotations[7][8]\n\nFifth, considering tool-specific configuration and policies[9]\n\nThis layered approach accommodates both explicit and implicit visibility information while allowing flexibility for edge cases and special scenarios.\n\n## Tree-Sitter Approaches for Multi-Language Visibility Detection\n\nWhile Python-specific AST analysis with the `ast` module works well for Python code, analyzing codebases that span multiple languages requires a more language-agnostic approach. **Tree-Sitter** is a parser generator and incremental parsing library that builds concrete syntax trees for source code and efficiently updates them as files change[16]. Tree-Sitter's key advantage is its support for numerous programming languages through a unified interface, making it valuable for tools that need to analyze visibility across heterogeneous codebases[16][29][50].\n\nTree-Sitter's query system provides a mechanism for searching and matching patterns in syntax trees using a Lisp-like query language[26][50]. Unlike regex-based approaches that operate on strings, Tree-Sitter queries understand code structure and can precisely target syntactic elements[26]. This capability extends visibility analysis to become language-agnostic, allowing the same conceptual analysis to be applied to Python, JavaScript, TypeScript, Go, and many other languages[26][29][50].\n\nThe fundamental Tree-Sitter workflow for visibility analysis involves three steps: first, parsing code into a syntax tree using a language-specific grammar; second, writing queries that match public or private patterns in that language; and third, executing queries against the tree to extract visibility information[50]. Consider how visibility analysis might be implemented using Tree-Sitter for multiple languages:\n\nFor **Python**, a Tree-Sitter query might identify public function definitions:\n\n```\n(module\n  (function_definition\n    name: (identifier) @function.name\n    (#not-match? @function.name \"^_\")))\n```\n\nThis query matches function definitions at the module level where the function name does not start with an underscore[26][50].\n\nFor **JavaScript**, an analogous query would target exported functions:\n\n```\n(export_statement\n  (function_declaration\n    name: (identifier) @function.name))\n```\n\nFor **Go**, where visibility is determined by capitalization rather than underscores, the query would look for capitalized function declarations:\n\n```\n(function_declaration\n  name: (identifier) @function.name\n  (#match? @function.name \"^[A-Z]\"))\n```\n\nThese examples demonstrate how Tree-Sitter enables visibility analysis by allowing language-specific query patterns to be written and applied to language-specific syntax trees[26][50].\n\nTree-Sitter's query predicates add powerful filtering capabilities to visibility detection[26]. Predicates like `#eq?`, `#match?`, `#not-match?`, and others enable precise matching of patterns[26]. For instance, to find all functions that are explicitly exported in Python (by appearing in `__all__`), a more complex query pattern could be constructed:\n\n```python\nimport tree_sitter_python as tspython\nfrom tree_sitter import Language, Parser, Query\n\n# Setup parser\nPY_LANGUAGE = Language(tspython.language())\nparser = Parser(PY_LANGUAGE)\n\n# Parse source code\nsource_code = b\"\"\"\n__all__ = [\"public_func\", \"PublicClass\"]\n\ndef public_func():\n    pass\n\ndef _private_func():\n    pass\n\nclass PublicClass:\n    pass\n\nclass _PrivateClass:\n    pass\n\"\"\"\n\ntree = parser.parse(source_code)\n\n# Query for module-level assignments to __all__\nall_query = \"\"\"\n(assignment\n  left: (identifier) @var_name\n  (#eq? @var_name \"__all__\")\n  right: (list\n    (string (string_content) @export)))\n\"\"\"\n\nquery = Query(PY_LANGUAGE, all_query)\nmatches = query.matches(tree.root_node)\n\nexported_names = set()\nfor match in matches:\n    for capture in match.captures:\n        if capture.name == \"export\":\n            # Extract string content, removing quotes\n            exported_names.add(capture.node.text.decode('utf-8').strip('\"\\''))\n\nprint(f\"Explicitly exported names: {exported_names}\")\n```\n\nThis Tree-Sitter-based approach can accurately extract what a module explicitly declares as public, similar to the AST-based approach but with the benefit of working across multiple languages[26][50].\n\nTree-Sitter's incremental parsing capability is particularly valuable for real-time analysis tools like integrated development environments and continuous analysis systems[50]. When source code changes, Tree-Sitter can update only the affected parts of the syntax tree rather than reparsing the entire file, making it efficient for tools that monitor code changes and provide immediate feedback[50]. This capability is less relevant for batch analysis but becomes essential for interactive tools that need to maintain current visibility information as developers type[50].\n\nThe trade-off with Tree-Sitter is that while it provides language-agnostic parsing and querying, each language's visibility rules are fundamentally different. Python uses underscore prefixes and `__all__` declarations; JavaScript uses explicit `export` keywords; Go uses capitalization; Rust uses explicit `pub` keywords; and so forth[26]. A comprehensive cross-language visibility system must implement language-specific logic for interpreting these different mechanisms, even if the parsing and query infrastructure is shared[29].\n\n## Practical Implementation: Building a Unified Visibility Analyzer\n\nCombining the various techniques discussed above, a practical visibility analyzer can be constructed that leverages AST analysis for Python and provides extensibility for other concerns. This implementation demonstrates how to integrate naming convention analysis, `__all__` detection, and visitor-based traversal into a cohesive tool:\n\n```python\nimport ast\nfrom typing import Dict, List, Set, Tuple\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass SymbolInfo:\n    \"\"\"Information about a module symbol (function, class, variable).\"\"\"\n    name: str\n    kind: str  # 'function', 'class', 'variable', 'method'\n    lineno: int\n    visibility: str  # 'public', 'protected', 'private', 'dunder'\n    docstring: str = None\n    parent: str = None  # For methods, the containing class\n    members: List['SymbolInfo'] = field(default_factory=list)  # For classes\n    is_imported: bool = False\n    mangled_name: str = None  # For double-underscore attributes\n\nclass ModuleVisibilityAnalyzer(ast.NodeVisitor):\n    \"\"\"Comprehensive analyzer for Python module visibility.\"\"\"\n    \n    def __init__(self, source_code: str, module_path: str = None):\n        self.source_code = source_code\n        self.module_path = module_path\n        self.tree = ast.parse(source_code)\n        self.symbols: List[SymbolInfo] = []\n        self.all_exports: Set[str] = None\n        self.has_all_declaration = False\n        self.imported_names: Set[str] = set()\n        self.current_class: str = None\n    \n    def analyze(self) -> Dict:\n        \"\"\"Perform complete visibility analysis.\"\"\"\n        # First pass: collect __all__ and imports\n        self._collect_metadata()\n        \n        # Second pass: visit all definitions\n        self.visit(self.tree)\n        \n        return {\n            'symbols': self.symbols,\n            'all_exports': self.all_exports,\n            'has_all_declaration': self.has_all_declaration,\n            'public_api': self._get_public_api(),\n            'private_api': self._get_private_api(),\n            'protected_api': self._get_protected_api()\n        }\n    \n    def _collect_metadata(self):\n        \"\"\"Collect __all__ exports and import information.\"\"\"\n        for node in ast.walk(self.tree):\n            # Collect __all__\n            if isinstance(node, ast.Assign):\n                for target in node.targets:\n                    if isinstance(target, ast.Name) and target.id == \"__all__\":\n                        self.has_all_declaration = True\n                        if isinstance(node.value, ast.List):\n                            self.all_exports = set()\n                            for elt in node.value.elts:\n                                if isinstance(elt, ast.Constant):\n                                    self.all_exports.add(elt.value)\n            \n            # Collect imported names\n            if isinstance(node, ast.Import):\n                for alias in node.names:\n                    name = alias.asname if alias.asname else alias.name\n                    self.imported_names.add(name)\n            elif isinstance(node, ast.ImportFrom):\n                for alias in node.names:\n                    name = alias.asname if alias.asname else alias.name\n                    self.imported_names.add(name)\n    \n    def _determine_visibility(self, name: str, is_imported: bool = False) -> str:\n        \"\"\"Determine visibility classification for a name.\"\"\"\n        # Dunder (magic) methods\n        if name.startswith('__') and name.endswith('__'):\n            return 'dunder'\n        \n        # Double-underscore private (subject to name mangling)\n        if name.startswith('__'):\n            return 'private'\n        \n        # Single-underscore protected\n        if name.startswith('_'):\n            return 'protected'\n        \n        # If __all__ is defined, check if explicitly exported\n        if self.has_all_declaration and self.all_exports is not None:\n            return 'public' if name in self.all_exports else 'private'\n        \n        # If imported, not part of this module's public API\n        if is_imported:\n            return 'private'\n        \n        # Default: public\n        return 'public'\n    \n    def visit_Module(self, node: ast.Module):\n        \"\"\"Visit module and extract module-level items.\"\"\"\n        self.generic_visit(node)\n    \n    def visit_FunctionDef(self, node: ast.FunctionDef):\n        \"\"\"Visit function definitions.\"\"\"\n        is_imported = node.name in self.imported_names\n        visibility = self._determine_visibility(node.name, is_imported)\n        \n        symbol = SymbolInfo(\n            name=node.name,\n            kind='function' if self.current_class is None else 'method',\n            lineno=node.lineno,\n            visibility=visibility,\n            docstring=ast.get_docstring(node),\n            parent=self.current_class,\n            is_imported=is_imported\n        )\n        \n        # Handle name mangling for double-underscore names\n        if node.name.startswith('__') and not node.name.endswith('__'):\n            if self.current_class:\n                symbol.mangled_name = f'_{self.current_class}{node.name}'\n        \n        self.symbols.append(symbol)\n        \n        # Don't visit nested functions for now\n        if self.current_class is None:\n            return\n    \n    def visit_ClassDef(self, node: ast.ClassDef):\n        \"\"\"Visit class definitions.\"\"\"\n        is_imported = node.name in self.imported_names\n        visibility = self._determine_visibility(node.name, is_imported)\n        \n        class_symbol = SymbolInfo(\n            name=node.name,\n            kind='class',\n            lineno=node.lineno,\n            visibility=visibility,\n            docstring=ast.get_docstring(node),\n            is_imported=is_imported\n        )\n        \n        # Visit methods\n        old_class = self.current_class\n        self.current_class = node.name\n        \n        for item in node.body:\n            if isinstance(item, ast.FunctionDef):\n                method_visibility = self._determine_visibility(item.name, False)\n                method_symbol = SymbolInfo(\n                    name=item.name,\n                    kind='method',\n                    lineno=item.lineno,\n                    visibility=method_visibility,\n                    docstring=ast.get_docstring(item),\n                    parent=node.name\n                )\n                \n                # Handle name mangling\n                if item.name.startswith('__') and not item.name.endswith('__'):\n                    method_symbol.mangled_name = f'_{node.name}{item.name}'\n                \n                class_symbol.members.append(method_symbol)\n        \n        self.current_class = old_class\n        self.symbols.append(class_symbol)\n    \n    def visit_Assign(self, node: ast.Assign):\n        \"\"\"Visit assignments to track variables.\"\"\"\n        for target in node.targets:\n            if isinstance(target, ast.Name):\n                name = target.id\n                # Skip __all__ assignment (already processed)\n                if name == '__all__':\n                    continue\n                \n                is_imported = name in self.imported_names\n                visibility = self._determine_visibility(name, is_imported)\n                \n                if self.current_class is None:\n                    # Module-level variable\n                    symbol = SymbolInfo(\n                        name=name,\n                        kind='variable',\n                        lineno=node.lineno,\n                        visibility=visibility,\n                        is_imported=is_imported\n                    )\n                    self.symbols.append(symbol)\n    \n    def _get_public_api(self) -> List[str]:\n        \"\"\"Get list of public symbols.\"\"\"\n        return [s.name for s in self.symbols \n                if s.visibility == 'public' and s.parent is None]\n    \n    def _get_private_api(self) -> List[str]:\n        \"\"\"Get list of private symbols.\"\"\"\n        return [s.name for s in self.symbols \n                if s.visibility in ('private', 'dunder') and s.parent is None]\n    \n    def _get_protected_api(self) -> List[str]:\n        \"\"\"Get list of protected symbols.\"\"\"\n        return [s.name for s in self.symbols \n                if s.visibility == 'protected' and s.parent is None]\n\n# Example usage\nif __name__ == \"__main__\":\n    sample_code = '''\n\"\"\"Module demonstrating visibility analysis.\"\"\"\n\n__all__ = [\"PublicClass\", \"public_function\"]\n\nimport json\nfrom typing import Optional\n\ndef public_function(x: int) -> int:\n    \"\"\"A public function.\"\"\"\n    return _private_helper(x)\n\ndef _private_helper(x: int) -> int:\n    \"\"\"Private helper function.\"\"\"\n    return x * 2\n\nclass PublicClass:\n    \"\"\"A public class.\"\"\"\n    \n    def public_method(self):\n        \"\"\"Public method.\"\"\"\n        self.__private_method()\n    \n    def __private_method(self):\n        \"\"\"Private method using name mangling.\"\"\"\n        pass\n\nclass _PrivateClass:\n    \"\"\"A private class.\"\"\"\n    pass\n\nCONSTANT = 42\n_PRIVATE_CONSTANT = 100\n'''\n    \n    analyzer = ModuleVisibilityAnalyzer(sample_code)\n    results = analyzer.analyze()\n    \n    print(\"=== Visibility Analysis Results ===\")\n    print(f\"Has __all__ declaration: {results['has_all_declaration']}\")\n    print(f\"Exported via __all__: {results['all_exports']}\")\n    print(f\"\\nPublic API: {results['public_api']}\")\n    print(f\"Protected API: {results['protected_api']}\")\n    print(f\"Private API: {results['private_api']}\")\n    \n    print(\"\\n=== All Symbols ===\")\n    for symbol in results['symbols']:\n        parent_info = f\" (in {symbol.parent})\" if symbol.parent else \"\"\n        print(f\"  {symbol.name}{parent_info}: {symbol.visibility}\")\n        if symbol.mangled_name:\n            print(f\"    Mangled as: {symbol.mangled_name}\")\n```\n\nThis implementation demonstrates how to combine multiple visibility detection techniques into a practical tool. It properly handles `__all__` declarations, naming conventions, imported objects, name mangling, and distinguishes between module-level and class-level definitions. The tool can be extended to generate documentation, perform linting checks, or feed visibility information to other analysis tools.\n\n## Conclusion\n\nDetermining public versus private visibility in Python represents a multifaceted challenge that combines language conventions, explicit metadata, syntactic analysis, and tool-specific policies. Python's philosophy of explicit-is-better-than-implicit manifests in multiple mechanisms for declaring and detecting visibility: the underscore prefix conventions provide lightweight signaling of intent, the `__all__` attribute enables explicit public API declaration, Abstract Syntax Trees enable programmatic analysis of source structure, and specialized tools like pdoc and Sphinx implement sophisticated visibility detection algorithms[2][7][8]. For multi-language codebases, Tree-Sitter provides a language-agnostic foundation for parsing and querying syntax across numerous programming languages, though language-specific visibility rules must still be implemented separately[26][50].\n\nA comprehensive understanding of these visibility detection techniques enables developers to build more sophisticated code analysis tools, documentation generators, and static analyzers that respect Python's design philosophy while maintaining accuracy and flexibility[1][15][25]. By combining AST-based analysis with knowledge of Python conventions and explicit metadata, tools can effectively determine what constitutes an API's public surface and what remains implementation detail, ultimately improving code organization, documentation quality, and maintainability across Python projects.[27][43][46]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

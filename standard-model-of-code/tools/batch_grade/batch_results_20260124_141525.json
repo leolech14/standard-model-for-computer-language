@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "timestamp": "20260124_141525",
+    "total_repos": 3,
+    "success": 0,
+    "failed": 3,
+    "duration_sec": 48.52967,
+    "workers": 2
+  },
+  "grade_distribution": {
+    "null": 3
+  },
+  "results": [
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Extra data: line 7 column 1 (char 93)",
+      "duration_sec": 6.109652
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Extra data: line 7 column 1 (char 95)",
+      "duration_sec": 4.676861
+    },
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Extra data: line 7 column 1 (char 95)",
+      "duration_sec": 48.454879
+    }
+  ]
+}

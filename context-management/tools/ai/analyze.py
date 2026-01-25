@@ -1151,16 +1151,50 @@ def estimate_cost(input_tokens, output_tokens, model):
     return input_cost + output_cost
 
 
+def auto_diagnose_error(error_str: str) -> None:
+    """Auto-diagnose Gemini API errors and print helpful info."""
+    import re
+
+    print(f"\n  ╔═══════════════════════════════════════════════════════════╗")
+    print(f"  ║                  AUTO-DIAGNOSIS                           ║")
+    print(f"  ╠═══════════════════════════════════════════════════════════╣")
+
+    # Extract retry delay
+    match = re.search(r'retry.*?(\d+\.?\d*)\s*s', error_str, re.IGNORECASE)
+    if match:
+        print(f"  ║  ⏱️  Retry in: {float(match.group(1)):.0f} seconds                          ║")
+
+    # Extract quota info
+    if 'input_token' in error_str.lower():
+        print(f"  ║  📊 Cause: Input token quota exceeded                     ║")
+        print(f"  ║  💡 Fix: Use --model gemini-2.5-flash (4x higher limit)   ║")
+    elif 'request' in error_str.lower() and 'quota' in error_str.lower():
+        print(f"  ║  📊 Cause: Request rate limit exceeded                    ║")
+        print(f"  ║  💡 Fix: Wait 60s or use gemini-2.5-flash                 ║")
+    else:
+        print(f"  ║  📊 Cause: Rate limit (see error details)                 ║")
+        print(f"  ║  💡 Fix: Wait or use --model gemini-2.5-flash             ║")
+
+    print(f"  ║                                                           ║")
+    print(f"  ║  Run: python gemini_status.py --diagnose                  ║")
+    print(f"  ╚═══════════════════════════════════════════════════════════╝\n")
+
+
 def retry_with_backoff(func, max_retries=5, base_delay=1.0):
     """Execute function with exponential backoff on rate limit errors."""
+    last_error = None
     for attempt in range(max_retries):
         try:
             return func()
         except Exception as e:
+            last_error = e
             error_str = str(e).lower()
             is_rate_limit = any(x in error_str for x in ['429', 'rate limit', 'quota', 'resource exhausted'])
 
             if not is_rate_limit or attempt == max_retries - 1:
+                # Auto-diagnose on final failure
+                if is_rate_limit:
+                    auto_diagnose_error(str(e))
                 raise
 
             delay = base_delay * (2 ** attempt) + random.uniform(0, 1)

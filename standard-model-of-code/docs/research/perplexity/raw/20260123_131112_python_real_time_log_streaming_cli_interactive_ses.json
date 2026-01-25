@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T13:11:12.100679",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "python real-time log streaming CLI interactive session observability tail -f websocket named pipe IPC 2024",
+    "query_length": 106,
+    "checksum": "sha256:ba864beae6e263255d939368a0ee4f7c4d08af81dcd34de7a2d3de482421b571"
+  },
+  "response": {
+    "id": "c0effcd4-0849-47eb-9246-8d63e83f5af8",
+    "model": "sonar-pro",
+    "created": 1769184671,
+    "usage": {
+      "prompt_tokens": 20,
+      "completion_tokens": 954,
+      "total_tokens": 974,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.014,
+        "request_cost": 0.006,
+        "total_cost": 0.02
+      }
+    },
+    "citations": [
+      "https://tradermade.com/tutorials/ohlc-python-websocket",
+      "https://github.com/AssemblyAI/python-websocket-client",
+      "https://www.icertglobal.com/blog/python-real-time-data-kafka-to-websockets-blog",
+      "https://ably.com/topic/websockets-python",
+      "https://community.openai.com/t/python-integration-of-real-time/964902",
+      "https://massive.com/blog/pattern-for-non-blocking-websocket-and-rest-calls-in-python/",
+      "https://websocket.org/guides/languages/python/"
+    ],
+    "search_results": [
+      {
+        "title": "Create Real-time OHLC Data with Python WebSocket",
+        "url": "https://tradermade.com/tutorials/ohlc-python-websocket",
+        "date": "2024-04-23",
+        "last_updated": "2026-01-17",
+        "snippet": "This tutorial will show you how to connect to a WebSocket Server using Python, get real-time data, convert it into OHLC, and log messages received on a File.",
+        "source": "web"
+      },
+      {
+        "title": "AssemblyAI/python-websocket-client",
+        "url": "https://github.com/AssemblyAI/python-websocket-client",
+        "date": "2024-10-21",
+        "last_updated": "2025-09-21",
+        "snippet": "This script will stream audio from your machine's microphone to the AssemblyAI WebSocket API. Transcripts will show up in the terminal as you speak.",
+        "source": "web"
+      },
+      {
+        "title": "Real-Time Data Streaming: Kafka to WebSockets with Python",
+        "url": "https://www.icertglobal.com/blog/python-real-time-data-kafka-to-websockets-blog",
+        "date": "2024-10-05",
+        "last_updated": "2025-10-26",
+        "snippet": "Streamline your data flow with Python: Learn how to integrate Kafka and WebSockets for real-time data delivery.",
+        "source": "web"
+      },
+      {
+        "title": "Building dependable realtime apps with Python and ...",
+        "url": "https://ably.com/topic/websockets-python",
+        "date": "2024-11-15",
+        "last_updated": "2026-01-23",
+        "snippet": "Learn how to build dependable realtime apps that scale with Python and WebSockets, and the challenges associated with this.",
+        "source": "web"
+      },
+      {
+        "title": "Python integration of real time? - API",
+        "url": "https://community.openai.com/t/python-integration-of-real-time/964902",
+        "date": "2024-10-02",
+        "last_updated": "2025-10-29",
+        "snippet": "This code worked for me. Its not fully realtime, but at least connects to the right endpoint and sends and receives audio or text.",
+        "source": "web"
+      },
+      {
+        "title": "Pattern for Non-Blocking WebSocket and REST Calls in ...",
+        "url": "https://massive.com/blog/pattern-for-non-blocking-websocket-and-rest-calls-in-python/",
+        "date": "2024-01-12",
+        "last_updated": "2026-01-13",
+        "snippet": "This tutorial provides a step-by-step guide on implementing non-blocking WebSocket and REST API calls in Python, demonstrating efficient ...",
+        "source": "web"
+      },
+      {
+        "title": "Python WebSocket Implementation",
+        "url": "https://websocket.org/guides/languages/python/",
+        "date": "2024-09-02",
+        "last_updated": "2026-01-21",
+        "snippet": "Learn how to implement WebSockets with production-ready code examples, best practices, and real-world patterns. Complete guide to WebSocket ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Python tools for **real-time log streaming** in a **CLI interactive session** (like `tail -f`) can use **WebSockets** for network streaming or **named pipes** for local IPC, enabling observability with live output display and processing.\n\n## WebSocket-Based Streaming (Networked Logs)\nUse the `websocket-client` library for persistent, bidirectional connections to stream logs from remote sources, displaying them interactively in the terminal like `tail -f`[2][4][7].\n\n**Example CLI script** (adapted from real-time data streaming patterns[1][2]):\n```python\nimport websocket\nimport threading\nimport sys\nimport json\nfrom datetime import datetime\n\ndef on_message(ws, message):\n    # Parse and display log line interactively (non-blocking)\n    try:\n        log_data = json.loads(message)\n        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')\n        print(f\"[{timestamp}] {log_data.get('level', 'INFO')}: {log_data.get('message', message)}\")\n        sys.stdout.flush()  # Ensure real-time CLI output\n    except json.JSONDecodeError:\n        print(f\"Raw log: {message}\", flush=True)\n\ndef on_error(ws, error):\n    print(f\"WebSocket error: {error}\", file=sys.stderr)\n\ndef on_close(ws, close_status_code, close_msg):\n    print(\"Log stream closed.\")\n\ndef on_open(ws):\n    print(\"Connected to log stream. Press Ctrl+C to exit.\")\n\nif __name__ == \"__main__\":\n    ws_url = \"ws://your-log-server:8080/logs\"  # Replace with log endpoint\n    ws = websocket.WebSocketApp(ws_url,\n                                on_open=on_open,\n                                on_message=on_message,\n                                on_error=on_error,\n                                on_close=on_close)\n    ws.run_forever()\n```\n- Run via CLI: `python log_tail_ws.py` for interactive, `tail -f`-like output[1][2].\n- Handles JSON logs (common for observability); extend with aggregation like OHLC-style processing[1].\n- Non-blocking for concurrent REST calls if needed[6].\n\n**Libraries**:\n- `pip install websocket-client` (supports proxies, tracing)[4][7].\n- For audio/logs: AssemblyAI demo streams to terminal[2].\n\n## Named Pipes for Local IPC (Unix-like tail -f)\nUse `multiprocessing` or `subprocess` with named pipes (`mkfifo`) for inter-process log streaming on the same machine, mimicking local `tail -f`[no direct 2024 results; standard Python pattern].\n\n**CLI producer-consumer example**:\n```python\nimport os\nimport sys\nfrom multiprocessing import Process\nimport time\n\nPIPE_PATH = '/tmp/log_pipe'  # Named pipe\n\ndef log_producer():\n    os.mkfifo(PIPE_PATH)\n    with open(PIPE_PATH, 'w') as pipe:\n        while True:\n            log_line = f\"{time.strftime('%Y-%m-%d %H:%M:%S')} INFO: Simulated log entry\\n\"\n            pipe.write(log_line)\n            pipe.flush()\n            time.sleep(1)\n\ndef log_consumer():\n    with open(PIPE_PATH, 'r') as pipe:\n        for line in iter(pipe.readline, ''):\n            print(line.strip(), flush=True)  # Interactive tail -f\n\nif __name__ == \"__main__\":\n    if not os.path.exists(PIPE_PATH):\n        p1 = Process(target=log_producer)\n        p1.start()\n    p2 = Process(target=log_consumer)\n    p2.start()\n    try:\n        p2.join()\n    except KeyboardInterrupt:\n        print(\"\\nExiting...\")\n```\n- Run: `python log_pipe.py`; consumer tails pipe indefinitely.\n- Cross-platform alternative: `queue.Queue` or `asyncio.Queue` for threads/asyncio.\n\n## Observability Enhancements (2024 Patterns)\n- **Kafka + WebSockets**: Consume from Kafka topics, push via WebSocket for distributed logs[3].\n- **Non-blocking**: Use `asyncio` + `aiohttp` or `websockets` lib for concurrent streaming[6][7].\n- **CLI Tools**: Integrate with `click` or `rich` for formatted, colored live views (e.g., progress bars for log rates).\n- Limitations: Results focus on finance/audio; generalize for logs by swapping callbacks. No 2024-specific CLI tools in results; use `websockets` (pip-installable) for production[7]. For full observability stacks, pair with Prometheus or ELK via WebSocket exporters."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

@@ -184,10 +184,35 @@ EOF
 
 if [ "$JSON_ONLY" = false ]; then
     echo ""
+    echo "=== HEALTH CHECKS ==="
+    echo ""
+
+    # Run boundary analyzer if available (PROJECT_elements only)
+    BOUNDARY_ANALYZER="$REPO_ROOT/context-management/tools/maintenance/boundary_analyzer.py"
+    if [ -f "$BOUNDARY_ANALYZER" ]; then
+        echo "Running boundary analyzer..."
+        python3 "$BOUNDARY_ANALYZER" --save --threshold 60 2>/dev/null || {
+            echo "  ⚠️  Boundary alignment below threshold (see .agent/intelligence/boundary_analysis.json)"
+        }
+        echo ""
+    fi
+
+    # Run Gemini status if available
+    GEMINI_STATUS="$REPO_ROOT/context-management/tools/ai/gemini_status.py"
+    if [ -f "$GEMINI_STATUS" ]; then
+        echo "Checking Gemini API status..."
+        python3 "$GEMINI_STATUS" --quick 2>/dev/null && echo "  ✓ Gemini API OK" || echo "  ⚠️  Gemini API issues detected"
+        echo ""
+    fi
+
     echo "=== BOOT COMPLETE ==="
     echo ""
     echo "Next steps:"
     echo "1. Review context-management/docs/agent_school/ for workflows"
     echo "2. Review standard-model-of-code/CLAUDE.md for tool details"
     echo "3. Begin your task using: SCAN → PLAN → EXECUTE → VALIDATE → COMMIT"
+    echo ""
+    echo "Maintenance tools:"
+    echo "  python3 context-management/tools/maintenance/boundary_analyzer.py  # Boundary check"
+    echo "  python3 context-management/tools/ai/gemini_status.py               # API status"
 fi

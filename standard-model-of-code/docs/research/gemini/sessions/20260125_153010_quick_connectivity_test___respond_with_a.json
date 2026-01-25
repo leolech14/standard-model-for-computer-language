@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-25 15:30:03",
+  "session_end": "2026-01-25 15:30:10",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 6324,
+  "total_tokens_out": 1,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769365803.479419,
+      "timestamp_str": "2026-01-25 15:30:03",
+      "role": "user",
+      "content": "Quick connectivity test - respond with a single word: OK"
+    },
+    {
+      "timestamp": 1769365810.95171,
+      "timestamp_str": "2026-01-25 15:30:10",
+      "role": "assistant",
+      "content": "OK"
+    }
+  ]
+}

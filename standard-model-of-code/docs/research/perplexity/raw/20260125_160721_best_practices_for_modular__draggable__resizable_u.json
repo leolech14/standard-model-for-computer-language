@@ -1,0 +1,105 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T16:07:21.685092",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Best practices for modular, draggable, resizable UI panel systems in vanilla JavaScript (no React/Vue). Looking for: 1) Lightweight libraries for dockable panels (like golden-layout but simpler), 2) CSS Grid vs Flexbox for dynamic panel layouts, 3) How to implement drag-to-rearrange panels with localStorage persistence. Context: Building a data visualization control panel with 82 controls grouped into ~10 semantic categories. Need users to customize layout (resize, reorder, hide, combine panels).",
+    "query_length": 501,
+    "checksum": "sha256:72ef336b720a2f5b048652484684b310ebe5e2588bd1e36656a4815523761b26"
+  },
+  "response": {
+    "id": "be1a4a3d-40d4-4820-9fe5-60133b100bdb",
+    "model": "sonar-pro",
+    "created": 1769368041,
+    "usage": {
+      "prompt_tokens": 102,
+      "completion_tokens": 1079,
+      "total_tokens": 1181,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.016,
+        "request_cost": 0.006,
+        "total_cost": 0.022
+      }
+    },
+    "citations": [
+      "https://dockview.dev",
+      "https://www.syncfusion.com/javascript-ui-controls",
+      "https://discourse.threejs.org/t/three-js-editor-any-suggestion-js-libraries-for-docking-movable-widgets/45825",
+      "https://jordnkr.github.io/collapsible/",
+      "https://github.com/automat/controlkit.js",
+      "https://news.ycombinator.com/item?id=36343544",
+      "https://www.jointjs.com/jointjs-plus"
+    ],
+    "search_results": [
+      {
+        "title": "Dockview: A zero dependency layout manager supporting ReactJS ...",
+        "url": "https://dockview.dev",
+        "last_updated": "2026-01-22",
+        "snippet": "Choose from a simple splitview, gridview, collapsable panes or a full docking solution. Combine multiple for complex layouts.",
+        "source": "web"
+      },
+      {
+        "title": "Modern HTML5 and JavaScript UI Controls Library - Syncfusion",
+        "url": "https://www.syncfusion.com/javascript-ui-controls",
+        "date": "2026-01-24",
+        "last_updated": "2026-01-24",
+        "snippet": "Syncfusion JavaScript UI controls offer more than 145+ cross-platform, responsive, and lightweight JS/HTML5 UI controls for building modern web ...",
+        "source": "web"
+      },
+      {
+        "title": "Three.js Editor: Any suggestion (js libraries) for docking movable ...",
+        "url": "https://discourse.threejs.org/t/three-js-editor-any-suggestion-js-libraries-for-docking-movable-widgets/45825",
+        "date": "2022-12-15",
+        "last_updated": "2025-03-31",
+        "snippet": "I want to tide up the widgets in the 3D editor and also be able to move them in dockable positions. I have found some open source libraries that might do the ...",
+        "source": "web"
+      },
+      {
+        "title": "Collapsible.js - a jQuery plugin for collapsible menus",
+        "url": "https://jordnkr.github.io/collapsible/",
+        "last_updated": "2025-09-12",
+        "snippet": "Collapsible.js is a lightweight jQuery plugin that was created with the intent to expand on the functionality of the accordion effect found in jQuery UI.",
+        "source": "web"
+      },
+      {
+        "title": "automat/controlkit.js: A lightweight controller and gui library - GitHub",
+        "url": "https://github.com/automat/controlkit.js",
+        "snippet": "ControlKit is a lightweight controller and gui library for browser environments. Object properties can be modified with basic control components.",
+        "source": "web"
+      },
+      {
+        "title": "Progressively enhance HTML with lightweight JavaScript libraries",
+        "url": "https://news.ycombinator.com/item?id=36343544",
+        "date": "2023-06-15",
+        "last_updated": "2024-11-22",
+        "snippet": "This is a brilliant list, I'm a particular fan of HTMX and Alpine.js. The move back towards small dependancy free JS libs, in combination with modern JS ES ...",
+        "source": "web"
+      },
+      {
+        "title": "JointJS+, extended diagramming library for exceptional UIs",
+        "url": "https://www.jointjs.com/jointjs-plus",
+        "date": "2000-01-01",
+        "last_updated": "2026-01-18",
+        "snippet": "Our library is based on a strong HTML5 and SVG foundation that allows it to run seamlessly in all major JavaScript frameworks and modern browsers.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "### 1. Lightweight Libraries for Dockable Panels (Vanilla JS, Simpler than Golden Layout)\n\n**Dockview** is the top recommendation: a zero-dependency layout manager with vanilla TypeScript support (no React required), offering dockable panels, splitviews, gridviews, collapsible panes, drag-and-drop tab positioning, floating groups, and serialization for persistence—ideal for your 10-panel control system with 82 controls.[1] It supports programmatic panel addition/removal, custom headers, and CSS customization without frameworks.\n\n**jsPanel** is another strong vanilla JS option: supports docking, movable/resizable floating panels, and modal dialogs, suitable for tidy widget arrangements in editors like your data viz controls.[3]\n\nAvoid heavier libraries like Syncfusion (145+ components, modular but not zero-dependency)[2] or jQuery-based ones like Collapsible.js[4] to stay lightweight and framework-free. ControlKit.js offers simple property controls but lacks full docking.[5]\n\n### 2. CSS Grid vs Flexbox for Dynamic Panel Layouts\n\n**Use CSS Grid** for your resizable/rearrangeable panels: it excels at 2D layouts with dynamic track sizing (`grid-template-columns: 1fr 2fr` or `repeat(auto-fit, minmax(300px, 1fr))`), perfect for splitting/combining ~10 panels with arbitrary resizing via `resize: both` on panel elements and `display: grid` on the container.[1] Grid handles complex, non-linear arrangements (e.g., nested docks) better than Flexbox.\n\nFlexbox is simpler for 1D flows (e.g., horizontal toolbars) but struggles with true 2D resizing/reordering—use it only for panel headers or linear stacks within Grid cells. Combine them: Grid for overall layout, Flexbox inside panels for control alignment.\n\nExample starter CSS for dynamic panels:\n```css\n.panel-container {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  grid-gap: 4px;\n  height: 100vh;\n}\n.panel {\n  resize: both;\n  overflow: auto;\n  border: 1px solid #ccc;\n  display: flex;\n  flex-direction: column;\n}\n```\n\n### 3. Implementing Drag-to-Rearrange Panels with localStorage Persistence\n\nUse the **HTML5 Drag and Drop API** (native vanilla JS) for lightweight dragging—no libraries needed beyond layout managers like Dockview (which has built-in DND).[1] Track panel order/positions in a data structure (array of panel configs: `{id, x, y, width, height, visible}`), update on drag end, and persist via `JSON.stringify/localStorage`.\n\n**Core Implementation Steps:**\n- Assign `draggable=\"true\"` to panels; listen for `dragstart`, `dragover`, `dragenter`, `dragleave`, `drop`, `dragend`.\n- On `drop`, reorder DOM via `insertBefore` or update Grid `order`/`grid-area` properties.\n- For resize: Use `ResizeObserver` (native) to track `contentRect` changes and save dimensions.\n- Hide/combine: Toggle `display: none` or merge via `appendChild`; persist visibility state.\n- Save on changes: `localStorage.setItem('panelLayout', JSON.stringify(layoutState));`.\n- Load on init: Parse JSON, recreate DOM/layout with Dockview API or manual Grid assignment.\n\n**Vanilla JS Drag Example** (integrate with your panels):\n```javascript\nconst container = document.querySelector('.panel-container');\nlet draggedElement = null;\n\ncontainer.addEventListener('dragstart', (e) => {\n  draggedElement = e.target.closest('.panel');\n  e.dataTransfer.effectAllowed = 'move';\n});\n\ncontainer.addEventListener('dragover', (e) => {\n  e.preventDefault(); // Allow drop\n  e.dataTransfer.dropEffect = 'move';\n});\n\ncontainer.addEventListener('drop', (e) => {\n  e.preventDefault();\n  if (draggedElement && e.target.closest('.panel') !== draggedElement) {\n    container.insertBefore(draggedElement, e.target.closest('.panel'));\n    saveLayout(); // Persist order\n  }\n  draggedElement = null;\n});\n\nfunction saveLayout() {\n  const layout = Array.from(container.children).map((panel, i) => ({\n    id: panel.id,\n    order: i,\n    // Add rect from getBoundingClientRect() or ResizeObserver\n  }));\n  localStorage.setItem('panelLayout', JSON.stringify(layout));\n}\n\nfunction loadLayout() {\n  const saved = JSON.parse(localStorage.getItem('panelLayout') || '[]');\n  // Reorder/resize panels based on saved data\n}\n\n// Init ResizeObserver for all panels\nconst resizeObserver = new ResizeObserver((entries) => {\n  entries.forEach(entry => saveLayout());\n});\ndocument.querySelectorAll('.panel').forEach(p => resizeObserver.observe(p));\n```\n\nFor your 82 controls: Group into panels semantically, use Dockview's serialization API for complex docks (e.g., `dockviewApi.saveLayoutAsJson()`), or stick to custom Grid + native APIs for minimalism. Test on ultrawide/non-standard screens with `minmax` and `overflow: auto`.[1][3]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

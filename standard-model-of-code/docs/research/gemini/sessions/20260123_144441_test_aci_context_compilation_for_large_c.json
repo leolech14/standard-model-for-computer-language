@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 14:44:39",
+  "session_end": "2026-01-23 14:44:41",
+  "model": "gemini-1.5-pro-002",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769190279.856541,
+      "timestamp_str": "2026-01-23 14:44:39",
+      "role": "user",
+      "content": "Test ACI context compilation for large context window (Pro 002)"
+    }
+  ]
+}

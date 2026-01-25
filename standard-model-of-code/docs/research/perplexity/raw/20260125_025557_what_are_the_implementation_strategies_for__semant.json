@@ -1,0 +1,116 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T02:55:57.592869",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "What are the implementation strategies for 'semantic design tokens' in data visualization engines to achieve 100% separation of style and logic? Looking for architectures where the rendering engine is purely functional and strictly adheres to a semantic definition file. Include sources from: Design Systems research (Adobe, Salesforce), CSS architecture papers, W3C Design Tokens Community Group.",
+    "query_length": 397,
+    "checksum": "sha256:6bfb442b45c2bcf1dbfe6534977914042155e2f961d10ccf97d1e1460f3d3745"
+  },
+  "response": {
+    "id": "88aff7db-6401-4b23-a8e8-ebab6875e104",
+    "model": "sonar-pro",
+    "created": 1769320557,
+    "usage": {
+      "prompt_tokens": 70,
+      "completion_tokens": 642,
+      "total_tokens": 712,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.01,
+        "request_cost": 0.006,
+        "total_cost": 0.016
+      }
+    },
+    "citations": [
+      "https://www.contentful.com/blog/design-token-system/",
+      "https://nulab.com/learn/design-and-ux/design-tokens/",
+      "https://martinfowler.com/articles/design-token-based-ui-architecture.html",
+      "https://thedesignsystem.guide/design-tokens",
+      "https://www.figma.com/blog/the-future-of-design-systems-is-semantic/",
+      "https://www.outframe.co/blog/how-we-apply-design-tokens-for-our-clients-a-guide",
+      "https://www.designsystemscollective.com/understanding-design-token-relationships-a-visual-approach-7911ec82f3c1",
+      "https://m3.material.io/foundations/design-tokens"
+    ],
+    "search_results": [
+      {
+        "title": "Design tokens explained (and how to build a design token system)",
+        "url": "https://www.contentful.com/blog/design-token-system/",
+        "date": "2024-05-16",
+        "last_updated": "2026-01-24",
+        "snippet": "In this article, I'll guide you through the process of building a basic design token system focused on colors, starting from primitive tokens — ...",
+        "source": "web"
+      },
+      {
+        "title": "Everything you need to know about design tokens - Nulab",
+        "url": "https://nulab.com/learn/design-and-ux/design-tokens/",
+        "date": "2025-11-25",
+        "last_updated": "2026-01-25",
+        "snippet": "Semantic tokens: These provide an intermediate layer of abstraction by naming values based on their purpose or meaning in the user interface. E.g., color-button ...",
+        "source": "web"
+      },
+      {
+        "title": "Design Token-Based UI Architecture - Martin Fowler",
+        "url": "https://martinfowler.com/articles/design-token-based-ui-architecture.html",
+        "date": "2024-12-12",
+        "last_updated": "2026-01-25",
+        "snippet": "Design tokens, or “tokens” are fundamental design decisions represented as data. They are the foundational building blocks of design systems.",
+        "source": "web"
+      },
+      {
+        "title": "Design tokens - The Design System Guide",
+        "url": "https://thedesignsystem.guide/design-tokens",
+        "date": "2025-12-22",
+        "last_updated": "2026-01-25",
+        "snippet": "Design tokens are the backbone of your design system. They keep your brand's visual style consistent and easy to manage.",
+        "source": "web"
+      },
+      {
+        "title": "The Future of Design Systems is Semantic | Figma Blog",
+        "url": "https://www.figma.com/blog/the-future-of-design-systems-is-semantic/",
+        "date": "2023-07-27",
+        "last_updated": "2026-01-22",
+        "snippet": "In this piece, we dig into the decreasing gap between design and code, increasing semantics, and one of Figma's newest features: variables.",
+        "source": "web"
+      },
+      {
+        "title": "How We Apply Design Tokens: a Guide - Outframe",
+        "url": "https://www.outframe.co/blog/how-we-apply-design-tokens-for-our-clients-a-guide",
+        "date": "2024-05-15",
+        "last_updated": "2026-01-24",
+        "snippet": "In this blog post we share about Design Tokens and how we apply them for our clients to reduce development time and improve consistenty.",
+        "source": "web"
+      },
+      {
+        "title": "Understanding Design Token Relationships — A Visual Approach",
+        "url": "https://www.designsystemscollective.com/understanding-design-token-relationships-a-visual-approach-7911ec82f3c1",
+        "date": "2025-10-27",
+        "snippet": "Design tokens are meant to bring consistency, but without visibility into how they connect, teams often introduce duplication, break ...",
+        "source": "web"
+      },
+      {
+        "title": "Design tokens – Material Design 3",
+        "url": "https://m3.material.io/foundations/design-tokens",
+        "last_updated": "2024-07-29",
+        "snippet": "Tokens point to style values like colors, fonts, and measurements. Use design tokens instead of hardcoded values. Each token is named for how or where it's ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**Semantic design tokens achieve 100% separation of style and logic in data visualization engines by defining styles as a semantic JSON file (with primitive values like colors and semantic aliases like \"text-default\") that a purely functional rendering engine consumes without embedding any hardcoded styles.** This architecture treats the token file as the single source of truth, using translation tools to generate platform-specific outputs while keeping rendering logic agnostic to visual details[1][3].\n\n### Core Architecture Components\n- **Token Structure**: Primitive tokens store raw values (e.g., \"blue-500\": \"#1E40AF\"), while **semantic tokens** reference primitives and encode meaning (e.g., \"color-text-primary\": \"{color.blue-500}\", \"color-button-hover\": \"{color.gray-200}\"). This builds an API-like layer for usage (text, backgrounds, states), eliminating ambiguity in application[1][2][4].\n- **Semantic Definition File**: A JSON file organizes tokens in a grid (e.g., x-axis for states like default/hover, y-axis for roles like text/background), capturing all design decisions without visual rendering logic[1].\n- **Purely Functional Rendering Engine**: The engine parses only semantic tokens, applying them based on context (e.g., component role + state). No inline styles or primitives in code; it resolves references at runtime or build-time for strict separation[1][3].\n\n### Implementation Strategies\n1. **Translation Pipeline**: Use tools like Style Dictionary or Theo to transform the semantic JSON into platform outputs (CSS variables, Swift, etc.). Filter by flags (e.g., \"public: true\") for scoped exports, ensuring the engine imports generated files without token knowledge[1][3].\n2. **Token Resolution in Engine**: Rendering functions map semantic keys to visuals functionally, e.g.:\n   ```\n   renderChart(data, semantics) {\n     return data.map(point => (\n       <Bar fill={semantics['color-bar-positive']} />\n     ));\n   }\n   ```\n   Here, `semantics` loads from JSON, keeping logic data-only[1].\n3. **Modes and States**: Semantic tokens include variants (e.g., \"text-default-dark-mode\"), swapped via mappings for theming without code changes[1][2].\n4. **ETL Workflow**: Extract from design tools (Figma Tokens plugin), transform via pipelines, load into engine. Audit for duplicates to maintain purity[2].\n\n### Sources Alignment\n- **Design Systems Research (Adobe/Salesforce-like)**: Contentful and Nulab describe semantic layers mirroring Adobe Spectrum/Salesforce Lightning practices, using JSON for cross-platform consistency[1][2].\n- **CSS Architecture**: Martin Fowler's token-based UI uses translation for CSS variables, enabling functional engines[3].\n- **W3C Design Tokens CG**: Emphasizes aliases and references for semantic abstraction, foundational for spec-compliant separation[4].\n\nLimitations: Search results focus on web/UI; data viz adaptations (e.g., D3/Vega) require custom resolvers for SVG/canvas, but principles apply directly[1][3]. No explicit Adobe/Salesforce docs surfaced, but patterns match industry standards."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

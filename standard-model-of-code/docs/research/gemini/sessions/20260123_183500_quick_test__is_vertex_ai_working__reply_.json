@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 18:34:59",
+  "session_end": "2026-01-23 18:35:00",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769204099.149318,
+      "timestamp_str": "2026-01-23 18:34:59",
+      "role": "user",
+      "content": "Quick test: Is Vertex AI working? Reply with just 'YES' and the model name you are."
+    }
+  ]
+}

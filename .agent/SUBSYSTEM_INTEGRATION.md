@@ -76,6 +76,8 @@
 | S8 | **Commit Hygiene** | Guard | `.pre-commit-config.yaml`, `commitlint.config.js` | Enforce Conventional Commits |
 | S9 | **Laboratory** | Bridge | `standard-model-of-code/tools/research/laboratory.py` | Scientist facade (Particle-side API) |
 | S9b | **Laboratory Bridge** | Client | `context-management/tools/ai/laboratory_bridge.py` | Agent client (Wave-side caller) |
+| S10 | **Cloud Automation** | Engine | `.agent/tools/cloud/` | Auto-boost opportunities via GCS + Cloud Function |
+| S11 | **Batch Grade** | Experiment | `standard-model-of-code/tools/batch_grade/` | Mass Collider validation on 999+ repos (RunPod) |
 
 ---
 
@@ -118,6 +120,8 @@
 | **Git commit ← Commit Hygiene** | pre-commit + commit-msg hooks | Block invalid commits | **ACTIVE** |
 | **analyze.py → Laboratory** | laboratory_bridge.py | Python import | **ACTIVE** |
 | **Laboratory → Scientist Tools** | subprocess with templates | CLI execution | **ACTIVE** |
+| **Git commit → Cloud Automation** | post-commit → sync_registry.py | Shell script | **ACTIVE** |
+| **Cloud Scheduler → auto_boost** | Hourly HTTP trigger | Cloud Function | **PENDING DEPLOY** |
 
 ### Proposed (from Gemini analysis)
 
@@ -204,6 +208,29 @@ For each subsystem, these are the key files to understand:
 - Convenience: `measure_coverage()`, `evaluate_hypothesis()`
 - Output: Experiment artifacts in temp directories
 
+### Cloud Automation (S10)
+- Directory: `.agent/tools/cloud/`
+- Tools:
+  - `sync_registry.py` - Sync local registry ↔ GCS
+  - `auto_boost_function.py` - Cloud Function for auto-promotion
+  - `deploy.sh` - Deploy to GCP
+- Trigger: Post-commit hook + Cloud Scheduler (hourly)
+- Bucket: `gs://elements-archive-2026/.agent/registry/`
+- Health check: `.agent/tools/cloud/check_status.sh`
+
+### Batch Grade (S11)
+- Directory: `standard-model-of-code/tools/batch_grade/`
+- Scripts:
+  - `runpod_agent.py` - Full automation: create pod, run job, download results
+  - `run_batch_local.py` - Parallel grading (runs on pod or locally)
+  - `repos_999.json` - List of 999 GitHub repos to grade
+- Outputs:
+  - `grades_DEGRADED_summary_only/` - DEGRADED: 590 grade summaries only
+  - `full_scans/` - EMPTY: Target for proper `collider full` run
+- **STATUS: FAIL-001** - Ran with `grade` not `full`, missing unified_analysis.json
+- Degradation marker: `grades_DEGRADED_summary_only/DEGRADED.md`
+- Concern tracker: `standard-model-of-code/docs/OPEN_CONCERNS.md` (FAIL-001)
+
 ---
 
 ## Integration Checklist
@@ -222,6 +249,8 @@ When adding a new subsystem:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.4.0 | 2026-01-25 | Added Batch Grade (S11) with FAIL-001 status |
+| 1.3.0 | 2026-01-25 | Added Cloud Automation (S10), wired post-commit hook, health check |
 | 1.2.0 | 2026-01-24 | Added Laboratory Bridge (S9) - Wave↔Particle integration |
 | 1.1.0 | 2026-01-24 | Added Commit Hygiene (S8) - pre-commit + commitlint |
 | 1.0.0 | 2026-01-23 | Initial integration map (validated by Gemini analysis) |

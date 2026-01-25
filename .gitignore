@@ -123,3 +123,8 @@ standard-model-of-code/collider
 # =============================================================================
 assets/
 !standard-model-of-code/src/core/viz/assets/
+
+# =============================================================================
+# AGENT SESSION STATE (ephemeral, not committed)
+# =============================================================================
+.agent/state/session.yaml

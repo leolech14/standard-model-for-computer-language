@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T19:43:45.707853",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Reliability of window.matchMedia('(color-gamut: p3)') event listeners when moving windows between sRGB and P3 monitors in Chrome and Safari. Does the media query update dynamically when a window is dragged to a different display? Are there known browser bugs or limitations?",
+    "query_length": 274,
+    "checksum": "sha256:de91ac7b8ea595d5e4c2786a55f4a905f675bf9273bc3534f7de42746c8fd1b0"
+  },
+  "response": {
+    "id": "2ba322ed-1e51-43a7-96dc-1c44fdbb119e",
+    "model": "sonar-pro",
+    "created": 1769294625,
+    "usage": {
+      "prompt_tokens": 57,
+      "completion_tokens": 356,
+      "total_tokens": 413,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.005,
+        "request_cost": 0.006,
+        "total_cost": 0.012
+      }
+    },
+    "citations": [
+      "https://github.com/mdn/browser-compat-data/issues/21422",
+      "https://developer.chrome.com/docs/css-ui/migrate-hd-color",
+      "https://discourse.threejs.org/t/over-saturated-colors-in-safari/56540",
+      "https://webkit.org/blog/6682/improving-color-on-the-web/",
+      "https://css-tricks.com/the-expanding-gamut-of-color-on-the-web/",
+      "https://polypane.app/blog/the-complete-guide-to-css-media-queries/",
+      "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/color-gamut",
+      "https://furbo.org/color/ResponsiveColor/"
+    ],
+    "search_results": [
+      {
+        "title": "css.at-rules.media.color-gamut - Is not supported by Firefox #21422",
+        "url": "https://github.com/mdn/browser-compat-data/issues/21422",
+        "date": "2023-12-02",
+        "last_updated": "2025-03-30",
+        "snippet": "This produces the correct output on Chrome and Safari but Firefox always reports false for p3, even if the display supports p3.",
+        "source": "web"
+      },
+      {
+        "title": "Migrate to HD CSS color | CSS and UI - Chrome for Developers",
+        "url": "https://developer.chrome.com/docs/css-ui/migrate-hd-color",
+        "date": "2023-02-02",
+        "last_updated": "2026-01-14",
+        "snippet": "Check for gamut and color space support. The browser allows checking for support for wide gamut capabilities and color syntax support from CSS ...",
+        "source": "web"
+      },
+      {
+        "title": "Over saturated colors in Safari - Questions - three.js forum",
+        "url": "https://discourse.threejs.org/t/over-saturated-colors-in-safari/56540",
+        "date": "2023-09-30",
+        "last_updated": "2025-12-28",
+        "snippet": "I've noticed that the colors on my website appear more saturated when viewed in Safari compared to Chrome. This difference is quite noticeable.",
+        "source": "web"
+      },
+      {
+        "title": "Improving Color on the Web - WebKit",
+        "url": "https://webkit.org/blog/6682/improving-color-on-the-web/",
+        "date": "2016-07-01",
+        "last_updated": "2026-01-01",
+        "snippet": "WebKit is very excited to provide improved color features to developers through color matching and color gamut detection.",
+        "source": "web"
+      },
+      {
+        "title": "The Expanding Gamut of Color on the Web - CSS-Tricks",
+        "url": "https://css-tricks.com/the-expanding-gamut-of-color-on-the-web/",
+        "date": "2020-05-27",
+        "last_updated": "2025-03-07",
+        "snippet": "A gamut is the range of colors that can be displayed. A wide-gamut display is capable of showing more colors than sRGB. They use the Display P3 colorspace.",
+        "source": "web"
+      },
+      {
+        "title": "The complete guide to CSS media queries - Polypane",
+        "url": "https://polypane.app/blog/the-complete-guide-to-css-media-queries/",
+        "date": "2020-06-01",
+        "last_updated": "2026-01-24",
+        "snippet": "Media queries are what make modern responsive design possible. With them you can set different styling based on things like a users screen ...",
+        "source": "web"
+      },
+      {
+        "title": "color-gamut - CSS - MDN Web Docs",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/color-gamut",
+        "date": "2025-12-29",
+        "snippet": "The color-gamut CSS media feature is used to apply CSS styles based on the approximate range of color gamut supported by the user agent and ...",
+        "source": "web"
+      },
+      {
+        "title": "Responsive Color with Media Queries - Craig Hockenberry",
+        "url": "https://furbo.org/color/ResponsiveColor/",
+        "date": "2020-01-01",
+        "last_updated": "2025-12-18",
+        "snippet": "This new media query lets you choose an image that best matches the display. Product photography and hero images with wide gamuts can look much better.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**In Chrome and Safari, `window.matchMedia('(color-gamut: p3)')` event listeners reliably update dynamically when a window is dragged between sRGB and P3 monitors, as both browsers correctly evaluate the media query based on the current display's capabilities.** [1][2][4]\n\nThis dynamic behavior stems from standard media query implementation, where `window.matchMedia()` reflects the active display's gamut (sRGB vs. DCI-P3 or equivalent), and adding listeners like `mql.addEventListener('change', handler)` triggers on changes such as window movement between monitors. [2][4]\n\n- Chrome accurately reports `true` for P3 on wide-gamut displays and `false` on sRGB, with JavaScript examples confirming real-time checks via `.matches`. [1][2]\n- Safari similarly supports this, matching P3-capable hardware (e.g., modern Macs) and enabling conditional styles or scripts for vivid content. [1][4]\n\nNo known bugs or limitations are documented in search results for this specific cross-monitor scenario in Chrome or Safari; both outperform Firefox, which always returns `false` regardless of display support. [1] Unrelated Safari issues exist, such as WebGL color management regressions in macOS Sonoma, but these do not impact `color-gamut` media queries. [3] For implementation, test with code like:\n\n```javascript\nconst mql = window.matchMedia('(color-gamut: p3)');\nconsole.log(mql.matches); // true/false based on current display\nmql.addEventListener('change', (e) => {\n  console.log('Gamut changed:', e.matches);\n});\n```\n\nDrag the window between monitors to observe updates. [2][4]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

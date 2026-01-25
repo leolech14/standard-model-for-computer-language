@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T16:37:53.796185",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Validate this terminology model for a software project analysis tool:\n\nPROJECTOME = all project contents (Codome + Contextome)\nCODOME = all executable code (.py, .js, .ts, .go, .rs)\nCONTEXTOME = all non-executable content (.md, .yaml, .json configs, documentation)\nDOMAINS = vertical slices through both universes (e.g., Pipeline domain has both code AND docs)\n\nQuestions:\n1. Is the -ome suffix (from biology: genome, proteome) appropriate for software engineering terminology?\n2. Are there existing IEEE/ISO/academic terms that already cover these concepts?\n3. What are the pros and cons of using novel domain-specific terminology vs standard terms like 'codebase', 'documentation', 'project files'?\n4. Score the terminology on CLARITY (0-100), PRECISION (0-100), and ADOPTION LIKELIHOOD (0-100) with brief justification for each score.",
+    "query_length": 837,
+    "checksum": "sha256:76ec59105cc09f932c644cda0abd6155db7d42b5d54e0ee39891ed01a1cd3db5"
+  },
+  "response": {
+    "id": "76643da6-3bd7-4a8e-b2d4-3ee2810071b0",
+    "model": "sonar-pro",
+    "created": 1769369873,
+    "usage": {
+      "prompt_tokens": 200,
+      "completion_tokens": 810,
+      "total_tokens": 1010,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.012,
+        "request_cost": 0.006,
+        "total_cost": 0.019
+      }
+    },
+    "citations": [
+      "https://cosmic-sizing.org/wp-content/uploads/2021/04/Glossary_of_Terms-DE-V5.16a.pdf",
+      "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+      "https://people.eecs.ku.edu/~saiedian/812/Project/Wiegers-Resources/Glossary/Requirements%20Engineering%20Glossary.html",
+      "https://www.smartsheet.com/complete-glossary-project-management-terminology",
+      "https://agilealliance.org/agile101/agile-glossary/",
+      "https://asana.com/resources/project-management-terms",
+      "https://www.codingtemple.com/blog/50-terms-every-software-engineer-should-know/",
+      "https://sep.com/software-development-resources/software-product-design-glossary/"
+    ],
+    "search_results": [
+      {
+        "title": "[PDF] GLOSSARY OF TERMS for SOFTWARE PROJECT DEVELOPMENT ...",
+        "url": "https://cosmic-sizing.org/wp-content/uploads/2021/04/Glossary_of_Terms-DE-V5.16a.pdf",
+        "last_updated": "2025-12-22",
+        "snippet": "Requirements Elicitation. Specify. 2. System Requirements Analysis. Specify. 3. System Architecture Design. Specify. 4. Software Requirements Analysis. Specify.",
+        "source": "web"
+      },
+      {
+        "title": "Glossary of Computer System Software Development Terminology ...",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+        "date": "2014-11-06",
+        "last_updated": "2026-01-25",
+        "snippet": "This document is intended to serve as a glossary of terminology applicable to software development and computerized systems in FDA regulated industries.",
+        "source": "web"
+      },
+      {
+        "title": "Glossary of Requirements Engineering Terms",
+        "url": "https://people.eecs.ku.edu/~saiedian/812/Project/Wiegers-Resources/Glossary/Requirements%20Engineering%20Glossary.html",
+        "date": "2013-01-01",
+        "last_updated": "2025-10-24",
+        "snippet": "A collection of the business requirements for a new system, including business objectives, success criteria, a product vision statement, and a project scope ...",
+        "source": "web"
+      },
+      {
+        "title": "The Complete Glossary of Project Management Terms - Smartsheet",
+        "url": "https://www.smartsheet.com/complete-glossary-project-management-terminology",
+        "date": "2017-02-24",
+        "last_updated": "2026-01-25",
+        "snippet": "This glossary contains more than 600 terms and provides simple, clear explanations. Included on this page, you'll find definitions from AZ, from activity codes ...",
+        "source": "web"
+      },
+      {
+        "title": "Agile Glossary and Terminology",
+        "url": "https://agilealliance.org/agile101/agile-glossary/",
+        "date": "2025-10-30",
+        "last_updated": "2026-01-16",
+        "snippet": "Learn the unique terminology used in Agile development from the experts at Agile Alliance. Help the Agile community practice continuous learning.",
+        "source": "web"
+      },
+      {
+        "title": "39 Project Management Terms You Should Know [2026] - Asana",
+        "url": "https://asana.com/resources/project-management-terms",
+        "date": "2026-01-13",
+        "last_updated": "2026-01-24",
+        "snippet": "The Project Management Body of Knowledge is a set of standard terminology and guidelines set by the Project Management Institute. The PMBOK ...",
+        "source": "web"
+      },
+      {
+        "title": "50 Terms Every Software Engineer Should Know | Coding Temple",
+        "url": "https://www.codingtemple.com/blog/50-terms-every-software-engineer-should-know/",
+        "date": "2025-02-27",
+        "last_updated": "2026-01-25",
+        "snippet": "We'll break down 50 essential software engineering terms that will help you become more proficient in technical discussions, job interviews, or day-to-day ...",
+        "source": "web"
+      },
+      {
+        "title": "Software Product Design Glossary | Definitions | SEP.com",
+        "url": "https://sep.com/software-development-resources/software-product-design-glossary/",
+        "date": "2023-07-31",
+        "last_updated": "2025-09-02",
+        "snippet": "SEP's detailed software product development glossary is full of the terms and definitions to help you get the most of your product development.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "### 1. Appropriateness of the -ome Suffix\nThe **-ome suffix**, borrowed from biology (e.g., genome for complete genetic material, proteome for all proteins), is **not standard in software engineering** but could be creatively appropriate for a novel analysis tool emphasizing comprehensive \"universes\" of project elements. It evokes totality and systematic study, aligning with PROJECTOME as an all-encompassing model. However, no IEEE, ISO, or academic glossaries in the results use this suffix for code or docs, suggesting it's unconventional and risks confusion outside niche contexts.[1][2][3]\n\n### 2. Existing IEEE/ISO/Academic Terms\nNo exact matches exist for PROJECTOME, CODOME, or CONTEXTOME in standards, but related concepts are covered by established terms:\n- **Codebase** or **source code**: Encompasses all executable code, similar to CODOME (e.g., \"code\" defined as program/source code).[2]\n- **Documentation**, **user documentation**, or **non-code artifacts**: Covers CONTEXTOME-like items (e.g., specs, manuals).[1][2][3]\n- **Software requirements specification (SRS)** or **project files**: Broader project contents, akin to PROJECTOME (e.g., SRS includes functional/nonfunctional requirements).[3]\n- **Domains** align with **application area** (project category by characteristics) or **data flow analysis** (slicing through data/code).[1][4]\nISO/IEC standards (e.g., 24765 Vocabulary, 12207 Lifecycle) focus on lifecycle phases like \"Build\" (code construction) and \"Specify\" (docs/requirements), without holistic -ome constructs.[1]\n\n### 3. Pros and Cons of Novel vs. Standard Terminology\n\n| Aspect | Novel (e.g., -ome terms) | Standard (e.g., codebase, documentation) |\n|--------|---------------------------|------------------------------------------|\n| **Pros** | - **Memorable and branded**: Creates a unique tool identity, like biological metaphors for \"complete sets\" (e.g., evokes genome-scale analysis).<br>- **Precise for tool**: DOMAINS as \"vertical slices\" distinguishes cross-cutting views not explicit in standards. | - **Universal understanding**: Immediate recognition reduces onboarding (e.g., \"codebase\" in IEEE glossaries).[2][7]<br>- **Interoperability**: Aligns with ISO/IEEE for benchmarks, audits.[1] |\n| **Cons** | - **Adoption barrier**: Unfamiliar; may confuse devs/managers expecting PMBOK or agile terms.[5][6]<br>- **Over-engineering**: Risks sounding gimmicky without peer-reviewed backing. | - **Generic**: Lacks specificity for \"executable-only\" (CODOME) vs. configs/docs (CONTEXTOME).<br>- **Less innovative**: Misses opportunity to brand analytical \"slices\" (DOMAINS). |\n\nNovel terms suit internal tools or marketing but hinder external collaboration; standards prioritize clarity in regulated fields.[2]\n\n### 4. Terminology Scores\n\n- **CLARITY: 65/100**  \n  Intuitive for biology-savvy users (total \"omes\" signal completeness), but -ome is alien to most engineers, risking misinterpretation of CODOME as non-executable configs.[1][2][3]\n\n- **PRECISION: 85/100**  \n  Highly specific: distinguishes executable code, non-executable content, and domain slices better than vague \"project files\"; file-type examples (.py vs. .md) add sharpness.[3]\n\n- **ADOPTION LIKELIHOOD: 40/100**  \n  Low due to no IEEE/ISO precedent and glossary saturation (600+ PM terms exist); niche appeal for AI/analysis tools, but devs prefer familiar terms like codebase.[1][4][6]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

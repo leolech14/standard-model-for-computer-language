@@ -1,0 +1,252 @@
+{
+  "$schema": "bindings-v2",
+  "generated": "2026-01-25T06:35:00Z",
+  "validated_by": "Agent Beta (Claude Opus 4.5) - source verification",
+  "source": "Direct grep verification against sidebar.js + app.js",
+
+  "summary": {
+    "total_controls": 33,
+    "wired": 30,
+    "orphaned": 3,
+    "dead_handler": 0,
+    "binding_coverage": "90.9%",
+    "last_updated": "2026-01-25T06:35:00Z",
+    "updated_by": "Agent Beta - B2 validation task"
+  },
+
+  "VALIDATION_NOTES": {
+    "previous_state": {
+      "wired": 22,
+      "orphaned": 8,
+      "dead_handler": 3
+    },
+    "corrections_applied": [
+      "cfg-label-size: dead -> wired (app.js:1820)",
+      "cfg-toggle-highlight: dead -> wired (app.js:1834)",
+      "cfg-toggle-depth: dead -> wired (app.js:1846)",
+      "cfg-toggle-edge-hover: orphaned -> wired (app.js:1906, sidebar.js:826)",
+      "cfg-toggle-codome: orphaned -> wired (app.js:1911, sidebar.js:833)",
+      ".btn[data-size-mode]: orphaned -> wired (app.js:1794)",
+      ".btn[data-edge-style]: orphaned -> wired (app.js:1858)"
+    ],
+    "evidence": {
+      "sidebar.js_bindings": [
+        "Line 786: _bindToggle('cfg-toggle-highlight', ...)",
+        "Line 801: _bindToggle('cfg-toggle-depth', ...)",
+        "Line 826: _bindToggle('cfg-toggle-edge-hover', ...)",
+        "Line 833: _bindToggle('cfg-toggle-codome', ...)",
+        "Line 864: case 'cfg-label-size':"
+      ],
+      "app.js_bindings": [
+        "Line 1794: bindButtonGroup(nodeCfg, 'data-size-mode', ...)",
+        "Line 1820: bindSlider('cfg-label-size', ...)",
+        "Line 1834: bindToggle('cfg-toggle-highlight', ...)",
+        "Line 1846: bindToggle('cfg-toggle-depth', ...)",
+        "Line 1858: bindButtonGroup(edgeCfg, 'data-edge-style', ...)",
+        "Line 1906: bindToggle('cfg-toggle-edge-hover', ...)",
+        "Line 1911: bindToggle('cfg-toggle-codome', ...)"
+      ]
+    }
+  },
+
+  "binding_locations": {
+    "sidebar.js": {
+      "functions": [
+        "_handleSliderChange",
+        "_bindAppearanceControls",
+        "_bindLayoutPresets",
+        "_bindPhysicsControls",
+        "_bindActionButtons",
+        "_bindToggle",
+        "initViewModeToggle",
+        "initSchemeNavigator"
+      ],
+      "controls_bound": 26
+    },
+    "app.js": {
+      "functions": [
+        "bindSlider",
+        "bindToggle",
+        "bindButtonGroup"
+      ],
+      "controls_bound": 7,
+      "note": "Duplicate bindings - app.js contains parallel binding logic for several controls"
+    },
+    "dimension.js": {
+      "functions": ["setup"],
+      "controls_bound": 1
+    },
+    "control-bar.js": {
+      "functions": ["init", "applyMapping", "resetMapping"],
+      "controls_bound": 8
+    },
+    "panels.js": {
+      "functions": ["toggle", "initNodeSizeSlider", "initEdgeOpacitySlider"],
+      "controls_bound": 4
+    },
+    "vis-state.js": {
+      "functions": ["init"],
+      "controls_bound": 1,
+      "note": "Line 309: querySelectorAll('[data-size-mode]')"
+    }
+  },
+
+  "state_mutations": {
+    "APPEARANCE_STATE": {
+      "properties": [
+        "nodeScale",
+        "nodeOpacity",
+        "edgeOpacity",
+        "edgeWidth",
+        "edgeCurvature",
+        "showArrows",
+        "gradientEdges",
+        "highlightSelected",
+        "depthShading",
+        "edgeHoverHighlight",
+        "labelSize"
+      ],
+      "mutated_by": [
+        "sidebar.js:_handleSliderChange",
+        "sidebar.js:_bindAppearanceControls",
+        "app.js:bindSlider",
+        "app.js:bindToggle"
+      ]
+    },
+    "VIS_STATE": {
+      "properties": [
+        "colorBy",
+        "colorScheme"
+      ],
+      "mutated_by": [
+        "sidebar.js:initSchemeNavigator"
+      ]
+    },
+    "VIS_FILTERS": {
+      "properties": [
+        "metadata.showLabels"
+      ],
+      "mutated_by": [
+        "sidebar.js:_bindAppearanceControls"
+      ]
+    },
+    "GRAPH_MODE": {
+      "properties": ["mode"],
+      "mutated_by": [
+        "sidebar.js:initViewModeToggle"
+      ]
+    },
+    "IS_3D": {
+      "properties": ["value"],
+      "mutated_by": [
+        "dimension.js:setup"
+      ]
+    },
+    "SHOW_CODOME": {
+      "properties": ["value"],
+      "mutated_by": [
+        "app.js:bindToggle",
+        "sidebar.js:_bindToggle"
+      ]
+    },
+    "Graph": {
+      "properties": [
+        "nodeVal",
+        "nodeResolution",
+        "nodeLabel",
+        "linkWidth",
+        "linkCurvature",
+        "linkDirectionalParticleSpeed",
+        "linkDirectionalParticles",
+        "linkDirectionalArrowLength",
+        "numDimensions",
+        "d3Force('charge')",
+        "d3Force('link')",
+        "d3Force('center')",
+        "d3AlphaTarget",
+        "cameraPosition",
+        "graphData"
+      ],
+      "mutated_by": [
+        "sidebar.js:_handleSliderChange",
+        "sidebar.js:_bindPhysicsControls",
+        "sidebar.js:_bindActionButtons",
+        "app.js:bindButtonGroup",
+        "dimension.js:setup"
+      ]
+    },
+    "ANIM": {
+      "properties": [
+        "togglePulse",
+        "applyLayout"
+      ],
+      "mutated_by": [
+        "sidebar.js:_bindAppearanceControls",
+        "sidebar.js:_bindLayoutPresets"
+      ]
+    }
+  },
+
+  "orphaned_controls": [
+    {
+      "selector": "#node-size",
+      "expected_binding": "sidebar.js",
+      "reason": "Legacy ID, only cfg-node-size is bound",
+      "impact": "Duplicate control, legacy version non-functional",
+      "recommendation": "Remove from HTML template or wire to cfg-node-size"
+    },
+    {
+      "selector": "#edge-opacity",
+      "expected_binding": "sidebar.js",
+      "reason": "Legacy ID, only cfg-edge-opacity is bound",
+      "impact": "Duplicate control, legacy version non-functional",
+      "recommendation": "Remove from HTML template or wire to cfg-edge-opacity"
+    },
+    {
+      "selector": "#toggle-labels",
+      "expected_binding": "sidebar.js",
+      "reason": "Legacy ID, only cfg-toggle-labels is bound",
+      "impact": "Duplicate control, legacy version non-functional",
+      "recommendation": "Remove from HTML template or wire to cfg-toggle-labels"
+    }
+  ],
+
+  "dead_handlers": [],
+
+  "duplicate_bindings": {
+    "description": "Controls bound in BOTH sidebar.js AND app.js - potential conflict",
+    "controls": [
+      {
+        "selector": "#cfg-label-size",
+        "sidebar_binding": "sidebar.js:864",
+        "app_binding": "app.js:1820",
+        "note": "Both active - may execute twice"
+      },
+      {
+        "selector": "#cfg-toggle-highlight",
+        "sidebar_binding": "sidebar.js:786",
+        "app_binding": "app.js:1834",
+        "note": "Both active - may execute twice"
+      },
+      {
+        "selector": "#cfg-toggle-depth",
+        "sidebar_binding": "sidebar.js:801",
+        "app_binding": "app.js:1846",
+        "note": "Both active - may execute twice"
+      },
+      {
+        "selector": "#cfg-toggle-edge-hover",
+        "sidebar_binding": "sidebar.js:826",
+        "app_binding": "app.js:1906",
+        "note": "Both active - may execute twice"
+      },
+      {
+        "selector": "#cfg-toggle-codome",
+        "sidebar_binding": "sidebar.js:833",
+        "app_binding": "app.js:1911",
+        "note": "Both active - may execute twice"
+      }
+    ],
+    "recommendation": "Consider removing app.js bindings and delegating to sidebar.js for single source of truth"
+  }
+}

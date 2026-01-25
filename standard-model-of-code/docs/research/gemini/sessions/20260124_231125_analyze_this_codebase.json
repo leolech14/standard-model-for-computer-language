@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-24 23:11:22",
+  "session_end": "2026-01-24 23:11:25",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769307082.927813,
+      "timestamp_str": "2026-01-24 23:11:22",
+      "role": "user",
+      "content": "Analyze this codebase"
+    }
+  ]
+}

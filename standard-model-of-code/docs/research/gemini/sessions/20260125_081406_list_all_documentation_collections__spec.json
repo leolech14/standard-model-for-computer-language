@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-25 08:13:39",
+  "session_end": "2026-01-25 08:14:06",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 195257,
+  "total_tokens_out": 737,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769339619.9129658,
+      "timestamp_str": "2026-01-25 08:13:39",
+      "role": "user",
+      "content": "List ALL documentation collections: specs directories, research outputs, reports, guides. For each collection: name, path, file count, what topics they cover."
+    },
+    {
+      "timestamp": 1769339646.642768,
+      "timestamp_str": "2026-01-25 08:14:06",
+      "role": "assistant",
+      "content": "Based on the codebase context provided, here are the documentation collections categorized by directory structure:\n\n### 1. Core Documentation (Theory & Usage)\n*   **Path:** `standard-model-of-code/docs/`\n*   **File Count:** ~12 files\n*   **Topics Covered:**\n    *   **Theory:** The Standard Model of Code foundations (Atoms, Roles, RPBL), Knowledge Tree provenance, and theoretical expansions.\n    *   **Usage:** The Collider CLI tool manual, commands, and troubleshooting.\n    *   **Strategy:** Competitive analysis, open concerns/bugs, roadmap possibilities, and project philosophy.\n\n### 2. Reports & Audits (Snapshots & Forensics)\n*   **Path:** `standard-model-of-code/docs/reports/`\n*   **File Count:** 22 files\n*   **Topics Covered:**\n    *   **Architecture Audits:** Anti-pattern investigations, gap analyses, and debt registries.\n    *   **Refactoring Plans:** Detailed plans for modularizing `app.js` and frontend systems.\n    *   **Fact Checking:** Reconciliations of conflicting claims across documentation versions.\n    *   **System Audits:** Design token system validation and frontend/backend gap analysis.\n\n### 3. Active Research (Protocols & Findings)\n*   **Path:** `standard-model-of-code/docs/research/`\n*   **File Count:** 9 files\n*   **Topics Covered:**\n    *   **Methodology:** AI orchestration protocols and decision templates for promoting research claims.\n    *   **Investigations:** Atom coverage studies, network centrality analysis, and context window optimization.\n    *   **Discoveries:** \"Codome\" edge discovery (invisible callers) and semantic matching research.\n\n### 4. Legal & Intellectual Property\n*   **Path:** `standard-model-of-code/docs/legal/`\n*   **File Count:** 3 files\n*   **Topics Covered:**\n    *   **Protection:** Enumerated original claims (IP) and disclosure policies.\n    *   **Provenance:** Prior art bibliography distinguishing original work from referenced giants (Koestler, Popper, etc.).\n\n### 5. Business Strategy\n*   **Path:** `standard-model-of-code/docs/business/`\n*   **File Count:** 1 file\n*   **Topics Covered:**\n    *   **Market Fit:** Product-market fit analysis (specifically regarding GraphRAG integration).\n\n### 6. Implementation Plans\n*   **Path:** `standard-model-of-code/docs/plans/`\n*   **File Count:** 1 file\n*   **Topics Covered:**\n    *   **Hardening:** Specific, executable engineering plans (e.g., Role Registry hardening).\n\n### 7. Registry & History\n*   **Path:** `standard-model-of-code/docs/registry/`\n*   **File Count:** 1 file\n*   **Topics Covered:**\n    *   **Chronology:** The evolutionary timeline of the project, including the pivot from AI-centric to deterministic analysis.\n\n### 8. Figures & Assets\n*   **Path:** `standard-model-of-code/docs/figures/`\n*   **File Count:** 1 file\n*   **Topics Covered:**\n    *   **Visualization:** Prompts for generating scientific-grade diagrams and illustrations."
+    }
+  ]
+}

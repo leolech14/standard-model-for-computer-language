@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-25",
+  "source": "gemini-3-pro-preview forensic audit",
+  "css_variables": {
+    "color_semantic": [
+      {
+        "name": "--color-node-default",
+        "category": "node",
+        "description": "Default node fill color"
+      },
+      {
+        "name": "--color-node-selected",
+        "category": "node",
+        "description": "Selected node highlight"
+      },
+      {
+        "name": "--color-edge-default",
+        "category": "edge",
+        "description": "Default edge stroke"
+      },
+      {
+        "name": "--color-edge-active",
+        "category": "edge",
+        "description": "Hovered/selected edge"
+      },
+      {
+        "name": "--color-background",
+        "category": "chrome",
+        "description": "Canvas background"
+      },
+      {
+        "name": "--color-panel-bg",
+        "category": "chrome",
+        "description": "Sidebar panel background"
+      }
+    ],
+    "spacing": [
+      {
+        "name": "--spacing-xs",
+        "value": "4px",
+        "usage": "Tight grouping"
+      },
+      {
+        "name": "--spacing-sm",
+        "value": "8px",
+        "usage": "Element padding"
+      },
+      {
+        "name": "--spacing-md",
+        "value": "16px",
+        "usage": "Section gaps"
+      },
+      {
+        "name": "--spacing-lg",
+        "value": "24px",
+        "usage": "Panel margins"
+      }
+    ],
+    "typography": [
+      {
+        "name": "--font-mono",
+        "value": "'JetBrains Mono', monospace",
+        "usage": "Code, labels"
+      },
+      {
+        "name": "--font-sans",
+        "value": "'Inter', sans-serif",
+        "usage": "UI text"
+      },
+      {
+        "name": "--font-size-sm",
+        "value": "12px",
+        "usage": "Labels, hints"
+      },
+      {
+        "name": "--font-size-md",
+        "value": "14px",
+        "usage": "Body text"
+      }
+    ],
+    "animation": [
+      {
+        "name": "--transition-fast",
+        "value": "100ms",
+        "usage": "Hover states"
+      },
+      {
+        "name": "--transition-normal",
+        "value": "200ms",
+        "usage": "Panel transitions"
+      }
+    ]
+  },
+  "design_system_notes": {
+    "color_engine": "OKLCH-based via color-engine.js",
+    "theming": "Dark mode only currently",
+    "accessibility": "Contrast ratios not verified",
+    "responsive": "Sidebar collapse at 768px breakpoint"
+  }
+}

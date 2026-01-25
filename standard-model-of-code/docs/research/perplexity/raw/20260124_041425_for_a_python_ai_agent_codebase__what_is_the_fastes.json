@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T04:14:25.516179",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "For a Python AI-agent codebase, what is the fastest way to add semantic vector embeddings to a chunking/RAG system? Options: 1) sentence-transformers library, 2) OpenAI embeddings API, 3) Gemini embedding API, 4) local ONNX model. I need low-latency, offline-capable, minimal dependencies.",
+    "query_length": 289,
+    "checksum": "sha256:bbdab07fd1975df85fccb5286b57b830b4fbfbaaadafea3ac821dfc128c98237"
+  },
+  "response": {
+    "id": "8479b329-b4e7-4c00-bf82-c6a48d3b6a09",
+    "model": "sonar-pro",
+    "created": 1769238865,
+    "usage": {
+      "prompt_tokens": 72,
+      "completion_tokens": 641,
+      "total_tokens": 713,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.01,
+        "request_cost": 0.006,
+        "total_cost": 0.016
+      }
+    },
+    "citations": [
+      "https://arxiv.org/html/2505.11582v2",
+      "https://supermemory.ai/blog/best-open-source-embedding-models-benchmarked-and-ranked/",
+      "https://huggingface.co/blog/mteb",
+      "https://www.instaclustr.com/blog/vector-search-benchmarking-setting-up-embeddings-insertion-and-retrieval-with-postgresql/",
+      "https://www.firecrawl.dev/blog/best-vector-databases-2025",
+      "https://codesignal.com/learn/courses/understanding-embeddings-and-vector-representations-3/lessons/comparing-vector-embedding-models-in-python-pgvector",
+      "https://modal.com/blog/6-best-code-embedding-models-compared"
+    ],
+    "search_results": [
+      {
+        "title": "Comparing Lexical and Semantic Vector Search Methods ... - arXiv",
+        "url": "https://arxiv.org/html/2505.11582v2",
+        "date": "2025-06-03",
+        "last_updated": "2026-01-20",
+        "snippet": "The embeddings used in lexical vector search generally achieved higher predictive accuracy than the embeddings used in semantic vector search. ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Open-Source Embedding Models Benchmarked and Ranked",
+        "url": "https://supermemory.ai/blog/best-open-source-embedding-models-benchmarked-and-ranked/",
+        "date": "2025-06-27",
+        "last_updated": "2026-01-24",
+        "snippet": "For top performance, you still need to manage token length and truncation carefully. It may also underperform slightly compared to larger models ...",
+        "source": "web"
+      },
+      {
+        "title": "MTEB: Massive Text Embedding Benchmark - Hugging Face",
+        "url": "https://huggingface.co/blog/mteb",
+        "date": "2022-10-19",
+        "last_updated": "2026-01-23",
+        "snippet": "MTEB is a massive benchmark for measuring the performance of text embedding models on diverse embedding tasks.",
+        "source": "web"
+      },
+      {
+        "title": "Vector search benchmarking: Setting up embeddings, insertion, and ...",
+        "url": "https://www.instaclustr.com/blog/vector-search-benchmarking-setting-up-embeddings-insertion-and-retrieval-with-postgresql/",
+        "date": "2025-11-04",
+        "last_updated": "2026-01-23",
+        "snippet": "Learn from first-hand project experience how to set up a performance benchmarking project, why performance is critical for vector search, ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Vector Databases in 2025: A Complete Comparison Guide",
+        "url": "https://www.firecrawl.dev/blog/best-vector-databases-2025",
+        "date": "2025-10-09",
+        "last_updated": "2026-01-24",
+        "snippet": "Compare 14 major vector databases with real performance benchmarks, honest trade-offs, and decision frameworks. Learn which database fits ...",
+        "source": "web"
+      },
+      {
+        "title": "Comparing Vector Embedding Models in Python | CodeSignal Learn",
+        "url": "https://codesignal.com/learn/courses/understanding-embeddings-and-vector-representations-3/lessons/comparing-vector-embedding-models-in-python-pgvector",
+        "date": "2025-01-01",
+        "last_updated": "2026-01-16",
+        "snippet": "Vector embeddings are numerical representations of text that capture semantic meaning, allowing us to perform tasks like similarity comparison.",
+        "source": "web"
+      },
+      {
+        "title": "6 Best Code Embedding Models Compared: A Complete Guide",
+        "url": "https://modal.com/blog/6-best-code-embedding-models-compared",
+        "date": "2025-03-31",
+        "last_updated": "2026-01-24",
+        "snippet": "Compare the top code embedding models for semantic code search, code completion, and repository analysis.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**The fastest way to add semantic vector embeddings to your Python AI-agent codebase, prioritizing low-latency, offline capability, and minimal dependencies, is using the sentence-transformers library with the all-MiniLM-L6-v2 model.[2][3][4][7]**\n\nThis lightweight model (22M parameters, 384 dimensions) delivers blazing-fast embedding speeds of ~14.7 ms per 1K tokens and end-to-end query-to-retrieve latency of 68 ms on CPU, making it 4-5x faster than larger models while achieving solid 78.1% top-5 retrieval accuracy on benchmarks.[2] It runs fully offline after a one-time Hugging Face download, requires only `pip install sentence-transformers` (minimal deps: transformers, torch, etc.), and supports batched inference with automatic GPU acceleration if available.[2][4][7]\n\n### Quick Integration Example\n```python\nfrom sentence_transformers import SentenceTransformer\nimport numpy as np\nfrom sklearn.metrics.pairwise import cosine_similarity  # Or use FAISS for scale\n\nmodel = SentenceTransformer('all-MiniLM-L6-v2')  # Loads once, ~80MB\n\n# Embed chunks (e.g., for RAG)\nchunks = [\"Your text chunk 1\", \"Chunk 2\"]\nembeddings = model.encode(chunks)  # Batched, low-latency\n\n# Query example\nquery = \"Search query\"\nquery_emb = model.encode([query])\nsimilarities = cosine_similarity(query_emb, embeddings)[0]\ntop_chunks = np.argsort(similarities)[-3:]  # Retrieve top 3\n```\n\n### Comparison to Other Options\n| Option | Latency/Speed | Offline? | Dependencies | Notes |\n|--------|---------------|----------|--------------|-------|\n| **1) sentence-transformers (all-MiniLM-L6-v2)** | Fastest CPU (~15ms/1K tokens, 68ms E2E)[2] | Yes | Minimal (pip install sentence-transformers) | Best balance; production-ready for high-throughput RAG[2][3][4][7] |\n| 2) OpenAI embeddings API | Variable (network-bound) | No | API key + requests | High quality but online-only, adds latency[1] |\n| 3) Gemini embedding API | Variable (network-bound) | No | API key + google-generativeai | Similar to OpenAI; not offline |\n| 4) Local ONNX model | Potentially faster (optimized inference) | Yes | onnxruntime + model export | More setup (convert HF model to ONNX); sentence-transformers already fast enough for most[7] |\n\nBenchmarks confirm MiniLM excels for speed-critical semantic search over lexical methods or heavier models like mxbai, with negligible search time post-embedding when paired with FAISS.[1][2] For chunking/RAG, truncate inputs to 256 tokens to optimize performance.[2][4] If scaling to millions of vectors, add FAISS (`pip install faiss-cpu`) for sub-ms ANN search.[2][5]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

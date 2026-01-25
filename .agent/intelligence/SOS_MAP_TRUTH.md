@@ -84,14 +84,14 @@ File system scan revealed 3 significant subsystems not in the SoS map:
 
 | Proposed ID | Name | Path | Purpose | Significance |
 |-------------|------|------|---------|--------------|
-| **S10** | AEP | `.agent/tools/aep_orchestrator.py` | Task enrichment & promotion | HIGH |
+| **S10** | Enrichment | `.agent/tools/enrichment_orchestrator.py` | Task enrichment & promotion | HIGH |
 | **S11** | ACI Refinery | `context-management/tools/refinery/` | Context atomization | HIGH |
 | **S12** | Centripetal | `.agent/tools/centripetal_scan.py` | Deep 12-round analysis | MEDIUM |
 
 ### Evidence for S10 (AEP)
 
 ```
-File: .agent/tools/aep_orchestrator.py
+File: .agent/tools/enrichment_orchestrator.py
 Referenced in: BACKGROUND_AI_LAYER_MAP.md
 Purpose: Autonomous Enrichment Pipeline
 Status: Tools operational, orchestration partial
@@ -118,7 +118,7 @@ Status: Tool available, API-gated
 
 | Component | Current | Recommendation |
 |-----------|---------|----------------|
-| `hsl_daemon.py` | Standalone | Merge into S2 (HSL) |
+| `drift_guard.py` | S2 (HSL) | Now part of S2 (renamed from hsl_daemon.py) |
 | `context-management/tools/ai/aci/` | Unlisted | Part of S3 (analyze.py) |
 
 ---
@@ -196,9 +196,9 @@ Penalty breakdown:
    - Enable BARE polling
    - Expected coherence: 88 → 95
 
-4. **Merge hsl_daemon.py into S2**
-   - Currently standalone, should be HSL component
-   - Reduces subsystem count, increases coherence
+4. **COMPLETED: hsl_daemon.py renamed to drift_guard.py**
+   - Now officially part of S2 (HSL)
+   - SMoC Role: Guard | Domain: Drift
 
 ### Medium-term Actions (P2)
 

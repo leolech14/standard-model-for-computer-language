@@ -1,0 +1,331 @@
+{
+  "$schema": "dom-controls-v1",
+  "generated": "2026-01-25",
+  "validated_by": "analyze.py + Gemini (gemini-3-pro-preview)",
+  "source": "standard-model-of-code/docs/research/gemini/docs/20260125_050508_ui_gap_fill__build_a_control_inventory_for_collid.md",
+
+  "summary": {
+    "total_controls": 33,
+    "wired": 30,
+    "orphaned": 3,
+    "dead_handler": 0,
+    "last_updated": "2026-01-25T06:35:00Z",
+    "updated_by": "Agent Beta - B2 validation (source-verified)"
+  },
+
+  "controls": [
+    {
+      "selector": "#view-mode-toggle .view-mode-btn[data-mode='atoms']",
+      "label": "ATOMS",
+      "type": "Button (Segmented)",
+      "binding": "sidebar.js:initViewModeToggle",
+      "mutates": "GRAPH_MODE",
+      "status": "wired"
+    },
+    {
+      "selector": "#view-mode-toggle .view-mode-btn[data-mode='files']",
+      "label": "FILES",
+      "type": "Button (Segmented)",
+      "binding": "sidebar.js:initViewModeToggle",
+      "mutates": "GRAPH_MODE",
+      "status": "wired"
+    },
+    {
+      "selector": ".btn[data-size-mode]",
+      "label": "Uniform, Degree, Fanout, Complex",
+      "type": "Button Group",
+      "binding": "app.js:bindButtonGroup (line 1794)",
+      "mutates": "Graph.nodeVal",
+      "status": "wired",
+      "notes": "Wired in app.js via bindButtonGroup(nodeCfg, 'data-size-mode', ...). Also referenced in vis-state.js:309."
+    },
+    {
+      "selector": "#cfg-node-size",
+      "label": "Base Size",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "APPEARANCE_STATE.nodeScale, Graph.nodeVal",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-node-opacity",
+      "label": "Opacity",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "APPEARANCE_STATE.nodeOpacity",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-node-res",
+      "label": "Resolution",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "Graph.nodeResolution",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-label-size",
+      "label": "Label Size",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "APPEARANCE_STATE.labelSize, Graph.nodeLabel",
+      "status": "wired",
+      "notes": "Fixed by Agent Alpha 2026-01-25"
+    },
+    {
+      "selector": "#cfg-toggle-labels",
+      "label": "Show Labels",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "VIS_FILTERS.metadata.showLabels, Graph.nodeLabel",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-toggle-highlight",
+      "label": "Highlight Selected",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "APPEARANCE_STATE.highlightSelected",
+      "status": "wired",
+      "notes": "Fixed by Agent Alpha 2026-01-25"
+    },
+    {
+      "selector": "#cfg-toggle-pulse",
+      "label": "Pulse Animation",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "ANIM.togglePulse",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-toggle-depth",
+      "label": "3D Depth Shading",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "APPEARANCE_STATE.depthShading",
+      "status": "wired",
+      "notes": "Fixed by Agent Alpha 2026-01-25"
+    },
+    {
+      "selector": ".btn[data-edge-style]",
+      "label": "Solid, Dashed, Particle",
+      "type": "Button Group",
+      "binding": "app.js:bindButtonGroup (line 1858)",
+      "mutates": "APPEARANCE_STATE.edgeStyle",
+      "status": "wired",
+      "notes": "Wired in app.js via bindButtonGroup(edgeCfg, 'data-edge-style', ...)."
+    },
+    {
+      "selector": "#cfg-edge-opacity",
+      "label": "Opacity (Edge)",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "APPEARANCE_STATE.edgeOpacity",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-edge-width",
+      "label": "Width",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "APPEARANCE_STATE.edgeWidth, Graph.linkWidth",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-edge-curve",
+      "label": "Curvature",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "APPEARANCE_STATE.edgeCurvature, Graph.linkCurvature",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-particle-speed",
+      "label": "Particle Speed",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "Graph.linkDirectionalParticleSpeed",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-particle-count",
+      "label": "Particle Density",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "Graph.linkDirectionalParticles",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-toggle-arrows",
+      "label": "Show Arrows",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "APPEARANCE_STATE.showArrows, Graph.linkDirectionalArrowLength",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-toggle-gradient",
+      "label": "Gradient Colors",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "APPEARANCE_STATE.gradientEdges",
+      "status": "wired"
+    },
+    {
+      "selector": "#cfg-toggle-edge-hover",
+      "label": "Highlight on Hover",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "APPEARANCE_STATE.edgeHoverHighlight",
+      "status": "wired",
+      "notes": "Added by Agent Alpha 2026-01-25"
+    },
+    {
+      "selector": "#cfg-toggle-codome",
+      "label": "Show Codome Boundaries",
+      "type": "Toggle",
+      "binding": "sidebar.js:_bindAppearanceControls",
+      "mutates": "SHOW_CODOME, Graph.graphData (re-filter)",
+      "status": "wired",
+      "notes": "Added by Agent Alpha 2026-01-25"
+    },
+    {
+      "selector": ".btn[data-layout]",
+      "label": "Force, Radial, Orbital, Sphere...",
+      "type": "Button Grid",
+      "binding": "sidebar.js:_bindLayoutPresets",
+      "mutates": "ANIM.applyLayout",
+      "status": "wired"
+    },
+    {
+      "selector": "#physics-charge",
+      "label": "Repulsion",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "Graph.d3Force('charge')",
+      "status": "wired"
+    },
+    {
+      "selector": "#physics-link",
+      "label": "Link Distance",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "Graph.d3Force('link')",
+      "status": "wired"
+    },
+    {
+      "selector": "#physics-center",
+      "label": "Center Pull",
+      "type": "Slider",
+      "binding": "sidebar.js:_bindPhysicsControls",
+      "mutates": "Graph.d3Force('center')",
+      "status": "wired"
+    },
+    {
+      "selector": ".btn[data-physics]",
+      "label": "Def, Tight, Loose, Boom",
+      "type": "Button Grid",
+      "binding": "sidebar.js:_bindPhysicsControls",
+      "mutates": "Graph.d3Force (multiple)",
+      "status": "wired"
+    },
+    {
+      "selector": "#node-size",
+      "label": "Node Size (Legacy)",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "None",
+      "status": "orphaned",
+      "notes": "Legacy slider in 'Appearance' section. _handleSliderChange only checks cfg-node-size."
+    },
+    {
+      "selector": "#edge-opacity",
+      "label": "Edge Opacity (Legacy)",
+      "type": "Slider",
+      "binding": "sidebar.js:_handleSliderChange",
+      "mutates": "None",
+      "status": "orphaned",
+      "notes": "Legacy slider in 'Appearance' section. _handleSliderChange only checks cfg-edge-opacity."
+    },
+    {
+      "selector": "#toggle-labels",
+      "label": "Show Labels (Legacy)",
+      "type": "Toggle",
+      "binding": "sidebar.js",
+      "mutates": "None",
+      "status": "orphaned",
+      "notes": "Legacy toggle in 'Appearance' section. Only cfg-toggle-labels is bound."
+    },
+    {
+      "selector": "#btn-reset",
+      "label": "Reset View",
+      "type": "Button",
+      "binding": "sidebar.js:_bindActionButtons",
+      "mutates": "Graph.cameraPosition",
+      "status": "wired"
+    },
+    {
+      "selector": "#btn-screenshot",
+      "label": "Screenshot",
+      "type": "Button",
+      "binding": "sidebar.js:_bindActionButtons",
+      "mutates": "Canvas export",
+      "status": "wired"
+    },
+    {
+      "selector": "#btn-2d",
+      "label": "Toggle 2D",
+      "type": "Button",
+      "binding": "dimension.js:setup",
+      "mutates": "IS_3D, Graph.numDimensions",
+      "status": "wired"
+    },
+    {
+      "selector": "#btn-freeze",
+      "label": "Freeze",
+      "type": "Button",
+      "binding": "sidebar.js:_bindActionButtons",
+      "mutates": "Graph.d3AlphaTarget",
+      "status": "wired"
+    },
+    {
+      "selector": ".color-btn[data-preset]",
+      "label": "Tier, Family, Layer, Ring...",
+      "type": "Button Grid",
+      "binding": "sidebar.js:initSchemeNavigator",
+      "mutates": "VIS_STATE.colorBy",
+      "status": "wired"
+    }
+  ],
+
+  "cfg_ids": [
+    "cfg-node-size",
+    "cfg-node-opacity",
+    "cfg-node-res",
+    "cfg-label-size",
+    "cfg-toggle-labels",
+    "cfg-toggle-highlight",
+    "cfg-toggle-pulse",
+    "cfg-toggle-depth",
+    "cfg-edge-opacity",
+    "cfg-edge-width",
+    "cfg-edge-curve",
+    "cfg-particle-speed",
+    "cfg-particle-count",
+    "cfg-toggle-arrows",
+    "cfg-toggle-gradient",
+    "cfg-toggle-edge-hover",
+    "cfg-toggle-codome"
+  ],
+
+  "data_attributes": [
+    {"name": "data-mode", "purpose": "View mode toggle", "status": "wired"},
+    {"name": "data-section", "purpose": "Accordion collapse", "status": "wired"},
+    {"name": "data-size-mode", "purpose": "Node sizing logic", "status": "wired", "binding": "app.js:1794"},
+    {"name": "data-edge-style", "purpose": "Edge styling logic", "status": "wired", "binding": "app.js:1858"},
+    {"name": "data-layout", "purpose": "Layout preset selection", "status": "wired"},
+    {"name": "data-physics", "purpose": "Physics preset selection", "status": "wired"},
+    {"name": "data-preset", "purpose": "Color mode selection", "status": "wired"},
+    {"name": "data-target", "purpose": "Panel collapse target", "status": "wired"}
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T18:20:17.487128",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Semantic chunking OR code summarization OR program understanding OR incremental indexing OR semantic tagging AND code AND granularity: sentence OR paragraph AND (schema OR ontology) AND (2024 OR 2025 OR 2026) -patent -tutorial -example\n\nSpecifically looking for:\n1. Prior art in semantic chunking for SOURCE CODE at sentence/paragraph granularity\n2. Compact semantic tagging schemas for code segments (not verbose XML, something efficient)\n3. Incremental indexing strategies for codebases that update continuously\n4. Academic papers or industry tools (2024-2026) for semantic boundary detection in code\n5. How to represent semantic dependencies between code chunks compactly\n\nContext: Building an incremental semantic indexer that maps code into Semantic Chunk Records (SCR) with type codes, summaries, entities, dependencies. Goal is to compile these chunks into ordered context strings for LLM consumption.",
+    "query_length": 908,
+    "checksum": "sha256:d6c72c1a8c450c63a2d746909af8b9826905fe97a788adcbe24d44baddb8a17e"
+  },
+  "response": {
+    "id": "2d34da80-e3e5-4fd8-ba1c-3703e77668ee",
+    "model": "sonar-pro",
+    "created": 1769203217,
+    "usage": {
+      "prompt_tokens": 179,
+      "completion_tokens": 309,
+      "total_tokens": 488,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.005,
+        "request_cost": 0.006,
+        "total_cost": 0.011
+      }
+    },
+    "citations": [
+      "https://www.pinecone.io/learn/chunking-strategies/",
+      "https://www.firecrawl.dev/blog/best-chunking-strategies-rag-2025",
+      "https://agenta.ai/blog/the-ultimate-guide-for-chunking-strategies",
+      "https://amirteymoori.com/rag-text-chunking-strategies/",
+      "https://community.databricks.com/t5/technical-blog/the-ultimate-guide-to-chunking-strategies-for-rag-applications/ba-p/113089",
+      "https://github.com/pavanbelagatti/Semantic-Chunking-RAG/blob/main/Semantic%20Chunking%20Tutorial.ipynb",
+      "https://justaithings.org/complete-guide-with-code-to-top-chunking-method-you-should-know-rag-lives-or-dies-by-chunking-6b92bf6628e3"
+    ],
+    "search_results": [
+      {
+        "title": "Chunking Strategies for LLM Applications - Pinecone",
+        "url": "https://www.pinecone.io/learn/chunking-strategies/",
+        "date": "2025-06-28",
+        "last_updated": "2026-01-23",
+        "snippet": "Semantic chunking involves breaking a document into sentences, grouping each sentence with its surrounding sentences, and generating embeddings for these groups ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Chunking Strategies for RAG in 2025 - Firecrawl",
+        "url": "https://www.firecrawl.dev/blog/best-chunking-strategies-rag-2025",
+        "date": "2025-10-10",
+        "last_updated": "2026-01-23",
+        "snippet": "Semantic chunking splits text based on meaning, not structure. Instead of looking for paragraph breaks or sentence boundaries, it analyzes how ...",
+        "source": "web"
+      },
+      {
+        "title": "The Ultimate Guide to RAG Chunking Strategies - Agenta",
+        "url": "https://agenta.ai/blog/the-ultimate-guide-for-chunking-strategies",
+        "date": "2025-08-15",
+        "last_updated": "2026-01-22",
+        "snippet": "Learn 4 essential chunking strategies for RAG systems: syntactic, recursive, semantic, and cluster-based. Compare performance with code ...",
+        "source": "web"
+      },
+      {
+        "title": "RAG Text Chunking Strategies - Amir Teymoori",
+        "url": "https://amirteymoori.com/rag-text-chunking-strategies/",
+        "date": "2025-11-18",
+        "last_updated": "2025-12-02",
+        "snippet": "Master 8 production-ready chunking strategies for RAG: fixed-size, semantic, recursive, hierarchical, LLM-based, agentic, and late chunking.",
+        "source": "web"
+      },
+      {
+        "title": "Mastering Chunking Strategies for RAG - Databricks Community",
+        "url": "https://community.databricks.com/t5/technical-blog/the-ultimate-guide-to-chunking-strategies-for-rag-applications/ba-p/113089",
+        "date": "2025-04-03",
+        "last_updated": "2026-01-23",
+        "snippet": "Instead of arbitrarily slicing text by length, semantic chunking splits documents at logical boundaries (e.g., sentences, paragraphs, or ...",
+        "source": "web"
+      },
+      {
+        "title": "Semantic-Chunking-RAG/Semantic Chunking Tutorial.ipynb at main",
+        "url": "https://github.com/pavanbelagatti/Semantic-Chunking-RAG/blob/main/Semantic%20Chunking%20Tutorial.ipynb",
+        "date": "2024-07-15",
+        "last_updated": "2025-05-05",
+        "snippet": "Today, we will see how semantic chunking works. Semantic Chunking considers the relationships within the text. It divides the text into meaningful, ...",
+        "source": "web"
+      },
+      {
+        "title": "Complete Guide with code to Top Chunking method you should ...",
+        "url": "https://justaithings.org/complete-guide-with-code-to-top-chunking-method-you-should-know-rag-lives-or-dies-by-chunking-6b92bf6628e3",
+        "date": "2025-11-30",
+        "snippet": "Semantic chunking groups text based on meaning rather than formatting or raw size. It relies on embeddings to detect where topics naturally ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "I cannot fully answer your query based on the provided search results. The results focus exclusively on semantic chunking for **natural language documents** (research papers, articles, novels, technical documentation) rather than **source code**. None of the results address code-specific semantic chunking, semantic tagging schemas for code, incremental indexing of codebases, or academic work on code boundary detection from 2024-2026.\n\nThe search results cover general chunking principles—such as embedding-based similarity detection and threshold-based chunk boundaries[1][2][3]—that *could* theoretically apply to code, but they don't discuss:\n\n- Code-specific parsing or Abstract Syntax Tree (AST) considerations\n- Compact tagging schemas designed for code segments\n- Incremental indexing strategies for evolving codebases\n- Code dependency representation methods\n- Academic papers or tools from 2024-2026 addressing these problems\n\n**What would help:** A search specifically targeting:\n- \"Semantic chunking source code\" or \"code segmentation AST\"\n- \"Code tagging schema\" or \"semantic metadata code indexing\"\n- \"Incremental code indexing\" combined with 2024-2026 date filters\n- \"Code dependency graphs\" and semantic indexing\n- Academic venues (ICSE, FSE, ASE) from recent years on code understanding and retrieval\n\nYour use case—building Semantic Chunk Records (SCRs) with type codes, summaries, entities, and dependencies for LLM consumption—is specialized and likely requires domain-specific research or industry tools not captured in these results."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

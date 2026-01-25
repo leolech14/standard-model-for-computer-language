@@ -1,0 +1,91 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T19:57:33.574620",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Academic research on: purpose and intentionality in software engineering, code as crystallized intent, relational semantics in program understanding.\n\nLooking for:\n1. Philosophy of software - is code an artifact of human intention?\n2. Semiotics of code - how meaning is encoded/decoded in programs\n3. Intentional programming paradigm - any research on capturing intent alongside code\n4. Graph-based program understanding - using relationships not just entities\n5. Information theory applied to software - is information lost when encoding intent to code?\n\nAcademic papers, books, or established theories preferred (2020-2026).",
+    "query_length": 626,
+    "checksum": "sha256:b39e84dd847d42564d7f6ae26192e82ec263f162c263d0707d620c0d6d32e686"
+  },
+  "response": {
+    "id": "ba49aec6-5ba4-40db-8737-4c4b02ff76be",
+    "model": "sonar-pro",
+    "created": 1769209053,
+    "usage": {
+      "prompt_tokens": 121,
+      "completion_tokens": 321,
+      "total_tokens": 442,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.005,
+        "request_cost": 0.006,
+        "total_cost": 0.011
+      }
+    },
+    "citations": [
+      "https://shiftasia.com/column/top-5-software-development-innovations/",
+      "https://www.ciodive.com/news/software-development-challenges-2026-CIO/808413/",
+      "https://www.chainguard.dev/2026-engineering-reality-report",
+      "https://benjamincongdon.me/blog/2025/12/29/Software-Engineering-in-2026/",
+      "https://waydev.co/2026-tech-trends-a-guide-for-engineering-leaders/"
+    ],
+    "search_results": [
+      {
+        "title": "Top 5 Software Development Innovations That Will Shape 2026",
+        "url": "https://shiftasia.com/column/top-5-software-development-innovations/",
+        "date": "2026-01-11",
+        "last_updated": "2026-01-11",
+        "snippet": "The software development landscape of 2026 will be defined by intelligence, integration, and intentional design. AI-native development, platform ...",
+        "source": "web"
+      },
+      {
+        "title": "The challenge for software engineers in 2026 — and beyond",
+        "url": "https://www.ciodive.com/news/software-development-challenges-2026-CIO/808413/",
+        "date": "2026-01-05",
+        "last_updated": "2026-01-05",
+        "snippet": "Burnout is also a critical issue plaguing software engineering teams — another in a litany of issues expected to play out in 2026. Enterprise ...",
+        "source": "web"
+      },
+      {
+        "title": "2026 Engineering Reality Report - Chainguard",
+        "url": "https://www.chainguard.dev/2026-engineering-reality-report",
+        "date": "2026-01-01",
+        "last_updated": "2026-01-23",
+        "snippet": "A software engineer's reality moving into 2026: what engineers want to do, and what they have to do.",
+        "source": "web"
+      },
+      {
+        "title": "Software Engineering in 2026 - Ben Congdon",
+        "url": "https://benjamincongdon.me/blog/2025/12/29/Software-Engineering-in-2026/",
+        "date": "2025-12-29",
+        "last_updated": "2026-01-19",
+        "snippet": "Shifting bottlenecks after a year of dramatic improvement in the quality of AI-generated code.",
+        "source": "web"
+      },
+      {
+        "title": "2026 Tech Trends: A Guide For Engineering Leaders - Waydev",
+        "url": "https://waydev.co/2026-tech-trends-a-guide-for-engineering-leaders/",
+        "date": "2025-12-03",
+        "last_updated": "2026-01-23",
+        "snippet": "2026 tech trends will focus on measurable ROI and disciplined engineering amid a more scrutinized AI landscape.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "I cannot provide a comprehensive answer to your query based on the search results provided. The search results focus on **practical software development trends and challenges for 2026** (AI integration, developer burnout, automation, and engineering practices), but do not contain academic research on the philosophical, semiotic, or theoretical foundations you're seeking.\n\nYour query specifically requests:\n\n- **Philosophy of software and code as crystallized intent** — not addressed in these results\n- **Semiotics of code and meaning encoding/decoding** — not covered\n- **Intentional programming paradigm research** — not discussed\n- **Graph-based program understanding** — not included\n- **Information theory applied to software** — not present\n- **Academic papers and established theories from 2020-2026** — the results are industry reports and trend analyses, not peer-reviewed academic research\n\nTo properly address your research interests, you would need different search results focused on academic literature in areas such as:\n\n- Philosophy of programming and software artifacts\n- Formal semantics and program understanding\n- Intentional programming and literate programming traditions (building on Don Knuth's work)\n- Graph-based code analysis and program comprehension\n- Information theory and software design\n- Computational semiotics\n\nI recommend searching academic databases (arXiv, ACM Digital Library, IEEE Xplore, or Google Scholar) with keywords like \"philosophy of programming,\" \"program semantics,\" \"intentional programming,\" \"code comprehension,\" or \"software semiotics\" to find relevant peer-reviewed sources in your area of interest."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

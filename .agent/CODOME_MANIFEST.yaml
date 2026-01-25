@@ -408,7 +408,7 @@ ai_tools:
     purpose: "Test Vertex AI SDK connectivity"
 
 # =============================================================================
-# CONFIGS (5 YAML files) - Auto-generated
+# CONFIGS (8 YAML files) - Updated 2026-01-25
 # =============================================================================
 configs:
   documentation_map:
@@ -430,6 +430,53 @@ configs:
   semantic_models:
     path: "context-management/config/semantic_models.yaml"
     purpose: "Semantic truth map for Holographic-Socratic Layer"
+
+  research_schemas:
+    path: "context-management/config/research_schemas.yaml"
+    purpose: "Research orchestration patterns (validation_trio, depth_ladder)"
+
+# =============================================================================
+# ORPHAN RESCUE (7 files - Added 2026-01-25)
+# =============================================================================
+orphan_rescue:
+  # Core Graph Engine
+  graph_framework:
+    path: "standard-model-of-code/src/core/graph_framework.py"
+    purpose: "Graph topology builder (build_nx_graph, find_entry_points)"
+    category: "core_engine"
+
+  graph_metrics:
+    path: "standard-model-of-code/src/core/graph_metrics.py"
+    purpose: "Centrality and critical node calculations"
+    category: "core_engine"
+
+  intent_extractor:
+    path: "standard-model-of-code/src/core/intent_extractor.py"
+    purpose: "Docstring and commit signal extraction"
+    category: "core_engine"
+
+  # Theory Definitions
+  scale_inout_topology:
+    path: "standard-model-of-code/docs/specs/SCALE_INOUT_TOPOLOGY.md"
+    purpose: "Topological structure (Scale-Free/In-Out)"
+    category: "theory"
+
+  health_model:
+    path: "standard-model-of-code/docs/specs/HEALTH_MODEL_CONSOLIDATED.md"
+    purpose: "Code health metrics definition"
+    category: "theory"
+
+  # UI Schema
+  ui_controls_schema:
+    path: "standard-model-of-code/docs/specs/UI_CONTROLS_SCHEMA.md"
+    purpose: "UI control interface contract"
+    category: "interface"
+
+  # Bridge
+  laboratory_bridge:
+    path: "context-management/tools/ai/laboratory_bridge.py"
+    purpose: "Bridge to experimental laboratory environment"
+    category: "integration"
 
 # =============================================================================
 # CANONICAL DOCUMENTATION
@@ -528,6 +575,89 @@ visualization:
   styles: "standard-model-of-code/src/core/viz/assets/styles.css"
   modules_dir: "standard-model-of-code/src/core/viz/assets/modules/"
   module_count: 48
+
+# =============================================================================
+# REGISTRIES (86 discovered, 14 task registries documented)
+# =============================================================================
+registries:
+  # Master index
+  meta:
+    path: ".agent/META_REGISTRY.yaml"
+    purpose: "WHERE to find WHAT - minimal path lookup"
+
+  master_spec:
+    path: "standard-model-of-code/docs/specs/REGISTRY_OF_REGISTRIES.md"
+    purpose: "Theory and enumeration of all registries"
+    item_count: "~5,160 items across 86 registries (4 universes)"
+
+  # Task Registries (Governance Universe)
+  task_registries:
+    agent_index:
+      path: ".agent/registry/INDEX.md"
+      purpose: "Agent task dashboard"
+
+    pipeline_refactor:
+      path: "standard-model-of-code/docs/specs/PIPELINE_REFACTOR_TASK_REGISTRY.md"
+      purpose: "Pipeline refactoring tasks"
+
+    tree_sitter:
+      path: "standard-model-of-code/docs/specs/TREE_SITTER_TASK_REGISTRY.md"
+      purpose: "Tree-sitter integration tasks"
+
+    upb:
+      path: "standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md"
+      purpose: "Universal Property Binder tasks"
+
+    token_system:
+      path: "standard-model-of-code/docs/reports/TOKEN_SYSTEM_TASK_REGISTRY.md"
+      purpose: "Token/credit system tasks"
+
+    sidebar_refactor:
+      path: "standard-model-of-code/docs/reports/SIDEBAR_REFACTOR_TASK_REGISTRY.md"
+      purpose: "Sidebar UI refactoring tasks"
+
+    docs_improvement:
+      path: "standard-model-of-code/docs/reports/DOCS_IMPROVEMENT_TASK_REGISTRY.md"
+      purpose: "Documentation improvement tasks"
+
+    docs_reorg:
+      path: "context-management/docs/DOCS_REORG_TASK_REGISTRY.md"
+      purpose: "Docs reorganization tasks"
+
+    task_confidence:
+      path: "context-management/tools/mcp/mcp_factory/TASK_CONFIDENCE_REGISTRY.md"
+      purpose: "MCP task confidence tracking"
+
+    architecture_debt:
+      path: "standard-model-of-code/docs/reports/ARCHITECTURE_DEBT_REGISTRY.md"
+      purpose: "Technical debt tracking"
+
+    building_materials:
+      path: "standard-model-of-code/docs/ui/corpus/v1/BUILDING_MATERIALS_REGISTRY.md"
+      purpose: "UI building blocks inventory"
+
+  # Universe Summary (from coordinated scan)
+  universes:
+    codome:
+      count: 42
+      items: "~4,100"
+      description: "Code universe - source files, functions, classes"
+
+    contextome:
+      count: 18
+      items: "~700"
+      description: "Context universe - docs, configs, AI tools"
+      spec: "context-management/docs/CONTEXTOME.md"  # TO BE CREATED
+
+    visualization:
+      count: 14
+      items: "~200"
+      description: "Visual representation of code"
+
+    governance:
+      count: 12
+      items: "~160"
+      description: "Task management, sprints, confidence"
 
 # =============================================================================
 # VALIDATION

@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T18:19:56.421418",
+    "source": "gemini",
+    "model": "gemini-2.0-flash",
+    "query": "We are designing an INCREMENTAL SEMANTIC INDEXING system for codebases. Context from Standard Model of Code project (atoms, dimensions, roles for code classification).\n\nSYSTEM PROPERTIES:\n1. GRANULARITY: Sentence/paragraph level (not token, not file)\n2. PURPOSE: Slow, steady, continuous mapping of semantic boundaries\n3. TRIGGER: Activity watcher detects sustained editing (30 min window)\n4. OUTPUT: Compact Semantic Chunk Records (SCR) with:\n   - Semantic type codes (FN.VALID, DT.MODEL, IO.READ)\n   - 1-line summaries, entity extraction\n   - Dependency links, hash for change detection\n5. USE CASE: Compile chunks into ordered context for LLMs\n\nYOUR TASK: Formulate the OPTIMAL Perplexity Sonar Pro query to research:\n- Prior art in semantic chunking for code\n- Compact semantic tagging schemas  \n- Incremental indexing strategies\n- Relevant academic/industry approaches (2024-2026)\n\nOutput ONE well-crafted query string.",
+    "query_length": 924,
+    "checksum": "sha256:e4e9294fc4c7183a7a7d2e4a2f2e8f8ef90ba5ec4b1f3bc8fd01d93b604b2bae"
+  },
+  "response": {
+    "content": "```text\n\"Semantic chunking OR code summarization OR program understanding OR incremental indexing OR semantic tagging AND code AND granularity: sentence OR paragraph AND (schema OR ontology) AND (2024 OR 2025 OR 2026) -patent -tutorial -example\"\n```\n",
+    "mode": "standard"
+  }
+}

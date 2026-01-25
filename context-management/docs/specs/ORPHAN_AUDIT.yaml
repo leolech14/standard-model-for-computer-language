@@ -1,0 +1,160 @@
+# ORPHAN AUDIT - Onboarding Refactor
+# Generated: 2026-01-25
+# Finding: 36 references in OLD, only 4 in NEW = 32 orphaned
+
+---
+summary:
+  old_references: 36
+  new_references: 4
+  orphaned: 32
+
+---
+# CATEGORIZED ORPHANS
+
+critical:
+  description: "Agent NEEDS these to function - must restore discoverability"
+  items:
+    - path: "context-management/docs/operations/AGENT_KERNEL.md"
+      reason: "Core rules, DoD summary, micro-loop"
+      fix: "Add to CLAUDE.md or concierge"
+
+    - path: "context-management/docs/agent_school/DOD.md"
+      reason: "Definition of Done - agent needs this"
+      fix: "Add to CLAUDE.md or concierge"
+
+    - path: "context-management/docs/agent_school/WORKFLOWS.md"
+      reason: "Git workflow, commit discipline"
+      fix: "Add to CLAUDE.md or concierge"
+
+    - path: ".agent/ROADMAP.yaml"
+      reason: "Task planning, current focus"
+      fix: "Concierge already shows active task - OK?"
+
+important:
+  description: "Useful for deeper work - should be in deep/"
+  items:
+    - path: "standard-model-of-code/docs/COLLIDER.md"
+      reason: "Tool documentation"
+      fix: "Already in standard-model-of-code/CLAUDE.md"
+
+    - path: "context-management/docs/RESEARCH_SCHEMAS.md"
+      reason: "Research patterns"
+      fix: "Move to deep/"
+
+    - path: "context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md"
+      reason: "HSL documentation"
+      fix: "Move to deep/"
+
+    - path: "context-management/docs/BACKGROUND_AI_LAYER_MAP.md"
+      reason: "Background AI systems"
+      fix: "Move to deep/"
+
+    - path: "context-management/tools/archive/archive.py"
+      reason: "Archive tool"
+      fix: "Add to commands table or deep/"
+
+    - path: "context-management/tools/maintenance/boot.sh"
+      reason: "Original boot script"
+      fix: "Concierge replaces this - document migration"
+
+domain_specific:
+  description: "Belong in domain CLAUDE.md files, not root"
+  items:
+    - path: "standard-model-of-code/docs/specs/UNIVERSAL_PROPERTY_BINDER.md"
+      location: "standard-model-of-code/CLAUDE.md"
+      status: "Already there"
+
+    - path: "standard-model-of-code/docs/specs/UPB_TASK_REGISTRY.md"
+      location: "standard-model-of-code/CLAUDE.md"
+      status: "Already there"
+
+    - path: "standard-model-of-code/docs/specs/UPB_LEGACY_SPRAWL.md"
+      location: "standard-model-of-code/CLAUDE.md"
+      status: "Already there"
+
+    - path: "standard-model-of-code/src/core/full_analysis.py"
+      location: "standard-model-of-code/CLAUDE.md"
+      status: "Already there"
+
+    - path: "standard-model-of-code/src/core/atom_classifier.py"
+      location: "standard-model-of-code/CLAUDE.md"
+      status: "Already there"
+
+    - path: "context-management/config/analysis_sets.yaml"
+      location: "context-management/docs/deep/"
+      status: "Should add"
+
+    - path: "context-management/config/research_schemas.yaml"
+      location: "context-management/docs/deep/"
+      status: "Should add"
+
+    - path: "context-management/config/semantic_models.yaml"
+      location: "context-management/docs/deep/"
+      status: "Should add"
+
+internal_only:
+  description: "Internal files, not needed in onboarding"
+  items:
+    - path: ".agent/intelligence/PRIORITY_MATRIX.md"
+      reason: "Internal tracking"
+
+    - path: ".agent/intelligence/WAVE_PARTICLE_BALANCE.md"
+      reason: "Internal metrics"
+
+    - path: ".agent/specs/WAVE_PARTICLE_SYMMETRY.md"
+      reason: "Internal spec"
+
+    - path: ".agent/SUBSYSTEM_INTEGRATION.md"
+      reason: "Internal architecture"
+
+    - path: ".agent/registry/INDEX.md"
+      reason: "Internal registry"
+
+    - path: "context-management/tools/ai/aci/research_orchestrator.py"
+      reason: "Internal implementation"
+
+deleted_ok:
+  description: "Were in killed docs, OK to not reference"
+  items:
+    - path: "context-management/docs/operations/AGENT_INITIATION.md"
+      reason: "Killed - archived"
+
+    - path: "context-management/docs/agent_school/INDEX.md"
+      reason: "Killed - archived"
+
+noise:
+  description: "Not real references"
+  items:
+    - path: "YYYYMMDD_HHMMSS_topic_slug.md"
+      reason: "Template example"
+
+    - path: "20260122_143000_context_window_utilization.md"
+      reason: "Example filename"
+
+    - path: "unified_analysis.json"
+      reason: "Output file, not input"
+
+    - path: ".pre-commit-config.yaml"
+      reason: "Auto-discovered by git hooks"
+
+    - path: "commitlint.config.js"
+      reason: "Auto-discovered by git hooks"
+
+---
+# ACTION PLAN
+
+immediate_fixes:
+  - action: "Add AGENT_KERNEL.md to CLAUDE.md"
+    priority: P0
+
+  - action: "Add DOD.md to CLAUDE.md"
+    priority: P0
+
+  - action: "Add WORKFLOWS.md to CLAUDE.md"
+    priority: P0
+
+  - action: "Create deep/INDEX.md listing all deep docs"
+    priority: P1
+
+  - action: "Add archive.py command to QUICK_START.md"
+    priority: P2

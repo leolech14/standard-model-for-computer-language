@@ -1,0 +1,6 @@
+#!/bin/bash
+# Concierge: Smart agent boot
+# Usage: ./concierge [--json] [--tutorial]
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python3 "$SCRIPT_DIR/.agent/tools/concierge.py" "$@"

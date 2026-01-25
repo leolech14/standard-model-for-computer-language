@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-25 15:57:31",
+  "session_end": "2026-01-25 15:57:56",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769367451.865025,
+      "timestamp_str": "2026-01-25 15:57:31",
+      "role": "user",
+      "content": "Rate the Domain cross-cut model:\n\n'A Domain is a vertical slice through Codome AND Contextome. Example: Pipeline domain has code (full_analysis.py) AND context (PIPELINE_STAGES.md). Domain symmetry = how well code matches docs.'\n\nScore 0-100: Does this match how the codebase is actually organized? Is it useful?"
+    }
+  ]
+}

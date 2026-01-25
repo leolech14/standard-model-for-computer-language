@@ -1,0 +1,233 @@
+# Query Manifest Schema
+# =====================
+# THE CANONICAL RECORD FORMAT FOR AI QUERIES
+#
+# A Query Manifest IS the file. It's not metadata about a file - it IS the record.
+# Every significant AI query produces a Query Manifest as its primary artifact.
+#
+# PRINCIPLE: If you can't show the manifest, the query didn't happen.
+#
+# Storage Locations:
+#   - Gemini queries: standard-model-of-code/docs/research/gemini/docs/
+#   - Perplexity queries: standard-model-of-code/docs/research/perplexity/docs/
+#   - Claude queries: standard-model-of-code/docs/research/claude/docs/
+#   - Session logs: .agent/intelligence/query_logs/
+#
+# Filename Convention:
+#   YYYYMMDD_HHMMSS_topic_slug.md
+#
+# Version: 1.0.0
+# Created: 2026-01-25
+
+# =============================================================================
+# THE QUERY MANIFEST
+# =============================================================================
+
+query_manifest:
+  # --- IDENTITY ---
+  id: "QM-YYYYMMDD-HHMMSS-XXXX"  # Unique query ID
+  timestamp: "2026-01-25T20:30:00Z"  # ISO 8601
+  session_id: "optional-session-reference"
+
+  # --- MODEL CONFIGURATION ---
+  model:
+    name: "gemini-2.0-flash-001"  # Exact model ID
+    provider: "google"  # google | anthropic | openai | perplexity
+    tier: "flash_deep"  # ACI tier used
+    temperature: 0.1  # 0.0 = deterministic, 1.0 = creative
+    max_tokens: null  # Output limit (null = model default)
+
+  # --- CONTEXT INJECTION ---
+  context:
+    type: "file"  # file | set | rag | none
+    sources:
+      - path: "/tmp/claude_history_today.md"
+        type: "claude_code_jsonl"
+        tokens_est: 241125
+    total_tokens_est: 241125
+    token_budget: 1000000
+    truncation: "none"  # none | head | tail | middle | smart
+
+  # --- PROMPT STRUCTURE ---
+  prompt:
+    system: "You are a research analyst reviewing Claude Code conversation logs..."
+    user_length_chars: 964502
+    template: "analysis_task"  # Optional: named template used
+
+  # --- QUANTITATIVE METRICS ---
+  metrics:
+    input_tokens: 241125  # Actual (from API response)
+    output_tokens: 1847  # Actual
+    latency_ms: 12340  # Time to first token or total
+    cost_usd: 0.024  # Estimated cost
+
+  # --- QUALITATIVE ASSESSMENT ---
+  quality:
+    confidence: 85  # 0-100: How reliable is this answer?
+    completeness: 90  # 0-100: Did it address the full query?
+    specificity: 75  # 0-100: How concrete vs vague?
+    citation_count: 12  # Number of specific references
+
+  # --- RESULT SUMMARY ---
+  result:
+    takeaway: "Identified 4 parallel threads: ACI Correctness, Codespace Topology, UI Expansion, Batch Grading"
+    key_findings:
+      - "Purpose Field formalized as teleological layer"
+      - "Crystallization distinction: human (dynamic) vs code (static)"
+      - "Survey module emerged from vendor node problem"
+    artifacts_mentioned:
+      - "context-management/docs/CODESPACE_ALGEBRA.md"
+      - "context-management/docs/GLOSSARY.md"
+
+  # --- IMPLICATIONS ---
+  implications:
+    applies_to:
+      - "CODESPACE_ALGEBRA.md - theoretical foundation"
+      - "ACI system - routing improvements"
+    documented_in: null  # Path if result was saved
+    follow_up_queries: []  # Suggested next queries
+    action_items:
+      - "Save analysis to research folder"
+      - "Update thread tracking"
+
+# =============================================================================
+# COMPACT FORMAT (for inline use)
+# =============================================================================
+#
+# ```yaml
+# # QUERY MANIFEST
+# model: gemini-2.0-flash-001 | temp=0.1 | tier=flash_deep
+# context: 241K tokens from claude_history_today.md
+# metrics: in=241K out=1.8K latency=12s cost=$0.02
+# quality: conf=85 complete=90 specific=75
+# takeaway: "4 parallel threads identified..."
+# ```
+
+# =============================================================================
+# FIELD DEFINITIONS
+# =============================================================================
+
+field_definitions:
+  # Model fields
+  model.name:
+    description: "Exact model identifier as used in API call"
+    required: true
+    examples:
+      - "gemini-2.0-flash-001"
+      - "gemini-3-pro-preview"
+      - "claude-opus-4-5-20251101"
+      - "sonar-pro"
+
+  model.provider:
+    description: "AI provider"
+    required: true
+    enum: ["google", "anthropic", "openai", "perplexity", "local"]
+
+  model.tier:
+    description: "ACI tier that selected this configuration"
+    required: false
+    enum: ["instant", "rag", "long_context", "perplexity", "flash_deep", "hybrid"]
+
+  model.temperature:
+    description: "Sampling temperature. 0=deterministic, 1=max creativity"
+    required: true
+    range: [0.0, 2.0]
+
+  # Context fields
+  context.type:
+    description: "How context was provided"
+    required: true
+    enum:
+      - "file"      # Direct file(s) loaded
+      - "set"       # Analysis set from config
+      - "rag"       # Retrieved from vector store
+      - "cache"     # Gemini context cache
+      - "none"      # No context (prompt only)
+
+  context.total_tokens_est:
+    description: "Estimated input tokens (before API call)"
+    required: true
+
+  context.truncation:
+    description: "How oversized context was handled"
+    required: false
+    enum: ["none", "head", "tail", "middle", "smart", "error"]
+
+  # Metrics fields
+  metrics.input_tokens:
+    description: "Actual input tokens from API response"
+    required: false  # May not be available pre-call
+
+  metrics.cost_usd:
+    description: "Estimated cost in USD"
+    required: false
+    calculation: "input_tokens * input_price + output_tokens * output_price"
+
+  # Quality fields (human or automated assessment)
+  quality.confidence:
+    description: "How reliable is this answer? Based on: citations, consistency, specificity"
+    range: [0, 100]
+
+  quality.completeness:
+    description: "Did it fully address the query? Based on: all parts answered, no gaps"
+    range: [0, 100]
+
+  quality.specificity:
+    description: "How concrete vs vague? Based on: file paths, line numbers, exact values"
+    range: [0, 100]
+
+  # Result fields
+  result.takeaway:
+    description: "One-sentence summary of the key finding"
+    required: true
+    max_length: 200
+
+  result.key_findings:
+    description: "Bullet list of specific discoveries"
+    required: false
+    max_items: 10
+
+  # Implications fields
+  implications.applies_to:
+    description: "What does this result affect? Files, systems, decisions."
+    required: false
+
+  implications.documented_in:
+    description: "Path where full result was saved"
+    required: false
+
+  implications.action_items:
+    description: "Concrete next steps from this query"
+    required: false
+
+# =============================================================================
+# PRICING REFERENCE (as of 2026-01)
+# =============================================================================
+
+pricing:
+  gemini-2.0-flash-001:
+    input_per_1m: 0.075   # $0.075 per 1M input tokens
+    output_per_1m: 0.30   # $0.30 per 1M output tokens
+    context_window: 1000000
+
+  gemini-3-pro-preview:
+    input_per_1m: 1.25
+    output_per_1m: 5.00
+    context_window: 1000000
+
+  sonar-pro:  # Perplexity
+    per_request: 0.005  # $5 per 1000 requests
+    context_window: 127000
+
+# =============================================================================
+# TEMPLATE: Copy-paste for new queries
+# =============================================================================
+
+template: |
+  # QUERY MANIFEST
+  model: MODEL_NAME | temp=TEMP | tier=TIER
+  context: TOKENSk tokens from SOURCE
+  metrics: in=INk out=OUTk latency=TIMEs cost=$COST
+  quality: conf=CONF complete=COMP specific=SPEC
+  takeaway: "SUMMARY"
+  documented_in: PATH_OR_NULL

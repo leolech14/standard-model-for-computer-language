@@ -1,0 +1,173 @@
+{
+  "$schema": "layout-containers-v1",
+  "generated": "2026-01-25",
+  "validated_by": "Agent Alpha - source code inspection",
+  "source": "template.html + ui_layout_model.json",
+
+  "root": {
+    "element": "body",
+    "children": ["#loader", "#header", "#sidebar", "#3d-graph", "#right-panel"]
+  },
+
+  "containers": [
+    {
+      "id": "header",
+      "selector": "#header",
+      "role": "global_hud",
+      "position": "fixed",
+      "dimensions": {
+        "height": "var(--header-height)",
+        "width": "100%"
+      },
+      "z_index": 200,
+      "children": [".logo", ".header-stats", ".target-name"]
+    },
+    {
+      "id": "sidebar",
+      "selector": "#sidebar",
+      "role": "control_stack",
+      "position": "fixed",
+      "dimensions": {
+        "width": "var(--sidebar-width)",
+        "height": "calc(100% - var(--header-height))",
+        "top": "var(--header-height)",
+        "left": 0
+      },
+      "z_index": 150,
+      "collapsible": true,
+      "children": ["view-mode-toggle", "accordion-sections"]
+    },
+    {
+      "id": "3d-graph",
+      "selector": "#3d-graph",
+      "role": "canvas",
+      "position": "fixed",
+      "dimensions": {
+        "top": "var(--header-height)",
+        "left": "var(--sidebar-width)",
+        "right": "var(--right-panel-width)",
+        "bottom": 0
+      },
+      "z_index": 1,
+      "children": ["canvas", "tooltip", "legend"]
+    },
+    {
+      "id": "right-panel",
+      "selector": "#right-panel",
+      "role": "context_stack",
+      "position": "fixed",
+      "dimensions": {
+        "width": "var(--right-panel-width)",
+        "height": "calc(100% - var(--header-height))",
+        "top": "var(--header-height)",
+        "right": 0
+      },
+      "z_index": 150,
+      "collapsible": true,
+      "children": ["hover-panel", "selection-panel", "color-schemes"]
+    },
+    {
+      "id": "control-bar",
+      "selector": "#control-bar",
+      "role": "upb_interface",
+      "position": "fixed",
+      "dimensions": {
+        "bottom": "20px",
+        "left": "50%",
+        "transform": "translateX(-50%)"
+      },
+      "z_index": 300,
+      "visibility": "toggle",
+      "trigger": "M or ` key"
+    }
+  ],
+
+  "accordion_sections": [
+    {
+      "id": "section-view",
+      "title": "VIEW",
+      "data_section": "view",
+      "default_expanded": true,
+      "controls": ["view-mode-toggle"]
+    },
+    {
+      "id": "section-nodes",
+      "title": "NODES",
+      "data_section": "nodes",
+      "default_expanded": true,
+      "controls": [
+        "cfg-node-size", "cfg-node-opacity", "cfg-node-res",
+        "cfg-label-size", "cfg-toggle-labels",
+        "cfg-toggle-highlight", "cfg-toggle-pulse", "cfg-toggle-depth",
+        "btn[data-size-mode]"
+      ]
+    },
+    {
+      "id": "section-edges",
+      "title": "EDGES",
+      "data_section": "edges",
+      "default_expanded": true,
+      "controls": [
+        "cfg-edge-opacity", "cfg-edge-width", "cfg-edge-curve",
+        "cfg-particle-speed", "cfg-particle-count",
+        "cfg-toggle-arrows", "cfg-toggle-gradient", "cfg-toggle-edge-hover",
+        "cfg-toggle-codome",
+        "btn[data-edge-style]"
+      ]
+    },
+    {
+      "id": "section-physics",
+      "title": "PHYSICS",
+      "data_section": "physics",
+      "default_expanded": false,
+      "controls": [
+        "physics-charge", "physics-link", "physics-center",
+        "btn[data-physics]"
+      ]
+    },
+    {
+      "id": "section-layout",
+      "title": "LAYOUT",
+      "data_section": "layout",
+      "default_expanded": false,
+      "controls": ["btn[data-layout]"]
+    }
+  ],
+
+  "css_variables": {
+    "--bg": "#0a0a0f",
+    "--surface": "rgba(15, 15, 22, 0.85)",
+    "--surface-hover": "rgba(25, 25, 35, 0.9)",
+    "--border": "rgba(255, 255, 255, 0.08)",
+    "--border-accent": "rgba(74, 158, 255, 0.3)",
+    "--text": "rgba(255, 255, 255, 0.9)",
+    "--text-dim": "rgba(255, 255, 255, 0.5)",
+    "--text-muted": "rgba(255, 255, 255, 0.3)",
+    "--accent": "#4a9eff",
+    "--accent-dim": "rgba(74, 158, 255, 0.15)",
+    "--accent-glow": "rgba(74, 158, 255, 0.25)",
+    "--sidebar-width": "300px",
+    "--right-panel-width": "280px",
+    "--min-sidebar-width": "240px",
+    "--max-sidebar-width": "500px",
+    "--header-height": "48px",
+    "--radius": "8px",
+    "--radius-sm": "4px",
+    "--glass": "blur(12px)"
+  },
+
+  "responsive_breakpoints": {
+    "sidebar_collapse": 768,
+    "min_canvas_width": 400
+  },
+
+  "z_index_stack": {
+    "canvas": 1,
+    "sidebars": 150,
+    "header": 200,
+    "control_bar": 300,
+    "modals": 400,
+    "tooltips": 500,
+    "loader": 9999
+  }
+}

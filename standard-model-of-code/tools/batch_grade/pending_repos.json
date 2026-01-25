@@ -1,0 +1,3098 @@
+[
+  {
+    "name": "freeCodeCamp/freeCodeCamp",
+    "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+    "stars": 436242,
+    "language": "TypeScript",
+    "size_kb": 544919,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "facebook/react",
+    "url": "https://github.com/facebook/react.git",
+    "stars": 242481,
+    "language": "JavaScript",
+    "size_kb": 899926,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "TheAlgorithms/Python",
+    "url": "https://github.com/TheAlgorithms/Python.git",
+    "stars": 217133,
+    "language": "Python",
+    "size_kb": 15646,
+    "reason": "timeout"
+  },
+  {
+    "name": "Significant-Gravitas/AutoGPT",
+    "url": "https://github.com/Significant-Gravitas/AutoGPT.git",
+    "stars": 181404,
+    "language": "Python",
+    "size_kb": 329112,
+    "reason": "timeout"
+  },
+  {
+    "name": "microsoft/vscode",
+    "url": "https://github.com/microsoft/vscode.git",
+    "stars": 180978,
+    "language": "TypeScript",
+    "size_kb": 1113207,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "n8n-io/n8n",
+    "url": "https://github.com/n8n-io/n8n.git",
+    "stars": 171011,
+    "language": "TypeScript",
+    "size_kb": 351813,
+    "reason": "timeout"
+  },
+  {
+    "name": "ollama/ollama",
+    "url": "https://github.com/ollama/ollama.git",
+    "stars": 160433,
+    "language": "Go",
+    "size_kb": 73652,
+    "reason": "timeout"
+  },
+  {
+    "name": "AUTOMATIC1111/stable-diffusion-webui",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui.git",
+    "stars": 160187,
+    "language": "Python",
+    "size_kb": 36544,
+    "reason": "timeout"
+  },
+  {
+    "name": "huggingface/transformers",
+    "url": "https://github.com/huggingface/transformers.git",
+    "stars": 155653,
+    "language": "Python",
+    "size_kb": 439938,
+    "reason": "timeout"
+  },
+  {
+    "name": "langflow-ai/langflow",
+    "url": "https://github.com/langflow-ai/langflow.git",
+    "stars": 144182,
+    "language": "Python",
+    "size_kb": 1085386,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "yt-dlp/yt-dlp",
+    "url": "https://github.com/yt-dlp/yt-dlp.git",
+    "stars": 143880,
+    "language": "Python",
+    "size_kb": 59020,
+    "reason": "timeout"
+  },
+  {
+    "name": "ytdl-org/youtube-dl",
+    "url": "https://github.com/ytdl-org/youtube-dl.git",
+    "stars": 139555,
+    "language": "Python",
+    "size_kb": 65509,
+    "reason": "timeout"
+  },
+  {
+    "name": "vercel/next.js",
+    "url": "https://github.com/vercel/next.js.git",
+    "stars": 137317,
+    "language": "JavaScript",
+    "size_kb": 2454438,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "golang/go",
+    "url": "https://github.com/golang/go.git",
+    "stars": 132107,
+    "language": "Go",
+    "size_kb": 425375,
+    "reason": "timeout"
+  },
+  {
+    "name": "langgenius/dify",
+    "url": "https://github.com/langgenius/dify.git",
+    "stars": 127083,
+    "language": "TypeScript",
+    "size_kb": 276044,
+    "reason": "timeout"
+  },
+  {
+    "name": "Chalarangelo/30-seconds-of-code",
+    "url": "https://github.com/Chalarangelo/30-seconds-of-code.git",
+    "stars": 126484,
+    "language": "JavaScript",
+    "size_kb": 742662,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "langchain-ai/langchain",
+    "url": "https://github.com/langchain-ai/langchain.git",
+    "stars": 125019,
+    "language": "Python",
+    "size_kb": 509461,
+    "reason": "timeout"
+  },
+  {
+    "name": "open-webui/open-webui",
+    "url": "https://github.com/open-webui/open-webui.git",
+    "stars": 121732,
+    "language": "Python",
+    "size_kb": 316958,
+    "reason": "timeout"
+  },
+  {
+    "name": "kubernetes/kubernetes",
+    "url": "https://github.com/kubernetes/kubernetes.git",
+    "stars": 120038,
+    "language": "Go",
+    "size_kb": 1437854,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "nodejs/node",
+    "url": "https://github.com/nodejs/node.git",
+    "stars": 115358,
+    "language": "JavaScript",
+    "size_kb": 1407683,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "mrdoob/three.js",
+    "url": "https://github.com/mrdoob/three.js.git",
+    "stars": 110519,
+    "language": "JavaScript",
+    "size_kb": 1552477,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "iptv-org/iptv",
+    "url": "https://github.com/iptv-org/iptv.git",
+    "stars": 110134,
+    "language": "TypeScript",
+    "size_kb": 1136812,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "microsoft/TypeScript",
+    "url": "https://github.com/microsoft/TypeScript.git",
+    "stars": 107542,
+    "language": "TypeScript",
+    "size_kb": 2911456,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "shadcn-ui/ui",
+    "url": "https://github.com/shadcn-ui/ui.git",
+    "stars": 105428,
+    "language": "TypeScript",
+    "size_kb": 43546,
+    "reason": "timeout"
+  },
+  {
+    "name": "Comfy-Org/ComfyUI",
+    "url": "https://github.com/Comfy-Org/ComfyUI.git",
+    "stars": 101299,
+    "language": "Python",
+    "size_kb": 78177,
+    "reason": "timeout"
+  },
+  {
+    "name": "angular/angular",
+    "url": "https://github.com/angular/angular.git",
+    "stars": 99746,
+    "language": "TypeScript",
+    "size_kb": 606839,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "mui/material-ui",
+    "url": "https://github.com/mui/material-ui.git",
+    "stars": 97691,
+    "language": "JavaScript",
+    "size_kb": 708507,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "ant-design/ant-design",
+    "url": "https://github.com/ant-design/ant-design.git",
+    "stars": 97348,
+    "language": "TypeScript",
+    "size_kb": 249790,
+    "reason": "timeout"
+  },
+  {
+    "name": "pytorch/pytorch",
+    "url": "https://github.com/pytorch/pytorch.git",
+    "stars": 96874,
+    "language": "Python",
+    "size_kb": 1211930,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "supabase/supabase",
+    "url": "https://github.com/supabase/supabase.git",
+    "stars": 96699,
+    "language": "TypeScript",
+    "size_kb": 2257368,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "microsoft/Web-Dev-For-Beginners",
+    "url": "https://github.com/microsoft/Web-Dev-For-Beginners.git",
+    "stars": 95133,
+    "language": "JavaScript",
+    "size_kb": 2168526,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "fastapi/fastapi",
+    "url": "https://github.com/fastapi/fastapi.git",
+    "stars": 94417,
+    "language": "Python",
+    "size_kb": 32149,
+    "reason": "timeout"
+  },
+  {
+    "name": "puppeteer/puppeteer",
+    "url": "https://github.com/puppeteer/puppeteer.git",
+    "stars": 93383,
+    "language": "TypeScript",
+    "size_kb": 1284363,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "google-gemini/gemini-cli",
+    "url": "https://github.com/google-gemini/gemini-cli.git",
+    "stars": 92358,
+    "language": "TypeScript",
+    "size_kb": 79538,
+    "reason": "timeout"
+  },
+  {
+    "name": "immich-app/immich",
+    "url": "https://github.com/immich-app/immich.git",
+    "stars": 89803,
+    "language": "TypeScript",
+    "size_kb": 272072,
+    "reason": "timeout"
+  },
+  {
+    "name": "Shubhamsaboo/awesome-llm-apps",
+    "url": "https://github.com/Shubhamsaboo/awesome-llm-apps.git",
+    "stars": 89165,
+    "language": "Python",
+    "size_kb": 193687,
+    "reason": "timeout"
+  },
+  {
+    "name": "storybookjs/storybook",
+    "url": "https://github.com/storybookjs/storybook.git",
+    "stars": 89117,
+    "language": "TypeScript",
+    "size_kb": 1095452,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "django/django",
+    "url": "https://github.com/django/django.git",
+    "stars": 86559,
+    "language": "Python",
+    "size_kb": 276230,
+    "reason": "timeout"
+  },
+  {
+    "name": "anomalyco/opencode",
+    "url": "https://github.com/anomalyco/opencode.git",
+    "stars": 86244,
+    "language": "TypeScript",
+    "size_kb": 240294,
+    "reason": "timeout"
+  },
+  {
+    "name": "gohugoio/hugo",
+    "url": "https://github.com/gohugoio/hugo.git",
+    "stars": 86225,
+    "language": "Go",
+    "size_kb": 136137,
+    "reason": "timeout"
+  },
+  {
+    "name": "sveltejs/svelte",
+    "url": "https://github.com/sveltejs/svelte.git",
+    "stars": 85550,
+    "language": "JavaScript",
+    "size_kb": 118194,
+    "reason": "timeout"
+  },
+  {
+    "name": "home-assistant/core",
+    "url": "https://github.com/home-assistant/core.git",
+    "stars": 84363,
+    "language": "Python",
+    "size_kb": 778603,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "3b1b/manim",
+    "url": "https://github.com/3b1b/manim.git",
+    "stars": 83917,
+    "language": "Python",
+    "size_kb": 76524,
+    "reason": "timeout"
+  },
+  {
+    "name": "microsoft/playwright",
+    "url": "https://github.com/microsoft/playwright.git",
+    "stars": 81631,
+    "language": "TypeScript",
+    "size_kb": 224209,
+    "reason": "timeout"
+  },
+  {
+    "name": "vitejs/vite",
+    "url": "https://github.com/vitejs/vite.git",
+    "stars": 77749,
+    "language": "TypeScript",
+    "size_kb": 65359,
+    "reason": "timeout"
+  },
+  {
+    "name": "tensorflow/models",
+    "url": "https://github.com/tensorflow/models.git",
+    "stars": 77693,
+    "language": "Python",
+    "size_kb": 658975,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "hoppscotch/hoppscotch",
+    "url": "https://github.com/hoppscotch/hoppscotch.git",
+    "stars": 77638,
+    "language": "TypeScript",
+    "size_kb": 95431,
+    "reason": "timeout"
+  },
+  {
+    "name": "firecrawl/firecrawl",
+    "url": "https://github.com/firecrawl/firecrawl.git",
+    "stars": 77092,
+    "language": "TypeScript",
+    "size_kb": 81744,
+    "reason": "timeout"
+  },
+  {
+    "name": "browser-use/browser-use",
+    "url": "https://github.com/browser-use/browser-use.git",
+    "stars": 76654,
+    "language": "Python",
+    "size_kb": 27778,
+    "reason": "timeout"
+  },
+  {
+    "name": "FortAwesome/Font-Awesome",
+    "url": "https://github.com/FortAwesome/Font-Awesome.git",
+    "stars": 76270,
+    "language": "JavaScript",
+    "size_kb": 138845,
+    "reason": "timeout"
+  },
+  {
+    "name": "nestjs/nest",
+    "url": "https://github.com/nestjs/nest.git",
+    "stars": 74322,
+    "language": "TypeScript",
+    "size_kb": 463562,
+    "reason": "timeout"
+  },
+  {
+    "name": "Stirling-Tools/Stirling-PDF",
+    "url": "https://github.com/Stirling-Tools/Stirling-PDF.git",
+    "stars": 73476,
+    "language": "TypeScript",
+    "size_kb": 228218,
+    "reason": "timeout"
+  },
+  {
+    "name": "infiniflow/ragflow",
+    "url": "https://github.com/infiniflow/ragflow.git",
+    "stars": 72072,
+    "language": "Python",
+    "size_kb": 105807,
+    "reason": "timeout"
+  },
+  {
+    "name": "grafana/grafana",
+    "url": "https://github.com/grafana/grafana.git",
+    "stars": 71865,
+    "language": "TypeScript",
+    "size_kb": 1401832,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "moby/moby",
+    "url": "https://github.com/moby/moby.git",
+    "stars": 71414,
+    "language": "Go",
+    "size_kb": 298919,
+    "reason": "timeout"
+  },
+  {
+    "name": "python/cpython",
+    "url": "https://github.com/python/cpython.git",
+    "stars": 71206,
+    "language": "Python",
+    "size_kb": 782969,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "jesseduffield/lazygit",
+    "url": "https://github.com/jesseduffield/lazygit.git",
+    "stars": 71088,
+    "language": "Go",
+    "size_kb": 151573,
+    "reason": "timeout"
+  },
+  {
+    "name": "strapi/strapi",
+    "url": "https://github.com/strapi/strapi.git",
+    "stars": 71075,
+    "language": "TypeScript",
+    "size_kb": 614590,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "lobehub/lobe-chat",
+    "url": "https://github.com/lobehub/lobe-chat.git",
+    "stars": 70477,
+    "language": "TypeScript",
+    "size_kb": 646028,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "apache/superset",
+    "url": "https://github.com/apache/superset.git",
+    "stars": 70252,
+    "language": "TypeScript",
+    "size_kb": 878852,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "binary-husky/gpt_academic",
+    "url": "https://github.com/binary-husky/gpt_academic.git",
+    "stars": 70015,
+    "language": "Python",
+    "size_kb": 72681,
+    "reason": "timeout"
+  },
+  {
+    "name": "caddyserver/caddy",
+    "url": "https://github.com/caddyserver/caddy.git",
+    "stars": 69372,
+    "language": "Go",
+    "size_kb": 20156,
+    "reason": "timeout"
+  },
+  {
+    "name": "PaddlePaddle/PaddleOCR",
+    "url": "https://github.com/PaddlePaddle/PaddleOCR.git",
+    "stars": 68709,
+    "language": "Python",
+    "size_kb": 1730767,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "vllm-project/vllm",
+    "url": "https://github.com/vllm-project/vllm.git",
+    "stars": 68445,
+    "language": "Python",
+    "size_kb": 145538,
+    "reason": "timeout"
+  },
+  {
+    "name": "ansible/ansible",
+    "url": "https://github.com/ansible/ansible.git",
+    "stars": 67767,
+    "language": "Python",
+    "size_kb": 262720,
+    "reason": "timeout"
+  },
+  {
+    "name": "OpenHands/OpenHands",
+    "url": "https://github.com/OpenHands/OpenHands.git",
+    "stars": 67030,
+    "language": "Python",
+    "size_kb": 271233,
+    "reason": "timeout"
+  },
+  {
+    "name": "webpack/webpack",
+    "url": "https://github.com/webpack/webpack.git",
+    "stars": 65927,
+    "language": "JavaScript",
+    "size_kb": 76152,
+    "reason": "timeout"
+  },
+  {
+    "name": "apache/echarts",
+    "url": "https://github.com/apache/echarts.git",
+    "stars": 65519,
+    "language": "TypeScript",
+    "size_kb": 264205,
+    "reason": "timeout"
+  },
+  {
+    "name": "scikit-learn/scikit-learn",
+    "url": "https://github.com/scikit-learn/scikit-learn.git",
+    "stars": 64756,
+    "language": "Python",
+    "size_kb": 179213,
+    "reason": "timeout"
+  },
+  {
+    "name": "localstack/localstack",
+    "url": "https://github.com/localstack/localstack.git",
+    "stars": 64187,
+    "language": "Python",
+    "size_kb": 61289,
+    "reason": "timeout"
+  },
+  {
+    "name": "keras-team/keras",
+    "url": "https://github.com/keras-team/keras.git",
+    "stars": 63742,
+    "language": "Python",
+    "size_kb": 49489,
+    "reason": "timeout"
+  },
+  {
+    "name": "facebook/docusaurus",
+    "url": "https://github.com/facebook/docusaurus.git",
+    "stars": 63513,
+    "language": "TypeScript",
+    "size_kb": 973171,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "FoundationAgents/MetaGPT",
+    "url": "https://github.com/FoundationAgents/MetaGPT.git",
+    "stars": 63372,
+    "language": "Python",
+    "size_kb": 184037,
+    "reason": "timeout"
+  },
+  {
+    "name": "prometheus/prometheus",
+    "url": "https://github.com/prometheus/prometheus.git",
+    "stars": 62363,
+    "language": "Go",
+    "size_kb": 274466,
+    "reason": "timeout"
+  },
+  {
+    "name": "toeverything/AFFiNE",
+    "url": "https://github.com/toeverything/AFFiNE.git",
+    "stars": 62153,
+    "language": "TypeScript",
+    "size_kb": 564265,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "nocodb/nocodb",
+    "url": "https://github.com/nocodb/nocodb.git",
+    "stars": 61686,
+    "language": "TypeScript",
+    "size_kb": 1399753,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "traefik/traefik",
+    "url": "https://github.com/traefik/traefik.git",
+    "stars": 61222,
+    "language": "Go",
+    "size_kb": 153301,
+    "reason": "timeout"
+  },
+  {
+    "name": "gorhill/uBlock",
+    "url": "https://github.com/gorhill/uBlock.git",
+    "stars": 61105,
+    "language": "JavaScript",
+    "size_kb": 162431,
+    "reason": "timeout"
+  },
+  {
+    "name": "minio/minio",
+    "url": "https://github.com/minio/minio.git",
+    "stars": 59890,
+    "language": "Go",
+    "size_kb": 135984,
+    "reason": "timeout"
+  },
+  {
+    "name": "commaai/openpilot",
+    "url": "https://github.com/commaai/openpilot.git",
+    "stars": 59840,
+    "language": "Python",
+    "size_kb": 798292,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "scrapy/scrapy",
+    "url": "https://github.com/scrapy/scrapy.git",
+    "stars": 59535,
+    "language": "Python",
+    "size_kb": 29131,
+    "reason": "timeout"
+  },
+  {
+    "name": "OpenBB-finance/OpenBB",
+    "url": "https://github.com/OpenBB-finance/OpenBB.git",
+    "stars": 59299,
+    "language": "Python",
+    "size_kb": 2399404,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "unclecode/crawl4ai",
+    "url": "https://github.com/unclecode/crawl4ai.git",
+    "stars": 58952,
+    "language": "Python",
+    "size_kb": 148138,
+    "reason": "timeout"
+  },
+  {
+    "name": "pathwaycom/pathway",
+    "url": "https://github.com/pathwaycom/pathway.git",
+    "stars": 57960,
+    "language": "Python",
+    "size_kb": 141408,
+    "reason": "timeout"
+  },
+  {
+    "name": "cline/cline",
+    "url": "https://github.com/cline/cline.git",
+    "stars": 57131,
+    "language": "TypeScript",
+    "size_kb": 325948,
+    "reason": "timeout"
+  },
+  {
+    "name": "withastro/astro",
+    "url": "https://github.com/withastro/astro.git",
+    "stars": 56203,
+    "language": "TypeScript",
+    "size_kb": 217576,
+    "reason": "timeout"
+  },
+  {
+    "name": "gatsbyjs/gatsby",
+    "url": "https://github.com/gatsbyjs/gatsby.git",
+    "stars": 55976,
+    "language": "JavaScript",
+    "size_kb": 1143692,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "pocketbase/pocketbase",
+    "url": "https://github.com/pocketbase/pocketbase.git",
+    "stars": 55538,
+    "language": "Go",
+    "size_kb": 125331,
+    "reason": "timeout"
+  },
+  {
+    "name": "Textualize/rich",
+    "url": "https://github.com/Textualize/rich.git",
+    "stars": 55231,
+    "language": "Python",
+    "size_kb": 49996,
+    "reason": "timeout"
+  },
+  {
+    "name": "rclone/rclone",
+    "url": "https://github.com/rclone/rclone.git",
+    "stars": 55106,
+    "language": "Go",
+    "size_kb": 216297,
+    "reason": "timeout"
+  },
+  {
+    "name": "deepfakes/faceswap",
+    "url": "https://github.com/deepfakes/faceswap.git",
+    "stars": 54920,
+    "language": "Python",
+    "size_kb": 204954,
+    "reason": "timeout"
+  },
+  {
+    "name": "appwrite/appwrite",
+    "url": "https://github.com/appwrite/appwrite.git",
+    "stars": 54526,
+    "language": "TypeScript",
+    "size_kb": 395295,
+    "reason": "timeout"
+  },
+  {
+    "name": "microsoft/autogen",
+    "url": "https://github.com/microsoft/autogen.git",
+    "stars": 53848,
+    "language": "Python",
+    "size_kb": 148202,
+    "reason": "timeout"
+  },
+  {
+    "name": "Mintplex-Labs/anything-llm",
+    "url": "https://github.com/Mintplex-Labs/anything-llm.git",
+    "stars": 53773,
+    "language": "JavaScript",
+    "size_kb": 53513,
+    "reason": "timeout"
+  },
+  {
+    "name": "go-gitea/gitea",
+    "url": "https://github.com/go-gitea/gitea.git",
+    "stars": 53344,
+    "language": "Go",
+    "size_kb": 323580,
+    "reason": "timeout"
+  },
+  {
+    "name": "laurent22/joplin",
+    "url": "https://github.com/laurent22/joplin.git",
+    "stars": 53116,
+    "language": "TypeScript",
+    "size_kb": 613165,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "mozilla/pdf.js",
+    "url": "https://github.com/mozilla/pdf.js.git",
+    "stars": 52713,
+    "language": "JavaScript",
+    "size_kb": 173782,
+    "reason": "timeout"
+  },
+  {
+    "name": "ultralytics/ultralytics",
+    "url": "https://github.com/ultralytics/ultralytics.git",
+    "stars": 52398,
+    "language": "Python",
+    "size_kb": 45190,
+    "reason": "timeout"
+  },
+  {
+    "name": "ionic-team/ionic-framework",
+    "url": "https://github.com/ionic-team/ionic-framework.git",
+    "stars": 52309,
+    "language": "TypeScript",
+    "size_kb": 1562544,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "TryGhost/Ghost",
+    "url": "https://github.com/TryGhost/Ghost.git",
+    "stars": 51674,
+    "language": "JavaScript",
+    "size_kb": 411169,
+    "reason": "timeout"
+  },
+  {
+    "name": "etcd-io/etcd",
+    "url": "https://github.com/etcd-io/etcd.git",
+    "stars": 51391,
+    "language": "Go",
+    "size_kb": 94235,
+    "reason": "timeout"
+  },
+  {
+    "name": "DefinitelyTyped/DefinitelyTyped",
+    "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "stars": 50850,
+    "language": "TypeScript",
+    "size_kb": 801986,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "ethereum/go-ethereum",
+    "url": "https://github.com/ethereum/go-ethereum.git",
+    "stars": 50717,
+    "language": "Go",
+    "size_kb": 231601,
+    "reason": "timeout"
+  },
+  {
+    "name": "daytonaio/daytona",
+    "url": "https://github.com/daytonaio/daytona.git",
+    "stars": 50107,
+    "language": "TypeScript",
+    "size_kb": 79212,
+    "reason": "timeout"
+  },
+  {
+    "name": "cypress-io/cypress",
+    "url": "https://github.com/cypress-io/cypress.git",
+    "stars": 49532,
+    "language": "TypeScript",
+    "size_kb": 530945,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "harry0703/MoneyPrinterTurbo",
+    "url": "https://github.com/harry0703/MoneyPrinterTurbo.git",
+    "stars": 49136,
+    "language": "Python",
+    "size_kb": 532071,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "AlistGo/alist",
+    "url": "https://github.com/AlistGo/alist.git",
+    "stars": 48889,
+    "language": "Go",
+    "size_kb": 6010,
+    "reason": "timeout"
+  },
+  {
+    "name": "odoo/odoo",
+    "url": "https://github.com/odoo/odoo.git",
+    "stars": 48634,
+    "language": "Python",
+    "size_kb": 13640644,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "FlowiseAI/Flowise",
+    "url": "https://github.com/FlowiseAI/Flowise.git",
+    "stars": 48524,
+    "language": "TypeScript",
+    "size_kb": 71530,
+    "reason": "timeout"
+  },
+  {
+    "name": "moment/moment",
+    "url": "https://github.com/moment/moment.git",
+    "stars": 48085,
+    "language": "JavaScript",
+    "size_kb": 22191,
+    "reason": "timeout"
+  },
+  {
+    "name": "pandas-dev/pandas",
+    "url": "https://github.com/pandas-dev/pandas.git",
+    "stars": 47687,
+    "language": "Python",
+    "size_kb": 380939,
+    "reason": "timeout"
+  },
+  {
+    "name": "lllyasviel/Fooocus",
+    "url": "https://github.com/lllyasviel/Fooocus.git",
+    "stars": 47577,
+    "language": "Python",
+    "size_kb": 34158,
+    "reason": "timeout"
+  },
+  {
+    "name": "hashicorp/terraform",
+    "url": "https://github.com/hashicorp/terraform.git",
+    "stars": 47518,
+    "language": "Go",
+    "size_kb": 348402,
+    "reason": "timeout"
+  },
+  {
+    "name": "gogs/gogs",
+    "url": "https://github.com/gogs/gogs.git",
+    "stars": 47497,
+    "language": "Go",
+    "size_kb": 210437,
+    "reason": "timeout"
+  },
+  {
+    "name": "v2ray/v2ray-core",
+    "url": "https://github.com/v2ray/v2ray-core.git",
+    "stars": 46888,
+    "language": "Go",
+    "size_kb": 55142,
+    "reason": "timeout"
+  },
+  {
+    "name": "expo/expo",
+    "url": "https://github.com/expo/expo.git",
+    "stars": 46728,
+    "language": "TypeScript",
+    "size_kb": 3535175,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "run-llama/llama_index",
+    "url": "https://github.com/run-llama/llama_index.git",
+    "stars": 46565,
+    "language": "Python",
+    "size_kb": 383082,
+    "reason": "timeout"
+  },
+  {
+    "name": "freqtrade/freqtrade",
+    "url": "https://github.com/freqtrade/freqtrade.git",
+    "stars": 46252,
+    "language": "Python",
+    "size_kb": 671295,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "mem0ai/mem0",
+    "url": "https://github.com/mem0ai/mem0.git",
+    "stars": 45912,
+    "language": "Python",
+    "size_kb": 44497,
+    "reason": "timeout"
+  },
+  {
+    "name": "jestjs/jest",
+    "url": "https://github.com/jestjs/jest.git",
+    "stars": 45272,
+    "language": "TypeScript",
+    "size_kb": 314227,
+    "reason": "timeout"
+  },
+  {
+    "name": "prisma/prisma",
+    "url": "https://github.com/prisma/prisma.git",
+    "stars": 45119,
+    "language": "TypeScript",
+    "size_kb": 162694,
+    "reason": "timeout"
+  },
+  {
+    "name": "tldraw/tldraw",
+    "url": "https://github.com/tldraw/tldraw.git",
+    "stars": 44845,
+    "language": "TypeScript",
+    "size_kb": 1017878,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "makeplane/plane",
+    "url": "https://github.com/makeplane/plane.git",
+    "stars": 44830,
+    "language": "TypeScript",
+    "size_kb": 212262,
+    "reason": "timeout"
+  },
+  {
+    "name": "meteor/meteor",
+    "url": "https://github.com/meteor/meteor.git",
+    "stars": 44772,
+    "language": "JavaScript",
+    "size_kb": 142686,
+    "reason": "timeout"
+  },
+  {
+    "name": "vercel/hyper",
+    "url": "https://github.com/vercel/hyper.git",
+    "stars": 44658,
+    "language": "TypeScript",
+    "size_kb": 24532,
+    "reason": "timeout"
+  },
+  {
+    "name": "RocketChat/Rocket.Chat",
+    "url": "https://github.com/RocketChat/Rocket.Chat.git",
+    "stars": 44397,
+    "language": "TypeScript",
+    "size_kb": 1943135,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "coqui-ai/TTS",
+    "url": "https://github.com/coqui-ai/TTS.git",
+    "stars": 44344,
+    "language": "Python",
+    "size_kb": 170196,
+    "reason": "timeout"
+  },
+  {
+    "name": "parcel-bundler/parcel",
+    "url": "https://github.com/parcel-bundler/parcel.git",
+    "stars": 44043,
+    "language": "JavaScript",
+    "size_kb": 61530,
+    "reason": "timeout"
+  },
+  {
+    "name": "apache/airflow",
+    "url": "https://github.com/apache/airflow.git",
+    "stars": 43999,
+    "language": "Python",
+    "size_kb": 523710,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "babel/babel",
+    "url": "https://github.com/babel/babel.git",
+    "stars": 43865,
+    "language": "TypeScript",
+    "size_kb": 138384,
+    "reason": "timeout"
+  },
+  {
+    "name": "SimplifyJobs/Summer2026-Internships",
+    "url": "https://github.com/SimplifyJobs/Summer2026-Internships.git",
+    "stars": 43191,
+    "language": "Python",
+    "size_kb": 1765302,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "streamlit/streamlit",
+    "url": "https://github.com/streamlit/streamlit.git",
+    "stars": 43186,
+    "language": "Python",
+    "size_kb": 829139,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "getsentry/sentry",
+    "url": "https://github.com/getsentry/sentry.git",
+    "stars": 42976,
+    "language": "Python",
+    "size_kb": 780419,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "upscayl/upscayl",
+    "url": "https://github.com/upscayl/upscayl.git",
+    "stars": 42710,
+    "language": "TypeScript",
+    "size_kb": 567802,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "milvus-io/milvus",
+    "url": "https://github.com/milvus-io/milvus.git",
+    "stars": 42398,
+    "language": "Go",
+    "size_kb": 263677,
+    "reason": "timeout"
+  },
+  {
+    "name": "mudler/LocalAI",
+    "url": "https://github.com/mudler/LocalAI.git",
+    "stars": 42324,
+    "language": "Go",
+    "size_kb": 43373,
+    "reason": "timeout"
+  },
+  {
+    "name": "cli/cli",
+    "url": "https://github.com/cli/cli.git",
+    "stars": 42130,
+    "language": "Go",
+    "size_kb": 74170,
+    "reason": "timeout"
+  },
+  {
+    "name": "mitmproxy/mitmproxy",
+    "url": "https://github.com/mitmproxy/mitmproxy.git",
+    "stars": 42034,
+    "language": "Python",
+    "size_kb": 68043,
+    "reason": "timeout"
+  },
+  {
+    "name": "nwjs/nw.js",
+    "url": "https://github.com/nwjs/nw.js.git",
+    "stars": 41615,
+    "language": "JavaScript",
+    "size_kb": 134338,
+    "reason": "timeout"
+  },
+  {
+    "name": "yarnpkg/yarn",
+    "url": "https://github.com/yarnpkg/yarn.git",
+    "stars": 41552,
+    "language": "JavaScript",
+    "size_kb": 119779,
+    "reason": "timeout"
+  },
+  {
+    "name": "9001/copyparty",
+    "url": "https://github.com/9001/copyparty.git",
+    "stars": 41476,
+    "language": "Python",
+    "size_kb": 8925,
+    "reason": "timeout"
+  },
+  {
+    "name": "gradio-app/gradio",
+    "url": "https://github.com/gradio-app/gradio.git",
+    "stars": 41418,
+    "language": "Python",
+    "size_kb": 315616,
+    "reason": "timeout"
+  },
+  {
+    "name": "dcloudio/uni-app",
+    "url": "https://github.com/dcloudio/uni-app.git",
+    "stars": 41395,
+    "language": "JavaScript",
+    "size_kb": 7356518,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "deepspeedai/DeepSpeed",
+    "url": "https://github.com/deepspeedai/DeepSpeed.git",
+    "stars": 41388,
+    "language": "Python",
+    "size_kb": 243744,
+    "reason": "timeout"
+  },
+  {
+    "name": "DIYgod/RSSHub",
+    "url": "https://github.com/DIYgod/RSSHub.git",
+    "stars": 41355,
+    "language": "TypeScript",
+    "size_kb": 922771,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "hpcaitech/ColossalAI",
+    "url": "https://github.com/hpcaitech/ColossalAI.git",
+    "stars": 41330,
+    "language": "Python",
+    "size_kb": 66479,
+    "reason": "timeout"
+  },
+  {
+    "name": "psf/black",
+    "url": "https://github.com/psf/black.git",
+    "stars": 41329,
+    "language": "Python",
+    "size_kb": 7826,
+    "reason": "timeout"
+  },
+  {
+    "name": "ray-project/ray",
+    "url": "https://github.com/ray-project/ray.git",
+    "stars": 40964,
+    "language": "Python",
+    "size_kb": 679741,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "siyuan-note/siyuan",
+    "url": "https://github.com/siyuan-note/siyuan.git",
+    "stars": 40824,
+    "language": "TypeScript",
+    "size_kb": 478486,
+    "reason": "timeout"
+  },
+  {
+    "name": "ccxt/ccxt",
+    "url": "https://github.com/ccxt/ccxt.git",
+    "stars": 40669,
+    "language": "Python",
+    "size_kb": 6075792,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "chakra-ui/chakra-ui",
+    "url": "https://github.com/chakra-ui/chakra-ui.git",
+    "stars": 40183,
+    "language": "TypeScript",
+    "size_kb": 280105,
+    "reason": "timeout"
+  },
+  {
+    "name": "janhq/jan",
+    "url": "https://github.com/janhq/jan.git",
+    "stars": 40171,
+    "language": "TypeScript",
+    "size_kb": 1467955,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "payloadcms/payload",
+    "url": "https://github.com/payloadcms/payload.git",
+    "stars": 40135,
+    "language": "TypeScript",
+    "size_kb": 170537,
+    "reason": "timeout"
+  },
+  {
+    "name": "calcom/cal.com",
+    "url": "https://github.com/calcom/cal.com.git",
+    "stars": 39856,
+    "language": "TypeScript",
+    "size_kb": 1112620,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "zen-browser/desktop",
+    "url": "https://github.com/zen-browser/desktop.git",
+    "stars": 39692,
+    "language": "JavaScript",
+    "size_kb": 5900405,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "evanw/esbuild",
+    "url": "https://github.com/evanw/esbuild.git",
+    "stars": 39652,
+    "language": "Go",
+    "size_kb": 21391,
+    "reason": "timeout"
+  },
+  {
+    "name": "pingcap/tidb",
+    "url": "https://github.com/pingcap/tidb.git",
+    "stars": 39642,
+    "language": "Go",
+    "size_kb": 594610,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "photoprism/photoprism",
+    "url": "https://github.com/photoprism/photoprism.git",
+    "stars": 39142,
+    "language": "Go",
+    "size_kb": 322979,
+    "reason": "timeout"
+  },
+  {
+    "name": "twentyhq/twenty",
+    "url": "https://github.com/twentyhq/twenty.git",
+    "stars": 39039,
+    "language": "TypeScript",
+    "size_kb": 698606,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "gofiber/fiber",
+    "url": "https://github.com/gofiber/fiber.git",
+    "stars": 39030,
+    "language": "Go",
+    "size_kb": 235247,
+    "reason": "timeout"
+  },
+  {
+    "name": "appsmithorg/appsmith",
+    "url": "https://github.com/appsmithorg/appsmith.git",
+    "stars": 38979,
+    "language": "TypeScript",
+    "size_kb": 795520,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "HeyPuter/puter",
+    "url": "https://github.com/HeyPuter/puter.git",
+    "stars": 38931,
+    "language": "JavaScript",
+    "size_kb": 33400,
+    "reason": "timeout"
+  },
+  {
+    "name": "phaserjs/phaser",
+    "url": "https://github.com/phaserjs/phaser.git",
+    "stars": 38912,
+    "language": "JavaScript",
+    "size_kb": 464816,
+    "reason": "timeout"
+  },
+  {
+    "name": "novuhq/novu",
+    "url": "https://github.com/novuhq/novu.git",
+    "stars": 38476,
+    "language": "TypeScript",
+    "size_kb": 267829,
+    "reason": "timeout"
+  },
+  {
+    "name": "mindsdb/mindsdb",
+    "url": "https://github.com/mindsdb/mindsdb.git",
+    "stars": 38307,
+    "language": "Python",
+    "size_kb": 276720,
+    "reason": "timeout"
+  },
+  {
+    "name": "CherryHQ/cherry-studio",
+    "url": "https://github.com/CherryHQ/cherry-studio.git",
+    "stars": 38299,
+    "language": "TypeScript",
+    "size_kb": 123340,
+    "reason": "timeout"
+  },
+  {
+    "name": "Kong/insomnia",
+    "url": "https://github.com/Kong/insomnia.git",
+    "stars": 37853,
+    "language": "TypeScript",
+    "size_kb": 142739,
+    "reason": "timeout"
+  },
+  {
+    "name": "istio/istio",
+    "url": "https://github.com/istio/istio.git",
+    "stars": 37852,
+    "language": "Go",
+    "size_kb": 289847,
+    "reason": "timeout"
+  },
+  {
+    "name": "LAION-AI/Open-Assistant",
+    "url": "https://github.com/LAION-AI/Open-Assistant.git",
+    "stars": 37468,
+    "language": "Python",
+    "size_kb": 35477,
+    "reason": "timeout"
+  },
+  {
+    "name": "ToolJet/ToolJet",
+    "url": "https://github.com/ToolJet/ToolJet.git",
+    "stars": 37331,
+    "language": "JavaScript",
+    "size_kb": 1539010,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "NervJS/taro",
+    "url": "https://github.com/NervJS/taro.git",
+    "stars": 37248,
+    "language": "TypeScript",
+    "size_kb": 1590943,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "agno-agi/agno",
+    "url": "https://github.com/agno-agi/agno.git",
+    "stars": 37145,
+    "language": "Python",
+    "size_kb": 263555,
+    "reason": "timeout"
+  },
+  {
+    "name": "outline/outline",
+    "url": "https://github.com/outline/outline.git",
+    "stars": 36825,
+    "language": "TypeScript",
+    "size_kb": 308077,
+    "reason": "timeout"
+  },
+  {
+    "name": "RSSNext/Folo",
+    "url": "https://github.com/RSSNext/Folo.git",
+    "stars": 36756,
+    "language": "TypeScript",
+    "size_kb": 68914,
+    "reason": "timeout"
+  },
+  {
+    "name": "ManimCommunity/manim",
+    "url": "https://github.com/ManimCommunity/manim.git",
+    "stars": 36392,
+    "language": "Python",
+    "size_kb": 46164,
+    "reason": "timeout"
+  },
+  {
+    "name": "roboflow/supervision",
+    "url": "https://github.com/roboflow/supervision.git",
+    "stars": 36382,
+    "language": "Python",
+    "size_kb": 2735397,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "sqlmapproject/sqlmap",
+    "url": "https://github.com/sqlmapproject/sqlmap.git",
+    "stars": 36376,
+    "language": "Python",
+    "size_kb": 87631,
+    "reason": "timeout"
+  },
+  {
+    "name": "portainer/portainer",
+    "url": "https://github.com/portainer/portainer.git",
+    "stars": 36310,
+    "language": "TypeScript",
+    "size_kb": 85287,
+    "reason": "timeout"
+  },
+  {
+    "name": "typeorm/typeorm",
+    "url": "https://github.com/typeorm/typeorm.git",
+    "stars": 36264,
+    "language": "TypeScript",
+    "size_kb": 33855,
+    "reason": "timeout"
+  },
+  {
+    "name": "huggingface/pytorch-image-models",
+    "url": "https://github.com/huggingface/pytorch-image-models.git",
+    "stars": 36257,
+    "language": "Python",
+    "size_kb": 30450,
+    "reason": "timeout"
+  },
+  {
+    "name": "hankcs/HanLP",
+    "url": "https://github.com/hankcs/HanLP.git",
+    "stars": 36107,
+    "language": "Python",
+    "size_kb": 72904,
+    "reason": "timeout"
+  },
+  {
+    "name": "microsoft/qlib",
+    "url": "https://github.com/microsoft/qlib.git",
+    "stars": 35979,
+    "language": "Python",
+    "size_kb": 17942,
+    "reason": "timeout"
+  },
+  {
+    "name": "paperless-ngx/paperless-ngx",
+    "url": "https://github.com/paperless-ngx/paperless-ngx.git",
+    "stars": 35895,
+    "language": "Python",
+    "size_kb": 175548,
+    "reason": "timeout"
+  },
+  {
+    "name": "mattermost/mattermost",
+    "url": "https://github.com/mattermost/mattermost.git",
+    "stars": 35007,
+    "language": "TypeScript",
+    "size_kb": 932093,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "666ghj/BettaFish",
+    "url": "https://github.com/666ghj/BettaFish.git",
+    "stars": 34906,
+    "language": "Python",
+    "size_kb": 206478,
+    "reason": "timeout"
+  },
+  {
+    "name": "jax-ml/jax",
+    "url": "https://github.com/jax-ml/jax.git",
+    "stars": 34691,
+    "language": "Python",
+    "size_kb": 149643,
+    "reason": "timeout"
+  },
+  {
+    "name": "geekcomputers/Python",
+    "url": "https://github.com/geekcomputers/Python.git",
+    "stars": 34658,
+    "language": "Python",
+    "size_kb": 49989,
+    "reason": "timeout"
+  },
+  {
+    "name": "juanfont/headscale",
+    "url": "https://github.com/juanfont/headscale.git",
+    "stars": 34485,
+    "language": "Go",
+    "size_kb": 22553,
+    "reason": "timeout"
+  },
+  {
+    "name": "BerriAI/litellm",
+    "url": "https://github.com/BerriAI/litellm.git",
+    "stars": 34421,
+    "language": "Python",
+    "size_kb": 731006,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "XTLS/Xray-core",
+    "url": "https://github.com/XTLS/Xray-core.git",
+    "stars": 34385,
+    "language": "Go",
+    "size_kb": 28864,
+    "reason": "timeout"
+  },
+  {
+    "name": "TriliumNext/Trilium",
+    "url": "https://github.com/TriliumNext/Trilium.git",
+    "stars": 34291,
+    "language": "TypeScript",
+    "size_kb": 457278,
+    "reason": "timeout"
+  },
+  {
+    "name": "python-poetry/poetry",
+    "url": "https://github.com/python-poetry/poetry.git",
+    "stars": 34157,
+    "language": "Python",
+    "size_kb": 24055,
+    "reason": "timeout"
+  },
+  {
+    "name": "directus/directus",
+    "url": "https://github.com/directus/directus.git",
+    "stars": 34047,
+    "language": "TypeScript",
+    "size_kb": 434212,
+    "reason": "timeout"
+  },
+  {
+    "name": "facebookresearch/detectron2",
+    "url": "https://github.com/facebookresearch/detectron2.git",
+    "stars": 33987,
+    "language": "Python",
+    "size_kb": 6862,
+    "reason": "timeout"
+  },
+  {
+    "name": "refinedev/refine",
+    "url": "https://github.com/refinedev/refine.git",
+    "stars": 33914,
+    "language": "TypeScript",
+    "size_kb": 8283621,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "hashicorp/vault",
+    "url": "https://github.com/hashicorp/vault.git",
+    "stars": 33873,
+    "language": "Go",
+    "size_kb": 342121,
+    "reason": "timeout"
+  },
+  {
+    "name": "harness/harness",
+    "url": "https://github.com/harness/harness.git",
+    "stars": 33839,
+    "language": "Go",
+    "size_kb": 57588,
+    "reason": "timeout"
+  },
+  {
+    "name": "Textualize/textual",
+    "url": "https://github.com/Textualize/textual.git",
+    "stars": 33827,
+    "language": "Python",
+    "size_kb": 492480,
+    "reason": "timeout"
+  },
+  {
+    "name": "pnpm/pnpm",
+    "url": "https://github.com/pnpm/pnpm.git",
+    "stars": 33792,
+    "language": "TypeScript",
+    "size_kb": 203485,
+    "reason": "timeout"
+  },
+  {
+    "name": "halfrost/LeetCode-Go",
+    "url": "https://github.com/halfrost/LeetCode-Go.git",
+    "stars": 33791,
+    "language": "Go",
+    "size_kb": 19315,
+    "reason": "timeout"
+  },
+  {
+    "name": "lllyasviel/ControlNet",
+    "url": "https://github.com/lllyasviel/ControlNet.git",
+    "stars": 33587,
+    "language": "Python",
+    "size_kb": 125281,
+    "reason": "timeout"
+  },
+  {
+    "name": "danny-avila/LibreChat",
+    "url": "https://github.com/danny-avila/LibreChat.git",
+    "stars": 33316,
+    "language": "TypeScript",
+    "size_kb": 137547,
+    "reason": "timeout"
+  },
+  {
+    "name": "adobe/brackets",
+    "url": "https://github.com/adobe/brackets.git",
+    "stars": 33129,
+    "language": "JavaScript",
+    "size_kb": 92974,
+    "reason": "timeout"
+  },
+  {
+    "name": "explosion/spaCy",
+    "url": "https://github.com/explosion/spaCy.git",
+    "stars": 33099,
+    "language": "Python",
+    "size_kb": 203340,
+    "reason": "timeout"
+  },
+  {
+    "name": "v2fly/v2ray-core",
+    "url": "https://github.com/v2fly/v2ray-core.git",
+    "stars": 33070,
+    "language": "Go",
+    "size_kb": 69034,
+    "reason": "timeout"
+  },
+  {
+    "name": "1Panel-dev/1Panel",
+    "url": "https://github.com/1Panel-dev/1Panel.git",
+    "stars": 32994,
+    "language": "Go",
+    "size_kb": 94438,
+    "reason": "timeout"
+  },
+  {
+    "name": "certbot/certbot",
+    "url": "https://github.com/certbot/certbot.git",
+    "stars": 32782,
+    "language": "Python",
+    "size_kb": 68366,
+    "reason": "timeout"
+  },
+  {
+    "name": "derailed/k9s",
+    "url": "https://github.com/derailed/k9s.git",
+    "stars": 32593,
+    "language": "Go",
+    "size_kb": 67321,
+    "reason": "timeout"
+  },
+  {
+    "name": "huggingface/diffusers",
+    "url": "https://github.com/huggingface/diffusers.git",
+    "stars": 32573,
+    "language": "Python",
+    "size_kb": 95995,
+    "reason": "timeout"
+  },
+  {
+    "name": "zeromicro/go-zero",
+    "url": "https://github.com/zeromicro/go-zero.git",
+    "stars": 32512,
+    "language": "Go",
+    "size_kb": 32659,
+    "reason": "timeout"
+  },
+  {
+    "name": "drizzle-team/drizzle-orm",
+    "url": "https://github.com/drizzle-team/drizzle-orm.git",
+    "stars": 32467,
+    "language": "TypeScript",
+    "size_kb": 49338,
+    "reason": "timeout"
+  },
+  {
+    "name": "beego/beego",
+    "url": "https://github.com/beego/beego.git",
+    "stars": 32401,
+    "language": "Go",
+    "size_kb": 12108,
+    "reason": "timeout"
+  },
+  {
+    "name": "backstage/backstage",
+    "url": "https://github.com/backstage/backstage.git",
+    "stars": 32397,
+    "language": "TypeScript",
+    "size_kb": 2674575,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "wailsapp/wails",
+    "url": "https://github.com/wailsapp/wails.git",
+    "stars": 32389,
+    "language": "Go",
+    "size_kb": 389190,
+    "reason": "timeout"
+  },
+  {
+    "name": "open-mmlab/mmdetection",
+    "url": "https://github.com/open-mmlab/mmdetection.git",
+    "stars": 32318,
+    "language": "Python",
+    "size_kb": 64771,
+    "reason": "timeout"
+  },
+  {
+    "name": "khoj-ai/khoj",
+    "url": "https://github.com/khoj-ai/khoj.git",
+    "stars": 32281,
+    "language": "Python",
+    "size_kb": 117773,
+    "reason": "timeout"
+  },
+  {
+    "name": "lutzroeder/netron",
+    "url": "https://github.com/lutzroeder/netron.git",
+    "stars": 32257,
+    "language": "JavaScript",
+    "size_kb": 82448,
+    "reason": "timeout"
+  },
+  {
+    "name": "AdguardTeam/AdGuardHome",
+    "url": "https://github.com/AdguardTeam/AdGuardHome.git",
+    "stars": 32237,
+    "language": "Go",
+    "size_kb": 25659,
+    "reason": "timeout"
+  },
+  {
+    "name": "facebookresearch/fairseq",
+    "url": "https://github.com/facebookresearch/fairseq.git",
+    "stars": 32110,
+    "language": "Python",
+    "size_kb": 26071,
+    "reason": "timeout"
+  },
+  {
+    "name": "k3s-io/k3s",
+    "url": "https://github.com/k3s-io/k3s.git",
+    "stars": 31978,
+    "language": "Go",
+    "size_kb": 588823,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "restic/restic",
+    "url": "https://github.com/restic/restic.git",
+    "stars": 31882,
+    "language": "Go",
+    "size_kb": 69186,
+    "reason": "timeout"
+  },
+  {
+    "name": "hasura/graphql-engine",
+    "url": "https://github.com/hasura/graphql-engine.git",
+    "stars": 31872,
+    "language": "TypeScript",
+    "size_kb": 5193888,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "medusajs/medusa",
+    "url": "https://github.com/medusajs/medusa.git",
+    "stars": 31827,
+    "language": "TypeScript",
+    "size_kb": 712792,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "cockroachdb/cockroach",
+    "url": "https://github.com/cockroachdb/cockroach.git",
+    "stars": 31778,
+    "language": "Go",
+    "size_kb": 3488821,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "stanfordnlp/dspy",
+    "url": "https://github.com/stanfordnlp/dspy.git",
+    "stars": 31764,
+    "language": "Python",
+    "size_kb": 177126,
+    "reason": "timeout"
+  },
+  {
+    "name": "ianstormtaylor/slate",
+    "url": "https://github.com/ianstormtaylor/slate.git",
+    "stars": 31482,
+    "language": "TypeScript",
+    "size_kb": 26663,
+    "reason": "timeout"
+  },
+  {
+    "name": "kubernetes/minikube",
+    "url": "https://github.com/kubernetes/minikube.git",
+    "stars": 31406,
+    "language": "Go",
+    "size_kb": 289250,
+    "reason": "timeout"
+  },
+  {
+    "name": "numpy/numpy",
+    "url": "https://github.com/numpy/numpy.git",
+    "stars": 31310,
+    "language": "Python",
+    "size_kb": 170082,
+    "reason": "timeout"
+  },
+  {
+    "name": "frappe/erpnext",
+    "url": "https://github.com/frappe/erpnext.git",
+    "stars": 31250,
+    "language": "Python",
+    "size_kb": 1576486,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "tinygrad/tinygrad",
+    "url": "https://github.com/tinygrad/tinygrad.git",
+    "stars": 31211,
+    "language": "Python",
+    "size_kb": 99311,
+    "reason": "timeout"
+  },
+  {
+    "name": "OWASP/CheatSheetSeries",
+    "url": "https://github.com/OWASP/CheatSheetSeries.git",
+    "stars": 31202,
+    "language": "Python",
+    "size_kb": 2099807,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "aquasecurity/trivy",
+    "url": "https://github.com/aquasecurity/trivy.git",
+    "stars": 31105,
+    "language": "Go",
+    "size_kb": 928910,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "continuedev/continue",
+    "url": "https://github.com/continuedev/continue.git",
+    "stars": 31064,
+    "language": "TypeScript",
+    "size_kb": 854373,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "PostHog/posthog",
+    "url": "https://github.com/PostHog/posthog.git",
+    "stars": 30955,
+    "language": "Python",
+    "size_kb": 4276829,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "kovidgoyal/kitty",
+    "url": "https://github.com/kovidgoyal/kitty.git",
+    "stars": 30882,
+    "language": "Python",
+    "size_kb": 67051,
+    "reason": "timeout"
+  },
+  {
+    "name": "motiondivision/motion",
+    "url": "https://github.com/motiondivision/motion.git",
+    "stars": 30831,
+    "language": "TypeScript",
+    "size_kb": 1658710,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "Lightning-AI/pytorch-lightning",
+    "url": "https://github.com/Lightning-AI/pytorch-lightning.git",
+    "stars": 30773,
+    "language": "Python",
+    "size_kb": 133297,
+    "reason": "timeout"
+  },
+  {
+    "name": "containers/podman",
+    "url": "https://github.com/containers/podman.git",
+    "stars": 30446,
+    "language": "Go",
+    "size_kb": 170214,
+    "reason": "timeout"
+  },
+  {
+    "name": "mantinedev/mantine",
+    "url": "https://github.com/mantinedev/mantine.git",
+    "stars": 30431,
+    "language": "TypeScript",
+    "size_kb": 218804,
+    "reason": "timeout"
+  },
+  {
+    "name": "iperov/DeepFaceLive",
+    "url": "https://github.com/iperov/DeepFaceLive.git",
+    "stars": 30428,
+    "language": "Python",
+    "size_kb": 1540184,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "sequelize/sequelize",
+    "url": "https://github.com/sequelize/sequelize.git",
+    "stars": 30333,
+    "language": "TypeScript",
+    "size_kb": 76227,
+    "reason": "timeout"
+  },
+  {
+    "name": "SagerNet/sing-box",
+    "url": "https://github.com/SagerNet/sing-box.git",
+    "stars": 29953,
+    "language": "Go",
+    "size_kb": 16326,
+    "reason": "timeout"
+  },
+  {
+    "name": "encode/django-rest-framework",
+    "url": "https://github.com/encode/django-rest-framework.git",
+    "stars": 29822,
+    "language": "Python",
+    "size_kb": 58787,
+    "reason": "timeout"
+  },
+  {
+    "name": "openai/openai-python",
+    "url": "https://github.com/openai/openai-python.git",
+    "stars": 29760,
+    "language": "Python",
+    "size_kb": 7163,
+    "reason": "timeout"
+  },
+  {
+    "name": "GoogleChrome/lighthouse",
+    "url": "https://github.com/GoogleChrome/lighthouse.git",
+    "stars": 29756,
+    "language": "JavaScript",
+    "size_kb": 350423,
+    "reason": "timeout"
+  },
+  {
+    "name": "grafana/k6",
+    "url": "https://github.com/grafana/k6.git",
+    "stars": 29750,
+    "language": "Go",
+    "size_kb": 70230,
+    "reason": "timeout"
+  },
+  {
+    "name": "seaweedfs/seaweedfs",
+    "url": "https://github.com/seaweedfs/seaweedfs.git",
+    "stars": 29736,
+    "language": "Go",
+    "size_kb": 159737,
+    "reason": "timeout"
+  },
+  {
+    "name": "jumpserver/jumpserver",
+    "url": "https://github.com/jumpserver/jumpserver.git",
+    "stars": 29732,
+    "language": "Python",
+    "size_kb": 114276,
+    "reason": "timeout"
+  },
+  {
+    "name": "blakeblackshear/frigate",
+    "url": "https://github.com/blakeblackshear/frigate.git",
+    "stars": 29719,
+    "language": "TypeScript",
+    "size_kb": 114711,
+    "reason": "timeout"
+  },
+  {
+    "name": "StevenBlack/hosts",
+    "url": "https://github.com/StevenBlack/hosts.git",
+    "stars": 29695,
+    "language": "Python",
+    "size_kb": 1730959,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "hashicorp/consul",
+    "url": "https://github.com/hashicorp/consul.git",
+    "stars": 29683,
+    "language": "Go",
+    "size_kb": 482853,
+    "reason": "timeout"
+  },
+  {
+    "name": "helm/helm",
+    "url": "https://github.com/helm/helm.git",
+    "stars": 29338,
+    "language": "Go",
+    "size_kb": 26711,
+    "reason": "timeout"
+  },
+  {
+    "name": "remotion-dev/remotion",
+    "url": "https://github.com/remotion-dev/remotion.git",
+    "stars": 29271,
+    "language": "TypeScript",
+    "size_kb": 3676648,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "pmndrs/react-spring",
+    "url": "https://github.com/pmndrs/react-spring.git",
+    "stars": 29020,
+    "language": "TypeScript",
+    "size_kb": 676304,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "tastejs/todomvc",
+    "url": "https://github.com/tastejs/todomvc.git",
+    "stars": 28905,
+    "language": "JavaScript",
+    "size_kb": 76582,
+    "reason": "timeout"
+  },
+  {
+    "name": "python-telegram-bot/python-telegram-bot",
+    "url": "https://github.com/python-telegram-bot/python-telegram-bot.git",
+    "stars": 28691,
+    "language": "Python",
+    "size_kb": 18474,
+    "reason": "timeout"
+  },
+  {
+    "name": "swagger-api/swagger-ui",
+    "url": "https://github.com/swagger-api/swagger-ui.git",
+    "stars": 28557,
+    "language": "JavaScript",
+    "size_kb": 638328,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "jitsi/jitsi-meet",
+    "url": "https://github.com/jitsi/jitsi-meet.git",
+    "stars": 28426,
+    "language": "TypeScript",
+    "size_kb": 345371,
+    "reason": "timeout"
+  },
+  {
+    "name": "getredash/redash",
+    "url": "https://github.com/getredash/redash.git",
+    "stars": 28172,
+    "language": "Python",
+    "size_kb": 29491,
+    "reason": "timeout"
+  },
+  {
+    "name": "CopilotKit/CopilotKit",
+    "url": "https://github.com/CopilotKit/CopilotKit.git",
+    "stars": 28146,
+    "language": "TypeScript",
+    "size_kb": 672258,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "voideditor/void",
+    "url": "https://github.com/voideditor/void.git",
+    "stars": 28119,
+    "language": "TypeScript",
+    "size_kb": 40251,
+    "reason": "timeout"
+  },
+  {
+    "name": "Genesis-Embodied-AI/Genesis",
+    "url": "https://github.com/Genesis-Embodied-AI/Genesis.git",
+    "stars": 28014,
+    "language": "Python",
+    "size_kb": 94502,
+    "reason": "timeout"
+  },
+  {
+    "name": "reflex-dev/reflex",
+    "url": "https://github.com/reflex-dev/reflex.git",
+    "stars": 28010,
+    "language": "Python",
+    "size_kb": 29193,
+    "reason": "timeout"
+  },
+  {
+    "name": "heroui-inc/heroui",
+    "url": "https://github.com/heroui-inc/heroui.git",
+    "stars": 27985,
+    "language": "TypeScript",
+    "size_kb": 90642,
+    "reason": "timeout"
+  },
+  {
+    "name": "nrwl/nx",
+    "url": "https://github.com/nrwl/nx.git",
+    "stars": 27975,
+    "language": "TypeScript",
+    "size_kb": 826204,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "celery/celery",
+    "url": "https://github.com/celery/celery.git",
+    "stars": 27906,
+    "language": "Python",
+    "size_kb": 36231,
+    "reason": "timeout"
+  },
+  {
+    "name": "fyne-io/fyne",
+    "url": "https://github.com/fyne-io/fyne.git",
+    "stars": 27842,
+    "language": "Go",
+    "size_kb": 115211,
+    "reason": "timeout"
+  },
+  {
+    "name": "deepinsight/insightface",
+    "url": "https://github.com/deepinsight/insightface.git",
+    "stars": 27659,
+    "language": "Python",
+    "size_kb": 59811,
+    "reason": "timeout"
+  },
+  {
+    "name": "opentofu/opentofu",
+    "url": "https://github.com/opentofu/opentofu.git",
+    "stars": 27623,
+    "language": "Go",
+    "size_kb": 284346,
+    "reason": "timeout"
+  },
+  {
+    "name": "HKUDS/LightRAG",
+    "url": "https://github.com/HKUDS/LightRAG.git",
+    "stars": 27601,
+    "language": "Python",
+    "size_kb": 87084,
+    "reason": "timeout"
+  },
+  {
+    "name": "Budibase/budibase",
+    "url": "https://github.com/Budibase/budibase.git",
+    "stars": 27566,
+    "language": "TypeScript",
+    "size_kb": 695124,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "Z-Siqi/Clash-for-Windows_Chinese",
+    "url": "https://github.com/Z-Siqi/Clash-for-Windows_Chinese.git",
+    "stars": 27556,
+    "language": "JavaScript",
+    "size_kb": 86688,
+    "reason": "timeout"
+  },
+  {
+    "name": "grafana/loki",
+    "url": "https://github.com/grafana/loki.git",
+    "stars": 27467,
+    "language": "Go",
+    "size_kb": 455295,
+    "reason": "timeout"
+  },
+  {
+    "name": "tailscale/tailscale",
+    "url": "https://github.com/tailscale/tailscale.git",
+    "stars": 27426,
+    "language": "Go",
+    "size_kb": 75072,
+    "reason": "timeout"
+  },
+  {
+    "name": "fanmingming/live",
+    "url": "https://github.com/fanmingming/live.git",
+    "stars": 27423,
+    "language": "JavaScript",
+    "size_kb": 1615325,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "goharbor/harbor",
+    "url": "https://github.com/goharbor/harbor.git",
+    "stars": 27413,
+    "language": "Go",
+    "size_kb": 240773,
+    "reason": "timeout"
+  },
+  {
+    "name": "locustio/locust",
+    "url": "https://github.com/locustio/locust.git",
+    "stars": 27385,
+    "language": "Python",
+    "size_kb": 37812,
+    "reason": "timeout"
+  },
+  {
+    "name": "element-plus/element-plus",
+    "url": "https://github.com/element-plus/element-plus.git",
+    "stars": 27094,
+    "language": "TypeScript",
+    "size_kb": 888953,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "quasarframework/quasar",
+    "url": "https://github.com/quasarframework/quasar.git",
+    "stars": 27048,
+    "language": "JavaScript",
+    "size_kb": 472389,
+    "reason": "timeout"
+  },
+  {
+    "name": "angular/angular-cli",
+    "url": "https://github.com/angular/angular-cli.git",
+    "stars": 27033,
+    "language": "TypeScript",
+    "size_kb": 200135,
+    "reason": "timeout"
+  },
+  {
+    "name": "labring/FastGPT",
+    "url": "https://github.com/labring/FastGPT.git",
+    "stars": 26980,
+    "language": "TypeScript",
+    "size_kb": 372540,
+    "reason": "timeout"
+  },
+  {
+    "name": "cloudreve/cloudreve",
+    "url": "https://github.com/cloudreve/cloudreve.git",
+    "stars": 26733,
+    "language": "Go",
+    "size_kb": 9463,
+    "reason": "timeout"
+  },
+  {
+    "name": "projectdiscovery/nuclei",
+    "url": "https://github.com/projectdiscovery/nuclei.git",
+    "stars": 26654,
+    "language": "Go",
+    "size_kb": 42194,
+    "reason": "timeout"
+  },
+  {
+    "name": "ArchiveBox/ArchiveBox",
+    "url": "https://github.com/ArchiveBox/ArchiveBox.git",
+    "stars": 26607,
+    "language": "Python",
+    "size_kb": 15086,
+    "reason": "timeout"
+  },
+  {
+    "name": "invoke-ai/InvokeAI",
+    "url": "https://github.com/invoke-ai/InvokeAI.git",
+    "stars": 26601,
+    "language": "TypeScript",
+    "size_kb": 350331,
+    "reason": "timeout"
+  },
+  {
+    "name": "pydantic/pydantic",
+    "url": "https://github.com/pydantic/pydantic.git",
+    "stars": 26551,
+    "language": "Python",
+    "size_kb": 353005,
+    "reason": "timeout"
+  },
+  {
+    "name": "recharts/recharts",
+    "url": "https://github.com/recharts/recharts.git",
+    "stars": 26551,
+    "language": "TypeScript",
+    "size_kb": 226502,
+    "reason": "timeout"
+  },
+  {
+    "name": "discordjs/discord.js",
+    "url": "https://github.com/discordjs/discord.js.git",
+    "stars": 26530,
+    "language": "TypeScript",
+    "size_kb": 64916,
+    "reason": "timeout"
+  },
+  {
+    "name": "Wox-launcher/Wox",
+    "url": "https://github.com/Wox-launcher/Wox.git",
+    "stars": 26524,
+    "language": "Go",
+    "size_kb": 220106,
+    "reason": "timeout"
+  },
+  {
+    "name": "marmelab/react-admin",
+    "url": "https://github.com/marmelab/react-admin.git",
+    "stars": 26502,
+    "language": "TypeScript",
+    "size_kb": 443611,
+    "reason": "timeout"
+  },
+  {
+    "name": "authelia/authelia",
+    "url": "https://github.com/authelia/authelia.git",
+    "stars": 26490,
+    "language": "Go",
+    "size_kb": 69851,
+    "reason": "timeout"
+  },
+  {
+    "name": "ComposioHQ/composio",
+    "url": "https://github.com/ComposioHQ/composio.git",
+    "stars": 26430,
+    "language": "TypeScript",
+    "size_kb": 230448,
+    "reason": "timeout"
+  },
+  {
+    "name": "HumanSignal/label-studio",
+    "url": "https://github.com/HumanSignal/label-studio.git",
+    "stars": 26256,
+    "language": "TypeScript",
+    "size_kb": 2955836,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "rollup/rollup",
+    "url": "https://github.com/rollup/rollup.git",
+    "stars": 26212,
+    "language": "JavaScript",
+    "size_kb": 33481,
+    "reason": "timeout"
+  },
+  {
+    "name": "simstudioai/sim",
+    "url": "https://github.com/simstudioai/sim.git",
+    "stars": 26111,
+    "language": "TypeScript",
+    "size_kb": 366738,
+    "reason": "timeout"
+  },
+  {
+    "name": "WZMIAOMIAO/deep-learning-for-image-processing",
+    "url": "https://github.com/WZMIAOMIAO/deep-learning-for-image-processing.git",
+    "stars": 26041,
+    "language": "Python",
+    "size_kb": 25637,
+    "reason": "timeout"
+  },
+  {
+    "name": "badges/shields",
+    "url": "https://github.com/badges/shields.git",
+    "stars": 25968,
+    "language": "JavaScript",
+    "size_kb": 488858,
+    "reason": "timeout"
+  },
+  {
+    "name": "mattermost-community/focalboard",
+    "url": "https://github.com/mattermost-community/focalboard.git",
+    "stars": 25763,
+    "language": "TypeScript",
+    "size_kb": 59225,
+    "reason": "timeout"
+  },
+  {
+    "name": "kataras/iris",
+    "url": "https://github.com/kataras/iris.git",
+    "stars": 25626,
+    "language": "Go",
+    "size_kb": 18454,
+    "reason": "timeout"
+  },
+  {
+    "name": "better-auth/better-auth",
+    "url": "https://github.com/better-auth/better-auth.git",
+    "stars": 25532,
+    "language": "TypeScript",
+    "size_kb": 95906,
+    "reason": "timeout"
+  },
+  {
+    "name": "dapr/dapr",
+    "url": "https://github.com/dapr/dapr.git",
+    "stars": 25449,
+    "language": "Go",
+    "size_kb": 135188,
+    "reason": "timeout"
+  },
+  {
+    "name": "SigNoz/signoz",
+    "url": "https://github.com/SigNoz/signoz.git",
+    "stars": 25429,
+    "language": "TypeScript",
+    "size_kb": 106462,
+    "reason": "timeout"
+  },
+  {
+    "name": "NativeScript/NativeScript",
+    "url": "https://github.com/NativeScript/NativeScript.git",
+    "stars": 25416,
+    "language": "TypeScript",
+    "size_kb": 184452,
+    "reason": "timeout"
+  },
+  {
+    "name": "zloirock/core-js",
+    "url": "https://github.com/zloirock/core-js.git",
+    "stars": 25409,
+    "language": "JavaScript",
+    "size_kb": 82609,
+    "reason": "timeout"
+  },
+  {
+    "name": "anomalyco/sst",
+    "url": "https://github.com/anomalyco/sst.git",
+    "stars": 25340,
+    "language": "TypeScript",
+    "size_kb": 163505,
+    "reason": "timeout"
+  },
+  {
+    "name": "rancher/rancher",
+    "url": "https://github.com/rancher/rancher.git",
+    "stars": 25282,
+    "language": "Go",
+    "size_kb": 172053,
+    "reason": "timeout"
+  },
+  {
+    "name": "pypa/pipenv",
+    "url": "https://github.com/pypa/pipenv.git",
+    "stars": 25106,
+    "language": "Python",
+    "size_kb": 258930,
+    "reason": "timeout"
+  },
+  {
+    "name": "eyaltoledano/claude-task-master",
+    "url": "https://github.com/eyaltoledano/claude-task-master.git",
+    "stars": 25033,
+    "language": "JavaScript",
+    "size_kb": 28146,
+    "reason": "timeout"
+  },
+  {
+    "name": "BabylonJS/Babylon.js",
+    "url": "https://github.com/BabylonJS/Babylon.js.git",
+    "stars": 25005,
+    "language": "TypeScript",
+    "size_kb": 1373493,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "angular/components",
+    "url": "https://github.com/angular/components.git",
+    "stars": 24981,
+    "language": "TypeScript",
+    "size_kb": 149498,
+    "reason": "timeout"
+  },
+  {
+    "name": "nylas/nylas-mail",
+    "url": "https://github.com/nylas/nylas-mail.git",
+    "stars": 24807,
+    "language": "JavaScript",
+    "size_kb": 87026,
+    "reason": "timeout"
+  },
+  {
+    "name": "eip-work/kuboard-press",
+    "url": "https://github.com/eip-work/kuboard-press.git",
+    "stars": 24786,
+    "language": "JavaScript",
+    "size_kb": 204738,
+    "reason": "timeout"
+  },
+  {
+    "name": "bytedance/UI-TARS-desktop",
+    "url": "https://github.com/bytedance/UI-TARS-desktop.git",
+    "stars": 24722,
+    "language": "TypeScript",
+    "size_kb": 191748,
+    "reason": "timeout"
+  },
+  {
+    "name": "HumanSignal/labelImg",
+    "url": "https://github.com/HumanSignal/labelImg.git",
+    "stars": 24701,
+    "language": "Python",
+    "size_kb": 242833,
+    "reason": "timeout"
+  },
+  {
+    "name": "pulumi/pulumi",
+    "url": "https://github.com/pulumi/pulumi.git",
+    "stars": 24576,
+    "language": "Go",
+    "size_kb": 258634,
+    "reason": "timeout"
+  },
+  {
+    "name": "Infisical/infisical",
+    "url": "https://github.com/Infisical/infisical.git",
+    "stars": 24563,
+    "language": "TypeScript",
+    "size_kb": 1257804,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "go-delve/delve",
+    "url": "https://github.com/go-delve/delve.git",
+    "stars": 24558,
+    "language": "Go",
+    "size_kb": 34283,
+    "reason": "timeout"
+  },
+  {
+    "name": "onlook-dev/onlook",
+    "url": "https://github.com/onlook-dev/onlook.git",
+    "stars": 24503,
+    "language": "TypeScript",
+    "size_kb": 80312,
+    "reason": "timeout"
+  },
+  {
+    "name": "actualbudget/actual",
+    "url": "https://github.com/actualbudget/actual.git",
+    "stars": 24484,
+    "language": "TypeScript",
+    "size_kb": 509593,
+    "reason": "timeout"
+  },
+  {
+    "name": "blackmatrix7/ios_rule_script",
+    "url": "https://github.com/blackmatrix7/ios_rule_script.git",
+    "stars": 24473,
+    "language": "JavaScript",
+    "size_kb": 1185647,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "zhaoolee/ChromeAppHeroes",
+    "url": "https://github.com/zhaoolee/ChromeAppHeroes.git",
+    "stars": 24264,
+    "language": "JavaScript",
+    "size_kb": 864472,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "hcengineering/platform",
+    "url": "https://github.com/hcengineering/platform.git",
+    "stars": 24243,
+    "language": "TypeScript",
+    "size_kb": 309251,
+    "reason": "timeout"
+  },
+  {
+    "name": "trufflesecurity/trufflehog",
+    "url": "https://github.com/trufflesecurity/trufflehog.git",
+    "stars": 24216,
+    "language": "Go",
+    "size_kb": 45965,
+    "reason": "timeout"
+  },
+  {
+    "name": "microsoft/typescript-go",
+    "url": "https://github.com/microsoft/typescript-go.git",
+    "stars": 23847,
+    "language": "Go",
+    "size_kb": 183107,
+    "reason": "timeout"
+  },
+  {
+    "name": "cilium/cilium",
+    "url": "https://github.com/cilium/cilium.git",
+    "stars": 23525,
+    "language": "Go",
+    "size_kb": 470135,
+    "reason": "timeout"
+  },
+  {
+    "name": "pubkey/rxdb",
+    "url": "https://github.com/pubkey/rxdb.git",
+    "stars": 22994,
+    "language": "TypeScript",
+    "size_kb": 516970,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "dubinc/dub",
+    "url": "https://github.com/dubinc/dub.git",
+    "stars": 22946,
+    "language": "TypeScript",
+    "size_kb": 78951,
+    "reason": "timeout"
+  },
+  {
+    "name": "terrastruct/d2",
+    "url": "https://github.com/terrastruct/d2.git",
+    "stars": 22924,
+    "language": "Go",
+    "size_kb": 245140,
+    "reason": "timeout"
+  },
+  {
+    "name": "facebook/lexical",
+    "url": "https://github.com/facebook/lexical.git",
+    "stars": 22821,
+    "language": "TypeScript",
+    "size_kb": 121952,
+    "reason": "timeout"
+  },
+  {
+    "name": "grpc/grpc-go",
+    "url": "https://github.com/grpc/grpc-go.git",
+    "stars": 22731,
+    "language": "Go",
+    "size_kb": 43704,
+    "reason": "timeout"
+  },
+  {
+    "name": "micro/go-micro",
+    "url": "https://github.com/micro/go-micro.git",
+    "stars": 22680,
+    "language": "Go",
+    "size_kb": 14918,
+    "reason": "timeout"
+  },
+  {
+    "name": "emberjs/ember.js",
+    "url": "https://github.com/emberjs/ember.js.git",
+    "stars": 22580,
+    "language": "TypeScript",
+    "size_kb": 103198,
+    "reason": "timeout"
+  },
+  {
+    "name": "SillyTavern/SillyTavern",
+    "url": "https://github.com/SillyTavern/SillyTavern.git",
+    "stars": 22426,
+    "language": "JavaScript",
+    "size_kb": 210709,
+    "reason": "timeout"
+  },
+  {
+    "name": "jaegertracing/jaeger",
+    "url": "https://github.com/jaegertracing/jaeger.git",
+    "stars": 22380,
+    "language": "Go",
+    "size_kb": 35846,
+    "reason": "timeout"
+  },
+  {
+    "name": "t4t5/sweetalert",
+    "url": "https://github.com/t4t5/sweetalert.git",
+    "stars": 22357,
+    "language": "TypeScript",
+    "size_kb": 5478,
+    "reason": "timeout"
+  },
+  {
+    "name": "copy/v86",
+    "url": "https://github.com/copy/v86.git",
+    "stars": 22119,
+    "language": "JavaScript",
+    "size_kb": 16045,
+    "reason": "timeout"
+  },
+  {
+    "name": "RooCodeInc/Roo-Code",
+    "url": "https://github.com/RooCodeInc/Roo-Code.git",
+    "stars": 21899,
+    "language": "TypeScript",
+    "size_kb": 343407,
+    "reason": "timeout"
+  },
+  {
+    "name": "QwikDev/qwik",
+    "url": "https://github.com/QwikDev/qwik.git",
+    "stars": 21894,
+    "language": "TypeScript",
+    "size_kb": 65979,
+    "reason": "timeout"
+  },
+  {
+    "name": "redis/go-redis",
+    "url": "https://github.com/redis/go-redis.git",
+    "stars": 21854,
+    "language": "Go",
+    "size_kb": 28591,
+    "reason": "timeout"
+  },
+  {
+    "name": "argoproj/argo-cd",
+    "url": "https://github.com/argoproj/argo-cd.git",
+    "stars": 21809,
+    "language": "Go",
+    "size_kb": 151085,
+    "reason": "timeout"
+  },
+  {
+    "name": "handsontable/handsontable",
+    "url": "https://github.com/handsontable/handsontable.git",
+    "stars": 21754,
+    "language": "JavaScript",
+    "size_kb": 839936,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "react-dnd/react-dnd",
+    "url": "https://github.com/react-dnd/react-dnd.git",
+    "stars": 21627,
+    "language": "TypeScript",
+    "size_kb": 588032,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "be5invis/Iosevka",
+    "url": "https://github.com/be5invis/Iosevka.git",
+    "stars": 21604,
+    "language": "JavaScript",
+    "size_kb": 19597514,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "dgraph-io/dgraph",
+    "url": "https://github.com/dgraph-io/dgraph.git",
+    "stars": 21478,
+    "language": "Go",
+    "size_kb": 661505,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "netbirdio/netbird",
+    "url": "https://github.com/netbirdio/netbird.git",
+    "stars": 21249,
+    "language": "Go",
+    "size_kb": 76067,
+    "reason": "timeout"
+  },
+  {
+    "name": "wekan/wekan",
+    "url": "https://github.com/wekan/wekan.git",
+    "stars": 20805,
+    "language": "JavaScript",
+    "size_kb": 95082,
+    "reason": "timeout"
+  },
+  {
+    "name": "vitessio/vitess",
+    "url": "https://github.com/vitessio/vitess.git",
+    "stars": 20638,
+    "language": "Go",
+    "size_kb": 470077,
+    "reason": "timeout"
+  },
+  {
+    "name": "MobSF/Mobile-Security-Framework-MobSF",
+    "url": "https://github.com/MobSF/Mobile-Security-Framework-MobSF.git",
+    "stars": 20253,
+    "language": "JavaScript",
+    "size_kb": 1521517,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "qax-os/excelize",
+    "url": "https://github.com/qax-os/excelize.git",
+    "stars": 20224,
+    "language": "Go",
+    "size_kb": 7854,
+    "reason": "timeout"
+  },
+  {
+    "name": "containerd/containerd",
+    "url": "https://github.com/containerd/containerd.git",
+    "stars": 20150,
+    "language": "Go",
+    "size_kb": 129474,
+    "reason": "timeout"
+  },
+  {
+    "name": "OpenListTeam/OpenList",
+    "url": "https://github.com/OpenListTeam/OpenList.git",
+    "stars": 20123,
+    "language": "Go",
+    "size_kb": 7896,
+    "reason": "timeout"
+  },
+  {
+    "name": "tabler/tabler-icons",
+    "url": "https://github.com/tabler/tabler-icons.git",
+    "stars": 20080,
+    "language": "JavaScript",
+    "size_kb": 1143473,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "gravitational/teleport",
+    "url": "https://github.com/gravitational/teleport.git",
+    "stars": 19736,
+    "language": "Go",
+    "size_kb": 1334698,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "dolthub/dolt",
+    "url": "https://github.com/dolthub/dolt.git",
+    "stars": 19615,
+    "language": "Go",
+    "size_kb": 176837,
+    "reason": "timeout"
+  },
+  {
+    "name": "kubernetes/ingress-nginx",
+    "url": "https://github.com/kubernetes/ingress-nginx.git",
+    "stars": 19276,
+    "language": "Go",
+    "size_kb": 150414,
+    "reason": "timeout"
+  },
+  {
+    "name": "nats-io/nats-server",
+    "url": "https://github.com/nats-io/nats-server.git",
+    "stars": 19025,
+    "language": "Go",
+    "size_kb": 55058,
+    "reason": "timeout"
+  },
+  {
+    "name": "charmbracelet/crush",
+    "url": "https://github.com/charmbracelet/crush.git",
+    "stars": 18797,
+    "language": "Go",
+    "size_kb": 23060,
+    "reason": "timeout"
+  },
+  {
+    "name": "bettercap/bettercap",
+    "url": "https://github.com/bettercap/bettercap.git",
+    "stars": 18751,
+    "language": "Go",
+    "size_kb": 26492,
+    "reason": "timeout"
+  },
+  {
+    "name": "navidrome/navidrome",
+    "url": "https://github.com/navidrome/navidrome.git",
+    "stars": 18728,
+    "language": "Go",
+    "size_kb": 43956,
+    "reason": "timeout"
+  },
+  {
+    "name": "golangci/golangci-lint",
+    "url": "https://github.com/golangci/golangci-lint.git",
+    "stars": 18361,
+    "language": "Go",
+    "size_kb": 51979,
+    "reason": "timeout"
+  },
+  {
+    "name": "temporalio/temporal",
+    "url": "https://github.com/temporalio/temporal.git",
+    "stars": 17902,
+    "language": "Go",
+    "size_kb": 123730,
+    "reason": "timeout"
+  },
+  {
+    "name": "google/gvisor",
+    "url": "https://github.com/google/gvisor.git",
+    "stars": 17584,
+    "language": "Go",
+    "size_kb": 102584,
+    "reason": "timeout"
+  },
+  {
+    "name": "rqlite/rqlite",
+    "url": "https://github.com/rqlite/rqlite.git",
+    "stars": 17260,
+    "language": "Go",
+    "size_kb": 52862,
+    "reason": "timeout"
+  },
+  {
+    "name": "tinygo-org/tinygo",
+    "url": "https://github.com/tinygo-org/tinygo.git",
+    "stars": 17103,
+    "language": "Go",
+    "size_kb": 12496,
+    "reason": "timeout"
+  },
+  {
+    "name": "ipfs/kubo",
+    "url": "https://github.com/ipfs/kubo.git",
+    "stars": 16888,
+    "language": "Go",
+    "size_kb": 58877,
+    "reason": "timeout"
+  },
+  {
+    "name": "ory/hydra",
+    "url": "https://github.com/ory/hydra.git",
+    "stars": 16878,
+    "language": "Go",
+    "size_kb": 124272,
+    "reason": "timeout"
+  },
+  {
+    "name": "ent/ent",
+    "url": "https://github.com/ent/ent.git",
+    "stars": 16866,
+    "language": "Go",
+    "size_kb": 32985,
+    "reason": "timeout"
+  },
+  {
+    "name": "kubesphere/kubesphere",
+    "url": "https://github.com/kubesphere/kubesphere.git",
+    "stars": 16823,
+    "language": "Go",
+    "size_kb": 97886,
+    "reason": "timeout"
+  },
+  {
+    "name": "sqlc-dev/sqlc",
+    "url": "https://github.com/sqlc-dev/sqlc.git",
+    "stars": 16782,
+    "language": "Go",
+    "size_kb": 22357,
+    "reason": "timeout"
+  },
+  {
+    "name": "wavetermdev/waveterm",
+    "url": "https://github.com/wavetermdev/waveterm.git",
+    "stars": 16766,
+    "language": "Go",
+    "size_kb": 74406,
+    "reason": "timeout"
+  },
+  {
+    "name": "livekit/livekit",
+    "url": "https://github.com/livekit/livekit.git",
+    "stars": 16680,
+    "language": "Go",
+    "size_kb": 14102,
+    "reason": "timeout"
+  },
+  {
+    "name": "influxdata/telegraf",
+    "url": "https://github.com/influxdata/telegraf.git",
+    "stars": 16655,
+    "language": "Go",
+    "size_kb": 80538,
+    "reason": "timeout"
+  },
+  {
+    "name": "kubernetes/kops",
+    "url": "https://github.com/kubernetes/kops.git",
+    "stars": 16541,
+    "language": "Go",
+    "size_kb": 472673,
+    "reason": "timeout"
+  },
+  {
+    "name": "hyperledger/fabric",
+    "url": "https://github.com/hyperledger/fabric.git",
+    "stars": 16537,
+    "language": "Go",
+    "size_kb": 154855,
+    "reason": "timeout"
+  },
+  {
+    "name": "argoproj/argo-workflows",
+    "url": "https://github.com/argoproj/argo-workflows.git",
+    "stars": 16386,
+    "language": "Go",
+    "size_kb": 170662,
+    "reason": "timeout"
+  },
+  {
+    "name": "hashicorp/nomad",
+    "url": "https://github.com/hashicorp/nomad.git",
+    "stars": 16129,
+    "language": "Go",
+    "size_kb": 617608,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "VictoriaMetrics/VictoriaMetrics",
+    "url": "https://github.com/VictoriaMetrics/VictoriaMetrics.git",
+    "stars": 16127,
+    "language": "Go",
+    "size_kb": 321662,
+    "reason": "timeout"
+  },
+  {
+    "name": "pion/webrtc",
+    "url": "https://github.com/pion/webrtc.git",
+    "stars": 15947,
+    "language": "Go",
+    "size_kb": 6558,
+    "reason": "timeout"
+  },
+  {
+    "name": "GoogleContainerTools/skaffold",
+    "url": "https://github.com/GoogleContainerTools/skaffold.git",
+    "stars": 15718,
+    "language": "Go",
+    "size_kb": 171505,
+    "reason": "timeout"
+  },
+  {
+    "name": "openimsdk/open-im-server",
+    "url": "https://github.com/openimsdk/open-im-server.git",
+    "stars": 15618,
+    "language": "Go",
+    "size_kb": 35689,
+    "reason": "timeout"
+  },
+  {
+    "name": "gofr-dev/gofr",
+    "url": "https://github.com/gofr-dev/gofr.git",
+    "stars": 15566,
+    "language": "Go",
+    "size_kb": 18526,
+    "reason": "timeout"
+  },
+  {
+    "name": "goreleaser/goreleaser",
+    "url": "https://github.com/goreleaser/goreleaser.git",
+    "stars": 15501,
+    "language": "Go",
+    "size_kb": 25400,
+    "reason": "timeout"
+  },
+  {
+    "name": "weaviate/weaviate",
+    "url": "https://github.com/weaviate/weaviate.git",
+    "stars": 15466,
+    "language": "Go",
+    "size_kb": 1038535,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "apache/answer",
+    "url": "https://github.com/apache/answer.git",
+    "stars": 15332,
+    "language": "Go",
+    "size_kb": 15762,
+    "reason": "timeout"
+  },
+  {
+    "name": "dagger/dagger",
+    "url": "https://github.com/dagger/dagger.git",
+    "stars": 15318,
+    "language": "Go",
+    "size_kb": 206180,
+    "reason": "timeout"
+  },
+  {
+    "name": "loft-sh/devpod",
+    "url": "https://github.com/loft-sh/devpod.git",
+    "stars": 14594,
+    "language": "Go",
+    "size_kb": 72420,
+    "reason": "timeout"
+  },
+  {
+    "name": "GoogleCloudPlatform/terraformer",
+    "url": "https://github.com/GoogleCloudPlatform/terraformer.git",
+    "stars": 14399,
+    "language": "Go",
+    "size_kb": 69352,
+    "reason": "timeout"
+  }
+]

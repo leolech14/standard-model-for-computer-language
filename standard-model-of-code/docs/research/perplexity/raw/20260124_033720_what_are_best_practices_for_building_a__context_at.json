@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T03:37:20.863950",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "What are best practices for building a 'context atomization' system for AI agents? I need to: 1) Break large context (code, docs) into semantic chunks, 2) Score chunks by relevance, 3) Cache and retrieve efficiently. What algorithms and data structures are used in production systems like LangChain, LlamaIndex, or Semantic Kernel?",
+    "query_length": 331,
+    "checksum": "sha256:bca5ab4f20dd3be7d967406f99325d849c48a2108ebc1129813c0f37ca440bde"
+  },
+  "response": {
+    "id": "28fd5154-ee74-4f03-aaee-54924030bb15",
+    "model": "sonar-pro",
+    "created": 1769236640,
+    "usage": {
+      "prompt_tokens": 74,
+      "completion_tokens": 807,
+      "total_tokens": 881,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.012,
+        "request_cost": 0.006,
+        "total_cost": 0.018
+      }
+    },
+    "citations": [
+      "https://www.vellum.ai/blog/multi-agent-systems-building-with-context-engineering",
+      "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus",
+      "https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/",
+      "https://onereach.ai/blog/best-practices-for-ai-agent-implementations/",
+      "https://community.latenode.com/t/best-practices-for-keeping-ai-agent-contexts-separate-but-synced/39881",
+      "https://www.uipath.com/blog/ai/agent-builder-best-practices",
+      "https://www.flowhunt.io/blog/context-engineering-for-ai-agents/"
+    ],
+    "search_results": [
+      {
+        "title": "How to Build Multi Agent AI Systems With Context Engineering",
+        "url": "https://www.vellum.ai/blog/multi-agent-systems-building-with-context-engineering",
+        "date": "2025-12-03",
+        "last_updated": "2026-01-23",
+        "snippet": "This blog explores multi-agent systems, context engineering frameworks, and practical best practices for teams ready to build working multi-agent solutions that ...",
+        "source": "web"
+      },
+      {
+        "title": "Effective context engineering for AI agents - Anthropic",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "date": "2025-09-29",
+        "last_updated": "2026-01-24",
+        "snippet": "In this post, we'll explore the emerging art of context engineering and offer a refined mental model for building steerable, effective agents.",
+        "source": "web"
+      },
+      {
+        "title": "Context Engineering for AI Agents: Lessons from Building Manus",
+        "url": "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus",
+        "date": "2025-07-18",
+        "last_updated": "2026-01-23",
+        "snippet": "Context Engineering for AI Agents: Lessons from Building Manus · Keep your prompt prefix stable. · Make your context append-only. · Mark cache ...",
+        "source": "web"
+      },
+      {
+        "title": "Architecting efficient context-aware multi-agent framework for ...",
+        "url": "https://developers.googleblog.com/architecting-efficient-context-aware-multi-agent-framework-for-production/",
+        "date": "2025-12-04",
+        "last_updated": "2026-01-24",
+        "snippet": "ADK's Context Engineering scales production AI agents. Architect tiered context for efficiency, reliability, and multi-agent context ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Practices for AI Agent Implementations: Enterprise Guide 2026",
+        "url": "https://onereach.ai/blog/best-practices-for-ai-agent-implementations/",
+        "date": "2025-10-31",
+        "last_updated": "2026-01-23",
+        "snippet": "Use security frameworks that address four critical parameters: prompt filtering, data protection, external access control, and response ...",
+        "source": "web"
+      },
+      {
+        "title": "Best practices for keeping AI agent contexts separate but synced?",
+        "url": "https://community.latenode.com/t/best-practices-for-keeping-ai-agent-contexts-separate-but-synced/39881",
+        "date": "2025-09-10",
+        "last_updated": "2025-09-27",
+        "snippet": "Use Autonomous AI Teams - each agent gets isolated execution context with controlled data passing through dedicated nodes. Built-in context ...",
+        "source": "web"
+      },
+      {
+        "title": "10 best practices for building reliable AI agents in 2025 - UiPath",
+        "url": "https://www.uipath.com/blog/ai/agent-builder-best-practices",
+        "date": "2025-10-07",
+        "last_updated": "2026-01-24",
+        "snippet": "1. Design agents that fail safe (not just fast) · 2. Configure context the right way · 3. Treat every capability as a tool · 4. Write prompts like ...",
+        "source": "web"
+      },
+      {
+        "title": "Context Engineering for AI Agents: Mastering the Art of Feeding ...",
+        "url": "https://www.flowhunt.io/blog/context-engineering-for-ai-agents/",
+        "date": "2025-10-25",
+        "last_updated": "2026-01-23",
+        "snippet": "Learn how to engineer context for AI agents by managing tool feedback, optimizing token usage, and implementing strategies like offloading, ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**Context atomization** involves breaking large contexts like code or documents into semantic chunks, scoring them for relevance, and caching/retrieving them efficiently to optimize AI agent performance, using techniques like RAG, similarity search, and compaction seen in production systems.[1][2]\n\n### 1. Breaking Large Context into Semantic Chunks\nSemantic chunking splits documents or code into meaningful units (e.g., sentences, paragraphs, functions) rather than fixed-size tokens to preserve meaning and improve retrieval.\n- Use **RAG pipelines** for semantic splitting via embeddings, filters, or summarization to isolate relevant sections without token bloat.[1]\n- Employ **compaction** and **structured note-taking** to trim traces, retaining only essential details like key decisions (e.g., tone, audience) while discarding noise.[2]\n- In multi-agent setups like those in Vellum or Anthropic, **isolate context** per sub-agent with scoped windows, using prompt chaining for progressive disclosure.[1][2]\nProduction examples: LangChain and LlamaIndex (implied via RAG) use embedding-based splitters; Semantic Kernel employs similar hierarchical chunking for code/docs.[1][2]\n\n### 2. Scoring Chunks by Relevance\nScore chunks using similarity metrics to prioritize high-utility content.\n- Apply **similarity search** or embedding cosine similarity to rank chunks against queries, filtering via RAG or metadata (e.g., timestamps, sources).[1][2]\n- Use **evaluation and observability** to score outputs, comparing for conflicts and relevance, as in Vellum's pipelines.[1]\n- For long contexts, **context-aware state machines** mask irrelevant chunks during decoding, tuning prompts for recall then precision.[2][3]\nProduction examples: LlamaIndex scores via vector stores (e.g., FAISS); LangChain uses retrievers like BM25 + embeddings; Anthropic agents dynamically score via exploration.[1][2]\n\n### 3. Caching and Efficient Retrieval\nCache scored chunks externally to handle context limits, enabling fast reuse.\n- Leverage **context caching (prefix caching)** to reuse stable prefixes (e.g., instructions) across calls, separating \"Session\" storage from dynamic \"Working Context.\"[4]\n- Implement **external memory** (files, objects) with append-only caches, marked for stability, and retrieve via RAG or filters.[1][3]\n- Use **multi-agent architectures** where sub-agents cache summaries (1-2k tokens) for the lead agent, supporting parallel retrieval.[2]\nProduction examples:\n| Framework/System | Key Caching/Retrieval Structures | Algorithms |\n|------------------|---------------------------------|------------|\n| **LangChain**   | Vector stores (e.g., Pinecone, FAISS); memory modules | Embeddings + cosine similarity; prompt compression [inferred from RAG][1] |\n| **LlamaIndex**  | Index graphs; summary indices | Hierarchical semantic search; node parsers for chunking [inferred from RAG][1][2] |\n| **Semantic Kernel** | Planners with memory stores; kernel functions | Hybrid search (semantic + keyword); context variables [inferred from agent patterns][2] |\n| **Vellum/ADK**  | Prompt nodes; tiered context zones | Prefix caching; workflow orchestration [1][4] |\n| **Anthropic Agents** | Sub-agent summaries; note-taking | Compaction prompts; progressive retrieval [2] |\n\n**Best Practices Across Systems**:\n- Order context stably (static prefix first) for cache efficiency.[4]\n- Compress via summarization (e.g., `summary_of_prior_steps`) to fit windows.[1][2]\n- Parallelize with specialized agents for decomposition, reducing single-context overload.[1][2]\nThese draw from production like Anthropic's sub-agents and Vellum's RAG, emphasizing relevance over exhaustive inclusion.[1][2][4]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

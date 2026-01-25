@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T15:28:35.438505",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "RunPod SSH authentication 2025:\n1. How does SSH authentication work for RunPod pods?\n2. Do I need to upload an SSH public key?\n3. Can I use password authentication?\n4. How to set SSH key via API when creating pod?\n5. Is there an alternative to SSH for running commands (like exec API)?",
+    "query_length": 285,
+    "checksum": "sha256:e1857cb6db936049b8ed671f46263a11939a968e55e636fd8dfe10483cf0dcba"
+  },
+  "response": {
+    "id": "f644962d-7e52-496d-9bac-71f8f7e3fcb3",
+    "model": "sonar-pro",
+    "created": 1769279315,
+    "usage": {
+      "prompt_tokens": 69,
+      "completion_tokens": 456,
+      "total_tokens": 525,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.007,
+        "request_cost": 0.006,
+        "total_cost": 0.013
+      }
+    },
+    "citations": [
+      "https://docs.runpod.io/pods/configuration/use-ssh",
+      "https://www.answeroverflow.com/m/1194365915509293187",
+      "https://www.youtube.com/watch?v=Q5r0SayNWg0",
+      "https://www.runpod.io/blog/enable-ssh-password-authentication-on-a-runpod-pod",
+      "https://github.com/justinwlin/Runpod-SSH-Password",
+      "https://www.runpod.io/blog/how-to-set-up-terminal-access-on-runpod",
+      "https://docs.runpod.io/pods/connect-to-a-pod"
+    ],
+    "search_results": [
+      {
+        "title": "Connect to a Pod with SSH",
+        "url": "https://docs.runpod.io/pods/configuration/use-ssh",
+        "date": "2025-12-01",
+        "last_updated": "2026-01-22",
+        "snippet": "Runpod does not require a password for SSH connections, as authentication is handled entirely through your SSH key pair. Here are some common reasons why this ...",
+        "source": "web"
+      },
+      {
+        "title": "Dev Accounts Adding Public Key - Runpod - Answer Overflow",
+        "url": "https://www.answeroverflow.com/m/1194365915509293187",
+        "date": "2024-01-09",
+        "last_updated": "2025-12-08",
+        "snippet": "I want folks who have dev accounts to be able to ssh into a pod. To do so they need to share their public keys w/ runpod.",
+        "source": "web"
+      },
+      {
+        "title": "How to Connect to a Runpod Pod on Windows with SSH - YouTube",
+        "url": "https://www.youtube.com/watch?v=Q5r0SayNWg0",
+        "date": "2025-08-13",
+        "last_updated": "2026-01-24",
+        "snippet": "Learn how to connect to a Runpod pod through SSH in Windows using PowerShell, streamlining your workflow. Some addenda: To get the a new SSH key ...",
+        "source": "web"
+      },
+      {
+        "title": "Enable SSH Password Authentication on a Runpod Pod",
+        "url": "https://www.runpod.io/blog/enable-ssh-password-authentication-on-a-runpod-pod",
+        "date": "2024-05-16",
+        "last_updated": "2025-10-14",
+        "snippet": "By setting a root password and modifying the SSH configuration file, you can now securely connect to your Pod using a username and password.",
+        "source": "web"
+      },
+      {
+        "title": "Runpod SSH Password - justinwlin",
+        "url": "https://github.com/justinwlin/Runpod-SSH-Password",
+        "snippet": "Dual authentication: Enables both SSH key and password authentication; rsync examples: Connection scripts include rsync commands for efficient transfers.",
+        "source": "web"
+      },
+      {
+        "title": "How to Configure Basic Terminal Access on Runpod",
+        "url": "https://www.runpod.io/blog/how-to-set-up-terminal-access-on-runpod",
+        "date": "2022-05-16",
+        "last_updated": "2025-10-14",
+        "snippet": "This post walks through creating and uploading an SSH key, connecting via the terminal, and highlights the limitations of this method (e.g. ...",
+        "source": "web"
+      },
+      {
+        "title": "Pod connection options",
+        "url": "https://docs.runpod.io/pods/connect-to-a-pod",
+        "date": "2026-01-22",
+        "last_updated": "2026-01-24",
+        "snippet": "Connecting to a Pod via an SSH (Secure Shell) terminal provides a secure and reliable method for interacting with your instance. To establish an SSH connection, ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "RunPod SSH authentication uses **key-based authentication** as its primary method, though password authentication can be enabled as an alternative.[1]\n\n## How SSH Authentication Works\n\nRunPod authenticates SSH connections entirely through **SSH key pairs** rather than passwords.[1] When you connect to a Pod, RunPod's systems verify that you possess the corresponding private key to your uploaded public key. This is more secure than password-based authentication and is the standard method for Pod access.[1]\n\n## Do You Need to Upload an SSH Public Key?\n\nYes. To use SSH with RunPod, you must:**[1]\n\n1. Generate an SSH key pair on your local machine using `ssh-keygen -t ed25519 -C \"[email protected]\"`\n2. Retrieve your public key from `~/.ssh/id_ed25519.pub`\n3. Add the public key to the **SSH Public Keys** field in your RunPod user account settings\n\nRunPod will automatically inject these keys into all Pods you create.[1] Alternatively, you can override the default public key for a specific Pod by setting the `SSH_PUBLIC_KEY` environment variable.[1]\n\n## Password Authentication\n\nWhile RunPod's default configuration doesn't require passwords, **password authentication can be enabled** on a Pod.[4][5] You can set a root password and modify the SSH configuration file to allow password-based connections, though this is less secure than key-based authentication.[4]\n\nAdditionally, there are community scripts available that enable dual authentication (both SSH key and password methods).[5]\n\n## Setting SSH Key via API When Creating a Pod\n\nThe search results don't explicitly document an API method for setting the SSH key during Pod creation. However, you can set the `RUNPOD_SSH_PUBLIC_KEY` (or `SSH_PUBLIC_KEY`) environment variable on a running Pod to inject a new public key, which will cause the Pod to restart.[3]\n\n## Alternatives to SSH for Running Commands\n\nThe search results provided don't include information about an exec API or other alternative methods for running commands on RunPod Pods beyond SSH. To get comprehensive information about RunPod's API capabilities for command execution, you would need to consult RunPod's full API documentation, which isn't included in these search results."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-25 08:15:40",
+  "session_end": "2026-01-25 08:16:17",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 94911,
+  "total_tokens_out": 857,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769339740.1782641,
+      "timestamp_str": "2026-01-25 08:15:40",
+      "role": "user",
+      "content": "List ALL configuration-based collections: analysis_sets (how many sets?), prompts (how many?), semantic_models, research_schemas, ACI tiers. For each: name, path, item count."
+    },
+    {
+      "timestamp": 1769339777.231112,
+      "timestamp_str": "2026-01-25 08:16:17",
+      "role": "assistant",
+      "content": "Based on the provided codebase context, here are the configuration-based collections.\n\n### 1. Analysis Sets\n**Path:** `context-management/config/analysis_sets.yaml`\n**Item Count:** 35 sets\n**Description:** Defines coherent slices of the codebase for AI analysis, categorized by purpose (Core, Task, Research, Agent, etc.).\n\n| Category | Set Names |\n| :--- | :--- |\n| **Data Boxes** | `archive`, `repo_docs`, `roadmap`, `docs_core`, `repo_theory`, `repo_tool`, `archeology` |\n| **Micro-Sets** | `constraints`, `viz_core`, `theory`, `schema` |\n| **Composed** | `pipeline`, `classifiers`, `architecture_review`, `implementation_review` |\n| **Legacy** | `brain`, `body`, `viz`, `complete` |\n| **Task** | `role_registry`, `tests` |\n| **Research** | `research_core`, `research_tools`, `research_atoms`, `research_full`, `research_validation` |\n| **Agent** | `agent_session`, `agent_kernel`, `agent_tasks`, `agent_intelligence`, `agent_specs`, `agent_full` |\n| **ACI** | `aci_core`, `aci_siblings`, `aci_audit` |\n\n### 2. Prompts\n**Path:** `context-management/config/prompts.yaml`\n**Item Count:** 9 items (5 templates + 4 modes)\n**Description:** System prompts and templates for specialized analysis tasks.\n\n**Analysis Templates (5):**\n*   `insights`: General architecture/pattern analysis.\n*   `insights_source`: Source code quality and refactoring analysis.\n*   `plan_validation`: Validates implementation plans against code reality.\n*   `role_validation`: Audits code against the Standard Model canonical roles.\n*   `task_assessment`: Scores tasks on Factual, Alignment, Current, and Onwards dimensions.\n\n**Execution Modes (4):**\n*   `standard`: Default text output.\n*   `forensic`: Requires file path/line number citations.\n*   `architect`: Enforces Standard Model terminology (Atoms, Rings, Tiers).\n*   `interactive`: Optimized for chat sessions.\n\n### 3. ACI Tiers (Configuration)\n**Path:** `context-management/config/aci_config.yaml`\n**Item Count:** 4 defined in config\n**Description:** Routing thresholds and budgets for Adaptive Context Intelligence.\n\n1.  **instant**: Cached truths (<100ms).\n2.  **rag**: File Search targeted lookups (<5s).\n3.  **long_context**: Full context reasoning (<60s).\n4.  **perplexity**: External web research (<30s).\n\n*Note: The code in `tier_orchestrator.py` implements two additional logic-based tiers not present in the YAML config:*\n*   *`FLASH_DEEP`: For massive context (2M tokens).*\n*   *`HYBRID`: Combines Internal + External synthesis.*\n\n### 4. Semantic Models\n**Path:** `context-management/config/semantic_models.yaml`\n**Item Count:** Unknown (File content not provided)\n**Description:** Referenced in `analyze.py` and `HOLOGRAPHIC_SOCRATIC_LAYER.md`. Used for defining \"Antimatter Laws\" and semantic domain definitions for the Socratic Validator.\n\n### 5. Research Schemas\n**Path:** `context-management/config/research_schemas.yaml` (Inferred from `research_orchestrator.py`)\n**Item Count:** Unknown (File content not provided)\n**Description:** Referenced in `research_orchestrator.py`. Defines multi-step research plans (schemas) containing runs, strategies, and synthesis configurations for the Research Engine."
+    }
+  ]
+}

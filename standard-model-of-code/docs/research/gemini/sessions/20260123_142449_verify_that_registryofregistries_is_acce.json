@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 14:24:46",
+  "session_end": "2026-01-23 14:24:49",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769189086.671,
+      "timestamp_str": "2026-01-23 14:24:46",
+      "role": "user",
+      "content": "Verify that RegistryOfRegistries is accessible and lists all sub-registries including workflows"
+    }
+  ]
+}

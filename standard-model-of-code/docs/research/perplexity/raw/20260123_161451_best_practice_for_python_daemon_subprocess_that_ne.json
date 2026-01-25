@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T16:14:51.748172",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Best practice for Python daemon subprocess that needs API keys from Doppler secrets manager. Options: (A) wrap subprocess in 'doppler run', (B) export env vars before daemon start, (C) use launchd EnvironmentVariables. Which is most reliable for macOS launchd-managed daemons?",
+    "query_length": 276,
+    "checksum": "sha256:f77ceb21ad8eb4c7075dc5082ea50fb3b32967c0b8922868bad87b92fe9ade1f"
+  },
+  "response": {
+    "id": "870d3cd4-1a15-445a-9fb4-d0fdc00c3a0d",
+    "model": "sonar-pro",
+    "created": 1769195691,
+    "usage": {
+      "prompt_tokens": 62,
+      "completion_tokens": 653,
+      "total_tokens": 715,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.01,
+        "request_cost": 0.006,
+        "total_cost": 0.016
+      }
+    },
+    "citations": [
+      "https://www.youtube.com/watch?v=L3RuE7BMruE",
+      "https://www.doppler.com/blog/secrets-management-best-practices-for-ephemeral-environments",
+      "https://www.youtube.com/watch?v=7UaVLpbtNCc",
+      "https://www.doppler.com/blog/doppler-secrets-setup-guide",
+      "https://www.doppler.com/blog/5-secrets-management-best-practices-for-new-developers",
+      "https://news.ycombinator.com/item?id=40941412",
+      "https://discuss.python.org/t/proper-way-to-create-a-daemon-process/79824",
+      "https://serverascode.com/2021/12/01/dev-experience-doppler-secrets.html"
+    ],
+    "search_results": [
+      {
+        "title": "Better Python secrets management for data scientists and devs",
+        "url": "https://www.youtube.com/watch?v=L3RuE7BMruE",
+        "date": "2024-11-25",
+        "last_updated": "2025-09-30",
+        "snippet": "Learn the most secure way to manage secrets in Python projects - no more .env files in your project directory. Great for anyone who uses ...",
+        "source": "web"
+      },
+      {
+        "title": "Secrets management best practices for ephemeral environments",
+        "url": "https://www.doppler.com/blog/secrets-management-best-practices-for-ephemeral-environments",
+        "date": "2025-11-17",
+        "last_updated": "2025-11-29",
+        "snippet": "Automate rotation and revocation through your cloud provider or a secrets manager. Scrub logs and disable debug endpoints to avoid leaks.",
+        "source": "web"
+      },
+      {
+        "title": "Managing Secrets with Doppler - YouTube",
+        "url": "https://www.youtube.com/watch?v=7UaVLpbtNCc",
+        "date": "2021-10-12",
+        "last_updated": "2025-07-05",
+        "snippet": "For the last few months I have been using doppler to manage my secrets for my personal dev projects. It's super easy to use and does a great ...",
+        "source": "web"
+      },
+      {
+        "title": "How to set up Doppler for secrets management (step-by-step guide)",
+        "url": "https://www.doppler.com/blog/doppler-secrets-setup-guide",
+        "date": "2025-09-04",
+        "last_updated": "2026-01-20",
+        "snippet": "Set up Doppler to manage secrets securely across local, staging, and cloud environments. Includes CLI, GitHub, and CI/CD steps.",
+        "source": "web"
+      },
+      {
+        "title": "5 Secrets Management Best Practices for New Developers - Doppler",
+        "url": "https://www.doppler.com/blog/5-secrets-management-best-practices-for-new-developers",
+        "date": "2024-06-27",
+        "last_updated": "2026-01-20",
+        "snippet": "In this article, we'll cover five secrets management best practices to help you build more secure software.",
+        "source": "web"
+      },
+      {
+        "title": "AWS Secrets Manager Agent - Hacker News",
+        "url": "https://news.ycombinator.com/item?id=40941412",
+        "date": "2024-07-11",
+        "last_updated": "2025-10-28",
+        "snippet": "This is a solution for storing and retrieving secrets using AWS credentials. Essentially an online password manager for your application.",
+        "source": "web"
+      },
+      {
+        "title": "Proper way to create a daemon process - Python Discussions",
+        "url": "https://discuss.python.org/t/proper-way-to-create-a-daemon-process/79824",
+        "date": "2025-02-07",
+        "last_updated": "2025-12-26",
+        "snippet": "I would like to create a daemon process that continues running after the current process exits, does not block from I/O and is immune to signals from the ...",
+        "source": "web"
+      },
+      {
+        "title": "Dev Experience: Managing Secrets with Doppler",
+        "url": "https://serverascode.com/2021/12/01/dev-experience-doppler-secrets.html",
+        "date": "2021-12-01",
+        "last_updated": "2026-01-21",
+        "snippet": "Dev Experience: Managing Secrets with Doppler · 1. About Doppler · 2. tl;dr · 3. Installing doppler cli · 4. Initial Configuration · 5. Using Doppler ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**Option (C) using launchd EnvironmentVariables is the most reliable for macOS launchd-managed daemons.**\n\nLaunchd on macOS natively supports setting environment variables directly in the plist file via the `EnvironmentVariables` key, allowing your Python daemon subprocess to access Doppler-fetched API keys securely at launch time without runtime dependencies.[7] This approach avoids shell wrappers or pre-export steps that can fail in daemon contexts.\n\n### Comparison of Options\n| Option | Description | Reliability for launchd Daemons | Key Limitations |\n|--------|-------------|--------------------------------|-----------------|\n| **(A) Wrap subprocess in 'doppler run'** | Use `doppler run -- python your_daemon.py` to inject secrets at runtime via Doppler CLI.[4] | Low: launchd executes commands directly without shell interpretation; wrappers may not propagate env vars reliably, and CLI requires authentication/availability.[2][4] |\n| **(B) Export env vars before daemon start** | Fetch secrets (e.g., `doppler run -- printenv`) and export manually before launchd loads the plist.[4] | Medium: Manual step is error-prone, non-reproducible across restarts/updates, and doesn't persist if launchd reloads independently. |\n| **(C) launchd EnvironmentVariables** | In your `~/Library/LaunchAgents/yourdaemon.plist`:<br>```xml<br><?xml version=\"1.0\" encoding=\"UTF-8\"?><br><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\"...><br><plist version=\"1.0\"><br><dict><br>  <key>EnvironmentVariables</key><br>  <dict><br>    <key>API_KEY</key><br>    <string>your_doppler_fetched_value</string><br>  </dict><br>  <key>ProgramArguments</key><br>  <array><br>    <string>python</string><br>    <string>/path/to/daemon.py</string><br>  </array><br></dict><br></plist><br>```<br>Load with `launchctl load ~/Library/LaunchAgents/yourdaemon.plist`. | **High: Native, persistent, and secure.** Variables are set per-launch without external tools; Doppler values can be fetched once and stored securely (rotate via Doppler).[4] |\n\n### Recommended Workflow\n1. Install Doppler CLI and fetch secrets: `doppler run -- echo \"API_KEY=value\" > /tmp/secrets.txt` (secure tmp, or use keychain).[4]\n2. Edit plist with `EnvironmentVariables` using fetched values (avoid committing secrets).[1][4]\n3. In Python daemon: `import os; api_key = os.environ['API_KEY']`.\n4. Reload: `launchctl unload/load your.plist`.\n\nThis aligns with Doppler's runtime injection best practices (env vars over files) while leveraging launchd's strengths for daemons.[2][4][7] For dynamic rotation, combine with Doppler service tokens or periodic plist updates."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

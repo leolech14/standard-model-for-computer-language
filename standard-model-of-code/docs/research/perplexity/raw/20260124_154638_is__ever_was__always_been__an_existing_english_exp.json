@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T15:46:38.424101",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Is \"Ever was, always been\" an existing English expression or idiom? What are similar phrases that convey the idea of something being native/original to a system, as if it was always there from the beginning? Looking for phrases used in software engineering, design, or architecture contexts.",
+    "query_length": 291,
+    "checksum": "sha256:45d26bf75aaec22674babbf69ed7f464d33d501c0f926c3a230985d169a68665"
+  },
+  "response": {
+    "id": "c2da97f6-f369-483b-8d36-4c8b7c497dea",
+    "model": "sonar-pro",
+    "created": 1769280398,
+    "usage": {
+      "prompt_tokens": 57,
+      "completion_tokens": 586,
+      "total_tokens": 643,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.009,
+        "request_cost": 0.006,
+        "total_cost": 0.015
+      }
+    },
+    "citations": [
+      "https://www.crestolympiads.com/spellbee/ever",
+      "https://forum.thefreedictionary.com/postst25999_Ever-and-Always.aspx",
+      "https://forum.thefreedictionary.com/postst1294_Ever-the-gentleman--idiom.aspx",
+      "https://www.niftyword.com/idioms-phrases/ever/",
+      "https://www.youtube.com/watch?v=lZ7bFOjYZws",
+      "http://www.goenglish.com/Idioms/Ever.asp"
+    ],
+    "search_results": [
+      {
+        "title": "Word: ever - Meaning, Usage, Idioms & Fun Facts",
+        "url": "https://www.crestolympiads.com/spellbee/ever",
+        "date": "2025-01-01",
+        "last_updated": "2025-12-15",
+        "snippet": "**Word:** Ever\n\n**Part of Speech:** Adverb\n\n**Meaning:** At any time; always; continuously or repeatedly.\n\n**Synonyms:** Always, perpetually, endlessly, continually\n\n**Antonyms:** Never, not once\n\n**Example 1:** Have you ever been to the Eiffel Tower?\n\n**Example 2:** She is ever cheerful, no matter ...",
+        "source": "web"
+      },
+      {
+        "title": "Ever and Always",
+        "url": "https://forum.thefreedictionary.com/postst25999_Ever-and-Always.aspx",
+        "date": "2025-01-01",
+        "last_updated": "2025-08-17",
+        "snippet": "Welcome Guest\n\nForum Search\n\n\n\nActive Topics\n\n\n\nMembers\n\n中文简体\n\nDansk\n\nNederlands\n\nEnglish\n\nSuomi\n\nFrançais\n\nDeutsch\n\nNorsk\n\nPolski\n\nRomână\n\nРусский\n\nEspañol\n\nSvenska\n\nTürkçe\n\nThe Free Dictionary Language Forums\n\n\n\nEnglish\n\n\n\nEnglish Grammar",
+        "source": "web"
+      },
+      {
+        "title": "Ever the gentleman, idiom",
+        "url": "https://forum.thefreedictionary.com/postst1294_Ever-the-gentleman--idiom.aspx",
+        "date": "2025-01-01",
+        "last_updated": "2025-01-28",
+        "snippet": "Welcome Guest\n\nForum Search\n\n\n\nActive Topics\n\n\n\nMembers\n\n中文简体\n\nDansk\n\nNederlands\n\nEnglish\n\nSuomi\n\nFrançais\n\nDeutsch\n\nNorsk\n\nPolski\n\nRomână\n\nРусский\n\nEspañol\n\nSvenska\n\nTürkçe\n\nThe Free Dictionary Language Forums\n\n\n\nEnglish\n\n\n\nEnglish Vocabulary",
+        "source": "web"
+      },
+      {
+        "title": "ever : Idioms & Phrases",
+        "url": "https://www.niftyword.com/idioms-phrases/ever/",
+        "last_updated": "2025-01-30",
+        "snippet": "# ever : Idioms & Phrases\n### Index\n\n#### Ever and anon\n\n- now and then; often. See under\n\nAnon.\n\n##### Webster 1913\n\n#### Ever is one\n\n- continually; constantly. Obs.\n\n*Chaucer.*\n\n##### Webster 1913",
+        "source": "web"
+      },
+      {
+        "title": "Every Now and Then Meaning - Learn English Idioms",
+        "url": "https://www.youtube.com/watch?v=lZ7bFOjYZws",
+        "date": "2020-03-07",
+        "last_updated": "2025-07-01",
+        "snippet": "## Essential English and Idioms\n##### Mar 07, 2020 (0:01:44)",
+        "source": "web"
+      },
+      {
+        "title": "\"Ever\" Idioms & Phrases with \"Ever\"",
+        "url": "http://www.goenglish.com/Idioms/Ever.asp",
+        "date": "2009-05-01",
+        "last_updated": "2025-01-30",
+        "snippet": "",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**No, \"Ever was, always been\" is not a recognized English expression or idiom.** Search results do not reference this exact phrase; \"ever\" functions as an adverb meaning \"at any time,\" \"always,\" or emphasizing continuity, often poetically for inherent traits, but no sources document this specific wording.[1][2][3]\n\n### Similar Phrases Conveying Something Native/Original to a System\nThese phrases imply a feature, behavior, or element inherent \"from the beginning\" or fundamentally built-in. While search results focus on general English idioms with \"ever\" (e.g., \"ever the gentleman\" for unfailing traits, \"ever-changing,\" \"ever-present\"),[3][4] the following are established idioms or terms commonly used in **software engineering, design, or architecture** contexts to evoke nativeness or primordial presence:\n\n- **Baked in**: Describes a feature fundamentally integrated into the core design, as if always part of the system (e.g., \"Security is baked in from day one\").[inferred from common usage; aligns with \"ever\" as inherent character][2]\n- **By design**: Indicates intentional, original inclusion rather than an accident (e.g., \"The latency is by design in this architecture\").\n- **Core to / At the core of**: Emphasizes something central and original to the system's identity (e.g., \"Modularity is at the core of microservices\").\n- **Hardwired / Hard-coded**: Refers to permanently embedded elements, unchangeable without major rework (e.g., \"The parser is hardwired into the legacy codebase\").\n- **Inherent / In-built**: Directly conveys something native and unavoidable from inception (e.g., \"State management is inherent in monolithic designs\").\n- **From the ground up**: Suggests built into the foundational structure (e.g., \"The framework supports scalability from the ground up\").\n\n| Phrase          | Nuance in Tech Contexts                  | Example Usage |\n|-----------------|------------------------------------------|---------------|\n| **Baked in**   | Deeply integrated, non-optional         | \"Concurrency is baked in to the language runtime.\" |\n| **By design**  | Deliberately original, not emergent     | \"Single-threaded behavior is by design.\" |\n| **Hardwired**  | Fixed at low level, like hardware       | \"Error handling is hardwired in the kernel.\" |\n| **Inherent**   | Naturally arising from the system's nature | \"Mutability is inherent in object-oriented paradigms.\" |\n\nThese align with \"ever\" connotations of timeless, character-defining presence (e.g., \"ever busy\" for perpetual traits).[2] No search results provide tech-specific idioms matching the query exactly, so the above draw from standard domain terminology."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

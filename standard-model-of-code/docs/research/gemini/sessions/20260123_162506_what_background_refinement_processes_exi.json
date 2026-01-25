@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 16:24:47",
+  "session_end": "2026-01-23 16:25:06",
+  "model": "gemini-2.0-flash",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769196287.732057,
+      "timestamp_str": "2026-01-23 16:24:47",
+      "role": "user",
+      "content": "What background refinement processes exist? List auto-boost, cloud refinery systems. Are they deployed?"
+    }
+  ]
+}

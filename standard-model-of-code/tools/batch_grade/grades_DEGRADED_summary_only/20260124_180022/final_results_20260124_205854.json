@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "timestamp": "20260124_205854",
+    "total_repos": 5,
+    "processed": 5,
+    "success": 0,
+    "failed": 5,
+    "duration_sec": 87.5,
+    "rate_per_hour": 205.8,
+    "workers": 32
+  },
+  "grade_distribution": {
+    "FAIL": 5
+  },
+  "results": [
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "size_kb": 544919,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 532MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "size_kb": 20882,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+      "duration_sec": 24.8
+    },
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "size_kb": 4955,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+      "duration_sec": 26.4
+    },
+    {
+      "name": "donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer.git",
+      "language": "Python",
+      "stars": 333203,
+      "size_kb": 11243,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+      "duration_sec": 31.1
+    },
+    {
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://github.com/kamranahmedse/developer-roadmap.git",
+      "language": "TypeScript",
+      "stars": 347847,
+      "size_kb": 358864,
+      "status": "error",
+      "grade": null,
+      "health_index": null,
+      "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+      "duration_sec": 87.3
+    }
+  ]
+}

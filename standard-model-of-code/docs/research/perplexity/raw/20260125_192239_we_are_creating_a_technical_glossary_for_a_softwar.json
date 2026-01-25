@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T19:22:39.169049",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "We are creating a technical glossary for a software project called PROJECT_elements. The glossary needs to serve AI agents navigating the codebase. \n\nOur current terminology includes:\n- PROJECTOME (all project files)\n- CODOME (all executable code) \n- CONTEXTOME (all non-executable content)\n- Set algebra: P = C ⊔ X (disjoint union/partition)\n- DOMAINS (vertical slices, can overlap - a Cover)\n- REALMS (directory partitions: Particle/Wave/Observer)\n- SYMMETRY states (SYMMETRIC, ORPHAN, PHANTOM, DRIFT)\n- Classification function σ: Nodes → Atoms\n\nQuestions:\n1. What are best practices for technical glossaries that serve both humans AND AI agents?\n2. Should definitions be structured as formal logic (∀x: P(x) → Q(x)) or natural language?\n3. What ASCII diagram conventions are most universally parseable?\n4. For a ~400 line glossary, what is the optimal structure/ordering?\n5. Any standard glossary formats (like RFC 2119 for MUST/SHOULD) we should adopt?",
+    "query_length": 956,
+    "checksum": "sha256:c97ac3bcc163eea67bd3c48ff63d762efbd656e124872de3a97900e3e360bee9"
+  },
+  "response": {
+    "id": "9baf3a77-568b-4c05-a1fc-5ba88c532428",
+    "model": "sonar-pro",
+    "created": 1769379759,
+    "usage": {
+      "prompt_tokens": 234,
+      "completion_tokens": 957,
+      "total_tokens": 1191,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.014,
+        "request_cost": 0.006,
+        "total_cost": 0.021
+      }
+    },
+    "citations": [
+      "https://getdx.com/blog/glossary/",
+      "https://www.codingtemple.com/blog/50-terms-every-software-engineer-should-know/",
+      "https://clutch.co/resources/software-development-glossary-88-essential-terms",
+      "https://deepsource.com/glossary",
+      "https://archie.8base.com/blog/essential-technical-glossary-for-non-technical-founders",
+      "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+      "https://agilealliance.org/agile101/agile-glossary/"
+    ],
+    "search_results": [
+      {
+        "title": "The complete developer productivity glossary - DX",
+        "url": "https://getdx.com/blog/glossary/",
+        "date": "2025-07-29",
+        "last_updated": "2026-01-25",
+        "snippet": "Effective internal communication strategies ensure developers stay informed without information overload. Internal talks. Presentations and ...",
+        "source": "web"
+      },
+      {
+        "title": "50 Terms Every Software Engineer Should Know | Coding Temple",
+        "url": "https://www.codingtemple.com/blog/50-terms-every-software-engineer-should-know/",
+        "date": "2025-02-27",
+        "last_updated": "2026-01-25",
+        "snippet": "In this guide, we'll break down 50 essential software engineering terms that will help you become more proficient in technical discussions, job interviews, or ...",
+        "source": "web"
+      },
+      {
+        "title": "Software Development Glossary: 88 Essential Terms | Clutch.co",
+        "url": "https://clutch.co/resources/software-development-glossary-88-essential-terms",
+        "date": "2025-12-09",
+        "last_updated": "2026-01-24",
+        "snippet": "This glossary will define essential software development terms to give your company complete insight into how to manage, build, and own a software product.",
+        "source": "web"
+      },
+      {
+        "title": "Glossary - DeepSource",
+        "url": "https://deepsource.com/glossary",
+        "date": "2025-11-03",
+        "last_updated": "2026-01-24",
+        "snippet": "Agile software development refers to the methodology of delivering incremental improvements continuously to adapt to market demand. Alpha Testing. Alpha testing ...",
+        "source": "web"
+      },
+      {
+        "title": "The Essential Technical Glossary for Non-Technical Founders",
+        "url": "https://archie.8base.com/blog/essential-technical-glossary-for-non-technical-founders",
+        "date": "2024-01-01",
+        "last_updated": "2026-01-12",
+        "snippet": "This comprehensive, easy-to-understand glossary uses analogies to help you navigate essential technical terms, empowering you to better manage the development ...",
+        "source": "web"
+      },
+      {
+        "title": "Glossary of Computer System Software Development Terminology ...",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+        "date": "2014-11-06",
+        "last_updated": "2026-01-25",
+        "snippet": "This document is intended to serve as a glossary of terminology applicable to software development and computerized systems in FDA regulated industries.",
+        "source": "web"
+      },
+      {
+        "title": "Agile Glossary and Terminology",
+        "url": "https://agilealliance.org/agile101/agile-glossary/",
+        "date": "2025-10-30",
+        "last_updated": "2026-01-16",
+        "snippet": "Learn the unique terminology used in Agile development from the experts at Agile Alliance. Help the Agile community practice continuous learning.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**Best practices for technical glossaries serving both humans and AI agents emphasize clarity, consistency, structure, and machine-parseability.** Use hierarchical organization (e.g., alphabetical or thematic sections), concise natural-language definitions with examples, analogies for accessibility, and standardized formatting for easy parsing by tools like AI agents[1][3][4][5].\n\n### 1. Best Practices for Human + AI Glossaries\n- **Prioritize scannability and searchability**: Organize alphabetically or thematically with bolded terms, short definitions (1-3 sentences), and cross-references to related entries[1][3][4].\n- **Include examples and context**: Add code snippets, analogies, or use cases to aid human comprehension and AI training/prompting[1][5].\n- **Ensure consistency**: Define terms once, use precise language, and avoid ambiguity to support AI agents in codebase navigation[1][6].\n- **Machine-readable features**: Use consistent markup (e.g., YAML/JSON exports), keywords for tagging, and formal syntax where possible for AI parsing[4].\n- **Accessibility for both**: Short paragraphs, active voice, and visual aids like diagrams; test with AI tools for accurate retrieval[5].\n\n### 2. Formal Logic vs. Natural Language\n**Natural language is optimal as the primary format, supplemented by formal logic for precision.** Natural language ensures human readability and flexibility, while formal notations (e.g., ∀x: P(x) → Q(x)) clarify relationships like your set algebra (P = C ⊔ X) or σ function, aiding AI inference without overwhelming users[1][6]. Hybrid approach: Lead with plain English, follow with logical form in a subsection[6].\n\n### 3. Universally Parseable ASCII Diagram Conventions\nUse simple, grid-based ASCII art with standard symbols for broad compatibility across terminals, docs, and AI parsers:\n- **Hierarchy/trees**: Use `|` for verticals, `+-` for branches (e.g., your REALMS: Particle | Wave | Observer)[4].\n- **Flows/relations**: Arrows like `-->` or `=>` for functions (e.g., σ: Nodes → Atoms).\n- **Sets/unions**: `{C} ⊔ {X} = P` or boxes like `+-------+\\n| P     |\\n+-------+`.\nAvoid complex Unicode; stick to 7-bit ASCII for universal parsing[1].\n\n**Example for your terms**:\n```\nPROJECTOME\n├── CODOME (C)\n├── CONTEXTOME (X)\n└── P = C ⊔ X\n\nDOMAINS: Overlapping cover\nREALMS: /Particle /Wave /Observer\nSYMMETRY: SYMMETRIC | ORPHAN | PHANTOM | DRIFT\n```\n\n### 4. Optimal Structure/Ordering for ~400-Line Glossary\n**Alphabetical with thematic groupings for ~400 lines (aim for 1-2 pages per section).** This balances quick lookup (alpha) with conceptual flow[3][4][6]:\n1. **Intro/Usage** (1 page): Purpose, how AI agents use it, notation key.\n2. **Core Terms** (grouped: e.g., PROJECTOME/CODOME first, then DOMAINS/REALMS).\n3. **Alphabetical Index** (full list with page refs).\n4. **Relations Diagram** (ASCII overview of P=C⊔X, σ, etc.).\n5. **Appendix**: Formal logic, change log.\nLimit entries to 4-6 lines each; total ~70-100 terms[1][3].\n\n| Section | Lines | Purpose |\n|---------|-------|---------|\n| Core/Project-Specific | 100 | PROJECTOME, SYMMETRY, etc. |\n| Alphabetical | 200 | All terms |\n| Diagrams/Logic | 50 | Relations |\n| Index/Appendix | 50 | Navigation |\n\n### 5. Standard Glossary Formats to Adopt\n**Adopt RFC 2119 keywords (MUST, SHOULD, MAY) for normative statements.** This is widely used in tech specs for clarity on requirements vs. options[3]. Other standards:\n- **IEEE-style** (expansions first, domains grouped like specs/testing)[6].\n- **Agile glossaries** for iterative terms[7].\n- **YAML/JSON serialization** for AI agents (e.g., `term: definition`)[4].\nApply to your classification: \"σ **MUST** map Nodes to Atoms via SYMMETRY states.\"[3][6]."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

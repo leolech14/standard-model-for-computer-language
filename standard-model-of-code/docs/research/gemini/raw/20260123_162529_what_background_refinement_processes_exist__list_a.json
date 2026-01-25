@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T16:25:29.635464",
+    "source": "gemini",
+    "model": "gemini-2.0-flash",
+    "query": "What background refinement processes exist? List auto-boost, cloud refinery systems. Are they deployed and running?",
+    "query_length": 115,
+    "checksum": "sha256:bb09548a35ae112659939f8c826657efff17c313d1ab56ed5a19d72369023e98"
+  },
+  "response": {
+    "content": "```json\n{\n  \"background_refinement_processes\": [\n    {\n      \"name\": \"TruthValidator\",\n      \"description\": \"Validates core truths from roles.json and outputs repo_truths.yaml\",\n      \"auto_boost\": true,\n      \"cloud_refinery\": true,\n      \"deployed\": true,\n      \"running\": true,\n      \"source_file\": \"context-management/tools/ai/analyze.py\",\n      \"related_files\": [\n        \"context-management/config/semantic_models.yaml\",\n        \"context-management/config/aci_config.yaml\"\n      ]\n    },\n    {\n      \"name\": \"CrossValidator\",\n      \"description\": \"Checks for code-docs drift by comparing code to associated documentation and checks documentation against Antimatter Laws\",\n      \"auto_boost\": true,\n      \"cloud_refinery\": true,\n      \"deployed\": true,\n      \"running\": true,\n      \"source_file\": \"context-management/tools/ai/analyze.py\",\n      \"related_files\": [\n        \"context-management/config/semantic_models.yaml\",\n        \"context-management/config/aci_config.yaml\"\n      ]\n    },\n    {\n      \"name\": \"ConceptMapper\",\n      \"description\": \"Generates a semantic graph of code and its relationships and creates concept_graph.yaml\",\n      \"auto_boost\": true,\n      \"cloud_refinery\": true,\n      \"deployed\": false,\n      \"running\": false,\n      \"source_file\": \"context-management/tools/ai/analyze.py\",\n      \"related_files\": [\n        \"context-management/config/semantic_models.yaml\",\n        \"context-management/config/aci_config.yaml\"\n      ]\n    }\n  ],\n  \"justification\": \"Based on KERNEL.md, agent_intelligence/*, and HOLOGRAPHIC_SOCRATIC_LAYER.md. Status also checked against  .agent/registry/active. TODO: Check for activeLaunchAgent.\"\n}\n```",
+    "mode": "standard"
+  }
+}

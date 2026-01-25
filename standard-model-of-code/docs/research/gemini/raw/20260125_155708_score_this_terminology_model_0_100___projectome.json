@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:57:08.489591",
+    "source": "gemini",
+    "model": "gemini-3-pro-preview",
+    "query": "Score this terminology model 0-100:\n\nPROJECTOME = all project contents\nCODOME = executable code (.py, .js)\nCONTEXTOME = non-executable (.md, .yaml)\nDOMAINS = cross-cuts (Pipeline, Viz, Governance)\n\nScore on: FACTUAL (matches codebase?), ALIGNMENT (serves mission?), USEFULNESS (helps AI reasoning?)\n\nTable format please.",
+    "query_length": 320,
+    "checksum": "sha256:47bd2d8baf759f878ac4191245be4bbe35e2ed600087cd0d0b2145433c1bf8ae"
+  },
+  "response": {
+    "content": "Here is the scoring analysis of the proposed terminology model based on the active codebase context.\n\n| Dimension | Score | Analysis |\n| :--- | :--- | :--- |\n| **FACTUAL** | **95/100** | **Accurate Mapping.** The model precisely maps to the repository's physical state. The codebase is strictly divided into executable logic (`src`, `tools`) and semantic definitions (`docs`, `registry`, `schemas`). The \"Domains\" list (Pipeline, Viz, Governance) accurately reflects the active scopes defined in `KERNEL.md` (e.g., `.agent` for governance, `collider` for pipeline). |\n| **ALIGNMENT** | **65/100** | **Metaphor Clash.** The project uses a **Quantum Physics** metaphor (Standard Model, Particle/Wave, Collider, Objects/Concepts). The `-OME` suffix introduces a **Biological Systems** metaphor (Genome, Proteome). While it serves the mission of identifying \"constituents,\" it cuts across the established `Concepts` (Specs) vs `Objects` (Instances) duality defined in the Kernel. |\n| **USEFULNESS** | **92/100** | **High Utility for Context Engineering.** This is superior to the current model for **Token Budgeting**. It allows the agent to instantly classify files: `CODOME` files are typically high-attention targets (Guru tier), while `CONTEXTOME` files are reference materials best suited for RAG or \"Sandwiching\" (Architect/Archeologist tiers). It turns abstract architecture into concrete file-handling rules. |\n\n### Summary Recommendation\n**Adopt as Operational Taxonomy.** While it clashes with the *philosophical* Physics metaphor, it is highly effective as an *operational* model for the AI agent to manage context windows and file priorities.\n\n**Mapping to Current Architecture:**\n*   **Codome** ≈ Particle (Implementation/Objects)\n*   **Contextome** ≈ Wave (Specs/Concepts) + Registry Data\n*   **Projectome** ≈ The Repository Root",
+    "mode": "standard"
+  }
+}

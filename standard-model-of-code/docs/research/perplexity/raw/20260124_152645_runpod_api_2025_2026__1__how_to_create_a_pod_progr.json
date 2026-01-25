@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-24T15:26:45.271328",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "RunPod API 2025 2026:\n1. How to create a pod programmatically via API\n2. How to run commands on a pod via API (not SSH)\n3. How to get pod output/logs\n4. Python SDK or REST API endpoints\n5. How to stop/terminate pod via API\n6. Pricing for API usage vs UI\n\nI want to build a fully automated system where an AI agent can spin up a RunPod, run a batch job, collect results, and terminate - all via API without human intervention except for billing.",
+    "query_length": 444,
+    "checksum": "sha256:32cb2bb6023b47c1f6d78e24387d17f0cac1a2ae11e4dbadecacf5ee9b44bf10"
+  },
+  "response": {
+    "id": "72545603-78ca-4799-a0a0-50cead136e79",
+    "model": "sonar-pro",
+    "created": 1769279205,
+    "usage": {
+      "prompt_tokens": 115,
+      "completion_tokens": 984,
+      "total_tokens": 1099,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.015,
+        "request_cost": 0.006,
+        "total_cost": 0.021
+      }
+    },
+    "citations": [
+      "https://docs.runpod.io/api-reference/overview",
+      "https://github.com/runpod/runpod-python",
+      "https://www.runpod.io/changelog-entries/july-2025",
+      "https://www.youtube.com/watch?v=iUrG3qjvwXA",
+      "https://community.n8n.io/t/http-node-runpod-api/228934",
+      "https://www.runpod.io/blog/runpod-rest-api-gpu-management",
+      "https://docs.runpod.io/hosting/partner-requirements",
+      "https://www.runpod.io/blog/runpod-ai-field-notes-december-2025",
+      "https://www.runpod.io/blog/streamline-ai-workflows-s3-api",
+      "https://docs.runpod.io"
+    ],
+    "search_results": [
+      {
+        "title": "Overview - Runpod Documentation",
+        "url": "https://docs.runpod.io/api-reference/overview",
+        "date": "2026-01-22",
+        "last_updated": "2026-01-23",
+        "snippet": "The Runpod API provides programmatic access to all of Runpod's cloud compute resources. It enables you to integrate GPU infrastructure directly into your ...",
+        "source": "web"
+      },
+      {
+        "title": "Python library for RunPod API and serverless worker SDK. - GitHub",
+        "url": "https://github.com/runpod/runpod-python",
+        "date": "2022-12-09",
+        "last_updated": "2025-10-23",
+        "snippet": "See our blog post for creating a basic Serverless API, or view the details docs for more information. ... Releases 111 · v1.8.1 Latest. on Nov 19, 2025 · + 110 ...",
+        "source": "web"
+      },
+      {
+        "title": "Public Models via API + One-Click Slurm Clusters - Runpod",
+        "url": "https://www.runpod.io/changelog-entries/july-2025",
+        "date": "2025-07-01",
+        "last_updated": "2025-10-07",
+        "snippet": "Instant access to state-of-the-art AI models through simple API calls, with an API playground available through the Runpod Hub. Available public ...",
+        "source": "web"
+      },
+      {
+        "title": "Public Endpoints, Load Balancing Serverless, Billing Improvements",
+        "url": "https://www.youtube.com/watch?v=iUrG3qjvwXA",
+        "date": "2025-12-12",
+        "last_updated": "2026-01-15",
+        "snippet": "... docs.runpod ... Runpod Changelog for Dec 2025 - Public Endpoints, Load Balancing Serverless, Billing Improvements.",
+        "source": "web"
+      },
+      {
+        "title": "HTTP Node --> RunPod API - Help me Build my Workflow",
+        "url": "https://community.n8n.io/t/http-node-runpod-api/228934",
+        "date": "2025-12-01",
+        "last_updated": "2025-12-19",
+        "snippet": "Hey guys, I designed a workflow that use HTTP nodes to create on runpod (via API) pods and NFS store. I created the necessary API commands ...",
+        "source": "web"
+      },
+      {
+        "title": "Streamline GPU Cloud Management with RunPod's New REST API",
+        "url": "https://www.runpod.io/blog/runpod-rest-api-gpu-management",
+        "date": "2025-03-10",
+        "last_updated": "2026-01-24",
+        "snippet": "RunPod's new REST API lets you manage GPU workloads programmatically—launch, scale, and monitor pods without ever touching the dashboard.",
+        "source": "web"
+      },
+      {
+        "title": "Runpod Secure Cloud partner requirements (2025)",
+        "url": "https://docs.runpod.io/hosting/partner-requirements",
+        "date": "2026-01-22",
+        "last_updated": "2026-01-24",
+        "snippet": "This document outlines the specifications required to be a RunPod secure cloud partner. These requirements establish the baseline.",
+        "source": "web"
+      },
+      {
+        "title": "Runpod AI field notes: December 2025",
+        "url": "https://www.runpod.io/blog/runpod-ai-field-notes-december-2025",
+        "date": "2025-12-17",
+        "last_updated": "2025-12-18",
+        "snippet": "Runpod partners with RandomSeed to power easy-to-use API access for Stable Diffusion through AUTOMATIC1111, making generative art more ...",
+        "source": "web"
+      },
+      {
+        "title": "Streamline Your AI Workflows with RunPod's New S3-Compatible API",
+        "url": "https://www.runpod.io/blog/streamline-ai-workflows-s3-api",
+        "date": "2025-07-01",
+        "last_updated": "2026-01-24",
+        "snippet": "Runpod now offers an API that uses the same syntax as the S3 protocol, giving you direct access to your network volumes (your persistent storage on Runpod)",
+        "source": "web"
+      },
+      {
+        "title": "Runpod Documentation: Welcome to Runpod",
+        "url": "https://docs.runpod.io",
+        "date": "2025-05-24",
+        "last_updated": "2026-01-24",
+        "snippet": "Create an API key. Create API keys to manage your access to Runpod resources. Choose a workflow. Explore various methods for accessing and managing Runpod ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "## Python SDK and REST API Overview\nRunPod provides a **Python SDK** (`runpod-python` library) that wraps the REST API for managing pods, with methods like `create_pod`, `get_pods`, `stop_pod`, `terminate_pod`, and more[1][2]. The REST API base is `https://rest.runpod.io/v1/`; fetch the full OpenAPI schema via `GET /openapi.json` (with `Authorization: Bearer <API_KEY>`) for all endpoints, schemas, and examples[1]. Install the SDK via `pip install runpod` and set `runpod.api_key = \"your_api_key\"`[2].\n\n## 1. Create a Pod Programmatically\nUse the Python SDK:\n```\nimport runpod\nrunpod.api_key = \"your_runpod_api_key\"\npod = runpod.create_pod(name=\"test\", image_name=\"runpod/stack\", instance_type=\"NVIDIA GeForce RTX 3070\")\n# Or for CPU: runpod.create_pod(\"test\", \"runpod/stack\", instance_id=\"cpu3c-2-4\")\n```\nThis returns a pod object with `pod.id`. REST equivalent: `POST /pod` with JSON payload for name, image, instance type, etc. (see OpenAPI schema)[1][2].\n\n## 2. Run Commands on a Pod (No SSH)\nRunPod pods support SSH access programmatically, but direct command execution without SSH isn't detailed in core docs—instead, use **container entrypoint/Docker commands** at creation or **exec via pod's API server** if your image exposes one[1][2][4]. For batch jobs, prefer **Serverless endpoints** (deploy containerized jobs via `runpod.Endpoint(\"ID\").run_sync(input_data)`), which handle execution without pods[2]. For pods, start with `resume_pod(pod.id)` then SSH or expose ports for API-based commands[2].\n\n## 3. Get Pod Output/Logs\nUse `runpod.get_pod(pod.id)` to fetch pod details, including status and logs if available via the pod object[2]. REST: `GET /pod/{podId}` returns JSON with logs/output fields (full schema in `/openapi.json`)[1]. For serverless jobs: `run_request.output()` or `status()` blocks until complete[2].\n\n## 4. Python SDK vs REST Endpoints\n- **Python SDK** (preferred for automation): Covers pods (`get_pods()`, `create_pod()`, etc.) and serverless (`Endpoint.run_sync()`). Supports concurrent use with per-endpoint keys[2].\n- **REST API**: Full control via standard HTTP (e.g., `POST /pod`, `GET /pods`, `PATCH /pod/{id}/stop`). Authenticate with `Authorization: Bearer <key>`; all endpoints in `/openapi.json`[1][6].\n\n## 5. Stop/Terminate Pod\n```\nrunpod.stop_pod(pod.id)    # Stops (pause billing)\nrunpod.resume_pod(pod.id)  # Resumes\nrunpod.terminate_pod(pod.id)  # Deletes permanently\n```\nREST: `PATCH /pod/{podId}` with `{\"action\": \"stop\"}` or `{\"action\": \"terminate\"}`[1][2].\n\n## 6. Pricing: API vs UI\nNo difference—pricing is identical for API and UI usage, based on pod runtime (GPU/CPU hours) and storage; API just enables programmatic control without dashboard[1][4]. Monitor via billing endpoints (`/billing` resources) or `runpod.get_pods()` for usage metrics[1].\n\n## Fully Automated AI Agent Workflow\n1. **Spin up**: `pod = runpod.create_pod(name=\"batch-job\", image_name=\"your-docker-image\", instance_type=\"RTX 4090\")` (use templates for reuse)[1][2].\n2. **Run batch job**: Resume pod, then either SSH programmatically, expose an API endpoint in your container, or switch to **Serverless** for true no-intervention jobs: `endpoint.run_sync({\"command\": \"your-batch-args\"})`[2][4].\n3. **Collect results**: Poll `runpod.get_pod(pod.id)` for logs/output, or use network volumes/S3-compatible API for persistent storage[1][9].\n4. **Terminate**: `runpod.terminate_pod(pod.id)` after job completion (poll status)[2].\nServerless is ideal for your use case (spin-run-collect-terminate) as it autoscales and avoids pod management[1][2][4]. Availability errors like \"no instances\" may occur—retry or specify spot/preemptible[5]."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

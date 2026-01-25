@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "timestamp": "20260124_192425",
+    "total_repos": 10,
+    "processed": 10,
+    "success": 0,
+    "failed": 10,
+    "duration_sec": 41.3,
+    "rate_per_hour": 872.0,
+    "workers": 4
+  },
+  "grade_distribution": {
+    "FAIL": 10
+  },
+  "results": [
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "size_kb": 544919,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 532MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "size_kb": 4955,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 1.7
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "size_kb": 20882,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 2.4
+    },
+    {
+      "name": "facebook/react",
+      "url": "https://github.com/facebook/react.git",
+      "language": "JavaScript",
+      "stars": 242481,
+      "size_kb": 899926,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 879MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "vinta/awesome-python",
+      "url": "https://github.com/vinta/awesome-python.git",
+      "language": "Python",
+      "stars": 279711,
+      "size_kb": 4749,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 1.6
+    },
+    {
+      "name": "donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer.git",
+      "language": "Python",
+      "stars": 333203,
+      "size_kb": 11243,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 4.5
+    },
+    {
+      "name": "vuejs/vue",
+      "url": "https://github.com/vuejs/vue.git",
+      "language": "TypeScript",
+      "stars": 209885,
+      "size_kb": 32152,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 2.9
+    },
+    {
+      "name": "TheAlgorithms/Python",
+      "url": "https://github.com/TheAlgorithms/Python.git",
+      "language": "Python",
+      "stars": 217133,
+      "size_kb": 15646,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 6.6
+    },
+    {
+      "name": "trekhleb/javascript-algorithms",
+      "url": "https://github.com/trekhleb/javascript-algorithms.git",
+      "language": "JavaScript",
+      "stars": 195417,
+      "size_kb": 14828,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 5.1
+    },
+    {
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://github.com/kamranahmedse/developer-roadmap.git",
+      "language": "TypeScript",
+      "stars": 347847,
+      "size_kb": 358864,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "usage: collider [-h]\n                {analyze,doctor,health,audit,full,graph,viz,fix,discover,eval,symmetry}\n                ...\ncollider: error: argument command: invalid choice: 'grade' (choose from",
+      "duration_sec": 41.2
+    }
+  ]
+}

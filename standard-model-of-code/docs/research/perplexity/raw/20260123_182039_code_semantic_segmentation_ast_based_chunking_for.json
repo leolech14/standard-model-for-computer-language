@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T18:20:39.807551",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Code semantic segmentation AST-based chunking for RAG retrieval 2024 2025 2026. Looking for:\n\n1. How do modern code RAG systems (like GitHub Copilot, Cursor, Sourcegraph Cody) chunk source code for retrieval? Do they use AST boundaries, function-level, or something else?\n\n2. Tree-sitter or AST-based code segmentation approaches for LLM context preparation\n\n3. Code dependency graph extraction tools and compact representations (not verbose, efficient schemas)\n\n4. Academic work from ICSE, FSE, ASE, or MSR conferences (2024-2026) on code understanding, code summarization at sub-file granularity\n\n5. Any compact tagging/annotation schemas for code segments used in industry (like semantic type codes for functions, classes, etc.)\n\nContext: Building incremental semantic indexer for codebase that produces compact chunk records with type codes, summaries, entity extraction, dependency links - to compile into ordered context for LLMs.",
+    "query_length": 936,
+    "checksum": "sha256:5b2ffba4b052a55033add5192eadb55b0b541df34135242e32d0f7d5b1bec441"
+  },
+  "response": {
+    "id": "6ffbad7e-a178-47dd-b6d7-82ba8454a1e6",
+    "model": "sonar-pro",
+    "created": 1769203240,
+    "usage": {
+      "prompt_tokens": 195,
+      "completion_tokens": 326,
+      "total_tokens": 521,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.005,
+        "request_cost": 0.006,
+        "total_cost": 0.011
+      }
+    },
+    "citations": [
+      "https://www.augmentcode.com/tools/github-copilot-vs-sourcegraph-cody-which-gets-your-codebase",
+      "https://dev.to/maximsaplin/-cursorsh-a-competitor-to-github-copilot-58k4",
+      "https://www.vincentschmalbach.com/copilot-vs-cursor-vs-cody-vs-supermaven-vs-aider/",
+      "https://forum.cursor.com/t/new-to-cursor-whats-the-big-deal/14664",
+      "https://redmonk.com/kholterhoff/2024/11/18/top-10-things-developers-want-from-their-ai-code-assistants-in-2024/",
+      "https://news.ycombinator.com/item?id=39965639",
+      "https://sourcegraph.com/compare"
+    ],
+    "search_results": [
+      {
+        "title": "GitHub Copilot vs Sourcegraph Cody: Which Gets Your Codebase?",
+        "url": "https://www.augmentcode.com/tools/github-copilot-vs-sourcegraph-cody-which-gets-your-codebase",
+        "date": "2025-08-28",
+        "last_updated": "2026-01-22",
+        "snippet": "GitHub Copilot uses a \"suggest-first\" approach, streaming completions from patterns learned across millions of repositories. Sourcegraph Cody ...",
+        "source": "web"
+      },
+      {
+        "title": "Cursor.sh - a competitor to GitHub CoPilot - DEV Community",
+        "url": "https://dev.to/maximsaplin/-cursorsh-a-competitor-to-github-copilot-58k4",
+        "date": "2024-02-02",
+        "last_updated": "2026-01-23",
+        "snippet": "Over the past year, I have tried quite a few AI coding assistants: GitHub Copilot, Amazon CodeWhisperer, Sourcegraph Cody, Google IDX, a few ...",
+        "source": "web"
+      },
+      {
+        "title": "Copilot vs Cursor vs Cody vs Supermaven vs Aider",
+        "url": "https://www.vincentschmalbach.com/copilot-vs-cursor-vs-cody-vs-supermaven-vs-aider/",
+        "date": "2024-10-25",
+        "last_updated": "2026-01-15",
+        "snippet": "I used GitHub Copilot from early 2022 to mid 2024 and switched to Cursor at the beginning of 2024. I've tested Sourcegraph Cody and Supermaven along the way.",
+        "source": "web"
+      },
+      {
+        "title": "New to Cursor: What's the big deal? - Discussions",
+        "url": "https://forum.cursor.com/t/new-to-cursor-whats-the-big-deal/14664",
+        "date": "2024-09-03",
+        "last_updated": "2025-12-18",
+        "snippet": "I've used Copilot since release, and Cody since December 2023. Copilot is solid, if underpowered. Cody is amazing and my standard for what an ...",
+        "source": "web"
+      },
+      {
+        "title": "Top 10 Things Developers Want from their AI Code Assistants in 2024",
+        "url": "https://redmonk.com/kholterhoff/2024/11/18/top-10-things-developers-want-from-their-ai-code-assistants-in-2024/",
+        "date": "2024-11-18",
+        "last_updated": "2025-10-30",
+        "snippet": "Meanwhile, the promise of GitHub Copilot is that it can be customized to their own organization's private code and processes in addition to ...",
+        "source": "web"
+      },
+      {
+        "title": "has anyone tried Cody and Github Copilot and compared? I'm using ...",
+        "url": "https://news.ycombinator.com/item?id=39965639",
+        "date": "2024-04-08",
+        "last_updated": "2025-09-18",
+        "snippet": "I'm in the habit of using autocomplete to generate multiline chunks of code. So far, Copilot seems a bit better at autocomplete. In particular, Copilot seems to ...",
+        "source": "web"
+      },
+      {
+        "title": "Compare - Sourcegraph",
+        "url": "https://sourcegraph.com/compare",
+        "date": "2025-05-24",
+        "last_updated": "2026-01-23",
+        "snippet": "Cody vs GitHub Copilot GitHub Copilot is an AI code assistant that provides basic code assistance (autocomplete and chat) for small codebases.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "I cannot provide a comprehensive answer to your query based on these search results. While the results discuss high-level architectural differences between code AI assistants (GitHub Copilot's \"suggest-first\" vs. Sourcegraph Cody's \"search-first\" approach), they lack the technical depth you're seeking.\n\n**What the search results do reveal:**\n\nThe results indicate that **Sourcegraph Cody uses semantic search and embeddings with RAG** (retrieval-augmented generation) for code context enrichment[1][2], and that modern assistants achieve varying accuracy rates partly based on their codebase understanding capabilities (Copilot achieved 68% accuracy while Cody achieved 82% on a 200-file service test)[1]. However, the results provide no details about:\n\n- Specific chunking strategies (AST boundaries, function-level, or alternatives)\n- Tree-sitter or AST implementation details\n- Code dependency graph extraction methodologies\n- Compact representation schemas\n- Academic research from ICSE, FSE, ASE, or MSR conferences\n- Industry tagging/annotation systems for code segments\n\n**What you actually need:**\n\nTo build your incremental semantic indexer with type codes and dependency tracking, you'll need to search for:\n\n1. Academic papers on code segmentation and AST-based chunking from recent software engineering conferences\n2. Technical documentation from tree-sitter and language server protocol (LSP) projects\n3. Industry white papers on code RAG systems (likely from Anthropic, OpenAI, or specialized code search vendors)\n4. Open-source indexing tools that publish their chunking strategies\n\nThe current results are too high-level for your implementation-focused requirements."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

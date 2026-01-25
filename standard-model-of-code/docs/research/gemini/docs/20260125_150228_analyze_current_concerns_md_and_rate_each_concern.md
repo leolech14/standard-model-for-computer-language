@@ -1,0 +1,76 @@
+# Research: Analyze CURRENT_CONCERNS.md and rate each concern by: 1) SAFE_COMPLETION_CONFIDENCE (0-100) - likeli...
+
+> **Date:** 2026-01-25 15:02:28
+> **Source:** gemini
+> **Model:** gemini-3-pro-preview
+> **Checksum:** `sha256:4dc43ada6af16881ab6b9f8fb8ed5c2d45120d92ee2d7e33df67b1d33875ced1`
+> **Raw JSON:** `raw/20260125_150228_analyze_current_concerns_md_and_rate_each_concern.json`
+
+---
+
+## Query
+
+Analyze CURRENT_CONCERNS.md and rate each concern by: 1) SAFE_COMPLETION_CONFIDENCE (0-100) - likelihood of fixing without breaking anything, 2) UNBLOCK_VALUE (0-100) - how much other work it enables, 3) EFFORT (hours). Then provide a ranked execution order for the next 5 actions. Format as a table.
+
+---
+
+## Response
+
+Here is the analysis of the `CURRENT_CONCERNS.md` file, rated by confidence, value, and effort, followed by the recommended execution order.
+
+### Analysis Matrix
+
+| ID | Concern Name | Safe Completion Confidence (0-100) | Unblock Value (0-100) | Effort (Est. Hours) | Rationale |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **CC-001** | Scope Leakage (Node Count) | **90** | **85** | **2.0** | Fixing exclusion lists is isolated logic. Crucial because current metrics are "untrustworthy." |
+| **CC-002** | Reachability Bottleneck | **60** | **100** | **8.0** | **STRATEGIC BLOCKER.** Unblocks Phase 3 & 4. Moderate risk as it changes graph topology reasoning. |
+| **HC-001** | Tree-sitter Dependency | **99** | **80** | **0.5** | Trivial fix (pin version) that resolves 11 failing tests immediately. High ROI. |
+| **HC-002** | 88 Skipped Tests | **90** | **60** | **4.0** | Auditing skips is safe. Value lies in revealing hidden regressions before major refactors. |
+| **HC-003** | BARE System Missing | **90** | **75** | **20.0+** | New feature implementation (safe but slow). Essential for self-refinement loops. |
+| **HC-004** | UPB Unintegrated | **70** | **50** | **6.0** | Visual features only. Moderate complexity to wire backend docs to WebGL frontend. |
+| **HC-005** | Aquarela Theme | **85** | **40** | **5.0** | Mostly CSS/UI work. Low risk, but largely cosmetic compared to logic blockers. |
+| **HC-006** | Sprint-002 DoD | **85** | **70** | **16.0** | High effort required to close out the sprint. Missing tools (Inventory, Boundary) are needed. |
+| **HC-007** | Wave-Particle Asymmetry | **100** | **40** | **8.0** | Documentation task. Zero risk to runtime, improves maintainability. |
+| **HC-008** | analyze.py Monolith | **40** | **70** | **12.0** | Refactoring 3k lines is high risk for regressions. Should wait until tests (HC-001/002) are solid. |
+| **MC-001** | Snapshot Stage Counts | **95** | **30** | **2.0** | Telemetry improvement. Low risk, low immediate strategic impact. |
+| **MC-004** | Stale Wave Tools | **100** | **20** | **0.5** | Moving files to archive. Zero risk, cleans up workspace. |
+| **MC-006** | Centripetal Scan Blocked | **80** | **50** | **4.0** | Blocked by API limits. Requires batching logic implementation. |
+| **MC-007** | Cross-Language (TS/JS) | **85** | **40** | **10.0** | Phase 8 requirement. Independent of current Python focus. |
+| **MC-008** | Circuit Breaker Cleanup | **95** | **10** | **0.5** | Deleting code already hidden by CSS. Safe cleanup. |
+
+---
+
+### Ranked Execution Order (Next 5 Actions)
+
+This order prioritizes stabilizing the environment (tests), fixing the trustworthiness of data (metrics), and then attacking the primary strategic blocker.
+
+#### 1. HC-001: Fix Tree-sitter Dependency
+*   **Why:** It is an Environment Bug causing 11 tests to fail. We cannot reliably refactor or debug complex issues (like CC-002) if the test suite is red due to dependencies.
+*   **Action:** Pin `tree-sitter>=0.20,<0.22` in `requirements.txt`.
+*   **Effort:** 30 mins.
+
+#### 2. CC-001: Fix Scope Leakage
+*   **Why:** Metric inflation (+138%) means we are analyzing vendor code. This adds noise to the "Reachability" debugging (CC-002). We need a clean, accurate graph before trying to trace entry points.
+*   **Action:** Debug `exclusion_list` loading in `full_analysis.py`.
+*   **Effort:** 2 hours.
+
+#### 3. MC-004: Archive Stale Wave Tools
+*   **Why:** "Quick win" cleanup. Removes 1,800 lines of noise from the codebase context before beginning heavier logic work.
+*   **Action:** Move identified files to `archive/deprecated_wave_tools/`.
+*   **Effort:** 30 mins.
+
+#### 4. HC-002: Audit Skipped Tests
+*   **Why:** 40% of the suite is skipped. Before attacking the Reachability Bottleneck (CC-002), we need to ensure no existing logic regarding topology or parsing is silently failing.
+*   **Action:** Review `@pytest.mark.skip` decorators; enable critical tests; document permanent skips.
+*   **Effort:** 4 hours.
+
+#### 5. CC-002: Attack Reachability Bottleneck (Phase 3 Blocker)
+*   **Why:** This is the project's **Strategic Blocker**. With the environment fixed, metrics accurate, and tests audited, we can safely implement the complex logic required to trace FastAPI/Typer entry points.
+*   **Action:** Expand entrypoint detection rules in `topology_reasoning.py`.
+*   **Effort:** 8 hours (Initial sprint).
+
+---
+
+## Citations
+
+_No citations provided_

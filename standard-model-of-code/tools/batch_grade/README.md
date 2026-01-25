@@ -1,6 +1,18 @@
 # Collider Batch Grade
 
-Automated batch grading of 999 GitHub repositories to validate the Health Model.
+> **STATUS: FAIL-001** - First run captured grades only, not full scans.
+> See `docs/OPEN_CONCERNS.md` for details.
+
+Automated batch analysis of 999+ GitHub repositories to validate the Health Model.
+
+## Current State (2026-01-25)
+
+| Directory | Status | Contents |
+|-----------|--------|----------|
+| `grades_DEGRADED_summary_only/` | DEGRADED | 590 grade summaries (no full analysis) |
+| `full_scans/` | EMPTY | Awaiting proper `collider full` run |
+
+**DoD:** 999+ repos with full `unified_analysis.json` output per repo.
 
 ## Architecture
 
@@ -20,8 +32,8 @@ Automated batch grading of 999 GitHub repositories to validate the Health Model.
 │        │ Doppler                        │ GCS/Download       │
 │        ▼                                ▼                    │
 │  ┌──────────────┐            ┌──────────────────────────┐   │
-│  │ RUNPOD_API_  │            │ grades/                   │   │
-│  │   KEY        │            │   final_results_*.json   │   │
+│  │ RUNPOD_API_  │            │ full_scans/               │   │
+│  │   KEY        │            │   unified_analysis.json   │   │
 │  └──────────────┘            └──────────────────────────┘   │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
@@ -33,9 +45,32 @@ Automated batch grading of 999 GitHub repositories to validate the Health Model.
 |------|---------|
 | `runpod_agent.py` | Full automation: create pod, run job, download results, terminate |
 | `run_batch_local.py` | Batch grading script (runs inside pod or locally) |
+| `analyze_results.py` | **Results analyzer** - statistics, golden repos, markdown/JSON reports |
 | `repos_999.json` | List of 999 GitHub repos to grade |
 | `fetch_repos.py` | Script that generated repos_999.json |
 | `deploy.sh` | Alternative: GCP Cloud Run deployment (more complex) |
+
+## Analyzing Results
+
+After a batch run, analyze the results:
+
+```bash
+# Generate markdown report
+python analyze_results.py grades_DEGRADED_summary_only/20260124_224604/final_results_20260125_005603.json
+
+# Save to file
+python analyze_results.py <results.json> --output report.md
+
+# JSON output (for programmatic use)
+python analyze_results.py <results.json> --format json
+
+# Library usage
+from analyze_results import BatchAnalyzer
+analyzer = BatchAnalyzer.from_file("final_results.json")
+print(analyzer.grade_distribution)       # {'B': 10, 'C': 398, 'D': 178, 'F': 4}
+print(analyzer.golden_repos(10, "B"))    # Top 10 Grade B repos by health
+print(analyzer.component_variance())     # Which metrics differentiate grades
+```
 
 ## Quick Start (RunPod - Recommended)
 
@@ -78,7 +113,40 @@ doppler run --project ai-tools --config dev -- \
 | Cloud Run Jobs | 20 tasks × 4 vCPU | ~30 min | ~$1-2 |
 | Local MacBook | 8 workers | ~8 hrs | $0 (but slow) |
 
-## Output Format
+## Output Modes
+
+### REQUIRED: Full Analysis (`collider full`)
+
+**Use this for DoD compliance.**
+
+```python
+# CORRECT - produces full unified_analysis.json per repo
+subprocess.run([
+    sys.executable, str(COLLIDER_ROOT / "cli.py"),
+    "full", str(repo_dir), "--output", str(output_dir / repo_name)
+])
+```
+
+Output per repo:
+- `unified_analysis.json` (5-50MB) - Full node/edge graph
+- `collider_report.html` (1-5MB) - Interactive visualization
+- `output.md` (10-100KB) - Brain download
+
+### DEGRADED: Grade Only (`collider grade`)
+
+**WARNING: This was used in the first run. DO NOT use for DoD.**
+
+```python
+# WRONG - only produces summary, no unified_analysis.json
+subprocess.run([
+    sys.executable, str(COLLIDER_ROOT / "cli.py"),
+    "grade", str(repo_dir), "--json"
+])
+```
+
+Output: ~500 bytes JSON summary only.
+
+### Grade Summary Format (DEGRADED)
 
 ```json
 {
@@ -148,3 +216,13 @@ Results feed into:
 - Golden repo selection for regression tests
 - Health formula calibration
 - Statistical validation of grading distribution
+
+## Traceability
+
+| Reference | Location |
+|-----------|----------|
+| Concern tracker | `standard-model-of-code/docs/OPEN_CONCERNS.md` (FAIL-001) |
+| Subsystem registry | `.agent/SUBSYSTEM_INTEGRATION.md` (S11) |
+| Degraded results | `grades_DEGRADED_summary_only/DEGRADED.md` |
+| Full scans target | `full_scans/README.md` |
+| Task | #37 in session task list |

@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "timestamp": "20260124_194046",
+    "total_repos": 5,
+    "processed": 5,
+    "success": 0,
+    "failed": 5,
+    "duration_sec": 89.1,
+    "rate_per_hour": 202.1,
+    "workers": 2
+  },
+  "grade_distribution": {
+    "FAIL": 5
+  },
+  "results": [
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "size_kb": 544919,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 532MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "size_kb": 20882,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "Failed to initialize tree-sitter: Language.__init__() missing 1 required positional argument: 'name'\nFailed to initialize tree-sitter: Language.__init__() missing 1 required positional argument: 'name",
+      "duration_sec": 23.7
+    },
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "size_kb": 4955,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "Failed to initialize tree-sitter: Language.__init__() missing 1 required positional argument: 'name'\nFailed to initialize tree-sitter: Language.__init__() missing 1 required positional argument: 'name",
+      "duration_sec": 24.3
+    },
+    {
+      "name": "donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer.git",
+      "language": "Python",
+      "stars": 333203,
+      "size_kb": 11243,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "Failed to initialize tree-sitter: Language.__init__() missing 1 required positional argument: 'name'\nFailed to initialize tree-sitter: Language.__init__() missing 1 required positional argument: 'name",
+      "duration_sec": 25.8
+    },
+    {
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://github.com/kamranahmedse/developer-roadmap.git",
+      "language": "TypeScript",
+      "stars": 347847,
+      "size_kb": 358864,
+      "status": "grade_failed",
+      "grade": null,
+      "health_index": null,
+      "error": "Traceback (most recent call last):\n  File \"/workspace/collider/standard-model-of-code/cli.py\", line 1053, in <module>\n    main()\n  File \"/workspace/collider/standard-model-of-code/cli.py\", line 747, i",
+      "duration_sec": 65.3
+    }
+  ]
+}

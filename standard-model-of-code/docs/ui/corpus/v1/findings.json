@@ -1,0 +1,149 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-25",
+  "source": "gemini-3-pro-preview forensic audit",
+  "critical_fixes": [
+    {
+      "priority": "P0",
+      "action": "Add logic to sidebar.js for cfg-label-size",
+      "location": "sidebar.js:L831",
+      "issue": "Label Size slider has case but empty body",
+      "expected_effect": "Should update node label font size"
+    },
+    {
+      "priority": "P0",
+      "action": "Add logic to sidebar.js for cfg-toggle-highlight",
+      "location": "sidebar.js:L787",
+      "issue": "Selection highlight toggle has empty callback",
+      "expected_effect": "Should toggle highlight glow on selected nodes"
+    },
+    {
+      "priority": "P1",
+      "action": "Add logic to sidebar.js for cfg-toggle-depth",
+      "location": "sidebar.js:L797",
+      "issue": "Depth-based visibility toggle has empty callback",
+      "expected_effect": "Should filter nodes by depth from selection"
+    },
+    {
+      "priority": "P1",
+      "action": "Remove or rename legacy Appearance section",
+      "location": "template.html:L1352-L1369",
+      "issue": "IDs (node-size, edge-opacity, toggle-labels) clash with cfg-* versions",
+      "expected_effect": "Eliminate duplicate/conflicting controls"
+    },
+    {
+      "priority": "P1",
+      "action": "Add [data-edge-style] bindings in sidebar.js",
+      "location": "template.html:L1200",
+      "issue": "Solid/Dashed/Particle buttons have no JS handlers",
+      "expected_effect": "Should toggle edge rendering style"
+    },
+    {
+      "priority": "P2",
+      "action": "Wire cfg-toggle-edge-hover",
+      "location": "template.html:L1265",
+      "issue": "Toggle exists but no event listener",
+      "expected_effect": "Should enable/disable edge hover highlighting"
+    },
+    {
+      "priority": "P2",
+      "action": "Wire cfg-toggle-codome",
+      "location": "template.html:L1269",
+      "issue": "Toggle exists but no event listener",
+      "expected_effect": "Should toggle Codome boundary visualization"
+    }
+  ],
+  "orphaned_controls": [
+    {
+      "id": "[data-edge-style]",
+      "type": "button_group",
+      "location": "template.html:L1200",
+      "severity": "HIGH"
+    },
+    {
+      "id": "cfg-toggle-edge-hover",
+      "type": "toggle",
+      "location": "template.html:L1265",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "cfg-toggle-codome",
+      "type": "toggle",
+      "location": "template.html:L1269",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "toggle-labels",
+      "type": "toggle",
+      "location": "template.html:L1369",
+      "severity": "LOW",
+      "note": "Legacy duplicate of cfg-toggle-labels"
+    }
+  ],
+  "broken_handlers": [
+    {
+      "id": "cfg-label-size",
+      "handler_location": "sidebar.js:L831",
+      "issue": "empty_body",
+      "confidence": 0.95
+    },
+    {
+      "id": "cfg-toggle-highlight",
+      "handler_location": "sidebar.js:L787",
+      "issue": "empty_callback",
+      "confidence": 0.95
+    },
+    {
+      "id": "cfg-toggle-depth",
+      "handler_location": "sidebar.js:L797",
+      "issue": "empty_callback",
+      "confidence": 0.95
+    }
+  ],
+  "id_conflicts": [
+    {
+      "new_id": "cfg-node-size",
+      "legacy_id": "node-size",
+      "conflict": "Both exist, handler expects cfg-*"
+    },
+    {
+      "new_id": "cfg-edge-opacity",
+      "legacy_id": "edge-opacity",
+      "conflict": "Both exist, handler expects cfg-*"
+    },
+    {
+      "new_id": "cfg-toggle-labels",
+      "legacy_id": "toggle-labels",
+      "conflict": "Both exist, only cfg-* is bound"
+    }
+  ],
+  "missing_elements": [
+    {
+      "id": "btn-edge-mode",
+      "expected_in": "template.html",
+      "referenced_by": "edge-system.js:L498"
+    },
+    {
+      "id": "btn-create-group",
+      "expected_in": "template.html",
+      "referenced_by": ["groups.js:L146", "selection.js:L734"]
+    },
+    {
+      "id": "cmd-files",
+      "expected_in": "template.html",
+      "referenced_by": "file-viz.js:L348"
+    },
+    {
+      "id": "density-slider2",
+      "expected_in": "template.html",
+      "referenced_by": "sidebar.js:L165"
+    }
+  ],
+  "coverage_metrics": {
+    "total_analyzed": 38,
+    "working_percentage": 65,
+    "broken_percentage": 8,
+    "orphaned_percentage": 16,
+    "missing_percentage": 11
+  }
+}

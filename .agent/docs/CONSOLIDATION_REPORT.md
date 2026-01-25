@@ -238,8 +238,8 @@ confidence:
 | Tool | Purpose | Location |
 |------|---------|----------|
 | `import_legacy_tasks.py` | Parse & import legacy registries | `.agent/tools/` |
-| `boost_confidence.py` | AI-powered 4D assessment | `.agent/tools/` |
-| `task_registry.py` | Task CRUD CLI | `.agent/tools/` |
+| `confidence_validator.py` | AI-powered 4D assessment | `.agent/tools/` |
+| `task_store.py` | Task CRUD CLI | `.agent/tools/` |
 | `promote_opportunity.py` | OPP → TASK promotion | `.agent/tools/` |
 | `analyze.py --verify` | Socratic audit runner | `context-management/tools/ai/` |
 
@@ -279,7 +279,7 @@ confidence:
 ### Short-term (This Week)
 
 4. [ ] Execute Pipeline Refactor (OPP-023 to OPP-032)
-5. [ ] Run boost_confidence on all 57 opportunities
+5. [ ] Run confidence_validator on all 57 opportunities
 6. [ ] Create shared auth utility (fix AM001 secret handling)
 
 ### Medium-term

@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 15:17:23",
+  "session_end": "2026-01-23 15:17:25",
+  "model": "gemini-1.5-pro-001",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769192243.788821,
+      "timestamp_str": "2026-01-23 15:17:23",
+      "role": "user",
+      "content": "Test 2M context on Pro 001"
+    }
+  ]
+}

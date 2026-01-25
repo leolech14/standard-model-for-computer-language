@@ -521,6 +521,7 @@ def generate_webgl_html(json_source: Any, output_path: str):
     MODULE_ORDER = [
         "performance.js",                   # Performance subsystem (existing)
         "modules/utils.js",                 # Pure utility functions (zero deps)
+        "modules/event-bus.js",             # Pub/sub for decoupled communication (zero deps)
         "modules/registry.js",              # Command/element registry (zero deps)
         "modules/perf-monitor.js",          # FPS/frame monitoring (zero deps)
         "modules/core.js",                  # Constants & utilities
@@ -553,6 +554,9 @@ def generate_webgl_html(json_source: Any, output_path: str):
         "modules/selection.js",             # Selection system (depends: CORE, NODE)
         "modules/panels.js",                # Panel management
         "modules/sidebar.js",               # Sidebar controls
+        "modules/filter-state.js",          # Centralized filter state (depends: Graph, EVENT_BUS)
+        "modules/panel-system.js",          # Gridstack panel management (depends: EVENT_BUS)
+        "modules/panel-handlers.js",        # Panel control bindings (depends: FILTER_STATE, PANEL_SYSTEM)
         "modules/edge-system.js",           # Edge coloring & modes
         "modules/file-color-model.js",       # Pure color generation (zero deps)
         "modules/layout-forces.js",          # D3 force manipulation (takes graph as arg)

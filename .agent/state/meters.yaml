@@ -1,55 +1,47 @@
-# Decision Deck Meters
-# Tracks agent behavior quality across dimensions
-# Updated after each card play
-
-version: "1.0"
-last_updated: "2026-01-23T15:30:00Z"
-
+version: '1.0'
+last_updated: '2026-01-25T06:22:37Z'
 meters:
   focus:
     value: 5
     max: 10
-    description: "Staying on task without rabbit holes"
+    description: Staying on task without rabbit holes
     history:
-      - timestamp: "2026-01-23T15:30:00Z"
-        delta: 0
-        reason: "Initial state"
-
+    - timestamp: '2026-01-23T15:30:00Z'
+      delta: 0
+      reason: Initial state
+    - timestamp: '2026-01-25T06:22:37Z'
+      delta: 0
+      reason: Played CARD-RES-001
   reliability:
     value: 5
     max: 10
-    description: "Consistent, checkpointed output"
+    description: Consistent, checkpointed output
     history:
-      - timestamp: "2026-01-23T15:30:00Z"
-        delta: 0
-        reason: "Initial state"
-
+    - timestamp: '2026-01-23T15:30:00Z'
+      delta: 0
+      reason: Initial state
   debt:
     value: 2
     max: 10
-    description: "Accumulated shortcuts and tech debt (lower is better)"
+    description: Accumulated shortcuts and tech debt (lower is better)
     history:
-      - timestamp: "2026-01-23T15:30:00Z"
-        delta: 0
-        reason: "Initial state"
-
+    - timestamp: '2026-01-23T15:30:00Z'
+      delta: 0
+      reason: Initial state
   discovery:
-    value: 5
+    value: 7
     max: 10
-    description: "New knowledge and insights found"
+    description: New knowledge and insights found
     history:
-      - timestamp: "2026-01-23T15:30:00Z"
-        delta: 0
-        reason: "Initial state"
-
+    - timestamp: '2026-01-23T15:30:00Z'
+      delta: 0
+      reason: Initial state
+    - timestamp: '2026-01-25T06:22:37Z'
+      delta: 2
+      reason: Played CARD-RES-001
 thresholds:
   critical: 2
   low: 4
   normal: 6
   high: 8
   excellent: 10
-
-# Meter display format:
-# ████████░░ 8/10 (+2)
-# Filled squares = value/max
-# (+/-N) = last change

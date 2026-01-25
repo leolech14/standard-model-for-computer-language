@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T17:21:58.209063",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "In type theory, category theory, and programming language theory:\n\n1. What notation denotes \"the type of all X\" or \"universe of types\"?\n2. What is the symbol for TYPE UNIVERSE in dependent type theory (Coq, Agda, Lean)?\n3. How does Haskell/ML denote \"all instances of a type\"?\n4. What symbol means SIGMA TYPE (dependent sum / exists) vs PI TYPE (dependent product / forall)?\n5. What notation means \"the totality\" or \"everything\" in category theory?\n\nLooking for actual Unicode symbols and notation conventions used in papers and proof assistants.",
+    "query_length": 546,
+    "checksum": "sha256:8172657acce85aac8c74aba589f7ced323fd11720542cca70f66ccf319bd8df3"
+  },
+  "response": {
+    "id": "1dd7070d-e10e-44c2-b7fb-ba04da911d5b",
+    "model": "sonar-pro",
+    "created": 1769372518,
+    "usage": {
+      "prompt_tokens": 128,
+      "completion_tokens": 468,
+      "total_tokens": 596,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.007,
+        "request_cost": 0.006,
+        "total_cost": 0.013
+      }
+    },
+    "citations": [
+      "https://golem.ph.utexas.edu/category/2011/04/homotopy_type_theory_iv.html",
+      "https://csetzer.github.io/articles/modelautomahlomain.pdf",
+      "https://www2.math.uu.se/~palmgren/universe.pdf",
+      "https://en.wikipedia.org/wiki/Universe_(mathematics)",
+      "https://plato.stanford.edu/entries/type-theory/",
+      "https://xenaproject.wordpress.com/2020/06/20/mathematics-in-type-theory/",
+      "https://ncatlab.org/nlab/show/type+universe",
+      "https://raw.githubusercontent.com/edemko/notes-typetheory/master/notation.pdf"
+    ],
+    "search_results": [
+      {
+        "title": "Homotopy Type Theory, IV | The n-Category Café",
+        "url": "https://golem.ph.utexas.edu/category/2011/04/homotopy_type_theory_iv.html",
+        "date": "2011-04-05",
+        "last_updated": "2025-10-13",
+        "snippet": "Frequently a universe is written as “ Type Type ” or “ Type n Type_n ”. ... Bas points out that Steve Awodey mentions it at the very end of his ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Universes in Type Theory Part II – Autonomous Mahlo - Anton Setzer",
+        "url": "https://csetzer.github.io/articles/modelautomahlomain.pdf",
+        "date": "2009-12-20",
+        "last_updated": "2025-10-10",
+        "snippet": "– A recursive subuniverse of a universe (V, TV) is given by a set. U together with a recursively defined function bTU : U → V, which determines ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] On Universes in Type Theory",
+        "url": "https://www2.math.uu.se/~palmgren/universe.pdf",
+        "last_updated": "2026-01-12",
+        "snippet": "This a typed lambda calculus with a dependent func- tion space construction (Π-types) and a universe of types (Set, El(·)). The types of this universe are ...",
+        "source": "web"
+      },
+      {
+        "title": "Universe (mathematics) - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Universe_(mathematics)",
+        "date": "2003-08-15",
+        "last_updated": "2026-01-05",
+        "snippet": "In type theory, a universe is a type whose elements are types. Contents. 1 In ... notation Vi for Si{}, V0 = {}, V1 = P{}, and so on as before. But what ...",
+        "source": "web"
+      },
+      {
+        "title": "Type Theory - Stanford Encyclopedia of Philosophy",
+        "url": "https://plato.stanford.edu/entries/type-theory/",
+        "date": "2006-02-08",
+        "last_updated": "2026-01-23",
+        "snippet": "every \\(\\lambda x.M\\) is a function symbol;; there are no other function symbols. The notation for function application \\(M N\\) is a little ...",
+        "source": "web"
+      },
+      {
+        "title": "Mathematics in type theory. | Xena - WordPress.com",
+        "url": "https://xenaproject.wordpress.com/2020/06/20/mathematics-in-type-theory/",
+        "date": "2020-06-20",
+        "last_updated": "2025-12-13",
+        "snippet": "It turns out that ℝ : Type . The real numbers are a term of a “universe” type called Type — the type theory analogue of the class of all sets. ...",
+        "source": "web"
+      },
+      {
+        "title": "type universe in nLab",
+        "url": "https://ncatlab.org/nlab/show/type+universe",
+        "date": "2025-05-13",
+        "last_updated": "2025-09-10",
+        "snippet": "In type theory, a type universe – usually written 𝒰 \\mathcal{U} or Type Type – is a type whose terms are either themselves types (Russell ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Notions and Notations in Type Theory - GitHub",
+        "url": "https://raw.githubusercontent.com/edemko/notes-typetheory/master/notation.pdf",
+        "date": "2021-01-19",
+        "last_updated": "2024-04-11",
+        "snippet": "Given the prevalence of polymorphic functions, the most common universe to see in type theory is U0, which is the universe of small types, or in ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**1. \"The type of all X\" or \"universe of types\" is denoted as \\(\\mathsf{Type}\\), \\(\\mathcal{U}\\), or \\(\\mathsf{Type}_i\\) (for cumulative hierarchies like \\(\\mathsf{Type}_0 : \\mathsf{Type}_1\\)).**[1][4][7]\n\n**2. In dependent type theory (Coq, Agda, Lean), the TYPE UNIVERSE uses \\(\\mathsf{Type}\\), \\(\\mathsf{Type}_i\\), or \\(\\mathbf{Universe}\\); Coq/Lean often employ \\(\\mathsf{Type}\\) with universe polymorphism, Agda uses \\(\\mathbf{Set}\\) or leveled \\(\\ell\\).**[1][6][7][8]\n\n**3. Haskell uses \\(\\forall \\alpha.\\) for \"all instances of a type\" (universal quantification over type variables); ML (SML/OCaml) uses `'a` (unification variable) or explicit \\(\\forall \\alpha.\\) in higher-kinded polymorphism, but no direct universe—types are implicitly in a type-level \"universe\".**[5] (Note: No search results directly quote ML/Haskell symbols; this draws from standard PLT conventions.)\n\n**4. \\(\\Sigma\\)-TYPE (dependent sum / exists) is \\(\\sum_{x:A} B(x)\\) or \\(\\Sigma(x:A).B(x)\\); \\(\\Pi\\)-TYPE (dependent product / forall) is \\(\\prod_{x:A} B(x)\\) or \\(\\Pi(x:A).B(x)\\).**[1][3]\n\n**5. \"The totality\" or \"everything\" in category theory is the **terminal object** \\(1\\) (or \\(\\top\\)) or **initial object** \\(0\\), but for type universes/small types, it's the **object of objects** \\(\\mathcal{U}\\) or **display map** setup \\(U \\twoheadrightarrow \\mathsf{Type}(U)\\). No single universal \"everything\" symbol exists; contexts use subobject classifiers \\(\\Omega\\).**[1][7]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

@@ -1,0 +1,470 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T13:37:07.359126",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "In software architecture and programming language theory, I'm researching ENTITY STRATIFICATION across abstraction levels.\n\nCONTEXT:\nWe have established that code exists in a space that is:\n- BOUNDED BELOW: Physical substrate (bits, gates, electrons)\n- UNBOUNDED ABOVE: Infinite possible abstraction levels\n\nA typical hierarchy might be:\n- L0: Bit\n- L1: Byte\n- L2: Primitive (int, float, char)\n- L3: Variable\n- L4: Expression\n- L5: Statement\n- L6: Function/Method\n- L7: Class/Module\n- L8: Package/Namespace\n- L9: Service/Component\n- L10: System\n- L11: Domain\n- L12+: Enterprise, Industry, Universe...\n\nQUESTIONS:\n\n1. Do software entities LIVE AT a single level, or can they SPAN multiple levels?\n   - Is a function strictly L6, or does it span L4-L6 because it contains statements and expressions?\n   - Is a class L7, or does it span L6-L7 because it contains methods?\n\n2. Are abstraction levels DEFINED BY entity types, or do entities INHABIT pre-existing levels?\n   - Chicken-egg: Do levels exist because entities exist, or vice versa?\n\n3. Is there academic work on \"entity stratification\" or \"level residency\" in software?\n   - Particularly interested in: Can an entity be BORN at one level but OPERATE at another?\n\n4. How do cross-cutting concerns (logging, security, transactions) relate to levels?\n   - These seem to span ALL levels - how is this modeled?\n\n5. What is the relationship between CONTAINMENT (class contains method) and LEVEL (class is higher than method)?\n   - Is containment the MECHANISM that creates levels?\n\n6. In category theory or type theory, how are abstraction levels formalized?\n   - Are there functors between levels?\n\nProvide academic references where possible. This is for a theoretical framework called 'Standard Model of Code' that treats software entities like particles in physics.",
+    "query_length": 1818,
+    "checksum": "sha256:abc04079117bdedd2aadd29bc0fc3ba8ed026b139703a1bc37b2f8a734320840"
+  },
+  "response": {
+    "id": "7e714f23-3a7c-4aa2-bc1d-a48fe4244b9b",
+    "model": "sonar-deep-research",
+    "created": 1769186227,
+    "usage": {
+      "prompt_tokens": 435,
+      "completion_tokens": 6327,
+      "total_tokens": 6762,
+      "citation_tokens": 57515,
+      "num_search_queries": 30,
+      "reasoning_tokens": 338851,
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.051,
+        "citation_tokens_cost": 0.115,
+        "reasoning_tokens_cost": 1.017,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.333
+      }
+    },
+    "citations": [
+      "https://buildsimple.substack.com/p/stratification-in-application-architecture",
+      "https://dev.to/miguelmj/high-level-programming-explaining-abstraction-4ko",
+      "https://en.wikipedia.org/wiki/Cross-cutting_concern",
+      "https://vfunction.com/blog/enterprise-software-architecture-patterns/",
+      "https://en.wikipedia.org/wiki/Abstraction_(computer_science)",
+      "https://www.geeksforgeeks.org/system-design/cross-cutting-concerns-in-distributed-system/",
+      "https://www.i2b2.org/software/files/PDF/current/Ontology_Architecture.pdf",
+      "https://programminggems.wordpress.com/2019/04/22/aggregation-composition-and-containment-in-grady-boochs-object-oriented-analysis-and-design-with-applications/",
+      "https://www.fluentcpp.com/2016/12/15/respect-levels-of-abstraction/",
+      "https://www.hedden-information.com/2305-2/",
+      "https://isaaccomputerscience.org/concepts/prog_oop_aggregation_composition",
+      "https://atomicobject.com/oo-programming/object-oriented-polymorphism",
+      "https://plato.stanford.edu/archives/fall2012/entries/category-theory/",
+      "https://fib-dm.com/ontology-class-and-data-model-entity-hierarchy/",
+      "https://ceur-ws.org/Vol-3241/paper22.pdf",
+      "https://golem.ph.utexas.edu/category/2010/07/what_is_a_theory.html",
+      "http://lambda-the-ultimate.org/node/1386",
+      "https://en.wikipedia.org/wiki/Mereology",
+      "https://cacm.acm.org/research/abstractions-their-algorithms-and-their-compilers/",
+      "https://www.jsoftware.us/vol3/jsw0301-01.pdf",
+      "https://tgdwyer.github.io/levelsofabstraction/",
+      "https://www.classes.cs.uchicago.edu/archive/2012/spring/22300-1/papers/Cardelli-Wegner.pdf",
+      "https://users.soe.ucsc.edu/~ejw/papers/medvidovic_css96.pdf",
+      "https://en.wikipedia.org/wiki/Formal_semantics_(natural_language)",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6508658/",
+      "https://en.wikipedia.org/wiki/Aspect-oriented_programming",
+      "https://en.wikipedia.org/wiki/Denotational_semantics",
+      "https://www.gogravity.com/product/insights/reporting/dimensional-reporting-software",
+      "https://www.cs.drexel.edu/~yc349/CS575/Week8/KiczalesAOP_Ecoop97.pdf",
+      "https://www.cl.cam.ac.uk/teaching/1112/DenotSem/dens-notes-bw.pdf",
+      "https://realpython.com/python-metaclasses/",
+      "https://plato.stanford.edu/entries/games-abstraction/",
+      "https://en.wikipedia.org/wiki/Type_variance",
+      "https://emisa-journal.org/emisa/article/view/281/194",
+      "https://en.wikipedia.org/wiki/Abstract_interpretation",
+      "https://eli.thegreenplace.net/2018/covariance-and-contravariance-in-subtyping/",
+      "https://homepages.ecs.vuw.ac.nz/~tk/publications/papers/essence.pdf",
+      "https://www.dke.uni-linz.ac.at/rest/dke_web_res/publications/papers/Neum17d/Neum17d_copy.pdf",
+      "http://cshub.bc.edu/stumpaa/papers/archon.pdf",
+      "https://nemo.inf.ufes.br/wp-content/papercite-data/pdf/multi_level_conceptual_modeling_theory_language_and_application_2021.pdf",
+      "https://dl.acm.org/doi/pdf/10.1109/MODELS-C59198.2023.00104",
+      "https://bracha.org/mirrors.pdf",
+      "https://www.stefanos-lignos.dev/posts/nx-module-boundaries",
+      "https://datavirke.dk/posts/contemplating-entity-component-architecture/",
+      "https://www2.cs.sfu.ca/CourseCentral/354/zaiane/material/postscript/Chapter2.pdf",
+      "http://dmtopolog.com/modularity-1-boundaries",
+      "https://vfunction.com/blog/architecture-diagram-guide/",
+      "https://www.geeksforgeeks.org/dbms/entity-in-dbms/",
+      "https://dev.to/balapriya/abstract-syntax-tree-ast-explained-in-plain-english-1h38",
+      "https://www.cs.cornell.edu/courses/cs4120/2023sp/notes/ir/",
+      "https://www.cs.man.ac.uk/~david/categories/book/book.pdf",
+      "https://en.wikipedia.org/wiki/Abstract_syntax_tree",
+      "https://en.wikipedia.org/wiki/Intermediate_representation",
+      "https://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf",
+      "https://en.wikipedia.org/wiki/Chomsky_hierarchy",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5807479/",
+      "https://www.di.fc.ul.pt/~mal/papers/amast02.pdf",
+      "https://timhunter.humspace.ucla.edu/papers/blackwell-chomsky-hierarchy.pdf",
+      "https://www.dke.uni-linz.ac.at/rest/dke_web_res/publications/papers/Neum17d/Neum17d_copy.pdf",
+      "https://fredriknf.com/papers/universaluniversal_mscs2017.pdf"
+    ],
+    "search_results": [
+      {
+        "title": "Stratification in Application Architecture: The Foundation for ...",
+        "url": "https://buildsimple.substack.com/p/stratification-in-application-architecture",
+        "snippet": "At the heart of effective stratification lies the dependency rule: dependencies should only point inward, toward the more stable layers.",
+        "source": "web"
+      },
+      {
+        "title": "High level programming - Explaining abstraction - DEV Community",
+        "url": "https://dev.to/miguelmj/high-level-programming-explaining-abstraction-4ko",
+        "snippet": "In this post I want to analyze the concept of abstraction in the context of programming and software development.",
+        "source": "web"
+      },
+      {
+        "title": "Cross-cutting concern - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Cross-cutting_concern",
+        "snippet": "Cross-cutting concerns are aspects of a program that affect several modules, without the possibility of being encapsulated in any of them.",
+        "source": "web"
+      },
+      {
+        "title": "Enterprise software architecture patterns: The complete guide",
+        "url": "https://vfunction.com/blog/enterprise-software-architecture-patterns/",
+        "snippet": "Discover the most effective enterprise software architecture patterns, their benefits, comparisons, and real-world use cases.",
+        "source": "web"
+      },
+      {
+        "title": "Abstraction (computer science) - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Abstraction_(computer_science)",
+        "snippet": "The level of abstraction included in a programming language can influence its overall usability. The Cognitive dimensions framework includes the concept of ...",
+        "source": "web"
+      },
+      {
+        "title": "Cross-Cutting Concerns in Distributed System - GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/system-design/cross-cutting-concerns-in-distributed-system/",
+        "snippet": "Cross-cutting concerns are aspects of a software system that affect multiple components. In distributed systems, these concerns are critical ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Ontology Management (ONT) Cell - i2b2",
+        "url": "https://www.i2b2.org/software/files/PDF/current/Ontology_Architecture.pdf",
+        "snippet": "Vocabularies in the ONT cell are organized in hierarchical structures that represent the relationship between terms.",
+        "source": "web"
+      },
+      {
+        "title": "Aggregation, Composition, and Containment in Grady Booch's ...",
+        "url": "https://programminggems.wordpress.com/2019/04/22/aggregation-composition-and-containment-in-grady-boochs-object-oriented-analysis-and-design-with-applications/",
+        "snippet": "But on page 196 composition is equivalent to physical containment and tightly coupled.",
+        "source": "web"
+      },
+      {
+        "title": "It all comes down to respecting levels of abstraction - Fluent C++",
+        "url": "https://www.fluentcpp.com/2016/12/15/respect-levels-of-abstraction/",
+        "snippet": "Maybe the first thing you thought of when reading about abstraction is polymorphism. Polymorphism consists of segregating levels of abstraction.",
+        "source": "web"
+      },
+      {
+        "title": "Hierarchies in Taxonomies, Thesauri, Ontologies, and Beyond",
+        "url": "https://www.hedden-information.com/2305-2/",
+        "snippet": "Hierarchies are a defining feature of taxonomies, and they are also characteristic of other controlled vocabularies or knowledge organization systems.",
+        "source": "web"
+      },
+      {
+        "title": "Aggregation (containment) and composition - Isaac Computer Science",
+        "url": "https://isaaccomputerscience.org/concepts/prog_oop_aggregation_composition",
+        "snippet": "Composition (and aggregation / containment) is often preferred over inheritance as a more flexible approach to the reuse of code.",
+        "source": "web"
+      },
+      {
+        "title": "Object Oriented Polymorphism",
+        "url": "https://atomicobject.com/oo-programming/object-oriented-polymorphism",
+        "snippet": "Polymorphic: from the Greek for \"many forms.\" When something (function argument, variable, etc) can be of more than one type. Not limited to OO languages.",
+        "source": "web"
+      },
+      {
+        "title": "Category theory - Stanford Encyclopedia of Philosophy",
+        "url": "https://plato.stanford.edu/archives/fall2012/entries/category-theory/",
+        "snippet": "Category theory is an alternative to set theory as a foundation for mathematics. As such, it raises many issues about mathematical ontology and ...",
+        "source": "web"
+      },
+      {
+        "title": "Ontology Class- and Data Model Entity-hierarchy, are they the same?",
+        "url": "https://fib-dm.com/ontology-class-and-data-model-entity-hierarchy/",
+        "snippet": "This article proposes that an Enterprise Conceptual Data Model derived from an authoritative Domain Ontology is an isomorphic submodel and an optimal relational ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Mereological Approach for Formation of “Part‐Whole” Relations ...",
+        "url": "https://ceur-ws.org/Vol-3241/paper22.pdf",
+        "snippet": "Mereology analyzes the connection of part and whole that is one of the main types of connection between objects, as well as natural and artificial environments ...",
+        "source": "web"
+      },
+      {
+        "title": "What is a Theory? | The n-Category Café",
+        "url": "https://golem.ph.utexas.edu/category/2010/07/what_is_a_theory.html",
+        "snippet": "The level of structure required on the category is called the doctrine (or 2-theory) in which the theory is written; thus the theory of groups ...",
+        "source": "web"
+      },
+      {
+        "title": "Class hierarchies and Ontologies | Lambda the Ultimate",
+        "url": "http://lambda-the-ultimate.org/node/1386",
+        "snippet": "Each describes quite general concepts like \"objects\", \"processes\", \"sets\" and \"classes\", and then provide more specific concepts for particular ...",
+        "source": "web"
+      },
+      {
+        "title": "Mereology - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Mereology",
+        "snippet": "As a branch of metaphysics, mereology examines the connections between parts and their wholes, exploring how components interact within a system.",
+        "source": "web"
+      },
+      {
+        "title": "Abstractions, Their Algorithms, and Their Compilers",
+        "url": "https://cacm.acm.org/research/abstractions-their-algorithms-and-their-compilers/",
+        "snippet": "Computational thinking, which centers around devising abstractions for problems so they can be solved with computational steps and efficient algorithms.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Cohesion, Coupling and Abstraction Level: Criteria for Capability ...",
+        "url": "https://www.jsoftware.us/vol3/jsw0301-01.pdf",
+        "snippet": "The synthesis algorithm indicates that the abstraction level of a core function is determined by examining its links with other core functions. Therefore, one ...",
+        "source": "web"
+      },
+      {
+        "title": "Levels of Abstraction - Notes on Programming Paradigms",
+        "url": "https://tgdwyer.github.io/levelsofabstraction/",
+        "snippet": "Semantics: The processes a computer follows when executing a program in a given language. Imperative: Imperative programs are a sequence of statements that ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] On Understanding Types, Data Abstraction, and Polymorphism",
+        "url": "https://www.classes.cs.uchicago.edu/archive/2012/spring/22300-1/papers/Cardelli-Wegner.pdf",
+        "snippet": "The Smalltalk object hierarchy is a description of the Smalltalk programming environment in Smalltalk. It is conceptually similar to the LISP apply function,.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Formal Modeling of Software Architectures at Multiple Levels of ...",
+        "url": "https://users.soe.ucsc.edu/~ejw/papers/medvidovic_css96.pdf",
+        "snippet": "Software systems built with a focus on architectures are complex, multi-dimensional entities that span four distinct levels of abstraction: • specification ...",
+        "source": "web"
+      },
+      {
+        "title": "Formal semantics (natural language) - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Formal_semantics_(natural_language)",
+        "snippet": "Formal semantics constructs abstract models that map natural language expressions to individual objects and sets of objects. One major goal of research in ...",
+        "source": "web"
+      },
+      {
+        "title": "Developing a hierarchical decomposition methodology to increase ...",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6508658/",
+        "snippet": "The hierarchical decomposition methodology will advance the state of the art in terms of improving machine health by highlighting how health degradations ...",
+        "source": "web"
+      },
+      {
+        "title": "Aspect-oriented programming - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Aspect-oriented_programming",
+        "snippet": "Aspect-oriented programming (AOP) is a programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns.",
+        "source": "web"
+      },
+      {
+        "title": "Denotational semantics - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Denotational_semantics",
+        "snippet": "In computer science, denotational semantics is an approach of formalizing the meanings of programming languages by constructing mathematical objects (called ...",
+        "source": "web"
+      },
+      {
+        "title": "Dimensional & Hierarchical Reporting for Multi-Entity Accounting",
+        "url": "https://www.gogravity.com/product/insights/reporting/dimensional-reporting-software",
+        "snippet": "Gravity Software's powerful reporting tools allow you to run real-time reports across multiple entities, departments, or projects. You can easily filter and ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] aspect - oriented programming",
+        "url": "https://www.cs.drexel.edu/~yc349/CS575/Week8/KiczalesAOP_Ecoop97.pdf",
+        "snippet": "The goal of Aspect-Oriented Programming (AOP) is to make it possible to deal with cross- cutting aspects of a system's behavior as separately as possible. We ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Denotational Semantics - University of Cambridge",
+        "url": "https://www.cl.cam.ac.uk/teaching/1112/DenotSem/dens-notes-bw.pdf",
+        "snippet": "Slide 1 gives a reminder of various approaches to giving formal semantics for programming languages. The operational approach was introduced in the Part IB.",
+        "source": "web"
+      },
+      {
+        "title": "Python Metaclasses - Real Python",
+        "url": "https://realpython.com/python-metaclasses/",
+        "snippet": "Python supports a form of metaprogramming for classes called metaclasses. Metaclasses are an esoteric OOP concept, lurking behind virtually all Python code.",
+        "source": "web"
+      },
+      {
+        "title": "Games, Full Abstraction and Full Completeness",
+        "url": "https://plato.stanford.edu/entries/games-abstraction/",
+        "snippet": "The full abstraction property states that the denotational and operational approaches define the same relation.",
+        "source": "web"
+      },
+      {
+        "title": "Type variance - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Type_variance",
+        "snippet": "Type variance is the relationship between subtypes of a composite type (e.g. List[Int] ) and the subtypes of its components (e.g. Int ). A language's chosen ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Dual Deep Modeling of Business Processes",
+        "url": "https://emisa-journal.org/emisa/article/view/281/194",
+        "snippet": "Abstract. Multi-level modeling (MLM) facilitates conceptual modeling at multiple levels, with clabjects as basic modeling constructs that combine ...",
+        "source": "web"
+      },
+      {
+        "title": "Abstract interpretation - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Abstract_interpretation",
+        "snippet": "Abstract interpretation is a theory of sound approximation of the semantics of computer programs, based on monotonic functions over ordered sets.",
+        "source": "web"
+      },
+      {
+        "title": "Covariance and contravariance in subtyping - Eli Bendersky's website",
+        "url": "https://eli.thegreenplace.net/2018/covariance-and-contravariance-in-subtyping/",
+        "snippet": "Variance refers to how subtyping between composite types (eg list of Cats versus list of Mammals) relates to subtyping between their components (eg Cats and ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] The Essence of Multilevel Metamodeling",
+        "url": "https://homepages.ecs.vuw.ac.nz/~tk/publications/papers/essence.pdf",
+        "snippet": "In the case of the UML, all model elements instantiated from a class are also viewed as being instances of the metaclass Instance, or one of its subclasses.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Multilevel Modeling",
+        "url": "https://www.dke.uni-linz.ac.at/rest/dke_web_res/publications/papers/Neum17d/Neum17d_copy.pdf",
+        "snippet": "Multilevel modeling extends object-oriented modeling with multiple levels of instantiation as well as deep characterization. As opposed.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Directly Reflective Meta-Programming - Computer Science",
+        "url": "http://cshub.bc.edu/stumpaa/papers/archon.pdf",
+        "snippet": "Abstractly speaking, reflection is concerned with enabling entities at one lin- guistic level (called the object level) to interact with entities at a higher ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Multi-Level Conceptual Modeling: Theory, Language and Application",
+        "url": "https://nemo.inf.ufes.br/wp-content/papercite-data/pdf/multi_level_conceptual_modeling_theory_language_and_application_2021.pdf",
+        "snippet": "Abstract. In many important subject domains, there are central real-world phenomena that span across multiple classification levels.",
+        "source": "web"
+      },
+      {
+        "title": "Clabject Typing in MLM",
+        "url": "https://dl.acm.org/doi/pdf/10.1109/MODELS-C59198.2023.00104",
+        "snippet": "Abstract—MultiLevel software Modeling (MLM) views com- plex domains as a classification system, created by monotonically growing abstraction of a domain.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Mirrors: Design Principles for Meta-level Facilities of Object-Oriented ...",
+        "url": "https://bracha.org/mirrors.pdf",
+        "snippet": "They isolate an object-oriented programming language's reflective capabilities into separate intermediary objects called mirrors that directly correspond to ...",
+        "source": "web"
+      },
+      {
+        "title": "Three Ways to Enforce Module Boundaries and Dependency Rules ...",
+        "url": "https://www.stefanos-lignos.dev/posts/nx-module-boundaries",
+        "snippet": "Module boundaries - This defines what parts of a module are accesible from the outside. Everything else should not be accessible. · Dependency rules It specifies ...",
+        "source": "web"
+      },
+      {
+        "title": "Contemplating Entity Component Architecture - Datavirke",
+        "url": "https://datavirke.dk/posts/contemplating-entity-component-architecture/",
+        "snippet": "Instead of looking at the world as a tree of strictly hierarchical abstractions like above, ECS gives taxonomy the middle finger and embraces a ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] The Entity-Relationship Model",
+        "url": "https://www2.cs.sfu.ca/CourseCentral/354/zaiane/material/postscript/Chapter2.pdf",
+        "snippet": "The concept of an entity set corresponds to the programming language type definition. A variable of a given type has a particular value at a ...",
+        "source": "web"
+      },
+      {
+        "title": "Modularity. Boundaries | topolog's tech blog",
+        "url": "http://dmtopolog.com/modularity-1-boundaries",
+        "snippet": "In this post we'll talk about why boundaries matter and what types of modularity can we distinguish in our projects based on the existing boundaries.",
+        "source": "web"
+      },
+      {
+        "title": "System architecture diagram basics & best practices - vFunction",
+        "url": "https://vfunction.com/blog/architecture-diagram-guide/",
+        "snippet": "An architecture diagram is a blueprint of a software system, showcasing its core components, their interconnections, and the communication channels that drive ...",
+        "source": "web"
+      },
+      {
+        "title": "Entity in DBMS - GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/dbms/entity-in-dbms/",
+        "snippet": "An entity in DBMS represents a real-world object or concept that can be uniquely identified and stored in a database.",
+        "source": "web"
+      },
+      {
+        "title": "Abstract Syntax Tree (AST) - Explained in Plain English",
+        "url": "https://dev.to/balapriya/abstract-syntax-tree-ast-explained-in-plain-english-1h38",
+        "snippet": "An Abstract Syntax Tree (AST) abstracts away certain details and retains just enough information to help the compiler understand the structure of the code.",
+        "source": "web"
+      },
+      {
+        "title": "Intermediate Representations - Cornell: Computer Science",
+        "url": "https://www.cs.cornell.edu/courses/cs4120/2023sp/notes/ir/",
+        "snippet": "As a result, many compilers use multiple intermediate representations. ... To translate source-level control structures, we need IR statements that transfer ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Computational Category Theory",
+        "url": "https://www.cs.man.ac.uk/~david/categories/book/book.pdf",
+        "snippet": "functor T is left adjoint to the functor U : SmallCat → Graph which ... mer Workshop on Category Theory and Computer Science, Surrey,. 1985, LNCS 240 ...",
+        "source": "web"
+      },
+      {
+        "title": "Abstract syntax tree - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Abstract_syntax_tree",
+        "snippet": "An abstract syntax tree (AST) is a data structure used in computer science to represent the structure of a program or code snippet.",
+        "source": "web"
+      },
+      {
+        "title": "Intermediate representation - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Intermediate_representation",
+        "snippet": "An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Category Theory for Computing Science Michael Barr Charles Wells",
+        "url": "https://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf",
+        "snippet": "This book is a textbook in basic category theory, written specifically to be read by researchers and students in computing science. We expound the con-.",
+        "source": "web"
+      },
+      {
+        "title": "Chomsky hierarchy - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Chomsky_hierarchy",
+        "snippet": "The Chomsky hierarchy in the fields of formal language theory, computer science, and linguistics, is a containment hierarchy of classes of formal grammars.",
+        "source": "web"
+      },
+      {
+        "title": "Dual deep modeling: multi-level modeling with dual potencies and ...",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5807479/",
+        "snippet": "The clabjects of the different hierarchies are related by deep properties. The different user views then emphasize different levels of the clabject hierarchies ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Revisiting the Categorical Approach to Systems*",
+        "url": "https://www.di.fc.ul.pt/~mal/papers/amast02.pdf",
+        "snippet": "In this paper, we propose some revisions capitalising on the lessons that we have learned in using categorical techniques for formalising recent developments on ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] The Chomsky Hierarchy | Tim Hunter",
+        "url": "https://timhunter.humspace.ucla.edu/papers/blackwell-chomsky-hierarchy.pdf",
+        "snippet": "The classification of grammars that became known as the Chomsky hierarchy was an exploration of what kinds of regularities could arise from ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Multilevel Modeling",
+        "url": "https://www.dke.uni-linz.ac.at/rest/dke_web_res/publications/papers/Neum17d/Neum17d_copy.pdf",
+        "snippet": "Multilevel modeling arranges clabjects in arbitrary-depth hierarchies combining aspects of instantiation and specialization. A clabject not only specifies the ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Universal properties for universal types in bifibrational parametricity",
+        "url": "https://fredriknf.com/papers/universaluniversal_mscs2017.pdf",
+        "snippet": "Relational parametricity has proven to be one of the key techniques for formally estab- lishing properties of software systems, such as representation ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# Entity Stratification Across Abstraction Levels in Software Architecture and Programming Language Theory\n\nThis comprehensive research report examines the theoretical foundations and practical implications of how software entities exist, move, and interact across multiple abstraction levels. Drawing from contemporary research in software architecture, programming language theory, category theory, and multi-level modeling, we present evidence that entities in software systems do not simply \"live at\" a single abstraction level, but rather participate in complex stratification patterns that demand sophisticated theoretical frameworks to understand and formalize.\n\n## Understanding Abstraction as Hierarchical Organization\n\nThe concept of abstraction levels in software represents a fundamental organizing principle that structures how we understand, design, and implement computational systems. An abstraction level exists as a distinct organizational stratum characterized by a specific perspective, vocabulary, and set of concerns that define what information is relevant and what details can be safely hidden or deferred[2][9][19]. When we refer to a \"level\" of abstraction, we are not merely describing a vertical position in some arbitrary hierarchy, but rather identifying a coherent model of the system expressed in terms that make sense for the problems being solved at that particular level[21].\n\nThe relationship between abstraction levels can be understood through the principle that moving from one level to another represents a transition from describing **what** a system does to describing **how** it does it[2][9]. At a higher level of abstraction, we concern ourselves with behavior and capability; at a lower level, we concern ourselves with implementation and mechanism. A sorting algorithm at the high level of abstraction is simply \"arrange these elements in order,\" but at lower levels, this becomes a sequence of comparisons, swaps, and memory operations[9]. This what-how relationship establishes a directional structure to abstraction hierarchies: we can decompose higher-level concepts into lower-level mechanisms, and we can compose lower-level mechanisms into higher-level abstractions[2].\n\nIn contemporary software systems, these abstraction levels form a spectrum bounded below by the physical substrate of computation (bits, transistors, electrical signals) and extending upward through successive layers of linguistic and conceptual organization[1][9][19][21]. The typical hierarchy begins with primitive operations at the machine level, rises through assembly language, compiled code, high-level language constructs, and continues upward through functions, classes, modules, services, and eventually reaches architectural patterns and enterprise-level system design[1][4][9].\n\n## The Question of Entity Residency: Single-Level vs. Multi-Level Existence\n\nOne of the most fundamental questions in understanding software entities is whether an entity genuinely exists at a single, determinate abstraction level, or whether the very nature of software entities is to span multiple levels simultaneously. The traditional object-oriented perspective, which treats classes, methods, and functions as discrete, level-specific constructs, suggests that entities are fundamentally associated with particular levels—methods exist at level L6, classes at level L7, modules at level L8. However, examination of modern architectural and semantic frameworks reveals this view to be considerably oversimplified.\n\nConsider a method defined within a class[8][11]. Traditional analysis would place this method at the functional level (L6) and the containing class at the class level (L7). Yet this classification obscures crucial structural relationships: the method structurally contains statements and expressions (L5 and L4 in our hierarchy), while simultaneously serving as a component of the class structure. The method is not simply \"at\" level L6; rather, it participates in multiple levels simultaneously, acting as a structural container for lower-level constructs while serving as a structural component of higher-level constructs. This multi-level participation is not accidental or an artifact of representation; it is fundamental to how software is actually organized.\n\nThis phenomenon becomes even clearer when examining containerization relationships. A class that contains methods, which contain statements, which contain expressions, which contain variables and literals—this entire structure demonstrates what we might call **level spanning**: the class is not merely a higher-level abstraction that happens to reference lower levels; it is a composite entity whose definition necessarily encompasses multiple levels of internal structure[8][11][44]. The containment relationship itself creates these level-spanning characteristics. When we say a class \"contains\" a method, we are describing a relationship that has consequences for level residency: the class cannot be fully understood without reference to its internal methods, just as methods cannot be understood without reference to their internal statements[8][11].\n\nResearch in multi-level modeling provides crucial evidence that entities routinely inhabit multiple levels with varying roles and responsibilities. The clabject model, which combines aspects of class and object into a single modeling primitive, demonstrates that an entity can simultaneously serve as both a type definition (class facet) at one level and an instance (object facet) at another level[37][38][40][41]. A \"Car\" clabject, for example, is itself an instance of \"Product\" while simultaneously serving as a class for specific car instances. This is not a violation of the single-level principle; rather, it reveals that the single-level principle was never adequate for describing actual software structures[37][38][40][41]. The potency-based deep instantiation approach formalizes this multi-level existence by assigning each property or attribute a potency value indicating at how many levels below it remains active in the instantiation hierarchy[37][38][40][41].\n\n## Defining Levels: The Chicken-and-Egg Problem\n\nAn essential but frequently overlooked question concerns the generative relationship between abstraction levels and software entities: which comes first? Are abstraction levels emergent properties of how we organize entities, or do pre-existing level structures determine where entities can exist?\n\nThe evidence suggests that this relationship is fundamentally **bidirectional and co-constitutive** rather than unidirectional. Abstraction levels are not imposed from outside onto a neutral collection of entities; rather, levels emerge from the structural relationships that entities maintain with one another. Specifically, the dependency relationship and the composition relationship define level structure[1][4]. The foundational principle of stratified architecture states that dependencies should only point inward toward more stable, lower-level abstractions—never upward toward higher levels[1]. This dependency rule is not arbitrary; it expresses a structural constraint that defines what we mean by \"levels\" in the first place. When we say one layer is \"higher\" than another, we mean that the higher layer depends on the lower layer for its implementation, not vice versa[1][4].\n\nComposition relationships similarly contribute to level definition. When a class is defined as containing methods, or a method as containing statements, these containment relationships establish a compositional hierarchy that becomes coextensive with our notion of abstraction levels[8][11]. An entity's level is partly determined by what it contains and partly by what contains it. A method that contains only primitive operations and built-in language constructs would normally be considered mid-to-high-level code, but the same syntactic structure embedded within a framework template that contains numerous methods might be reconceived as lower-level infrastructure within a higher-level architectural pattern[1][4].\n\nHowever, levels also exhibit significant independence from individual entity arrangements. We can recognize that \"expression,\" \"statement,\" and \"function\" represent coherent levels in programming language hierarchies regardless of how any particular program organizes its entities[5][9][19][21]. These level definitions emerge from the fundamental operations available at each level, the vocabulary through which problems are expressed, and the scope of concerns that become relevant. The lexical/syntactic level is distinguished by concerns about tokens and grammar; the semantic level by concerns about meaning and type correctness; the execution level by concerns about runtime behavior and resource consumption[5][9][19][21]. These are not arbitrary divisions but reflect genuine discontinuities in the structure of computation[5][9][19][21].\n\nA productive way to understand this apparent paradox is through the concept of **level instantiation**: pre-existing logical level structures get instantiated differently in different systems and contexts, while specific entity arrangements create new micro-hierarchies and local levels that operate within the broader macro-level framework. The levels of programming language construction (lexical, syntactic, semantic, intermediate, assembly, machine) represent relatively stable, pre-existing logical levels that organize all software systems. Within these, specific architectural and organizational choices create domain-specific and application-specific level structures that have genuine reality within those systems even though they depend on the underlying logical levels[1][4][9][19].\n\n## Multi-Level Modeling: Formalization of Entity Stratification\n\nContemporary research in multi-level modeling provides the most sophisticated available formalization of how entities exist across multiple abstraction levels. Unlike traditional two-level metamodeling approaches—which strictly separate classes (meta-level) from instances (object-level)—multi-level modeling recognizes that the class-instance distinction is itself relative and that entities regularly participate in both roles simultaneously at different levels of the instantiation hierarchy[34][37][38][40][41].\n\nThe core insight of multi-level modeling is captured in the concept of **clabjects** (portmanteau of \"class\" and \"object\"): modeling primitives that embody characteristics of both classes and objects, with the distinction between these roles becoming relative rather than absolute[37][38][40][41]. A clabject can simultaneously be an instance of a higher-order clabject (object facet) and a class for lower-order clabjects (class facet). This simultaneity is not merely a representational trick; it reflects the actual structure of many software and domain concepts.\n\nFor example, in a product catalog domain, we might have a Product clabject at level 0 (the highest level of abstraction), which classifies product categories like \"Car\" as its instances. The Car clabject simultaneously serves as an object (instance of Product) and a class (defining the structure that product models like Porsche911GT3 must conform to). Porsche911GT3 in turn is an instance of Car and simultaneously a class whose instances are specific product individuals like MarysCar[37][38][40][41]. Each of these entities lives at a specific level in the hierarchy but simultaneously serves dual roles depending on perspective.\n\nMulti-level modeling formalizes this through the concept of **potency**, a numeric property attached to each modeling element indicating how many levels below it remains active in the instantiation hierarchy[37][38][40][41]. An attribute with potency 3 defined on the Product clabject actively structures the schema for three levels of instances below it. Deep characterization extends this further, allowing a clabject to define schema elements not only for its direct instances but for instances of instances, instances of instances of instances, and so on, at arbitrary depths[37][38][40][41]. This formal framework directly addresses the theoretical problem of entity stratification by providing mathematical machinery for describing precisely how entities inhabit multiple levels.\n\nThe dual deep modeling extension of multi-level modeling introduces **source potency** and **target potency** for properties connecting clabjects in different hierarchies, allowing properties to be instantiated selectively across different numbers of levels in different hierarchies[56]. This addresses the practical reality that different entity types often have different instantiation depths. Person entities might exist at a single instantiation level, while Product entities span three levels; a property connecting persons and products needs to be flexible about these different instantiation depths[56]. The formal specification of these relationships through dual potency provides a mathematical framework for describing exactly how entities at different levels can meaningfully interact.\n\n## Cross-Cutting Concerns and Vertical Consistency\n\nOne of the most theoretically challenging aspects of entity stratification is understanding how cross-cutting concerns operate across multiple abstraction levels. Cross-cutting concerns are aspects of a system that affect multiple components, layers, and modules without being neatly encapsulated within any single level—logging, security, transaction management, performance monitoring, and error handling all exemplify this phenomenon[3][6][26].\n\nThe traditional problem with cross-cutting concerns is that they resist encapsulation at any single level. Logging, for instance, may need to be applied at the statement execution level, the function call level, the service invocation level, and the external transaction level—creating scattered, tangled code that violates modularity principles[3][26]. Aspect-oriented programming emerged as an approach to address this problem by allowing the specification of behaviors that cut across multiple modules without modifying the core logic of those modules[26][29]. An aspect specifies pointcuts (locations where the aspect applies) and advice (behavior to be injected at those locations), enabling cross-cutting behavior to be expressed as a first-class concern rather than scattered throughout the system[26][29].\n\nHowever, aspect-oriented programming itself reveals something profound about entity stratification: concerns that genuinely cross-cut multiple levels cannot be adequately modeled by treating levels as independent. Instead, they demand that we recognize a **vertical consistency requirement**: certain properties and behaviors must be consistently maintained across all levels of a system, creating vertical constraints that unify what would otherwise be independent horizontal layers[3][6][26].\n\nSecurity provides a concrete example. A security concern cannot be adequately addressed by implementing authentication at the service boundary and assuming security is thereby ensured. Security requirements must be consistently maintained from the lowest levels of memory access control, through statement-level operations that might leak information through timing channels, through method-level access controls, through class-level encapsulation, through module-level export restrictions, through service-level authorization, and up through architectural access policies[3][6]. Each level has its own specific security mechanisms and vulnerabilities, and failing at any level compromises security at all levels. The cross-cutting nature of security stems from its vertical consistency requirement, not from any weakness in level structure[3][6].\n\nResearch in distributed systems has developed sophisticated frameworks for understanding cross-cutting concerns in multi-tier architectures, identifying logging, data validation, error handling, performance monitoring, and security as fundamental concerns that must be consistently addressed across all system levels[6]. The fact that these concerns are \"cross-cutting\" does not mean they violate stratification principles; rather, it reveals that genuine stratification requires more than horizontal independence—it requires vertical consistency along certain critical dimensions[3][6][26].\n\n## Containment, Composition, and the Generation of Level Structure\n\nThe relationship between containment (the \"is part of\" relationship) and abstraction levels deserves particular attention, as containment appears to be a primary mechanism through which level structure is created and maintained. When a class contains methods, or a method contains statements, or a statement contains expressions, these containment relationships generate a compositional hierarchy that directly corresponds to our intuitive understanding of abstraction levels[8][11][44].\n\nThe distinction between aggregation and composition, as formalized in object-oriented theory, proves relevant here[8][11]. Aggregation represents a looser whole-part relationship where components maintain relatively independent lifecycles and meaning; composition represents a tighter relationship where components derive their meaning and existence from their role within the whole[8][11]. This distinction maps onto differences in level participation: aggregated components participate less deeply in the level structure of their containing entity, while composed components are more thoroughly integrated into higher-level abstractions[8][11][44].\n\nA method is composed into its containing class (the method has no meaning independent of the class context), whereas a component might be aggregated into a system (the component potentially has meaning independent of its current system context). This compositional depth correlates with how thoroughly the contained entity participates in the level structure of the containing entity. A composed method takes on properties of its class level while retaining its own method-level properties, resulting in multi-level participation[8][11]. An aggregated component might maintain more independence, more clearly occupying its own single level[8][11][44].\n\nThe entity-component-system model that has emerged in game development and systems design offers an alternative perspective on level generation through composition[44]. Rather than strictly hierarchical containment where entities are composed into classes into modules into services, the entity-component system separates entity identity from entity attributes, with entities understood as collections of independent components that can be queried and manipulated without strict hierarchical containment[44]. Even in this model, however, levels still emerge—but they emerge from component interaction patterns and query relationships rather than from containment alone[44]. The vertical consistency requirements differ from traditional hierarchical systems, but level structure still emerges and remains essential for understanding the system[44].\n\n## Formal Approaches: Category Theory and Type Theory\n\nThe most sophisticated available mathematical frameworks for understanding abstraction levels draw from category theory, type theory, and formal semantics. These frameworks provide abstraction beyond any particular programming language or architectural pattern, revealing deep structural principles that govern how levels organize computational systems.\n\nIn category theory, abstraction levels can be understood as organizing principles within or across categories, with functors serving as structure-preserving mappings between levels of abstraction[13][16][51][54]. A functor from one category to another preserves the essential structural relationships of the source category while potentially mapping them to different representations in the target category, analogous to how higher-level abstractions preserve the logical structure of lower-level implementations while changing representation[13][51][54]. The concept of adjoint functors—functors that stand in an optimal relationship to one another—provides a formal model for how different levels of abstraction can be related; the left adjoint functor represents going from a more concrete level to a more abstract level, while the right adjoint represents going from abstract back to concrete[13][51][54].\n\nDenotational semantics provides another framework through which abstraction levels can be formalized[27][32]. In denotational semantics, the meaning of a program phrase is given by its denotation—a mathematical object in some abstract domain that represents what the phrase means[27]. Different levels of abstraction in denotational semantics correspond to different domains of interpretation: high-level program phrases denote mathematical objects representing program behavior, mid-level intermediate representations denote lower-level semantic structures, and low-level assembly instructions denote operations on memory and processors[27]. The compositional principle in denotational semantics—the requirement that the denotation of a complex phrase be computable from the denotations of its subphrases—directly encodes the level-spanning nature of software entities: complex entities at higher levels have denotations built compositionally from denotations of constituent lower-level entities[27][32].\n\nThe notion of **full abstraction** in semantic theory provides a criterion for when an abstraction truly captures the essential properties we care about[32]. An abstraction is fully abstract when two program phrases have the same denotation if and only if they behave identically in all possible computational contexts[32]. This provides a principled way to distinguish between true abstraction levels (those that correspond to genuinely distinguishable semantic properties) and false or artificial level distinctions[32]. Not all partitions of code into different organizational levels are genuine abstraction levels; genuine levels carve the universe of code at genuine semantic joints[32].\n\nType systems and type theory provide frameworks for understanding how entities of different abstraction levels can safely interact. The concept of **type variance**—which governs when substitution is safe between complex types and their components—reveals deep structural principles about safe interaction across abstraction levels[33][36]. When a function expects a list of Mammals, can we safely pass it a list of Cats? The answer depends on whether the function only reads from the list (covariance, yes) or also modifies it (contravariance, no)[33][36]. This principle generalizes: safe interaction across abstraction levels requires careful attention to what each level can depend on regarding lower levels, which connects directly to the dependency rule of stratified architecture[1][33][36].\n\nPolymorphism, understood through universal quantification and existential quantification in type theory, provides mechanisms for abstractions that apply uniformly across multiple instantiations without knowing the specific types of those instances[22][33][36]. A generic function that works with any type, or a container class that can hold any object, represents abstraction that genuinely spans levels—the polymorphic abstraction exists at a level above type-specific code, yet permits type-specific behavior when instantiated[22][33][36].\n\n## Intermediate Representations and the Stratification of Compilation\n\nThe compilation process in modern compilers provides concrete evidence for the stratification principle and reveals how compilers themselves function as systems that navigate multiple abstraction levels. A compiler does not translate source code directly into machine code; instead, it passes code through multiple intermediate representations, each at a different abstraction level[50][53].\n\nA typical compilation pipeline processes source code first into an abstract syntax tree (AST), which abstracts away syntactic details (parentheses, semicolons, whitespace) while preserving semantic structure[49][52]. The AST is then transformed into intermediate representations at varying abstraction levels: high-level intermediate representations (HIRs) that remain close to the source language, mid-level intermediate representations (MIRs) that support program analysis and optimization, and low-level intermediate representations (LIRs) that approach assembly-level semantics[50][53].\n\nCrucially, each intermediate representation preserves the meaning of the program (or at least an approximation sufficient for compilation purposes) while changing what aspects are visible or manipulable at that level[50][53]. A MIR might expose control flow structure for analysis and optimization but hide the original source syntax. A LIR might expose memory operations and register allocation but hide higher-level language constructs. An entity like a function or a loop exists at multiple intermediate representation levels, but its manifestation differs: at the HIR level, a function includes all its source-level syntax; at the LIR level, it becomes a sequence of basic blocks with jump instructions; at the machine code level, it becomes processor instructions with registers and memory addresses[50][53].\n\nThe intermediate representation design process itself reveals implicit principles about abstraction levels. Good intermediate representations are designed with specific goals in mind: simplicity (making analysis easier), machine-independence (allowing multiple targets), language-independence (allowing multiple sources), and support for transformation (making optimization possible)[50][53]. These design goals reflect the fact that intermediate representations must serve as meaningful levels within a larger multi-level structure. A representation that fails to be meaningfully intermediate—too high-level to generate efficient code from, or too low-level to support optimizations—fails as an abstraction level[50][53].\n\n## The Scope Hierarchy and Entity-Level Allocation\n\nSoftware systems exhibit multiple nested scope hierarchies that interact with abstraction levels in complex ways. A variable exists within the scope of a function, which exists within the scope of a module, which exists within the scope of a package, which exists within the scope of a system[1][4][21][46]. These nested scopes create an organizational hierarchy related to but distinct from abstraction levels.\n\nAn entity's scope defines the region of code in which it is accessible; its abstraction level defines its position within the hierarchy of what-versus-how abstraction. These are related but not identical concepts. A low-level helper function might have file scope (accessible throughout a single file) but operate at a low abstraction level (close to the machine); a high-level policy function might have global scope (accessible throughout the system) and operate at a high abstraction level (close to domain concerns)[1][4][21]. The relationship between scope hierarchy and abstraction level hierarchy is important but not one-to-one.\n\nModule boundaries and dependency rules exploit this distinction. Nx, a modern monorepo management framework, explicitly enforces rules about which modules can depend on which other modules through a tag-based system that allows multiple dimensions of categorization[43]. Tags like \"scope:users\" versus \"scope:shared\" establish a horizontal partitioning, while tags like \"type:feature\" versus \"type:util\" establish a functional distinction orthogonal to scope[43]. The dependency rules then enforce that certain combinations of these tags are prohibited: code tagged as \"feature\" can depend on code tagged as \"util,\" but not vice versa[43]. This reveals that genuine stratification often requires multi-dimensional organization rather than simple linear hierarchies[43].\n\n## Hierarchical Decomposition and Analysis\n\nThe hierarchical decomposition methodology, developed for analyzing complex cyber-physical systems, provides insights into how entity stratification supports system understanding and analysis[25]. The methodology partitions a system into multiple hierarchical levels of abstraction, with each level providing a different view of system health and behavior. Lower-level models capture detailed component behavior; higher-level models aggregate information from lower levels while abstracting away details. By linking separate models at different levels through hierarchical relationships, the methodology enables analysis that would be intractable if attempted at a single level of detail[25].\n\nThis multi-level analysis approach reveals several benefits of proper stratification: false alarms can be reduced by recognizing when multiple low-level problems have a common cause recognizable only at a higher level; true root causes become identifiable by tracing high-level symptoms to specific low-level components; and system understanding becomes manageable through progressive refinement rather than requiring comprehensive understanding at all levels simultaneously[25]. These benefits derive directly from the fact that entities at different levels capture genuinely different information, and that proper stratification maintains relationships between levels that enable productive cross-level reasoning[25].\n\n## Hierarchies in Knowledge Organization Systems\n\nThe theory of hierarchies in taxonomies, thesauri, and ontologies reveals that different knowledge organization systems permit different types of hierarchical relationships, each capturing different semantic structures[10][14][17]. A taxonomy might use generic-specific hierarchies (IS-A relationships), part-whole hierarchies (IS-PART-OF relationships), and sometimes instance hierarchies (IS-INSTANCE-OF relationships)[10][14][17]. Ontologies, in their pure form, restrict to generic-specific hierarchies (one entity being a subclass of another), with part-whole relationships requiring different representational machinery[10][14][17].\n\nThis diversity of hierarchical types in knowledge organization reveals that \"levels\" in different organizational contexts might represent different semantic structures. Not all hierarchies are abstraction-level hierarchies; some capture domain decomposition, others capture taxonomic classification, others capture temporal sequences or importance rankings[10][17]. Confusing these different types of hierarchies leads to conceptual incoherence[10][17]. A meaningful theory of entity stratification must carefully distinguish between these different types of hierarchical relationships and recognize that abstraction-level hierarchies represent a specific type of hierarchy with particular formal properties.\n\n## Reflection, Meta-Level Programming, and Level Crossing\n\nReflective programming enables code to examine and modify other code, creating explicit mechanisms for crossing between abstraction levels and the meta-levels above them[39][42]. In reflective architectures following the mirror pattern, meta-level facilities are encapsulated into separate intermediary objects that provide a distinct interface for meta-level operations, rather than embedding meta-level capabilities within base-level objects[42]. This design principle of stratification in reflection—keeping base-level and meta-level concerns separated—directly reflects the stratification principle in architecture more broadly[42].\n\nHowever, reflection also reveals that the distinction between a level and a meta-level to that level is not absolute but depends on perspective and purpose. Code that operates as base-level when examined from one perspective becomes meta-level when examined from another. A type system operates at the meta-level relative to programs typed by that system, but the type system itself is a program operating in a type system at a higher meta-level. The layers of reflection and meta-level programming create potentially infinite regressive chains of meta-levels, revealing that \"level\" and \"meta-level\" are relative rather than absolute concepts[39][42].\n\nWell-designed reflective systems maintain clear separation between levels while enabling necessary communication, using principled interfaces that prevent the confusion and complexity that arises from unconstrained access between levels[42]. This again reflects the broader principle that stratification does not prohibit interaction across levels; rather, it structures such interaction through explicit interfaces and dependency rules[1][42].\n\n## Conclusion: A Framework for Understanding Entity Stratification\n\nThe evidence from contemporary software architecture, programming language theory, multi-level modeling, category theory, and formal semantics converges on several conclusions about entity stratification in software:\n\n**First, entities routinely span multiple abstraction levels rather than residing at single, determinate levels.** This is not a failure of our abstractions but a fundamental characteristic of how software is actually structured. A function contains statements and expressions (spanning multiple levels downward), serves as a component of classes and modules (spanning multiple levels upward), and often exhibits dual roles as both definition and instance in reflective or meta-level contexts. Multi-level modeling provides the most sophisticated formalization of this phenomenon through clabjects and potency-based deep characterization.\n\n**Second, abstraction levels are both discovered and created.** Pre-existing logical levels organize all computational systems—the distinction between expression, statement, function, class, module, service, and system represents genuine discontinuities in the structure of software. Yet within these logical levels, specific systems create domain-specific and architectural levels through organizational choices. Level structure emerges from both the intrinsic mathematical properties of computation and the design decisions reflected in particular systems.\n\n**Third, stratification creates genuine constraints that support system properties including modularity, understandability, maintainability, and evolution.** These constraints are not artificial restrictions imposed from above but enable real benefits by capturing information about which parts of a system can be understood or modified independently. Violation of stratification (allowing higher layers to depend on lower layers, or mixing levels inappropriately) leads to the tangling and scattering that make systems difficult to maintain.\n\n**Fourth, cross-cutting concerns do not violate stratification; rather, they reveal the vertical consistency requirements that stratification must support.** Security, logging, transaction management, and other cross-cutting concerns must be consistently maintained across all levels because they represent genuinely system-wide properties, not because stratification failed.\n\n**Fifth, formal approaches including category theory, type theory, denotational semantics, and multi-level modeling provide rigorous frameworks for understanding and reasoning about entity stratification.** These frameworks reveal deep structural principles about how different levels relate, how entities can safely interact across levels, and what properties characterize genuine abstraction levels versus artificial organizational distinctions.\n\nFor the \"Standard Model of Code\" theoretical framework the user is developing, these findings suggest that software entities should be modeled as multi-dimensional objects with multiple aspects of their nature: an abstraction level, a scope, contained lower-level entities, containing higher-level entities, dependency relationships to other entities at various levels, and participation in multiple vertical consistency dimensions. The model should recognize potency-like properties that indicate how many levels below an entity its properties remain active. Most importantly, the model should treat level participation not as a flat categorization but as a complex multi-faceted relationship with significant mathematical structure that can be studied formally using category-theoretic and type-theoretic tools.\n\nEntities in such a model are not particles existing at fixed points in an abstract space, but rather fields or wave functions that extend across multiple abstraction levels, with different aspects of their nature becoming salient at different levels of observation. This perspective acknowledges the fundamental multi-level nature of software entities while preserving the genuine insights that stratification provides about system structure and properties."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

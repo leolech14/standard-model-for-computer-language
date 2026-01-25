@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T16:23:39.698640",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "We're building a 3D file tree visualization with Three.js where node colors encode data (OKLCH: hue=file type, lightness=recency, chroma=importance).\n\n**Problem:** Standard 3D lighting (Phong, Lambert) corrupts the data encoding because:\n- Shadows darken nodes (lightness no longer reflects recency)\n- Highlights brighten nodes (chroma interpretation changes)\n- Ambient occlusion adds unintended darkness\n\n**Proposed solution:** Use unlit/emissive materials so colors are data-pure.\n\n**Questions:**\n1. In Three.js, what's the best approach for unlit materials that preserve exact RGB values?\n2. Are there any perceptual issues with emissive-only 3D scenes (depth perception, spatial relationships)?\n3. Any techniques to maintain depth cues without corrupting color data (e.g., outline shaders, fog, size attenuation)?",
+    "query_length": 817,
+    "checksum": "sha256:4dd4dfb2506753c038ab14d475b36e236a71f5df467f9a983c2e6599d3256f16"
+  },
+  "response": {
+    "id": "46a71dd9-a403-4490-bd5d-958c1c61cada",
+    "model": "sonar-pro",
+    "created": 1769196219,
+    "usage": {
+      "prompt_tokens": 184,
+      "completion_tokens": 639,
+      "total_tokens": 823,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.01,
+        "request_cost": 0.006,
+        "total_cost": 0.016
+      }
+    },
+    "citations": [
+      "https://dustinpfister.github.io/2021/06/22/threejs-emissive-map/",
+      "https://github.com/KhronosGroup/glTF-Blender-Exporter/issues/315",
+      "https://forum.babylonjs.com/t/receiving-shadows-on-emissive-materials/30600",
+      "https://discourse.threejs.org/t/glb-modify-material-and-add-emission/4661",
+      "https://discourse.threejs.org/t/light-emitting-objects/24533",
+      "https://threejs.org/docs/"
+    ],
+    "search_results": [
+      {
+        "title": "Emissive maps in threejs | Dustin John Pfister at github pages",
+        "url": "https://dustinpfister.github.io/2021/06/22/threejs-emissive-map/",
+        "date": "2021-06-22",
+        "last_updated": "2025-09-11",
+        "snippet": "The emissive map is a kind of texture map for a material, and in order to use any of these texture maps you will need, well yeah a texture.",
+        "source": "web"
+      },
+      {
+        "title": "How to use the Unlit Material? · Issue #315 - GitHub",
+        "url": "https://github.com/KhronosGroup/glTF-Blender-Exporter/issues/315",
+        "date": "2018-10-07",
+        "last_updated": "2025-03-25",
+        "snippet": "I'm trying to export a simple scene with some objects, a camera and no light, in order to use them in Three.js. My meshes have textures and are shadeless.",
+        "source": "web"
+      },
+      {
+        "title": "Receiving shadows on emissive materials - Questions - Babylon.js",
+        "url": "https://forum.babylonjs.com/t/receiving-shadows-on-emissive-materials/30600",
+        "date": "2022-05-21",
+        "last_updated": "2025-09-16",
+        "snippet": "The easiest way to accomplish this is to create a simple node material for your emissive color/texture and add in shadows from the standard lighting node.",
+        "source": "web"
+      },
+      {
+        "title": "GLB Modify Material and add emission - Questions - three.js forum",
+        "url": "https://discourse.threejs.org/t/glb-modify-material-and-add-emission/4661",
+        "date": "2018-10-24",
+        "last_updated": "2026-01-09",
+        "snippet": "The model has an emissive channel and texture. My question is: How can I create a glow effect, if the material is embedded and I can not modify ...",
+        "source": "web"
+      },
+      {
+        "title": "Light emitting objects - Questions - three.js forum",
+        "url": "https://discourse.threejs.org/t/light-emitting-objects/24533",
+        "date": "2021-03-18",
+        "last_updated": "2026-01-01",
+        "snippet": "I want to achieve similar stuff: Shader - Glow (Three.js) But I want the object to glow and emit light, in Mr.Stemkoski's example he adds ...",
+        "source": "web"
+      },
+      {
+        "title": "MeshStandardMaterial.emissive – three.js docs",
+        "url": "https://threejs.org/docs/",
+        "last_updated": "2026-01-23",
+        "snippet": "Constructs a new mesh standard material. parameters. An object with one or more properties defining the material's appearance. Any property of the material ( ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "For preserving exact RGB values in your data visualization, **use `MeshBasicMaterial`** rather than emissive materials, as it displays colors unaffected by any lighting[1]. If you need emissive properties specifically, `MeshStandardMaterial` with an **`emissiveMap` and high `emissiveIntensity`** can work, though the distinction is that emissive colors always display regardless of lighting conditions while still being technically influenced by the material system[1].\n\n## Best Approach for Unlit Materials\n\n`MeshBasicMaterial` is the most direct solution for data-pure rendering[1]. This material ignores all light sources and displays your encoded OKLCH colors exactly as specified. If you're importing models with embedded materials from tools like Substance Painter, you can traverse the scene and replace lit materials with `MeshBasicMaterial` while preserving the texture maps[4]:\n\n```javascript\nloader.load('model.glb', function (gltf) {\n  var model = gltf.scene;\n  model.traverse(function (o) {\n    if (o.isMesh) {\n      o.material = new THREE.MeshBasicMaterial({map: o.material.map});\n    }\n  });\n  scene.add(model);\n});\n```\n\nFor the emissive alternative, `MeshStandardMaterial` with an `emissiveMap` provides the same visual effect of always-visible color, controlled by the `emissiveIntensity` property to adjust brightness[1].\n\n## Perceptual Issues with Unlit Scenes\n\nEmissive-only or unlit scenes present genuine depth perception challenges. Without lighting variation, you lose critical spatial cues:\n\n- **Shading gradients** normally help viewers understand surface curvature and orientation\n- **Shadows** establish spatial relationships between objects\n- **Specular highlights** indicate surface position relative to the viewer\n\nThis is particularly problematic for a tree visualization where spatial hierarchy should reinforce data relationships.\n\n## Techniques to Preserve Depth Without Corrupting Color Data\n\nSeveral approaches can maintain spatial clarity while keeping your OKLCH encoding intact:\n\n**Outline/Edge rendering:** Add subtle wireframe or outline passes that don't affect base colors. This emphasizes 3D structure without altering your data values.\n\n**Fog:** Linear or exponential fog can add atmospheric depth cues without changing individual object colors—distant nodes fade slightly, establishing depth without darkening the OKLCH values themselves[1].\n\n**Size attenuation:** Vary node size based on depth or distance to reinforce spatial relationships independently of color.\n\n**Monochromatic lighting at high intensity:** Use a very bright, uniform directional light with minimal shadow mapping. This provides subtle shading cues for depth perception while keeping color variation minimal. Since the light is uniform and intense, local variations in shade would be negligible.\n\n**Normal-mapped geometry without color influence:** If your nodes have geometry (not just flat planes), subtle normal mapping can create surface detail that signals 3D space without altering perceived color through lighting.\n\nThe most effective solution likely combines **`MeshBasicMaterial` for color purity + fog for depth + subtle geometry/outlines for structure**, keeping your OKLCH encoding completely protected while still providing viewers sufficient spatial context to interpret the tree hierarchy."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

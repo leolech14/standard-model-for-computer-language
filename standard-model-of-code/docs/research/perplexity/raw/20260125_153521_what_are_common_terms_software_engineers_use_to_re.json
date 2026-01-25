@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:35:21.188227",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "What are common terms software engineers use to refer to 'the complete collection of all files in a project' - not just code, but docs, configs, tests, everything?\n\nLooking for:\n1. Industry-standard terms\n2. Terms that imply 'totality' or 'completeness'\n3. Terms used in build systems, CI/CD, or project management\n\nExamples of what I'm trying to name: 'all 1,045 source files across code, docs, config, and governance artifacts in my project'",
+    "query_length": 443,
+    "checksum": "sha256:a902a5dedf1221304d16287c570c86c433c6ebe5b0a95edc1a66d2a616dd41e6"
+  },
+  "response": {
+    "id": "049c3901-a00d-4a3a-b1ba-c28c45e87bdd",
+    "model": "sonar-pro",
+    "created": 1769366121,
+    "usage": {
+      "prompt_tokens": 106,
+      "completion_tokens": 604,
+      "total_tokens": 710,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.009,
+        "request_cost": 0.006,
+        "total_cost": 0.015
+      }
+    },
+    "citations": [
+      "https://mitcommlab.mit.edu/broad/commkit/file-structure/",
+      "https://doc.alaska-software.com/content/prgtools_h2_the_structure_of_a_project_file.cxp",
+      "https://www.openproject.org/docs/glossary/",
+      "https://www.projectmanagertemplate.com/post/project-software-glossary-100-essential-terms",
+      "https://softwaredocumentation.tech/types-of-documents-in-software-development/",
+      "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+      "https://www.smartsheet.com/complete-glossary-project-management-terminology",
+      "https://sparxsystems.com/enterprise_architect_user_guide/16.1/ea_project_glossary.html",
+      "https://www.archbee.com/blog/software-documentation-terms"
+    ],
+    "search_results": [
+      {
+        "title": "File Structure : Broad Institute of MIT and Harvard",
+        "url": "https://mitcommlab.mit.edu/broad/commkit/file-structure/",
+        "date": "2019-07-01",
+        "last_updated": "2026-01-23",
+        "snippet": "A successful file structure organizes your data and code with the goal of repeatability, making it easier for you and your collaborators to revisit, revise and ...",
+        "source": "web"
+      },
+      {
+        "title": "The structure of a project file - Alaska Software",
+        "url": "https://doc.alaska-software.com/content/prgtools_h2_the_structure_of_a_project_file.cxp",
+        "last_updated": "2025-10-13",
+        "snippet": "The structure of a project file is divided into sections. The first section [PROJECT] contains definitions which are valid for the whole project and refers ...",
+        "source": "web"
+      },
+      {
+        "title": "OpenProject Glossary",
+        "url": "https://www.openproject.org/docs/glossary/",
+        "date": "2000-01-01",
+        "last_updated": "2026-01-25",
+        "snippet": "In this glossary, you will find the most commonly used terms in OpenProject Software. Each term is defined briefly and supplemented with links to get more ...",
+        "source": "web"
+      },
+      {
+        "title": "Project Software Glossary: 100 Essential Terms",
+        "url": "https://www.projectmanagertemplate.com/post/project-software-glossary-100-essential-terms",
+        "date": "2025-08-29",
+        "last_updated": "2025-09-03",
+        "snippet": "Search Function. A tool that allows users to quickly find tasks, files, or messages.",
+        "source": "web"
+      },
+      {
+        "title": "Listing Types of documents in software development",
+        "url": "https://softwaredocumentation.tech/types-of-documents-in-software-development/",
+        "date": "2024-11-28",
+        "last_updated": "2025-07-15",
+        "snippet": "Software Development Documents are some formal documents describing information that is critical to a software project throughout the project lifecycle.",
+        "source": "web"
+      },
+      {
+        "title": "Glossary of Computer System Software Development Terminology ...",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+        "date": "2014-11-06",
+        "last_updated": "2026-01-25",
+        "snippet": "This document is intended to serve as a glossary of terminology applicable to software development and computerized systems in FDA regulated industries.",
+        "source": "web"
+      },
+      {
+        "title": "The Complete Glossary of Project Management Terms - Smartsheet",
+        "url": "https://www.smartsheet.com/complete-glossary-project-management-terminology",
+        "date": "2017-02-24",
+        "last_updated": "2026-01-25",
+        "snippet": "This glossary contains more than 600 terms and provides simple, clear explanations. Included on this page, you'll find definitions from AZ, from activity codes ...",
+        "source": "web"
+      },
+      {
+        "title": "Project Glossary | Enterprise Architect User Guide - Sparx Systems",
+        "url": "https://sparxsystems.com/enterprise_architect_user_guide/16.1/ea_project_glossary.html",
+        "last_updated": "2025-07-08",
+        "snippet": "A Project Glossary lists and defines the terms that are important for a project or program of work. The Project Glossary can be generated as an isolated ...",
+        "source": "web"
+      },
+      {
+        "title": "Software Documentation Terms Every Technical Writer Should Know",
+        "url": "https://www.archbee.com/blog/software-documentation-terms",
+        "date": "2025-12-25",
+        "last_updated": "2026-01-09",
+        "snippet": "We've put together this glossary of software documentation terms so you always have a guide to refer to when writing software documentation.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**The most common industry-standard term software engineers use for the complete collection of all files in a project—including code, docs, configs, tests, and everything else—is the \"project\" itself, often referring to the root directory or repository containing **all project files**.** This implies totality as the self-contained unit for building, deploying, and managing the entire project.[1][2]\n\n### Key Terms Implying Totality or Completeness\n- **Project directory** or **project root**: The top-level folder housing **every file and subfolder** (e.g., `src/`, `docs/`, `tests/`, `.github/workflows/` for CI/CD). Engineers say \"my project has 1,045 files\" to mean everything under this root.[1]\n- **Repository** (or **repo**): In Git-based workflows, the full clone or working copy with **all committed files** across branches, used in CI/CD pipelines (e.g., \"lint all files in the repo\"). This emphasizes completeness as the version-controlled totality.[5] (inferred from common Git practices)\n- **Source tree**: Describes the hierarchical **complete set of source files and assets**, including non-code, often in build systems like Make or Bazel to glob \"everything in the tree.\"[1]\n\n### Usage in Build Systems, CI/CD, and Project Management\nThese terms appear in tools emphasizing **all files** for totality:\n\n| Context | Term | Description and Example |\n|---------|------|-------------------------|\n| **Build systems** (e.g., Maven, Gradle) | Project | Root with **all sources, resources, configs**; e.g., `mvn compile` builds everything in the project.[2] |\n| **CI/CD** (e.g., GitHub Actions, Jenkins) | Repository / Workspace | Pipeline checks out the **full repo** (code + docs + tests) for linting, testing; e.g., \"scan all files in workspace.\"[2][5] |\n| **Project management** (e.g., monorepos) | Monorepo | Single repo with **complete collection** of all project files across services/docs; implies total scope.[1] |\n| **Version control** (e.g., Git) | Working tree | Current **full set of tracked files** on disk, including uncommitted changes.[1] |\n\nLess common but related: **file structure** (interchangeable with hierarchy, covering **all elements** logically).[1] In regulated contexts like FDA software, a **data dictionary** catalogs **all files/data elements** but doesn't name the collection itself.[6]\n\nFor your example (\"all 1,045 source files across code, docs, config, and governance artifacts\"), engineers would say: **\"all files in the project/repo\"** or **\"the entire project directory\"**—precise, total, and standard across teams.[1][2]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

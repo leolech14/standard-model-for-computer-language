@@ -1,0 +1,90 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:30:41.010198",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "Follow-up on software terminology:\n\nGiven that '-ome' terms (Codome, Contextome, Projectome) are novel and not established, is there VALUE in creating new terminology when:\n\n1. The concepts they describe are genuinely different from 'codebase' (Codome implies completeness + boundary definition)\n2. They're used in an internal project with physics metaphors (treating code analysis like particle physics)\n3. The goal is to enable AI agents to reason about 'the complete set of X' with clear boundaries\n\nWhat does software engineering literature say about:\n- Creating domain-specific terminology for internal tools\n- Using scientific metaphors in software (e.g., 'code smell', 'technical debt', 'refactoring')\n- The trade-off between novel precision vs familiar ambiguity",
+    "query_length": 770,
+    "checksum": "sha256:76b03e5c563d5a6bee6ad09831cb99018f681fbcbcd118bc2f5b8223a232d1d9"
+  },
+  "response": {
+    "id": "96ccd041-34cb-4d38-80fc-f176dc813c10",
+    "model": "sonar-pro",
+    "created": 1769365840,
+    "usage": {
+      "prompt_tokens": 155,
+      "completion_tokens": 781,
+      "total_tokens": 936,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.012,
+        "request_cost": 0.006,
+        "total_cost": 0.018
+      }
+    },
+    "citations": [
+      "https://handsonpromptengineering.vercel.app/day-25/domain-specific-language-understanding/",
+      "https://john.cs.olemiss.edu/~hcc/csci555/notes/DomainSpecificLanguages.html",
+      "https://procodebase.com/article/mastering-domain-specific-prompt-engineering",
+      "https://martinfowler.com/articles/languageWorkbench.html",
+      "https://www.craigrisi.com/post/is-domain-knowledge-important-for-software-engineers"
+    ],
+    "search_results": [
+      {
+        "title": "Mastering Domain-Specific Language Understanding for Software ...",
+        "url": "https://handsonpromptengineering.vercel.app/day-25/domain-specific-language-understanding/",
+        "last_updated": "2025-11-25",
+        "snippet": "Identify the Domain: Clearly determine which domain you are working within. Learn the Language: Study the syntax, semantics, and lexicon of the DSL used in that ...",
+        "source": "web"
+      },
+      {
+        "title": "CSci 658: Software Language Engineering Domain Specific ...",
+        "url": "https://john.cs.olemiss.edu/~hcc/csci555/notes/DomainSpecificLanguages.html",
+        "date": "2018-04-02",
+        "last_updated": "2025-12-15",
+        "snippet": "A DSL should not attempt to solve all problems for all users for all time. It should not seek to define an entire software system.",
+        "source": "web"
+      },
+      {
+        "title": "Mastering Domain-Specific Prompt Engineering - ProCodebase",
+        "url": "https://procodebase.com/article/mastering-domain-specific-prompt-engineering",
+        "date": "2024-09-28",
+        "last_updated": "2025-06-04",
+        "snippet": "Best Practices for Domain-Specific Prompt Engineering · 1. Know Your Domain Inside Out · 2. Use Precise and Contextual Language · 3. Leverage ...",
+        "source": "web"
+      },
+      {
+        "title": "Language Workbenches: The Killer-App for Domain Specific ...",
+        "url": "https://martinfowler.com/articles/languageWorkbench.html",
+        "date": "2005-06-12",
+        "last_updated": "2026-01-24",
+        "snippet": "The two main terms I'm specifically coining for this article are 'Language Oriented Programming' and 'Language Workbench'. I use Language ...",
+        "source": "web"
+      },
+      {
+        "title": "Is domain knowledge important for software engineers? - Craig Risi",
+        "url": "https://www.craigrisi.com/post/is-domain-knowledge-important-for-software-engineers",
+        "date": "2024-11-01",
+        "last_updated": "2026-01-13",
+        "snippet": "Domain knowledge allows engineers to build solutions closely aligned with business needs, deep technical expertise provides a strong foundation for creating ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Yes, there is value in creating novel terminology like \"Codome\" for internal projects, particularly when it provides **precise boundaries and completeness** for AI reasoning, aligns with domain-specific metaphors, and differentiates from established terms like \"codebase.\" Software engineering literature on domain-specific languages (DSLs) and terminology supports this for internal tools, emphasizing precision over familiarity in scoped contexts.[1][2]\n\n### Domain-Specific Terminology for Internal Tools\nLiterature endorses creating **custom terminology** within DSLs for internal or project-specific use, as it tailors communication to the domain's unique needs without aiming for universal adoption. DSLs are defined as programming languages \"tailored to a particular application domain\" with \"limited expressiveness\" focused on specific problems, using **domain-relevant concepts, notations, and terminology** derived from systematic analysis like Scope-Commonality-Variability (SCV).[2] For internal physics-metaphor projects, this involves defining **scope** (e.g., complete bounded sets), **terminology** (e.g., Codome for completeness + boundaries), and **commonalities** (e.g., particle physics analogies), which guide DSL design and enable non-programmer domain experts to engage fluently.[2] Best practices include identifying the domain early, adapting expert notations (like physics terms), and formalizing informal concepts for automation, such as AI agents reasoning about \"the complete set of X.\"[1][2]\n\n### Scientific Metaphors in Software Engineering\nUsing metaphors like physics-inspired terms is a validated practice, mirroring established ones such as **code smell** (indicative of deeper issues), **technical debt** (cumulative maintenance costs), and **refactoring** (restructuring without changing behavior). These draw from external fields to convey complex ideas accessibly, and DSL design explicitly recommends \"adapt[ing] existing notations domain experts use\" while keeping changes close to their style for easier adoption.[2] In AI contexts, domain-specific prompt engineering leverages such **jargon, concepts, and frameworks** (e.g., physics metaphors) to elicit precise responses, as seen in tailored prompts for e-commerce or project management.[3]\n\n### Trade-offs: Novel Precision vs. Familiar Ambiguity\n| Aspect | Novel Precision | Familiar Ambiguity | Literature Guidance |\n|--------|-----------------|---------------------|---------------------|\n| **Advantages** | Enables exact semantics (e.g., Codome's completeness/boundaries vs. codebase's vagueness); supports AI reasoning in bounded domains; fluent for domain experts.[1][2] | Quick onboarding for broad audiences; leverages existing knowledge.[2] | Prioritize precision for internal/DSL use: \"limited expressiveness\" avoids overgeneralization; balance by building on familiar notations.[2] |\n| **Risks** | Learning curve if scaled beyond team; potential confusion outside domain.[1] | Imprecise for unique concepts (e.g., no standard term for \"complete bounded code set\"); hinders AI disambiguation.[3] | Use SCV analysis to scope tightly; identify user groups (e.g., AI agents, physicists) and simplify further; formalize for tools.[2] |\n| **When to Choose** | Internal projects with unique needs (your case: AI + physics).[2][5] | Cross-team/general tools.[2] | \"Focus on providing an effective, uncluttered solution to a specific aspect\"; domain knowledge aligns solutions precisely.[2][5] |\n\nOverall, sources like Fowler and Hudak advocate DSLs for such scenarios, noting they excel when general terms fall short, provided scope is bounded and users (including AI) are targeted.[2][4] If scaling externally, weigh onboarding costs against gains.[1]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T16:08:27.383338",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "What are ALL types of computers by computation method? Not by size/purpose, but by HOW they compute:\n\n1. Digital (discrete binary)\n2. Analog (continuous)\n3. Quantum (qubits)\n4. What else?\n\nI need the complete taxonomy of computation types that exist or have existed.",
+    "query_length": 266,
+    "checksum": "sha256:a6a49fcef8f6e25c441b3d25a0e240de679b28efb519b50f509b4ec84225cdd7"
+  },
+  "response": {
+    "id": "ee8dafdf-3062-46ce-8242-de2cbd5eeb3e",
+    "model": "sonar-pro",
+    "created": 1769368107,
+    "usage": {
+      "prompt_tokens": 62,
+      "completion_tokens": 850,
+      "total_tokens": 912,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.013,
+        "request_cost": 0.006,
+        "total_cost": 0.019
+      }
+    },
+    "citations": [
+      "https://www.geeksforgeeks.org/computer-organization-architecture/computer-architecture-flynns-taxonomy/",
+      "https://www.baeldung.com/cs/flynns-taxonomy-architecture-categories",
+      "https://en.wikipedia.org/wiki/Flynn's_taxonomy",
+      "https://www.scs.carleton.ca/sivarama/5105/papers/intro/skillicorn_survey.pdf",
+      "https://cvw.cac.cornell.edu/parallel/hpc/taxonomy-parallel-computers",
+      "http://www.bricklin.com/p2ptaxonomy.htm",
+      "https://www.techtarget.com/searchcontentmanagement/definition/taxonomy",
+      "https://research.cs.wisc.edu/htcondor/HTCondorWeek2016/presentations/ThuKoch_Taxonomy.pdf"
+    ],
+    "search_results": [
+      {
+        "title": "Flynn's Taxonomy - GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/computer-organization-architecture/computer-architecture-flynns-taxonomy/",
+        "date": "2025-09-26",
+        "last_updated": "2026-01-24",
+        "snippet": "Flynn's Taxonomy classifies computer architectures according to how many instruction streams (processes) and data streams they can process ...",
+        "source": "web"
+      },
+      {
+        "title": "Understanding Flynn's Taxonomy in Computer Architecture - Baeldung",
+        "url": "https://www.baeldung.com/cs/flynns-taxonomy-architecture-categories",
+        "date": "2024-07-03",
+        "last_updated": "2025-12-31",
+        "snippet": "This classification has four categories: Single Instruction Single Data (SISD), Single Instruction Multiple Data (SIMD), Multiple Instruction ...",
+        "source": "web"
+      },
+      {
+        "title": "Flynn's taxonomy - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Flynn's_taxonomy",
+        "date": "2003-05-06",
+        "last_updated": "2026-01-03",
+        "snippet": "Flynn's taxonomy is a classification of computer architectures, proposed by Michael J. Flynn in 1966 [1] and extended in 1972.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] A Taxonomy for Computer Architectures",
+        "url": "https://www.scs.carleton.ca/sivarama/5105/papers/intro/skillicorn_survey.pdf",
+        "last_updated": "2025-12-22",
+        "snippet": "Two very different architecture types result from this approach: tightly coupled systems and loosely coupled systems. Tightly coupled systems consist of a ...",
+        "source": "web"
+      },
+      {
+        "title": "Taxonomy of Parallel Computers - Cornell Virtual Workshop",
+        "url": "https://cvw.cac.cornell.edu/parallel/hpc/taxonomy-parallel-computers",
+        "last_updated": "2025-12-18",
+        "snippet": "Parallelization can be achieved by using multiple instruction streams and/or multiple data streams. This insight is formalized in Flynn's taxonomy.",
+        "source": "web"
+      },
+      {
+        "title": "A Taxonomy of Computer Systems and Different Topologies",
+        "url": "http://www.bricklin.com/p2ptaxonomy.htm",
+        "date": "2018-01-01",
+        "last_updated": "2025-09-11",
+        "snippet": "Let me propose some taxonomy that describes the topologies and roles of computers in a network, and then let's examine the taxonomy of various systems, such as ...",
+        "source": "web"
+      },
+      {
+        "title": "What is Taxonomy in Computing? | Definition from TechTarget",
+        "url": "https://www.techtarget.com/searchcontentmanagement/definition/taxonomy",
+        "date": "2025-03-13",
+        "last_updated": "2026-01-25",
+        "snippet": "Taxonomy is the science of classification according to a predetermined system, with the resulting catalog used to provide a conceptual framework for discussion.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Computational Taxonomy",
+        "url": "https://research.cs.wisc.edu/htcondor/HTCondorWeek2016/presentations/ThuKoch_Taxonomy.pdf",
+        "last_updated": "2024-11-02",
+        "snippet": "Generate data at a large scale for further analysis. ▫ Examples: ▫ parameter sweeps, Monte Carlo methods, protein folding/docking.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**The primary types of computers classified by computation method—focusing on the fundamental nature of data representation and processing—are digital, analog, quantum, and several others including optical, neuromorphic, biological/DNA, and mechanical/electromechanical.** These categories reflect how information is encoded and manipulated, distinct from architectural classifications like Flynn's taxonomy (which organizes digital systems by instruction/data streams, e.g., SISD, SIMD, MISD, MIMD).[1][2][3]\n\n### Core Taxonomy by Computation Method\nThis taxonomy covers existing, historical, and emerging paradigms, grounded in established computing paradigms:\n\n- **Digital computers**: Use discrete binary states (0s and 1s) processed via logic gates in electronic circuits. This is the dominant modern type, encompassing all Flynn's categories (SISD: traditional CPUs; SIMD: GPUs/Cray-1; MISD: fault-tolerant systems like Space Shuttle; MIMD: multi-core processors/supercomputers).[1][2][3]\n- **Analog computers**: Operate on continuous physical quantities (e.g., voltages, fluid flows) to model differential equations, without discrete states. Used historically for simulations like flight dynamics; less common today due to precision limits.[2]\n- **Quantum computers**: Employ qubits in superposition/entanglement for parallel probabilistic computation, enabling tasks like factoring large numbers (e.g., via Shor's algorithm). They challenge classical taxonomies like Flynn's.[2]\n- **Optical computers**: Process data using light (photons) via interference, holography, or photonic chips for high-speed, low-energy operations. Prototypes exist for AI and signal processing.[2]\n- **Neuromorphic computers**: Mimic brain neurons/synapses with spiking neural networks on specialized hardware (e.g., IBM TrueNorth, Intel Loihi). Suited for pattern recognition and edge AI; emerging beyond Flynn's framework.[2]\n- **Biological/DNA computers**: Leverage biomolecules (e.g., DNA strands) for storage/parallel computation via chemical reactions. Experimental for massive parallelism in optimization problems.[2]\n- **Mechanical/electromechanical computers**: Use physical motion (gears, relays, levers) for computation. Historical examples include Babbage's Difference Engine (1820s, mechanical) and Zuse's Z1/Z3 (1930s-1940s, relays).[3] (Note: Relays bridge to early digital.)\n\n### Key Distinctions and Limitations\n| Type | Data Representation | Strengths | Examples/Status |\n|------|----------------------|-----------|-----------------|\n| **Digital** | Discrete bits | Precision, scalability, universality | All modern PCs, servers[1][3] |\n| **Analog** | Continuous signals | Real-time simulation | Tide-predicting machines (1870s), MONIAC (1949)[2] |\n| **Quantum** | Qubits (superposition) | Exponential speedup for specific problems | IBM Quantum, Google Sycamore[2] |\n| **Optical** | Photons | Speed, low heat | Photonic chips (research)[2] |\n| **Neuromorphic** | Spikes (event-based) | Efficiency for AI | Loihi chips[2] |\n| **Biological** | Molecules | Density, parallelism | DNA computing labs[2] |\n| **Mechanical** | Positions/motions | Reliability (no electricity needed) | Analytical Engine (unbuilt), Harvard Mark I[3] |\n\nFlynn's taxonomy applies only to **digital** systems and classifies parallelism, not the computation method itself—e.g., GPUs are SIMD-digital.[1][2][3] Emerging hybrids (e.g., neuromorphic + digital) blur lines but are categorized by dominant method.[2] No universally exhaustive list exists, as research evolves (e.g., potential memristor or spintronic types), but these represent all major documented paradigms.[2]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

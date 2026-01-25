@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "timestamp": "20260125_005208",
+    "total_repos": 10,
+    "processed": 10,
+    "success": 8,
+    "failed": 2,
+    "duration_sec": 139.1,
+    "rate_per_hour": 258.9,
+    "workers": 32
+  },
+  "grade_distribution": {
+    "FAIL": 2,
+    "B": 1,
+    "C": 5,
+    "D": 2
+  },
+  "results": [
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "size_kb": 544919,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 532MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "facebook/react",
+      "url": "https://github.com/facebook/react.git",
+      "language": "JavaScript",
+      "stars": 242481,
+      "size_kb": 899926,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 879MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "vinta/awesome-python",
+      "url": "https://github.com/vinta/awesome-python.git",
+      "language": "Python",
+      "stars": 279711,
+      "size_kb": 4749,
+      "status": "success",
+      "grade": "B",
+      "health_index": 8.08,
+      "error": null,
+      "duration_sec": 10.6,
+      "component_scores": {
+        "cycles": 10.0,
+        "elevation": 5.0,
+        "gradients": 10.0,
+        "coupling": 7.5,
+        "isolation": 7.07
+      },
+      "nodes": 4,
+      "edges": 2
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "size_kb": 20882,
+      "status": "success",
+      "grade": "C",
+      "health_index": 7.62,
+      "error": null,
+      "duration_sec": 11.1,
+      "component_scores": {
+        "cycles": 7.92,
+        "elevation": 4.81,
+        "gradients": 10.0,
+        "coupling": 7.4,
+        "isolation": 8.23
+      },
+      "nodes": 8,
+      "edges": 13
+    },
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "size_kb": 4955,
+      "status": "success",
+      "grade": "C",
+      "health_index": 7.72,
+      "error": null,
+      "duration_sec": 12.1,
+      "component_scores": {
+        "cycles": 7.42,
+        "elevation": 4.97,
+        "gradients": 10.0,
+        "coupling": 7.48,
+        "isolation": 10.0
+      },
+      "nodes": 66,
+      "edges": 165
+    },
+    {
+      "name": "donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer.git",
+      "language": "Python",
+      "stars": 333203,
+      "size_kb": 11243,
+      "status": "success",
+      "grade": "C",
+      "health_index": 7.97,
+      "error": null,
+      "duration_sec": 15.0,
+      "component_scores": {
+        "cycles": 8.95,
+        "elevation": 5.0,
+        "gradients": 10.0,
+        "coupling": 7.5,
+        "isolation": 8.58
+      },
+      "nodes": 232,
+      "edges": 289
+    },
+    {
+      "name": "trekhleb/javascript-algorithms",
+      "url": "https://github.com/trekhleb/javascript-algorithms.git",
+      "language": "JavaScript",
+      "stars": 195417,
+      "size_kb": 14828,
+      "status": "success",
+      "grade": "C",
+      "health_index": 7.24,
+      "error": null,
+      "duration_sec": 20.3,
+      "component_scores": {
+        "cycles": 6.35,
+        "elevation": 4.94,
+        "gradients": 10.0,
+        "coupling": 7.47,
+        "isolation": 8.0
+      },
+      "nodes": 655,
+      "edges": 2501
+    },
+    {
+      "name": "vuejs/vue",
+      "url": "https://github.com/vuejs/vue.git",
+      "language": "TypeScript",
+      "stars": 209885,
+      "size_kb": 32152,
+      "status": "success",
+      "grade": "D",
+      "health_index": 6.68,
+      "error": null,
+      "duration_sec": 26.7,
+      "component_scores": {
+        "cycles": 5.15,
+        "elevation": 4.89,
+        "gradients": 10.0,
+        "coupling": 7.44,
+        "isolation": 5.57
+      },
+      "nodes": 847,
+      "edges": 4625
+    },
+    {
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://github.com/kamranahmedse/developer-roadmap.git",
+      "language": "TypeScript",
+      "stars": 347847,
+      "size_kb": 358864,
+      "status": "success",
+      "grade": "D",
+      "health_index": 6.86,
+      "error": null,
+      "duration_sec": 41.1,
+      "component_scores": {
+        "cycles": 4.26,
+        "elevation": 4.77,
+        "gradients": 10.0,
+        "coupling": 7.38,
+        "isolation": 10.0
+      },
+      "nodes": 825,
+      "edges": 5894
+    },
+    {
+      "name": "TheAlgorithms/Python",
+      "url": "https://github.com/TheAlgorithms/Python.git",
+      "language": "Python",
+      "stars": 217133,
+      "size_kb": 15646,
+      "status": "success",
+      "grade": "C",
+      "health_index": 7.43,
+      "error": null,
+      "duration_sec": 139.0,
+      "component_scores": {
+        "cycles": 7.1,
+        "elevation": 4.96,
+        "gradients": 10.0,
+        "coupling": 7.48,
+        "isolation": 7.95
+      },
+      "nodes": 5227,
+      "edges": 12634
+    }
+  ]
+}

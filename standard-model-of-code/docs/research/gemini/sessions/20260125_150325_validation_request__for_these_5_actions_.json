@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-25 15:03:03",
+  "session_end": "2026-01-25 15:03:25",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769364183.560024,
+      "timestamp_str": "2026-01-25 15:03:03",
+      "role": "user",
+      "content": "VALIDATION REQUEST: For these 5 actions, determine ACTUAL safe completion confidence by checking if the required files/functions exist:\n\n1. HC-001 (Tree-sitter): Does requirements.txt exist? Is tree-sitter currently pinned?\n2. CC-001 (Scope Leakage): Does full_analysis.py have exclusion list loading? Where?\n3. MC-004 (Archive tools): Do repo_archaeologist.py, present_architect.py, future_visionary.py exist?\n4. HC-002 (Skipped tests): How many tests have @pytest.mark.skip?\n5. CC-002 (Reachability): Does topology_reasoning.py have entrypoint detection? What frameworks are supported?\n\nReturn updated confidence scores based on what you find."
+    }
+  ]
+}

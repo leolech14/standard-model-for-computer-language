@@ -1,0 +1,305 @@
+{
+  "$schema": "ui-corpus-manifest-v1",
+  "version": "1.1.0",
+  "date": "2026-01-25",
+  "purpose": "Ground truth registry for UI Overhaul",
+  "validated_by": "analyze.py + Gemini (gemini-3-pro-preview)",
+
+  "builds": {
+    "baseline": {
+      "filename": "builds/baseline.html",
+      "status": "PENDING",
+      "notes": "Awaiting upload from user"
+    }
+  },
+
+  "screenshots": {
+    "dark": {
+      "directory": "screenshots/dark/",
+      "count": 0,
+      "status": "PENDING"
+    },
+    "aquarela": {
+      "directory": "screenshots/aquarela/",
+      "count": 1,
+      "files": [
+        {
+          "filename": "01_full_view.png",
+          "date": "2026-01-25",
+          "tags": ["full-view", "watercolor", "all-regions"],
+          "notes": "Full UI with watercolor background, v4.8.0, 2880 nodes"
+        }
+      ]
+    }
+  },
+
+  "themes": {
+    "dark": {
+      "status": "DEFAULT",
+      "token_file": "schema/viz/tokens/theme.tokens.json (root)",
+      "notes": "Current production theme"
+    },
+    "light": {
+      "status": "IMPLEMENTED",
+      "token_file": "schema/viz/tokens/theme.tokens.json (themes.light)",
+      "notes": "Basic light theme"
+    },
+    "high-contrast": {
+      "status": "IMPLEMENTED",
+      "token_file": "schema/viz/tokens/theme.tokens.json (themes.high-contrast)",
+      "notes": "Accessibility theme"
+    },
+    "aquarela": {
+      "status": "TOKENS_COMPLETE",
+      "token_file": "schema/viz/tokens/theme.tokens.json (themes.aquarela)",
+      "source_mockup": "html-asset.html",
+      "date_added": "2026-01-25",
+      "gap_analysis": "analysis/aquarela_gap_analysis.md",
+      "features": [
+        "Watercolor background simulation",
+        "Glass morphism panels",
+        "OKLCH color space throughout",
+        "Semantic panel tinting (cyan/yellow/peach)",
+        "Roboto Mono typography"
+      ],
+      "implementation_status": {
+        "tokens": "COMPLETE",
+        "css_injection": "PENDING",
+        "theme_switcher": "PENDING",
+        "structural_changes": "PENDING"
+      }
+    }
+  },
+
+  "extracted": {
+    "dom_controls": {
+      "filename": "extracted/dom_controls.json",
+      "status": "COMPLETE",
+      "purpose": "Every control with selector, type, region",
+      "validated": "2026-01-25T06:35:00Z via Agent Beta (source-verified)",
+      "summary": {
+        "total": 33,
+        "wired": 30,
+        "orphaned": 3,
+        "dead_handler": 0
+      }
+    },
+    "bindings": {
+      "filename": "extracted/bindings.json",
+      "status": "COMPLETE",
+      "purpose": "Handler bindings for each control",
+      "validated": "2026-01-25T06:35:00Z via Agent Beta (source-verified)",
+      "summary": {
+        "binding_locations": 6,
+        "state_objects": 8,
+        "orphaned_controls": 3,
+        "dead_handlers": 0,
+        "duplicate_bindings": 5
+      }
+    },
+    "tokens": {
+      "filename": "extracted/tokens.json",
+      "status": "COMPLETE",
+      "purpose": "CSS variables and token files merged",
+      "validated": "2026-01-25 via Agent Beta",
+      "CRITICAL_CORRECTION": "Token system is FULLY WIRED - not architectural fiction",
+      "summary": {
+        "source_files": 6,
+        "total_lines": 2726,
+        "themes": 4,
+        "TokenResolver": "IMPLEMENTED",
+        "CSS_injection": "WORKING",
+        "JS_injection": "WORKING"
+      }
+    },
+    "layout_containers": {
+      "filename": "extracted/layout_containers.json",
+      "status": "COMPLETE",
+      "purpose": "Top-level layout structure",
+      "validated": "2026-01-25 via Agent Alpha"
+    }
+  },
+
+  "analysis": {
+    "gaps_report": {
+      "filename": "analysis/gaps_report.md",
+      "status": "COMPLETE",
+      "purpose": "Missing controls, orphaned handlers",
+      "validated": "2026-01-25 via Agent Alpha"
+    },
+    "bypass_report": {
+      "filename": "analysis/bypass_report.md",
+      "status": "COMPLETE",
+      "purpose": "Pixel sovereignty violations",
+      "validated": "2026-01-25 via Agent Alpha (re-audited)",
+      "summary": {
+        "sovereignty_score": "92%",
+        "bypass_categories": 4,
+        "conflicts_resolved": 4
+      }
+    },
+    "region_map": {
+      "filename": "analysis/region_map.md",
+      "status": "COMPLETE",
+      "purpose": "9-region semantic topology",
+      "validated": "2026-01-25 via Agent Alpha"
+    },
+    "aquarela_gap_analysis": {
+      "filename": "analysis/aquarela_gap_analysis.md",
+      "status": "COMPLETE",
+      "purpose": "Mockup vs template structural/visual gaps",
+      "validated": "2026-01-25 via Agent (Claude Opus 4.5)",
+      "summary": {
+        "layout_gaps": 3,
+        "visual_effect_gaps": 4,
+        "component_gaps": 6,
+        "control_gaps": 2,
+        "typography_gaps": 1
+      }
+    }
+  },
+
+  "documentation": {
+    "building_materials": {
+      "filename": "BUILDING_MATERIALS_REGISTRY.md",
+      "status": "ACTIVE",
+      "purpose": "Complete inventory of UI building blocks"
+    },
+    "legacy": {
+      "ui_control_inventory.json": "Legacy control list (60 controls)",
+      "ui_controls_schema.json": "Target schema (82 controls)",
+      "ui_tokens.json": "Legacy token extraction",
+      "ui_layout_model.json": "9-region layout model",
+      "findings.json": "Critical findings from audit"
+    }
+  },
+
+  "research": {
+    "control_inventory": {
+      "filename": "standard-model-of-code/docs/research/gemini/docs/20260125_050508_ui_gap_fill__build_a_control_inventory_for_collid.md",
+      "date": "2026-01-25",
+      "model": "gemini-3-pro-preview"
+    },
+    "token_audit": {
+      "filename": "standard-model-of-code/docs/research/gemini/docs/20260125_050716_ui_gap_fill__token_sovereignty_audit__find____css.md",
+      "date": "2026-01-25",
+      "model": "gemini-3-pro-preview"
+    }
+  },
+
+  "source_locations": {
+    "modules": "standard-model-of-code/src/core/viz/assets/modules/",
+    "styles": "standard-model-of-code/src/core/viz/assets/styles.css",
+    "template": "standard-model-of-code/src/core/viz/assets/template.html",
+    "app_js": "standard-model-of-code/src/core/viz/assets/app.js",
+    "tokens": "standard-model-of-code/schema/viz/tokens/"
+  },
+
+  "metrics": {
+    "js_modules": 65,
+    "js_total_lines": 21626,
+    "upb_modules": 6,
+    "token_files": 6,
+    "css_lines": 3034,
+    "app_js_lines": 2999,
+    "color_schemes": 33,
+    "controls_identified": 33,
+    "controls_wired": 30,
+    "controls_orphaned": 3,
+    "controls_orphaned_status": "SCREAM_TEST (hidden via CSS, delete after validation)",
+    "controls_analyzer_validated": "2026-01-25 via analyze.py --set viz_core (MATCH)",
+    "controls_dead": 0,
+    "pixel_sovereignty": 0.92,
+    "pixel_sovereignty_target": 0.95,
+    "cfg_ids": 17,
+    "data_attributes": 8
+  },
+
+  "systems": {
+    "color": {
+      "engine": "modules/color-engine.js",
+      "lines": 1398,
+      "telemetry": "modules/color-telemetry.js",
+      "tests": "modules/color-contract-test.js",
+      "model": "OKLCH",
+      "schemes": 33
+    },
+    "property_query": {
+      "engine": "modules/property-query.js",
+      "lines": 390,
+      "init": "modules/property-query-init.js",
+      "priorities": [100, 80, 20, 0],
+      "provider_chain": ["Overrides", "UPB", "Raw", "Defaults"]
+    },
+    "upb": {
+      "directory": "modules/upb/",
+      "files": ["index.js", "endpoints.js", "bindings.js", "scales.js", "blenders.js"],
+      "total_lines": 1319,
+      "purpose": "Universal Property Binder - data to visual mapping"
+    },
+    "state": {
+      "unified": "VIS_STATE",
+      "appearance": "APPEARANCE_STATE",
+      "filters": "VIS_FILTERS",
+      "datamap": "DATAMAP",
+      "graph_mode": "GRAPH_MODE"
+    },
+    "layout": {
+      "engine": "modules/layout.js",
+      "lines": 703,
+      "forces": "modules/layout-forces.js",
+      "helpers": "modules/layout-helpers.js"
+    },
+    "validation": {
+      "circuit_breaker": "modules/circuit-breaker.js",
+      "lines": 625,
+      "color_test": "modules/color-contract-test.js",
+      "ui_validator": "tools/validate_ui.py"
+    }
+  },
+
+  "regions": {
+    "hud.left": { "purpose": "Brand + stats", "controls": ["stat-nodes", "stat-edges", "stat-entropy", "btn-filters"] },
+    "hud.center": { "purpose": "Performance + hardware", "controls": ["fps-display", "gpu-info"] },
+    "hud.right": { "purpose": "Counters + selection", "controls": ["files-count", "density", "selection-count"] },
+    "rail.left.top": { "purpose": "Scope + mapping", "controls": ["cb-scope", "cb-source", "cb-target", "cb-scale", "cb-apply", "cb-reset"] },
+    "rail.left.body": { "purpose": "Node + edge config", "controls": ["cfg-node-size", "cfg-edge-opacity", "physics-charge", "btn-reset"] },
+    "canvas.main": { "purpose": "3D visualization", "controls": ["topo-tooltip", "flow-legend"] },
+    "rail.right.top": { "purpose": "Selection info", "controls": ["hover-panel", "selection-panel", "btn-create-group"] },
+    "rail.right.body": { "purpose": "Color schemes + modes", "controls": ["color-btn[data-preset]", "scheme-chips"] },
+    "dock.bottom": { "purpose": "Mode bar + view toggles", "controls": ["btn-2d", "btn-files", "btn-report", "btn-freeze"] }
+  },
+
+  "phase_progress": {
+    "phase_1_corpus_bootstrap": {
+      "status": "PARTIAL",
+      "items_complete": ["aquarela screenshot", "manifest.json", "BUILDING_MATERIALS_REGISTRY.md"],
+      "items_pending": ["baseline HTML build", "dark screenshots"]
+    },
+    "phase_2_knowledge_gap_fill": {
+      "status": "COMPLETE",
+      "items_complete": ["dom_controls.json", "bindings.json", "bypass_report.md", "tokens.json", "layout_containers.json", "gaps_report.md"],
+      "items_pending": []
+    },
+    "phase_3_region_map": {
+      "status": "COMPLETE",
+      "validated": "2026-01-25 via Agent Alpha"
+    },
+    "phase_4_ui_scoring": {
+      "status": "COMPLETE",
+      "circuit_breaker": "9/9 PASS",
+      "color_engine": "372/372 PASS"
+    },
+    "phase_5_task_registry": {
+      "status": "COMPLETE",
+      "location": "docs/ui/coordination/WORKFLOW_GUIDE.md"
+    },
+    "phase_6_implementation": {
+      "status": "IN_PROGRESS",
+      "wave_a": "COMPLETE - 5 controls fixed",
+      "wave_b": "COMPLETE - token system verified",
+      "wave_c": "COMPLETE - validation passed",
+      "wave_d": "IN_PROGRESS - legacy cleanup (scream test applied 2026-01-25)"
+    }
+  }
+}

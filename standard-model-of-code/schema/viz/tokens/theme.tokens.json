@@ -95,6 +95,118 @@
       }
     },
 
+    "aquarela": {
+      "$description": "Watercolor Digitalism - Light theme with glass effects and soft organic tones",
+      "$design-language": "Watercolor background simulation, glass/blur panels, OKLCH color space",
+      "$source": "html-asset.html mockup (2026-01-25)",
+      "color": {
+        "bg": {
+          "base": { "$value": "oklch(98% 0.01 250)" },
+          "surface": { "$value": "oklch(96% 0.01 250)" },
+          "elevated": { "$value": "oklch(100% 0 0)" },
+          "sunken": { "$value": "oklch(93% 0.02 250)" },
+          "overlay": { "$value": "oklch(100% 0 0 / 0.9)" },
+          "overlay-light": { "$value": "oklch(100% 0 0 / 0.4)" },
+          "overlay-medium": { "$value": "oklch(100% 0 0 / 0.6)" },
+          "shadow-soft": { "$value": "oklch(0% 0 0 / 5%)" },
+          "hover": { "$value": "oklch(0% 0 0 / 0.05)" },
+          "active": { "$value": "oklch(0% 0 0 / 0.1)" },
+          "highlight": { "$value": "oklch(0% 0 0 / 0.15)" },
+          "panel-cyan": { "$value": "oklch(94% 0.03 210 / 40%)" },
+          "panel-yellow": { "$value": "oklch(96% 0.04 95 / 40%)" },
+          "panel-peach": { "$value": "oklch(95% 0.03 50 / 25%)" },
+          "tooltip": { "$value": "oklch(25% 0.01 250 / 95%)" },
+          "scrollbar-track": { "$value": "transparent" },
+          "scrollbar-thumb": { "$value": "oklch(0% 0 0 / 0.1)" },
+          "scrollbar-thumb-hover": { "$value": "oklch(0% 0 0 / 0.2)" }
+        },
+        "glass": {
+          "$description": "Glass morphism effects for panels",
+          "surface": { "$value": "oklch(98% 0.01 250 / 15%)" },
+          "border": { "$value": "oklch(100% 0 0 / 20%)" },
+          "blur": { "$value": "25px" },
+          "saturation": { "$value": "120%" },
+          "shadow": { "$value": "0 8px 32px 0 oklch(0% 0 0 / 5%)" }
+        },
+        "border": {
+          "default": { "$value": "oklch(0% 0 0 / 0.08)" },
+          "subtle": { "$value": "oklch(0% 0 0 / 0.04)" },
+          "faint": { "$value": "oklch(0% 0 0 / 0.03)" },
+          "muted": { "$value": "oklch(0% 0 0 / 0.06)" },
+          "strong": { "$value": "oklch(0% 0 0 / 0.15)" },
+          "focus": { "$value": "oklch(72% 0.12 225)" }
+        },
+        "text": {
+          "primary": { "$value": "oklch(25% 0.01 250)" },
+          "bright": { "$value": "oklch(15% 0 0)" },
+          "high": { "$value": "oklch(20% 0.01 250)" },
+          "secondary": { "$value": "oklch(40% 0.01 250)" },
+          "tertiary": { "$value": "oklch(50% 0.01 250)" },
+          "muted": { "$value": "oklch(55% 0.01 250)" },
+          "disabled": { "$value": "oklch(70% 0.01 250)" },
+          "inverse": { "$value": "oklch(98% 0 0)" }
+        },
+        "accent": {
+          "blue": { "$value": "oklch(72% 0.12 225)" },
+          "coral": { "$value": "oklch(78% 0.11 15)" },
+          "orange": { "$value": "oklch(68% 0.16 48)" },
+          "primary": { "$value": "oklch(72% 0.12 225)" },
+          "primary-bright": { "$value": "oklch(78% 0.14 225)" },
+          "primary-dim": { "$value": "oklch(65% 0.10 225)" },
+          "primary-bg": { "$value": "oklch(72% 0.12 225 / 0.15)" },
+          "primary-glow": { "$value": "oklch(72% 0.12 225 / 20%)" }
+        },
+        "gradient": {
+          "btn-start": { "$value": "oklch(82% 0.08 210)" },
+          "btn-end": { "$value": "oklch(85% 0.12 180)" },
+          "watercolor-1": { "$value": "oklch(88% 0.12 215)" },
+          "watercolor-2": { "$value": "oklch(88% 0.12 160)" },
+          "watercolor-3": { "$value": "oklch(88% 0.12 30)" },
+          "watercolor-4": { "$value": "oklch(92% 0.1 80)" }
+        },
+        "viz": {
+          "tooltip-bg": { "$value": "oklch(25% 0.01 250 / 95%)" },
+          "tooltip-text": { "$value": "oklch(98% 0 0)" },
+          "node-stroke": { "$value": "oklch(78% 0.11 15)" },
+          "node-fill": { "$value": "oklch(100% 0 0)" },
+          "node-glow": { "$value": "oklch(78% 0.11 15 / 60%)" },
+          "edge-stroke": { "$value": "oklch(72% 0.12 225 / 40%)" },
+          "selection": { "$value": "oklch(72% 0.12 225 / 30%)" },
+          "highlight": { "$value": "oklch(68% 0.16 48)" }
+        },
+        "status": {
+          "success": { "$value": "oklch(65% 0.15 145)" },
+          "success-bg": { "$value": "oklch(95% 0.05 145 / 50%)" },
+          "warning": { "$value": "oklch(75% 0.15 85)" },
+          "warning-bg": { "$value": "oklch(96% 0.04 85 / 50%)" },
+          "error": { "$value": "oklch(65% 0.18 25)" },
+          "error-bg": { "$value": "oklch(95% 0.05 25 / 50%)" },
+          "info": { "$value": "oklch(72% 0.12 225)" },
+          "info-bg": { "$value": "oklch(94% 0.03 210 / 50%)" }
+        }
+      },
+      "shadow": {
+        "sm": { "$value": "0 2px 8px oklch(0% 0 0 / 0.05)" },
+        "md": { "$value": "0 4px 16px oklch(0% 0 0 / 0.08)" },
+        "lg": { "$value": "0 8px 32px oklch(0% 0 0 / 0.1)" },
+        "glow-accent": { "$value": "0 4px 12px oklch(72% 0.12 225 / 20%)" }
+      },
+      "typography": {
+        "family": {
+          "mono": { "$value": "'Roboto Mono', monospace" }
+        }
+      },
+      "effects": {
+        "$description": "Watercolor background simulation",
+        "watercolor-bg": {
+          "$value": "radial-gradient(circle at 20% 30%, oklch(88% 0.12 215), transparent 60%), radial-gradient(circle at 80% 40%, oklch(88% 0.12 160), transparent 60%), radial-gradient(circle at 50% 80%, oklch(88% 0.12 30), transparent 60%), radial-gradient(circle at 10% 90%, oklch(92% 0.1 80), transparent 40%)"
+        },
+        "watercolor-filter": { "$value": "contrast(1.1) brightness(1.05)" },
+        "watercolor-blend": { "$value": "multiply" },
+        "noise-opacity": { "$value": "0.03" }
+      }
+    },
+
     "high-contrast": {
       "$description": "High contrast theme for accessibility",
       "color": {

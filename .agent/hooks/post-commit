@@ -1,15 +1,22 @@
 #!/bin/sh
-# Auto-mirror to GCS and Drive after every commit
-echo "--------------------------------------------------------"
-echo "🤖 [Auto-Mirror] Syncing to Cloud..."
-echo "--------------------------------------------------------"
-# Run mirror in background so it doesn't block the user immediately (or foreground if preferred)
-# Using foreground here to ensure it finishes or fails visibly
-/usr/bin/python3 context-management/tools/archive/archive.py mirror || echo "⚠️ Mirror failed (Check setup)"
-echo "--------------------------------------------------------"
+# Post-commit automation chain
+# Runs: Mirror → Facts → Registry Sync
+echo "========================================================"
+echo "🤖 POST-COMMIT AUTOMATION"
+echo "========================================================"
 
-# BARE: Background Auto-Refinement Engine
-# Run TruthValidator to keep repo facts up-to-date
-echo "🧠 [BARE] Validating repository truths..."
-/usr/bin/python3 .agent/tools/truth_validator.py > /dev/null 2>&1 && echo "✓ Truths updated" || echo "⚠️ TruthValidator failed"
-echo "--------------------------------------------------------"
+# 1. Mirror codebase to GCS
+echo "[1/3] Syncing codebase to GCS..."
+/usr/bin/python3 context-management/tools/archive/archive.py mirror || echo "⚠️ Mirror failed (Check setup)"
+
+# 2. BARE: Update repository facts
+echo "[2/3] Loading repository facts..."
+/usr/bin/python3 .agent/tools/fact_loader.py > /dev/null 2>&1 && echo "✓ Facts loaded" || echo "⚠️ FactLoader failed"
+
+# 3. Sync registry to GCS (enables Cloud Function auto-boost)
+echo "[3/3] Syncing registry to GCS..."
+/usr/bin/python3 .agent/tools/cloud/sync_registry.py --inbox-only 2>/dev/null && echo "✓ Registry synced" || echo "⚠️ Registry sync failed (run manually: python .agent/tools/cloud/sync_registry.py)"
+
+echo "========================================================"
+echo "✓ Post-commit complete"
+echo "========================================================"

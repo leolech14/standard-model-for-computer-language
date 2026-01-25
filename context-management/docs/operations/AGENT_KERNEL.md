@@ -14,22 +14,19 @@
 ## Session Start: Boot Sequence
 
 ```bash
-# 1. Run the boot script (from repo root)
-bash context-management/tools/maintenance/boot.sh --json
-
-# 2. Display Decision Deck (see available actions)
-python .agent/tools/deal_cards_ui.py --chill
+# Run concierge (from repo root)
+./concierge
 ```
 
-**Decision Deck:** After boot, you MUST display the deck and select a card.
-This uses the Primacy Effect — first interaction embeds the mental model.
+Shows: status, meters, options, P0 rules. Everything you need to start.
 
-| Card Type | Purpose |
-|-----------|---------|
-| `[1-5]` | Pre-defined actions with preconditions |
-| `[W]` | Wildcard (escape hatch, logged) |
+| Option | Action |
+|--------|--------|
+| `[1]` | Resume active task |
+| `[2]` | Pick from inbox (top 3 shown) |
+| `[3]` | Start fresh task |
+| `[D]` | Deal cards (Decision Deck) |
 
-**Primary doc:** `context-management/docs/agent_school/AGENT_BOOT.md`
 **Deck spec:** `.agent/specs/DECISION_DECK_LAYER.md`
 
 ## Definition of Done
@@ -43,11 +40,9 @@ This uses the Primacy Effect — first interaction embeds the mental model.
 
 | Doc | Purpose |
 |-----|---------|
-| `docs/agent_school/INDEX.md` | Boot checklist + report format |
 | `docs/agent_school/WORKFLOWS.md` | Git, test, review procedures |
-| `docs/agent_school/REPO_FACTS.md` | Commands, paths, environment |
 | `docs/agent_school/DOD.md` | Full Definition of Done |
-| `docs/workflows/TIMESTAMP_WORKFLOW.md` | File history, temporal analysis |
+| `docs/deep/INDEX.md` | Theory, architecture, research docs |
 
 ## Emergency Contacts
 

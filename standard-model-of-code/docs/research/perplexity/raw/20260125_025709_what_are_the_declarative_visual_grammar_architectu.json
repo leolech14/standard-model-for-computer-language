@@ -1,0 +1,105 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T02:57:09.830348",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "What are the declarative visual grammar architectures for binding abstract data properties to visual channels in interactive node-link diagrams? Looking for theoretical basis from Grammar of Graphics (Wilkinson), Vega-Lite architectural patterns, and InfoVis conference papers on visual encoding.",
+    "query_length": 296,
+    "checksum": "sha256:70fcc5bc0bc47eea037bc30f3a64e4078cdf50a92f73cf020f3d2a18e917110a"
+  },
+  "response": {
+    "id": "c6de05b5-4e02-4603-9fb9-243eedef2bca",
+    "model": "sonar-pro",
+    "created": 1769320629,
+    "usage": {
+      "prompt_tokens": 49,
+      "completion_tokens": 729,
+      "total_tokens": 778,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.011,
+        "request_cost": 0.006,
+        "total_cost": 0.017
+      }
+    },
+    "citations": [
+      "https://arxiv.org/html/2310.18902v2",
+      "https://linkurious.com/blog/graph-viz-101-visual-language-node-link-diagrams/",
+      "https://vis.csail.mit.edu/pubs/bluefish.pdf",
+      "https://idl.cs.washington.edu/files/2014-DeclarativeInteraction-UIST.pdf",
+      "https://dl.acm.org/doi/fullHtml/10.1145/3313831.3376297",
+      "https://chinavis.org/2018/echarts.pdf",
+      "https://dash.harvard.edu/server/api/core/bitstreams/fd11182a-65d5-4e20-af7e-8816f477220c/content"
+    ],
+    "search_results": [
+      {
+        "title": "A Declarative Grammar for Network Construction, Transformation ...",
+        "url": "https://arxiv.org/html/2310.18902v2",
+        "date": "2025-02-18",
+        "last_updated": "2025-10-03",
+        "snippet": "This approach allows the creation of a range of visualizations including many types of node-link diagrams, adjacency matrices using diverse cell ...",
+        "source": "web"
+      },
+      {
+        "title": "Graph Viz 101: a visual language of node-link diagrams - Linkurious",
+        "url": "https://linkurious.com/blog/graph-viz-101-visual-language-node-link-diagrams/",
+        "date": "2014-05-23",
+        "last_updated": "2025-09-22",
+        "snippet": "In this blog post we introduce the mapping of data to visual representations in node-link diagrams, which are the most common way to represent graphs.",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Bluefish: Composing Diagrams with Declarative Relations",
+        "url": "https://vis.csail.mit.edu/pubs/bluefish.pdf",
+        "last_updated": "2024-11-14",
+        "snippet": "To render diagrams, Bluefish extends a traditional tree-based scenegraph to a compound graph that captures both hierarchical and adjacent relationships between ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Declarative Interaction Design for Data Visualization",
+        "url": "https://idl.cs.washington.edu/files/2014-DeclarativeInteraction-UIST.pdf",
+        "last_updated": "2026-01-10",
+        "snippet": "Declarative visualization grammars can accelerate devel- opment, facilitate retargeting across platforms, and allow language-level optimizations.",
+        "source": "web"
+      },
+      {
+        "title": "GoTree: A Grammar of Tree Visualizations - ACM Digital Library",
+        "url": "https://dl.acm.org/doi/fullHtml/10.1145/3313831.3376297",
+        "last_updated": "2024-06-24",
+        "snippet": "We present GoTree, a declarative grammar allowing users to instantiate tree visualizations by specifying three aspects: visual elements, layout, ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] ECharts: A Declarative Framework for Rapid Construction of Web ...",
+        "url": "https://chinavis.org/2018/echarts.pdf",
+        "date": "2018-04-24",
+        "last_updated": "2025-09-05",
+        "snippet": "The declarative options allow users to create visual charts in a simple way and focus on the design of the visualization. In addition, rich ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] A Declarative Specification for Machine Learning Architectures",
+        "url": "https://dash.harvard.edu/server/api/core/bitstreams/fd11182a-65d5-4e20-af7e-8816f477220c/content",
+        "last_updated": "2025-05-27",
+        "snippet": "HuggingFace provides a litany of packages built on top of PyTorch that allows for simplified multi-node training, model sharing, tokenization, and other ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**Declarative visual grammar architectures for binding abstract data properties to visual channels in interactive node-link diagrams draw from Wilkinson's Grammar of Graphics, Vega-Lite's layered specifications, and InfoVis-inspired extensions like NetVis and Bluefish.** These architectures use JSON-like declarative languages to map data variables (e.g., node attributes, link metrics) to **visual channels** such as position, size, color, and shape without procedural code.[1][2]\n\n### Theoretical Basis from Grammar of Graphics (Wilkinson)\nWilkinson's framework treats visualizations as algebraic combinations of data transformations, scales, and geometric marks (e.g., points for nodes, paths for links).[1]  \n- Data properties (e.g., node degree, temporal attributes) bind to **visual variables** via scales: quantitative metrics scale to size or opacity, categorical to color hue.[1][2]  \n- For node-link diagrams, this extends to glyphs (node shapes) and edge encodings (e.g., thickness for weight), formalized as primitives in network grammars.[1]\n\n### Vega-Lite Architectural Patterns\nVega-Lite uses a concise JSON grammar with **marks**, **encodings**, and **transforms** for binding data to visuals, enabling interactive node-link diagrams via signals and reactive updates.[1][4]  \n- **Encodings** map fields (e.g., \"node_category\" → color scale) to channels like X/Y position (layouts), size, or stroke; layers stack node/link marks.[1]  \n- Interactivity rebinds signals (e.g., filters → visibility transforms) without code changes, supporting exploration in diagrams.[4]\n\n### InfoVis Conference Papers on Visual Encoding\nInfoVis papers extend these to graph-specific grammars for multivariate node-link diagrams:  \n- **NetVis (arxiv 2023)**: A DSL with primitives for network transforms (e.g., metrics, layouts), glyphs, and encodings (e.g., node size by degree, link color by type); data tables define node/link semantics, bound declaratively to channels like seriations or faceting.[1]  \n  - Supports hybrid techniques (e.g., NodeTrix) via parallel structures for data, layouts, and visuals.[1]  \n- **Bluefish**: Uses compound scenegraphs with **relations** (declarative constraints) to bind data-driven positions and adjacencies in node-link diagrams, relaxing tree hierarchies for shared elements.[3]  \n- **Visual Language Mappings**: Limits to ~5 variables (nodes, labels, links, qualitative/quantitative attrs) mapped to channels: position (layout), size/color (attributes), with layers over topology as \"base map\".[2]  \n\n| Architecture | Key Binding Mechanism | Node-Link Example | Source |\n|--------------|-----------------------|-------------------|--------|\n| **Grammar of Graphics** | Scales + geoms/marks | Degree → node size; type → edge color | [1] |\n| **Vega-Lite** | Encodings + transforms | Attr → position/color; signals for interactivity | [1][4] |\n| **NetVis** | Primitives (glyphs, layouts) | Metrics → glyphs; tables → node/link channels | [1] |\n| **Bluefish** | Relations + scenegraph | Data refs → adjacent positions/shapes | [3] |\n\nThese unify data wrangling, encoding, and interactivity, reducing library needs for agile network exploration.[1] Limitations include less coverage of massive graphs without additional scaling.[2]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

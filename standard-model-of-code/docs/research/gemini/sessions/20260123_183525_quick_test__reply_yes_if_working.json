@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 18:35:24",
+  "session_end": "2026-01-23 18:35:25",
+  "model": "gemini-1.5-pro",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769204124.188191,
+      "timestamp_str": "2026-01-23 18:35:24",
+      "role": "user",
+      "content": "Quick test: Reply YES if working."
+    }
+  ]
+}

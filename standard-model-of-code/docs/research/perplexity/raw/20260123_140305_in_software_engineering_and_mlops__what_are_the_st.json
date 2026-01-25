@@ -1,0 +1,126 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T14:03:05.599150",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "In software engineering and MLOps, what are the standard industry terms for these concepts? 1) A system that continuously processes and distills knowledge from a codebase into addressable units. 2) An automated background process that discovers improvement opportunities. 3) A pipeline that takes raw opportunities and promotes them to actionable tasks with approval gates. Are terms like 'context refinery', 'semantic mapping layer', 'opportunity discovery pipeline' standard, or what are the industry-standard equivalents?",
+    "query_length": 524,
+    "checksum": "sha256:9afc3c24d59dbf79b386710714e2e284625306da229bb8a5e3aabdb72f0ff89f"
+  },
+  "response": {
+    "id": "a733b144-80ba-49c9-8a17-d5323886b768",
+    "model": "sonar-pro",
+    "created": 1769187785,
+    "usage": {
+      "prompt_tokens": 98,
+      "completion_tokens": 393,
+      "total_tokens": 491,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.006,
+        "request_cost": 0.006,
+        "total_cost": 0.012
+      }
+    },
+    "citations": [
+      "https://www.databricks.com/glossary/mlops",
+      "https://www.nvidia.com/en-us/glossary/mlops/",
+      "https://www.dataiku.com/stories/detail/decoding-mlops/",
+      "https://ml-ops.org/content/mlops-principles",
+      "https://satoricyber.com/dataops/mlops-a-comprehensive-guide-on-best-practices/",
+      "https://www.hopsworks.ai/mlops-dictionary",
+      "https://www.tredence.com/blog/mlops-a-set-of-essential-practices-for-scaling-ml-powered-applications",
+      "https://nix-united.com/blog/guide-to-adopting-mlops-best-practices-and-benefits/",
+      "https://domino.ai/blog/7-roles-in-mlops"
+    ],
+    "search_results": [
+      {
+        "title": "MLOps Definition and Benefits | Databricks",
+        "url": "https://www.databricks.com/glossary/mlops",
+        "date": "2026-01-14",
+        "last_updated": "2026-01-23",
+        "snippet": "MLOps stands for Machine Learning Operations. MLOps is a core function of Machine Learning engineering, focused on streamlining the process of taking machine ...",
+        "source": "web"
+      },
+      {
+        "title": "What is Machine Learning Operations (MLOps)? | NVIDIA Glossary",
+        "url": "https://www.nvidia.com/en-us/glossary/mlops/",
+        "date": "2025-03-06",
+        "last_updated": "2026-01-22",
+        "snippet": "Machine Learning Operations, or MLOps, refers to the principles, practices, culture, and tools that enable organizations to develop, deploy, and maintain ...",
+        "source": "web"
+      },
+      {
+        "title": "Decoding MLOps: Key Concepts & Practices Explained - Dataiku",
+        "url": "https://www.dataiku.com/stories/detail/decoding-mlops/",
+        "date": "2025-12-16",
+        "last_updated": "2026-01-22",
+        "snippet": "MLOps, short for machine learning operations, is the discipline of applying DevOps practices to machine learning workflows.",
+        "source": "web"
+      },
+      {
+        "title": "MLOps Principles",
+        "url": "https://ml-ops.org/content/mlops-principles",
+        "date": "2025-03-24",
+        "last_updated": "2026-01-22",
+        "snippet": "The complete MLOps process includes three broad phases of “Designing the ML-powered application”, “ML Experimentation and Development”, and “ML Operations”. The ...",
+        "source": "web"
+      },
+      {
+        "title": "MLOps: A Comprehensive Guide on Best Practices - Satori Cyber",
+        "url": "https://satoricyber.com/dataops/mlops-a-comprehensive-guide-on-best-practices/",
+        "date": "2023-04-22",
+        "last_updated": "2026-01-16",
+        "snippet": "MLOps refers to machine learning operations, and it involves a set of best practices or methods that can be used by software companies to handle and implement ...",
+        "source": "web"
+      },
+      {
+        "title": "The big dictionary of MLOps & LLMOps - Hopsworks",
+        "url": "https://www.hopsworks.ai/mlops-dictionary",
+        "date": "2024-01-05",
+        "last_updated": "2026-01-22",
+        "snippet": "MLOps is based on three principles: observability, automated testing, and versioning of ML artifacts. Observability for ML systems refers to the ability to gain ...",
+        "source": "web"
+      },
+      {
+        "title": "11 MLOps Best Practices Explained in 2025 - Tredence",
+        "url": "https://www.tredence.com/blog/mlops-a-set-of-essential-practices-for-scaling-ml-powered-applications",
+        "date": "2022-11-03",
+        "last_updated": "2026-01-23",
+        "snippet": "MLOps, or Machine Learning Ops, or Model Ops, is a set of practices for collaboration and communication between data scientists, data engineers, ...",
+        "source": "web"
+      },
+      {
+        "title": "What is MLOps? Definitions, Benefits, and Best Practices - NIX United",
+        "url": "https://nix-united.com/blog/guide-to-adopting-mlops-best-practices-and-benefits/",
+        "date": "2024-04-30",
+        "snippet": "Machine learning operations (MLOps) is the practice that focuses on delivering consistent and scalable machine learning models.",
+        "source": "web"
+      },
+      {
+        "title": "7 Key roles and responsibilities in enterprise MLOps",
+        "url": "https://domino.ai/blog/7-roles-in-mlops",
+        "date": "2022-07-14",
+        "last_updated": "2026-01-22",
+        "snippet": "7 key roles in an MLOps team · 1. Data scientist · 2. Data analyst · 3. Data engineer · 4. DevOps engineer · 5. ML architect · 6. Software developer.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "No standard industry terms exactly match the described concepts in software engineering or MLOps, as the search results focus on established MLOps components like data pipelines, model training, monitoring, and CI/CD without referencing \"context refinery,\" \"semantic mapping layer,\" or \"opportunity discovery pipeline.\"[1][2][3][4][6]\n\n### Concept 1: System continuously processing and distilling knowledge from a codebase into addressable units\n- Closest equivalents are **feature stores** or **data versioning/feature engineering pipelines**, which extract, version, and make reusable features (knowledge units) from data/codebases continuously.[4][6]\n- These enable addressable, reproducible artifacts like metadata or features for ML workflows, but not explicitly \"distilling knowledge from codebases.\"[4]\n\n### Concept 2: Automated background process discovering improvement opportunities\n- Maps to **model monitoring** or **observability**, where automated systems detect **data drift**, **model degradation**, or performance issues signaling improvements (e.g., retraining triggers).[1][2][4][6]\n- Triggers like monitoring events automate detection without manual intervention.[4]\n\n### Concept 3: Pipeline promoting raw opportunities to actionable tasks with approval gates\n- Aligns with **CI/CD pipelines** for ML, incorporating automated testing, **model review/governance**, and human-in-loop approvals before deployment.[1][3][4][5]\n- Includes stages like model validation, governance gates, and promotion from experimentation to production.[1][4]\n\nThese concepts resemble advanced MLOps extensions (e.g., automated retraining loops[1][4]) but lack precise standardized names; terms like those queried appear non-standard or vendor-specific.[6] For codebase-focused knowledge extraction, general software engineering uses **static analysis tools** or **code intelligence platforms** (e.g., for refactoring opportunities), outside core MLOps glossaries.[4][6]"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

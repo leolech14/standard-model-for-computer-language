@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-23 16:21:46",
+  "session_end": "2026-01-23 16:22:08",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769196106.1599302,
+      "timestamp_str": "2026-01-23 16:21:46",
+      "role": "user",
+      "content": "List the top 5 directories in this repo and their purpose in ONE sentence each. Output as a markdown table."
+    }
+  ]
+}

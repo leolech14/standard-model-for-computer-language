@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:30:10.951820",
+    "source": "gemini",
+    "model": "gemini-3-pro-preview",
+    "query": "Quick connectivity test - respond with a single word: OK",
+    "query_length": 56,
+    "checksum": "sha256:4292de950e47a6e2bfd14adf454e646e27895f7da03cc39ad27dd43eb7ac9937"
+  },
+  "response": {
+    "content": "OK",
+    "mode": "standard"
+  }
+}

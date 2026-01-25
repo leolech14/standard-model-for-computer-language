@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "timestamp": "20260124_141713",
+    "total_repos": 3,
+    "success": 3,
+    "failed": 0,
+    "duration_sec": 47.973044,
+    "workers": 2
+  },
+  "grade_distribution": {
+    "D": 3
+  },
+  "results": [
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "status": "success",
+      "grade": "D",
+      "health_index": 6.67,
+      "error": null,
+      "duration_sec": 5.724711,
+      "component_scores": {
+        "topology": 3.6,
+        "elevation": 5.0,
+        "gradients": 9.19,
+        "alignment": 8.9
+      },
+      "nodes": 66,
+      "edges": 165,
+      "betti": {
+        "b0": 4,
+        "b1": 87
+      }
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "status": "success",
+      "grade": "D",
+      "health_index": 6.96,
+      "error": null,
+      "duration_sec": 5.010206,
+      "component_scores": {
+        "topology": 7.9,
+        "elevation": 4.98,
+        "gradients": 7.67,
+        "alignment": 7.28
+      },
+      "nodes": 8,
+      "edges": 13,
+      "betti": {
+        "b0": 2,
+        "b1": 7
+      }
+    },
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "status": "success",
+      "grade": "D",
+      "health_index": 6.6,
+      "error": null,
+      "duration_sec": 47.889066,
+      "component_scores": {
+        "topology": 2.96,
+        "elevation": 5.0,
+        "gradients": 9.28,
+        "alignment": 9.14
+      },
+      "nodes": 1142,
+      "edges": 8189,
+      "betti": {
+        "b0": 6,
+        "b1": 6925
+      }
+    }
+  ]
+}

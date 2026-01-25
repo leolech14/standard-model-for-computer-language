@@ -1,0 +1,98 @@
+[
+  {
+    "round": 1,
+    "level": "MACRO",
+    "query": "List ALL top-level directories in this repository. For each directory, provide:\n- Name\n- Apparent purpose (1 sentence)\n- Estimated importance (CRITICAL/HIGH/MEDIUM/LOW)\n\nOutput as a simple table. Do NOT read file contents yet.",
+    "set": "theory",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    THEORY - Theoretical framework and documentation\n\nSelected 50 files:\n  - context-management/docs/ACI_DATASET_MANAGEMENT.md\n  - context-management/docs/AI_USER_GUIDE.md\n  - context-management/docs/ASSET_INVENTORY.md\n  - context-management/docs/COLLIDER_ARCHITECTURE.md\n  - context-management/docs/DATA_LAYER_REFACTORING_MAP.md\n  ... and 45 more\n\nBuilding context from local files...\n  Positional strategy: SANDWICH (0 critical files at start+end)\nContext size: ~169,007 tokens (676,030 chars)\n",
+    "timestamp": "2026-01-23T16:18:11.858251"
+  },
+  {
+    "round": 2,
+    "level": "MACRO",
+    "query": "Based on the directory structure, identify the REALMS (major subsystems):\n- What are the 3-5 main realms/hemispheres?\n- What is the boundary between them?\n- Which realm owns which directories?\n\nFocus on ARCHITECTURE, not implementation.",
+    "set": "architecture_review",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    ARCHITECTURE_REVIEW - Full architecture review (pipeline + classifiers + constraints)\n  Composed from: pipeline, classifiers, constraints\n\nSelected 18 files:\n  - standard-model-of-code/schema/constraints/rules.yaml\n  - standard-model-of-code/schema/constraints/taxonomy.yaml\n  - standard-model-of-code/schema/profiles/architecture/classic_layered.yaml\n  - standard-model-of-code/schema/profiles/architecture/clean_onion.yaml\n  - standard-model-of-code/schema/profiles/dimensions/fp_strict.yaml\n  ... and 13 more\n\nBuilding context from local files...\n  Positional strategy: SANDWICH (1 critical files at start+end)\nContext size: ~91,334 tokens (365,336 chars)\n",
+    "timestamp": "2026-01-23T16:18:12.591863"
+  },
+  {
+    "round": 3,
+    "level": "MACRO",
+    "query": "Map the ENTRY POINTS of this codebase:\n- CLI entry points (executables, scripts)\n- API entry points (if any)\n- Configuration entry points (where settings come from)\n- Documentation entry points (where to start reading)\n\nList paths explicitly.",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:13.320358"
+  },
+  {
+    "round": 4,
+    "level": "MESO",
+    "query": "For each REALM identified, list the MODULES within it:\n- Module name and path\n- Primary responsibility\n- Key dependencies (imports from other modules)\n- Public interface (what it exports)\n\nFocus on the standard-model-of-code and context-management directories.",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:14.041874"
+  },
+  {
+    "round": 5,
+    "level": "MESO",
+    "query": "Map the DATA FLOW through this system:\n- What data structures flow between modules?\n- What is the canonical data format (JSON, YAML, etc.)?\n- Where does state accumulate?\n- What are the transformation stages?\n\nDraw the flow as ASCII if helpful.",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:14.788858"
+  },
+  {
+    "round": 6,
+    "level": "MESO",
+    "query": "Identify INTEGRATION POINTS:\n- Where do the realms connect?\n- What shared schemas or protocols exist?\n- What are the contracts between subsystems?\n- Where are the seams (places easy to modify)?\n\nBe specific about file paths.",
+    "set": "architecture_review",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    ARCHITECTURE_REVIEW - Full architecture review (pipeline + classifiers + constraints)\n  Composed from: pipeline, classifiers, constraints\n\nSelected 18 files:\n  - standard-model-of-code/schema/constraints/rules.yaml\n  - standard-model-of-code/schema/constraints/taxonomy.yaml\n  - standard-model-of-code/schema/profiles/architecture/classic_layered.yaml\n  - standard-model-of-code/schema/profiles/architecture/clean_onion.yaml\n  - standard-model-of-code/schema/profiles/dimensions/fp_strict.yaml\n  ... and 13 more\n\nBuilding context from local files...\n  Positional strategy: SANDWICH (1 critical files at start+end)\nContext size: ~91,334 tokens (365,336 chars)\n",
+    "timestamp": "2026-01-23T16:18:15.529351"
+  },
+  {
+    "round": 7,
+    "level": "MICRO",
+    "query": "For the CORE modules (most important 10 files), provide:\n- File path\n- Line count (estimate)\n- Main class/function names\n- Key algorithms or patterns used\n- Technical debt indicators\n\nPrioritize files that would break the system if removed.",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:16.285610"
+  },
+  {
+    "round": 8,
+    "level": "MICRO",
+    "query": "Map the CONFIGURATION landscape:\n- All YAML/JSON config files\n- What each config controls\n- Default values and overrides\n- Environment variables used\n- Secrets management approach\n\nList actual file paths.",
+    "set": "brain",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    BRAIN - [LARGE] Full context-management directory\n\nSelected 50 files:\n  - context-management/config/aci_config.yaml\n  - context-management/config/analysis_sets.yaml\n  - context-management/config/documentation_map.yaml\n  - context-management/config/prompts.yaml\n  - context-management/config/semantic_models.yaml\n  ... and 45 more\n\nBuilding context from local files...\nContext size: ~177,730 tokens (710,921 chars)\n",
+    "timestamp": "2026-01-23T16:18:16.990942"
+  },
+  {
+    "round": 9,
+    "level": "MICRO",
+    "query": "Identify PATTERNS used consistently across the codebase:\n- Naming conventions (files, functions, variables)\n- Error handling patterns\n- Logging patterns\n- Testing patterns\n- Documentation patterns\n\nGive examples from actual code.",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:17.718831"
+  },
+  {
+    "round": 10,
+    "level": "NANO",
+    "query": "Find INVARIANTS - things that must always be true:\n- Type constraints that are enforced\n- Validation rules in the code\n- Assertions and preconditions\n- Schema constraints\n- Business rules encoded in code\n\nQuote actual code where possible.",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:18.462482"
+  },
+  {
+    "round": 11,
+    "level": "NANO",
+    "query": "Identify EDGE CASES and DEFENSIVE CODE:\n- Error handling blocks\n- Fallback behaviors\n- Timeout handling\n- Null/empty checks\n- Boundary conditions\n\nWhat could go wrong and how does the code handle it?",
+    "set": "pipeline",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    PIPELINE - Main analysis pipeline (driver, graph builder, extractors)\n\nSelected 5 files:\n  - standard-model-of-code/src/core/edge_extractor.py\n  - standard-model-of-code/src/core/full_analysis.py\n  - standard-model-of-code/src/core/graph_analyzer.py\n  - standard-model-of-code/src/core/smart_extractor.py\n  - standard-model-of-code/src/core/unified_analysis.py\n\nBuilding context from local files...\n  Positional strategy: FRONT-LOAD (1 critical files at start)\nContext size: ~55,539 tokens (222,156 chars)\n",
+    "timestamp": "2026-01-23T16:18:19.203811"
+  },
+  {
+    "round": 12,
+    "level": "NANO",
+    "query": "SYNTHESIS: Based on all analysis, provide:\n\n1. ONE-SENTENCE summary of what this codebase does\n2. THREE key architectural decisions that define it\n3. FIVE most important files (with paths)\n4. TOP risk: What's most likely to break?\n5. TOP opportunity: What's the biggest improvement available?\n\nThis is the FINAL summary - make it count.",
+    "set": "architecture_review",
+    "response": "ERROR: Project Root: /Users/lech/PROJECTS_all/PROJECT_elements\nAnalyzing:    /Users/lech/PROJECTS_all/PROJECT_elements\nModel:        gemini-3-pro-preview\nMode:         STANDARD\nUsing Set:    ARCHITECTURE_REVIEW - Full architecture review (pipeline + classifiers + constraints)\n  Composed from: pipeline, classifiers, constraints\n\nSelected 18 files:\n  - standard-model-of-code/schema/constraints/rules.yaml\n  - standard-model-of-code/schema/constraints/taxonomy.yaml\n  - standard-model-of-code/schema/profiles/architecture/classic_layered.yaml\n  - standard-model-of-code/schema/profiles/architecture/clean_onion.yaml\n  - standard-model-of-code/schema/profiles/dimensions/fp_strict.yaml\n  ... and 13 more\n\nBuilding context from local files...\n  Positional strategy: SANDWICH (1 critical files at start+end)\nContext size: ~91,334 tokens (365,336 chars)\n",
+    "timestamp": "2026-01-23T16:18:19.994359"
+  }
+]

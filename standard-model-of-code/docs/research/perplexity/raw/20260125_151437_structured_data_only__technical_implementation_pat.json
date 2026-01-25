@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:14:37.697654",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "STRUCTURED DATA ONLY. Technical implementation patterns for AI agent context engineering.\n\nI need specific code patterns and configurations, not concepts.\n\n1. CONTEXT INJECTION PATTERNS:\n| Pattern Name | When to Use | Token Cost | Implementation Pseudocode |\n\n2. POSITION OPTIMIZATION (for lost-in-the-middle):\n| Info Type | Optimal Position | Attention Score | Reason |\n\n3. CHUNKING STRATEGIES:\n| Strategy | Chunk Size | Overlap | Best For | Retrieval Accuracy |\n\n4. PROMPT STRUCTURE TEMPLATE:\n| Section | Order | Token Budget % | Content Type |\n\n5. CACHE INVALIDATION RULES:\n| Trigger | Action | Staleness Threshold |\n\n6. RETRIEVAL VS STATIC DECISION MATRIX:\n| Content Type | Static? | Retrieval? | Hybrid? | Rationale |\n\nGive me the data tables. No explanatory prose.",
+    "query_length": 770,
+    "checksum": "sha256:75c1878d06ecb6c08c0fe51de4d2fe1080529195283ff2a9cf58d0cf8b756941"
+  },
+  "response": {
+    "id": "0b3bff9e-1839-42d6-82f9-5516cceded88",
+    "model": "sonar-pro",
+    "created": 1769364877,
+    "usage": {
+      "prompt_tokens": 177,
+      "completion_tokens": 952,
+      "total_tokens": 1129,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.014,
+        "request_cost": 0.006,
+        "total_cost": 0.021
+      }
+    },
+    "citations": [
+      "https://www.vellum.ai/blog/multi-agent-systems-building-with-context-engineering",
+      "https://yeyu.substack.com/p/context-engineering-for-ai-agents",
+      "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus",
+      "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "http://rlancemartin.github.io/2025/06/23/context_engineering/",
+      "https://weaviate.io/blog/context-engineering",
+      "https://galileo.ai/blog/context-engineering-for-agents",
+      "https://docs.langchain.com/oss/python/langchain/context-engineering",
+      "https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system"
+    ],
+    "search_results": [
+      {
+        "title": "Best practices for building AI multi agent system",
+        "url": "https://www.vellum.ai/blog/multi-agent-systems-building-with-context-engineering",
+        "date": "2025-12-03",
+        "last_updated": "2026-01-25",
+        "snippet": "Understand the basics of AI multi agent systems, their benefits, and what best practices and approaches to consider before you start building one.",
+        "source": "web"
+      },
+      {
+        "title": "Context Engineering for AI Agents: A Guide for Skills-Based ...",
+        "url": "https://yeyu.substack.com/p/context-engineering-for-ai-agents",
+        "date": "2026-01-03",
+        "last_updated": "2026-01-03",
+        "snippet": "But implementing context engineering manually requires deep understanding of attention mechanisms, token economics, and architectural patterns.",
+        "source": "web"
+      },
+      {
+        "title": "Context Engineering for AI Agents: Lessons from Building ...",
+        "url": "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus",
+        "date": "2025-07-18",
+        "last_updated": "2026-01-24",
+        "snippet": "Context Engineering for AI Agents: Lessons from Building Manus · Keep your prompt prefix stable. · Make your context append-only. · Mark cache ...",
+        "source": "web"
+      },
+      {
+        "title": "Effective context engineering for AI agents",
+        "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+        "date": "2025-09-29",
+        "last_updated": "2026-01-25",
+        "snippet": "After a few years of prompt engineering being the focus of attention in applied AI, a new term has come to prominence: context engineering.",
+        "source": "web"
+      },
+      {
+        "title": "Context Engineering for Agents - Patterns for managing agent context",
+        "url": "http://rlancemartin.github.io/2025/06/23/context_engineering/",
+        "date": "2025-06-23",
+        "last_updated": "2026-01-25",
+        "snippet": "Context engineering is the art and science of filling the context window with just the right information at each step of an agent's trajectory.",
+        "source": "web"
+      },
+      {
+        "title": "Context Engineering for AI Agents | Weaviate",
+        "url": "https://weaviate.io/blog/context-engineering",
+        "date": "2025-12-09",
+        "last_updated": "2026-01-25",
+        "snippet": "Context engineering is the act of selecting, organizing, and managing the information fed into a large language model during inference to ...",
+        "source": "web"
+      },
+      {
+        "title": "Deep Dive into Context Engineering for Agents",
+        "url": "https://galileo.ai/blog/context-engineering-for-agents",
+        "date": "2025-09-24",
+        "last_updated": "2026-01-25",
+        "snippet": "RAG typically handles knowledge retrieval while memory systems manage agent state and learned patterns. Retrieval bridges memory to context, and ...",
+        "source": "web"
+      },
+      {
+        "title": "Context engineering in agents - LangChain",
+        "url": "https://docs.langchain.com/oss/python/langchain/context-engineering",
+        "date": "2026-01-23",
+        "last_updated": "2026-01-25",
+        "snippet": "Context engineering is providing the right information and tools in the right format so the LLM can accomplish a task. This is the number one job of AI ...",
+        "source": "web"
+      },
+      {
+        "title": "Choose a design pattern for your agentic AI system",
+        "url": "https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system",
+        "date": "2025-10-08",
+        "last_updated": "2026-01-25",
+        "snippet": "Context engineering includes strategies such as isolating context for a specific agent, persisting information across multiple steps, or ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "## 1. CONTEXT INJECTION PATTERNS\n\n| Pattern Name | When to Use | Token Cost | Implementation Pseudocode |\n|--------------|-------------|------------|---------------------------|\n| Writing Context | Save info outside window for later reference (e.g., memory objects, files)[1][5] | Low (external storage) | `if context_length > threshold: save_to_memory(obj); return memory_id`[1] |\n| Selecting Context | Retrieve only needed data via RAG/similarity search[1][5] | Medium (retrieval overhead) | `relevant_docs = rag_search(query, top_k=5); inject_into_prompt(relevant_docs)`[1] |\n| Compressing Context | Summarize/trim past messages to avoid bloat[1][5] | Low (post-compression) | `summary = llm.summarize(history[-n:]); context = summary + current_input`[1] |\n| Isolating Context | Scoped window per agent/sub-agent[1][4][5] | Variable (per scope) | `agent_context = filter_context(global_state, agent_role); call_agent(agent_context)`[1][4] |\n\n## 2. POSITION OPTIMIZATION (for lost-in-the-middle)\n\n| Info Type | Optimal Position | Attention Score | Reason |\n|-----------|------------------|-----------------|--------|\n| Instructions | Prefix (first 10%) | High | Stable prefix for role/scope adherence[3] |\n| Critical Facts | Near prompt end (last 20%) | High | Avoids middle dilution; recent attention bias[5] |\n| Tool Outputs | Append-only (end) | Medium-High | Maintains recency; prevents overwrite[3] |\n| Historical Summary | Middle (compressed) | Low-Medium | Isolation reduces distraction if summarized[1][5] |\n\n## 3. CHUNKING STRATEGIES\n\n| Strategy | Chunk Size | Overlap | Best For | Retrieval Accuracy |\n|----------|------------|---------|----------|--------------------|\n| Fixed-size | 512-1024 tokens | 20% | General RAG/short docs | High (simple, consistent)[1] |\n| Semantic | 500-2000 tokens | 10-15% | Long docs/research | Very High (context-aware)[4] |\n| Hierarchical | Variable (summary + chunks) | N/A | Multi-agent/long-horizon | High (sub-agent distillation)[4] |\n| Append-only | Incremental (no fixed) | 0% | Agent memory streams | Medium (needs compression)[3] |\n\n## 4. PROMPT STRUCTURE TEMPLATE\n\n| Section | Order | Token Budget % | Content Type |\n|---------|-------|----------------|--------------|\n| Role/Instructions | 1 | 10-15% | Stable prefix text[3] |\n| Shared Assumptions | 2 | 5-10% | Task framing, filters[1] |\n| Retrieved Context | 3 | 30-50% | RAG results, summaries[1][4] |\n| Agent State/Memory | 4 | 10-20% | Condensed history[3][5] |\n| Current Query/Tools | 5 (end) | 20-30% | Input + dynamic tools[1][3] |\n\n## 5. CACHE INVALIDATION RULES\n\n| Trigger | Action | Staleness Threshold |\n|---------|--------|---------------------|\n| New agent decision | Update shared memory | Immediate[1] |\n| Tool output change | Recompress context | >5min or token delta >20%[1][3] |\n| Task phase shift | Isolate new window | Phase boundary[4] |\n| Contradiction detected | Flush conflicting chunks | Hallucination score >0.5[7] |\n\n## 6. RETRIEVAL VS STATIC DECISION MATRIX\n\n| Content Type | Static? | Retrieval? | Hybrid? | Rationale |\n|--------------|---------|------------|---------|-----------|\n| Instructions/Role | Yes | No | No | Stable prefix, no change[3] |\n| Research Data | No | Yes | Yes (progressive) | Dynamic, just-in-time loading[4] |\n| Agent History | No | No | Yes (summarized) | Append-only + compression[3][5] |\n| Tools/Schemas | Hybrid | On-demand | Yes | Context-aware masking[3] |\n| Task State | No | No | Yes (external memory) | Shared state for multi-agent[1][7] |"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

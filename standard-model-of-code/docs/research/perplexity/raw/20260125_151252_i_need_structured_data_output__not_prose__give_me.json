@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:12:52.658964",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "I need STRUCTURED DATA output, not prose. Give me optimization opportunities for AI agent onboarding systems.\n\nContext: We have an AI agent onboarding system that currently requires reading 10+ documentation files. We want to redesign it based on lost-in-the-middle research and cognitive load theory.\n\nProvide your response as STRUCTURED DATA in these formats:\n\n1. OPTIMIZATION MATRIX (table format):\n| Optimization | Impact (1-10) | Effort (1-10) | Priority Score | Evidence Source |\n\n2. KILL LIST (files to delete):\n| File Pattern | Reason | Risk Level |\n\n3. CREATE LIST (new artifacts needed):\n| Artifact | Purpose | Token Budget | Position in Context |\n\n4. METRICS TO TRACK:\n| Metric | Current Baseline | Target | Measurement Method |\n\n5. ANTI-PATTERNS TO AVOID:\n| Anti-Pattern | Why It Fails | Alternative |\n\n6. CONTEXT WINDOW BUDGET ALLOCATION:\n| Section | % of Context | Token Range | Justification |\n\nBe specific. No fluff. Tables only.",
+    "query_length": 945,
+    "checksum": "sha256:9c9ccdf9ff3b111ac62b5fb67fa61bbc49f7052871c4f692ea5a91a85b7a82e0"
+  },
+  "response": {
+    "id": "14c5328a-161c-42d7-8191-d2f67ca5118f",
+    "model": "sonar-pro",
+    "created": 1769364772,
+    "usage": {
+      "prompt_tokens": 218,
+      "completion_tokens": 1090,
+      "total_tokens": 1308,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.016,
+        "request_cost": 0.006,
+        "total_cost": 0.023
+      }
+    },
+    "citations": [
+      "https://sparkco.ai/blog/optimize-ai-agent-onboarding-flows-key-2025-trends",
+      "https://devblogs.microsoft.com/ise/agent-onboarding-process-for-agentic-systems/",
+      "https://standardbeagle.com/ai-agent-onboarding/",
+      "https://support.talkdesk.com/hc/en-us/articles/39096730105115-AI-Agent-Platform-Best-Practices",
+      "https://www.moxo.com/blog/ai-onboarding-best-practices",
+      "https://blogs.nvidia.com/blog/onboarding-teams-ai-agents-productivity-revenue-businesses/",
+      "https://www.moveworks.com/us/en/resources/blog/what-are-modern-employee-onboarding-best-practices",
+      "https://www.jitterbit.com/blog/5-best-practices-to-operationalize-agentic-ai/",
+      "https://onereach.ai/blog/best-practices-for-ai-agent-implementations/",
+      "https://www.uipath.com/blog/ai/agent-builder-best-practices"
+    ],
+    "search_results": [
+      {
+        "title": "Optimize AI Agent Onboarding Flows: Key 2025 Trends - Sparkco",
+        "url": "https://sparkco.ai/blog/optimize-ai-agent-onboarding-flows-key-2025-trends",
+        "date": "2025-09-22",
+        "last_updated": "2025-09-27",
+        "snippet": "Start by setting measurable goals, such as reducing onboarding time or increasing customer satisfaction. KPIs should align with these objectives ...",
+        "source": "web"
+      },
+      {
+        "title": "Agent Onboarding Process for Agentic Systems: Maintain accuracy ...",
+        "url": "https://devblogs.microsoft.com/ise/agent-onboarding-process-for-agentic-systems/",
+        "date": "2025-12-10",
+        "last_updated": "2026-01-24",
+        "snippet": "By combining semantic cache filtering, structured onboarding, rigorous evaluation, and responsible AI practices, organizations can confidently ...",
+        "source": "web"
+      },
+      {
+        "title": "AI Agent Onboarding: UX Strategies to Improve Adoption in SaaS ...",
+        "url": "https://standardbeagle.com/ai-agent-onboarding/",
+        "date": "2025-06-03",
+        "last_updated": "2026-01-24",
+        "snippet": "Setting role boundaries · Defining access permissions · Training on system architecture · Ensuring secure communication · Monitoring behavior over time.",
+        "source": "web"
+      },
+      {
+        "title": "AI Agent Platform: Best Practices – Knowledge Base",
+        "url": "https://support.talkdesk.com/hc/en-us/articles/39096730105115-AI-Agent-Platform-Best-Practices",
+        "date": "2021-04-18",
+        "last_updated": "2025-10-12",
+        "snippet": "This document outlines best practices for building and optimizing AI Agent Orchestration on the AI Agent Platform. General Best Practices.",
+        "source": "web"
+      },
+      {
+        "title": "AI onboarding best practices: Essential checklist for businesses ...",
+        "url": "https://www.moxo.com/blog/ai-onboarding-best-practices",
+        "date": "2026-01-20",
+        "last_updated": "2026-01-20",
+        "snippet": "9 essential AI onboarding best practices · 1. Define clear objectives before buying technology · 2. Secure executive buy-in · 3. Ensure data ...",
+        "source": "web"
+      },
+      {
+        "title": "AI On: How Onboarding Teams of AI Agents Drives Productivity and ...",
+        "url": "https://blogs.nvidia.com/blog/onboarding-teams-ai-agents-productivity-revenue-businesses/",
+        "date": "2025-09-19",
+        "last_updated": "2025-09-19",
+        "snippet": "1. Choose the Right AI Agent for the Task · 2. Upskill AI Agents by Connecting Them to Data · 3. Onboard AI Agents Into Lines of Business · 4.",
+        "source": "web"
+      },
+      {
+        "title": "A Guide to Employee Onboarding Best Practices - Moveworks",
+        "url": "https://www.moveworks.com/us/en/resources/blog/what-are-modern-employee-onboarding-best-practices",
+        "date": "2025-09-17",
+        "last_updated": "2026-01-25",
+        "snippet": "AI fix: Use centralized dashboards or tracking systems that give all stakeholders real-time visibility. Set up AI-powered alerts, reminders, and ...",
+        "source": "web"
+      },
+      {
+        "title": "5 Best Practices to Operationalize Agentic AI - Jitterbit",
+        "url": "https://www.jitterbit.com/blog/5-best-practices-to-operationalize-agentic-ai/",
+        "date": "2025-10-09",
+        "last_updated": "2026-01-23",
+        "snippet": "1. Start with the right use case: small, high-impact, business critical · 2. Combine AI agents and assistants – know the roles and leverage their ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Practices for AI Agent Implementations: Enterprise Guide 2026",
+        "url": "https://onereach.ai/blog/best-practices-for-ai-agent-implementations/",
+        "date": "2025-10-31",
+        "last_updated": "2026-01-25",
+        "snippet": "Adopt a structured Agent Lifecycle Management approach — design, train, test, deploy, monitor, and optimize AI agents continuously. This ensures ...",
+        "source": "web"
+      },
+      {
+        "title": "10 best practices for building reliable AI agents in 2025 - UiPath",
+        "url": "https://www.uipath.com/blog/ai/agent-builder-best-practices",
+        "date": "2025-10-07",
+        "last_updated": "2026-01-25",
+        "snippet": "Learn the best practices for designing, testing, and scaling reliable, governed agents that actually work in enterprise environments.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "### OPTIMIZATION MATRIX\n| Optimization | Impact (1-10) | Effort (1-10) | Priority Score | Evidence Source |\n|--------------|---------------|---------------|----------------|-----------------|\n| Consolidate 10+ docs into structured summaries with semantic cache filtering | 9 | 4 | High (Impact/Effort=2.25) | [2] |\n| Split complex onboarding into subtasks/skills with clear instructions | 8 | 3 | High (2.67) | [4] |\n| Implement AI-driven personalization and NLP for adaptive flows | 9 | 5 | High (1.8) | [1] |\n| Add semantic cache + LLM orchestrator for relevant info retrieval | 10 | 6 | Medium (1.67) | [2] |\n| Use microservices for scalable architecture and integration | 7 | 7 | Medium (1) | [1] |\n| Incorporate reinforcement learning simulations for agent training | 8 | 8 | Low (1) | [3] |\n| Define KPIs and real-time analytics dashboards | 7 | 2 | High (3.5) | [1] |\n| Enforce unique agent capabilities and rigorous evaluation | 9 | 4 | High (2.25) | [2] |\n\n### KILL LIST\n| File Pattern | Reason | Risk Level |\n|--------------|--------|------------|\n| Redundant/overlapping docs (>80% similarity) | Increases cognitive load, lost-in-the-middle effect | High |\n| Unstructured long-form files (>5k tokens) | Buries key info, violates cognitive load theory | High |\n| Outdated/legacy files (pre-2025) | Irrelevant data causes hallucinations | Medium |\n| Non-essential examples without context | Bloats context window without value | Low |\n| Conflicting instruction files | Leads to ambiguous agent behavior | High |\n\n### CREATE LIST\n| Artifact | Purpose | Token Budget | Position in Context |\n|----------|---------|--------------|---------------------|\n| Semantic Cache Index | Filter relevant docs via vector embeddings | 5k | Top (pre-retrieval) |\n| Structured Subtask Skills | Break onboarding into modular, low-load steps | 10k | Middle (core flow) |\n| LLM Orchestrator Prompt | Analyze intent, invoke subtasks dynamically | 3k | Top (after cache) |\n| Personalized Summary Digest | Hyper-personalized key info from 10+ docs | 8k | Middle (post-cache) |\n| Golden Dataset Benchmarks | Evaluate agent accuracy on onboarding scenarios | 4k | Bottom (validation) |\n| Analytics Dashboard Config | Track KPIs in real-time | 2k | Bottom (monitoring) |\n\n### METRICS TO TRACK\n| Metric | Current Baseline | Target | Measurement Method |\n|--------|-------------------|--------|--------------------|\n| Onboarding Completion Time | 30 min (avg from 10+ docs) | <12 min (60% reduction) | Timestamp logs[1] |\n| Agent Recall @5 (correct doc/agent) | N/A (no filtering) | >98% | Golden dataset eval[2] |\n| Cognitive Load Score (task steps) | 10+ steps | <5 subtasks | User simulation tests[4] |\n| Drop-off Rate | High (unquantified) | <10% (40% reduction) | Flow analytics[1] |\n| Context Token Efficiency | 100% (full docs) | <50% utilization | Token counter post-cache[2] |\n| Customer Satisfaction (CSAT) | N/A | >90% | Post-onboarding survey[1] |\n\n### ANTI-PATTERNS TO AVOID\n| Anti-Pattern | Why It Fails | Alternative |\n|--------------|--------------|-------------|\n| Dumping all 10+ docs raw | Lost-in-the-middle; high cognitive load | Semantic cache filtering[2] |\n| Overcomplicated single flow | Overwhelms agent/user; poor scalability | Split into subtasks/skills[4] |\n| No uniqueness checks | Ambiguous agent selection; 95% invoke fail | Rigorous eval + unique descriptors[2] |\n| Static instructions | Fails diverse scenarios; no adaptation | AI personalization + NLP[1] |\n| Ignoring feedback loops | Stagnant performance; rising churn | Continuous monitoring/iteration[1][4] |\n\n### CONTEXT WINDOW BUDGET ALLOCATION\n| Section | % of Context | Token Range | Justification |\n|---------|--------------|-------------|--------------|\n| Semantic Cache + Orchestrator | 15% | 0-15k | Fast filtering avoids middle loss[2] |\n| Personalized Core Instructions | 40% | 15k-55k | Reduces load via relevance[1] |\n| Subtask Skills/Modules | 25% | 55k-80k | Modular; invoke only needed[4] |\n| Examples + Benchmarks | 10% | 80k-90k | Targeted; prevents overload[2] |\n| Analytics/Monitoring | 10% | 90k-100k | Real-time; low static load[1] |"
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

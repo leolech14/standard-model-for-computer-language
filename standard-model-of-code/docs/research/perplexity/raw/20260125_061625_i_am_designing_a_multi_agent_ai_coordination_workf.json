@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T06:16:25.898820",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "I am designing a multi-agent AI coordination workflow with:\n\n1. **ChatGPT 5.2 Pro Extended Thinking** (web interface) as the ORCHESTRATOR\n2. **Two Claude Code CLI sessions** (Opus 4.5) as LOCAL AGENTS running in separate terminals\n3. **Context exchange via copy-paste** between terminals and ChatGPT web\n\nQuestions:\n1. Does ChatGPT Pro subscription ($20/month or $200/year) include API access? Or is API separate billing?\n2. What is the optimal schema/format for context exchange between AI agents via copy-paste? (structured JSON? markdown? custom protocol?)\n3. What are best practices for multi-agent coordination where one AI orchestrates others?\n4. How should we handle state synchronization and avoid conflicts?\n5. What validation patterns exist for ensuring agents stay aligned on shared goals?\n\nProvide specific, actionable recommendations for this terminal-to-web-interface coordination pattern.",
+    "query_length": 903,
+    "checksum": "sha256:f2e5da89282ca24eea642ea88e6e9c9ced32960fe65bebff26b38203aa50c2c7"
+  },
+  "response": {
+    "id": "e6fc790f-59b8-400d-99c3-38f595c243c7",
+    "model": "sonar-pro",
+    "created": 1769332585,
+    "usage": {
+      "prompt_tokens": 194,
+      "completion_tokens": 1188,
+      "total_tokens": 1382,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.018,
+        "request_cost": 0.006,
+        "total_cost": 0.024
+      }
+    },
+    "citations": [
+      "https://userjot.com/blog/chatgpt-pricing-2025-plus-pro-team-costs",
+      "https://costgoat.com/pricing/openai-api",
+      "https://www.finout.io/blog/openai-pricing-in-2026",
+      "https://openai.com/index/introducing-chatgpt-go/",
+      "https://openai.com/api/pricing/",
+      "https://openai.com/business/chatgpt-pricing/",
+      "https://chatlyai.app/blog/gpt-5-1-pricing-explained",
+      "https://www.metacto.com/blogs/understanding-chatgpt-costs-usage-setup-integration-and-maintenance"
+    ],
+    "search_results": [
+      {
+        "title": "ChatGPT Pricing 2026: Free vs Plus vs Pro ($200!) Explained",
+        "url": "https://userjot.com/blog/chatgpt-pricing-2025-plus-pro-team-costs",
+        "date": "2025-07-15",
+        "last_updated": "2026-01-24",
+        "snippet": "ChatGPT now costs up to $200/month. Compare all pricing tiers from Free to Pro, including the new o1 pro mode, API costs, ...",
+        "source": "web"
+      },
+      {
+        "title": "OpenAI ChatGPT API Pricing Calculator (Jan 2026) - CostGoat",
+        "url": "https://costgoat.com/pricing/openai-api",
+        "date": "2025-12-17",
+        "last_updated": "2026-01-24",
+        "snippet": "ChatGPT is a consumer web/mobile app with subscription pricing ($20/month for Plus, $200/month for Pro with enhanced reasoning). OpenAI API is a ...",
+        "source": "web"
+      },
+      {
+        "title": "OpenAI Pricing in 2026 for Individuals, Orgs & Developers - Finout",
+        "url": "https://www.finout.io/blog/openai-pricing-in-2026",
+        "date": "2025-12-23",
+        "last_updated": "2026-01-24",
+        "snippet": "ChatGPT Team is priced at $25 per user/month (billed annually) or $30 per user/month (billed monthly). It includes access to GPT-5 with ...",
+        "source": "web"
+      },
+      {
+        "title": "Introducing ChatGPT Go, now available worldwide - OpenAI",
+        "url": "https://openai.com/index/introducing-chatgpt-go/",
+        "date": "2026-01-16",
+        "last_updated": "2026-01-24",
+        "snippet": "ChatGPT Plus at $20 USD/month; ChatGPT Pro at $200 USD/month. *US price displayed. Go pricing is localized in some markets.",
+        "source": "web"
+      },
+      {
+        "title": "API Pricing - OpenAI",
+        "url": "https://openai.com/api/pricing/",
+        "date": "2025-11-01",
+        "last_updated": "2026-01-24",
+        "snippet": "Realtime API ; Text · $4.00 / 1M input tokens. $0.40 / 1M cached input tokens. $16.00 / 1M output tokens · $0.60 / 1M input tokens ; Audio · $32.00 / 1M input tokens.",
+        "source": "web"
+      },
+      {
+        "title": "ChatGPT Pricing - OpenAI",
+        "url": "https://openai.com/business/chatgpt-pricing/",
+        "date": "2015-01-01",
+        "last_updated": "2026-01-22",
+        "snippet": "Paid plans (Plus, Pro, Business, and Enterprise) are priced per user per month. We offer monthly plans for Plus, Pro, and Business and annual plans for ...",
+        "source": "web"
+      },
+      {
+        "title": "GPT-5.1 Pricing Explained: How Much Does It Cost? - AI Chat",
+        "url": "https://chatlyai.app/blog/gpt-5-1-pricing-explained",
+        "date": "2026-01-05",
+        "last_updated": "2026-01-25",
+        "snippet": "ChatGPT Pro targets researchers, developers, and power users at $200 per month. This premium tier removes message rate limits entirely, ...",
+        "source": "web"
+      },
+      {
+        "title": "Understanding ChatGPT Costs Usage, Setup, Integration ... - MetaCTO",
+        "url": "https://www.metacto.com/blogs/understanding-chatgpt-costs-usage-setup-integration-and-maintenance",
+        "date": "2025-07-01",
+        "last_updated": "2026-01-24",
+        "snippet": "However, reports suggest the cost is around $60 per user per month. This plan has a minimum requirement of 150 users and necessitates a 12-month contract. It ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "## API Access and Subscription Costs\n\n**ChatGPT Pro subscription ($200/month) does not include API access—these are separate billing systems.**[1] The ChatGPT web interface subscription and the OpenAI API operate independently with different pricing models. If you use ChatGPT Pro for the orchestrator role via the web interface, you'll pay $200/month for that access. Any API calls made programmatically incur separate pay-as-you-go charges based on tokens consumed.[1]\n\nFor your Claude CLI sessions, you'll need a separate Anthropic subscription or API key, which is not covered by ChatGPT pricing.\n\n## Context Exchange Schema\n\nFor terminal-to-web-interface coordination, **structured JSON is the optimal format** because it enables:\n\n- **Machine parsing**: Both AI systems can reliably extract and validate data\n- **Version tracking**: Include schema version numbers for backward compatibility\n- **Bidirectional clarity**: Explicit input/output delineation prevents misinterpretation\n\nA recommended schema structure:\n\n```json\n{\n  \"message_id\": \"uuid-or-timestamp\",\n  \"sender\": \"orchestrator|agent_1|agent_2\",\n  \"timestamp\": \"ISO-8601\",\n  \"message_type\": \"task|status|result|error|sync_request\",\n  \"payload\": {\n    \"task_id\": \"unique-identifier\",\n    \"instruction\": \"clear directive\",\n    \"context\": {},\n    \"constraints\": [],\n    \"expected_output_format\": {}\n  },\n  \"metadata\": {\n    \"retry_count\": 0,\n    \"timeout_seconds\": 300,\n    \"dependencies\": [\"task_id_x\", \"task_id_y\"]\n  }\n}\n```\n\nAvoid unstructured markdown or custom protocols—they degrade under scaling and make error recovery difficult.\n\n## Multi-Agent Coordination Best Practices\n\nImplement a **central task queue and explicit handoff protocol**:\n\n1. **Orchestrator responsibilities**:\n   - Decompose high-level goals into discrete, sequenceable tasks\n   - Assign tasks with clear success criteria and timeout windows\n   - Validate agent outputs before passing to downstream agents\n   - Make go/no-go decisions on task results\n\n2. **Agent responsibilities**:\n   - Accept only well-formed JSON task specifications\n   - Report intermediate progress at fixed intervals\n   - Surface uncertainty or failure conditions explicitly (don't mask them)\n   - Return results in the agreed schema format\n\n3. **Communication pattern**:\n   - Use **one-way requests followed by polling** rather than bidirectional messaging (more stable for copy-paste workflows)\n   - Orchestrator posts task → agents work → agents report completion → orchestrator validates and progresses\n\n## State Synchronization and Conflict Prevention\n\nAvoid conflicts with **explicit ownership and versioning**:\n\n- **Task-level locking**: Each task has a single owner (one agent). No shared write access to the same logical resource.\n- **Immutable checkpoints**: After each agent completes a subtask, save the result with a timestamp and checksum. Subsequent agents read from the checkpoint, not live state.\n- **Conflict detection**: Include a `state_version` field. If agents detect version mismatches, halt and escalate to orchestrator rather than attempting recovery.\n- **Copy-paste overhead mitigation**: Since manual transfers are involved, add **checksums (SHA-256 hashes) of payloads** so agents can detect corruption from transcription errors.\n\nExample state checkpoint:\n\n```json\n{\n  \"checkpoint_id\": \"ckpt_20260125_001\",\n  \"state_version\": 3,\n  \"completed_tasks\": [\"task_1\", \"task_2\"],\n  \"state_hash\": \"a3f2e8...\",\n  \"timestamp\": \"2026-01-25T09:16:00Z\",\n  \"locked_resources\": [\"resource_x\"],\n  \"next_agent\": \"agent_2\"\n}\n```\n\n## Validation and Goal Alignment Patterns\n\nEnsure agents stay aligned through **multi-layer validation**:\n\n1. **Input validation**: Orchestrator verifies each task before assignment (schema compliance, logical soundness, resource availability).\n2. **Semantic validation**: Agents confirm task interpretation by echoing back a summary before execution (\"I understand I'm solving for X with constraints Y\").\n3. **Output validation**: Orchestrator checks agent results against predefined criteria (does output match expected format? does it satisfy success thresholds?).\n4. **Cross-agent consistency checks**: When results from Agent 1 feed into Agent 2, orchestrator verifies logical continuity (e.g., \"Agent 1 returned list length 10; Agent 2 processes 10 items—match confirmed\").\n\nUse explicit **goal state definitions**:\n\n```json\n{\n  \"goal_id\": \"goal_001\",\n  \"objective\": \"Generate and validate deployment config\",\n  \"success_criteria\": [\n    \"Config parses without errors\",\n    \"All required fields populated\",\n    \"Validation passes security checklist\"\n  ],\n  \"failure_modes\": [\"syntax error\", \"missing field\", \"security violation\"],\n  \"escalation_trigger\": \"any failure_mode detected\"\n}\n```\n\n## Practical Terminal-to-Web Workflow\n\n1. **Pre-task**: Save agent-ready JSON to a file (e.g., `task_001.json`)\n2. **Claude terminal**: `cat task_001.json | process` → writes `result_001.json`\n3. **Manual transfer**: Copy `result_001.json` content → paste into ChatGPT web interface with prefix \"AGENT_1_RESULT:\" to signal orchestrator mode\n4. **Orchestrator** (ChatGPT Pro): Validates, decides next action, generates `task_002.json`\n5. **Copy back**: Paste into second Claude terminal with prefix \"TASK:\" to signal agent mode\n\nThis pattern minimizes ambiguity in the manual copy-paste handoff by using explicit signal markers."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

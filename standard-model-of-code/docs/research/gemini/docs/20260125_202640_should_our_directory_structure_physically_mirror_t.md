@@ -1,0 +1,35 @@
+# Research: Should our directory structure physically mirror the CODOME/CONTEXTOME conceptual separation? Curren...
+
+> **Date:** 2026-01-25 20:26:40
+> **Source:** gemini
+> **Model:** gemini-2.5-flash
+> **Checksum:** `sha256:5caeeb52fe029dd975091a82064b1936e7ce986542fd9b6485e8063a05693534`
+> **Raw JSON:** `raw/20260125_202640_should_our_directory_structure_physically_mirror_t.json`
+
+---
+
+## Query
+
+Should our directory structure physically mirror the CODOME/CONTEXTOME conceptual separation? Currently CONTEXTOME files (docs/*.md) live inside CODOME directories (standard-model-of-code/). Give a decisive YES or NO with 3 key reasons.
+
+---
+
+## Response
+
+No.
+
+The directory structure should **NOT** physically mirror the CODOME/CONTEXTOME conceptual separation at the top level.
+
+Here are 3 key reasons:
+
+1.  **Reinforces the Realm Architecture (Physics Metaphor):** The project's fundamental organizing principle is the "Three Realms" (Particle, Wave, Observer), each corresponding to a top-level directory (`standard-model-of-code/`, `context-management/`, `.agent/`) and a distinct physics role. Each Realm is designed to contain *both* the executable code (Codome) and its directly related documentation and configuration (Contextome) that are cohesive to that Realm's purpose. For example, `standard-model-of-code/` (Particle Realm) contains the Collider's code and its foundational `MODEL.md` theory. Imposing a top-level Codome/Contextome split would dismantle this deliberate and deeply ingrained architectural metaphor.
+
+2.  **Maintains Domain Cohesion:** The project explicitly defines "Domains" (e.g., Pipeline, Visualization, AI Tools) as "vertical slices through both universes" (`DOMAINS.md`), meaning each domain inherently comprises both code (`D.code` ⊂ Codome) and its associated documentation/configuration (`D.context` ⊂ Contextome). The current structure allows the Codome and Contextome components of a given domain to remain logically grouped within their respective Realms, which simplifies navigation and reasoning about a complete functional area. A top-level Codome/Contextome separation would scatter these related files across disparate root directories, making it harder to understand a domain holistically.
+
+3.  **Optimized for AI Context Management:** The Adaptive Context Intelligence (ACI) system, as configured in `aci_config.yaml` and `analysis_sets.yaml`, is designed to dynamically assemble context for AI agents by using "analysis sets." These sets logically group relevant files (e.g., `pipeline` includes `src/core/full_analysis.py` and `standard-model-of-code/docs/COLLIDER.md`) based on query intent, regardless of whether they are code or documentation. This flexible, semantic grouping is more effective for providing targeted, coherent context to LLMs than a rigid, top-level physical partition based solely on executability, which could isolate functionally related information.
+
+---
+
+## Citations
+
+_No citations provided_

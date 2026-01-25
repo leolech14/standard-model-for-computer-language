@@ -1,0 +1,428 @@
+{
+  "timestamp": "2026-01-25T20:37:16.444593",
+  "alignment_score": 71.96336996336996,
+  "total_directories": 91,
+  "declared_directories": 15,
+  "undeclared_directories": 76,
+  "phantom_declarations": 0,
+  "issues": [
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/agents/",
+      "message": "Directory exists but is not declared (3 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/config/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/deck/",
+      "message": "Directory exists but is not declared (8 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/docs/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/hooks/",
+      "message": "Directory exists but is not declared (2 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "LOW",
+      "category": "UNDECLARED",
+      "path": ".agent/roadmap/",
+      "message": "Directory exists but is not declared (0 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/roadmaps/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/runs/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/schema/",
+      "message": "Directory exists but is not declared (7 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/sprints/",
+      "message": "Directory exists but is not declared (3 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": ".agent/state/",
+      "message": "Directory exists but is not declared (2 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "LOW",
+      "category": "UNDECLARED",
+      "path": ".agent/workflows/",
+      "message": "Directory exists but is not declared (0 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "architecture_report/",
+      "message": "Directory exists but is not declared (7 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "architecture_report/collider_analysis/",
+      "message": "Directory exists but is not declared (5 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "assets/",
+      "message": "Directory exists but is not declared (58 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "collider_output_small/",
+      "message": "Directory exists but is not declared (7 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "LOW",
+      "category": "UNDECLARED",
+      "path": "context-management/experiments/",
+      "message": "Directory exists but is not declared (0 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "context-management/intelligence/",
+      "message": "Directory exists but is not declared (128 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "context-management/llm-threads/",
+      "message": "Directory exists but is not declared (56 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "context-management/output/",
+      "message": "Directory exists but is not declared (3 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "context-management/reference_datasets/",
+      "message": "Directory exists but is not declared (4 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "context-management/registry/",
+      "message": "Directory exists but is not declared (2 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "context-management/reports/",
+      "message": "Directory exists but is not declared (3 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "context-management/tests/",
+      "message": "Directory exists but is not declared (2 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "LOW",
+      "category": "UNDECLARED",
+      "path": "context-management/workflow_research/",
+      "message": "Directory exists but is not declared (0 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "LOW",
+      "category": "UNDECLARED",
+      "path": "context-management/workflows/",
+      "message": "Directory exists but is not declared (0 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "evolution_report/",
+      "message": "Directory exists but is not declared (3 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "related/",
+      "message": "Directory exists but is not declared (11186 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "related/chrome-mcp/",
+      "message": "Directory exists but is not declared (11186 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "roadmap_report/",
+      "message": "Directory exists but is not declared (2 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/.archive/",
+      "message": "Directory exists but is not declared (195 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/.collider/",
+      "message": "Directory exists but is not declared (1241 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/.github/",
+      "message": "Directory exists but is not declared (5 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/.pytest_cache/",
+      "message": "Directory exists but is not declared (5 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/.venv/",
+      "message": "Directory exists but is not declared (7293 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "LOW",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/_contextpack_staging/",
+      "message": "Directory exists but is not declared (0 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/archive/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/artifacts/",
+      "message": "Directory exists but is not declared (273 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/audio/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/blender/",
+      "message": "Directory exists but is not declared (25 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/collider.egg-info/",
+      "message": "Directory exists but is not declared (6 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/collider_pipeline_files/",
+      "message": "Directory exists but is not declared (13 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/data/",
+      "message": "Directory exists but is not declared (15 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/experiments/",
+      "message": "Directory exists but is not declared (11 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/output/",
+      "message": "Directory exists but is not declared (32 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "HIGH",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/research/",
+      "message": "Directory exists but is not declared (13 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "standard-model-of-code/scripts/",
+      "message": "Directory exists but is not declared (10 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "UNDECLARED",
+      "path": "temporal_dashboard/",
+      "message": "Directory exists but is not declared (1 files)",
+      "suggestion": "Add to DOMAINS.md or .agent/CODOME_MANIFEST.yaml"
+    }
+  ],
+  "realms_status": {
+    "PARTICLE": {
+      "path": "standard-model-of-code/",
+      "exists": true,
+      "codome_files": 9049,
+      "contextome_files": 3193,
+      "status": "VALID"
+    },
+    "WAVE": {
+      "path": "context-management/",
+      "exists": true,
+      "codome_files": 101,
+      "contextome_files": 261,
+      "status": "VALID"
+    },
+    "OBSERVER": {
+      "path": ".agent/",
+      "exists": true,
+      "codome_files": 35,
+      "contextome_files": 201,
+      "status": "VALID"
+    }
+  },
+  "domains_status": {
+    "Pipeline": {
+      "codome_paths": [
+        "standard-model-of-code/src/core/"
+      ],
+      "contextome_paths": [
+        "standard-model-of-code/docs/specs/"
+      ],
+      "status": "SYMMETRIC"
+    },
+    "Visualization": {
+      "codome_paths": [
+        "standard-model-of-code/src/core/viz/"
+      ],
+      "contextome_paths": [
+        "standard-model-of-code/docs/specs/VISUALIZATION_UI_SPEC.md"
+      ],
+      "status": "SYMMETRIC"
+    },
+    "Governance": {
+      "codome_paths": [
+        ".agent/tools/"
+      ],
+      "contextome_paths": [
+        ".agent/registry/",
+        ".agent/specs/"
+      ],
+      "status": "SYMMETRIC"
+    },
+    "AI_Tools": {
+      "codome_paths": [
+        "context-management/tools/ai/"
+      ],
+      "contextome_paths": [
+        "context-management/config/"
+      ],
+      "status": "SYMMETRIC"
+    },
+    "Theory": {
+      "codome_paths": [],
+      "contextome_paths": [
+        "standard-model-of-code/docs/MODEL.md"
+      ],
+      "status": "CONTEXTOME_ONLY"
+    },
+    "Archive": {
+      "codome_paths": [
+        "context-management/tools/archive/"
+      ],
+      "contextome_paths": [
+        "context-management/tools/archive/config.yaml"
+      ],
+      "status": "SYMMETRIC"
+    }
+  },
+  "recommendations": [
+    "HIGH: Update .agent/CODOME_MANIFEST.yaml to declare undeclared directories",
+    "CRITICAL: Boundary drift detected - schedule consolidation sprint"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "timestamp": "20260124_211323",
+    "total_repos": 5,
+    "processed": 5,
+    "success": 4,
+    "failed": 1,
+    "duration_sec": 90.1,
+    "rate_per_hour": 199.7,
+    "workers": 32
+  },
+  "grade_distribution": {
+    "FAIL": 1,
+    "C": 1,
+    "D": 2,
+    "F": 1
+  },
+  "results": [
+    {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
+      "language": "TypeScript",
+      "stars": 436242,
+      "size_kb": 544919,
+      "status": "skipped_too_large",
+      "grade": null,
+      "health_index": null,
+      "error": "Size 532MB > 500MB limit",
+      "duration_sec": null
+    },
+    {
+      "name": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books.git",
+      "language": "Python",
+      "stars": 380983,
+      "size_kb": 20882,
+      "status": "success",
+      "grade": "C",
+      "health_index": 7.45,
+      "error": null,
+      "duration_sec": 23.9,
+      "component_scores": {
+        "cycles": 6.5,
+        "elevation": 4.83,
+        "gradients": 10.0,
+        "coupling": 7.42,
+        "isolation": 10.0
+      },
+      "nodes": 8,
+      "edges": 13
+    },
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis.git",
+      "language": "Python",
+      "stars": 393217,
+      "size_kb": 4955,
+      "status": "success",
+      "grade": "D",
+      "health_index": 5.76,
+      "error": null,
+      "duration_sec": 26.1,
+      "component_scores": {
+        "cycles": 1.0,
+        "elevation": 4.65,
+        "gradients": 10.0,
+        "coupling": 7.33,
+        "isolation": 7.5
+      },
+      "nodes": 66,
+      "edges": 165
+    },
+    {
+      "name": "donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer.git",
+      "language": "Python",
+      "stars": 333203,
+      "size_kb": 11243,
+      "status": "success",
+      "grade": "D",
+      "health_index": 5.31,
+      "error": null,
+      "duration_sec": 30.8,
+      "component_scores": {
+        "cycles": 1.0,
+        "elevation": 4.96,
+        "gradients": 10.0,
+        "coupling": 7.48,
+        "isolation": 2.0
+      },
+      "nodes": 232,
+      "edges": 289
+    },
+    {
+      "name": "kamranahmedse/developer-roadmap",
+      "url": "https://github.com/kamranahmedse/developer-roadmap.git",
+      "language": "TypeScript",
+      "stars": 347847,
+      "size_kb": 358864,
+      "status": "success",
+      "grade": "F",
+      "health_index": 4.04,
+      "error": null,
+      "duration_sec": 90.0,
+      "component_scores": {
+        "cycles": 1.0,
+        "elevation": 0,
+        "gradients": 9.88,
+        "coupling": 3.0,
+        "isolation": 8.75
+      },
+      "nodes": 825,
+      "edges": 5894
+    }
+  ]
+}

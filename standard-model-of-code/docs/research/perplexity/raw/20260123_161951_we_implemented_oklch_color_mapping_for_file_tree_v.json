@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T16:19:51.083996",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "We implemented OKLCH color mapping for file tree visualization with these design choices:\n\n1. **Hue (0-360°)**: Semantic file type mapping\n   - Logic/Code: 180-300° (cyan to purple)\n   - Config: 30-90° (orange to yellow-green)\n   - Docs: 90-150° (yellow-green to green)\n   - Assets: 300-360° (magenta to red)\n   - Unknown: 0° (red fallback)\n\n2. **Lightness (0.3-0.9)**: Recency mapping\n   - 0 days (today): L=0.9 (brightest)\n   - 7 days: L=0.7\n   - 30 days: L=0.5\n   - 90+ days: L=0.3 (darkest)\n   - Piecewise linear interpolation between breakpoints\n\n3. **Chroma (0.1-0.4)**: Importance mapping\n   - Linear scale: importance 0.0→chroma 0.1, importance 1.0→chroma 0.4\n   - Kept low to avoid \"muddy middle\" problem in OKLCH\n\nValidate:\n- Is the chroma range 0.1-0.4 appropriate for OKLCH perceptual uniformity?\n- Is piecewise linear interpolation for lightness the right approach vs logarithmic decay?\n- Any known issues with OKLCH→sRGB conversion at these lightness/chroma ranges (gamut clipping)?",
+    "query_length": 996,
+    "checksum": "sha256:ab9472a89bde07cb4f024ea4ac059c73ae7f7d0da91138075619bf7179966e71"
+  },
+  "response": {
+    "id": "59bd886f-f2a9-464f-a0ba-521f9dac723b",
+    "model": "sonar-pro",
+    "created": 1769195991,
+    "usage": {
+      "prompt_tokens": 324,
+      "completion_tokens": 640,
+      "total_tokens": 964,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.01,
+        "request_cost": 0.006,
+        "total_cost": 0.017
+      }
+    },
+    "citations": [
+      "https://calebduren.com/posts/oklch",
+      "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+      "https://en.wikipedia.org/wiki/Oklab_color_space",
+      "https://uploadcare.com/blog/oklch-in-css/",
+      "https://oklch.net/hex-to-oklch",
+      "https://css-tricks.com/almanac/functions/o/oklch/",
+      "https://observablehq.com/@mjbo/perceptually-uniform-color-models",
+      "https://nikhgupta.com/posts/uniform-colors-oklch"
+    ],
+    "search_results": [
+      {
+        "title": "Introduction to OKLCH - Caleb Durenberger",
+        "url": "https://calebduren.com/posts/oklch",
+        "date": "2025-05-13",
+        "last_updated": "2026-01-05",
+        "snippet": "Unlike traditional RGB or HSL, OKLCH is perceptually uniform, which means that a 10% change in lightness or chroma feels the same across ...",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH, explained for designers - UX Collective",
+        "url": "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+        "date": "2025-01-31",
+        "last_updated": "2025-05-15",
+        "snippet": "OKLCH's perceptual uniformity ensures that color transitions feel natural. By deducting lightness and chroma without changing the hue. It's ...",
+        "source": "web"
+      },
+      {
+        "title": "Oklab color space - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Oklab_color_space",
+        "date": "2024-07-24",
+        "last_updated": "2025-12-22",
+        "snippet": "The Oklab color space is a uniform color space for device independent color designed to improve perceptual uniformity, hue and lightness prediction",
+        "source": "web"
+      },
+      {
+        "title": "What is OKLCH in CSS and why we use it - Uploadcare",
+        "url": "https://uploadcare.com/blog/oklch-in-css/",
+        "date": "2024-08-12",
+        "last_updated": "2026-01-22",
+        "snippet": "OKLCH is a color model designed to represent colors in a way that's more perceptually uniform than older color models.",
+        "source": "web"
+      },
+      {
+        "title": "Convert Hex Colors to OKLCH Format",
+        "url": "https://oklch.net/hex-to-oklch",
+        "date": "2025-01-01",
+        "last_updated": "2026-01-11",
+        "snippet": "OKLCH is a perceptually uniform color space that makes it easier to create harmonious color palettes. Unlike RGB or HSL, adjusting lightness in OKLCH maintains ...",
+        "source": "web"
+      },
+      {
+        "title": "oklch() - CSS-Tricks",
+        "url": "https://css-tricks.com/almanac/functions/o/oklch/",
+        "date": "2025-04-03",
+        "snippet": "The CSS oklch() function specifies colors with three components — Lightness (L), Chroma (C), and Hue (H) — offering a perceptually uniform ...",
+        "source": "web"
+      },
+      {
+        "title": "Perceptually uniform color models and their implications - Observable",
+        "url": "https://observablehq.com/@mjbo/perceptually-uniform-color-models",
+        "date": "2022-03-02",
+        "last_updated": "2026-01-23",
+        "snippet": "Running a interpolation through a modern perceptually uniform color space is a good way to maintain a constant lightness rate of change.",
+        "source": "web"
+      },
+      {
+        "title": "Exploring Uniform Colors in OKLCH color space - Nikhil Gupta",
+        "url": "https://nikhgupta.com/posts/uniform-colors-oklch",
+        "date": "2024-03-05",
+        "last_updated": "2025-08-29",
+        "snippet": "The OKLCH color space stands out because it is designed to be perceptually uniform. It is a cylindrical transformation of the CIELAB color space ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Your OKLCH implementation is well-founded, though there are some refinements to consider based on how the color space behaves:\n\n## Chroma Range (0.1-0.4)\n\nYour range is **appropriate and conservative**. According to CSS specifications, chroma in OKLCH treats +0.4 as 100% and practically doesn't exceed +0.5[3]. By keeping chroma between 0.1-0.4, you're operating safely within the perceptually uniform range where equal numerical changes produce equal perceptual changes[5]. This avoids the \"muddy middle\" problem you mentioned—staying below the upper limits where chroma becomes unpredictable across different hues and lightness values[1]. The lower boundary (0.1) also works well for importance zero, maintaining visibility while reducing saturation.\n\n## Lightness Interpolation: Piecewise Linear vs. Logarithmic\n\n**Piecewise linear is the right choice for your use case.** OKLCH's key strength is that it's **perceptually uniform**, meaning equal numerical changes in lightness produce equal perceptual changes across different hues[1][2]. This means L=0.9 to L=0.7 (0.2 difference) will feel like the same brightness change as L=0.7 to L=0.5 (another 0.2 difference).\n\nFor a recency-based visualization, piecewise linear interpolation directly leverages this uniformity—a file from today (L=0.9) will appear noticeably \"fresher\" than one from 7 days ago (L=0.7) with the same visual consistency as the 7-to-30 day transition. Logarithmic decay would complicate this, making older files fade more gradually than recent files, which could obscure the visual hierarchy you're building[7].\n\n## Gamut Clipping at Your Ranges\n\nAt your ranges (L: 0.3-0.9, C: 0.1-0.4), **gamut clipping is unlikely to be a significant issue**. OKLCH was specifically designed to address unexpected hue and lightness changes that plagued earlier color spaces like CIELAB[3]. Your lightness range is well within the safe 0-1 spectrum, and your chroma values remain conservative. The main risk occurs at extreme combinations (very high chroma with very high or very low lightness), which you're avoiding[4].\n\nHowever, two practical notes:\n\n- **Wide-gamut support**: If your visualization targets Display P3 displays, OKLCH can leverage 50% more colors than sRGB[4], making your importance and recency gradations even more distinct.\n- **sRGB fallback**: Modern browsers handle OKLCH→sRGB conversion, but some older devices may clip out-of-gamut colors. Test your specific hue ranges (especially the 300-360° asset colors) on target devices, as reds and high-saturation magenta can push gamut boundaries more easily than other hues.\n\nYour design choices align well with OKLCH's perceptual strengths for hierarchical visualization."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

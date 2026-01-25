@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:25:36.483924",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "In software project management and documentation, when consolidating multiple tracking documents (concerns, roadmaps, priorities, status trackers), what is the best practice: (A) Create a NEW 'single source of truth' document that summarizes all others, or (B) DELETE redundant documents and UPDATE existing ones to be authoritative? Context: We have 6 tracking documents and just created a 7th 'REPO_TRUTH.md' to consolidate them. Are we adding to sprawl or reducing it? What do documentation experts recommend for the 'cutting after bulking' refactoring phase?",
+    "query_length": 562,
+    "checksum": "sha256:a3085f81a33ace7bf3de59abc1d0e4a0df5d5c4da03fc1c22d0947fc6f383eb9"
+  },
+  "response": {
+    "id": "39bca571-c439-44ac-bef2-de765fbe0f13",
+    "model": "sonar-pro",
+    "created": 1769365536,
+    "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 736,
+      "total_tokens": 855,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.011,
+        "request_cost": 0.006,
+        "total_cost": 0.017
+      }
+    },
+    "citations": [
+      "https://devdynamics.ai/blog/a-deep-dive-into-software-documentation-best-practices/",
+      "https://www.docsie.io/blog/glossary/platform-consolidation/",
+      "https://www.gliffy.com/blog/architecture-documentation-best-practices",
+      "https://datasights.co/data-consolidation/",
+      "https://pronovix.com/articles/consolidate-govern-part-1-scaling-docs-code-enterprise",
+      "https://www.heretto.com/blog/best-practices-for-writing-code-documentation",
+      "https://cribl.io/glossary/data-consolidation/"
+    ],
+    "search_results": [
+      {
+        "title": "A Deep Dive into Software Documentation Best Practices",
+        "url": "https://devdynamics.ai/blog/a-deep-dive-into-software-documentation-best-practices/",
+        "date": "2024-05-21",
+        "last_updated": "2026-01-25",
+        "snippet": "Prioritize documentation in software development · Keep it user-focused · Create a style guide · Add graphics and visuals · Include examples · Be clear and concise.",
+        "source": "web"
+      },
+      {
+        "title": "Platform Consolidation: Definition, Examples & Best Practices (2025)",
+        "url": "https://www.docsie.io/blog/glossary/platform-consolidation/",
+        "date": "2024-01-01",
+        "last_updated": "2026-01-23",
+        "snippet": "Learn about Platform Consolidation and how combining multiple systems into a unified platform improves efficiency and reduces complexity.",
+        "source": "web"
+      },
+      {
+        "title": "Software Architecture Documentation Best Practices | Gliffy",
+        "url": "https://www.gliffy.com/blog/architecture-documentation-best-practices",
+        "date": "2023-02-23",
+        "last_updated": "2026-01-24",
+        "snippet": "This includes having a consistent visual language, defining terms clearly, and using those terms in the same way throughout your documentation.",
+        "source": "web"
+      },
+      {
+        "title": "Data Consolidation Guide 2025: Tools, Process & Best Practices",
+        "url": "https://datasights.co/data-consolidation/",
+        "date": "2025-11-03",
+        "last_updated": "2026-01-25",
+        "snippet": "Learn data consolidation end-to-end: ETL vs ELT, tools, pitfalls, and fixes pllus how teams cut month-end from 15+ days to under 5.",
+        "source": "web"
+      },
+      {
+        "title": "Consolidate & Govern part 1: Scaling docs-as-code for Enterprise",
+        "url": "https://pronovix.com/articles/consolidate-govern-part-1-scaling-docs-code-enterprise",
+        "date": "2023-05-17",
+        "last_updated": "2025-08-27",
+        "snippet": "Roll out docs-as-code practices where docs are broken: A central documentation platform team can provide tools and best practices to help teams ...",
+        "source": "web"
+      },
+      {
+        "title": "8 Essential Code Documentation Best Practices - Heretto",
+        "url": "https://www.heretto.com/blog/best-practices-for-writing-code-documentation",
+        "date": "2024-04-23",
+        "last_updated": "2026-01-24",
+        "snippet": "Boost developer efficiency with 8 essential code documentation best practices. Learn to write clear, consistent, and automated docs.",
+        "source": "web"
+      },
+      {
+        "title": "Data Consolidation: Techniques, Challenges & Best Practices - Cribl",
+        "url": "https://cribl.io/glossary/data-consolidation/",
+        "date": "2025-04-14",
+        "last_updated": "2026-01-25",
+        "snippet": "How the Data Consolidation Process Works · 1. Reducing High-Cardinality Data · 2. Optimize Metrics · 3. Normalize Metrics ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**The best practice is option (B): DELETE redundant documents and UPDATE existing ones to be authoritative, rather than creating a new 'single source of truth' document like REPO_TRUTH.md, which adds to sprawl.** This approach establishes a true single source of truth by consolidating into one authoritative system, eliminating duplicates and silos during the 'cutting after bulking' refactoring phase.[2][5][6]\n\n### Why Your 7th Document Increases Sprawl\nCreating REPO_TRUTH.md as a summary of 6 existing trackers perpetuates fragmentation: it introduces duplication (requiring manual syncs across 7 files), risks version conflicts, and creates maintenance overhead without resolving root issues like scattered content.[2][4][5] Experts describe this as \"documentation islands\" or silos, where multiple tools/docs lead to poor discoverability, findability, and inconsistent experiences.[1][5] Your setup exemplifies common pitfalls: engineering/product teams maintaining separate trackers, resulting in overlaps and gaps.[2]\n\n### Recommended Consolidation Process (Phased 'Cutting')\nDocumentation and platform experts advocate **platform consolidation**—migrating to a single authoritative system (e.g., one doc, wiki, or repo) with governance, rather than layering summaries. Key steps from best practices:\n\n- **Audit and inventory**: Catalog all 6+ docs, identify overlaps/duplicates, map content (e.g., concerns → priorities → status), and define ownership.[2][4]\n- **Choose/design unified structure**: Select one platform (e.g., central Markdown repo, Confluence, or docs-as-code hub) with templates, standardized formats, taxonomy/tagging, and version control. Keep it minimal—document only essentials to avoid bloat.[1][3][5]\n- **Migrate phased**: Start with simple content; reuse existing info via links/references (not copies) to avoid duplication. Update originals to be the source; delete redundants post-migration.[2][6]\n- **Govern ongoing**: Implement workflows (reviews, auto-sync if needed), role-based access, training, and audits. Establish style guides for consistency.[1][2][5]\n\n| Approach | Pros | Cons | Expert Examples |\n|----------|------|------|-----------------|\n| **A: New summary doc** | Quick overview | Adds sprawl, sync issues, outdated risks[2][6] | Avoided; leads to \"maintenance nightmare\"[6] |\n| **B: Update/delete to one authoritative** | Single truth, 40-75% efficiency gains, no duplicates[2] | Upfront migration effort | Unified platforms cut tool-switching 75%, comms overhead 50%[2]; hubs republish without forcing process changes[5] |\n\n### Outcomes from Real Cases\n- **75% tool reduction, 40% faster creation** via single platform with migration steps.[2]\n- **50% less inter-team comms**, eliminated duplicates via unified taxonomy.[2]\n- **Central hubs** (e.g., Drupal/Backstage) allow team autonomy while providing one portal—republish from sources, don't summarize.[5]\n- **Content reuse + single truth** prevents scattered info; focus docs on context/decisions.[3][6]\n\nIf your 6 docs are in a Git repo, evolve REPO_TRUTH.md into the sole tracker: migrate data there, delete others, and use Git for versioning. For larger scale, consider tools like a developer portal for federated search if full merge isn't feasible initially.[5] This reduces sprawl long-term while maintaining accuracy."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

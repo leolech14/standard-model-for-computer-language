@@ -1,0 +1,208 @@
+{
+  "schema_version": "2.0",
+  "generated": "2026-01-25",
+  "sources": ["perplexity_research", "gemini_architect_analysis"],
+  "meta": {
+    "project": "Collider",
+    "architecture": "Standard Model of Code",
+    "renderer": "3d-force-graph + Three.js",
+    "target_controls": 82,
+    "current_implemented": 49,
+    "gap": 33
+  },
+  "priority_summary": {
+    "P0_essential": 18,
+    "P1_important": 38,
+    "P2_nice_to_have": 24
+  },
+  "categories": {
+    "VIEW_MODES": {
+      "label": "Holarchic Navigation",
+      "description": "Controls for navigating the 16-level scale hierarchy",
+      "controls": [
+        {"id": "view-granularity", "label": "Granularity Level", "type": "toggle_group", "options": ["atoms", "files", "classes", "packages"], "default": "atoms", "state_path": "GRAPH_MODE", "handler": "SIDEBAR", "priority": "P0", "shortcut": "1/2/3"},
+        {"id": "btn-2d", "label": "Dimension", "type": "button_toggle", "options": ["2D", "3D"], "default": "3D", "state_path": "IS_3D", "handler": "DIMENSION", "priority": "P0", "shortcut": "D"},
+        {"id": "view-scope", "label": "Scope Focus", "type": "dropdown", "options": ["full", "selection", "codome", "neighborhood"], "default": "full", "state_path": "VIEW_SCOPE", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "view-depth", "label": "Depth Filter", "type": "slider", "range": {"min": 1, "max": 10, "step": 1}, "default": 10, "state_path": "VIS_FILTERS.maxDepth", "handler": "DATA", "priority": "P2"}
+      ]
+    },
+    "LAYOUT_PHYSICS": {
+      "label": "Topology & Physics",
+      "description": "Controls for graph layout algorithms and physics simulation",
+      "controls": [
+        {"id": "layout-preset", "label": "Layout Algorithm", "type": "select_grid", "options": ["force", "tree", "radial", "orbital", "codome", "hierarchical", "grid"], "default": "force", "state_path": "ANIM.currentLayout", "handler": "ANIM", "priority": "P0", "shortcut": "L"},
+        {"id": "physics-charge", "label": "Repulsion", "type": "slider", "range": {"min": -500, "max": 0, "step": 10}, "default": -120, "state_path": "PHYSICS_STATE.charge", "handler": "PHYSICS", "priority": "P0"},
+        {"id": "physics-link", "label": "Link Distance", "type": "slider", "range": {"min": 10, "max": 200, "step": 5}, "default": 50, "state_path": "PHYSICS_STATE.linkDistance", "handler": "PHYSICS", "priority": "P1"},
+        {"id": "physics-gravity", "label": "Center Gravity", "type": "slider", "range": {"min": 0, "max": 0.5, "step": 0.01}, "default": 0.05, "state_path": "PHYSICS_STATE.centerStrength", "handler": "PHYSICS", "priority": "P2"},
+        {"id": "physics-collision", "label": "Collision Radius", "type": "slider", "range": {"min": 0, "max": 50, "step": 1}, "default": 10, "state_path": "PHYSICS_STATE.collisionRadius", "handler": "PHYSICS", "priority": "P2"},
+        {"id": "physics-iterations", "label": "Iterations", "type": "slider", "range": {"min": 50, "max": 500, "step": 10}, "default": 100, "state_path": "PHYSICS_STATE.iterations", "handler": "PHYSICS", "priority": "P2"},
+        {"id": "btn-freeze", "label": "Freeze Simulation", "type": "button_toggle", "default": false, "state_path": "LAYOUT_FROZEN", "handler": "LAYOUT_HELPERS", "priority": "P1", "shortcut": "Space"},
+        {"id": "physics-preset", "label": "Physics Preset", "type": "button_group", "options": ["default", "tight", "loose", "clustered"], "default": "default", "state_path": "PHYSICS_PRESET", "handler": "PHYSICS", "priority": "P1"}
+      ]
+    },
+    "NODE_APPEARANCE": {
+      "label": "Node Semantics",
+      "description": "Controls for node visual properties",
+      "controls": [
+        {"id": "node-color-mode", "label": "Color By", "type": "dropdown", "options": ["tier", "family", "roleCategory", "layer", "ring", "rpbl_responsibility", "rpbl_purity", "flow", "depth", "health"], "default": "tier", "state_path": "VIS_STATE.colorBy", "handler": "SIDEBAR", "priority": "P0", "shortcut": "C"},
+        {"id": "node-color-scheme", "label": "Color Scheme", "type": "button_group", "options": ["viridis", "plasma", "oklab", "categorical"], "default": "oklab", "state_path": "COLOR_SCHEME", "handler": "COLOR", "priority": "P0"},
+        {"id": "cfg-node-size", "label": "Base Size", "type": "slider", "range": {"min": 0.2, "max": 4.0, "step": 0.1}, "default": 1.0, "state_path": "APPEARANCE_STATE.nodeScale", "handler": "SIDEBAR", "priority": "P0"},
+        {"id": "node-size-mode", "label": "Size By", "type": "select_buttons", "options": ["uniform", "complexity", "fan_in", "fan_out", "loc", "centrality"], "default": "uniform", "state_path": "VIS_STATE.sizeBy", "handler": "NODE_HELPERS", "priority": "P1", "shortcut": "S"},
+        {"id": "cfg-node-opacity", "label": "Opacity", "type": "slider", "range": {"min": 0, "max": 1, "step": 0.05}, "default": 0.9, "state_path": "APPEARANCE_STATE.nodeOpacity", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "cfg-node-res", "label": "Resolution", "type": "slider", "range": {"min": 4, "max": 32, "step": 2}, "default": 16, "state_path": "APPEARANCE_STATE.nodeResolution", "handler": "SIDEBAR", "priority": "P2"},
+        {"id": "cfg-toggle-labels", "label": "Show Labels", "type": "toggle", "default": true, "state_path": "VIS_FILTERS.metadata.showLabels", "handler": "SIDEBAR", "priority": "P0", "shortcut": "T"},
+        {"id": "cfg-label-size", "label": "Label Size", "type": "slider", "range": {"min": 0.5, "max": 3.0, "step": 0.1}, "default": 1.0, "state_path": "APPEARANCE_STATE.labelScale", "handler": "SIDEBAR", "priority": "P1", "status": "BROKEN"},
+        {"id": "node-shape-mode", "label": "Shape By", "type": "dropdown", "options": ["sphere", "cube", "role-icon", "tier-shape"], "default": "sphere", "state_path": "VIS_STATE.shapeBy", "handler": "NODE_HELPERS", "priority": "P2"},
+        {"id": "cfg-toggle-highlight", "label": "Selection Glow", "type": "toggle", "default": true, "state_path": "APPEARANCE_STATE.highlightGlow", "handler": "SIDEBAR", "priority": "P1", "status": "BROKEN"},
+        {"id": "cfg-toggle-pulse", "label": "Animate Entry Points", "type": "toggle", "default": false, "state_path": "ANIM.pulseEntryPoints", "handler": "ANIM", "priority": "P2"}
+      ]
+    },
+    "EDGE_APPEARANCE": {
+      "label": "Coupling & Flow",
+      "description": "Controls for edge/relationship visual properties",
+      "controls": [
+        {"id": "edge-mode", "label": "Edge Style", "type": "dropdown", "options": ["type", "gradient-tier", "gradient-flow", "gradient-depth"], "default": "type", "state_path": "EDGE_MODE", "handler": "EDGE", "priority": "P0", "shortcut": "E"},
+        {"id": "edge-style", "label": "Line Style", "type": "button_group", "options": ["solid", "dashed", "particles"], "default": "solid", "state_path": "EDGE_STYLE", "handler": "EDGE", "priority": "P1", "status": "ORPHANED"},
+        {"id": "cfg-edge-opacity", "label": "Opacity", "type": "slider", "range": {"min": 0, "max": 1, "step": 0.05}, "default": 0.6, "state_path": "APPEARANCE_STATE.edgeOpacity", "handler": "SIDEBAR", "priority": "P0"},
+        {"id": "cfg-edge-width", "label": "Width", "type": "slider", "range": {"min": 0.1, "max": 5, "step": 0.1}, "default": 1.0, "state_path": "APPEARANCE_STATE.edgeWidth", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "cfg-edge-curve", "label": "Curvature", "type": "slider", "range": {"min": 0, "max": 1, "step": 0.05}, "default": 0.2, "state_path": "APPEARANCE_STATE.edgeCurvature", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "cfg-toggle-arrows", "label": "Show Arrows", "type": "toggle", "default": true, "state_path": "APPEARANCE_STATE.showArrows", "handler": "SIDEBAR", "priority": "P0", "shortcut": "A"},
+        {"id": "cfg-toggle-gradient", "label": "Gradient Color", "type": "toggle", "default": false, "state_path": "APPEARANCE_STATE.edgeGradient", "handler": "SIDEBAR", "priority": "P1", "shortcut": "G"},
+        {"id": "cfg-particle-speed", "label": "Particle Speed", "type": "slider", "range": {"min": 0, "max": 0.05, "step": 0.001}, "default": 0.01, "state_path": "FLOW_CONFIG.particleSpeed", "handler": "FLOW", "priority": "P2"},
+        {"id": "cfg-particle-width", "label": "Particle Size", "type": "slider", "range": {"min": 1, "max": 10, "step": 1}, "default": 4, "state_path": "FLOW_CONFIG.particleWidth", "handler": "FLOW", "priority": "P2"},
+        {"id": "cfg-toggle-edge-hover", "label": "Hover Highlight", "type": "toggle", "default": true, "state_path": "APPEARANCE_STATE.edgeHoverHighlight", "handler": "SIDEBAR", "priority": "P1", "status": "ORPHANED"}
+      ]
+    },
+    "FILTERING": {
+      "label": "Data Filters",
+      "description": "Controls for data subset selection",
+      "controls": [
+        {"id": "filter-tier", "label": "Filter Tiers", "type": "multi_select_chips", "options": ["T0", "T1", "T2"], "default": [], "state_path": "VIS_FILTERS.tiers", "handler": "SIDEBAR", "priority": "P0"},
+        {"id": "filter-family", "label": "Filter Families", "type": "multi_select_chips", "options": ["LOG", "DAT", "ORG", "NET"], "default": [], "state_path": "VIS_FILTERS.families", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "filter-ring", "label": "Filter Rings", "type": "multi_select_chips", "options": ["DOMAIN", "APPLICATION", "INFRASTRUCTURE", "PRESENTATION"], "default": [], "state_path": "VIS_FILTERS.rings", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "filter-edges", "label": "Filter Edge Types", "type": "multi_select_chips", "options": ["calls", "contains", "inherits", "imports"], "default": [], "state_path": "VIS_FILTERS.edges", "handler": "SIDEBAR", "priority": "P1"},
+        {"id": "filter-role", "label": "Filter Roles", "type": "multi_select_chips", "options": "DYNAMIC_33_ROLES", "default": [], "state_path": "VIS_FILTERS.roles", "handler": "SIDEBAR", "priority": "P2"},
+        {"id": "toggle-orphans", "label": "Hide Orphans", "type": "toggle", "default": false, "state_path": "VIS_FILTERS.hideOrphans", "handler": "DATA", "priority": "P1", "shortcut": "O"},
+        {"id": "toggle-dead-code", "label": "Hide Dead Code", "type": "toggle", "default": false, "state_path": "VIS_FILTERS.hideDeadCode", "handler": "DATA", "priority": "P1"},
+        {"id": "filter-degree-min", "label": "Min Connections", "type": "slider", "range": {"min": 0, "max": 20, "step": 1}, "default": 0, "state_path": "VIS_FILTERS.minDegree", "handler": "DATA", "priority": "P2"},
+        {"id": "filter-degree-max", "label": "Max Connections", "type": "slider", "range": {"min": 1, "max": 100, "step": 1}, "default": 100, "state_path": "VIS_FILTERS.maxDegree", "handler": "DATA", "priority": "P2"},
+        {"id": "search-nodes", "label": "Search", "type": "text_input", "default": "", "state_path": "SEARCH_QUERY", "handler": "SEARCH", "priority": "P0", "shortcut": "/"},
+        {"id": "search-scope", "label": "Search Scope", "type": "dropdown", "options": ["name", "file", "all"], "default": "all", "state_path": "SEARCH_SCOPE", "handler": "SEARCH", "priority": "P1"}
+      ]
+    },
+    "SELECTION": {
+      "label": "Selection",
+      "description": "Controls for interactive element selection",
+      "controls": [
+        {"id": "selection-mode", "label": "Selection Mode", "type": "button_group", "options": ["single", "multi", "lasso"], "default": "single", "state_path": "SELECTION_MODE", "handler": "SELECTION", "priority": "P0"},
+        {"id": "selection-clear", "label": "Clear Selection", "type": "button", "state_path": "action:clearSelection", "handler": "SELECTION", "priority": "P0", "shortcut": "Escape"},
+        {"id": "selection-invert", "label": "Invert Selection", "type": "button", "state_path": "action:invertSelection", "handler": "SELECTION", "priority": "P2"},
+        {"id": "selection-expand", "label": "Expand to Neighbors", "type": "button", "state_path": "action:expandSelection", "handler": "SELECTION", "priority": "P1", "shortcut": "N"},
+        {"id": "selection-isolate", "label": "Isolate Selection", "type": "button", "state_path": "action:isolateSelection", "handler": "SELECTION", "priority": "P1", "shortcut": "I"},
+        {"id": "selection-k-hop", "label": "K-Hop Depth", "type": "slider", "range": {"min": 1, "max": 5, "step": 1}, "default": 1, "state_path": "SELECTION_K_HOP", "handler": "SELECTION", "priority": "P1"},
+        {"id": "selection-export", "label": "Export Selection", "type": "button", "state_path": "action:exportSelection", "handler": "EXPORT", "priority": "P1"},
+        {"id": "selection-fit", "label": "Fit to Selection", "type": "button", "state_path": "action:fitToSelection", "handler": "CAMERA", "priority": "P1"}
+      ]
+    },
+    "CAMERA": {
+      "label": "Camera",
+      "description": "Controls for 3D navigation and viewpoint",
+      "controls": [
+        {"id": "camera-zoom", "label": "Zoom Level", "type": "slider", "range": {"min": 0.01, "max": 200, "step": 0.1}, "default": 1.0, "state_path": "CAMERA.zoom", "handler": "CAMERA", "priority": "P1"},
+        {"id": "btn-reset", "label": "Reset Camera", "type": "button", "state_path": "action:resetCamera", "handler": "SIDEBAR", "priority": "P0", "shortcut": "Home"},
+        {"id": "btn-fit-all", "label": "Fit All", "type": "button", "state_path": "action:fitAll", "handler": "CAMERA", "priority": "P0", "shortcut": "F"},
+        {"id": "btn-fit-selection", "label": "Fit Selection", "type": "button", "state_path": "action:fitSelection", "handler": "CAMERA", "priority": "P1"},
+        {"id": "camera-auto-rotate", "label": "Auto Rotate", "type": "toggle", "default": false, "state_path": "CAMERA.autoRotate", "handler": "CAMERA", "priority": "P2"},
+        {"id": "camera-rotate-speed", "label": "Rotation Speed", "type": "slider", "range": {"min": 0.1, "max": 5, "step": 0.1}, "default": 1.0, "state_path": "CAMERA.rotateSpeed", "handler": "CAMERA", "priority": "P2"},
+        {"id": "camera-bookmark-save", "label": "Save Bookmark", "type": "button", "state_path": "action:saveBookmark", "handler": "CAMERA", "priority": "P2", "shortcut": "Ctrl+Shift+1-9"},
+        {"id": "camera-bookmark-load", "label": "Load Bookmark", "type": "dropdown", "options": "DYNAMIC_BOOKMARKS", "state_path": "action:loadBookmark", "handler": "CAMERA", "priority": "P2", "shortcut": "Ctrl+1-9"}
+      ]
+    },
+    "EXPORT": {
+      "label": "Export & Capture",
+      "description": "Controls for output generation",
+      "controls": [
+        {"id": "btn-screenshot", "label": "Screenshot", "type": "button", "state_path": "action:screenshot", "handler": "SIDEBAR", "priority": "P0", "shortcut": "P"},
+        {"id": "export-format", "label": "Image Format", "type": "dropdown", "options": ["png", "jpeg", "svg"], "default": "png", "state_path": "EXPORT_FORMAT", "handler": "EXPORT", "priority": "P1"},
+        {"id": "export-resolution", "label": "Resolution", "type": "dropdown", "options": ["1x", "2x", "4x"], "default": "2x", "state_path": "EXPORT_RESOLUTION", "handler": "EXPORT", "priority": "P1"},
+        {"id": "export-background", "label": "Background", "type": "dropdown", "options": ["dark", "light", "transparent"], "default": "dark", "state_path": "EXPORT_BACKGROUND", "handler": "EXPORT", "priority": "P1"},
+        {"id": "export-data", "label": "Export Data", "type": "button", "state_path": "action:exportData", "handler": "EXPORT", "priority": "P1", "shortcut": "Ctrl+E"},
+        {"id": "export-data-format", "label": "Data Format", "type": "dropdown", "options": ["json", "csv", "graphml"], "default": "json", "state_path": "EXPORT_DATA_FORMAT", "handler": "EXPORT", "priority": "P2"},
+        {"id": "export-video", "label": "Record Video", "type": "button", "state_path": "action:recordVideo", "handler": "EXPORT", "priority": "P2"}
+      ]
+    },
+    "ACCESSIBILITY": {
+      "label": "Accessibility & Help",
+      "description": "Controls for inclusive design and user assistance",
+      "controls": [
+        {"id": "a11y-colorblind", "label": "Colorblind Mode", "type": "dropdown", "options": ["none", "deuteranopia", "protanopia", "tritanopia"], "default": "none", "state_path": "A11Y.colorblindMode", "handler": "COLOR", "priority": "P1"},
+        {"id": "a11y-high-contrast", "label": "High Contrast", "type": "toggle", "default": false, "state_path": "A11Y.highContrast", "handler": "COLOR", "priority": "P1"},
+        {"id": "a11y-reduced-motion", "label": "Reduced Motion", "type": "toggle", "default": "auto", "state_path": "A11Y.reducedMotion", "handler": "ANIM", "priority": "P1"},
+        {"id": "a11y-screen-reader", "label": "Screen Reader Mode", "type": "toggle", "default": false, "state_path": "A11Y.screenReader", "handler": "A11Y", "priority": "P2"},
+        {"id": "btn-help", "label": "Help Overlay", "type": "button", "state_path": "action:showHelp", "handler": "PANELS", "priority": "P0", "shortcut": "?"},
+        {"id": "btn-shortcuts", "label": "Keyboard Shortcuts", "type": "button", "state_path": "action:showShortcuts", "handler": "PANELS", "priority": "P1", "shortcut": "Ctrl+/"},
+        {"id": "btn-tutorial", "label": "Tutorial", "type": "button", "state_path": "action:startTutorial", "handler": "PANELS", "priority": "P2"},
+        {"id": "loading-indicator", "label": "Loading Status", "type": "indicator", "state_path": "LOADING_STATE", "handler": "UI", "priority": "P0"}
+      ]
+    },
+    "ANALYSIS": {
+      "label": "Analysis & Intelligence",
+      "description": "Controls unique to code analysis visualization",
+      "controls": [
+        {"id": "toggle-codome", "label": "Show Codome Boundaries", "type": "toggle", "default": false, "state_path": "APPEARANCE_STATE.showCodome", "handler": "SIDEBAR", "priority": "P1", "status": "ORPHANED"},
+        {"id": "toggle-knots", "label": "Highlight Cycles", "type": "toggle", "default": false, "state_path": "ANALYSIS.showKnots", "handler": "ANALYSIS", "priority": "P1"},
+        {"id": "toggle-bridges", "label": "Highlight Bridges", "type": "toggle", "default": false, "state_path": "ANALYSIS.showBridges", "handler": "ANALYSIS", "priority": "P2"},
+        {"id": "btn-insights", "label": "AI Insights Panel", "type": "button", "state_path": "action:openInsights", "handler": "PANELS", "priority": "P1"},
+        {"id": "btn-report", "label": "Brain Download", "type": "button", "state_path": "action:openReport", "handler": "PANELS", "priority": "P1"},
+        {"id": "flow-animation", "label": "Animate Flow", "type": "toggle", "default": false, "state_path": "FLOW.animate", "handler": "FLOW", "priority": "P2"},
+        {"id": "markov-threshold", "label": "Flow Probability Threshold", "type": "slider", "range": {"min": 0, "max": 1, "step": 0.05}, "default": 0.1, "state_path": "FLOW.markovThreshold", "handler": "FLOW", "priority": "P2"},
+        {"id": "health-overlay", "label": "Health Heatmap", "type": "toggle", "default": false, "state_path": "ANALYSIS.healthOverlay", "handler": "ANALYSIS", "priority": "P2"}
+      ]
+    }
+  },
+  "keyboard_shortcuts": {
+    "navigation": {
+      "1": "Atoms view",
+      "2": "Files view",
+      "3": "Classes view",
+      "D": "Toggle 2D/3D",
+      "L": "Cycle layouts",
+      "F": "Fit to view",
+      "Home": "Reset camera",
+      "Space": "Freeze/unfreeze"
+    },
+    "appearance": {
+      "C": "Cycle color modes",
+      "S": "Cycle size modes",
+      "T": "Toggle labels",
+      "E": "Cycle edge modes",
+      "A": "Toggle arrows",
+      "G": "Toggle gradient"
+    },
+    "selection": {
+      "Escape": "Clear selection",
+      "Shift+Click": "Multi-select",
+      "N": "Expand to neighbors",
+      "I": "Isolate selection"
+    },
+    "actions": {
+      "/": "Focus search",
+      "?": "Help overlay",
+      "P": "Screenshot",
+      "Ctrl+E": "Export data",
+      "Ctrl+F": "Advanced filter",
+      "Ctrl+/": "Keyboard shortcuts",
+      "Ctrl+.": "Command palette"
+    }
+  },
+  "broken_controls": [
+    {"id": "cfg-label-size", "issue": "empty_handler", "location": "sidebar.js:L831"},
+    {"id": "cfg-toggle-highlight", "issue": "empty_callback", "location": "sidebar.js:L787"},
+    {"id": "cfg-toggle-depth", "issue": "empty_callback", "location": "sidebar.js:L797"}
+  ],
+  "orphaned_controls": [
+    {"id": "cfg-toggle-edge-hover", "issue": "no_binding", "location": "template.html:L1265"},
+    {"id": "cfg-toggle-codome", "issue": "no_binding", "location": "template.html:L1269"},
+    {"id": "edge-style", "issue": "no_handler", "location": "template.html:L1200"}
+  ]
+}

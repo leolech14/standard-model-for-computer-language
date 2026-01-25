@@ -1,0 +1,162 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-25",
+  "source": "exhaustive_scan + gemini_forensic_audit",
+  "total_interactions_found": 90,
+  "categories": {
+    "1_verified_working": {
+      "description": "Tested by Circuit Breaker - confirmed chain: UI → Binding → Handler → State → Effect",
+      "count": 9,
+      "controls": [
+        {"id": "cfg-edge-opacity", "type": "slider", "effect": "APPEARANCE_STATE.edgeOpacity"},
+        {"id": "cfg-edge-width", "type": "slider", "effect": "APPEARANCE_STATE.edgeWidth"},
+        {"id": "cfg-edge-curve", "type": "slider", "effect": "APPEARANCE_STATE.edgeCurvature"},
+        {"id": "cfg-node-size", "type": "slider", "effect": "APPEARANCE_STATE.nodeScale"},
+        {"id": "cfg-node-opacity", "type": "slider", "effect": "APPEARANCE_STATE.nodeOpacity"},
+        {"id": "cfg-toggle-arrows", "type": "toggle", "effect": "APPEARANCE_STATE.showArrows"},
+        {"id": "physics-charge", "type": "slider", "effect": "Graph.d3Force('charge')"},
+        {"id": "btn-2d", "type": "button", "effect": "IS_3D toggle"},
+        {"id": "btn-files", "type": "button", "effect": "GRAPH_MODE"}
+      ]
+    },
+    "2_untested_but_likely_working": {
+      "description": "UI exists, binding found, handler exists - not yet validated by Circuit Breaker",
+      "high_confidence": {
+        "count": 16,
+        "controls": [
+          {"id": "cfg-node-res", "type": "slider", "handler": "sidebar.js:L829", "effect": "Graph.nodeResolution"},
+          {"id": "cfg-toggle-labels", "type": "toggle", "handler": "sidebar.js:L782", "effect": "Graph.nodeLabel"},
+          {"id": "cfg-toggle-pulse", "type": "toggle", "handler": "sidebar.js:L792", "effect": "ANIM.togglePulse"},
+          {"id": "cfg-toggle-gradient", "type": "toggle", "handler": "sidebar.js:L810", "effect": "applyEdgeMode"},
+          {"id": "cfg-particle-speed", "type": "slider", "handler": "sidebar.js:L850", "effect": "Graph.linkDirectionalParticleSpeed"},
+          {"id": "physics-link", "type": "slider", "handler": "sidebar.js:L701", "effect": "Graph.d3Force('link')"},
+          {"id": "[data-layout]", "type": "button_group", "handler": "sidebar.js:L668", "effect": "ANIM.applyLayout"},
+          {"id": "[data-physics]", "type": "button_group", "handler": "sidebar.js:L728", "effect": "setPhysicsPreset"},
+          {"id": "[data-preset]", "type": "button_group", "handler": "sidebar.js:L461", "effect": "setColorMode"},
+          {"id": "[data-scheme]", "type": "button_group", "handler": "sidebar.js:L361", "effect": "applyColorScheme"},
+          {"id": "view-mode-toggle", "type": "button_group", "handler": "sidebar.js:L489", "effect": "setViewMode"},
+          {"id": "btn-reset", "type": "button", "handler": "sidebar.js:L882", "effect": "Graph.cameraPosition"},
+          {"id": "btn-screenshot", "type": "button", "handler": "sidebar.js:L895", "effect": "domElement.toDataURL"},
+          {"id": "btn-freeze", "type": "button", "handler": "sidebar.js:L913", "effect": "Graph.d3AlphaTarget"},
+          {"id": "selection-clear", "type": "button", "handler": "selection.js:L731", "effect": "clear()"},
+          {"id": "Escape", "type": "keyboard", "handler": "selection.js:L678", "effect": "hideSelectionModal"}
+        ]
+      },
+      "medium_confidence": {
+        "count": 4,
+        "controls": [
+          {"id": "Ctrl+Shift+L", "type": "keyboard", "handler": "layout.js:L645", "effect": "toggleDebugOverlay"},
+          {"id": "Ctrl+X", "type": "keyboard", "handler": "property-query-init.js:L303", "effect": "debugNode"},
+          {"id": "Space", "type": "keyboard", "handler": "TowerRenderer.js:L65", "effect": "PAN mode"},
+          {"id": "P", "type": "keyboard", "handler": "pipeline-navigator.js:L598", "effect": "togglePipelineNavigator"}
+        ]
+      }
+    },
+    "3_broken_chain": {
+      "description": "Some part of the chain is broken - needs fix",
+      "orphaned_no_binding": {
+        "count": 2,
+        "controls": [
+          {"id": "cfg-toggle-edge-hover", "type": "toggle", "html": "template.html:L1265", "issue": "No event listener found"},
+          {"id": "cfg-toggle-codome", "type": "toggle", "html": "template.html:L1269", "issue": "No event listener found"}
+        ]
+      },
+      "orphaned_no_handler": {
+        "count": 1,
+        "controls": [
+          {"id": "[data-edge-style]", "type": "button_group", "html": "template.html:L1200", "options": ["Solid", "Dashed", "Particle"], "issue": "Buttons exist, no JS binding"}
+        ]
+      },
+      "empty_handler": {
+        "count": 3,
+        "controls": [
+          {"id": "cfg-label-size", "type": "slider", "handler": "sidebar.js:L831", "issue": "Case exists but body is empty"},
+          {"id": "cfg-toggle-highlight", "type": "toggle", "handler": "sidebar.js:L787", "issue": "Empty callback"},
+          {"id": "cfg-toggle-depth", "type": "toggle", "handler": "sidebar.js:L797", "issue": "Empty callback"}
+        ]
+      },
+      "missing_html_element": {
+        "count": 4,
+        "controls": [
+          {"id": "btn-edge-mode", "referenced_in": "edge-system.js:L498", "issue": "JS references non-existent button"},
+          {"id": "btn-create-group", "referenced_in": ["groups.js:L146", "selection.js:L734"], "issue": "JS references non-existent button"},
+          {"id": "cmd-files", "referenced_in": "file-viz.js:L348", "issue": "Command bar button missing"},
+          {"id": "density-slider2", "referenced_in": "sidebar.js:L165", "issue": "Slider ID not in HTML"}
+        ]
+      },
+      "duplicate_id_conflict": {
+        "count": 3,
+        "controls": [
+          {"legacy_id": "node-size", "new_id": "cfg-node-size", "issue": "Handler expects cfg-*, legacy exists"},
+          {"legacy_id": "edge-opacity", "new_id": "cfg-edge-opacity", "issue": "Handler expects cfg-*, legacy exists"},
+          {"legacy_id": "toggle-labels", "new_id": "cfg-toggle-labels", "issue": "Only cfg-* is bound, legacy orphaned"}
+        ]
+      }
+    },
+    "4_infrastructure_no_ui": {
+      "description": "Code/handlers ready but no UI element exists",
+      "count": 5,
+      "controls": [
+        {"id": "tier-filter-chips", "infrastructure": "filter.js", "effect": "Filter by T0/T1/T2"},
+        {"id": "family-filter-chips", "infrastructure": "filter.js", "effect": "Filter by LOG/DAT/ORG/NET"},
+        {"id": "role-filter-chips", "infrastructure": "filter.js", "effect": "Filter by semantic role"},
+        {"id": "search-nodes", "infrastructure": "search.js partial", "effect": "Find node by name"},
+        {"id": "minimap-toggle", "infrastructure": "minimap.js stub", "effect": "Show/hide minimap"}
+      ]
+    },
+    "5_missing_should_add": {
+      "description": "Controls that should exist but don't - prioritized by necessity",
+      "MUST": {
+        "count": 4,
+        "rationale": "Core functionality gaps",
+        "controls": [
+          {"id": "undo-action", "type": "button", "rationale": "No way to undo camera/selection changes"},
+          {"id": "export-selection", "type": "button", "rationale": "Can't export selected subgraph"},
+          {"id": "help-overlay", "type": "button", "rationale": "No discoverability for keyboard shortcuts"},
+          {"id": "loading-indicator", "type": "indicator", "rationale": "No feedback during graph computation"}
+        ]
+      },
+      "SHOULD": {
+        "count": 5,
+        "rationale": "Expected by users familiar with similar tools",
+        "controls": [
+          {"id": "zoom-slider", "type": "slider", "rationale": "Only scroll wheel zoom, no precise control"},
+          {"id": "fit-to-selection", "type": "button", "rationale": "Can't auto-frame selected nodes"},
+          {"id": "isolate-selection", "type": "button", "rationale": "Can't hide everything except selection"},
+          {"id": "expand-neighbors", "type": "button", "rationale": "Can't progressively reveal connected nodes"},
+          {"id": "collapse-to-codome", "type": "button", "rationale": "Can't collapse nodes into their codome"}
+        ]
+      },
+      "COULD": {
+        "count": 4,
+        "rationale": "Nice-to-have enhancements",
+        "controls": [
+          {"id": "animation-speed", "type": "slider", "rationale": "Global animation timing control"},
+          {"id": "background-color", "type": "picker", "rationale": "Customizable canvas background"},
+          {"id": "node-shape-toggle", "type": "button_group", "rationale": "Sphere/cube/icon options"},
+          {"id": "edge-bundling-toggle", "type": "toggle", "rationale": "Reduce visual clutter"}
+        ]
+      }
+    }
+  },
+  "summary": {
+    "verified_working": 9,
+    "likely_working_untested": 20,
+    "broken_needs_fix": 13,
+    "infrastructure_needs_ui": 5,
+    "missing_must_add": 4,
+    "missing_should_add": 5,
+    "missing_could_add": 4,
+    "total_ideal_controls": 60
+  },
+  "task_generation_priority": [
+    {"phase": 1, "action": "Fix 3 empty handlers", "effort": "LOW", "impact": "HIGH"},
+    {"phase": 2, "action": "Wire 3 orphaned controls", "effort": "LOW", "impact": "MEDIUM"},
+    {"phase": 3, "action": "Add 4 missing HTML elements", "effort": "MEDIUM", "impact": "MEDIUM"},
+    {"phase": 4, "action": "Remove 3 duplicate legacy IDs", "effort": "LOW", "impact": "LOW"},
+    {"phase": 5, "action": "Add 5 infrastructure UIs", "effort": "MEDIUM", "impact": "HIGH"},
+    {"phase": 6, "action": "Implement 4 MUST controls", "effort": "HIGH", "impact": "HIGH"},
+    {"phase": 7, "action": "Implement 5 SHOULD controls", "effort": "HIGH", "impact": "MEDIUM"},
+    {"phase": 8, "action": "Expand Circuit Breaker to 25+ tests", "effort": "MEDIUM", "impact": "HIGH"}
+  ]
+}

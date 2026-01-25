@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-25 20:40:40",
+  "session_end": "2026-01-25 20:41:03",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769384440.579693,
+      "timestamp_str": "2026-01-25 20:40:40",
+      "role": "user",
+      "content": "VALIDATION REQUEST: We just added a \"Query Manifest\" schema to standardize AI query documentation.\n\nFiles added/modified:\n1. context-management/config/query_manifest_schema.yaml - Full schema definition\n2. context-management/docs/GLOSSARY.md - Added QUERY MANIFEST section\n3. standard-model-of-code/docs/research/gemini/docs/20260125_203000_today_threads_analysis.md - Example record\n\nThe Query Manifest captures: model config, context injection, metrics, quality scores, result takeaway, implications.\n\nQUESTIONS:\n1. Is this REDUNDANT with existing patterns in the codebase? (check research_schemas.yaml, aci_config.yaml, etc.)\n2. Does it ALIGN with our terminology (Codome/Contextome, Wave/Particle)?\n3. What is MISSING that should be there?\n4. Is this FLUFFY or does it add real value?\n5. How should it INTEGRATE with existing tools (analyze.py, ACI)?\n\nBe critical. Cite specific files if there are conflicts or redundancies."
+    }
+  ]
+}

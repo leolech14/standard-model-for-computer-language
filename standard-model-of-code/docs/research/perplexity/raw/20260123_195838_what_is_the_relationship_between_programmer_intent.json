@@ -1,0 +1,80 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T19:58:38.894573",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "What is the relationship between programmer intent and source code? Research on:\n\n1. Don Knuth's Literate Programming - capturing intent alongside code\n2. Dijkstra on programming as theory building\n3. Peter Naur 'Programming as Theory Building' (1985)\n4. Fred Brooks on conceptual integrity\n5. Design rationale capture in software engineering\n6. Modern research on 'code comprehension' and mental models\n\nHow do these thinkers view the relationship between human intent and the code artifact? Is meaning preserved or lost in the encoding process?",
+    "query_length": 546,
+    "checksum": "sha256:49b1cf7a3d9a183eca975b54b5e9013253e6330ccc7fa4df517ba2dbc64b38c6"
+  },
+  "response": {
+    "id": "2b7bf2ac-2446-4d83-bebf-d4976ad81cc8",
+    "model": "sonar-pro",
+    "created": 1769209118,
+    "usage": {
+      "prompt_tokens": 109,
+      "completion_tokens": 369,
+      "total_tokens": 478,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.006,
+        "request_cost": 0.006,
+        "total_cost": 0.012
+      }
+    },
+    "citations": [
+      "http://staff.ustc.edu.cn/~huangzhy/files/papers/YanminDong-WSDM2025.pdf",
+      "https://www.cs.mcgill.ca/~martin/papers/tse2004.pdf",
+      "https://knowledge.e.southern.edu/cgi/viewcontent.cgi?article=1007&context=mscs_reports",
+      "https://dl.acm.org/doi/10.1145/3746059.3747668"
+    ],
+    "search_results": [
+      {
+        "title": "[PDF] Enhancing Code Search Intent with Programming Context Exploration",
+        "url": "http://staff.ustc.edu.cn/~huangzhy/files/papers/YanminDong-WSDM2025.pdf",
+        "date": "2025-03-14",
+        "last_updated": "2025-09-24",
+        "snippet": "Motivated by this observation, in this paper, we propose to study the problem of Context-aware Code Search, where we define the code written by ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] How Effective Developers Investigate Source Code: An Exploratory ...",
+        "url": "https://www.cs.mcgill.ca/~martin/papers/tse2004.pdf",
+        "last_updated": "2025-09-21",
+        "snippet": "The intent of the initial investigation phase was to introduce some control over the study, and to prevent the case where a developer would try to perform the ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Visualizing Relationships Between Source Code Files",
+        "url": "https://knowledge.e.southern.edu/cgi/viewcontent.cgi?article=1007&context=mscs_reports",
+        "date": "2023-01-27",
+        "last_updated": "2025-05-21",
+        "snippet": "A good software visualization can help a developer in building a strong mental model of a codebase and the relationships within it. Hand-made ...",
+        "source": "web"
+      },
+      {
+        "title": "NeuroSync: Intent-Aware Code-Based Problem Solving via Direct ...",
+        "url": "https://dl.acm.org/doi/10.1145/3746059.3747668",
+        "date": "2025-09-27",
+        "snippet": "We introduce direct intent–task matching, a paradigm that externalizes LLM understanding, enabling domain users with limited programming ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "The search results provided do not contain information about the classical software engineering theorists and concepts you've asked about. Specifically, there is no coverage of Donald Knuth's Literate Programming, Edsger Dijkstra's work on programming as theory building, Peter Naur's 1985 paper on \"Programming as Theory Building,\" Fred Brooks's conceptual integrity, or design rationale capture methods.\n\nThe search results do address related modern research on **programmer intent and code comprehension**, though from a different angle:\n\n**Programming Context and Intent Understanding**\n\nRecent research recognizes that **developer intent is not fully captured by code alone**[1]. A 2025 study on context-aware code search demonstrates that traditional code retrieval systems fail to understand developers' search intent because they \"only mine their natural language queries, while ignoring the valuable programming context (e.g., the code written by the developer).\"[1] This research proposes that the **programming context—including surrounding code, code structure, and developer habits—is essential to understanding what developers actually intend to accomplish**[1].\n\n**Mental Models and Code Comprehension**\n\nResearch on software visualization confirms that **understanding source code requires building mental models of relationships between components**[3]. Developers must construct \"a mental model of the codebase so that they can see the 'big picture' and where this piece fits in with all the others.\"[3] Studies show that **successful developers use methodical, structured approaches to program investigation**, examining code structure and creating detailed plans before implementation[2].\n\nTo fully address your question about how classical software engineering thinkers conceptualize the relationship between human intent and code artifacts, you would need sources directly covering their work. The modern research suggests that meaning and intent are partially lost in the encoding process—code alone is insufficient, and developers must reconstruct intent through contextual analysis and mental model building."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

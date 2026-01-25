@@ -1,0 +1,470 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T05:13:49.554350",
+    "source": "perplexity-mcp",
+    "model": "sonar-deep-research",
+    "query": "OKLCH design token system architecture 2025-2026: Best practices for integrating OKLCH color space into a design token system. Specifically:\n\n1. How should OKLCH values (L, C, H) map to semantic design tokens (primary, secondary, accent, surface, etc.)?\n2. What is the recommended structure for OKLCH-based design token files (JSON/YAML)?\n3. How do modern design systems handle gamut mapping and fallbacks for OKLCH colors?\n4. What are the accessibility considerations for OKLCH-based color tokens (contrast ratios, perceptual uniformity)?\n5. How do Figma Tokens, Style Dictionary, and other tools handle OKLCH in 2025-2026?\n\nProvide concrete examples and schema structures.",
+    "query_length": 674,
+    "checksum": "sha256:9c449c0c20bcfa904fab23bdf6ee2ad20aacd23e7d075887e3a7aa02c0ebf252"
+  },
+  "response": {
+    "id": "d257d731-94d1-45a3-a53e-11250690ef08",
+    "model": "sonar-deep-research",
+    "created": 1769328829,
+    "usage": {
+      "prompt_tokens": 159,
+      "completion_tokens": 9874,
+      "total_tokens": 10033,
+      "citation_tokens": 44085,
+      "num_search_queries": 30,
+      "reasoning_tokens": 296324,
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.079,
+        "citation_tokens_cost": 0.088,
+        "reasoning_tokens_cost": 0.889,
+        "search_queries_cost": 0.15,
+        "total_cost": 1.206
+      }
+    },
+    "citations": [
+      "https://www.designtokens.org/tr/drafts/color/",
+      "https://mohanvadivel.com/thoughts/building-accessible-color-system",
+      "https://cobalt-ui.pages.dev/guides/tokens",
+      "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+      "https://www.figma.com/community/plugin/1560632211514322267/prism-oklch-colour-palette-generator",
+      "https://firefox-source-docs.mozilla.org/toolkit/themes/shared/design-system/docs/README.json-design-tokens.stories.html",
+      "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+      "https://www.figma.com/community/plugin/1520709447715571667/supa-design-tokens",
+      "https://www.ethangardner.com/posts/supporting-color-contrast-accessibility/",
+      "https://www.designtokens.org/TR/2025.10/color/",
+      "https://www.figma.com/community/plugin/1534554794837682758/push-ui-design-tokens",
+      "https://firefox-source-docs.mozilla.org/toolkit/themes/shared/design-system/docs/README.json-design-tokens.stories.html",
+      "https://blog.heronhq.com/en/best-practices-for-building-a-color-system-in-figma/",
+      "https://color-contrast.incluud.dev/design-tokens/",
+      "https://github.com/design-tokens/community-group/issues/137",
+      "https://m3.material.io/styles/color/roles",
+      "https://www.ethangardner.com/posts/supporting-color-contrast-accessibility/",
+      "https://www.designtokens.org/tr/drafts/color/",
+      "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+      "https://docs.tokens.studio/manage-tokens/token-sets",
+      "https://uploadcare.com/blog/oklch-in-css/",
+      "https://evilmartians.com/chronicles/better-dynamic-themes-in-tailwind-with-oklch-color-magic",
+      "https://www.figma.com/community/plugin/843461159747178978/tokens-studio-for-figma",
+      "https://evilmartians.com/chronicles/exploring-the-oklch-ecosystem-and-its-tools",
+      "https://www.contentful.com/blog/design-token-system/",
+      "https://mohanvadivel.com/thoughts/building-accessible-color-system",
+      "https://www.styleframe.dev/docs/design-tokens",
+      "https://www.designtokens.org/tr/drafts/color/",
+      "https://m3.material.io/styles/color/system/how-the-system-works",
+      "https://keithjgrant.com/posts/2024/06/a-structured-approach-to-custom-properties/",
+      "https://www.w3.org/TR/css-color-5/",
+      "https://www.designtokens.org/tr/drafts/color/",
+      "https://oklch.com",
+      "https://arxiv.org/html/2512.05067v1",
+      "https://javascript.plainenglish.io/the-tiny-css-upgrade-that-solves-big-design-system-headaches-3d933675bf76",
+      "https://oklch-palette.vercel.app",
+      "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+      "https://www.npmjs.com/package/@csstools/postcss-oklab-function",
+      "https://www.designtokens.org/TR/2025.10/format/",
+      "https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl",
+      "https://css-tricks.com/almanac/functions/o/oklch/",
+      "https://penpot.app/blog/design-tokens-for-designers/",
+      "https://facelessuser.github.io/coloraide/gamut/",
+      "https://zeroheight.com/blog/building-scalable-design-systems-with-figma-26-tips-for-2026/",
+      "https://blog.logrocket.com/oklch-css-consistent-accessible-color-palettes/",
+      "https://oklch.com",
+      "https://uxdesign.cc/design-tokens-with-confidence-862119eb819b",
+      "https://www.designsystemscollective.com/dark-mode-done-right-building-adaptive-design-systems-5f220f656b9f",
+      "https://blog.heronhq.com/en/best-practices-for-building-a-color-system-in-figma/",
+      "https://uxdesign.cc/naming-design-tokens-9454818ed7cb",
+      "https://utilitybend.com/blog/oklchroma-an-oklch-color-pattern-generator-that-generates-css-variables",
+      "https://m3.material.io/styles/color/roles",
+      "https://www.designsystemscollective.com/color-as-strategy-building-systems-with-intent-a89c0934983d",
+      "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties",
+      "https://terrazzo.app/docs/reference/tokens/",
+      "https://www.w3.org/community/design-tokens/2025/10/28/design-tokens-specification-reaches-first-stable-version/",
+      "https://www.figma.com/community/plugin/1383061356258316633/text-contrast-checker-apca-wcag3",
+      "https://www.gfor.rest/blog/advanced-design-utils-colors",
+      "https://www.zeroheight.com/blog/whats-new-in-the-design-tokens-spec/",
+      "https://evilmartians.com/chronicles/exploring-the-oklch-ecosystem-and-its-tools"
+    ],
+    "search_results": [
+      {
+        "title": "Design Tokens Color Module 2025.10",
+        "url": "https://www.designtokens.org/tr/drafts/color/",
+        "snippet": "Component-specific tokens provide design decisions at the component level and improve the separation of concerns in your token architecture.",
+        "source": "web"
+      },
+      {
+        "title": "Building an accessible color system - Mohan Vadivel",
+        "url": "https://mohanvadivel.com/thoughts/building-accessible-color-system",
+        "snippet": "Semantic Color Tokens. The semantic token system organizes colors in a structured and meaningful way, making them easier to manage and apply.",
+        "source": "web"
+      },
+      {
+        "title": "tokens.json Manifest - Cobalt",
+        "url": "https://cobalt-ui.pages.dev/guides/tokens",
+        "snippet": "The basic design token consists of a simple JSON object with $type and $value (required), as well as an optional $description (highly-recommended to use to ...",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH, explained for designers - UX Collective",
+        "url": "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+        "snippet": "OKLCH is a new system that solves this by offering a color space that's closer to how we actually perceive colors with better ergonomics in design and ...",
+        "source": "web"
+      },
+      {
+        "title": "Prism - OKLcH Colour Palette Generator - Figma",
+        "url": "https://www.figma.com/community/plugin/1560632211514322267/prism-oklch-colour-palette-generator",
+        "snippet": "Prism uses OKLCH, a perceptually-uniform color space that mirrors human vision. It divides the sRGB display range into steps based on how we actually perceive ...",
+        "source": "web"
+      },
+      {
+        "title": "JSON design tokens - Firefox Source Docs - Mozilla",
+        "url": "https://firefox-source-docs.mozilla.org/toolkit/themes/shared/design-system/docs/README.json-design-tokens.stories.html",
+        "snippet": "The CSS design token files in that folder come from the JSON file. If you need to modify a design token file, you should be editing the JSON.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH, explained for designers - UX Collective",
+        "url": "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+        "snippet": "OKLCH is a new system that solves this by offering a color space that's closer to how we actually perceive colors with better ergonomics in design and ...",
+        "source": "web"
+      },
+      {
+        "title": "Supa Design Tokens - Figma",
+        "url": "https://www.figma.com/community/plugin/1520709447715571667/supa-design-tokens",
+        "snippet": "Supports P3, OKLCH, and accessibility, with options for contrast preservation, and shade control. Ready for design systems and code export. – Typography: ...",
+        "source": "web"
+      },
+      {
+        "title": "Supporting Color Contrast in Design Systems - Ethan Gardner",
+        "url": "https://www.ethangardner.com/posts/supporting-color-contrast-accessibility/",
+        "snippet": "Using Style Dictionary for design token management and integrating contrast info in the design system documentation.",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens Color Module 2025.10",
+        "url": "https://www.designtokens.org/TR/2025.10/color/",
+        "snippet": "Gamut mapping ensures that the colors are represented accurately in the target color space, even if some colors cannot be represented exactly.",
+        "source": "web"
+      },
+      {
+        "title": "Push UI Design Tokens - Figma",
+        "url": "https://www.figma.com/community/plugin/1534554794837682758/push-ui-design-tokens",
+        "snippet": "Push UI Design System tooling for generating visual documentation of your design tokens and color variables.",
+        "source": "web"
+      },
+      {
+        "title": "JSON design tokens - Firefox Source Docs - Mozilla",
+        "url": "https://firefox-source-docs.mozilla.org/toolkit/themes/shared/design-system/docs/README.json-design-tokens.stories.html",
+        "snippet": "Style Dictionary works by ingesting JSON files with tokens data and performing various platform-specific transformations to output token files formatted for ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Practices for Building a Color System in Figma",
+        "url": "https://blog.heronhq.com/en/best-practices-for-building-a-color-system-in-figma/",
+        "snippet": "Accent colors are those that prominently display important elements in the interface to attract user attention, such as primary colors (brand ...",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens - Color Contrast Checker",
+        "url": "https://color-contrast.incluud.dev/design-tokens/",
+        "snippet": "A powerful color contrast checker that validates accessibility compliance against WCAG 2.2 standards. Test any color combination using hex, named colors, RGB, ...",
+        "source": "web"
+      },
+      {
+        "title": "Legacy color · Issue #137 · design-tokens/community-group - GitHub",
+        "url": "https://github.com/design-tokens/community-group/issues/137",
+        "snippet": "Hex/sRGB is a fine fallback for legacy or small gamut support, and can simply be a required field of the token. Display-p3 is already ...",
+        "source": "web"
+      },
+      {
+        "title": "Color roles - Material Design 3",
+        "url": "https://m3.material.io/styles/color/roles",
+        "snippet": "Fixed accent colors​​ Primary fixed, secondary fixed, and tertiary fixed are fill colors used against surface. These colors maintain the same tone in light and ...",
+        "source": "web"
+      },
+      {
+        "title": "Supporting Color Contrast in Design Systems - Ethan Gardner",
+        "url": "https://www.ethangardner.com/posts/supporting-color-contrast-accessibility/",
+        "snippet": "In other words, calculate accessibility for WCAG with the hexadecimal fallback colors, but make sure it exceeds a 4.5:1 ratio for AA compliance.",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens Color Module 2025.10",
+        "url": "https://www.designtokens.org/tr/drafts/color/",
+        "snippet": "This document describes the technical specification for design token color values and opacity.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH, explained for designers - UX Collective",
+        "url": "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+        "snippet": "Last week, TailwindCSS released their v4 version with revamped color tokens using OKLCH. I forsee more web devs are going to adopt OKLCH as ...",
+        "source": "web"
+      },
+      {
+        "title": "Token Sets - Tokens Studio for Figma",
+        "url": "https://docs.tokens.studio/manage-tokens/token-sets",
+        "snippet": "Token Sets are where our Design Tokens live in the Tokens Studio Plugin. In code, Tokens live in JSON files, so you can think of a Token Set as the no-code ...",
+        "source": "web"
+      },
+      {
+        "title": "What is OKLCH in CSS and why we use it - Uploadcare",
+        "url": "https://uploadcare.com/blog/oklch-in-css/",
+        "snippet": "The perceptual uniformity of OKLCH makes it easier to adjust colors for better readability and contrast, ensuring that our File Uploader is ...",
+        "source": "web"
+      },
+      {
+        "title": "Better dynamic themes in Tailwind with OKLCH color magic",
+        "url": "https://evilmartians.com/chronicles/better-dynamic-themes-in-tailwind-with-oklch-color-magic",
+        "snippet": "We make Tailwind CSS play nice with CSS variables, OKLCH colors, and dynamic themes. Get reliable, predictable theming.",
+        "source": "web"
+      },
+      {
+        "title": "Tokens Studio for Figma",
+        "url": "https://www.figma.com/community/plugin/843461159747178978/tokens-studio-for-figma",
+        "snippet": "Gives you the ability to use Design Tokens that can be used for a whole range of design options, from border radii or spacer units to semantic color and ...",
+        "source": "web"
+      },
+      {
+        "title": "Exploring the OKLCH ecosystem and its tools - Evil Martians",
+        "url": "https://evilmartians.com/chronicles/exploring-the-oklch-ecosystem-and-its-tools",
+        "snippet": "It's also one of the few color pickers that uses the APCA (Accessible Perceptual Contrast Algorithm), which is a new method of calculating color ...",
+        "source": "web"
+      },
+      {
+        "title": "Design tokens explained (and how to build a design token system)",
+        "url": "https://www.contentful.com/blog/design-token-system/",
+        "snippet": "With semantic tokens, we can now encapsulate design decisions within the system, providing clear guidance to those using the design system.",
+        "source": "web"
+      },
+      {
+        "title": "Building an accessible color system - Mohan Vadivel",
+        "url": "https://mohanvadivel.com/thoughts/building-accessible-color-system",
+        "snippet": "OKLCH has sharper transitions at both ends of the spectrum, but HCT offers a more gradual transition in lightness. Since the application I'm ...",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens Overview - Styleframe",
+        "url": "https://www.styleframe.dev/docs/design-tokens",
+        "snippet": "Modern CSS: Leverages OKLCH color space, CSS custom properties, and relative color syntax; Composable: Mix and match composables to build exactly the design ...",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens Color Module 2025.10",
+        "url": "https://www.designtokens.org/tr/drafts/color/",
+        "snippet": "This document describes the technical specification for design token color values and opacity.",
+        "source": "web"
+      },
+      {
+        "title": "Color - Material Design 3 - Create personal color schemes",
+        "url": "https://m3.material.io/styles/color/system/how-the-system-works",
+        "snippet": "The system uses a color space called HCT, which defines all colors using three dimensions: hue, chroma, and tone. Changing HCT values lets you manipulate colors ...",
+        "source": "web"
+      },
+      {
+        "title": "A Structured Approach to Custom Properties - Keith J. Grant",
+        "url": "https://keithjgrant.com/posts/2024/06/a-structured-approach-to-custom-properties/",
+        "snippet": "A tool for generating custom palettes as CSS custom properties. I hope this tool proves useful for many developers, but it's really only the first step in ...",
+        "source": "web"
+      },
+      {
+        "title": "CSS Color Module Level 5 - W3C",
+        "url": "https://www.w3.org/TR/css-color-5/",
+        "snippet": "This module extends CSS Color [css-color-4] to add color modification functions, custom color spaces (ICC profiles), contrast-color(), light-dark() and device- ...",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens Color Module 2025.10",
+        "url": "https://www.designtokens.org/tr/drafts/color/",
+        "snippet": "This document describes the technical specification for design token color values and opacity.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH Color Picker & Converter",
+        "url": "https://oklch.com",
+        "snippet": "OKLCH is a new way to encode colors (like hex, RGBA, or HSL)",
+        "source": "web"
+      },
+      {
+        "title": "Perceptually-Minimal Color Optimization for Web Accessibility - arXiv",
+        "url": "https://arxiv.org/html/2512.05067v1",
+        "snippet": "We present a novel, multi-phase optimization approach for automatically generating WCAG-compliant colors while minimizing perceptual change to ...",
+        "source": "web"
+      },
+      {
+        "title": "The Tiny CSS Upgrade That Solves Big Design System Headaches",
+        "url": "https://javascript.plainenglish.io/the-tiny-css-upgrade-that-solves-big-design-system-headaches-3d933675bf76",
+        "snippet": "Discover how CSS Relative Colors and OKLCH can automate your theming, fix design token chaos, and create adaptive, consistent UIs easily.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH Color Picker & Converter",
+        "url": "https://oklch-palette.vercel.app",
+        "snippet": "OKLCH is a new way to encode colors (like hex, RGBA, or HSL):. OKLCH has native browser support. It can encode more colors for modern screens (P3, Rec.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH, explained for designers - UX Collective",
+        "url": "https://uxdesign.cc/oklch-explained-for-designers-dc6af4433611",
+        "snippet": "OKLCH's perceptual uniformity ensures that color transitions feel natural. By deducting lightness and chroma without changing the hue. It's way ...",
+        "source": "web"
+      },
+      {
+        "title": "@csstools/postcss-oklab-function - NPM",
+        "url": "https://www.npmjs.com/package/@csstools/postcss-oklab-function",
+        "snippet": "PostCSS OKLab Function lets you use oklab and oklch color functions in CSS, following the CSS Color specification.",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens Format Module 2025.10",
+        "url": "https://www.designtokens.org/TR/2025.10/format/",
+        "snippet": "This document describes the technical specification for a file format to exchange design tokens between different tools.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH in CSS: why we moved from RGB and HSL - Evil Martians",
+        "url": "https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl",
+        "snippet": "OKLCH frees designers from the need to manually choose every color. Designers can define a formula, choose a few colors, and an entire design system palette is ...",
+        "source": "web"
+      },
+      {
+        "title": "oklch() - CSS-Tricks",
+        "url": "https://css-tricks.com/almanac/functions/o/oklch/",
+        "snippet": "The CSS oklch() function brings a fresh approach to defining colors located in the Oklab color space. It specifies colors with three components ...",
+        "source": "web"
+      },
+      {
+        "title": "Design tokens for designers: A practical guide - Penpot",
+        "url": "https://penpot.app/blog/design-tokens-for-designers/",
+        "snippet": "Design tokens bring together design and development teams with a single, unified language for expressing color, fonts, sizing, and more.",
+        "source": "web"
+      },
+      {
+        "title": "Gamut Mapping - ColorAide Documentation - GitHub Pages",
+        "url": "https://facelessuser.github.io/coloraide/gamut/",
+        "snippet": "If you are working within reasonable gamuts, OkLCh may be a better choice. LCh Chroma is the default gamut mapping algorithm unless otherwise changed, and can ...",
+        "source": "web"
+      },
+      {
+        "title": "Building scalable design systems with Figma: 26 tips for 2026",
+        "url": "https://zeroheight.com/blog/building-scalable-design-systems-with-figma-26-tips-for-2026/",
+        "snippet": "With the recent Design Tokens Community Group stable release, Figma supports native importing and exporting of tokens that align with this spec.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH in CSS: Consistent, accessible color palettes",
+        "url": "https://blog.logrocket.com/oklch-css-consistent-accessible-color-palettes/",
+        "snippet": "We demonstrate how to use the oklch() color model in CSS to create a variety of consistent, accessible color palettes.",
+        "source": "web"
+      },
+      {
+        "title": "OKLCH Color Picker & Converter",
+        "url": "https://oklch.com",
+        "snippet": "OKLCH is a new way to encode colors (like hex, RGBA, or HSL)",
+        "source": "web"
+      },
+      {
+        "title": "Design tokens with confidence - UX Collective",
+        "url": "https://uxdesign.cc/design-tokens-with-confidence-862119eb819b",
+        "snippet": "With stable releases and native platform support, it is the new baseline for design systems. Aligning your tokens with the W3C standard ...",
+        "source": "web"
+      },
+      {
+        "title": "Dark Mode Done Right: Building Adaptive Design Systems",
+        "url": "https://www.designsystemscollective.com/dark-mode-done-right-building-adaptive-design-systems-5f220f656b9f",
+        "snippet": "This article breaks down how to build dark mode the right way, with proper token architecture, color science, and accessibility baked in from ...",
+        "source": "web"
+      },
+      {
+        "title": "Best Practices for Building a Color System in Figma",
+        "url": "https://blog.heronhq.com/en/best-practices-for-building-a-color-system-in-figma/",
+        "snippet": "Neutral colors are typically used as background or text colors. In this project, background colors are divided into surface and fill categories.",
+        "source": "web"
+      },
+      {
+        "title": "The Practical Guide to Naming Design Tokens - UX Collective",
+        "url": "https://uxdesign.cc/naming-design-tokens-9454818ed7cb",
+        "snippet": "Learn how to effectively name your design tokens in a systematic and future proof way. Understand all key concepts used today.",
+        "source": "web"
+      },
+      {
+        "title": "an OKLCH color pattern generator that generates CSS variables",
+        "url": "https://utilitybend.com/blog/oklchroma-an-oklch-color-pattern-generator-that-generates-css-variables",
+        "snippet": "In this article, I'd like to present a little tool, an OKLCH color picker. A tool created by me using CSS, a bit of React and a bit of AI help.",
+        "source": "web"
+      },
+      {
+        "title": "Color roles - Material Design 3",
+        "url": "https://m3.material.io/styles/color/roles",
+        "snippet": "Color roles are like the \"numbers\" in a paint-by-number canvas. They're the connective tissue between elements of the UI and what color goes where.",
+        "source": "web"
+      },
+      {
+        "title": "Color as Strategy: Building Systems with Intent | by Ivy Hannu",
+        "url": "https://www.designsystemscollective.com/color-as-strategy-building-systems-with-intent-a89c0934983d",
+        "snippet": "Color variables (also called design tokens) are reusable color values that can be referenced and updated globally across your design system.",
+        "source": "web"
+      },
+      {
+        "title": "Using CSS custom properties (variables) - MDN Web Docs",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties",
+        "snippet": "The following example creates a custom property using the @property at-rule. Inheritance is disabled, there's a <color> data type defined ...",
+        "source": "web"
+      },
+      {
+        "title": "Token Types - Terrazzo",
+        "url": "https://terrazzo.app/docs/reference/tokens/",
+        "snippet": "Color is a frequently-used base token that can be aliased within the following composite token types: Border; Gradient; Shadow. Tips & recommendations. Color.js ...",
+        "source": "web"
+      },
+      {
+        "title": "Design Tokens specification reaches first stable version - W3C",
+        "url": "https://www.w3.org/community/design-tokens/2025/10/28/design-tokens-specification-reaches-first-stable-version/",
+        "snippet": "The new stable specification addresses this through standardized support for theming, modern color spaces, and cross-tool interoperability. “The ...",
+        "source": "web"
+      },
+      {
+        "title": "Text Contrast Checker (APCA WCAG3) - Figma",
+        "url": "https://www.figma.com/community/plugin/1383061356258316633/text-contrast-checker-apca-wcag3",
+        "snippet": "APCA Contrast Checker evaluates text accessibility using the Accessible Perceptual Contrast Algorithm (APCA) for WCAG 3 ... Version 4 on May 16, 2025 • ...",
+        "source": "web"
+      },
+      {
+        "title": "Adaptive, simplified design system colors - Grant Forrest",
+        "url": "https://www.gfor.rest/blog/advanced-design-utils-colors",
+        "snippet": "Color token systems are often flattened hierarchies; it's [colorName]-[number] and that's all the semantic context you get.",
+        "source": "web"
+      },
+      {
+        "title": "What's new in the Design Tokens spec: From static to living design ...",
+        "url": "https://www.zeroheight.com/blog/whats-new-in-the-design-tokens-spec/",
+        "snippet": "The Design Tokens spec reaches its first stable version, introducing modern color spaces, groups/aliases, and token resolvers to make design ...",
+        "source": "web"
+      },
+      {
+        "title": "Exploring the OKLCH ecosystem and its tools - Evil Martians",
+        "url": "https://evilmartians.com/chronicles/exploring-the-oklch-ecosystem-and-its-tools",
+        "snippet": "It's also one of the few color pickers that uses the APCA (Accessible Perceptual Contrast Algorithm), which is a new method of calculating color ...",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "# OKLCH Design Token System Architecture: Best Practices and Implementation for 2025-2026\n\nThe emergence of OKLCH as a standardized color space represents a fundamental shift in how design systems approach color management and accessibility. With browser adoption now exceeding ninety-three percent and the Design Tokens Community Group achieving its first stable specification in 2025[56], organizations are increasingly moving beyond legacy RGB and HSL color models to implement perceptually uniform color systems that offer superior control, consistency, and accessibility properties. This comprehensive report examines the architectural principles, technical implementation strategies, and practical methodologies for integrating OKLCH color spaces into modern design token systems, providing guidance for design systems teams, tool makers, and development organizations seeking to establish future-proof color management infrastructure.\n\n## Understanding OKLCH as a Perceptually Uniform Color Foundation\n\nBefore examining the architectural implications of OKLCH adoption, it is essential to understand the fundamental properties that distinguish OKLCH from traditional color models and why these properties have profound consequences for design token architecture. OKLCH, which stands for Oklab Lightness, Chroma, and Hue, is a cylindrical representation of the OKLAB color space, which was specifically designed to correct the shortcomings of earlier perceptually uniform color models such as CIELAB[1][4]. The three components of OKLCH operate on distinct perceptual dimensions: lightness (L) ranges from zero to one (or zero to one hundred percent), representing perceived brightness on a scale that closely mirrors human vision; chroma (C) represents the colorfulness or saturation of the color, ranging theoretically from zero to infinity but practically remaining below 0.5 in most implementations; and hue (H) represents the angle of the color on the color wheel, measured in degrees from zero to three hundred sixty[1][4][18].\n\nThe perceptual uniformity of OKLCH means that equal numerical changes in any of its components produce equal perceived visual differences, a property that is mathematically absent in traditional RGB and HSL color spaces[4][7][21]. This characteristic has immediate and cascading implications for how design tokens should be structured. In RGB color spaces, for example, a change from RGB(100, 100, 100) to RGB(150, 100, 100) produces a different perceptual change than moving from RGB(200, 150, 150) by the same absolute amount, and the perceptual change varies depending on which component is being modified. Conversely, in OKLCH, adjusting lightness by 0.1 produces a visually consistent change regardless of whether the color is a vibrant blue or a muted green[21][22]. This property enables design systems to create color scales with natural-feeling transitions and maintain consistent accessibility ratios across different hue families without manual adjustment for each color[2][49].\n\nThe wider color gamut support of OKLCH represents another critical architectural consideration. OKLCH can encode colors in the Display P3 color space, which contains approximately thirty percent more colors than the traditional sRGB gamut[4][7]. For design systems targeting modern devices with wide-gamut displays—particularly smartphones and professional monitors—this expanded palette offers opportunities for richer, more vibrant color expression while maintaining accessibility and brand fidelity[21]. However, this capability introduces the technical complexity of managing fallbacks for devices limited to sRGB color space, a challenge that fundamentally shapes how token files should be structured and how build systems must process color definitions[9][17].\n\n## Mapping OKLCH Components to Semantic Design Token Hierarchies\n\nThe transformation from OKLCH's technical color space into a usable semantic token system requires a carefully considered hierarchical structure that bridges the gap between perceptually uniform color mathematics and meaningful design intent. Design systems traditionally employ multiple token levels, beginning with base or primitive tokens that represent fundamental design decisions, advancing through component-specific tokens that apply to particular UI elements, and culminating in semantic tokens that encode meaning and usage guidance[25][39][42]. When OKLCH is introduced into this hierarchy, each level takes on specific responsibilities and constraints.\n\nAt the primitive or base token level, OKLCH colors should be organized into atomic color palettes grouped by hue family, with each hue family containing a consistent set of lightness levels[2][13][49]. The recommended approach involves creating approximately ten to thirteen discrete lightness values for each hue, arranged in increments that ensure perceptual uniformity while providing adequate coverage for different use cases[13][49]. For a primary brand color, for instance, you might define tones numbered fifty, one hundred, two hundred through nine hundred in increments of one hundred, following a pattern where the numbering convention allows for future insertion of intermediate values without disrupting the existing token naming structure[1][10][18][25]. Each token at this level should maintain a constant hue and vary primarily in lightness, with chroma adjustments reserved for refinement based on visual evaluation[2][13].\n\nWithin the atomic palette layer, the relationship between lightness values and practical application becomes crucial. Colors at the extreme ends of the lightness scale (very light tones in the range of ninety to ninety-eight percent lightness, and very dark tones below ten percent lightness) are typically reserved for backgrounds or minimal-contrast applications, while tones in the middle ranges—particularly those with lightness values between forty and sixty percent—carry maximum chroma and serve as accent colors[2][13][49]. This distribution ensures that when colors are applied to create backgrounds and foreground elements, the perceptual uniformity of OKLCH automatically maintains consistent contrast ratios across different hue families. For example, if a specific lightness value like fifty percent provides adequate contrast when used as text on a white background, the same fifty percent lightness value applied to a different hue should provide visually similar contrast characteristics[2][26][49].\n\nThe semantic layer builds directly upon these atomic primitives by creating named tokens that encode usage intent rather than merely describing color properties. Where primitive tokens might be named `color.blue.500` or `color.teal.600`, semantic tokens adopt names like `color.background.primary`, `color.text.secondary`, `color.border.emphasis`, or `color.surface.interactive`[13][25][42]. These semantic tokens typically reference primitive tokens through token aliasing mechanisms, allowing designers and developers to discuss color choices using meaningful language while maintaining a clear provenance back to the underlying color mathematics. A semantic token for button background color might be defined as a reference to `color.blue.600`, but this semantic layer provides the important contextual information that this particular shade of blue is specifically chosen for button backgrounds[2][13][49].\n\nThe challenge in mapping OKLCH components to semantic tokens becomes particularly complex when designing for multiple themes, interaction states, and accessibility requirements. A comprehensive semantic token system should define variants for different contexts: primary states for default appearance, hover states that typically involve a lightness adjustment of approximately 0.1 (ten percent), active or pressed states with similar lightness modifications, and disabled states that often employ reduced chroma or neutral hues[2][13][49]. The perceptual uniformity of OKLCH makes this remarkably tractable because the same lightness adjustment produces visually consistent results across all hue families. A button background might move from `oklch(56% 0.25 260)` in its default state to `oklch(46% 0.25 260)` in its hover state, applying a uniform lightness reduction while preserving hue and chroma[2][22][49].\n\nFor surface and background colors, the semantic mapping should recognize the distinction between primary surfaces (large-area backgrounds that establish the overall tone), secondary surfaces (intermediate background layers), and interactive surfaces (small focused areas like buttons or form inputs)[2][13][49]. A light mode theme might define `color.surface.primary` as a near-white color with lightness values exceeding ninety-five percent and minimal chroma, while `color.surface.interactive` might employ a more neutral tone with slightly higher chroma for visual interest. Dark mode variants would reverse this logic, beginning from very dark tones and scaling upward[2][13][49]. By using OKLCH's perceptual uniformity, the same semantic token names can serve both light and dark themes through simple value references, avoiding token proliferation and maintaining consistency[2][26].\n\nAccent and emphasis colors require specialized mapping approaches. Primary brand colors often pose particular challenges because they may need to serve simultaneously as background colors, text colors, and border colors in different contexts[13][49]. Rather than forcing a single primary color to perform all these functions, sophisticated token systems create multiple variants: `color.brand.primary` for the most vibrant, visually prominent application (often at high chroma and moderate lightness); `color.brand.secondary` for applications requiring somewhat reduced intensity; and `color.text.brand` for situations where the primary brand color is too light or insufficiently contrasted for readable text[13][49]. These variants typically employ the same base hue but vary lightness and chroma independently, leveraging OKLCH's ability to manipulate these dimensions without affecting hue perception.\n\n## Design Token File Architecture and JSON/YAML Structure\n\nThe practical representation of OKLCH design tokens within file systems requires careful attention to both the technical requirements of various tools and the cognitive ergonomics of maintaining these files. The Design Tokens Community Group's specification, which achieved stability in version 2025.10, provides normative guidance on token file structure while also defining extension points where implementations can incorporate additional features[1][3][56]. Understanding both the standard specification and the practical extensions employed by leading design systems provides the foundation for effective token architecture.\n\nAt the fundamental level, design token files following the DTCG specification employ either JSON or YAML formats, with JSON historically being the standard while YAML gains adoption for its improved readability and reduced syntactic overhead[3][39][56]. Each token requires at minimum a `$type` property and a `$value` property, with optional `$description` properties providing crucial documentation of intended usage[3][39]. For OKLCH colors specifically, the value can be expressed as either a simple string following CSS color notation or as a structured object that explicitly specifies color space, components, and fallback values[1][3][10][55].\n\nThe simplest OKLCH token representation employs direct CSS notation:\n\n```yaml\ncolor:\n  blue:\n    500:\n      $type: color\n      $value: oklch(56% 0.15 260)\n      $description: Primary blue for interactive elements\n```\n\nThis string-based format offers excellent compatibility with modern tools and provides human-readable color values that developers can understand at a glance. However, for systems requiring explicit gamut mapping, fallback support, or complex color space specifications, the object-based format provides necessary control:\n\n```yaml\ncolor:\n  blue:\n    500:\n      $type: color\n      $value:\n        colorSpace: oklch\n        components: [0.56, 0.15, 260]\n        alpha: 1\n      $description: Primary blue for interactive elements\n```\n\nWhen implementing fallback values for devices lacking Display P3 support, the token structure expands further to accommodate multiple representations:\n\n```yaml\ncolor:\n  blue:\n    500:\n      $type: color\n      $value:\n        colorSpace: oklch\n        components: [0.56, 0.15, 260]\n        alpha: 1\n        hex: \"#0077CC\"\n      $description: Primary blue, with sRGB fallback\n```\n\nFor design systems managing multiple themes, interaction states, and accessibility variants, the token structure must accommodate conditional values triggered by media queries or theme contexts. The Firefox design token system, which has been refined for production use across multiple platforms, demonstrates this through nested value objects:\n\n```yaml\ncolor:\n  blue:\n    primary:\n      value:\n        light: oklch(95% 0.02 260)\n        dark: oklch(25% 0.05 260)\n      description: Primary text color adapting to light and dark modes\n```\n\nThis structure automatically generates separate CSS variables for light and dark theme contexts, enabling themes to coexist within the same stylesheet without manual duplication[6][12]. Similarly, systems supporting accessibility features like high-contrast mode can employ nested structures under `prefersContrast` or `forcedColors` keys[6][12].\n\nThe atomic color palette layer requires a particular structural approach that balances between maintaining flat, manageable file hierarchies and encoding the relationships between colors within a hue family. A common pattern organizes colors into groups by hue, with numeric scales indicating lightness progression:\n\n```yaml\ncolor:\n  blue:\n    50:\n      $type: color\n      $value: oklch(98% 0.008 250)\n    100:\n      $type: color\n      $value: oklch(93% 0.028 250)\n    200:\n      $type: color\n      $value: oklch(80% 0.045 250)\n    300:\n      $type: color\n      $value: oklch(66% 0.056 250)\n    400:\n      $type: color\n      $value: oklch(58% 0.059 250)\n    500:\n      $type: color\n      $value: oklch(49% 0.053 250)\n    600:\n      $type: color\n      $value: oklch(35% 0.042 250)\n    700:\n      $type: color\n      $value: oklch(20% 0.025 250)\n```\n\nThis structure ensures that hue remains constant across the scale (two hundred fifty degrees throughout the blue family) while lightness decreases predictably from fifty (98% lightness) through seven hundred (20% lightness). The chroma values in this example follow a curve that rises toward the middle values (maximum saturation in the mid-tone ranges) and diminishes at the extremes, a pattern that ensures natural, visually harmonious color progressions[13][49].\n\nThe semantic token layer typically resides in separate file groups that reference these atomic primitives through token aliasing. A practical semantic color file might be organized as follows:\n\n```yaml\ncolor:\n  background:\n    primary:\n      $type: color\n      $value: \"{color.neutral.50}\"\n      $description: Primary surface for light mode\n    secondary:\n      $type: color\n      $value: \"{color.neutral.100}\"\n      $description: Secondary surface for card backgrounds\n    interactive:\n      $type: color\n      $value: \"{color.neutral.75}\"\n      $description: Background for interactive elements like buttons\n  text:\n    primary:\n      $type: color\n      $value: \"{color.neutral.900}\"\n      $description: Primary text color for maximum contrast\n    secondary:\n      $type: color\n      $value: \"{color.neutral.700}\"\n      $description: Secondary text for supporting information\n    brand:\n      $type: color\n      $value: \"{color.blue.600}\"\n      $description: Brand-colored text for emphasis\n```\n\nFor systems managing multiple token sets (light theme, dark theme, high-contrast variants), Style Dictionary and similar build tools support organizing tokens into separate files that can be selectively enabled or combined. Mozilla's Firefox design system, for instance, maintains separate token definitions for platform-specific values and brand-specific values, allowing the same semantic token names to resolve to different underlying colors depending on context[6][12].\n\nThe structure of OKLCH token files should account for the practical tooling limitations and capabilities. Figma Tokens, which serves as a widely adopted plugin for design systems, requires token sets to maintain flat or folder-based hierarchies and supports OKLCH notation directly when using modern color picker integrations[8][20][23]. Style Dictionary, an open-source tool for transforming design tokens into platform-specific formats, accepts OKLCH values in DTCG-compliant JSON structures and can apply gamut mapping transformations during the build process[6][9][12]. By structuring tokens according to the DTCG specification while remaining aware of tool-specific capabilities, design systems can maintain maximum interoperability while leveraging the strengths of different platforms.\n\n## Gamut Mapping and Cross-Platform Fallback Strategies\n\nOne of the most technically complex aspects of implementing OKLCH in production design systems involves managing the mismatch between the wide color gamut that OKLCH can theoretically represent and the limited gamut of devices where applications will actually run. The vast majority of desktop monitors and consumer devices support only the sRGB color gamut, which contains fewer colors than the Display P3 gamut used on modern smartphones and professional displays[4][7][19]. When an OKLCH color falls outside the sRGB gamut—which is particularly common for highly saturated colors at mid-tone lightness values—the color must be converted to the closest in-gamut equivalent for fallback purposes[10][17][34].\n\nGamut mapping is the process of converting out-of-gamut colors to the closest representable colors within a target color space[10][17][43]. The DTCG specification acknowledges that multiple gamut mapping algorithms exist, each with different properties and appropriate use cases[10]. The most commonly implemented algorithm for OKLCH-to-sRGB conversion, the \"oklch-chroma\" method, reduces the chroma of the color via binary search until the color falls within the sRGB gamut while preserving both lightness and hue[10][43]. This approach maintains the perceptual quality of the color while ensuring compatibility with legacy devices, though the resulting sRGB color may be visually less vibrant than the original OKLCH specification[17].\n\nA practical example illustrates this process. Consider an OKLCH color specified as `oklch(57% 0.24 23)`, which represents a moderately saturated red-orange. This color exists in the Display P3 gamut but not in the standard sRGB gamut. When gamut-mapped to sRGB using the chroma-reduction algorithm, it converts to approximately `#df002d`. The perceptual appearance remains similar—still recognizably red-orange, still at comparable lightness—but with slightly reduced saturation[9][17]. The contrast ratio between this mapped color and white text, measured at 5.02:1, exceeds the WCAG AA accessibility requirement of 4.5:1, confirming that the mapped color remains suitable for its intended use despite the conversion[9][17].\n\nDesign token systems should implement gamut mapping at the build-time level rather than attempting to manage it manually. The PostCSS OKLab Function plugin, for instance, automatically converts OKLCH values to sRGB fallbacks during CSS processing, optionally preserving the original OKLCH notation for browsers that support it[38]. A practical build configuration might specify:\n\n```json\n{\n  \"color\": {\n    \"primary\": {\n      \"value\": \"oklch(56% 0.25 260)\"\n    }\n  }\n}\n```\n\nDuring the build process, this specification generates CSS variables with multiple fallback layers:\n\n```css\n--color-primary: rgb(0, 119, 204);\n--color-primary: color(display-p3 0.15 0.50 0.85);\n--color-primary: oklch(56% 0.25 260);\n```\n\nBrowsers render the last format they understand, ensuring that Display P3-capable devices render the most vibrant color while older browsers fall back gracefully[38]. This approach requires no manual management by designers and scales automatically across hundreds of color tokens[9][17][38].\n\nThe specific choice of gamut mapping algorithm should depend on the design system's priorities. The chroma-reduction approach preserves lightness and hue, making it ideal for systems where perceptual uniformity and accessible contrast ratios are paramount[34][43]. Alternative approaches, such as saturation-based reduction or relative colorimetric mapping, may be appropriate for systems with different priorities[10][34][43]. Design system architects should document which algorithm is applied and validate the results by spot-checking critical color pairs to ensure contrast ratios remain within accessibility requirements[9][17][34].\n\nFor design systems operating across multiple platforms—particularly those supporting iOS, Android, and web simultaneously—fallback strategies become even more critical. iOS and Android platforms have varying levels of OKLCH support depending on the framework and runtime version. A pragmatic approach involves specifying colors in sRGB-compatible formats as the baseline, supplemented with OKLCH specifications for platforms that support them[25][38][56]. Style Dictionary and similar tools can generate platform-specific output formats, automatically selecting appropriate color specifications for iOS Swift enums, Android XML resources, CSS custom properties, and JSON exports[9][12][25].\n\nThe challenge of maintaining consistent color appearance across platforms and devices necessitates careful testing and validation. Design systems should establish processes for evaluating how colors appear on different device types—particularly comparing sRGB fallbacks on standard monitors against Display P3 colors on wide-gamut displays. Tools like WebGL color viewers and platform-specific preview applications enable this validation[21][24][33]. Additionally, design documentation should explicitly acknowledge the visual differences between sRGB fallback colors and their OKLCH specifications, setting appropriate expectations for design and development teams[17].\n\n## Accessibility Considerations and Contrast Management with OKLCH\n\nThe perceptual uniformity of OKLCH introduces fundamental changes to how design systems approach accessibility and color contrast, shifting from manual contrast ratio calculations based on RGB fallback colors to predictable, mathematically grounded contrast management based on lightness differences. This transformation represents one of the most significant practical benefits of OKLCH adoption, enabling design systems to scale color palettes with confidence that accessibility requirements will be met across diverse color families.\n\nThe relationship between OKLCH lightness and perceived brightness is so consistent that the W3C's WCAG 3 specifications, currently in development, have shifted to emphasizing the Advanced Perceptual Contrast Algorithm (APCA) which operates directly on perceptually uniform color spaces[34][57]. While WCAG 2 contrast ratios, which form the current accessibility baseline, technically calculate based on relative luminance derived from RGB values, applying OKLCH tokens with appropriate lightness separation achieves equivalent or superior results in practice[2][9][17][34]. The fundamental principle is straightforward: when two colors differ by a consistent lightness value in OKLCH space—say, one hundred-forty tones apart when using HCT, or thirty percent lightness separation in OKLCH—they will produce similar contrast ratios regardless of whether one is blue and the other is green[2][26][34].\n\nA practical implementation ensures that semantic tokens for text and backgrounds maintain sufficient lightness separation. Research suggests that a lightness difference of approximately thirty to forty percent between foreground and background colors typically satisfies WCAG AA contrast requirements[2][26][34]. For example, if a background surface is defined as `color.surface.primary` with a lightness of ninety-five percent, text applied over that background should employ a lightness value around fifty-five to sixty-five percent to maintain adequate contrast. This separation, when applied consistently across all hue families, produces visually equivalent contrast levels regardless of whether the text is blue, red, or green[2][26][34].\n\nDesign systems should document the lightness ranges that correspond to specific accessibility levels. A practical guideline might establish:\n\n- Lightness values from zero to twenty percent: reserved for dark text or very dark backgrounds\n- Lightness values from twenty to forty percent: suitable for secondary text and interactive elements\n- Lightness values from forty to sixty percent: appropriate for primary text and neutral backgrounds\n- Lightness values from sixty to eighty percent: suitable for light backgrounds and secondary surfaces\n- Lightness values from eighty to one hundred percent: reserved for very light backgrounds and minimal-contrast applications\n\nBy organizing semantic tokens according to these ranges, designers can make accessibility-conscious color choices at design time rather than requiring post-hoc contrast ratio verification[2][26][34][49].\n\nThe particular advantage of OKLCH for accessible color systems emerges when designing for dark mode variants. Rather than creating entirely separate color palettes for dark themes, designers can leverage the fact that OKLCH's perceptual uniformity makes the same semantic token names applicable to different OKLCH values in different themes[2][26]. A token defined as:\n\n```yaml\ncolor:\n  text:\n    primary:\n      value:\n        light: oklch(8% 0.02 260)\n        dark: oklch(92% 0.02 260)\n```\n\nautomatically provides appropriate contrast in both light and dark contexts because the lightness values are inverse while maintaining similar perceived saturation[2][26][49]. This pattern scales across dozens or hundreds of semantic tokens without requiring separate token definitions for dark mode.\n\nThe emerging APCA contrast algorithm provides even more precise accessibility guidance by considering font properties, text purpose, and perceptual characteristics in addition to simple color differences[34][57]. Tools implementing APCA, such as the Polychrom Figma plugin, work directly with OKLCH colors to suggest accessible color adjustments while minimizing visual changes to the design[24][60]. Rather than reducing a color's saturation indiscriminately to improve contrast, APCA-aware tools can adjust lightness alone, leveraging OKLCH's ability to modify this dimension independently. For example, a button color might shift from `oklch(56% 0.25 260)` to `oklch(42% 0.25 260)` to meet accessibility requirements while maintaining the original hue and saturation[24][34][60].\n\nSpecialized tools for accessibility-focused color optimization now employ OKLCH directly in their constraint satisfaction algorithms. A research implementation recently demonstrated that using OKLCH space with constrained optimization techniques can automatically modify colors to meet WCAG AA requirements while minimizing perceptual change, achieving acceptable results in over seventy-seven percent of accessibility violation cases with median perceptual differences below the just-noticeable-difference threshold[34]. This capability suggests that future design system tooling will increasingly automate the process of ensuring accessible color combinations through intelligent OKLCH-based manipulation.\n\nDesign systems should establish clear accessibility documentation that connects OKLCH lightness values to WCAG compliance levels. Rather than requiring designers to manually verify contrast ratios, documentation should communicate that combinations meeting the established lightness separation guidelines automatically satisfy accessibility requirements[2][9][26][34]. This shift from outcome-based verification to rule-based design dramatically reduces the cognitive load on design teams while improving overall accessibility outcomes.\n\n## Tool Ecosystem and Implementation: Figma Tokens, Style Dictionary, and Modern Platforms\n\nThe practical adoption of OKLCH in design systems depends critically on tooling support and the ability to integrate OKLCH-based tokens seamlessly into existing design and development workflows. As of 2025-2026, a mature ecosystem of tools has emerged to support OKLCH color token management, though native support within mainstream design tools remains limited, necessitating creative use of plugins and build-time transformations.\n\nFigma, the dominant design tool for design systems work, does not yet natively support OKLCH in its color picker interface. However, multiple third-party plugins enable OKLCH workflows within Figma. The Prism plugin generates comprehensive OKLCH palettes from a single base color, automatically creating tints and shades across all lightness values[5]. The Supa Design Tokens plugin supports OKLCH with Display P3 compatibility and includes accessibility features[8]. For design systems managing tokens through Tokens Studio, the plugin can parse OKLCH values in token files and apply them to Figma components, though visual feedback occurs through the resolved RGB representation[20][23]. This creates a practical workflow where designers work with semantic token names in Figma while the underlying OKLCH mathematics operates invisibly during the token resolution process.\n\nThe recommended Figma workflow for OKLCH-based design systems involves maintaining tokens in external JSON or YAML files synchronized with Figma through Tokens Studio or similar bridge tools. Designers reference semantic token names (like `color.background.primary` or `color.text.secondary`) when styling components, while the token resolution process maps these names to OKLCH values stored in source files. Build processes then handle the transformation from OKLCH to platform-specific formats[20][23][44]. This approach maintains Figma's visual design capabilities while leveraging OKLCH's mathematical properties for consistency and scalability.\n\nStyle Dictionary, an open-source tool maintained by Amazon and widely adopted across design systems, provides production-grade support for OKLCH-based tokens[9][12]. The tool accepts DTCG-compliant token definitions and transforms them into platform-specific outputs: CSS custom properties with sRGB and Display P3 fallbacks, iOS Swift code, Android XML resources, and JSON exports[6][9][12]. A typical Style Dictionary configuration for OKLCH colors might specify:\n\n```javascript\nmodule.exports = {\n  source: ['tokens/**/*.json'],\n  platforms: {\n    css: {\n      transformGroup: 'css',\n      buildPath: 'dist/css/',\n      files: [{\n        destination: 'colors.css',\n        format: 'css/variables'\n      }]\n    },\n    ios: {\n      transformGroup: 'ios',\n      buildPath: 'dist/ios/',\n      files: [{\n        destination: 'Colors.swift',\n        format: 'ios/colors.swift'\n      }]\n    }\n  }\n};\n```\n\nDuring the build process, Style Dictionary applies platform-specific transformations, automatically handling gamut mapping for sRGB targets while preserving OKLCH values for web outputs supporting Display P3[9][12]. This approach eliminates manual color format conversion and enables teams to maintain a single source of truth that scales across web, iOS, Android, and other platforms.\n\nTokens Studio for Figma, which has become the de facto standard for design token management within Figma workflows, achieved significant improvements in version 3.0 and beyond by adding native OKLCH support and improved multi-file token management[20][23][44]. The plugin allows designers to define and organize tokens directly within Figma, then export them in DTCG-compliant formats for integration with build systems like Style Dictionary. The workflow typically involves:\n\n1. Defining primitive and semantic tokens within Tokens Studio, leveraging the plugin's built-in OKLCH color picker or integrations with third-party tools\n2. Exporting tokens to JSON files that follow the DTCG specification\n3. Committing these files to version control alongside application code\n4. Running build processes (typically within CI/CD pipelines) to transform tokens into platform-specific formats\n5. Importing transformed tokens back into Figma components or applying them directly in application code\n\nRecent versions of Tokens Studio (Pro tier) support advanced features including multi-file management, theme management, branch switching, and composition tokens that reference other tokens[20][23]. These capabilities enable sophisticated design systems to manage complex token hierarchies with multiple themes and variant layers.\n\nMozilla's Firefox design system provides a production implementation demonstrating OKLCH token management at scale[6][12]. The system maintains design tokens in a master JSON file that sources specifications for multiple platforms. The token structure separates platform-specific values and brand-specific values, allowing the same semantic token names to resolve to different OKLCH specifications depending on context. The Firefox build process uses Style Dictionary to transform these tokens into:\n\n- CSS files with sRGB fallbacks and Display P3 variants for web components\n- Platform-specific colors files for native UI elements\n- JavaScript exports for runtime color access\n\nThis approach has been refined through years of production use and serves as a reference implementation for organizations building similar systems.\n\nBeyond these primary tools, a mature ecosystem of supporting utilities has emerged around OKLCH color token implementation. ColorAide, a comprehensive color mathematics library supporting all CSS Color Module Level 4 color spaces, enables sophisticated color manipulation and gamut mapping[43]. The `oklch.com` color picker, maintained by Evil Martians, provides both educational resources and practical tools for working with OKLCH colors[24][33][46]. The Harmonizer tool generates accessible OKLCH palettes using the APCA contrast algorithm, allowing designers to create color systems with mathematically guaranteed accessibility properties[24][60].\n\nThe design token ecosystem achieved a significant milestone in October 2025 when the Design Tokens Community Group released the first stable version of the Design Tokens Specification (version 2025.10)[56]. This standardization directly impacts tool implementations: Figma announced native token import/export support aligned with the DTCG specification[44], Tokens Studio confirmed compliance and added extended features[20], and multiple other tools including Penpot, Sketch, Framer, and Knapsack committed to supporting the standard[56]. This convergence on a shared specification dramatically reduces friction in token file exchange and enables design systems to migrate between tools with minimal rework.\n\n## Practical Implementation Patterns and Complete Examples\n\nTranslating architectural principles into working design systems requires concrete, production-tested patterns that address the full complexity of real-world requirements. This section presents comprehensive examples demonstrating how OKLCH tokens integrate with modern design system practices.\n\n### Complete Token File Structure\n\nA production design system typically organizes OKLCH tokens across multiple files that are combined during the build process. Here is a representative structure for a modern design system:\n\n```yaml\n# tokens/colors/primitives.yaml\ncolor:\n  neutral:\n    50:\n      $type: color\n      $value: oklch(99% 0.001 0)\n    100:\n      $type: color\n      $value: oklch(97% 0.002 0)\n    200:\n      $type: color\n      $value: oklch(90% 0.004 0)\n    300:\n      $type: color\n      $value: oklch(83% 0.006 0)\n    400:\n      $type: color\n      $value: oklch(73% 0.008 0)\n    500:\n      $type: color\n      $value: oklch(60% 0.009 0)\n    600:\n      $type: color\n      $value: oklch(48% 0.008 0)\n    700:\n      $type: color\n      $value: oklch(36% 0.006 0)\n    800:\n      $type: color\n      $value: oklch(24% 0.004 0)\n    900:\n      $type: color\n      $value: oklch(12% 0.002 0)\n\n  blue:\n    50:\n      $type: color\n      $value: oklch(98% 0.008 250)\n    100:\n      $type: color\n      $value: oklch(93% 0.028 250)\n    200:\n      $type: color\n      $value: oklch(80% 0.045 250)\n    300:\n      $type: color\n      $value: oklch(66% 0.056 250)\n    400:\n      $type: color\n      $value: oklch(58% 0.059 250)\n    500:\n      $type: color\n      $value: oklch(49% 0.053 250)\n    600:\n      $type: color\n      $value: oklch(35% 0.042 250)\n    700:\n      $type: color\n      $value: oklch(20% 0.025 250)\n\n  success:\n    50:\n      $type: color\n      $value: oklch(98% 0.009 150)\n    100:\n      $type: color\n      $value: oklch(93% 0.032 150)\n    500:\n      $type: color\n      $value: oklch(49% 0.065 150)\n    700:\n      $type: color\n      $value: oklch(20% 0.034 150)\n```\n\nThis primitive layer establishes the foundational color palette that all semantic tokens reference. Note that neutral colors maintain zero hue values (or achromatic hue), while colored families maintain consistent hues across all lightness values.\n\n```yaml\n# tokens/colors/semantic.yaml\ncolor:\n  background:\n    primary:\n      $type: color\n      $value: \"{color.neutral.50}\"\n      $description: Primary background for light mode\n    secondary:\n      $type: color\n      $value: \"{color.neutral.100}\"\n      $description: Secondary background for cards\n    tertiary:\n      $type: color\n      $value: \"{color.neutral.200}\"\n      $description: Tertiary background for subtle layers\n    interactive:\n      $type: color\n      $value: \"{color.neutral.75}\"\n      $description: Background for interactive states\n\n  text:\n    primary:\n      $type: color\n      $value: \"{color.neutral.900}\"\n      $description: Primary text color, maximum contrast\n    secondary:\n      $type: color\n      $value: \"{color.neutral.700}\"\n      $description: Secondary text for supporting information\n    tertiary:\n      $type: color\n      $value: \"{color.neutral.500}\"\n      $description: Tertiary text for minimal emphasis\n    inverse:\n      $type: color\n      $value: \"{color.neutral.50}\"\n      $description: Text color for dark backgrounds\n\n  border:\n    default:\n      $type: color\n      $value: \"{color.neutral.200}\"\n      $description: Default border color\n    emphasis:\n      $type: color\n      $value: \"{color.blue.500}\"\n      $description: Emphasized border for interactive elements\n\n  action:\n    primary:\n      $type: color\n      $value: \"{color.blue.500}\"\n      $description: Primary action color\n    success:\n      $type: color\n      $value: \"{color.success.500}\"\n      $description: Success state indication\n    warning:\n      $type: color\n      $value: oklch(58% 0.15 50)\n      $description: Warning state indication\n    error:\n      $type: color\n      $value: oklch(50% 0.20 30)\n      $description: Error state indication\n```\n\nThis semantic layer provides meaningful names that designers and developers use in practice. Tokens reference the primitive palette, enabling global color changes by modifying a single primitive token.\n\n```yaml\n# tokens/colors/dark-mode.yaml\ncolor:\n  background:\n    primary:\n      $type: color\n      $value: \"{color.neutral.900}\"\n      $description: Primary background for dark mode\n    secondary:\n      $type: color\n      $value: \"{color.neutral.800}\"\n      $description: Secondary background for cards in dark mode\n    tertiary:\n      $type: color\n      $value: \"{color.neutral.700}\"\n      $description: Tertiary background for subtle layers in dark mode\n    interactive:\n      $type: color\n      $value: \"{color.neutral.800}\"\n      $description: Background for interactive states in dark mode\n\n  text:\n    primary:\n      $type: color\n      $value: \"{color.neutral.50}\"\n      $description: Primary text color for dark mode\n    secondary:\n      $type: color\n      $value: \"{color.neutral.300}\"\n      $description: Secondary text for dark mode\n    tertiary:\n      $type: color\n      $value: \"{color.neutral.500}\"\n      $description: Tertiary text for dark mode\n    inverse:\n      $type: color\n      $value: \"{color.neutral.900}\"\n      $description: Text color for light backgrounds in dark mode\n```\n\nDark mode variants reuse the same semantic token names but reference different primitive colors. When these token sets are combined in build processes, CSS generation tools create media query variants that automatically select appropriate colors based on `prefers-color-scheme`.\n\n### Component-Level Token Integration\n\nAt the component level, design systems should define tokens for specific UI patterns while remaining abstract enough to reuse across variants. Here is an example for button styling:\n\n```yaml\n# tokens/components/button.yaml\ncomponent:\n  button:\n    primary:\n      background:\n        $type: color\n        $value: \"{color.action.primary}\"\n      background-hover:\n        $type: color\n        $value: oklch(from {color.action.primary} calc(l - 0.15) c h)\n      background-active:\n        $type: color\n        $value: oklch(from {color.action.primary} calc(l - 0.25) c h)\n      text:\n        $type: color\n        $value: \"{color.text.inverse}\"\n      border:\n        $type: color\n        $value: \"{color.action.primary}\"\n\n    secondary:\n      background:\n        $type: color\n        $value: \"{color.background.secondary}\"\n      background-hover:\n        $type: color\n        $value: \"{color.background.tertiary}\"\n      background-active:\n        $type: color\n        $value: \"{color.neutral.200}\"\n      text:\n        $type: color\n        $value: \"{color.text.primary}\"\n      border:\n        $type: color\n        $value: \"{color.border.default}\"\n\n    disabled:\n      background:\n        $type: color\n        $value: \"{color.background.secondary}\"\n      text:\n        $type: color\n        $value: \"{color.text.tertiary}\"\n      border:\n        $type: color\n        $value: \"{color.border.default}\"\n```\n\nNotice that component tokens directly reference semantic colors but also demonstrate the power of OKLCH's relative color syntax. The `background-hover` and `background-active` values adjust the lightness of the primary button color using `oklch(from ...)` syntax, maintaining hue and chroma while reducing brightness. This pattern automatically works across all color variants—primary, secondary, and disabled buttons all achieve consistent visual hierarchy through lightness adjustment.\n\n### Build Process Configuration\n\nA complete Style Dictionary configuration might appear as:\n\n```javascript\n// style-dictionary.config.js\nconst StyleDictionary = require('style-dictionary');\n\nStyleDictionary.registerFilter({\n  name: 'isColor',\n  matcher: (token) => token.$type === 'color'\n});\n\nmodule.exports = {\n  source: [\n    'tokens/colors/primitives.yaml',\n    'tokens/colors/semantic.yaml',\n    'tokens/colors/dark-mode.yaml',\n    'tokens/components/**/*.yaml'\n  ],\n  \n  platforms: {\n    css: {\n      transformGroup: 'css',\n      buildPath: 'dist/css/',\n      files: [{\n        destination: 'tokens.css',\n        format: 'css/variables',\n        filter: 'isColor'\n      }]\n    },\n\n    json: {\n      transformGroup: 'js',\n      buildPath: 'dist/json/',\n      files: [{\n        destination: 'tokens.json',\n        format: 'json/flat',\n        filter: 'isColor'\n      }]\n    },\n\n    ios: {\n      transformGroup: 'ios-swift',\n      buildPath: 'dist/ios/',\n      files: [{\n        destination: 'Colors.swift',\n        format: 'ios/colors.swift',\n        filter: 'isColor'\n      }]\n    }\n  }\n};\n```\n\nDuring the build process, Style Dictionary parses the YAML token definitions, applies platform-specific transformations, and generates output. For CSS, this produces:\n\n```css\n:root {\n  --color-neutral-50: rgb(255, 255, 254);\n  --color-neutral-50-p3: color(display-p3 0.998 0.998 0.996);\n  --color-neutral-50-oklch: oklch(99% 0.001 0);\n  \n  --color-blue-500: rgb(0, 119, 204);\n  --color-blue-500-p3: color(display-p3 0.15 0.50 0.85);\n  --color-blue-500-oklch: oklch(49% 0.053 250);\n  \n  --color-background-primary: var(--color-neutral-50);\n  --color-text-primary: var(--color-neutral-900);\n  \n  --component-button-primary-background: var(--color-action-primary);\n  --component-button-primary-background-hover: oklch(from var(--color-action-primary) calc(l - 0.15) c h);\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n    --color-background-primary: var(--color-neutral-900);\n    --color-text-primary: var(--color-neutral-50);\n  }\n}\n```\n\nThis output provides multiple fallback options for maximum compatibility while maintaining the original OKLCH specifications for browsers that support them.\n\n## Conclusion and Recommendations for Design System Evolution\n\nThe integration of OKLCH color space into design token systems represents a paradigm shift that extends far beyond a mere technical substitution of one color model for another. By leveraging perceptually uniform color mathematics, OKLCH enables design systems to scale with confidence, maintain accessibility automatically, and achieve consistency across multiple themes and platforms with minimal manual effort. The maturation of tooling, standardization through the DTCG specification, and broad adoption across leading design platforms have created a genuine inflection point where OKLCH has transitioned from experimental research to production standard practice.\n\nThe architectural principles outlined in this report—organizing tokens through multiple hierarchical levels, mapping OKLCH components to semantic meaning, implementing systematic gamut mapping, and establishing clear accessibility guidelines—provide design system teams with a robust foundation for modernizing their color management infrastructure. Organizations implementing OKLCH-based design systems in 2025-2026 should prioritize establishing clear documentation of their specific color space choices, developing appropriate testing and validation processes to verify behavior across target devices and platforms, and investing in tooling and build process improvements that automate the complex transformations required to support multiple platforms simultaneously[2][9][25][56].\n\nFor design systems currently operating with RGB or HSL color specifications, the migration to OKLCH can be undertaken gradually. Implementing OKLCH alongside existing color specifications allows teams to adopt the new system incrementally while maintaining backward compatibility[38]. Beginning with new token definitions in OKLCH format while maintaining existing RGB specifications enables teams to experience the benefits of perceptual uniformity for new components while avoiding the risk of breaking changes to established systems[4][38].\n\nThe future evolution of design token systems will likely see continued refinement of accessibility algorithms, particularly as WCAG 3 and APCA specifications achieve broader adoption[34][57]. Design system teams should remain engaged with emerging standards and tooling, as improvements in contrast algorithms and perceptual color science will enable even more sophisticated automation of accessibility assurance within design systems[34][57]. Additionally, as native OKLCH support within mainstream design tools like Figma and Sketch continues to improve, friction in design-to-code workflows will decrease further, enabling design systems to operate with greater efficiency and reduced manual color format conversions[4][19].\n\nThe architectural patterns and implementation approaches detailed in this report represent current best practices established through production use in leading design systems and validated through the collaborative work of the Design Tokens Community Group[56]. By following these principles while remaining responsive to emerging tools and standards, design system teams can establish color management infrastructure that will serve their organizations effectively through the evolution of design technology and the continuing expansion of design system capabilities."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

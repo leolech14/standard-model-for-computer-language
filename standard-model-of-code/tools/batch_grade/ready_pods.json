@@ -1,0 +1,52 @@
+[
+  {
+    "id": "sfs0b6o1axwdj6",
+    "host": "174.94.157.109",
+    "port": 25519
+  },
+  {
+    "id": "rotq6pgfotuxey",
+    "host": "38.65.239.43",
+    "port": 41448
+  },
+  {
+    "id": "hhjr8c7la2ewhm",
+    "host": "174.94.157.109",
+    "port": 29936
+  },
+  {
+    "id": "9wvsdwj6vka4da",
+    "host": "38.65.239.40",
+    "port": 34571
+  },
+  {
+    "id": "v8f0hdpfy2rdtl",
+    "host": "38.65.239.17",
+    "port": 22907
+  },
+  {
+    "id": "wl92l3gtcmmkdu",
+    "host": "38.65.239.17",
+    "port": 22908
+  },
+  {
+    "id": "ehfshmuh0ionbb",
+    "host": "38.65.239.46",
+    "port": 34122
+  },
+  {
+    "id": "1dl8yci1o8qe4r",
+    "host": "38.65.239.36",
+    "port": 33946
+  },
+  {
+    "id": "wjz0n28rjrr3ku",
+    "host": "38.65.239.36",
+    "port": 32295
+  },
+  {
+    "id": "htnv10xzf98d1d",
+    "host": "38.65.239.42",
+    "port": 24143
+  }
+]

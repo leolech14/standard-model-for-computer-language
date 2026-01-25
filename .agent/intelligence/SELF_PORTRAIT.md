@@ -68,7 +68,7 @@ The 10 documented subsystems, plus newly discovered ones:
 | S8 | Hygiene | Observer | `.pre-commit-config.yaml` | Commit guards |
 | S9 | Laboratory | Collider | `tools/research/laboratory.py` | Experiment API |
 | S9b | Lab Bridge | Wave | `tools/ai/laboratory_bridge.py` | Wave→Particle bridge |
-| **S10** | AEP | Observer | `.agent/tools/aep_orchestrator.py` | Task enrichment |
+| **S10** | Enrichment | Observer | `.agent/tools/enrichment_orchestrator.py` | Task enrichment |
 | **S11** | Refinery | Wave | `tools/refinery/` | Context atomization |
 | **S12** | Centripetal | Wave | `.agent/tools/centripetal_scan.py` | Deep analysis |
 
@@ -84,9 +84,9 @@ Individual source files. This is where the "orphan tools" live:
 
 | File | Proposed Tribe | Purpose |
 |------|----------------|---------|
-| `truth_validator.py` | S6 (BARE) | Validates repo truths |
-| `boost_confidence.py` | S6 (BARE) | Confidence scoring |
-| `task_registry.py` | S5 (Registry) | Task CRUD operations |
+| `fact_loader.py` | S6 (BARE) | Loads validated facts |
+| `confidence_validator.py` | S6 (BARE) | Validates confidence scores |
+| `task_store.py` | S5 (Registry) | Task state management |
 | `promote_opportunity.py` | S5 (Registry) | Opportunity → Task |
 | `batch_promote.py` | S5 (Registry) | Bulk promotions |
 | `triage_inbox.py` | S5 (Registry) | Inbox processing |
@@ -102,7 +102,7 @@ Individual source files. This is where the "orphan tools" live:
 
 | File | Proposed Tribe | Purpose |
 |------|----------------|---------|
-| `hsl_daemon.py` | S2 (HSL) | HSL background runner |
+| `drift_guard.py` | S2 (HSL) | Drift Guard - detects semantic drift |
 | `activity_watcher.py` | NEW: S15? (Telemetry) | Activity monitoring |
 | `continuous_cartographer.py` | S11 (Refinery) | Continuous mapping |
 | `loop.py` | S3 (analyze.py) | Interactive loop |

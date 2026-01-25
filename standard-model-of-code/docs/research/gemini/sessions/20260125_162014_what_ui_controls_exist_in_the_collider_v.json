@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-25 16:19:51",
+  "session_end": "2026-01-25 16:20:14",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769368791.041426,
+      "timestamp_str": "2026-01-25 16:19:51",
+      "role": "user",
+      "content": "What UI controls exist in the Collider visualization? List all control IDs, their types (slider, toggle, button), and what state they modify. I need a complete inventory."
+    }
+  ]
+}

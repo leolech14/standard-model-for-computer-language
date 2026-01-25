@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-25 15:01:55",
+  "session_end": "2026-01-25 15:02:20",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769364115.06615,
+      "timestamp_str": "2026-01-25 15:01:55",
+      "role": "user",
+      "content": "What is the purpose of the workflows registry in registry_of_registries.py? Should it be populated or removed? List any workflow-related files or patterns that could populate it."
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "name": "vercel/next.js",
+    "url": "https://github.com/vercel/next.js.git",
+    "stars": 137317,
+    "language": "JavaScript",
+    "size_kb": 2454438,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "microsoft/TypeScript",
+    "url": "https://github.com/microsoft/TypeScript.git",
+    "stars": 107542,
+    "language": "TypeScript",
+    "size_kb": 2911456,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "supabase/supabase",
+    "url": "https://github.com/supabase/supabase.git",
+    "stars": 96699,
+    "language": "TypeScript",
+    "size_kb": 2257368,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "microsoft/Web-Dev-For-Beginners",
+    "url": "https://github.com/microsoft/Web-Dev-For-Beginners.git",
+    "stars": 95133,
+    "language": "JavaScript",
+    "size_kb": 2168526,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "OpenBB-finance/OpenBB",
+    "url": "https://github.com/OpenBB-finance/OpenBB.git",
+    "stars": 59299,
+    "language": "Python",
+    "size_kb": 2399404,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "expo/expo",
+    "url": "https://github.com/expo/expo.git",
+    "stars": 46728,
+    "language": "TypeScript",
+    "size_kb": 3535175,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "dcloudio/uni-app",
+    "url": "https://github.com/dcloudio/uni-app.git",
+    "stars": 41395,
+    "language": "JavaScript",
+    "size_kb": 7356518,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "ccxt/ccxt",
+    "url": "https://github.com/ccxt/ccxt.git",
+    "stars": 40669,
+    "language": "Python",
+    "size_kb": 6075792,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "zen-browser/desktop",
+    "url": "https://github.com/zen-browser/desktop.git",
+    "stars": 39692,
+    "language": "JavaScript",
+    "size_kb": 5900405,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "roboflow/supervision",
+    "url": "https://github.com/roboflow/supervision.git",
+    "stars": 36382,
+    "language": "Python",
+    "size_kb": 2735397,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "refinedev/refine",
+    "url": "https://github.com/refinedev/refine.git",
+    "stars": 33914,
+    "language": "TypeScript",
+    "size_kb": 8283621,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "backstage/backstage",
+    "url": "https://github.com/backstage/backstage.git",
+    "stars": 32397,
+    "language": "TypeScript",
+    "size_kb": 2674575,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "hasura/graphql-engine",
+    "url": "https://github.com/hasura/graphql-engine.git",
+    "stars": 31872,
+    "language": "TypeScript",
+    "size_kb": 5193888,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "cockroachdb/cockroach",
+    "url": "https://github.com/cockroachdb/cockroach.git",
+    "stars": 31778,
+    "language": "Go",
+    "size_kb": 3488821,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "OWASP/CheatSheetSeries",
+    "url": "https://github.com/OWASP/CheatSheetSeries.git",
+    "stars": 31202,
+    "language": "Python",
+    "size_kb": 2099807,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "PostHog/posthog",
+    "url": "https://github.com/PostHog/posthog.git",
+    "stars": 30955,
+    "language": "Python",
+    "size_kb": 4276829,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "remotion-dev/remotion",
+    "url": "https://github.com/remotion-dev/remotion.git",
+    "stars": 29271,
+    "language": "TypeScript",
+    "size_kb": 3676648,
+    "reason": "skipped_too_large"
+  },
+  {
+    "name": "HumanSignal/label-studio",
+    "url": "https://github.com/HumanSignal/label-studio.git",
+    "stars": 26256,
+    "language": "TypeScript",
+    "size_kb": 2955836,
+    "reason": "skipped_too_large"
+  }
+]

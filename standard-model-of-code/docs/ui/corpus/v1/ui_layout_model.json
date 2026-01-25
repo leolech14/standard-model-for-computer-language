@@ -1,0 +1,133 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-25",
+  "source": "gemini-3-pro-preview forensic audit",
+  "nine_square_model": {
+    "description": "3x3 semantic grid for UI organization",
+    "rows": ["Global HUD", "Work Surface", "Dock"],
+    "columns": ["Control Stack", "Canvas", "Context Stack"],
+    "cells": {
+      "global_hud_control": {
+        "position": [0, 0],
+        "contents": ["view-mode-toggle", "btn-2d", "btn-freeze"]
+      },
+      "global_hud_canvas": {
+        "position": [0, 1],
+        "contents": ["title", "status-indicators"]
+      },
+      "global_hud_context": {
+        "position": [0, 2],
+        "contents": ["btn-screenshot", "btn-reset"]
+      },
+      "work_surface_control": {
+        "position": [1, 0],
+        "contents": ["left-sidebar", "node-config", "edge-config", "physics-config"]
+      },
+      "work_surface_canvas": {
+        "position": [1, 1],
+        "contents": ["3d-force-graph", "selection-overlay"]
+      },
+      "work_surface_context": {
+        "position": [1, 2],
+        "contents": ["right-sidebar", "selection-panel", "color-presets"]
+      },
+      "dock_control": {
+        "position": [2, 0],
+        "contents": ["legacy-appearance"]
+      },
+      "dock_canvas": {
+        "position": [2, 1],
+        "contents": ["keyboard-shortcuts-hint"]
+      },
+      "dock_context": {
+        "position": [2, 2],
+        "contents": ["selection-actions"]
+      }
+    }
+  },
+  "containers": {
+    "required": [
+      {
+        "id": "app-container",
+        "role": "root",
+        "children": ["sidebar-left", "canvas-container", "sidebar-right"]
+      },
+      {
+        "id": "sidebar-left",
+        "role": "control_stack",
+        "collapsible": true,
+        "default_width": "280px"
+      },
+      {
+        "id": "canvas-container",
+        "role": "work_surface",
+        "flex": 1,
+        "min_width": "400px"
+      },
+      {
+        "id": "sidebar-right",
+        "role": "context_stack",
+        "collapsible": true,
+        "default_width": "320px"
+      }
+    ]
+  },
+  "panels": {
+    "fixed": [
+      {
+        "id": "view-mode-panel",
+        "region": "global_hud",
+        "position": "top-left"
+      },
+      {
+        "id": "action-buttons",
+        "region": "global_hud",
+        "position": "top-right"
+      }
+    ],
+    "dynamic": [
+      {
+        "id": "selection-modal",
+        "trigger": "node_selection",
+        "dismissible": true,
+        "position": "centered"
+      },
+      {
+        "id": "debug-overlay",
+        "trigger": "Ctrl+Shift+L",
+        "dismissible": true,
+        "position": "top-left"
+      },
+      {
+        "id": "pipeline-navigator",
+        "trigger": "P_key",
+        "dismissible": true,
+        "position": "bottom"
+      }
+    ]
+  },
+  "layout_primitives": {
+    "LAYOUT": {
+      "purpose": "Layout intelligence - manages spatial arrangement",
+      "location": "layout.js"
+    },
+    "UI_MANAGER": {
+      "purpose": "Orchestration - coordinates panel visibility",
+      "location": "panels.js"
+    },
+    "REGISTRY": {
+      "purpose": "Command registration - maps controls to actions",
+      "location": "sidebar.js"
+    },
+    "CIRCUIT": {
+      "purpose": "Diagnostics - validates control chains",
+      "location": "circuit-breaker.js"
+    }
+  },
+  "constraints": {
+    "min_canvas_width": 400,
+    "sidebar_collapse_breakpoint": 768,
+    "max_simultaneous_modals": 1,
+    "touch_target_min_size": 44
+  }
+}

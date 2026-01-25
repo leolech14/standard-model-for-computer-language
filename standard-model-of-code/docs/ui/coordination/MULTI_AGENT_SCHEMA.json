@@ -1,0 +1,91 @@
+{
+  "$schema": "multi-agent-coordination-v1",
+  "version": "1.0.0",
+  "created": "2026-01-25",
+  "purpose": "Schema for ChatGPT 5.2 Pro ↔ Claude Opus 4.5 coordination via copy-paste",
+
+  "agents": {
+    "orchestrator": {
+      "id": "chatgpt-pro-52",
+      "model": "o1-pro / GPT-5.2 Extended Thinking",
+      "interface": "web",
+      "role": "Task decomposition, validation, decision making",
+      "capabilities": ["extended_reasoning", "multi_step_planning", "cross_validation"]
+    },
+    "agent_1": {
+      "id": "claude-opus-45-alpha",
+      "model": "claude-opus-4-5-20251101",
+      "interface": "cli",
+      "role": "Primary implementation, codebase analysis",
+      "capabilities": ["file_read", "file_write", "bash", "analyze_py", "mcp_tools"]
+    },
+    "agent_2": {
+      "id": "claude-opus-45-beta",
+      "model": "claude-opus-4-5-20251101",
+      "interface": "cli",
+      "role": "Validation, parallel research, secondary implementation",
+      "capabilities": ["file_read", "file_write", "bash", "analyze_py", "mcp_tools"]
+    }
+  },
+
+  "message_schema": {
+    "task": {
+      "type": "object",
+      "required": ["message_id", "sender", "timestamp", "message_type", "payload"],
+      "properties": {
+        "message_id": {"type": "string", "format": "uuid"},
+        "sender": {"enum": ["orchestrator", "agent_1", "agent_2"]},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "message_type": {"enum": ["task", "status", "result", "error", "sync_request", "checkpoint"]},
+        "payload": {
+          "task_id": {"type": "string"},
+          "instruction": {"type": "string"},
+          "context": {"type": "object"},
+          "constraints": {"type": "array"},
+          "expected_output_format": {"type": "string"},
+          "dependencies": {"type": "array"},
+          "timeout_seconds": {"type": "integer", "default": 300}
+        },
+        "state_version": {"type": "integer"},
+        "checksum": {"type": "string", "description": "SHA-256 of payload for corruption detection"}
+      }
+    }
+  },
+
+  "protocols": {
+    "task_assignment": {
+      "flow": "orchestrator → agent",
+      "prefix": "TASK:",
+      "required_fields": ["task_id", "instruction", "expected_output_format"]
+    },
+    "result_submission": {
+      "flow": "agent → orchestrator",
+      "prefix": "RESULT:",
+      "required_fields": ["task_id", "status", "output", "checksum"]
+    },
+    "checkpoint": {
+      "flow": "agent → orchestrator",
+      "prefix": "CHECKPOINT:",
+      "required_fields": ["checkpoint_id", "state_version", "completed_tasks", "state_hash"]
+    },
+    "sync_request": {
+      "flow": "bidirectional",
+      "prefix": "SYNC:",
+      "required_fields": ["requesting_agent", "resource_needed"]
+    }
+  },
+
+  "validation_layers": {
+    "input": "Orchestrator verifies task schema before assignment",
+    "semantic": "Agent echoes back understanding before execution",
+    "output": "Orchestrator validates result format and content",
+    "cross_agent": "Orchestrator verifies continuity between agent outputs"
+  },
+
+  "conflict_prevention": {
+    "task_locking": "Each task has single owner - no shared writes",
+    "immutable_checkpoints": "Results saved with timestamp + checksum",
+    "version_tracking": "state_version field increments on each change",
+    "escalation": "Version mismatch → halt and escalate to orchestrator"
+  }
+}

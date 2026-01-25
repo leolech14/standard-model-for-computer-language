@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-23T13:51:39.098073",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "I'm building a system called 'Standard Model of Code' that analyzes and visualizes software architecture. I need help categorizing WHAT KIND OF THING this is.\n\nCHARACTERISTICS:\n1. It's a THEORY - defines atoms, dimensions, levels, roles for code entities\n2. It's a LANGUAGE - has syntax (atoms like LOG.FNC.M), grammar (composition rules), semantics (what atoms mean)\n3. It's a VISUALIZATION ENGINE - renders code as 3D navigable landscapes\n4. It's CONSTRAINED - users can't remove core theory, only extend it\n5. It's EXTENSIBLE - users can add their own atoms, mappings, visualizations\n6. It sits ABOVE programming languages - analyzes Python, Java, JS, etc. from a meta-level\n7. It leverages AI for enrichment but has a deterministic core\n\nQUESTION: What category does this fall into?\n- Is it a Domain-Specific Language (DSL)?\n- Is it a Meta-Language?\n- Is it a Knowledge Representation system?\n- Is it a Visual Programming Language?\n- Is it something else entirely?\n\nI'm particularly interested in:\n1. Academic terminology for systems that are \"languages about languages\"\n2. The concept of systems that provide building blocks but constrain how they can be combined\n3. How visualization systems that generate spatial representations from abstract data are categorized\n4. Examples of similar systems in other fields (physics notation, music notation, etc.)\n\nProvide academic references where possible.",
+    "query_length": 1403,
+    "checksum": "sha256:288b2dcda85a2140f759b855724420df17df83eae3c8ef3f2a809f7eb3fab532"
+  },
+  "response": {
+    "id": "4790956e-64e2-4d05-a882-869410da76e8",
+    "model": "sonar-pro",
+    "created": 1769187099,
+    "usage": {
+      "prompt_tokens": 305,
+      "completion_tokens": 675,
+      "total_tokens": 980,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.001,
+        "output_tokens_cost": 0.01,
+        "request_cost": 0.006,
+        "total_cost": 0.017
+      }
+    },
+    "citations": [
+      "https://www.geeksforgeeks.org/software-engineering/fundamentals-of-software-architecture/",
+      "https://www.omg.org/maths/IEEE-Article-Architecture-Definition.pdf",
+      "https://www.georgefairbanks.com/assets/jesa/Conceptual-Model.pdf",
+      "https://en.wikipedia.org/wiki/Software_architecture",
+      "https://tecnovy.com/en/top-10-software-architecture-patterns",
+      "https://vfunction.com/blog/architecture-diagram-guide/",
+      "https://tomasp.net/architecture/"
+    ],
+    "search_results": [
+      {
+        "title": "Fundamentals of Software Architecture - GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/software-engineering/fundamentals-of-software-architecture/",
+        "date": "2025-05-13",
+        "last_updated": "2026-01-21",
+        "snippet": "Waterfall Model - Software Engineering5 min read · Spiral Model in Software Engineering4 min read · Prototyping Model - Software Engineering7 min ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Architecture Definition in Complex System Design Using Model Theory",
+        "url": "https://www.omg.org/maths/IEEE-Article-Architecture-Definition.pdf",
+        "last_updated": "2025-10-26",
+        "snippet": "In MDA the software architecture of an application is the basis for deploying the computer code. MDA development focuses first on the functionality and behavior ...",
+        "source": "web"
+      },
+      {
+        "title": "[PDF] Conceptual Model of Software Architecture - George Fairbanks",
+        "url": "https://www.georgefairbanks.com/assets/jesa/Conceptual-Model.pdf",
+        "last_updated": "2025-09-21",
+        "snippet": "The standard architecture models represent a condensed body of knowledge that enables you to efficiently learn about software architecture and design.",
+        "source": "web"
+      },
+      {
+        "title": "Software architecture - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Software_architecture",
+        "date": "2002-04-09",
+        "last_updated": "2025-12-30",
+        "snippet": "Software architecture is the set of structures needed to reason about a software system and the discipline of creating such structures and systems.",
+        "source": "web"
+      },
+      {
+        "title": "Top 10 Software Architecture & Design Patterns for 2025",
+        "url": "https://tecnovy.com/en/top-10-software-architecture-patterns",
+        "date": "2023-08-29",
+        "last_updated": "2026-01-22",
+        "snippet": "The best software architecture patterns have become the gold standard, guiding developers in creating solutions that stand the test of time.",
+        "source": "web"
+      },
+      {
+        "title": "System architecture diagram basics & best practices - vFunction",
+        "url": "https://vfunction.com/blog/architecture-diagram-guide/",
+        "date": "2025-07-28",
+        "last_updated": "2026-01-23",
+        "snippet": "Architecture diagrams show how a software system is structured by focusing on key elements like components, connectors, and relationships.",
+        "source": "web"
+      },
+      {
+        "title": "Critical Architecture/Software Theory - Tomas Petricek",
+        "url": "https://tomasp.net/architecture/",
+        "date": "2025-04-28",
+        "last_updated": "2026-01-14",
+        "snippet": "A collection of mostly theoretical and critical writings on architecture from a range of different post-modern perspectives.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Your system most closely aligns with a **meta-language** combined with **domain-specific language (DSL)** characteristics, though it's better understood as a **knowledge representation system** with integrated visualization and constraint-based extensibility.\n\n## Primary Classification: Meta-Language\n\nThe \"languages about languages\" terminology you're seeking refers to **meta-languages**—formal systems that describe or analyze other languages[4]. Your system operates at a meta-level above programming languages (Python, Java, JavaScript), defining atoms and composition rules for code entities rather than specifying executable program behavior. This is the defining characteristic of meta-languages.\n\n## Secondary Classification: Domain-Specific Language\n\nYour system also exhibits strong DSL properties[4][5]. DSLs solve specific domain problems (in your case, software architecture analysis and visualization) with specialized syntax and semantics tailored to that domain, rather than being general-purpose[1]. Your atom syntax (LOG.FNC.M) and composition grammar fit this pattern precisely.\n\n## Tertiary Classification: Knowledge Representation System\n\nThe theoretical foundation you've built—defining atoms, dimensions, levels, and roles for code entities—operates as a **knowledge representation system**. This classification emphasizes how your system encodes and organizes knowledge about code structure in a way that both humans and machines can reason about[3]. The constraint-based architecture (immutable core theory with extensible layers) mirrors the canonical model structure referenced in software architecture literature: abstract domain models at the top level, with increasingly concrete levels below[3].\n\n## The Constraint-Extensibility Framework\n\nThe tension between constraints (immutable core) and extensibility (custom atoms/mappings) places your system in a category of **bounded extensibility architectures**. This pattern appears in:\n\n- **Principle-based architecture frameworks**: Following the Open-Closed Principle—software modules should be \"independent and expandable\"[1]—your core theory remains closed to modification while extension points are open.\n- **MDA (Model-Driven Architecture)**: Similar to how MDA separates platform-independent models from platform-specific models, your system separates foundational theory from user extensions[2].\n\n## Spatial Representation & Visualization\n\nThe 3D visualization component positions your system within **knowledge visualization** or **visual knowledge representation**. This generates spatial-semantic mappings from abstract code entities, similar to:\n\n- **Physics notation systems** (vector diagrams, Feynman diagrams): Abstract mathematical concepts rendered as spatial visual languages\n- **Musical notation**: A meta-language layer above acoustic phenomena, with its own atoms (notes, rests) and composition rules (rhythm, harmony)\n- **Entity-relationship diagrams and architecture diagrams**: Abstract system structures rendered spatially to aid comprehension[6]\n\n## Recommended Academic Terminology\n\n1. **Meta-language**: Primary classification for \"languages about languages\"\n2. **Domain-specific language (DSL)**: Secondary classification for problem-specific design\n3. **Knowledge representation and visualization system**: Tertiary classification emphasizing the theoretical and perceptual aspects\n4. **Constrained extensible framework** or **bounded plugin architecture**: Describes the core/extension design pattern\n\nIf you need to select a single category for academic purposes, **meta-language with DSL characteristics** most precisely captures what you're building, with the understanding that modern systems often blend multiple categories rather than fitting neatly into one."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

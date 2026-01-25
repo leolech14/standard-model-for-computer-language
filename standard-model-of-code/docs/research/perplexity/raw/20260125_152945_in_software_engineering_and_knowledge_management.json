@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-25T15:29:45.178500",
+    "source": "perplexity-mcp",
+    "model": "sonar-pro",
+    "query": "In software engineering and knowledge management, validate this terminology proposal:\n\n1. CODOME - The complete set of executable code in a project (source files, functions, classes). Analogous to 'genome' for genetics.\n\n2. CONTEXTOME - The complete set of documentation, configuration, and AI-reasoning artifacts alongside code. Non-executable context that gives meaning.\n\n3. PROJECTOME - The totality of a software project: Codome + Contextome + Visualization + Governance artifacts.\n\nQuestions:\n- Are these terms already used in academic literature or industry?\n- Is the '-ome' suffix appropriate for software engineering concepts?\n- What existing terms overlap with these concepts (e.g., 'codebase', 'documentation corpus', 'project universe')?\n- Would these terms be understood by software engineers without explanation?",
+    "query_length": 825,
+    "checksum": "sha256:7e7fbe823b79a88aea4a81614e0d6b7902828b5863da70fcaea36b9a5836bb07"
+  },
+  "response": {
+    "id": "47a806c9-3254-4d28-823e-63461d3c0ede",
+    "model": "sonar-pro",
+    "created": 1769365785,
+    "usage": {
+      "prompt_tokens": 161,
+      "completion_tokens": 436,
+      "total_tokens": 597,
+      "search_context_size": "low",
+      "cost": {
+        "input_tokens_cost": 0.0,
+        "output_tokens_cost": 0.007,
+        "request_cost": 0.006,
+        "total_cost": 0.013
+      }
+    },
+    "citations": [
+      "https://en.wikipedia.org/wiki/Software_engineering",
+      "https://buildsoftwaresystems.com/terminologies/",
+      "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+      "https://clutch.co/resources/software-development-glossary-88-essential-terms",
+      "https://www.coursera.org/collections/software-engineering-terms",
+      "https://www.codingtemple.com/blog/50-terms-every-software-engineer-should-know/",
+      "https://www.indeed.com/career-advice/career-development/coding-terminology",
+      "https://www.eng.uwaterloo.ca/~comp03a/misc/humour/softengterms.html",
+      "https://wholewhale.com/tips/developer-terms-glossary/"
+    ],
+    "search_results": [
+      {
+        "title": "Software engineering",
+        "url": "https://en.wikipedia.org/wiki/Software_engineering",
+        "date": "2001-11-14",
+        "last_updated": "2026-01-22",
+        "snippet": "Software engineering is a branch of both computer science and engineering focused on designing, developing, testing, and maintaining software applications.",
+        "source": "web"
+      },
+      {
+        "title": "Useful Software Engineering Terminologies",
+        "url": "https://buildsoftwaresystems.com/terminologies/",
+        "date": "2006-02-01",
+        "last_updated": "2025-06-15",
+        "snippet": "Combination of computer instructions and data definitions that enable computer hardware to perform computational or control functions.",
+        "source": "web"
+      },
+      {
+        "title": "Glossary of Computer System Software Development ...",
+        "url": "https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/inspection-guides/glossary-computer-system-software-development-terminology-895",
+        "date": "2014-11-06",
+        "last_updated": "2026-01-25",
+        "snippet": "This document is intended to serve as a glossary of terminology applicable to software development and computerized systems in FDA regulated industries.",
+        "source": "web"
+      },
+      {
+        "title": "Software Development Glossary: 88 Essential Terms",
+        "url": "https://clutch.co/resources/software-development-glossary-88-essential-terms",
+        "date": "2025-12-09",
+        "last_updated": "2026-01-24",
+        "snippet": "This glossary will define essential software development terms to give your company complete insight into how to manage, build, and own a software product.",
+        "source": "web"
+      },
+      {
+        "title": "Software Engineering Definitions: A to Z Glossary Terms",
+        "url": "https://www.coursera.org/collections/software-engineering-terms",
+        "date": "2026-01-01",
+        "last_updated": "2026-01-25",
+        "snippet": "This software engineering glossary can be helpful if you want to get familiar with basic terms and advance your understanding of software engineering.",
+        "source": "web"
+      },
+      {
+        "title": "50 Terms Every Software Engineer Should Know",
+        "url": "https://www.codingtemple.com/blog/50-terms-every-software-engineer-should-know/",
+        "date": "2025-02-27",
+        "last_updated": "2026-01-25",
+        "snippet": "We'll break down 50 essential software engineering terms that will help you become more proficient in technical discussions, job interviews, or day-to-day ...",
+        "source": "web"
+      },
+      {
+        "title": "Coding Terminology: 68 Terms and Definitions To Know",
+        "url": "https://www.indeed.com/career-advice/career-development/coding-terminology",
+        "date": "2025-12-15",
+        "last_updated": "2026-01-15",
+        "snippet": "Learn about common coding terminology in this list of 68 terms and their definitions to help you develop your programming skills and build a ...",
+        "source": "web"
+      },
+      {
+        "title": "Glossary of Software Engineering Terms",
+        "url": "https://www.eng.uwaterloo.ca/~comp03a/misc/humour/softengterms.html",
+        "date": "2003-01-01",
+        "last_updated": "2025-01-23",
+        "snippet": "Computer human interface. The means by which the program conditions the user into never trying all the things that don't work. Cost modelling.",
+        "source": "web"
+      },
+      {
+        "title": "47 Terms You Should Know When Working with a Developer",
+        "url": "https://wholewhale.com/tips/developer-terms-glossary/",
+        "date": "2020-04-22",
+        "last_updated": "2026-01-13",
+        "snippet": "Suite of programs used in website or software development. This lays the groundwork for the type of programming language used for your site or app development.",
+        "source": "web"
+      }
+    ],
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "**The proposed terms CODOME, CONTEXTOME, and PROJECTOME are not used in academic literature or industry based on available sources.** These glossaries and standards from IEEE, ISO, FDA, and various software engineering resources do not reference them, nor do they appear in definitions of software components, projects, or related concepts[1][2][3][4][5][6][7][8][9].\n\n**The '-ome' suffix is not standard or appropriate for software engineering concepts.** It originates from biology (e.g., genome for complete genetic material) to denote comprehensive sets, but software engineering terminology relies on precise, established terms like \"codebase,\" \"source code,\" or \"software system\" without biological analogies[1][2][3]. No sources apply '-ome' to code, documentation, or projects, potentially causing confusion by implying unestablished scientific completeness[1][2].\n\n**Existing terms overlap significantly:**\n- **CODOME** (executable code set): Matches **codebase** (complete source code repository), **source code** (program instructions in high-level language), or **program** (instructions and data for computation)[2][3][4].\n- **CONTEXTOME** (documentation, config, AI artifacts): Aligns with **documentation** (descriptions for maintenance), **software** (includes programs, procedures, documentation, data), or **requirements** (needs and specs)[1][2][3].\n- **PROJECTOME** (full project totality): Corresponds to **software system** (programs, docs, data for operation), **software engineering project** (design, implementation, testing, maintenance), or **SDLC** (full development lifecycle)[1][2][3][4].\n\n**Software engineers would not understand these terms without explanation.** Established glossaries emphasize familiar terms like \"code,\" \"architecture,\" and \"system\" for clarity and interoperability; novel biological metaphors lack precedent and could hinder communication[1][2][3][4][5][6][7]. Sources stress standardized vocabulary (e.g., IEEE/ISO) to avoid ambiguity in development and maintenance[1][2]."
+        },
+        "delta": {
+          "role": "assistant",
+          "content": ""
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}
