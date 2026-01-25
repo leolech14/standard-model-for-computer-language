@@ -1,0 +1,135 @@
+# Main Development Roadmap
+# The primary roadmap for PROJECT_elements development
+#
+# Hierarchy: ROADMAP > SPRINT > TASK/OPP > STEP
+# Version: 1.0.0
+# Updated: 2026-01-23
+
+id: ROADMAP-main
+title: "Standard Model of Code - Main Development"
+description: |
+  The primary development roadmap for PROJECT_elements.
+  Goal: Build a self-proving codebase analysis system that treats code like physics.
+
+branch:
+  parent: null  # This is the main branch
+  created_from: null
+  merge_target: null
+
+status: ACTIVE
+
+# Phases (from SMOC ROADMAP.md)
+phases:
+  - id: P0
+    name: "Locked Invariants"
+    description: "Core theoretical invariants locked and tested"
+    status: COMPLETE
+    sprints: []
+    dependencies: []
+    completion: 100
+
+  - id: P1
+    name: "Graph Substrate"
+    description: "Canonical node IDs, deterministic graph"
+    status: ACTIVE
+    sprints: []
+    dependencies: [P0]
+    completion: 60
+
+  - id: P2
+    name: "Resolution Correctness"
+    description: "Call resolver improvements, edge accuracy"
+    status: PLANNED
+    sprints: []
+    dependencies: [P1]
+    completion: 0
+
+  - id: P3
+    name: "Reachability"
+    description: "Improve reachability from 29.3% to 80%"
+    status: ACTIVE
+    sprints: [SPRINT-001]
+    dependencies: [P1]
+    completion: 30
+    critical: true  # This is the bottleneck
+
+  - id: P4
+    name: "Pipeline Refactor"
+    description: "Class-based pipeline with BaseStage pattern"
+    status: ACTIVE
+    sprints: [SPRINT-002]
+    dependencies: [P1]
+    completion: 10
+
+  - id: P5
+    name: "Dimensions D1-D8"
+    description: "Full dimension coverage implementation"
+    status: PLANNED
+    sprints: []
+    dependencies: [P4]
+    completion: 0
+
+  - id: P6
+    name: "Visualization v2"
+    description: "UPB integration, improved controls"
+    status: ACTIVE
+    sprints: []
+    dependencies: [P1]
+    completion: 40
+
+  - id: P7
+    name: "AI Integration"
+    description: "Holographic Socratic Layer, BARE-Live"
+    status: ACTIVE
+    sprints: []
+    dependencies: [P3]
+    completion: 25
+
+  - id: P8
+    name: "Self-Proving"
+    description: "System analyzes and improves itself"
+    status: PLANNED
+    sprints: []
+    dependencies: [P3, P5, P7]
+    completion: 0
+
+  - id: P9
+    name: "Synthesis"
+    description: "Graph → Code generation"
+    status: PLANNED
+    sprints: []
+    dependencies: [P8]
+    completion: 0
+
+  - id: P10
+    name: "Survey Intelligence"
+    description: "Adaptive codebase discovery"
+    status: ACTIVE
+    sprints: []
+    dependencies: []
+    completion: 50
+
+# Current focus
+focus:
+  primary: P3  # Reachability is the bottleneck
+  secondary: [P4, P10]
+  rationale: "Most tasks depend on improving reachability from 29.3% to 80%"
+
+# Metrics
+metrics:
+  total_phases: 11
+  active_phases: 5
+  complete_phases: 1
+  total_sprints: 2
+  total_tasks: 13
+  total_opps: 47
+
+# Confidence
+confidence:
+  factual: 90
+  alignment: 100
+  current: 85
+  onwards: 95
+
+created: "2026-01-23T00:00:00Z"
+updated: "2026-01-23T11:40:00Z"
