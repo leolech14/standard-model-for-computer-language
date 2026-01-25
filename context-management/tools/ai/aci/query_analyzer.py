@@ -189,13 +189,6 @@ def get_intent_keywords() -> Dict[QueryIntent, List[str]]:
     return merged
 
 
-# Legacy module-level aliases (for backward compatibility)
-EXTERNAL_INDICATORS = _DEFAULT_EXTERNAL_INDICATORS
-AGENT_INDICATORS = _DEFAULT_AGENT_INDICATORS
-COMPLEX_INDICATORS = _DEFAULT_COMPLEX_INDICATORS
-SIMPLE_INDICATORS = _DEFAULT_SIMPLE_INDICATORS
-
-
 def _extract_keywords(query: str) -> List[str]:
     """Extract significant keywords from query."""
     # Lowercase and remove punctuation
