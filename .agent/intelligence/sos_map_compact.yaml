@@ -1,0 +1,180 @@
+# System-of-Systems Map - Compact Representation
+# For AI model validation queries
+# Generated: 2026-01-24
+
+meta:
+  version: "1.2.0"
+  coherence_score: 88
+  last_validated: "2026-01-24"
+  subsystem_count: 10
+  active_integrations: 8
+  proposed_integrations: 3
+  missing_integrations: 1
+
+realms:
+  particle:
+    description: "Measurement, collapse, ground truth"
+    subsystems:
+      - id: S1
+        name: Collider
+        type: Engine
+        path: standard-model-of-code/
+        purpose: "Semantic code analysis (ground truth)"
+        outputs: [unified_analysis.json, collider_report.html]
+      - id: S9
+        name: Laboratory
+        type: Bridge
+        path: standard-model-of-code/tools/research/laboratory.py
+        purpose: "Scientist facade (Particle-side API)"
+        api: "run_experiment(ExperimentRequest) -> ExperimentResult"
+
+  wave:
+    description: "Potential, field, intelligence"
+    subsystems:
+      - id: S3
+        name: analyze.py
+        type: Engine
+        path: context-management/tools/ai/analyze.py
+        purpose: "AI query interface (implements HSL)"
+        tiers: [instant, rag, long_context, deep]
+      - id: S2
+        name: HSL
+        type: Framework
+        path: context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md
+        purpose: "Automated validation rules"
+        implementation: "analyze.py --verify"
+      - id: S4
+        name: Perplexity MCP
+        type: Utility
+        path: context-management/tools/mcp/perplexity_mcp_server.py
+        purpose: "External knowledge queries"
+      - id: S9b
+        name: Laboratory Bridge
+        type: Client
+        path: context-management/tools/ai/laboratory_bridge.py
+        purpose: "Agent client (Wave-side caller)"
+        functions: [run_laboratory, measure_coverage, evaluate_hypothesis]
+
+  observer:
+    description: "Governance, state, decisions"
+    subsystems:
+      - id: S5
+        name: Task Registry
+        type: State
+        path: .agent/registry/
+        purpose: "Work item tracking"
+        format: "YAML + Markdown"
+      - id: S6
+        name: BARE
+        type: Engine
+        path: .agent/tools/bare
+        purpose: "Background Auto-Refinement Engine"
+        components: [TruthValidator, DiscoveryInbox, ConfidenceBooster]
+        completion: "80%"
+      - id: S7
+        name: Archive/Mirror
+        type: Utility
+        path: context-management/tools/archive/
+        purpose: "Cloud sync (GCS)"
+        bucket: gs://elements-archive-2026/
+      - id: S8
+        name: Commit Hygiene
+        type: Guard
+        path: .pre-commit-config.yaml
+        purpose: "Enforce Conventional Commits"
+        hooks: [pre-commit, commit-msg]
+
+integrations:
+  active:
+    - from: S1
+      to: S3
+      mechanism: "unified_analysis.json file read"
+    - from: S2
+      to: S3
+      mechanism: "--verify flag CLI invocation"
+    - from: git_commit
+      to: S7
+      mechanism: "post-commit hook"
+    - from: git_commit
+      to: S6
+      mechanism: "post-commit hook"
+    - from: S8
+      to: git_commit
+      mechanism: "pre-commit + commit-msg hooks"
+    - from: S3
+      to: S9b
+      mechanism: "Python import"
+    - from: S9b
+      to: S9
+      mechanism: "subprocess with templates"
+    - from: S3
+      to: research_docs
+      mechanism: "Auto-save to docs/research/"
+
+  proposed:
+    - from: S3
+      to: S5
+      mechanism: "Structured YAML output"
+      priority: P1
+    - from: S3
+      to: S4
+      mechanism: "--enable-external-search"
+      priority: P2
+    - from: CI/CD
+      to: S7
+      mechanism: "GitHub Action"
+      priority: P2
+
+  missing:
+    - from: S5
+      to: S6
+      mechanism: "tasks.yaml polling"
+      gap_id: SG-004
+      impact: "Blocks auto-refinement cycle"
+
+data_flows:
+  - name: "CODE_COMMIT"
+    steps:
+      - "S8 validates commit message"
+      - "S1 generates unified_analysis.json"
+      - "S7 syncs to GCS"
+      - "S6 TruthValidator updates repo_truths.yaml"
+
+  - name: "SCHEDULED_VALIDATION"
+    steps:
+      - "S3 --verify runs against semantic_models.yaml"
+      - "Violations generate tasks in S5"
+
+  - name: "TASK_EXECUTION"
+    steps:
+      - "S6 claims task from S5"
+      - "S6 generates fix"
+      - "Commits -> loop restarts"
+
+  - name: "RESEARCH_QUERY"
+    steps:
+      - "S3 processes query"
+      - "S9b invokes S9"
+      - "S9 runs Scientist tools"
+      - "Optional: S4 for external context"
+
+validation_questions:
+  completeness:
+    - "Are all 10 subsystems documented with paths?"
+    - "Are all integration mechanisms specified?"
+    - "Are missing integrations identified with gap IDs?"
+    - "Are data flow cycles complete (closed loops)?"
+
+  correctness:
+    - "Do file paths exist in the repository?"
+    - "Are subsystem types accurate (Engine/Bridge/State/etc)?"
+    - "Are integration statuses accurate (ACTIVE/PROPOSED/MISSING)?"
+    - "Is the coherence score (88) justified by the integration count?"
+
+known_gaps:
+  - id: SG-001
+    description: "Reachability bottleneck (29.3%)"
+    blocks: "Phase 3-4"
+  - id: SG-004
+    description: "Task Registry -> BARE loop missing"
+    blocks: "Auto-refinement cycle"
