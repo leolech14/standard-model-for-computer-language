@@ -202,7 +202,91 @@ const COLOR_TEST = (function() {
         },
 
         /**
-         * Test 7: No HSL/RGB string outputs anywhere in palette
+         * Test 7: Telemetry bySource regression test
+         * Ensures bySource is populated when perSource:true
+         */
+        'telemetry-bySource': () => {
+            const COLOR = window.COLOR;
+            const TELEM = window.COLOR_TELEM;
+
+            if (!TELEM || !TELEM.capture) {
+                return { passed: 0, total: 1, skipped: 'COLOR_TELEM not available' };
+            }
+
+            const m = TELEM.capture(() => {
+                COLOR.getSchemeColor('viridis', 0.5);
+                COLOR.get('tier', 'T0');
+                COLOR.toHex({ l: 0.5, c: 0.05, h: 60 });
+            }, { frameId: 'bySource-test', perSource: true });
+
+            const bs = m.bySource;
+            const keys = bs ? Object.keys(bs) : [];
+
+            // Regression test: bySource must exist and have entries
+            const hasScheme = keys.some(k => k.startsWith('scheme:'));
+            const hasPalette = keys.some(k => k.startsWith('palette:'));
+            const hasApi = keys.some(k => k.startsWith('api:'));
+
+            let passed = 0;
+            if (bs && keys.length >= 3) passed++;
+            if (hasScheme) passed++;
+            if (hasPalette) passed++;
+            if (hasApi) passed++;
+
+            // Events sum check
+            let eventsSum = 0;
+            for (const k of keys) {
+                eventsSum += bs[k].events;
+            }
+            if (eventsSum === m.events) passed++;
+
+            return { passed, total: 5 };
+        },
+
+        /**
+         * Test 8: Categorical palettes must not clip (gamut budget)
+         * Categorical colors are semantic labels - clipping is a product defect
+         */
+        'categorical-gamut-safe': () => {
+            const COLOR = window.COLOR;
+            const TELEM = window.COLOR_TELEM;
+
+            if (!TELEM || !TELEM.capture) {
+                return { passed: 0, total: 1, skipped: 'COLOR_TELEM not available' };
+            }
+
+            // Test tier palette (critical categorical)
+            const tiers = ['T0', 'T1', 'T2'];
+            const tierMetrics = TELEM.capture(() => {
+                for (const t of tiers) COLOR.get('tier', t);
+            }, { frameId: 'tier-gamut' });
+
+            // Test family palette
+            const families = ['LOG', 'DAT', 'ORG', 'EXE', 'EXT'];
+            const familyMetrics = TELEM.capture(() => {
+                for (const f of families) COLOR.get('family', f);
+            }, { frameId: 'family-gamut' });
+
+            let passed = 0;
+
+            // Tier: no collapse, no clip
+            if (tierMetrics.collapse_ratio === 1) passed++;
+            if (tierMetrics.clip_rate === 0) passed++;
+
+            // Family: no collapse, no clip
+            if (familyMetrics.collapse_ratio === 1) passed++;
+            if (familyMetrics.clip_rate === 0) passed++;
+
+            return {
+                passed,
+                total: 4,
+                tier_clip_rate: tierMetrics.clip_rate,
+                family_clip_rate: familyMetrics.clip_rate
+            };
+        },
+
+        /**
+         * Test 9: No HSL/RGB string outputs anywhere in palette
          */
         'no-hsl-leak': () => {
             const COLOR = window.COLOR;

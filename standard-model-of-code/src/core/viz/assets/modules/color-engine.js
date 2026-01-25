@@ -21,18 +21,20 @@ const COLOR = (function () {
 
     const palette = {
         // NODE DIMENSIONS - VIVID BASE COLORS (high chroma for bold schemes)
+        // NOTE: Chroma values are calibrated for sRGB gamut safety
+        // Blue (h~220) and cyan (h~180) hues need lower chroma to stay in gamut
         tier: {
-            'T0': { h: 142, c: 0.22, l: 0.68, label: 'Foundation', semantic: 'stable' },      // Green
-            'T1': { h: 220, c: 0.22, l: 0.68, label: 'Domain', semantic: 'structure' },       // Blue
-            'T2': { h: 330, c: 0.22, l: 0.68, label: 'Application', semantic: 'active' },     // Pink
+            'T0': { h: 142, c: 0.20, l: 0.68, label: 'Foundation', semantic: 'stable' },      // Green (safe)
+            'T1': { h: 220, c: 0.11, l: 0.65, label: 'Domain', semantic: 'structure' },       // Blue (c=0.11 max for sRGB)
+            'T2': { h: 330, c: 0.20, l: 0.68, label: 'Application', semantic: 'active' },     // Pink (safe)
             'UNKNOWN': { h: 0, c: 0.04, l: 0.50, label: 'Unknown', semantic: 'neutral' }      // Gray
         },
         family: {
-            'LOG': { h: 220, c: 0.24, l: 0.65, label: 'Logic', semantic: 'computation' },     // Blue
-            'DAT': { h: 142, c: 0.22, l: 0.68, label: 'Data', semantic: 'storage' },          // Green
-            'ORG': { h: 280, c: 0.24, l: 0.62, label: 'Organization', semantic: 'structure' },// Purple
-            'EXE': { h: 15, c: 0.26, l: 0.62, label: 'Execution', semantic: 'action' },       // Red
-            'EXT': { h: 35, c: 0.22, l: 0.65, label: 'External', semantic: 'boundary' },      // Orange
+            'LOG': { h: 220, c: 0.11, l: 0.62, label: 'Logic', semantic: 'computation' },     // Blue (c=0.11 max for sRGB)
+            'DAT': { h: 142, c: 0.20, l: 0.68, label: 'Data', semantic: 'storage' },          // Green (safe)
+            'ORG': { h: 280, c: 0.18, l: 0.60, label: 'Organization', semantic: 'structure' },// Purple (slight reduce)
+            'EXE': { h: 15, c: 0.22, l: 0.62, label: 'Execution', semantic: 'action' },       // Red (safe)
+            'EXT': { h: 35, c: 0.20, l: 0.65, label: 'External', semantic: 'boundary' },      // Orange (safe)
             'UNKNOWN': { h: 0, c: 0.04, l: 0.50, label: 'Unknown', semantic: 'neutral' }
         },
         ring: {
