@@ -184,27 +184,27 @@ The human/agent interaction is:
 | Tool | Purpose | Command |
 |------|---------|---------|
 | `triage_inbox.py` | Score opportunities, find duplicates | `./triage_inbox.py --score` |
-| `boost_confidence.py` | 4D AI assessment with Gemini | `./boost_confidence.py --all` |
+| `confidence_validator.py` | 4D AI assessment with Gemini | `./confidence_validator.py --all` |
 | `batch_promote.py` | Promote by threshold/category | `./batch_promote.py --threshold 90` |
 | `promote_opportunity.py` | Single opportunity promotion | `./promote_opportunity.py OPP-XXX` |
 | `add_task_steps.py` | Add steps to promoted tasks | `./add_task_steps.py TASK-XXX` |
 
 ### Orchestrator
 
-The `aep_orchestrator.py` chains these tools:
+The `enrichment_orchestrator.py` chains these tools:
 ```bash
-python .agent/tools/aep_orchestrator.py        # Full pipeline
-python .agent/tools/aep_orchestrator.py --dry-run  # Preview
+python .agent/tools/enrichment_orchestrator.py        # Full pipeline
+python .agent/tools/enrichment_orchestrator.py --dry-run  # Preview
 ```
 
 ### Phase 1: Local Cron
 ```bash
 # Add to crontab
-0 * * * * cd /path/to/PROJECT_elements && python .agent/tools/aep_orchestrator.py >> /tmp/aep.log 2>&1
+0 * * * * cd /path/to/PROJECT_elements && python .agent/tools/enrichment_orchestrator.py >> /tmp/enrichment.log 2>&1
 ```
 
 ### Phase 2: Cloud Function
-Deploy `aep_orchestrator.py` to GCP Cloud Functions with:
+Deploy `enrichment_orchestrator.py` to GCP Cloud Functions with:
 - Trigger: Cloud Scheduler (every 15 min) or Pub/Sub (on git push)
 - Secrets: GEMINI_API_KEY from Secret Manager
 - Writes back via `git commit && git push`
@@ -247,7 +247,7 @@ From this point forward in PROJECT_elements:
 
 1. [x] Spec written (this document)
 2. [x] Create OPP-060 for AEP MVP
-3. [x] Orchestrator created (aep_orchestrator.py)
+3. [x] Orchestrator created (enrichment_orchestrator.py)
 4. [x] Centripetal scan tool created (centripetal_scan.py)
 5. [ ] Run full centripetal scan (needs API quota reset)
 6. [ ] Deploy to Cloud Function

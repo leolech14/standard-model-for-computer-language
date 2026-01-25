@@ -123,7 +123,7 @@ Tasks move here when:
 |------|---------|-------|
 | `promote_opportunity.py` | Inbox → Active | `./promote_opportunity.py OPP-001` |
 | `sprint.py` | Sprint management | `./sprint.py status` |
-| `boost_confidence.py` | AI confidence assessment | `./boost_confidence.py TASK-126` |
+| `confidence_validator.py` | AI confidence assessment | `./confidence_validator.py TASK-126` |
 | `claim_task.sh` | Atomic task lock | `./claim_task.sh TASK-001` |
 | `release_task.sh` | Release task lock | `./release_task.sh TASK-001 COMPLETE` |
 | `check_stale.sh` | Find stale claims | `./check_stale.sh` |

@@ -1,7 +1,9 @@
 """
-Semantic Query Matcher for Adaptive Context Intelligence (ACI)
+Semantic Finder
+===============
+SMoC Role: Finder | Domain: Semantic
 
-Uses the Standard Model of Code relationship graph for semantic query matching:
+Finds semantically related code using the Standard Model relationship graph:
 - PURPOSE field (π₁-π₄) for semantic distance calculation
 - 8 Dimensions for state-space proximity
 - 19 Edge Types for upstream/downstream traversal
@@ -9,6 +11,8 @@ Uses the Standard Model of Code relationship graph for semantic query matching:
 
 This is the "Curriculum Compiler" - it selects optimal context based on
 semantic understanding of the query's relationship to the codebase graph.
+
+Part of S3 (ACI subsystem).
 """
 
 from dataclasses import dataclass, field

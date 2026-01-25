@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-AEP Orchestrator - Chains existing tools for Autonomous Enrichment Pipeline
-============================================================================
+Enrichment Orchestrator
+=======================
+SMoC Role: Orchestrator | Domain: Enrichment
 
-Orchestrates the existing tools in sequence:
+Orchestrates the task enrichment pipeline:
 0. REFINERY                     → Pre-atomize context for efficient AI queries
 1. triage_inbox.py --score      → Score all opportunities
-2. boost_confidence.py --all    → AI-assess tasks needing boost
+2. confidence_validator.py --all    → AI-assess tasks needing boost
 3. batch_promote.py --threshold 85  → Auto-promote Grade A+ opps
 
 This is the ORCHESTRATOR, not the implementation.
@@ -14,16 +15,16 @@ The implementation is in the existing tools.
 
 Usage:
     # Run full pipeline
-    python aep_orchestrator.py
+    python enrichment_orchestrator.py
 
     # Dry run
-    python aep_orchestrator.py --dry-run
+    python enrichment_orchestrator.py --dry-run
 
     # Skip refinery (use cached chunks)
-    python aep_orchestrator.py --skip-refinery
+    python enrichment_orchestrator.py --skip-refinery
 
     # Run as cloud function entry point
-    python aep_orchestrator.py --cloud
+    python enrichment_orchestrator.py --cloud
 """
 
 import argparse
@@ -131,7 +132,7 @@ def run_refinery(dry_run: bool = False) -> bool:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AEP Orchestrator")
+    parser = argparse.ArgumentParser(description="Enrichment Orchestrator")
     parser.add_argument("--dry-run", "-n", action="store_true")
     parser.add_argument("--skip-refinery", action="store_true", help="Skip REFINERY step (use cached chunks)")
     parser.add_argument("--cloud", action="store_true", help="Cloud function mode")
@@ -155,14 +156,14 @@ def main():
 
     # Step 2: Boost (AI-assess tasks needing work)
     print("\n[2/4] BOOST - AI assessment...")
-    run_tool("boost_confidence.py", ["--all"], args.dry_run)
+    run_tool("confidence_validator.py", ["--all"], args.dry_run)
 
     # Step 3: Promote (auto-promote Grade A+)
     print("\n[3/4] PROMOTE - Auto-promoting Grade A+ opportunities...")
     run_tool("batch_promote.py", ["--threshold", "85", "--auto"], args.dry_run)
 
     print("\n" + "=" * 60)
-    print(f"AEP COMPLETE: {datetime.now().isoformat()}")
+    print(f"ENRICHMENT COMPLETE: {datetime.now().isoformat()}")
     print("=" * 60)
 
 

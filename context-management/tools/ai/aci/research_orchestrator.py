@@ -1,11 +1,16 @@
 """
-Research Engine for Adaptive Context Intelligence (ACI)
+Research Orchestrator
+=====================
+SMoC Role: Orchestrator | Domain: Research
+
+Orchestrates multi-configuration query execution using predefined
+research schemas. Provides the "joystick interface" for AI agents.
+
+Part of S3 (ACI subsystem).
 
 TARGET AUDIENCE: AI AGENTS
 
-This module orchestrates multi-configuration query execution using
-predefined research schemas. It allows AI agents to:
-
+Capabilities:
 1. Execute multiple ACI queries with different parameters
 2. Synthesize results using various strategies
 3. Produce validated, multi-perspective answers
@@ -29,7 +34,7 @@ Schema loader performs preflight validation:
 - External membrane rules enforced
 
 Usage:
-    from aci.schema_orchestrator import ResearchEngine
+    from aci.research_orchestrator import ResearchEngine
 
     engine = ResearchEngine()
 
@@ -68,7 +73,7 @@ from enum import Enum
 from datetime import datetime
 
 # Import ACI components
-from .query_analyzer import analyze_query, QueryScope, QueryIntent
+from .intent_parser import analyze_query, QueryScope, QueryIntent
 
 
 class SynthesisStrategy(Enum):

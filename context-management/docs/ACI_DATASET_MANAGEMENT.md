@@ -354,11 +354,11 @@ Edges define causal relationships used for context expansion:
 |-----------|------|-----------|
 | Set Definitions | `analysis_sets.yaml` | 1-459 |
 | ACI Config | `aci_config.yaml` | 1-100 |
-| Query Analyzer | `query_analyzer.py` | 225-387 |
-| Tier Router | `tier_router.py` | 46-295 |
-| Context Optimizer | `context_optimizer.py` | 69-273 |
-| **Semantic Matcher** | `semantic_matcher.py` | 1-420 |
-| Feedback Loop | `feedback_loop.py` | 44-267 |
+| Intent Parser | `intent_parser.py` | 225-387 |
+| Tier Orchestrator | `tier_orchestrator.py` | 46-295 |
+| Context Builder | `context_builder.py` | 69-273 |
+| **Semantic Finder** | `semantic_finder.py` | 1-420 |
+| Feedback Store | `feedback_store.py` | 44-267 |
 | File Selection | `analyze.py` | 810-886 |
 | Context Building | `analyze.py` | 1030-1089 |
 | Set Resolution | `analyze.py` | 268-331 |

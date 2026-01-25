@@ -128,7 +128,7 @@ try:
         Tier,
         sanitize_sets,
     )
-    from aci.feedback_loop import log_aci_query, get_feedback_loop
+    from aci.feedback_store import log_aci_query, get_feedback_loop
     HAS_ACI = True
 except ImportError:
     HAS_ACI = False
@@ -1228,7 +1228,7 @@ def get_or_create_cache(repo_path: str, model: str, force_new: bool = False) -> 
         Cache resource name if available, empty string otherwise
     """
     try:
-        from aci.cache_registry import CacheRegistry
+        from aci.context_cache import CacheRegistry
         from aci.repopack import format_repopack, get_cache_key
 
         repo_path = Path(repo_path)
@@ -2369,7 +2369,7 @@ Examples:
                     print(f"\n(Source: .agent/intelligence/truths/repo_truths.yaml)", file=sys.stderr)
                     # Log to feedback loop
                     if HAS_ACI:
-                        from aci.query_analyzer import analyze_query as aci_analyze
+                        from aci.intent_parser import analyze_query as aci_analyze
                         profile = aci_analyze(args.prompt)
                         log_aci_query(
                             profile=profile,
@@ -2445,7 +2445,7 @@ Examples:
 
                     # Log to feedback loop if available
                     if HAS_ACI:
-                        from aci.query_analyzer import analyze_query as aci_analyze
+                        from aci.intent_parser import analyze_query as aci_analyze
                         profile = aci_analyze(args.prompt)
                         usage = result.get("usage", {})
                         log_aci_query(
@@ -2613,7 +2613,7 @@ Please provide a thorough, comprehensive answer using the full context available
                 # Log ACI feedback
                 if HAS_ACI:
                     try:
-                        from aci.query_analyzer import analyze_query as aci_analyze
+                        from aci.intent_parser import analyze_query as aci_analyze
                         flash_profile = aci_analyze(args.prompt)
                         usage = getattr(response, 'usage_metadata', None)
                         log_aci_query(
@@ -3380,7 +3380,7 @@ Please provide a thorough, comprehensive answer using the full context available
                 # Log to ACI feedback loop for LONG_CONTEXT tier
                 if args.aci and HAS_ACI and aci_decision is not None:
                     try:
-                        from aci.query_analyzer import analyze_query as aci_analyze
+                        from aci.intent_parser import analyze_query as aci_analyze
                         profile = aci_analyze(args.prompt)
                         duration_ms = int((time.time() - aci_start_time) * 1000) if aci_start_time else 0
                         log_aci_query(

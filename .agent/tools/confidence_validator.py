@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Confidence Booster - AI-powered task confidence assessment.
+Confidence Validator
+====================
+SMoC Role: Validator | Domain: Confidence
+
+AI-powered task confidence assessment and validation.
 
 Validated Architecture (Gemini + Perplexity 2026-01-23):
 - Generates REPORTS, does not auto-update scores
@@ -9,12 +13,12 @@ Validated Architecture (Gemini + Perplexity 2026-01-23):
 - Human/Lead Agent reviews report → decides to update
 
 Usage:
-    ./boost_confidence.py TASK-126              # Assess single task
-    ./boost_confidence.py TASK-126 --output report.json
-    ./boost_confidence.py --all                 # Assess all pending tasks
-    ./boost_confidence.py TASK-126 --verbose    # Show full context sent
+    ./confidence_validator.py TASK-126              # Assess single task
+    ./confidence_validator.py TASK-126 --output report.json
+    ./confidence_validator.py --all                 # Assess all pending tasks
+    ./confidence_validator.py TASK-126 --verbose    # Show full context sent
 
-Part of BARE (Background Auto-Refinement Engine).
+Part of S6 (BARE subsystem).
 See: .agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md
 """
 

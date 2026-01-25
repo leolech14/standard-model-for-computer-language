@@ -30,8 +30,8 @@ registries:
 
   tools:
     dir: ".agent/tools/"
-    boost: ".agent/tools/boost_confidence.py"
-    registry: ".agent/tools/task_registry.py"
+    boost: ".agent/tools/confidence_validator.py"
+    registry: ".agent/tools/task_store.py"
 
 # =============================================================================
 # BODY (COLLIDER) - Located in standard-model-of-code/

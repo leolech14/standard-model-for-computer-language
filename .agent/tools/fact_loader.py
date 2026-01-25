@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-TruthValidator - BARE Processor 1
-Generates validated facts about the repository.
+Fact Loader
+===========
+SMoC Role: Loader | Domain: Fact
 
-Part of the Background Auto-Refinement Engine (BARE).
+Loads and validates facts about the repository.
+Extracts ground truth metrics from codebase analysis.
+
+Part of S6 (BARE subsystem).
 See: .agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md
 """
 

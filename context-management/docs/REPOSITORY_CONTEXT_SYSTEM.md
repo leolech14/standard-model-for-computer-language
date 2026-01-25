@@ -9,17 +9,17 @@
 python context-management/tools/continuous_cartographer.py
 
 # Start background daemon (15s debounce in local mode)
-python context-management/tools/hsl_daemon.py --local --debug
+python context-management/tools/drift_guard.py --local --debug
 
 # Run single pass then exit (for cron/launchd)
-python context-management/tools/hsl_daemon.py --once
+python context-management/tools/drift_guard.py --once
 ```
 
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    HSL DAEMON (File Watcher)                    │
+│                    DRIFT GUARD (File Watcher)                   │
 │  Watches: src/, docs/, tools/, *.yaml                          │
 │  Ignores: .collider/, intelligence/, reports/ (prevents loops) │
 │  Throttle: 15s (local) / 300s (daemon)                         │
@@ -63,9 +63,9 @@ python context-management/tools/hsl_daemon.py --once
 | **Update context now** | `python continuous_cartographer.py` |
 | **Update + verify** | `python continuous_cartographer.py --verify` |
 | **Check what would run** | `python continuous_cartographer.py --dry-run` |
-| **Start daemon (local)** | `python hsl_daemon.py --local --debug` |
-| **Start daemon (production)** | `python hsl_daemon.py --interval 3600` |
-| **Single pass** | `python hsl_daemon.py --once` |
+| **Start daemon (local)** | `python drift_guard.py --local --debug` |
+| **Start daemon (production)** | `python drift_guard.py --interval 3600` |
+| **Single pass** | `python drift_guard.py --once` |
 
 ## Output Files
 
@@ -74,7 +74,7 @@ python context-management/tools/hsl_daemon.py --once
 | `.collider/unified_analysis.json` | The knowledge graph | ~25MB |
 | `.collider/output_human-readable_*.html` | Visual map | ~2MB |
 | `reports/socratic_audit_latest.md` | Verification report | ~10KB |
-| `intelligence/hsl_daemon_state.json` | Daemon state | ~1KB |
+| `intelligence/drift_guard_state.json` | Daemon state | ~1KB |
 
 ## File Change Detection
 
@@ -107,13 +107,13 @@ On each change event (15s debounce):
 CRITICAL: Never watch .collider/ - causes infinite loops.
 
 The daemon handles all of this automatically.
-Just run: python hsl_daemon.py --local --debug
+Just run: python drift_guard.py --local --debug
 ```
 
 ## Troubleshooting
 
 **Daemon not detecting changes:**
-- Check `WATCH_PATHS` in `hsl_daemon.py:52`
+- Check `WATCH_PATHS` in `drift_guard.py:52`
 - Ensure file isn't in `IGNORE_PATHS`
 
 **Cartographer fails:**

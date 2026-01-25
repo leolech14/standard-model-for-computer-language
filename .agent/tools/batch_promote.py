@@ -253,10 +253,10 @@ def run_boost(opportunities: list) -> list:
         print(f"  Boosting {opp_id}...", end=" ", flush=True)
 
         try:
-            # Run boost_confidence.py for the opportunity
-            # Note: boost_confidence works on tasks, so we do a quick assessment
+            # Run confidence_validator.py for the opportunity
+            # Note: confidence_validator works on tasks, so we do a quick assessment
             result = subprocess.run(
-                [sys.executable, str(SCRIPT_DIR / "boost_confidence.py"), opp_id, "--no-save"],
+                [sys.executable, str(SCRIPT_DIR / "confidence_validator.py"), opp_id, "--no-save"],
                 capture_output=True,
                 text=True,
                 timeout=60,
@@ -368,7 +368,7 @@ def main():
     if failed > 0:
         print(f"{RED}Failed: {failed}{NC}")
     if not args.dry_run:
-        print(f"\nView with: .agent/tools/task_registry.py list")
+        print(f"\nView with: .agent/tools/task_store.py list")
 
 
 if __name__ == "__main__":

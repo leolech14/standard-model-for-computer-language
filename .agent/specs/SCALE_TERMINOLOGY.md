@@ -113,7 +113,7 @@ Current inventory: **12 subsystems**
 | S8 | Hygiene | Observer | `.pre-commit-config.yaml` | Commit guards |
 | S9 | Laboratory | Particle | `laboratory.py` | Experiment API |
 | S9b | Lab Bridge | Wave | `laboratory_bridge.py` | Cross-realm bridge |
-| S10 | AEP | Observer | `aep_orchestrator.py` | Task enrichment |
+| S10 | Enrichment | Observer | `enrichment_orchestrator.py` | Task enrichment |
 | S11 | Refinery | Wave | `refinery/` | Context atomization |
 | S12 | Centripetal | Wave | `centripetal_scan.py` | Deep analysis |
 

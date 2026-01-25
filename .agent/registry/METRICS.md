@@ -33,7 +33,7 @@
 
 **Refinement Steps:** 3
 **Tools Used:** 4 (Read, Grep, Perplexity, Gemini)
-**Root Cause:** hsl_daemon.py subprocess calls missing Doppler wrapper
+**Root Cause:** drift_guard.py (formerly hsl_daemon.py) subprocess calls missing Doppler wrapper
 **Fix:** Updated plist ProgramArguments with Doppler injection
 
 ---

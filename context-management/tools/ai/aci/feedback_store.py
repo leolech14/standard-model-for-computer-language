@@ -1,5 +1,7 @@
 """
-Feedback Loop for Adaptive Context Intelligence (ACI)
+Feedback Store
+==============
+SMoC Role: Store | Domain: Feedback
 
 Logs every ACI query and enables learning from results:
 - Query profile
@@ -7,6 +9,8 @@ Logs every ACI query and enables learning from results:
 - Sets used
 - Tokens consumed
 - Success/retry signal
+
+Part of S3 (ACI subsystem).
 
 Feedback is stored in .agent/intelligence/aci_feedback.yaml
 """
@@ -18,8 +22,8 @@ from typing import Optional, List, Dict
 import yaml
 import os
 
-from .query_analyzer import QueryProfile
-from .tier_router import RoutingDecision
+from .intent_parser import QueryProfile
+from .tier_orchestrator import RoutingDecision
 
 
 @dataclass

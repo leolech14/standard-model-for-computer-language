@@ -124,20 +124,67 @@ def get_meters():
         return defaults
 
 
+def get_session():
+    """Read session.yaml if it exists."""
+    root = get_project_root()
+    session_file = root / ".agent" / "state" / "session.yaml"
+
+    if not session_file.exists():
+        return None
+
+    try:
+        with open(session_file) as f:
+            return yaml.safe_load(f)
+    except Exception:
+        return None
+
+
+def format_time_ago(iso_timestamp: str) -> str:
+    """Convert ISO timestamp to human-readable 'Xm ago' format."""
+    from datetime import datetime, timezone
+
+    try:
+        dt = datetime.fromisoformat(iso_timestamp.replace("Z", "+00:00"))
+        now = datetime.now(timezone.utc)
+        delta = now - dt
+
+        minutes = int(delta.total_seconds() / 60)
+        if minutes < 1:
+            return "now"
+        elif minutes < 60:
+            return f"{minutes}m"
+        elif minutes < 1440:
+            return f"{minutes // 60}h"
+        else:
+            return f"{minutes // 1440}d"
+    except Exception:
+        return "?"
+
+
 def build_real_stats():
-    """Build stats dict from real state."""
+    """Build stats dict from real state including session."""
     active, inbox = get_task_counts()
     meters = get_meters()
+    session = get_session()
 
-    return {
-        "session": "RUNNING",
+    stats = {
+        "session": "NEW",
         "task": None,
+        "task_time": None,
         "inbox": inbox,
         "active": active,
-        "last_card": None,
-        "streak": 0,
+        "cards_played": [],
         "insight": f"focus:{meters['focus']} | reliability:{meters['reliability']} | debt:{meters['debt']}"
     }
+
+    if session:
+        stats["session"] = session.get("status", "ACTIVE")
+        stats["task"] = session.get("claimed_task")
+        if session.get("claimed_at"):
+            stats["task_time"] = format_time_ago(session["claimed_at"])
+        stats["cards_played"] = session.get("cards_played", [])[-5:]  # Last 5
+
+    return stats
 
 
 def render_vibes(cards: list = None, phase: str = "DESIGNING"):
@@ -238,31 +285,35 @@ def get_card_color(index: int) -> str:
 
 
 def render_context(stats: dict = None):
-    """Render context section with stats and insights."""
+    """Render context section with session, task, and card history."""
     if stats is None:
         stats = build_real_stats()
 
-    print(f"  {DIM}┌─ CONTEXT ─────────────────────┐{RESET}")
+    print(f"  {DIM}┌─ SESSION ─────────────────────┐{RESET}")
 
-    # Session status
-    session = stats.get("session", "NEW")
+    # Task row
     task = stats.get("task")
+    task_time = stats.get("task_time")
     if task:
-        print(f"  {DIM}│{RESET} {CYAN}task:{RESET} {task:<22} {DIM}│{RESET}")
+        time_str = f" ({task_time})" if task_time else ""
+        task_display = f"{task}{time_str}"[:26]
+        print(f"  {DIM}│{RESET} {CYAN}task:{RESET} {task_display:<24} {DIM}│{RESET}")
     else:
         print(f"  {DIM}│{RESET} {YELLOW}no task claimed{RESET}              {DIM}│{RESET}")
+
+    # Cards played row
+    cards = stats.get("cards_played", [])
+    if cards:
+        # Show abbreviated card trail: SES→REG→GIT
+        card_trail = "→".join([c["card_id"].split("-")[1][:3] for c in cards[-4:]])
+        card_count = len(cards)
+        card_display = f"{card_trail} ({card_count})"[:26]
+        print(f"  {DIM}│{RESET} {MAGENTA}cards:{RESET} {card_display:<24} {DIM}│{RESET}")
 
     # Stats row
     inbox = stats.get("inbox", 0)
     active = stats.get("active", 0)
     print(f"  {DIM}│{RESET} inbox:{MAGENTA}{inbox}{RESET}  active:{CYAN}{active}{RESET}           {DIM}│{RESET}")
-
-    # Streak/insight
-    insight = stats.get("insight", "")
-    if insight:
-        # Truncate insight to fit
-        insight_short = insight[:28]
-        print(f"  {DIM}│{RESET} {DIM}» {insight_short}{RESET} {DIM}│{RESET}")
 
     print(f"  {DIM}└───────────────────────────────┘{RESET}")
     print()

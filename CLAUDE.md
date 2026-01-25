@@ -187,7 +187,7 @@ Reusable patterns that orchestrate multiple ACI queries with different configura
 
 - **Config**: `context-management/config/research_schemas.yaml`
 - **Docs**: `context-management/docs/RESEARCH_SCHEMAS.md`
-- **Engine**: `context-management/tools/ai/aci/schema_orchestrator.py`
+- **Engine**: `context-management/tools/ai/aci/research_orchestrator.py`
 
 ## Universal Property Binder (UPB)
 

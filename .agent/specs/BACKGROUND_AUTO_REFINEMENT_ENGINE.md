@@ -8,15 +8,15 @@
 
 ## What's Implemented
 
-### 1. Confidence Booster
+### 1. Confidence Validator
 
-**Tool:** `.agent/tools/boost_confidence.py`
+**Tool:** `.agent/tools/confidence_validator.py`
 
 Automatically boosts task confidence through Gemini-powered Socratic queries.
 
 ```bash
 # Usage
-python .agent/tools/boost_confidence.py TASK-002
+python .agent/tools/confidence_validator.py TASK-002
 
 # What it does
 1. Loads task from registry
@@ -96,8 +96,8 @@ description: |
 │   └── archive/                    # Completed
 │
 └── tools/
-    ├── boost_confidence.py         # ✓ IMPLEMENTED
-    ├── task_registry.py            # ✓ IMPLEMENTED
+    ├── confidence_validator.py     # ✓ IMPLEMENTED
+    ├── task_store.py               # ✓ IMPLEMENTED
     ├── sprint.py                   # ✓ IMPLEMENTED
     └── claim_task.sh               # ✓ IMPLEMENTED
 ```

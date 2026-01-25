@@ -1,11 +1,15 @@
 """
-Context Optimizer for Adaptive Context Intelligence (ACI)
+Context Builder
+===============
+SMoC Role: Builder | Domain: Context
 
-Handles:
+Builds optimized context for AI queries:
 - Automatic injection of .agent/ context when needed
 - Strategic positioning of critical files (sandwich/front-load)
 - Context budget management (from aci_config.yaml)
 - Truths integration for instant queries
+
+Part of S3 (ACI subsystem).
 """
 
 from dataclasses import dataclass

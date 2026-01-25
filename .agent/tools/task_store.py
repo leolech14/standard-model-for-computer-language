@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Task Registry CLI - YAML-based task management for LEARNING_SYSTEM.
+Task Store
+==========
+SMoC Role: Store | Domain: Task
+
+YAML-based task state management.
 
 Validated Architecture (Gemini + Perplexity 2026-01-23):
 - YAML format for hybrid human-AI safety
@@ -9,13 +13,13 @@ Validated Architecture (Gemini + Perplexity 2026-01-23):
 - Schema validation via pre-defined structure
 
 Usage:
-    ./task_registry.py list                              # List all tasks
-    ./task_registry.py show TASK-122                     # Show task details
-    ./task_registry.py add --id 128 --subject "Name" --score 85
-    ./task_registry.py update TASK-122 --status complete --commit abc123
-    ./task_registry.py boost TASK-127 --score 85 --reason "Evidence found"
+    ./task_store.py list                              # List all tasks
+    ./task_store.py show TASK-122                     # Show task details
+    ./task_store.py add --id 128 --subject "Name" --score 85
+    ./task_store.py update TASK-122 --status complete --commit abc123
+    ./task_store.py boost TASK-127 --score 85 --reason "Evidence found"
 
-Part of Agent System Foundation.
+Part of S5 (Task Registry subsystem).
 See: .agent/specs/BACKGROUND_AUTO_REFINEMENT_ENGINE.md
 """
 

@@ -14,7 +14,7 @@ PROJECT_elements/
 │   ├── intelligence/          # Generated facts and insights
 │   ├── registry/              # Task management (YAML + Markdown)
 │   ├── specs/                 # System specifications
-│   ├── tools/                 # CLI tools (task_registry.py, sprint.py)
+│   ├── tools/                 # CLI tools (task_store.py, sprint.py)
 │   └── workflows/             # Workflow definitions
 │
 ├── context-management/        # BRAIN Hemisphere - AI Tools
@@ -75,8 +75,8 @@ PROJECT_elements/
 |------------|-------|
 | Analyze codebase | `./collider full <path> --output .collider` |
 | Query with AI | `python context-management/tools/ai/analyze.py --set <set> "query"` |
-| Manage tasks | `python .agent/tools/task_registry.py list` |
-| Add new task | `python .agent/tools/task_registry.py add --id N --subject "X" --score 85` |
+| Manage tasks | `python .agent/tools/task_store.py list` |
+| Add new task | `python .agent/tools/task_store.py add --id N --subject "X" --score 85` |
 | Run tests | `cd standard-model-of-code && pytest tests/ -q` |
 | Mirror to GCS | `python context-management/tools/archive/archive.py mirror` |
 

@@ -48,7 +48,7 @@ The Decision Deck Layer constrains AI agent actions to a curated library of **CE
 ┌─────────────────────────────────────────────────────────────┐
 │                         ACI LAYER                            │
 │              (Adaptive Context Intelligence)                 │
-│         tier_router.py, analyze.py, research tools          │
+│       tier_orchestrator.py, analyze.py, research tools      │
 └─────────────────────────────────────────────────────────────┘
                            │
                            ▼
@@ -239,7 +239,7 @@ Every deal includes a Wildcard option for actions outside the deck.
 ```
 CARD-REG-001 ←→ promote_opportunity.py
 CARD-REG-002 ←→ sprint.py start
-CARD-REG-003 ←→ task_registry.py update
+CARD-REG-003 ←→ task_store.py update
 ```
 
 ### With 4D Confidence

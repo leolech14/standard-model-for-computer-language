@@ -309,6 +309,18 @@ analysis_sets:
   # AGENT SETS - .agent/ directory for ACI (Adaptive Context Intelligence)
   # ==========================================================================
 
+  agent_session:
+    description: "Active Decision Deck session state (real-time context)"
+    max_tokens: 10000
+    critical_files:
+      - ".agent/state/session.yaml"
+      - ".agent/state/meters.yaml"
+    positional_strategy: "front-load"
+    patterns:
+      - ".agent/state/session.yaml"
+      - ".agent/state/meters.yaml"
+      - ".agent/deck/CARD-*.yaml"
+
   agent_kernel:
     description: "Agent boot protocol and manifest (~30k tokens)"
     max_tokens: 30000
@@ -359,10 +371,12 @@ analysis_sets:
     max_tokens: 150000
     auto_interactive: true
     critical_files:
+      - ".agent/state/session.yaml"
       - ".agent/KERNEL.md"
       - ".agent/registry/INDEX.md"
     positional_strategy: "sandwich"
     includes:
+      - agent_session
       - agent_kernel
       - agent_tasks
       - agent_intelligence
@@ -376,8 +390,8 @@ analysis_sets:
     description: "ACI module source code - the curriculum compiler"
     max_tokens: 30000
     critical_files:
-      - "context-management/tools/ai/aci/tier_router.py"
-      - "context-management/tools/ai/aci/context_optimizer.py"
+      - "context-management/tools/ai/aci/tier_orchestrator.py"
+      - "context-management/tools/ai/aci/context_builder.py"
     positional_strategy: "front-load"
     patterns:
       - "context-management/tools/ai/aci/*.py"
@@ -389,7 +403,7 @@ analysis_sets:
     patterns:
       - "context-management/tools/ai/analyze.py"
       - "context-management/tools/ai/perplexity_research.py"
-      - "context-management/tools/hsl_daemon.py"
+      - "context-management/tools/drift_guard.py"
       - "context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md"
 
   aci_audit:
@@ -397,8 +411,8 @@ analysis_sets:
     max_tokens: 100000
     auto_interactive: true
     critical_files:
-      - "context-management/tools/ai/aci/tier_router.py"
-      - "context-management/tools/ai/aci/context_optimizer.py"
+      - "context-management/tools/ai/aci/tier_orchestrator.py"
+      - "context-management/tools/ai/aci/context_builder.py"
       - "context-management/config/aci_config.yaml"
     positional_strategy: "sandwich"
     includes:
@@ -456,3 +470,15 @@ recommendations:
     - agent_intelligence
   "sprint * status":
     - agent_tasks
+  "decision * deck":
+    - agent_session
+    - agent_kernel
+  "play * card":
+    - agent_session
+  "session * state":
+    - agent_session
+  "current * task":
+    - agent_session
+    - agent_tasks
+  "meters * status":
+    - agent_session

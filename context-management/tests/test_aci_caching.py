@@ -2,7 +2,7 @@
 """
 Tests for ACI Context Caching System
 
-Tests cache_registry, repopack, and token counting functionality.
+Tests context_cache, repopack, and token counting functionality.
 """
 
 import pytest
@@ -18,11 +18,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "tools/ai"))
 
 
 class TestCacheRegistry:
-    """Tests for cache_registry module."""
+    """Tests for context_cache module."""
 
     def test_cache_entry_validity(self):
         """Test CacheEntry is_valid and ttl_remaining properties."""
-        from aci.cache_registry import CacheEntry
+        from aci.context_cache import CacheEntry
 
         now = time.time()
         # Valid entry (expires in 1 hour)
@@ -51,7 +51,7 @@ class TestCacheRegistry:
 
     def test_registry_register_and_get(self):
         """Test registering and retrieving cache entries."""
-        from aci.cache_registry import CacheRegistry
+        from aci.context_cache import CacheRegistry
 
         with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as f:
             registry = CacheRegistry(Path(f.name))
@@ -78,7 +78,7 @@ class TestCacheRegistry:
 
     def test_registry_cleanup_expired(self):
         """Test cleaning up expired entries."""
-        from aci.cache_registry import CacheRegistry, CacheEntry
+        from aci.context_cache import CacheRegistry, CacheEntry
 
         with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as f:
             registry = CacheRegistry(Path(f.name))

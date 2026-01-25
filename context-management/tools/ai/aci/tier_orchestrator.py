@@ -1,31 +1,35 @@
 """
-Tier Router for Adaptive Context Intelligence (ACI)
+Tier Orchestrator
+=================
+SMoC Role: Orchestrator | Domain: Tier
 
-Routes queries to the appropriate execution tier based on query profile:
+Orchestrates routing queries to the appropriate execution tier:
 - TIER 0 (INSTANT): Use cached truths for simple counts/stats
 - TIER 1 (RAG): Use File Search for targeted lookups
 - TIER 2 (LONG_CONTEXT): Gemini 3 Pro with 1M context for reasoning
 - TIER 3 (PERPLEXITY): Use external research for web knowledge
 - TIER 4 (FLASH_DEEP): Gemini 2.0 Flash with 2M context for massive analysis
 
-Integrates with SemanticMatcher for graph-based context selection using:
+Integrates with SemanticFinder for graph-based context selection using:
 - PURPOSE field (π₁-π₄) hierarchy
 - 8-dimensional semantic space
 - 19 edge types for upstream/downstream traversal
+
+Part of S3 (ACI subsystem).
 """
 
 from enum import Enum
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-from .query_analyzer import (
+from .intent_parser import (
     QueryProfile,
     QueryIntent,
     QueryComplexity,
     QueryScope,
     analyze_query
 )
-from .semantic_matcher import (
+from .semantic_finder import (
     SemanticMatch,
     SemanticTarget,
     semantic_match,

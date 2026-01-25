@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0
 **Location:** `context-management/config/research_schemas.yaml`
-**Engine:** `context-management/tools/ai/aci/schema_orchestrator.py`
+**Engine:** `context-management/tools/ai/aci/research_orchestrator.py`
 
 ---
 
@@ -232,7 +232,7 @@ result = execute_research("validation_trio", "query here")
 | File | Purpose |
 |------|---------|
 | `config/research_schemas.yaml` | Schema definitions |
-| `tools/ai/aci/schema_orchestrator.py` | Orchestration engine |
+| `tools/ai/aci/research_orchestrator.py` | Orchestration engine |
 | `tools/ai/aci/__init__.py` | Exports |
 | `tools/ai/analyze.py` | CLI handlers |
 

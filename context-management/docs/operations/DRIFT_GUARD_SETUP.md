@@ -1,12 +1,12 @@
-# HSL Daemon Setup (launchd)
+# Drift Guard Setup (launchd)
 
 ## Overview
 
-The Holographic-Socratic Layer (HSL) daemon runs periodic code analysis audits. It requires `GEMINI_API_KEY` to function.
+The Drift Guard (SMoC Role: Guard) runs periodic code analysis audits to detect semantic drift. It requires `GEMINI_API_KEY` to function.
 
 ## Installation
 
-The HSL daemon is managed via macOS launchd and automatically started at boot.
+The Drift Guard is managed via macOS launchd and automatically started at boot.
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ The HSL daemon is managed via macOS launchd and automatically started at boot.
     <key>ProgramArguments</key>
     <array>
         <string>/Users/lech/PROJECTS_all/PROJECT_elements/.tools_venv/bin/python</string>
-        <string>/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/hsl_daemon.py</string>
+        <string>/Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/drift_guard.py</string>
         <string>--once</string>
     </array>
     <key>StartInterval</key>
@@ -54,9 +54,9 @@ The HSL daemon is managed via macOS launchd and automatically started at boot.
         <string>INSERT_KEY_HERE</string>
     </dict>
     <key>StandardOutPath</key>
-    <string>/tmp/hsl_daemon.out</string>
+    <string>/tmp/drift_guard.out</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/hsl_daemon.err</string>
+    <string>/tmp/drift_guard.err</string>
     <key>WorkingDirectory</key>
     <string>/Users/lech/PROJECTS_all/PROJECT_elements</string>
 </dict>
@@ -69,7 +69,7 @@ Test the daemon runs successfully:
 
 ```bash
 /Users/lech/PROJECTS_all/PROJECT_elements/.tools_venv/bin/python \
-  /Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/hsl_daemon.py --once
+  /Users/lech/PROJECTS_all/PROJECT_elements/context-management/tools/drift_guard.py --once
 ```
 
 Expected output:
@@ -86,8 +86,8 @@ launchctl list | grep hsl
 
 ### View logs:
 ```bash
-tail -f /tmp/hsl_daemon.out
-tail -f /tmp/hsl_daemon.err
+tail -f /tmp/drift_guard.out
+tail -f /tmp/drift_guard.err
 ```
 
 ### Reload (after plist changes):
@@ -110,12 +110,12 @@ launchctl load ~/Library/LaunchAgents/com.elements.hsl.plist
 
 ### Daemon not running
 1. Check plist syntax: `plutil -lint ~/Library/LaunchAgents/com.elements.hsl.plist`
-2. View error logs: `cat /tmp/hsl_daemon.err`
+2. View error logs: `cat /tmp/drift_guard.err`
 3. Re-load service: `launchctl unload ... && launchctl load ...`
 
 ### API key errors
 - Verify key is set in plist: `grep -A 1 GEMINI_API_KEY ~/Library/LaunchAgents/com.elements.hsl.plist`
-- Test manually: `GEMINI_API_KEY="..." python context-management/tools/hsl_daemon.py --once`
+- Test manually: `GEMINI_API_KEY="..." python context-management/tools/drift_guard.py --once`
 
 ### Missing dependencies
 - Ensure `.tools_venv` is activated and dependencies installed
@@ -144,6 +144,6 @@ The plist injects `GEMINI_API_KEY` via `EnvironmentVariables` section. This is m
 
 ## Related Files
 
-- HSL daemon: `context-management/tools/hsl_daemon.py`
+- Drift Guard: `context-management/tools/drift_guard.py`
 - Analysis tool: `context-management/tools/ai/analyze.py`
-- State file: `context-management/intelligence/hsl_daemon_state.json`
+- State file: `context-management/intelligence/drift_guard_state.json`

@@ -155,7 +155,7 @@ context-management/tools/ai/
 # .agent External API
 
 ## Intentional Exports (use these)
-- task_registry.py: TaskRegistry class
+- task_store.py: TaskStore class
 - sprint.py: Sprint CLI
 
 ## Internal (do not depend on)

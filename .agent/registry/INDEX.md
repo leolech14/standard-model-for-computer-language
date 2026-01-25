@@ -36,7 +36,7 @@ All tasks now use the unified 4D scoring system:
 - `50-74%` → DEFER (needs work)
 - `< 50%` → REJECT
 
-**Tool:** `.agent/tools/boost_confidence.py TASK-XXX`
+**Tool:** `.agent/tools/confidence_validator.py TASK-XXX`
 
 ---
 
@@ -102,8 +102,8 @@ All tasks now use the unified 4D scoring system:
 |------|---------|-------|
 | `import_legacy_tasks.py` | Import from legacy registries | `./import_legacy_tasks.py scan` |
 | `promote_opportunity.py` | Inbox → Active | `./promote_opportunity.py OPP-008` |
-| `boost_confidence.py` | AI confidence assessment | `./boost_confidence.py TASK-002` |
-| `task_registry.py` | Task CRUD operations | `./task_registry.py list` |
+| `confidence_validator.py` | AI confidence assessment | `./confidence_validator.py TASK-002` |
+| `task_store.py` | Task CRUD operations | `./task_store.py list` |
 | `sprint.py` | Sprint management | `./sprint.py status` |
 
 ---

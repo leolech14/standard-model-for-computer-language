@@ -1,12 +1,15 @@
 """
-Query Analyzer for Adaptive Context Intelligence (ACI)
+Intent Parser
+=============
+SMoC Role: Parser | Domain: Intent
 
-Analyzes incoming queries to determine:
+Parses incoming queries to determine:
 - Intent: What type of question is being asked
 - Complexity: How difficult/broad is the query
 - Scope: Internal (codebase) vs External (web research)
 - Agent Context: Whether .agent/ files are relevant
 
+Part of S3 (ACI subsystem).
 Configuration is loaded from aci_config.yaml and merged with defaults.
 """
 

@@ -112,8 +112,8 @@ TRIGGER: Git post-commit hook
 **Tools:**
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `truth_validator.py` | Extract repo facts | `python .agent/tools/truth_validator.py` |
-| `boost_confidence.py` | 4D AI scoring | `python .agent/tools/boost_confidence.py TASK-XXX` |
+| `fact_loader.py` | Extract repo facts | `python .agent/tools/fact_loader.py` |
+| `confidence_validator.py` | 4D AI scoring | `python .agent/tools/confidence_validator.py TASK-XXX` |
 
 ---
 
@@ -151,9 +151,9 @@ TRIGGER: Cron (hourly) or Cloud Function
 **Tools:**
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `aep_orchestrator.py` | Full pipeline orchestration | `python .agent/tools/aep_orchestrator.py` |
+| `enrichment_orchestrator.py` | Full pipeline orchestration | `python .agent/tools/enrichment_orchestrator.py` |
 | `triage_inbox.py` | Score opportunities | `python .agent/tools/triage_inbox.py --score` |
-| `boost_confidence.py` | 4D AI assessment | `python .agent/tools/boost_confidence.py --all` |
+| `confidence_validator.py` | 4D AI assessment | `python .agent/tools/confidence_validator.py --all` |
 | `batch_promote.py` | Bulk promotion | `python .agent/tools/batch_promote.py --threshold 85` |
 | `promote_opportunity.py` | Single promotion | `python .agent/tools/promote_opportunity.py OPP-XXX` |
 | `add_task_steps.py` | Map task steps | `python .agent/tools/add_task_steps.py TASK-XXX` |
@@ -384,7 +384,7 @@ TRIGGER: Manual (API quota required)
 - `adversarial_pair`: Stress-test claims (thesis vs antithesis)
 
 Docs: `context-management/docs/RESEARCH_SCHEMAS.md`
-Engine: `context-management/tools/ai/aci/schema_orchestrator.py`
+Engine: `context-management/tools/ai/aci/research_orchestrator.py`
 
 ---
 
@@ -393,9 +393,9 @@ Engine: `context-management/tools/ai/aci/schema_orchestrator.py`
 ### Core Pipeline Tools
 | Tool | Purpose | Trigger |
 |------|---------|---------|
-| `aep_orchestrator.py` | Chain all enrichment tools | Cron/manual |
-| `triage_inbox.py` | Score and dedupe OPPs | AEP step 1 |
-| `boost_confidence.py` | 4D AI assessment | AEP step 2 |
+| `enrichment_orchestrator.py` | Chain all enrichment tools | Cron/manual |
+| `triage_inbox.py` | Score and dedupe OPPs | Enrichment step 1 |
+| `confidence_validator.py` | 4D AI assessment | Enrichment step 2 |
 | `batch_promote.py` | Bulk promotion | AEP step 3 |
 | `promote_opportunity.py` | Single OPP → TASK | Manual |
 | `add_task_steps.py` | Map task substeps | Post-promotion |
@@ -404,14 +404,14 @@ Engine: `context-management/tools/ai/aci/schema_orchestrator.py`
 | Tool | Purpose | Trigger |
 |------|---------|---------|
 | `centripetal_scan.py` | 12-round deep analysis | Manual |
-| `truth_validator.py` | Extract repo facts | Post-commit |
+| `fact_loader.py` | Extract repo facts | Post-commit |
 | `wave_particle_balance.py` | Realm metrics | Manual |
 | `industrial_triage.py` | Batch assessment | Manual |
 
 ### Registry Tools
 | Tool | Purpose | Trigger |
 |------|---------|---------|
-| `task_registry.py` | CRUD for tasks | Manual |
+| `task_store.py` | CRUD for tasks | Manual |
 | `sprint.py` | Sprint management | Manual |
 | `deal_cards.py` | Task card generation | Manual |
 | `update_task_hierarchy.py` | Parent/child links | Manual |
@@ -477,14 +477,14 @@ Engine: `context-management/tools/ai/aci/schema_orchestrator.py`
 
 ## Quick Start Examples
 
-### Run the Full AEP Pipeline
+### Run the Full Enrichment Pipeline
 
 ```bash
 # Dry run first (see what would happen)
-python .agent/tools/aep_orchestrator.py --dry-run
+python .agent/tools/enrichment_orchestrator.py --dry-run
 
 # Run full pipeline (triage → boost → promote)
-python .agent/tools/aep_orchestrator.py
+python .agent/tools/enrichment_orchestrator.py
 ```
 
 ### Run HSL Audit
@@ -522,13 +522,13 @@ doppler run -- python .agent/tools/centripetal_scan.py
 
 ```bash
 # Update repository truths
-python .agent/tools/truth_validator.py
+python .agent/tools/fact_loader.py
 
 # Boost a specific task's confidence
-python .agent/tools/boost_confidence.py TASK-007
+python .agent/tools/confidence_validator.py TASK-007
 
 # Boost all tasks needing attention
-python .agent/tools/boost_confidence.py --all
+python .agent/tools/confidence_validator.py --all
 ```
 
 ---

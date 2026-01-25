@@ -52,7 +52,7 @@ ACI_CONFIG: Dict[str, Any] = _load_aci_config()
 # MODULE IMPORTS
 # =============================================================================
 
-from .query_analyzer import (
+from .intent_parser import (
     QueryIntent,
     QueryComplexity,
     QueryScope,
@@ -62,7 +62,7 @@ from .query_analyzer import (
     is_external_query,
 )
 
-from .tier_router import (
+from .tier_orchestrator import (
     Tier,
     RoutingDecision,
     route_query,
@@ -72,7 +72,7 @@ from .tier_router import (
     SET_ALIASES,
 )
 
-from .context_optimizer import (
+from .context_builder import (
     OptimizedContext,
     load_repo_truths,
     answer_from_truths,
@@ -80,7 +80,7 @@ from .context_optimizer import (
     format_context_summary,
 )
 
-from .semantic_matcher import (
+from .semantic_finder import (
     SemanticMatch,
     SemanticTarget,
     PurposeLevel,
@@ -92,7 +92,7 @@ from .semantic_matcher import (
     format_semantic_match,
 )
 
-from .cache_registry import (
+from .context_cache import (
     CacheEntry,
     CacheRegistry,
     get_workspace_key,
@@ -108,7 +108,7 @@ from .refinery import (
     YamlChunker,
 )
 
-from .schema_orchestrator import (
+from .research_orchestrator import (
     ResearchEngine,
     ResearchSchema,
     RunConfig,

@@ -38,8 +38,8 @@ agent_system:
   # Task management tools
   tools:
     import_legacy: .agent/tools/import_legacy_tasks.py
-    boost_confidence: .agent/tools/boost_confidence.py
-    task_registry: .agent/tools/task_registry.py
+    confidence_validator: .agent/tools/confidence_validator.py
+    task_store: .agent/tools/task_store.py
     promote: .agent/tools/promote_opportunity.py
 
 # Project structure (Concepts / Objects duality)

@@ -42,7 +42,7 @@ token_budgets:
 
 # =============================================================================
 # INTENT KEYWORDS
-# Additional keywords for intent detection (supplements query_analyzer.py)
+# Additional keywords for intent detection (supplements intent_parser.py)
 # =============================================================================
 intent_keywords:
   architecture:

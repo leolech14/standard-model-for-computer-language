@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """
-ACI Cache Registry - Track Gemini Context Caches
+Context Cache
+=============
+SMoC Role: Cache | Domain: Context
 
 Manages the lifecycle of cached contexts for the FLASH_DEEP tier.
 Enables "expensive per snapshot, cheap per question" pattern.
 
+Part of S3 (ACI subsystem).
+
 Usage:
-    from aci.cache_registry import CacheRegistry
+    from aci.context_cache import CacheRegistry
 
     registry = CacheRegistry()
 
