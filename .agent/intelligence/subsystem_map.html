@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT_elements Subsystem Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Three Realms */
+        .realms {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .realm {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .realm-particle {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .realm-wave {
+            border-color: rgba(123, 44, 191, 0.3);
+            box-shadow: 0 0 40px rgba(123, 44, 191, 0.1);
+        }
+
+        .realm-observer {
+            border-color: rgba(255, 0, 110, 0.3);
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.1);
+        }
+
+        .realm-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .realm-particle .realm-title { color: #00d4ff; }
+        .realm-wave .realm-title { color: #7b2cbf; }
+        .realm-observer .realm-title { color: #ff006e; }
+
+        .realm-desc {
+            color: #888;
+            font-size: 0.85em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Subsystem Cards */
+        .subsystem {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .subsystem:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .realm-particle .subsystem { border-left-color: #00d4ff; }
+        .realm-wave .subsystem { border-left-color: #7b2cbf; }
+        .realm-observer .subsystem { border-left-color: #ff006e; }
+
+        .subsystem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .subsystem-id {
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .subsystem-name {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .subsystem-type {
+            font-size: 0.8em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subsystem-path {
+            font-size: 0.75em;
+            color: #00d4ff;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        .subsystem-purpose {
+            font-size: 0.85em;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* Data Flow Section */
+        .dataflow {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dataflow h2 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+        }
+
+        .flow-diagram {
+            font-family: 'SF Mono', monospace;
+            font-size: 0.9em;
+            line-height: 1.8;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .flow-step {
+            margin-bottom: 20px;
+        }
+
+        .flow-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .flow-title {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .flow-detail {
+            margin-left: 45px;
+            color: #888;
+            border-left: 2px solid #333;
+            padding-left: 15px;
+        }
+
+        .flow-arrow {
+            color: #00d4ff;
+        }
+
+        /* Integration Matrix */
+        .matrix {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .matrix h2 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+        }
+
+        .integration-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+
+        .integration-table th {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #333;
+        }
+
+        .integration-table td {
+            padding: 12px;
+            border-bottom: 1px solid #222;
+        }
+
+        .status-active {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .status-proposed {
+            color: #ffaa00;
+        }
+
+        .status-missing {
+            color: #ff4444;
+        }
+
+        /* Stats Footer */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* ASCII Art Section */
+        .ascii-diagram {
+            background: #000;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            font-size: 0.75em;
+            line-height: 1.4;
+            color: #00ff88;
+            margin-top: 30px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-particle { background: #00d4ff; }
+        .legend-wave { background: #7b2cbf; }
+        .legend-observer { background: #ff006e; }
+        .legend-guard { background: #ffaa00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PROJECT_elements Subsystem Map</h1>
+        <p class="subtitle">Wave-Particle-Observer Architecture | Version 1.2.0 | 2026-01-24</p>
+
+        <!-- Three Realms -->
+        <div class="realms">
+            <!-- PARTICLE REALM -->
+            <div class="realm realm-particle">
+                <div class="realm-title">
+                    <span>PARTICLE</span>
+                </div>
+                <p class="realm-desc">Measurement, collapse, ground truth</p>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S1</span>
+                        <span class="subsystem-type">Engine</span>
+                    </div>
+                    <div class="subsystem-name">Collider</div>
+                    <div class="subsystem-purpose">Semantic code analysis (ground truth)</div>
+                    <div class="subsystem-path">standard-model-of-code/</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S9</span>
+                        <span class="subsystem-type">Bridge</span>
+                    </div>
+                    <div class="subsystem-name">Laboratory</div>
+                    <div class="subsystem-purpose">Scientist facade (Particle-side API)</div>
+                    <div class="subsystem-path">standard-model-of-code/tools/research/laboratory.py</div>
+                </div>
+            </div>
+
+            <!-- WAVE REALM -->
+            <div class="realm realm-wave">
+                <div class="realm-title">
+                    <span>WAVE</span>
+                </div>
+                <p class="realm-desc">Potential, field, intelligence</p>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S3</span>
+                        <span class="subsystem-type">Engine</span>
+                    </div>
+                    <div class="subsystem-name">analyze.py</div>
+                    <div class="subsystem-purpose">AI query interface (implements HSL)</div>
+                    <div class="subsystem-path">context-management/tools/ai/analyze.py</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S2</span>
+                        <span class="subsystem-type">Framework</span>
+                    </div>
+                    <div class="subsystem-name">HSL</div>
+                    <div class="subsystem-purpose">Holographic-Socratic Layer (validation rules)</div>
+                    <div class="subsystem-path">context-management/docs/HOLOGRAPHIC_SOCRATIC_LAYER.md</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S4</span>
+                        <span class="subsystem-type">Utility</span>
+                    </div>
+                    <div class="subsystem-name">Perplexity MCP</div>
+                    <div class="subsystem-purpose">External knowledge queries</div>
+                    <div class="subsystem-path">context-management/tools/mcp/perplexity_mcp_server.py</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S9b</span>
+                        <span class="subsystem-type">Client</span>
+                    </div>
+                    <div class="subsystem-name">Laboratory Bridge</div>
+                    <div class="subsystem-purpose">Agent client (Wave-side caller)</div>
+                    <div class="subsystem-path">context-management/tools/ai/laboratory_bridge.py</div>
+                </div>
+            </div>
+
+            <!-- OBSERVER REALM -->
+            <div class="realm realm-observer">
+                <div class="realm-title">
+                    <span>OBSERVER</span>
+                </div>
+                <p class="realm-desc">Governance, state, decisions</p>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S5</span>
+                        <span class="subsystem-type">State</span>
+                    </div>
+                    <div class="subsystem-name">Task Registry</div>
+                    <div class="subsystem-purpose">Work item tracking</div>
+                    <div class="subsystem-path">.agent/registry/</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S6</span>
+                        <span class="subsystem-type">Engine</span>
+                    </div>
+                    <div class="subsystem-name">BARE</div>
+                    <div class="subsystem-purpose">Background Auto-Refinement Engine</div>
+                    <div class="subsystem-path">.agent/tools/bare</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S7</span>
+                        <span class="subsystem-type">Utility</span>
+                    </div>
+                    <div class="subsystem-name">Archive/Mirror</div>
+                    <div class="subsystem-purpose">Cloud sync (GCS)</div>
+                    <div class="subsystem-path">context-management/tools/archive/</div>
+                </div>
+
+                <div class="subsystem">
+                    <div class="subsystem-header">
+                        <span class="subsystem-id">S8</span>
+                        <span class="subsystem-type">Guard</span>
+                    </div>
+                    <div class="subsystem-name">Commit Hygiene</div>
+                    <div class="subsystem-purpose">Enforce Conventional Commits</div>
+                    <div class="subsystem-path">.pre-commit-config.yaml</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Flow -->
+        <div class="dataflow">
+            <h2>Data Flow Cycles</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <span class="flow-number">1</span>
+                    <span class="flow-title">CODE COMMIT</span>
+                    <div class="flow-detail">
+                        <span class="flow-arrow">└─►</span> S8 (Commit Hygiene) validates commit message<br>
+                        <span class="flow-arrow">└─►</span> S1 (Collider) generates unified_analysis.json<br>
+                        <span class="flow-arrow">└─►</span> S7 (Archive) syncs to GCS<br>
+                        <span class="flow-arrow">└─►</span> S6 (BARE) TruthValidator updates repo_truths.yaml
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <span class="flow-number">2</span>
+                    <span class="flow-title">SCHEDULED VALIDATION (HSL)</span>
+                    <div class="flow-detail">
+                        <span class="flow-arrow">└─►</span> S3 (analyze.py) --verify runs against semantic_models.yaml<br>
+                        <span class="flow-arrow">└─►</span> Violations generate tasks in S5 (Registry)
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <span class="flow-number">3</span>
+                    <span class="flow-title">TASK EXECUTION</span>
+                    <div class="flow-detail">
+                        <span class="flow-arrow">└─►</span> S6 (BARE) claims task from S5 (Registry)<br>
+                        <span class="flow-arrow">└─►</span> S6 (BARE) generates fix<br>
+                        <span class="flow-arrow">└─►</span> Commits → loop restarts at (1)
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <span class="flow-number">4</span>
+                    <span class="flow-title">RESEARCH QUERY</span>
+                    <div class="flow-detail">
+                        <span class="flow-arrow">└─►</span> S3 (analyze.py) processes query<br>
+                        <span class="flow-arrow">└─►</span> S9b (Laboratory Bridge) invokes S9 (Laboratory)<br>
+                        <span class="flow-arrow">└─►</span> S9 runs Scientist tools (atom_coverage, hypothesis_eval)<br>
+                        <span class="flow-arrow">└─►</span> Optional: S4 (Perplexity) for external context
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Matrix -->
+        <div class="matrix">
+            <h2>Integration Matrix</h2>
+            <table class="integration-table">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Mechanism</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S1 (Collider)</td>
+                        <td>S3 (analyze.py)</td>
+                        <td>unified_analysis.json file read</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>S2 (HSL)</td>
+                        <td>S3 (analyze.py)</td>
+                        <td>--verify flag CLI invocation</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>Git commit</td>
+                        <td>S7 (Archive)</td>
+                        <td>post-commit hook</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>Git commit</td>
+                        <td>S6 (BARE)</td>
+                        <td>post-commit hook</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>S8 (Hygiene)</td>
+                        <td>Git commit</td>
+                        <td>pre-commit + commit-msg hooks</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>S3 (analyze.py)</td>
+                        <td>S9b (Lab Bridge)</td>
+                        <td>Python import</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>S9b (Lab Bridge)</td>
+                        <td>S9 (Laboratory)</td>
+                        <td>subprocess with templates</td>
+                        <td class="status-active">ACTIVE</td>
+                    </tr>
+                    <tr>
+                        <td>S3 (analyze.py)</td>
+                        <td>S5 (Registry)</td>
+                        <td>Structured YAML output</td>
+                        <td class="status-proposed">PROPOSED (P1)</td>
+                    </tr>
+                    <tr>
+                        <td>S5 (Registry)</td>
+                        <td>S6 (BARE)</td>
+                        <td>tasks.yaml polling</td>
+                        <td class="status-missing">MISSING (SG-004)</td>
+                    </tr>
+                    <tr>
+                        <td>S3 (analyze.py)</td>
+                        <td>S4 (Perplexity)</td>
+                        <td>--enable-external-search</td>
+                        <td class="status-proposed">PROPOSED (P2)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ASCII System Diagram -->
+        <div class="dataflow">
+            <h2>System Architecture (ASCII)</h2>
+            <pre class="ascii-diagram">
+                                    ┌─────────────────────────────────────────────────────────────────┐
+                                    │                        SOURCE CODE                               │
+                                    └───────────────────────────────┬─────────────────────────────────┘
+                                                                    │
+                                         ┌──────────────────────────┼──────────────────────────┐
+                                         │                          ▼                          │
+                                         │  ╔═══════════════════════════════════════════════╗  │
+                                         │  ║              PARTICLE REALM                    ║  │
+                                         │  ║  ┌─────────────┐      ┌─────────────┐         ║  │
+                                         │  ║  │   S1        │      │    S9       │         ║  │
+                                         │  ║  │  COLLIDER   │─────►│ LABORATORY  │         ║  │
+                                         │  ║  │  (Engine)   │      │  (Bridge)   │         ║  │
+                                         │  ║  └──────┬──────┘      └──────┬──────┘         ║  │
+                                         │  ╚═════════│═══════════════════│════════════════╝  │
+                                         │            │                    │                   │
+                                         │            │ unified_analysis   │ ExperimentResult  │
+                                         │            │      .json         │                   │
+                                         │            ▼                    ▼                   │
+┌────────────────────────────────────────┼────────────────────────────────────────────────────┼───────────────────────────────────────┐
+│                                        │  ╔═══════════════════════════════════════════════╗  │                                       │
+│  ╔════════════════════════════════╗    │  ║                WAVE REALM                      ║  │    ╔════════════════════════════════╗│
+│  ║       OBSERVER REALM           ║    │  ║                                                ║  │    ║        EXTERNAL                ║│
+│  ║                                ║    │  ║  ┌─────────────┐    ┌─────────────┐           ║  │    ║                                ║│
+│  ║  ┌─────────────┐               ║    │  ║  │    S3       │◄───│    S2       │           ║  │    ║  ┌─────────────┐               ║│
+│  ║  │    S5       │               ║◄───┼──║──│ analyze.py  │    │    HSL      │           ║  │    ║  │    S4       │               ║│
+│  ║  │  REGISTRY   │               ║    │  ║  │  (Engine)   │    │ (Framework) │           ║──┼───►║  │ PERPLEXITY  │               ║│
+│  ║  │  (State)    │               ║    │  ║  └──────┬──────┘    └─────────────┘           ║  │    ║  │   (MCP)     │               ║│
+│  ║  └──────┬──────┘               ║    │  ║         │                                      ║  │    ║  └─────────────┘               ║│
+│  ║         │                      ║    │  ║         │                                      ║  │    ║                                ║│
+│  ║         │ tasks.yaml           ║    │  ║         ▼                                      ║  │    ║       gs://elements-           ║│
+│  ║         │ (MISSING!)           ║    │  ║  ┌──────────────────┐                          ║  │    ║       archive-2026/            ║│
+│  ║         ▼                      ║    │  ║  │      S9b         │                          ║  │    ║            ▲                   ║│
+│  ║  ┌─────────────┐               ║    │  ║  │ LABORATORY BRIDGE│──────────────────────────╬──┼────╬────────────┘                   ║│
+│  ║  │    S6       │               ║    │  ║  │  (Wave↔Particle) │                          ║  │    ║                                ║│
+│  ║  │   BARE      │               ║    │  ║  └──────────────────┘                          ║  │    ╚════════════════════════════════╝│
+│  ║  │  (Engine)   │               ║    │  ║                                                ║  │                                       │
+│  ║  └──────┬──────┘               ║    │  ╚════════════════════════════════════════════════╝  │                                       │
+│  ║         │                      ║    │                                                      │                                       │
+│  ║         │                      ║    └──────────────────────────────────────────────────────┘                                       │
+│  ║         │                      ║                                                                                                   │
+│  ║  ┌──────┴──────┐               ║                                                                                                   │
+│  ║  │    S7       │               ║                                                                                                   │
+│  ║  │  ARCHIVE    │───────────────╬───────────────────────────────────────────────────────────────────────────────────────────────────┘
+│  ║  │  (Utility)  │               ║
+│  ║  └─────────────┘               ║
+│  ║                                ║
+│  ║  ┌─────────────┐               ║
+│  ║  │    S8       │               ║
+│  ║  │  COMMIT     │◄──────────────╬─────── pre-commit + commit-msg hooks
+│  ║  │  HYGIENE    │               ║
+│  ║  └─────────────┘               ║
+│  ╚════════════════════════════════╝
+│
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+                                                                    │
+                                                                    ▼
+                                    ┌─────────────────────────────────────────────────────────────────┐
+                                    │                        SOURCE CODE                               │
+                                    │                      (loop closes)                               │
+                                    └─────────────────────────────────────────────────────────────────┘
+            </pre>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-particle"></div>
+                <span>Particle (Measurement)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-wave"></div>
+                <span>Wave (Intelligence)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-observer"></div>
+                <span>Observer (Governance)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-guard"></div>
+                <span>Guard (Enforcement)</span>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Subsystems</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Active Integrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Proposed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">88</div>
+                <div class="stat-label">Coherence Score</div>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: #444; margin-top: 40px; font-size: 0.9em;">
+            Generated 2026-01-24 | "The Collider keeps collapsing wave functions into knowledge."
+        </p>
+    </div>
+</body>
+</html>
