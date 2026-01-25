@@ -1,78 +1,79 @@
-# Validated Semantic Map: PIPELINE\n\nDate: 2026-01-23 02:49:07\n\n## Concept: Stage\n> A processing unit in the analysis pipeline.\n\n### Findings
+# Validated Semantic Map: PIPELINE\n\nDate: 2026-01-24 22:41:55\n\n## Concept: Stage\n> A processing unit in the analysis pipeline.\n\n### Findings
 
-Based on the semantic definition of a **Stage**, I have audited the provided codebase. The analysis reveals a systemic architectural deviation from the specified concept. The pipeline is implemented using a procedural approach with standalone functions rather than an object-oriented one with classes inheriting from a common base.
+- **Entity**: `run_full_analysis` (Function)
+  - **Status**: Non-Compliant
+  - **Evidence**: `def run_full_analysis(...)` implements steps explicitly labeled as "Stage 0", "Stage 1", "Stage 2" via `StageTimer` and procedural calls.
+  - **Deviation**: This entity acts as a monolithic orchestrator but violates the **Stage** concept architecture.
+    - **Invariant Breach**: Does not inherit from `BaseStage`.
+    - **Invariant Breach**: Does not implement `execute(state: CodebaseState) -> CodebaseState`.
+    - **Invariant Breach**: Manages state via loose variables (`nodes`, `edges`) instead of the `CodebaseState` container.
+    - **Invariant Breach**: Defined as a procedural function rather than an encapsulated class.
 
----
+- **Entity**: `create_codome_boundaries` (Function)
+  - **Status**: Non-Compliant
+  - **Evidence**: `def create_codome_boundaries(nodes: List[Dict], edges: List[Dict]) -> Dict[str, Any]:`
+  - **Deviation**: Represents a distinct processing unit ("Codome Analysis") but is implemented as a functional helper rather than a `Stage`.
+    - **Invariant Breach**: Does not inherit from `BaseStage`.
+    - **Invariant Breach**: Signature is `(nodes, edges) -> Dict` instead of `execute(state) -> state`.
+    - **Invariant Breach**: Lacks `name` property.
 
-- **Entity**: Stage Implementation Pattern (as Functions)
-- **Status**: Non-Compliant
-- **Evidence**: The main pipeline orchestrator, `run_full_analysis`, calls a series of regular Python functions to perform sequential processing tasks. These functions represent the "Stages" in the pipeline.
+- **Entity**: `detect_knots` (Function)
+  - **Status**: Non-Compliant
+  - **Evidence**: `def detect_knots(nodes: List[Dict], edges: List[Dict]) -> Dict:`
+  - **Deviation**: Represents a topology analysis unit but is implemented as a standalone function.
+    - **Invariant Breach**: Does not inherit from `BaseStage`.
+    - **Invariant Breach**: Incorrect method signature for a pipeline stage.
 
-  Examples include:
-  ```python
-  # Stage 2: Standard Model enrichment
-  print("\n🧬 Stage 2: Standard Model Enrichment...")
-  with StageTimer(perf_manager, "Stage 2: Standard Model Enrichment") as timer:
-      nodes = enrich_with_standard_model(nodes)
-      ...
+- **Entity**: `compute_markov_matrix` (Function)
+  - **Status**: Non-Compliant
+  - **Evidence**: `def compute_markov_matrix(nodes: List[Dict], edges: List[Dict]) -> Dict:`
+  - **Deviation**: Represents a flow analysis unit but is implemented as a standalone function.
+    - **Invariant Breach**: Does not inherit from `BaseStage`.
+    - **Invariant Breach**: Incorrect method signature for a pipeline stage.
 
-  # Stage 2.7: Octahedral Dimension Classification
-  print("\n📐 Stage 2.7: Octahedral Dimension Classification...")
-  with StageTimer(perf_manager, "Stage 2.7: Dimension Classification") as timer:
-      try:
-          from dimension_classifier import classify_all_dimensions
-          dim_count = classify_all_dimensions(nodes)
-          ...
-  ```
-  These functions, like `enrich_with_standard_model` and `classify_all_dimensions`, are the concrete implementations of the `Stage` concept.
+- **Entity**: `run_pipeline_analysis` (Function)
+  - **Status**: Architecturally Aligned (Not a Stage)
+  - **Evidence**: `state = pipeline.run(state)`
+  - **Deviation**: This function acts as an entry point that correctly utilizes the `Pipeline` and `BaseStage` architecture (imported from `.pipeline`), contrasting with `run_full_analysis`. It is not a `Stage` itself but orchestrates the compliant pipeline.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM001]**: Context Myopia: The function 'detect_knots' manually re-implements a simplified, inefficient, and recursion-prone graph cycle detection algorithm. The import of 'src.core.graph_framework' implies access to 'networkx' (via 'build_nx_graph'), which provides robust, optimized standard algorithms (e.g., 'nx.simple_cycles') that should be used instead of custom implementations. (Severity: HIGH)\n- 🔴 **[AM002]**: Architectural Drift: The module is located in 'src.core' (Core Business Logic) but contains OS-specific presentation/UI logic in '_open_file' and '_manual_open_command' (invoking 'xdg-open', 'start', etc.). Opening reports in a browser is a CLI/Interface concern, not a Core Analysis concern. (Severity: MEDIUM)\n- 🔴 **[AM001]**: Context Myopia: 'detect_js_imports' and 'detect_class_instantiation' perform ad-hoc regex-based file parsing and I/O within the analysis orchestration layer. This duplicates parsing logic that belongs in the existing 'FileEnricher' or dedicated language parsers, fragmenting the 'Source of Truth' for dependency extraction. (Severity: MEDIUM)\n\n## Concept: PipelineManager\n> Orchestrator that executes stages in sequence with timing.\n\n### Findings
 
-- **Deviation**: This functional implementation pattern violates multiple invariants:
-    - **Invariant 1 (Inherit from base class):** The stages are functions, not classes, so they cannot inherit from a `BaseStage` class.
-    - **Invariant 2 (Implement 'execute'/'run'):** Stages are invoked by their unique function names (e.g., `enrich_with_standard_model`), not a standardized method like `execute` or `run`.
-    - **Invariant 4 (Return standard format):** The functions do not return a standard `ProcessingResult` object. They take a specific data structure (like the `nodes` list), modify or replace it, and return it. The overall state is managed externally by the `run_full_analysis` function.
-
-  The pattern is, however, compliant with the "stateless" invariant, as the functions operate on their inputs without maintaining an internal state between calls.
-
----
-
-- **Entity**: `PatternMatcher`
-- **Status**: Non-Compliant
-- **Evidence**: In "Stage 2.10: Pattern-Based Atom Detection," a class instance is used to perform the processing, which is closer to the intended object-oriented design.
-
-  ```python
-  # Stage 2.10: Pattern-Based Atom Detection
-  print("\n🧬 Stage 2.10: Pattern-Based Atom Detection...")
-  with StageTimer(perf_manager, "Stage 2.10: Pattern Detection") as timer:
-      try:
-          from pattern_matcher import PatternMatcher
-          ...
-          pattern_matcher = PatternMatcher()
-          ...
-          atoms = pattern_matcher.detect_atoms(tree, bytes(body, 'utf8'), lang)
-  ```
-- **Deviation**: Despite being a class-based component, `PatternMatcher` does not adhere to the `Stage` definition:
-    - **Invariant 1 (Inherit from base class):** There is no evidence that `PatternMatcher` inherits from a `BaseStage` class.
-    - **Invariant 2 (Implement 'execute'/'run'):** It uses a specific method name, `detect_atoms`, instead of the standard `execute` or `run`.
-    - **Invariant 4 (Return standard format):** The `detect_atoms` method returns a list of `atoms`, not a standardized `ProcessingResult` object.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM004]**: The code imports `FileEnricher` from `src.core.file_enricher` at the top level but never uses it within the provided file scope. Furthermore, a large number of public functions (`build_file_index`, `build_file_boundaries`, `_calculate_theory_completeness`, `compute_markov_matrix`, `detect_knots`, `compute_data_flow`, and several CLI helpers like `_resolve_output_dir`) are defined but are never called, making them orphan code within this module's context. (Severity: HIGH)\n- 🔴 **[AM002]**: The code violates its 'Stage' role, which implies stateless transformation. Functions like `detect_js_imports`, `detect_class_instantiation`, and `compute_markov_matrix` modify the input `edges` list in-place. This introduces side effects, breaking the stateless data pipeline paradigm and making the system's behavior harder to reason about and test. A Stage should return new or transformed data, not mutate its inputs. (Severity: HIGH)\n- 🔴 **[AM001]**: The `detect_knots` function implements a 'simplified Tarjan-like' algorithm to find cycles. This represents context myopia by reimplementing a fundamental graph algorithm, which is a solved problem, instead of using a standard, robust library (e.g., networkx). This custom, performance-limited implementation (`[:10]`, `[:200]`) is likely to be less efficient and more error-prone than an established solution. (Severity: MEDIUM)\n\n## Concept: Extractor\n> Component responsible for raw data ingestion.\n\n### Findings
-- **Entity**: `extract_call_edges` (Main Orchestrator Function)
+- **Entity**: `PipelineManager` (class in `src/core/pipeline/manager.py`)
 - **Status**: Compliant
-- **Evidence**: The function orchestrates the extraction process by operating on `particles` (which contain raw `body_source`) and `results` (which contain `raw_imports` and `raw_content`). It builds structural edges like `imports`, `contains`, and `inherits` from pre-parsed metadata and delegates body analysis to language-specific strategies. For example, it passes raw file content to the `JSModuleResolver`: `resolver.analyze_file(file_path, content)`.
-- **Deviation**: None. The function is a pure orchestrator for extraction tasks, transforming raw or semi-raw data into a structured graph of relationships without inferring high-level concepts.
+- **Evidence**:
+    - **Accepts list of BaseStage**: The constructor explicitly defines the signature `def __init__(self, stages: List[BaseStage], ...)` and stores them in `self.stages`.
+    - **Executes in order via run(state)**: The `run(state)` method iterates sequentially (`for stage in self.stages:`) and updates the state via `state = stage.execute(state)`.
+    - **Tracks timing**: Inside the loop, the code captures `start_time = time.perf_counter()` and calculates `elapsed_ms` immediately after execution.
+    - **Callbacks**: The class accepts `on_stage_start` and `on_stage_complete` in `__init__` and invokes them correctly within the execution loop (e.g., `self._on_stage_complete(stage, elapsed_ms)`).
+- **Deviation**: None.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM002]**: Architectural Drift: The class docstring explicitly lists 'Handle errors gracefully' as a responsibility, but the 'run' method contains no exception handling (try/except) blocks. Any exception raised by 'stage.execute(state)' will crash the entire pipeline, violating the stated design role. (Severity: HIGH)\n- 🔴 **[AM001]**: Context Myopia: The class accepts a 'perf_manager' argument and stores it, but never utilizes it in the 'run' method. Instead, it re-implements basic timing logic using 'time.perf_counter()' and ignores the established observability component provided in the constructor. (Severity: MEDIUM)\n- 🔴 **[AM002]**: Architectural Drift (Layer Violation): The 'run' method uses 'print()' for warnings. In a 'Core' layer component of a complex system ('standard-model-of-code'), logging should be routed through a logger or the observability module, not written directly to stdout. (Severity: LOW)\n\n## Concept: CodebaseState\n> Central state container passed between pipeline stages.\n\n### Findings
 
----
-- **Entity**: `EdgeExtractionStrategy` (and its Regex-based subclasses: `PythonEdgeStrategy`, `JavascriptEdgeStrategy`, etc.)
-- **Status**: Compliant
-- **Evidence**: These strategies operate directly on the raw source code of a function body. For instance, `PythonEdgeStrategy` uses `body = particle.get('body_source', '')` and then applies `re.findall(r'(?:self\.)?(\w+)\s*\(', body)` to find call patterns. This is a direct operation on raw file content. The logic is based on simple lexical patterns, not semantic understanding.
-- **Deviation**: None. This is a classic example of extraction from raw content.
+- **Entity**: `CodebaseState` (in `src/core/data_management.py`)
+- **Status**: **Compliant**
+- **Evidence**:
+    - **Nodes/Edges Collections**: The class initializes `self.nodes = {}` and `self.edges = []` in `__init__` and populates them in `load_initial_graph`.
+    - **O(1) Lookups**: The class maintains hash map indexes (`_by_file`, `_by_ring`, `_by_kind`, `_by_role`) and provides corresponding accessor methods (`get_by_file`, `get_by_ring`, etc.) that perform dictionary lookups.
+    - **Metadata Tracking**: `self.metadata` is initialized with `"layers_activated": []` in `__init__`.
+    - **Enrichment**: The method `enrich_node(self, node_id, layer_name, **attributes)` is present. It updates node attributes and appends the `layer_name` to `self.metadata["layers_activated"]`.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM004]**: The classes 'UnifiedNode', 'UnifiedEdge', and 'UnifiedAnalysisOutput' are imported from 'unified_analysis' but never referenced in the code. The implementation relies on generic dictionary manipulation and 'Any' types instead of these domain models. (Severity: MEDIUM)\n- 🔴 **[AM002]**: Architectural Drift detected in 'load_initial_graph': The Core Data Layer contains a direct call to 'print()', coupling data management logic with the CLI/Presentation layer. This should be handled via a logger or returned as status metadata. (Severity: LOW)\n\n## Concept: Extractor\n> Component responsible for raw data ingestion.\n\nBased on the provided codebase and the semantic definition of an **Extractor**, here is the audit report.
 
----
-- **Entity**: `TreeSitterEdgeStrategy` (and its subclasses: `PythonTreeSitterStrategy`, `JavaScriptTreeSitterStrategy`, etc.)
-- **Status**: Compliant
-- **Evidence**: This family of strategies operates on an Abstract Syntax Tree (AST). The code explicitly parses the raw body source into an AST: `tree = self.parser.parse(source_bytes)`. It then traverses this tree to find specific node types, such as `call_expression`, to identify function calls. This perfectly matches the "Must operate on raw file content or AST" invariant. While it uses a `ScopeAnalyzer` for more accurate reference resolution, this is a structural analysis task (determining which declaration a name refers to) rather than complex semantic reasoning (determining what a function *does*).
-- **Deviation**: None. The use of an AST and scope analysis is an advanced extraction technique, but it remains within the defined boundaries of an Extractor, as it reasons about code structure, not its conceptual purpose.
+### Findings
 
----
-- **Entity**: `JSModuleResolver`
-- **Status**: Compliant
-- **Evidence**: The `JSModuleResolver` class is responsible for resolving module references in JavaScript. It does this by parsing JavaScript files (`analyze_file`) using Tree-sitter (an AST parser) to find `import`, `require`, and `window.export` patterns. This is an operation on an AST derived from raw file content. Its purpose is to resolve dependencies to build an accurate call graph, which is a core extraction task. It does not attempt to classify the *role* or *meaning* of the modules it resolves.
-- **Deviation**: None. This component performs sophisticated reference resolution, but this is a form of structural analysis, not the "complex semantic reasoning" that a Classifier would perform. It determines *where* a symbol is defined, not *what* it represents conceptually.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM002]**: The component violates its 'Extractor' role by introducing a global stateful singleton ('_js_module_resolver'). An extractor should be a stateless transformer of inputs to outputs. The use of a global instance, managed by `get_js_module_resolver()` and `reset_js_module_resolver()`, introduces side effects and hidden dependencies, drifting from a pure architectural role towards a stateful service, which complicates testing and concurrency. (Severity: MEDIUM)\n- 🔴 **[AM001]**: The code exhibits context myopia regarding its own project structure. The repeated, cascading `try-except ImportError` blocks for `scope_analyzer` (from 'src.core', 'core', and root) indicate the module is unaware of its canonical location within the project and is attempting to guess the import path. This suggests a fragile coupling and a lack of established architectural context for internal dependencies. (Severity: MEDIUM)\n- 🔴 **[AM004]**: The method `get_callee_with_location` within the `TreeSitterEdgeStrategy` class is defined but is never called within the provided code. Its counterpart, `extract_callee_name`, is used instead. While potentially intended for future enhancements, in its current state, it constitutes orphan code that is not integrated into any execution path. (Severity: LOW)\n- 🔴 **[AM001]**: The regex-based strategies (e.g., `PythonEdgeStrategy`, `JavascriptEdgeStrategy`) use hardcoded, incomplete lists of common built-in functions to ignore. This is a myopic approach that fails to consider the full context of a language's standard library, leading to brittle heuristics and potential false positives. For example, a more robust method for Python would be to check against the `__builtins__` module directly. (Severity: LOW)\n\n
+- **Entity**: `intent_extractor.py` (Module)
+  - **Status**: Compliant
+  - **Evidence**: The module ingests raw data from multiple sources: file content (`extract_readme_intent`), git logs (`extract_commit_intents`), and source code strings (`extract_docstring_intent`).
+  - **Reasoning**: While it contains a function named `classify_commit_intent`, the logic relies on simple keyword matching (e.g., checking if "fix" is in the message) rather than complex semantic reasoning or architectural inference. It aggregates raw signals into a profile.
+
+- **Entity**: `SmartExtractor` (Class in `smart_extractor.py`)
+  - **Status**: Compliant
+  - **Evidence**: Its stated purpose is "Rich Context Extraction for LLM Classification". It reads raw source files and parses ASTs (`_enrich_from_ast`) to populate a `ComponentCard`.
+  - **Reasoning**: It strictly gathers structural data (lines, decorators, imports) and heuristics (folder layer via path patterns). It explicitly delegates the "complex semantic reasoning" to an external LLM by formatting the extracted data into a prompt (`format_card_for_llm`).
+
+- **Entity**: `EdgeExtractionStrategy` & Subclasses (in `edge_extractor.py`)
+  - **Status**: Compliant
+  - **Evidence**: These classes (e.g., `PythonEdgeStrategy`, `TreeSitterEdgeStrategy`) operate directly on `body_source` strings using regex or `tree-sitter` ASTs.
+  - **Reasoning**: They identify syntactic relationships (calls, imports, inheritance) based on raw patterns and structure. They do not interpret the business logic or intent of the connections, satisfying the invariant of avoiding complex semantic reasoning.
+
+- **Entity**: `JSModuleResolver` (Class in `edge_extractor.py`)
+  - **Status**: Compliant
+  - **Evidence**: Analyzes Javascript file content using AST traversals to track `window` exports and `require`/`import` statements.
+  - **Reasoning**: It performs data ingestion to resolve scope and linking, operating strictly on the syntax tree of the raw files.
+
+### Summary
+All analyzed components adhere to the **Extractor** concept. They focus on ingesting raw data (files, git history, AST nodes) and structuring it (into profiles, cards, or edges) without crossing the boundary into complex semantic reasoning, which is reserved for the Classifier role.\n\n### Semantic Guardrails (Antimatter Check)\n**DETECTED LIABILITIES**:\n- 🔴 **[AM001]**: In 'intent_extractor.py', the function 'extract_docstring_intent' re-implements Python docstring extraction using brittle regex patterns. This violates Context Myopia by ignoring the Python standard library's 'ast' module (which is correctly utilized in the sibling file 'smart_extractor.py') and creating unnecessary, inferior duplication of logic. (Severity: HIGH)\n- 🔴 **[AM001]**: In 'edge_extractor.py', the import logic for 'ScopeAnalyzer' attempts three different import paths (src.core..., core..., and local). This 'guesswork' indicates the code is myopic to the project's actual package structure, suggesting it was copied from elsewhere without proper integration into the project's namespace context. (Severity: MEDIUM)\n- 🔴 **[AM002]**: In 'intent_extractor.py', the core logic tightly couples with the shell environment by directly executing 'git' subprocesses. This constitutes Architectural Drift for a 'core' module, which should ideally abstract infrastructure concerns (like VCS operations) behind an adapter interface to maintain testability and layer separation. (Severity: MEDIUM)\n\n

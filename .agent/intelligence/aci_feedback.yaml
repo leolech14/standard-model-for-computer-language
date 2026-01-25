@@ -16,11 +16,127 @@ entries:
   fallback_used: false
   duration_ms: 8295
   error: null
+- timestamp: '2026-01-24T23:29:48.521073+00:00'
+  query: Compare our ACI routing design to common RAG pipeline patterns
+  intent: architecture
+  complexity: complex
+  scope: internal
+  tier: long_context
+  sets_used:
+  - pipeline
+  - theory
+  - architecture_review
+  tokens_input: 198700
+  tokens_output: 1555
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 37144
+  error: null
+- timestamp: '2026-01-24T23:33:49.008040+00:00'
+  query: How do controllers coordinate services in the transport layer?
+  intent: unknown
+  complexity: moderate
+  scope: internal
+  tier: long_context
+  sets_used:
+  - pipeline
+  - agent_tasks
+  - repo_tool
+  - theory
+  tokens_input: 79081
+  tokens_output: 887
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 29803
+  error: null
+- timestamp: '2026-01-25T01:08:39.933914+00:00'
+  query: How does ACI select datasets for queries? List all available analysis sets
+    and explain the routing matrix.
+  intent: architecture
+  complexity: complex
+  scope: internal
+  tier: long_context
+  sets_used:
+  - pipeline
+  - theory
+  - architecture_review
+  tokens_input: 198708
+  tokens_output: 1307
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 40484
+  error: null
+- timestamp: '2026-01-25T01:10:02.794555+00:00'
+  query: 'Validate the System-of-Systems (SoS) map: Are all 12 subsystems (S1-S12)
+    documented correctly? What is the critical gap SG-004 and how does it block the
+    auto-refinement cycle?'
+  intent: validate
+  complexity: complex
+  scope: internal
+  tier: long_context
+  sets_used:
+  - constraints
+  - research_validation
+  - tests
+  tokens_input: 1632
+  tokens_output: 612
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 20419
+  error: null
+- timestamp: '2026-01-25T01:11:41.093720+00:00'
+  query: 'Validate the 16-level scale terminology: Is the mapping from L8=ECOSYSTEM
+    to L3=NODE consistent with Koestler''s Holon theory? Are the terms (System, Package,
+    Module, Container, Node) correctly applied'
+  intent: validate
+  complexity: complex
+  scope: internal
+  tier: long_context
+  sets_used:
+  - constraints
+  - research_validation
+  - tests
+  tokens_input: 4054
+  tokens_output: 1016
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 47898
+  error: null
+- timestamp: '2026-01-25T04:49:31.141187+00:00'
+  query: What are ALL the names, acronyms, and terms we have used to refer to the
+    cloud-based AI automation layer that runs background audits, enrichment, and refinement?
+    List every name found in docs, code co
+  intent: validate
+  complexity: complex
+  scope: internal
+  tier: long_context
+  sets_used:
+  - pipeline
+  - theory
+  - agent_kernel
+  - agent_tasks
+  - research_validation
+  tokens_input: 70582
+  tokens_output: 993
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 32069
+  error: null
 stats:
-  total_queries: 1
+  total_queries: 7
   by_tier:
     perplexity: 1
+    long_context: 6
   by_intent:
     research: 1
+    architecture: 2
+    unknown: 1
+    validate: 3
   success_rate: 1.0
-  avg_tokens: 14
+  avg_tokens: 78966
