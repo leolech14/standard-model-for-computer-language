@@ -10,12 +10,16 @@ pattern filtering, and AI context injection.
 
 Usage:
     python tdj.py --scan                    # Full rescan to JSONL
+    python tdj.py --scan --quiet            # Silent scan (for automation)
     python tdj.py recent 7                  # Files created in last 7 days
     python tdj.py modified 1                # Files modified in last 1 day
     python tdj.py stale 30                  # Not modified in 30+ days
     python tdj.py pattern "src/core"        # Files matching path pattern
     python tdj.py summary                   # Project timeline summary
     python tdj.py context                   # AI-ready XML context block
+
+Flags:
+    --quiet, -q                             # Suppress all output (for automation)
 
 Replaces: timestamps.py + project_elements_file_timestamps.csv
 Output: .agent/intelligence/tdj.jsonl
@@ -58,6 +62,9 @@ IGNORE_PATTERNS = {
 
 # File extensions to track (None = all)
 TRACK_EXTENSIONS = None  # Track everything
+
+# Global quiet flag (set by --quiet argument)
+QUIET = False
 
 # =============================================================================
 # SCANNER
@@ -134,13 +141,15 @@ def write_jsonl(entries: List[Dict]):
             f.write(json.dumps(entry) + '\n')
 
     duration_ms = int((time.time() - start) * 1000)
-    print(f"Scan complete: {len(entries)} files in {duration_ms}ms")
-    print(f"Output: {TDJ_FILE}")
+    if not QUIET:
+        print(f"Scan complete: {len(entries)} files in {duration_ms}ms")
+        print(f"Output: {TDJ_FILE}")
 
 
 def cmd_scan():
     """Full filesystem scan to JSONL."""
-    print(f"Scanning {PROJECT_ROOT}...")
+    if not QUIET:
+        print(f"Scanning {PROJECT_ROOT}...")
     entries = scan_filesystem()
     write_jsonl(entries)
 
@@ -333,28 +342,39 @@ def cmd_context():
 # =============================================================================
 
 def main():
-    if len(sys.argv) < 2:
+    global QUIET
+
+    # Parse global flags
+    args = sys.argv[1:]
+    if "--quiet" in args:
+        QUIET = True
+        args.remove("--quiet")
+    if "-q" in args:
+        QUIET = True
+        args.remove("-q")
+
+    if len(args) < 1:
         print(__doc__)
         sys.exit(0)
 
-    cmd = sys.argv[1]
+    cmd = args[0]
 
     if cmd == "--scan" or cmd == "scan":
         cmd_scan()
     elif cmd == "recent":
-        days = int(sys.argv[2]) if len(sys.argv) > 2 else 7
+        days = int(args[1]) if len(args) > 1 else 7
         cmd_recent(days)
     elif cmd == "modified":
-        days = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+        days = int(args[1]) if len(args) > 1 else 1
         cmd_modified(days)
     elif cmd == "stale":
-        days = int(sys.argv[2]) if len(sys.argv) > 2 else 30
+        days = int(args[1]) if len(args) > 1 else 30
         cmd_stale(days)
     elif cmd == "pattern":
-        if len(sys.argv) < 3:
+        if len(args) < 2:
             print("Usage: tdj.py pattern PATTERN")
             sys.exit(1)
-        cmd_pattern(sys.argv[2])
+        cmd_pattern(args[1])
     elif cmd == "summary":
         cmd_summary()
     elif cmd == "context":

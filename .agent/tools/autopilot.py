@@ -244,7 +244,7 @@ def run_tdj(circuit_breaker: CircuitBreaker) -> Tuple[bool, str]:
         circuit_breaker.record_failure(system, "TDJ script not found")
         return False, "TDJ script not found"
 
-    success, output = run_with_timeout([sys.executable, str(TDJ_PATH), "--scan"])
+    success, output = run_with_timeout([sys.executable, str(TDJ_PATH), "--scan", "--quiet"])
 
     if success:
         circuit_breaker.record_success(system)
