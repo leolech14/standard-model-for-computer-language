@@ -557,7 +557,7 @@ def cmd_post_commit(safe_mode: bool = True):
     if not autopilot_state.is_enabled():
         return True  # Silent exit if disabled
 
-    if autopilot_state.get_level() >= AutopilotLevel.MANUAL:
+    if autopilot_state.get_level().value >= AutopilotLevel.MANUAL.value:
         return True  # Silent exit in manual/emergency mode
 
     log_event("post_commit_triggered")
