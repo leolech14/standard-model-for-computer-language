@@ -25,15 +25,15 @@ CANONICAL_ROLES = 33
 
 def count_patterns():
     """Count all patterns from live code."""
-    from core.registry.pattern_repository import get_pattern_repository
+    from core.registry.pattern_registry import get_pattern_registry
     from core.atom_classifier import AtomClassifier
-    
-    repo = get_pattern_repository()
+
+    repo = get_pattern_registry()
     classifier = AtomClassifier()
-    
+
     sys.path.insert(0, 'scripts')
     from train_serial import ROLE_MAP
-    
+
     counts = {
         "prefix_patterns": len(repo.get_prefix_patterns()),
         "suffix_patterns": len(repo.get_suffix_patterns()),
@@ -45,28 +45,28 @@ def count_patterns():
         "canonical_roles": len(set(ROLE_MAP.values())),
     }
     counts["total_learnable"] = (
-        counts["prefix_patterns"] + 
-        counts["suffix_patterns"] + 
-        counts["path_patterns"] + 
-        counts["role_map_entries"] + 
+        counts["prefix_patterns"] +
+        counts["suffix_patterns"] +
+        counts["path_patterns"] +
+        counts["role_map_entries"] +
         counts["atom_aliases"]
     )
-    
+
     return counts
 
 def validate_canonical():
     """Validate canonical constants haven't been violated."""
     counts = count_patterns()
-    
+
     errors = []
-    
+
     if counts["canonical_atoms"] != CANONICAL_ATOMS:
         if counts["canonical_atoms"] > CANONICAL_ATOMS:
             # Aliases added, not a violation
             pass
         else:
             errors.append(f"❌ Atoms: {counts['canonical_atoms']} (expected {CANONICAL_ATOMS})")
-    
+
     return {
         "valid": len(errors) == 0,
         "errors": errors,
@@ -76,9 +76,9 @@ def validate_canonical():
 def add_pattern(pattern_type: str, pattern: str, role: str, confidence: int):
     """Add a new pattern and update the ledger."""
     # Read pattern repository
-    repo_path = Path("core/registry/pattern_repository.py")
+    repo_path = Path("core/registry/pattern_registry.py")
     content = repo_path.read_text()
-    
+
     # Determine where to insert
     if pattern_type == "prefix":
         marker = "'make_': ('Factory', 90)"  # Insert after this
@@ -88,17 +88,17 @@ def add_pattern(pattern_type: str, pattern: str, role: str, confidence: int):
         new_line = f"            '{pattern}': ('{role}', {confidence}),  # LEARNED: Auto-added"
     else:
         return {"success": False, "error": f"Unknown type: {pattern_type}"}
-    
+
     if pattern in content:
         return {"success": False, "error": f"Pattern '{pattern}' already exists"}
-    
+
     # Insert pattern
     content = content.replace(marker, marker + "\n" + new_line)
     repo_path.write_text(content)
-    
+
     # Update LEARNING_LEDGER
     update_ledger(pattern_type, pattern, role, confidence)
-    
+
     return {
         "success": True,
         "message": f"Added {pattern_type} pattern: {pattern} → {role} ({confidence}%)",
@@ -108,10 +108,10 @@ def add_pattern(pattern_type: str, pattern: str, role: str, confidence: int):
 def update_ledger(pattern_type: str, pattern: str, role: str, confidence: int):
     """Append to LEARNING_LEDGER.md"""
     ledger_path = Path("docs/LEARNING_LEDGER.md")
-    
+
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
     entry = f"| {timestamp} | `{pattern}` | {pattern_type.title()} | **{role}** | **{confidence}%** | Auto-ingested |\n"
-    
+
     content = ledger_path.read_text()
     # Find the table and append
     # (Simplified - would need proper table parsing in production)
@@ -122,7 +122,7 @@ def generate_report():
     """Generate inventory report."""
     counts = count_patterns()
     validation = validate_canonical()
-    
+
     report = f"""
 # Pattern Inventory Report
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}
@@ -151,40 +151,40 @@ Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}
 def main():
     parser = argparse.ArgumentParser(description='Pattern Inventory Manager')
     subparsers = parser.add_subparsers(dest='command')
-    
+
     # Count command
     subparsers.add_parser('count', help='Count all patterns')
-    
+
     # Add prefix/suffix command
     add_parser = subparsers.add_parser('add', help='Add a pattern')
     add_parser.add_argument('type', choices=['prefix', 'suffix', 'path'])
     add_parser.add_argument('pattern', help='Pattern string')
     add_parser.add_argument('role', help='Target role')
     add_parser.add_argument('confidence', type=int, help='Confidence (0-100)')
-    
+
     # Validate command
     subparsers.add_parser('validate', help='Validate canonical constants')
-    
+
     # Report command
     subparsers.add_parser('report', help='Generate inventory report')
-    
+
     args = parser.parse_args()
-    
+
     if args.command == 'count':
         counts = count_patterns()
         print(json.dumps(counts, indent=2))
-    
+
     elif args.command == 'add':
         result = add_pattern(args.type, args.pattern, args.role, args.confidence)
         print(json.dumps(result, indent=2))
-    
+
     elif args.command == 'validate':
         result = validate_canonical()
         print(json.dumps(result, indent=2))
-    
+
     elif args.command == 'report':
         print(generate_report())
-    
+
     else:
         parser.print_help()
 

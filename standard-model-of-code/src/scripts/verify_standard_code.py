@@ -21,26 +21,26 @@ from collections import Counter
 def load_document(path: str) -> tuple[dict, str]:
     """Load the document and extract frontmatter."""
     content = Path(path).read_text(encoding='utf-8')
-    
+
     # Extract YAML frontmatter
     frontmatter_match = re.match(r'^---\n(.+?)\n---', content, re.DOTALL)
     if not frontmatter_match:
         raise ValueError("No YAML frontmatter found")
-    
+
     frontmatter = yaml.safe_load(frontmatter_match.group(1))
     body = content[frontmatter_match.end():]
-    
+
     return frontmatter, body
 
 def check_required_sections(frontmatter: dict, body: str) -> list[str]:
     """Check all required sections are present."""
     errors = []
     required = frontmatter.get('required_sections', [])
-    
+
     for section in required:
         if section not in body:
             errors.append(f"Missing required section: '{section}'")
-    
+
     return errors
 
 def check_canonical_counts(frontmatter: dict, body: str) -> list[str]:
@@ -48,7 +48,7 @@ def check_canonical_counts(frontmatter: dict, body: str) -> list[str]:
     errors = []
     warnings = []
     counts = frontmatter.get('canonical_counts', {})
-    
+
     # Define patterns to search for each count
     patterns = {
         'planes': [r'(\d+)\s+planes', r'(\d+)\s+PLANES', r'THE\s+(\d+)\s+PLANES'],
@@ -58,23 +58,23 @@ def check_canonical_counts(frontmatter: dict, body: str) -> list[str]:
         'atoms': [r'(\d+)\s+atoms', r'(\d+)\s+ATOMS', r'(\d+)\s+atom\s+types'],
         'roles': [r'(\d+)\s+roles', r'(\d+)\s+ROLES', r'(\d+)\s+canonical\s+roles'],
     }
-    
+
     for key, expected in counts.items():
         if key not in patterns:
             continue
-            
+
         found_values = []
         for pattern in patterns[key]:
             matches = re.findall(pattern, body, re.IGNORECASE)
             found_values.extend([int(m) for m in matches])
-        
+
         # Check for inconsistencies
         unique_values = set(found_values)
         if len(unique_values) > 1:
             errors.append(f"INCONSISTENT {key}: found values {unique_values}, expected {expected}")
         elif len(unique_values) == 1 and list(unique_values)[0] != expected:
             errors.append(f"MISMATCH {key}: document says {list(unique_values)[0]}, schema says {expected}")
-    
+
     return errors
 
 def check_postulates(frontmatter: dict, body: str) -> list[str]:
@@ -82,49 +82,49 @@ def check_postulates(frontmatter: dict, body: str) -> list[str]:
     errors = []
     # Support both old 'theorems' and new 'postulates' key
     postulates = frontmatter.get('postulates', frontmatter.get('theorems', []))
-    
+
     for postulate in postulates:
         if postulate not in body:
             errors.append(f"Missing postulate: '{postulate}'")
-    
+
     return errors
 
 def check_duplicate_headers(body: str) -> list[str]:
     """Check for duplicate section headers."""
     errors = []
     headers = re.findall(r'^#+\s+(.+)$', body, re.MULTILINE)
-    
+
     # Count occurrences (ignoring case)
     header_counts = Counter(h.strip().lower() for h in headers)
-    
+
     for header, count in header_counts.items():
         if count > 1 and 'section' not in header.lower():
             # Allow some duplication for common patterns
             if header not in ['---', '']:
                 errors.append(f"Possible duplicate header: '{header}' appears {count} times")
-    
+
     return errors
 
 def check_assert_markers(body: str) -> list[str]:
     """Check that ASSERT markers are present and valid."""
     errors = []
-    
+
     # Find all ASSERT markers
     asserts = re.findall(r'<!--\s*ASSERT:\s*([^>]+)\s*-->', body)
-    
+
     if not asserts:
         errors.append("No ASSERT markers found in document")
     else:
         print(f"  Found {len(asserts)} ASSERT markers")
-    
+
     return errors
 
 def check_json_cross_reference(frontmatter: dict) -> list[str]:
     """Cross-check canonical counts against JSON files."""
     errors = []
-    
+
     # Try both old and new paths
-    roles_paths = [Path("schema/fixed/roles.json"), Path("canonical/fixed/roles.json")]
+    roles_paths = [Path("schema/fixed/roles.json"), Path("schema/fixed/roles.json")]
     for roles_path in roles_paths:
         if roles_path.exists():
             try:
@@ -138,8 +138,8 @@ def check_json_cross_reference(frontmatter: dict) -> list[str]:
                 break
             except Exception as e:
                 errors.append(f"Failed to check {roles_path}: {e}")
-    
-    dims_paths = [Path("schema/fixed/dimensions.json"), Path("canonical/fixed/dimensions.json")]
+
+    dims_paths = [Path("schema/fixed/dimensions.json"), Path("schema/fixed/dimensions.json")]
     for dims_path in dims_paths:
         if dims_path.exists():
             try:
@@ -153,30 +153,30 @@ def check_json_cross_reference(frontmatter: dict) -> list[str]:
                 break
             except Exception as e:
                 errors.append(f"Failed to check {dims_path}: {e}")
-    
+
     return errors
 
 def main():
     if len(sys.argv) < 2:
         print("Usage: python verify_standard_code.py <path_to_STANDARD_CODE.md>")
         sys.exit(1)
-    
+
     path = sys.argv[1]
     print(f"\n{'='*60}")
     print(f"STANDARD CODE VERIFICATION")
     print(f"{'='*60}")
     print(f"Document: {path}")
     print()
-    
+
     try:
         frontmatter, body = load_document(path)
         print(f"✓ Frontmatter loaded (schema v{frontmatter.get('schema_version', 'unknown')})")
     except Exception as e:
         print(f"✗ Failed to load document: {e}")
         sys.exit(1)
-    
+
     all_errors = []
-    
+
     # Check required sections
     print("\nChecking required sections...")
     errors = check_required_sections(frontmatter, body)
@@ -186,7 +186,7 @@ def main():
             print(f"  ✗ {e}")
     else:
         print(f"  ✓ All {len(frontmatter.get('required_sections', []))} required sections present")
-    
+
     # Check canonical counts
     print("\nChecking canonical counts consistency...")
     errors = check_canonical_counts(frontmatter, body)
@@ -196,7 +196,7 @@ def main():
             print(f"  ✗ {e}")
     else:
         print(f"  ✓ Canonical counts consistent")
-    
+
     # Check postulates
     print("\nChecking postulates...")
     errors = check_postulates(frontmatter, body)
@@ -207,7 +207,7 @@ def main():
     else:
         postulate_count = len(frontmatter.get('postulates', frontmatter.get('theorems', [])))
         print(f"  ✓ All {postulate_count} postulates present")
-    
+
     # Check for duplicates
     print("\nChecking for duplicate headers...")
     errors = check_duplicate_headers(body)
@@ -217,7 +217,7 @@ def main():
             print(f"  ⚠ {e}")
     else:
         print(f"  ✓ No problematic duplicate headers")
-    
+
     # Check ASSERT markers
     print("\nChecking ASSERT markers...")
     errors = check_assert_markers(body)
@@ -225,7 +225,7 @@ def main():
         all_errors.extend(errors)
         for e in errors:
             print(f"  ✗ {e}")
-    
+
     # Cross-check JSON files
     print("\nCross-checking canonical JSON files...")
     errors = check_json_cross_reference(frontmatter)
@@ -233,7 +233,7 @@ def main():
         all_errors.extend(errors)
         for e in errors:
             print(f"  ✗ {e}")
-    
+
     # Summary
     print(f"\n{'='*60}")
     if all_errors:

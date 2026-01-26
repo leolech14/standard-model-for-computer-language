@@ -13,7 +13,7 @@ apt-get update && apt-get install -y git python3-pip python3-venv
 
 # Clone collider
 cd /workspace
-git clone https://github.com/YOUR_USERNAME/standard-model-of-code.git collider 2>/dev/null || \
+git clone https://github.com/anthropics/standard-model-of-code.git collider 2>/dev/null || \
     (cd collider && git pull)
 
 cd /workspace/collider

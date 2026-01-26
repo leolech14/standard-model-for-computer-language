@@ -1,0 +1,2626 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-19",
+  "total_nodes": 291,
+  "nodes": [
+    {
+      "id": "DCOL.PRI.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 11,
+      "loc_end": 15,
+      "nature": "TBL",
+      "heading": "Primary",
+      "excerpt": "| Command | Purpose |\n|---------|---------|\n| `./collider full <path>` | Complete 18-stage analysis |\n| `./collider full <path> --output <dir>` | Custom output directory |\n| `./collider full <path> --ai-insights` | With LLM enrichment |\n"
+    },
+    {
+      "id": "DCOL.GRAANA.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 19,
+      "loc_end": 23,
+      "nature": "TBL",
+      "heading": "Graph Analysis",
+      "excerpt": "| Command | Purpose |\n|---------|---------|\n| `./collider graph <json>` | Analyze existing graph |\n| `./collider graph <json> --bottlenecks` | Find bottlenecks |\n| `./collider graph <json> --shortest-path a:b` | Path between nodes |\n"
+    },
+    {
+      "id": "DCOL.OTH.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 27,
+      "loc_end": 30,
+      "nature": "TBL",
+      "heading": "Other",
+      "excerpt": "| Command | Purpose |\n|---------|---------|\n| `./collider viz <json>` | Generate HTML visualization |\n| `./collider doctor <path>` | Validate pipeline + output |\n"
+    },
+    {
+      "id": "DCOL.FLA.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 34,
+      "loc_end": 41,
+      "nature": "TBL",
+      "heading": "Flags",
+      "excerpt": "| Flag | Description |\n|------|-------------|\n| `--output`, `-o` | Output directory |\n| `--ai-insights` | Enable LLM layer |\n| `--verbose`, `-v` | Detailed logging |\n| `--timing` | Pipeline timing |\n| `--verbose-timing` | Per-stage timing |\n| `--3d` | 3D visualization |\n"
+    },
+    {
+      "id": "DCOL.FILGEN.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 49,
+      "loc_end": 53,
+      "nature": "TBL",
+      "heading": "Files Generated",
+      "excerpt": "| File | Contents |\n|------|----------|\n| `unified_analysis.json` | Nodes, edges, metrics |\n| `output.md` | Brain Download report |\n| `collider_report.html` | Interactive 3D visualization |\n"
+    },
+    {
+      "id": "DCOL.BRADOW.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 57,
+      "loc_end": 66,
+      "nature": "TBL",
+      "heading": "Brain Download Sections",
+      "excerpt": "| Section | Contents |\n|---------|----------|\n| IDENTITY | Node count, edge count, dead code % |\n| CHARACTER (RPBL) | Responsibility, Purity, Boundary, Lifecycle |\n| ARCHITECTURE | Type distribution, layer breakdown |\n| HEALTH STATUS | Traffic-light indicators |\n| IMPROVEMENTS | Prescriptive recipes |\n| VISUAL REASONING | Topology shape |\n| DOMAIN CONTEXT | Inferred business domain |\n| AI INSIGHTS | LLM analysis (if enabled) |\n"
+    },
+    {
+      "id": "DCOL.TOPSHA.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 70,
+      "loc_end": 76,
+      "nature": "TBL",
+      "heading": "Topology Shapes",
+      "excerpt": "| Shape | Description |\n|-------|-------------|\n| Star | Central hub with spokes |\n| Hierarchical | Tree-like structure |\n| Mesh | Highly interconnected |\n| Islands | Disconnected clusters |\n| Layered | Clear architectural layers |\n"
+    },
+    {
+      "id": "DCOL.3PIP.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 82,
+      "loc_end": 104,
+      "nature": "TBL",
+      "heading": "3. PIPELINE (19 Stages)",
+      "excerpt": "| Stage | Name | Produces |\n|-------|------|----------|\n| 1 | Base Analysis | AST, initial nodes |\n| 2 | Standard Model | atom classification |\n| 2.5 | Ecosystem Discovery | framework detection |\n| 2.7 | Octahedral Dimensions | 8D vectors |\n| 3 | Purpose Field | layers, \u03c0 emergence |\n| 3.5 | Organelle Purpose (\u03c0\u2083) | container purpose labels |\n| 3.6 | System Purpose (\u03c0\u2084) | file-level purpose labels |\n| 4 | Execution Flow | reachable_set, orphans |\n| 5 | Markov Transitions | state matrix |\n| 6 | K..."
+    },
+    {
+      "id": "DCOL.PURINT.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 110,
+      "loc_end": 116,
+      "nature": "TBL",
+      "heading": "Purpose Intelligence Stage (8.6)",
+      "excerpt": "| Metric | Measures |\n|--------|----------|\n| Q_alignment | Rule violations |\n| Q_coherence | Entropy of atom categories |\n| Q_density | Signal-to-noise ratio |\n| Q_completeness | Expected children present |\n| Q_simplicity | 1 / log(complexity) |\n"
+    },
+    {
+      "id": "DCOL.TWOSYS.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 130,
+      "loc_end": 147,
+      "nature": "COD",
+      "heading": "Two-Layer System",
+      "excerpt": "```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502  LAYER 1: DETERMINISTIC CORE (The Intelligence)         \u2502\n\u2502  \u2022 94 atoms, 4 phases, 16 families                      \u2502\n\u2502  \u2022 29 canonical roles                                   \u2502\n\u2502  \u2022 Layer detection (Domain, Application, Infra, UI)     \u2502\n\u2502  \u2022 Antimatter detection, RPBL scoring                   \u2502\n\u2502  \u2022 Dead code detection, topology classification         \u2502\n\u2502  STATUS: FULLY IMPLEMENTED                              \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500..."
+    },
+    {
+      "id": "DCOL.BIDVIS.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 154,
+      "loc_end": 156,
+      "nature": "COD",
+      "heading": "Bidirectionality Vision",
+      "excerpt": "```\nCodebase  \u2550\u2550\u2550\u2550\u2550\u2550\u25b6  Collider  \u2550\u2550\u2550\u2550\u2550\u2550\u25b6  Codespace (graph)\n```\n"
+    },
+    {
+      "id": "DCOL.BIDVIS.2",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 159,
+      "loc_end": 163,
+      "nature": "COD",
+      "heading": "Bidirectionality Vision",
+      "excerpt": "```\nCodebase  \u25c0\u2550\u2550\u2550\u2550\u2550\u2550\u25b6  Collider  \u25c0\u2550\u2550\u2550\u2550\u2550\u2550\u25b6  Codespace (graph)\n                                              \u2502\n                                         MANIPULATE\n```\n"
+    },
+    {
+      "id": "DCOL.WHALLM.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 169,
+      "loc_end": 174,
+      "nature": "TBL",
+      "heading": "What LLM Receives",
+      "excerpt": "| Receives | Does NOT Receive |\n|----------|------------------|\n| Node counts | Actual source code |\n| Metrics | Function implementations |\n| Topology shape | File contents |\n| Hub names | Business logic |\n"
+    },
+    {
+      "id": "DCOL.COR.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 184,
+      "loc_end": 194,
+      "nature": "TBL",
+      "heading": "Core",
+      "excerpt": "| Task | File |\n|------|------|\n| CLI entry | `cli.py` |\n| Pipeline orchestrator | `src/core/full_analysis.py` |\n| Graph generation | `src/core/unified_analysis.py` |\n| Report generator | `src/core/brain_download.py` |\n| Atom loader | `src/core/atom_loader.py` |\n| Atom classifier | `src/patterns/atom_classifier.py` |\n| Role assignment | `src/core/heuristic_classifier.py` |\n| Topology classifier | `src/core/topology_reasoning.py` |\n| HTML generator | `tools/visualize_graph_webgl.py` |\n"
+    },
+    {
+      "id": "DCOL.CON.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 198,
+      "loc_end": 204,
+      "nature": "TBL",
+      "heading": "Configuration",
+      "excerpt": "| Task | File |\n|------|------|\n| Base atoms (14) | `src/patterns/atoms.json` |\n| T0 atoms (42) | `src/patterns/ATOMS_TIER0_CORE.yaml` |\n| T1 atoms (21) | `src/patterns/ATOMS_TIER1_STDLIB.yaml` |\n| T2 atoms (17) | `src/patterns/ATOMS_TIER2_ECOSYSTEM.yaml` |\n| Role definitions | `schema/fixed/roles.json` |\n"
+    },
+    {
+      "id": "DCOL.TREQUE.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 210,
+      "loc_end": 217,
+      "nature": "TBL",
+      "heading": "Tree-sitter Query Infrastructure",
+      "excerpt": "| Language | Query Types | Notes |\n|----------|-------------|-------|\n| Python | symbols, locals | PEP 227 scope rules |\n| JavaScript | symbols, locals | TDZ-aware |\n| TypeScript | symbols (+ inherits JS locals) | Type-specific additions |\n| Go | symbols | Functions, methods, structs |\n| Rust | symbols | Structs, traits, impls |\n| _fallback | symbols | Generic patterns |\n"
+    },
+    {
+      "id": "DCOL.TREQUE.2",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 222,
+      "loc_end": 231,
+      "nature": "COD",
+      "heading": "Tree-sitter Query Infrastructure",
+      "excerpt": "```python\nfrom src.core.queries import get_query_loader, get_symbols_query\n\nloader = get_query_loader()\nsymbols = loader.load_query('python', 'symbols')\nlocals_q = loader.load_query('python', 'locals')\n\n# Or convenience functions:\nsymbols = get_symbols_query('python')\n```\n"
+    },
+    {
+      "id": "DCOL.VIS.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 235,
+      "loc_end": 243,
+      "nature": "TBL",
+      "heading": "Visualization",
+      "excerpt": "| Task | File |\n|------|------|\n| HTML template | `src/core/viz/assets/template.html` |\n| Styles | `src/core/viz/assets/styles.css` |\n| Main application | `src/core/viz/assets/app.js` |\n| Control Bar | `src/core/viz/assets/modules/control-bar.js` |\n| File Visualization | `src/core/viz/assets/modules/file-viz.js` |\n| Edge System | `src/core/viz/assets/modules/edge-system.js` |\n| Animation | `src/core/viz/assets/modules/animation.js` |\n"
+    },
+    {
+      "id": "DCOL.KEYSHO.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 251,
+      "loc_end": 259,
+      "nature": "TBL",
+      "heading": "Keyboard Shortcuts",
+      "excerpt": "| Key | Action |\n|-----|--------|\n| `M` or `` ` `` | Toggle Control Bar |\n| `Escape` | Close panels, collapse Control Bar |\n| `I` | Show info for selected nodes |\n| `W` | Cycle wave pattern |\n| `Click` | Select node |\n| `Shift+Click` | Multi-select |\n| `Ctrl/Cmd+Click` | Toggle selection |\n"
+    },
+    {
+      "id": "DCOL.SCOOPT.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 269,
+      "loc_end": 273,
+      "nature": "TBL",
+      "heading": "Scope Options",
+      "excerpt": "| Scope | Description |\n|-------|-------------|\n| Selected Nodes | Apply to current selection |\n| All Nodes | Apply to entire graph |\n| Group X | Apply to saved node group |\n"
+    },
+    {
+      "id": "DCOL.SOUFIE.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 277,
+      "loc_end": 283,
+      "nature": "TBL",
+      "heading": "Source Fields (MAP from)",
+      "excerpt": "| Category | Fields |\n|----------|--------|\n| Structural | `token_estimate`, `line_count`, `size_bytes`, `code_lines`, `complexity_density`, `cohesion` |\n| Temporal | `age_days` |\n| Graph | `in_degree`, `out_degree` |\n| Categorical | `tier`, `ring`, `layer`, `role`, `format_category`, `effect` |\n| Boolean | `is_test`, `is_config`, `is_stale` |\n"
+    },
+    {
+      "id": "DCOL.TARPRO.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 287,
+      "loc_end": 292,
+      "nature": "TBL",
+      "heading": "Target Properties (MAP to)",
+      "excerpt": "| Category | Properties |\n|----------|------------|\n| Appearance | `nodeSize`, `hue`, `saturation`, `lightness`, `opacity` |\n| Position | `xPosition`, `yPosition`, `zPosition`, `radius` |\n| Physics | `charge`, `mass` |\n| Animation | `pulseSpeed` |\n"
+    },
+    {
+      "id": "DCOL.SCATYP.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 296,
+      "loc_end": 301,
+      "nature": "TBL",
+      "heading": "Scale Types",
+      "excerpt": "| Scale | Use Case |\n|-------|----------|\n| Linear | Even distribution |\n| Sqrt | Compress large values |\n| Log | Extreme ranges |\n| Inverse | Flip mapping |\n"
+    },
+    {
+      "id": "DCOL.FILVIS.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 311,
+      "loc_end": 317,
+      "nature": "TBL",
+      "heading": "File Visualization Modes",
+      "excerpt": "| Mode | Description |\n|------|-------------|\n| Color | Each file gets unique hue |\n| Hulls | Boundary polygons around file clusters |\n| Cluster | Force-based file grouping |\n| Map | File nodes view (files as first-class nodes) |\n| Spheres | Containment spheres |\n"
+    },
+    {
+      "id": "DCOL.EDGMOD.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 321,
+      "loc_end": 327,
+      "nature": "TBL",
+      "heading": "Edge Modes",
+      "excerpt": "| Mode | Colors By |\n|------|-----------|\n| gradient-tier | Source/target tier |\n| gradient-file | Source/target file |\n| gradient-flow | Data flow direction |\n| type | Edge type (calls, imports, etc.) |\n| mono | Single color |\n"
+    },
+    {
+      "id": "DCOL.TERJSO.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 335,
+      "loc_end": 347,
+      "nature": "TBL",
+      "heading": "Term \u2192 JSON Path \u2192 Code Location",
+      "excerpt": "| Term | JSON Path | Computed In |\n|------|-----------|-------------|\n| Atom | `$.particles[*].atom` | `atom_classifier.py` |\n| Role | `$.particles[*].metadata.role` | `heuristic_classifier.py` |\n| Layer | `$.particles[*].ddd.layer` | `purpose_field.py` |\n| Dead Code | `$.execution_flow.orphans[*]` | `execution_flow.py` |\n| Knot | `$.knots.cycles[*]` | `topology_reasoning.py` |\n| Topology | `$.statistics.topology` | `topology_reasoning.py` |\n| Antimatter | `$.particles[*].violations[*]` | `antim..."
+    },
+    {
+      "id": "DCOL.RPBJSO.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 351,
+      "loc_end": 356,
+      "nature": "TBL",
+      "heading": "RPBL \u2192 JSON Path",
+      "excerpt": "| Dimension | JSON Path |\n|-----------|-----------|\n| Responsibility | `$.rpbl_profile.responsibility` |\n| Purity | `$.rpbl_profile.purity` |\n| Boundary | `$.rpbl_profile.boundary` |\n| Lifecycle | `$.rpbl_profile.lifecycle` |\n"
+    },
+    {
+      "id": "DCOL.GRAMET.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 360,
+      "loc_end": 365,
+      "nature": "TBL",
+      "heading": "Graph Metrics \u2192 JSON Path",
+      "excerpt": "| Metric | JSON Path |\n|--------|-----------|\n| In-Degree | `$.particles[*].metrics.in_degree` |\n| Out-Degree | `$.particles[*].metrics.out_degree` |\n| Entry Points | `$.execution_flow.entry_points[*]` |\n| Dead Code % | `$.coverage.dead_code_percent` |\n"
+    },
+    {
+      "id": "DCOL.OUTFIL.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 369,
+      "loc_end": 373,
+      "nature": "TBL",
+      "heading": "Output Files",
+      "excerpt": "| File | Produces |\n|------|----------|\n| `unified_analysis.json` | `unified_analysis.py` |\n| `output.md` | `brain_download.py` |\n| `collider_report.html` | `viz/` |\n"
+    },
+    {
+      "id": "DCOL.SET.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 381,
+      "loc_end": 383,
+      "nature": "COD",
+      "heading": "Setup",
+      "excerpt": "```bash\npip install -e .\n```\n"
+    },
+    {
+      "id": "DCOL.TES.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 387,
+      "loc_end": 389,
+      "nature": "COD",
+      "heading": "Test",
+      "excerpt": "```bash\npytest tests/ -q\n```\n"
+    },
+    {
+      "id": "DCOL.SEL.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 393,
+      "loc_end": 395,
+      "nature": "COD",
+      "heading": "Self-Check",
+      "excerpt": "```bash\n./collider full . --output .collider\n```\n"
+    },
+    {
+      "id": "DCOL.WITAI.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 399,
+      "loc_end": 402,
+      "nature": "COD",
+      "heading": "With AI",
+      "excerpt": "```bash\ngcloud auth application-default login\n./collider full . --ai-insights --output .collider\n```\n"
+    },
+    {
+      "id": "DCOL.CRIRUL.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 407,
+      "loc_end": 409,
+      "nature": "COD",
+      "heading": "Critical Rule",
+      "excerpt": "```bash\n./collider full . --output .collider\n```\n"
+    },
+    {
+      "id": "DCOL.COMERR.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 419,
+      "loc_end": 427,
+      "nature": "TBL",
+      "heading": "Common Errors",
+      "excerpt": "| Error | Cause | Solution |\n|-------|-------|----------|\n| `path argument is required` | No path provided | `./collider full /path/to/repo` |\n| `No Python files found` | Wrong path | `ls -la /path && find /path -name '*.py'` |\n| `Graph has no nodes` | Parser failed | Check encoding: `file -i /path/*.py` |\n| `Dead code percentage 100%` | No entry points | Check for `__main__` blocks |\n| `AI insights unavailable` | Not authenticated | `gcloud auth application-default login` |\n| `JSONDecodeError` ..."
+    },
+    {
+      "id": "DCOL.DEBCOM.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 431,
+      "loc_end": 436,
+      "nature": "TBL",
+      "heading": "Debug Commands",
+      "excerpt": "| Situation | Command |\n|-----------|---------|\n| Verbose output | `./collider full /path 2>&1` |\n| Validate schema | `python -m jsonschema schema/atom.schema.json` |\n| Inspect graph | `python -m json.tool .collider/graph.json` |\n| Test graph | `./collider graph .collider/graph.json --bottlenecks` |\n"
+    },
+    {
+      "id": "DCOL.COMSCE.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 441,
+      "loc_end": 444,
+      "nature": "COD",
+      "heading": "Common Scenarios",
+      "excerpt": "```bash\nls -la /path/to/repo\nfind /path/to/repo -name '*.py' -type f\n```\n"
+    },
+    {
+      "id": "DCOL.COMSCE.2",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 447,
+      "loc_end": 450,
+      "nature": "COD",
+      "heading": "Common Scenarios",
+      "excerpt": "```bash\n./collider full /path --verbose-timing\nfile -i src/**/*.py\n```\n"
+    },
+    {
+      "id": "DCOL.ORIFIL.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 464,
+      "loc_end": 468,
+      "nature": "COD",
+      "heading": "Orientation Files Export",
+      "excerpt": "```bash\n./scripts/sync-orientation-files.sh          # One-time sync\n./scripts/sync-orientation-files.sh --watch  # Continuous sync\n./scripts/sync-orientation-files.sh --zip    # Generate zip\n```\n"
+    },
+    {
+      "id": "DCOL.EXPFIL.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 474,
+      "loc_end": 479,
+      "nature": "TBL",
+      "heading": "Exported Files",
+      "excerpt": "| Source | Destination |\n|--------|-------------|\n| README.md | REPO_README.md |\n| CLAUDE.md | CLAUDE.md |\n| docs/TOOL.md | TOOL.md |\n| docs/MODEL.md | MODEL.md |\n"
+    },
+    {
+      "id": "DCOL.REQ.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 483,
+      "loc_end": 485,
+      "nature": "COD",
+      "heading": "Requirements",
+      "excerpt": "```bash\nbrew install fswatch  # For watch mode\n```\n"
+    },
+    {
+      "id": "DCOL.10VER.1",
+      "path": "docs/COLLIDER.md",
+      "loc_start": 491,
+      "loc_end": 496,
+      "nature": "TBL",
+      "heading": "10. VERSION HISTORY",
+      "excerpt": "| Date | Event |\n|------|-------|\n| 2025-12-14 | Initial commit (Spectrometer v12) |\n| 2025-12-23 | THE PIVOT: AI \u2192 Deterministic |\n| 2026-01-11 | Rebrand: Spectrometer \u2192 Collider |\n| 2026-01-19 | Atom integration (94 atoms unified) |\n"
+    },
+    {
+      "id": "DCOM.WHACOL.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 14,
+      "loc_end": 24,
+      "nature": "TBL",
+      "heading": "What Collider Does Uniquely",
+      "excerpt": "| Capability | Status | Competitors |\n|------------|--------|-------------|\n| 8-Dimensional Classification | \u2713 Implemented | None |\n| Standard Model Theory (200 atoms, 33 roles) | \u2713 Implemented | None |\n| 3D Force-Directed Graph Visualization | \u2713 Implemented | None |\n| Purity Scoring (D6:EFFECT) | \u2713 Implemented | None |\n| RPBL Character Analysis | \u2713 Implemented | None |\n| Graph Centrality (PageRank, Betweenness) | \u2713 Implemented | None |\n| Topology Role Detection | \u2713 Implemented | None |\n| UPB Vi..."
+    },
+    {
+      "id": "DCOM.CURMET.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 28,
+      "loc_end": 36,
+      "nature": "COD",
+      "heading": "Current Metrics (Self-Analysis)",
+      "excerpt": "```\nNodes analyzed:        2,107\nEdges extracted:       5,860\nFiles processed:       173\nProcessing time:       18.1s\nDimension coverage:    99.7%\nTree-sitter coverage:  82.6%\nLanguages supported:   5 (Python, JS/TS, Go, Rust)\n```\n"
+    },
+    {
+      "id": "DCOM.MARSIZ.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 44,
+      "loc_end": 50,
+      "nature": "TBL",
+      "heading": "Market Size and Growth",
+      "excerpt": "| Metric | Value | Source |\n|--------|-------|--------|\n| Global SAST Market (2025) | $554 million | Mordor Intelligence |\n| Projected Market (2030) | $1.548 billion | Mordor Intelligence |\n| CAGR | 22.82% | Mordor Intelligence |\n| Cloud SAST Growth Rate | 20.4% CAGR | Industry reports |\n| IDE Plugin Growth Rate | 21.1% CAGR | Industry reports |\n"
+    },
+    {
+      "id": "DCOM.SONSON.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 68,
+      "loc_end": 77,
+      "nature": "TBL",
+      "heading": "SonarQube / SonarCloud",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Code Quality + Security |\n| **Languages** | 30+ (Java, Python, JS/TS, C/C++, C#, Go, Ruby, PHP, etc.) |\n| **Pricing** | Cloud: \u20ac30/mo (100K LOC), Free tier (50K LOC), Enterprise: Annual license |\n| **Deployment** | Cloud (SonarCloud) + Self-managed (SonarQube Server) |\n| **Key Feature** | Quality Gates - enforce thresholds before merge |\n| **Certifications** | SOC 2 Type II (Feb 2025), ISO 27001:2022 |\n| **IDE Plugins** | JetBrains, VS Co..."
+    },
+    {
+      "id": "DCOM.SEM.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 81,
+      "loc_end": 90,
+      "nature": "TBL",
+      "heading": "Semgrep",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Custom Rules + Security (SAST/SCA/Secrets) |\n| **Languages** | 20+ (C, C++, C#, Go, Java, JS, Kotlin, PHP, Python, Ruby, Rust, etc.) |\n| **Pricing** | Free (10 contributors), Teams: $40/dev/mo (Code), $40/dev/mo (SCA), $20/dev/mo (Secrets) |\n| **Deployment** | Cloud + Self-managed |\n| **Key Feature** | Rule-based pattern matching, Semgrep Assistant (GPT-4 powered) |\n| **Recent** | MCP Server for LLM integration, 85% false positive auto-de..."
+    },
+    {
+      "id": "DCOM.SNYCOD.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 94,
+      "loc_end": 103,
+      "nature": "TBL",
+      "heading": "Snyk Code",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Developer-First Security (SAST/SCA/DAST/Container) |\n| **Languages** | Java, Python, JS/TS, C#, Go, Ruby, PHP |\n| **Pricing** | From $25/mo, Ignite: $1,260/dev/yr, Enterprise: Contact |\n| **Deployment** | Cloud-native |\n| **Key Feature** | AI-powered semantic analysis, lowest false-positive rates |\n| **Recent** | Acquired Probely (DAST) Nov 2024, 300+ new customers in 2024 |\n| **IDE Plugins** | VS Code, JetBrains |\n| **CI/CD** | Jenkins, ..."
+    },
+    {
+      "id": "DCOM.CODGIT.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 107,
+      "loc_end": 116,
+      "nature": "TBL",
+      "heading": "CodeQL (GitHub Advanced Security)",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Semantic Analysis / Vulnerability Research |\n| **Languages** | 9 GA (JS/TS, Python, Java, C/C++, C#, Ruby, Go, Kotlin), Swift (beta) |\n| **Pricing** | Free (open source), GHAS: $29/active committer/mo |\n| **Deployment** | Cloud (GitHub) + Enterprise Server |\n| **Key Feature** | Queryable code database, 432 security queries, 100% CWE Top 25 |\n| **Recent** | 318 default queries (+27% YoY) |\n| **IDE Plugins** | VS Code (CodeQL extension) |\n|..."
+    },
+    {
+      "id": "DCOM.VER.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 120,
+      "loc_end": 129,
+      "nature": "TBL",
+      "heading": "Veracode",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Enterprise Compliance (SAST/DAST/SCA/IaC) |\n| **Languages** | 100+ languages, 350+ frameworks |\n| **Pricing** | SAST: ~$15K/yr (100 apps), SCA: ~$12K/yr, DAST: ~$20-25K/yr, Full suite: $100K+ |\n| **Deployment** | Cloud + Hybrid |\n| **Key Feature** | Whole-program analysis, AI-powered Veracode Fix |\n| **Recent** | 420 trillion LOC scanned, 204M flaws found, EASM (May 2025), Package Firewall (Jun 2025) |\n| **IDE Plugins** | VS Code, JetBrai..."
+    },
+    {
+      "id": "DCOM.CHEONE.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 133,
+      "loc_end": 142,
+      "nature": "TBL",
+      "heading": "Checkmarx One",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Enterprise AppSec Platform (SAST/DAST/SCA/API) |\n| **Languages** | 30+ (Apex, Groovy, Java, JS, JSP, Kotlin, PHP, Python, Ruby, etc.) |\n| **Pricing** | $5K-$35K+/yr (50 devs), Enterprise: Contact |\n| **Deployment** | Cloud |\n| **Key Feature** | Agentic AI for instant fix recommendations, unified dashboard |\n| **Recent** | Acquired Dustico (2021) for malicious code detection |\n| **IDE Plugins** | Yes (multiple) |\n| **CI/CD** | Major platfo..."
+    },
+    {
+      "id": "DCOM.COVBLA.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 146,
+      "loc_end": 155,
+      "nature": "TBL",
+      "heading": "Coverity (Black Duck/Synopsys)",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Focus** | Enterprise Security + Code Quality |\n| **Languages** | 22 languages, 200+ frameworks |\n| **Pricing** | Enterprise (contact sales) |\n| **Deployment** | Cloud + On-prem |\n| **Key Feature** | Multi-file defect detection, Code Sight IDE plugin |\n| **Compliance** | OWASP Top 10, CWE Top 25, MISRA, CERT |\n| **IDE Plugins** | Code Sight (real-time) |\n| **CI/CD** | Popular IDE, SCM, CI systems |\n"
+    },
+    {
+      "id": "DCOM.COMFEA.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 159,
+      "loc_end": 174,
+      "nature": "TBL",
+      "heading": "Comprehensive Feature Matrix",
+      "excerpt": "| Feature | Collider | SonarQube | Semgrep | Snyk | CodeQL | Veracode | Checkmarx |\n|---------|----------|-----------|---------|------|--------|----------|-----------|\n| **SAST** | Partial | \u2713 | \u2713 | \u2713 | \u2713 | \u2713 | \u2713 |\n| **SCA** | \u2717 | \u2717 | \u2713 | \u2713 | \u2717 | \u2713 | \u2713 |\n| **DAST** | \u2717 | \u2717 | \u2717 | \u2713 | \u2717 | \u2713 | \u2713 |\n| **Secrets** | \u2717 | \u2713 | \u2713 | \u2713 | \u2717 | \u2713 | \u2713 |\n| **IaC** | \u2717 | \u2713 | \u2713 | \u2713 | \u2717 | \u2713 | \u2713 |\n| **Container** | \u2717 | \u2717 | \u2717 | \u2713 | \u2717 | \u2713 | \u2713 |\n| **API Security** | \u2717 | \u2717 | \u2717 | \u2713 | \u2717 | \u2713 | \u2713 |\n| **Quality Gates** | \u2717 |..."
+    },
+    {
+      "id": "DCOM.PRICOM.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 178,
+      "loc_end": 187,
+      "nature": "TBL",
+      "heading": "Pricing Comparison",
+      "excerpt": "| Tool | Free Tier | Entry Price | Enterprise |\n|------|-----------|-------------|------------|\n| **Collider** | \u2713 Open source | Free | N/A |\n| **SonarQube** | 50K LOC | \u20ac30/mo (100K LOC) | Annual license |\n| **Semgrep** | 10 contributors | $40/dev/mo | Contact |\n| **Snyk** | Limited | $25/mo | $1,260/dev/yr |\n| **CodeQL** | Open source repos | $29/committer/mo | GHAS |\n| **Veracode** | \u2717 | ~$15K/yr | $100K+ |\n| **Checkmarx** | \u2717 | ~$5K/yr | $35K+ |\n| **Coverity** | \u2717 | Enterprise | Enterprise |..."
+    },
+    {
+      "id": "DCOM.EMECOM.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 191,
+      "loc_end": 195,
+      "nature": "TBL",
+      "heading": "Emerging Competitors",
+      "excerpt": "| Tool | Focus | Key Differentiator |\n|------|-------|-------------------|\n| **Aikido Security** | AI-powered SAST + compliance | Acquired Trag AI (2025), SOC 2/GDPR automation |\n| **DeepSource** | DevSecOps platform | Noise reduction, auto-remediation |\n| **CodeRabbit** | AI code review | Learns from developer corrections |\n"
+    },
+    {
+      "id": "DCOM.COLUNI.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 199,
+      "loc_end": 224,
+      "nature": "COD",
+      "heading": "Collider's Unique Position",
+      "excerpt": "```\nCollider creates a NEW CATEGORY: Code Architecture Intelligence\n\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    THE SECURITY QUESTION                        \u2502\n\u2502                                                                 \u2502\n\u2502   SonarQube:  \"Is this code clean?\"                            \u2502\n\u2502   Snyk:       \"Is this code secure?\"                           \u2502\n\u2502   Semgrep:    \"Does this match a vulnerability pattern?\"       \u2502\n\u2502   Veracode:   \"Does this..."
+    },
+    {
+      "id": "DCOM.ARCPLU.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 234,
+      "loc_end": 249,
+      "nature": "COD",
+      "heading": "Architecture: Pluggable Modules",
+      "excerpt": "```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    COLLIDER CORE                            \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u2502\n\u2502  \u2502 Parser  \u2502\u2192 \u2502Analyzer \u2502\u2192 \u2502Classifier\u2502\u2192 \u2502 Visualizer \u2502    \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2502\n\u2502       \u2502            \u2502            \u2502               \u2502           \u2502\n\u2502       \u25bc            \u25bc            \u25bc               \u25bc           \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500..."
+    },
+    {
+      "id": "DCOM.M1LAN.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 257,
+      "loc_end": 266,
+      "nature": "TBL",
+      "heading": "M1: Language Modules (Expand Coverage)",
+      "excerpt": "| Language | Priority | Effort | Tree-sitter Support |\n|----------|----------|--------|---------------------|\n| Java | HIGH | Medium | \u2713 Available |\n| C/C++ | HIGH | Medium | \u2713 Available |\n| C# | MEDIUM | Medium | \u2713 Available |\n| Ruby | MEDIUM | Low | \u2713 Available |\n| PHP | MEDIUM | Low | \u2713 Available |\n| Kotlin | MEDIUM | Low | \u2713 Available |\n| Swift | LOW | Low | \u2713 Available |\n| Scala | LOW | Medium | \u2713 Available |\n"
+    },
+    {
+      "id": "DCOM.M1LAN.2",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 269,
+      "loc_end": 275,
+      "nature": "COD",
+      "heading": "M1: Language Modules (Expand Coverage)",
+      "excerpt": "```\nsrc/core/queries/{language}/\n\u251c\u2500\u2500 symbols.scm      # Required: function/class extraction\n\u251c\u2500\u2500 locals.scm       # Optional: scope analysis\n\u251c\u2500\u2500 patterns.scm     # Optional: atom detection\n\u2514\u2500\u2500 data_flow.scm    # Optional: purity analysis\n```\n"
+    },
+    {
+      "id": "DCOM.M2SEC.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 281,
+      "loc_end": 287,
+      "nature": "TBL",
+      "heading": "M2: Security Modules (Address Gap)",
+      "excerpt": "| Module | Priority | Competitors | Integration Point |\n|--------|----------|-------------|-------------------|\n| **SAST Scanner** | HIGH | Semgrep, Snyk | Post-parse analysis |\n| **Dependency Check** | HIGH | Snyk, OWASP | Import analysis |\n| **Secret Detection** | MEDIUM | GitLeaks, Aikido | Pattern matching |\n| **Taint Analysis** | MEDIUM | CodeQL | Data flow extension |\n| **OWASP Top 10** | MEDIUM | All | Rule-based detection |\n"
+    },
+    {
+      "id": "DCOM.M2SEC.2",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 290,
+      "loc_end": 298,
+      "nature": "COD",
+      "heading": "M2: Security Modules (Address Gap)",
+      "excerpt": "```python\n# src/core/security/__init__.py\nclass SecurityModule:\n    def analyze(self, nodes: List[Node], edges: List[Edge]) -> SecurityReport:\n        \"\"\"Run security checks on analyzed code.\"\"\"\n        pass\n\n# Plugs into Stage 2.12 of pipeline\n```\n"
+    },
+    {
+      "id": "DCOM.M3INT.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 304,
+      "loc_end": 312,
+      "nature": "TBL",
+      "heading": "M3: Integration Modules (Enterprise Readiness)",
+      "excerpt": "| Integration | Priority | Effort | Value |\n|-------------|----------|--------|-------|\n| **GitHub Actions** | HIGH | Low | CI/CD automation |\n| **GitLab CI** | HIGH | Low | CI/CD automation |\n| **Jenkins Plugin** | MEDIUM | Medium | Enterprise CI |\n| **VS Code Extension** | HIGH | Medium | Developer experience |\n| **JetBrains Plugin** | MEDIUM | Medium | Developer experience |\n| **Slack/Teams Alerts** | LOW | Low | Notifications |\n| **Jira Integration** | LOW | Medium | Issue tracking |\n"
+    },
+    {
+      "id": "DCOM.M3INT.2",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 315,
+      "loc_end": 322,
+      "nature": "COD",
+      "heading": "M3: Integration Modules (Enterprise Readiness)",
+      "excerpt": "```yaml\n# .github/workflows/collider.yml\n- name: Run Collider Analysis\n  uses: collider/action@v1\n  with:\n    output: collider-report\n    fail-on: critical-violations\n```\n"
+    },
+    {
+      "id": "DCOM.M4EXP.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 328,
+      "loc_end": 334,
+      "nature": "TBL",
+      "heading": "M4: Export Modules (Interoperability)",
+      "excerpt": "| Format | Priority | Use Case |\n|--------|----------|----------|\n| **SARIF** | HIGH | GitHub Security, IDE integration |\n| **SPDX** | MEDIUM | License compliance |\n| **CycloneDX** | MEDIUM | SBOM generation |\n| **GraphML** | LOW | Graph tool import |\n| **DOT** | LOW | Graphviz visualization |\n"
+    },
+    {
+      "id": "DCOM.M5ANA.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 340,
+      "loc_end": 347,
+      "nature": "TBL",
+      "heading": "M5: Analysis Modules (Extend Theory)",
+      "excerpt": "| Module | Priority | Theory Link | Description |\n|--------|----------|-------------|-------------|\n| **Coupling Analyzer** | HIGH | Architecture | Afferent/efferent coupling |\n| **Cohesion Analyzer** | HIGH | Architecture | LCOM metrics |\n| **Change Risk** | MEDIUM | D7:LIFECYCLE | Churn + complexity hotspots |\n| **Test Coverage Map** | MEDIUM | D8:TRUST | Coverage \u2192 graph overlay |\n| **Performance Predictor** | LOW | Theory expansion | Complexity \u2192 runtime |\n| **Refactoring Suggester** | LOW |..."
+    },
+    {
+      "id": "DCOM.M6VIS.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 353,
+      "loc_end": 359,
+      "nature": "TBL",
+      "heading": "M6: Visualization Modules (Enhance UX)",
+      "excerpt": "| Module | Priority | Description |\n|--------|----------|-------------|\n| **Diff Visualization** | HIGH | Compare two analyses |\n| **Time-lapse Mode** | MEDIUM | Animate codebase evolution |\n| **AR/VR Export** | LOW | Spatial computing readiness |\n| **Dependency Matrix** | MEDIUM | DSM (Design Structure Matrix) |\n| **Treemap View** | LOW | Alternative to 3D graph |\n"
+    },
+    {
+      "id": "DCOM.M7COM.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 365,
+      "loc_end": 371,
+      "nature": "TBL",
+      "heading": "M7: Compliance Modules (Enterprise Requirement)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **OWASP Top 10** | HIGH | All major tools | Security vulnerability rules |\n| **PCI-DSS Rules** | MEDIUM | Veracode, Checkmarx | Payment card compliance |\n| **GDPR Data Flow** | MEDIUM | Snyk, SonarQube | Privacy compliance tracking |\n| **Code Smell Rules** | HIGH | SonarQube, CodeClimate | Maintainability rules |\n| **False Positive Tuning** | HIGH | All tools | Suppress/configure rules |\n"
+    },
+    {
+      "id": "DCOM.M8CLO.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 379,
+      "loc_end": 384,
+      "nature": "TBL",
+      "heading": "M8: Cloud/SaaS Modules (Deployment Options)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **Hosted SaaS** | HIGH | All major tools | Cloud-hosted analysis |\n| **Multi-tenant** | MEDIUM | SonarCloud, Snyk | Organization support |\n| **Multi-repo Support** | MEDIUM | All major tools | Monorepo + multi-repo |\n| **Self-hosted Docker** | HIGH | SonarQube | On-prem deployment |\n"
+    },
+    {
+      "id": "DCOM.M9COL.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 392,
+      "loc_end": 397,
+      "nature": "TBL",
+      "heading": "M9: Collaboration Modules (Team Features)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **PR Comments** | HIGH | All CI tools | Auto-comment on PRs |\n| **Issue Assignment** | MEDIUM | SonarQube, Snyk | Assign findings to devs |\n| **Team Dashboards** | MEDIUM | CodeClimate | Aggregate team metrics |\n| **Annotations API** | LOW | GitHub | In-file annotations |\n"
+    },
+    {
+      "id": "DCOM.M10HIS.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 405,
+      "loc_end": 410,
+      "nature": "TBL",
+      "heading": "M10: Historical/Trends Modules (Time-Series)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **Trend Charts** | HIGH | CodeClimate, SonarQube | Metrics over time |\n| **Regression Detection** | HIGH | All CI tools | Alert on degradation |\n| **Technical Debt Tracker** | MEDIUM | SonarQube | Debt accumulation |\n| **Custom Dashboards** | LOW | Enterprise tools | Build custom reports |\n"
+    },
+    {
+      "id": "DCOM.M11QUA.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 418,
+      "loc_end": 423,
+      "nature": "TBL",
+      "heading": "M11: Quality Gates Modules (CI Blocking)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **Pass/Fail Thresholds** | HIGH | All CI tools | Block merge on violations |\n| **Custom Gate Rules** | MEDIUM | SonarQube | Define custom criteria |\n| **Baseline Comparison** | MEDIUM | Snyk | Compare to baseline |\n| **Branch Policies** | LOW | GitHub/GitLab | Enforce on specific branches |\n"
+    },
+    {
+      "id": "DCOM.M12INC.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 431,
+      "loc_end": 436,
+      "nature": "TBL",
+      "heading": "M12: Incremental Analysis Modules (Performance)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **Diff-only Analysis** | HIGH | Semgrep, SonarQube | Analyze only changed files |\n| **Result Caching** | MEDIUM | All tools | Cache unchanged results |\n| **Parallel Processing** | MEDIUM | Built-in potential | Multi-core analysis |\n| **Streaming Results** | LOW | Large codebase need | Progressive output |\n"
+    },
+    {
+      "id": "DCOM.M13API.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 444,
+      "loc_end": 449,
+      "nature": "TBL",
+      "heading": "M13: API/SDK Modules (Programmatic Access)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **REST API** | HIGH | All SaaS tools | Programmatic access |\n| **GraphQL API** | LOW | Modern tools | Flexible queries |\n| **Webhooks** | MEDIUM | All CI tools | Event notifications |\n| **Python SDK** | MEDIUM | Snyk, Semgrep | Native integration |\n"
+    },
+    {
+      "id": "DCOM.M14DUP.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 457,
+      "loc_end": 461,
+      "nature": "TBL",
+      "heading": "M14: Duplicate Detection Modules (Code Quality)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **Clone Detection** | MEDIUM | SonarQube, PMD | Find copy-pasted code |\n| **Near-duplicate** | LOW | Advanced tools | Similar but not identical |\n| **Cross-repo Clones** | LOW | Enterprise need | Duplicates across repos |\n"
+    },
+    {
+      "id": "DCOM.M15TES.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 469,
+      "loc_end": 474,
+      "nature": "TBL",
+      "heading": "M15: Test Coverage Modules (Quality Metrics)",
+      "excerpt": "| Module | Priority | Competitors | Description |\n|--------|----------|-------------|-------------|\n| **Coverage Import** | HIGH | CodeClimate | Import lcov/cobertura |\n| **Coverage Overlay** | MEDIUM | Unique to Collider | Show coverage on 3D graph |\n| **Uncovered Complexity** | HIGH | Unique | High complexity + low coverage |\n| **Test Gap Analysis** | MEDIUM | SonarQube | Identify untested areas |\n"
+    },
+    {
+      "id": "DCOM.COMGAP.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 482,
+      "loc_end": 503,
+      "nature": "TBL",
+      "heading": "COMPLETE GAP COVERAGE MATRIX",
+      "excerpt": "| Gap | Module | Priority |\n|-----|--------|----------|\n| Languages (5 \u2192 15+) | M1 | HIGH |\n| SAST/Security Rules | M2 | HIGH |\n| CI/CD Integration | M3 | HIGH |\n| IDE Plugins | M3 | HIGH |\n| Export Formats (SARIF) | M4 | HIGH |\n| Coupling/Cohesion | M5 | HIGH |\n| Diff Visualization | M6 | HIGH |\n| OWASP/PCI-DSS Compliance | M7 | HIGH |\n| Code Smell Rules | M7 | HIGH |\n| Cloud/SaaS Deployment | M8 | HIGH |\n| PR Comments | M9 | HIGH |\n| Team Dashboards | M9 | MEDIUM |\n| Trend Charts | M10 | HIGH ..."
+    },
+    {
+      "id": "DCOM.IMPPRI.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 512,
+      "loc_end": 533,
+      "nature": "COD",
+      "heading": "IMPLEMENTATION PRIORITY MATRIX",
+      "excerpt": "```\n                           HIGH VALUE\n                               \u2502\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502                        \u2502                        \u2502\n      \u2502  M3: GitHub CI    \u2605    \u2502   \u2605   M1: Languages    \u2502\n      \u2502  M4: SARIF             \u2502       M3: VS Code      \u2502\n      \u2502  M11: Quality Gates    \u2502       M8: Docker       \u2502\n      \u2502  M12: Incremental      \u2502       M2: SAST         \u2502\n      \u2502                        \u2502                        \u2502\n LOW \u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500..."
+    },
+    {
+      "id": "DCOM.CURBAS.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 574,
+      "loc_end": 583,
+      "nature": "TBL",
+      "heading": "Current Baseline",
+      "excerpt": "| Metric | Current | Target (6mo) | Target (12mo) | Target (24mo) |\n|--------|---------|--------------|---------------|---------------|\n| Languages | 5 | 10 | 15 | 20 |\n| CI/CD Integrations | 0 | 2 | 4 | 4 |\n| IDE Plugins | 0 | 1 | 2 | 3 |\n| Security Rules | 0 | 50 | 200 | 500 |\n| Export Formats | 2 (JSON, HTML) | 4 | 6 | 8 |\n| Modules Implemented | 0/15 | 4/15 | 8/15 | 15/15 |\n| API Endpoints | 0 | 0 | 10 | 50 |\n| Team Features | 0 | 0 | 3 | 10 |\n"
+    },
+    {
+      "id": "DCOM.MODIMP.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 587,
+      "loc_end": 603,
+      "nature": "TBL",
+      "heading": "Module Implementation Tracking",
+      "excerpt": "| Module | Status | Target |\n|--------|--------|--------|\n| M1: Languages | 5/20 | 6mo: 10, 12mo: 15 |\n| M2: Security | 0% | 6mo: SAST basics |\n| M3: Integrations | 0% | 6mo: GitHub Actions + SARIF |\n| M4: Export | 33% | 6mo: SARIF |\n| M5: Analysis | 0% | 12mo: Coupling |\n| M6: Visualization | 0% | 6mo: Diff view |\n| M7: Compliance | 0% | 12mo: OWASP Top 10 |\n| M8: Cloud/SaaS | 0% | 12mo: Docker |\n| M9: Collaboration | 0% | 12mo: PR comments |\n| M10: Trends | 0% | 18mo: Basic charts |\n| M11: Qua..."
+    },
+    {
+      "id": "DCOM.DONCOM.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 642,
+      "loc_end": 656,
+      "nature": "COD",
+      "heading": "Don't Compete, Complement",
+      "excerpt": "```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    DEVELOPER WORKFLOW                        \u2502\n\u2502                                                              \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510              \u2502\n\u2502  \u2502  Snyk    \u2502    \u2502 SonarQube\u2502    \u2502 Collider \u2502              \u2502\n\u2502  \u2502 Security \u2502    \u2502 Quality  \u2502    \u2502 Architect\u2502              \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518    \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518              \u2502\n\u2502       \u2502               \u2502               \u2502         ..."
+    },
+    {
+      "id": "DCOM.DOCHIS.1",
+      "path": "docs/COMPETITIVE_ANALYSIS.md",
+      "loc_start": 668,
+      "loc_end": 672,
+      "nature": "TBL",
+      "heading": "DOCUMENT HISTORY",
+      "excerpt": "| Date | Change |\n|------|--------|\n| 2026-01-22 | Initial creation with competitive analysis and 6-module roadmap |\n| 2026-01-22 | Expanded to 15 modules (M1-M15) covering all 24 identified gaps |\n| 2026-01-22 | Added market research: $554M market size, detailed competitor profiles, pricing, feature matrices |\n"
+    },
+    {
+      "id": "DKNO.THEROO.1",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 10,
+      "loc_end": 15,
+      "nature": "COD",
+      "heading": "The Root Axiom (ORIGINAL)",
+      "excerpt": "```\n\"Tudo \u00e9 uma analogia para tudo\"\n\"Everything is an analogy to everything\"\n\n\u2014 Leonardo Lech, ~2021\n```\n"
+    },
+    {
+      "id": "DKNO.KNOTRE.2",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 23,
+      "loc_end": 196,
+      "nature": "COD",
+      "heading": "Knowledge Tree",
+      "excerpt": "```\nSTANDARD MODEL OF CODE\n\u2502\n\u251c\u2500\u2500 PHILOSOPHICAL FOUNDATION\n\u2502   \u251c\u2500\u2500 [ORIGINAL] \"Tudo \u00e9 uma analogia para tudo\" (Lech, ~2021)\n\u2502   \u251c\u2500\u2500 [ORIGINAL] Physics-Code isomorphism hypothesis\n\u2502   \u2514\u2500\u2500 [ORIGINAL] December 2025 Pivot: AI \u2192 Deterministic\n\u2502\n\u251c\u2500\u2500 STRUCTURAL FRAMEWORK\n\u2502   \u2502\n\u2502   \u251c\u2500\u2500 THREE PLANES\n\u2502   \u2502   \u251c\u2500\u2500 [REFERENCED] Popper's Three Worlds (1978)\n\u2502   \u2502   \u2502   \u2514\u2500\u2500 World 1 (Physical), World 2 (Mental), World 3 (Abstract)\n\u2502   \u2502   \u2514\u2500\u2500 [ORIGINAL] Mapping to Physical/Virtual/Semantic for code\n\u2502   \u2502\n\u2502   \u251c\u2500\u2500..."
+    },
+    {
+      "id": "DKNO.SUMSTA.1",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 202,
+      "loc_end": 206,
+      "nature": "TBL",
+      "heading": "Summary Statistics",
+      "excerpt": "| Category | Count | Examples |\n|----------|-------|----------|\n| **REFERENCED** | ~20 | Koestler, Popper, DDD, McCabe, Bejan |\n| **ORIGINAL** | ~45+ | RPBL, \u03c0-levels, Q-metrics, 94 atoms, 7 pathogens |\n| **SYNTHESIS** | ~15 | Applying physics to code, mapping Betti to health |\n"
+    },
+    {
+      "id": "DKNO.2THE.1",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 217,
+      "loc_end": 217,
+      "nature": "NUM",
+      "heading": "2. The Classification System",
+      "excerpt": "- 33 specific roles (not generic \"patterns\")"
+    },
+    {
+      "id": "DKNO.WHAWE.1",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 244,
+      "loc_end": 254,
+      "nature": "TBL",
+      "heading": "What We Stand On (Giants' Shoulders)",
+      "excerpt": "| Giant | Contribution | Our Use |\n|-------|--------------|---------|\n| **Koestler** | Holons (1967) | 16-level scale |\n| **Popper** | Three Worlds (1978) | Three planes |\n| **Ranganathan** | Faceted classification (1933) | 8 dimensions |\n| **Evans** | DDD (2003) | Role vocabulary |\n| **Martin** | Clean Architecture (2017) | Layer concept |\n| **McCabe** | Cyclomatic complexity (1976) | Elevation component |\n| **Bejan** | Constructal Law (1996) | Flow topology |\n| **Beer** | VSM (1972) | System h..."
+    },
+    {
+      "id": "DKNO.INTPRO.1",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 260,
+      "loc_end": 269,
+      "nature": "TBL",
+      "heading": "Intellectual Property Assessment",
+      "excerpt": "| Component | Status | IP Potential |\n|-----------|--------|--------------|\n| Philosophical axiom | ORIGINAL | Trademark/Brand |\n| 94-atom taxonomy | ORIGINAL | Patent (classification method) |\n| RPBL signature | ORIGINAL | Patent (characterization method) |\n| Purpose Field | ORIGINAL | Patent (emergence detection) |\n| Health Formula | ORIGINAL | Trade secret / Patent |\n| Pathogen Taxonomy | ORIGINAL | Patent (detection method) |\n| Collider Pipeline | ORIGINAL | Trade secret |\n| 100% coverage me..."
+    },
+    {
+      "id": "DKNO.VER.1",
+      "path": "docs/KNOWLEDGE_TREE.md",
+      "loc_start": 275,
+      "loc_end": 279,
+      "nature": "TBL",
+      "heading": "Version",
+      "excerpt": "| Field | Value |\n|-------|-------|\n| Document Version | 1.0.0 |\n| Created | 2026-01-24 |\n| Author | Leonardo Lech + Claude |\n"
+    },
+    {
+      "id": "DMOD.THETHR.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 11,
+      "loc_end": 15,
+      "nature": "TBL",
+      "heading": "The Three Planes",
+      "excerpt": "| Plane | What Exists | Example |\n|-------|-------------|---------|\n| **Physical** | Bits, bytes, files on disk | `0x48 0x65 0x6C 0x6C 0x6F` |\n| **Virtual** | AST nodes, runtime objects | `FunctionDeclaration`, `ClassInstance` |\n| **Semantic** | Meaning, intent, architecture | `Repository`, `Entity`, `Service` |\n"
+    },
+    {
+      "id": "DMOD.THE16L.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 19,
+      "loc_end": 19,
+      "nature": "NUM",
+      "heading": "The 16-Level Scale",
+      "excerpt": "### The 16-Level Scale"
+    },
+    {
+      "id": "DMOD.THE16L.2",
+      "path": "docs/MODEL.md",
+      "loc_start": 21,
+      "loc_end": 38,
+      "nature": "TBL",
+      "heading": "The 16-Level Scale",
+      "excerpt": "| Level | Name | Zone |\n|-------|------|------|\n| L12 | UNIVERSE | COSMOLOGICAL |\n| L11 | DOMAIN | COSMOLOGICAL |\n| L10 | ORGANIZATION | COSMOLOGICAL |\n| L9 | PLATFORM | COSMOLOGICAL |\n| L8 | ECOSYSTEM | COSMOLOGICAL |\n| L7 | SYSTEM | SYSTEMIC |\n| L6 | PACKAGE | SYSTEMIC |\n| L5 | FILE | SYSTEMIC |\n| L4 | CONTAINER | SYSTEMIC |\n| L3 | NODE | SEMANTIC |\n| L2 | BLOCK | SEMANTIC |\n| L1 | STATEMENT | SEMANTIC |\n| L0 | TOKEN | SYNTACTIC |\n| L-1 | CHARACTER | PHYSICAL |\n| L-2 | BYTE | PHYSICAL |\n| L-3 ..."
+    },
+    {
+      "id": "DMOD.THE4.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 48,
+      "loc_end": 53,
+      "nature": "TBL",
+      "heading": "The 4 Phases",
+      "excerpt": "| Phase | Question | Contains |\n|-------|----------|----------|\n| **DATA** | What is this made of? | Primitives, Variables, Constants |\n| **LOGIC** | What does it do? | Expressions, Statements, Functions |\n| **ORGANIZATION** | How is it structured? | Classes, Modules, Services |\n| **EXECUTION** | How does it run? | Handlers, Workers, Initializers |\n"
+    },
+    {
+      "id": "DMOD.THE8.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 57,
+      "loc_end": 66,
+      "nature": "TBL",
+      "heading": "The 8 Dimensions",
+      "excerpt": "| Dimension | Question | Values |\n|-----------|----------|--------|\n| WHAT | What type? | Atom taxonomy |\n| LAYER | Where in architecture? | Domain, Application, Infrastructure, UI |\n| ROLE | What purpose? | Role taxonomy |\n| BOUNDARY | Crosses boundaries? | Internal, External |\n| STATE | Maintains state? | Stateless, Stateful |\n| EFFECT | Side effects? | Pure, Impure |\n| LIFECYCLE | What phase? | Init, Active, Dispose |\n| TRUST | How confident? | 0-100% |\n"
+    },
+    {
+      "id": "DMOD.ATO.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 70,
+      "loc_end": 74,
+      "nature": "TBL",
+      "heading": "Atoms",
+      "excerpt": "| Version | Count | Source |\n|---------|-------|--------|\n| V1 (documented) | 167 | FORMAL_PROOF.md |\n| V2 (documented) | 200 | 200_ATOMS.md |\n| **Implemented** | **94** | atom_loader.py |\n"
+    },
+    {
+      "id": "DMOD.ROL33.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 84,
+      "loc_end": 96,
+      "nature": "TBL",
+      "heading": "Roles (33 Canonical)",
+      "excerpt": "| Category | Roles |\n|----------|-------|\n| Query | Query, Finder, Loader, Getter |\n| Command | Command, Creator, Mutator, Destroyer |\n| Factory | Factory, Builder |\n| Storage | Repository, Store, Cache |\n| Orchestration | Service, Controller, Manager |\n| Validation | Validator, Guard, Asserter |\n| Transform | Transformer, Mapper, Serializer |\n| Event | Handler, Listener, Subscriber |\n| Utility | Utility, Formatter, Helper |\n| Internal | Internal, Lifecycle |\n| Unknown | Unknown |\n"
+    },
+    {
+      "id": "DMOD.RPBDIM.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 102,
+      "loc_end": 107,
+      "nature": "TBL",
+      "heading": "RPBL Dimensions",
+      "excerpt": "| Dim | Low (1) | High (9) |\n|-----|---------|----------|\n| **R** (Responsibility) | Single purpose | Omnibus |\n| **P** (Purity) | No side effects | Heavy I/O |\n| **B** (Boundary) | Internal only | External APIs |\n| **L** (Lifecycle) | Ephemeral | Singleton |\n"
+    },
+    {
+      "id": "DMOD.NODMIN.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 117,
+      "loc_end": 125,
+      "nature": "COD",
+      "heading": "Node (Minimal)",
+      "excerpt": "```json\n{\n  \"id\": \"user.py:UserRepository\",\n  \"name\": \"UserRepository\",\n  \"kind\": \"class\",\n  \"role\": \"Repository\",\n  \"layer\": \"Infrastructure\"\n}\n```\n"
+    },
+    {
+      "id": "DMOD.NODFUL.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 129,
+      "loc_end": 148,
+      "nature": "TBL",
+      "heading": "Node (Full)",
+      "excerpt": "| Field | Type | Stage |\n|-------|------|-------|\n| `id` | string | 1 |\n| `name` | string | 1 |\n| `kind` | string | 1 |\n| `file_path` | string | 1 |\n| `start_line`, `end_line` | int | 1 |\n| `complexity` | int | 1 |\n| `role` | string | 2 |\n| `role_confidence` | float | 2 |\n| `layer` | string | 6 |\n| `is_orphan` | bool | 7 |\n| `is_hotspot` | bool | 8 |\n| `body_source` | string | 1 |\n| `in_degree` | int | 7 |\n| `out_degree` | int | 7 |\n| `topology_role` | string | 7 |\n| `disconnection` | object | 7..."
+    },
+    {
+      "id": "DMOD.RELPRO.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 154,
+      "loc_end": 161,
+      "nature": "TBL",
+      "heading": "Relational Properties",
+      "excerpt": "| Property | Requires | Description |\n|----------|----------|-------------|\n| `in_degree` | edge list | Number of incoming dependencies |\n| `out_degree` | edge list | Number of outgoing dependencies |\n| `topology_role` | full graph | Structural position in dependency graph |\n| `disconnection` | full graph | Why orphan nodes appear disconnected (7 types) |\n| `betweenness_centrality` | full graph | Bridge importance (0-1, higher = more paths through) |\n| `pagerank` | full graph | Authority score (..."
+    },
+    {
+      "id": "DMOD.TOPROL.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 165,
+      "loc_end": 171,
+      "nature": "TBL",
+      "heading": "Topology Roles",
+      "excerpt": "| Role | Condition | Meaning | Typical Atoms |\n|------|-----------|---------|---------------|\n| `orphan` | in=0, out=0 | Disconnected, possibly dead code | - |\n| `root` | in=0, out>0 | Entry point, initiator | Main, Handler, CLI |\n| `leaf` | in>0, out=0 | Terminal node, no dependencies | DTO, Query, Config |\n| `hub` | high degree | Central coordinator, coupling risk | Service, Controller |\n| `internal` | in>0, out>0 | Normal flow-through node | most nodes |\n"
+    },
+    {
+      "id": "DMOD.DISTAX.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 179,
+      "loc_end": 187,
+      "nature": "TBL",
+      "heading": "Disconnection Taxonomy (Jan 2026)",
+      "excerpt": "| `reachability_source` | Meaning | Action |\n|-----------------------|---------|--------|\n| `test_entry` | Called by test framework (pytest, jest) | OK |\n| `entry_point` | Program entry point (__main__, CLI) | OK |\n| `framework_managed` | Instantiated by framework (dataclass, DI) | OK |\n| `cross_language` | Called from different language (JS\u2194Python) | CHECK |\n| `external_boundary` | Public API, exported function | CHECK |\n| `dynamic_target` | Called via reflection/eval | CHECK |\n| `unreachable` ..."
+    },
+    {
+      "id": "DMOD.DISTAX.2",
+      "path": "docs/MODEL.md",
+      "loc_start": 189,
+      "loc_end": 199,
+      "nature": "COD",
+      "heading": "Disconnection Taxonomy (Jan 2026)",
+      "excerpt": "```json\n{\n  \"topology_role\": \"orphan\",\n  \"disconnection\": {\n    \"reachability_source\": \"test_entry\",\n    \"connection_gap\": \"isolated\",\n    \"isolation_confidence\": 0.95,\n    \"suggested_action\": \"OK - test framework invokes\"\n  }\n}\n```\n"
+    },
+    {
+      "id": "DMOD.CENMET.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 205,
+      "loc_end": 208,
+      "nature": "TBL",
+      "heading": "Centrality Metrics",
+      "excerpt": "| Property | Algorithm | Meaning |\n|----------|-----------|---------|\n| `betweenness_centrality` | Shortest paths | Bridges between modules (change risk) |\n| `pagerank` | Random walk | Influential nodes (authority) |\n"
+    },
+    {
+      "id": "DMOD.EDGMIN.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 214,
+      "loc_end": 220,
+      "nature": "COD",
+      "heading": "Edge (Minimal)",
+      "excerpt": "```json\n{\n  \"source\": \"user.py:UserService\",\n  \"target\": \"user.py:UserRepository\",\n  \"edge_type\": \"CALLS\"\n}\n```\n"
+    },
+    {
+      "id": "DMOD.EDGTYP.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 224,
+      "loc_end": 231,
+      "nature": "TBL",
+      "heading": "Edge Types",
+      "excerpt": "| Type | Meaning |\n|------|---------|\n| CONTAINS | Parent-child |\n| CALLS | Function invocation |\n| IMPORTS | Module dependency |\n| INHERITS | Class inheritance |\n| IMPLEMENTS | Interface realization |\n| USES | General dependency |\n"
+    },
+    {
+      "id": "DMOD.HIE.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 239,
+      "loc_end": 244,
+      "nature": "COD",
+      "heading": "Hierarchy",
+      "excerpt": "```\nLevel 4: PURPOSE FIELD     - Global gradient across codebase\nLevel 3: LAYER PURPOSE     - Shared purpose in architectural layer\nLevel 2: COMPOSITE PURPOSE - Aggregated from grouped components\nLevel 1: ATOMIC PURPOSE    - Intrinsic purpose of function/class\n```\n"
+    },
+    {
+      "id": "DMOD.LAYFLO.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 248,
+      "loc_end": 256,
+      "nature": "COD",
+      "heading": "Layer Flow",
+      "excerpt": "```\nPRESENTATION    \u2192 Purpose: Display (user sees data)\n      \u2193\nAPPLICATION     \u2192 Purpose: Orchestrate (use cases happen)\n      \u2193\nDOMAIN          \u2192 Purpose: Express (business rules enforced)\n      \u2193\nINFRASTRUCTURE  \u2192 Purpose: Implement (technical details handled)\n```\n"
+    },
+    {
+      "id": "DMOD.PUREQU.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 260,
+      "loc_end": 265,
+      "nature": "COD",
+      "heading": "Purpose Equations",
+      "excerpt": "```\n\u03c0\u2081(node)  = role(node)\n\u03c0\u2082(class) = emergence(\u03a3 \u03c0\u2081(method))\n\u03c0\u2083(layer) = common_purpose({\u03c0\u2082(component)})\n\u03a0(codebase) = \u222b \u03c0\u2083(layer) d(layer)\n```\n"
+    },
+    {
+      "id": "DMOD.ANTVIO.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 269,
+      "loc_end": 273,
+      "nature": "TBL",
+      "heading": "Antimatter (Violations)",
+      "excerpt": "| Violation | Example |\n|-----------|---------|\n| Domain \u2192 Infrastructure | Entity imports PostgresAdapter |\n| UI \u2192 Domain | Component calls repository directly |\n| Test \u2192 Production | Test code in main bundle |\n"
+    },
+    {
+      "id": "DMOD.PURINT.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 279,
+      "loc_end": 282,
+      "nature": "TBL",
+      "heading": "Purpose Intelligence (Q-Scores)",
+      "excerpt": "| Concept | Question | Output |\n|---------|----------|--------|\n| Purpose Emergence (\u03c0) | What IS the purpose? | Labels: Retrieve, Transform, Scattered |\n| Purpose Intelligence (Q) | How WELL does it serve? | Score: 0.0 - 1.0 |\n"
+    },
+    {
+      "id": "DMOD.PURINT.2",
+      "path": "docs/MODEL.md",
+      "loc_start": 285,
+      "loc_end": 287,
+      "nature": "COD",
+      "heading": "Purpose Intelligence (Q-Scores)",
+      "excerpt": "```\nQ(H) = w_parts \u00d7 Avg(Q_children) + w_intrinsic \u00d7 I(H)\n```\n"
+    },
+    {
+      "id": "DMOD.PURINT.3",
+      "path": "docs/MODEL.md",
+      "loc_start": 291,
+      "loc_end": 297,
+      "nature": "TBL",
+      "heading": "Purpose Intelligence (Q-Scores)",
+      "excerpt": "| Metric | Measures |\n|--------|----------|\n| Q_alignment | Rule violations (axioms, invariants, profiles) |\n| Q_coherence | Focus via entropy of atom categories |\n| Q_density | Signal-to-noise ratio |\n| Q_completeness | Expected children present |\n| Q_simplicity | 1 / log(complexity) |\n"
+    },
+    {
+      "id": "DMOD.PURINT.4",
+      "path": "docs/MODEL.md",
+      "loc_start": 300,
+      "loc_end": 303,
+      "nature": "COD",
+      "heading": "Purpose Intelligence (Q-Scores)",
+      "excerpt": "```\nSharp code:   Q(\u03c0\u2084) = 0.85+  \u2192 parts serve wholes cleanly\nMuddy code:   Q(\u03c0\u2084) = 0.40   \u2192 scattered, misaligned, incomplete\n```\n"
+    },
+    {
+      "id": "DMOD.KEYTHE.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 313,
+      "loc_end": 322,
+      "nature": "TBL",
+      "heading": "Key Theorems",
+      "excerpt": "| ID | Name | Claim |\n|----|------|-------|\n| 3.1 | WHAT Completeness | Atom taxonomy covers all syntactic structures |\n| 3.2 | WHY Completeness | Role taxonomy achieves 100% coverage |\n| 3.3 | RPBL Boundedness | RPBL space is finite (6,561 states) |\n| 3.4 | Total Space | Semantic space < 50M states |\n| 3.5 | Minimality | WHAT/WHY/HOW are minimal dimensions |\n| 3.6 | Orthogonality | Dimensions are statistically independent |\n| 3.7 | Pipeline DAG | 18-stage pipeline is valid topological order |\n|..."
+    },
+    {
+      "id": "DMOD.LEA4.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 326,
+      "loc_end": 332,
+      "nature": "TBL",
+      "heading": "Lean 4 Verification",
+      "excerpt": "| Theorem | File | Status |\n|---------|------|--------|\n| 3.3 RPBL Boundedness | `Boundedness.lean` | Verified |\n| 3.4 Total Space | `Boundedness.lean` | Verified |\n| 3.5 Minimality | `Minimality.lean` | Verified |\n| 3.7 Pipeline DAG | `Pipeline.lean` | Verified |\n| 3.8 Schema Minimality | `Schema.lean` | Verified |\n"
+    },
+    {
+      "id": "DMOD.SEMSPA.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 338,
+      "loc_end": 342,
+      "nature": "COD",
+      "heading": "Semantic Space Calculation",
+      "excerpt": "```\n|\u03a3| = |Atom| \u00d7 |Role| \u00d7 |RPBL|\n    = 94 \u00d7 29 \u00d7 6,561\n    = 17,884,806 possible states\n```\n"
+    },
+    {
+      "id": "DMOD.THEPIV.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 363,
+      "loc_end": 367,
+      "nature": "TBL",
+      "heading": "The Pivot (Dec 23, 2025)",
+      "excerpt": "| Archived (AI-centric) | Promoted (Deterministic) |\n|-----------------------|--------------------------|\n| LearningEngine | HeuristicClassifier |\n| AutoPatternDiscovery | UniversalDetector |\n| LLMClassifier | PatternMatcher |\n"
+    },
+    {
+      "id": "DMOD.TIM.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 374,
+      "loc_end": 379,
+      "nature": "TBL",
+      "heading": "Timeline",
+      "excerpt": "| Date | Event |\n|------|-------|\n| 2025-12-14 | Initial commit (Spectrometer v12) |\n| 2025-12-23 | THE PIVOT: AI \u2192 Deterministic |\n| 2026-01-11 | Rebrand: Spectrometer \u2192 Collider |\n| 2026-01-19 | Atom integration (94 atoms unified) |\n"
+    },
+    {
+      "id": "DMOD.7THE.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 385,
+      "loc_end": 392,
+      "nature": "COD",
+      "heading": "7. THEORETICAL LINEAGE",
+      "excerpt": "```\nKoestler (Holons)     \u2192 16 LEVELS + Systems of Systems\nPopper (Three Worlds) \u2192 3 PLANES\nRanganathan (Facets)  \u2192 8 DIMENSIONS\nClean Architecture    \u2192 LAYER dimension\nDDD (Evans)           \u2192 33 ROLES\nShannon               \u2192 M-I-P-O CYCLE\n```\n"
+    },
+    {
+      "id": "DMOD.HOLTHE.1",
+      "path": "docs/MODEL.md",
+      "loc_start": 396,
+      "loc_end": 396,
+      "nature": "NUM",
+      "heading": "Holon Theory (Koestler 1967)",
+      "excerpt": "The 16-level scale is a **holarchy** - a hierarchy of holons. Each level is:"
+    },
+    {
+      "id": "DMOD.HOLTHE.2",
+      "path": "docs/MODEL.md",
+      "loc_start": 402,
+      "loc_end": 406,
+      "nature": "TBL",
+      "heading": "Holon Theory (Koestler 1967)",
+      "excerpt": "| Level | As WHOLE (looking down) | As PART (looking up) |\n|-------|-------------------------|----------------------|\n| L5 FILE | Contains classes, functions | Part of package |\n| L3 NODE | Contains body, params | Part of file |\n| L1 STATEMENT | Contains tokens | Part of block |\n"
+    },
+    {
+      "id": "DOPE.EXESUM.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 11,
+      "loc_end": 19,
+      "nature": "TBL",
+      "heading": "Executive Summary (2026-01-25)",
+      "excerpt": "| Domain | Critical | High | Medium | Low | Blocked |\n|--------|:--------:|:----:|:------:|:---:|:-------:|\n| **Collider (Particle)** | 1 | 2 | 4 | 2 | 1 |\n| **Context (Wave)** | 0 | 2 | 1 | 1 | 0 |\n| **Agent (Observer)** | 0 | 1 | 2 | 1 | 0 |\n| **UI (Visualization)** | 0 | 2 | 3 | 2 | 1 |\n| **Infrastructure** | **2** | **1** | 0 | 0 | 0 |\n| **Documentation** | 0 | **2** | 1 | 0 | 0 |\n| **TOTAL** | **3** | **10** | **11** | **6** | **2** |\n"
+    },
+    {
+      "id": "DOPE.VALMET.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 23,
+      "loc_end": 34,
+      "nature": "TBL",
+      "heading": "Validated Metrics (2026-01-25)",
+      "excerpt": "| Metric | Expected | Actual | Status |\n|--------|----------|--------|--------|\n| Collider Self-Grade | B (8.0+) | **7.6 (C)** | YELLOW |\n| Wave-Particle Symmetry | 90 (Gold) | **81 (Silver)** | YELLOW |\n| Test Pass Rate | >95% | **100%** (354/354) | GREEN |\n| Node Count (Full+Tests) | 2,353 | 2,509 | GREEN (+6.6%) |\n| Reachability | >60% | 29.3% | RED (strategic blocker) |\n| Tree-sitter | Pinned | `>=0.20.0,<0.22` | GREEN |\n| Documentation Files | - | 1,550 | HIGH VOLUME |\n| Stale Docs (>30d) |..."
+    },
+    {
+      "id": "DOPE.COMTAS.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 42,
+      "loc_end": 46,
+      "nature": "TBL",
+      "heading": "Completed Tasks",
+      "excerpt": "| Task | Description | Files Modified |\n|------|-------------|----------------|\n| Pipeline Navigator Integration | P key now shows 27-stage pipeline with timing data | `full_analysis.py`, `pipeline-navigator.js` |\n| Node Count Ground Truth | Established canonical counts: Core=1,179, Full=1,961 | `NODE_COUNT_GROUND_TRUTH.md` |\n| File View Camera Fix | Camera state preserved when switching Atom/File views | `sidebar.js` |\n"
+    },
+    {
+      "id": "DOPE.HIGPRI.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 68,
+      "loc_end": 74,
+      "nature": "TBL",
+      "heading": "HIGH PRIORITY",
+      "excerpt": "| ID | Concern | Impact | Status | Action |\n|----|---------|--------|--------|--------|\n| OC-009 | ~~Scope Leakage~~ | ~~Core count 2,809 >> Expected 1,179~~ | **RESOLVED** (2026-01-25) | Survey IS working (2,509 nodes, 51 paths excluded) |\n| OC-001 | ~~Test failures in pattern_matcher.py~~ | ~~11 tests fail due to missing `tree_sitter`~~ | **FIXED** (2026-01-25) | Pinned `tree-sitter>=0.20,<0.22` |\n| OC-010 | ~~88 skipped tests unexplained~~ | ~~40% of test suite skipped~~ | **INVALIDATED** (20..."
+    },
+    {
+      "id": "DOPE.MEDPRI.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 78,
+      "loc_end": 82,
+      "nature": "TBL",
+      "heading": "MEDIUM PRIORITY",
+      "excerpt": "| ID | Concern | Impact | Status | Action |\n|----|---------|--------|--------|--------|\n| OC-004 | Physics behavior differs between Atom/File views | File view has `forceCenter(0,0,0)`, Atom doesn't | INVESTIGATE | Reproduce: toggle views, compare forces |\n| OC-005 | Node count variance (2787\u21922807\u21922809) | ~0.7% drift between runs | MONITORING | Track in CI, establish baseline |\n| OC-006 | Pipeline Navigator stage names mismatch | `stage_2_5` vs `stage_2.5` format | COSMETIC | Update `build_pipel..."
+    },
+    {
+      "id": "DOPE.LOWPRI.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 86,
+      "loc_end": 89,
+      "nature": "TBL",
+      "heading": "LOW PRIORITY",
+      "excerpt": "| ID | Concern | Impact | Status | Action |\n|----|---------|--------|--------|--------|\n| OC-007 | Unused variable warnings in sidebar.js (line 818, 828) | TypeScript lint | COSMETIC | Remove unused `active` vars |\n| OC-008 | `snapshot.py` has unused FieldDelta/sample functions | Dead code | TECH_DEBT | Wire up or remove |\n"
+    },
+    {
+      "id": "DOPE.RESFIX.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 95,
+      "loc_end": 101,
+      "nature": "TBL",
+      "heading": "RESOLVED (Fixed)",
+      "excerpt": "| ID | Concern | Priority | Status |\n|----|---------|----------|--------|\n| OC-011 | ACI: HYBRID tier returned by routing but had no execution path in `analyze.py` (silent fall-through to internal-only) | HIGH | FIXED (`522d9e2`) |\n| OC-012 | ACI: invalid set names emitted by semantic matching could crowd out valid sets, causing silent context loss | HIGH | FIXED (`522d9e2`) |\n| OC-013 | Perplexity membrane missing: local repo context was injected into external search query, polluting retrieval ..."
+    },
+    {
+      "id": "DOPE.WHAHAP.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 123,
+      "loc_end": 128,
+      "nature": "TBL",
+      "heading": "What Happened",
+      "excerpt": "| Aspect | Expected | Actual |\n|--------|----------|--------|\n| Command | `collider full <repo> --output <dir>` | `collider grade <repo> --json` |\n| Output | `unified_analysis.json` per repo (5-50MB each) | 500-byte JSON summary per repo |\n| Data captured | topology_shape, dead_code_pct, layer/role distribution, full graph | grade, health_index, component_scores, node/edge counts only |\n| Total data | ~30-50 GB of analysis artifacts | ~300 KB of summaries |\n"
+    },
+    {
+      "id": "DOPE.ROOCAU.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 133,
+      "loc_end": 139,
+      "nature": "COD",
+      "heading": "Root Cause",
+      "excerpt": "```python\n# WRONG: Uses lightweight grade command\n[sys.executable, str(COLLIDER_ROOT / \"cli.py\"), \"grade\", str(repo_dir), \"--json\"]\n\n# SHOULD BE: Full analysis with output capture\n[sys.executable, str(COLLIDER_ROOT / \"cli.py\"), \"full\", str(repo_dir), \"--output\", str(output_dir)]\n```\n"
+    },
+    {
+      "id": "DOPE.WHAWE.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 143,
+      "loc_end": 148,
+      "nature": "TBL",
+      "heading": "What We Have (Partially Useful)",
+      "excerpt": "| Location | Contents |\n|----------|----------|\n| `standard-model-of-code/tools/batch_grade/grades_DEGRADED_summary_only/` | 590 successful grades, 409 failed (RENAMED 2026-01-25) |\n| `standard-model-of-code/tools/batch_grade/grades_DEGRADED_summary_only/DEGRADED.md` | Marker file explaining degradation |\n| `standard-model-of-code/tools/batch_grade/full_scans/` | EMPTY - awaiting proper run |\n| `standard-model-of-code/tools/batch_grade/repos_999.json` | List of 999 GitHub repos (top by stars) |\n"
+    },
+    {
+      "id": "DOPE.PATFOR.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 166,
+      "loc_end": 170,
+      "nature": "TBL",
+      "heading": "Path Forward",
+      "excerpt": "| Option | Effort | Cost | Outcome |\n|--------|--------|------|---------|\n| A. Re-run top 10 B-grade with `full` | 2 hrs | ~$0.05 | Proof of concept, golden repo candidates |\n| B. Re-run all 590 successful with `full` | 8-12 hrs | ~$2-3 | Full dataset, ~30GB output |\n| C. Fix script + re-run 1098 repos | 12-16 hrs | ~$3-5 | Complete experiment with expanded set |\n"
+    },
+    {
+      "id": "DOPE.TRAIND.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 174,
+      "loc_end": 186,
+      "nature": "TBL",
+      "heading": "Traceability Index",
+      "excerpt": "| Reference | Location |\n|-----------|----------|\n| Batch script (wrong command) | `standard-model-of-code/tools/batch_grade/run_batch_local.py:89` |\n| Grade command definition | `standard-model-of-code/cli.py:679-793` |\n| Full command definition | `standard-model-of-code/cli.py:799-850` |\n| Degraded results | `standard-model-of-code/tools/batch_grade/grades_DEGRADED_summary_only/` |\n| Degradation marker | `standard-model-of-code/tools/batch_grade/grades_DEGRADED_summary_only/DEGRADED.md` |\n| **..."
+    },
+    {
+      "id": "DOPE.FILINV.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 206,
+      "loc_end": 213,
+      "nature": "TBL",
+      "heading": "Files Involved",
+      "excerpt": "| File | Purpose | Status |\n|------|---------|--------|\n| `.agent/tools/cloud/auto_boost_function.py` | Cloud Function for auto-promoting opportunities | EXISTS, NOT DEPLOYED |\n| `.agent/tools/cloud/sync_registry.py` | Sync local registry \u2194 GCS | EXISTS, NOW WIRED |\n| `.agent/tools/cloud/deploy.sh` | Deployment script | EXISTS, NEVER RUN |\n| `.agent/tools/cloud/check_status.sh` | Health check | CREATED 2026-01-25 |\n| `.agent/hooks/post-commit` | Automation trigger | UPDATED 2026-01-25 to include..."
+    },
+    {
+      "id": "DOPE.TRAIND.3",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 240,
+      "loc_end": 247,
+      "nature": "TBL",
+      "heading": "Traceability Index",
+      "excerpt": "| Reference | Location |\n|-----------|----------|\n| Cloud tools directory | `.agent/tools/cloud/` |\n| Local-first decision doc | `context-management/docs/operations/CASE_AGAINST_PREMATURE_CLOUD.md` |\n| Background AI Layer Map | `context-management/docs/BACKGROUND_AI_LAYER_MAP.md` (shows AEP Cloud: 0%) |\n| Subsystem Integration | `.agent/SUBSYSTEM_INTEGRATION.md` (S10 added) |\n| Post-commit hook | `.agent/hooks/post-commit` (sync added) |\n| Health check | `.agent/tools/cloud/check_status.sh` |\n"
+    },
+    {
+      "id": "DOPE.THEANT.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 258,
+      "loc_end": 265,
+      "nature": "COD",
+      "heading": "The Anti-Pattern",
+      "excerpt": "```\n1. Tool is built \u2713\n2. Tool works when manually invoked \u2713\n3. Tool is NOT in subsystem registry \u2717\n4. Tool is NOT wired to triggers \u2717\n5. Tool outputs are NOT consumed \u2717\n6. Tool is invisible to agents/humans \u2717\n```\n"
+    },
+    {
+      "id": "DOPE.KNOINS.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 269,
+      "loc_end": 273,
+      "nature": "TBL",
+      "heading": "Known Instances",
+      "excerpt": "| Tool | Built | Works | In Registry | Wired | Outputs Consumed |\n|------|:-----:|:-----:|:-----------:|:-----:|:----------------:|\n| batch_grade | \u2713 | \u2713 | \u2713 (S11) | \u2717 | \u2713 (`analyze_results.py`) |\n| cloud/auto_boost | \u2713 | ? | \u2713 (S10) | \u2717 | \u2717 |\n| cloud/sync_registry | \u2713 | \u2713 | \u2713 (S10) | \u2713 (now) | \u2717 |\n"
+    },
+    {
+      "id": "DOPE.USA.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 292,
+      "loc_end": 304,
+      "nature": "COD",
+      "heading": "Usage",
+      "excerpt": "```bash\n# CLI: Generate markdown report\npython tools/batch_grade/analyze_results.py <results.json>\n\n# CLI: Generate JSON output\npython tools/batch_grade/analyze_results.py <results.json> --format json\n\n# Library: Programmatic access\nfrom analyze_results import BatchAnalyzer\nanalyzer = BatchAnalyzer.from_file(\"final_results.json\")\nprint(analyzer.grade_distribution)\nprint(analyzer.golden_repos(10, \"B\"))\n```\n"
+    },
+    {
+      "id": "DOPE.TRA.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 308,
+      "loc_end": 313,
+      "nature": "TBL",
+      "heading": "Traceability",
+      "excerpt": "| Reference | Location |\n|-----------|----------|\n| **New module** | `standard-model-of-code/tools/batch_grade/analyze_results.py` |\n| Manual analysis | `grades_DEGRADED_summary_only/LEARNINGS.md` |\n| Stats generator (single scope) | `src/core/stats_generator.py` |\n| Charts engine (single scope) | `src/core/scientific_charts.py` |\n"
+    },
+    {
+      "id": "DOPE.HIGGLO.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 339,
+      "loc_end": 345,
+      "nature": "TBL",
+      "heading": "HIGH-003: Glossary Fragmentation (5 Files)",
+      "excerpt": "| File | Location | Format | Status |\n|------|----------|--------|:------:|\n| GLOSSARY.md | `archive/docs_consolidated_2026-01-19/` | Markdown | ARCHIVED |\n| GLOSSARY.yaml | `standard-model-of-code/docs/` | YAML | ACTIVE |\n| GLOSSARY.md | `context-management/docs/archive/legacy_schema_2025/` | Markdown | LEGACY |\n| GLOSSARY.md | `context-management/docs/` | Markdown | ACTIVE? |\n| GLOSSARY_GAP_MAP.md | `context-management/docs/` | Markdown | META |\n"
+    },
+    {
+      "id": "DOPE.MEDSTA.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 369,
+      "loc_end": 373,
+      "nature": "TBL",
+      "heading": "MEDIUM: Stale Documentation (44%)",
+      "excerpt": "| Metric | Value |\n|--------|-------|\n| Total .md files | 1,550 |\n| Stale (>30 days) | 678 (44%) |\n| Recent (<7 days) | 803 (52%) |\n"
+    },
+    {
+      "id": "DOPE.DOCHEA.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 379,
+      "loc_end": 385,
+      "nature": "TBL",
+      "heading": "Documentation Health Metrics",
+      "excerpt": "| Metric | Value | Target | Gap |\n|--------|-------|--------|-----|\n| Collider Self-Grade | 7.6/10 (C) | 8.0/10 (B) | 0.4 |\n| Wave-Particle Symmetry | 81/100 | 90/100 | 9 |\n| Max Cyclomatic Complexity | 217 | <50 | 167 |\n| Dead Code | 2.09% | <5% | OK |\n| Dependency Cycles | 0 | 0 | OK |\n"
+    },
+    {
+      "id": "DOPE.CRIBLO.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 395,
+      "loc_end": 400,
+      "nature": "TBL",
+      "heading": "CRITICAL (Blocks Phases)",
+      "excerpt": "| ID | Gap | Blocks | Status | Path Forward |\n|----|-----|--------|--------|--------------|\n| SG-001 | **Reachability bottleneck (29.3%)** | Phase 3-4 | BLOCKING | Expand entrypoint detection, improve call resolution |\n| SG-002 | **Phase 2 (Resolution) not started** | Phase 3 | NOT_STARTED | Call resolver improvements, import strictness |\n| SG-003 | **Health Model A-component** | Phase 5 | UNIMPLEMENTED | Formula exists (H=10\u00d7(0.25T+0.25E+0.25Gd+0.25A)), alignment scoring missing |\n| SG-004 | **..."
+    },
+    {
+      "id": "DOPE.IMPRED.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 404,
+      "loc_end": 409,
+      "nature": "TBL",
+      "heading": "IMPORTANT (Reduces Capability)",
+      "excerpt": "| ID | Gap | Impact | Status | Path Forward |\n|----|-----|--------|--------|--------------|\n| SG-005 | **UPB documented but unintegrated** | Visualization intelligence | 13:0 docs:code | Wire to HTML generation |\n| SG-006 | **BARE 40% missing** | Inference pipeline | CrossValidator + ConceptMapper = 0% | Implement or descope |\n| SG-007 | **Centripetal Scan blocked** | Strategic insights | API quota | Budget allocation or batch mode |\n| SG-008 | **Cross-language (TS/JS) unscoped** | Phase 8 | ZER..."
+    },
+    {
+      "id": "DOPE.MINTEC.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 413,
+      "loc_end": 417,
+      "nature": "TBL",
+      "heading": "MINOR (Tech Debt)",
+      "excerpt": "| ID | Gap | Impact | Status |\n|----|-----|--------|--------|\n| SG-009 | Wave-Particle asymmetry | 81/100 Silver | 19 docs without code, 8 code undocumented |\n| SG-010 | Terminology (Attributes vs Lenses) | Phase 5 deliverable | Model.md uses both inconsistently |\n| SG-011 | Perplexity not in HSL loop | External research | --enable-external-search proposed (P2) |\n"
+    },
+    {
+      "id": "DOPE.TYPSYS.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 447,
+      "loc_end": 455,
+      "nature": "COD",
+      "heading": "Type System",
+      "excerpt": "```bash\n# Verify type errors:\npyright src/core/full_analysis.py\n\n# Known issues:\n#   - Line 1025: CodebaseState not defined\n#   - Lines 1171-1180: UnifiedAnalysisOutput.get() issues\n#   - Lines 1182, 1187: nodes/edges possibly unbound\n```\n"
+    },
+    {
+      "id": "DOPE.MODDEP.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 459,
+      "loc_end": 465,
+      "nature": "COD",
+      "heading": "Module Dependencies",
+      "excerpt": "```bash\n# Check if tree_sitter is installed:\npython -c \"import tree_sitter; print('OK')\"\n\n# Fix: Add to requirements.txt OR implement graceful fallback\n# pattern_matcher.py: 11 tests skip/fail without tree_sitter\n```\n"
+    },
+    {
+      "id": "DOPE.MONMET.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 471,
+      "loc_end": 476,
+      "nature": "TBL",
+      "heading": "Monitoring Metrics",
+      "excerpt": "| Metric | Expected | Actual (2026-01-25) | Delta | Status |\n|--------|----------|---------------------|-------|--------|\n| Full+Tests node count | 2,353 | 2,509 | +6.6% | GREEN |\n| Pipeline stages | 27 | 24 | -11% | CHECK |\n| Test pass rate | >95% | **100%** (354/354) | +5% | GREEN |\n| Reachability | >60% | 29.3% | -50% | RED (strategic blocker) |\n"
+    },
+    {
+      "id": "DOPE.REFGRO.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 492,
+      "loc_end": 497,
+      "nature": "TBL",
+      "heading": "Reference: Ground Truth Node Counts",
+      "excerpt": "| Scope | Count | What It Includes |\n|-------|-------|------------------|\n| **Collider Core** | ~1,179 | Python analysis engine + pipeline stages |\n| **Collider Full** | ~1,961 | Core + JavaScript visualization |\n| **With Tests** | ~2,353 | Full + test suite |\n| **Everything** | ~2,787 | All code in repo |\n"
+    },
+    {
+      "id": "DOPE.VALHIS.1",
+      "path": "docs/OPEN_CONCERNS.md",
+      "loc_start": 569,
+      "loc_end": 572,
+      "nature": "TBL",
+      "heading": "Validation History",
+      "excerpt": "| Date | Validator | Score | Key Feedback |\n|------|-----------|-------|--------------|\n| 2026-01-23 15:02 | Gemini 3 Pro | 8.5/10 | Elevate scope bug, add retention policy, add % Delta |\n| 2026-01-23 15:08 | Gemini 3 Pro | 9.5/10 | Tree-sitter version trap, scope hypothesis, 88 skipped tests |\n"
+    },
+    {
+      "id": "DORP.BYTHE.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 28,
+      "loc_end": 35,
+      "nature": "TBL",
+      "heading": "By The Numbers",
+      "excerpt": "| Metric | Value |\n|--------|-------|\n| Total template controls | 176 |\n| Orphaned controls | 46 |\n| Orphan rate | 26.1% |\n| JavaScript modules analyzed | 69 |\n| Handler references found | 1,070 |\n| Confidence level | 100% |\n"
+    },
+    {
+      "id": "DORP.WHIFIL.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 149,
+      "loc_end": 157,
+      "nature": "TBL",
+      "heading": "Which File Should I Read?",
+      "excerpt": "| Your Situation | Read This | Then Read |\n|---|---|---|\n| \"What are these orphaned controls?\" | Quick Reference (5 min) | Audit (15 min) |\n| \"Should we implement these?\" | Executive Summary | Audit (full) |\n| \"How do I implement them?\" | Roadmap (overview) | Patterns (specific) |\n| \"I want to do the quick win\" | Patterns (Pattern 1) | Roadmap (Phase 1) |\n| \"I'm deciding on priorities\" | Quick Reference | Audit (Impact Assessment) |\n| \"I'm starting Phase 2 work\" | Roadmap (Phase 2) | Patterns (P..."
+    },
+    {
+      "id": "DORP.EFFBY.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 165,
+      "loc_end": 172,
+      "nature": "TBL",
+      "heading": "Effort by Category",
+      "excerpt": "| Category | Controls | Time | Difficulty | Priority |\n|----------|----------|------|------------|----------|\n| Numeric Display Sync | 14 | 30 min | EASY | QUICK WIN |\n| Filter UI | 10 | 2 hours | MEDIUM | HIGH |\n| Selection Actions | 3 | 30 min | EASY | MEDIUM |\n| Stats Display | 2 | 30 min | EASY | LOW |\n| Camera System | 9 | 4-6 hours | HARD | MEDIUM |\n| Accessibility | 5 | 2-3 hours | MEDIUM | LOW |\n"
+    },
+    {
+      "id": "DORP.FILLOC.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 199,
+      "loc_end": 208,
+      "nature": "COD",
+      "heading": "File Locations",
+      "excerpt": "```\ndocs/\n\u251c\u2500\u2500 ORPHANED_CONTROLS_INDEX.md ................. This file (navigation)\n\u251c\u2500\u2500 ORPHANED_CONTROLS_ROADMAP.md .............. Implementation phases\n\u251c\u2500\u2500 reports/\n\u2502   \u251c\u2500\u2500 ORPHANED_UI_CONTROLS_AUDIT.md ........ Technical analysis\n\u2502   \u2514\u2500\u2500 ORPHANED_CONTROLS_QUICK_REFERENCE.txt . Reference tables\n\u2514\u2500\u2500 patterns/\n    \u2514\u2500\u2500 UI_HANDLER_IMPLEMENTATION_PATTERNS.md  Code patterns & examples\n```\n"
+    },
+    {
+      "id": "DORP.KEYFIL.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 251,
+      "loc_end": 258,
+      "nature": "TBL",
+      "heading": "Key Files to Know",
+      "excerpt": "| File | Purpose | Lines |\n|------|---------|-------|\n| `src/core/viz/assets/template.html` | HTML template (includes 46 orphans) | - |\n| `src/core/viz/assets/modules/circuit-breaker.js` | Main handler registration (40 handlers) | 1,300+ |\n| `src/core/viz/assets/modules/filter-state.js` | Filter logic | - |\n| `src/core/viz/assets/modules/selection.js` | Selection logic | - |\n| `src/core/viz/assets/modules/hud.js` | HUD/stats display | - |\n| `src/core/viz/assets/modules/ui-manager.js` | UI manage..."
+    },
+    {
+      "id": "DORP.HANPAT.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 264,
+      "loc_end": 276,
+      "nature": "COD",
+      "heading": "Handler Pattern Example",
+      "excerpt": "```javascript\n{\n  id: 'control-name',\n  validate: () => document.getElementById('control-name') !== null,\n  execute: () => {\n    const el = document.getElementById('control-name');\n    el.addEventListener('change', (e) => {\n      STATE.property = e.target.value;\n      updateVisualization();\n    });\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.DOCVER.1",
+      "path": "docs/ORPHANED_CONTROLS_INDEX.md",
+      "loc_start": 369,
+      "loc_end": 375,
+      "nature": "TBL",
+      "heading": "Document Versions",
+      "excerpt": "| Document | Date | Lines | Focus |\n|----------|------|-------|-------|\n| This Index | 2026-01-25 | 400+ | Navigation & overview |\n| Audit Report | 2026-01-25 | 500+ | Technical analysis |\n| Quick Reference | 2026-01-25 | 300+ | Quick lookup |\n| Patterns Guide | 2026-01-25 | 400+ | Implementation guide |\n| Roadmap | 2026-01-25 | 600+ | Phased approach |\n"
+    },
+    {
+      "id": "DORP.TAS11.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 34,
+      "loc_end": 45,
+      "nature": "COD",
+      "heading": "Task 1.1: Numeric Display Sync in circuit-breaker.js",
+      "excerpt": "```javascript\n{\n  id: 'cfg-edge-opacity',\n  execute: () => {\n    const el = document.getElementById('cfg-edge-opacity');\n    el.addEventListener('input', (e) => {\n      APPEARANCE_STATE.edgeOpacity = parseFloat(e.target.value);\n      updateVisualization();\n    });\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS11.2",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 48,
+      "loc_end": 61,
+      "nature": "COD",
+      "heading": "Task 1.1: Numeric Display Sync in circuit-breaker.js",
+      "excerpt": "```javascript\n{\n  id: 'cfg-edge-opacity',\n  execute: () => {\n    const el = document.getElementById('cfg-edge-opacity');\n    el.addEventListener('input', (e) => {\n      APPEARANCE_STATE.edgeOpacity = parseFloat(e.target.value);\n      // ADD THIS LINE:\n      document.getElementById('cfg-edge-opacity-num').value = e.target.value;\n      updateVisualization();\n    });\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS11.3",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 76,
+      "loc_end": 79,
+      "nature": "COD",
+      "heading": "Task 1.1: Numeric Display Sync in circuit-breaker.js",
+      "excerpt": "```bash\ngit add src/core/viz/assets/modules/circuit-breaker.js\ngit commit -m \"feat(circuit-breaker): Sync numeric displays with appearance sliders\"\n```\n"
+    },
+    {
+      "id": "DORP.TAS21.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 93,
+      "loc_end": 108,
+      "nature": "COD",
+      "heading": "Task 2.1: Wire Range Slider Value Displays",
+      "excerpt": "```javascript\n{\n  id: 'filter-min-degree',\n  execute: () => {\n    const slider = document.getElementById('filter-min-degree');\n    const display = document.getElementById('filter-min-degree-val');\n\n    slider.addEventListener('input', (e) => {\n      const value = parseInt(e.target.value);\n      filterState.minDegree = value;\n      display.textContent = value;\n      applyFilters();\n    });\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS22.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 125,
+      "loc_end": 142,
+      "nature": "COD",
+      "heading": "Task 2.2: Implement Chip Selector Handlers",
+      "excerpt": "```javascript\n{\n  id: 'filter-role-chips',\n  execute: () => {\n    const container = document.getElementById('filter-role-chips');\n\n    container.addEventListener('click', (e) => {\n      const chip = e.target.closest('.chip');\n      if (!chip) return;\n\n      const role = chip.dataset.role;\n      filterState.toggleRole(role);\n      chip.classList.toggle('active', filterState.roles.has(role));\n      applyFilters();\n    });\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS23.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 159,
+      "loc_end": 177,
+      "nature": "COD",
+      "heading": "Task 2.3: Update Active Filter Display",
+      "excerpt": "```javascript\nfunction updateActiveFilterDisplay() {\n  const container = document.getElementById('panel-filter-chips');\n  if (!container) return;\n\n  container.innerHTML = '';\n\n  // Add chips for each active filter\n  filterState.roles.forEach(role => {\n    const chip = document.createElement('div');\n    chip.className = 'filter-chip';\n    chip.textContent = role;\n    chip.dataset.type = 'role';\n    container.appendChild(chip);\n  });\n\n  // Similar for families, tiers, degree ranges, etc.\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS23.2",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 188,
+      "loc_end": 197,
+      "nature": "COD",
+      "heading": "Task 2.3: Update Active Filter Display",
+      "excerpt": "```bash\ngit add src/core/viz/assets/modules/filter-state.js\ngit commit -m \"feat(filters): Wire UI controls to filter state management\"\n\ngit add src/core/viz/assets/modules/filter-state.js\ngit commit -m \"feat(filters): Implement chip selector handlers\"\n\ngit add src/core/viz/assets/modules/filter-state.js\ngit commit -m \"feat(filters): Update active filter display panel\"\n```\n"
+    },
+    {
+      "id": "DORP.TAS31.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 211,
+      "loc_end": 234,
+      "nature": "COD",
+      "heading": "Task 3.1: Implement Selection Action Handlers",
+      "excerpt": "```javascript\n{\n  id: 'panel-select-clear',\n  execute: () => {\n    const btn = document.getElementById('panel-select-clear');\n    btn.addEventListener('click', () => {\n      selectionState.clear();\n      updateSelectionPanel();\n      updateVisualization();\n    });\n  }\n},\n{\n  id: 'panel-select-invert',\n  execute: () => {\n    const btn = document.getElementById('panel-select-invert');\n    btn.addEventListener('click', () => {\n      selectionState.invert();\n      updateSelectionPanel();\n      updat..."
+    },
+    {
+      "id": "DORP.TAS32.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 248,
+      "loc_end": 263,
+      "nature": "COD",
+      "heading": "Task 3.2: Implement Stats Display Updates",
+      "excerpt": "```javascript\nfunction updateStatisticsDisplay() {\n  const fileCount = graph.nodes.filter(n => n.file_path).length;\n  const density = calculateGraphDensity(graph);\n\n  const filesDisplay = document.getElementById('stats-files');\n  if (filesDisplay) {\n    filesDisplay.querySelector('.value').textContent = fileCount;\n  }\n\n  const densityDisplay = document.getElementById('stats-density');\n  if (densityDisplay) {\n    densityDisplay.querySelector('.value').textContent = density.toFixed(2);\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS32.2",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 279,
+      "loc_end": 285,
+      "nature": "COD",
+      "heading": "Task 3.2: Implement Stats Display Updates",
+      "excerpt": "```bash\ngit add src/core/viz/assets/modules/selection.js\ngit commit -m \"feat(selection): Add clear and invert action handlers\"\n\ngit add src/core/viz/assets/modules/hud.js\ngit commit -m \"feat(hud): Update statistics displays on data changes\"\n```\n"
+    },
+    {
+      "id": "DORP.TAS41.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 299,
+      "loc_end": 415,
+      "nature": "COD",
+      "heading": "Task 4.1: Create Camera Manager Module",
+      "excerpt": "```javascript\nexport class CameraManager {\n  constructor(camera, graph) {\n    this.camera = camera;\n    this.graph = graph;\n    this.bookmarks = this.loadBookmarks();\n    this.autoRotateEnabled = false;\n    this.autoRotateSpeed = 1;\n  }\n\n  // Navigation methods\n  zoomIn(factor = 1.2) {\n    this.camera.position.multiplyScalar(1 / factor);\n  }\n\n  zoomOut(factor = 1.2) {\n    this.camera.position.multiplyScalar(factor);\n  }\n\n  fitGraph() {\n    // Calculate bounding sphere of all nodes\n    const boun..."
+    },
+    {
+      "id": "DORP.TAS42.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 424,
+      "loc_end": 509,
+      "nature": "COD",
+      "heading": "Task 4.2: Wire Camera Control UI",
+      "excerpt": "```javascript\nexport function initCameraControls(cameraManager) {\n  // Zoom buttons\n  document.getElementById('camera-zoom-in')?.addEventListener('click',\n    () => cameraManager.zoomIn()\n  );\n\n  document.getElementById('camera-zoom-out')?.addEventListener('click',\n    () => cameraManager.zoomOut()\n  );\n\n  document.getElementById('camera-zoom-fit')?.addEventListener('click',\n    () => cameraManager.fitGraph()\n  );\n\n  // Reset\n  document.getElementById('camera-reset')?.addEventListener('click',\n ..."
+    },
+    {
+      "id": "DORP.TAS43.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 534,
+      "loc_end": 553,
+      "nature": "COD",
+      "heading": "Task 4.3: Integrate with Main Visualization Loop",
+      "excerpt": "```javascript\nimport { CameraManager, initCameraControls } from './camera-manager.js';\n\nfunction init() {\n  // ... existing code ...\n\n  const cameraManager = new CameraManager(camera, graph);\n  initCameraControls(cameraManager);\n\n  // Store for later access\n  window.cameraManager = cameraManager;\n}\n\nfunction animate() {\n  const deltaTime = clock.getDelta();\n  cameraManager.update(deltaTime);\n\n  // ... rest of animation loop\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS43.2",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 560,
+      "loc_end": 566,
+      "nature": "COD",
+      "heading": "Task 4.3: Integrate with Main Visualization Loop",
+      "excerpt": "```bash\ngit add src/core/viz/assets/modules/camera-manager.js\ngit commit -m \"feat(camera): Add camera manager module with bookmarks and presets\"\n\ngit add src/core/viz/assets/modules/main.js\ngit commit -m \"feat(camera): Integrate camera manager into visualization loop\"\n```\n"
+    },
+    {
+      "id": "DORP.TAS51.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 582,
+      "loc_end": 663,
+      "nature": "COD",
+      "heading": "Task 5.1: Create A11y Manager Module",
+      "excerpt": "```javascript\nexport function initA11yControls() {\n  // Font size adjustment\n  const fontSizeSlider = document.getElementById('a11y-font-size');\n  const fontSizeVal = document.getElementById('a11y-font-size-val');\n\n  if (fontSizeSlider) {\n    fontSizeSlider.addEventListener('input', (e) => {\n      const size = parseInt(e.target.value);\n      fontSizeVal.textContent = `${size}px`;\n      document.documentElement.style.fontSize = `${size}px`;\n      localStorage.setItem('font-size', size);\n    });\n\n..."
+    },
+    {
+      "id": "DORP.TAS52.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 672,
+      "loc_end": 697,
+      "nature": "COD",
+      "heading": "Task 5.2: Add A11y Styles",
+      "excerpt": "```css\n/* Accessibility mode styles */\n\nbody.large-text {\n  font-size: 18px !important;\n  letter-spacing: 0.05em;\n}\n\nbody.show-focus {\n  --focus-color: #ff00ff;\n}\n\nbody.show-focus *:focus-visible {\n  outline: 3px solid var(--focus-color);\n  outline-offset: 2px;\n}\n\n/* Reduced motion support */\n@media (prefers-reduced-motion: reduce) {\n  * {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n  }\n}\n```\n"
+    },
+    {
+      "id": "DORP.TAS52.2",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 704,
+      "loc_end": 710,
+      "nature": "COD",
+      "heading": "Task 5.2: Add A11y Styles",
+      "excerpt": "```bash\ngit add src/core/viz/assets/modules/a11y-manager.js\ngit commit -m \"feat(a11y): Add accessibility controls manager\"\n\ngit add src/core/viz/assets/styles.css\ngit commit -m \"feat(a11y): Add accessibility mode styles\"\n```\n"
+    },
+    {
+      "id": "DORP.TAS63.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 758,
+      "loc_end": 764,
+      "nature": "COD",
+      "heading": "Task 6.3: Final Validation",
+      "excerpt": "```bash\ngit add -A\ngit commit -m \"docs: Update UI documentation and control references\"\n\ngit add -A\ngit commit -m \"test: Validate all orphaned control handlers in generated report\"\n```\n"
+    },
+    {
+      "id": "DORP.IMPTIM.1",
+      "path": "docs/ORPHANED_CONTROLS_ROADMAP.md",
+      "loc_start": 770,
+      "loc_end": 778,
+      "nature": "TBL",
+      "heading": "Implementation Timeline",
+      "excerpt": "| Phase | Tasks | Effort | Total |\n|-------|-------|--------|-------|\n| 1 | Numeric sync | 30 min | 30 min |\n| 2 | Filters | 95 min | 2h 5m |\n| 3 | Selection/Stats | 35 min | 1h 40m |\n| 4 | Camera system | 4-6h | 4-6h |\n| 5 | A11y (optional) | 2-2.5h | 2-2.5h |\n| 6 | Polish/Testing | 60 min | 1h |\n| **Total** | **All phases** | **8-12h** | **8-12h** |\n"
+    },
+    {
+      "id": "DPOS.HOWTO.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 11,
+      "loc_end": 16,
+      "nature": "COD",
+      "heading": "HOW TO USE THIS DOCUMENT",
+      "excerpt": "```\n1. Scan for what resonates\n2. Pick ONE thing\n3. Do it\n4. Update this document\n```\n"
+    },
+    {
+      "id": "DPOS.CAT1.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 24,
+      "loc_end": 44,
+      "nature": "TBL",
+      "heading": "CATEGORY 1: IMMEDIATE (Tasks in Progress)",
+      "excerpt": "| ID | What | Status |\n|----|------|--------|\n| #22 | Fix MISALIGNMENT: UNKNOWN vs CLEAN | READY |\n| #23 | Consolidate Pollution vs Pathogen terminology | READY |\n| #30 | Normalization + bounds contract | READY |\n| #33 | Define Q-metric mathematical formulas | READY |\n| #19 | Decompose Q_purity into 3 components | READY |\n| #20 | Weighted PurityAlignmentScore | READY |\n| #25 | Document two-tier truth model | READY |\n| #34 | Pathogen impact inventory | READY |\n| #18 | Implement Health Model (H=T+..."
+    },
+    {
+      "id": "DPOS.HIGIMP.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 54,
+      "loc_end": 58,
+      "nature": "TBL",
+      "heading": "HIGH IMPACT",
+      "excerpt": "| ID | What | Confidence |\n|----|------|------------|\n| OPP-007 | Context Refinery: RAG + Long Context hybrid | 90% |\n| OPP-005 | Perplexity research tool integration | 85% |\n| OPP-006 | Socratic audit misalignment fixes | 90% |\n"
+    },
+    {
+      "id": "DPOS.PIPREF.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 62,
+      "loc_end": 68,
+      "nature": "TBL",
+      "heading": "PIPELINE REFACTORING",
+      "excerpt": "| ID | What | Confidence |\n|----|------|------------|\n| OPP-023 | Define BaseStage abstract class | 97% |\n| OPP-024 | Extend CodebaseState | 100% |\n| OPP-025 | Define PipelineManager | 97% |\n| OPP-026 | Create pipeline package structure | 95% |\n| OPP-027 | Refactor run_full_analysis() | 95% |\n"
+    },
+    {
+      "id": "DPOS.VIS.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 72,
+      "loc_end": 80,
+      "nature": "TBL",
+      "heading": "VISUALIZATION",
+      "excerpt": "| ID | What | Confidence |\n|----|------|------------|\n| OPP-013 | Create index.js | 94% |\n| OPP-014 | Update template.html | 99% |\n| OPP-008 | Create scales.js | 85% |\n| OPP-009 | Create endpoints.js | 90% |\n| OPP-010 | Create presets.yaml | 82% |\n| OPP-011 | Create bindings.js | 88% |\n| OPP-012 | Create blenders.js | 87% |\n"
+    },
+    {
+      "id": "DPOS.AIINT.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 84,
+      "loc_end": 88,
+      "nature": "TBL",
+      "heading": "AI INTEGRATION",
+      "excerpt": "| ID | What | Confidence |\n|----|------|------------|\n| OPP-058 | Gemini context caching for FLASH_DEEP | 90% |\n| OPP-059 | Sprawl consolidation infrastructure | 90% |\n| OPP-060 | Autonomous Enrichment Pipeline (AEP) | 80% |\n"
+    },
+    {
+      "id": "DPOS.OPEQUE.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 98,
+      "loc_end": 109,
+      "nature": "TBL",
+      "heading": "OPEN QUESTIONS (Unanswered)",
+      "excerpt": "| Question | Domain |\n|----------|--------|\n| At what level does \"meaning\" emerge? | PURPOSE |\n| Is there a ground level where systems become mere structure? | SCALE |\n| Can we compute emergence? Detect when \u03c0(n+1) > \u03a3 \u03c0(n)? | PURPOSE |\n| What flows through the graph? Dependencies, control, data, understanding? | FLOW |\n| Is evolvability computable from structure alone? | EVOLUTION |\n| Are the 94 atoms complete? Will new paradigms need new atoms? | ATOMS |\n| Is the health formula stable across d..."
+    },
+    {
+      "id": "DPOS.RESDIR.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 113,
+      "loc_end": 120,
+      "nature": "TBL",
+      "heading": "RESEARCH DIRECTIONS (Explored but not implemented)",
+      "excerpt": "| Direction | Source | Status |\n|-----------|--------|--------|\n| Normalized Systems Theory | ScienceDirect | RESEARCHED |\n| Category Theory for composition | ResearchGate | RESEARCHED |\n| Network centrality metrics | arXiv 2501.13520 | PARTIAL (betweenness done) |\n| Biological evolvability (Wagner) | Literature | RESEARCHED |\n| Constructal Law application | Bejan | CONCEPTUAL |\n| Viable System Model mapping | Beer | CONCEPTUAL |\n"
+    },
+    {
+      "id": "DPOS.NOTIMP.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 130,
+      "loc_end": 139,
+      "nature": "TBL",
+      "heading": "NOT IMPLEMENTED",
+      "excerpt": "| Capability | Difficulty | Value |\n|------------|------------|-------|\n| Runtime analysis (not just static) | HIGH | HIGH |\n| Git history integration (evolution tracking) | MEDIUM | HIGH |\n| Multi-repo analysis | MEDIUM | MEDIUM |\n| Real-time watch mode | MEDIUM | MEDIUM |\n| IDE plugin (VSCode, JetBrains) | HIGH | HIGH |\n| CI/CD integration (GitHub Actions) | LOW | HIGH |\n| API mode (not just CLI) | MEDIUM | HIGH |\n| Web UI (not just local HTML) | HIGH | MEDIUM |\n"
+    },
+    {
+      "id": "DPOS.PARIMP.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 143,
+      "loc_end": 149,
+      "nature": "TBL",
+      "heading": "PARTIALLY IMPLEMENTED",
+      "excerpt": "| Capability | Current State | Gap |\n|------------|---------------|-----|\n| Health scoring | Formula exists, not unified | #18 |\n| Pathogen detection | Survey has PollutionAlert | #34 |\n| Disconnection taxonomy | Research done, not in code | #29 |\n| Tree-sitter scope analysis | 5-10% utilized | Large |\n| Visualization controls | Working but scattered | UPB tasks |\n"
+    },
+    {
+      "id": "DPOS.DECNEE.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 159,
+      "loc_end": 166,
+      "nature": "TBL",
+      "heading": "DECISIONS NEEDED",
+      "excerpt": "| Decision | Options | Status |\n|----------|---------|--------|\n| Business model | SaaS / CLI / Enterprise / API | NOT DECIDED |\n| Open source strategy | Open core / Proprietary / Source available | NOT DECIDED |\n| Legal entity | LLC / Ltda / None | NOT DONE |\n| Trademark | \"Collider\" / alternatives | NOT SEARCHED |\n| Patent track | Yes / No | NOT DECIDED |\n| Antivirus product name | Not \"McAfee\" - alternatives? | NOT DECIDED |\n"
+    },
+    {
+      "id": "DPOS.IPACT.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 170,
+      "loc_end": 177,
+      "nature": "TBL",
+      "heading": "IP ACTIONS",
+      "excerpt": "| Action | Status |\n|--------|--------|\n| Create legal entity | TODO |\n| Assign IP to entity | TODO |\n| CLA for contributors | TODO |\n| Trademark search | TODO |\n| Decide patent strategy | TODO |\n| Timestamped milestones (signed tags) | TODO |\n"
+    },
+    {
+      "id": "DPOS.HIGPRI.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 187,
+      "loc_end": 191,
+      "nature": "TBL",
+      "heading": "HIGH PRIORITY BUGS",
+      "excerpt": "| ID | Issue | Impact |\n|----|-------|--------|\n| OC-009 | Scope leakage: Core count 2,809 >> 1,179 | BUG |\n| OC-001 | Test failures (tree_sitter missing) | ENVIRONMENT |\n| OC-010 | 88 skipped tests unexplained | UNKNOWN RISK |\n"
+    },
+    {
+      "id": "DPOS.MEDPRI.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 195,
+      "loc_end": 200,
+      "nature": "TBL",
+      "heading": "MEDIUM PRIORITY",
+      "excerpt": "| ID | Issue | Impact |\n|----|-------|--------|\n| OC-002 | Pipeline snapshot lacks per-stage counts | ENHANCEMENT |\n| OC-003 | Pyright type errors in full_analysis.py | TECH_DEBT |\n| OC-004 | Physics differs between Atom/File views | INVESTIGATE |\n| OC-005 | Node count variance 0.7% between runs | MONITORING |\n"
+    },
+    {
+      "id": "DPOS.GODFUN.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 204,
+      "loc_end": 208,
+      "nature": "TBL",
+      "heading": "GOD FUNCTIONS",
+      "excerpt": "| Function | CC | Location |\n|----------|-----|----------|\n| run_full_analysis | 217 | full_analysis.py |\n| main | 181 | cli.py |\n| _analyze_single_file | 150+ | (estimated) |\n"
+    },
+    {
+      "id": "DPOS.CONNEE.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 218,
+      "loc_end": 225,
+      "nature": "TBL",
+      "heading": "CONSOLIDATION NEEDED",
+      "excerpt": "| Topic | Currently | Should Be |\n|-------|-----------|-----------|\n| Atoms | 3 YAML + scattered docs | ATOMS.md |\n| Roles | roles.json + MODEL.md | ROLES.md |\n| Health | 4+ spec files | HEALTH.md |\n| Pipeline | code + PIPELINE_STAGES.md | PIPELINE.md |\n| Pathogens | Not written | PATHOGENS.md |\n| Visualization | Multiple specs | VISUALIZATION.md |\n"
+    },
+    {
+      "id": "DPOS.RESARC.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 229,
+      "loc_end": 233,
+      "nature": "TBL",
+      "heading": "RESEARCH ARCHIVE",
+      "excerpt": "| Location | Count | Action |\n|----------|-------|--------|\n| docs/research/gemini/ | 80+ | Keep, don't consolidate |\n| docs/research/perplexity/ | 40+ | Keep, don't consolidate |\n| docs/research/*.md | 30+ | Review, archive stale |\n"
+    },
+    {
+      "id": "DPOS.CAT8.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 241,
+      "loc_end": 249,
+      "nature": "TBL",
+      "heading": "CATEGORY 8: SESSION IDEAS (From Today)",
+      "excerpt": "| Idea | What | Priority |\n|------|------|----------|\n| John McAfee | Code antivirus system | HIGH |\n| Perplexity refutation | \"Impossible\" claim is dust | DONE (documented) |\n| Knowledge Tree | IP provenance | DONE |\n| Legal docs | ORIGINAL_CLAIMS, PRIOR_ART, DISCLOSURE | DONE |\n| Task validation | Gemini audit, 4 new tasks | DONE |\n| Theory liberation | Tool is truth, not claims | INSIGHT |\n| Possibility consolidation | This document | DONE |\n"
+    },
+    {
+      "id": "DPOS.THETRU.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 255,
+      "loc_end": 261,
+      "nature": "COD",
+      "heading": "THE TRUTH",
+      "excerpt": "```\nThe tool exists.\nThe tool works.\nEverything else is possibility.\n\nPick one. Do it. Ship it.\n```\n"
+    },
+    {
+      "id": "DPOS.VER.1",
+      "path": "docs/POSSIBILITIES.md",
+      "loc_start": 267,
+      "loc_end": 272,
+      "nature": "TBL",
+      "heading": "VERSION",
+      "excerpt": "| Field | Value |\n|-------|-------|\n| Created | 2026-01-24 |\n| Total Possibilities | 100+ |\n| Categories | 8 |\n| Next Action | Pick one |\n"
+    },
+    {
+      "id": "DPUR.1COR.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 13,
+      "loc_end": 16,
+      "nature": "TBL",
+      "heading": "1. Core Concept",
+      "excerpt": "| Concept | Question | Output |\n|---------|----------|--------|\n| Purpose Emergence (\u03c0) | What IS the purpose? | Labels: Retrieve, Transform, Scattered |\n| Purpose Intelligence (Q) | How WELL does it serve? | Score: 0.0 - 1.0 |\n"
+    },
+    {
+      "id": "DPUR.1COR.2",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 22,
+      "loc_end": 25,
+      "nature": "COD",
+      "heading": "1. Core Concept",
+      "excerpt": "```\nSharp code:   Q(\u03c0\u2084) = 0.85+  \u2192 parts serve wholes cleanly\nMuddy code:   Q(\u03c0\u2084) = 0.40   \u2192 scattered, misaligned, incomplete\n```\n"
+    },
+    {
+      "id": "DPUR.2THE.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 33,
+      "loc_end": 35,
+      "nature": "COD",
+      "heading": "2. The Holon Quality Formula",
+      "excerpt": "```\nQ(H) = w_parts \u00d7 Avg(Q_children) + w_intrinsic \u00d7 I(H)\n```\n"
+    },
+    {
+      "id": "DPUR.3THE.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 54,
+      "loc_end": 56,
+      "nature": "COD",
+      "heading": "3. The Five Intrinsic Metrics",
+      "excerpt": "```\nI(H) = 0.25\u00d7Q_align + 0.25\u00d7Q_cohere + 0.20\u00d7Q_dense + 0.15\u00d7Q_complete + 0.15\u00d7Q_simple\n```\n"
+    },
+    {
+      "id": "DPUR.31ALI.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 63,
+      "loc_end": 65,
+      "nature": "COD",
+      "heading": "3.1 Alignment (Q_align)",
+      "excerpt": "```\nQ_align = 1.0 - (w_A \u00d7 V_axiom) - (w_B \u00d7 V_invariant) - (w_P \u00d7 V_profile)\n```\n"
+    },
+    {
+      "id": "DPUR.32COH.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 82,
+      "loc_end": 84,
+      "nature": "COD",
+      "heading": "3.2 Coherence (Q_cohere)",
+      "excerpt": "```\nQ_cohere = 1.0 / (1 + H(categories) + w_H \u00d7 V_heuristic)\n```\n"
+    },
+    {
+      "id": "DPUR.32COH.2",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 96,
+      "loc_end": 107,
+      "nature": "COD",
+      "heading": "3.2 Coherence (Q_cohere)",
+      "excerpt": "```python\n# Coherent function (all Logic atoms)\ndef calculate_tax(amount, rate):\n    return amount * rate\n\n# Incoherent function (Logic + IO + Data mixed)\ndef process_order(order):\n    validate(order)           # Logic\n    db.save(order)            # IO/Execution\n    send_email(order.user)    # IO/Execution\n    return OrderDTO(order)    # Data\n```\n"
+    },
+    {
+      "id": "DPUR.33DEN.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 114,
+      "loc_end": 116,
+      "nature": "COD",
+      "heading": "3.3 Density (Q_dense)",
+      "excerpt": "```\nQ_dense = \u03a3 weight(atom) / count(atoms)\n```\n"
+    },
+    {
+      "id": "DPUR.34COM.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 132,
+      "loc_end": 134,
+      "nature": "COD",
+      "heading": "3.4 Completeness (Q_complete)",
+      "excerpt": "```\nQ_complete = children_present / children_expected\n```\n"
+    },
+    {
+      "id": "DPUR.34COM.2",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 141,
+      "loc_end": 146,
+      "nature": "TBL",
+      "heading": "3.4 Completeness (Q_complete)",
+      "excerpt": "| Role | Expected Children |\n|------|-------------------|\n| Repository | save, find, delete (at least 2) |\n| Service | At least one use case method |\n| Controller | At least one handler |\n| Entity | At least one field |\n"
+    },
+    {
+      "id": "DPUR.35SIM.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 153,
+      "loc_end": 155,
+      "nature": "COD",
+      "heading": "3.5 Simplicity (Q_simple)",
+      "excerpt": "```\nQ_simple = 1.0 / (1 + log(1 + complexity_score))\n```\n"
+    },
+    {
+      "id": "DPUR.EXABAD.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 174,
+      "loc_end": 178,
+      "nature": "COD",
+      "heading": "Example: BadRepository Class",
+      "excerpt": "```\n\u03c0\u2083: BadRepository (class)\n\u251c\u2500\u2500 \u03c0\u2082: save(entity)     - has business logic inside (bad)\n\u2514\u2500\u2500 \u03c0\u2082: findById(id)     - clean query (good)\n```\n"
+    },
+    {
+      "id": "DPUR.EXABAD.2",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 182,
+      "loc_end": 200,
+      "nature": "COD",
+      "heading": "Example: BadRepository Class",
+      "excerpt": "```\nfindById():\n  Q_align    = 1.0  (no violations)\n  Q_cohere   = 0.95 (focused query)\n  Q_dense    = 0.9  (clean code)\n  Q_complete = 1.0  (returns result)\n  Q_simple   = 0.95 (simple logic)\n  I(findById) = 0.96\n  Q(findById) = 0.5 \u00d7 1.0 + 0.5 \u00d7 0.96 = 0.98\n\nsave():\n  Q_align    = 0.5  (business logic in repository = violation)\n  Q_cohere   = 0.4  (mixed IO + Logic atoms)\n  Q_dense    = 0.6  (some boilerplate)\n  Q_complete = 1.0  (saves entity)\n  Q_simple   = 0.7  (moderate complexity)\n  I(sav..."
+    },
+    {
+      "id": "DPUR.EXABAD.3",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 204,
+      "loc_end": 216,
+      "nature": "COD",
+      "heading": "Example: BadRepository Class",
+      "excerpt": "```\nAvg(Q_children) = (0.98 + 0.79) / 2 = 0.885\n\nBadRepository intrinsic:\n  Q_align    = 0.6  (wrong lifecycle: Transient instead of Singleton)\n  Q_cohere   = 1.0  (focused role: data access only)\n  Q_dense    = 0.8  (standard implementation)\n  Q_complete = 1.0  (has both save and find)\n  Q_simple   = 0.9  (normal method count)\n  I(BadRepository) = 0.84\n\nQ(BadRepository) = 0.5 \u00d7 0.885 + 0.5 \u00d7 0.84 = 0.86\n```\n"
+    },
+    {
+      "id": "DPUR.5COD.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 226,
+      "loc_end": 234,
+      "nature": "COD",
+      "heading": "5. Codebase Intelligence Score",
+      "excerpt": "```\nCODEBASE INTELLIGENCE: 0.72\n\nBreakdown by file:\n  user_repository.py    Q = 0.86  \u2713\n  order_service.py      Q = 0.45  \u26a0 (scattered)\n  utils.py              Q = 0.32  \u2717 (god module)\n  auth_controller.py    Q = 0.91  \u2713\n```\n"
+    },
+    {
+      "id": "DPUR.5COD.2",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 237,
+      "loc_end": 242,
+      "nature": "TBL",
+      "heading": "5. Codebase Intelligence Score",
+      "excerpt": "| Score | Quality | Action |\n|-------|---------|--------|\n| 0.85+ | Sharp | Maintain |\n| 0.70-0.84 | Good | Minor improvements |\n| 0.50-0.69 | Muddy | Refactoring needed |\n| < 0.50 | Poor | Significant rework |\n"
+    },
+    {
+      "id": "DPUR.6PIP.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 250,
+      "loc_end": 254,
+      "nature": "COD",
+      "heading": "6. Pipeline Integration",
+      "excerpt": "```\nStage 8:   Performance Prediction (complexity scores)\nStage 8.5: Purpose Intelligence (Q-scores)  \u2190 NEW\nStage 9:   Roadmap Evaluation\n```\n"
+    },
+    {
+      "id": "DPUR.7OUT.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 266,
+      "loc_end": 280,
+      "nature": "COD",
+      "heading": "7. Output Schema",
+      "excerpt": "```json\n{\n  \"id\": \"UserRepository.save\",\n  \"pi2_purpose\": \"Persist\",\n  \"purpose_intelligence\": {\n    \"Q_total\": 0.79,\n    \"Q_alignment\": 0.5,\n    \"Q_coherence\": 0.4,\n    \"Q_density\": 0.6,\n    \"Q_completeness\": 1.0,\n    \"Q_simplicity\": 0.7,\n    \"Q_intrinsic\": 0.58\n  }\n}\n```\n"
+    },
+    {
+      "id": "DPUR.8REL.1",
+      "path": "docs/PURPOSE_INTELLIGENCE.md",
+      "loc_start": 286,
+      "loc_end": 292,
+      "nature": "TBL",
+      "heading": "8. Relationship to Other Concepts",
+      "excerpt": "| Concept | Relationship |\n|---------|--------------|\n| Purpose Emergence (\u03c0) | Q measures quality OF the \u03c0 label |\n| Purpose Field | Field detects problems; Q quantifies severity |\n| Antimatter Laws | Violations directly reduce Q_alignment |\n| Coherence Score | Existing coherence \u2192 Q_coherence |\n| God Class Detection | God class \u2192 low Q_coherence |\n"
+    },
+    {
+      "id": "DRDM.THETWO.1",
+      "path": "docs/README.md",
+      "loc_start": 5,
+      "loc_end": 8,
+      "nature": "TBL",
+      "heading": "The Two Documents",
+      "excerpt": "| Document | Concern | Contents |\n|----------|---------|----------|\n| [MODEL.md](MODEL.md) | **THEORY** | What the Standard Model is, why it works, how it's proven |\n| [COLLIDER.md](COLLIDER.md) | **PRACTICE** | How to use the tool, commands, troubleshooting |\n"
+    },
+    {
+      "id": "DRDM.MODTHE.1",
+      "path": "docs/README.md",
+      "loc_start": 16,
+      "loc_end": 23,
+      "nature": "TBL",
+      "heading": "MODEL.md (Theory)",
+      "excerpt": "| Section | Question Answered |\n|---------|-------------------|\n| 1. Foundations | What are the bedrock axioms? |\n| 2. Classification | How are atoms and roles defined? |\n| 3. Schema | What's the data structure? |\n| 4. Purpose Field | How does purpose flow through code? |\n| 5. Proofs | Why is this mathematically sound? |\n| 6. History | How did we discover this? |\n"
+    },
+    {
+      "id": "DRDM.COLPRA.1",
+      "path": "docs/README.md",
+      "loc_start": 27,
+      "loc_end": 36,
+      "nature": "TBL",
+      "heading": "COLLIDER.md (Practice)",
+      "excerpt": "| Section | Question Answered |\n|---------|-------------------|\n| 1. Commands | What commands can I run? |\n| 2. Output | What files are generated? |\n| 3. Pipeline | What are the 12 stages? |\n| 4. Architecture | How is the tool structured? |\n| 5. Source Files | Where is the code? |\n| 6. Lookup Tables | Where is X in the JSON/code? |\n| 7. Development | How do I set up and test? |\n| 8. Troubleshooting | How do I fix errors? |\n"
+    },
+    {
+      "id": "DRDM.SUB.1",
+      "path": "docs/README.md",
+      "loc_start": 48,
+      "loc_end": 52,
+      "nature": "TBL",
+      "heading": "Subdirectories",
+      "excerpt": "| Path | Contents |\n|------|----------|\n| `registry/` | Project history, timeline |\n| `reports/` | Gap analysis, audits |\n| `specs/` | Interface specifications |\n"
+    },
+    {
+      "id": "DRES.13NET.1",
+      "path": "docs/RESEARCH_DIRECTIONS.md",
+      "loc_start": 51,
+      "loc_end": 57,
+      "nature": "TBL",
+      "heading": "1.3 Network Centrality in Microservices",
+      "excerpt": "| Metric | Definition | SMC Application |\n|--------|------------|-----------------|\n| **Betweenness Centrality** | Nodes on shortest paths between others | Bridge detection, criticality |\n| **Closeness Centrality** | Average distance to all other nodes | Communication efficiency |\n| **Eigenvector Centrality** | Connected to important nodes | Influence propagation |\n| **PageRank** | Recursive importance | Code significance ranking |\n| **Clustering Coefficient** | Local interconnectedness | Module..."
+    },
+    {
+      "id": "DRES.14BIO.1",
+      "path": "docs/RESEARCH_DIRECTIONS.md",
+      "loc_start": 87,
+      "loc_end": 93,
+      "nature": "TBL",
+      "heading": "1.4 Biological Evolvability (Wagner, Kirschner, Gerhart)",
+      "excerpt": "| Biology | Code Equivalent | SMC Concept |\n|---------|-----------------|-------------|\n| Neutral mutation | Refactoring without behavior change | Safe evolution zone |\n| Epistatic interaction | Dependency coupling | Edge weight |\n| Phenotype | Observable behavior | API contract |\n| Genotype | Source code | Implementation |\n| Neutral network | Equivalent implementations | Substitutability |\n"
+    },
+    {
+      "id": "DRES.41IMP.1",
+      "path": "docs/RESEARCH_DIRECTIONS.md",
+      "loc_start": 193,
+      "loc_end": 199,
+      "nature": "COD",
+      "heading": "4.1 Implement Missing Network Metrics",
+      "excerpt": "```python\n# Proposed additions to full_analysis.py\nnode['betweenness_centrality'] = nx.betweenness_centrality(G).get(node_id, 0)\nnode['closeness_centrality'] = nx.closeness_centrality(G).get(node_id, 0)\nnode['clustering_coefficient'] = nx.clustering(G.to_undirected()).get(node_id, 0)\nnode['pagerank'] = nx.pagerank(G).get(node_id, 0)\n```\n"
+    },
+    {
+      "id": "DRES.5KEY.1",
+      "path": "docs/RESEARCH_DIRECTIONS.md",
+      "loc_start": 225,
+      "loc_end": 234,
+      "nature": "TBL",
+      "heading": "5. Key Researchers to Follow",
+      "excerpt": "| Researcher | Area | Key Contribution |\n|------------|------|------------------|\n| **Andreas Wagner** | Biology/Evolvability | Robustness enables evolvability |\n| **Marc Kirschner & John Gerhart** | Biology | Facilitated variation theory |\n| **Adrian Bejan** | Physics | Constructal Law |\n| **Stafford Beer** | Cybernetics | Viable System Model |\n| **Hermann Haken** | Physics | Synergetics, slaving principle |\n| **Manny Lehman** | Software Engineering | Laws of software evolution |\n| **Jos\u00e9 Fiade..."
+    },
+    {
+      "id": "DRES.WHAWE.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 13,
+      "loc_end": 19,
+      "nature": "TBL",
+      "heading": "What We Have (Implemented)",
+      "excerpt": "| Component | Location | Status |\n|-----------|----------|--------|\n| `topology_role` | `full_analysis.py:705-735` | \u2713 LIVE |\n| `in_degree`, `out_degree` | `full_analysis.py` | \u2713 LIVE |\n| Basic Tree-sitter parsing | `tree_sitter_engine.py` | \u2713 5-10% utilized |\n| Dependency graph | `edge_extractor.py` | \u2713 LIVE |\n| NetworkX integration | `full_analysis.py` | \u2713 LIVE |\n"
+    },
+    {
+      "id": "DRES.WHAWE.3",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 23,
+      "loc_end": 29,
+      "nature": "TBL",
+      "heading": "What We Theorized (Not Implemented)",
+      "excerpt": "| Concept | Theory Doc | Research Status | Implementation |\n|---------|------------|-----------------|----------------|\n| Flow Substances | THEORY_EXPANSION \u00a77 | \u26aa OPEN QUESTIONS | \u26aa NOT STARTED |\n| Interface Surface | THEORY_EXPANSION \u00a78 | \u26aa OPEN QUESTIONS | \u26aa NOT STARTED |\n| Evolvability | THEORY_EXPANSION \u00a79 | \u26aa OPEN QUESTIONS | \u26aa NOT STARTED |\n| Network Centrality | RESEARCH_DIRECTIONS \u00a71.3 | \u2713 RESEARCHED | \u26aa NOT STARTED |\n| Biological Modularity | RESEARCH_DIRECTIONS \u00a71.4 | \u2713 RESEARCHED | \u26aa..."
+    },
+    {
+      "id": "DRES.TRECAP.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 33,
+      "loc_end": 41,
+      "nature": "TBL",
+      "heading": "Tree-sitter Capabilities (Unutilized)",
+      "excerpt": "| Capability | Tree-sitter Feature | SMC Theory Connection | Priority |\n|------------|--------------------|-----------------------|----------|\n| Scope tracking | `@local.scope` | Interface Surface | HIGH |\n| Definition tracking | `@local.definition` | What's INSIDE boundary | HIGH |\n| Reference tracking | `@local.reference` | What CROSSES boundary | HIGH |\n| Unused detection | def without ref | Dead code / Orphan | MEDIUM |\n| Data flow | Assignment tracking | Flow Substances | HIGH |\n| State det..."
+    },
+    {
+      "id": "DRES.LIVDOC.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 122,
+      "loc_end": 127,
+      "nature": "TBL",
+      "heading": "Living Documents to Maintain",
+      "excerpt": "| Document | Purpose | Update Frequency |\n|----------|---------|------------------|\n| `THEORY_EXPANSION_2026.md` | Open questions, directions | As discoveries happen |\n| `RESEARCH_DIRECTIONS.md` | External theory synthesis | After each research session |\n| `MODEL.md` | Canonical theory (only confirmed) | After validation |\n| `TREE_SITTER_INTEGRATION_SPEC.md` | Implementation guide | After research confirms approach |\n"
+    },
+    {
+      "id": "DRES.31NET.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 144,
+      "loc_end": 159,
+      "nature": "COD",
+      "heading": "3.1 Network Centrality (Ready for Implementation)",
+      "excerpt": "```python\n# Proposed addition to full_analysis.py Stage 7\n\n# Centrality metrics (requires research validation first)\nif G is not None:\n    betweenness = nx.betweenness_centrality(G)\n    closeness = nx.closeness_centrality(G)\n    # pagerank only for directed graphs\n    pagerank = nx.pagerank(G) if G.is_directed() else {}\n\n    for node in nodes:\n        node_id = node.get('id', '')\n        node['betweenness_centrality'] = betweenness.get(node_id, 0)\n        node['closeness_centrality'] = closeness..."
+    },
+    {
+      "id": "DRES.32TRE.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 179,
+      "loc_end": 195,
+      "nature": "COD",
+      "heading": "3.2 Tree-sitter Scope Analysis (Needs Research First)",
+      "excerpt": "```python\n# src/core/scope_analyzer.py (NEW FILE - AFTER RESEARCH)\n\nclass ScopeAnalyzer:\n    \"\"\"\n    Analyze scope boundaries using Tree-sitter locals.scm\n\n    Maps to SMC concepts:\n    - @local.scope \u2192 Interface boundary\n    - @local.definition \u2192 Internal (private)\n    - @local.reference \u2192 Cross-boundary usage\n    \"\"\"\n\n    def analyze_interface_surface(self, node, tree, source):\n        # Implementation depends on research findings\n        pass\n```\n"
+    },
+    {
+      "id": "DRES.33EVO.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 205,
+      "loc_end": 220,
+      "nature": "COD",
+      "heading": "3.3 Evolvability Score (Needs Research First)",
+      "excerpt": "```python\n# HYPOTHETICAL - DO NOT IMPLEMENT UNTIL VALIDATED\n\ndef compute_evolvability(node):\n    \"\"\"\n    Evolvability = capacity to change without breaking system\n\n    Candidate factors (need validation):\n    - coupling_freedom: 1 / (1 + in_degree)  # fewer dependents = freer\n    - interface_stability: from git history\n    - test_coverage: from coverage reports\n    - centrality_risk: 1 - betweenness  # not on critical paths\n    \"\"\"\n    # Formula TBD after research\n    pass\n```\n"
+    },
+    {
+      "id": "DRES.HOWTHE.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 228,
+      "loc_end": 234,
+      "nature": "TBL",
+      "heading": "How Theory Additions Enhance Collider Output",
+      "excerpt": "| Theory Addition | Collider Enhancement | User Value |\n|-----------------|---------------------|------------|\n| `topology_role` | Node classification in viz | See leaves vs hubs instantly |\n| Network centrality | Highlight critical paths | Know what NOT to break |\n| Evolvability | Color by change safety | Know WHERE to evolve safely |\n| Interface surface | Show boundaries in graph | Understand module contracts |\n| Flow substances | Animate data flow | See what moves through system |\n"
+    },
+    {
+      "id": "DRES.BRADOW.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 240,
+      "loc_end": 265,
+      "nature": "COD",
+      "heading": "Brain Download (output.md)",
+      "excerpt": "```markdown\n## TOPOLOGY ANALYSIS (NEW SECTION)\n\n### Flow Structure\n| Role | Count | % | Health |\n|------|-------|---|--------|\n| Root (entry points) | 12 | 3% | \u2713 |\n| Leaf (terminals) | 89 | 22% | \u2713 |\n| Hub (coordinators) | 8 | 2% | \u26a0 High coupling |\n| Internal (flow) | 290 | 72% | \u2713 |\n| Orphan (dead) | 5 | 1% | \u2717 Remove |\n\n### Critical Paths (Betweenness > 0.1)\n- `src/core/full_analysis.py::run_full_analysis` - 43% of paths\n- `src/core/edge_extractor.py::extract_edges` - 28% of paths\n\n### Evolv..."
+    },
+    {
+      "id": "DRES.VISHTM.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 269,
+      "loc_end": 278,
+      "nature": "COD",
+      "heading": "Visualization (HTML)",
+      "excerpt": "```javascript\n// Color nodes by evolvability zone\nfunction getNodeColor(node) {\n    if (node.topology_role === 'leaf') return '#4CAF50';  // Green - safe\n    if (node.topology_role === 'hub') return '#F44336';   // Red - dangerous\n    if (node.topology_role === 'orphan') return '#9E9E9E'; // Gray - dead\n    if (node.betweenness > 0.1) return '#FF9800';         // Orange - critical path\n    return '#2196F3';  // Blue - normal\n}\n```\n"
+    },
+    {
+      "id": "DRES.VALCOD.1",
+      "path": "docs/RESEARCH_TO_IMPLEMENTATION_ROADMAP.md",
+      "loc_start": 294,
+      "loc_end": 299,
+      "nature": "TBL",
+      "heading": "Validation Codebases",
+      "excerpt": "| Codebase | Size | Why |\n|----------|------|-----|\n| Collider itself | ~50 files | We know it intimately |\n| express.js | Medium | Well-documented architecture |\n| lodash | Large | Many small functions (leaf-heavy?) |\n| A monolith | Large | Hub-heavy, coupling problems |\n"
+    },
+    {
+      "id": "DSES.EXESUM.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 12,
+      "loc_end": 17,
+      "nature": "TBL",
+      "heading": "Executive Summary",
+      "excerpt": "| Metric | Before | After | Delta |\n|--------|--------|-------|-------|\n| Controls | 33 | 90 | +57 |\n| Target | 82 | 82 | - |\n| Coverage | 40% | 110% | +70% |\n| Gatekeeper | None | CONTROL_REGISTRY.yaml | NEW |\n"
+    },
+    {
+      "id": "DSES.C1HAN.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 24,
+      "loc_end": 29,
+      "nature": "TBL",
+      "heading": "C1. Handler Wiring Gap",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Severity** | 9/10 |\n| **Confidence** | 95% |\n| **Risk** | Orphaned controls (visible but non-functional) |\n| **Blocking** | No, but degraded UX |\n"
+    },
+    {
+      "id": "DSES.C1HAN.2",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 39,
+      "loc_end": 43,
+      "nature": "COD",
+      "heading": "C1. Handler Wiring Gap",
+      "excerpt": "```bash\ngrep -oP 'id=\"[^\"]+\"' src/core/viz/assets/template.html | sort -u > /tmp/controls.txt\ngrep -oP \"getElementById\\(['\\\"]([^'\\\"]+)\" src/core/viz/assets/modules/panel-handlers.js | sort -u > /tmp/handlers.txt\ncomm -23 /tmp/controls.txt /tmp/handlers.txt\n```\n"
+    },
+    {
+      "id": "DSES.C2REG.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 48,
+      "loc_end": 53,
+      "nature": "TBL",
+      "heading": "C2. Registry-Template Mismatch",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Severity** | 8/10 |\n| **Confidence** | 90% |\n| **Risk** | False positives in validation |\n| **Blocking** | No |\n"
+    },
+    {
+      "id": "DSES.C2REG.2",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 65,
+      "loc_end": 75,
+      "nature": "COD",
+      "heading": "C2. Registry-Template Mismatch",
+      "excerpt": "```python\nSTRUCTURAL_IDS = {\n    '3d-graph', 'header', 'loader', 'toast', 'control-bar-container',\n    'filtering', 'selection', 'camera', 'accessibility', 'export',\n    'analysis', 'layout-phys', 'view-modes', 'panel-settings',\n    'node-appear', 'edge-appear'\n}\n\n# In audit_template():\nunauthorized = template_ids - authorized - STRUCTURAL_IDS\n```\n"
+    },
+    {
+      "id": "DSES.C3PRE.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 80,
+      "loc_end": 85,
+      "nature": "TBL",
+      "heading": "C3. Pre-commit Hook Not Wired",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Severity** | 7/10 |\n| **Confidence** | 85% |\n| **Risk** | Unregistered controls can still be added |\n| **Blocking** | No |\n"
+    },
+    {
+      "id": "DSES.C3PRE.2",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 89,
+      "loc_end": 98,
+      "nature": "COD",
+      "heading": "C3. Pre-commit Hook Not Wired",
+      "excerpt": "```yaml\n- repo: local\n  hooks:\n    - id: control-registry\n      name: UI Control Registry Check\n      entry: python tools/validate_control_registry.py --audit\n      language: system\n      files: template\\.html$\n      pass_filenames: false\n```\n"
+    },
+    {
+      "id": "DSES.C4CON.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 106,
+      "loc_end": 111,
+      "nature": "TBL",
+      "heading": "C4. Controls Untested",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Severity** | 6/10 |\n| **Confidence** | 80% |\n| **Risk** | Broken controls ship to users |\n| **Blocking** | No |\n"
+    },
+    {
+      "id": "DSES.C5PLA.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 127,
+      "loc_end": 132,
+      "nature": "TBL",
+      "heading": "C5. Plan File Stale",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Severity** | 3/10 |\n| **Confidence** | 100% |\n| **Risk** | Confusion in future sessions |\n| **Blocking** | No |\n"
+    },
+    {
+      "id": "DSES.C6GAT.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 141,
+      "loc_end": 146,
+      "nature": "TBL",
+      "heading": "C6. Gatekeeper Pattern Validation",
+      "excerpt": "| Attribute | Value |\n|-----------|-------|\n| **Severity** | 6/10 (informational) |\n| **Confidence** | 85% |\n| **Risk** | Pattern may not scale |\n| **Blocking** | No |\n"
+    },
+    {
+      "id": "DSES.ACTMAT.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 159,
+      "loc_end": 166,
+      "nature": "TBL",
+      "heading": "Action Matrix",
+      "excerpt": "| ID | Concern | Severity | Steps | Time Est. | Owner |\n|----|---------|:--------:|:-----:|-----------|-------|\n| C1 | Handler Wiring | 9 | 5 | 30min | Agent |\n| C2 | Registry Mismatch | 8 | 3 | 10min | Agent |\n| C3 | Pre-commit Hook | 7 | 4 | 15min | Agent |\n| C4 | QA Testing | 6 | 3 | 20min | Human |\n| C5 | Plan Update | 3 | 2 | 5min | Agent |\n| C6 | Pattern Review | 6 | 0 | Done | - |\n"
+    },
+    {
+      "id": "DSES.RECEXE.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 176,
+      "loc_end": 178,
+      "nature": "COD",
+      "heading": "Recommended Execution Order",
+      "excerpt": "```\nC2 (10min) \u2192 C1 (30min) \u2192 C3 (15min) \u2192 C5 (5min) \u2192 C4 (Human)\n```\n"
+    },
+    {
+      "id": "DSES.CONSCO.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 191,
+      "loc_end": 198,
+      "nature": "TBL",
+      "heading": "Confidence Scores Summary",
+      "excerpt": "| Concern | Severity | Confidence | Validated By |\n|---------|:--------:|:----------:|--------------|\n| C1 Handler Wiring | 9/10 | 95% | Perplexity + Logic |\n| C2 Registry Mismatch | 8/10 | 90% | Audit output |\n| C3 Pre-commit | 7/10 | 85% | Perplexity |\n| C4 QA Testing | 6/10 | 80% | Best practice |\n| C5 Plan Stale | 3/10 | 100% | Direct observation |\n| C6 Pattern | 6/10 | 85% | Perplexity |\n"
+    },
+    {
+      "id": "DSES.SESART.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 204,
+      "loc_end": 209,
+      "nature": "TBL",
+      "heading": "Session Artifacts",
+      "excerpt": "| Artifact | Path |\n|----------|------|\n| Control Registry | `schema/viz/controls/CONTROL_REGISTRY.yaml` |\n| Validator Script | `tools/validate_control_registry.py` |\n| Perplexity Research | `docs/research/perplexity/docs/20260125_220611_*.md` |\n| This Document | `docs/SESSION_CONCERNS_20260125.md` |\n"
+    },
+    {
+      "id": "DSES.DEFOF.1",
+      "path": "docs/SESSION_CONCERNS_20260125.md",
+      "loc_start": 213,
+      "loc_end": 213,
+      "nature": "DEF",
+      "heading": "Definition of Done",
+      "excerpt": "## Definition of Done\n"
+    },
+    {
+      "id": "DSPR.EXESUM.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 11,
+      "loc_end": 17,
+      "nature": "TBL",
+      "heading": "Executive Summary",
+      "excerpt": "| Metric | Before | After | Impact |\n|--------|--------|-------|--------|\n| Total Files | 56,361 | ~3,000 | -94.7% |\n| Real Code Files | 2,771 | 2,771 | 0% (protected) |\n| Cache Files | 53,590 | 0 | -100% |\n| Report Directories | 9 | 2 | -78% |\n| Disk Usage (cache) | 1.03 GB | 0 | -100% |\n"
+    },
+    {
+      "id": "DSPR.11ARC.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 25,
+      "loc_end": 39,
+      "nature": "COD",
+      "heading": "1.1 Archive Calibration Cache to GCS",
+      "excerpt": "```bash\n# Archive all repos_cache directories to GCS\ngsutil -m cp -r standard-model-of-code/artifacts/atom-research/.repos_cache/ \\\n  gs://elements-archive-2026/calibration/repos_cache_root_2026-01-23/\n\ngsutil -m cp -r standard-model-of-code/artifacts/atom-research/2026-01-23-calibration/.repos_cache/ \\\n  gs://elements-archive-2026/calibration/repos_cache_calibration_2026-01-23/\n\n# Verify upload success (must return 0)\ngsutil ls gs://elements-archive-2026/calibration/ | wc -l\n\n# Remove local cac..."
+    },
+    {
+      "id": "DSPR.CURSTA.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 57,
+      "loc_end": 67,
+      "nature": "TBL",
+      "heading": "Current State (9 directories)",
+      "excerpt": "| Directory | Files | Purpose | Action |\n|-----------|-------|---------|--------|\n| `architecture_report/` | ? | Legacy | ARCHIVE |\n| `roadmap_report/` | ? | Legacy | ARCHIVE |\n| `evolution_report/` | ? | Legacy | ARCHIVE |\n| `standard-model-of-code/.archive/html_reports/` | ? | Old outputs | ARCHIVE |\n| `standard-model-of-code/docs/reports/` | 12 | Active reports | KEEP |\n| `context-management/docs/reports/` | ? | Brain reports | KEEP |\n| `context-management/reports/` | ? | Duplicate? | MERGE |..."
+    },
+    {
+      "id": "DSPR.TARSTA.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 71,
+      "loc_end": 74,
+      "nature": "TBL",
+      "heading": "Target State (2 directories)",
+      "excerpt": "| Directory | Purpose |\n|-----------|---------|\n| `standard-model-of-code/docs/reports/` | Collider/Body reports |\n| `context-management/docs/reports/` | Brain/AI reports |\n"
+    },
+    {
+      "id": "DSPR.CONSCR.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 78,
+      "loc_end": 91,
+      "nature": "COD",
+      "heading": "Consolidation Script",
+      "excerpt": "```bash\n# Archive legacy report directories\nmkdir -p archive/reports_2026-01-23/\nmv architecture_report/ archive/reports_2026-01-23/\nmv roadmap_report/ archive/reports_2026-01-23/\nmv evolution_report/ archive/reports_2026-01-23/\n\n# Merge context-management reports\nmv context-management/reports/* context-management/docs/reports/ 2>/dev/null || true\nrmdir context-management/reports/ 2>/dev/null || true\n\n# Upload archive to GCS\ngsutil -m cp -r archive/reports_2026-01-23/ gs://elements-archive-2026/..."
+    },
+    {
+      "id": "DSPR.CURSTA.3",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 99,
+      "loc_end": 105,
+      "nature": "TBL",
+      "heading": "Current State",
+      "excerpt": "| Metric | Count |\n|--------|-------|\n| Total .md files | 528 |\n| Created in last 7 days | 403 |\n| In `docs/` directories | ~200 |\n| In `archive/` | ~150 |\n| Scattered elsewhere | ~178 |\n"
+    },
+    {
+      "id": "DSPR.AUDCHE.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 110,
+      "loc_end": 113,
+      "nature": "COD",
+      "heading": "Audit Checklist",
+      "excerpt": "   ```bash\n   # Find files with similar names\n   find . -name \"*.md\" | xargs -I{} basename {} | sort | uniq -d\n   ```\n"
+    },
+    {
+      "id": "DSPR.AUDCHE.2",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 116,
+      "loc_end": 119,
+      "nature": "COD",
+      "heading": "Audit Checklist",
+      "excerpt": "   ```bash\n   # Find .md files not modified in 30+ days\n   find . -name \"*.md\" -mtime +30 -type f | head -20\n   ```\n"
+    },
+    {
+      "id": "DSPR.41GIT.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 134,
+      "loc_end": 139,
+      "nature": "COD",
+      "heading": "4.1 .gitignore Updates (DONE)",
+      "excerpt": "```gitignore\n# Added 2026-01-23\n.repos_cache/\n**/.repos_cache/\n**/calibration_repos/\n```\n"
+    },
+    {
+      "id": "DSPR.42CI.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 145,
+      "loc_end": 153,
+      "nature": "COD",
+      "heading": "4.2 CI Sprawl Alert (TODO)",
+      "excerpt": "```yaml\nsprawl-check:\n  script: |\n    TOTAL=$(find . -type f | wc -l)\n    if [ \"$TOTAL\" -gt 5000 ]; then\n      echo \"SPRAWL ALERT: $TOTAL files (threshold: 5000)\"\n      exit 1\n    fi\n```\n"
+    },
+    {
+      "id": "DSPR.43WEE.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 157,
+      "loc_end": 160,
+      "nature": "COD",
+      "heading": "4.3 Weekly Timestamp Regeneration",
+      "excerpt": "```bash\n# Add to cron or agent boot sequence\npython3 standard-model-of-code/scripts/generate_repo_timestamps.py\n```\n"
+    },
+    {
+      "id": "DSPR.EXEORD.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 166,
+      "loc_end": 172,
+      "nature": "TBL",
+      "heading": "Execution Order",
+      "excerpt": "| Step | Command | Risk |\n|------|---------|------|\n| 1 | Run Phase 1.1 (archive to GCS) | LOW (reversible) |\n| 2 | Run Phase 2 (consolidate reports) | LOW (reversible) |\n| 3 | Commit .gitignore changes | LOW |\n| 4 | Regenerate timestamps CSV | LOW |\n| 5 | Run Phase 3 (doc audit) | MEDIUM (needs review) |\n"
+    },
+    {
+      "id": "DSPR.VAL.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 180,
+      "loc_end": 193,
+      "nature": "COD",
+      "heading": "Validation",
+      "excerpt": "```bash\n# Total file count should be ~3,000\nfind . -type f | wc -l\n\n# No .repos_cache locally\nfind . -name \".repos_cache\" -type d | wc -l  # Should be 0\n\n# Report directories reduced\nfind . -maxdepth 3 -type d -name \"*report*\" | wc -l  # Should be <= 4\n\n# GCS backup exists\ngsutil ls gs://elements-archive-2026/calibration/\ngsutil ls gs://elements-archive-2026/archive/\n```\n"
+    },
+    {
+      "id": "DSPR.RISMIT.1",
+      "path": "docs/SPRAWL_CONSOLIDATION_PLAN.md",
+      "loc_start": 199,
+      "loc_end": 203,
+      "nature": "TBL",
+      "heading": "Risk Mitigation",
+      "excerpt": "| Risk | Mitigation |\n|------|------------|\n| Lose calibration data | GCS backup BEFORE local delete |\n| Break calibration scripts | Keep one local repo for testing |\n| Lose important docs | Archive before delete, never hard-delete |\n"
+    },
+    {
+      "id": "DTHE.1THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 10,
+      "loc_end": 10,
+      "nature": "NUM",
+      "heading": "1. The Core Distinction: Atoms vs. Roles",
+      "excerpt": "**The fundamental question:** Are the 200 Atoms defined by what they *are* (Structure) or what they *do* (Purpose)?"
+    },
+    {
+      "id": "DTHE.2THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 40,
+      "loc_end": 40,
+      "nature": "NUM",
+      "heading": "2. The First Purpose Equation",
+      "excerpt": "2.  But we have a **finite** set of architectural purposes (33 Roles)."
+    },
+    {
+      "id": "DTHE.2THE.2",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 41,
+      "loc_end": 41,
+      "nature": "NUM",
+      "heading": "2. The First Purpose Equation",
+      "excerpt": "3.  Therefore, the \"Purpose\" of any component, at the architectural level, is one of the 33 Roles."
+    },
+    {
+      "id": "DTHE.3THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 46,
+      "loc_end": 46,
+      "nature": "NUM",
+      "heading": "3. The \"Situation\" (Context)",
+      "excerpt": "*Or: How 33 Roles Create Infinite Possibilities*"
+    },
+    {
+      "id": "DTHE.3THE.2",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 48,
+      "loc_end": 48,
+      "nature": "NUM",
+      "heading": "3. The \"Situation\" (Context)",
+      "excerpt": "If we only have 33 Roles, where does the complexity of software come from? It comes from the **Situation** (Context). The Situation is the intersection of 4 Dimensions."
+    },
+    {
+      "id": "DTHE.DIM4.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 87,
+      "loc_end": 87,
+      "nature": "NUM",
+      "heading": "Dimension 4: The Meaning (Domain Intent)",
+      "excerpt": "*   **The Infinite Variable.** This is where the 33 Roles meet the real world."
+    },
+    {
+      "id": "DTHE.51THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 115,
+      "loc_end": 126,
+      "nature": "COD",
+      "heading": "5.1 The Reframe",
+      "excerpt": "```\nNOT THIS:\n  Code \u2500\u2500analogous to\u2500\u2500\u25ba Living Beings\n\nTHIS:\n                    SYSTEMS OF SYSTEMS\n                          \u2502\n            \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n            \u25bc                           \u25bc\n      Living Beings                   Code\n      (biological SoS)            (computational SoS)\n```\n"
+    },
+    {
+      "id": "DTHE.52THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 136,
+      "loc_end": 156,
+      "nature": "COD",
+      "heading": "5.2 The Core Insight: Recursive Composition (Clarified Jan 21, 2026)",
+      "excerpt": "```\nTURTLES ALL THE WAY UP:\nL12 UNIVERSE\n \u2514\u2500\u2500 L11 DOMAIN\n      \u2514\u2500\u2500 L10 ORGANIZATION\n           \u2514\u2500\u2500 L9 PLATFORM\n                \u2514\u2500\u2500 L8 ECOSYSTEM\n                     \u2514\u2500\u2500 L7 SYSTEM\n                          \u2514\u2500\u2500 L6 PACKAGE\n                               \u2514\u2500\u2500 L5 FILE \u2190 You are here\n                                    \u2514\u2500\u2500 L4 CONTAINER\n                                         \u2514\u2500\u2500 L3 NODE\n                                              \u2514\u2500\u2500 L2 BLOCK\n                                                   \u2514\u2500\u2500 L1..."
+    },
+    {
+      "id": "DTHE.52THE.2",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 162,
+      "loc_end": 162,
+      "nature": "NUM",
+      "heading": "5.2 The Core Insight: Recursive Composition (Clarified Jan 21, 2026)",
+      "excerpt": "4. **The 16-level scale IS a holarchy.** Each level is a **holon** (Koestler 1967) - simultaneously a WHOLE and a PART."
+    },
+    {
+      "id": "DTHE.53HOL.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 172,
+      "loc_end": 175,
+      "nature": "TBL",
+      "heading": "5.3 Holon Theory Connection",
+      "excerpt": "| Looking | The node is | It exhibits |\n|---------|-------------|-------------|\n| DOWN (inward) | A whole containing parts | Self-assertive tendency (autonomy) |\n| UP (outward) | A part within a whole | Integrative tendency (belonging) |\n"
+    },
+    {
+      "id": "DTHE.54EME.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 187,
+      "loc_end": 193,
+      "nature": "COD",
+      "heading": "5.4 Emergence at Every Level",
+      "excerpt": "```\n\u03c0\u2081(statement) = atomic purpose (role of single node)\n\u03c0\u2082(block) = emergent from {\u03c0\u2081(statements)} - NEW PROPERTY APPEARS\n\u03c0\u2083(function) = emergent from {\u03c0\u2082(blocks)} - NEW PROPERTY APPEARS\n\u03c0\u2084(class) = emergent from {\u03c0\u2083(functions)} - NEW PROPERTY APPEARS\n...continues up...\n```\n"
+    },
+    {
+      "id": "DTHE.61THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 223,
+      "loc_end": 229,
+      "nature": "TBL",
+      "heading": "6.1 The Discovery",
+      "excerpt": "| Role | Condition | Meaning |\n|------|-----------|---------|\n| `orphan` | in=0, out=0 | Disconnected (\u26a0\ufe0f see \u00a713 - this is a misclassification bucket) |\n| `root` | in=0, out>0 | Entry point, initiator |\n| `leaf` | in>0, out=0 | Terminal, no outgoing dependencies |\n| `hub` | high degree | Central coordinator |\n| `internal` | in>0, out>0 | Normal flow-through |\n"
+    },
+    {
+      "id": "DTHE.62REL.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 237,
+      "loc_end": 240,
+      "nature": "TBL",
+      "heading": "6.2 Relational vs Intrinsic Properties",
+      "excerpt": "| Property Type | Source | Example |\n|---------------|--------|---------|\n| Intrinsic | Node alone | atom, role, complexity |\n| Relational | Graph context | topology_role, centrality, component_id |\n"
+    },
+    {
+      "id": "DTHE.71CAN.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 259,
+      "loc_end": 271,
+      "nature": "TBL",
+      "heading": "7.1 Candidate Substances",
+      "excerpt": "| Layer | Substance | Source | Status |\n|-------|-----------|--------|--------|\n| **Static** | Dependencies | Code analysis | \u2713 Tracked |\n| **Static** | Import chains | Code analysis | \u2713 Tracked |\n| **Static** | Type flow | Code analysis | \u26aa Not yet |\n| **Runtime** | Control flow | Profiler | \u26aa Not yet |\n| **Runtime** | Execution time | Profiler | \u26aa Not yet |\n| **Runtime** | Data/payloads | Tracer | \u26aa Not yet |\n| **Runtime** | Memory | Profiler | \u26aa Not yet |\n| **Change** | Impact propagation | G..."
+    },
+    {
+      "id": "DTHE.81THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 294,
+      "loc_end": 315,
+      "nature": "COD",
+      "heading": "8.1 The Concept",
+      "excerpt": "```\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n        \u2502              NODE A                     \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510    \u2502\n        \u2502  \u2502         INTERNALS               \u2502    \u2502\n        \u2502  \u2502    (private, can evolve)        \u2502    \u2502\n        \u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518    \u2502\n        \u2502                  \u2502                      \u2502\n        \u2502  \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2567\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557  \u2502\n        \u2502  \u2551      INTERFACE SURFACE            \u2551  \u2502  \u2190 THE MEMBRANE\n        \u2502  \u255a..."
+    },
+    {
+      "id": "DTHE.92OPE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 383,
+      "loc_end": 391,
+      "nature": "COD",
+      "heading": "9.2 Open Questions",
+      "excerpt": "```\nPossible inputs to evolvability:\n  - coupling_freedom (inverse of in_degree?)\n  - interface_stability (signature change frequency?)\n  - test_coverage (safety net?)\n  - change_success_rate (historical evidence?)\n  - blast_radius (impact of change?)\n  - compartment_isolation (bulkhead membership?)\n```\n"
+    },
+    {
+      "id": "DTHE.101SOU.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 399,
+      "loc_end": 403,
+      "nature": "TBL",
+      "heading": "10.1 Source Materials",
+      "excerpt": "| Document | Location | Key Concepts |\n|----------|----------|--------------|\n| Universal Laws of Software Organisms | `/assets/Universal_Laws_*.png` | SoS, Constructal Law, VSM, Cybernetics |\n| C\u00f3digo Vivo: A F\u00edsica dos Sistemas Evolutivos | `/assets/C\u00f3digo_Vivo_*.png` | Flow physics, evolutionary systems |\n| C\u00f3digo \u00e9 Biologia: Engenharia Evolutiva | `/assets/C\u00f3digo_\u00e9_Biologia_*.png` | Biological engineering patterns |\n"
+    },
+    {
+      "id": "DTHE.102KEY.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 407,
+      "loc_end": 414,
+      "nature": "TBL",
+      "heading": "10.2 Key Theoretical Connections",
+      "excerpt": "| Theory | Author | Connection to SMC |\n|--------|--------|-------------------|\n| Constructal Law | Adrian Bejan | Flow must branch to persist \u2192 topology_role |\n| Viable System Model | Stafford Beer | System 1-5 hierarchy \u2192 layers + roles |\n| Synergetics | Hermann Haken | Order emerges via \"slaving\" \u2192 hubs as order parameters |\n| Cybernetics | Wiener/Ashby | Feedback loops \u2192 circuit breakers, homeostasis |\n| Apoptosis | Biology | Programmed cell death \u2192 orphan detection, dead code |\n| Compartmen..."
+    },
+    {
+      "id": "DTHE.11SUM.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 420,
+      "loc_end": 428,
+      "nature": "TBL",
+      "heading": "11. Summary: What We Know vs. What We're Exploring",
+      "excerpt": "| Category | KNOW (implemented) | EXPLORING (questions) |\n|----------|-------------------|----------------------|\n| Structure | Nodes, edges, atoms, roles | Boundary detection |\n| Position | `topology_role` | Depth, betweenness, bridges |\n| Flow | Static dependencies | Runtime flow, all substances |\n| Interface | Edge exists | Surface quality, coupling nature |\n| Evolution | Git history exists | Evolvability as computable property |\n| Frame | Code analysis | Systems of Systems unification |\n| **..."
+    },
+    {
+      "id": "DTHE.121THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 440,
+      "loc_end": 449,
+      "nature": "TBL",
+      "heading": "12.1 The Alignment",
+      "excerpt": "| SoS Theory Concept | Tree-sitter Capability | Current Status |\n|--------------------|----------------------|----------------|\n| Flow Substances | Data flow tracking (ST-08) | 0% utilized |\n| Interface Surface | Scope tracking (@local.scope) | 0% utilized |\n| What's inside | @local.definition | 0% utilized |\n| What crosses boundary | @local.reference | 0% utilized |\n| Dead code (orphan) | Definition without reference | 0% utilized |\n| External dependency | Reference without definition | 0% util..."
+    },
+    {
+      "id": "DTHE.122THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 453,
+      "loc_end": 461,
+      "nature": "COD",
+      "heading": "12.2 The Scope Graph IS the Membrane Model",
+      "excerpt": "```\nTREE-SITTER SCOPE GRAPH              SoS INTERFACE SURFACE\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n@local.scope              =          Component boundary\n@local.definition         =          What's INSIDE (private)\n@local.reference          =          What CROSSES (interface)\ndef without ref           =          Dead substance (orphan)\nref without def           =          External flow (dependency)\n```\n"
+    },
+    {
+      "id": "DTHE.132WHA.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 496,
+      "loc_end": 504,
+      "nature": "TBL",
+      "heading": "13.2 What \"Orphan\" Actually Conflates",
+      "excerpt": "| What We Label | What It IS | Correct Treatment |\n|---------------|------------|-------------------|\n| orphan | Dead code (truly unreachable) | **DELETE** |\n| orphan | Entry point (__main__, CLI) | Mark as `root` |\n| orphan | Test fixture (pytest, jest) | Mark as `test_root` |\n| orphan | Framework-managed (DI, decorators) | Mark as `framework_root` |\n| orphan | Cross-language boundary (JS\u2194Python) | Mark as `boundary` |\n| orphan | Dynamic dispatch target (reflection) | Mark as `dynamic_target` |..."
+    },
+    {
+      "id": "DTHE.133PRO.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 517,
+      "loc_end": 541,
+      "nature": "COD",
+      "heading": "13.3 Proposed: `disconnection` Property",
+      "excerpt": "```python\ndisconnection: {\n    # WHY is this node disconnected?\n    reachability_source:\n        \"unreachable\"       |  # True dead code - DELETE\n        \"entry_point\"       |  # __main__, CLI, event handler\n        \"test_entry\"        |  # pytest fixture, test function\n        \"framework_managed\" |  # @Component, dataclass instantiation\n        \"cross_language\"    |  # Called from JS, YAML, etc.\n        \"dynamic_target\"    |  # Reflection, eval, getattr\n        \"external_boundary\",   # Public A..."
+    },
+    {
+      "id": "DTHE.134DET.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 545,
+      "loc_end": 554,
+      "nature": "COD",
+      "heading": "13.4 Detection Logic",
+      "excerpt": "```\nIF node is disconnected:\n    IF in test file           \u2192 test_entry (confidence: 0.95)\n    IF has __main__ guard     \u2192 entry_point (confidence: 0.99)\n    IF has framework decorator \u2192 framework_managed (confidence: 0.90)\n    IF different language     \u2192 cross_language (confidence: 0.70)\n    IF has dynamic patterns   \u2192 dynamic_target (confidence: 0.60)\n    IF is public/exported     \u2192 external_boundary (confidence: 0.80)\n    ELSE                      \u2192 unreachable (confidence: 0.85)\n```\n"
+    },
+    {
+      "id": "DTHE.135VIS.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 559,
+      "loc_end": 561,
+      "nature": "COD",
+      "heading": "13.5 Visualization Implications",
+      "excerpt": "```\nAll orphans \u2192 Gray \u2192 \"Dead code?\" tooltip\n```\n"
+    },
+    {
+      "id": "DTHE.135VIS.2",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 565,
+      "loc_end": 573,
+      "nature": "TBL",
+      "heading": "13.5 Visualization Implications",
+      "excerpt": "| Category | Color | Icon | Tooltip |\n|----------|-------|------|---------|\n| `unreachable` | Red | \ud83d\udc80 | \"No callers found - safe to delete?\" |\n| `entry_point` | Green | \u25b6 | \"Entry point - runs via __main__\" |\n| `test_entry` | Blue | \ud83e\uddea | \"Test fixture - framework invokes\" |\n| `framework_managed` | Purple | \u2699 | \"Framework creates this\" |\n| `cross_language` | Yellow | \ud83c\udf09 | \"Called from other language\" |\n| `dynamic_target` | Orange | \u26a1 | \"Called via reflection/dynamic\" |\n| `external_boundary` | Cyan ..."
+    },
+    {
+      "id": "DTHE.136THE.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 579,
+      "loc_end": 584,
+      "nature": "TBL",
+      "heading": "13.6 Theory Connection",
+      "excerpt": "| Concept | Connection |\n|---------|------------|\n| **Interface Surface (\u00a78)** | Disconnection types are boundary crossings our analysis can't see |\n| **Flow Substances (\u00a77)** | Different substances flow through different boundaries |\n| **Tree-sitter (\u00a712)** | `@local.reference` without `@local.definition` = external boundary |\n| **Systems of Systems (\u00a75)** | Each disconnection type is a different kind of system boundary |\n"
+    },
+    {
+      "id": "DTHE.138IMP.1",
+      "path": "docs/THEORY_EXPANSION_2026.md",
+      "loc_start": 609,
+      "loc_end": 615,
+      "nature": "TBL",
+      "heading": "13.8 Implementation Status",
+      "excerpt": "| Component | Status |\n|-----------|--------|\n| Research | \u2713 Complete (see `docs/research/ORPHAN_TAXONOMY.md`) |\n| Theory | \u2713 This section |\n| Detection algorithm | \u26aa Not implemented |\n| Schema update | \u26aa Not implemented |\n| Visualization | \u26aa Not implemented |\n"
+    }
+  ]
+}

@@ -3,15 +3,15 @@ Registry Package
 
 Centralized repositories for code analysis data:
 
-- pattern_repository.py: Role detection patterns (prefix, suffix, dunder, etc.)
+- pattern_registry.py: Role detection patterns (prefix, suffix, dunder, etc.)
 - schema_repository.py: Optimization schemas (13 patterns with instructions)
 - role_registry.py: Canonical roles (33 WHY-dimension roles)
 """
 
-from .pattern_repository import (
-    PatternRepository,
+from .pattern_registry import (
+    PatternRegistry,
     RolePattern,
-    get_pattern_repository,
+    get_pattern_registry,
 )
 
 from .schema_repository import (
@@ -30,10 +30,10 @@ from .role_registry import (
 )
 
 __all__ = [
-    # Pattern repository
-    'PatternRepository',
+    # Pattern registry
+    'PatternRegistry',
     'RolePattern',
-    'get_pattern_repository',
+    'get_pattern_registry',
 
     # Schema repository
     'SchemaRepository',

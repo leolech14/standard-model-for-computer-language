@@ -22,15 +22,15 @@ except ImportError:
         def normalize_type(t): return t
 
 try:
-    from core.registry.pattern_repository import get_pattern_repository
+    from core.registry.pattern_registry import get_pattern_registry
     # New: Role Registry for validation
     from core.registry.role_registry import get_role_registry
 except ImportError:
     try:
-        from registry.pattern_repository import get_pattern_repository
+        from registry.pattern_registry import get_pattern_registry
         from registry.role_registry import get_role_registry
     except ImportError:
-        def get_pattern_repository(): return None
+        def get_pattern_registry(): return None
         def get_role_registry(): return None
 
 try:
@@ -55,7 +55,7 @@ class UniversalClassifier:
     """Classifies code particles based on patterns, paths, and naming conventions."""
 
     def __init__(self):
-        self.pattern_repo = get_pattern_repository()
+        self.pattern_repo = get_pattern_registry()
         self.role_registry = get_role_registry()
         # V3: Initialize AtomRegistry for T2 ecosystem detection
         self.atom_registry = AtomRegistry() if AtomRegistry else None
@@ -153,7 +153,7 @@ class UniversalClassifier:
         confidence = self._calculate_confidence(func_name, line_stripped) if particle_type else 30.0
 
         particle_id = f"{file_path}:{func_name}" if file_path else func_name
-        
+
         # Validate against Registry
         if self.role_registry and resolved_type:
              resolved_type = self.role_registry.get_canonical(resolved_type)
@@ -198,7 +198,7 @@ class UniversalClassifier:
             normalized_path = "/" + normalized_path
         particle_type: Optional[str] = None
         confidence = 30.0  # Default low confidence
-        
+
         # =============================================================================
         # TIER 0: FRAMEWORK-SPECIFIC OVERRIDES (99% confidence)
         # =============================================================================
@@ -210,7 +210,7 @@ class UniversalClassifier:
             else:
                 particle_type = "Test" # Default for things in conftest
                 confidence = 80.0
-                
+
         if particle_type is None:
             for d in decorators:
                 if "fixture" in d: # pytest.fixture
@@ -258,7 +258,7 @@ class UniversalClassifier:
                     if result and result[0] != "Unknown" and result[1] > 0:
                         particle_type = result[0]
                         confidence = float(result[1])
-            
+
             # Check file path patterns
             if particle_type is None:
                 result = self.pattern_repo.classify_by_path(file_path)
@@ -378,7 +378,7 @@ class UniversalClassifier:
         if symbol_kind in {"function", "method"}:
             # If we get "Class.method", classify primarily by the last segment.
             short_name = name.split(".")[-1] if "." in name else name
-            
+
             if particle_type is None:
                 particle_type = self._get_function_type_by_name(short_name)
                 if particle_type:
@@ -405,7 +405,7 @@ class UniversalClassifier:
         # =============================================================================
         if self.pattern_repo is not None:
             short_name = name.split(".")[-1] if "." in name else name
-            
+
             # Try prefix patterns
             prefix_result = self.pattern_repo.classify_by_prefix(short_name)
             if prefix_result and prefix_result[0] != "Unknown":
@@ -415,7 +415,7 @@ class UniversalClassifier:
                 if particle_type is None or pattern_conf > confidence:
                     particle_type = prefix_result[0]
                     confidence = pattern_conf
-            
+
             # Try suffix patterns
             suffix_result = self.pattern_repo.classify_by_suffix(short_name)
             if suffix_result and suffix_result[0] != "Unknown":
@@ -572,7 +572,7 @@ class UniversalClassifier:
             if ecosystem:
                 # Always propagate file-level ecosystem to particle
                 dims["D1_ECOSYSTEM"] = ecosystem
-                
+
                 # Build detection context: body + signature/evidence + base classes (for class detection)
                 detection_context = body
                 # Use signature or evidence field (evidence contains the definition line, e.g., "class Net(nn.Module):")

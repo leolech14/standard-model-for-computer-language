@@ -1,13 +1,25 @@
 """
-Registry of Registries (The "List of Lists")
+Registry of Registries - Collider Runtime Access
 
-A central meta-registry that aggregates all system registries:
-- AtomRegistry (Atoms) - 3,644 atoms across 180 ecosystems
-- RoleRegistry (Roles) - 33 canonical roles
-- TypeRegistry (Types) - 36 node types
-- PatternRegistry (Patterns) - Role detection patterns
-- SchemaRegistry (Schemas) - 13 optimization schemas
-- WorkflowRegistry (Workflows) - 4 analysis workflows
+AUTHORITATIVE SOURCE OF TRUTH: .agent/intelligence/LOL.yaml
+============================================================
+This Python module provides RUNTIME access to Collider registries only.
+For the COMPLETE List of Lists (LOL) covering ALL project inventories:
+- Collider registries (6)
+- Agent registries (6)
+- Context registries (3)
+- Subsystems (13)
+- Files, tools, hooks, etc.
+
+See: .agent/intelligence/LOL.yaml
+
+Collider registries exposed here (runtime objects):
+- AtomRegistry: 3,644 atoms (110 canonical + 3,534 T2)
+- RoleRegistry: 33 canonical roles
+- TypeRegistry: 36 node types
+- PatternRegistry: 36 role detection patterns
+- SchemaRegistry: 13 optimization schemas
+- WorkflowRegistry: 4 analysis workflows
 """
 
 from typing import Dict, Any, List, Optional

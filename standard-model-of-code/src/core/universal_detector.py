@@ -11,9 +11,7 @@ from pathlib import Path
 from typing import Dict, List, Any
 
 from tree_sitter_engine import TreeSitterUniversalEngine
-# from particle_classifier import ParticleClassifier  # QUARANTINED: Moved to archive/zombie_code/
 from stats_generator import StatsGenerator
-# from dependency_analyzer import DependencyAnalyzer  # QUARANTINED: Moved to archive/zombie_code/
 from report_generator import ReportGenerator
 from god_class_detector_lite import GodClassDetectorLite
 
@@ -22,9 +20,7 @@ class UniversalPatternDetector:
 
     def __init__(self):
         self.tree_sitter_engine = TreeSitterUniversalEngine()
-        # self.particle_classifier = ParticleClassifier()  # QUARANTINED
         self.stats_generator = StatsGenerator()
-        # self.dependency_analyzer = DependencyAnalyzer()  # QUARANTINED
         self.report_generator = ReportGenerator()
         self.god_class_detector = GodClassDetectorLite()
 
@@ -43,11 +39,9 @@ class UniversalPatternDetector:
             )
 
         # Step 1.5: Extract dependencies (internal/external/stdlib)
-        print("🔗 Analyzing dependencies... [SKIPPED - QUARANTINED]")
         dependency_summary = {} # self.dependency_analyzer.analyze_repository(repo_path, analysis_results)
 
         # Step 2: Classify particles with RPBL scores
-        print("🔬 Classifying particles with RPBL scores... [SKIPPED - QUARANTINED]")
         for result in analysis_results:
             classified_particles = []
             for particle in result.get('particles', []):
@@ -62,7 +56,7 @@ class UniversalPatternDetector:
         if depth_summary:
             comprehensive_results['depth_metrics'] = depth_summary
         comprehensive_results['dependencies'] = dependency_summary
-        
+
         # Step 3.5: God Class Detection
         print("☢️  Scanning for Antimatter (God Classes)...")
         god_results = self.god_class_detector.analyze_repository(repo_path)
@@ -70,7 +64,7 @@ class UniversalPatternDetector:
         from dataclasses import asdict
         comprehensive_results['god_classes'] = [asdict(gc) for gc in god_results['god_classes']]
         comprehensive_results['god_class_summary'] = god_results['summary']
-        
+
         # Merge God Class recommendations
         if 'recommendations' not in comprehensive_results: comprehensive_results['recommendations'] = {}
         comprehensive_results['recommendations']['antimatter'] = god_results['recommendations']

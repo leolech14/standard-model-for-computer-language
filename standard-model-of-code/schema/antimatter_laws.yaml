@@ -11,8 +11,6 @@
 #
 # Version: 1.0.0
 
----
-
 # =============================================================================
 # Layer Violation Laws (Dijkstra + Clean Architecture)
 # =============================================================================
@@ -41,8 +39,6 @@ AM001:
     Add an intermediate layer entity. If direct access is truly needed,
     create a facade or adapter at the appropriate layer.
 
----
-
 AM002:
   name: ReverseLayerDependency
   description: >
@@ -68,8 +64,6 @@ AM002:
   remediation: >
     Invert the dependency using dependency injection or an interface.
     The lower layer should define an interface that the higher layer implements.
-
----
 
 # =============================================================================
 # Holon Pathology Laws (Koestler)
@@ -102,8 +96,6 @@ AM003:
   remediation: >
     Split into smaller, focused classes with single responsibilities.
     Extract behaviors into separate services or modules.
-
----
 
 AM004:
   name: AnemicModel
@@ -139,8 +131,6 @@ AM004:
     Move behavior into the entity. Domain entities should encapsulate
     both data and the business rules that govern that data.
 
----
-
 # =============================================================================
 # DDD Boundary Laws (Evans)
 # =============================================================================
@@ -170,8 +160,6 @@ AM005:
     Create explicit interfaces at context boundaries.
     Use anti-corruption layers to translate between contexts.
     Consider event-driven communication for loose coupling.
-
----
 
 # =============================================================================
 # Additional Laws (Future)
