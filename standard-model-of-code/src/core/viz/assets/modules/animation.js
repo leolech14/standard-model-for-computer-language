@@ -108,7 +108,7 @@ const ANIM = (function () {
         'radial': {
             name: 'RADIAL', icon: '?', description: 'Concentric tier rings',
             motion: 'static', cooldown: 0,
-            getPosition: (node, idx, total, time, tierGroups) => {
+            getPosition: (node, _idx, _total, _time, tierGroups) => {
                 const tier = NODE.getTier(node);
                 const r = { T0: 60, T1: 150, T2: 280, UNKNOWN: 220 }[tier] || 180;
                 const tierNodes = tierGroups?.[tier] || [];
@@ -186,7 +186,7 @@ const ANIM = (function () {
         'tree': {
             name: 'TREE', icon: '▼', description: 'Hierarchical tree (root top)',
             motion: 'static', cooldown: 0,
-            getPosition: (node, idx, total, time, tierGroups) => {
+            getPosition: (node, _idx, _total, _time, tierGroups) => {
                 // Simple hierarchical layout: arrange by tier levels
                 // T0 at top, T1 in middle, T2 at bottom
                 const tier = NODE.getTier(node);
@@ -378,7 +378,7 @@ const ANIM = (function () {
         }
     }
 
-    function _animateStaggered(nodes, startPos, targetPos, preset, tierGroups, presetKey) {
+    function _animateStaggered(nodes, startPos, targetPos, preset, _tierGroups, presetKey) {
         const baseDuration = CONFIG.baseDuration;
         const staggerSpread = CONFIG.staggerSpread;
         const startTime = Date.now();
@@ -769,7 +769,7 @@ function cycleStaggerPattern() {
     ANIM.cycleStaggerPattern();
 }
 
-function startFlockSimulation(params) {
+function startFlockSimulation(_params) {
     // Handled internally by ANIM
     ANIM.applyLayout('flock');
 }

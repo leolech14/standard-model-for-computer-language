@@ -559,7 +559,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'clickable',
-            trigger: (el) => { /* Don't click - just verify exists */ },
+            trigger: (_el) => { /* Don't click - just verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-select-expand');
                 return { passed: !!el && !el.disabled, expected: 'clickable', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -574,7 +574,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'clickable',
-            trigger: (el) => { /* Don't click - just verify exists */ },
+            trigger: (_el) => { /* Don't click - just verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-select-isolate');
                 return { passed: !!el && !el.disabled, expected: 'clickable', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -621,7 +621,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'cameraPosition',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-cam-reset');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -636,7 +636,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'zoomToFit',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-cam-fit');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -700,7 +700,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'renderer',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-export-png');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -715,7 +715,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'graphData',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-export-json');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -730,7 +730,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-export-svg');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -745,7 +745,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-export-embed');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -762,7 +762,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'graphData',
             expected: 'exists',
-            trigger: (el) => { /* Read-only */ },
+            trigger: (_el) => { /* Read-only */ },
             validate: () => {
                 const el = document.getElementById('panel-stat-visible');
                 return { passed: !!el, expected: 'exists', actual: el ? el.textContent : 'missing', stateExists: true };
@@ -777,7 +777,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'exists',
-            trigger: (el) => { /* Read-only */ },
+            trigger: (_el) => { /* Read-only */ },
             validate: () => {
                 const el = document.getElementById('panel-stat-selected');
                 return { passed: !!el, expected: 'exists', actual: el ? el.textContent : 'missing', stateExists: true };
@@ -792,7 +792,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'graphData',
             expected: 'exists',
-            trigger: (el) => { /* Read-only */ },
+            trigger: (_el) => { /* Read-only */ },
             validate: () => {
                 const el = document.getElementById('panel-stat-edges');
                 return { passed: !!el, expected: 'exists', actual: el ? el.textContent : 'missing', stateExists: true };
@@ -807,7 +807,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'exists',
-            trigger: (el) => { /* Read-only */ },
+            trigger: (_el) => { /* Read-only */ },
             validate: () => {
                 const el = document.getElementById('panel-stat-density');
                 return { passed: !!el, expected: 'exists', actual: el ? el.textContent : 'missing', stateExists: true };
@@ -839,7 +839,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'd3ReheatSimulation',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-reheat');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -854,7 +854,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'd3Force',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-freeze');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -869,7 +869,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: 'cooldownTicks',
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-cool');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -965,7 +965,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-reset-layout');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
@@ -980,7 +980,7 @@ const CIRCUIT = (function() {
             statePath: null,
             graphMethod: null,
             expected: 'clickable',
-            trigger: (el) => { /* Verify exists */ },
+            trigger: (_el) => { /* Verify exists */ },
             validate: () => {
                 const el = document.getElementById('panel-toggle-dock');
                 return { passed: !!el, expected: 'exists', actual: el ? 'exists' : 'missing', stateExists: true };
