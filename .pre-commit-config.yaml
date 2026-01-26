@@ -33,7 +33,7 @@ repos:
         exclude: ^(archive/|standard-model-of-code/docs/research/)
       - id: check-added-large-files
         args: ['--maxkb=500']
-        exclude: '^\.agent/intelligence/LOL.*\.csv$'  # LOL inventories are authoritative data
+        exclude: '^\.agent/intelligence/(LOL.*\.csv|REPO_HISTORY\.jsonl|tdj\.jsonl)$'  # Large data files
       - id: check-merge-conflict
       - id: detect-private-key
 
