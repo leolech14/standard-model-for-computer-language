@@ -183,11 +183,11 @@ def detect_js_imports(nodes: List[Dict], edges: List[Dict]) -> int:
     for n in nodes:
         if n.get('name'):
             targets_by_name[n.get('name')].append(n.get('id'))
-        
+
     # 2. Identify unique JS files
     js_files = set()
     file_to_node_id = {} # Map file path to a representative node ID (e.g. module or first function) to use as source
-    
+
     for n in nodes:
         fpath = n.get('file_path', '')
         if fpath.lower().endswith(('.js', '.jsx', '.ts', '.tsx')):
@@ -208,7 +208,7 @@ def detect_js_imports(nodes: List[Dict], edges: List[Dict]) -> int:
             if not full_path.exists():
                 # Try relative to cwd
                 full_path = Path.cwd() / fpath
-            
+
             if not full_path.exists():
                 continue
 
@@ -217,9 +217,9 @@ def detect_js_imports(nodes: List[Dict], edges: List[Dict]) -> int:
 
             # Pattern: import { X, Y } from ...
             named_imports = re.findall(r'import\s*{([^}]+)}\s*from', content)
-            
+
             source_id = file_to_node_id[fpath]
-            
+
             for group in named_imports:
                 names = [n.strip().split(' as ')[0] for n in group.split(',')]
                 for name in names:
@@ -227,7 +227,7 @@ def detect_js_imports(nodes: List[Dict], edges: List[Dict]) -> int:
                     if name in targets_by_name:
                         for target_id in targets_by_name[name]:
                             if target_id == source_id: continue
-                            
+
                             edges.append({
                                 'source': source_id,
                                 'target': target_id,
@@ -251,33 +251,33 @@ def detect_class_instantiation(nodes: List[Dict], edges: List[Dict]) -> int:
     Pattern: x = MyClass() -> invokes edge
     """
     new_edges = 0
-    
+
     classes_by_name = defaultdict(list)
     for n in nodes:
         # UPDATED: Check 'kind' OR 'type' for robustness
         if n.get('kind') == 'class' or n.get('type') == 'class':
             classes_by_name[n.get('name', '')].append(n.get('id'))
-            
+
     # 2. Scan all nodes for usage
     for src_node in nodes:
         body = src_node.get('body_source', '')
         if not body:
             continue
-            
-        # Naive pattern: look for ClassName() 
+
+        # Naive pattern: look for ClassName()
         # (This is a heuristic, better would be AST analysis, but sticking to regex for 'light' Collider)
         import re
         for class_name, targets in classes_by_name.items():
             # Skip common/short names to avoid noise
             if len(class_name) < 4:
                 continue
-                
+
             # Regex: Word boundary + ClassName + (
             if re.search(r'\b' + re.escape(class_name) + r'\s*\(', body):
                 for target_id in targets:
                     if target_id == src_node.get('id'):
                         continue
-                    
+
                     edges.append({
                         'source': src_node.get('id'),
                         'target': target_id,
@@ -288,7 +288,7 @@ def detect_class_instantiation(nodes: List[Dict], edges: List[Dict]) -> int:
                         'description': f"Class instantiation {class_name}() detected"
                     })
                     new_edges += 1
-                    
+
     return new_edges
 
 
@@ -356,7 +356,7 @@ def create_codome_boundaries(nodes: List[Dict], edges: List[Dict]) -> Dict[str, 
     js_count = detect_js_imports(nodes, edges)
     # Run Detector #2: Class Instantiation
     class_count = detect_class_instantiation(nodes, edges)
-    
+
     print(f"   → [Codome] JS import edges detected: {js_count}")
     print(f"   → [Codome] Class instantiation edges detected: {class_count}")
 
@@ -640,28 +640,28 @@ def build_file_boundaries(files_index: Dict[str, Any]) -> List[Dict[str, Any]]:
 def _calculate_theory_completeness(nodes: List[Dict]) -> Dict[str, Any]:
     """
     Calculate theory completeness metrics for the analysis output.
-    
+
     Measures what percentage of applicable Standard Model elements
     are captured in the analysis.
     """
     if not nodes:
         return {'overall_score': 0, 'error': 'No nodes'}
-    
+
     total = len(nodes)
-    
+
     # D1_WHAT (atom assignment)
     d1_what_assigned = sum(
         1 for n in nodes
         if n.get('dimensions', {}).get('D1_WHAT')
         and n['dimensions']['D1_WHAT'] != 'Unknown'
     )
-    
+
     # D1_ECOSYSTEM
     d1_ecosystem_assigned = sum(
         1 for n in nodes
         if n.get('dimensions', {}).get('D1_ECOSYSTEM')
     )
-    
+
     # React hook metadata
     react_components = [
         n for n in nodes
@@ -671,7 +671,7 @@ def _calculate_theory_completeness(nodes: List[Dict]) -> Dict[str, Any]:
         1 for n in react_components
         if n.get('metadata', {}).get('hooks_used') is not None
     )
-    
+
     # K8s metadata
     k8s_resources = [
         n for n in nodes
@@ -681,16 +681,16 @@ def _calculate_theory_completeness(nodes: List[Dict]) -> Dict[str, Any]:
         1 for n in k8s_resources
         if n.get('metadata', {}).get('k8s_kind')
     )
-    
+
     # Calculate percentages
     d1_what_pct = (d1_what_assigned / total) * 100
     d1_ecosystem_pct = (d1_ecosystem_assigned / total) * 100
     hooks_pct = (hooks_enriched / len(react_components) * 100) if react_components else 100.0
     k8s_pct = (k8s_kind_assigned / len(k8s_resources) * 100) if k8s_resources else 100.0
-    
+
     # Overall score
     overall = (d1_what_pct * 0.4 + d1_ecosystem_pct * 0.3 + hooks_pct * 0.15 + k8s_pct * 0.15)
-    
+
     return {
         'd1_what_percentage': round(d1_what_pct, 1),
         'd1_ecosystem_percentage': round(d1_ecosystem_pct, 1),
@@ -766,19 +766,19 @@ def detect_knots(nodes: List[Dict], edges: List[Dict]) -> Dict:
     # Build adjacency
     graph = defaultdict(set)
     reverse = defaultdict(set)
-    
+
     for edge in edges:
         source = edge.get('source', '')
         target = edge.get('target', '')
         if source and target:
             graph[source].add(target)
             reverse[target].add(source)
-    
+
     # Find strongly connected components (simplified Tarjan-like)
     visited = set()
     on_stack = set()
     cycles = []
-    
+
     def find_cycle(node: str, path: List[str]) -> bool:
         if node in on_stack:
             cycle_start = path.index(node)
@@ -788,23 +788,23 @@ def detect_knots(nodes: List[Dict], edges: List[Dict]) -> Dict:
             return True
         if node in visited:
             return False
-        
+
         visited.add(node)
         on_stack.add(node)
         path.append(node)
-        
+
         for neighbor in list(graph.get(node, set()))[:10]:  # Limit for perf
             find_cycle(neighbor, path)
-        
+
         path.pop()
         on_stack.remove(node)
         return False
-    
+
     # Check for cycles from each unvisited node (limited)
     for node in list(graph.keys())[:200]:
         if node not in visited:
             find_cycle(node, [])
-    
+
     # Find bidirectional edges (tangles)
     bidirectional = []
     for source, targets in graph.items():
@@ -816,10 +816,10 @@ def detect_knots(nodes: List[Dict], edges: List[Dict]) -> Dict:
                         'a': source.split(':')[-1] if ':' in source else source,
                         'b': target.split(':')[-1] if ':' in target else target
                     })
-    
+
     # Compute knot score: 0 = no knots, 10 = severely tangled
     knot_score = min(10, len(cycles) * 2 + len(bidirectional) * 0.5)
-    
+
     return {
         'cycles_detected': len(cycles),
         'bidirectional_edges': len(bidirectional),
@@ -835,11 +835,11 @@ def compute_data_flow(nodes: List[Dict], edges: List[Dict]) -> Dict:
     """
     # Track flow by type
     flow_by_type = defaultdict(lambda: {'in': 0, 'out': 0})
-    
+
     for edge in edges:
         source = edge.get('source', '')
         target = edge.get('target', '')
-        
+
         # Find source/target types
         source_type = None
         target_type = None
@@ -848,23 +848,23 @@ def compute_data_flow(nodes: List[Dict], edges: List[Dict]) -> Dict:
                 source_type = n.get('type', 'Unknown')
             if n.get('id') == target:
                 target_type = n.get('type', 'Unknown')
-        
+
         if source_type:
             flow_by_type[source_type]['out'] += 1
         if target_type:
             flow_by_type[target_type]['in'] += 1
-    
+
     # Identify data sources and sinks
     sources = []  # High out, low in (data producers)
     sinks = []    # High in, low out (data consumers)
-    
+
     for type_name, flow in flow_by_type.items():
         ratio = flow['out'] / flow['in'] if flow['in'] > 0 else flow['out']
         if ratio > 2 and flow['out'] > 10:
             sources.append({'type': type_name, 'ratio': round(ratio, 1), 'out': flow['out']})
         elif ratio < 0.5 and flow['in'] > 10:
             sinks.append({'type': type_name, 'ratio': round(ratio, 1), 'in': flow['in']})
-    
+
     return {
         'flow_by_type': dict(flow_by_type),
         'data_sources': sorted(sources, key=lambda x: -x['out'])[:5],
@@ -1163,7 +1163,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     from topology_reasoning import TopologyClassifier
     from semantic_cortex import ConceptExtractor
     # NOTE: standard_output_generator removed - consolidated into unified outputs
-    
+
     # Stage 1: Base analysis
     print("\n🔬 Stage 1: Base Analysis...")
     with StageTimer(perf_manager, "Stage 1: Base Analysis") as timer:
@@ -1185,7 +1185,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         unified_recommendations = getattr(result, 'recommendations', []) if hasattr(result, 'recommendations') else result.get('recommendations', [])
         timer.set_output(nodes=len(nodes), edges=len(edges))
     print(f"   → {len(nodes)} nodes, {len(edges)} edges")
-    
+
     # Stage 2: Standard Model enrichment
     print("\n🧬 Stage 2: Standard Model Enrichment...")
     with StageTimer(perf_manager, "Stage 2: Standard Model Enrichment") as timer:
@@ -1596,6 +1596,38 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
 
     print(f"   → {len(file_purposes)} files with π₄ purpose")
 
+    # Stage 3.7: Purpose Coherence (from PurposeField)
+    print("\n🎯 Stage 3.7: Purpose Coherence Metrics...")
+    coherence_enriched = 0
+    # Build lookup from purpose_field.nodes by node name
+    pf_by_name = {pn.name: pn for pn in purpose_field.nodes.values()}
+    for node in nodes:
+        name = node.get('name', '')
+        if name in pf_by_name:
+            pf_node = pf_by_name[name]
+            # Transfer coherence metrics
+            node['purpose_coherence'] = {
+                'coherence_score': pf_node.coherence_score,
+                'purpose_entropy': pf_node.purpose_entropy,
+                'is_god_class': pf_node.is_god_class,
+                'unique_child_purposes': pf_node.unique_purposes,
+                'composite_purpose': pf_node.composite_purpose,
+                'atomic_purpose': pf_node.atomic_purpose,
+                'atomic_confidence': pf_node.atomic_confidence,
+                'layer': pf_node.layer.value,
+            }
+            # Also add flat fields for easier access
+            node['coherence_score'] = pf_node.coherence_score
+            node['purpose_entropy'] = pf_node.purpose_entropy
+            if pf_node.is_god_class:
+                node['is_god_class'] = True
+            coherence_enriched += 1
+    print(f"   → {coherence_enriched} nodes enriched with coherence metrics")
+    # Count god classes
+    god_class_count = sum(1 for n in nodes if n.get('is_god_class', False))
+    if god_class_count > 0:
+        print(f"   ⚠️  {god_class_count} god classes detected")
+
     # Stage 4: Execution Flow
     print("\n⚡ Stage 4: Execution Flow...")
     with StageTimer(perf_manager, "Stage 4: Execution Flow") as timer:
@@ -1764,7 +1796,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
                 # This ensures we report "behavioral" stats correctly in APIs
                 node['call_in_degree'] = in_deg
                 node['call_out_degree'] = out_deg
-                
+
                 # Add disconnection taxonomy for nodes missing incoming edges
                 # This includes orphans (no edges) AND roots (no incoming but have outgoing)
                 if in_deg == 0:
@@ -2073,10 +2105,10 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
 
     # Compute aggregate metrics
     total_time = time.time() - start_time
-    
+
     # Type distribution
     types = Counter(n.get('type', 'Unknown') for n in nodes)
-    
+
     # Ring distribution (Clean Architecture)
     rings = Counter(n.get('ring', 'unknown') for n in nodes)
 
@@ -2093,7 +2125,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
     orphan_percent = (orphan_count / len(nodes) * 100) if nodes else 0.0
     reachability_percent = max(0.0, 100.0 - exec_flow.dead_code_percent)
     graph_density = (total_edges / (len(nodes) * (len(nodes) - 1))) if len(nodes) > 1 else 0.0
-    
+
     # RPBL averages
     rpbl_sums = {'responsibility': 0, 'purity': 0, 'boundary': 0, 'lifecycle': 0}
     for n in nodes:
@@ -2101,7 +2133,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         for k in rpbl_sums:
             rpbl_sums[k] += rpbl.get(k, 0)
     rpbl_avgs = {k: round(v / len(nodes), 1) if nodes else 0 for k, v in rpbl_sums.items()}
-    
+
     # Build complete output
     full_output = {
         'nodes': list(nodes),  # Required for report generator
@@ -2204,7 +2236,7 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             'total_inferred_edges': codome_result.get('total_inferred_edges', 0)
         },
     }
-    
+
     # Compute top hubs
     in_deg = Counter()
     for e in edges:
@@ -2397,13 +2429,13 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python full_analysis.py <path> [--output <dir>]")
         sys.exit(1)
-    
+
     target = sys.argv[1]
     output_dir = None
-    
+
     if '--output' in sys.argv:
         idx = sys.argv.index('--output')
         if idx + 1 < len(sys.argv):
             output_dir = sys.argv[idx + 1]
-    
+
     run_full_analysis(target, output_dir)

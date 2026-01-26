@@ -1,11 +1,11 @@
 {
-  "last_audit_time": 1769406068.1737669,
+  "last_audit_time": 1769406684.367,
   "last_file_hashes": {
     "context-management/config/semantic_models.yaml": "c66168c3c8ea0a75",
     "standard-model-of-code/src/core": "45fb8a91e87afe91",
     "standard-model-of-code/docs": "b1019e594072574d"
   },
-  "audit_count": 641,
+  "audit_count": 643,
   "violation_count": 4,
-  "updated": "2026-01-26T02:41:08.174480"
+  "updated": "2026-01-26T02:51:52.814623"
 }

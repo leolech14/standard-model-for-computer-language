@@ -220,7 +220,8 @@ class CodomeScanner:
                 purpose=Purpose(
                     role=node.get('semantic_role', 'unknown'),
                     intent=node.get('docstring', ''),
-                    confidence=node.get('purpose_confidence', 0.0),
+                    # Use coherence_score from Stage 3.7 as confidence
+                    confidence=node.get('coherence_score', node.get('purpose_confidence', 0.0)),
                     layer=self._map_layer(node.get('layer', ''))
                 ),
                 edges=self._extract_edges(node)

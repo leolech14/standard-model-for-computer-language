@@ -293,13 +293,17 @@ def create_unified_output(
     kind_counts = {}
     confidence_dist = {"high": 0, "medium": 0, "low": 0}
 
+    layer_counts: Dict[str, int] = {}
+
     for node in output.nodes:
         role = node.get("role", "Unknown")
         kind = node.get("kind", "unknown")
+        layer = node.get("layer") or "unknown"
         conf = node.get("role_confidence", 0)
 
         role_counts[role] = role_counts.get(role, 0) + 1
         kind_counts[kind] = kind_counts.get(kind, 0) + 1
+        layer_counts[layer] = layer_counts.get(layer, 0) + 1
 
         if conf >= 80:
             confidence_dist["high"] += 1
@@ -311,7 +315,7 @@ def create_unified_output(
     output.classification = {
         "by_role": role_counts,
         "by_kind": kind_counts,
-        "by_layer": {},  # TODO: populate from layer analysis
+        "by_layer": layer_counts,
         "by_confidence": confidence_dist,
     }
 
