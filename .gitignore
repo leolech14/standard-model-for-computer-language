@@ -131,3 +131,4 @@ assets/
 # TDJ generated data (recreate with: python tdj.py --scan)
 .agent/intelligence/tdj.jsonl
 unified_analysis.json
+archive/spectrometer_benchmarks_legacy/express/
