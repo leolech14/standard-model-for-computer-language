@@ -31,16 +31,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-# Use ruamel.yaml for safe round-trip editing (preserves comments)
-try:
-    from ruamel.yaml import YAML
-    yaml = YAML()
-    yaml.preserve_quotes = True
-    USE_RUAMEL = True
-except ImportError:
-    import yaml as pyyaml
-    yaml = None
-    USE_RUAMEL = False
+from utils.yaml_utils import load_yaml_preserve as load_yaml, save_yaml_preserve as save_yaml
 
 # Paths
 REPO_ROOT = Path(__file__).parent.parent.parent
@@ -63,26 +54,6 @@ def ensure_dirs():
     LIBRARY_DIR.mkdir(parents=True, exist_ok=True)
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def load_yaml(path: Path) -> dict:
-    """Load YAML file with ruamel fallback."""
-    with open(path) as f:
-        if USE_RUAMEL:
-            return yaml.load(f)
-        else:
-            return pyyaml.safe_load(f)
-
-
-def save_yaml(path: Path, data: dict):
-    """Save YAML file atomically."""
-    temp_path = path.with_suffix('.tmp')
-    with open(temp_path, 'w') as f:
-        if USE_RUAMEL:
-            yaml.dump(data, f)
-        else:
-            pyyaml.dump(data, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
-    temp_path.rename(path)
 
 
 def load_macro(macro_id: str) -> tuple[Path, dict]:

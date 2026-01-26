@@ -22,13 +22,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-try:
-    from ruamel.yaml import YAML
-    yaml = YAML()
-    yaml.preserve_quotes = True
-except ImportError:
-    import yaml as pyyaml
-    yaml = None
+from utils.yaml_utils import load_yaml_preserve as load_yaml, save_yaml_preserve as save_yaml
 
 SCRIPT_DIR = Path(__file__).parent
 AGENT_DIR = SCRIPT_DIR.parent
@@ -49,23 +43,6 @@ YELLOW = '\033[1;33m'
 RED = '\033[0;31m'
 CYAN = '\033[0;36m'
 NC = '\033[0m'
-
-
-def load_yaml(path: Path) -> dict:
-    """Load YAML file."""
-    with open(path) as f:
-        if yaml:
-            return yaml.load(f)
-        return pyyaml.safe_load(f)
-
-
-def save_yaml(path: Path, data: dict):
-    """Save YAML file."""
-    with open(path, 'w') as f:
-        if yaml:
-            yaml.dump(data, f)
-        else:
-            pyyaml.dump(data, f, default_flow_style=False, sort_keys=False)
 
 
 def get_confidence(opp: dict) -> int:

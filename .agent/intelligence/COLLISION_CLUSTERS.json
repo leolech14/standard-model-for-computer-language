@@ -1,271 +1,13 @@
 {
-  "Unknown|Controller|general": [
+  "Unknown|Transform|MixedResponsibility|general": [
     {
-      "path": "related/chrome-mcp/src/index.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/research/run_corpus.py",
-      "node_count": 9,
-      "in_degree": 8,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 2,
-        "Unknown": 1,
-        "Controller": 4,
-        "Factory": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9
-      }
-    },
-    {
-      "path": "context-management/tools/refine_context_loop.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "ReadWrite",
-      "roles": {
-        "Controller": 2,
-        "Query": 1,
-        "Unknown": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5,
-        "Test": 1
-      }
-    },
-    {
-      "path": "context-management/tools/analyze_logs.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "context-management/tools/continuous_cartographer.py",
-      "node_count": 7,
-      "in_degree": 8,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 1,
-        "Query": 1,
-        "Validator": 1,
-        "Controller": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "context-management/tools/ai/insights_generator.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "Write",
-      "roles": {
-        "Controller": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "context-management/tools/ai/laboratory_bridge.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 1,
-        "Controller": 2,
-        "Unknown": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "context-management/tools/ai/setup_rag.py",
-      "node_count": 7,
-      "in_degree": 7,
-      "effect": "Write",
-      "roles": {
-        "Controller": 2,
-        "Query": 1,
-        "Unknown": 1,
-        "Validator": 1,
-        "Lifecycle": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "context-management/tools/ai/loop.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Controller": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/find_relocation_candidates.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 1,
-        "Controller": 2,
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": ".tools_venv/bin/jp.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "Write",
-      "roles": {
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": ".agent/tools/centripetal_scan.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Controller": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": ".agent/tools/enrichment_orchestrator.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "Read",
-      "roles": {
-        "Controller": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": ".agent/tools/symmetry_check.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 1,
-        "Controller": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    }
-  ],
-  "Unknown|Internal|general": [
-    {
-      "path": "related/chrome-mcp/src/chrome-manager.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "related/chrome-mcp/src/tools/page-tools.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "related/chrome-mcp/src/tools/element-tools.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "related/chrome-mcp/src/tools/network-tools.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "related/chrome-mcp/src/tools/browser-tools.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/mine_semgrep.py",
+      "path": "tools/mine_semgrep.py",
       "node_count": 17,
       "in_degree": 20,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
         "Unknown": 3,
         "Mapper": 1,
@@ -276,27 +18,31 @@
       },
       "layers": {
         "Unknown": 17
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/visualize_graph_webgl.py",
-      "node_count": 8,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 3,
-        "Internal": 4,
-        "Utility": 1
       },
-      "layers": {
-        "Unknown": 8
+      "purposes": {
+        "Transform": 4,
+        "Compute": 1,
+        "Persist(Orphan)": 1,
+        "Emit": 1,
+        "Process": 3,
+        "Retrieve": 3,
+        "Sender": 1,
+        "Generate": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 17
       }
     },
     {
-      "path": "standard-model-of-code/tools/mine_eslint.py",
+      "path": "tools/mine_eslint.py",
       "node_count": 16,
       "in_degree": 16,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
         "Unknown": 3,
         "Mapper": 1,
@@ -307,486 +53,32 @@
       },
       "layers": {
         "Unknown": 16
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/research/laboratory.py",
-      "node_count": 15,
-      "in_degree": 16,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 2,
-        "Mapper": 1,
-        "Internal": 9,
-        "Controller": 2,
-        "Utility": 1
       },
-      "layers": {
-        "Unknown": 15
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/cloud/run_single_repo.py",
-      "node_count": 11,
-      "in_degree": 11,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 2,
-        "Lifecycle": 1,
-        "Internal": 6,
-        "Controller": 1,
-        "Utility": 1
+      "purposes": {
+        "Transform": 5,
+        "Compute": 1,
+        "Persist(Orphan)": 1,
+        "Emit": 1,
+        "Retrieve": 4,
+        "Intake": 1,
+        "Gateway": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Unknown": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/collider_pipeline_files/libs/quarto-html/quarto.js",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/collider_pipeline_files/libs/quarto-html/tabsets/tabsets.js",
-      "node_count": 1,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/collider_pipeline_files/libs/quarto-html/axe/axe-check.js",
-      "node_count": 6,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 6
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/schema/types.ts",
-      "node_count": 3,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 3
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/tokens-bridge.ts",
-      "node_count": 11,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 11
-      },
-      "layers": {
-        "Unknown": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/OKLCHColorPicker.tsx",
-      "node_count": 3,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 3
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/index.ts",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/app/index.tsx",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/app/components/SideDrawer.tsx",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/app/components/DottedGlowBackground.tsx",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/app/components/OKLCHColorPicker.tsx",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/integrations/flash-ui/app/components/ArtifactCard.tsx",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_class_files/libs/quarto-html/quarto.js",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_class_files/libs/quarto-html/tabsets/tabsets.js",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_class_files/libs/quarto-html/axe/axe-check.js",
-      "node_count": 6,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 6
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_sequence_files/libs/quarto-html/quarto.js",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_sequence_files/libs/quarto-html/tabsets/tabsets.js",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_sequence_files/libs/quarto-html/axe/axe-check.js",
-      "node_count": 6,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 6
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_state_files/libs/quarto-html/quarto.js",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_state_files/libs/quarto-html/tabsets/tabsets.js",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/llm-threads/ui_drift_state_files/libs/quarto-html/axe/axe-check.js",
-      "node_count": 6,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 6
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "context-management/tools/utils/output_formatters.py",
-      "node_count": 12,
-      "in_degree": 7,
-      "effect": "ReadWrite",
-      "roles": {
-        "Utility": 3,
-        "Unknown": 3,
-        "Lifecycle": 1,
-        "Internal": 4,
-        "Validator": 1
-      },
-      "layers": {
-        "Unknown": 12
-      }
-    },
-    {
-      "path": "context-management/tools/ai/boundary_analyzer.py",
-      "node_count": 17,
-      "in_degree": 19,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Mapper": 1,
-        "Lifecycle": 1,
-        "Controller": 2,
-        "Internal": 6,
-        "Handler": 1,
-        "Command": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/semantic_finder.py",
-      "node_count": 19,
-      "in_degree": 12,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 6,
-        "Internal": 9,
-        "Query": 2,
-        "Utility": 2
-      },
-      "layers": {
-        "Unknown": 19
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/intent_parser.py",
-      "node_count": 19,
-      "in_degree": 19,
-      "effect": "Read",
-      "roles": {
-        "Store": 1,
-        "Unknown": 4,
-        "Query": 4,
-        "Internal": 6,
-        "Controller": 1,
-        "Validator": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 19
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/research_orchestrator.py",
-      "node_count": 43,
-      "in_degree": 51,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 8,
-        "Store": 2,
-        "Internal": 20,
-        "Lifecycle": 1,
-        "Query": 6,
-        "Asserter": 2,
-        "DomainService": 2,
-        "Handler": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 43
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/boundary_analyzer.py",
-      "node_count": 17,
-      "in_degree": 19,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Mapper": 1,
-        "Lifecycle": 1,
-        "Controller": 2,
-        "Internal": 6,
-        "Handler": 1,
-        "Command": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": ".agent/tools/oklch_color.py",
-      "node_count": 11,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Mapper": 1,
-        "Lifecycle": 1,
-        "Internal": 3,
-        "Query": 3,
-        "Unknown": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 11
+      "sys_purposes": {
+        "MixedResponsibility": 16
       }
     }
   ],
-  "Unknown|Handler|general": [
+  "Unknown|Transform|UnknownSystem|general": [
     {
-      "path": "standard-model-of-code/tools/validate_ui.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "Pure",
-      "roles": {
-        "Validator": 1,
-        "Handler": 2,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/prove.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Handler": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "context-management/tools/mcp/perplexity_mcp_server.py",
-      "node_count": 9,
-      "in_degree": 7,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 2,
-        "Unknown": 2,
-        "Handler": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9
-      }
-    },
-    {
-      "path": "context-management/tools/mcp/mcp_factory/templates/python_stdio_server.py",
-      "node_count": 10,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Unknown": 2,
-        "Handler": 4,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    }
-  ],
-  "Unknown|Unknown|general": [
-    {
-      "path": "standard-model-of-code/tools/extract_doc_nodes.py",
+      "path": "tools/extract_doc_nodes.py",
       "node_count": 5,
       "in_degree": 3,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Unknown": 3,
         "Controller": 1,
@@ -794,107 +86,303 @@
       },
       "layers": {
         "Unknown": 5
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve": 1,
+        "Intake": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 5
       }
     },
     {
-      "path": "standard-model-of-code/tools/pipeline_tracer.py",
-      "node_count": 9,
-      "in_degree": 90,
+      "path": "src/scripts/extract_chart_data.py",
+      "node_count": 5,
+      "in_degree": 3,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 5,
-        "DomainService": 1,
-        "Lifecycle": 1,
+        "Unknown": 3,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 5
+      },
+      "purposes": {
+        "Transform": 1,
+        "Process": 1,
+        "Intake": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 5
+      }
+    }
+  ],
+  "Unknown|Intake|UnknownSystem|general": [
+    {
+      "path": "tools/export_graphrag.py",
+      "node_count": 6,
+      "in_degree": 4,
+      "effect": "Read",
+      "role": "Factory",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Query": 1,
+        "Factory": 2,
+        "Unknown": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 6
+      },
+      "purposes": {
+        "Intake": 3,
+        "Gateway": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 6
+      }
+    },
+    {
+      "path": "tools/research/evaluate_hypotheses.py",
+      "node_count": 12,
+      "in_degree": 16,
+      "effect": "Read",
+      "role": "Asserter",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Unknown": 3,
+        "Query": 1,
+        "Asserter": 5,
+        "Handler": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 6,
+        "Test": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Intake": 7,
+        "Retrieve": 2,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 12
+      }
+    },
+    {
+      "path": "scripts/theory_coverage.py",
+      "node_count": 3,
+      "in_degree": 1,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Unknown": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 3
+      },
+      "purposes": {
+        "Intake": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
+      }
+    },
+    {
+      "path": "src/scripts/extract_patterns.py",
+      "node_count": 7,
+      "in_degree": 5,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Query": 2,
+        "Command": 1,
+        "Unknown": 2,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 7
+      },
+      "purposes": {
+        "Intake": 3,
+        "Sender": 1,
+        "Gateway": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 7
+      }
+    },
+    {
+      "path": "src/scripts/analyze_failures.py",
+      "node_count": 3,
+      "in_degree": 2,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Unknown": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 3
+      },
+      "purposes": {
+        "Intake": 1,
+        "Gateway": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
+      }
+    },
+    {
+      "path": "src/scripts/validate_annotations.py",
+      "node_count": 5,
+      "in_degree": 3,
+      "effect": "Write",
+      "role": "Unknown",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Query": 1,
+        "Unknown": 2,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 5
+      },
+      "purposes": {
+        "Intake": 1,
+        "Persist": 1,
+        "Sender": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 5
+      }
+    }
+  ],
+  "Unknown|Receiver|UnknownSystem|general": [
+    {
+      "path": "tools/validate_control_registry.py",
+      "node_count": 9,
+      "in_degree": 9,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Receiver",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Query": 5,
+        "Validator": 1,
+        "Unknown": 1,
         "Controller": 1,
         "Utility": 1
       },
       "layers": {
         "Unknown": 9
+      },
+      "purposes": {
+        "Receiver": 2,
+        "Initiate": 2,
+        "Intake": 1,
+        "Retrieve": 2,
+        "Produce": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 9
       }
     },
     {
-      "path": "standard-model-of-code/tools/research/summarize_corpus.py",
-      "node_count": 8,
-      "in_degree": 6,
-      "effect": "ReadWrite",
+      "path": "tools/batch_grade/fetch_repos.py",
+      "node_count": 3,
+      "in_degree": 1,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Receiver",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Query": 1,
-        "Unknown": 4,
-        "Validator": 1,
         "Controller": 1,
         "Utility": 1
       },
       "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/research/atom_coverage.py",
-      "node_count": 10,
-      "in_degree": 9,
-      "effect": "Write",
-      "roles": {
-        "Query": 1,
-        "Unknown": 6,
-        "Controller": 2,
-        "Utility": 1
+        "Unknown": 3
       },
-      "layers": {
-        "Unknown": 10
+      "purposes": {
+        "Receiver": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
-    },
+    }
+  ],
+  "Unknown|Initiate|UnknownSystem|general": [
     {
-      "path": "standard-model-of-code/tools/research/regenerate_results.py",
-      "node_count": 4,
-      "in_degree": 2,
+      "path": "tools/verify_animation.py",
+      "node_count": 2,
+      "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Validator",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 1,
         "Validator": 1,
-        "Controller": 1,
         "Utility": 1
       },
       "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/research/atom_inventory.py",
-      "node_count": 10,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Unknown": 5,
-        "Controller": 2,
-        "Utility": 1
+        "Unknown": 2
       },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/batch_grade/analyze_results.py",
-      "node_count": 25,
-      "in_degree": 17,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 18,
-        "Validator": 1,
-        "Lifecycle": 1,
-        "Mapper": 3,
-        "Controller": 1,
-        "Utility": 1
+      "purposes": {
+        "Initiate": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Unknown": 25
+      "sys_purposes": {
+        "UnknownSystem": 2
       }
     },
     {
-      "path": "standard-model-of-code/tools/batch_grade/runpod_agent.py",
+      "path": "tools/batch_grade/runpod_agent.py",
       "node_count": 12,
       "in_degree": 17,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Query": 2,
         "Factory": 1,
@@ -905,28 +393,29 @@
       },
       "layers": {
         "Unknown": 12
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/batch_grade/run_batch_cloud.py",
-      "node_count": 8,
-      "in_degree": 3,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Lifecycle": 1,
-        "Controller": 1,
-        "Utility": 1
       },
-      "layers": {
-        "Unknown": 8
+      "purposes": {
+        "Retrieve": 2,
+        "Generate": 1,
+        "Receiver": 1,
+        "Intake": 1,
+        "Gateway": 2,
+        "Initiate": 3,
+        "Transform(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 12
       }
     },
     {
-      "path": "standard-model-of-code/tools/batch_grade/run_batch.py",
+      "path": "tools/batch_grade/run_batch.py",
       "node_count": 3,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Unknown": 1,
         "Controller": 1,
@@ -934,77 +423,228 @@
       },
       "layers": {
         "Unknown": 3
+      },
+      "purposes": {
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
     },
     {
-      "path": "standard-model-of-code/tools/batch_grade/run_batch_local.py",
-      "node_count": 6,
+      "path": "tools/batch_grade/runpod_parallel.py",
+      "node_count": 5,
       "in_degree": 1,
       "effect": "ReadWrite",
+      "role": "Factory",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 3,
-        "Lifecycle": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/cloud/orchestrate_corpus.py",
-      "node_count": 19,
-      "in_degree": 22,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 9,
-        "Lifecycle": 1,
-        "Internal": 6,
+        "Factory": 1,
         "Handler": 1,
+        "Unknown": 1,
         "Controller": 1,
         "Utility": 1
       },
       "layers": {
-        "Unknown": 19
+        "Unknown": 5
+      },
+      "purposes": {
+        "Transform": 1,
+        "Initiate": 2,
+        "Transform(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 5
       }
     },
     {
-      "path": "standard-model-of-code/schema/types.py",
-      "node_count": 37,
-      "in_degree": 3,
+      "path": "scripts/verify_polyglot.py",
+      "node_count": 3,
+      "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Validator",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 31,
-        "Repository": 1,
-        "Factory": 2,
-        "Utility": 2,
-        "Validator": 1
+        "Validator": 2,
+        "Utility": 1
       },
       "layers": {
-        "Unknown": 37
+        "Unknown": 3
+      },
+      "purposes": {
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
     },
     {
-      "path": "standard-model-of-code/scripts/extract_sections.py",
-      "node_count": 8,
-      "in_degree": 10,
-      "effect": "ReadWrite",
+      "path": "src/scripts/find_disconnected_modules.py",
+      "node_count": 2,
+      "in_degree": 0,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 3,
-        "Utility": 2,
+        "Query": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 2
+      },
+      "purposes": {
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
+      }
+    },
+    {
+      "path": "src/scripts/clone_repos.py",
+      "node_count": 3,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Unknown": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 3
+      },
+      "purposes": {
+        "Initiate": 1,
+        "Sender(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
+      }
+    },
+    {
+      "path": "src/scripts/migrate_roles.py",
+      "node_count": 2,
+      "in_degree": 0,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Unknown": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 2
+      },
+      "purposes": {
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
+      }
+    },
+    {
+      "path": "src/scripts/sample_for_mini_validation.py",
+      "node_count": 4,
+      "in_degree": 0,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Query": 1,
+        "Unknown": 2,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 4
+      },
+      "purposes": {
+        "Intake(Orphan)": 1,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 4
+      }
+    }
+  ],
+  "Unknown|Retrieve|UnknownSystem|general": [
+    {
+      "path": "tools/research/atom_inventory.py",
+      "node_count": 10,
+      "in_degree": 8,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Query": 2,
+        "Unknown": 5,
+        "Controller": 2,
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 10
+      },
+      "purposes": {
+        "Receiver": 2,
+        "Retrieve": 3,
+        "Intake": 2,
+        "Generate": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 10
+      }
+    },
+    {
+      "path": "scripts/generate_repo_timestamps.py",
+      "node_count": 4,
+      "in_degree": 2,
+      "effect": "Pure",
+      "role": "Query",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
         "Query": 1,
         "Validator": 1,
-        "Controller": 1
+        "Controller": 1,
+        "Utility": 1
       },
       "layers": {
-        "Unknown": 8
+        "Unknown": 4
+      },
+      "purposes": {
+        "Retrieve": 1,
+        "Compute": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 4
       }
     },
     {
-      "path": "standard-model-of-code/scripts/version_compare.py",
+      "path": "scripts/version_compare.py",
       "node_count": 12,
       "in_degree": 14,
       "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Query": 2,
         "Unknown": 6,
@@ -1014,28 +654,57 @@
       },
       "layers": {
         "Unknown": 12
+      },
+      "purposes": {
+        "Retrieve": 4,
+        "Intake": 3,
+        "Gateway": 1,
+        "Generate": 1,
+        "Sender": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 12
       }
     },
     {
-      "path": "standard-model-of-code/scripts/output_parity.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "Write",
+      "path": "src/tools/redundancy_detector.py",
+      "node_count": 11,
+      "in_degree": 9,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Handler": 1,
-        "Unknown": 2,
+        "Unknown": 5,
+        "Query": 4,
         "Controller": 1,
         "Utility": 1
       },
       "layers": {
-        "Unknown": 5
+        "Unknown": 11
+      },
+      "purposes": {
+        "Transform": 2,
+        "Intake": 2,
+        "Retrieve": 4,
+        "Generate(Orphan)": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 11
       }
     },
     {
-      "path": "standard-model-of-code/scripts/theory_coverage.py",
+      "path": "src/scripts/canonize_migration.py",
       "node_count": 3,
       "in_degree": 1,
       "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Unknown": 1,
         "Controller": 1,
@@ -1043,1437 +712,280 @@
       },
       "layers": {
         "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/redundancy_detector.py",
-      "node_count": 11,
-      "in_degree": 9,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 5,
-        "Query": 4,
-        "Controller": 1,
-        "Utility": 1
       },
-      "layers": {
-        "Unknown": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/extract_chat_insights.py",
-      "node_count": 16,
-      "in_degree": 32,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 9,
-        "Lifecycle": 1,
-        "Utility": 2,
-        "Internal": 1,
-        "Handler": 1,
-        "Query": 1,
-        "Controller": 1
+      "purposes": {
+        "Retrieve": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Unknown": 16
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/conversation_mapper.py",
-      "node_count": 17,
-      "in_degree": 17,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 10,
-        "Lifecycle": 1,
-        "Utility": 2,
-        "Internal": 2,
-        "Query": 1,
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/dedupe_insights.py",
-      "node_count": 14,
-      "in_degree": 14,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 9,
-        "Lifecycle": 1,
-        "Query": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/compute_dimension_orthogonality.py",
-      "node_count": 14,
-      "in_degree": 15,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Unknown": 8,
-        "Controller": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/analyze_failures.py",
-      "node_count": 3,
-      "in_degree": 2,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/extract_chart_data.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/validate_annotations.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "Write",
-      "roles": {
-        "Query": 1,
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/clone_repos.py",
-      "node_count": 3,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/pattern_manager.py",
-      "node_count": 7,
-      "in_degree": 9,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 2,
-        "Validator": 1,
-        "Command": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/migrate_roles.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/canonize_migration.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/sample_for_mini_validation.py",
-      "node_count": 4,
-      "in_degree": 0,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Unknown": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": "context-management/tools/activity_watcher.py",
-      "node_count": 8,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 3,
-        "Query": 2,
-        "Command": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": "context-management/tools/drift_guard.py",
-      "node_count": 17,
-      "in_degree": 87,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Lifecycle": 2,
-        "Handler": 1,
-        "Internal": 2,
-        "Validator": 2,
-        "Controller": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": "context-management/tools/pom/projectome_omniscience.py",
-      "node_count": 42,
-      "in_degree": 48,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 19,
-        "Internal": 13,
-        "Lifecycle": 3,
-        "Handler": 1,
-        "Validator": 1,
-        "Controller": 2,
-        "Command": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 42
-      }
-    },
-    {
-      "path": "context-management/tools/mcp/mcp_factory/scaffold.py",
-      "node_count": 5,
-      "in_degree": 2,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "context-management/tools/ai/gemini_status.py",
-      "node_count": 10,
-      "in_degree": 8,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 2,
-        "Controller": 2,
-        "Internal": 1,
-        "Unknown": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": "context-management/tools/ai/observe_session.py",
-      "node_count": 10,
-      "in_degree": 9,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Handler": 1,
-        "Query": 2,
-        "Utility": 2,
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 9,
-        "Test": 1
-      }
-    },
-    {
-      "path": "context-management/tools/ai/industrial_ui.py",
-      "node_count": 32,
-      "in_degree": 54,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 27,
-        "Lifecycle": 1,
-        "Internal": 1,
-        "Query": 1,
-        "Command": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 32
-      }
-    },
-    {
-      "path": "context-management/tools/ai/perplexity_research.py",
-      "node_count": 5,
-      "in_degree": 4,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 1,
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "context-management/tools/ai/research/precision_fetcher.py",
-      "node_count": 28,
-      "in_degree": 38,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 10,
-        "Store": 1,
-        "Lifecycle": 3,
-        "Internal": 6,
-        "Controller": 2,
-        "Validator": 1,
-        "Query": 3,
-        "DomainService": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 28
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/context_cache.py",
-      "node_count": 17,
-      "in_degree": 20,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 6,
-        "Validator": 1,
-        "Lifecycle": 2,
-        "Internal": 3,
-        "Query": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/refinery.py",
-      "node_count": 37,
-      "in_degree": 19,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 23,
-        "Mapper": 1,
-        "Internal": 7,
-        "Validator": 1,
-        "Lifecycle": 2,
-        "DomainService": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 37
-      }
-    },
-    {
-      "path": "context-management/tools/ai/deck/play_card.py",
-      "node_count": 15,
-      "in_degree": 15,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 2,
-        "Command": 2,
-        "Unknown": 6,
-        "Lifecycle": 1,
-        "Validator": 1,
-        "DomainService": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 15
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/timestamps.py",
-      "node_count": 10,
-      "in_degree": 14,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 1,
-        "Unknown": 7,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/gemini_status.py",
-      "node_count": 10,
-      "in_degree": 8,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 2,
-        "Controller": 2,
-        "Internal": 1,
-        "Unknown": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/generate_metadata_csv.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/tdj.py",
-      "node_count": 14,
-      "in_degree": 17,
-      "effect": "ReadWrite",
-      "roles": {
-        "Validator": 1,
-        "Unknown": 9,
-        "Query": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": "context-management/tools/maintenance/analyze_sets.py",
-      "node_count": 7,
-      "in_degree": 5,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Unknown": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "context-management/tools/refinery/atom_generator.py",
-      "node_count": 7,
-      "in_degree": 5,
-      "effect": "Read",
-      "roles": {
-        "Factory": 1,
-        "Unknown": 3,
-        "DomainService": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": ".agent/tools/triage_inbox.py",
-      "node_count": 13,
-      "in_degree": 14,
-      "effect": "Read",
-      "roles": {
-        "Query": 4,
-        "Command": 1,
-        "Unknown": 6,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 13
-      }
-    },
-    {
-      "path": ".agent/tools/autopilot.py",
-      "node_count": 37,
-      "in_degree": 86,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 15,
-        "Validator": 4,
-        "Query": 3,
-        "Command": 3,
-        "Emitter": 1,
-        "Internal": 3,
-        "Lifecycle": 2,
-        "Controller": 5,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 37
-      }
-    },
-    {
-      "path": ".agent/tools/task_store.py",
-      "node_count": 11,
-      "in_degree": 15,
-      "effect": "ReadWrite",
-      "roles": {
-        "Validator": 1,
-        "Query": 2,
-        "Command": 1,
-        "Unknown": 5,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 11
-      }
-    },
-    {
-      "path": ".agent/tools/fact_loader.py",
-      "node_count": 11,
-      "in_degree": 9,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 6,
-        "Query": 2,
-        "Command": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 11
-      }
-    },
-    {
-      "path": ".agent/tools/lol_sync.py",
-      "node_count": 19,
-      "in_degree": 20,
-      "effect": "Write",
-      "roles": {
-        "Unknown": 10,
-        "Internal": 2,
-        "Mapper": 1,
-        "Query": 1,
-        "Command": 2,
-        "Listener": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 19
-      }
-    },
-    {
-      "path": ".agent/tools/audit_unicode.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": ".agent/tools/wire.py",
-      "node_count": 10,
-      "in_degree": 11,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Command": 1,
-        "Query": 1,
-        "Controller": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9,
-        "Test": 1
-      }
-    },
-    {
-      "path": ".agent/tools/industrial_triage.py",
-      "node_count": 9,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Unknown": 5,
-        "Command": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9
-      }
-    },
-    {
-      "path": ".agent/tools/wave_particle_balance.py",
-      "node_count": 7,
-      "in_degree": 5,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Controller": 2,
-        "Unknown": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 1,
-        "Unknown": 6
-      }
-    },
-    {
-      "path": ".agent/tools/validate_lol.py",
-      "node_count": 10,
-      "in_degree": 10,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Unknown": 3,
-        "Validator": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": ".agent/tools/opp_generator.py",
-      "node_count": 12,
-      "in_degree": 12,
-      "effect": "ReadWrite",
-      "roles": {
-        "Validator": 1,
-        "Query": 3,
-        "Command": 1,
-        "Unknown": 4,
-        "Factory": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 12
-      }
-    },
-    {
-      "path": ".agent/tools/deal_cards.py",
-      "node_count": 13,
-      "in_degree": 11,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Validator": 1,
-        "Unknown": 5,
-        "Utility": 3,
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 13
-      }
-    },
-    {
-      "path": ".agent/tools/macro_executor.py",
-      "node_count": 20,
-      "in_degree": 22,
-      "effect": "ReadWrite",
-      "roles": {
-        "Validator": 2,
-        "Query": 2,
-        "Command": 1,
-        "Unknown": 9,
-        "Lifecycle": 1,
-        "DomainService": 1,
-        "Internal": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 20
-      }
-    },
-    {
-      "path": ".agent/tools/opp_to_deck.py",
-      "node_count": 9,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Unknown": 4,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9
-      }
-    },
-    {
-      "path": ".agent/tools/promote_opportunity.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 3,
-        "Query": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
     }
   ],
-  "Unknown|Factory|general": [
+  "Unknown|Transform(Orphan)|UnknownSystem|general": [
     {
-      "path": "standard-model-of-code/tools/export_graphrag.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Factory": 2,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/batch_grade/runpod_parallel.py",
-      "node_count": 5,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Factory": 1,
-        "Handler": 1,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/generate_paper_charts.py",
-      "node_count": 7,
-      "in_degree": 0,
-      "effect": "Write",
-      "roles": {
-        "Factory": 5,
-        "Handler": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "context-management/tools/ai/analyze.py",
-      "node_count": 66,
-      "in_degree": 71,
-      "effect": "Read",
-      "roles": {
-        "Internal": 4,
-        "Query": 15,
-        "Unknown": 11,
-        "Validator": 6,
-        "Factory": 25,
-        "Command": 1,
-        "Handler": 1,
-        "Lifecycle": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 66
-      }
-    }
-  ],
-  "Unknown|Query|general": [
-    {
-      "path": "standard-model-of-code/tools/validate_control_registry.py",
-      "node_count": 9,
-      "in_degree": 9,
-      "effect": "Read",
-      "roles": {
-        "Query": 5,
-        "Validator": 1,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9
-      }
-    },
-    {
-      "path": "standard-model-of-code/tools/batch_grade/fetch_repos.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/scripts/generate_repo_timestamps.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "Pure",
-      "roles": {
-        "Query": 1,
-        "Validator": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/extract_patterns.py",
-      "node_count": 7,
-      "in_degree": 5,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Command": 1,
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/curate_repos.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/find_disconnected_modules.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 2
-      }
-    },
-    {
-      "path": "context-management/tools/ai/intel.py",
-      "node_count": 19,
-      "in_degree": 27,
-      "effect": "Read",
-      "roles": {
-        "Query": 14,
-        "Utility": 4,
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 19
-      }
-    },
-    {
-      "path": "context-management/tools/ai/gemini_cache_demo.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/context_builder.py",
-      "node_count": 14,
-      "in_degree": 14,
-      "effect": "Read",
-      "roles": {
-        "Store": 1,
-        "Query": 5,
-        "Unknown": 5,
-        "Internal": 1,
-        "Utility": 2
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/repopack.py",
-      "node_count": 7,
-      "in_degree": 37,
-      "effect": "Read",
-      "roles": {
-        "Query": 5,
-        "Utility": 2
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/tier_orchestrator.py",
-      "node_count": 14,
-      "in_degree": 11,
-      "effect": "Read",
-      "roles": {
-        "Query": 4,
-        "Unknown": 4,
-        "Internal": 3,
-        "Validator": 1,
-        "Utility": 2
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": "context-management/tools/ai/aci/feedback_store.py",
-      "node_count": 14,
-      "in_degree": 12,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 2,
-        "Lifecycle": 1,
-        "Internal": 4,
-        "Query": 6,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": "context-management/tools/ai/deck/deck_context.py",
-      "node_count": 8,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Query": 6,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": "context-management/tools/refinery/delta_detector.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Command": 1,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "context-management/tools/refinery/boundary_mapper.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "Read",
-      "roles": {
-        "Query": 1,
-        "Unknown": 1,
-        "Factory": 1,
-        "Mapper": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 6
-      }
-    },
-    {
-      "path": "context-management/tools/refinery/state_synthesizer.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "Pure",
-      "roles": {
-        "Query": 1,
-        "Unknown": 1,
-        "Validator": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": "context-management/tools/refinery/corpus_inventory.py",
-      "node_count": 7,
-      "in_degree": 4,
-      "effect": "Read",
-      "roles": {
-        "Validator": 1,
-        "Query": 2,
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": ".agent/tools/play_card.py",
-      "node_count": 8,
-      "in_degree": 10,
-      "effect": "Read",
-      "roles": {
-        "Query": 4,
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": ".agent/tools/priority_matrix.py",
-      "node_count": 17,
-      "in_degree": 19,
-      "effect": "Read",
-      "roles": {
-        "Query": 8,
-        "Unknown": 7,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": ".agent/tools/confidence_validator.py",
-      "node_count": 12,
-      "in_degree": 9,
-      "effect": "Read",
-      "roles": {
-        "Internal": 1,
-        "Query": 6,
-        "Unknown": 2,
-        "Command": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 12
-      }
-    },
-    {
-      "path": ".agent/tools/sync_session_tasks.py",
-      "node_count": 8,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Handler": 1,
-        "Unknown": 1,
-        "Validator": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": ".agent/tools/session_manager.py",
-      "node_count": 17,
-      "in_degree": 40,
-      "effect": "Read",
-      "roles": {
-        "Query": 6,
-        "Handler": 1,
-        "Unknown": 6,
-        "Lifecycle": 1,
-        "Command": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 17
-      }
-    },
-    {
-      "path": ".agent/tools/lol_smoc_merger.py",
-      "node_count": 7,
-      "in_degree": 5,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Factory": 1,
-        "Unknown": 2,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 1,
-        "Unknown": 6
-      }
-    },
-    {
-      "path": ".agent/tools/size_normalizer.py",
-      "node_count": 5,
-      "in_degree": 3,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 5
-      }
-    },
-    {
-      "path": ".agent/tools/update_task_hierarchy.py",
-      "node_count": 7,
-      "in_degree": 6,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Command": 2,
-        "Factory": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 7
-      }
-    },
-    {
-      "path": ".agent/tools/validate_manifest.py",
-      "node_count": 8,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Validator": 2,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": ".agent/tools/lol_unify.py",
-      "node_count": 10,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Query": 4,
-        "Unknown": 3,
-        "Command": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": ".agent/tools/concierge.py",
-      "node_count": 11,
-      "in_degree": 9,
-      "effect": "Read",
-      "roles": {
-        "Query": 6,
-        "Unknown": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 11
-      }
-    },
-    {
-      "path": ".agent/tools/add_task_steps.py",
-      "node_count": 8,
-      "in_degree": 9,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Command": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": ".agent/tools/batch_promote.py",
-      "node_count": 10,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Query": 4,
-        "Command": 1,
-        "Validator": 1,
-        "Unknown": 1,
-        "Controller": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 10
-      }
-    },
-    {
-      "path": ".agent/tools/sprint.py",
-      "node_count": 8,
-      "in_degree": 7,
-      "effect": "ReadWrite",
-      "roles": {
-        "Query": 2,
-        "Command": 1,
-        "Handler": 1,
-        "Validator": 1,
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": ".agent/tools/trigger_engine.py",
-      "node_count": 14,
-      "in_degree": 16,
-      "effect": "Read",
-      "roles": {
-        "Query": 5,
-        "Command": 2,
-        "Unknown": 4,
-        "DomainService": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 14
-      }
-    },
-    {
-      "path": ".agent/tools/deal_cards_ui.py",
-      "node_count": 15,
-      "in_degree": 20,
-      "effect": "Read",
-      "roles": {
-        "Query": 6,
-        "Unknown": 6,
-        "Utility": 2,
-        "Factory": 1
-      },
-      "layers": {
-        "Unknown": 15
-      }
-    },
-    {
-      "path": ".agent/tools/cloud/sync_registry.py",
-      "node_count": 8,
-      "in_degree": 6,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Unknown": 3,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 8
-      }
-    },
-    {
-      "path": ".agent/tools/cloud/auto_boost_function.py",
-      "node_count": 9,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Query": 3,
-        "Unknown": 2,
-        "Command": 1,
-        "Controller": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 9
-      }
-    }
-  ],
-  "Unknown|Validator|general": [
-    {
-      "path": "standard-model-of-code/tools/verify_animation.py",
+      "path": "collider_pipeline_files/libs/quarto-html/quarto.js",
       "node_count": 2,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Validator": 1,
-        "Utility": 1
+        "Internal": 2
       },
       "layers": {
         "Unknown": 2
+      },
+      "purposes": {
+        "Transform(Orphan)": 2
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
       }
     },
     {
-      "path": "standard-model-of-code/tools/research/validate_audit_pack.py",
-      "node_count": 13,
-      "in_degree": 15,
-      "effect": "Pure",
+      "path": "collider_pipeline_files/libs/quarto-html/tabsets/tabsets.js",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Mapper": 1,
-        "Internal": 2,
-        "Lifecycle": 1,
-        "Query": 1,
-        "Unknown": 1,
-        "Validator": 5,
-        "Controller": 1,
-        "Utility": 1
+        "Internal": 1
       },
       "layers": {
-        "Unknown": 13
+        "Unknown": 1
+      },
+      "purposes": {
+        "Transform(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
       }
     },
     {
-      "path": "standard-model-of-code/scripts/verify_polyglot.py",
+      "path": "collider_pipeline_files/libs/quarto-html/axe/axe-check.js",
+      "node_count": 6,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 6
+      },
+      "layers": {
+        "Unknown": 6
+      },
+      "purposes": {
+        "Transform(Orphan)": 6
+      },
+      "sys_purposes": {
+        "UnknownSystem": 6
+      }
+    },
+    {
+      "path": "schema/types.ts",
       "node_count": 3,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Validator": 2,
-        "Utility": 1
+        "Internal": 3
       },
       "layers": {
         "Unknown": 3
+      },
+      "purposes": {
+        "Transform(Orphan)": 3
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
     },
     {
-      "path": "standard-model-of-code/src/scripts/verify_standard_code.py",
-      "node_count": 9,
-      "in_degree": 7,
-      "effect": "Pure",
+      "path": "src/integrations/flash-ui/tokens-bridge.ts",
+      "node_count": 11,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Query": 1,
-        "Validator": 6,
-        "Controller": 1,
-        "Utility": 1
+        "Internal": 11
       },
       "layers": {
-        "Unknown": 9
+        "Unknown": 11
+      },
+      "purposes": {
+        "Transform(Orphan)": 11
+      },
+      "sys_purposes": {
+        "UnknownSystem": 11
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/OKLCHColorPicker.tsx",
+      "node_count": 3,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 3
+      },
+      "layers": {
+        "Unknown": 3
+      },
+      "purposes": {
+        "Transform(Orphan)": 3
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/index.ts",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 1
+      },
+      "layers": {
+        "Unknown": 1
+      },
+      "purposes": {
+        "Transform(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/app/index.tsx",
+      "node_count": 2,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 2
+      },
+      "layers": {
+        "Unknown": 2
+      },
+      "purposes": {
+        "Transform(Orphan)": 2
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/app/components/SideDrawer.tsx",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 1
+      },
+      "layers": {
+        "Unknown": 1
+      },
+      "purposes": {
+        "Transform(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/app/components/DottedGlowBackground.tsx",
+      "node_count": 2,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 2
+      },
+      "layers": {
+        "Unknown": 2
+      },
+      "purposes": {
+        "Transform(Orphan)": 2
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/app/components/OKLCHColorPicker.tsx",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 1
+      },
+      "layers": {
+        "Unknown": 1
+      },
+      "purposes": {
+        "Transform(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
+      }
+    },
+    {
+      "path": "src/integrations/flash-ui/app/components/ArtifactCard.tsx",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 1
+      },
+      "layers": {
+        "Unknown": 1
+      },
+      "purposes": {
+        "Transform(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
       }
     }
   ],
-  "Test|Asserter|testing": [
+  "Test|Initiate|TestSuite|testing": [
     {
-      "path": "standard-model-of-code/tests/test_scope_analyzer.py",
+      "path": "tests/test_scope_analyzer.py",
       "node_count": 27,
       "in_degree": 15,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Utility": 2,
         "Asserter": 23,
@@ -2481,13 +993,25 @@
       },
       "layers": {
         "Test": 27
+      },
+      "purposes": {
+        "Coordinate": 1,
+        "Transform(Orphan)": 7,
+        "Initiate": 18,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 27
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_output_generator.py",
+      "path": "tests/test_output_generator.py",
       "node_count": 9,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 5,
         "Handler": 3,
@@ -2495,13 +1019,24 @@
       },
       "layers": {
         "Test": 9
+      },
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Initiate": 6,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 9
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_cci.py",
+      "path": "tests/test_cci.py",
       "node_count": 14,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 12,
         "Handler": 1,
@@ -2509,13 +1044,24 @@
       },
       "layers": {
         "Test": 14
+      },
+      "purposes": {
+        "Transform(Orphan)": 3,
+        "Initiate": 10,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 14
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_import_resolution.py",
+      "path": "tests/test_import_resolution.py",
       "node_count": 5,
       "in_degree": 3,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Internal": 1,
         "Asserter": 3,
@@ -2523,13 +1069,24 @@
       },
       "layers": {
         "Test": 5
+      },
+      "purposes": {
+        "Persist": 1,
+        "Initiate": 3,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 5
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_control_flow_analyzer.py",
+      "path": "tests/test_control_flow_analyzer.py",
       "node_count": 34,
       "in_degree": 18,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Utility": 2,
         "Asserter": 28,
@@ -2537,13 +1094,25 @@
       },
       "layers": {
         "Test": 34
+      },
+      "purposes": {
+        "Coordinate": 1,
+        "Transform(Orphan)": 6,
+        "Initiate": 26,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 34
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_purpose_field.py",
+      "path": "tests/test_purpose_field.py",
       "node_count": 15,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 10,
         "Store": 1,
@@ -2552,26 +1121,47 @@
       },
       "layers": {
         "Test": 15
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Initiate": 13,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 15
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_identity_matcher.py",
+      "path": "tests/test_identity_matcher.py",
       "node_count": 11,
       "in_degree": 0,
       "effect": "Write",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 10,
         "Utility": 1
       },
       "layers": {
         "Test": 11
+      },
+      "purposes": {
+        "Initiate": 10,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 11
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_data_flow_analyzer.py",
+      "path": "tests/test_data_flow_analyzer.py",
       "node_count": 49,
       "in_degree": 27,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Utility": 2,
         "Asserter": 45,
@@ -2579,13 +1169,25 @@
       },
       "layers": {
         "Test": 49
+      },
+      "purposes": {
+        "Coordinate": 1,
+        "Transform(Orphan)": 9,
+        "Initiate": 38,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 49
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_insights_engine.py",
+      "path": "tests/test_insights_engine.py",
       "node_count": 11,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 8,
         "Store": 1,
@@ -2594,13 +1196,24 @@
       },
       "layers": {
         "Test": 11
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Initiate": 9,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 11
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_parse_errors.py",
+      "path": "tests/test_parse_errors.py",
       "node_count": 15,
       "in_degree": 12,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 11,
         "Internal": 1,
@@ -2609,13 +1222,25 @@
       },
       "layers": {
         "Test": 15
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Coordinate": 1,
+        "Initiate": 12,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 15
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_role_registry.py",
+      "path": "tests/test_role_registry.py",
       "node_count": 21,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 14,
         "Handler": 6,
@@ -2623,13 +1248,24 @@
       },
       "layers": {
         "Test": 21
+      },
+      "purposes": {
+        "Transform(Orphan)": 5,
+        "Initiate": 15,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 21
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_semantic_indexer.py",
+      "path": "tests/test_semantic_indexer.py",
       "node_count": 48,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Store": 2,
         "Asserter": 45,
@@ -2637,26 +1273,49 @@
       },
       "layers": {
         "Test": 48
+      },
+      "purposes": {
+        "Retrieve(Orphan)": 2,
+        "Transform(Orphan)": 11,
+        "Initiate": 34,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 48
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_wave_extractor.py",
+      "path": "tests/test_wave_extractor.py",
       "node_count": 12,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 11,
         "Utility": 1
       },
       "layers": {
         "Test": 12
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Initiate": 10,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 12
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_domain_separation_guardrails.py",
+      "path": "tests/test_domain_separation_guardrails.py",
       "node_count": 18,
       "in_degree": 14,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Internal": 6,
         "Asserter": 11,
@@ -2664,13 +1323,27 @@
       },
       "layers": {
         "Test": 18
+      },
+      "purposes": {
+        "Gateway": 1,
+        "Intake": 3,
+        "Process": 1,
+        "Initiate": 7,
+        "Transform(Orphan)": 5,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 18
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_contract_output.py",
+      "path": "tests/test_contract_output.py",
       "node_count": 5,
       "in_degree": 3,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Internal": 1,
         "Asserter": 3,
@@ -2678,13 +1351,24 @@
       },
       "layers": {
         "Test": 5
+      },
+      "purposes": {
+        "Transform": 1,
+        "Initiate": 3,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 5
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_viz_tokens.py",
+      "path": "tests/test_viz_tokens.py",
       "node_count": 4,
       "in_degree": 2,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Internal": 1,
         "Asserter": 2,
@@ -2692,13 +1376,24 @@
       },
       "layers": {
         "Test": 4
+      },
+      "purposes": {
+        "Intake": 1,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 4
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_visibility_analyzer.py",
+      "path": "tests/test_visibility_analyzer.py",
       "node_count": 14,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Handler": 2,
         "Asserter": 11,
@@ -2706,13 +1401,23 @@
       },
       "layers": {
         "Test": 14
+      },
+      "purposes": {
+        "Initiate": 13,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 14
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_topology_reasoning.py",
+      "path": "tests/test_topology_reasoning.py",
       "node_count": 46,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 41,
         "Lifecycle": 3,
@@ -2721,26 +1426,48 @@
       },
       "layers": {
         "Test": 46
+      },
+      "purposes": {
+        "Transform(Orphan)": 6,
+        "Initiate": 39,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 46
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_entrypoint_expansion.py",
+      "path": "tests/test_entrypoint_expansion.py",
       "node_count": 25,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 24,
         "Utility": 1
       },
       "layers": {
         "Test": 25
+      },
+      "purposes": {
+        "Transform(Orphan)": 7,
+        "Initiate": 17,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 25
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_react_t2_detection.py",
+      "path": "tests/test_react_t2_detection.py",
       "node_count": 25,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 21,
         "Store": 1,
@@ -2749,13 +1476,24 @@
       },
       "layers": {
         "Test": 25
+      },
+      "purposes": {
+        "Transform(Orphan)": 7,
+        "Initiate": 17,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 25
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_pipeline.py",
+      "path": "tests/test_pipeline.py",
       "node_count": 45,
       "in_degree": 24,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 24,
         "Lifecycle": 2,
@@ -2766,13 +1504,28 @@
       },
       "layers": {
         "Test": 45
+      },
+      "purposes": {
+        "Transform": 5,
+        "Transform(Orphan)": 7,
+        "Retrieve(Orphan)": 9,
+        "Persist(Orphan)": 2,
+        "Compute": 2,
+        "Initiate": 19,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 45
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_pattern_matcher.py",
+      "path": "tests/test_pattern_matcher.py",
       "node_count": 21,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Utility": 2,
         "Asserter": 18,
@@ -2780,13 +1533,24 @@
       },
       "layers": {
         "Test": 21
+      },
+      "purposes": {
+        "Initiate": 14,
+        "Transform(Orphan)": 6,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 21
       }
     },
     {
-      "path": "standard-model-of-code/tests/test_query_loader.py",
+      "path": "tests/test_query_loader.py",
       "node_count": 27,
-      "in_degree": 1,
+      "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 20,
         "Store": 2,
@@ -2795,13 +1559,24 @@
       },
       "layers": {
         "Test": 27
+      },
+      "purposes": {
+        "Transform(Orphan)": 4,
+        "Initiate": 22,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "TestSuite": 27
       }
     },
     {
-      "path": "standard-model-of-code/tests/specs/test_auto_pattern_discovery.py",
+      "path": "tests/specs/test_auto_pattern_discovery.py",
       "node_count": 26,
       "in_degree": 22,
       "effect": "ReadWrite",
+      "role": "Asserter",
+      "purpose": "Initiate",
+      "sys_purpose": "TestSuite",
       "roles": {
         "Asserter": 22,
         "Unknown": 1,
@@ -2811,291 +1586,162 @@
       },
       "layers": {
         "Test": 26
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_entry_pytest/test_example.py",
-      "node_count": 6,
-      "in_degree": 3,
-      "effect": "ReadWrite",
-      "roles": {
-        "Utility": 2,
-        "Asserter": 4
       },
-      "layers": {
-        "Test": 6
-      }
-    },
-    {
-      "path": "context-management/tools/ai/test_vertex_sdk.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Asserter": 1,
-        "Utility": 1
+      "purposes": {
+        "Transform": 2,
+        "Transform(Orphan)": 1,
+        "Initiate": 22,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Test": 2
-      }
-    },
-    {
-      "path": "context-management/tests/test_aci_caching.py",
-      "node_count": 11,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Asserter": 10,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 11
+      "sys_purposes": {
+        "TestSuite": 26
       }
     }
   ],
-  "Test|Unknown|general": [
+  "Unknown|Gateway|UnknownSystem|general": [
     {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_file_node/pkg/a.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_call_file_node_shadow/pkg/main.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_ambiguous/json.py",
-      "node_count": 2,
-      "in_degree": 58,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_ambiguous/pkg/a.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 2
-      }
-    }
-  ],
-  "Test|Utility|general": [
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_proof_import_invariance_no_import/app.py",
-      "node_count": 3,
-      "in_degree": 3,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 2,
-        "Controller": 1
-      },
-      "layers": {
-        "Test": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_entry_fastapi/app.py",
-      "node_count": 6,
-      "in_degree": 4,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 2,
-        "Unknown": 1,
-        "Factory": 1,
-        "Controller": 2
-      },
-      "layers": {
-        "Test": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_entry_flask/app.py",
+      "path": "scripts/output_parity.py",
       "node_count": 5,
-      "in_degree": 8,
-      "effect": "Pure",
+      "in_degree": 3,
+      "effect": "Write",
+      "role": "Unknown",
+      "purpose": "Gateway",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Utility": 2,
+        "Handler": 1,
         "Unknown": 2,
-        "Factory": 1
+        "Controller": 1,
+        "Utility": 1
       },
       "layers": {
-        "Test": 5
+        "Unknown": 5
+      },
+      "purposes": {
+        "Gateway": 1,
+        "Intake": 1,
+        "Persist": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 5
       }
     },
     {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_internal/pkg/b.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "Pure",
+      "path": "src/scripts/run_benchmark.py",
+      "node_count": 14,
+      "in_degree": 10,
+      "effect": "ReadWrite",
+      "role": "Command",
+      "purpose": "Gateway",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Utility": 2
-      },
-      "layers": {
-        "Test": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_proof_import_invariance_with_import/app.py",
-      "node_count": 3,
-      "in_degree": 1,
-      "effect": "Pure",
-      "roles": {
+        "Query": 2,
+        "Command": 3,
+        "Unknown": 3,
+        "Controller": 2,
         "Utility": 2,
+        "Asserter": 1,
+        "Validator": 1
+      },
+      "layers": {
+        "Unknown": 13,
+        "Test": 1
+      },
+      "purposes": {
+        "Intake": 1,
+        "Sender": 1,
+        "Intake(Orphan)": 1,
+        "Sender(Orphan)": 1,
+        "Persist": 1,
+        "Generate": 1,
+        "Emit": 1,
+        "Compute": 2,
+        "Gateway": 3,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 14
+      }
+    }
+  ],
+  "Unknown|Retrieve|ScatteredSystem|general": [
+    {
+      "path": "src/tools/extract_chat_insights.py",
+      "node_count": 16,
+      "in_degree": 32,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 9,
+        "Lifecycle": 1,
+        "Utility": 2,
+        "Internal": 1,
+        "Handler": 1,
+        "Query": 1,
         "Controller": 1
       },
       "layers": {
-        "Test": 3
+        "Unknown": 16
+      },
+      "purposes": {
+        "Transform": 4,
+        "Transform(Orphan)": 1,
+        "Compute": 1,
+        "Retrieve": 7,
+        "Persist": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 16
       }
     },
     {
-      "path": "standard-model-of-code/tests/fixtures/toy_entry_typer/app.py",
-      "node_count": 5,
-      "in_degree": 2,
-      "effect": "Pure",
+      "path": "src/tools/dedupe_insights.py",
+      "node_count": 14,
+      "in_degree": 14,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
       "roles": {
-        "Utility": 2,
+        "Unknown": 9,
+        "Lifecycle": 1,
+        "Query": 2,
         "Controller": 1,
-        "Command": 1,
-        "Unknown": 1
-      },
-      "layers": {
-        "Test": 5
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_file_node/pkg/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
         "Utility": 1
       },
       "layers": {
-        "Test": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_file_node/pkg/c.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
+        "Unknown": 14
       },
-      "layers": {
-        "Test": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_call_file_node_shadow/pkg/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
+      "purposes": {
+        "Transform": 2,
+        "Retrieve": 5,
+        "Transform(Orphan)": 1,
+        "Emit": 1,
+        "Generate": 2,
+        "Gateway": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Test": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_internal/pkg/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/toy_import_ambiguous/pkg/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Test": 1
+      "sys_purposes": {
+        "ScatteredSystem": 14
       }
     }
   ],
-  "Test|Internal|general": [
+  "Core|Transform|MixedResponsibility|general": [
     {
-      "path": "standard-model-of-code/tests/fixtures/react_t2/hooks_component.tsx",
-      "node_count": 3,
-      "in_degree": 38,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 3
-      },
-      "layers": {
-        "Test": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/tests/fixtures/react_t2/class_component.tsx",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Test": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/upb/tests/holographic_simulation.js",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Test": 1
-      }
-    }
-  ],
-  "Core|Unknown|general": [
-    {
-      "path": "standard-model-of-code/src/core/topology_reasoning.py",
+      "path": "src/core/topology_reasoning.py",
       "node_count": 31,
       "in_degree": 71,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
         "Unknown": 18,
         "Lifecycle": 2,
@@ -3106,62 +1752,455 @@
       },
       "layers": {
         "Core": 31
+      },
+      "purposes": {
+        "Transform": 7,
+        "Retrieve(Orphan)": 5,
+        "Transform(Orphan)": 2,
+        "Gateway": 1,
+        "Process": 3,
+        "Compute(Orphan)": 2,
+        "Coordinate": 2,
+        "Retrieve": 6,
+        "Intake": 3
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 31
       }
     },
     {
-      "path": "standard-model-of-code/src/core/survey.py",
-      "node_count": 33,
-      "in_degree": 36,
-      "effect": "Read",
+      "path": "src/core/purpose_field.py",
+      "node_count": 15,
+      "in_degree": 27,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
-        "Internal": 8,
-        "Unknown": 18,
-        "Transformer": 1,
-        "Handler": 3,
-        "Controller": 1,
-        "Store": 1,
+        "Unknown": 7,
+        "Lifecycle": 1,
+        "Internal": 6,
         "Utility": 1
       },
       "layers": {
-        "Core": 33
+        "Core": 15
+      },
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Transform": 5,
+        "Retrieve(Orphan)": 1,
+        "Coordinate": 1,
+        "Process": 1,
+        "Persist": 2,
+        "Intake": 1,
+        "Retrieve": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 15
       }
     },
     {
-      "path": "standard-model-of-code/src/core/purpose_intelligence.py",
-      "node_count": 14,
-      "in_degree": 14,
-      "effect": "ReadWrite",
+      "path": "src/core/symbol_indexer.py",
+      "node_count": 23,
+      "in_degree": 28,
+      "effect": "Read",
+      "role": "Internal",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
-        "Unknown": 12,
+        "Unknown": 8,
+        "Internal": 9,
+        "Lifecycle": 1,
+        "Handler": 1,
+        "Query": 3,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 23
+      },
+      "purposes": {
+        "Transform": 8,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 5,
+        "Retrieve": 6,
+        "Generate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 23
+      }
+    },
+    {
+      "path": "src/core/performance_predictor.py",
+      "node_count": 15,
+      "in_degree": 13,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
+      "roles": {
+        "Unknown": 7,
+        "Lifecycle": 1,
+        "Internal": 6,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 15
+      },
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Transform": 5,
+        "Retrieve(Orphan)": 1,
+        "Process": 1,
+        "Persist": 2,
+        "Retrieve": 3,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 15
+      }
+    },
+    {
+      "path": "src/core/execution_flow.py",
+      "node_count": 23,
+      "in_degree": 20,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
+      "roles": {
+        "Unknown": 8,
+        "Internal": 11,
+        "Lifecycle": 1,
+        "Handler": 2,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 23
+      },
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Transform": 6,
+        "Retrieve(Orphan)": 2,
+        "Coordinate": 1,
+        "Process": 3,
+        "Retrieve": 5,
+        "Intake": 3,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 23
+      }
+    },
+    {
+      "path": "src/core/deviation_tracker.py",
+      "node_count": 25,
+      "in_degree": 30,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
+      "roles": {
+        "Unknown": 11,
+        "Internal": 7,
+        "Mapper": 4,
+        "Lifecycle": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 25
+      },
+      "purposes": {
+        "Transform": 8,
+        "Retrieve(Orphan)": 1,
+        "Compute": 1,
+        "Persist": 1,
+        "Initiate": 5,
+        "Produce": 1,
+        "Emit": 1,
+        "Generate": 3,
+        "Retrieve": 2,
+        "Process": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 25
+      }
+    },
+    {
+      "path": "src/core/constraint_engine.py",
+      "node_count": 15,
+      "in_degree": 16,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Transform",
+      "sys_purpose": "MixedResponsibility",
+      "roles": {
+        "Unknown": 5,
         "Mapper": 1,
+        "Lifecycle": 1,
+        "Internal": 3,
+        "Validator": 4,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 15
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Transform": 4,
+        "Compute": 4,
+        "Initiate": 2,
+        "Gateway": 1,
+        "Intake": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 15
+      }
+    }
+  ],
+  "Core|Retrieve|MixedResponsibility|general": [
+    {
+      "path": "src/core/tree_sitter_engine.py",
+      "node_count": 27,
+      "in_degree": 65,
+      "effect": "Read",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "MixedResponsibility",
+      "roles": {
+        "Unknown": 5,
+        "Query": 3,
+        "Internal": 11,
+        "Utility": 2,
+        "Validator": 1,
+        "Lifecycle": 1,
+        "Controller": 2,
+        "Handler": 2
+      },
+      "layers": {
+        "Core": 27
+      },
+      "purposes": {
+        "Retrieve(Orphan)": 2,
+        "Retrieve": 7,
+        "Initiate": 7,
+        "Transform": 2,
+        "Persist": 1,
+        "Compute": 2,
+        "Receiver": 1,
+        "Coordinate": 1,
+        "Intake": 2,
+        "Gateway": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 27
+      }
+    },
+    {
+      "path": "src/core/dimension_classifier.py",
+      "node_count": 31,
+      "in_degree": 31,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "MixedResponsibility",
+      "roles": {
+        "Unknown": 22,
+        "Lifecycle": 3,
+        "Internal": 4,
+        "Query": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 31
+      },
+      "purposes": {
+        "Transform(Orphan)": 5,
+        "Transform": 4,
+        "Retrieve": 6,
+        "Generate": 1,
+        "Intake": 4,
+        "Persist(Orphan)": 2,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 6,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 31
+      }
+    }
+  ],
+  "Core|Retrieve|ScatteredSystem|general": [
+    {
+      "path": "src/core/god_class_detector_lite.py",
+      "node_count": 12,
+      "in_degree": 9,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 3,
+        "Lifecycle": 1,
+        "Controller": 1,
+        "Internal": 6,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 12
+      },
+      "purposes": {
+        "Transform": 2,
+        "Transform(Orphan)": 1,
+        "Initiate": 1,
+        "Retrieve": 3,
+        "Intake": 2,
+        "Gateway": 1,
+        "Generate(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 12
+      }
+    },
+    {
+      "path": "src/core/pattern_matcher.py",
+      "node_count": 13,
+      "in_degree": 41,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Internal": 4,
+        "Unknown": 6,
+        "Lifecycle": 1,
+        "Query": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 13
+      },
+      "purposes": {
+        "Retrieve": 4,
+        "Transform": 2,
+        "Transform(Orphan)": 1,
+        "Receiver": 1,
+        "Coordinate": 1,
+        "Intake": 1,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 13
+      }
+    },
+    {
+      "path": "src/core/file_enricher.py",
+      "node_count": 14,
+      "in_degree": 13,
+      "effect": "Read",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 4,
+        "Lifecycle": 1,
+        "Internal": 8,
         "Utility": 1
       },
       "layers": {
         "Core": 14
+      },
+      "purposes": {
+        "Transform": 1,
+        "Initiate": 2,
+        "Emit": 1,
+        "Generate": 2,
+        "Retrieve": 4,
+        "Intake": 3,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 14
       }
     },
     {
-      "path": "standard-model-of-code/src/core/unified_analysis.py",
-      "node_count": 9,
-      "in_degree": 33,
+      "path": "src/core/smart_extractor.py",
+      "node_count": 14,
+      "in_degree": 12,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
       "roles": {
         "Unknown": 4,
+        "Lifecycle": 1,
+        "Internal": 7,
+        "Utility": 2
+      },
+      "layers": {
+        "Core": 14
+      },
+      "purposes": {
+        "Transform": 3,
+        "Transform(Orphan)": 2,
+        "Intake": 1,
+        "Retrieve": 4,
+        "Process": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 2
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 14
+      }
+    },
+    {
+      "path": "src/core/viz/controls_engine.py",
+      "node_count": 16,
+      "in_degree": 12,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Retrieve",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 2,
+        "Lifecycle": 1,
+        "Query": 9,
+        "Internal": 2,
         "Mapper": 1,
-        "Factory": 1,
-        "Controller": 1,
-        "Internal": 1,
         "Utility": 1
       },
       "layers": {
-        "Core": 9
+        "Core": 16
+      },
+      "purposes": {
+        "Transform": 1,
+        "Initiate": 5,
+        "Retrieve": 7,
+        "Intake": 1,
+        "Receiver": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 16
       }
-    },
+    }
+  ],
+  "Core|Initiate|MixedResponsibility|general": [
     {
-      "path": "standard-model-of-code/src/core/edge_extractor.py",
+      "path": "src/core/edge_extractor.py",
       "node_count": 69,
       "in_degree": 89,
       "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
         "Unknown": 40,
         "Lifecycle": 5,
@@ -3173,164 +2212,31 @@
       },
       "layers": {
         "Core": 69
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/graph_framework.py",
-      "node_count": 8,
-      "in_degree": 39,
-      "effect": "Read",
-      "roles": {
-        "Factory": 1,
-        "Unknown": 3,
-        "Query": 2,
-        "Controller": 1,
-        "Utility": 1
       },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/purpose_field.py",
-      "node_count": 15,
-      "in_degree": 27,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 7,
-        "Lifecycle": 1,
-        "Internal": 6,
-        "Utility": 1
+      "purposes": {
+        "Transform": 14,
+        "Coordinate": 5,
+        "Intake": 4,
+        "Retrieve(Orphan)": 5,
+        "Retrieve": 17,
+        "Persist": 1,
+        "Transform(Orphan)": 2,
+        "Initiate": 19,
+        "Process": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Core": 15
+      "sys_purposes": {
+        "MixedResponsibility": 69
       }
     },
     {
-      "path": "standard-model-of-code/src/core/atom_registry.py",
-      "node_count": 16,
-      "in_degree": 12,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 6,
-        "Lifecycle": 1,
-        "Internal": 4,
-        "Query": 3,
-        "Command": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 16
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pattern_matcher.py",
-      "node_count": 13,
-      "in_degree": 41,
-      "effect": "Read",
-      "roles": {
-        "Internal": 4,
-        "Unknown": 6,
-        "Lifecycle": 1,
-        "Query": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 13
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/brain_download.py",
-      "node_count": 3,
-      "in_degree": 3,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/scientific_charts.py",
-      "node_count": 18,
-      "in_degree": 5,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 13,
-        "Lifecycle": 1,
-        "Internal": 1,
-        "Query": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 18
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/graph_metrics.py",
-      "node_count": 7,
-      "in_degree": 19,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Query": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/purpose_emergence.py",
-      "node_count": 9,
-      "in_degree": 15,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 7,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 9
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/universal_detector.py",
-      "node_count": 5,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 1,
-        "Lifecycle": 1,
-        "Controller": 1,
-        "Query": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 5
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/extract_orphans.py",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/observability.py",
+      "path": "src/core/observability.py",
       "node_count": 21,
       "in_degree": 25,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "MixedResponsibility",
       "roles": {
         "Unknown": 7,
         "Mapper": 2,
@@ -3343,86 +2249,434 @@
       },
       "layers": {
         "Core": 21
+      },
+      "purposes": {
+        "Transform": 4,
+        "Compute": 1,
+        "Transform(Orphan)": 1,
+        "Persist": 2,
+        "Retrieve": 2,
+        "Gateway": 1,
+        "Initiate": 7,
+        "Persist(Orphan)": 1,
+        "Emit": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "MixedResponsibility": 21
+      }
+    }
+  ],
+  "Core|Retrieve|UnknownSystem|general": [
+    {
+      "path": "src/core/graph_framework.py",
+      "node_count": 8,
+      "in_degree": 39,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Factory": 1,
+        "Unknown": 3,
+        "Query": 2,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 8
+      },
+      "purposes": {
+        "Coordinate": 1,
+        "Persist": 1,
+        "Retrieve": 2,
+        "Intake": 1,
+        "Retrieve(Orphan)": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 8
       }
     },
     {
-      "path": "standard-model-of-code/src/core/performance_predictor.py",
-      "node_count": 15,
-      "in_degree": 13,
+      "path": "src/core/graph_metrics.py",
+      "node_count": 7,
+      "in_degree": 19,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Unknown": 4,
+        "Query": 1,
+        "Controller": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 7
+      },
+      "purposes": {
+        "Persist": 1,
+        "Process": 1,
+        "Retrieve": 2,
+        "Transform": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 7
+      }
+    },
+    {
+      "path": "src/core/output_generator.py",
+      "node_count": 8,
+      "in_degree": 14,
+      "effect": "Read",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 4,
+        "Unknown": 3,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 8
+      },
+      "purposes": {
+        "Retrieve": 2,
+        "Intake": 1,
+        "Transform": 1,
+        "Sender": 1,
+        "Persist": 1,
+        "Coordinate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 8
+      }
+    },
+    {
+      "path": "src/core/analytics_engine.py",
+      "node_count": 8,
+      "in_degree": 10,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Handler": 1,
+        "Unknown": 6,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 8
+      },
+      "purposes": {
+        "Retrieve": 4,
+        "Initiate": 1,
+        "Process": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 8
+      }
+    }
+  ],
+  "Core|Initiate|ScatteredSystem|general": [
+    {
+      "path": "src/core/atom_registry.py",
+      "node_count": 16,
+      "in_degree": 12,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 6,
+        "Lifecycle": 1,
+        "Internal": 4,
+        "Query": 3,
+        "Command": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 16
+      },
+      "purposes": {
+        "Transform": 4,
+        "Initiate": 5,
+        "Process": 2,
+        "Intake": 3,
+        "Retrieve(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 16
+      }
+    },
+    {
+      "path": "src/core/scientific_charts.py",
+      "node_count": 18,
+      "in_degree": 5,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 13,
+        "Lifecycle": 1,
+        "Internal": 1,
+        "Query": 2,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 18
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Transform": 1,
+        "Initiate": 10,
+        "Process": 1,
+        "Intake": 1,
+        "Retrieve(Orphan)": 1,
+        "Emit": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 18
+      }
+    },
+    {
+      "path": "src/core/type_registry.py",
+      "node_count": 20,
+      "in_degree": 27,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Initiate",
+      "sys_purpose": "ScatteredSystem",
       "roles": {
         "Unknown": 7,
         "Lifecycle": 1,
-        "Internal": 6,
+        "Internal": 1,
+        "Query": 8,
+        "Validator": 2,
         "Utility": 1
       },
       "layers": {
-        "Core": 15
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/ir.py",
-      "node_count": 10,
-      "in_degree": 6,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Command": 2,
-        "Mapper": 2,
-        "Utility": 1
+        "Core": 20
       },
-      "layers": {
-        "Core": 10
+      "purposes": {
+        "Transform": 1,
+        "Transform(Orphan)": 1,
+        "Initiate": 8,
+        "Process": 1,
+        "Retrieve": 5,
+        "Compute": 1,
+        "Intake": 1,
+        "Retrieve(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 20
       }
     },
     {
-      "path": "standard-model-of-code/src/core/semantic_cortex.py",
-      "node_count": 5,
-      "in_degree": 5,
+      "path": "src/core/data_management.py",
+      "node_count": 21,
+      "in_degree": 20,
       "effect": "Read",
+      "role": "Query",
+      "purpose": "Initiate",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Validator": 3,
+        "Unknown": 4,
+        "Lifecycle": 1,
+        "Query": 11,
+        "Command": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 21
+      },
+      "purposes": {
+        "Compute": 3,
+        "Transform": 2,
+        "Transform(Orphan)": 1,
+        "Receiver": 1,
+        "Initiate": 6,
+        "Intake": 2,
+        "Retrieve(Orphan)": 3,
+        "Retrieve": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 21
+      }
+    },
+    {
+      "path": "src/core/registry/role_registry.py",
+      "node_count": 14,
+      "in_degree": 14,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 6,
+        "Lifecycle": 1,
+        "Internal": 1,
+        "Validator": 1,
+        "Query": 4,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 14
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Transform": 1,
+        "Initiate": 6,
+        "Gateway": 1,
+        "Compute": 1,
+        "Retrieve": 2,
+        "Retrieve(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 14
+      }
+    }
+  ],
+  "Core|Process|UnknownSystem|general": [
+    {
+      "path": "src/core/brain_download.py",
+      "node_count": 3,
+      "in_degree": 3,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Process",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Unknown": 2,
-        "Internal": 2,
         "Utility": 1
       },
       "layers": {
-        "Core": 5
+        "Core": 3
+      },
+      "purposes": {
+        "Process": 1,
+        "Initiate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
     },
     {
-      "path": "standard-model-of-code/src/core/generate_health_report.py",
-      "node_count": 2,
-      "in_degree": 0,
+      "path": "src/core/purpose_emergence.py",
+      "node_count": 9,
+      "in_degree": 15,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Process",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 1,
+        "Unknown": 7,
+        "Controller": 1,
         "Utility": 1
       },
       "layers": {
-        "Core": 2
+        "Core": 9
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Transform": 1,
+        "Process": 3,
+        "Persist": 1,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 9
+      }
+    }
+  ],
+  "Core|Initiate|Composite|general": [
+    {
+      "path": "src/core/profile_loader.py",
+      "node_count": 17,
+      "in_degree": 12,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Initiate",
+      "sys_purpose": "Composite",
+      "roles": {
+        "Unknown": 3,
+        "Validator": 1,
+        "Query": 8,
+        "Handler": 3,
+        "Lifecycle": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 17
+      },
+      "purposes": {
+        "Transform": 3,
+        "Initiate": 4,
+        "Intake": 4,
+        "Transform(Orphan)": 1,
+        "Retrieve(Orphan)": 2,
+        "Retrieve": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Composite": 17
       }
     },
     {
-      "path": "standard-model-of-code/src/core/dimension_classifier.py",
-      "node_count": 27,
-      "in_degree": 26,
-      "effect": "Read",
+      "path": "src/core/pipeline/snapshot.py",
+      "node_count": 10,
+      "in_degree": 4,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Initiate",
+      "sys_purpose": "Composite",
       "roles": {
-        "Unknown": 18,
-        "Lifecycle": 3,
-        "Internal": 4,
+        "Unknown": 5,
+        "Mapper": 3,
         "Query": 1,
         "Utility": 1
       },
       "layers": {
-        "Core": 27
+        "Core": 10
+      },
+      "purposes": {
+        "Transform": 1,
+        "Transform(Orphan)": 2,
+        "Compute": 1,
+        "Initiate": 3,
+        "Generate": 1,
+        "Retrieve(Orphan)": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Composite": 10
       }
-    },
+    }
+  ],
+  "Core|Retrieve|RetrieveSystem|general": [
     {
-      "path": "standard-model-of-code/src/core/wave_extractor.py",
+      "path": "src/core/wave_extractor.py",
       "node_count": 12,
       "in_degree": 36,
       "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "RetrieveSystem",
       "roles": {
         "Unknown": 5,
         "Lifecycle": 1,
@@ -3431,48 +2685,123 @@
       },
       "layers": {
         "Core": 12
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/symmetry_reporter.py",
-      "node_count": 15,
-      "in_degree": 13,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Internal": 2,
-        "Mapper": 4,
-        "Query": 1,
-        "Lifecycle": 1,
-        "Controller": 2,
-        "Utility": 1
       },
-      "layers": {
-        "Core": 15
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Transform": 2,
+        "Retrieve": 6,
+        "Emit": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "RetrieveSystem": 12
       }
     },
     {
-      "path": "standard-model-of-code/src/core/control_flow_analyzer.py",
-      "node_count": 13,
-      "in_degree": 42,
+      "path": "src/core/viz/appearance_engine.py",
+      "node_count": 28,
+      "in_degree": 36,
       "effect": "Read",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "RetrieveSystem",
       "roles": {
-        "Unknown": 7,
-        "Controller": 1,
-        "Internal": 1,
+        "Unknown": 3,
+        "Lifecycle": 1,
+        "Internal": 12,
+        "Query": 10,
         "Handler": 1,
-        "Query": 2,
         "Utility": 1
       },
       "layers": {
-        "Core": 13
+        "Core": 28
+      },
+      "purposes": {
+        "Transform": 1,
+        "Initiate": 1,
+        "Process": 2,
+        "Intake": 3,
+        "Retrieve": 19,
+        "Coordinate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "RetrieveSystem": 28
       }
     },
     {
-      "path": "standard-model-of-code/src/core/visibility_analyzer.py",
+      "path": "src/core/viz/token_resolver.py",
+      "node_count": 19,
+      "in_degree": 47,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "RetrieveSystem",
+      "roles": {
+        "Unknown": 8,
+        "Lifecycle": 1,
+        "Internal": 4,
+        "Query": 5,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 19
+      },
+      "purposes": {
+        "Transform": 1,
+        "Initiate": 3,
+        "Intake": 1,
+        "Retrieve": 9,
+        "Coordinate": 1,
+        "Persist": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "RetrieveSystem": 19
+      }
+    },
+    {
+      "path": "src/core/registry/pattern_registry.py",
+      "node_count": 27,
+      "in_degree": 22,
+      "effect": "Read",
+      "role": "Query",
+      "purpose": "Retrieve",
+      "sys_purpose": "RetrieveSystem",
+      "roles": {
+        "Query": 10,
+        "Unknown": 9,
+        "Lifecycle": 1,
+        "Internal": 6,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 27
+      },
+      "purposes": {
+        "Retrieve": 9,
+        "Transform(Orphan)": 1,
+        "Transform": 4,
+        "Initiate": 4,
+        "Process": 2,
+        "Retrieve(Orphan)": 6,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "RetrieveSystem": 27
+      }
+    }
+  ],
+  "Core|Retrieve|Mixed(Retrieve+Transform)System|general": [
+    {
+      "path": "src/core/visibility_analyzer.py",
       "node_count": 10,
       "in_degree": 25,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "Mixed(Retrieve+Transform)System",
       "roles": {
         "Unknown": 3,
         "Lifecycle": 1,
@@ -3483,13 +2812,26 @@
       },
       "layers": {
         "Core": 10
+      },
+      "purposes": {
+        "Transform(Orphan)": 1,
+        "Transform": 3,
+        "Initiate": 1,
+        "Retrieve": 4,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Retrieve+Transform)System": 10
       }
     },
     {
-      "path": "standard-model-of-code/src/core/heuristic_classifier.py",
+      "path": "src/core/heuristic_classifier.py",
       "node_count": 9,
       "in_degree": 26,
       "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "Mixed(Retrieve+Transform)System",
       "roles": {
         "Query": 2,
         "Unknown": 3,
@@ -3499,13 +2841,28 @@
       },
       "layers": {
         "Core": 9
+      },
+      "purposes": {
+        "Retrieve": 4,
+        "Transform": 2,
+        "Initiate": 1,
+        "Process": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Retrieve+Transform)System": 9
       }
-    },
+    }
+  ],
+  "Core|Process|Composite|general": [
     {
-      "path": "standard-model-of-code/src/core/full_analysis.py",
+      "path": "src/core/full_analysis.py",
       "node_count": 21,
       "in_degree": 24,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Process",
+      "sys_purpose": "Composite",
       "roles": {
         "Unknown": 7,
         "Factory": 4,
@@ -3518,59 +2875,30 @@
       "layers": {
         "Core": 20,
         "Test": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/graph_type_inference.py",
-      "node_count": 12,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Unknown": 6,
-        "Internal": 1,
-        "Lifecycle": 1,
-        "Factory": 1,
-        "Utility": 1
       },
-      "layers": {
-        "Core": 12
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/newman_suite.py",
-      "node_count": 8,
-      "in_degree": 8,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 6,
-        "Controller": 1,
-        "Utility": 1
+      "purposes": {
+        "Process": 8,
+        "Intake": 2,
+        "Gateway": 2,
+        "Transform": 2,
+        "Retrieve": 3,
+        "Persist": 1,
+        "Initiate": 1,
+        "Coordinate": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Core": 8
+      "sys_purposes": {
+        "Composite": 21
       }
     },
     {
-      "path": "standard-model-of-code/src/core/intent_extractor.py",
-      "node_count": 8,
-      "in_degree": 20,
-      "effect": "Write",
-      "roles": {
-        "Unknown": 5,
-        "Factory": 1,
-        "Controller": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/insights_engine.py",
+      "path": "src/core/insights_engine.py",
       "node_count": 17,
       "in_degree": 21,
       "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Process",
+      "sys_purpose": "Composite",
       "roles": {
         "Unknown": 6,
         "Lifecycle": 1,
@@ -3582,812 +2910,29 @@
       },
       "layers": {
         "Core": 17
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/deviation_tracker.py",
-      "node_count": 25,
-      "in_degree": 30,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 11,
-        "Internal": 7,
-        "Mapper": 4,
-        "Lifecycle": 1,
-        "Controller": 1,
-        "Utility": 1
       },
-      "layers": {
-        "Core": 25
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/chart_viewer.py",
-      "node_count": 3,
-      "in_degree": 2,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 2,
-        "Utility": 1
+      "purposes": {
+        "Transform(Orphan)": 4,
+        "Transform": 2,
+        "Process": 8,
+        "Intake": 1,
+        "Retrieve": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Core": 3
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/constraint_engine.py",
-      "node_count": 15,
-      "in_degree": 16,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Mapper": 1,
-        "Lifecycle": 1,
-        "Internal": 3,
-        "Validator": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 15
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/analytics_engine.py",
-      "node_count": 8,
-      "in_degree": 10,
-      "effect": "Read",
-      "roles": {
-        "Handler": 1,
-        "Unknown": 6,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/classification/universal_classifier.py",
-      "node_count": 15,
-      "in_degree": 28,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 4,
-        "Query": 2,
-        "Lifecycle": 1,
-        "Handler": 3,
-        "Internal": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 15
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/base_stage.py",
-      "node_count": 8,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 2,
-        "Internal": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/snapshot.py",
-      "node_count": 10,
-      "in_degree": 4,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Mapper": 3,
-        "Query": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 10
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/data_flow_macro.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/topology_reasoning.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/base_analysis.py",
-      "node_count": 8,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Validator": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/roadmap_evaluation.py",
-      "node_count": 7,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/codome_boundary.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/statistical_metrics.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/system_purpose.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/purpose_intelligence.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/constraint_validation.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/purpose_field.py",
-      "node_count": 6,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/knot_detection.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/dimension_classification.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/control_flow.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/semantic_cortex.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/graph_analytics.py",
-      "node_count": 6,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/pattern_detection.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/performance_prediction.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/scope_analysis.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/ecosystem_discovery.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/edge_extraction.py",
-      "node_count": 6,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/stage_0_survey.py",
-      "node_count": 7,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/organelle_purpose.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/data_flow_analysis.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/markov_matrix.py",
-      "node_count": 6,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 6
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/ai_insights.py",
-      "node_count": 7,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/output_generation.py",
-      "node_count": 7,
-      "in_degree": 1,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Validator": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/parser/python_extractor.py",
-      "node_count": 17,
-      "in_degree": 24,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 7,
-        "Lifecycle": 1,
-        "Internal": 6,
-        "Handler": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 17
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/parser/symbol_classifier.py",
-      "node_count": 11,
-      "in_degree": 7,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 5,
-        "Mapper": 1,
-        "Internal": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/parser/import_extractor.py",
-      "node_count": 23,
-      "in_degree": 14,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 20,
-        "Internal": 1,
-        "Query": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 23
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/physics_engine.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 1,
-        "Lifecycle": 1,
-        "Mapper": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 4
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/token_resolver.py",
-      "node_count": 19,
-      "in_degree": 47,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 8,
-        "Lifecycle": 1,
-        "Internal": 4,
-        "Query": 5,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 19
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/registry/workflow_registry.py",
-      "node_count": 11,
-      "in_degree": 6,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Query": 4,
-        "Internal": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/registry/role_registry.py",
-      "node_count": 14,
-      "in_degree": 14,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 6,
-        "Lifecycle": 1,
-        "Internal": 1,
-        "Validator": 1,
-        "Query": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 14
-      }
-    },
-    {
-      "path": "context-management/tools/mcp/mcp_factory/core/server.py",
-      "node_count": 16,
-      "in_degree": 7,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Internal": 4,
-        "Lifecycle": 1,
-        "Handler": 5,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 16
+      "sys_purposes": {
+        "Composite": 17
       }
     }
   ],
-  "Core|Unknown|data": [
+  "Core|Transform|Utility|general": [
     {
-      "path": "standard-model-of-code/src/core/standard_model_enricher.py",
-      "node_count": 13,
-      "in_degree": 15,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 5,
-        "Lifecycle": 1,
-        "Internal": 2,
-        "Query": 4,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 13
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/identity_matcher.py",
-      "node_count": 10,
-      "in_degree": 49,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 5,
-        "Lifecycle": 1,
-        "Internal": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 10
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/standard_model.py",
-      "node_count": 7,
-      "in_degree": 2,
-      "effect": "Pure",
-      "roles": {
-        "Unknown": 4,
-        "Validator": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 7
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/registry/schema_registry.py",
-      "node_count": 15,
-      "in_degree": 25,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 6,
-        "Mapper": 1,
-        "Lifecycle": 1,
-        "Internal": 1,
-        "Query": 5,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 15
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/registry/schema_repository.py",
-      "node_count": 15,
-      "in_degree": 4,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 5,
-        "Mapper": 1,
-        "Repository": 1,
-        "Lifecycle": 1,
-        "Internal": 1,
-        "Query": 5,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 15
-      }
-    }
-  ],
-  "Core|Internal|general": [
-    {
-      "path": "standard-model-of-code/src/core/tree_sitter_engine.py",
-      "node_count": 27,
-      "in_degree": 65,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 5,
-        "Query": 3,
-        "Internal": 11,
-        "Utility": 2,
-        "Validator": 1,
-        "Lifecycle": 1,
-        "Controller": 2,
-        "Handler": 2
-      },
-      "layers": {
-        "Core": 27
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/god_class_detector_lite.py",
-      "node_count": 12,
-      "in_degree": 9,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 3,
-        "Lifecycle": 1,
-        "Controller": 1,
-        "Internal": 6,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 12
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/stats_generator.py",
-      "node_count": 11,
-      "in_degree": 11,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 2,
-        "Lifecycle": 1,
-        "Internal": 6,
-        "Command": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/file_enricher.py",
-      "node_count": 14,
-      "in_degree": 13,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Internal": 8,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 14
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/roadmap_evaluator.py",
-      "node_count": 11,
-      "in_degree": 13,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Internal": 5,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/symbol_indexer.py",
-      "node_count": 23,
-      "in_degree": 28,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 8,
-        "Internal": 9,
-        "Lifecycle": 1,
-        "Handler": 1,
-        "Query": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 23
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/report_generator.py",
-      "node_count": 12,
-      "in_degree": 12,
-      "effect": "Read",
-      "roles": {
-        "Internal": 8,
-        "Unknown": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 12
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/data_flow_analyzer.py",
+      "path": "src/core/data_flow_analyzer.py",
       "node_count": 36,
       "in_degree": 127,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform",
+      "sys_purpose": "Utility",
       "roles": {
         "Internal": 15,
         "Unknown": 10,
@@ -4399,29 +2944,31 @@
       },
       "layers": {
         "Core": 36
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/execution_flow.py",
-      "node_count": 23,
-      "in_degree": 20,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 8,
-        "Internal": 11,
-        "Lifecycle": 1,
-        "Handler": 2,
-        "Utility": 1
       },
-      "layers": {
-        "Core": 23
+      "purposes": {
+        "Retrieve(Orphan)": 4,
+        "Transform": 14,
+        "Compute(Orphan)": 2,
+        "Coordinate": 2,
+        "Persist": 2,
+        "Initiate": 2,
+        "Generate": 2,
+        "Retrieve": 5,
+        "Process": 2,
+        "Intake": 1
+      },
+      "sys_purposes": {
+        "Utility": 36
       }
     },
     {
-      "path": "standard-model-of-code/src/core/scope_analyzer.py",
+      "path": "src/core/scope_analyzer.py",
       "node_count": 27,
       "in_degree": 64,
       "effect": "Read",
+      "role": "Internal",
+      "purpose": "Transform",
+      "sys_purpose": "Utility",
       "roles": {
         "Unknown": 7,
         "Internal": 9,
@@ -4433,276 +2980,32 @@
       },
       "layers": {
         "Core": 27
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/smart_extractor.py",
-      "node_count": 14,
-      "in_degree": 12,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Internal": 7,
-        "Utility": 2
       },
-      "layers": {
-        "Core": 14
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/normalize_output.py",
-      "node_count": 19,
-      "in_degree": 36,
-      "effect": "Read",
-      "roles": {
-        "Internal": 8,
-        "Unknown": 7,
-        "Validator": 3,
-        "Utility": 1
+      "purposes": {
+        "Transform": 8,
+        "Retrieve(Orphan)": 2,
+        "Intake": 3,
+        "Initiate": 1,
+        "Transform(Orphan)": 1,
+        "Retrieve": 8,
+        "Coordinate": 2,
+        "Process": 1,
+        "Compute(Orphan)": 1
       },
-      "layers": {
-        "Core": 19
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/output_generator.py",
-      "node_count": 8,
-      "in_degree": 14,
-      "effect": "Read",
-      "roles": {
-        "Internal": 4,
-        "Unknown": 3,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/parser/python_parser.py",
-      "node_count": 24,
-      "in_degree": 28,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 7,
-        "Mapper": 1,
-        "Lifecycle": 3,
-        "Internal": 11,
-        "Utility": 2
-      },
-      "layers": {
-        "Core": 24
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/appearance_engine.py",
-      "node_count": 28,
-      "in_degree": 36,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 3,
-        "Lifecycle": 1,
-        "Internal": 12,
-        "Query": 10,
-        "Handler": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 28
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/app.js",
-      "node_count": 16,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 16
-      },
-      "layers": {
-        "Core": 16
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/edge-system.js",
-      "node_count": 11,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 11
-      },
-      "layers": {
-        "Core": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/property-query.js",
-      "node_count": 8,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 8
-      },
-      "layers": {
-        "Core": 8
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/color-engine.js",
-      "node_count": 24,
-      "in_degree": 727,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 24
-      },
-      "layers": {
-        "Core": 24
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/property-query-init.js",
-      "node_count": 11,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 11
-      },
-      "layers": {
-        "Core": 11
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/legend-manager.js",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 1
-      },
-      "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/selection.js",
-      "node_count": 19,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 19
-      },
-      "layers": {
-        "Core": 19
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/data-manager.js",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Core": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/panels.js",
-      "node_count": 4,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 4
-      },
-      "layers": {
-        "Core": 4
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/upb-defaults.js",
-      "node_count": 2,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 2
-      },
-      "layers": {
-        "Core": 2
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/assets/modules/animation.js",
-      "node_count": 4,
-      "in_degree": 0,
-      "effect": "ReadWrite",
-      "roles": {
-        "Internal": 4
-      },
-      "layers": {
-        "Core": 4
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/validation/self_proof.py",
-      "node_count": 24,
-      "in_degree": 63,
-      "effect": "ReadWrite",
-      "roles": {
-        "Unknown": 3,
-        "Validator": 1,
-        "Lifecycle": 1,
-        "Internal": 17,
-        "Handler": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 23,
-        "Test": 1
+      "sys_purposes": {
+        "Utility": 27
       }
     }
   ],
-  "Core|Query|general": [
+  "Core|Intake|UnknownSystem|general": [
     {
-      "path": "standard-model-of-code/src/core/profile_loader.py",
-      "node_count": 17,
-      "in_degree": 12,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 3,
-        "Validator": 1,
-        "Query": 8,
-        "Handler": 3,
-        "Lifecycle": 1,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 17
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/type_registry.py",
-      "node_count": 20,
-      "in_degree": 27,
-      "effect": "Read",
-      "roles": {
-        "Unknown": 7,
-        "Lifecycle": 1,
-        "Internal": 1,
-        "Query": 8,
-        "Validator": 2,
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 20
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/atom_loader.py",
+      "path": "src/core/atom_loader.py",
       "node_count": 9,
       "in_degree": 8,
       "effect": "Read",
+      "role": "Query",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Query": 2,
         "Handler": 1,
@@ -4713,46 +3016,76 @@
       },
       "layers": {
         "Core": 9
+      },
+      "purposes": {
+        "Intake": 3,
+        "Retrieve": 2,
+        "Transform": 1,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 9
       }
     },
     {
-      "path": "standard-model-of-code/src/core/data_management.py",
-      "node_count": 21,
-      "in_degree": 20,
+      "path": "src/core/chart_viewer.py",
+      "node_count": 3,
+      "in_degree": 2,
       "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Intake",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Validator": 3,
-        "Unknown": 4,
-        "Lifecycle": 1,
-        "Query": 11,
-        "Command": 1,
+        "Unknown": 2,
         "Utility": 1
       },
       "layers": {
-        "Core": 21
+        "Core": 3
+      },
+      "purposes": {
+        "Intake": 1,
+        "Transform": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 3
       }
-    },
+    }
+  ],
+  "Core|Transform|ModuleExport|general": [
     {
-      "path": "standard-model-of-code/src/core/graph_analyzer.py",
-      "node_count": 16,
-      "in_degree": 62,
-      "effect": "Read",
+      "path": "src/core/pipeline/__init__.py",
+      "node_count": 3,
+      "in_degree": 3,
+      "effect": "ReadWrite",
+      "role": "Factory",
+      "purpose": "Transform",
+      "sys_purpose": "ModuleExport",
       "roles": {
-        "Unknown": 6,
-        "Query": 8,
-        "Controller": 1,
+        "Factory": 2,
         "Utility": 1
       },
       "layers": {
-        "Core": 14,
-        "Test": 2
+        "Core": 3
+      },
+      "purposes": {
+        "Transform": 1,
+        "Coordinate": 1,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 3
       }
     },
     {
-      "path": "standard-model-of-code/src/core/queries/__init__.py",
+      "path": "src/core/queries/__init__.py",
       "node_count": 19,
       "in_degree": 46,
       "effect": "Read",
+      "role": "Query",
+      "purpose": "Transform",
+      "sys_purpose": "ModuleExport",
       "roles": {
         "Unknown": 3,
         "Guard": 1,
@@ -4765,425 +3098,1235 @@
       },
       "layers": {
         "Core": 19
+      },
+      "purposes": {
+        "Transform": 4,
+        "Compute": 1,
+        "Intake": 3,
+        "Transform(Orphan)": 1,
+        "Coordinate": 2,
+        "Retrieve": 4,
+        "Initiate": 1,
+        "Retrieve(Orphan)": 1,
+        "Compute(Orphan)": 2
+      },
+      "sys_purposes": {
+        "ModuleExport": 19
       }
-    },
+    }
+  ],
+  "Core|Retrieve(Orphan)|Mixed(Compute+Gateway+Retrieve)System|general": [
     {
-      "path": "standard-model-of-code/src/core/viz/controls_engine.py",
-      "node_count": 16,
-      "in_degree": 12,
-      "effect": "Read",
+      "path": "src/core/pipeline/stages/data_flow_macro.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
       "roles": {
-        "Unknown": 2,
-        "Lifecycle": 1,
-        "Query": 9,
-        "Internal": 2,
-        "Mapper": 1,
+        "Unknown": 4,
+        "Validator": 1,
         "Utility": 1
       },
       "layers": {
-        "Core": 16
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
       }
     },
     {
-      "path": "standard-model-of-code/src/core/registry/registry_of_registries.py",
-      "node_count": 11,
-      "in_degree": 8,
-      "effect": "Read",
+      "path": "src/core/pipeline/stages/topology_reasoning.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
       "roles": {
-        "Query": 4,
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/codome_boundary.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/statistical_metrics.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/system_purpose.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/purpose_intelligence.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/constraint_validation.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/purpose_field.py",
+      "node_count": 6,
+      "in_degree": 2,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/knot_detection.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/dimension_classification.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/control_flow.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/semantic_cortex.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/graph_analytics.py",
+      "node_count": 6,
+      "in_degree": 2,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/pattern_detection.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/performance_prediction.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/ecosystem_discovery.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/edge_extraction.py",
+      "node_count": 6,
+      "in_degree": 2,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/organelle_purpose.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/data_flow_analysis.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/markov_matrix.py",
+      "node_count": 6,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Mixed(Compute+Gateway+Retrieve)System",
+      "roles": {
+        "Unknown": 4,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 6
+      },
+      "purposes": {
+        "Transform": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Mixed(Compute+Gateway+Retrieve)System": 6
+      }
+    }
+  ],
+  "Core|Retrieve(Orphan)|ScatteredSystem|general": [
+    {
+      "path": "src/core/pipeline/stages/roadmap_evaluation.py",
+      "node_count": 7,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
         "Unknown": 4,
         "Lifecycle": 1,
-        "Internal": 1,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 7
+      },
+      "purposes": {
+        "Transform": 1,
+        "Transform(Orphan)": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 7
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/stage_0_survey.py",
+      "node_count": 7,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 4,
+        "Lifecycle": 1,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 7
+      },
+      "purposes": {
+        "Transform": 1,
+        "Transform(Orphan)": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 7
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/ai_insights.py",
+      "node_count": 7,
+      "in_degree": 1,
+      "effect": "ReadWrite",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "ScatteredSystem",
+      "roles": {
+        "Unknown": 4,
+        "Lifecycle": 1,
+        "Validator": 1,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 7
+      },
+      "purposes": {
+        "Transform": 1,
+        "Transform(Orphan)": 1,
+        "Retrieve(Orphan)": 2,
+        "Compute(Orphan)": 2,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "ScatteredSystem": 7
+      }
+    }
+  ],
+  "Core|Retrieve|Composite|general": [
+    {
+      "path": "src/core/parser/python_extractor.py",
+      "node_count": 17,
+      "in_degree": 24,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "Composite",
+      "roles": {
+        "Unknown": 7,
+        "Lifecycle": 1,
+        "Internal": 6,
+        "Handler": 2,
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 17
+      },
+      "purposes": {
+        "Transform": 3,
+        "Transform(Orphan)": 1,
+        "Retrieve": 9,
+        "Coordinate": 1,
+        "Initiate": 2,
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "Composite": 17
+      }
+    },
+    {
+      "path": "src/core/parser/symbol_classifier.py",
+      "node_count": 11,
+      "in_degree": 7,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve",
+      "sys_purpose": "Composite",
+      "roles": {
+        "Unknown": 5,
+        "Mapper": 1,
+        "Internal": 4,
         "Utility": 1
       },
       "layers": {
         "Core": 11
+      },
+      "purposes": {
+        "Transform": 3,
+        "Compute(Orphan)": 2,
+        "Transform(Orphan)": 1,
+        "Retrieve": 4,
+        "Initiate": 1
+      },
+      "sys_purposes": {
+        "Composite": 11
       }
     },
     {
-      "path": "standard-model-of-code/src/core/registry/pattern_registry.py",
-      "node_count": 27,
-      "in_degree": 22,
+      "path": "src/core/parser/python_parser.py",
+      "node_count": 24,
+      "in_degree": 28,
       "effect": "Read",
+      "role": "Internal",
+      "purpose": "Retrieve",
+      "sys_purpose": "Composite",
       "roles": {
-        "Query": 10,
-        "Unknown": 9,
-        "Lifecycle": 1,
-        "Internal": 6,
-        "Utility": 1
+        "Unknown": 7,
+        "Mapper": 1,
+        "Lifecycle": 3,
+        "Internal": 11,
+        "Utility": 2
       },
       "layers": {
-        "Core": 27
+        "Core": 24
+      },
+      "purposes": {
+        "Transform": 5,
+        "Compute(Orphan)": 2,
+        "Transform(Orphan)": 2,
+        "Retrieve": 10,
+        "Initiate": 4,
+        "Coordinate": 1
+      },
+      "sys_purposes": {
+        "Composite": 24
       }
     }
   ],
-  "Unknown|Command|general": [
+  "Core|Transform(Orphan)|UnknownSystem|general": [
     {
-      "path": "standard-model-of-code/src/scripts/run_benchmark.py",
-      "node_count": 14,
-      "in_degree": 10,
+      "path": "src/core/viz/assets/app.js",
+      "node_count": 16,
+      "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Query": 2,
-        "Command": 3,
-        "Unknown": 3,
-        "Controller": 2,
-        "Utility": 2,
-        "Asserter": 1,
-        "Validator": 1
+        "Internal": 16
       },
       "layers": {
-        "Unknown": 13,
-        "Test": 1
+        "Core": 16
+      },
+      "purposes": {
+        "Transform(Orphan)": 16
+      },
+      "sys_purposes": {
+        "UnknownSystem": 16
       }
     },
     {
-      "path": "standard-model-of-code/src/scripts/update_docs.py",
-      "node_count": 7,
-      "in_degree": 5,
-      "effect": "Write",
+      "path": "src/core/viz/assets/modules/edge-system.js",
+      "node_count": 11,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Query": 1,
-        "Command": 2,
-        "Unknown": 1,
-        "Validator": 1,
-        "Controller": 1,
-        "Utility": 1
+        "Internal": 11
       },
       "layers": {
-        "Unknown": 7
-      }
-    }
-  ],
-  "Unknown|Query|data": [
-    {
-      "path": "context-management/tools/ai/list_models.py",
-      "node_count": 4,
-      "in_degree": 2,
-      "effect": "Read",
-      "roles": {
-        "Query": 2,
-        "Controller": 1,
-        "Utility": 1
+        "Core": 11
       },
-      "layers": {
-        "Unknown": 4
+      "purposes": {
+        "Transform(Orphan)": 11
+      },
+      "sys_purposes": {
+        "UnknownSystem": 11
       }
     },
     {
-      "path": "context-management/tools/ai/debug_models.py",
+      "path": "src/core/viz/assets/modules/property-query.js",
+      "node_count": 8,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 8
+      },
+      "layers": {
+        "Core": 8
+      },
+      "purposes": {
+        "Transform(Orphan)": 8
+      },
+      "sys_purposes": {
+        "UnknownSystem": 8
+      }
+    },
+    {
+      "path": "src/core/viz/assets/modules/color-engine.js",
+      "node_count": 24,
+      "in_degree": 440,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 24
+      },
+      "layers": {
+        "Core": 24
+      },
+      "purposes": {
+        "Transform(Orphan)": 22,
+        "Transform": 2
+      },
+      "sys_purposes": {
+        "UnknownSystem": 24
+      }
+    },
+    {
+      "path": "src/core/viz/assets/modules/property-query-init.js",
+      "node_count": 11,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 11
+      },
+      "layers": {
+        "Core": 11
+      },
+      "purposes": {
+        "Transform(Orphan)": 11
+      },
+      "sys_purposes": {
+        "UnknownSystem": 11
+      }
+    },
+    {
+      "path": "src/core/viz/assets/modules/legend-manager.js",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Transform(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
+      }
+    },
+    {
+      "path": "src/core/viz/assets/modules/selection.js",
+      "node_count": 19,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 19
+      },
+      "layers": {
+        "Core": 19
+      },
+      "purposes": {
+        "Transform(Orphan)": 19
+      },
+      "sys_purposes": {
+        "UnknownSystem": 19
+      }
+    },
+    {
+      "path": "src/core/viz/assets/modules/data-manager.js",
       "node_count": 2,
       "in_degree": 0,
-      "effect": "Read",
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Query": 1,
-        "Utility": 1
+        "Internal": 2
       },
       "layers": {
-        "Unknown": 2
+        "Core": 2
+      },
+      "purposes": {
+        "Transform(Orphan)": 2
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
       }
-    }
-  ],
-  "Unknown|Utility|general": [
+    },
     {
-      "path": "context-management/tools/maintenance/archive_stale.py",
+      "path": "src/core/viz/assets/modules/panels.js",
       "node_count": 4,
-      "in_degree": 84,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 2,
-        "Validator": 1,
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 4
-      }
-    },
-    {
-      "path": ".agent/tools/import_legacy_tasks.py",
-      "node_count": 13,
-      "in_degree": 13,
-      "effect": "Pure",
-      "roles": {
-        "Unknown": 4,
-        "Utility": 5,
-        "Query": 1,
-        "Factory": 1,
-        "Command": 1,
-        "Controller": 1
-      },
-      "layers": {
-        "Unknown": 13
-      }
-    },
-    {
-      "path": "standard-model-of-code/setup.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/tools/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/scripts/verify_taxonomy.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/tools/pom/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/tools/utils/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/tools/mcp/mcp_factory/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/tools/ai/research/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": "context-management/tools/refinery/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    }
-  ],
-  "Unknown|Unknown|data": [
-    {
-      "path": ".agent/schema/hierarchy.schema.yaml",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Write",
-      "roles": {
-        "Unknown": 1
-      },
-      "layers": {
-        "Unknown": 1
-      }
-    },
-    {
-      "path": ".agent/schema/run.schema.yaml",
-      "node_count": 1,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 1
+        "Internal": 4
       },
       "layers": {
-        "Unknown": 1
+        "Core": 4
+      },
+      "purposes": {
+        "Process(Orphan)": 1,
+        "Transform(Orphan)": 3
+      },
+      "sys_purposes": {
+        "UnknownSystem": 4
       }
     },
     {
-      "path": ".agent/schema/task.schema.yaml",
-      "node_count": 1,
+      "path": "src/core/viz/assets/modules/upb-defaults.js",
+      "node_count": 2,
       "in_degree": 0,
       "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
-        "Unknown": 1
+        "Internal": 2
       },
       "layers": {
-        "Unknown": 1
+        "Core": 2
+      },
+      "purposes": {
+        "Transform(Orphan)": 2
+      },
+      "sys_purposes": {
+        "UnknownSystem": 2
+      }
+    },
+    {
+      "path": "src/core/viz/assets/modules/animation.js",
+      "node_count": 4,
+      "in_degree": 0,
+      "effect": "ReadWrite",
+      "role": "Internal",
+      "purpose": "Transform(Orphan)",
+      "sys_purpose": "UnknownSystem",
+      "roles": {
+        "Internal": 4
+      },
+      "layers": {
+        "Core": 4
+      },
+      "purposes": {
+        "Transform(Orphan)": 4
+      },
+      "sys_purposes": {
+        "UnknownSystem": 4
       }
     }
   ],
-  "Core|Utility|general": [
+  "Core|Retrieve(Orphan)|Composite|data": [
     {
-      "path": "standard-model-of-code/src/core/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
+      "path": "src/core/registry/schema_registry.py",
+      "node_count": 15,
+      "in_degree": 16,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Composite",
       "roles": {
+        "Unknown": 6,
+        "Mapper": 1,
+        "Lifecycle": 1,
+        "Internal": 1,
+        "Query": 5,
         "Utility": 1
       },
       "layers": {
-        "Core": 1
+        "Core": 15
+      },
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Transform": 3,
+        "Compute(Orphan)": 2,
+        "Initiate": 1,
+        "Intake": 1,
+        "Retrieve(Orphan)": 4,
+        "Retrieve": 2
+      },
+      "sys_purposes": {
+        "Composite": 15
       }
     },
     {
-      "path": "standard-model-of-code/src/core/classification/ddd_mappings.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
+      "path": "src/core/registry/schema_repository.py",
+      "node_count": 15,
+      "in_degree": 4,
+      "effect": "Read",
+      "role": "Unknown",
+      "purpose": "Retrieve(Orphan)",
+      "sys_purpose": "Composite",
       "roles": {
+        "Unknown": 5,
+        "Mapper": 1,
+        "Repository": 1,
+        "Lifecycle": 1,
+        "Internal": 1,
+        "Query": 5,
         "Utility": 1
       },
       "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/pipeline/stages/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
+        "Core": 15
       },
-      "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/parser/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
+      "purposes": {
+        "Transform(Orphan)": 2,
+        "Transform": 3,
+        "Compute(Orphan)": 2,
+        "Initiate": 2,
+        "Intake": 1,
+        "Retrieve(Orphan)": 5
       },
-      "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/viz/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/registry/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "standard-model-of-code/src/core/validation/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 1
-      }
-    },
-    {
-      "path": "context-management/tools/mcp/mcp_factory/core/__init__.py",
-      "node_count": 1,
-      "in_degree": 0,
-      "effect": "Pure",
-      "roles": {
-        "Utility": 1
-      },
-      "layers": {
-        "Core": 1
+      "sys_purposes": {
+        "Composite": 15
       }
     }
   ],
-  "Test|Utility|testing": [
+  "Unknown|Compute(Orphan)|UnknownSystem|general": [
     {
-      "path": "context-management/tools/ai/gemini_genai_test.py",
+      "path": "setup.py",
       "node_count": 1,
       "in_degree": 0,
       "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Utility": 1
       },
       "layers": {
-        "Test": 1
+        "Unknown": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
       }
     },
     {
-      "path": "context-management/tools/ai/gemini_test_simple.py",
+      "path": "src/scripts/verify_taxonomy.py",
       "node_count": 1,
       "in_degree": 0,
       "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "UnknownSystem",
       "roles": {
         "Utility": 1
       },
       "layers": {
-        "Test": 1
+        "Unknown": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "UnknownSystem": 1
+      }
+    }
+  ],
+  "Unknown|Compute(Orphan)|ModuleExport|general": [
+    {
+      "path": "src/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    },
+    {
+      "path": "src/tools/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Unknown": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    }
+  ],
+  "Core|Compute(Orphan)|ModuleExport|general": [
+    {
+      "path": "src/core/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    },
+    {
+      "path": "src/core/pipeline/stages/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    },
+    {
+      "path": "src/core/parser/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    },
+    {
+      "path": "src/core/viz/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    },
+    {
+      "path": "src/core/registry/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
+      }
+    },
+    {
+      "path": "src/core/validation/__init__.py",
+      "node_count": 1,
+      "in_degree": 0,
+      "effect": "Pure",
+      "role": "Utility",
+      "purpose": "Compute(Orphan)",
+      "sys_purpose": "ModuleExport",
+      "roles": {
+        "Utility": 1
+      },
+      "layers": {
+        "Core": 1
+      },
+      "purposes": {
+        "Compute(Orphan)": 1
+      },
+      "sys_purposes": {
+        "ModuleExport": 1
       }
     }
   ]

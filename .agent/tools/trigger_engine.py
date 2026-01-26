@@ -31,16 +31,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Use ruamel.yaml if available
-try:
-    from ruamel.yaml import YAML
-    yaml = YAML()
-    yaml.preserve_quotes = True
-    USE_RUAMEL = True
-except ImportError:
-    import yaml as pyyaml
-    yaml = None
-    USE_RUAMEL = False
+from utils.yaml_utils import load_yaml_preserve as load_yaml, save_yaml_preserve as save_yaml
 
 # Paths
 REPO_ROOT = Path(__file__).parent.parent.parent
@@ -54,24 +45,6 @@ GREEN = '\033[0;32m'
 YELLOW = '\033[1;33m'
 BLUE = '\033[0;34m'
 NC = '\033[0m'
-
-
-def load_yaml(path: Path) -> dict:
-    """Load YAML file."""
-    with open(path) as f:
-        if USE_RUAMEL:
-            return yaml.load(f)
-        else:
-            return pyyaml.safe_load(f)
-
-
-def save_yaml(path: Path, data: dict):
-    """Save YAML file."""
-    with open(path, 'w') as f:
-        if USE_RUAMEL:
-            yaml.dump(data, f)
-        else:
-            pyyaml.dump(data, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
 
 def load_state() -> dict:
