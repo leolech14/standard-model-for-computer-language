@@ -46,6 +46,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from enum import Enum
 
+from utils.yaml_utils import load_yaml, save_yaml
+
 # =============================================================================
 # CONFIGURATION
 # =============================================================================
@@ -97,27 +99,6 @@ def ensure_dirs():
     """Ensure required directories exist."""
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
-
-def load_yaml(path: Path) -> dict:
-    """Load YAML file safely."""
-    if not path.exists():
-        return {}
-    try:
-        import yaml
-        with open(path) as f:
-            return yaml.safe_load(f) or {}
-    except Exception:
-        return {}
-
-def save_yaml(path: Path, data: dict):
-    """Save YAML file safely."""
-    try:
-        import yaml
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, 'w') as f:
-            yaml.dump(data, f, default_flow_style=False)
-    except Exception as e:
-        log_error(f"Failed to save {path}: {e}")
 
 def log_event(event: str, details: dict = None):
     """Log an autopilot event."""

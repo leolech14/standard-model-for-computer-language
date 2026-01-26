@@ -16,7 +16,6 @@ Outputs:
 """
 
 import sys
-import yaml
 import json
 import re
 import shutil
@@ -24,6 +23,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 from difflib import SequenceMatcher
+
+from utils.yaml_utils import load_yaml, save_yaml
 
 # Paths
 SCRIPT_DIR = Path(__file__).parent
@@ -45,22 +46,6 @@ BLUE = '\033[0;34m'
 CYAN = '\033[0;36m'
 NC = '\033[0m'
 BOLD = '\033[1m'
-
-
-def load_yaml(path: Path) -> Optional[dict]:
-    """Load a YAML file safely."""
-    try:
-        with open(path) as f:
-            return yaml.safe_load(f)
-    except Exception as e:
-        print(f"{RED}Error loading {path}: {e}{NC}")
-        return None
-
-
-def save_yaml(path: Path, data: dict):
-    """Save data to YAML file."""
-    with open(path, 'w') as f:
-        yaml.dump(data, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
 
 def similarity(a: str, b: str) -> float:
