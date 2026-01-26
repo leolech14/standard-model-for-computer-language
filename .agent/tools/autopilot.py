@@ -445,30 +445,11 @@ def cmd_run(safe_mode: bool = False, dry_run: bool = False):
     results = {}
     overall_success = True
 
-    # Step 1: TDJ (Temporal Index)
-    print("[1/3] TDJ - Updating temporal index...")
-    if not circuit_breaker.is_broken("tdj"):
-        if dry_run:
-            print("  [DRY RUN] Would run TDJ scan")
-            results["tdj"] = True
-        else:
-            success, output = run_tdj(circuit_breaker)
-            results["tdj"] = success
-            if success:
-                # Extract file count from output
-                if "files in" in output:
-                    print(f"  ✓ {output.strip().split(chr(10))[0]}")
-                else:
-                    print("  ✓ TDJ updated")
-            else:
-                print(f"  ✗ TDJ failed: {output[:100]}")
-                overall_success = False
-    else:
-        print("  ⊘ TDJ skipped (circuit broken)")
-        results["tdj"] = None
+    # TDJ removed from post-commit - it's on-demand only (11ms, no need to pre-compute)
+    # Run manually: python context-management/tools/maintenance/tdj.py --scan
 
-    # Step 2: Trigger Engine
-    print("\n[2/3] Trigger Engine - Checking for macro triggers...")
+    # Step 1: Trigger Engine
+    print("[1/2] Trigger Engine - Checking for macro triggers...")
     if not circuit_breaker.is_broken("trigger_engine"):
         if dry_run:
             print("  [DRY RUN] Would check triggers")
@@ -485,8 +466,8 @@ def cmd_run(safe_mode: bool = False, dry_run: bool = False):
         print("  ⊘ Trigger engine skipped (circuit broken)")
         results["trigger_engine"] = None
 
-    # Step 3: Enrichment (only on full runs, not post-commit)
-    print("\n[3/3] Enrichment - Processing opportunities...")
+    # Step 2: Enrichment (only on full runs, not post-commit)
+    print("\n[2/2] Enrichment - Processing opportunities...")
     if not safe_mode:  # Skip enrichment in safe mode (too heavy for post-commit)
         if not circuit_breaker.is_broken("enrichment"):
             if dry_run:
@@ -543,13 +524,9 @@ def cmd_post_commit(safe_mode: bool = True):
 
     log_event("post_commit_triggered")
 
-    # Only run TDJ and trigger engine on post-commit (fast)
+    # Only run trigger engine on post-commit
+    # TDJ removed - on-demand only (11ms, run when needed)
     results = []
-
-    # TDJ (fast, ~20ms)
-    if not circuit_breaker.is_broken("tdj"):
-        success, _ = run_tdj(circuit_breaker)
-        results.append(success)
 
     # Trigger engine (check for macro triggers)
     if not circuit_breaker.is_broken("trigger_engine"):
