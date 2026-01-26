@@ -1055,7 +1055,7 @@ function getInterval(intervalName, value) {
 
     // Find surrounding stops
     let lower = stops[0];
-    let upper = stops[stops.length - 1];
+    let upper = (stops && stops.length > 0) ? stops[stops.length - 1] : null;
 
     for (let i = 0; i < stops.length - 1; i++) {
         if (v >= stops[i].value && v <= stops[i + 1].value) {
@@ -1223,7 +1223,7 @@ function getSchemeColor(schemeName, t) {
 
     // Find surrounding stops
     let lower = stops[0];
-    let upper = stops[stops.length - 1];
+    let upper = (stops && stops.length > 0) ? stops[stops.length - 1] : null;
 
     for (let i = 0; i < stops.length - 1; i++) {
         if (v >= stops[i].value && v <= stops[i + 1].value) {

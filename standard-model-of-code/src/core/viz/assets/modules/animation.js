@@ -721,6 +721,7 @@ const ANIM = (function () {
 
     function cycleStaggerPattern() {
         const patterns = Object.keys(STAGGER_PATTERNS);
+        if (!patterns || patterns.length === 0) return _currentStaggerPattern;
         const currentIdx = patterns.indexOf(_currentStaggerPattern);
         _currentStaggerPattern = patterns[(currentIdx + 1) % patterns.length];
         if (typeof showModeToast === 'function') {
