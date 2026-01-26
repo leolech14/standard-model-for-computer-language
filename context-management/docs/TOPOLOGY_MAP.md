@@ -32,18 +32,30 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Directory Topology
+## Directory Topology (Plain English)
+
+**Three main directories. That's it.**
+
+| Directory | What's Inside | When to Use |
+|-----------|---------------|-------------|
+| `standard-model-of-code/` | Collider engine, analysis pipeline, theory docs | Analyzing code |
+| `context-management/` | AI tools, research, this documentation | Querying context |
+| `.agent/` | Task registry, automation, agent state | Managing work |
+
+## Directory Topology (With Metaphors)
+
+*The physics metaphor (Particle/Wave/Observer) is optional context. Skip if not useful.*
 
 ```
 PROJECT_elements/
 │
-├── standard-model-of-code/     ← PARTICLE REALM (measurement, collapse)
+├── standard-model-of-code/     ← "Particle" - measurement, determinism
 │   ├── src/core/               ← Pipeline engine (CODOME)
 │   ├── src/patterns/           ← Atom definitions (CODOME)
 │   ├── docs/                   ← Theory & specs (CONTEXTOME)
 │   └── tools/                  ← Utilities (CODOME)
 │
-├── context-management/         ← WAVE REALM (potential, field)
+├── context-management/         ← "Wave" - potential, AI reasoning
 │   ├── tools/ai/               ← AI engines (CODOME)
 │   ├── config/                 ← Configurations (CONTEXTOME)
 │   └── docs/                   ← This topology (CONTEXTOME)
@@ -53,7 +65,7 @@ PROJECT_elements/
 │       ├── DOMAINS.md
 │       └── TOPOLOGY_MAP.md     ← YOU ARE HERE
 │
-└── .agent/                     ← OBSERVER REALM (decides what to measure)
+└── .agent/                     ← "Observer" - decides what to do next
     ├── registry/               ← Task state (CONTEXTOME)
     ├── specs/                  ← Governance specs (CONTEXTOME)
     ├── tools/                  ← Automation (CODOME)
