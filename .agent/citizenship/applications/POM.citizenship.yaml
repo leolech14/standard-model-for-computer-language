@@ -1,0 +1,198 @@
+# =============================================================================
+# CITIZENSHIP APPLICATION: POM (Projectome Omniscience Module)
+# =============================================================================
+# Applying for: S14
+# Status: PENDING APPROVAL
+# =============================================================================
+
+application:
+  version: "1.0"
+  submitted: "2026-01-26"
+  applicant: "leonardo.lech@gmail.com"
+  requested_seat: S14
+
+# =============================================================================
+# IDENTITY
+# =============================================================================
+identity:
+  id: "S14"
+  name: "Projectome Omniscience Module"
+  shortname: "POM"
+  realm: wave
+  type: engine
+  purpose: "Complete PROJECTOME visibility across CODOME and CONTEXTOME"
+  created: "2026-01-25"
+  author: "leonardo.lech@gmail.com"
+
+  theory_grounding:
+    axiom_group: "G (Observability)"
+    principle: "Structural Observer in Peircean Triad"
+    reference: "context-management/docs/specs/OBSERVABILITY_TRIAD.md"
+
+# =============================================================================
+# INTERFACE (The Contract)
+# =============================================================================
+interface:
+  invoke:
+    method: cli
+    command: "python3 {entrypoint} --output {output}"
+    entrypoint: "context-management/tools/pom/projectome_omniscience.py"
+    cwd: "${PROJECT_ROOT}"
+
+  inputs:
+    - name: unified_analysis.json
+      type: file
+      from: S1  # Collider
+      required: false
+      description: "CODOME entities from Collider analysis"
+
+    - name: project_root
+      type: path
+      default: "."
+      description: "Root directory to scan for CONTEXTOME"
+
+  outputs:
+    - name: pom_manifest.yaml
+      type: file
+      format: yaml
+      description: "Complete PROJECTOME inventory with symmetry analysis"
+      contains:
+        - totals.entities
+        - universes.codome.entities
+        - universes.contextome.entities
+        - symmetry.symmetric
+        - symmetry.orphan
+        - symmetry.phantom
+        - symmetry.drift
+        - purpose_field.coverage
+        - purpose_field.coherence
+        - purpose_field.entropy
+
+  requires:
+    runtime:
+      - python >= 3.10
+    packages:
+      - pyyaml
+    external: []  # No external services required
+
+# =============================================================================
+# INTEGRATIONS
+# =============================================================================
+integrations:
+  consumes_from:
+    - seat: S1
+      name: Collider
+      artifact: unified_analysis.json
+      mechanism: file_read
+      optional: true
+      description: "Reads CODOME entities if Collider has run"
+
+  produces_for:
+    - seat: S15  # Future Charts seat
+      artifact: pom_manifest.yaml
+      mechanism: file_write
+      description: "Provides data for Purpose Field visualization"
+
+    - seat: S3
+      name: analyze.py
+      artifact: pom_manifest.yaml
+      mechanism: file_read
+      description: "AI can query POM results for context"
+
+  hooks:
+    - trigger: post_collider_analysis
+      action: "Auto-generate updated manifest"
+      priority: low
+
+    - trigger: manual
+      action: "Run standalone CONTEXTOME scan"
+      priority: high
+
+# =============================================================================
+# DOCUMENTATION
+# =============================================================================
+documentation:
+  user_guide: "context-management/docs/specs/POM_USER_GUIDE.md"
+  api_reference: "context-management/tools/pom/README.md"
+  theory: "context-management/docs/specs/OBSERVABILITY_TRIAD.md"
+
+  lol_entry: pending  # Will be added on approval
+  sos_entry: pending  # Will be added on approval
+  tools_registry_entry: true  # Already in TOOLS_REGISTRY.yaml as T003
+
+# =============================================================================
+# QUALITY
+# =============================================================================
+quality:
+  tests:
+    path: "context-management/tools/pom/tests/"
+    exists: false  # TODO: Create tests
+    coverage: "0%"  # Needs improvement
+
+  error_handling: graceful
+  docstrings: true
+  typed: partial
+
+  known_issues:
+    - "coherence = 0.0 when unified_analysis.json missing coherence_score"
+    - "No tests yet"
+
+# =============================================================================
+# SELF-ASSESSMENT
+# =============================================================================
+self_assessment:
+  why_needed: |
+    POM is the ONLY subsystem that provides complete PROJECTOME visibility.
+
+    - S1 (Collider) sees CODOME only
+    - S3 (analyze.py) queries but doesn't inventory
+    - POM bridges both universes and detects symmetry
+
+    Without POM, we cannot:
+    - Detect ORPHAN code (code without docs)
+    - Detect PHANTOM docs (docs without code)
+    - Measure PURPOSE FIELD coherence
+    - Verify Lawvere fixed-point (self-reference)
+
+  alternatives_considered:
+    - name: "Extend S1 Collider"
+      rejected_because: |
+        Collider is Particle realm (deterministic analysis).
+        POM is Wave realm (intelligence/synthesis).
+        Mixing realms violates architectural boundary.
+
+    - name: "Add to S3 analyze.py"
+      rejected_because: |
+        analyze.py is query-focused (question → answer).
+        POM is inventory-focused (scan → manifest).
+        Different modalities.
+
+  integration_plan:
+    phase_1: "Read unified_analysis.json from S1 (DONE)"
+    phase_2: "Export manifest for S15 Charts (PENDING)"
+    phase_3: "Hook into post-analysis flow (PENDING)"
+    phase_4: "Auto-run on significant file changes (FUTURE)"
+
+  value_proposition: |
+    POM makes the invisible visible:
+    - SYMMETRY states (what's aligned, what's drifted)
+    - PURPOSE FIELD metrics (coherence > 0.0 when healthy)
+    - CROSS-UNIVERSE edges (how code connects to docs)
+    - SELF-REFERENCE proof (Lawvere fixed point in manifest)
+
+# =============================================================================
+# VALIDATION CHECKLIST
+# =============================================================================
+validation:
+  identity_complete: true
+  interface_defined: true
+  integrations_specified: true
+  documentation_exists: partial  # Missing user_guide
+  tests_exist: false  # TODO
+  entrypoint_runs: true
+
+  blockers:
+    - "Missing tests"
+    - "Missing user_guide documentation"
+
+  ready_for_approval: false  # Blocked by above
