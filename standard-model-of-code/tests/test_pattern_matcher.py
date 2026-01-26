@@ -35,6 +35,7 @@ def parse_python(code: str):
     return parser.parse(bytes(code, 'utf8'))
 
 
+@pytest.mark.skipif(not HAS_TREE_SITTER, reason="tree-sitter not available")
 class TestPatternMatcher:
     """Tests for PatternMatcher class."""
 
@@ -208,6 +209,7 @@ class TestAtomConfidence:
             assert 0.0 < ATOM_CONFIDENCE[atom_type] <= 1.0
 
 
+@pytest.mark.skipif(not HAS_TREE_SITTER, reason="tree-sitter not available")
 class TestAtomSummary:
     """Tests for summary functionality."""
 
@@ -232,6 +234,7 @@ def test_repos():
         assert summary['repository'] >= 1
 
 
+@pytest.mark.skipif(not HAS_TREE_SITTER, reason="tree-sitter not available")
 class TestMultiplePatterns:
     """Tests for code with multiple patterns."""
 
