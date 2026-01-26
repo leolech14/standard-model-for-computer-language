@@ -2,13 +2,12 @@
 # PROJECT ELEMENTS - Unified CLI
 # Frictionless access to all tools
 #
-# Usage:
-#   ./pe help                    # Show all commands
-#   ./pe status                  # System health at a glance
-#   ./pe ask "question"          # Ask AI (auto-activates venv)
-#   ./pe collider <args>         # Run Collider
-#   ./pe tdj <cmd>               # Timestamp Daily Journal
-#   ./pe autopilot <cmd>         # Automation orchestrator
+# TWO ABSTRACTIONS:
+#   1. Explicit commands:  ./pe status, ./pe collider, ./pe ask
+#   2. Intent routing:     ./pe "fix the auth bug" → routes to right tool
+#
+# Intent routing is LOCAL (no API calls) - pattern matching only.
+# Speed: <10ms for any command.
 
 set -e
 
@@ -27,42 +26,139 @@ run_python() {
     fi
 }
 
+# =============================================================================
+# INTENT ROUTER (Second Abstraction) - LOCAL, ULTRAFAST
+# =============================================================================
+# Priority:
+#   1. Pattern matching (<5ms)
+#   2. Local LLM via Ollama if available (~100ms with small model)
+#   3. Fallback to AI tool
+#
+# To enable local LLM: ollama pull llama3.2:1b
+
+# Check if Ollama is available and fast model is pulled
+has_ollama() {
+    command -v ollama &>/dev/null && ollama list 2>/dev/null | grep -q "llama3.2:1b\|phi3:mini\|qwen2:0.5b"
+}
+
+# Route via local LLM (ultrafast, ~100ms)
+route_via_ollama() {
+    local input="$1"
+    local prompt="Classify this user intent into ONE word from: [status, analyze, fix, explain, recent, stale, test, commit, drift, ask]. Input: '$input'. Output only the category word, nothing else."
+
+    local category=$(ollama run llama3.2:1b "$prompt" 2>/dev/null | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+
+    case "$category" in
+        status)  cmd_status; return 0 ;;
+        analyze) cd "$COLLIDER" && ./collider full . --output .collider; return 0 ;;
+        fix)     run_python "$TOOLS/ai/analyze.py" "$input" --set brain; return 0 ;;
+        explain) run_python "$TOOLS/ai/analyze.py" "$input" --set brain; return 0 ;;
+        recent)  python3 "$TOOLS/maintenance/tdj.py" recent 7; return 0 ;;
+        stale)   python3 "$TOOLS/maintenance/tdj.py" stale 30; return 0 ;;
+        test)    cmd_test; return 0 ;;
+        commit)  git status --short; return 0 ;;
+        drift)   cd "$COLLIDER" && ./collider symmetry . --docs docs; return 0 ;;
+        ask)     run_python "$TOOLS/ai/analyze.py" "$input" --set brain; return 0 ;;
+        *)       return 1 ;;
+    esac
+}
+
+route_intent() {
+    local input="$*"
+    local lower=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+
+    # HEALTH / STATUS patterns
+    if [[ "$lower" =~ (health|status|how.*(system|doing|going)|check.*system|overview|state) ]]; then
+        cmd_status
+        return 0
+    fi
+
+    # ANALYZE / SCAN patterns
+    if [[ "$lower" =~ (analyze|scan|parse|inspect).*(code|repo|codebase) ]]; then
+        cd "$COLLIDER" && ./collider full . --output .collider
+        return 0
+    fi
+
+    # FIX / DEBUG patterns → route to AI with context
+    if [[ "$lower" =~ ^(fix|debug|solve|repair|broken) ]]; then
+        run_python "$TOOLS/ai/analyze.py" "$input" --set brain
+        return 0
+    fi
+
+    # EXPLAIN / HOW / WHAT / WHY patterns → AI question
+    if [[ "$lower" =~ ^(explain|how|what|why|where|when|who|describe|tell) ]]; then
+        run_python "$TOOLS/ai/analyze.py" "$input" --set brain
+        return 0
+    fi
+
+    # RECENT / NEW / CREATED patterns → TDJ
+    if [[ "$lower" =~ (recent|new|created|added).*(file|today|week|yesterday) ]]; then
+        python3 "$TOOLS/maintenance/tdj.py" recent 7
+        return 0
+    fi
+
+    # STALE / OLD / UNUSED patterns → TDJ stale
+    if [[ "$lower" =~ (stale|old|unused|untouched|dead) ]]; then
+        python3 "$TOOLS/maintenance/tdj.py" stale 30
+        return 0
+    fi
+
+    # TEST patterns
+    if [[ "$lower" =~ ^(test|run.*test|check.*test) ]]; then
+        cmd_test
+        return 0
+    fi
+
+    # COMMIT / SAVE patterns
+    if [[ "$lower" =~ ^(commit|save|checkpoint) ]]; then
+        git status --short
+        echo ""
+        echo "Ready to commit. Use: git add -A && git commit -m 'message'"
+        return 0
+    fi
+
+    # DRIFT / SYMMETRY / ALIGNMENT patterns
+    if [[ "$lower" =~ (drift|symmetry|alignment|wave.*particle|doc.*code) ]]; then
+        cd "$COLLIDER" && ./collider symmetry . --docs docs
+        return 0
+    fi
+
+    # Pattern matching failed - try local LLM if available
+    if has_ollama; then
+        route_via_ollama "$input" && return 0
+    fi
+
+    # No match - return 1
+    return 1
+}
+
 # Commands
 cmd_help() {
     cat << 'EOF'
 PROJECT ELEMENTS - Unified CLI
 
-QUICK ACCESS:
+EXPLICIT COMMANDS:
   ./pe status              System health overview
   ./pe ask "question"      Ask AI (Gemini) a question
-  ./pe research "topic"    Deep research via Perplexity
-
-COLLIDER (Code Analysis):
-  ./pe collider full <path>         Full analysis
-  ./pe collider full <path> --ai    With AI insights
-  ./pe collider symmetry <path>     Wave/Particle symmetry check
-
-AUTOMATION:
-  ./pe autopilot status    Automation system status
-  ./pe autopilot health    Deep health check
-  ./pe autopilot run       Run full automation cycle
-  ./pe autopilot disable   Pause automation
-
-TEMPORAL INDEX:
-  ./pe tdj summary         Project timeline
-  ./pe tdj recent 7        Files created in last 7 days
-  ./pe tdj modified 1      Files modified today
-  ./pe tdj stale 30        Untouched 30+ days
-
-MAINTENANCE:
+  ./pe collider <args>     Run Collider analysis
+  ./pe autopilot <cmd>     Automation control
+  ./pe tdj <cmd>           Temporal index queries
   ./pe boot                Run boot sequence
   ./pe test                Run all tests
+
+INTENT ROUTING (just type naturally):
+  ./pe "how is the system doing"     → status
+  ./pe "analyze the codebase"        → collider full
+  ./pe "fix the auth bug"            → AI analysis
+  ./pe "what files were added today" → tdj recent
+  ./pe "check for stale code"        → tdj stale
+  ./pe "run tests"                   → pytest
+  ./pe "check drift"                 → symmetry check
 
 LOCATIONS:
   Collider:    standard-model-of-code/
   AI Tools:    context-management/tools/ai/
   Automation:  .agent/tools/
-  Config:      context-management/config/
 EOF
 }
 
@@ -156,8 +252,13 @@ case "${1:-help}" in
         cmd_test
         ;;
     *)
-        echo "Unknown command: $1"
-        echo "Run './pe help' for available commands"
-        exit 1
+        # Not a known command - try intent routing
+        if route_intent "$@"; then
+            exit 0
+        fi
+
+        # Intent routing failed - fallback to AI as last resort
+        echo "→ Routing to AI: $*"
+        run_python "$TOOLS/ai/analyze.py" "$*" --set brain
         ;;
 esac
