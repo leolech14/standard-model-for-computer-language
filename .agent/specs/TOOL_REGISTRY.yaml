@@ -1,0 +1,175 @@
+# TOOL REGISTRY - Mapping of 38 tools to owning subsystems
+# Created: 2026-01-26 (TASK-071)
+# Purpose: Know which subsystem owns each tool for maintenance and reorganization
+
+version: "1.0"
+created: "2026-01-26"
+total_tools: 38
+
+# =============================================================================
+# SUBSYSTEM MAPPINGS
+# =============================================================================
+
+subsystems:
+
+  # ---------------------------------------------------------------------------
+  # S5: Task Registry - Persist and query task state
+  # ---------------------------------------------------------------------------
+  S5_TaskRegistry:
+    purpose: "Persist and query task state"
+    directory: task/
+    tools:
+      - name: task_store.py
+        purpose: "CRUD operations on tasks"
+      - name: add_task_steps.py
+        purpose: "Add steps to tasks"
+      - name: update_task_hierarchy.py
+        purpose: "Update task hierarchy fields"
+      - name: import_legacy_tasks.py
+        purpose: "Import tasks from legacy format"
+      - name: sync_session_tasks.py
+        purpose: "Sync tasks with session state"
+      - name: sprint.py
+        purpose: "Sprint management"
+
+  # ---------------------------------------------------------------------------
+  # S6: BARE/Executor - Execute refinement actions
+  # ---------------------------------------------------------------------------
+  S6_Executor:
+    purpose: "Execute refinement actions autonomously"
+    directory: automation/
+    tools:
+      - name: autopilot.py
+        purpose: "Master orchestrator for automation"
+      - name: wire.py
+        purpose: "Wire components together"
+      - name: concierge.py
+        purpose: "Agent concierge service"
+      - name: centripetal_scan.py
+        purpose: "Deep 12-round analysis"
+
+  # ---------------------------------------------------------------------------
+  # S10: Enrichment/Prioritizer - Score and promote tasks
+  # ---------------------------------------------------------------------------
+  S10_Prioritizer:
+    purpose: "Score and promote tasks"
+    directory: triage/
+    tools:
+      - name: triage_inbox.py
+        purpose: "Score and prioritize inbox"
+      - name: industrial_triage.py
+        purpose: "Industrial-scale triage"
+      - name: opp_generator.py
+        purpose: "Generate opportunity files"
+      - name: promote_opportunity.py
+        purpose: "Promote opportunity to task"
+      - name: batch_promote.py
+        purpose: "Batch promote opportunities"
+      - name: enrichment_orchestrator.py
+        purpose: "Orchestrate enrichment pipeline"
+      - name: priority_matrix.py
+        purpose: "Priority scoring matrix"
+      - name: confidence_validator.py
+        purpose: "Validate confidence scores"
+
+  # ---------------------------------------------------------------------------
+  # S13: Macro Registry - Store and replay action patterns
+  # ---------------------------------------------------------------------------
+  S13_MacroRegistry:
+    purpose: "Store and replay action patterns"
+    directory: macro/
+    tools:
+      - name: macro_executor.py
+        purpose: "Execute recorded macros"
+      - name: trigger_engine.py
+        purpose: "Match triggers to macros"
+
+  # ---------------------------------------------------------------------------
+  # DECK: Decision Deck System (part of S10)
+  # ---------------------------------------------------------------------------
+  Deck:
+    purpose: "AI governance via certified moves"
+    directory: deck/
+    tools:
+      - name: deal_cards.py
+        purpose: "Deal available move cards"
+      - name: deal_cards_ui.py
+        purpose: "UI for card dealing"
+      - name: play_card.py
+        purpose: "Execute a card move"
+      - name: opp_to_deck.py
+        purpose: "Convert opportunity to deck card"
+
+  # ---------------------------------------------------------------------------
+  # LOL: List of Lists - Meta-registry validation
+  # ---------------------------------------------------------------------------
+  LOL:
+    purpose: "Meta-registry and validation"
+    directory: lol/
+    tools:
+      - name: lol_sync.py
+        purpose: "Sync LOL with subsystems"
+      - name: lol_unify.py
+        purpose: "Unify LOL entries"
+      - name: lol_smoc_merger.py
+        purpose: "Merge SMoC into LOL"
+      - name: validate_lol.py
+        purpose: "Validate LOL consistency"
+      - name: validate_manifest.py
+        purpose: "Validate manifest files"
+      - name: symmetry_check.py
+        purpose: "Check registry symmetry"
+
+  # ---------------------------------------------------------------------------
+  # UTILS: Standalone utilities (no specific subsystem)
+  # ---------------------------------------------------------------------------
+  Utils:
+    purpose: "Standalone utilities"
+    directory: utils/
+    tools:
+      - name: fact_loader.py
+        purpose: "Load facts for context"
+      - name: size_normalizer.py
+        purpose: "Normalize file sizes"
+      - name: session_manager.py
+        purpose: "Manage agent sessions"
+      - name: semantic_compressor.py
+        purpose: "Compress semantic content"
+      - name: collider_coverage.py
+        purpose: "Check Collider coverage"
+      - name: audit_unicode.py
+        purpose: "Audit unicode in files"
+      - name: oklch_color.py
+        purpose: "OKLCH color utilities"
+      - name: wave_particle_balance.py
+        purpose: "Check Wave/Particle balance"
+
+# =============================================================================
+# PROPOSED DIRECTORY STRUCTURE
+# =============================================================================
+
+proposed_structure: |
+  .agent/tools/
+  ├── task/           # S5: 6 tools
+  ├── automation/     # S6: 4 tools
+  ├── triage/         # S10: 8 tools
+  ├── macro/          # S13: 2 tools
+  ├── deck/           # Deck: 4 tools
+  ├── lol/            # LOL: 6 tools
+  ├── utils/          # Utils: 8 tools (+ yaml_utils.py)
+  └── __init__.py
+
+# =============================================================================
+# VERIFICATION
+# =============================================================================
+
+verification:
+  total_mapped: 38
+  by_subsystem:
+    S5_TaskRegistry: 6
+    S6_Executor: 4
+    S10_Prioritizer: 8
+    S13_MacroRegistry: 2
+    Deck: 4
+    LOL: 6
+    Utils: 8
