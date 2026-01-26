@@ -13,10 +13,16 @@
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 AUTOPILOT="$REPO_ROOT/.agent/tools/autopilot.py"
+PYTHON="$REPO_ROOT/.tools_venv/bin/python"
+
+# Fallback to homebrew python3 if venv doesn't exist
+if [ ! -f "$PYTHON" ]; then
+    PYTHON="/opt/homebrew/bin/python3"
+fi
 
 # Run autopilot in post-commit mode (lightweight, ~100ms)
 if [ -f "$AUTOPILOT" ]; then
-    /usr/bin/python3 "$AUTOPILOT" post-commit --safe 2>/dev/null
+    "$PYTHON" "$AUTOPILOT" post-commit --safe 2>/dev/null
     exit_code=$?
     if [ $exit_code -ne 0 ]; then
         echo "[autopilot] Warning: post-commit automation returned $exit_code"
@@ -30,5 +36,5 @@ fi
 
 # Mirror to GCS (only if autopilot didn't run it)
 if [ ! -f "$REPO_ROOT/.agent/state/autopilot_state.yaml" ]; then
-    /usr/bin/python3 "$REPO_ROOT/context-management/tools/archive/archive.py" mirror 2>/dev/null || true
+    "$PYTHON" "$REPO_ROOT/context-management/tools/archive/archive.py" mirror 2>/dev/null || true
 fi

@@ -196,7 +196,7 @@ def execute_macro(macro: dict, dry_run: bool = False) -> bool:
         print(f"{RED}Macro executor not found: {executor_path}{NC}")
         return False
 
-    cmd = ["python", str(executor_path), "run", macro_id]
+    cmd = ["python3", str(executor_path), "run", macro_id]
     if dry_run:
         cmd.append("--dry-run")
 
