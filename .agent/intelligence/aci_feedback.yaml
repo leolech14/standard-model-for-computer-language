@@ -300,10 +300,30 @@ entries:
   fallback_used: false
   duration_ms: 37288
   error: null
+- timestamp: '2026-01-26T08:05:31.707190+00:00'
+  query: "Given the current state of the architecture cleanup sprint, what is the\
+    \ optimal path forward?\n\nCOMPLETED:\n- TASK-067: Deleted duplicate SocraticValidator\
+    \ (-70 lines) \u2713\n- TASK-068: Created yaml_utils.p"
+  intent: task
+  complexity: complex
+  scope: external
+  tier: perplexity
+  sets_used:
+  - pipeline
+  - classifiers
+  - agent_tasks
+  - agent_kernel
+  tokens_input: 302
+  tokens_output: 597
+  success: true
+  retry_count: 0
+  fallback_used: false
+  duration_ms: 5506
+  error: null
 stats:
-  total_queries: 15
+  total_queries: 16
   by_tier:
-    perplexity: 8
+    perplexity: 9
     long_context: 7
   by_intent:
     research: 2
@@ -311,5 +331,6 @@ stats:
     unknown: 1
     validate: 4
     explain: 1
+    task: 1
   success_rate: 1.0
-  avg_tokens: 37145
+  avg_tokens: 34842
