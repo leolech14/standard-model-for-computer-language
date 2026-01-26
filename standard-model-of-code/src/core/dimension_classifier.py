@@ -75,6 +75,13 @@ ROLE_CONFIDENCE = {
     'emitter': 75,
     'lifecycle': 85,
     'internal': 70,
+    # New roles
+    'query': 75,
+    'processor': 80,
+    'parser': 85,
+    'accessor': 70,
+    'adapter': 80,
+    'builder': 80,
 }
 
 
@@ -276,7 +283,8 @@ class TreeSitterDimensionClassifier:
         role_priority = [
             'repository', 'service', 'controller', 'factory',
             'validator', 'handler', 'mapper', 'guard', 'emitter',
-            'asserter', 'lifecycle', 'internal', 'utility'
+            'asserter', 'lifecycle', 'parser', 'processor', 'adapter',
+            'builder', 'query', 'accessor', 'internal', 'utility'
         ]
 
         detected_roles = {}
@@ -321,6 +329,13 @@ class TreeSitterDimensionClassifier:
             'emitter': 'Emitter',
             'lifecycle': 'Lifecycle',
             'internal': 'Internal',
+            # New roles
+            'query': 'Query',
+            'processor': 'Processor',
+            'parser': 'Parser',
+            'accessor': 'Accessor',
+            'adapter': 'Adapter',
+            'builder': 'Builder',
         }
 
         return {

@@ -246,3 +246,167 @@
 (function_definition
   name: (identifier) @role.emitter.function
   (#match? @role.emitter.function "^(emit|publish|broadcast|notify|dispatch)_"))
+
+; -- QUERY --
+;    Read-only computation, data retrieval
+
+; Compute/calculate functions
+(function_definition
+  name: (identifier) @role.query.compute
+  (#match? @role.query.compute "^(compute|calculate|evaluate|measure|determine)_"))
+
+; Methods with compute/calculate prefix
+(function_definition
+  name: (identifier) @role.query.compute_method
+  (#match? @role.query.compute_method "^(compute|calculate|evaluate)"))
+
+; Getter-style functions (not in a class context)
+(module
+  (function_definition
+    name: (identifier) @role.query.getter
+    (#match? @role.query.getter "^get_")
+    body: (block
+      (return_statement))))
+
+; Classification functions
+(function_definition
+  name: (identifier) @role.query.classifier
+  (#match? @role.query.classifier "^(classify|categorize|identify|detect|recognize)"))
+
+; Analysis functions
+(function_definition
+  name: (identifier) @role.query.analysis
+  (#match? @role.query.analysis "^(analyze|analyse|inspect|examine|audit)"))
+
+; Count/sum aggregation functions
+(function_definition
+  name: (identifier) @role.query.aggregate
+  (#match? @role.query.aggregate "^(count|sum|average|total|aggregate)_"))
+
+; -- PROCESSOR --
+;    Data transformation pipelines, batch operations
+
+; Process functions
+(function_definition
+  name: (identifier) @role.processor.function
+  (#match? @role.processor.function "^(process|run|execute|perform|apply)_"))
+
+; Batch processing functions
+(function_definition
+  name: (identifier) @role.processor.batch
+  (#match? @role.processor.batch "^(batch|bulk|parallel)_"))
+
+; Pipeline functions
+(function_definition
+  name: (identifier) @role.processor.pipeline
+  (#match? @role.processor.pipeline "^(pipe|chain|stream|flow)_"))
+
+; Processor class
+(class_definition
+  name: (identifier) @role.processor.class
+  (#match? @role.processor.class "(Processor|Pipeline|Worker|Job)$"))
+
+; -- PARSER --
+;    Parsing and lexing
+
+; Parser class
+(class_definition
+  name: (identifier) @role.parser.class
+  (#match? @role.parser.class "(Parser|Lexer|Tokenizer|Reader)$"))
+
+; Parse function
+(function_definition
+  name: (identifier) @role.parser.function
+  (#match? @role.parser.function "^(parse|lex|tokenize|read)_"))
+
+; -- ACCESSOR --
+;    Property accessors
+
+; Property decorated method
+(decorated_definition
+  (decorator
+    (identifier) @_prop
+    (#eq? @_prop "property"))
+  definition: (function_definition
+    name: (identifier) @role.accessor.property))
+
+; Cached property
+(decorated_definition
+  (decorator
+    (call
+      function: (identifier) @_cached
+      (#match? @_cached "^(cached_property|lru_cache)$")))
+  definition: (function_definition
+    name: (identifier) @role.accessor.cached))
+
+; -- INTERNAL (Extended) --
+;    Domain entities without standard suffixes
+
+; Result class (computation results)
+(class_definition
+  name: (identifier) @role.internal.result
+  (#match? @role.internal.result "(Result|Output|Response)$"))
+
+; Config/Settings class
+(class_definition
+  name: (identifier) @role.internal.config
+  (#match? @role.internal.config "(Config|Settings|Options|Parameters)$"))
+
+; Metrics/Stats class
+(class_definition
+  name: (identifier) @role.internal.metrics
+  (#match? @role.internal.metrics "(Metrics|Stats|Statistics|Report)$"))
+
+; Index/Profile class
+(class_definition
+  name: (identifier) @role.internal.profile
+  (#match? @role.internal.profile "(Index|Profile|Summary|Snapshot)$"))
+
+; Model class (domain models)
+(class_definition
+  name: (identifier) @role.internal.model
+  (#match? @role.internal.model "(Model|Entity|Record|Entry)$"))
+
+; Classifier class
+(class_definition
+  name: (identifier) @role.internal.classifier
+  (#match? @role.internal.classifier "Classifier$"))
+
+; Enum-like class (constants)
+(class_definition
+  name: (identifier) @role.internal.enum
+  superclasses: (argument_list
+    (identifier) @_base
+    (#match? @_base "^(Enum|IntEnum|StrEnum|Flag)$")))
+
+; ABC/Protocol (abstract base)
+(class_definition
+  name: (identifier) @role.internal.abstract
+  superclasses: (argument_list
+    (identifier) @_base
+    (#match? @_base "^(ABC|Protocol)$")))
+
+; -- ADAPTER --
+;    External system wrappers
+
+; Adapter class
+(class_definition
+  name: (identifier) @role.adapter.class
+  (#match? @role.adapter.class "(Adapter|Wrapper|Client|Connector|Gateway)$"))
+
+; -- BUILDER --
+;    Complex object construction (distinct from Factory)
+
+; Builder class
+(class_definition
+  name: (identifier) @role.builder.class
+  (#match? @role.builder.class "Builder$"))
+
+; Build chain method (returns self)
+(function_definition
+  name: (identifier) @role.builder.method
+  (#match? @role.builder.method "^(with|set|add)_")
+  body: (block
+    (return_statement
+      (identifier) @_self
+      (#eq? @_self "self"))))
