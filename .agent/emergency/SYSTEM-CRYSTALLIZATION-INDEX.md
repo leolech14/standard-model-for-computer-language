@@ -44,6 +44,7 @@
 | [PARTICLE-COLLIDER-EMERGENCY-MAP.md](./PARTICLE-COLLIDER-EMERGENCY-MAP.md) | Particle | DEGRADED | tree-sitter broken |
 | [WAVE-AI-SUBSYSTEM-EMERGENCY-MAP.md](./WAVE-AI-SUBSYSTEM-EMERGENCY-MAP.md) | Wave | CRITICAL | Daemons idle, stale data |
 | [OBSERVER-GOVERNANCE-EMERGENCY-MAP.md](./OBSERVER-GOVERNANCE-EMERGENCY-MAP.md) | Observer | PARTIAL | S5→S6 gap (SG-004) |
+| [BACKGROUND-SERVICES-EMERGENCY-MAP.md](./BACKGROUND-SERVICES-EMERGENCY-MAP.md) | Cross-Realm | FRAGMENTED | 3/11 running, no coordination |
 
 ---
 
@@ -251,10 +252,10 @@ cat .git/hooks/pre-commit | head -5
 
 ```
 Crystallization completed: 2026-01-26
-Maps created: 3
-Total blockers identified: 5
+Maps created: 5
+Total blockers identified: 10
 Recovery phases: 4
-Estimated fix time: 2-4 hours
+Estimated fix time: 3-5 hours
 ```
 
 ---
