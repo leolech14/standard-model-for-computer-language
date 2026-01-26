@@ -490,5 +490,123 @@ Before adding any external tool:
 
 ---
 
+## 14. Internal Tools Registry
+
+Tools we built ourselves. Organized by purpose.
+
+### CLI & Entry Points
+
+| Tool | Location | Purpose |
+|------|----------|---------|
+| `collider` | `./collider` | Main CLI wrapper (bash) |
+| `cli.py` | `cli.py` | CLI implementation (39KB) |
+
+### Visualization & Validation
+
+| Tool | Location | Purpose |
+|------|----------|---------|
+| `visualize_graph_webgl.py` | `tools/` | Generate HTML report (29KB) |
+| `validate_ui.py` | `tools/` | Validate UI controls work |
+| `validate_control_registry.py` | `tools/` | Validate control registry |
+| `verify_animation.py` | `tools/` | Verify animations |
+
+### Pipeline & Analysis
+
+| Tool | Location | Purpose |
+|------|----------|---------|
+| `pipeline_tracer.py` | `tools/` | Debug pipeline stages |
+| `export_graphrag.py` | `tools/` | Export to GraphRAG format |
+| `extract_doc_nodes.py` | `tools/` | Extract documentation nodes |
+
+### Mining & Pattern Discovery
+
+| Tool | Location | Purpose |
+|------|----------|---------|
+| `mine_eslint.py` | `tools/` | Mine ESLint rules for atoms |
+| `mine_semgrep.py` | `tools/` | Mine Semgrep rules for atoms |
+| `clean_scm_headers.py` | `tools/` | Clean .scm file headers |
+
+### Batch Analysis (tools/batch_grade/)
+
+| Tool | Purpose |
+|------|---------|
+| `run_batch.py` | Run batch analysis |
+| `run_batch_local.py` | Local batch execution |
+| `run_batch_cloud.py` | Cloud batch execution |
+| `fetch_repos.py` | Fetch repositories |
+| `analyze_results.py` | Analyze batch results |
+| `runpod_agent.py` | RunPod cloud agent |
+| `runpod_parallel.py` | Parallel RunPod execution |
+
+### Research Tools (tools/research/)
+
+| Tool | Purpose |
+|------|---------|
+| `atom_coverage.py` | Measure atom coverage |
+| `atom_inventory.py` | Inventory all atoms |
+| `laboratory.py` | Experimentation framework |
+| `run_corpus.py` | Run corpus analysis |
+| `summarize_corpus.py` | Summarize corpus results |
+| `evaluate_hypotheses.py` | Test hypotheses |
+| `validate_audit_pack.py` | Validate audit packages |
+| `regenerate_results.py` | Regenerate results |
+
+### Cloud Orchestration (tools/cloud/)
+
+| Tool | Purpose |
+|------|---------|
+| `orchestrate_corpus.py` | Orchestrate cloud analysis |
+| `run_single_repo.py` | Analyze single repo in cloud |
+
+### Proof & Analysis (src/tools/)
+
+| Tool | Purpose |
+|------|---------|
+| `prove.py` | Generate mathematical proofs |
+| `redundancy_detector.py` | Detect redundant code |
+| `dedupe_insights.py` | Deduplicate insights |
+| `extract_chat_insights.py` | Extract insights from chats |
+| `conversation_mapper.py` | Map conversations |
+| `compute_dimension_orthogonality.py` | Verify dimension independence |
+
+### Context Management (context-management/tools/)
+
+| Tool | Purpose |
+|------|---------|
+| `activity_watcher.py` | Monitor file activity |
+| `continuous_cartographer.py` | Continuous codebase mapping |
+| `drift_guard.py` | Detect documentation drift |
+| `refine_context_loop.py` | Refine AI context |
+| `analyze_logs.py` | Analyze session logs |
+| `ai/` | AI-specific tools (subdirectory) |
+
+### Shell Scripts
+
+| Script | Location | Purpose |
+|--------|----------|---------|
+| `check-arch-docs.sh` | `tools/` | Check architecture docs |
+| `sync-orientation-files.sh` | `scripts/` | Sync orientation files |
+| `batch_extract.sh` | `src/tools/` | Batch extraction |
+| `evaluate_architecture.sh` | `src/tools/` | Evaluate architecture |
+| `scan_deep.sh` | `src/tools/` | Deep scan |
+
+### Tool Counts
+
+| Category | Count |
+|----------|-------|
+| CLI/Entry | 2 |
+| Visualization | 4 |
+| Pipeline | 3 |
+| Mining | 3 |
+| Batch | 7 |
+| Research | 8 |
+| Cloud | 2 |
+| Proof/Analysis | 6 |
+| Context Mgmt | 6 |
+| Shell Scripts | 5 |
+| **TOTAL** | **46** |
+
+---
+
 *Last updated: 2026-01-26*
 *Part of the Standard Model of Code project*
