@@ -7,7 +7,7 @@
 | Theory | Standard Model of Code |
 | Tool | Collider |
 | Purpose | Find basic constituents of computer programs |
-| Atoms | 3,644 total (110 canonical + 3,534 T2) |
+| Atoms | 3,525 total (80 core + 3,445 T2 mined) |
 | Roles | 33 canonical, 29 implemented |
 | Pipeline | 28 stages (5 phases) |
 | **Node Count** | 1,179 core / 1,961 full (see `docs/specs/NODE_COUNT_GROUND_TRUTH.md`) |
@@ -20,7 +20,7 @@
 | Base | 22 | ~90% structural | Core semantic roles (Function, Class, Variable) |
 | T0 | 42 | 100% parseable | AST atoms (definitional) |
 | T1 | 21 | ~20-40% | Standard library patterns |
-| T2 | 3,531 | 0-60% variable | Ecosystem-specific (178 ecosystems) |
+| T2 | 3,445 | 0-60% variable | Ecosystem-specific (178 ecosystems) |
 
 **Key insight:** 4 base atoms (LOG.FNC.M, ORG.AGG.M, DAT.VAR.A, ORG.MOD.O) cover ~80-90% of code structure. T2 atoms provide semantic enrichment, not structural coverage.
 

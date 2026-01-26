@@ -8,26 +8,26 @@
 # VALIDATION: The Holographic-Socratic Layer should validate these values
 #             against actual implementation. See: analyze.py --verify
 #
-# LAST VERIFIED: 2026-01-22
-# VERIFIED BY: Claude (Repo Guru) + analyze.py
+# LAST VERIFIED: 2026-01-26
+# VERIFIED BY: Ghost Exorcism Phase 2 (G08 audit)
 # =============================================================================
 
-schema_version: "1.0.0"
+schema_version: "1.1.0"
 project: "Standard Model of Code"
 tool: "Collider"
 
 # =============================================================================
-# COUNTS - Verified against actual files
+# COUNTS - Verified against actual files (2026-01-26)
 # =============================================================================
 
 counts:
   # Atoms
-  atoms_total: 3616              # 80 core + 3,536 ecosystem
+  atoms_total: 3525              # 80 core + 3,445 T2 mined
   atoms_core: 80                 # Verified: grep "- id:" ATOMS_TIER*.yaml
-  atoms_ecosystem: 3536          # Framework-specific atoms (250+ ecosystems)
+  atoms_t2_mined: 3445           # src/patterns/t2_mined/ATOMS_T2_*.yaml
   atoms_tier0_core: 42           # src/patterns/ATOMS_TIER0_CORE.yaml
   atoms_tier1_stdlib: 21         # src/patterns/ATOMS_TIER1_STDLIB.yaml
-  atoms_tier2_ecosystem: 17      # src/patterns/ATOMS_TIER2_ECOSYSTEM.yaml
+  atoms_tier2_ecosystem: 17      # src/patterns/ATOMS_TIER2_ECOSYSTEM.yaml (base patterns)
 
   # Roles
   roles_canonical: 33            # Verified: schema/fixed/roles.json

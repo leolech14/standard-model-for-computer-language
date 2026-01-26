@@ -1,7 +1,7 @@
 # Ghost Exorcism Plan
 
 **Date:** 2026-01-26
-**Status:** PHASE 1 COMPLETE
+**Status:** PHASE 2 COMPLETE
 **Agents:** 6 parallel scans completed
 
 ## Execution Log
@@ -9,7 +9,8 @@
 | Phase | Date | Ghosts Fixed | Commit |
 |-------|------|--------------|--------|
 | 0+1 | 2026-01-26 | G02, G03, G05, G06, G09, G10 | fb80372 |
-| 1 (cont) | 2026-01-26 | G04, G07 | (pending) |
+| 1 (cont) | 2026-01-26 | G04, G07 | 96918dc |
+| 2 | 2026-01-26 | G08 (audit), G10 (already done) | e624d85 |
 
 ---
 
@@ -246,15 +247,15 @@ const VIS_STATE = {
 - [ ] `jq '.[].id' atoms.json | sort | uniq -d` returns empty
 
 ### Phase 1 Complete When:
-- [ ] 10 orphan modules moved to archive
-- [ ] pattern_repository.py deleted
-- [ ] runpod_setup.sh has valid repo URL
-- [ ] sidebar.js has destroy() method
-- [ ] VIS_STATE owns all global state
+- [x] 10 orphan modules moved to archive (commit fb80372)
+- [x] pattern_repository.py deleted (commit fb80372)
+- [x] runpod_setup.sh has valid repo URL (commit fb80372)
+- [x] sidebar.js has destroy() method (commit 96918dc)
+- [x] VIS_STATE owns all global state (commit 96918dc)
 
 ### Phase 2 Complete When:
-- [ ] No `QUARANTINED` comments in codebase
-- [ ] SCHEMA_AUDIT.md documents all schema decisions
+- [x] No `QUARANTINED` comments in codebase (G10 done in Phase 0+1)
+- [x] SCHEMA_AUDIT.md documents all schema decisions (created 2026-01-26)
 
 ### Phase 3 Complete When:
 - [ ] `grep -r "TODO\|FIXME" src/` returns only intentional markers
