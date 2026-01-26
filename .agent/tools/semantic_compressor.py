@@ -66,6 +66,8 @@ def aggregate_file_signatures(data):
         "roles": defaultdict(int),
         "layers": defaultdict(int),
         "effects": defaultdict(int),
+        "purposes": defaultdict(int),  # pi2_purpose - atomic function purpose
+        "sys_purposes": defaultdict(int),  # pi4_purpose - system-level purpose
         "in_degree": 0,
         "node_count": 0
     })
@@ -93,6 +95,14 @@ def aggregate_file_signatures(data):
         fd["layers"][layer] += 1
         fd["effects"][effect] += 1
 
+        # Capture atomic purpose (pi2_purpose)
+        purpose = node.get("pi2_purpose", "unknown")
+        fd["purposes"][purpose] += 1
+
+        # Capture system-level purpose (pi4_purpose)
+        sys_purpose = node.get("pi4_purpose", "unknown")
+        fd["sys_purposes"][sys_purpose] += 1
+
     return file_data
 
 
@@ -115,6 +125,8 @@ def detect_collisions(data):
         role = get_dominant(fd["roles"])
         layer = get_dominant(fd["layers"])
         effect = get_dominant(fd["effects"])
+        purpose = get_dominant(fd["purposes"])  # pi2_purpose - atomic function
+        sys_purpose = get_dominant(fd["sys_purposes"])  # pi4_purpose - system level
 
         # Extract filename pattern for domain hint
         name = Path(file_path).stem.lower()
@@ -134,19 +146,25 @@ def detect_collisions(data):
         else:
             domain = "general"
 
-        sig = (layer, role, domain)
+        # 4D signature: layer + atomic purpose + system purpose + domain
+        sig = (layer, purpose, sys_purpose, domain)
         clusters[sig].append({
             "path": file_path,
             "node_count": fd["node_count"],
             "in_degree": fd["in_degree"],
             "effect": effect,
+            "role": role,
+            "purpose": purpose,
+            "sys_purpose": sys_purpose,
             "roles": dict(fd["roles"]),
-            "layers": dict(fd["layers"])
+            "layers": dict(fd["layers"]),
+            "purposes": dict(fd["purposes"]),
+            "sys_purposes": dict(fd["sys_purposes"])
         })
 
     # Filter to only clusters with >1 file (actual collisions)
     collisions = {
-        f"{sig[0]}|{sig[1]}|{sig[2]}": members
+        f"{sig[0]}|{sig[1]}|{sig[2]}|{sig[3]}": members
         for sig, members in clusters.items()
         if len(members) > 1
     }

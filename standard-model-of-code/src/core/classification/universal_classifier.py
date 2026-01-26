@@ -590,9 +590,23 @@ class UniversalClassifier:
 
 
         # =====================================================================
-        # D2_LAYER: Clean Architecture Layer
+        # D2_LAYER: Clean Architecture Layer (Tree-sitter → Path fallback)
         # =====================================================================
-        if "/domain/" in path or "/entities/" in path or "/models/" in path:
+        # Tier 0: Tree-sitter layer.scm queries (AST-based, highest accuracy)
+        ts_layer_result = None
+        if self.ts_role_classifier and body:
+            file_path_orig = particle.get("file_path", "")
+            language = 'python'
+            if file_path_orig.endswith(('.js', '.jsx')):
+                language = 'javascript'
+            elif file_path_orig.endswith(('.ts', '.tsx')):
+                language = 'typescript'
+            ts_layer_result = self.ts_role_classifier.classify_layer(body, language)
+
+        if ts_layer_result:
+            dims["D2_LAYER"] = ts_layer_result.value
+        # Tier 1: Path-based fallback (for files without body or no AST match)
+        elif "/domain/" in path or "/entities/" in path or "/models/" in path:
             dims["D2_LAYER"] = "Core"
         elif "/application/" in path or "/services/" in path or "/usecases/" in path:
             dims["D2_LAYER"] = "Application"

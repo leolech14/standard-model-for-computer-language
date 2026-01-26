@@ -50,6 +50,16 @@ class LifecyclePhase(Enum):
     DESTROY = "destroy"      # Cleanup: __del__, close, dispose, cleanup
 
 
+class LayerType(Enum):
+    """D2: Clean Architecture layer classification."""
+    INTERFACE = "Interface"        # API endpoints, CLI, web handlers
+    APPLICATION = "Application"    # Use cases, services, orchestration
+    CORE = "Core"                  # Entities, value objects, domain logic
+    INFRASTRUCTURE = "Infrastructure"  # Database, file I/O, external services
+    TEST = "Test"                  # Test files, fixtures, mocks
+    UNKNOWN = "Unknown"            # Cannot determine layer
+
+
 # Role confidence thresholds for tree-sitter detection
 ROLE_CONFIDENCE = {
     'repository': 90,
@@ -140,7 +150,7 @@ class TreeSitterDimensionClassifier:
 
         loader = get_query_loader()
 
-        for query_type in ['boundary', 'state', 'lifecycle', 'roles']:
+        for query_type in ['boundary', 'state', 'lifecycle', 'roles', 'layer']:
             query_text = loader.load_query(language, query_type)
             if query_text:
                 try:
@@ -210,6 +220,34 @@ class TreeSitterDimensionClassifier:
             return LifecyclePhase.DESTROY
         else:
             return LifecyclePhase.USE
+
+    def classify_layer(self, source: str, language: str = 'python') -> Optional[LayerType]:
+        """Classify Clean Architecture layer using tree-sitter queries."""
+        if not self._ensure_initialized(language):
+            return None
+
+        if 'layer' not in self._queries:
+            return None
+
+        tree = self._parser.parse(bytes(source, 'utf8'))
+        captures = self._run_query('layer', tree.root_node)
+
+        # Check capture tags for layer classification
+        # Priority: Test > Interface > Infrastructure > Application > Core
+        # (Test is special case, Interface/Infrastructure are boundaries)
+        layer_priority = [
+            ('test', LayerType.TEST),
+            ('interface', LayerType.INTERFACE),
+            ('infrastructure', LayerType.INFRASTRUCTURE),
+            ('application', LayerType.APPLICATION),
+            ('core', LayerType.CORE),
+        ]
+
+        for layer_key, layer_type in layer_priority:
+            if any(f'layer.{layer_key}' in tag for tag in captures):
+                return layer_type
+
+        return None  # Let fallback handle unknown
 
     def classify_role(self, source: str, name: str = '', language: str = 'python') -> Optional[Dict[str, Any]]:
         """
@@ -415,6 +453,96 @@ class RegexDimensionClassifier:
         ],
     }
 
+    # Layer detection patterns (body-based)
+    LAYER_PATTERNS = {
+        'infrastructure': [
+            r'\.execute\s*\(',        # DB execute
+            r'\.cursor\s*\(',         # DB cursor
+            r'sqlalchemy\.',          # SQLAlchemy ORM
+            r'\.commit\s*\(',         # Transaction commit
+            r'redis\.',               # Redis cache
+            r'requests\.',            # HTTP requests
+            r'httpx\.',               # HTTP client
+            r'aiohttp\.',             # Async HTTP
+            r'boto3\.',               # AWS SDK
+            r's3\.put_object',        # S3 upload
+            r'\.query\s*\(',          # DB query
+            r'Repository',            # Repository pattern
+        ],
+        'interface': [
+            r'@app\.(?:get|post|put|delete|patch)',   # Flask/FastAPI routes
+            r'@router\.(?:get|post|put|delete|patch)', # FastAPI router
+            r'@click\.',              # Click CLI
+            r'@typer\.',              # Typer CLI
+            r'APIView',               # Django REST
+            r'ViewSet',               # Django ViewSet
+            r'Controller',            # Controller pattern
+        ],
+        'application': [
+            r'Service',               # Service pattern
+            r'UseCase',               # Use case pattern
+            r'Interactor',            # Interactor pattern
+            r'\.execute\(',           # Use case execute
+            r'Orchestrator',          # Orchestrator
+        ],
+        'core': [
+            r'BaseModel',             # Pydantic
+            r'@dataclass',            # Dataclass
+            r'Enum\)',                # Enum inheritance
+            r'Entity',                # Entity pattern
+            r'ValueObject',           # Value object
+            r'DomainEvent',           # Domain event
+        ],
+        'test': [
+            r'^test_',                # Test functions
+            r'^Test',                 # Test classes
+            r'@pytest\.fixture',      # Pytest fixtures
+            r'unittest\.TestCase',    # Unittest
+            r'mock\.',                # Mocking
+            r'assert\s+',             # Assertions
+        ],
+    }
+
+    # Layer detection patterns (name-based)
+    LAYER_NAME_PATTERNS = {
+        'infrastructure': [
+            r'Repository$',
+            r'Store$',
+            r'DAO$',
+            r'Adapter$',
+            r'Gateway$',
+            r'Client$',
+        ],
+        'interface': [
+            r'Controller$',
+            r'Handler$',
+            r'View$',
+            r'Endpoint$',
+            r'Resource$',
+            r'Router$',
+        ],
+        'application': [
+            r'Service$',
+            r'UseCase$',
+            r'Interactor$',
+            r'Application$',
+            r'Orchestrator$',
+        ],
+        'core': [
+            r'Entity$',
+            r'Aggregate$',
+            r'ValueObject$',
+            r'Domain',
+            r'Model$',
+        ],
+        'test': [
+            r'^test_',
+            r'^Test',
+            r'_test$',
+            r'Test$',
+        ],
+    }
+
     def __init__(self):
         # Compile regex patterns for performance
         self.input_regexes = [re.compile(p, re.IGNORECASE) for p in self.IO_PATTERNS['input']]
@@ -422,6 +550,16 @@ class RegexDimensionClassifier:
         self.state_regexes = [re.compile(p) for p in self.STATE_PATTERNS]
         self.create_regexes = [re.compile(p, re.IGNORECASE) for p in self.LIFECYCLE_PATTERNS['create']]
         self.destroy_regexes = [re.compile(p, re.IGNORECASE) for p in self.LIFECYCLE_PATTERNS['destroy']]
+
+        # Compile layer patterns
+        self.layer_body_regexes = {
+            layer: [re.compile(p, re.IGNORECASE) for p in patterns]
+            for layer, patterns in self.LAYER_PATTERNS.items()
+        }
+        self.layer_name_regexes = {
+            layer: [re.compile(p) for p in patterns]
+            for layer, patterns in self.LAYER_NAME_PATTERNS.items()
+        }
 
     def classify_boundary(self, body: str, signature: str = '') -> BoundaryType:
         """Classify the I/O boundary type."""
@@ -470,6 +608,38 @@ class RegexDimensionClassifier:
                 return LifecyclePhase.DESTROY
 
         return LifecyclePhase.USE
+
+    def classify_layer(self, body: str, name: str, file_path: str = '') -> LayerType:
+        """Classify Clean Architecture layer using regex patterns."""
+        # Priority order: Test > Interface > Infrastructure > Application > Core
+        layer_priority = ['test', 'interface', 'infrastructure', 'application', 'core']
+
+        # Check name-based patterns first (more reliable)
+        for layer in layer_priority:
+            for regex in self.layer_name_regexes.get(layer, []):
+                if regex.search(name):
+                    return LayerType[layer.upper()]
+
+        # Check body-based patterns
+        for layer in layer_priority:
+            for regex in self.layer_body_regexes.get(layer, []):
+                if regex.search(body):
+                    return LayerType[layer.upper()]
+
+        # Path-based fallback (original logic)
+        path = file_path.lower()
+        if '/test' in path or 'test_' in path or '_test.py' in path:
+            return LayerType.TEST
+        elif '/api/' in path or '/routes/' in path or '/views/' in path or '/handlers/' in path:
+            return LayerType.INTERFACE
+        elif '/infrastructure/' in path or '/repositories/' in path or '/adapters/' in path:
+            return LayerType.INFRASTRUCTURE
+        elif '/services/' in path or '/application/' in path or '/usecases/' in path:
+            return LayerType.APPLICATION
+        elif '/domain/' in path or '/entities/' in path or '/core/' in path or '/models/' in path:
+            return LayerType.CORE
+
+        return LayerType.UNKNOWN
 
 
 # =============================================================================
@@ -569,9 +739,33 @@ class DimensionClassifier:
         # Fallback to regex (name-based only)
         return self._regex_classifier.classify_lifecycle(name)
 
+    def classify_layer(self, node: Dict[str, Any]) -> LayerType:
+        """
+        Classify D2_LAYER using tree-sitter AST patterns.
+
+        Args:
+            node: Node dict with 'body_source', 'name', 'file_path', etc.
+
+        Returns:
+            LayerType enum value
+        """
+        body = node.get('body_source', '') or node.get('body', '') or ''
+        name = node.get('name', '')
+        file_path = node.get('file_path', '')
+
+        # Try tree-sitter first
+        if self._use_tree_sitter and body:
+            language = self._get_language(node)
+            result = self._ts_classifier.classify_layer(body, language)
+            if result is not None:
+                return result
+
+        # Fallback to regex (uses body, name, and path)
+        return self._regex_classifier.classify_layer(body, name, file_path)
+
     def classify_all(self, node: Dict[str, Any]) -> Dict[str, str]:
         """
-        Classify all 3 dimensions for a node.
+        Classify D4_BOUNDARY, D5_STATE, D7_LIFECYCLE for a node.
 
         Returns:
             Dict with 'boundary', 'state', 'lifecycle' string values
