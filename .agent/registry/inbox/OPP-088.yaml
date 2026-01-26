@@ -1,0 +1,17 @@
+# Opportunity: [MACRO-001] Integration Failures
+# Created: 2026-01-26T01:51:00.606861+00:00
+# Source: macro:MACRO-001
+
+id: OPP-088
+title: '[MACRO-001] Integration Failures'
+description: 'Found 4 issues.
+
+
+  Discovered by MACRO-001 audit.'
+urgency: HIGH
+source: macro:MACRO-001
+created_at: '2026-01-26T01:51:00.606861+00:00'
+tags:
+- integration_failures
+- audit
+- MACRO-001

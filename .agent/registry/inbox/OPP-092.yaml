@@ -1,0 +1,14 @@
+# Opportunity: [MACRO-001] Implement manifest persistence
+# Created: 2026-01-26T01:51:00.608886+00:00
+# Source: macro:MACRO-001
+
+id: OPP-092
+title: '[MACRO-001] Implement manifest persistence'
+description: Follow-up action from MACRO-001 audit.
+urgency: MEDIUM
+source: macro:MACRO-001
+created_at: '2026-01-26T01:51:00.608886+00:00'
+suggested_action: Implement manifest persistence
+tags:
+- follow_up
+- MACRO-001

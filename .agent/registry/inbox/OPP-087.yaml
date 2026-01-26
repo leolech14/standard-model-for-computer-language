@@ -1,0 +1,17 @@
+# Opportunity: [MACRO-001] Dead Code
+# Created: 2026-01-26T01:51:00.605677+00:00
+# Source: macro:MACRO-001
+
+id: OPP-087
+title: '[MACRO-001] Dead Code'
+description: 'Found 1 issues.
+
+
+  Discovered by MACRO-001 audit.'
+urgency: HIGH
+source: macro:MACRO-001
+created_at: '2026-01-26T01:51:00.605677+00:00'
+tags:
+- dead_code
+- audit
+- MACRO-001

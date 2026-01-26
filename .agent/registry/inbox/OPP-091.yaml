@@ -1,0 +1,14 @@
+# Opportunity: [MACRO-001] Wire history_loader to research_orchestrator
+# Created: 2026-01-26T01:51:00.608453+00:00
+# Source: macro:MACRO-001
+
+id: OPP-091
+title: '[MACRO-001] Wire history_loader to research_orchestrator'
+description: Follow-up action from MACRO-001 audit.
+urgency: MEDIUM
+source: macro:MACRO-001
+created_at: '2026-01-26T01:51:00.608453+00:00'
+suggested_action: Wire history_loader to research_orchestrator
+tags:
+- follow_up
+- MACRO-001
