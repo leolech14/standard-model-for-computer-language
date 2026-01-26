@@ -25,6 +25,9 @@ window.SIDEBAR = (function () {
     let _refreshTimer = null;
     let _bound = false;
 
+    // G04 FIX: Listener tracking for cleanup
+    const _listeners = [];
+
     // =========================================================================
     // INITIALIZATION
     // =========================================================================
@@ -66,7 +69,8 @@ window.SIDEBAR = (function () {
 
     function _bindSectionHeaders() {
         document.querySelectorAll('.section-header[data-section]').forEach(header => {
-            header.addEventListener('click', () => {
+            // G04 FIX: Use tracked listener
+            _addListener(header, 'click', () => {
                 const sectionId = header.dataset.section;
                 const content = document.getElementById(`section-${sectionId}`);
                 if (!content) return;
@@ -523,7 +527,12 @@ window.SIDEBAR = (function () {
             // Apply files mode (data is now available)
             if (typeof FILE_VIZ !== 'undefined') {
                 FILE_VIZ.buildFileGraph();
-                window.GRAPH_MODE = 'files';
+                // G07 FIX: Use VIS_STATE for centralized state management
+                if (typeof VIS_STATE !== 'undefined' && VIS_STATE.setGraphMode) {
+                    VIS_STATE.setGraphMode('files', 'sidebar.applyDeferredViewMode');
+                } else {
+                    window.GRAPH_MODE = 'files';
+                }
                 FILE_VIZ.graphMode = 'files';
                 FILE_VIZ.setMode('map');
                 FILE_VIZ.setEnabled(true);
@@ -554,6 +563,15 @@ window.SIDEBAR = (function () {
             localStorage.setItem('collider_view_mode', mode);
         } catch (e) { /* ignore */ }
 
+        // G07 FIX: Helper to set graph mode via VIS_STATE or fallback
+        const _setGraphMode = (m) => {
+            if (typeof VIS_STATE !== 'undefined' && VIS_STATE.setGraphMode) {
+                VIS_STATE.setGraphMode(m, 'sidebar.setViewMode');
+            } else {
+                window.GRAPH_MODE = m;
+            }
+        };
+
         // Apply view mode via FILE_VIZ module
         if (mode === 'files') {
             // Switch to file-nodes view
@@ -564,15 +582,15 @@ window.SIDEBAR = (function () {
                 if (fileGraph) {
                     // EXPLICIT data switch - don't rely on side effects (OPP-058 fix)
                     Graph.graphData(fileGraph);
-                    window.GRAPH_MODE = 'files';
+                    _setGraphMode('files');
                     FILE_VIZ.setMode('map');
                     FILE_VIZ.setEnabled(true);
                     console.log('[SIDEBAR] View mode: FILES - switched to', fileGraph.nodes.length, 'file nodes');
                 } else {
                     console.warn('[SIDEBAR] Failed to build file graph');
                 }
-            } else if (typeof window.GRAPH_MODE !== 'undefined') {
-                window.GRAPH_MODE = 'files';
+            } else {
+                _setGraphMode('files');
                 if (typeof buildFileGraph === 'function') buildFileGraph(null);
                 if (typeof refreshGraph === 'function') refreshGraph();
             }
@@ -580,14 +598,14 @@ window.SIDEBAR = (function () {
             // Switch to atoms view
             if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined' && typeof DM !== 'undefined') {
                 FILE_VIZ.setEnabled(false);
-                window.GRAPH_MODE = 'atoms';
+                _setGraphMode('atoms');
                 // EXPLICIT data restore - don't leave file nodes in graph (OPP-059 fix)
                 const nodes = DM.getNodes();
                 const links = DM.getLinks();
                 Graph.graphData({ nodes, links });
                 console.log('[SIDEBAR] View mode: ATOMS - restored', nodes.length, 'atom nodes');
-            } else if (typeof window.GRAPH_MODE !== 'undefined') {
-                window.GRAPH_MODE = 'atoms';
+            } else {
+                _setGraphMode('atoms');
                 if (typeof refreshGraph === 'function') refreshGraph();
             }
         }
@@ -1108,17 +1126,17 @@ window.SIDEBAR = (function () {
 
         if (!slider) return;
 
-        // Slider -> Number
-        slider.addEventListener('input', () => {
+        // G04 FIX: Slider -> Number (tracked listener)
+        _addListener(slider, 'input', () => {
             const val = parseFloat(slider.value);
             if (numberInput) numberInput.value = val;
             if (valSpan) valSpan.textContent = val;
             callback(val);
         });
 
-        // Number -> Slider
+        // G04 FIX: Number -> Slider (tracked listener)
         if (numberInput) {
-            numberInput.addEventListener('change', () => { // Change triggers on enter/blur
+            _addListener(numberInput, 'change', () => { // Change triggers on enter/blur
                 let val = parseFloat(numberInput.value);
 
                 // Clamp
@@ -1130,8 +1148,6 @@ window.SIDEBAR = (function () {
                 if (valSpan) valSpan.textContent = val;
                 callback(val);
             });
-
-            // Optional: Live update while typing? Maybe too heavy. Use change for now.
         }
     }
 
@@ -1156,7 +1172,8 @@ window.SIDEBAR = (function () {
             return;
         }
 
-        toggle.addEventListener('click', () => {
+        // G04 FIX: Use tracked listener
+        _addListener(toggle, 'click', () => {
             const isActive = toggle.classList.toggle('active');
             callback(isActive);
         });
@@ -1175,6 +1192,43 @@ window.SIDEBAR = (function () {
                 refreshGraph();
             }
         }, 16); // ~1 frame
+    }
+
+    // =========================================================================
+    // G04 FIX: LISTENER MANAGEMENT
+    // =========================================================================
+
+    /**
+     * Track an event listener for cleanup
+     * @param {Element} el - DOM element
+     * @param {string} event - Event name
+     * @param {Function} handler - Event handler
+     */
+    function _addListener(el, event, handler) {
+        if (!el) return;
+        el.addEventListener(event, handler);
+        _listeners.push({ el, event, handler });
+    }
+
+    /**
+     * Clean up all tracked listeners
+     * Call this before destroying the sidebar or during hot reload
+     */
+    function destroy() {
+        console.log(`[SIDEBAR] destroy() - removing ${_listeners.length} listeners`);
+
+        _listeners.forEach(({ el, event, handler }) => {
+            if (el) {
+                el.removeEventListener(event, handler);
+            }
+        });
+        _listeners.length = 0;
+
+        // Reset state
+        _bound = false;
+        clearTimeout(_refreshTimer);
+
+        console.log('[SIDEBAR] Destroyed');
     }
 
     // =========================================================================
@@ -1404,6 +1458,9 @@ window.SIDEBAR = (function () {
         init,
         initSectionResize,
         initSidebarResize,
+
+        // G04 FIX: Cleanup
+        destroy,
 
         // Color modes
         setColorMode,

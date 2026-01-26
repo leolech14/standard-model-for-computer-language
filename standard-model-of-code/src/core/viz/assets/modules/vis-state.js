@@ -56,8 +56,70 @@ window.VIS_STATE = (function() {
         sizeBy: 'fanout',          // 'uniform', 'degree', 'fanout', 'complexity'
         edgeBy: 'type',            // 'type', 'resolution', 'weight', 'gradient-tier', etc.
         palette: 'helix',          // OKLCH helix path - visually striking default
-        paletteType: 'interval'    // Derived: 'categorical' or 'interval'
+        paletteType: 'interval',   // Derived: 'categorical' or 'interval'
+
+        // G07 FIX: Centralized dimension and mode state (previously window.IS_3D, window.GRAPH_MODE)
+        is3D: true,                // 2D/3D dimension mode
+        graphMode: 'atoms'         // 'atoms' | 'files' | 'hybrid'
     };
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // G07 FIX: CENTRALIZED IS_3D AND GRAPH_MODE ACCESSORS
+    // ═══════════════════════════════════════════════════════════════════════
+
+    /**
+     * Get current 3D mode state
+     */
+    function getIs3D() {
+        return state.is3D;
+    }
+
+    /**
+     * Set 3D mode state (single source of truth)
+     * @param {boolean} val - true for 3D, false for 2D
+     * @param {string} source - Debug label for console
+     */
+    function setIs3D(val, source = 'unknown') {
+        if (state.is3D === val) return;
+        state.is3D = val;
+        window.IS_3D = val; // Backward compat
+
+        console.log(`[VIS_STATE] setIs3D(${val}) from ${source}`);
+
+        // Emit event for listeners
+        if (typeof window.EVENT_BUS !== 'undefined') {
+            window.EVENT_BUS.emit('dimension:changed', val);
+        }
+    }
+
+    /**
+     * Get current graph mode
+     */
+    function getGraphMode() {
+        return state.graphMode;
+    }
+
+    /**
+     * Set graph mode (single source of truth)
+     * @param {string} mode - 'atoms' | 'files' | 'hybrid'
+     * @param {string} source - Debug label for console
+     */
+    function setGraphMode(mode, source = 'unknown') {
+        if (state.graphMode === mode) return;
+        if (!['atoms', 'files', 'hybrid'].includes(mode)) {
+            console.warn('[VIS_STATE] Invalid graphMode:', mode);
+            return;
+        }
+        state.graphMode = mode;
+        window.GRAPH_MODE = mode; // Backward compat
+
+        console.log(`[VIS_STATE] setGraphMode(${mode}) from ${source}`);
+
+        // Emit event for listeners
+        if (typeof window.EVENT_BUS !== 'undefined') {
+            window.EVENT_BUS.emit('graphMode:changed', mode);
+        }
+    }
 
     // ═══════════════════════════════════════════════════════════════════════
     // VIEW PRESETS - Macros that set multiple properties at once
@@ -457,6 +519,12 @@ window.VIS_STATE = (function() {
         setSizeBy,
         setEdgeBy,
         setPalette,
+
+        // G07 FIX: Centralized IS_3D and GRAPH_MODE accessors
+        getIs3D,
+        setIs3D,
+        getGraphMode,
+        setGraphMode,
 
         // Lifecycle
         init,

@@ -192,10 +192,14 @@ const PANELS = (function() {
                     // Handle dimension change
                     if (control.id === 'dim-control') {
                         const dim = segment.dataset.dim;
-                        if (typeof IS_3D !== 'undefined') {
-                            window.IS_3D = (dim !== '2');
-                            if (typeof Graph !== 'undefined' && Graph) Graph.numDimensions(window.IS_3D ? 3 : 2);
+                        const newIs3D = (dim !== '2');
+                        // G07 FIX: Use VIS_STATE for centralized state management
+                        if (typeof VIS_STATE !== 'undefined' && VIS_STATE.setIs3D) {
+                            VIS_STATE.setIs3D(newIs3D, 'panels.dim-control');
+                        } else {
+                            window.IS_3D = newIs3D;
                         }
+                        if (typeof Graph !== 'undefined' && Graph) Graph.numDimensions(newIs3D ? 3 : 2);
                     }
 
                     // Handle node color mode
@@ -254,20 +258,29 @@ const PANELS = (function() {
         REGISTRY.register('cmd-3d', () => {
             if (typeof toggleDimensions === 'function') {
                 toggleDimensions();
-            } else if (typeof IS_3D !== 'undefined') {
-                window.IS_3D = !window.IS_3D;
-                if (typeof Graph !== 'undefined' && Graph) Graph.numDimensions(window.IS_3D ? 3 : 2);
+            } else {
+                // G07 FIX: Use VIS_STATE for centralized state management
+                const currentIs3D = typeof VIS_STATE !== 'undefined' ? VIS_STATE.getIs3D() : window.IS_3D;
+                const newIs3D = !currentIs3D;
+                if (typeof VIS_STATE !== 'undefined' && VIS_STATE.setIs3D) {
+                    VIS_STATE.setIs3D(newIs3D, 'panels.cmd-3d');
+                } else {
+                    window.IS_3D = newIs3D;
+                }
+                if (typeof Graph !== 'undefined' && Graph) Graph.numDimensions(newIs3D ? 3 : 2);
                 const btnDim = document.getElementById('btn-dimensions');
-                if (btnDim) btnDim.textContent = window.IS_3D ? '2D' : '3D';
+                if (btnDim) btnDim.textContent = newIs3D ? '2D' : '3D';
             }
             const btn = document.getElementById('cmd-3d');
-            if (btn && typeof IS_3D !== 'undefined') btn.classList.toggle('active', window.IS_3D);
+            const is3D = typeof VIS_STATE !== 'undefined' ? VIS_STATE.getIs3D() : window.IS_3D;
+            if (btn) btn.classList.toggle('active', is3D);
 
             // Update dim-control if exists
             const dimControl = document.getElementById('dim-control');
-            if (dimControl && typeof IS_3D !== 'undefined') {
+            if (dimControl) {
+                const currentIs3D = typeof VIS_STATE !== 'undefined' ? VIS_STATE.getIs3D() : window.IS_3D;
                 dimControl.querySelectorAll('.segment').forEach(s => {
-                    s.classList.toggle('active', s.dataset.dim === (window.IS_3D ? '3' : '2'));
+                    s.classList.toggle('active', s.dataset.dim === (currentIs3D ? '3' : '2'));
                 });
             }
         }, { desc: 'Toggle 2D/3D View' });

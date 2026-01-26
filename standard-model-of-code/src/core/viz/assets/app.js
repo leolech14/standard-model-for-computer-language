@@ -591,7 +591,12 @@ worker.onmessage = function (e) {
         FILE_GRAPH = null;
         FILE_NODE_POSITIONS = new Map();
         EXPANDED_FILES.clear();
-        window.GRAPH_MODE = 'atoms';
+        // G07 FIX: Use VIS_STATE for centralized state management
+        if (typeof VIS_STATE !== 'undefined' && VIS_STATE.setGraphMode) {
+            VIS_STATE.setGraphMode('atoms', 'app.worker.onmessage');
+        } else {
+            window.GRAPH_MODE = 'atoms';
+        }
         document.getElementById('loader-status').innerText = "INITIALIZING VISUALIZATION...";
         initGraph(FULL_GRAPH);
     }

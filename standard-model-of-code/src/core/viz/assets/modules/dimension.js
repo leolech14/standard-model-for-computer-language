@@ -29,12 +29,18 @@ window.DIMENSION = (function() {
         const button = document.getElementById('btn-2d');
 
         animateChange(target3d, () => {
-            window.IS_3D = target3d;
+            // G07 FIX: Use VIS_STATE for centralized state management
+            if (typeof VIS_STATE !== 'undefined' && VIS_STATE.setIs3D) {
+                VIS_STATE.setIs3D(target3d, 'dimension.toggle');
+            } else {
+                window.IS_3D = target3d; // Fallback
+            }
             window.DIMENSION_TRANSITION = false;
-            if (button) button.textContent = window.IS_3D ? '2D' : '3D';
+            if (button) button.textContent = (typeof VIS_STATE !== 'undefined' ? VIS_STATE.getIs3D() : window.IS_3D) ? '2D' : '3D';
 
             // Re-apply file viz mode if active
-            if (window.fileMode && window.GRAPH_MODE === 'atoms') {
+            const graphMode = typeof VIS_STATE !== 'undefined' ? VIS_STATE.getGraphMode() : window.GRAPH_MODE;
+            if (window.fileMode && graphMode === 'atoms') {
                 if (typeof window.applyFileVizMode === 'function') {
                     window.applyFileVizMode();
                 }
