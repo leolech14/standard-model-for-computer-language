@@ -1,0 +1,181 @@
+# MACRO-002: Timestamp Daily Journal (TDJ)
+# =========================================
+# Temporal index of all repository files for AI context awareness.
+#
+# TRIGGER: Schedule (daily 6AM) - wired to drift_guard.py for event-based
+# OUTPUT: .agent/intelligence/tdj.jsonl
+#
+# Version: 1.0.0
+# Created: 2026-01-25
+# Validated: Gemini 3.0 Pro (architecture approved)
+
+id: "MACRO-002"
+name: "Timestamp Daily Journal"
+version: "1.0.0"
+status: "TESTED"
+
+created: "2026-01-25T23:00:00Z"
+author: "claude-opus-4-5 + leonardo.lech"
+description: |
+  Maintains a persistent temporal index of all files in the repository.
+  Enables:
+  - Point-in-time queries ("what existed on date X")
+  - Activity detection ("files created in last N days")
+  - Staleness analysis ("files untouched for N+ days")
+  - Pattern filtering ("files matching path X")
+  - AI context injection (structured temporal awareness)
+
+  Replaces legacy timestamps.py + CSV with JSONL format.
+
+tags:
+  - "temporal"
+  - "index"
+  - "automation"
+  - "ai-context"
+
+# =============================================================================
+# TRIGGER
+# =============================================================================
+
+trigger:
+  type: "schedule"
+  schedule: "0 6 * * *"  # Daily at 6 AM (aligns with HSL audit)
+
+  # Event-based updates handled by drift_guard.py calling tdj.py --scan
+  # Do NOT run separate watchdog (AM001 violation risk)
+
+# =============================================================================
+# PRECONDITIONS
+# =============================================================================
+
+preconditions:
+  - condition: "Python 3.10+ available"
+    required: true
+    reason: "Script requires modern Python"
+
+  - condition: ".agent/intelligence directory exists"
+    required: true
+    reason: "Output location must exist"
+
+# =============================================================================
+# INPUT
+# =============================================================================
+
+input:
+  scan_root:
+    description: "Repository root to scan"
+    default: "."
+
+  ignore_patterns:
+    description: "Paths to exclude from scan"
+    default:
+      - ".git"
+      - "__pycache__"
+      - "node_modules"
+      - ".venv"
+      - ".tools_venv"
+      - "*.pyc"
+      - ".DS_Store"
+      - ".agent/intelligence/tdj.jsonl"  # Prevent self-reference loop
+
+# =============================================================================
+# STEPS
+# =============================================================================
+
+steps:
+  # --- STEP 1: Run scan ---
+  - id: "scan_filesystem"
+    description: "Scan all files and generate JSONL index"
+    tool: "Bash"
+    params:
+      command: |
+        python3 context-management/tools/maintenance/tdj.py --scan
+    output_var: "scan_result"
+    on_failure: "stop"
+    expect: "Scan complete"
+
+  # --- STEP 2: Verify output ---
+  - id: "verify_output"
+    description: "Confirm JSONL was generated"
+    tool: "Bash"
+    params:
+      command: |
+        test -f .agent/intelligence/tdj.jsonl && \
+        echo "TDJ exists: $(wc -l < .agent/intelligence/tdj.jsonl) entries"
+    expect: "TDJ exists"
+    on_failure: "stop"
+
+# =============================================================================
+# SUCCESS CRITERIA
+# =============================================================================
+
+success_criteria:
+  - "tdj.jsonl generated in .agent/intelligence/"
+  - "Entry count > 0"
+  - "No self-reference loop detected"
+
+# =============================================================================
+# OUTPUT
+# =============================================================================
+
+output:
+  type: "file"
+  path: ".agent/intelligence/tdj.jsonl"
+  format: "jsonl"
+
+  schema:
+    description: "Each line is a JSON object"
+    fields:
+      - name: "path"
+        type: "string"
+        description: "Relative file path from repo root"
+      - name: "size"
+        type: "integer"
+        description: "File size in bytes"
+      - name: "mtime"
+        type: "float"
+        description: "Modification time (Unix epoch)"
+      - name: "ctime"
+        type: "float"
+        description: "Creation time (Unix epoch)"
+      - name: "scan_ts"
+        type: "float"
+        description: "When this entry was recorded"
+
+# =============================================================================
+# EXECUTION HISTORY
+# =============================================================================
+
+executions: []
+  # Will be populated on first run
+
+# =============================================================================
+# INTEGRATION
+# =============================================================================
+
+integration:
+  drift_guard:
+    description: "drift_guard.py can trigger --scan on file changes"
+    mechanism: "subprocess call"
+
+  enrichment_pipeline:
+    description: "AEP can use TDJ for temporal task prioritization"
+    mechanism: "Read tdj.jsonl, boost tasks in active areas"
+
+  boot_sequence:
+    description: "boot.sh can inject TDJ context via --context"
+    mechanism: "Append XML to session context"
+
+# =============================================================================
+# AI DISCOVERABILITY
+# =============================================================================
+
+ai_metadata:
+  type: "temporal_index"
+  purpose: "Codebase temporal awareness for AI agents"
+  query_examples:
+    - "python tdj.py recent 7"
+    - "python tdj.py stale 30"
+    - "python tdj.py pattern src/core"
+    - "python tdj.py context"
+  context_injection: "Use --context for XML output suitable for LLM context windows"

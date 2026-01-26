@@ -128,3 +128,5 @@ assets/
 # AGENT SESSION STATE (ephemeral, not committed)
 # =============================================================================
 .agent/state/session.yaml
+# TDJ generated data (recreate with: python tdj.py --scan)
+.agent/intelligence/tdj.jsonl

@@ -9,9 +9,9 @@
 ## Quick Stats
 
 ```
-Total Macros:    1
+Total Macros:    2
 DRAFT:           0
-TESTED:          1
+TESTED:          2
 PRODUCTION:      0
 DEPRECATED:      0
 ```
@@ -55,6 +55,7 @@ DEPRECATED:      0
 | ID | Name | Status | Trigger | Last Run | Success Rate |
 |----|------|--------|---------|----------|--------------|
 | MACRO-001 | Skeptical Audit | TESTED | manual | 2026-01-25 | 100% (1/1) |
+| MACRO-002 | Timestamp Daily Journal | TESTED | schedule (6AM) | 2026-01-25 | 100% (1/1) |
 
 ---
 
@@ -82,6 +83,33 @@ TESTED ──► post_commit trigger ──► PRODUCTION
 
 ---
 
+## MACRO-002: Timestamp Daily Journal (TDJ)
+
+**Purpose:** Persistent temporal index of all repository files for AI context awareness.
+
+**Trigger:** Schedule (daily 6AM) + drift_guard events
+
+**Steps:**
+1. Scan filesystem (excluding .git, __pycache__, node_modules, etc.)
+2. Generate JSONL with path/size/mtime/ctime/scan_ts
+3. Write to .agent/intelligence/tdj.jsonl
+
+**Output:** `.agent/intelligence/tdj.jsonl`
+
+**Query Commands:**
+```bash
+python tdj.py recent 7      # Files created in last 7 days
+python tdj.py modified 1    # Files modified in last day
+python tdj.py stale 30      # Untouched for 30+ days
+python tdj.py pattern X     # Files matching pattern
+python tdj.py summary       # Timeline overview
+python tdj.py context       # AI-ready XML output
+```
+
+**Replaces:** `timestamps.py` + `project_elements_file_timestamps.csv`
+
+---
+
 ## Directory Structure
 
 ```
@@ -90,10 +118,10 @@ TESTED ──► post_commit trigger ──► PRODUCTION
 ├── schema/
 │   └── macro.schema.yaml             # Macro definition schema
 ├── library/
-│   └── MACRO-001-skeptical-audit.yaml
+│   ├── MACRO-001-skeptical-audit.yaml
+│   └── MACRO-002-tdj.yaml            # Timestamp Daily Journal
 └── logs/
-    └── MACRO-001/
-        └── (execution logs)
+    └── (execution logs per macro)
 ```
 
 ---
@@ -128,11 +156,11 @@ The trigger engine will:
 
 | ID | Name | Purpose | Priority |
 |----|------|---------|----------|
-| MACRO-002 | Integration Test | Verify all imports work | HIGH |
-| MACRO-003 | Manifest Generator | Auto-save query manifests | HIGH |
-| MACRO-004 | Dead Code Scan | Weekly orphan detection | MEDIUM |
-| MACRO-005 | Schema Drift Detector | Check docs match code | MEDIUM |
-| MACRO-006 | Research Archiver | Save Perplexity/Gemini outputs | LOW |
+| MACRO-003 | Integration Test | Verify all imports work | HIGH |
+| MACRO-004 | Manifest Generator | Auto-save query manifests | HIGH |
+| MACRO-005 | Dead Code Scan | Weekly orphan detection | MEDIUM |
+| MACRO-006 | Schema Drift Detector | Check docs match code | MEDIUM |
+| MACRO-007 | Research Archiver | Save Perplexity/Gemini outputs | LOW |
 
 ---
 
@@ -152,6 +180,7 @@ The trigger engine will:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | 2026-01-25 | Added MACRO-002 (TDJ - Timestamp Daily Journal) |
 | 1.0.0 | 2026-01-25 | Initial creation with MACRO-001 |
 
 ---
