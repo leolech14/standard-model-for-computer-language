@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-26T23:57:14.416246",
+    "source": "gemini",
+    "model": "gemini-3-pro-preview",
+    "query": "what command should I use to create a zip file containing all documentation files from this repository for external audit?",
+    "query_length": 122,
+    "checksum": "sha256:7004b944ce14ae02fc66f8196963330c7df966d7d14c9334fe5cd66303fd4d0f"
+  },
+  "response": {
+    "content": "Based on the `context-management/docs/ORIENTATION_FILES.md` documentation, the system has a dedicated tool for exporting key context and documentation into a zip file for external sharing or AI context loading.\n\nTo create the zip file (`orientation-files.zip`), run the following command from the project root:\n\n```bash\n./standard-model-of-code/scripts/sync-orientation-files.sh --zip\n```\n\n### Details\n*   **What it does:** Collects core documentation (`README.md`, `VISION.md`, `THEORY.md`, `TOOL.md`, specs, schemas) from the working directory.\n*   **Output Location:** Creates `~/Downloads/orientation-files.zip` (and a corresponding folder).\n*   **Content:** Contains the \"Contextome\" essentials needed for an external agent or collaborator to understand the project without the full codebase.\n\n**Note:** If you want to continuously sync these files to a folder as you edit them (for a local context pack), you can use the `--watch` flag instead.",
+    "mode": "standard"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-26 23:28:47",
+  "session_end": "2026-01-26 23:29:08",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 213610,
+  "total_tokens_out": 602,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769480927.712328,
+      "timestamp_str": "2026-01-26 23:28:47",
+      "role": "user",
+      "content": "where is the Stone Tool Principle documented and how does it integrate with TOOLOME"
+    },
+    {
+      "timestamp": 1769480948.91435,
+      "timestamp_str": "2026-01-26 23:29:08",
+      "role": "assistant",
+      "content": "Based on the provided codebase context, here is the documentation location and integration logic for the Stone Tool Principle.\n\n### 1. Location of Documentation\n\nThe **Stone Tool Principle** (formally **Axiom H4**) is primarily documented in two locations:\n\n*   **Primary Definition:** `context-management/docs/CODESPACE_ALGEBRA.md`\n    *   **Section:** 15. CONSUMER CLASSES (AI-Native)\n    *   **Key Text:** \"AXIOM H4 (Ergonomics Shift): Tools MAY be designed that humans cannot directly use.\"\n\n*   **Glossary Definition:** `context-management/docs/GLOSSARY.md`\n    *   **Section:** CONSUMER CLASSES (Axiom Group H)\n    *   **Key Text:** \"Stone Tool Test: 'Can a human use this tool directly, without AI mediation?' If NO \u2192 AI-native tool (valid design).\"\n\n*   **Reference Specs:** The glossary also points to `docs/specs/AI_CONSUMER_CLASS.md` and `docs/deep/THEORY_AMENDMENT_2026-01.md` for full specifications.\n\n### 2. The Principle\n\nThe principle asserts that in an AI-native era, **ergonomics shift from human hands to AI \"hands.\"**\n*   **Human Hand:** Needs grip, balance, visual UI, natural language (L1).\n*   **AI \"Hand\":** Needs structured data, parseability, high information density (L0, L2).\n\nA \"Stone Tool\" is a tool intentionally designed to be difficult for humans to use directly but highly optimized for AI agents (e.g., `unified_analysis.json` or complex YAML manifests).\n\n### 3. Integration with TOOLOME\n\nThe **TOOLOME** and **STONE_TOOLS** form a partition of the total tool universe (Taxonomy defined in `GLOSSARY.md`).\n\nThey integrate by separating concerns based on the **Consumer Class**:\n\n| Taxonomy Segment | Consumer | Purpose | Example |\n| :--- | :--- | :--- | :--- |\n| **TOOLOME** | **Developer** | **Shape the CODOME** (Action). Tools designed for human clarity and usability. | Formatters, Linters, IDEs. |\n| **STONE_TOOLS** | **AI_AGENT** | **Observe the CODOME** (Analysis). Tools designed for machine parseability and structural completeness. | `unified_analysis.json`, `POM YAML`, `Collider` outputs. |\n\n**The Integration Logic:**\nAI Agents act as the bridge. They use **Stone Tools** to understand the system (Observation) and then use the **Toolome** or direct file manipulation to modify the system (Action), mediating the results back to the human in Natural Language (L1)."
+    }
+  ]
+}

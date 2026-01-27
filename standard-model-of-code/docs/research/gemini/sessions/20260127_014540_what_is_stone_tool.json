@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 01:45:21",
+  "session_end": "2026-01-27 01:45:40",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 213790,
+  "total_tokens_out": 495,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769489121.147941,
+      "timestamp_str": "2026-01-27 01:45:21",
+      "role": "user",
+      "content": "what is stone tool"
+    },
+    {
+      "timestamp": 1769489140.659553,
+      "timestamp_str": "2026-01-27 01:45:40",
+      "role": "assistant",
+      "content": "Based on the `CODESPACE_ALGEBRA.md` and `GLOSSARY.md` files in the codebase, a **Stone Tool** is a specific class of software utility designed **exclusively for AI Agents**, not humans.\n\n### 1. The Definition (Axiom H4)\nAccording to **Axiom H4 (Ergonomics Shift)** found in `CODESPACE_ALGEBRA.md`, the definition is:\n\n> **Stone Tool Principle:** \"Tools MAY be designed that humans cannot directly use.\"\n\nIn this architecture, software tools are usually designed for human ergonomics (GUIs, readable text, CLI help menus). **Stone Tools** are designed for **AI ergonomics** (parseability, structured data, high information density).\n\n### 2. The Metaphor\nThe documentation uses this analogy:\n*   **Paleolithic Stone Tools:** Were shaped specifically to fit the **human hand** (grip, leverage).\n*   **AI Stone Tools:** Are shaped specifically to fit the **AI \"hand\"** (Context windows, JSON parsing, token budgets).\n\n### 3. The \"Stone Tool Test\"\nTo determine if a utility is a Stone Tool, the documentation applies this logic:\n\n```\nSTONE_TOOL_TEST(tool) = \"Can a human use this without AI mediation?\"\n```\n*   **If YES:** It is a standard Dev Tool (Toolome).\n*   **If NO:** It is a **Stone Tool** (valid AI-native design).\n\n### 4. Examples in PROJECT_elements\nBased on `GLOSSARY.md`, the repository distinguishes between:\n\n1.  **TOOLOME (Dev Tools):** Things humans use (formatters, linters, `git`).\n2.  **STONE_TOOLS (Analysis Tools):** Things the AI uses to understand the code.\n    *   **`unified_analysis.json`**: A massive JSON output from the Collider engine. It is too large and complex for a human to read, but perfect for an AI to query.\n    *   **`POM YAML`**: Physical Object Model manifests.\n\n### Summary\nA **Stone Tool** is a piece of infrastructure that generates data formats (like complex JSON graphs) optimized for LLM consumption, accepting that these outputs may be illegible or unusable to a human developer without an AI intermediary."
+    }
+  ]
+}

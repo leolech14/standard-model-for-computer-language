@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 01:44:20",
+  "session_end": "2026-01-27 01:44:44",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 213790,
+  "total_tokens_out": 655,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769489060.616917,
+      "timestamp_str": "2026-01-27 01:44:20",
+      "role": "user",
+      "content": "what is stone tool"
+    },
+    {
+      "timestamp": 1769489084.354069,
+      "timestamp_str": "2026-01-27 01:44:44",
+      "role": "assistant",
+      "content": "Based on the **Codespace Algebra** and **Glossary** documents provided in the context, here is the definition of a **Stone Tool** within the PROJECT_elements framework.\n\n### Definition: Stone Tool\nA **Stone Tool** is a software artifact or utility designed specifically for **AI Agents**, not humans. It prioritizes structure, parseability, and information density over human readability or ergonomics.\n\nIt represents a fundamental shift in tool design philosophy (Axiom Group H), acknowledging that in an AI-mediated workflow, the \"user\" of a tool is often a machine, not a person.\n\n---\n\n### The Core Concept (Axiom H4)\n\nThe concept is formally defined in `context-management/docs/CODESPACE_ALGEBRA.md` under **Axiom H4 (Ergonomics Shift)**:\n\n> **Stone Tool Principle:** Tools MAY be designed that humans cannot directly use.\n>\n> *   **Physical Stone Tools:** Were shaped to fit the human **HAND** (grip, balance).\n> *   **Software Stone Tools:** Are shaped to fit the **AI's \"HAND\"** (parseability, typing speed, token efficiency).\n\n### The Stone Tool Test\n\nTo determine if something is a Stone Tool, the system applies the following logic:\n\n> **STONE_TOOL_TEST(tool) = \"Can a human use this without AI mediation?\"**\n> *   **YES** \u2192 Standard Tool (Toolome)\n> *   **NO** \u2192 Stone Tool (AI-Native / Valid Design)\n\n### Key Characteristics\n\n1.  **AI-Native Ergonomics:** Humans communicate via Natural Language (L1). AI operates best on Structured Data (L0, L2). Stone Tools operate at L0/L2.\n2.  **Mediation:** Humans are not expected to read the raw output of a Stone Tool. An AI Agent acts as the bridge, consuming the Stone Tool's output and translating it for the human.\n3.  **High Density:** They often produce massive JSON or YAML outputs that would overwhelm a human but provide perfect context for an LLM.\n\n### Concrete Examples\n\nBased on the documentation, these are the primary Stone Tools in the project:\n\n*   **`unified_analysis.json`**: The massive output of the Collider. It is a \"Stone Tool\" because it contains thousands of lines of AST data, atom classifications, and graph relationships. It is unreadable to humans but gives an AI perfect situational awareness.\n*   **`POM` (Project Object Model) YAMLs**: Structural manifests intended for automated reasoning.\n*   **`analyze.py --mode forensic`**: While humans trigger it, the output format is strictly structured for verification, making it a tool designed for the \"Surgeon\" AI persona.\n\n### Summary\nIn this architecture, **you** (the human) are the architect. The **AI** is the laborer. The **Stone Tool** is the specialized instrument the laborer uses to measure and manipulate the code\u2014an instrument that doesn't need to fit your hand, because you aren't the one holding it."
+    }
+  ]
+}

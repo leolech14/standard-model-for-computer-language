@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 01:18:15",
+  "session_end": "2026-01-27 01:18:39",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 213601,
+  "total_tokens_out": 601,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769487495.805232,
+      "timestamp_str": "2026-01-27 01:18:15",
+      "role": "user",
+      "content": "what is the stone tool principle"
+    },
+    {
+      "timestamp": 1769487519.765205,
+      "timestamp_str": "2026-01-27 01:18:39",
+      "role": "assistant",
+      "content": "Based on the codebase context, specifically `context-management/docs/CODESPACE_ALGEBRA.md` and `context-management/docs/GLOSSARY.md`, here is the definition and explanation of the **Stone Tool Principle**.\n\n### The Stone Tool Principle (Axiom H4)\n\nThe **Stone Tool Principle** is a design philosophy for the AI-native era which states that **tools may be validly designed even if humans cannot directly use them.**\n\nIt argues that just as prehistoric stone tools were shaped specifically to fit the ergonomics of the **human hand** (grip, balance, leverage), modern tools should be shaped to fit the **AI's \"hand\"** (parseability, structural integrity, token density).\n\n#### 1. The Core Definition\n> **Axiom H4 (Ergonomics Shift):** Tools MAY be designed that humans cannot directly use. AI mediates.\n\nIn traditional software design, if a tool is too complex for a human to type or read, it is considered \"bad UX.\" This principle inverts that rule: if a tool is optimized for an AI Agent to use efficiently, it is \"good design,\" even if it is illegible or unusable to a human.\n\n#### 2. The Physical Analogy\n*   **Paleolithic Era:** A hand axe is shaped for the **Human Hand**. It creates a mechanical advantage for a biological operator.\n*   **AI Era:** A \"Stone Tool\" (like a massive JSON schema or a complex CLI) is shaped for the **AI Agent**. It creates a cognitive advantage for a synthetic operator.\n\n#### 3. The Stone Tool Test\nThe documentation defines a specific test to validate this design choice:\n\n```\nSTONE_TOOL_TEST(tool) = \"Can a human use this without AI mediation?\"\n\nIf FALSE \u2192 It is a valid AI-native \"Stone Tool.\"\n```\n\n#### 4. Practical Application in Project\nThis principle justifies the existence of specific artifacts within the `PROJECT_elements` architecture:\n\n*   **`unified_analysis.json`**: A massive, dense JSON output from the Collider. It is too large for a human to read effectively, but it is perfectly shaped for an AI to perform reasoning.\n*   **`POM` (Project Object Model)**: Complex YAML configurations that humans are not expected to write manually; they are expected to instruct an AI to generate them.\n\n#### 5. Implications\nThis creates a new consumer class partition:\n*   **Toolome**: Development tools shaped for humans (linters, formatters).\n*   **Stone Tools**: Analysis tools shaped for AI agents.\n\n**Source References:**\n*   `context-management/docs/CODESPACE_ALGEBRA.md` (\u00a715 Consumer Classes)\n*   `context-management/docs/GLOSSARY.md` (Under Consumer Classes)"
+    }
+  ]
+}

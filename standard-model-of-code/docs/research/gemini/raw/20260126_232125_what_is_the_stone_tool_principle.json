@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-26T23:21:25.037616",
+    "source": "gemini",
+    "model": "gemini-3-pro-preview",
+    "query": "what is the stone tool principle",
+    "query_length": 32,
+    "checksum": "sha256:42114c0fe00b1c009c8f16065663d42024ac1e8fbfdacaf6ad8c4d86e0e4014b"
+  },
+  "response": {
+    "content": "Based on the provided codebase, specifically `context-management/docs/CODESPACE_ALGEBRA.md` and `context-management/docs/GLOSSARY.md`, here is the definition of the **Stone Tool Principle**:\n\n**The Stone Tool Principle (Axiom H4)** represents a fundamental shift in software ergonomics, asserting that **tools may be validly designed even if humans cannot directly use them**, provided they are optimized for AI agents.\n\n### 1. The Core Definition\n> **AXIOM H4 (Ergonomics Shift):** Tools MAY be designed that humans cannot directly use. AI_AGENT mediates.\n\nThis principle challenges the traditional requirement that all software tools must be \"user-friendly\" for humans. It validates the creation of **AI-native tools**—interfaces designed specifically for the high-speed, structured-data capabilities of Large Language Models (LLMs).\n\n### 2. The Metaphor (Hand-Fit)\nThe name derives from the ergonomic fit of prehistoric tools:\n*   **Stone Tools:** Were shaped specifically for the **human hand** (grip, balance, weight).\n*   **AI-Age Tools:** Must be shaped for the **AI \"hand\"** (parseability, type safety, massive context, structured I/O).\n\n### 3. The \"Stone Tool Test\"\nTo determine if a tool adheres to this principle, apply this test defined in the algebra:\n\n> **STONE_TOOL_TEST(tool)** = \"Can a human use this tool directly, without AI mediation?\"\n>\n> *   If **TRUE** → It is a Human Tool (part of the TOOLOME).\n> *   If **FALSE** → It is a valid **AI-Native Tool** (or \"Stone Tool\" in the new era).\n\n### 4. Practical Application\nIn **PROJECT_elements**, this principle justifies tools like the **Collider** or specific `analyze.py` modes that output massive JSON files (`unified_analysis.json`). These outputs are illegible to humans (too large/complex) but are perfectly shaped for an AI agent to \"grip\" and reason about the codebase's topology.\n\n**Sources:**\n*   `context-management/docs/CODESPACE_ALGEBRA.md` (Section 15)\n*   `context-management/docs/GLOSSARY.md` (Consumer Classes section)",
+    "mode": "standard"
+  }
+}

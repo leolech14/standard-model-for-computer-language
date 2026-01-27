@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 01:42:43",
+  "session_end": "2026-01-27 01:43:06",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 144525,
+  "total_tokens_out": 884,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769488963.56689,
+      "timestamp_str": "2026-01-27 01:42:43",
+      "role": "user",
+      "content": "What tools do we have for mapping/analyzing our own repository? List: 1) Collider capabilities for self-analysis 2) Cloud Refinery 3) Any other analysis/mapping tools. Show me the COMMANDS to run them."
+    },
+    {
+      "timestamp": 1769488986.9500968,
+      "timestamp_str": "2026-01-27 01:43:06",
+      "role": "assistant",
+      "content": "Based on the `BACKGROUND_AI_LAYER_MAP.md`, `TOOL.md`, and `CLI_GRAMMAR.md`, here are the tools available for self-analysis and mapping of the `PROJECT_elements` repository.\n\n### 1. Collider (The Physics Engine)\n**Purpose:** Performs static analysis to collapse the \"wave function\" of source code into a concrete graph of \"particles\" (Nodes) and forces (Edges). It analyzes the **CODOME** (executable code).\n\n*   **Capabilities:** AST parsing, Atom classification, 8D dimensional analysis, 3D Graph generation.\n*   **Output:** `unified_analysis.json` (The Ground Truth).\n\n**COMMANDS:**\n```bash\n# 1. Run full analysis on the current directory\n./collider full . --output .collider\n\n# 2. Run analysis with 3D visualization server\n./collider viz . --3d\n\n# 3. Generate human-readable HTML report\n./collider report --input .collider/unified_analysis.json\n```\n\n---\n\n### 2. Context Refinery (The Atomizer)\n**Purpose:** Breaks large code contexts into semantic units (\"chunks\") optimized for AI ingestion. It uses relevance scoring to prioritize code for limited context windows.\n\n*   **Capabilities:** Python/Markdown/YAML chunking, Relevance scoring (Type/Length/Docstring), JSON export.\n*   **Location:** `context-management/tools/ai/aci/refinery.py`\n\n**COMMANDS:**\n```bash\n# 1. Atomize a specific directory into chunks\npython context-management/tools/ai/aci/refinery.py src/core/ --export chunks.json\n\n# 2. Analyze a specific file's atomization\npython context-management/tools/ai/aci/refinery.py src/core/full_analysis.py --verbose\n```\n\n---\n\n### 3. Other Analysis & Mapping Tools\n\n#### A. Holographic-Socratic Layer (HSL)\n**Purpose:** Maps the **symmetry** between Code and Documentation. It detects \"Antimatter\" (architectural violations like Context Myopia or Drift).\n**Location:** `context-management/tools/ai/analyze.py`\n\n**COMMANDS:**\n```bash\n# 1. Verify semantic integrity of a specific domain (e.g., pipeline)\npython context-management/tools/ai/analyze.py --verify pipeline\n\n# 2. Audit a specific candidate file against the \"Antimatter Laws\"\npython context-management/tools/ai/analyze.py --verify pipeline --candidate src/core/violation_stage.py\n```\n\n#### B. Continuous Cartographer / Drift Guard\n**Purpose:** A daemon that watches the file system and auto-updates the map (`unified_analysis.json`) when code changes.\n**Location:** `context-management/tools/drift_guard.py`\n\n**COMMANDS:**\n```bash\n# 1. Run a single cartography pass to update the internal map\npython context-management/tools/continuous_cartographer.py\n\n# 2. Start the background daemon (watches for file changes)\npython context-management/tools/drift_guard.py --local --debug\n```\n\n#### C. Centripetal Scan\n**Purpose:** Performs a deep, 12-round progressive resolution scan, moving from macro structure to nano invariants. Uses both internal analysis and external research.\n**Location:** `.agent/tools/centripetal_scan.py`\n\n**COMMANDS:**\n```bash\n# 1. Initiate a deep scan (Requires API quota)\npython .agent/tools/centripetal_scan.py\n```\n\n#### D. The Unified Interface (`./pe`)\n**Purpose:** A wrapper that routes natural language intent to the specific tools listed above.\n\n**COMMANDS:**\n```bash\n# Analyze structure (Routes to Collider)\n./pe \"analyze the code structure\"\n\n# Audit docs (Routes to HSL)\n./pe \"check for doc drift\"\n\n# Health check (Routes to BARE/Truths)\n./pe status\n```"
+    }
+  ]
+}

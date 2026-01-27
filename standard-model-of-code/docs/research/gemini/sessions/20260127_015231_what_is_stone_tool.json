@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 01:51:51",
+  "session_end": "2026-01-27 01:52:31",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 589430,
+  "total_tokens_out": 661,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769489511.619383,
+      "timestamp_str": "2026-01-27 01:51:51",
+      "role": "user",
+      "content": "what is stone tool"
+    },
+    {
+      "timestamp": 1769489551.603881,
+      "timestamp_str": "2026-01-27 01:52:31",
+      "role": "assistant",
+      "content": "Based on the provided codebase documentation\u2014specifically **`AI_CONSUMER_CLASS.md`** and **`THEORY_AMENDMENT_2026-01.md`**\u2014here is the definition of a **Stone Tool** within the Standard Model of Code.\n\n### Definition\nA **Stone Tool** is a software artifact or utility designed specifically for consumption by **AI Agents**, rather than humans. It prioritizes machine parseability over human usability.\n\n### 1. The Stone Tool Test\nThe documentation defines a litmus test to identify these tools:\n\n> **\"Can a human use this tool directly, without AI mediation?\"**\n\n*   **If YES:** It is part of the **TOOLOME** (traditional dev tools like Linters, Formatters).\n*   **If NO:** It is a **STONE_TOOL** (AI-native analysis tools).\n\n### 2. Characteristics\nUnlike traditional tools evolved for the human hand (ergonomics) or eye (GUI), Stone Tools are evolved for the \"AI Hand\":\n\n| Feature | Human Tool (Traditional) | Stone Tool (AI-Native) |\n| :--- | :--- | :--- |\n| **Output** | Human-readable text/GUI | Structured Data (JSON, YAML) |\n| **Error Handling** | \"Something went wrong\" | `{\"code\": \"E001\", \"context\": {...}}` |\n| **Optimized For** | Experience & Aesthetics | Parseability & Predictability |\n| **User Interface** | Click, Type, Read | Schema, API, Type Constraints |\n\n### 3. Examples from the Codebase\n\n| Tool | Category | Reason |\n| :--- | :--- | :--- |\n| **CLI with `--help`** | Human Tool | Human can read and operate it. |\n| **Collider** | **Stone Tool** | Outputs `unified_analysis.json` (25MB+ of graph data) which is impossible for a human to read directly but perfect for an AI. |\n| **POM (Projectome Omniscience)** | **Stone Tool** | Generates a YAML manifest of the entire project structure for AI consumption. |\n\n### 4. The \"Stone Tool\" Analogy\nThe term is derived from an evolutionary analogy regarding the \"Third Consumer Class\" (AI Agents):\n\n1.  **Stone Age:** Tools shaped to fit the **human hand** (Stone Axe).\n2.  **Digital Age:** Tools shaped to fit **human perception** (GUI).\n3.  **AI Age:** Tools shaped to fit **AI processing** (Stone Tools).\n\nThe \"Stone Tool\" represents the raw, fundamental instruments that AI agents use to build higher-order value, just as early humans used stone tools to build civilization.\n\n### 5. Operational Workflow\nStone Tools are **intermediate artifacts**. They operate in a mediated flow:\n\n```\nHuman Intent (L1) \u2500\u2500\u25ba AI Agent \u2500\u2500\u25ba Stone Tool \u2500\u2500\u25ba Structured Output \u2500\u2500\u25ba AI Agent \u2500\u2500\u25ba Human Insight\n```\n\nThe human never touches the Stone Tool directly; the AI mediates the interaction."
+    }
+  ]
+}

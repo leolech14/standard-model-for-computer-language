@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-27T01:49:09.949750",
+    "source": "gemini",
+    "model": "gemini-3-pro-preview",
+    "query": "what is stone tool",
+    "query_length": 18,
+    "checksum": "sha256:d1b5e47cb4cec3ed102fddf47bea5cfa1b7480fe715af35c996c92ac5a9a7254"
+  },
+  "response": {
+    "content": "Based on the provided codebase documentation, specifically **`context-management/docs/CODESPACE_ALGEBRA.md`** and **`context-management/docs/GLOSSARY.md`**, here is the definition of a **Stone Tool** within the context of **PROJECT_elements**:\n\n### Definition\nA **Stone Tool** is a software utility or artifact designed specifically to be \"held\" and used by an **AI Agent**, not a human.\n\nIt derives from **Axiom H4 (The Stone Tool Principle)**, which asserts that in an AI-native architecture, it is valid design to create tools that are ergonomically hostile to humans but optimized for AI consumption.\n\n### The Metaphor (Ergonomics)\nThe term relies on an anthropological analogy regarding ergonomics:\n*   **Prehistoric Stone Tools:** Were knapped and shaped specifically to fit the human **hand** (grip, balance, thumb position).\n*   **AI-Native \"Stone Tools\":** Are shaped to fit the **AI's \"hand\"** (parseability, token efficiency, structured schema, type safety).\n\n### The \"Stone Tool Test\"\nTo determine if a utility is a Stone Tool, the documentation defines a specific test:\n\n> **\"Can a human use this tool directly, without AI mediation?\"**\n> *   **YES:** It is a standard Developer Tool (e.g., a CLI with help text, a linter with colored output).\n> *   **NO:** It is a **Stone Tool** (e.g., a script that outputs 50MB of raw JSON, or a complex YAML schema intended for agent consumption).\n\n### Role in the Project\nIn the **PROJECT_elements** architecture:\n1.  **Consumer Classes:** The system recognizes three consumers: End Users, Developers, and **AI Agents**.\n2.  **Optimization:** Stone Tools are optimized for the **AI Agent** consumer class.\n3.  **Examples:**\n    *   **`unified_analysis.json`**: The massive output of the **Collider**. It is too complex for a human to read raw, but perfect for an AI to reason about the codebase structure.\n    *   **POM (Project Object Model) YAMLs**: Configuration files designed for the agent to read/write state.\n\n### Why It Matters\nThis concept justifies the creation of \"unusable\" (to humans) interfaces. It argues that attempting to make every tool human-readable restricts the AI's capability. By accepting Stone Tools, the project allows for higher-fidelity data transmission between the system and the AI agents.",
+    "mode": "standard"
+  }
+}

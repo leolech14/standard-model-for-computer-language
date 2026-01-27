@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-27 07:39:09",
+  "session_end": "2026-01-27 07:39:41",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769510349.781566,
+      "timestamp_str": "2026-01-27 07:39:09",
+      "role": "user",
+      "content": "What are the quality criteria you use to evaluate implementation work? Specifically: Do you score for implementation completeness, integration with existing systems, validation/testing, documentation quality, and findability? What makes work 'good' vs 'excellent' in your analysis?"
+    }
+  ]
+}

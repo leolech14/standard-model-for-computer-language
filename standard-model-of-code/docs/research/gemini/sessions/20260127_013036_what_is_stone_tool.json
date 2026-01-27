@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 01:30:15",
+  "session_end": "2026-01-27 01:30:36",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 213599,
+  "total_tokens_out": 505,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769488215.020992,
+      "timestamp_str": "2026-01-27 01:30:15",
+      "role": "user",
+      "content": "what is stone tool"
+    },
+    {
+      "timestamp": 1769488236.081009,
+      "timestamp_str": "2026-01-27 01:30:36",
+      "role": "assistant",
+      "content": "Based on the `CODESPACE_ALGEBRA.md` and `GLOSSARY.md` files in the codebase, a **Stone Tool** is a specific class of software tool designed exclusively for **AI Agent consumption**, deliberately disregarding human ergonomics in favor of machine parseability.\n\nIt is formally defined under **Axiom H4 (The Stone Tool Principle)**.\n\n### Definition\nA **Stone Tool** is an artifact or utility shaped to fit the \"hand\" of an AI (Context Window + LLM), rather than the hand/eye of a human developer.\n\n### The Stone Tool Principle (Axiom H4)\n> \"Tools MAY be designed that humans cannot directly use.\"\n\nJust as a paleolithic stone tool was knapped to fit the grip of a human hand, a digital Stone Tool is \"knapped\" to fit the input constraints of an LLM.\n\n*   **Human Interface:** Natural language, GUI, brevity, visual abstraction (L1).\n*   **AI Interface (Stone Tool):** Dense structured data, massive JSON dumps, explicit graph topology (L0, L2).\n\n### The Stone Tool Test\nTo determine if a utility qualifies as a Stone Tool, apply the test defined in `GLOSSARY.md`:\n\n> **Question:** \"Can a human use this tool directly, without AI mediation?\"\n>\n> *   **IF YES:** It is a standard Dev Tool (part of the `TOOLOME`).\n> *   **IF NO:** It is a **Stone Tool** (AI-Native design).\n\n### Examples in the Codebase\n\n1.  **`unified_analysis.json`**: The output of the **Collider**. It is a massive, dense JSON file containing the AST analysis, RPBL scores, and graph topology. It is illegible to humans due to size and complexity, but it is the perfect \"handle\" for an AI to grasp the codebase's structure.\n2.  **`POM` (Project Object Model) YAMLs**: High-density metadata files intended for the \"Observer\" system, not for human maintenance.\n\n### Why It Matters\nThis concept validates the creation of tools that look \"broken\" or \"overly complex\" to a human developer. In the **Alien Architecture** of `PROJECT_elements`, optimizing for the `AI_AGENT` consumer class (who reads structure better than prose) is a valid and necessary design pattern."
+    }
+  ]
+}

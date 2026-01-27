@@ -1,0 +1,22 @@
+{
+  "session_start": "2026-01-27 00:30:33",
+  "session_end": "2026-01-27 00:31:07",
+  "model": "gemini-3-pro-preview",
+  "total_tokens_in": 213599,
+  "total_tokens_out": 548,
+  "turn_count": 2,
+  "turns": [
+    {
+      "timestamp": 1769484633.5318122,
+      "timestamp_str": "2026-01-27 00:30:33",
+      "role": "user",
+      "content": "what files define atoms"
+    },
+    {
+      "timestamp": 1769484667.829677,
+      "timestamp_str": "2026-01-27 00:31:07",
+      "role": "assistant",
+      "content": "Based on the codebase context, the definition of **Atoms** (the fundamental structural units of code) is split across three layers: Theoretical, Schema, and Implementation.\n\nHere are the specific files that define them:\n\n### 1. The Canonical Registry (Schema)\n**File:** `standard-model-of-code/schema/atoms.json`\n*   **Purpose:** The \"Periodic Table\" of code. This is the immutable source of truth listing all **167 canonical atoms** (e.g., `LOG.FNC.M` for Method, `DAT.VAR.L` for Local Variable).\n*   **Status:** \"Locked\" as of Jan 16, 2026 (per `TIMELINE_ANALYSIS.md`).\n\n### 2. The Implementation (Python Code)\n**File:** `standard-model-of-code/src/core/atom_registry.py`\n*   **Purpose:** The active Python class that the **Collider** tool uses during analysis.\n*   **Note:** It currently implements **94 of the 167 atoms** (the \"working set\" needed for current language support).\n\n### 3. The Detection Patterns\n**File:** `standard-model-of-code/src/patterns/particle_defs.json`\n*   **Purpose:** Contains the regex patterns and heuristics used to detect these atoms in source code (e.g., identifying that a string starting with `get` is likely a `Query` role).\n\n### 4. The Theory\n**File:** `standard-model-of-code/docs/MODEL.md`\n*   **Purpose:** Explains *why* these atoms exist, how they are organized into the 4 Phases (Data, Logic, Organization, Execution), and how they map to the physical universe metaphor.\n\n---\n\n### Summary Table\n\n| Layer | File Path | Content |\n| :--- | :--- | :--- |\n| **Schema** | `standard-model-of-code/schema/atoms.json` | Full list of 167 Atoms (JSON) |\n| **Code** | `standard-model-of-code/src/core/atom_registry.py` | 94 Implemented Atoms (Python) |\n| **Rules** | `standard-model-of-code/src/patterns/particle_defs.json` | Detection Logic (JSON) |\n| **Theory** | `standard-model-of-code/docs/MODEL.md` | Concepts & Definitions (Markdown) |"
+    }
+  ]
+}
