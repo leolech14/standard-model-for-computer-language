@@ -23,7 +23,12 @@ fi
 
 # Run the Socratic Audit
 echo "[Cloud Run] Running Audit..."
-# By default we verify the pipeline domain, but this can be overridden by arguments
-python3 context-management/tools/ai/analyze.py "$@"
+# Use smaller context set + Flash model to avoid rate limits
+python3 context-management/tools/ai/analyze.py \
+    --verify pipeline \
+    --set agent_kernel \
+    --model gemini-2.0-flash-exp \
+    --max-files 20 \
+    "$@"
 
 echo "[Cloud Run] Audit complete."
