@@ -64,6 +64,7 @@ TDJ_PATH = REPO_ROOT / "context-management/tools/maintenance/tdj.py"
 TRIGGER_ENGINE_PATH = TOOLS_DIR / "trigger_engine.py"
 ENRICHMENT_PATH = TOOLS_DIR / "enrichment_orchestrator.py"
 DRIFT_GUARD_PATH = REPO_ROOT / "context-management/tools/drift_guard.py"
+COMM_FABRIC_PATH = INTELLIGENCE_DIR / "comms" / "fabric.py"
 
 # State files
 AUTOPILOT_STATE = STATE_DIR / "autopilot_state.yaml"
@@ -304,6 +305,28 @@ def run_enrichment(circuit_breaker: CircuitBreaker, dry_run: bool = False) -> Tu
 
     return success, output
 
+def run_comm_fabric(circuit_breaker: CircuitBreaker) -> Tuple[bool, str]:
+    """Record Communication Fabric state vector."""
+    system = "comm_fabric"
+
+    if circuit_breaker.is_broken(system):
+        return False, "Circuit breaker tripped"
+
+    if not COMM_FABRIC_PATH.exists():
+        circuit_breaker.record_failure(system, "Communication Fabric module not found")
+        return False, "Communication Fabric module not found"
+
+    success, output = run_with_timeout([sys.executable, str(COMM_FABRIC_PATH), "--record"])
+
+    if success:
+        circuit_breaker.record_success(system)
+        log_event("comm_fabric_success", {"output": output[:500]})
+    else:
+        circuit_breaker.record_failure(system, output[:200])
+        log_event("comm_fabric_failure", {"error": output[:500]})
+
+    return success, output
+
 # =============================================================================
 # AUTOPILOT STATE
 # =============================================================================
@@ -399,6 +422,7 @@ def cmd_status():
         ("tdj", "Timestamp Daily Journal", TDJ_PATH.exists()),
         ("trigger_engine", "Trigger Engine", TRIGGER_ENGINE_PATH.exists()),
         ("enrichment", "Enrichment Pipeline", ENRICHMENT_PATH.exists()),
+        ("comm_fabric", "Communication Fabric", COMM_FABRIC_PATH.exists()),
     ]
 
     status_icons = {
@@ -449,7 +473,7 @@ def cmd_run(safe_mode: bool = False, dry_run: bool = False):
     # Run manually: python context-management/tools/maintenance/tdj.py --scan
 
     # Step 1: Trigger Engine
-    print("[1/2] Trigger Engine - Checking for macro triggers...")
+    print("[1/3] Trigger Engine - Checking for macro triggers...")
     if not circuit_breaker.is_broken("trigger_engine"):
         if dry_run:
             print("  [DRY RUN] Would check triggers")
@@ -467,7 +491,7 @@ def cmd_run(safe_mode: bool = False, dry_run: bool = False):
         results["trigger_engine"] = None
 
     # Step 2: Enrichment (only on full runs, not post-commit)
-    print("\n[2/2] Enrichment - Processing opportunities...")
+    print("\n[2/3] Enrichment - Processing opportunities...")
     if not safe_mode:  # Skip enrichment in safe mode (too heavy for post-commit)
         if not circuit_breaker.is_broken("enrichment"):
             if dry_run:
@@ -487,6 +511,24 @@ def cmd_run(safe_mode: bool = False, dry_run: bool = False):
     else:
         print("  ⊘ Enrichment skipped (safe mode)")
         results["enrichment"] = None
+
+    # Step 3: Communication Fabric - Record state vector
+    print("\n[3/3] Communication Fabric - Recording state vector...")
+    if not circuit_breaker.is_broken("comm_fabric"):
+        if dry_run:
+            print("  [DRY RUN] Would record Communication Fabric metrics")
+            results["comm_fabric"] = True
+        else:
+            success, output = run_comm_fabric(circuit_breaker)
+            results["comm_fabric"] = success
+            if success:
+                print("  ✓ Communication Fabric recorded")
+            else:
+                print(f"  ✗ Communication Fabric failed: {output[:100]}")
+                # Don't fail overall - it's observability
+    else:
+        print("  ⊘ Communication Fabric skipped (circuit broken)")
+        results["comm_fabric"] = None
 
     # Record run
     autopilot_state.record_run(overall_success)
@@ -533,7 +575,37 @@ def cmd_post_commit(safe_mode: bool = True):
         success, _ = run_trigger_engine(circuit_breaker, "post-commit")
         results.append(success)
 
+    # Periodic enrichment: run if stale (>24h since last run)
+    # This processes inbox opportunities, auto-promotes high-confidence items
+    if _should_run_enrichment(autopilot_state):
+        log_event("enrichment_stale_trigger")
+        if not circuit_breaker.is_broken("enrichment"):
+            success, _ = run_enrichment(circuit_breaker, dry_run=False)
+            if success:
+                _mark_enrichment_run(autopilot_state)
+            results.append(success)
+
     return all(results) if results else True
+
+
+def _should_run_enrichment(state: AutopilotState) -> bool:
+    """Check if enrichment should run (>24h since last run)."""
+    last_enrichment = state.state.get("last_enrichment_run")
+    if not last_enrichment:
+        return True  # Never run before
+
+    try:
+        last = datetime.fromisoformat(last_enrichment.replace('Z', '+00:00'))
+        elapsed_hours = (datetime.now(timezone.utc) - last).total_seconds() / 3600
+        return elapsed_hours >= 24  # Run once per day
+    except Exception:
+        return True  # If parsing fails, assume stale
+
+
+def _mark_enrichment_run(state: AutopilotState):
+    """Mark that enrichment was run."""
+    state.state["last_enrichment_run"] = datetime.now(timezone.utc).isoformat()
+    state._save()
 
 def cmd_enable():
     """Enable autopilot."""
@@ -632,6 +704,23 @@ def cmd_health():
         checks.append(True)
     else:
         print(f"  ✗ Script missing: {ENRICHMENT_PATH}")
+        checks.append(False)
+
+    # Check Communication Fabric
+    print("\nCommunication Fabric:")
+    if COMM_FABRIC_PATH.exists():
+        print(f"  ✓ Script exists: {COMM_FABRIC_PATH}")
+        # Check if history exists
+        comm_history = INTELLIGENCE_DIR / "comms" / "state_history.jsonl"
+        if comm_history.exists():
+            import time as time_module
+            age_hours = (time_module.time() - comm_history.stat().st_mtime) / 3600
+            print(f"  ✓ State history exists ({age_hours:.1f}h old)")
+        else:
+            print("  ⚠ No state history yet (run --record first)")
+        checks.append(True)
+    else:
+        print(f"  ✗ Script missing: {COMM_FABRIC_PATH}")
         checks.append(False)
 
     # Check state files
