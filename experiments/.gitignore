@@ -1,0 +1,4 @@
+# Experiments directory - temporary files, tests, archives
+*.zip
+*.tar.gz
+*.tar
