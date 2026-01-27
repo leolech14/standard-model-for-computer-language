@@ -554,10 +554,10 @@ window.SIDEBAR = (function () {
     }
 
     /**
-     * Set the view mode (atoms or files)
+     * Set the view mode (atoms, files, or unified)
      */
     function setViewMode(mode) {
-        if (mode !== 'atoms' && mode !== 'files') return;
+        if (mode !== 'atoms' && mode !== 'files' && mode !== 'unified') return;
         _currentViewMode = mode;
 
         // Update button states
@@ -580,41 +580,82 @@ window.SIDEBAR = (function () {
             }
         };
 
-        // Apply view mode via FILE_VIZ module
-        if (mode === 'files') {
-            // Switch to file-nodes view
-            if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined') {
-                // Build the file graph first (required before switching mode)
-                FILE_VIZ.buildFileGraph();
-                const fileGraph = FILE_VIZ.getFileGraph();
-                if (fileGraph) {
-                    // EXPLICIT data switch - don't rely on side effects (OPP-058 fix)
-                    Graph.graphData(fileGraph);
-                    _setGraphMode('files');
-                    FILE_VIZ.setMode('map');
-                    FILE_VIZ.setEnabled(true);
-                    console.log('[SIDEBAR] View mode: FILES - switched to', fileGraph.nodes.length, 'file nodes');
+        // Determine current and target layers for crossfade
+        const currentGraphMode = (typeof VIS_STATE !== 'undefined' && VIS_STATE.getGraphMode)
+            ? VIS_STATE.getGraphMode()
+            : (window.GRAPH_MODE || 'atoms');
+
+        const currentLayer = currentGraphMode === 'files' ? 'file' : (currentGraphMode === 'unified' ? 'unified' : 'atom');
+        const targetLayer = mode === 'files' ? 'file' : (mode === 'unified' ? 'unified' : 'atom');
+
+        // Use animated crossfade transition if available
+        if (typeof ANIM !== 'undefined' && ANIM.crossfade) {
+            console.log(`[SIDEBAR] Crossfade transition: ${currentLayer} → ${targetLayer}`);
+            ANIM.crossfade(currentLayer, targetLayer);
+
+            // Update graph mode state
+            _setGraphMode(mode);
+
+            // CRITICAL: Do NOT call FILE_VIZ in unified mode
+            // FILE_VIZ.setEnabled() triggers drawFileBoundaries() → HullVisualizer spam
+            // Unified graph uses pure opacity transitions, no hulls needed
+        } else {
+            // Fallback: old behavior (hard swap)
+            console.warn('[SIDEBAR] ANIM.crossfade not available, using hard swap');
+
+            if (mode === 'files') {
+                // Switch to file-nodes view
+                if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined') {
+                    // Build the file graph first (required before switching mode)
+                    FILE_VIZ.buildFileGraph();
+                    const fileGraph = FILE_VIZ.getFileGraph();
+                    if (fileGraph) {
+                        // EXPLICIT data switch - don't rely on side effects (OPP-058 fix)
+                        Graph.graphData(fileGraph);
+                        _setGraphMode('files');
+                        FILE_VIZ.setMode('map');
+                        FILE_VIZ.setEnabled(true);
+                        console.log('[SIDEBAR] View mode: FILES - switched to', fileGraph.nodes.length, 'file nodes');
+                    } else {
+                        console.warn('[SIDEBAR] Failed to build file graph');
+                    }
                 } else {
-                    console.warn('[SIDEBAR] Failed to build file graph');
+                    _setGraphMode('files');
+                    if (typeof buildFileGraph === 'function') buildFileGraph(null);
+                    if (typeof refreshGraph === 'function') refreshGraph();
+                }
+            } else if (mode === 'unified') {
+                // Switch to unified view
+                if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined') {
+                    FILE_VIZ.buildFileGraph();
+                    const unifiedGraph = FILE_VIZ.getUnifiedGraph();
+                    if (unifiedGraph) {
+                        Graph.graphData(unifiedGraph);
+                        _setGraphMode('unified');
+                        FILE_VIZ.setMode('unified');
+                        FILE_VIZ.setEnabled(true);
+                        console.log('[SIDEBAR] View mode: UNIFIED - showing both files and atoms');
+                    } else {
+                        console.warn('[SIDEBAR] Failed to build unified graph');
+                    }
+                } else {
+                    _setGraphMode('unified');
+                    if (typeof refreshGraph === 'function') refreshGraph();
                 }
             } else {
-                _setGraphMode('files');
-                if (typeof buildFileGraph === 'function') buildFileGraph(null);
-                if (typeof refreshGraph === 'function') refreshGraph();
-            }
-        } else {
-            // Switch to atoms view
-            if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined' && typeof DM !== 'undefined') {
-                FILE_VIZ.setEnabled(false);
-                _setGraphMode('atoms');
-                // EXPLICIT data restore - don't leave file nodes in graph (OPP-059 fix)
-                const nodes = DM.getNodes();
-                const links = DM.getLinks();
-                Graph.graphData({ nodes, links });
-                console.log('[SIDEBAR] View mode: ATOMS - restored', nodes.length, 'atom nodes');
-            } else {
-                _setGraphMode('atoms');
-                if (typeof refreshGraph === 'function') refreshGraph();
+                // Switch to atoms view
+                if (typeof FILE_VIZ !== 'undefined' && typeof Graph !== 'undefined' && typeof DM !== 'undefined') {
+                    FILE_VIZ.setEnabled(false);
+                    _setGraphMode('atoms');
+                    // EXPLICIT data restore - don't leave file nodes in graph (OPP-059 fix)
+                    const nodes = DM.getNodes();
+                    const links = DM.getLinks();
+                    Graph.graphData({ nodes, links });
+                    console.log('[SIDEBAR] View mode: ATOMS - restored', nodes.length, 'atom nodes');
+                } else {
+                    _setGraphMode('atoms');
+                    if (typeof refreshGraph === 'function') refreshGraph();
+                }
             }
         }
 
@@ -622,6 +663,8 @@ window.SIDEBAR = (function () {
         if (typeof showToast === 'function') {
             const msg = mode === 'files'
                 ? 'FILE VIEW: Each node is a file. Click to expand.'
+                : mode === 'unified'
+                ? 'UNIFIED VIEW: Files and atoms together.'
                 : 'ATOM VIEW: Each node is a code element.';
             showToast(msg);
         }

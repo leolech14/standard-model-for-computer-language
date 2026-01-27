@@ -416,11 +416,9 @@ const ANIM = (function () {
                 }
             });
 
-            if (typeof REFRESH !== 'undefined') {
-                REFRESH.throttled();
-            } else if (Graph) {
-                REFRESH.throttled();
-            }
+            // PERFORMANCE FIX: Don't call REFRESH during animation
+            // Graph updates automatically via its own render loop
+            // Only refresh at completion
 
             const totalDuration = baseDuration + staggerSpread;
             if (elapsed < totalDuration) {
@@ -429,6 +427,10 @@ const ANIM = (function () {
                 // Restore edges
                 if (typeof applyEdgeMode === 'function') {
                     applyEdgeMode();
+                }
+                // Single refresh at end
+                if (typeof REFRESH !== 'undefined') {
+                    REFRESH.force();
                 }
                 if (preset.motion === 'rotate' || preset.motion === 'orbit') {
                     _startLayoutMotion(presetKey);
@@ -457,18 +459,20 @@ const ANIM = (function () {
                 n.fz = startPos[i].z + (targetPos[i].z - startPos[i].z) * eased;
             });
 
-            if (typeof REFRESH !== 'undefined') {
-                REFRESH.throttled();
-            } else if (Graph) {
-                REFRESH.throttled();
-            }
+            // PERFORMANCE FIX: Don't call REFRESH during animation
 
             if (progress < 1) {
                 _animationId = requestAnimationFrame(animateFrame);
-            } else if (preset.motion === 'rotate' || preset.motion === 'orbit') {
-                _startLayoutMotion(presetKey);
             } else {
-                _releaseOwnership('layout');
+                // Single refresh at end
+                if (typeof REFRESH !== 'undefined') {
+                    REFRESH.force();
+                }
+                if (preset.motion === 'rotate' || preset.motion === 'orbit') {
+                    _startLayoutMotion(presetKey);
+                } else {
+                    _releaseOwnership('layout');
+                }
             }
         }
 
@@ -498,11 +502,8 @@ const ANIM = (function () {
                 n.fz = pos.z;
             });
 
-            if (typeof REFRESH !== 'undefined') {
-                REFRESH.throttled();
-            } else if (Graph) {
-                REFRESH.throttled();
-            }
+            // PERFORMANCE FIX: No REFRESH during continuous motion
+            // Graph render loop handles updates automatically
 
             _animationId = requestAnimationFrame(animate);
         }
@@ -618,11 +619,7 @@ const ANIM = (function () {
                 n.fz = (n.z || 0) + n._vz;
             });
 
-            if (typeof REFRESH !== 'undefined') {
-                REFRESH.throttled();
-            } else if (Graph) {
-                REFRESH.throttled();
-            }
+            // PERFORMANCE FIX: No REFRESH during flock simulation
 
             _animationId = requestAnimationFrame(flockStep);
         }
@@ -659,17 +656,8 @@ const ANIM = (function () {
                 COLOR.setTransform('chromaScale', 1.0 + Math.sin(elapsed * 0.003) * 0.2);
             }
 
-            if (typeof REFRESH !== 'undefined') {
-                REFRESH.throttled();
-            } else if (typeof Graph !== 'undefined' && Graph) {
-                // Determine if we need to force re-coloring or if just re-rendering canvas is enough.
-                // Since transforms affect color calculation, we likely need to re-apply colors.
-                if (typeof window.applyNodeColors === 'function') {
-                    const nodes = Graph.graphData().nodes;
-                    window.applyNodeColors(nodes);
-                    Graph.nodeColor(Graph.nodeColor()); // Trigger internal update
-                }
-            }
+            // PERFORMANCE FIX: No REFRESH during pulse animation
+            // Color transforms are applied, Graph updates automatically
 
             _pulseId = requestAnimationFrame(loop);
         }
@@ -696,6 +684,175 @@ const ANIM = (function () {
         }
 
         if (typeof showModeToast === 'function') showModeToast('Pulse Animation OFF');
+    }
+
+    // =========================================================================
+    // CROSSFADE TRANSITIONS - Smooth layer transitions with opacity
+    // =========================================================================
+
+    /**
+     * Set material opacity on a node's Three.js mesh.
+     * NO CACHING - prevents memory leaks.
+     */
+    function _setNodeMaterialOpacity(node, opacity) {
+        const obj = node.__threeObj;
+        if (!obj) return;
+
+        // Skip if already at target opacity (within tolerance)
+        if (node._lastSetOpacity !== undefined && Math.abs(node._lastSetOpacity - opacity) < 0.01) {
+            return;
+        }
+        node._lastSetOpacity = opacity;
+
+        // CRITICAL: Only traverse when opacity changes significantly
+        // Reduces 175K+ traversals to ~3500 during full crossfade
+        obj.traverse(child => {
+            if (child.isMesh && child.material && !child.userData?.isOverlay) {
+                // Only enable transparency when opacity < 1.0
+                const needsTransparency = opacity < 0.999;
+                if (child.material.transparent !== needsTransparency) {
+                    child.material.transparent = needsTransparency;
+                    child.material.needsUpdate = true;
+                }
+                child.material.opacity = opacity;
+            }
+        });
+    }
+
+    /**
+     * Crossfade between atom and file layers with 750ms animated transition.
+     *
+     * @param {string} fromLayer - Starting layer ('atom'|'file')
+     * @param {string} toLayer - Target layer ('atom'|'file'|'unified')
+     */
+    function crossfade(fromLayer, toLayer) {
+        if (!Graph) {
+            console.warn('[ANIM] crossfade: Graph not available');
+            return;
+        }
+
+        _acquireOwnership('crossfade');
+
+        const nodes = Graph.graphData().nodes || [];
+        const links = Graph.graphData().links || [];
+        const duration = 750;
+        const startTime = Date.now();
+
+        // Determine target opacities based on toLayer
+        let atomTargetOpacity, fileTargetOpacity;
+        if (toLayer === 'unified') {
+            atomTargetOpacity = 0.3;
+            fileTargetOpacity = 1.0;
+        } else if (toLayer === 'atom') {
+            atomTargetOpacity = 1.0;
+            fileTargetOpacity = 0.0;
+        } else if (toLayer === 'file') {
+            atomTargetOpacity = 0.0;
+            fileTargetOpacity = 1.0;
+        } else {
+            console.warn(`[ANIM] crossfade: Unknown toLayer "${toLayer}"`);
+            _releaseOwnership('crossfade');
+            return;
+        }
+
+        // Store initial opacities
+        nodes.forEach(node => {
+            if (!node._viewOpacity) {
+                node._viewOpacity = 1.0;
+            }
+            node._startOpacity = node._viewOpacity;
+        });
+
+        links.forEach(link => {
+            if (!link._viewOpacity) {
+                link._viewOpacity = 1.0;
+            }
+            link._startOpacity = link._viewOpacity;
+        });
+
+        function animateFrame() {
+            if (_owner !== 'crossfade') return;
+
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(1.0, elapsed / duration);
+
+            // Smoothstep easing: 3t^2 - 2t^3
+            const eased = progress * progress * (3 - 2 * progress);
+
+            // Update node opacities
+            nodes.forEach(node => {
+                const isAtom = node._nodeType === 'atom';
+                const isFile = node._nodeType === 'file';
+
+                let targetOpacity;
+                if (isAtom) {
+                    targetOpacity = atomTargetOpacity;
+                } else if (isFile) {
+                    targetOpacity = fileTargetOpacity;
+                } else {
+                    targetOpacity = 1.0; // Unknown types stay visible
+                }
+
+                node._viewOpacity = node._startOpacity + (targetOpacity - node._startOpacity) * eased;
+                _setNodeMaterialOpacity(node, node._viewOpacity);
+            });
+
+            // Update edge opacities based on layer
+            links.forEach(link => {
+                const isAtomEdge = link._edgeLayer === 'atom';
+                const isFileEdge = link._edgeLayer === 'file';
+
+                let targetOpacity;
+                if (toLayer === 'unified') {
+                    targetOpacity = 1.0; // Both layers visible
+                } else if (toLayer === 'atom') {
+                    targetOpacity = isAtomEdge ? 1.0 : 0.0;
+                } else if (toLayer === 'file') {
+                    targetOpacity = isFileEdge ? 1.0 : 0.0;
+                } else {
+                    targetOpacity = 1.0;
+                }
+
+                link._viewOpacity = link._startOpacity + (targetOpacity - link._startOpacity) * eased;
+            });
+
+            // DO NOT CALL REFRESH DURING ANIMATION - causes HullVisualizer spam and performance collapse
+            // Three.js render loop updates automatically
+
+            if (progress < 1.0) {
+                _animationId = requestAnimationFrame(animateFrame);
+            } else {
+                // Animation complete - single refresh at end
+                _completeTransition(toLayer, nodes);
+                if (typeof REFRESH !== 'undefined') {
+                    REFRESH.force();
+                }
+            }
+        }
+
+        _animationId = requestAnimationFrame(animateFrame);
+    }
+
+    function _completeTransition(toLayer, nodes) {
+        // Set nodeVisibility to hide fully transparent nodes from physics
+        if (Graph.nodeVisibility) {
+            Graph.nodeVisibility(node => {
+                return node._viewOpacity > 0.01;
+            });
+        }
+
+        // Emit graphMode:changed event
+        if (typeof EVENT_BUS !== 'undefined' && EVENT_BUS.emit) {
+            EVENT_BUS.emit('graphMode:changed', { mode: toLayer });
+        }
+
+        _releaseOwnership('crossfade');
+
+        if (typeof showModeToast === 'function') {
+            const modeLabel = toLayer === 'unified' ? 'UNIFIED' :
+                            toLayer === 'atom' ? 'ATOMS' : 'FILES';
+            showModeToast(`${modeLabel} view`);
+        }
     }
 
     // =========================================================================
@@ -738,11 +895,14 @@ const ANIM = (function () {
         // Stagger patterns
         setStaggerPattern,
         cycleStaggerPattern,
-        togglePulse, // Added to public API
-        get staggerPattern() { return _currentStaggerPattern; },
-        get staggerPatterns() { return Object.keys(STAGGER_PATTERNS); },
+        togglePulse,
+
+        // Layer transitions
+        crossfade,
 
         // State
+        get staggerPattern() { return _currentStaggerPattern; },
+        get staggerPatterns() { return Object.keys(STAGGER_PATTERNS); },
         get currentLayout() { return _currentLayout; },
         get isAnimating() { return _animationId !== null; },
         get owner() { return _owner; },

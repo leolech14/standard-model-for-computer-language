@@ -412,6 +412,11 @@ const FILE_VIZ = (function () {
 
         // File graph
         buildFileGraph,
+        buildUnifiedGraph: function() {
+            const dm = typeof DM !== 'undefined' ? DM : (typeof DATA !== 'undefined' ? DATA : null);
+            if (!dm || !dm.getUnifiedGraph) return null;
+            return dm.getUnifiedGraph();
+        },
 
         // Getters
         isEnabled,

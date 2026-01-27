@@ -27,6 +27,11 @@ const SELECT = (function () {
     let _marqueeAdditive = false;
     let _lastMarqueeEndTs = 0;
 
+    // Pan mode state (SPACE + LEFT drag)
+    let _spacePressed = false;
+    let _panActive = false;
+    let _panStart = null;
+
     // Selection visuals state
     const _selectionOriginals = new Map();
     const _originalColorsForDim = new Map();
@@ -206,12 +211,18 @@ const SELECT = (function () {
         const PENDULUM = CORE.PENDULUM;
         if (!PENDULUM.running) return;
 
+        // CRITICAL: Stop animation if no nodes selected
+        if (_ids.size === 0) {
+            stopAnimation();
+            return;
+        }
+
         const dt = PENDULUM.lastTime ? Math.min(timestamp - PENDULUM.lastTime, 50) : 16;
         PENDULUM.lastTime = timestamp;
 
         _updatePendulums(dt);
 
-        if (_ids.size > 0 && typeof Graph !== 'undefined' && Graph?.graphData) {
+        if (typeof Graph !== 'undefined' && Graph?.graphData) {
             const nodes = Graph.graphData().nodes || [];
 
             nodes.forEach(node => {
@@ -370,6 +381,9 @@ const SELECT = (function () {
         node.__selectionHalo = selectionHalo;
         node.__groupHalo = groupHalo;
         node.__overlayGroup = group;
+
+        // Transparency is managed dynamically by animation.js during crossfade
+        // No permanent transparent flag to avoid performance penalty
 
         return group;
     }
@@ -742,27 +756,121 @@ const SELECT = (function () {
         const canvas = Graph.renderer().domElement;
         if (!canvas) return;
 
+        // =====================================================================
+        // KEYBOARD TRACKING: Space key for pan mode
+        // =====================================================================
+        const onKeyDown = (e) => {
+            if (e.code === 'Space' && !e.repeat) {
+                _spacePressed = true;
+                // Update global for backward compatibility
+                if (typeof window !== 'undefined') window.SPACE_PRESSED = true;
+                // Change cursor to indicate pan mode
+                canvas.style.cursor = 'grab';
+            }
+        };
+
+        const onKeyUp = (e) => {
+            if (e.code === 'Space') {
+                _spacePressed = false;
+                if (typeof window !== 'undefined') window.SPACE_PRESSED = false;
+                canvas.style.cursor = '';
+                // End any active pan
+                if (_panActive) {
+                    _panActive = false;
+                    _panStart = null;
+                    canvas.style.cursor = '';
+                }
+            }
+        };
+
+        document.addEventListener('keydown', onKeyDown);
+        document.addEventListener('keyup', onKeyUp);
+
+        // =====================================================================
+        // MOUSE CONTROLS:
+        // LEFT + DRAG = Area select (marquee)
+        // LEFT + SPACE + DRAG = Pan
+        // RIGHT + DRAG = Rotate (handled by OrbitControls)
+        // =====================================================================
+
         const onPointerDown = (e) => {
-            if (e.button !== 0) return;
-            if (typeof SPACE_PRESSED !== 'undefined' && SPACE_PRESSED) return;
+            if (e.button !== 0) return; // Only handle left button
             if (e.target !== canvas) return;
+
+            // SPACE + LEFT = PAN MODE
+            if (_spacePressed) {
+                _panActive = true;
+                _panStart = { x: e.clientX, y: e.clientY };
+                canvas.style.cursor = 'grabbing';
+                // CRITICAL: Block event from reaching OrbitControls
+                // DON'T use controls.enabled = false (blocks right-click too)
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                return;
+            }
+
+            // LEFT (no space) = MARQUEE SELECT
             if (typeof HOVERED_NODE !== 'undefined' && HOVERED_NODE) return;
             _marqueeActive = true;
             _marqueeAdditive = !!e.shiftKey;
             _marqueeStart = { x: e.clientX, y: e.clientY };
             updateSelectionBox(typeof getBoxRect === 'function' ? getBoxRect(_marqueeStart, _marqueeStart) : { left: e.clientX, top: e.clientY, width: 0, height: 0 });
-            if (Graph.controls()) {
-                Graph.controls().enabled = false;
-            }
+            // Block left-click from reaching OrbitControls (allows right-click through)
+            e.stopImmediatePropagation();
             e.preventDefault();
         };
 
         const onPointerMove = (e) => {
+            // PAN MODE: Move camera
+            if (_panActive && _panStart) {
+                const dx = e.clientX - _panStart.x;
+                const dy = e.clientY - _panStart.y;
+                _panStart = { x: e.clientX, y: e.clientY };
+
+                // Apply pan to camera
+                const camera = Graph.camera();
+                const controls = Graph.controls();
+                if (camera && controls) {
+                    // Calculate pan amount based on camera distance
+                    const distance = camera.position.distanceTo(controls.target);
+                    const panSpeed = distance * 0.001;
+
+                    // Get camera's right and up vectors
+                    const right = new THREE.Vector3();
+                    const up = new THREE.Vector3();
+                    camera.matrix.extractBasis(right, up, new THREE.Vector3());
+
+                    // Pan the camera and target together
+                    const panOffset = new THREE.Vector3();
+                    panOffset.addScaledVector(right, -dx * panSpeed);
+                    panOffset.addScaledVector(up, dy * panSpeed);
+
+                    camera.position.add(panOffset);
+                    controls.target.add(panOffset);
+                    controls.update();
+                }
+                return;
+            }
+
+            // MARQUEE MODE: Update selection box
             if (!_marqueeActive || !_marqueeStart) return;
             updateSelectionBox(typeof getBoxRect === 'function' ? getBoxRect(_marqueeStart, { x: e.clientX, y: e.clientY }) : { left: Math.min(_marqueeStart.x, e.clientX), top: Math.min(_marqueeStart.y, e.clientY), width: Math.abs(e.clientX - _marqueeStart.x), height: Math.abs(e.clientY - _marqueeStart.y), right: Math.max(_marqueeStart.x, e.clientX), bottom: Math.max(_marqueeStart.y, e.clientY) });
         };
 
-        const finishSelection = (e) => {
+        const finishInteraction = (e) => {
+            // End pan mode
+            if (_panActive) {
+                _panActive = false;
+                _panStart = null;
+                canvas.style.cursor = _spacePressed ? 'grab' : '';
+                // Re-enable OrbitControls
+                if (Graph.controls()) {
+                    Graph.controls().enabled = true;
+                }
+                return;
+            }
+
+            // End marquee selection
             if (!_marqueeActive || !_marqueeStart) return;
             const rect = typeof getBoxRect === 'function' ? getBoxRect(_marqueeStart, { x: e.clientX, y: e.clientY }) : { left: Math.min(_marqueeStart.x, e.clientX), top: Math.min(_marqueeStart.y, e.clientY), width: Math.abs(e.clientX - _marqueeStart.x), height: Math.abs(e.clientY - _marqueeStart.y), right: Math.max(_marqueeStart.x, e.clientX), bottom: Math.max(_marqueeStart.y, e.clientY) };
             _selectionBox.style.display = 'none';
@@ -771,9 +879,7 @@ const SELECT = (function () {
             _marqueeStart = null;
             _marqueeAdditive = false;
             _lastMarqueeEndTs = Date.now();
-            if (Graph.controls()) {
-                Graph.controls().enabled = true;
-            }
+            // Controls were never disabled, no need to re-enable
             const didDrag = rect.width > 4 && rect.height > 4;
             if (didDrag) {
                 // Only update timestamp if we actually dragged, to prevent blocking valid background clicks
@@ -785,10 +891,12 @@ const SELECT = (function () {
             }
         };
 
-        canvas.addEventListener('pointerdown', onPointerDown, { passive: false });
-        canvas.addEventListener('pointermove', onPointerMove, { passive: true });
-        canvas.addEventListener('pointerup', finishSelection, { passive: true });
-        canvas.addEventListener('pointerleave', finishSelection, { passive: true });
+        // CRITICAL: Use capture:true to intercept BEFORE OrbitControls
+        // This ensures left-click is blocked before OrbitControls sees it
+        canvas.addEventListener('pointerdown', onPointerDown, { capture: true, passive: false });
+        canvas.addEventListener('pointermove', onPointerMove, { capture: true, passive: true });
+        canvas.addEventListener('pointerup', finishInteraction, { capture: true, passive: true });
+        canvas.addEventListener('pointerleave', finishInteraction, { capture: true, passive: true });
     }
 
     // =========================================================================

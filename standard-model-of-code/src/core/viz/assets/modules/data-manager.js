@@ -620,6 +620,115 @@ const DATA = (function() {
     }
 
     // =========================================================================
+    // UNIFIED GRAPH (atoms + files in one graph)
+    // =========================================================================
+
+    let _unifiedGraph = null;
+
+    function buildUnifiedGraph() {
+        const boundaries = raw.fileBoundaries;
+        if (!boundaries || boundaries.length === 0) {
+            // No file data - return atoms only with tags
+            raw.nodes.forEach(n => {
+                n._nodeType = 'atom';
+                n._viewOpacity = 1.0;
+            });
+            raw.links.forEach(l => {
+                l._edgeLayer = 'atom';
+                l._viewOpacity = 1.0;
+            });
+            _unifiedGraph = { nodes: raw.nodes, links: raw.links };
+            return _unifiedGraph;
+        }
+
+        // Tag existing atom nodes
+        raw.nodes.forEach(n => {
+            n._nodeType = 'atom';
+            n._viewOpacity = 1.0;
+            if (n.fileIdx !== undefined && n.fileIdx >= 0) {
+                n._parentFileId = 'file:' + n.fileIdx;
+            }
+        });
+
+        // Tag existing atom edges
+        raw.links.forEach(l => {
+            l._edgeLayer = 'atom';
+            l._viewOpacity = 1.0;
+        });
+
+        // Create file nodes
+        const fileNodes = boundaries.map((boundary, idx) => {
+            const atomCount = boundary.atom_count || (index.nodesByFile.get(idx) || []).length || 0;
+            return {
+                id: 'file:' + idx,
+                name: boundary.file_name || ('File ' + idx),
+                file_path: boundary.file_path || boundary.file_name || '',
+                fileIdx: idx,
+                isFileNode: true,
+                _nodeType: 'file',
+                _viewOpacity: 0.0, // Start hidden (atoms mode is default)
+                atomCount: atomCount,
+                val: Math.max(3, Math.sqrt(atomCount) * 2),
+                color: typeof FILE_VIZ !== 'undefined' ? FILE_VIZ.getColor(idx, boundaries.length, boundary.file_name) : '#666666',
+                x: 0, y: 0, z: 0
+            };
+        });
+
+        // Build file-to-file edges from atom cross-file edges
+        const atomToFile = new Map();
+        raw.nodes.forEach(node => {
+            if (node.fileIdx !== undefined && node.fileIdx >= 0) {
+                atomToFile.set(node.id, node.fileIdx);
+            }
+        });
+
+        const fileLinkCounts = new Map();
+        raw.links.forEach(link => {
+            const srcFile = atomToFile.get(typeof link.source === 'object' ? link.source.id : link.source);
+            const tgtFile = atomToFile.get(typeof link.target === 'object' ? link.target.id : link.target);
+            if (srcFile !== undefined && tgtFile !== undefined && srcFile !== tgtFile) {
+                const key = srcFile + '-' + tgtFile;
+                fileLinkCounts.set(key, (fileLinkCounts.get(key) || 0) + 1);
+            }
+        });
+
+        const fileLinks = [];
+        fileLinkCounts.forEach((count, key) => {
+            const parts = key.split('-');
+            const src = parseInt(parts[0]);
+            const tgt = parseInt(parts[1]);
+            fileLinks.push({
+                source: 'file:' + src,
+                target: 'file:' + tgt,
+                _edgeLayer: 'file',
+                _viewOpacity: 0.0, // Start hidden
+                weight: count,
+                opacity: Math.min(0.8, 0.1 + count * 0.05)
+            });
+        });
+
+        // Merge into unified graph
+        const allNodes = [...raw.nodes, ...fileNodes];
+        const allLinks = [...raw.links, ...fileLinks];
+
+        _unifiedGraph = { nodes: allNodes, links: allLinks, fileNodes: fileNodes, fileLinks: fileLinks };
+
+        console.log('[DATA] Unified graph built:', allNodes.length, 'nodes (' + raw.nodes.length + ' atoms +', fileNodes.length, 'files),', allLinks.length, 'edges');
+
+        return _unifiedGraph;
+    }
+
+    function getUnifiedGraph() {
+        if (!_unifiedGraph) buildUnifiedGraph();
+        return _unifiedGraph;
+    }
+
+    function getNodesByType(type) {
+        if (!_unifiedGraph) buildUnifiedGraph();
+        return _unifiedGraph.nodes.filter(n => n._nodeType === type);
+    }
+
+    // =========================================================================
     // SELF-TEST
     // =========================================================================
 
@@ -720,6 +829,10 @@ const DATA = (function() {
         getEdgeRanges,
         getRange,
 
+        // Unified graph
+        getUnifiedGraph,
+        getNodesByType,
+
         // Self-test
         selfTest,
 
@@ -790,6 +903,8 @@ class DataManager {
     getEdgeFamilyCounts() { return DATA.getEdgeFamilyCounts(); }
     getEdgeRanges() { return DATA.getEdgeRanges(); }
     getRange(sourceKey, scope) { return DATA.getRange(sourceKey, scope); }
+    getUnifiedGraph() { return DATA.getUnifiedGraph(); }
+    getNodesByType(type) { return DATA.getNodesByType(type); }
     selfTest() { return DATA.selfTest(); }
 
     // Internal methods

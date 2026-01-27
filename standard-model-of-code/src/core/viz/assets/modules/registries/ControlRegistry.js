@@ -26,10 +26,14 @@ const ControlRegistry = (function () {
         PAN: 2
     };
 
-    // Default Configuration (Matches Codebase Reality: Left=Pan, Right=Rotate)
+    // Default Configuration:
+    // LEFT: PAN (but selection.js intercepts for marquee)
+    // RIGHT: ROTATE around origin
+    // MIDDLE: DOLLY (zoom)
+    // PAN: via SPACE + LEFT drag (handled in selection.js)
     const DEFAULTS = {
         mouse: {
-            LEFT: ACTIONS.ROTATE,   // 0
+            LEFT: ACTIONS.PAN,      // 2 - OrbitControls pan, but selection.js intercepts
             MIDDLE: ACTIONS.DOLLY,  // 1
             RIGHT: ACTIONS.ROTATE   // 0
         },

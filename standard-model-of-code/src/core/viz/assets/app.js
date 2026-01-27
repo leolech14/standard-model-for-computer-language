@@ -92,7 +92,9 @@ let EDGE_DEFAULT_OPACITY = null;  // Initialized from appearance.tokens at runti
 
 // Initialize after DOM ready
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => PERF_MONITOR.init(), 100);
+    // PERF_MONITOR.init() disabled - causes 60fps loop overhead
+    // setTimeout(() => PERF_MONITOR.init(), 100);
+
     // Initialize SidebarManager facade for sidebar controls
     if (typeof SIDEBAR !== 'undefined' && SIDEBAR.init) {
         SIDEBAR.init();
@@ -901,7 +903,10 @@ function initGraph(data) {
         inherits: edgeColor.inherits || '#ff6b6b'
     };
 
-    // Initial Filter: show full graph
+    // Build unified graph containing both atoms and files
+    const unifiedData = DATA.getUnifiedGraph();
+
+    // Initial Filter: show full graph (atoms only - files start hidden)
     const filtered = filterGraph(data, CURRENT_DENSITY, ACTIVE_DATAMAPS, VIS_FILTERS);
 
     // ═══════════════════════════════════════════════════════════════════
@@ -1038,7 +1043,7 @@ function initGraph(data) {
             }
         })
             (div)
-            .graphData(filtered)
+            .graphData(unifiedData)
             .numDimensions(dimensions)
             .backgroundColor(toColorNumber(background.color, 0x000000))
             .nodeLabel('name')
@@ -1138,6 +1143,15 @@ function initGraph(data) {
     }
 
     window.Graph = Graph;
+
+    // =================================================================
+    // VIEW MODE: Start in atoms mode (files hidden)
+    // =================================================================
+    Graph.nodeVisibility(node => {
+        // Hide file nodes initially (atoms mode is default)
+        if (node._nodeType === 'file') return false;
+        return true;
+    });
 
     // =================================================================
     // PROPERTY QUERY: Initialize unified property resolution system
@@ -1255,10 +1269,11 @@ function initGraph(data) {
         } else {
             // Fallback: Map generic names to integer constants
             // 0: ROTATE, 1: DOLLY (Zoom), 2: PAN
+            // LEFT set to PAN, but selection.js intercepts for marquee
             const defaultButtons = {
-                LEFT: 2, // PAN
+                LEFT: 2, // PAN - but selection.js intercepts for marquee
                 MIDDLE: 1, // DOLLY
-                RIGHT: 0 // ROTATE
+                RIGHT: 0 // ROTATE around origin
             };
 
             if (navConfig.mouseButtons) {

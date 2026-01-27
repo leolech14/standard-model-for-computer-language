@@ -461,10 +461,13 @@ const EDGE = (function () {
                 const tgtIdx = getLinkFileIdx(link, 'target');
                 if (srcIdx >= 0 && tgtIdx >= 0 && srcIdx !== tgtIdx) {
                     const dimFactor = _config.dim?.interfile_factor ?? 0.25;
-                    return opacity * dimFactor;
+                    opacity *= dimFactor;
                 }
             }
-            return opacity;
+
+            // Apply layer visibility multiplier for crossfade transitions
+            const layerOpacity = link._viewOpacity !== undefined ? link._viewOpacity : 1.0;
+            return opacity * layerOpacity;
         });
 
         // Apply dashed line pattern to inferred CODOME edges
