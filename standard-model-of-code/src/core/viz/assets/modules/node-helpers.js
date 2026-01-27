@@ -59,7 +59,11 @@ window.NODE_HELPERS = (function() {
         // 6. SEMANTIC PURPOSE (Stage 6.7 - PURPOSE = f(edges))
         semanticRole:   (n, C) => C.get('semanticRole', n.semantic_role || 'unknown'),
 
-        // 7. EVOLUTION (Placeholders)
+        // 7. HOLARCHY SCALE (Stage 2.6 - 16-level classification)
+        scale:          (n, C) => C.get('scale', n.level || 'L3'),
+        levelZone:      (n, C) => C.get('levelZone', n.level_zone || 'SEMANTIC'),
+
+        // 8. EVOLUTION (Placeholders)
         churn:          (n, C) => C.getInterval('churn', Math.random() * 0.5),
         age:            (n, C) => C.getInterval('churn', 0.2)
     };

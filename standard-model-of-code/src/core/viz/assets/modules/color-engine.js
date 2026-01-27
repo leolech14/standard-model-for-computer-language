@@ -121,6 +121,35 @@ const COLOR = (function () {
             'leaf': { h: 220, c: 0.10, l: 0.55, label: 'Leaf', semantic: 'specialized' },         // Blue-gray - edge node
             'unknown': { h: 0, c: 0.02, l: 0.45, label: 'Unknown', semantic: 'neutral' }
         },
+        // HOLARCHY SCALE: 16-level scale from MODEL.md (L-3 to L12)
+        // Colors follow the ocean metaphor: deep blue (physical) → bright surface (semantic) → teal depths (systemic) → cosmic purple (cosmological)
+        scale: {
+            'L-3': { h: 220, c: 0.18, l: 0.28, label: 'BIT', semantic: 'physical' },
+            'L-2': { h: 220, c: 0.16, l: 0.35, label: 'BYTE', semantic: 'physical' },
+            'L-1': { h: 220, c: 0.14, l: 0.42, label: 'CHARACTER', semantic: 'physical' },
+            'L0':  { h: 60,  c: 0.24, l: 0.55, label: 'TOKEN', semantic: 'syntactic' },
+            'L1':  { h: 210, c: 0.10, l: 0.78, label: 'STATEMENT', semantic: 'semantic' },
+            'L2':  { h: 210, c: 0.12, l: 0.85, label: 'BLOCK', semantic: 'semantic' },
+            'L3':  { h: 210, c: 0.08, l: 0.92, label: 'NODE', semantic: 'semantic' },
+            'L4':  { h: 182, c: 0.18, l: 0.40, label: 'CONTAINER', semantic: 'systemic' },
+            'L5':  { h: 180, c: 0.16, l: 0.44, label: 'FILE', semantic: 'systemic' },
+            'L6':  { h: 178, c: 0.14, l: 0.48, label: 'PACKAGE', semantic: 'systemic' },
+            'L7':  { h: 175, c: 0.12, l: 0.52, label: 'SYSTEM', semantic: 'systemic' },
+            'L8':  { h: 220, c: 0.12, l: 0.45, label: 'ECOSYSTEM', semantic: 'cosmological' },
+            'L9':  { h: 230, c: 0.14, l: 0.40, label: 'PLATFORM', semantic: 'cosmological' },
+            'L10': { h: 240, c: 0.16, l: 0.35, label: 'ORGANIZATION', semantic: 'cosmological' },
+            'L11': { h: 250, c: 0.18, l: 0.30, label: 'DOMAIN', semantic: 'cosmological' },
+            'L12': { h: 260, c: 0.20, l: 0.25, label: 'UNIVERSE', semantic: 'cosmological' },
+        },
+        // HOLARCHY ZONE: aggregated zone coloring
+        levelZone: {
+            'PHYSICAL':      { h: 220, c: 0.16, l: 0.35, label: 'Physical', semantic: 'substrate' },
+            'SYNTACTIC':     { h: 60,  c: 0.24, l: 0.55, label: 'Syntactic', semantic: 'tokens' },
+            'SEMANTIC':      { h: 210, c: 0.10, l: 0.85, label: 'Semantic', semantic: 'meaning' },
+            'SYSTEMIC':      { h: 180, c: 0.16, l: 0.45, label: 'Systemic', semantic: 'architecture' },
+            'COSMOLOGICAL':  { h: 250, c: 0.18, l: 0.30, label: 'Cosmological', semantic: 'beyond' },
+            'UNKNOWN':       { h: 0,   c: 0.02, l: 0.50, label: 'Unknown', semantic: 'neutral' },
+        },
         fileType: {
             'js': { h: 60, c: 0.24, l: 0.70, label: 'JavaScript', semantic: 'code' },    // Yellow
             'ts': { h: 240, c: 0.22, l: 0.60, label: 'TypeScript', semantic: 'code' },    // Blue

@@ -1230,6 +1230,24 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
             timer.set_status("WARN", str(e))
             print(f"   ⚠️ Ecosystem discovery skipped: {e}")
 
+    # Stage 2.6: Holarchy Level Classification (L-3..L12)
+    print("\n📊 Stage 2.6: Holarchy Level Classification...")
+    with StageTimer(perf_manager, "Stage 2.6: Level Classification") as timer:
+        try:
+            from level_classifier import classify_level_batch, compute_level_statistics, infer_package_levels
+            level_count = classify_level_batch(nodes)
+            pkg_count = infer_package_levels(nodes)
+            level_stats = compute_level_statistics(nodes)
+            timer.set_output(nodes_classified=level_count, packages_detected=pkg_count, distribution=level_stats)
+            # Show distribution summary
+            dist_str = ", ".join(f"{k}:{v}" for k, v in level_stats.items() if v > 0)
+            print(f"   → {level_count} nodes assigned holarchy levels ({dist_str})")
+            if pkg_count > 0:
+                print(f"   → {pkg_count} implicit L6 packages detected")
+        except Exception as e:
+            timer.set_status("WARN", str(e))
+            print(f"   ⚠️ Level classification skipped: {e}")
+
     # Stage 2.7: Octahedral Dimension Classification (D4, D5, D7)
     print("\n📐 Stage 2.7: Octahedral Dimension Classification...")
     with StageTimer(perf_manager, "Stage 2.7: Dimension Classification") as timer:
@@ -2172,7 +2190,9 @@ def run_full_analysis(target_path: str, output_dir: str = None, options: Dict[st
         'distributions': {
             'types': dict(types.most_common(15)),
             'rings': dict(rings),
-            'atoms': dict(Counter(n.get('atom', '') for n in nodes))
+            'atoms': dict(Counter(n.get('atom', '') for n in nodes)),
+            'levels': dict(Counter(n.get('level', 'L3') for n in nodes)),
+            'level_zones': dict(Counter(n.get('level_zone', 'SEMANTIC') for n in nodes)),
         },
         'analytics': statistical_metrics,
         'edge_types': dict(edge_types),

@@ -131,6 +131,14 @@ window.SIDEBAR = (function () {
             ]
         },
         {
+            category: 'Holarchy',
+            presets: [
+                { id: 'scale', label: 'Scale', desc: '16-level holarchy (L-3..L12)' },
+                { id: 'levelZone', label: 'Zone', desc: 'Physical/Syntactic/Semantic/Systemic/Cosmological' },
+                { id: 'semanticRole', label: 'Semantic', desc: 'Purpose from edge analysis' }
+            ]
+        },
+        {
             category: 'Topology',
             presets: [
                 { id: 'centrality', label: 'Centrality', desc: 'Graph importance' },

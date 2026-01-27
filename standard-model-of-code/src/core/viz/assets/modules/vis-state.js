@@ -30,7 +30,9 @@ window.VIS_STATE = (function() {
     const CATEGORICAL_MODES = new Set([
         'tier', 'family', 'atom', 'ring', 'layer', 'role', 'roleCategory',
         'subsystem', 'phase', 'fileType', 'file', 'state', 'visibility',
-        'semanticRole'  // PURPOSE = f(edges) - utility/orchestrator/hub/leaf
+        'semanticRole',  // PURPOSE = f(edges) - utility/orchestrator/hub/leaf
+        'scale',         // Holarchy level (L-3..L12) - Stage 2.6
+        'levelZone'      // Holarchy zone (Physical/Syntactic/Semantic/Systemic/Cosmological)
     ]);
 
     const INTERVAL_MODES = new Set([

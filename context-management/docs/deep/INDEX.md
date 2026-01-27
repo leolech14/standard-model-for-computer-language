@@ -30,9 +30,10 @@ PROJECTOME = CODOME + CONTEXTOME
 
 | Doc | Location |
 |-----|----------|
-| Standard Model of Code | `standard-model-of-code/docs/MODEL.md` |
-| **Codespace Algebra** | `../CODESPACE_ALGEBRA.md` — Mathematical formalization |
-| **Ontological Foundations** | `ONTOLOGICAL_FOUNDATIONS.md` — Axioms, category theory, semiotics, fundamentality |
+| **Theory Stack (CANONICAL)** | `../../standard-model-of-code/docs/theory/THEORY_INDEX.md` | **START HERE** - Unified theory in 4 layers |
+| Standard Model of Code | `../../standard-model-of-code/docs/MODEL.md` | Original (now unified into Stack) |
+| **Codespace Algebra** | `../CODESPACE_ALGEBRA.md` | Mathematical elaboration (foundations in Stack L0) |
+| **Ontological Foundations** | `ONTOLOGICAL_FOUNDATIONS.md` | Category theory + semiotics (merged into Stack L0 §10) |
 | Wave-Particle Symmetry | `.agent/specs/WAVE_PARTICLE_SYMMETRY.md` |
 | Decision Deck | `.agent/specs/DECISION_DECK_LAYER.md` |
 

@@ -32,7 +32,8 @@ See `docs/reports/ATOM_STATISTICAL_ANALYSIS.md` for full analysis.
 
 | Document | Path | Contents |
 |----------|------|----------|
-| Model | `docs/MODEL.md` | Theory, atoms, roles, proofs, history |
+| **Theory Stack** | `docs/theory/THEORY_INDEX.md` | **CANONICAL** - Unified theory in 4 layers (L0-L3) |
+| Model | `docs/MODEL.md` | Original theory doc (now unified into Stack) |
 | Collider | `docs/COLLIDER.md` | Commands, pipeline, visualization controls |
 | Viz UI Spec | `docs/specs/VISUALIZATION_UI_SPEC.md` | Technical spec for interactive UI |
 | Tree-sitter Spec | `docs/specs/TREE_SITTER_INTEGRATION_SPEC.md` | Full TS integration guide |
