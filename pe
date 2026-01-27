@@ -12,10 +12,12 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$SCRIPT_DIR"
 VENV="$SCRIPT_DIR/.tools_venv"
 COLLIDER="$SCRIPT_DIR/standard-model-of-code"
 TOOLS="$SCRIPT_DIR/context-management/tools"
 AGENT="$SCRIPT_DIR/.agent"
+INTELLIGENCE_DIR="$AGENT/intelligence"
 
 # Auto-activate venv for Python tools
 run_python() {
@@ -144,6 +146,19 @@ route_intent() {
         return 0
     fi
 
+    # DISCUSS / THEORY / FRAMEWORK / CONTROL patterns → theoretical discussion
+    if [[ "$lower" =~ (discuss|theor|framework|control.*(theory|system)|validate.*(model|framework)|critique) ]]; then
+        shift_input="${input#* }"  # Remove first word
+        cmd_discuss "$shift_input"
+        return 0
+    fi
+
+    # COMMUNICATION / FABRIC / CHANNEL / FEEDBACK patterns → comm fabric
+    if [[ "$lower" =~ (comm.*(fabric|theory|system)|channel|feedback.*l(oop|atency)|snr|entropy|mutual.*info|signal.*noise) ]]; then
+        cmd_comm "$input"
+        return 0
+    fi
+
     # Pattern matching failed - try local LLM if available
     if has_ollama; then
         route_via_ollama "$input" && return 0
@@ -165,6 +180,9 @@ EXPLICIT COMMANDS:
   ./pe wire --dashboard    Show health dashboard only
   ./pe ask "question"      Ask AI (Gemini) a question
   ./pe research "topic"    Deep research with validation
+  ./pe discuss "framework" Theoretical discussion (control theory, critique)
+  ./pe comm "target"       Communication Fabric analysis (F, MI, SNR, ΔH)
+  ./pe refs <cmd>          Reference library (list|show|read|search|sync)
   ./pe deck [cmd]          Decision Deck (list|deal|route|show|play)
   ./pe collider <args>     Run Collider analysis
   ./pe viz                 Start 3D visualization server
@@ -294,6 +312,64 @@ cmd_wire() {
     python3 "$AGENT/tools/wire.py" "$@"
 }
 
+cmd_discuss() {
+    if [ -z "$1" ]; then
+        echo "Usage: ./pe discuss \"framework or theory to analyze\""
+        echo ""
+        echo "Deep theoretical discussion with multi-perspective critique."
+        echo "Uses: Control theory analysis, academic grounding, novel extensions."
+        exit 1
+    fi
+    echo "=== THEORETICAL DISCUSSION ==="
+    run_python "$TOOLS/ai/analyze.py" "$@" --research theoretical_discussion
+}
+
+cmd_comm() {
+    case "${1:-help}" in
+        metrics|state|status)
+            echo "=== COMMUNICATION FABRIC METRICS ==="
+            run_python "$AGENT/intelligence/comms/fabric.py"
+            ;;
+        metrics-json)
+            run_python "$AGENT/intelligence/comms/fabric.py" --json
+            ;;
+        trends)
+            echo "=== COMMUNICATION FABRIC TRENDS ==="
+            run_python "$AGENT/intelligence/comms/fabric.py" --trends
+            ;;
+        trends-json)
+            run_python "$AGENT/intelligence/comms/fabric.py" --trends --json
+            ;;
+        record)
+            echo "Recording metrics to history..."
+            run_python "$AGENT/intelligence/comms/fabric.py" --record
+            ;;
+        help|"")
+            echo "Usage: ./pe comm <command>"
+            echo ""
+            echo "Commands:"
+            echo "  metrics      Show current state vector (F, MI, N, SNR, R, ΔH)"
+            echo "  metrics-json Output state vector as JSON"
+            echo "  trends       Show trend analysis (7 days)"
+            echo "  trends-json  Trends as JSON"
+            echo "  record       Record current state to history"
+            echo "  <query>      AI analysis via Communication Fabric research schema"
+            echo ""
+            echo "State Variables:"
+            echo "  F   = Feedback Latency (hours)"
+            echo "  MI  = Mutual Information (0-1)"
+            echo "  N   = Noise (0-1, lower=better)"
+            echo "  SNR = Signal-to-Noise Ratio"
+            echo "  R   = Redundancy (R_auto, R_manual)"
+            echo "  ΔH  = Change Entropy (0-1)"
+            ;;
+        *)
+            echo "=== COMMUNICATION FABRIC ANALYSIS ==="
+            run_python "$TOOLS/ai/analyze.py" "$@" --research communication_fabric
+            ;;
+    esac
+}
+
 # Router
 case "${1:-help}" in
     help|--help|-h)
@@ -348,6 +424,63 @@ case "${1:-help}" in
     wire)
         shift
         cmd_wire "$@"
+        ;;
+    discuss|theory)
+        shift
+        cmd_discuss "$@"
+        ;;
+    comm|fabric)
+        shift
+        cmd_comm "$@"
+        ;;
+    refs|reference|library)
+        shift
+        run_python "$TOOLS/refs_cli.py" "$@"
+        ;;
+    refinery)
+        shift
+        case "${1:-help}" in
+            search)
+                shift
+                python3 "$REPO_ROOT/context-management/tools/refinery/query_chunks.py" "$@"
+                ;;
+            stats)
+                python3 "$REPO_ROOT/context-management/tools/refinery/state_synthesizer.py"
+                ;;
+            chunks)
+                # Show chunk metadata
+                if [ -f "$INTELLIGENCE_DIR/chunks/metadata.json" ]; then
+                    python3 -c "import json; d=json.load(open('$INTELLIGENCE_DIR/chunks/metadata.json')); print(f\"Generated: {d.get('timestamp', 'unknown')}\"); print(f\"Git SHA: {d.get('git_sha', 'unknown')[:8]}...\"); print(f\"Total chunks: {d.get('total_chunks', 0):,}\"); print(f\"Total tokens: {d.get('total_tokens', 0):,}\")"
+                else
+                    echo "No chunk metadata. Run: ./pe wire"
+                fi
+                ;;
+            report)
+                python3 "$REPO_ROOT/context-management/tools/refinery/refinery_report.py"
+                ;;
+            library)
+                python3 "$REPO_ROOT/context-management/tools/refinery/refinery_report.py" --library
+                ;;
+            changes)
+                python3 "$REPO_ROOT/context-management/tools/refinery/refinery_report.py" --changes
+                ;;
+            *)
+                echo "Usage: ./pe refinery <command>"
+                echo ""
+                echo "Commands:"
+                echo "  search <query>   Search consolidated knowledge"
+                echo "  stats            Show corpus state (files, boundaries, atoms)"
+                echo "  chunks           Show chunk generation metadata"
+                echo "  report           Activity report (what happened while you were away)"
+                echo "  library          Organized library view of all knowledge"
+                echo "  changes          Recent activity log"
+                echo ""
+                echo "Examples:"
+                echo "  ./pe refinery search 'Communication Fabric'"
+                echo "  ./pe refinery report"
+                echo "  ./pe refinery library"
+                ;;
+        esac
         ;;
     *)
         # Not a known command - try intent routing

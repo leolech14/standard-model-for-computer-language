@@ -126,12 +126,16 @@ analysis_sets:
     critical_files:
       - "standard-model-of-code/docs/MODEL.md"
       - "standard-model-of-code/docs/COLLIDER.md"
+      - "context-management/docs/specs/AI_CONSUMER_CLASS.md"
     positional_strategy: "sandwich"
     patterns:
       - "standard-model-of-code/docs/MODEL.md"
       - "standard-model-of-code/docs/COLLIDER.md"
       - "standard-model-of-code/docs/specs/*.md"
+      - "standard-model-of-code/docs/theory/*.md"
       - "context-management/docs/*.md"
+      - "context-management/docs/specs/*.md"
+      - "context-management/docs/deep/*.md"
 
   schema:
     description: "All schema definitions (atoms, roles, dimensions)"
@@ -459,6 +463,23 @@ analysis_sets:
       - "context-management/docs/AI_USER_GUIDE.md"
       - "context-management/config/analysis_sets.yaml"
       - "context-management/config/prompts.yaml"
+
+  # --- FOUNDATIONS: Reference library ---
+  foundations:
+    description: "Intellectual foundations reference library - 82 academic works"
+    max_tokens: 500000
+    auto_interactive: true
+    critical_files:
+      - "context-management/docs/theory/INTELLECTUAL_FOUNDATIONS.md"
+      - "context-management/docs/theory/references/index/catalog.json"
+      - "context-management/docs/theory/references/index/concept_index.json"
+    positional_strategy: "sandwich"
+    patterns:
+      - "context-management/docs/theory/references/txt/*.txt"
+      - "context-management/docs/theory/references/metadata/*.json"
+      - "context-management/docs/theory/INTELLECTUAL_FOUNDATIONS.md"
+      - "context-management/docs/theory/REFERENCE_LIBRARY.md"
+      - "context-management/docs/theory/AUTHOR_CORPUS.md"
 
 # ==========================================================================
 # RECOMMENDATIONS - Maps question types to sets

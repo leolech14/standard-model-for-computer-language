@@ -611,7 +611,7 @@ research_schemas:
 
     synthesis:
       strategy: "hierarchical"
-      output_format: "knowledge_graph"
+      output_format: "structured"
       fields:
         - entities: "All extracted entities with metadata"
         - relationships: "Entity relationship map"
@@ -619,6 +619,207 @@ research_schemas:
         - gaps: "Identified knowledge gaps"
         - rag_ready_chunks: "Chunks prepared for RAG indexing"
         - mermaid_diagram: "Mermaid.js visualization code"
+
+  # ---------------------------------------------------------------------------
+  # THEORETICAL_DISCUSSION: Deep framework analysis with expert critique
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Developing or validating theoretical frameworks
+  # COST: ~$1.00 (4 runs: 2 internal + 2 external)
+  # TIME: ~180s
+  # ---------------------------------------------------------------------------
+  theoretical_discussion:
+    description: "Deep discussion of theoretical frameworks with multi-perspective critique"
+    purpose: "Develop, validate, and extend theoretical models through expert-level analysis"
+    recommended_for:
+      - "Framework development (like Communication Fabric)"
+      - "Control theory model validation"
+      - "Architectural hypothesis testing"
+      - "Novel concept exploration"
+
+    runs:
+      - name: "internal_analysis"
+        description: "Analyze framework against existing codebase architecture"
+        type: "internal"
+        model: "gemini-2.5-pro"
+        tier: "long_context"
+        sets: ["theory", "agent_kernel", "pipeline"]
+        token_budget: 200000
+        temperature: 0.3
+        system_prompt: |
+          You are a systems architect reviewing a theoretical framework.
+          Analyze how this framework maps to the existing PROJECT_elements architecture.
+
+          Evaluate:
+          1. ALIGNMENT: How does this fit with Wave/Particle, Codome/Contextome?
+          2. IMPLEMENTATION: What existing components support or conflict?
+          3. GAPS: What's missing in current architecture to support this?
+          4. CONCRETE EXAMPLES: Cite specific files/functions that relate.
+
+          Be critical. Challenge assumptions. Cite file:line references.
+
+      - name: "control_theory_review"
+        description: "Evaluate from control systems perspective"
+        type: "internal"
+        model: "gemini-2.5-pro"
+        tier: "long_context"
+        sets: ["theory", "docs_core"]
+        token_budget: 150000
+        temperature: 0.2
+        system_prompt: |
+          You are a control systems engineer reviewing this framework.
+
+          Evaluate:
+          1. STATE VARIABLES: Are they observable? Controllable?
+          2. STABILITY: Can the system diverge? What are attractors?
+          3. FEEDBACK LOOPS: Are they properly damped? Any oscillation risk?
+          4. TRANSFER FUNCTIONS: Can relationships be quantified?
+          5. LYAPUNOV: Is there a candidate stability function?
+
+          Apply rigorous control theory. Don't just describe - analyze dynamics.
+
+      - name: "academic_grounding"
+        description: "Ground in academic literature"
+        type: "external"
+        tier: "perplexity"
+        system_prompt: |
+          Search for peer-reviewed research validating or contradicting this framework.
+          Find:
+          1. Prior art in software engineering applying these concepts
+          2. Empirical studies with measured outcomes
+          3. Known limitations or failures of similar approaches
+          4. Researchers/labs working on related problems
+
+      - name: "novel_extension"
+        description: "Propose extensions and novel contributions"
+        type: "internal"
+        model: "gemini-2.5-pro"
+        tier: "long_context"
+        sets: ["theory", "research_core"]
+        token_budget: 150000
+        temperature: 0.4
+        system_prompt: |
+          You are a research scientist identifying novel contributions.
+
+          Identify:
+          1. WHAT'S GENUINELY NEW: What hasn't been done before?
+          2. WHAT'S PUBLISHABLE: What could be a conference paper?
+          3. EXTENSIONS: How could this framework be extended?
+          4. EXPERIMENTS: What would validate/falsify the claims?
+          5. APPLICATIONS: Where else could this apply?
+
+          Be ambitious but grounded. Cite connections to existing work.
+
+    synthesis:
+      strategy: "dialectic"
+      output_format: "structured"
+      fields:
+        - framework_validation: "Does the framework hold up?"
+        - control_analysis: "Stability, dynamics, feedback assessment"
+        - prior_art: "Academic grounding and citations"
+        - novel_contributions: "What's genuinely new"
+        - gaps_identified: "What needs more work"
+        - recommended_experiments: "How to validate"
+        - implementation_roadmap: "Phased approach"
+        - risks: "What could go wrong"
+
+  # ---------------------------------------------------------------------------
+  # COMMUNICATION_FABRIC: Specific schema for comm theory analysis
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Analyzing or extending the Communication Fabric framework
+  # COST: ~$0.80 (3 specialized runs)
+  # TIME: ~150s
+  # ---------------------------------------------------------------------------
+  communication_fabric:
+    description: "Analyze codebase through Communication Fabric lens"
+    purpose: "Apply communication theory metrics and identify patterns"
+    recommended_for:
+      - "Measuring F, MI, N, SNR, R, ΔH"
+      - "Identifying feedback loops"
+      - "Detecting death spirals"
+      - "Channel analysis"
+
+    runs:
+      - name: "metric_analysis"
+        description: "Calculate communication metrics for target"
+        type: "internal"
+        model: "gemini-2.0-flash-001"
+        tier: "long_context"
+        sets: ["pipeline", "agent_intelligence"]
+        token_budget: 150000
+        temperature: 0.1
+        system_prompt: |
+          Analyze through Communication Fabric lens. For the target, estimate:
+
+          METRICS:
+          - F (Feedback Latency): Time from trigger→detect→correct→verify
+          - MI (Mutual Information): Alignment between code and docs
+          - N (Noise): Orphans, phantoms, drift, open loops
+          - SNR (Signal-to-Noise): Closed loops / total events
+          - R_auto (Automated Redundancy): Tests, types, schemas coverage
+          - ΔH (Change Entropy): Recent structural novelty
+
+          RISK ASSESSMENT:
+          risk ≈ f(ΔH, centrality, 1/R_auto, F)
+
+          Cite specific evidence for each metric estimate.
+
+      - name: "loop_analysis"
+        description: "Identify feedback loops and their health"
+        type: "internal"
+        model: "gemini-2.5-pro"
+        tier: "long_context"
+        sets: ["agent_kernel", "pipeline", "theory"]
+        token_budget: 150000
+        temperature: 0.2
+        system_prompt: |
+          Identify FEEDBACK LOOPS in the system:
+
+          For each loop:
+          1. NAME: Descriptive identifier
+          2. TYPE: Negative (stabilizing) or Positive (amplifying)
+          3. PHASES: trigger → detect → propose → implement → verify
+          4. LATENCY: Estimated time per phase
+          5. HEALTH: Is it closing? Open? Oscillating?
+
+          DETECT DEATH SPIRALS:
+          - F↑ → N↑ → SNR↓ → F↑ patterns
+          - Identify if damping (R_auto) is sufficient
+
+          DETECT VIRTUOUS CYCLES:
+          - R_auto↑ → F↓ → N↓ → SNR↑ patterns
+
+      - name: "channel_mapping"
+        description: "Map communication channels"
+        type: "internal"
+        model: "gemini-2.0-flash-001"
+        tier: "long_context"
+        sets: ["pipeline", "schema", "agent_specs"]
+        token_budget: 100000
+        temperature: 0.1
+        system_prompt: |
+          Map COMMUNICATION CHANNELS in the system:
+
+          For each channel:
+          1. ID: Unique identifier
+          2. SOURCE: What generates messages
+          3. RECEIVER: What consumes messages
+          4. MEDIUM: File system, API, Git, etc.
+          5. MESSAGE_TYPES: What payloads flow through
+          6. CAPACITY: Estimated throughput
+          7. NOISE_SOURCES: What degrades the channel
+
+          Identify BOTTLENECKS where capacity limits flow.
+
+    synthesis:
+      strategy: "triangulation"
+      output_format: "structured"
+      fields:
+        - metrics_summary: "F, MI, N, SNR, R, ΔH estimates"
+        - feedback_loops: "Identified loops with health status"
+        - channels: "Communication channel map"
+        - death_spiral_risk: "Current risk assessment"
+        - recommended_actions: "Priority interventions"
+        - loop_closure_opportunities: "Open loops to close"
 
   # ---------------------------------------------------------------------------
   # QUICK_VALIDATE: Fast 2-run validation (cost-optimized)
@@ -656,6 +857,33 @@ research_schemas:
       min_agreement: 2
       distinct_sources_required: true
       output_format: "brief"
+
+  # ---------------------------------------------------------------------------
+  # FOUNDATIONS: Reference library for intellectual foundations
+  # ---------------------------------------------------------------------------
+  # USE WHEN: Asking about theoretical underpinnings of SMoC
+  # COVERAGE: 82 academic works, 5.4M tokens, 856 captioned figures
+  # ---------------------------------------------------------------------------
+  foundations:
+    description: "Query the intellectual foundations reference library"
+    purpose: "Trace SMoC concepts to academic sources"
+    recommended_for:
+      - "Theoretical questions about SMoC origins"
+      - "Finding academic citations"
+      - "Understanding foundational concepts"
+
+    runs:
+      - name: "primary"
+        type: "internal"
+        model: "gemini-3-pro-preview"
+        sets: ["foundations"]
+        token_budget: 500000
+        temperature: 0.2
+        system_prompt: "You have access to the complete SMoC reference library with 82 academic works. Cite specific references (REF-XXX) and quote relevant passages."
+
+    synthesis:
+      strategy: "direct"
+      output_format: "markdown"
 
 # =============================================================================
 # EXTERNAL MEMBRANE ENFORCEMENT
@@ -705,6 +933,8 @@ guardrails:
 # | Quick sanity check            | quick_validate        |
 # | Mine Claude Code history      | claude_history_ingest |
 # | Build knowledge graph         | mind_map_builder      |
+# | Develop/validate frameworks   | theoretical_discussion|
+# | Communication Fabric analysis | communication_fabric  |
 #
 # PARAMETER OVERRIDE SYNTAX:
 # --------------------------

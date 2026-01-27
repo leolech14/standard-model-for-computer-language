@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SMoC Holon Hierarchy",
+  "description": "Structured representation of a holon hierarchy in SMoC. Can describe hierarchies from a single paper, a cross-reference synthesis, or a new SMoC model.",
+  "type": "object",
+  "required": ["hierarchy_id", "source_ref", "root_holon", "description"],
+  "properties": {
+    "hierarchy_id": {
+      "type": "string",
+      "pattern": "^HOL-[A-Z0-9-]+$",
+      "description": "Unique ID, e.g., HOL-KOESTLER-1967 or HOL-SMOC-SYNTHESIS-001"
+    },
+    "source_ref": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "REF-IDs or AUTHOR-IDs this hierarchy is extracted from or inspired by"
+    },
+    "description": {
+      "type": "string",
+      "description": "Overall summary of the hierarchy and its role in SMoC (300–600 words)"
+    },
+    "smoc_integration": {
+      "type": "object",
+      "properties": {
+        "boundary_mapping": { "type": "string", "description": "How holon boundaries map to Markov blankets, structural coupling, etc." },
+        "inference_role": { "type": "string", "description": "How active inference operates across levels" },
+        "flow_dynamics": { "type": "string", "description": "Constructal/dissipative flows between levels" },
+        "stability_mechanisms": { "type": "string", "description": "Requisite variety, abduction, etc. for hierarchy persistence" }
+      }
+    },
+    "root_holon": {
+      "$ref": "#/definitions/holon"
+    },
+    "visualization_notes": {
+      "type": "string",
+      "description": "Suggestions for diagram layout (e.g., tree, nested circles)"
+    },
+    "generated_date": { "type": "string", "format": "date" },
+    "generated_by": { "type": "string" }
+  },
+  "definitions": {
+    "holon": {
+      "type": "object",
+      "required": ["holon_id", "name", "level", "autonomy_traits", "integration_traits"],
+      "properties": {
+        "holon_id": { "type": "string", "description": "Unique within hierarchy, e.g., H1, H1.2" },
+        "name": { "type": "string", "description": "Descriptive name, e.g., Organism, Society, Neural Assembly" },
+        "level": { "type": "integer", "description": "Depth from root (root = 0)" },
+        "description": { "type": "string", "description": "What this holon represents" },
+        "autonomy_traits": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Downward-facing: self-assertion, identity maintenance, own boundary/inference"
+        },
+        "integration_traits": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Upward-facing: dependence, service to higher whole, coupling mechanisms"
+        },
+        "boundary_mechanism": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["markov_blanket", "structural_coupling", "semiotic_closure", "affordance_field", "other"] },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "sub_holons": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/holon" },
+          "description": "Nested child holons (recursive)"
+        },
+        "parent_holon_id": { "type": "string", "description": "ID of parent (null for root)" },
+        "cross_level_relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target_holon_id": { "type": "string" },
+              "relation_type": { "type": "string", "enum": ["control", "information_flow", "energy_flow", "emergent_property"] },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "key_quotes_or_pages": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

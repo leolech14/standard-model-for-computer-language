@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SMoC Reference Library Metadata Schema",
+  "description": "Structured metadata for academic references in the Standard Model of Code intellectual foundation library",
+  "type": "object",
+  "required": [
+    "ref_id",
+    "title",
+    "authors",
+    "source_type",
+    "category"
+  ],
+  "properties": {
+    "ref_id": {
+      "type": "string",
+      "pattern": "^(REF-[0-9]{3}|[A-Z]+(-[A-Z]+)?(-[0-9]{4})?)$",
+      "description": "Unique identifier (REF-001, KOESTLER-1967, or KOESTLER)",
+      "examples": ["REF-001", "FRISTON-2010", "KOESTLER", "SIMON"]
+    },
+    "title": {
+      "type": "string",
+      "description": "Full title of the work"
+    },
+    "authors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Author names (Last, F.)"
+    },
+    "year": {
+      "type": ["integer", "null"],
+      "minimum": 1700,
+      "maximum": 2100
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["paper", "book", "chapter", "thesis", "lecture"]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "I.1 Category Theory",
+        "I.2 Type Theory",
+        "I.3 Topology",
+        "I.4 Order Theory",
+        "I.5 Information Theory",
+        "II.1 Thermodynamics",
+        "II.2 Field Theory",
+        "II.3 Free Energy",
+        "III.1 Semiotics",
+        "III.2 Logic",
+        "III.3 Metaphysics",
+        "III.4 Philosophy of Mind",
+        "IV.1 Software Architecture",
+        "IV.2 PL Theory",
+        "IV.3 Formal Methods",
+        "V.1 General Systems",
+        "V.2 Complexity",
+        "V.3 IIT",
+        "VI.1 Analogy",
+        "VI.2 Embodied Cognition",
+        "VI.3 Attention",
+        "VII.1 Morphogenesis",
+        "VII.2 Autopoiesis",
+        "VII.3 Evolution",
+        "VIII.1 Sociology",
+        "VIII.2 Economics",
+        "IX. Information Science",
+        "X. Design",
+        "XI. Control Theory"
+      ]
+    },
+    "original_file": {
+      "type": "string",
+      "description": "Path to PDF: pdf/REF-001_Lawvere_1969.pdf"
+    },
+    "enhanced_txt": {
+      "type": "string",
+      "description": "Path to enhanced TXT: txt/REF-001_Lawvere_1969.txt"
+    },
+    "images_dir": {
+      "type": "string",
+      "description": "Path to images folder: images/REF-001/"
+    },
+    "markdown_file": {
+      "type": "string",
+      "description": "Path to basic markdown: md/REF-001_Lawvere_1969.md"
+    },
+    "page_count": {
+      "type": "integer"
+    },
+    "token_count_estimate": {
+      "type": "integer",
+      "description": "Estimated tokens in markdown version"
+    },
+    "summary": {
+      "type": "string",
+      "description": "300-500 word neutral academic summary of the work"
+    },
+    "smoc_relevance_summary": {
+      "type": "string",
+      "description": "400-600 word analysis of WHY and HOW this work matters to Standard Model of Code. Specific applications to SMoC constructs."
+    },
+    "key_smoc_concepts": {
+      "type": "array",
+      "description": "Structured mapping to specific SMoC concepts (empty until LLM analysis)",
+      "items": {
+        "type": "object",
+        "required": ["smoc_concept", "paper_concept", "mapping", "quotes_or_pages"],
+        "properties": {
+          "smoc_concept": {
+            "type": "string",
+            "enum": [
+              "codome_contextome_partition",
+              "lawvere_fixed_point",
+              "adjoint_functors",
+              "atoms_semantic_types",
+              "roles_canonical_33",
+              "layers_architectural",
+              "scales_16_level_hierarchy",
+              "dimensions_8_faceted",
+              "holons_holarchy",
+              "purpose_field_dynamics",
+              "free_energy_minimization",
+              "constructal_flow_optimization",
+              "renormalization_group_flow",
+              "betti_numbers_topology",
+              "spectral_centrality",
+              "observability_triad_peircean",
+              "affordances_stone_tool",
+              "structure_mapping_analogy",
+              "distributed_cognition",
+              "situated_action",
+              "activity_systems",
+              "actor_network_theory",
+              "bounded_rationality",
+              "requisite_variety",
+              "good_regulator",
+              "markov_blankets",
+              "autopoiesis_boundaries",
+              "dissipative_structures",
+              "formal_concept_lattices",
+              "persistent_homology",
+              "graph_invariants",
+              "denotational_semantics",
+              "program_synthesis",
+              "extended_mind_tools",
+              "semiotic_triads",
+              "process_prehension",
+              "emergence_epsilon",
+              "other"
+            ],
+            "description": "Specific SMoC construct this maps to"
+          },
+          "paper_concept": {
+            "type": "string",
+            "description": "The concept as named/described in this source"
+          },
+          "mapping": {
+            "type": "string",
+            "description": "150-300 words on how paper concept informs/enables SMoC concept"
+          },
+          "quotes_or_pages": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Direct quotes or page refs (e.g., 'p.45: diagonal argument...', 'Theorem 3.2')"
+          },
+          "strength": {
+            "type": "string",
+            "enum": ["foundational", "strong", "moderate", "tangential"],
+            "description": "How central this connection is"
+          }
+        }
+      }
+    },
+    "important_figures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["image_path", "description", "smoc_relevance"],
+        "properties": {
+          "image_path": { "type": "string" },
+          "page": { "type": "integer" },
+          "original_caption": { "type": "string" },
+          "description": { "type": "string" },
+          "smoc_relevance": {
+            "type": "string",
+            "description": "Why this diagram/figure is crucial for SMoC (e.g., shows Markov blanket structure, illustrates holon hierarchy)"
+          }
+        }
+      }
+    },
+    "important_equations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["equation", "page"],
+        "properties": {
+          "equation": { "type": "string", "description": "LaTeX or plain text" },
+          "page": { "type": "integer" },
+          "description": { "type": "string" },
+          "smoc_mapping": {
+            "type": "string",
+            "description": "How this equation maps to SMoC dynamics (e.g., relates to d𝒫/dt = -∇Incoherence)"
+          }
+        }
+      }
+    },
+    "cross_references": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other REF-IDs this work connects to in SMoC framework"
+    },
+    "gaps_or_extensions": {
+      "type": "string",
+      "description": "What this work doesn't cover that SMoC extends or where SMoC diverges"
+    },
+    "priority_tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Reading priority (1=essential, 4=supplementary)"
+    },
+    "generated_metadata": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "model": { "type": "string" },
+        "analyst": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# Large files stored in GCS, not git
+images/
+backup/
+pdf/
+txt/
+md/
+
+# Temp analysis files
+metadata/*_analysis_prompt.txt
+metadata/*_analysis.json
