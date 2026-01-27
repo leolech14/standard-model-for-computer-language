@@ -1,0 +1,16 @@
+{
+  "session_start": "2026-01-27 12:17:09",
+  "session_end": "2026-01-27 12:17:48",
+  "model": "gemini-2.5-flash",
+  "total_tokens_in": 0,
+  "total_tokens_out": 0,
+  "turn_count": 1,
+  "turns": [
+    {
+      "timestamp": 1769527029.464503,
+      "timestamp_str": "2026-01-27 12:17:09",
+      "role": "user",
+      "content": "Quick test: what is the default model now?"
+    }
+  ]
+}

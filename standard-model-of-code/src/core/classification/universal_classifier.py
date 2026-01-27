@@ -54,13 +54,45 @@ except ImportError:
 class UniversalClassifier:
     """Classifies code particles based on patterns, paths, and naming conventions."""
 
-    def __init__(self):
-        self.pattern_repo = get_pattern_registry()
-        self.role_registry = get_role_registry()
+    def __init__(
+        self,
+        pattern_repo=None,
+        role_registry=None,
+        atom_registry=None,
+        dimension_classifier=None
+    ):
+        """
+        Initialize classifier with optional dependency injection.
+
+        Args:
+            pattern_repo: PatternRegistry instance (defaults to global singleton)
+            role_registry: RoleRegistry instance (defaults to global singleton)
+            atom_registry: AtomRegistry instance (defaults to new instance)
+            dimension_classifier: TreeSitterDimensionClassifier (defaults to new instance)
+
+        Backward compatible: calling UniversalClassifier() with no args works as before.
+        Hub integration: pass registries from hub for proper DI.
+        """
+        # Dependency injection with global fallbacks
+        self.pattern_repo = pattern_repo or get_pattern_registry()
+        self.role_registry = role_registry or get_role_registry()
+
         # V3: Initialize AtomRegistry for T2 ecosystem detection
-        self.atom_registry = AtomRegistry() if AtomRegistry else None
+        if atom_registry is not None:
+            self.atom_registry = atom_registry
+        elif AtomRegistry:
+            self.atom_registry = AtomRegistry()
+        else:
+            self.atom_registry = None
+
         # V4: Tree-sitter dimension classifier for D3_ROLE (roles.scm queries)
-        self.ts_role_classifier = TreeSitterDimensionClassifier() if TreeSitterDimensionClassifier else None
+        if dimension_classifier is not None:
+            self.ts_role_classifier = dimension_classifier
+        elif TreeSitterDimensionClassifier:
+            self.ts_role_classifier = TreeSitterDimensionClassifier()
+        else:
+            self.ts_role_classifier = None
+
         # V2: Initialize simplified Atom map (hardcoded for speed, could load from atoms.json)
         self.atom_map = {
             "class": "ORG.AGG.M", # Default Aggregate

@@ -3,6 +3,11 @@ manager.py
 
 Pipeline Manager for orchestrating stage execution.
 Coordinates the 18-stage Collider analysis pipeline.
+
+Hub Integration:
+- Accepts Hub reference for service access
+- Emits events via EventBus (replaces callbacks)
+- Stages can request services from Hub
 """
 
 import time
@@ -13,6 +18,7 @@ from .base_stage import BaseStage
 if TYPE_CHECKING:
     from ..data_management import CodebaseState
     from ..observability import PerformanceManager
+    from ..registry.registry_of_registries import RegistryOfRegistries
 
 
 class PipelineManager:
@@ -32,6 +38,7 @@ class PipelineManager:
         perf_manager: Optional["PerformanceManager"] = None,
         on_stage_start: Optional[Callable[[BaseStage], None]] = None,
         on_stage_complete: Optional[Callable[[BaseStage, float], None]] = None,
+        hub: Optional["RegistryOfRegistries"] = None,
     ):
         """
         Initialize the pipeline manager.
@@ -39,13 +46,22 @@ class PipelineManager:
         Args:
             stages: List of stages to execute in order.
             perf_manager: Optional PerformanceManager for detailed metrics.
-            on_stage_start: Optional callback when a stage begins.
-            on_stage_complete: Optional callback when a stage ends (with duration_ms).
+            on_stage_start: Optional callback when a stage begins (DEPRECATED - use hub events).
+            on_stage_complete: Optional callback when a stage ends (DEPRECATED - use hub events).
+            hub: Optional Hub reference for service access and EventBus.
+
+        Hub Integration:
+            If hub provided, emits events via hub.event_bus:
+            - 'pipeline:stage:started' - {stage: str, phase: int}
+            - 'pipeline:stage:complete' - {stage: str, duration_ms: float}
+            - 'pipeline:started' - {stage_count: int}
+            - 'pipeline:complete' - {total_duration_ms: float}
         """
         self.stages = stages
         self._perf_manager = perf_manager
         self._on_stage_start = on_stage_start
         self._on_stage_complete = on_stage_complete
+        self.hub = hub  # Hub reference for service access and events
 
     def run(self, state: "CodebaseState") -> "CodebaseState":
         """
@@ -57,14 +73,35 @@ class PipelineManager:
         Returns:
             Final CodebaseState after all stages complete.
         """
+        pipeline_start = time.perf_counter()
+
+        # Emit pipeline started event
+        if self.hub and self.hub.event_bus:
+            self.hub.event_bus.emit('pipeline:started', {
+                'stage_count': len(self.stages),
+                'stages': [s.name for s in self.stages]
+            })
+
         for stage in self.stages:
-            # Notify start
+            # Notify start (callbacks for backward compatibility)
             if self._on_stage_start:
                 self._on_stage_start(stage)
+
+            # Emit event (new pattern)
+            if self.hub and self.hub.event_bus:
+                self.hub.event_bus.emit('pipeline:stage:started', {
+                    'stage': stage.name,
+                    'phase': getattr(stage, 'stage_number', None)
+                })
 
             # Validate input
             if not stage.validate_input(state):
                 print(f"  [Pipeline] WARN: {stage.name} input validation failed, skipping")
+                if self.hub and self.hub.event_bus:
+                    self.hub.event_bus.emit('pipeline:stage:skipped', {
+                        'stage': stage.name,
+                        'reason': 'input_validation_failed'
+                    })
                 continue
 
             # Execute with timing
@@ -76,9 +113,26 @@ class PipelineManager:
             if not stage.validate_output(state):
                 print(f"  [Pipeline] WARN: {stage.name} output validation failed")
 
-            # Notify complete
+            # Notify complete (callbacks for backward compatibility)
             if self._on_stage_complete:
                 self._on_stage_complete(stage, elapsed_ms)
+
+            # Emit event (new pattern)
+            if self.hub and self.hub.event_bus:
+                self.hub.event_bus.emit('pipeline:stage:complete', {
+                    'stage': stage.name,
+                    'duration_ms': elapsed_ms,
+                    'node_count': len(state.nodes) if hasattr(state, 'nodes') else 0
+                })
+
+        # Emit pipeline complete
+        pipeline_elapsed = (time.perf_counter() - pipeline_start) * 1000
+        if self.hub and self.hub.event_bus:
+            self.hub.event_bus.emit('pipeline:complete', {
+                'total_duration_ms': pipeline_elapsed,
+                'final_node_count': len(state.nodes) if hasattr(state, 'nodes') else 0,
+                'stages_executed': len(self.stages)
+            })
 
         return state
 

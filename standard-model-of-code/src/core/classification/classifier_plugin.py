@@ -47,16 +47,12 @@ class ClassifierPlugin(ServicePlugin):
         """Resolve registries from hub and create classifier."""
         super().initialize(hub)
 
-        # Create UniversalClassifier but inject dependencies
-        # (Current UniversalClassifier still fetches globals - this is transitional)
-        self._classifier = UniversalClassifier()
-
-        # TODO: Once UniversalClassifier accepts injected deps, do this:
-        # self._classifier = UniversalClassifier(
-        #     pattern_repo=hub.get('patterns'),
-        #     role_registry=hub.get('roles'),
-        #     atom_registry=hub.get('atoms')
-        # )
+        # Proper dependency injection from Hub
+        self._classifier = UniversalClassifier(
+            pattern_repo=hub.get('patterns'),
+            role_registry=hub.get('roles'),
+            atom_registry=hub.get('atoms')
+        )
 
     def register(self) -> None:
         """Register as service and subscribe to classification events."""

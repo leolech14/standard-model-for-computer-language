@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "saved_at": "2026-01-27T12:18:08.964511",
+    "source": "gemini",
+    "model": "gemini-2.5-flash",
+    "query": "What is the default model configured in prompts.yaml?",
+    "query_length": 53,
+    "checksum": "sha256:fe1a3a65a50aa5850fb053d28c9ceacb2504c41144bb137ac29595424795e8cc"
+  },
+  "response": {
+    "content": "Based on the provided codebase context, there is **no mention** of a `prompts.yaml` file. Therefore, I cannot determine the default model configured within it.\n\nThe `.agent/manifest.yaml` lists configurations for AI tools like `gemini` (via `context-management/tools/ai/analyze.py`) and `perplexity` (via `context-management/tools/mcp/perplexity_mcp_server.py`), but these do not reference a `prompts.yaml` file.",
+    "mode": "standard"
+  }
+}
