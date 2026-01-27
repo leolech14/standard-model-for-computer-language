@@ -471,12 +471,12 @@ analysis_sets:
     auto_interactive: true
     critical_files:
       - "context-management/docs/theory/INTELLECTUAL_FOUNDATIONS.md"
-      - "context-management/docs/theory/references/index/catalog.json"
-      - "context-management/docs/theory/references/index/concept_index.json"
+      - "context-management/archive/references/index/catalog.json"
+      - "context-management/archive/references/index/concept_index.json"
     positional_strategy: "sandwich"
     patterns:
-      - "context-management/docs/theory/references/txt/*.txt"
-      - "context-management/docs/theory/references/metadata/*.json"
+      - "context-management/archive/references/txt/*.txt"
+      - "context-management/archive/references/metadata/*.json"
       - "context-management/docs/theory/INTELLECTUAL_FOUNDATIONS.md"
       - "context-management/docs/theory/REFERENCE_LIBRARY.md"
       - "context-management/docs/theory/AUTHOR_CORPUS.md"
