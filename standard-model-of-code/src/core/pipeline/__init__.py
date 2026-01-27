@@ -28,6 +28,7 @@ from .stages import STAGE_ORDER
 def create_default_pipeline(
     options: Optional[Dict[str, Any]] = None,
     stages: Optional[List[str]] = None,
+    hub=None,
 ) -> PipelineManager:
     """
     Create the default Collider analysis pipeline (5 core stages).
@@ -35,6 +36,7 @@ def create_default_pipeline(
     Args:
         options: Analysis options passed to stages
         stages: Optional list of stage names to include (default: core 5)
+        hub: Optional Hub reference for EventBus integration
 
     Returns:
         PipelineManager configured with selected stages
@@ -71,7 +73,7 @@ def create_default_pipeline(
     else:
         selected = [all_stages[name] for name in default_order]
 
-    return PipelineManager(selected)
+    return PipelineManager(selected, hub=hub)
 
 
 def create_full_pipeline(
@@ -81,6 +83,7 @@ def create_full_pipeline(
     skip_ai: bool = True,
     roadmap: Optional[str] = None,
     output_dir: Optional[str] = None,
+    hub=None,
 ) -> PipelineManager:
     """
     Create the complete 27-stage Collider analysis pipeline.
@@ -92,6 +95,7 @@ def create_full_pipeline(
         skip_ai: Skip Stage 11b AI insights (default: True)
         roadmap: Roadmap name for Stage 9 (optional)
         output_dir: Output directory for Stage 12
+        hub: Optional Hub reference for EventBus integration
 
     Returns:
         PipelineManager configured with all 27 stages
@@ -173,7 +177,7 @@ def create_full_pipeline(
     else:
         selected = [all_stages[name] for name in STAGE_ORDER]
 
-    return PipelineManager(selected)
+    return PipelineManager(selected, hub=hub)
 
 
 __all__ = [
