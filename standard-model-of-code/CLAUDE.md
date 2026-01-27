@@ -127,6 +127,13 @@ See `tools/visualize_graph_webgl.py` for the generation logic.
 | **Edge Extractor** | `src/core/edge_extractor.py` |
 | **Codome Boundaries** | `src/core/full_analysis.py:165-298` |
 | **Level Classifier** | `src/core/level_classifier.py` |
+| **EventBus (Python)** | `src/core/event_bus.py` |
+| **EventBus (JS)** | `src/core/viz/assets/modules/event-bus-v2.js` |
+| **Hub (Registry of Registries)** | `src/core/registry/registry_of_registries.py` |
+| **Plugin System (Pipeline)** | `src/core/pipeline/manager.py` |
+| **OKLCH Integration Guide** | `docs/specs/OKLCH_INTEGRATION_GUIDE.md` |
+| **Modularity Assessment** | `docs/specs/MODULARITY_ASSESSMENT.md` |
+| **Architecture Synthesis** | `docs/specs/MODULAR_ARCHITECTURE_SYNTHESIS.md` |
 | Module pattern | `docs/specs/VISUALIZATION_UI_SPEC.md#state-unification-pattern` |
 
 ## Output Files

@@ -1,5 +1,5 @@
 """
-Registry of Registries - Collider Runtime Access
+Registry of Registries - Collider Runtime Access (THE HUB)
 
 AUTHORITATIVE SOURCE OF TRUTH: .agent/intelligence/LOL.yaml
 ============================================================
@@ -20,6 +20,21 @@ Collider registries exposed here (runtime objects):
 - PatternRegistry: 36 role detection patterns
 - SchemaRegistry: 13 optimization schemas
 - WorkflowRegistry: 4 analysis workflows
+
+Hub Services (cross-module coordination):
+- EventBus: Pub/sub for decoupled module communication
+
+Usage:
+    from src.core.registry.registry_of_registries import get_meta_registry
+
+    hub = get_meta_registry()
+
+    # Access registries
+    roles = hub.get('roles')
+
+    # Use event bus
+    hub.event_bus.on('analysis:complete', lambda data: print(data))
+    hub.event_bus.emit('analysis:complete', {'nodes': 100})
 """
 
 from typing import Dict, Any, List, Optional
@@ -29,6 +44,9 @@ from .role_registry import get_role_registry, RoleRegistry
 from .pattern_registry import get_pattern_registry, PatternRegistry
 from .schema_registry import get_schema_registry, SchemaRegistry
 from .workflow_registry import get_workflow_registry, WorkflowRegistry
+
+# EventBus (cross-module communication)
+from ..event_bus import get_event_bus, EventBus
 
 # TypeRegistry is in parent core/ directory
 try:
@@ -58,6 +76,7 @@ class RegistryOfRegistries:
 
     def __init__(self):
         self._registries: Dict[str, Any] = {}
+        self.event_bus: EventBus = get_event_bus()  # Global event bus for cross-module communication
         self._initialize_defaults()
 
     def _initialize_defaults(self):
@@ -102,8 +121,15 @@ class RegistryOfRegistries:
         return sorted(list(self._registries.keys()))
 
     def status_report(self) -> Dict[str, str]:
-        """Get a status summary of all registries."""
+        """Get a status summary of all registries and services."""
         report = {}
+
+        # EventBus status
+        if self.event_bus:
+            event_count = len(self.event_bus.get_events())
+            report["event_bus"] = f"Active ({event_count} events registered)"
+
+        # Registry statuses
         for name, reg in self._registries.items():
             # Handle specific registry types
             if name == "atoms" and hasattr(reg, 'atoms'):
